@@ -1,0 +1,67 @@
+{
+  "name": "conventional-changelog-lint",
+  "version": "0.0.0",
+  "description": "Lint commit messages against a conventional-changelog preset",
+  "main": "distribution/index.js",
+  "bin": {
+    "conventional-changelog-lint": "distribution/cli.js"
+  },
+  "scripts": {
+    "build": "babel source --out-dir distribution",
+    "watch": "npm run build -- --watch",
+    "commit": "git-cz",
+    "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
+    "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && npm publish && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
+    "release": "npm version $(conventional-recommended-bump -p angular)",
+    "test": "eslint *.js && jsonlint-cli *.json && node distribution/cli.js",
+    "preversion": "npm test",
+    "version": "npm run changelog && git add . && echo \"$(conventional-changelog -p angular)\" > .git/COMMITMSG.tmp",
+    "postversion": "echo $(git log -1 --pretty=%B HEAD^..HEAD) > .git/RELEASE_VERSION.tmp && git tag -d v$(cat .git/RELEASE_VERSION.tmp) && git commit --amend -m \"chore(release): $(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && git tag -a v$(cat .git/RELEASE_VERSION.tmp) -m \"$(cat .git/COMMITMSG.tmp)\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marionebl/conventional-changelog-lint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marionebl/conventional-changelog-lint/issues"
+  },
+  "homepage": "https://github.com/marionebl/conventional-changelog-lint#readme",
+  "keywords": [
+    "conventional",
+    "conventional-changelog",
+    "log",
+    "changelog",
+    "lint",
+    "check"
+  ],
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "6.5.1",
+    "babel-cli": "6.4.0",
+    "babel-plugin-add-module-exports": "0.1.2",
+    "babel-polyfill": "6.3.14",
+    "babel-preset-es2015-node4": "2.0.3",
+    "babel-preset-stage-0": "6.5.0",
+    "commitizen": "2.5.0",
+    "conventional-changelog-cli": "1.0.0",
+    "conventional-recommended-bump": "0.1.0",
+    "eslint": "1.10.3",
+    "eslint-config-xo": "0.9.2",
+    "jsonlint-cli": "0.2.7"
+  },
+  "dependencies": {
+    "chalk": "1.1.1",
+    "conventional-changelog-angular": "1.0.0",
+    "conventional-commits-parser": "1.0.1",
+    "franc": "1.1.2",
+    "get-stdin": "5.0.1",
+    "git-raw-commits": "1.0.0",
+    "lodash.merge": "4.1.0",
+    "lodash.pick": "4.0.1",
+    "meow": "3.7.0"
+  }
+}
