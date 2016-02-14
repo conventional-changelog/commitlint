@@ -31,7 +31,8 @@ const rules = {
 
 const configuration = {
 	// flags of string type
-	string: ['from', 'to', 'preset'],
+	string: ['from', 'to', 'preset', 'extends'],
+	// flags of array type
 	// flags of bool type
 	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
 	// flag aliases
@@ -43,11 +44,13 @@ const configuration = {
 		t: 'to',
 		q: 'quiet',
 		h: 'help',
-		v: 'version'
+		v: 'version',
+		x: 'extends'
 	},
 	description: {
 		color: 'toggle formatted output',
 		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
+		'extends': 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		preset: 'conventional-changelog-preset to use for commit message parsing',
 		to: 'upper end of the commit range to lint; applies if edit=false',
@@ -89,9 +92,20 @@ async function main(options) {
 		.map(async commit => {
 			const fmt = new chalk.constructor({enabled: flags.color});
 
+			const seed = {};
+			if (flags.extends) {
+				seed.extends = flags.extends.split(',');
+			}
+
 			const report = lint(commit, {
 				preset: await getPreset(flags.preset),
-				configuration: await getConfiguration()
+				configuration: await getConfiguration(
+					'conventional-changelog-lint',
+					{
+						prefix: 'conventional-changelog-lint-config'
+					},
+					seed
+				)
 			});
 
 			const formatted = format(report, {

@@ -19,7 +19,7 @@ function resolveExtends(config, prefix = '', key = 'extends') {
 // Get linting config
 export default (name = 'conventional-changelog-lint', settings = {
 	prefix: 'conventional-changelog-lint-config'
-}) => {
-	const config = rc(name, settings.defaults);
+}, seed = {}) => {
+	const config = merge(rc(name, settings.defaults), seed);
 	return resolveExtends(config, settings.prefix);
 };
