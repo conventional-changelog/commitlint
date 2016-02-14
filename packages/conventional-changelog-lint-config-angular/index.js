@@ -45,7 +45,8 @@ module.exports = {
 		],
 		'scope-min-length': [0,
 			'always',
-			0],
+			0
+		],
 		'subject-case': [0,
 			'always',
 			'lowerCase'
