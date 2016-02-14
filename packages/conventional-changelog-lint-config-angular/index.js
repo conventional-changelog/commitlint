@@ -45,13 +45,13 @@ module.exports = {
 	},
 	wildcards: {
 		merge: [
-			'/^(Merge pull request)|(Merge (.*?) into (.*?)$)/'
+			'^(Merge pull request)|(Merge (.*?) into (.*?)$)'
 		],
 		release: [
-			'/^\\d.\\d.\\d$/'
+			'^\\d.\\d.\\d$'
 		],
 		revert: [
-			'/^revert: (.*)/'
+			'^revert: (.*)'
 		]
 	}
 };
