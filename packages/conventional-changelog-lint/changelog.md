@@ -1,3 +1,13 @@
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.6...v0.1.7) (2016-02-14)
+
+
+### Bug Fixes
+
+* prune duplicate dependency ([33a6fca](https://github.com/marionebl/conventional-changelog-lint/commit/33a6fca))
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.5...v0.1.6) (2016-02-14)
 
