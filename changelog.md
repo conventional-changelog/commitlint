@@ -1,3 +1,13 @@
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.3...v0.1.4) (2016-02-14)
+
+
+### Bug Fixes
+
+* correct dependencies ([eeb6149](https://github.com/marionebl/conventional-changelog-lint/commit/eeb6149))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.2...v0.1.3) (2016-02-14)
 
