@@ -1,5 +1,10 @@
 import {sync as parse} from 'conventional-commits-parser';
 
+export getConfiguration from './library/get-configuration';
+export getMessages from './library/get-messages';
+export getPreset from './library/get-preset';
+export format from './library/format';
+
 export default (message, options = {}) => {
 	const {
 		preset: {
