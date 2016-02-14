@@ -1,3 +1,13 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.1...v0.1.2) (2016-02-14)
+
+
+### Bug Fixes
+
+* enforce addition of distribution folder ([cbe3a90](https://github.com/marionebl/conventional-changelog-lint/commit/cbe3a90))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.0...v0.1.1) (2016-02-14)
 
