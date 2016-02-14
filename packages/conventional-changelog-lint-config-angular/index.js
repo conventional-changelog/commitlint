@@ -66,7 +66,7 @@ module.exports = {
 			'never',
 			'.'
 		],
-		'body-case': [2,
+		'body-case': [0,
 			'always',
 			'lowerCase'
 		],
@@ -86,7 +86,7 @@ module.exports = {
 		],
 		'header-max-length': [2,
 			'always',
-			80
+			72
 		],
 		'header-min-length': [0,
 			'always',
@@ -94,7 +94,7 @@ module.exports = {
 		],
 		'lang': [1,
 			'always',
-			'en'
+			'eng'
 		]
 	},
 	wildcards: {
@@ -105,7 +105,7 @@ module.exports = {
 			'/^\\d.\\d.\\d$/'
 		],
 		revert: [
-			'revert: (.*)'
+			'/^revert: (.*)/'
 		]
 	}
 };
