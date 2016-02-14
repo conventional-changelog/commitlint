@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.2...v0.1.3) (2016-02-14)
+
+
+### Bug Fixes
+
+* add missing shebang ([461e50f](https://github.com/marionebl/conventional-changelog-lint/commit/461e50f))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.1...v0.1.2) (2016-02-14)
 
