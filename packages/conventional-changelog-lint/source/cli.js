@@ -9,6 +9,7 @@ import {
 // npm modules
 import chalk from 'chalk';
 import denodeify from 'denodeify';
+import gitRawCommits from 'git-raw-commits';
 import meow from 'meow';
 import merge from 'lodash.merge';
 import pick from 'lodash.pick';
@@ -52,10 +53,11 @@ const cli = meow({
 	},
 	// flag defaults
 	default: {
+		color: true,
+		edit: false,
 		from: null,
-		to: null,
-		e: true,
 		preset: 'angular',
+		to: null,
 		quiet: false
 	},
 	// fail on unknown
@@ -65,6 +67,20 @@ const cli = meow({
 });
 
 // Get commit messages
+// TODO: move this to an own moduleddd
+function getCommits(options) {
+	return new Promise((resolve, reject) => {
+		const data = [];
+		gitRawCommits(options)
+		.on('data', chunk => data.push(chunk.toString('utf-8')))
+		.on('error', reject)
+		.on('end', () => {
+			resolve(data);
+		});
+	});
+}
+
+// Get commit messages
 // TODO: move this to an own module
 async function getMessages(settings) {
 	const {from, to, edit} = settings;
@@ -72,9 +88,14 @@ async function getMessages(settings) {
 	if (edit) {
 		const editFile = await readFile(`.git/COMMIT_EDITMSG`);
 		return [editFile.toString('utf-8')];
+	} else {
+		return await getCommits({
+			from,
+			to
+		});
 	}
 
-	throw new Error(`Reading from git history not supported yet.`);
+	// throw new Error(`Reading from git history not supported yet.`);
 }
 
 // Resolve extend configs
@@ -159,6 +180,7 @@ async function main(options) {
 			});
 
 			if (!flags.quiet) {
+				console.log(`validating: ${commit.split('\n')[0]}`);
 				console.log(
 					formatted
 						.join('\n')
@@ -168,6 +190,8 @@ async function main(options) {
 			if (report.errors.length > 0) {
 				throw new Error(formatted[formatted.length - 1]);
 			}
+
+			console.log('');
 		}));
 }
 
