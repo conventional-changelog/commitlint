@@ -10,6 +10,7 @@
     "build": "babel source --out-dir distribution",
     "watch": "npm run build -- --watch",
     "commit": "git-cz",
+    "commitmsg": "node distribution/cli.js --edit",
     "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
     "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && npm publish && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
     "release": "npm version $(conventional-recommended-bump -p angular)",
