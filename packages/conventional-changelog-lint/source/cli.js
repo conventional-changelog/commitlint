@@ -1,24 +1,35 @@
 // polyfills
 import 'babel-polyfill';
 
+// core modules
+import {
+	readFile as readFileNodeback
+} from 'fs';
+
 // npm modules
 import chalk from 'chalk';
+import denodeify from 'denodeify';
 import meow from 'meow';
 import merge from 'lodash.merge';
 import pick from 'lodash.pick';
 import stdin from 'get-stdin';
 import rc from 'rc';
 
+// local modules
 import lint from './';
-
-// Import package for meta data
 import pkg from '../package';
+
+// denodeifications
+const readFile = denodeify(readFileNodeback);
 
 /**
  * Behavioural rules
  */
 const rules = {
-	fromStdin: (input, settings) => input.length === 0 && settings.from === null && settings.to === null
+	fromStdin: (input, settings) => input.length === 0 &&
+		settings.from === null &&
+		settings.to === null &&
+		settings.edit === null
 };
 
 // Init meow 😸cli
@@ -57,6 +68,12 @@ const cli = meow({
 // TODO: move this to an own module
 async function getMessages(settings) {
 	const {from, to, edit} = settings;
+
+	if (edit) {
+		const editFile = await readFile(`.git/COMMIT_EDITMSG`);
+		return [editFile.toString('utf-8')];
+	}
+
 	throw new Error(`Reading from git history not supported yet.`);
 }
 
@@ -121,34 +138,37 @@ async function main(options) {
 	const fromStdin = rules.fromStdin(raw, flags);
 
 	const input = fromStdin ?
-		await stdin() :
+		[await stdin()] :
 		await getMessages(
 			pick(flags, ['edit', 'from', 'to'])
 		);
 
-	const results = lint(input, {
-		preset: await require(`conventional-changelog-${flags.preset}`),
-		configuration: getConfiguration('conventional-changelog-lint', {
-			prefix: `conventional-changelog-lint-config`
-		})
-	});
+	return Promise.all(input
+		.map(async commit => {
+			const report = lint(commit, {
+				preset: await require(`conventional-changelog-${flags.preset}`),
+				configuration: getConfiguration('conventional-changelog-lint', {
+					prefix: `conventional-changelog-lint-config`
+				})
+			});
 
-	const formatted = format(results, {
-		color: flags.color,
-		signs: [' ', '⚠', '✖'],
-		colors: ['white', 'yellow', 'red']
-	});
+			const formatted = format(report, {
+				color: flags.color,
+				signs: [' ', '⚠', '✖'],
+				colors: ['white', 'yellow', 'red']
+			});
 
-	if (!flags.quiet) {
-		console.log(
-			formatted
-				.join('\n')
-		);
-	}
+			if (!flags.quiet) {
+				console.log(
+					formatted
+						.join('\n')
+				);
+			}
 
-	if (results.errors.length > 0) {
-		throw new Error(formatted[formatted.length - 1]);
-	}
+			if (report.errors.length > 0) {
+				throw new Error(formatted[formatted.length - 1]);
+			}
+		}));
 }
 
 // Start the engine
