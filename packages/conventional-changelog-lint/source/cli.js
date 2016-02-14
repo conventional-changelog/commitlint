@@ -94,8 +94,6 @@ async function getMessages(settings) {
 			to
 		});
 	}
-
-	// throw new Error(`Reading from git history not supported yet.`);
 }
 
 // Resolve extend configs
@@ -153,7 +151,7 @@ function format(report, options = {}) {
 	return [...problems, chalk.bold(summary)];
 }
 
-// Assmeble the engine
+// Assemble the engine
 async function main(options) {
 	const {input: raw, flags} = options;
 	const fromStdin = rules.fromStdin(raw, flags);
