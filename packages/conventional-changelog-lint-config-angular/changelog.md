@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.2...v0.1.3) (2016-02-22)
+
+
+### Bug Fixes
+
+* match gitlab auto-merge messages with merge wildcards ([a766a4b](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/a766a4b))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.1...v0.1.2) (2016-02-14)
 
