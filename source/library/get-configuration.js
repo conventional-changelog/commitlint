@@ -26,7 +26,7 @@ export default (name = 'conventional-changelog-lint', settings = {
 	prefix: 'conventional-changelog-lint-config'
 }, seed = {}) => {
 	const config = merge(rc(name, settings.defaults), seed);
-	const opts = merge({}, defaults, pick(config, ['extends']));
+	const opts = merge({}, defaults, pick(config, 'extends'));
 	return merge(
 		{},
 		resolveExtends(opts, settings.prefix),
