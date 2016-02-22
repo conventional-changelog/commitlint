@@ -45,7 +45,7 @@ module.exports = {
 	},
 	wildcards: {
 		merge: [
-			'^(Merge pull request)|(Merge (.*?) into (.*?)$)'
+			'^(Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?))$)'
 		],
 		release: [
 			'^\\d.\\d.\\d$'
