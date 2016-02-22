@@ -10,6 +10,7 @@
     "conventional-changelog-lint": "distribution/cli.js"
   },
   "scripts": {
+    "start": "npm run watch",
     "build": "babel source --out-dir distribution",
     "watch": "npm run build -- --watch",
     "commit": "git-cz",
@@ -61,7 +62,7 @@
     "babel-polyfill": "6.3.14",
     "chalk": "1.1.1",
     "conventional-changelog-angular": "1.0.0",
-    "conventional-changelog-lint-config-angular": "0.1.2",
+    "conventional-changelog-lint-config-angular": "^0.1.2",
     "conventional-commits-parser": "1.0.1",
     "denodeify": "1.2.1",
     "franc": "1.1.2",
