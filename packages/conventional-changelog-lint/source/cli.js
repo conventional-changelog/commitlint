@@ -86,7 +86,7 @@ async function main(options) {
 	const input = fromStdin ?
 		[await stdin()] :
 		await getMessages(
-			pick(flags, ['edit', 'from', 'to'])
+			pick(flags, 'edit', 'from', 'to')
 		);
 
 	return Promise.all(input
