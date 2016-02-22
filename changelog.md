@@ -1,3 +1,13 @@
+<a name="0.1.9"></a>
+## [0.1.9](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.8...v0.1.9) (2016-02-22)
+
+
+### Bug Fixes
+
+* use raw commit message to check for leading blank line ([9c1ca3b](https://github.com/marionebl/conventional-changelog-lint/commit/9c1ca3b))
+
+
+
 <a name="0.1.8"></a>
 ## [0.1.8](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.7...v0.1.8) (2016-02-22)
 
