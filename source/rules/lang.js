@@ -5,7 +5,11 @@ export default (parsed, when, value) => {
 	const detected = franc.all(parsed.subject)
 		.filter(lang => lang[1] >= 0.45)
 		.map(lang => lang[0]);
-	const matches = detected.indexOf(value) > -1;
+
+	// franc spits out ['und'] when unable to
+	// guess any languages, let it through in this case
+	const matches = detected[0] === 'und' ||
+		detected.indexOf(value) > -1;
 
 	return [
 		negated ? !matches : matches,
