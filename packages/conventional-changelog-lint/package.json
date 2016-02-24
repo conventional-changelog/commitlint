@@ -21,7 +21,7 @@
     "test": "eslint *.js && jsonlint-cli *.json && node distribution/cli.js --from=HEAD~1",
     "preversion": "npm run build && npm test",
     "version": "npm run changelog && git add . && echo \"$(conventional-changelog -p angular)\" > .git/COMMITMSG.tmp",
-    "postversion": "echo $(git log -1 --pretty=%B HEAD^..HEAD) > .git/RELEASE_VERSION.tmp && git tag -d v$(cat .git/RELEASE_VERSION.tmp) && git commit --amend -m \"chore(release): $(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && git tag -a v$(cat .git/RELEASE_VERSION.tmp) -m \"$(cat .git/COMMITMSG.tmp)\""
+    "postversion": "echo $(git log -1 --pretty=%B HEAD^..HEAD) > .git/RELEASE_VERSION.tmp && git tag -d v$(cat .git/RELEASE_VERSION.tmp) && git commit --amend -m \"chore(release): $(cat .git/RELEASE_VERSION.tmp)\n\n$(cat .git/COMMITMSG.tmp)\" && git tag -a v$(cat .git/RELEASE_VERSION.tmp) -m \"$(cat .git/COMMITMSG.tmp)\""
   },
   "repository": {
     "type": "git",
