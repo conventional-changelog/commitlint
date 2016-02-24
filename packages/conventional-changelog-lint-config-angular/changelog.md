@@ -1,3 +1,13 @@
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.3...v0.1.4) (2016-02-24)
+
+
+### Bug Fixes
+
+* match multi-digit releases with wildcard ([a0d33f3](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/a0d33f3))
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.2...v0.1.3) (2016-02-22)
 
