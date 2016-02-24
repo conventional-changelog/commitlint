@@ -1,3 +1,13 @@
+<a name="0.1.10"></a>
+## [0.1.10](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.9...v0.1.10) (2016-02-24)
+
+
+### Bug Fixes
+
+* skip language check if no lang is detected ([d3e8454](https://github.com/marionebl/conventional-changelog-lint/commit/d3e8454))
+
+
+
 <a name="0.1.9"></a>
 ## [0.1.9](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.8...v0.1.9) (2016-02-22)
 
