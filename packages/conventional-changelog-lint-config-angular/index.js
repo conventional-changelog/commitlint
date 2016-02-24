@@ -48,7 +48,7 @@ module.exports = {
 			'^(Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?))$)'
 		],
 		release: [
-			'^\\d.\\d.\\d$'
+			'^\\d+.\\d+.\\d+\n?$'
 		],
 		revert: [
 			'^revert: (.*)'
