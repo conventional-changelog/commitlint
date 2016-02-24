@@ -30,13 +30,14 @@ The command line interface reads `.conventional-changelog-lintrc` resolves `exte
 
 #### Recipes
 * As a git `commitmsg` hook with husky
-  ```json
+```json
   {
     "scripts": {
       "commitmsg": "conventional-changelog-lint -e"
     }
   }
-  ```
+```
+
 * As part of `npm test`
 ```json
   {
