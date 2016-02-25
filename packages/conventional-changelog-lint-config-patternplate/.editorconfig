@@ -1,0 +1,11 @@
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+
+[{.*rc,*.yml,*.md,package.json,*.svg}]
+indent_style = space
+
+[*.md]
+trim_trailing_whitespace = false
