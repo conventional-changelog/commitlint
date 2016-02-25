@@ -1,5 +1,4 @@
-import merge from 'lodash.merge';
-import pick from 'lodash.pick';
+import {merge, pick} from 'lodash';
 import rc from 'rc';
 
 const defaults = {
