@@ -1,3 +1,13 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.2.0...v0.2.1) (2016-02-25)
+
+
+### Bug Fixes
+
+* footer-leading-blank should warn ([f1dea9d](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/f1dea9d))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.4...v0.2.0) (2016-02-25)
 
