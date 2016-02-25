@@ -44,7 +44,7 @@
     "jsonlint-cli": "0.2.7"
   },
   "peerDependencies": {
-    "conventional-changelog-lint": ">= 0.2.0"
+    "conventional-changelog-lint": ">= 0.3.0"
   },
   "config": {
     "commitizen": {
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "conventional-changelog-lint-config-angular": "0.1.4",
+    "conventional-changelog-lint-config-angular": "^0.2.0",
     "globby": "4.0.0",
     "lodash": "4.5.1"
   }
