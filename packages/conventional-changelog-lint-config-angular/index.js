@@ -1,24 +1,15 @@
 module.exports = {
 	rules: {
-		'type-enum': [2,
-			'always',
-			[
-				'feat',
-				'fix',
-				'docs',
-				'style',
-				'refactor',
-				'test',
-				'chore',
-				'revert'
-			]
+		'body-leading-blank': [1,
+			'always'
 		],
-		'type-case': [2,
+		'header-max-length': [2,
 			'always',
-			'lowerCase'
+			72
 		],
-		'type-empty': [2,
-			'never'
+		'lang': [1,
+			'always',
+			'eng'
 		],
 		'scope-case': [2,
 			'always',
@@ -31,16 +22,25 @@ module.exports = {
 			'never',
 			'.'
 		],
-		'body-leading-blank': [1,
-			'always'
-		],
-		'header-max-length': [2,
+		'type-case': [2,
 			'always',
-			72
+			'lowerCase'
 		],
-		'lang': [1,
+		'type-empty': [2,
+			'never'
+		],
+		'type-enum': [2,
 			'always',
-			'eng'
+			[
+				'feat',
+				'fix',
+				'docs',
+				'style',
+				'refactor',
+				'test',
+				'chore',
+				'revert'
+			]
 		]
 	},
 	wildcards: {
