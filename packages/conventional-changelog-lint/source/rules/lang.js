@@ -1,15 +1,8 @@
-import franc from 'franc';
+import ensureLanguage from '../library/ensure-language';
 
 export default (parsed, when, value) => {
 	const negated = when === 'never';
-	const detected = franc.all(parsed.subject)
-		.filter(lang => lang[1] >= 0.45)
-		.map(lang => lang[0]);
-
-	// franc spits out ['und'] when unable to
-	// guess any languages, let it through in this case
-	const matches = detected[0] === 'und' ||
-		detected.indexOf(value) > -1;
+	const {matches, detected} = ensureLanguage(parsed.subject, value);
 
 	return [
 		negated ? !matches : matches,
