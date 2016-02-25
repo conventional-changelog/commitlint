@@ -1,3 +1,17 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.10...v0.2.0) (2016-02-25)
+
+
+### Bug Fixes
+
+* catch unhandled rejections ([b7e4bf9](https://github.com/marionebl/conventional-changelog-lint/commit/b7e4bf9))
+
+### Features
+
+* support for dynamic and async rules ([efce01a](https://github.com/marionebl/conventional-changelog-lint/commit/efce01a))
+
+
+
 <a name="0.1.10"></a>
 ## [0.1.10](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.9...v0.1.10) (2016-02-24)
 
