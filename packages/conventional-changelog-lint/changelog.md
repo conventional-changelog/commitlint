@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/marionebl/conventional-changelog-lint/compare/v0.3.0...v0.3.1) (2016-02-25)
+
+
+### Bug Fixes
+
+* guard pos lexer against errors ([a12f1b2](https://github.com/marionebl/conventional-changelog-lint/commit/a12f1b2))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/marionebl/conventional-changelog-lint/compare/v0.2.0...v0.3.0) (2016-02-25)
 
