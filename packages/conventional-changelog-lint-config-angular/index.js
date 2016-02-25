@@ -7,7 +7,7 @@ module.exports = {
 			'always',
 			['present-imperative']
 		],
-		'footer-leading-blank': [2,
+		'footer-leading-blank': [1,
 			'always'
 		],
 		'footer-tense': [1,
