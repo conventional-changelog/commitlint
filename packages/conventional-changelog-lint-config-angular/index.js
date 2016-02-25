@@ -3,8 +3,16 @@ module.exports = {
 		'body-leading-blank': [1,
 			'always'
 		],
+		'body-tense': [1,
+			'always',
+			['present-imperative']
+		],
 		'footer-leading-blank': [2,
 			'always'
+		],
+		'footer-tense': [1,
+			'always',
+			['present-imperative']
 		],
 		'header-max-length': [2,
 			'always',
@@ -24,6 +32,10 @@ module.exports = {
 		'subject-full-stop': [2,
 			'never',
 			'.'
+		],
+		'subject-tense': [1,
+			'always',
+			['present-imperative']
 		],
 		'type-case': [2,
 			'always',
