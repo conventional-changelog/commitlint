@@ -51,7 +51,7 @@ const configuration = {
 	description: {
 		color: 'toggle formatted output',
 		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
-		'extends': 'array of shareable configurations to extend',
+		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		preset: 'conventional-changelog-preset to use for commit message parsing',
 		to: 'upper end of the commit range to lint; applies if edit=false',
@@ -126,7 +126,7 @@ async function main(options) {
 				throw error;
 			}
 
-			console.log('');
+			return console.log('');
 		}));
 }
 
@@ -139,4 +139,10 @@ main(cli)
 			}
 			throw error;
 		})
-	)
+	);
+
+// Catch unhandled rejections globally
+process.on('unhandledRejection', (reason, promise) => {
+	console.log('Unhandled Rejection at: Promise ', promise, ' reason: ', reason);
+	throw reason;
+});
