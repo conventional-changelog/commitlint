@@ -10,9 +10,25 @@ const tenses = {
 	'present-third-person': ['VB', 'VBZ']
 };
 
+function getLemmata(input) {
+	try {
+		return lexer.lex(input);
+	} catch (err) {
+		return [];
+	}
+}
+
+function getTags(lemmata) {
+	try {
+		return tagger.tag(lemmata);
+	} catch (err) {
+		return [];
+	}
+}
+
 export default (input, allowed) => {
-	const lemmata = lexer.lex(input);
-	const tagged = tagger.tag(lemmata);
+	const lemmata = getLemmata(input);
+	const tagged = getTags(lemmata);
 	const verbs = tagged.filter(tag => tag[1][0] === 'V');
 	const tags = allowed.reduce((registry, name) => {
 		return [
