@@ -1,3 +1,14 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.4...v0.2.0) (2016-02-25)
+
+
+### Features
+
+* add *-tense rules ([ec35760](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/ec35760))
+* add footer-leading-blank rule ([7ff4b2e](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/7ff4b2e))
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.1.3...v0.1.4) (2016-02-24)
 
