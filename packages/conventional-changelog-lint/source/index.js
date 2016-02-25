@@ -6,7 +6,14 @@ export getMessages from './library/get-messages';
 export getPreset from './library/get-preset';
 export format from './library/format';
 
-export default (message, options = {}) => {
+async function executeRule(entry) {
+	const [name, config] = entry;
+	return typeof config === 'function' ?
+		[name, await config()] :
+		[name, await config];
+}
+
+export default async (message, options = {}) => {
 	const {
 		preset: {
 			parserOpts: parserOptions
@@ -22,8 +29,14 @@ export default (message, options = {}) => {
 		parse(message, parserOptions)
 	);
 
+	// execute wildcard rules
+	const executedWildcards = await Promise.all(
+		Object.entries(wildcards || {})
+			.map(async entry => await executeRule(entry))
+	);
+
 	// wildcard matches skip the linting
-	const bails = Object.entries(wildcards || {})
+	const bails = executedWildcards
 		.filter(entry => {
 			const [, pattern] = entry;
 			return Array.isArray(pattern);
@@ -33,7 +46,7 @@ export default (message, options = {}) => {
 			const expression = new RegExp(...pattern);
 			return parsed.header.match(expression);
 		})
-		.map(entry => entry[0]);
+		.map(entry => entry[0])
 
 	if (bails.length > 0) {
 		return {
@@ -45,8 +58,14 @@ export default (message, options = {}) => {
 		};
 	}
 
-	// validate against all rules
-	const results = Object.entries(rules || {})
+	// execute linting rules
+	const executedRules = await Promise.all(
+		Object.entries(rules || {})
+			.map(async entry => await executeRule(entry))
+		);
+
+		// validate against all rules
+	const results = executedRules
 		.filter(entry => {
 			const [, [level]] = entry;
 			return level > 0;
@@ -70,7 +89,7 @@ export default (message, options = {}) => {
 				message
 			};
 		})
-		.filter(Boolean);
+		.filter(Boolean)
 
 	const errors = results.filter(result =>
 		result.level > 1 && !result.valid);

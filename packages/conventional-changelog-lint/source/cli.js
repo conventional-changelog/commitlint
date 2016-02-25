@@ -98,7 +98,7 @@ async function main(options) {
 				seed.extends = flags.extends.split(',');
 			}
 
-			const report = lint(commit, {
+			const report = await lint(commit, {
 				preset: await getPreset(flags.preset),
 				configuration: await getConfiguration(
 					'conventional-changelog-lint',
@@ -117,10 +117,7 @@ async function main(options) {
 
 			if (!flags.quiet) {
 				console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(commit.split('\n')[0])}`);
-				console.log(
-					formatted
-						.join('\n')
-				);
+				console.log(formatted.join('\n'));
 			}
 
 			if (report.errors.length > 0) {
