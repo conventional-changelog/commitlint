@@ -5,7 +5,7 @@ import 'babel-polyfill';
 // npm modules
 import chalk from 'chalk';
 import meow from 'meow';
-import pick from 'lodash.pick';
+import {pick} from 'lodash';
 import stdin from 'get-stdin';
 
 // local modules
