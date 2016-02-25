@@ -1,3 +1,15 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/marionebl/conventional-changelog-lint/compare/v0.2.0...v0.3.0) (2016-02-25)
+
+
+### Features
+
+* add footer rules ([6acb930](https://github.com/marionebl/conventional-changelog-lint/commit/6acb930))
+* add subject-leading-capital rule ([c6714a4](https://github.com/marionebl/conventional-changelog-lint/commit/c6714a4))
+* **rules:** add rules for tense-checking ([d7b8d4b](https://github.com/marionebl/conventional-changelog-lint/commit/d7b8d4b))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/marionebl/conventional-changelog-lint/compare/v0.1.10...v0.2.0) (2016-02-25)
 
