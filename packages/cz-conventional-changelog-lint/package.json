@@ -1,0 +1,86 @@
+{
+  "name": "cz-conventional-changelog-lint",
+  "version": "0.0.0",
+  "description": "Let an interactive command line interface help you with creating commit messages matching your conventional-changelog-lint configuration.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run watch",
+    "execute": "conventional-changelog -",
+    "clean": "rm -rf distribution",
+    "prepare": "mkdir -p distribution",
+    "copy": "cp *.{json,md} distribution",
+    "typings": "cat source/index.js | react2dts --name $npm_package_name > distribution/index.d.ts",
+    "prebuild": "parallelshell 'npm run test' 'npm run clean && npm run prepare'",
+    "build": "babel source --out-dir distribution",
+    "postbuild": "npm run typings && npm run copy && npm run notify",
+    "test": "(eslint source/**/*.js && remark *.md -u remark-lint) && echo '' || notify -t $npm_package_name -m 'Linting failed! 😢'",
+    "watch": "npm run build -- --watch",
+    "serve": "serve() {\nbeefy \"distribution/examples/${1}.js\"\n}\n serve",
+    "notify": "echo 'Build ready, happy hacking! ✊' && notify -t $npm_package_name -m 'Build ready, happy hacking! ✊'",
+    "commit": "git-cz",
+    "commitmsg": "conventional-changelog-lint -e",
+    "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
+    "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && npm publish && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
+    "release": "npm version $(conventional-recommended-bump -p angular)",
+    "preversion": "npm run build && npm test",
+    "version": "npm run changelog && git add . && echo \"$(conventional-changelog -p angular)\" > .git/COMMITMSG.tmp",
+    "postversion": "echo $(git log -1 --pretty=%B HEAD^..HEAD) > .git/RELEASE_VERSION.tmp && git tag -d v$(cat .git/RELEASE_VERSION.tmp) && git commit --amend -m \"chore(release): $(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && git tag -a v$(cat .git/RELEASE_VERSION.tmp) -m \"$(cat .git/COMMITMSG.tmp)\""
+  },
+  "config": {
+    "commitizen": {
+      "path": "./distribution/"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marionebl/cz-conventional-changelog.git"
+  },
+  "keywords": [
+    "commitizen",
+    "conventional-changelog-lint",
+    "angular",
+    "commit"
+  ],
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marionebl/cz-conventional-changelog/issues"
+  },
+  "homepage": "https://github.com/marionebl/cz-conventional-changelog#readme",
+  "devDependencies": {
+    "babel-cli": "6.6.0",
+    "babel-eslint": "5.0.0",
+    "babel-plugin-add-module-exports": "0.1.2",
+    "babel-plugin-transform-async-to-generator": "6.5.0",
+    "babel-plugin-transform-do-expressions": "6.5.0",
+    "babel-plugin-transform-function-bind": "6.5.2",
+    "babel-plugin-transform-object-rest-spread": "6.5.0",
+    "babel-polyfill": "6.6.1",
+    "babel-preset-es2015-node4": "2.0.3",
+    "commitizen": "2.5.0",
+    "conventional-changelog-cli": "1.1.1",
+    "conventional-changelog-lint": "0.3.1",
+    "conventional-recommended-bump": "0.1.1",
+    "cz-conventional-changelog": "1.1.5",
+    "eslint": "1.10.3",
+    "eslint-config-xo": "0.9.1",
+    "eslint-plugin-babel": "3.1.0",
+    "eslint-plugin-react": "3.15.0",
+    "eslint-plugin-require-jsdoc": "1.0.4",
+    "husky": "0.11.1",
+    "node-notifier": "4.4.0",
+    "parallelshell": "2.0.0",
+    "react-to-typescript-definitions": "0.10.0",
+    "remark": "4.1.1",
+    "remark-lint": "3.0.0",
+    "watch": "0.17.1"
+  },
+  "dependencies": {
+    "chalk": "1.1.1",
+    "conventional-changelog-lint": "0.3.2",
+    "inquirer": "0.12.0",
+    "lodash": "4.5.1",
+    "throat": "2.0.2",
+    "vorpal": "1.10.0"
+  }
+}

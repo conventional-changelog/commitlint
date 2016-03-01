@@ -1,0 +1,8 @@
+{
+  "extends": ["xo/esnext"],
+  "plugins": ["require-jsdoc"],
+  "rules": {
+    "require-jsdoc": 2,
+    "valid-jsdoc": 2
+  }
+}
