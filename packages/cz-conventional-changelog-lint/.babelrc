@@ -1,0 +1,12 @@
+{
+  "presets": [
+    "es2015-node4"
+  ],
+  "plugins": [
+    "transform-do-expressions",
+    "transform-function-bind",
+    "transform-object-rest-spread",
+    "transform-async-to-generator",
+    "add-module-exports"
+  ]
+}
