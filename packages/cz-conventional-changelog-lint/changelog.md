@@ -1,3 +1,13 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/marionebl/cz-conventional-changelog/compare/v0.1.1...v0.1.2) (2016-03-03)
+
+
+### Bug Fixes
+
+* **system:** publish from distribution ([1e98d3c](https://github.com/marionebl/cz-conventional-changelog/commit/1e98d3c))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/marionebl/cz-conventional-changelog/compare/v0.1.0...v0.1.1) (2016-03-03)
 
