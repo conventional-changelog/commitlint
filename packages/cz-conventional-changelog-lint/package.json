@@ -20,7 +20,7 @@
     "commit": "git-cz",
     "commitmsg": "conventional-changelog-lint -e",
     "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
-    "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && npm publish && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
+    "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && cd ./distribution && npm publish && cd ../ && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
     "release": "npm version $(conventional-recommended-bump -p angular)",
     "preversion": "npm run build && npm test",
     "version": "npm run changelog && git add . && echo \"$(conventional-changelog -p angular)\" > .git/COMMITMSG.tmp",
