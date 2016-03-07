@@ -47,14 +47,14 @@ module.exports = {
 		'type-enum': [2,
 			'always',
 			[
+				'chore',
+				'docs',
 				'feat',
 				'fix',
-				'docs',
-				'style',
+				'perf',
 				'refactor',
-				'test',
-				'chore',
-				'revert'
+				'style',
+				'test'
 			]
 		]
 	},
