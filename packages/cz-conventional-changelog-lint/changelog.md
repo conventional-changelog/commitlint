@@ -1,3 +1,13 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/marionebl/cz-conventional-changelog/compare/v0.1.2...v0.1.3) (2016-03-13)
+
+
+### Bug Fixes
+
+* correct dependency type for babel-polyfill ([08123f0](https://github.com/marionebl/cz-conventional-changelog/commit/08123f0))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/marionebl/cz-conventional-changelog/compare/v0.1.1...v0.1.2) (2016-03-03)
 
