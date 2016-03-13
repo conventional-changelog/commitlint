@@ -55,7 +55,6 @@
     "babel-plugin-transform-do-expressions": "6.5.0",
     "babel-plugin-transform-function-bind": "6.5.2",
     "babel-plugin-transform-object-rest-spread": "6.5.0",
-    "babel-polyfill": "6.6.1",
     "babel-preset-es2015-node4": "2.0.3",
     "commitizen": "2.5.0",
     "conventional-changelog-cli": "1.1.1",
@@ -76,6 +75,7 @@
     "watch": "0.17.1"
   },
   "dependencies": {
+    "babel-polyfill": "6.7.2",
     "chalk": "1.1.1",
     "conventional-changelog-lint": "0.3.2",
     "inquirer": "0.12.0",
