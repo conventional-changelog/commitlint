@@ -17,11 +17,11 @@
     "commitmsg": "node distribution/cli.js --edit",
     "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
     "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && npm publish && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
-    "release": "npm version $(conventional-recommended-bump -p angular)",
     "test": "eslint *.js && jsonlint-cli *.json && node distribution/cli.js --from=HEAD~1",
     "preversion": "npm run build && npm test",
-    "version": "npm run changelog && git add . && echo \"$(conventional-changelog -p angular)\" > .git/COMMITMSG.tmp",
-    "postversion": "echo $(git log -1 --pretty=%B HEAD^..HEAD) > .git/RELEASE_VERSION.tmp && git tag -d v$(cat .git/RELEASE_VERSION.tmp) && git commit --amend -m \"chore(release): $(cat .git/RELEASE_VERSION.tmp)\n\n$(cat .git/COMMITMSG.tmp)\" && git tag -a v$(cat .git/RELEASE_VERSION.tmp) -m \"$(cat .git/COMMITMSG.tmp)\""
+    "release": "npm version --no-git-tag-version $(conventional-recommended-bump -p angular)",
+    "version": "npm run changelog && git add .",
+    "postversion": "git commit -m \"chore(release): v$npm_package_version\n$(conventional-changelog -p angular)\" && git tag -a v$npm_package_version -m \"$(conventional-changelog -p angular)\""
   },
   "config": {
     "commitizen": {
