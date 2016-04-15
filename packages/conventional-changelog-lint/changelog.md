@@ -1,3 +1,13 @@
+<a name="0.3.4"></a>
+## [0.3.4](https://github.com/marionebl/conventional-changelog-lint/compare/v0.3.2...v0.3.4) (2016-04-15)
+
+
+### Bug Fixes
+
+* **cli:** disable angular defaults when a rc file is provided ([8c3ee6c](https://github.com/marionebl/conventional-changelog-lint/commit/8c3ee6c))
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/marionebl/conventional-changelog-lint/compare/v0.3.1...v0.3.2) (2016-03-03)
 
