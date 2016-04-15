@@ -77,7 +77,7 @@ const report = lint(
 
 ### Recipes
 
-*   As a git `commitmsg` hook with husky
+*   As a `commitmsg` git-hook with ["husky"](https://git.io/JDwyQg)
 
 ```json
   {
@@ -99,12 +99,16 @@ const report = lint(
 
 ## Configuration
 
-`conventional-changelog-lint` allows detailed configuration via
+`conventional-changelog-lint` is configured via
 `.conventional-changelog-lintrc` and shareable configuration.
-By default it will use the
+
+When no `.conventional-changelog-lintrc` is found it will use the
 [angular](https://github.com/marionebl/conventional-changelog-lint-config-angular#rules)
 shareable config.
 See the documentation there for default rules.
+
+When a `.conventional-changelog-lintrc` is found it will **not** load any preset
+unless specified via [extends](#extends) configuration.
 
 ### extends
 
@@ -150,8 +154,9 @@ for details
   }
 }
 ```
+
 Rules applicable to the linted commit messages.
-By default all rules are disabled via a level of 0.
+By default all rules are turned off via a level of 0.
 They can be enabled by shareable configuration,
 such as the
 [angular config](https://github.com/marionebl/conventional-changelog-lint-config-angular),

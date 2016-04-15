@@ -15,9 +15,18 @@ const defaultSettings = {
 };
 
 export default async (name = defaultName, settings = defaultSettings, seed = {}) => {
+	// Obtain config from .rc files
+	const userConfig = rc(name, settings.defaults);
+
+	// Use the default extends config if there is no userConfig
+	// See https://git.io/vwT1C for reference
+	const applicableDefaults = Object.keys(userConfig) > 0 ?
+		{} :
+		defaults;
+
 	// Merge passed config with file based options
-	const config = merge(rc(name, settings.defaults), seed);
-	const opts = merge({}, defaults, pick(config, 'extends'));
+	const config = merge(userConfig, seed);
+	const opts = merge({}, applicableDefaults, pick(config, 'extends'));
 
 	// Resolve extends key
 	const extended = resolveExtends(opts, settings.prefix);
