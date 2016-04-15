@@ -184,6 +184,44 @@ wildcards: {
 }
 ```
 
+## Related projects
+
+*   [angular-precommit](https://git.io/vwTDd)
+– Pre commit with angular conventions
+
+*   [conventional-changelog-cli](https://git.io/vwTDA)
+– Generate a changelog from conventional commit history
+
+*   [cz-conventional-changelog-lint](https://git.io/vwTyf)
+– Let an interactive command line interface help you with creating commit
+messages matching your `conventional-changelog-lint` configuration
+
+*   [conventional-changelog-lint-config-angular](https://git.io/vwTy4)
+– Shareable conventional-changelog-lint config enforcing the angular
+commit convention
+
+*   [conventional-changelog-lint-config-atom](https://git.io/vwTy9)
+– Shareable configuration for conventional-changelog-lint based on the
+atom commit guidelines
+
+*   [conventional-changelog-lint-config-patternplate](https://git.io/vwTyz)
+– Lint your commits, patternplate-style
+
+*   [conventional-commits-detector](https://git.io/vwTyk)
+– Detect what commit message convention your repository is using
+
+*   [conventional-github-releaser](https://git.io/vwTyI)
+– Make a new GitHub release from git metadata
+
+*   [conventional-recommended-bump](https://git.io/vwTyL)
+– Get a recommended version bump based on conventional commits
+
+*   [commitizen](https://git.io/vwTym)
+– Simple commit conventions for internet citizens
+
+*   [standard-changelog](https://git.io/vwTyO)
+– Generate a changelog from conventional commit history, angular-style
+
 ---
 
 Copyright 2016 by [Mario Nebl](https://github.com/marionebl)
