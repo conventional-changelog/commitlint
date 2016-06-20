@@ -1,3 +1,25 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/marionebl/conventional-changelog-lint/compare/v0.3.2...v1.0.0) (2016-06-20)
+
+
+### Bug Fixes
+
+* **cli:** disable angular defaults when a rc file is provided ([ef9a2b7](https://github.com/marionebl/conventional-changelog-lint/commit/ef9a2b7))
+
+### Features
+
+* **rules:** update to latest default ruleset ([1c2f772](https://github.com/marionebl/conventional-changelog-lint/commit/1c2f772))
+
+
+### BREAKING CHANGES
+
+* rules: fix: remove revert type
+*  fix: add perf type
+*  fix: allow multidigit release versions
+*  feat: warn on footer-leading-blank
+
+
+
 <a name="0.3.4"></a>
 ## [0.3.4](https://github.com/marionebl/conventional-changelog-lint/compare/v0.3.2...v0.3.4) (2016-04-15)
 
