@@ -1,3 +1,13 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/marionebl/conventional-changelog-lint/compare/v1.0.0...v1.0.1) (2016-08-15)
+
+
+### Bug Fixes
+
+* **rules:** respect keyword setting for scope-empty (#11) ([c646a60](https://github.com/marionebl/conventional-changelog-lint/commit/c646a60)), closes [#10](https://github.com/marionebl/conventional-changelog-lint/issues/10)
+
+
+
 <a name="1.0.0"></a>
 # [1.0.0](https://github.com/marionebl/conventional-changelog-lint/compare/v0.3.2...v1.0.0) (2016-06-20)
 
