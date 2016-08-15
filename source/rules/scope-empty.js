@@ -1,12 +1,13 @@
 import ensureNotEmpty from '../library/ensure-not-empty';
 
-export default (parsed, when) => {
-	const negated = when === 'never';
+export default (parsed, when = 'never') => {
+	const negated = when === 'always';
+	const result = ensureNotEmpty(parsed.scope);
 	return [
-		ensureNotEmpty(parsed.scope),
+		negated ? !result : result,
 		[
 			'scope',
-			negated ? 'may not' : 'must',
+			negated ? 'must' : 'may not',
 			'be empty'
 		]
 		.filter(Boolean)

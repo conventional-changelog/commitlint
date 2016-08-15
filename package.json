@@ -17,11 +17,15 @@
     "commitmsg": "node distribution/cli.js --edit",
     "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
     "push": "git push && git push --tags && hub release create \"v$npm_package_version\" --message=\"v$npm_package_version\n$(conventional-changelog -p angular)\" && npm publish",
-    "test": "eslint *.js && jsonlint-cli *.json && node distribution/cli.js --from=HEAD~1",
+    "test": "eslint *.js && jsonlint-cli *.json && node distribution/cli.js --from=HEAD~1 && ava",
     "preversion": "npm run build && npm test",
     "release": "npm version --no-git-tag-version $(conventional-recommended-bump -p angular)",
     "version": "npm run changelog && git add .",
     "postversion": "git commit -m \"chore(release): v$npm_package_version\n$(conventional-changelog -p angular)\" && git tag -a v$npm_package_version -m \"$(conventional-changelog -p angular)\""
+  },
+  "ava": {
+    "babel": "inherit",
+    "require": ["babel-register"]
   },
   "config": {
     "commitizen": {
@@ -50,6 +54,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "ava": "0.15.2",
     "babel": "6.5.1",
     "babel-cli": "6.4.0",
     "babel-eslint": "5.0.0",
