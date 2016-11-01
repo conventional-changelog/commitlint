@@ -1,3 +1,13 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/marionebl/conventional-changelog-lint/compare/v1.0.1...v1.1.0) (2016-11-01)
+
+
+### Features
+
+* update angular config ([0a28ca0](https://github.com/marionebl/conventional-changelog-lint/commit/0a28ca0))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/marionebl/conventional-changelog-lint/compare/v1.0.0...v1.0.1) (2016-08-15)
 
