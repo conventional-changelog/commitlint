@@ -1,3 +1,13 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.2.3...v0.3.0) (2016-11-01)
+
+
+### Features
+
+* add angular 2x commit types ([8c01b7e](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/8c01b7e))
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.2.2...v0.2.3) (2016-06-20)
 
