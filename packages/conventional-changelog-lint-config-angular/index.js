@@ -18,7 +18,7 @@ module.exports = {
 			'always',
 			72
 		],
-		'lang': [1,
+		lang: [1,
 			'always',
 			'eng'
 		],
