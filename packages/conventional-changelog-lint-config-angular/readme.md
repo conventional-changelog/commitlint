@@ -9,6 +9,11 @@ Fetch it with `npm`
 npm install --save-dev conventional-changelog-lint-config-angular conventional-changelog-lint
 ```
 
+See version 0.2 for config conforming to Angular 1 conventions:
+
+```shell
+npm install --save-dev conventional-changelog-lint-config-angular@0.2
+```
 
 ## Usage
 Install and use as `conventional-changelog-lint` shareable config.
@@ -31,17 +36,17 @@ The following rules are considered problems for `conventional-changelog-lint-con
 * **value**
   ```js
 	[
-		'feat',
-		'fix',
-		'docs',
-		'style',
-		'refactor',
-		'perf',
-		'test',
-		'build',
-		'ci',
-		'chore',
-		'revert'
+    'build',
+    'chore',
+    'ci',
+    'docs',
+    'feat',
+    'fix',
+    'perf',
+    'refactor',
+    'revert',
+    'style',
+    'test'
 	]
   ```
 
