@@ -34,8 +34,9 @@ The following rules are considered problems for `conventional-changelog-lint-con
 * **condition**: `type` is found in value
 * **rule**: `always`
 * **value**
+
   ```js
-	[
+  [
     'build',
     'chore',
     'ci',
