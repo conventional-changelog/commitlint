@@ -92,7 +92,7 @@ const report = lint(
 ```json
   {
     "scripts": {
-      "test": "conventional-changelog --from=HEAD~1"
+      "test": "conventional-changelog-lint --from=HEAD~1"
     }
   }
 ```
