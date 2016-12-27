@@ -70,6 +70,9 @@ module.exports = {
 		],
 		revert: [
 			'^revert: (.*)'
+		],
+		prerelease: [
+			'^(\\d*.\\d*.\\d*)(?:-)(?:(\\d.{0,3})|alpha|beta|rc)(.\\d*)?$'
 		]
 	}
 };
