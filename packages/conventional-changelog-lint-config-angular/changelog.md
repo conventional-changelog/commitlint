@@ -1,3 +1,13 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.3.0...v0.4.0) (2017-03-03)
+
+
+### Features
+
+* add wildcards for prerelease ([e34db1c](https://github.com/marionebl/conventional-changelog-lint-config-angular/commit/e34db1c))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.2.3...v0.3.0) (2016-11-01)
 
