@@ -5,4 +5,8 @@ node_js:
   - '4'
 before_install:
   - npm i -g npm
+before_script:
+  - npm run build
+script:
+  - npm test
 after_success: npm run coveralls
