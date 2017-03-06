@@ -184,6 +184,10 @@ wildcards: {
 }
 ```
 
+## Supported Node.js versions
+
+conventional-changelog-lint supports the active Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) version and higher: `>= 4`
+
 ## Related projects
 
 *   [angular-precommit](https://git.io/vwTDd)
