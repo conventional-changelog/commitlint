@@ -1,10 +1,12 @@
-> Lint commit messages against your conventional-changelog ruleset and preset
+> Lint commit messages
 
-# conventional-changelog-lint
+# conventional-changelog-lint [![stability][0]][1]
 
-Lint your commit messages against defined rulesets.
-`conventional-changelog-lint` plays nice with `conventional-changelog`
- and takes cues from `eslint`, e.g. shareable configurations.
+[![npm version][6]][7] [![Travis branch][2]][3] [![AppVeyor branch][4]][5]
+
+*  🚓  Enforce commit conventions
+*  🤖   Plays nice with `conventional-changelog`
+*  📦   Supports shareable configuration
 
 ## Installation
 
@@ -231,3 +233,13 @@ atom commit guidelines
 Copyright 2016 by [Mario Nebl](https://github.com/marionebl)
 and [contributors](./graphs/contributors).
 Released under the [MIT license]('./license.md').
+
+
+[0]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
+[1]: https://nodejs.org/api/documentation.html#documentation_stability_index
+[2]: https://img.shields.io/travis/marionebl/conventional-changelog-lint/master.svg?style=flat-square
+[3]: https://travis-ci.org/marionebl/conventional-changelog-lint
+[4]: https://img.shields.io/appveyor/ci/marionebl/conventional-changelog-lint/master.svg?style=flat-square
+[5]: https://ci.appveyor.com/project/marionebl/conventional-changelog-lint
+[6]: https://img.shields.io/npm/v/conventional-changelog-lint.svg?style=flat-square
+[7]: https://npmjs.org/package/conventional-changelog-lint
