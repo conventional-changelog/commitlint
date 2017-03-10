@@ -1,8 +1,13 @@
 import ensureEnum from '../library/ensure-enum';
 
 export default (parsed, when, value) => {
+	if (!parsed.scope) {
+		return [true, ''];
+	}
+
 	const negated = when === 'never';
-	const result = ensureEnum(parsed.scope, value);
+	const result = value.length === 0 || ensureEnum(parsed.scope, value);
+
 	return [
 		negated ? !result : result,
 		[
