@@ -1,3 +1,13 @@
+<a name="1.1.2"></a>
+## [1.1.2](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.0...v1.1.2) (2017-03-10)
+
+
+### Bug Fixes
+
+* allow empty scopes in scope-enum check ([b433c07](https://github.com/marionebl/conventional-changelog-lint/commit/b433c07))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.0...v1.1.1) (2017-03-03)
 
