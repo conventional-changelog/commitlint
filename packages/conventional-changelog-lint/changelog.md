@@ -1,3 +1,13 @@
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.2...v1.1.3) (2017-03-12)
+
+
+### Bug Fixes
+
+* determine git toplevel before reading .git/COMMIT_EDITMSG ([c45a62b](https://github.com/marionebl/conventional-changelog-lint/commit/c45a62b))
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.0...v1.1.2) (2017-03-10)
 
