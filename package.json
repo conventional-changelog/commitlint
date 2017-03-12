@@ -34,7 +34,13 @@
   },
   "babel": {
     "presets": [
-      "es2015-node4",
+      [
+        "env", {
+          "targets": {
+            "node": 4
+          }
+        }
+      ],
       "stage-0"
     ],
     "plugins": [
@@ -71,10 +77,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "ava": "0.17.0",
+    "ava": "0.18.2",
     "babel-cli": "6.18.0",
     "babel-plugin-add-module-exports": "0.2.1",
-    "babel-preset-es2015-node4": "2.1.0",
+    "babel-preset-env": "1.2.1",
     "babel-preset-stage-0": "6.16.0",
     "conventional-changelog-cli": "1.2.0",
     "conventional-recommended-bump": "0.3.0",
