@@ -11,6 +11,7 @@ import rimraf from 'rimraf';
 import expect from 'unexpected';
 
 import getMessages from '../../source/library/get-messages';
+import pkg from '../../package';
 
 const rm = denodeify(rimraf);
 
@@ -60,6 +61,22 @@ test.serial('get edit commit message from git subdirectory', async () => {
 	await cleanRepository(repo);
 });
 
+test.serial('get history commit messages from shallow clone', async () => {
+	const repo = await initRepository();
+
+	await writeFile('alpha.txt', 'alpha');
+	await execa('git', ['add', 'alpha.txt']);
+	await execa('git', ['commit', '-m', 'alpha']);
+
+	const clone = await cloneRepository(pkg.repository.url, repo, '--depth', '1');
+
+	const actual = async () => await getMessages({from: 'master'});
+	expect(actual, 'to error with', /Could not get git history from shallow clone/);
+
+	await cleanRepository(clone);
+	await cleanRepository(repo);
+});
+
 async function initRepository() {
 	const previous = process.cwd();
 	const directory = join(tmpdir(), rand());
@@ -72,6 +89,17 @@ async function initRepository() {
 	await execa('git', ['config', 'user.name', 'ava']);
 
 	return {directory, previous};
+}
+
+async function cloneRepository(source, context, ...args) {
+	const directory = join(tmpdir(), rand());
+	await execa('git', ['clone', ...args, source, directory]);
+	process.chdir(directory);
+
+	await execa('git', ['config', 'user.email', 'test@example.com']);
+	await execa('git', ['config', 'user.name', 'ava']);
+
+	return {directory, previous: context.previous};
 }
 
 async function cleanRepository(repo) {

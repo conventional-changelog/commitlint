@@ -1,4 +1,5 @@
 import {join} from 'path';
+import exists from 'path-exists';
 import gitRawCommits from 'git-raw-commits';
 import gitToplevel from 'git-toplevel';
 import {readFile} from 'mz/fs';
@@ -12,6 +13,10 @@ async function getCommitMessages(settings) {
 
 	if (edit) {
 		return getEditCommit();
+	}
+
+	if (await isShallow()) {
+		throw new Error('Could not get git history from shallow clone. Original issue: https://git.io/vyKMq\n Refer to https://git.io/vyKMv for details.');
 	}
 
 	return await getHistoryCommits({from, to});
@@ -29,6 +34,14 @@ function getHistoryCommits(options) {
 			resolve(data);
 		});
 	});
+}
+
+// Check if the current repository is shallow
+// () => Promise<Boolean>
+async function isShallow() {
+	const top = await gitToplevel();
+	const shallow = join(top, '.git/shallow');
+	return await exists(shallow);
 }
 
 // Get recently edited commit message
