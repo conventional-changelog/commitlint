@@ -1,3 +1,13 @@
+<a name="1.1.7"></a>
+## [1.1.7](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.6...v1.1.7) (2017-03-12)
+
+
+### Bug Fixes
+
+* move mz to dependencies ([3b3f057](https://github.com/marionebl/conventional-changelog-lint/commit/3b3f057))
+
+
+
 <a name="1.1.6"></a>
 ## [1.1.6](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.5...v1.1.6) (2017-03-12)
 
