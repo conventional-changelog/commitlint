@@ -1,3 +1,13 @@
+<a name="1.1.6"></a>
+## [1.1.6](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.5...v1.1.6) (2017-03-12)
+
+
+### Bug Fixes
+
+* add missing globby dependency ([4e71f84](https://github.com/marionebl/conventional-changelog-lint/commit/4e71f84))
+
+
+
 <a name="1.1.5"></a>
 ## [1.1.5](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.4...v1.1.5) (2017-03-12)
 
