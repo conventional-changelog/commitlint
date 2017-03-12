@@ -1,3 +1,13 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.3...v1.1.4) (2017-03-12)
+
+
+### Bug Fixes
+
+* move git-toplevel to dependencies ([d036390](https://github.com/marionebl/conventional-changelog-lint/commit/d036390))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.2...v1.1.3) (2017-03-12)
 
