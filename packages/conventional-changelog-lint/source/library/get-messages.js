@@ -27,11 +27,11 @@ export default async settings => {
 
 	if (edit) {
 		const editFile = await readFile(`.git/COMMIT_EDITMSG`);
-		return [editFile.toString('utf-8')];
-	} else {
-		return await getCommits({
-			from,
-			to
-		});
+		return [`${editFile.toString('utf-8')}\n`];
 	}
-}
+
+	return await getCommits({
+		from,
+		to
+	});
+};
