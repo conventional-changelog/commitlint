@@ -1,0 +1,45 @@
+{
+  "name": "conventional-changelog-lint-config-lerna-scopes",
+  "version": "1.0.0",
+  "description": "Shareable conventional-changelog-lint config enforcing lerna package names as scopes",
+  "scripts": {
+    "commit": "git-cz",
+    "commitmsg": "conventional-changelog-lint -e",
+    "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
+    "push": "git push && git push --tags && hub release create \"v$(cat .git/RELEASE_VERSION.tmp)\" --message=\"v$(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && npm publish && rm .git/RELEASE_VERSION.tmp && rm .git/COMMITMSG.tmp",
+    "release": "npm version $(conventional-recommended-bump -p angular)",
+    "test": "xo *.js && conventional-changelog-lint --from=HEAD~1",
+    "preversion": "npm test",
+    "version": "npm run changelog && git add . && echo \"$(conventional-changelog -p angular)\" > .git/COMMITMSG.tmp",
+    "postversion": "echo $(git log -1 --pretty=%B HEAD^..HEAD) > .git/RELEASE_VERSION.tmp && git tag -d v$(cat .git/RELEASE_VERSION.tmp) && git commit --amend -m \"chore(release): $(cat .git/RELEASE_VERSION.tmp)\n$(cat .git/COMMITMSG.tmp)\" && git tag -a v$(cat .git/RELEASE_VERSION.tmp) -m \"$(cat .git/COMMITMSG.tmp)\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marionebl/conventional-changelog-lint-config-lerna-scopes.git"
+  },
+  "keywords": [
+    "conventional-changelog",
+    "changelog",
+    "commit",
+    "config",
+    "lint",
+    "lerna"
+  ],
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marionebl/conventional-changelog-lint-config-lerna-scopes/issues"
+  },
+  "homepage": "https://github.com/marionebl/conventional-changelog-lint-config-lerna-scopes#readme",
+  "devDependencies": {
+    "conventional-changelog-cli": "1.2.0",
+    "conventional-changelog-lint": "1.0.1",
+    "conventional-recommended-bump": "0.3.0",
+    "cz-conventional-changelog": "1.2.0",
+    "husky": "0.11.9"
+  },
+  "dependencies": {
+    "globby": "6.1.0",
+    "load-json-file": "2.0.0"
+  }
+}
