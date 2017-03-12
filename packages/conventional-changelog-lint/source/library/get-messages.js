@@ -1,15 +1,25 @@
-// core modules
-import {
-	readFile as readFileNodeback
-} from 'fs';
-
-import denodeify from 'denodeify';
+import {join} from 'path';
 import gitRawCommits from 'git-raw-commits';
+import gitToplevel from 'git-toplevel';
+import {readFile} from 'mz/fs';
 
-const readFile = denodeify(readFileNodeback);
+export default getCommitMessages;
 
 // Get commit messages
-function getCommits(options) {
+// Object => Promise<Array<String>>
+async function getCommitMessages(settings) {
+	const {from, to, edit} = settings;
+
+	if (edit) {
+		return getEditCommit();
+	}
+
+	return await getHistoryCommits({from, to});
+}
+
+// Get commit messages from history
+// Object => Promise<Array<String>>
+function getHistoryCommits(options) {
 	return new Promise((resolve, reject) => {
 		const data = [];
 		gitRawCommits(options)
@@ -21,17 +31,11 @@ function getCommits(options) {
 	});
 }
 
-// Get commit messages
-export default async settings => {
-	const {from, to, edit} = settings;
-
-	if (edit) {
-		const editFile = await readFile(`.git/COMMIT_EDITMSG`);
-		return [`${editFile.toString('utf-8')}\n`];
-	}
-
-	return await getCommits({
-		from,
-		to
-	});
-};
+// Get recently edited commit message
+// () => Promise<Array<String>>
+async function getEditCommit() {
+	const top = await gitToplevel();
+	const editFilePath = join(top, '.git/COMMIT_EDITMSG');
+	const editFile = await readFile(editFilePath);
+	return [`${editFile.toString('utf-8')}\n`];
+}
