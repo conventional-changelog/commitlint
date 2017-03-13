@@ -1,6 +1,5 @@
 #!/usr/bin/env node
-// polyfills
-import 'babel-polyfill';
+import 'babel-polyfill'; // eslint-disable-line import/no-unassigned-import
 
 // npm modules
 import chalk from 'chalk';
@@ -8,17 +7,10 @@ import meow from 'meow';
 import {pick} from 'lodash';
 import stdin from 'get-stdin';
 
-// local modules
+import pkg from '../package.json'; // eslint-disable-line import/extensions
 import help from './help';
 import lint from './';
-import {
-	format,
-	getConfiguration,
-	getPreset,
-	getMessages
-} from './';
-
-import pkg from '../package';
+import {format, getConfiguration, getPreset, getMessages} from './'; // eslint-disable-line no-duplicate-imports
 
 /**
  * Behavioural rules
@@ -132,12 +124,12 @@ async function main(options) {
 
 // Start the engine
 main(cli)
-	.catch(error =>
+	.catch(err =>
 		setTimeout(() => {
-			if (error.type === pkg.name) {
+			if (err.type === pkg.name) {
 				process.exit(1);
 			}
-			throw error;
+			throw err;
 		})
 	);
 
