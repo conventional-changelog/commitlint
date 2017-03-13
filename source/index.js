@@ -1,10 +1,13 @@
 import {sync as parse} from 'conventional-commits-parser';
 import {merge} from 'lodash';
 
-export getConfiguration from './library/get-configuration';
-export getMessages from './library/get-messages';
-export getPreset from './library/get-preset';
-export format from './library/format';
+import ruleFunctions from './rules';
+import format from './library/format';
+import getConfiguration from './library/get-configuration';
+import getMessages from './library/get-messages';
+import getPreset from './library/get-preset';
+
+export {format, getConfiguration, getMessages, getPreset};
 
 export default async (message, options = {}) => {
 	const {
@@ -62,7 +65,7 @@ export default async (message, options = {}) => {
 				return null;
 			}
 
-			const rule = require(`./rules/${name}`);
+			const rule = ruleFunctions[name];
 			const [valid, message] = rule(parsed, when, value);
 
 			return {
