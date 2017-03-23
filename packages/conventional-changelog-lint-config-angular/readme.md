@@ -112,7 +112,7 @@ The following rules identify commits that pass linting by skipping all other rul
 * **condition**: `header` matches `pattern`
 * **pattern**:
   ```js
-    /^(Merge pull request)|(Merge (.*?) into (.*?)$)/
+    /^(Merge pull request)|(Merge (.*?) into (.*?)|(Merge (.*?) branch (.*?))$)/
   ```
 
 #### release
@@ -120,7 +120,7 @@ The following rules identify commits that pass linting by skipping all other rul
 * **pattern**: `always`
 * **pattern**:
   ```js
-    /^\\d.\\d.\\d$/
+    /^\\d+.\\d+.\\d+\n?$/
   ```
 
 #### revert
