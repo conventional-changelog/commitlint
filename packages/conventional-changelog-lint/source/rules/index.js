@@ -23,6 +23,7 @@ export default {
 	'subject-full-stop': require('./subject-full-stop'),
 	'subject-leading-capital': require('./subject-leading-capital'),
 	'subject-max-length': require('./subject-max-length'),
+	'subject-min-length': require('./subject-min-length'),
 	'subject-tense': require('./subject-tense'),
 	'type-case': require('./type-case'),
 	'type-empty': require('./type-empty'),
