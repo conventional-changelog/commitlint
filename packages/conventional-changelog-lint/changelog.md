@@ -1,3 +1,14 @@
+<a name="1.1.9"></a>
+## [1.1.9](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.8...v1.1.9) (2017-04-05)
+
+
+### Bug Fixes
+
+* **rules:** export subject-min-length rule ([29d149e](https://github.com/marionebl/conventional-changelog-lint/commit/29d149e))
+* override arrays when merging user configuration ([8637292](https://github.com/marionebl/conventional-changelog-lint/commit/8637292)), closes [#11](https://github.com/marionebl/conventional-changelog-lint/issues/11)
+
+
+
 <a name="1.1.8"></a>
 ## [1.1.8](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.7...v1.1.8) (2017-03-31)
 
