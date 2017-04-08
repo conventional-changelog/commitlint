@@ -6,6 +6,12 @@ import {readFile} from 'mz/fs';
 
 export default getCommitMessages;
 
+const SHALLOW_MESSAGE = [
+	'Could not get git history from shallow clone.',
+	'Use git fetch --shallow before linting.',
+	'Original issue: https://git.io/vyKMq\n Refer to https://git.io/vyKMv for details.'
+].join('\n');
+
 // Get commit messages
 // Object => Promise<Array<String>>
 async function getCommitMessages(settings) {
@@ -16,7 +22,7 @@ async function getCommitMessages(settings) {
 	}
 
 	if (await isShallow()) {
-		throw new Error('Could not get git history from shallow clone. Original issue: https://git.io/vyKMq\n Refer to https://git.io/vyKMv for details.');
+		throw new Error(SHALLOW_MESSAGE);
 	}
 
 	return await getHistoryCommits({from, to});
