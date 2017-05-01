@@ -1,5 +1,5 @@
 import test from 'ava';
-import {sync as parse} from 'conventional-commits-parser';
+import parse from '../../source/library/parse';
 import footerLeadingBlank from '../../source/rules/footer-leading-blank';
 
 const messages = {
@@ -72,19 +72,19 @@ test('footer-leading-blank with trailing message should succeed for "always"', t
 	t.is(actual, expected);
 });
 
-test.failing('footer-leading-blank without blank line before footer should fail for empty keyword', t => {
+test('footer-leading-blank without blank line before footer should fail for empty keyword', t => {
 	const [actual] = footerLeadingBlank(parsed.without);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('footer-leading-blank without blank line before footer should succeed for "never"', t => {
+test('footer-leading-blank without blank line before footer should succeed for "never"', t => {
 	const [actual] = footerLeadingBlank(parsed.without, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('footer-leading-blank without blank line before footer should fail for "always"', t => {
+test('footer-leading-blank without blank line before footer should fail for "always"', t => {
 	const [actual] = footerLeadingBlank(parsed.without, 'always');
 	const expected = false;
 	t.is(actual, expected);

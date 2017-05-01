@@ -1,5 +1,5 @@
 import test from 'ava';
-import {sync as parse} from 'conventional-commits-parser';
+import parse from '../../source/library/parse';
 import scopeEmpty from '../../source/rules/scope-empty';
 
 const messages = {

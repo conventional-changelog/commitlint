@@ -7,16 +7,14 @@ export default (parsed, when) => {
 	const negated = when === 'never';
 
 	// get complete body split into lines
-	const lines = (parsed.raw || '').split('\n').slice(2);
+	const lines = (parsed.raw || '').split(/\r|\n/).slice(2);
+	const [leading] = lines;
 
-	// check if the first line of body (if any) is empty
-	const leadingBlank =
-		lines.length > 0 ?
-		lines[0].length === 0 :
-		true;
+	// check if the first line of body is empty
+	const succeeds = leading === '';
 
 	return [
-		negated ? !leadingBlank : leadingBlank,
+		negated ? !succeeds : succeeds,
 		[
 			'footer',
 			negated ? 'may not' : 'must',
