@@ -12,37 +12,37 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test('subject-empty without subject should succeed for empty keyword', t => {
+test('without subject should succeed for empty keyword', t => {
 	const [actual] = subjectEmpty(parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('subject-empty without subject should fail for "never"', t => {
+test('without subject should fail for "never"', t => {
 	const [actual] = subjectEmpty(parsed.empty, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('subject-empty without subject should succeed for "always"', t => {
+test('without subject should succeed for "always"', t => {
 	const [actual] = subjectEmpty(parsed.empty, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('subject-empty with subject fail for empty keyword', t => {
+test('with subject fail for empty keyword', t => {
 	const [actual] = subjectEmpty(parsed.filled);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('subject-empty with subject succeed for "never"', t => {
+test('with subject succeed for "never"', t => {
 	const [actual] = subjectEmpty(parsed.filled, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('subject-empty with subject fail for "always"', t => {
+test('with subject fail for "always"', t => {
 	const [actual] = subjectEmpty(parsed.filled, 'always');
 	const expected = false;
 	t.is(actual, expected);

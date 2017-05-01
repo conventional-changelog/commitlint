@@ -12,37 +12,37 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test('body-empty with empty body should succeed for empty keyword', t => {
+test('with empty body should succeed for empty keyword', t => {
 	const [actual] = bodyEmpty(parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('body-empty with empty body should fail for "never"', t => {
+test('with empty body should fail for "never"', t => {
 	const [actual] = bodyEmpty(parsed.empty, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('body-empty with empty body should succeed for "always"', t => {
+test('with empty body should succeed for "always"', t => {
 	const [actual] = bodyEmpty(parsed.empty, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('body-empty with body should fail for empty keyword', t => {
+test('with body should fail for empty keyword', t => {
 	const [actual] = bodyEmpty(parsed.filled);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('body-empty with body should succeed for "never"', t => {
+test('with body should succeed for "never"', t => {
 	const [actual] = bodyEmpty(parsed.filled, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('body-empty with body should fail for "always"', t => {
+test('with body should fail for "always"', t => {
 	const [actual] = bodyEmpty(parsed.filled, 'always');
 	const expected = false;
 	t.is(actual, expected);

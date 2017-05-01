@@ -14,55 +14,55 @@ const parsed = {
 	empty: parse(messages.empty)
 };
 
-test('scope-empty with plain message it should succeed for empty keyword', t => {
+test('with plain message it should succeed for empty keyword', t => {
 	const [actual] = scopeEmpty(parsed.plain);
 	const expected = true;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with plain message it should succeed for "never"', t => {
+test('with plain message it should succeed for "never"', t => {
 	const [actual] = scopeEmpty(parsed.plain, 'never');
 	const expected = true;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with plain message it should fail for "always"', t => {
+test('with plain message it should fail for "always"', t => {
 	const [actual] = scopeEmpty(parsed.plain, 'always');
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with superfluous message it should fail for empty keyword', t => {
+test('with superfluous message it should fail for empty keyword', t => {
 	const [actual] = scopeEmpty(parsed.superfluous);
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with superfluous message it should fail for "never"', t => {
+test('with superfluous message it should fail for "never"', t => {
 	const [actual] = scopeEmpty(parsed.superfluous, 'never');
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with superfluous message it should fail for "always"', t => {
+test('with superfluous message it should fail for "always"', t => {
 	const [actual] = scopeEmpty(parsed.superfluous, 'always');
 	const expected = true;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with empty message it should fail for empty keyword', t => {
+test('with empty message it should fail for empty keyword', t => {
 	const [actual] = scopeEmpty(parsed.empty);
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with empty message it should fail for "never"', t => {
+test('with empty message it should fail for "never"', t => {
 	const [actual] = scopeEmpty(parsed.empty, 'never');
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
 
-test('scope-empty with empty message it should fail for "always"', t => {
+test('with empty message it should fail for "always"', t => {
 	const [actual] = scopeEmpty(parsed.empty, 'always');
 	const expected = true;
 	t.deepEqual(actual, expected);
