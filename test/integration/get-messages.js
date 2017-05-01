@@ -15,22 +15,32 @@ import pkg from '../../package';
 
 const rm = denodeify(rimraf);
 
-test.serial('get edit commit message from git root', async () => {
-	const repo = await initRepository();
+test.beforeEach(async t => {
+	t.context.repos = [await initRepository()];
+});
+
+test.afterEach.always(async t => {
+	try {
+		await Promise.all(t.context.repos.map(async repo => cleanRepository(repo)));
+		t.context.repos = [];
+	} catch (err) {
+		console.log({err});
+	}
+});
+
+test.serial('get edit commit message from git root', async t => {
+	const [repo] = t.context.repos;
 
 	await writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', '.']);
 	await execa('git', ['commit', '-m', 'alpha']);
-
 	const expected = ['alpha\n\n'];
 	const actual = await getMessages({edit: true});
 	expect(actual, 'to equal', expected);
-
-	await cleanRepository(repo);
 });
 
-test.serial('get history commit messages', async () => {
-	const repo = await initRepository();
+test.serial('get history commit messages', async t => {
+	const [repo] = t.context.repos;
 
 	await writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt']);
@@ -41,12 +51,10 @@ test.serial('get history commit messages', async () => {
 	const expected = ['remove alpha\n\n', 'alpha\n\n'];
 	const actual = await getMessages({});
 	expect(actual, 'to equal', expected);
-
-	await cleanRepository(repo);
 });
 
-test.serial('get edit commit message from git subdirectory', async () => {
-	const repo = await initRepository();
+test.serial('get edit commit message from git subdirectory', async t => {
+	const [repo] = t.context.repos;
 
 	await mkdir('beta');
 	await writeFile('beta/beta.txt', 'beta');
@@ -57,24 +65,20 @@ test.serial('get edit commit message from git subdirectory', async () => {
 	const expected = ['beta\n\n'];
 	const actual = await getMessages({edit: true});
 	expect(actual, 'to equal', expected);
-
-	await cleanRepository(repo);
 });
 
-test.serial('get history commit messages from shallow clone', async () => {
-	const repo = await initRepository();
+test.serial('get history commit messages from shallow clone', async t => {
+	const [repo] = t.context.repos;
 
 	await writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt']);
 	await execa('git', ['commit', '-m', 'alpha']);
 
 	const clone = await cloneRepository(pkg.repository.url, repo, '--depth', '1');
+	t.context.repos = [...t.context.repos, clone];
 
-	const actual = async () => await getMessages({from: 'master'});
-	expect(actual, 'to error with', /Could not get git history from shallow clone/);
-
-	await cleanRepository(clone);
-	await cleanRepository(repo);
+	const err = await t.throws(getMessages({from: 'master'}));
+	expect(err.message, 'to contain', 'Could not get git history from shallow clone');
 });
 
 async function initRepository() {
@@ -103,7 +107,9 @@ async function cloneRepository(source, context, ...args) {
 }
 
 async function cleanRepository(repo) {
-	process.chdir(repo.previous);
+	if (repo.previous && repo.previous !== process.cwd()) {
+		process.chdir(repo.previous);
+	}
 
 	if (await exists(repo.directory)) {
 		await rm(repo.directory);
