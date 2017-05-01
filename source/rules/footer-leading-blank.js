@@ -1,12 +1,20 @@
 export default (parsed, when) => {
+	// flunk if no footer is found
+	if (!parsed.footer) {
+		return [true];
+	}
+
 	const negated = when === 'never';
+
 	// get complete body split into lines
 	const lines = (parsed.raw || '').split('\n').slice(2);
+
 	// check if the first line of body (if any) is empty
 	const leadingBlank =
 		lines.length > 0 ?
 		lines[0].length === 0 :
 		true;
+
 	return [
 		negated ? !leadingBlank : leadingBlank,
 		[

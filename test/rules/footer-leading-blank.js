@@ -24,7 +24,7 @@ test('footer-leading-blank with simple message should succeed for empty keyword'
 	t.is(actual, expected);
 });
 
-test.failing('footer-leading-blank with simple message should succeed for "never"', t => {
+test('footer-leading-blank with simple message should succeed for "never"', t => {
 	const [actual] = footerLeadingBlank(parsed.simple, 'never');
 	const expected = true;
 	t.is(actual, expected);
@@ -42,7 +42,7 @@ test('footer-leading-blank with body message should succeed for empty keyword', 
 	t.is(actual, expected);
 });
 
-test.failing('footer-leading-blank with body message should succeed for "never"', t => {
+test('footer-leading-blank with body message should succeed for "never"', t => {
 	const [actual] = footerLeadingBlank(parsed.body, 'never');
 	const expected = true;
 	t.is(actual, expected);
@@ -60,7 +60,7 @@ test('footer-leading-blank with trailing message should succeed for empty keywor
 	t.is(actual, expected);
 });
 
-test.failing('footer-leading-blank with trailing message should succeed for "never"', t => {
+test('footer-leading-blank with trailing message should succeed for "never"', t => {
 	const [actual] = footerLeadingBlank(parsed.trailing, 'never');
 	const expected = true;
 	t.is(actual, expected);
