@@ -1,6 +1,6 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import scopeEnum from '../../source/rules/scope-enum';
+import parse from '../library/parse';
+import scopeEnum from './scope-enum';
 
 const messages = {
 	plain: 'foo(bar): baz',

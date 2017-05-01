@@ -1,6 +1,6 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import typeEmpty from '../../source/rules/type-empty';
+import parse from '../library/parse';
+import typeEmpty from './type-empty';
 
 const messages = {
 	empty: '(scope):',

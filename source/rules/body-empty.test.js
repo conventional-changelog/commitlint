@@ -1,6 +1,6 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import bodyEmpty from '../../source/rules/body-empty';
+import parse from '../library/parse';
+import bodyEmpty from './body-empty';
 
 const messages = {
 	empty: 'chore: subject',

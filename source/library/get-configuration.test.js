@@ -2,7 +2,7 @@ import path from 'path';
 import test from 'ava';
 import expect from 'unexpected';
 
-import getConfiguration from '../../source/library/get-configuration';
+import getConfiguration from './get-configuration';
 
 const cwd = process.cwd();
 

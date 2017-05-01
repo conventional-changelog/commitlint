@@ -10,7 +10,7 @@ import exists from 'path-exists';
 import rimraf from 'rimraf';
 import expect from 'unexpected';
 
-import getMessages from '../../source/library/get-messages';
+import getMessages from './get-messages';
 import pkg from '../../package';
 
 const rm = denodeify(rimraf);

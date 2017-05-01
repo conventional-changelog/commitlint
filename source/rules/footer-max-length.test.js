@@ -1,11 +1,11 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import footerMinLength from '../../source/rules/footer-min-length';
+import parse from '../library/parse';
+import footerMaxLength from './footer-max-length';
 
 const short = 'BREAKING CHANGE: a';
 const long = 'BREAKING CHANGE: ab';
 
-const needed = long.length;
+const allowed = short.length;
 
 const messages = {
 	simple: 'chore: subject',
@@ -22,26 +22,26 @@ const parsed = {
 };
 
 test('with simple message should succeed', t => {
-	const [actual] = footerMinLength(parsed.simple, '', needed);
+	const [actual] = footerMaxLength(parsed.simple, '', allowed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with empty footer should succeed', t => {
-	const [actual] = footerMinLength(parsed.empty, '', needed);
+	const [actual] = footerMaxLength(parsed.empty, '', allowed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with short footer should fail', t => {
-	const [actual] = footerMinLength(parsed.short, '', needed);
+test('with short footer should succeed', t => {
+	const [actual] = footerMaxLength(parsed.short, '', allowed);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with long footer should fail', t => {
+	const [actual] = footerMaxLength(parsed.long, '', allowed);
 	const expected = false;
-	t.is(actual, expected);
-});
-
-test('with long footer should succeed', t => {
-	const [actual] = footerMinLength(parsed.long, '', needed);
-	const expected = true;
 	t.is(actual, expected);
 });
 

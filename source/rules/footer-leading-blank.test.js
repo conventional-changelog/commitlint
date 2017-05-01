@@ -1,6 +1,6 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import footerLeadingBlank from '../../source/rules/footer-leading-blank';
+import parse from '../library/parse';
+import footerLeadingBlank from './footer-leading-blank';
 
 const messages = {
 	simple: 'chore: subject',

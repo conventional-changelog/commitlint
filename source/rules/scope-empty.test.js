@@ -1,6 +1,6 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import scopeEmpty from '../../source/rules/scope-empty';
+import parse from '../library/parse';
+import scopeEmpty from './scope-empty';
 
 const messages = {
 	plain: 'foo(bar): baz',
