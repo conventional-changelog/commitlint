@@ -19,13 +19,13 @@ const parsed = {
 	long: parse(messages.short)
 };
 
-test.failing('footer-max-length with simple message should succeed', t => {
+test('footer-max-length with simple message should succeed', t => {
 	const [actual] = footerMaxLength(parsed.simple, '', short.length);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('footer-max-length with empty footer should succeed', t => {
+test('footer-max-length with empty footer should succeed', t => {
 	const [actual] = footerMaxLength(parsed.empty, '', short.length);
 	const expected = true;
 	t.is(actual, expected);
