@@ -29,7 +29,7 @@ resolves `extends` configurations.
 
 ```shell
 ❯ conventional-changelog-lint --help
-  conventional-changelog-lint@0.1.0 - Lint commit messages against a conventional-changelog preset and ruleset
+  conventional-changelog-lint - Lint commit messages against a conventional-changelog preset and ruleset
 
   [input] reads from stdin if --edit, --from, --to are omitted
   --color,-c    toggle formatted output, defaults to: true
@@ -40,6 +40,41 @@ resolves `extends` configurations.
   --to,-t       upper end of the commit range to lint; applies if edit=false
   --quiet,-q    toggle console output
 
+```
+
+### Recipes
+
+#### git hook
+As a `commitmsg` git-hook with ["husky"](https://git.io/JDwyQg)
+
+```json
+  {
+    "scripts": {
+      "commitmsg": "conventional-changelog-lint -e"
+    }
+  }
+```
+
+
+#### Last commit
+As part of `npm test`
+
+```json
+  {
+    "scripts": {
+      "test": "conventional-changelog-lint --from=HEAD~1"
+    }
+  }
+```
+
+#### Travis
+
+```yml
+# Force full git checkout
+before_install: git fetch --unshallow
+
+# Lint all commits not in the target branch
+before_script: conventional-changelog-lint --from=$TRAVIS_BRANCH to=$TRAVIS_PULL_REQUEST_BRANCH
 ```
 
 ### API
@@ -75,28 +110,6 @@ const report = lint(
     configuration: await readConfiguration('conventional-changelog-lint')
   }
 );
-```
-
-### Recipes
-
-*   As a `commitmsg` git-hook with ["husky"](https://git.io/JDwyQg)
-
-```json
-  {
-    "scripts": {
-      "commitmsg": "conventional-changelog-lint -e"
-    }
-  }
-```
-
-*   As part of `npm test`
-
-```json
-  {
-    "scripts": {
-      "test": "conventional-changelog-lint --from=HEAD~1"
-    }
-  }
 ```
 
 ## Configuration
@@ -184,6 +197,45 @@ wildcards: {
     '/^revert: (.*)/'
   ]
 }
+```
+
+## Shallow clones
+
+### TL;DR
+
+Perform `git fetch --shallow` before linting.
+
+Most likely you are reading this because you where presented with an error message:
+
+```
+  'Could not get git history from shallow clone. 
+  Use git fetch --shallow before linting.
+  Original issue: https://git.io/vyKMq\n Refer to https://git.io/vyKMv for details.'
+```
+
+### Explanation
+
+git supports checking out `shallow` clones of a repository to save bandwith in times.
+These limited copies do not contain a full git history. This makes `conventional-changelog-lint`
+fail, especially when running on large commit ranges. 
+To ensure linting works every time you should convert a shallow git repo to a complete one.
+Use `git fetch --shallow` to do so.
+
+### Travis
+
+Ensure full git checkouts on TravisCI, add to `.travis.yml`:
+
+```yml
+before_install: 
+  - git fetch --unshallow
+```
+
+### Appveyor
+
+Ensure full git checkouts on AppVeyor, add to `appveyor.yml`:
+
+```yml
+shallow_clone: false
 ```
 
 ## Supported Node.js versions
