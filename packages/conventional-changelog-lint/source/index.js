@@ -1,4 +1,3 @@
-import {sync as parse} from 'conventional-commits-parser';
 import {merge} from 'lodash';
 
 import ruleFunctions from './rules';
@@ -6,6 +5,7 @@ import format from './library/format';
 import getConfiguration from './library/get-configuration';
 import getMessages from './library/get-messages';
 import getPreset from './library/get-preset';
+import parse from './library/parse';
 
 export {format, getConfiguration, getMessages, getPreset};
 
@@ -21,10 +21,7 @@ export default async (message, options = {}) => {
 	} = options;
 
 	// parse the commit message
-	const parsed = merge(
-		{raw: message},
-		parse(message, parserOptions)
-	);
+	const parsed = parse(message);
 
 	// wildcard matches skip the linting
 	const bails = Object.entries(wildcards)
