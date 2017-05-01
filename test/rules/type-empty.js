@@ -12,7 +12,7 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test.failing('without type should succeed for empty keyword', t => {
+test('without type should succeed for empty keyword', t => {
 	const [actual] = typeEmpty(parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
@@ -24,13 +24,13 @@ test('without type should fail for "never"', t => {
 	t.is(actual, expected);
 });
 
-test.failing('without type should succeed for "always"', t => {
+test('without type should succeed for "always"', t => {
 	const [actual] = typeEmpty(parsed.empty, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with type fail for empty keyword', t => {
+test('with type fail for empty keyword', t => {
 	const [actual] = typeEmpty(parsed.filled);
 	const expected = false;
 	t.is(actual, expected);
@@ -42,7 +42,7 @@ test('with type succeed for "never"', t => {
 	t.is(actual, expected);
 });
 
-test.failing('with type fail for "always"', t => {
+test('with type fail for "always"', t => {
 	const [actual] = typeEmpty(parsed.filled, 'always');
 	const expected = false;
 	t.is(actual, expected);
