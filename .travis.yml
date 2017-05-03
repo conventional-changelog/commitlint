@@ -4,8 +4,9 @@ node_js:
   - '6'
   - '4'
 before_install:
-  - npm i -g npm
+  - git fetch --unshallow
 before_script:
+  - conventional-changelog-lint --from=$TRAVIS_BRANCH --to=$TRAVIS_PULL_REQUEST_BRANCH
   - npm run build
 script:
   - npm test
