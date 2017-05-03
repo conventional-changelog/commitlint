@@ -4,8 +4,9 @@ node_js:
   - '6'
   - '4'
 before_install:
-  - npm i -g npm
+  - git fetch --unshallow
 before_script:
+  - npm run lint:prcommits
   - npm run build
 script:
   - npm test
