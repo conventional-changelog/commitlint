@@ -21,13 +21,13 @@
     "pretest": "npm run deps",
     "test": "ava",
     "lint": "xo *.js",
-    "lint:prcommits": "./scripts/lint-prcommits.sh",
     "deps": "npm run build && dependency-check . --missing && dependency-check . --extra --no-dev -i conventional-changelog-angular -i conventional-changelog-lint-config-angular",
     "commitlint": "node distribution/cli.js --from=HEAD~1",
     "preversion": "npm run build && npm test",
     "release": "npm version --no-git-tag-version $(conventional-recommended-bump -p angular)",
     "version": "npm run changelog && git add .",
-    "postversion": "git commit -m \"chore(release): v$npm_package_version\n$(conventional-changelog -p angular)\" && git tag -a v$npm_package_version -m \"$(conventional-changelog -p angular)\""
+    "postversion": "git commit -m \"chore(release): v$npm_package_version\n$(conventional-changelog -p angular)\" && git tag -a v$npm_package_version -m \"$(conventional-changelog -p angular)\"",
+    "travis:lint:commits": "./scripts/lint:commits.sh"
   },
   "ava": {
     "babel": "inherit",
