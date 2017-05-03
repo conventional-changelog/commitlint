@@ -15,8 +15,8 @@ else
 	TO="$TRAVIS_PULL_REQUEST_BRANCH"
 fi
 
-if [[ $TRAVIS_BRANCH == $TO ]]; then
-	conventional-changelog-lint --from="HEAD~1"
-else
-	conventional-changelog-lint --from="$TRAVIS_BRANCH" --to="$TO"
-fi
+# Lint all commits in the PR
+conventional-changelog-lint --from="$TRAVIS_BRANCH" --to="$TO"
+
+# Always lint the triggerig commit
+conventional-changelog-lint --from="$TRAVIS_COMMIT"

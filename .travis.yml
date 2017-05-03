@@ -6,7 +6,7 @@ node_js:
 before_install:
   - git fetch --unshallow
 before_script:
-  - npm run lint:prcommits
   - npm run build
 script:
+  - npm run travis:lint:commits
   - npm test
