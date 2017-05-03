@@ -21,6 +21,7 @@
     "pretest": "npm run deps",
     "test": "ava",
     "lint": "xo *.js",
+    "lint:prcommits": "./scripts/lint-prcommits.sh",
     "deps": "npm run build && dependency-check . --missing && dependency-check . --extra --no-dev -i conventional-changelog-angular -i conventional-changelog-lint-config-angular",
     "commitlint": "node distribution/cli.js --from=HEAD~1",
     "preversion": "npm run build && npm test",
