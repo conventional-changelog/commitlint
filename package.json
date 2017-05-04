@@ -30,6 +30,14 @@
     "travis:lint:commits": "./scripts/lint:commits.sh"
   },
   "ava": {
+    "files": [
+      "source/**/*.test.js",
+      "!distribution/**/*"
+    ],
+    "source": [
+      "source/**/*.js",
+      "!distribution/**/*"
+    ],
     "babel": "inherit",
     "require": [
       "babel-register",
