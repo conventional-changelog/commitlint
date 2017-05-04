@@ -7,7 +7,8 @@ const messages = {
 	body: 'chore: subject\nbody',
 	trailing: 'chore: subject\nbody\n\n',
 	without: 'chore: subject\nbody\nBREAKING CHANGE: something important',
-	with: 'chore: subject\nbody\n\nBREAKING CHANGE: something important'
+	with: 'chore: subject\nbody\n\nBREAKING CHANGE: something important',
+	withMulitLine: 'chore: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
 };
 
 const parsed = {
@@ -15,7 +16,8 @@ const parsed = {
 	body: parse(messages.body),
 	trailing: parse(messages.trailing),
 	without: parse(messages.without),
-	with: parse(messages.with)
+	with: parse(messages.with),
+	withMulitLine: parse(messages.withMulitLine)
 };
 
 test('with simple message should succeed for empty keyword', t => {
@@ -104,6 +106,24 @@ test('with blank line before footer should fail for "never"', t => {
 
 test('with blank line before footer should succeed for "always"', t => {
 	const [actual] = footerLeadingBlank(parsed.with, 'always');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test.failing('with blank line before footer and multiline body should succeed for empty keyword', t => {
+	const [actual] = footerLeadingBlank(parsed.withMulitLine);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test.failing('with blank line before footer and multiline body should fail for "never"', t => {
+	const [actual] = footerLeadingBlank(parsed.withMulitLine, 'never');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test.failing('with blank line before footer and multiline body should succeed for "always"', t => {
+	const [actual] = footerLeadingBlank(parsed.withMulitLine, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
