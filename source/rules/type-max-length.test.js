@@ -9,8 +9,8 @@ const value = short.length;
 
 const messages = {
 	empty: '():\n',
-	short: `${short}:\n`,
-	long: `${long}:\n`
+	short: `${short}: \n`,
+	long: `${long}: \n`
 };
 
 const parsed = {
@@ -19,13 +19,13 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test.failing('with empty should succeed', t => {
+test('with empty should succeed', t => {
 	const [actual] = check(parsed.empty, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with short should succeed', t => {
+test('with short should succeed', t => {
 	const [actual] = check(parsed.short, '', value);
 	const expected = true;
 	t.is(actual, expected);

@@ -1,8 +1,14 @@
 import ensureMaxLength from '../library/ensure-max-length';
 
 export default (parsed, when, value) => {
+	const input = parsed.type;
+
+	if (!input) {
+		return [true];
+	}
+
 	return [
-		ensureMaxLength(parsed.type, value),
+		ensureMaxLength(input, value),
 		`type must not be longer than ${value} characters`
 	];
 };

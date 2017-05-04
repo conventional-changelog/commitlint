@@ -5,12 +5,12 @@ import check from './type-min-length';
 const short = 'a';
 const long = 'ab';
 
-const value = short.length;
+const value = long.length;
 
 const messages = {
 	empty: '():\n',
-	short: `${short}:\n`,
-	long: `${long}:\n`
+	short: `${short}: \n`,
+	long: `${long}: \n`
 };
 
 const parsed = {
@@ -19,7 +19,13 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test.failing('with short should fail', t => {
+test('with empty should succeed', t => {
+	const [actual] = check(parsed.empty, '', value);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with short should fail', t => {
 	const [actual] = check(parsed.short, '', value);
 	const expected = false;
 	t.is(actual, expected);

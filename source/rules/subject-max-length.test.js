@@ -1,6 +1,6 @@
 import test from 'ava';
 import parse from '../library/parse';
-import check from './scope-max-length';
+import check from './subject-max-length';
 
 const short = 'a';
 const long = 'ab';
@@ -19,7 +19,7 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test.failing('with empty should succeed', t => {
+test('with empty should succeed', t => {
 	const [actual] = check(parsed.empty, '', value);
 	const expected = true;
 	t.is(actual, expected);
