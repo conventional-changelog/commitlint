@@ -110,19 +110,19 @@ test('with blank line before footer should succeed for "always"', t => {
 	t.is(actual, expected);
 });
 
-test.failing('with blank line before footer and multiline body should succeed for empty keyword', t => {
+test('with blank line before footer and multiline body should succeed for empty keyword', t => {
 	const [actual] = footerLeadingBlank(parsed.withMulitLine);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with blank line before footer and multiline body should fail for "never"', t => {
+test('with blank line before footer and multiline body should fail for "never"', t => {
 	const [actual] = footerLeadingBlank(parsed.withMulitLine, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('with blank line before footer and multiline body should succeed for "always"', t => {
+test('with blank line before footer and multiline body should succeed for "always"', t => {
 	const [actual] = footerLeadingBlank(parsed.withMulitLine, 'always');
 	const expected = true;
 	t.is(actual, expected);

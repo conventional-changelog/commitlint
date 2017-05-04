@@ -6,11 +6,16 @@ export default (parsed, when) => {
 
 	const negated = when === 'never';
 
-	// get complete body split into lines
-	const lines = (parsed.raw || '').split(/\r|\n/).slice(2);
+	const count = (parsed.body || '').split(/\r|\n/).length;
+
+	// get complete message split into lines
+	const lines = (parsed.raw || '')
+		.split(/\r|\n/)
+		.slice(count + 1);
+
 	const [leading] = lines;
 
-	// check if the first line of body is empty
+	// check if the first line of footer is empty
 	const succeeds = leading === '';
 
 	return [
