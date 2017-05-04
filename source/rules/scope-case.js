@@ -9,7 +9,7 @@ export default (parsed, when, value) => {
 
 	const negated = when === 'never';
 
-	const result = ensureCase(parsed.scope, value);
+	const result = ensureCase(scope, value);
 	return [
 		negated ? !result : result,
 		[
