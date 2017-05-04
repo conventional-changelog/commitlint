@@ -16,7 +16,7 @@ const parsed = {
 	uppercase: parse(messages.uppercase)
 };
 
-test.failing('with empty subject should succeed for "never lowercase"', t => {
+test('with empty subject should succeed for "never lowercase"', t => {
 	const [actual] = subjectCase(parsed.empty, 'never', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
@@ -34,7 +34,7 @@ test('with empty subject should succeed for "never uppercase"', t => {
 	t.is(actual, expected);
 });
 
-test.failing('with empty subject should succeed for "always uppercase"', t => {
+test('with empty subject should succeed for "always uppercase"', t => {
 	const [actual] = subjectCase(parsed.empty, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
