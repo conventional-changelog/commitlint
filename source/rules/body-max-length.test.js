@@ -8,30 +8,30 @@ const long = 'ab';
 const allowed = short.length;
 
 const messages = {
-	simple: 'chore: subject',
+	empty: 'chore: subject',
 	short: `chore: subject\n${short}`,
 	long: `chore: subject\n${long}`
 };
 
 const parsed = {
-	simple: parse(messages.simple),
+	empty: parse(messages.empty),
 	short: parse(messages.short),
 	long: parse(messages.long)
 };
 
-test('with simple message should succeed', t => {
-	const [actual] = bodyMaxLength(parsed.simple, '', allowed);
+test('with empty should succeed', t => {
+	const [actual] = bodyMaxLength(parsed.empty, '', allowed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with short body should succeed', t => {
+test('with short should succeed', t => {
 	const [actual] = bodyMaxLength(parsed.short, '', allowed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with long body should fail', t => {
+test('with long should fail', t => {
 	const [actual] = bodyMaxLength(parsed.long, '', allowed);
 	const expected = false;
 	t.is(actual, expected);

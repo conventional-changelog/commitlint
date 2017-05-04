@@ -21,27 +21,26 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with simple message should succeed', t => {
+test('with simple should succeed', t => {
 	const [actual] = footerMinLength(parsed.simple, '', needed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty footer should succeed', t => {
+test('with empty should succeed', t => {
 	const [actual] = footerMinLength(parsed.empty, '', needed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with short footer should fail', t => {
+test('with short should fail', t => {
 	const [actual] = footerMinLength(parsed.short, '', needed);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with long footer should succeed', t => {
+test('with long should succeed', t => {
 	const [actual] = footerMinLength(parsed.long, '', needed);
 	const expected = true;
 	t.is(actual, expected);
 });
-

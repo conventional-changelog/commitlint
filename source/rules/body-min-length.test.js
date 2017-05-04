@@ -19,19 +19,19 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with simple message should succeed', t => {
+test('with simple should succeed', t => {
 	const [actual] = bodyMinLength(parsed.simple, '', needed);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with short body should fail', t => {
+test('with short should fail', t => {
 	const [actual] = bodyMinLength(parsed.short, '', needed);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with long body should succeed', t => {
+test('with long should succeed', t => {
 	const [actual] = bodyMinLength(parsed.long, '', needed);
 	const expected = true;
 	t.is(actual, expected);

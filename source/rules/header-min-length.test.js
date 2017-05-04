@@ -17,13 +17,13 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with short footer should fail', t => {
+test('with short should fail', t => {
 	const [actual] = headerMinLength(parsed.short, '', needed);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with long footer should succeed', t => {
+test('with long should succeed', t => {
 	const [actual] = headerMinLength(parsed.long, '', needed);
 	const expected = true;
 	t.is(actual, expected);
