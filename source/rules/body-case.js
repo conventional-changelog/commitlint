@@ -1,7 +1,14 @@
 import ensureCase from '../library/ensure-case';
 
 export default (parsed, when, value) => {
+	const {body} = parsed;
+
+	if (!body) {
+		return [true];
+	}
+
 	const negated = when === 'never';
+
 	const result = ensureCase(parsed.body, value);
 	return [
 		negated ? !result : result,

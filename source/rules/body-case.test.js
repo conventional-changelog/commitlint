@@ -16,13 +16,7 @@ const parsed = {
 	uppercase: parse(messages.uppercase)
 };
 
-test.failing('with empty body should succeed for empty keyword', t => {
-	const [actual] = bodyCase(parsed.empty);
-	const expected = true;
-	t.is(actual, expected);
-});
-
-test.failing('with empty body should succeed for "never lowercase"', t => {
+test('with empty body should succeed for "never lowercase"', t => {
 	const [actual] = bodyCase(parsed.empty, 'never', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
@@ -34,7 +28,7 @@ test('with empty body should succeed for "always lowercase"', t => {
 	t.is(actual, expected);
 });
 
-test.failing('with empty body should succeed for "never uppercase"', t => {
+test('with empty body should succeed for "never uppercase"', t => {
 	const [actual] = bodyCase(parsed.empty, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
