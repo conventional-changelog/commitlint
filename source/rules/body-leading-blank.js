@@ -1,14 +1,20 @@
 export default (parsed, when) => {
+	// flunk if no body is found
+	if (!parsed.body) {
+		return [true];
+	}
+
 	const negated = when === 'never';
+
 	// get complete body split into lines
-	const lines = (parsed.raw || '').split('\n').slice(1);
-	// check if the first line of body (if any) is empty
-	const leadingBlank =
-		lines.length > 0 ?
-		lines[0].length === 0 :
-		true;
+	const lines = (parsed.raw || '').split(/\r|\n/).slice(1);
+	const [leading] = lines;
+
+	// check if the first line of body is empty
+	const succeeds = leading === '';
+
 	return [
-		negated ? !leadingBlank : leadingBlank,
+		negated ? !succeeds : succeeds,
 		[
 			'body',
 			negated ? 'may not' : 'must',

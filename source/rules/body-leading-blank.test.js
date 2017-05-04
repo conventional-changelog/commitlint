@@ -20,7 +20,7 @@ test('with simple message should succeed for empty keyword', t => {
 	t.is(actual, expected);
 });
 
-test.failing('with simple message should succeed for "never"', t => {
+test('with simple message should succeed for "never"', t => {
 	const [actual] = bodyLeadingBlank(parsed.simple, 'never');
 	const expected = true;
 	t.is(actual, expected);
