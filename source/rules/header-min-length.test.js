@@ -1,11 +1,11 @@
 import test from 'ava';
 import parse from '../library/parse';
-import headerMinLength from './header-min-length';
+import check from './header-min-length';
 
 const short = 'BREAKING CHANGE: a';
 const long = 'BREAKING CHANGE: ab';
 
-const needed = long.length;
+const value = long.length;
 
 const messages = {
 	short,
@@ -18,13 +18,13 @@ const parsed = {
 };
 
 test('with short should fail', t => {
-	const [actual] = headerMinLength(parsed.short, '', needed);
+	const [actual] = check(parsed.short, '', value);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with long should succeed', t => {
-	const [actual] = headerMinLength(parsed.long, '', needed);
+	const [actual] = check(parsed.long, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });

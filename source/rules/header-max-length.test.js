@@ -1,11 +1,11 @@
 import test from 'ava';
 import parse from '../library/parse';
-import headerMaxLength from './header-max-length';
+import check from './header-max-length';
 
 const short = 'chore: a';
 const long = 'chore: ab';
 
-const allowed = short.length;
+const value = short.length;
 
 const messages = {
 	short,
@@ -18,13 +18,13 @@ const parsed = {
 };
 
 test('with short should succeed', t => {
-	const [actual] = headerMaxLength(parsed.short, '', allowed);
+	const [actual] = check(parsed.short, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with long should fail', t => {
-	const [actual] = headerMaxLength(parsed.long, '', allowed);
+	const [actual] = check(parsed.long, '', value);
 	const expected = false;
 	t.is(actual, expected);
 });

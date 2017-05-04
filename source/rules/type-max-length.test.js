@@ -1,39 +1,31 @@
 import test from 'ava';
 import parse from '../library/parse';
-import check from './footer-max-length';
+import check from './type-max-length';
 
-const short = 'BREAKING CHANGE: a';
-const long = 'BREAKING CHANGE: ab';
+const short = 'a';
+const long = 'ab';
 
 const value = short.length;
 
 const messages = {
-	simple: 'chore: subject',
-	empty: 'chore: subject\nbody',
-	short: `chore: subject\n${short}`,
-	long: `chore: subject\n${long}`
+	empty: '():\n',
+	short: `${short}:\n`,
+	long: `${long}:\n`
 };
 
 const parsed = {
-	simple: parse(messages.simple),
 	empty: parse(messages.empty),
 	short: parse(messages.short),
 	long: parse(messages.long)
 };
 
-test('with simple should succeed', t => {
-	const [actual] = check(parsed.simple, '', value);
-	const expected = true;
-	t.is(actual, expected);
-});
-
-test('with empty should succeed', t => {
+test.failing('with empty should succeed', t => {
 	const [actual] = check(parsed.empty, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with short should succeed', t => {
+test.failing('with short should succeed', t => {
 	const [actual] = check(parsed.short, '', value);
 	const expected = true;
 	t.is(actual, expected);

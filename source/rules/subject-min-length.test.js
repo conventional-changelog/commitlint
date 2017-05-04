@@ -1,6 +1,6 @@
 import test from 'ava';
 import parse from '../library/parse';
-import check from './body-max-length';
+import check from './subject-min-length';
 
 const short = 'a';
 const long = 'ab';
@@ -8,9 +8,9 @@ const long = 'ab';
 const value = short.length;
 
 const messages = {
-	empty: 'chore: subject',
-	short: `chore: subject\n${short}`,
-	long: `chore: subject\n${long}`
+	empty: 'chore:\n',
+	short: `chore: ${short}\n`,
+	long: `chore: ${long}\n`
 };
 
 const parsed = {
@@ -19,20 +19,14 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with empty should succeed', t => {
-	const [actual] = check(parsed.empty, '', value);
-	const expected = true;
-	t.is(actual, expected);
-});
-
-test('with short should succeed', t => {
+test.failing('with short should fail', t => {
 	const [actual] = check(parsed.short, '', value);
-	const expected = true;
+	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with long should fail', t => {
+test('with long should succeed', t => {
 	const [actual] = check(parsed.long, '', value);
-	const expected = false;
+	const expected = true;
 	t.is(actual, expected);
 });

@@ -1,11 +1,11 @@
 import test from 'ava';
 import parse from '../library/parse';
-import footerMinLength from './footer-min-length';
+import check from './footer-min-length';
 
 const short = 'BREAKING CHANGE: a';
 const long = 'BREAKING CHANGE: ab';
 
-const needed = long.length;
+const value = long.length;
 
 const messages = {
 	simple: 'chore: subject',
@@ -22,25 +22,25 @@ const parsed = {
 };
 
 test('with simple should succeed', t => {
-	const [actual] = footerMinLength(parsed.simple, '', needed);
+	const [actual] = check(parsed.simple, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with empty should succeed', t => {
-	const [actual] = footerMinLength(parsed.empty, '', needed);
+	const [actual] = check(parsed.empty, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with short should fail', t => {
-	const [actual] = footerMinLength(parsed.short, '', needed);
+	const [actual] = check(parsed.short, '', value);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with long should succeed', t => {
-	const [actual] = footerMinLength(parsed.long, '', needed);
+	const [actual] = check(parsed.long, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });

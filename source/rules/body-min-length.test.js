@@ -1,11 +1,11 @@
 import test from 'ava';
 import parse from '../library/parse';
-import bodyMinLength from './body-min-length';
+import check from './body-min-length';
 
 const short = 'a';
 const long = 'ab';
 
-const needed = long.length;
+const value = long.length;
 
 const messages = {
 	simple: 'chore: subject',
@@ -20,19 +20,19 @@ const parsed = {
 };
 
 test('with simple should succeed', t => {
-	const [actual] = bodyMinLength(parsed.simple, '', needed);
+	const [actual] = check(parsed.simple, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with short should fail', t => {
-	const [actual] = bodyMinLength(parsed.short, '', needed);
+	const [actual] = check(parsed.short, '', value);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with long should succeed', t => {
-	const [actual] = bodyMinLength(parsed.long, '', needed);
+	const [actual] = check(parsed.long, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
