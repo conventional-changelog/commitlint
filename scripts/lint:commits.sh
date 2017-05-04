@@ -2,21 +2,23 @@
 set -e
 set -u
 
-# Add the clone as remote if this is a PR from a clone
 if [[ $TRAVIS_PULL_REQUEST_SLUG != "" && $TRAVIS_PULL_REQUEST_SLUG != $TRAVIS_REPO_SLUG ]]; then
+	# This is a Pull Request from a different slug, hence a forked repository
 	git remote add "$TRAVIS_PULL_REQUEST_SLUG" "https://github.com/$TRAVIS_PULL_REQUEST_SLUG.git"
 	git fetch "$TRAVIS_PULL_REQUEST_SLUG"
-fi
 
-# Use REMOTE/BRANCH as comparison if applicable
-if [[ $TRAVIS_PULL_REQUEST_SLUG != "" ]]; then
+	# Use the fetched remote pointing to the source clone for comparison
 	TO="$TRAVIS_PULL_REQUEST_SLUG/$TRAVIS_PULL_REQUEST_BRANCH"
 else
-	TO="$TRAVIS_PULL_REQUEST_BRANCH"
+	# This is a Pull Request from the same remote, no clone repository
+	TO=$TRAVIS_COMMIT
 fi
 
 # Lint all commits in the PR
+# - Covers fork pull requests (when TO=slug/branch)
+# - Covers branch pull requests (when TO=branch)
 conventional-changelog-lint --from="$TRAVIS_BRANCH" --to="$TO"
 
 # Always lint the triggerig commit
+# - Covers direct commits
 conventional-changelog-lint --from="$TRAVIS_COMMIT"
