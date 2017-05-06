@@ -32,37 +32,37 @@ test('empty against "never" should succeed', t => {
 	t.is(actual, expected);
 });
 
-test.failing('with should succeed', t => {
+test('with should succeed', t => {
 	const [actual] = check(parsed.with);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with against "always" should succeed', t => {
+test('with against "always" should succeed', t => {
 	const [actual] = check(parsed.with, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with against "never" should fail', t => {
+test('with against "never" should fail', t => {
 	const [actual] = check(parsed.with, 'never', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('without should fail', t => {
+test('without should fail', t => {
 	const [actual] = check(parsed.without, 'always', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('without against "always" should fail', t => {
+test('without against "always" should fail', t => {
 	const [actual] = check(parsed.without, 'always', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('without against "never" should succeed', t => {
+test('without against "never" should succeed', t => {
 	const [actual] = check(parsed.without, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
