@@ -1,8 +1,12 @@
 import ensureTense from '../library/ensure-tense';
 
 export default (parsed, when, value) => {
+	const tenses = Array.isArray(value) ? value : value.allowed || [];
+	const ignoreConfig = Array.isArray(value) ? [] : value.ignored || [];
+
 	const negated = when === 'never';
-	const {matches, offending} = ensureTense(parsed.subject, value);
+	const ignored = [...ignoreConfig, ...parsed.notes.map(note => note.title)];
+	const {matches, offending} = ensureTense(parsed.subject, tenses, {ignored});
 	const offenders = offending
 		.map(item => [item.lemma, item.tense].join(' - '))
 		.join(',');
@@ -10,7 +14,7 @@ export default (parsed, when, value) => {
 	return [
 		negated ? !matches : matches,
 		[
-			`tense of message must`,
+			`tense of subject must`,
 			negated ? `not` : null,
 			`be ${value}. Verbs in other tenses: ${offenders}`
 		]
