@@ -20,19 +20,19 @@ test('empty against "always" should succeed', t => {
 	t.is(actual, expected);
 });
 
-test.failing('empty against "never ." should succeed', t => {
+test('empty against "never ." should succeed', t => {
 	const [actual] = check(parsed.empty, 'never', '.');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with against "always ." should succeed', t => {
+test('with against "always ." should succeed', t => {
 	const [actual] = check(parsed.with, 'always', '.');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('with against "never ." should fail', t => {
+test('with against "never ." should fail', t => {
 	const [actual] = check(parsed.with, 'never', '.');
 	const expected = false;
 	t.is(actual, expected);
