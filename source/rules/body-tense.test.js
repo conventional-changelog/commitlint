@@ -74,25 +74,25 @@ test('past fails "never past-tense"', t => {
 	t.is(actual, expected);
 });
 
-test.failing('mixed fails "always present-third-person"', t => {
+test('mixed fails "always present-third-person"', t => {
 	const [actual] = footerTense(parsed.mixed, 'always', ['present-third-person']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('mixed fails "always present-imperative"', t => {
+test('mixed fails "always present-imperative"', t => {
 	const [actual] = footerTense(parsed.mixed, 'always', ['present-imperative']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('present fails "always present-participle"', t => {
+test('present fails "always present-participle"', t => {
 	const [actual] = footerTense(parsed.mixed, 'always', ['present-participle']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('mixed fails "always past-tense"', t => {
+test('mixed fails "always past-tense"', t => {
 	const [actual] = footerTense(parsed.mixed, 'always', ['past-tense']);
 	const expected = false;
 	t.is(actual, expected);
@@ -104,7 +104,7 @@ test('mixed succeeds "always present-third-person, present-imperative, present-p
 	t.is(actual, expected);
 });
 
-test.failing('mixed succeeds "never allowed: present-third-person" and matching ignored: implements', t => {
+test('mixed succeeds "never allowed: present-third-person" and matching ignored: implements', t => {
 	const [actual] = footerTense(parsed.mixed, 'never', {
 		allowed: ['present-third-person'],
 		ignored: ['implements']
