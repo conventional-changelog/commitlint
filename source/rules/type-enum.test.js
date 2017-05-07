@@ -14,19 +14,19 @@ const parsed = {
 	b: parse(messages.b)
 };
 
-test.failing('empty succeeds', t => {
+test('empty succeeds', t => {
 	const [actual] = check(parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('empty on "a" succeeds', t => {
+test('empty on "a" succeeds', t => {
 	const [actual] = check(parsed.empty, '', ['a']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('empty on "always a" succeeds', t => {
+test('empty on "always a" succeeds', t => {
 	const [actual] = check(parsed.empty, 'always', ['a']);
 	const expected = true;
 	t.is(actual, expected);
@@ -38,13 +38,13 @@ test('empty on "never a" succeeds', t => {
 	t.is(actual, expected);
 });
 
-test.failing('empty on "always a, b" succeeds', t => {
+test('empty on "always a, b" succeeds', t => {
 	const [actual] = check(parsed.empty, 'always', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test.failing('empty on "never a, b" succeeds', t => {
+test('empty on "never a, b" succeeds', t => {
 	const [actual] = check(parsed.empty, 'neber', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
