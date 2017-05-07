@@ -9,7 +9,7 @@ test('exports all rules', async t => {
 	t.deepEqual(actual, expected);
 });
 
-test('rules export functions', async t => {
+test('rules export functions', t => {
 	const actual = Object.values(rules);
 	t.true(actual.every(rule => typeof rule === 'function'));
 });

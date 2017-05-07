@@ -9,8 +9,7 @@ import stdin from 'get-stdin';
 
 import pkg from '../package.json'; // eslint-disable-line import/extensions
 import help from './help';
-import lint from './';
-import {format, getConfiguration, getPreset, getMessages} from './'; // eslint-disable-line no-duplicate-imports
+import lint, {format, getConfiguration, getPreset, getMessages} from './';
 
 /**
  * Behavioural rules
@@ -23,12 +22,8 @@ const rules = {
 };
 
 const configuration = {
-	// flags of string type
 	string: ['from', 'to', 'preset', 'extends'],
-	// flags of array type
-	// flags of bool type
 	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
-	// flag aliases
 	alias: {
 		c: 'color',
 		e: 'edit',
@@ -49,7 +44,6 @@ const configuration = {
 		to: 'upper end of the commit range to lint; applies if edit=false',
 		quiet: 'toggle console output'
 	},
-	// flag defaults
 	default: {
 		color: true,
 		edit: false,
@@ -58,7 +52,6 @@ const configuration = {
 		to: null,
 		quiet: false
 	},
-	// fail on unknown
 	unknown(arg) {
 		throw new Error(`unknown flags: ${arg}`);
 	}

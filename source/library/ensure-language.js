@@ -6,9 +6,7 @@ export default (input, allowed) => {
 		.map(lang => lang[0])
 		.slice(0, 5);
 
-	console.log(input, allowed, detected);
-
-	// franc spits out ['und'] when unable to
+	// Library franc spits out ['und'] when unable to
 	// guess any languages, let it through in this case
 	const matches = detected[0] === 'und' ||
 		detected.indexOf(allowed) > -1;

@@ -1,5 +1,5 @@
 export default (parsed, when) => {
-	// flunk if no footer is found
+	// Flunk if no footer is found
 	if (!parsed.footer) {
 		return [true];
 	}
@@ -8,14 +8,14 @@ export default (parsed, when) => {
 
 	const count = (parsed.body || '').split(/\r|\n/).length;
 
-	// get complete message split into lines
+	// Get complete message split into lines
 	const lines = (parsed.raw || '')
 		.split(/\r|\n/)
 		.slice(count + 1);
 
 	const [leading] = lines;
 
-	// check if the first line of footer is empty
+	// Check if the first line of footer is empty
 	const succeeds = leading === '';
 
 	return [

@@ -25,7 +25,7 @@ async function getCommitMessages(settings) {
 		throw new Error(SHALLOW_MESSAGE);
 	}
 
-	return await getHistoryCommits({from, to});
+	return getHistoryCommits({from, to});
 }
 
 // Get commit messages from history
@@ -47,7 +47,7 @@ function getHistoryCommits(options) {
 async function isShallow() {
 	const top = await gitToplevel();
 	const shallow = join(top, '.git/shallow');
-	return await exists(shallow);
+	return exists(shallow);
 }
 
 // Get recently edited commit message

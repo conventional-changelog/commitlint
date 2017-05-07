@@ -29,7 +29,7 @@ test('extends-empty should have no rules', async t => {
 	t.deepEqual(actual.rules, {});
 });
 
-/* test('invalid extend should throw', async t => {
+/* Failing: test('invalid extend should throw', async t => {
 	t.context.back = chdir('fixtures/extends-invalid');
 	t.throws(getConfiguration());
 }); */

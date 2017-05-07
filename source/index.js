@@ -1,5 +1,3 @@
-import {merge} from 'lodash';
-
 import ruleFunctions from './rules';
 import format from './library/format';
 import getConfiguration from './library/get-configuration';
@@ -11,19 +9,16 @@ export {format, getConfiguration, getMessages, getPreset};
 
 export default async (message, options = {}) => {
 	const {
-		preset: {
-			parserOpts: parserOptions
-		},
 		configuration: {
 			rules,
 			wildcards
 		}
 	} = options;
 
-	// parse the commit message
+	// Parse the commit message
 	const parsed = parse(message);
 
-	// wildcard matches skip the linting
+	// Wildcard matches skip the linting
 	const bails = Object.entries(wildcards)
 		.filter(entry => {
 			const [, pattern] = entry;
@@ -36,7 +31,7 @@ export default async (message, options = {}) => {
 		})
 		.map(entry => entry[0]);
 
-	// found a wildcard match, skip
+	// Found a wildcard match, skip
 	if (bails.length > 0) {
 		return {
 			valid: true,
@@ -47,7 +42,7 @@ export default async (message, options = {}) => {
 		};
 	}
 
-	// validate against all rules
+	// Validate against all rules
 	const results = Object.entries(rules)
 		.filter(entry => {
 			const [, [level]] = entry;

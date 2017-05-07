@@ -1,3 +1,3 @@
-export default async name => {
-	return await require(`conventional-changelog-${name}`);
+export default name => {
+	return require(`conventional-changelog-${name}`);
 };
