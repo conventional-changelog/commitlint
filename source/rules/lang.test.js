@@ -38,7 +38,7 @@ test('english against "never eng" fails', t => {
 	t.is(actual, expected);
 });
 
-test.failing('english against "deu" fails', t => {
+test('english against "deu" fails', t => {
 	const [actual] = check(parsed.eng, '', 'deu+');
 	const expected = false;
 	t.is(actual, expected);
