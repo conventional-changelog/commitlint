@@ -1,7 +1,7 @@
 import test from 'ava';
 import ensure from './ensure-enum';
 
-test.failing('false for no params', t => {
+test('false for no params', t => {
 	const actual = ensure();
 	t.is(actual, false);
 });
