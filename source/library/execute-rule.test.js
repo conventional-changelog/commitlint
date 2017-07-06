@@ -1,7 +1,7 @@
 import test from 'ava';
 import execute from './execute-rule';
 
-test.failing('does nothing without params', async t => {
+test('does nothing without params', async t => {
 	const actual = await execute();
 	t.is(actual, null);
 });
