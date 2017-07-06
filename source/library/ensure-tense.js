@@ -44,7 +44,7 @@ export default (input, allowed, options = {}) => {
 		})
 		.filter(verb => {
 			const [word] = verb;
-			return !options.ignored.some(ignored => ignored.indexOf(word) > -1);
+			return !(options.ignored || []).some(ignored => ignored.indexOf(word) > -1);
 		})
 		.filter(Boolean)
 		.map(verb => {
