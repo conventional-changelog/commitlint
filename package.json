@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "npm run watch",
-    "build": "BABEL_ENV=production babel source --out-dir distribution",
+    "build": "cross-env BABEL_ENV=production babel source --out-dir distribution",
     "watch": "npm run build -- --watch",
     "commit": "git-cz",
     "commitmsg": "npm run build && node distribution/cli.js --edit",
@@ -140,6 +140,7 @@
     "babel-register": "6.24.1",
     "conventional-changelog-cli": "1.2.0",
     "conventional-recommended-bump": "0.3.0",
+    "cross-env": "^5.0.1",
     "cz-conventional-changelog-lint": "0.1.3",
     "denodeify": "1.2.1",
     "dependency-check": "2.7.0",
