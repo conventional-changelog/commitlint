@@ -1,16 +1,19 @@
 import test from 'ava';
 import hasAnsi from 'has-ansi';
+import chalk from 'chalk';
 import {yellow, red, magenta, blue} from 'ansi-styles';
 import format from './format';
 
-test.failing('does nothing without arguments', t => {
+const ok = chalk.bold(`${chalk.green('✔')}   found 0 problems, 0 warnings`);
+
+test('does nothing without arguments', t => {
 	const actual = format();
-	t.is(actual, null);
+	t.deepEqual(actual, [ok]);
 });
 
-test.failing('does nothing without .errors and .warnings', t => {
+test('does nothing without .errors and .warnings', t => {
 	const actual = format({});
-	t.is(actual, null);
+	t.deepEqual(actual, [ok]);
 });
 
 test('returns empty summary of problems for empty .errors and .warnings', t => {
@@ -22,7 +25,7 @@ test('returns empty summary of problems for empty .errors and .warnings', t => {
 	t.true(msg.includes('0 problems, 0 warnings'));
 });
 
-test.failing('returns a correct of empty .errors and .warnings', t => {
+test('returns a correct of empty .errors and .warnings', t => {
 	const [err, prob, msg] = format({
 		errors: [
 			{
@@ -45,17 +48,20 @@ test.failing('returns a correct of empty .errors and .warnings', t => {
 	t.true(msg.includes('1 problems, 1 warnings'));
 });
 
-test.failing('colors messages by default', t => {
-	const [msg] = format({});
+test('colors messages by default', t => {
+	const [msg] = format({
+		errors: [],
+		warnings: []
+	});
 	t.true(hasAnsi(msg));
 });
 
-test.failing('does not color messages if configured', t => {
+test('does not color messages if configured', t => {
 	const [msg] = format({}, {color: false});
 	t.false(hasAnsi(msg));
 });
 
-test.failing('uses appropriate signs by default', t => {
+test('uses appropriate signs by default', t => {
 	const [err, warn] = format({
 		errors: [
 			{
@@ -77,7 +83,7 @@ test.failing('uses appropriate signs by default', t => {
 	t.true(warn.includes('⚠'));
 });
 
-test.failing('uses signs as configured', t => {
+test('uses signs as configured', t => {
 	const [err, warn] = format({
 		errors: [
 			{
@@ -101,7 +107,7 @@ test.failing('uses signs as configured', t => {
 	t.true(warn.includes('WRN'));
 });
 
-test.failing('uses appropriate colors by default', t => {
+test('uses appropriate colors by default', t => {
 	const [err, warn] = format({
 		errors: [
 			{
@@ -123,7 +129,7 @@ test.failing('uses appropriate colors by default', t => {
 	t.true(warn.includes(yellow.open));
 });
 
-test.failing('uses colors as configured', t => {
+test('uses colors as configured', t => {
 	const [err, warn] = format({
 		errors: [
 			{

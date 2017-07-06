@@ -1,31 +1,39 @@
 import chalk from 'chalk';
 
-export default function format(report, options = {}) {
-	const {signs, colors, color: enabled} = options;
-	const fmt = new chalk.constructor({enabled});
+const DEFAULT_SIGNS = [' ', '⚠', '✖'];
+const DEFAULT_COLORS = ['white', 'yellow', 'red'];
 
-	const problems = [...report.errors, ...report.warnings]
+export default function format(report = {}, options = {}) {
+	const {signs = DEFAULT_SIGNS, colors = DEFAULT_COLORS, color: enabled = true} = options;
+	const {errors = [], warnings = []} = report;
+
+	const problems = [...errors, ...warnings]
 		.map(problem => {
-			const sign = signs[problem.level];
-			const color = colors[problem.level];
-			const decoration = fmt[color](sign);
+			const sign = signs[problem.level] || '';
+			const color = colors[problem.level] || 'white';
+			const decoration = enabled ? chalk[color](sign) : sign;
 			const name = chalk.grey(`[${problem.name}]`);
 			return `${decoration}   ${problem.message} ${name}`;
 		});
 
-	const sign = report.errors.length ? // eslint-disable-line no-nested-ternary
-		'✖' :
-		report.warnings.length ?
-		'⚠' :
-		'✔';
+	const sign = selectSign({errors, warnings});
+	const color = selectColor({errors, warnings});
 
-	const color = report.errors.length ? // eslint-disable-line no-nested-ternary
-		'red' :
-		report.warnings.length ?
-		'yellow' :
-		'green';
+	const decoration = enabled ? chalk[color](sign) : sign;
+	const summary = `${decoration}   found ${errors.length} problems, ${warnings.length} warnings`;
+	return [...problems, enabled ? chalk.bold(summary) : summary];
+}
 
-	const decoration = fmt[color](sign);
-	const summary = `${decoration}   found ${report.errors.length} problems, ${report.warnings.length} warnings`;
-	return [...problems, chalk.bold(summary)];
+function selectSign(report) {
+	if (report.errors.length > 0) {
+		return '✖';
+	}
+	return report.warnings.length ? '⚠' : '✔';
+}
+
+function selectColor(report) {
+	if (report.errors.length > 0) {
+		return 'red';
+	}
+	return report.warnings.length ? 'yellow' : 'green';
 }

@@ -36,7 +36,7 @@ const configuration = {
 		x: 'extends'
 	},
 	description: {
-		color: 'toggle formatted output',
+		color: 'toggle colored output',
 		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
 		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
@@ -94,11 +94,7 @@ async function main(options) {
 				)
 			});
 
-			const formatted = format(report, {
-				color: flags.color,
-				signs: [' ', '⚠', '✖'],
-				colors: ['white', 'yellow', 'red']
-			});
+			const formatted = format(report, {color: flags.color});
 
 			if (!flags.quiet) {
 				console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(commit.split('\n')[0])}`);
