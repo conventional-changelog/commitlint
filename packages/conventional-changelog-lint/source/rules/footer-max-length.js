@@ -1,8 +1,14 @@
 import ensureMaxLength from '../library/ensure-max-length';
 
 export default (parsed, when, value) => {
+	const input = parsed.footer;
+
+	if (!input) {
+		return [true];
+	}
+
 	return [
-		ensureMaxLength(parsed.footer, value),
+		ensureMaxLength(input, value),
 		`footer must not be longer than ${value} characters`
 	];
 };

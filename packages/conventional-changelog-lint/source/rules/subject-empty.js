@@ -2,8 +2,10 @@ import ensureNotEmpty from '../library/ensure-not-empty';
 
 export default (parsed, when) => {
 	const negated = when === 'never';
+	const notEmpty = ensureNotEmpty(parsed.subject);
+
 	return [
-		ensureNotEmpty(parsed.subject),
+		negated ? notEmpty : !notEmpty,
 		[
 			'message',
 			negated ? 'may not' : 'must',

@@ -8,10 +8,9 @@ import execa from 'execa';
 import {mkdir, writeFile} from 'mz/fs';
 import exists from 'path-exists';
 import rimraf from 'rimraf';
-import expect from 'unexpected';
 
-import getMessages from '../../source/library/get-messages';
 import pkg from '../../package';
+import getMessages from './get-messages';
 
 const rm = denodeify(rimraf);
 
@@ -29,19 +28,15 @@ test.afterEach.always(async t => {
 });
 
 test.serial('get edit commit message from git root', async t => {
-	const [repo] = t.context.repos;
-
 	await writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', '.']);
 	await execa('git', ['commit', '-m', 'alpha']);
 	const expected = ['alpha\n\n'];
 	const actual = await getMessages({edit: true});
-	expect(actual, 'to equal', expected);
+	t.deepEqual(actual, expected);
 });
 
 test.serial('get history commit messages', async t => {
-	const [repo] = t.context.repos;
-
 	await writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt']);
 	await execa('git', ['commit', '-m', 'alpha']);
@@ -50,12 +45,10 @@ test.serial('get history commit messages', async t => {
 
 	const expected = ['remove alpha\n\n', 'alpha\n\n'];
 	const actual = await getMessages({});
-	expect(actual, 'to equal', expected);
+	t.deepEqual(actual, expected);
 });
 
 test.serial('get edit commit message from git subdirectory', async t => {
-	const [repo] = t.context.repos;
-
 	await mkdir('beta');
 	await writeFile('beta/beta.txt', 'beta');
 	process.chdir('beta');
@@ -64,7 +57,7 @@ test.serial('get edit commit message from git subdirectory', async t => {
 
 	const expected = ['beta\n\n'];
 	const actual = await getMessages({edit: true});
-	expect(actual, 'to equal', expected);
+	t.deepEqual(actual, expected);
 });
 
 test.serial('get history commit messages from shallow clone', async t => {
@@ -78,7 +71,7 @@ test.serial('get history commit messages from shallow clone', async t => {
 	t.context.repos = [...t.context.repos, clone];
 
 	const err = await t.throws(getMessages({from: 'master'}));
-	expect(err.message, 'to contain', 'Could not get git history from shallow clone');
+	t.true(err.message.indexOf('Could not get git history from shallow clone') > -1);
 });
 
 async function initRepository() {

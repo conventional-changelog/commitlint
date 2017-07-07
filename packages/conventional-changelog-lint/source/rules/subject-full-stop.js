@@ -1,11 +1,15 @@
 export default (parsed, when, value) => {
+	const input = parsed.subject;
+
+	if (!input) {
+		return [true];
+	}
+
 	const negated = when === 'never';
-	const closingFullStop =
-		parsed.subject ?
-		parsed.subject[parsed.subject.length - 1] === value :
-		true;
+	const hasStop = input[input.length - 1] === value;
+
 	return [
-		negated ? !closingFullStop : closingFullStop,
+		negated ? !hasStop : hasStop,
 		[
 			'message',
 			negated ? 'may not' : 'must',
