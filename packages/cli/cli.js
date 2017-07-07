@@ -1,0 +1,122 @@
+#!/usr/bin/env node
+require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
+
+// npm modules
+const core = require('@commitlint/core');
+const chalk = require('chalk');
+const meow = require('meow');
+const {pick} = require('lodash');
+const stdin = require('get-stdin');
+
+const pkg = require('./package');
+const help = require('./help');
+
+/**
+ * Behavioural rules
+ */
+const rules = {
+	fromStdin: (input, flags) => input.length === 0 &&
+		flags.from === null &&
+		flags.to === null &&
+		!flags.edit
+};
+
+const configuration = {
+	string: ['from', 'to', 'preset', 'extends'],
+	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
+	alias: {
+		c: 'color',
+		e: 'edit',
+		f: 'from',
+		p: 'preset',
+		t: 'to',
+		q: 'quiet',
+		h: 'help',
+		v: 'version',
+		x: 'extends'
+	},
+	description: {
+		color: 'toggle colored output',
+		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
+		extends: 'array of shareable configurations to extend',
+		from: 'lower end of the commit range to lint; applies if edit=false',
+		preset: 'conventional-changelog-preset to use for commit message parsing',
+		to: 'upper end of the commit range to lint; applies if edit=false',
+		quiet: 'toggle console output'
+	},
+	default: {
+		color: true,
+		edit: false,
+		from: null,
+		preset: 'angular',
+		to: null,
+		quiet: false
+	},
+	unknown(arg) {
+		throw new Error(`unknown flags: ${arg}`);
+	}
+};
+
+const cli = meow({
+	help: `[input] reads from stdin if --edit, --from, --to are omitted\n${help(configuration)}`,
+	description: `${pkg.name}@${pkg.version} - ${pkg.description}`
+}, configuration);
+
+const load = seed => core.getConfiguration('commitlint', {prefix: 'commitlint-config'}, seed);
+
+function main(options) {
+	const {input: raw, flags} = options;
+	const fromStdin = rules.fromStdin(raw, flags);
+
+	const input = fromStdin ? stdin() : core.getMessages(pick(flags, 'edit', 'from', 'to'));
+	const fmt = new chalk.constructor({enabled: flags.color});
+	const seed = {};
+
+	return input
+		.then(raw => Array.isArray(raw) ? raw : [raw])
+		.then(messages => Promise.all(messages.map(commit => {
+			if (flags.extends) {
+				seed.extends = flags.extends.split(',');
+			}
+
+			return Promise.all([core.getPreset(flags.preset), load(seed)])
+				.then(tasks => {
+					const [preset, configuration] = tasks;
+					return core.lint(commit, {preset, configuration});
+				})
+				.then(report => {
+					const formatted = core.format(report, {color: flags.color});
+
+					if (!flags.quiet) {
+						console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(commit.split('\n')[0])}`);
+						console.log(formatted.join('\n'));
+					}
+
+					if (report.errors.length > 0) {
+						const error = new Error(formatted[formatted.length - 1]);
+						error.type = pkg.name;
+						throw error;
+					}
+
+					return console.log('');
+				});
+		})
+	));
+}
+
+// Start the engine
+main(cli)
+	.catch(err =>
+		setTimeout(() => {
+			if (err.type === pkg.name) {
+				process.exit(1);
+			}
+			throw err;
+		})
+	);
+
+// Catch unhandled rejections globally
+process.on('unhandledRejection', (reason, promise) => {
+	console.log('Unhandled Rejection at: Promise ', promise, ' reason: ', reason);
+	throw reason;
+});
