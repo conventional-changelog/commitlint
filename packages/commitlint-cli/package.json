@@ -1,13 +1,13 @@
 {
-  "name": "conventional-changelog-lint",
-  "version": "2.1.0",
-  "description": "Lint commit messages against a conventional-changelog preset and ruleset",
+  "name": "commitlint-cli",
+  "version": "1.0.0",
+  "description": "commitlint-cli",
   "main": "distribution/index.js",
   "files": [
     "distribution"
   ],
   "bin": {
-    "conventional-changelog-lint": "distribution/cli.js"
+    "commitlint": "distribution/cli.js"
   },
   "scripts": {
     "start": "npm run watch",
