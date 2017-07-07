@@ -45,6 +45,7 @@
     ]
   },
   "babel": {
+    "ignore": ["**/*.test.js"],
     "env": {
       "development": {
         "sourceMaps": "inline",
