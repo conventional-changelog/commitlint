@@ -1,3 +1,21 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.9...v2.1.0) (2017-07-07)
+
+
+### Bug Fixes
+
+* prevent false positives for footer-leading-blank ([#33](https://github.com/marionebl/conventional-changelog-lint/issues/33)) ([05b4427](https://github.com/marionebl/conventional-changelog-lint/commit/05b4427))
+* rebuff rules ([#34](https://github.com/marionebl/conventional-changelog-lint/issues/34)) ([702a2f7](https://github.com/marionebl/conventional-changelog-lint/commit/702a2f7))
+* throw when detecting a shallow clone ([8c354c5](https://github.com/marionebl/conventional-changelog-lint/commit/8c354c5)), closes [#7](https://github.com/marionebl/conventional-changelog-lint/issues/7) [#12](https://github.com/marionebl/conventional-changelog-lint/issues/12)
+* update to latest angular config ([b1f3606](https://github.com/marionebl/conventional-changelog-lint/commit/b1f3606))
+
+
+### Features
+
+* ignore fixup and squash commit ([#17](https://github.com/marionebl/conventional-changelog-lint/issues/17)) ([f0b83d8](https://github.com/marionebl/conventional-changelog-lint/commit/f0b83d8))
+
+
+
 <a name="2.0.0"></a>
 # 2.0.0 (2017-07-07)
 
