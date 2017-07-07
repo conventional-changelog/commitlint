@@ -3,47 +3,28 @@ import format from './library/format';
 import getConfiguration from './library/get-configuration';
 import getMessages from './library/get-messages';
 import getPreset from './library/get-preset';
+import isIgnored from './library/is-ignored';
 import parse from './library/parse';
 
 export {format, getConfiguration, getMessages, getPreset};
 
 export default async (message, options = {}) => {
-	const {
-		configuration: {
-			rules,
-			wildcards
-		}
-	} = options;
+	const {configuration} = options;
+
+	// Found a wildcard match, skip
+	if (isIgnored(message)) {
+		return {
+			valid: true,
+			errors: [],
+			warnings: []
+		};
+	}
 
 	// Parse the commit message
 	const parsed = parse(message);
 
-	// Wildcard matches skip the linting
-	const bails = Object.entries(wildcards)
-		.filter(entry => {
-			const [, pattern] = entry;
-			return Array.isArray(pattern);
-		})
-		.filter(entry => {
-			const [, pattern] = entry;
-			const expression = new RegExp(...pattern);
-			return parsed.header.match(expression);
-		})
-		.map(entry => entry[0]);
-
-	// Found a wildcard match, skip
-	if (bails.length > 0) {
-		return {
-			valid: true,
-			wildcards: bails,
-			rules: [],
-			warnings: [],
-			errors: []
-		};
-	}
-
 	// Validate against all rules
-	const results = Object.entries(rules)
+	const results = Object.entries(configuration.rules)
 		.filter(entry => {
 			const [, [level]] = entry;
 			return level > 0;
