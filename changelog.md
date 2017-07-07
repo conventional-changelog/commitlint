@@ -1,3 +1,15 @@
+<a name="1.1.10"></a>
+## [1.1.10](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.9...v1.1.10) (2017-07-07)
+
+
+### Bug Fixes
+
+* prevent false positives for footer-leading-blank ([#33](https://github.com/marionebl/conventional-changelog-lint/issues/33)) ([05b4427](https://github.com/marionebl/conventional-changelog-lint/commit/05b4427))
+* rebuff rules ([#34](https://github.com/marionebl/conventional-changelog-lint/issues/34)) ([702a2f7](https://github.com/marionebl/conventional-changelog-lint/commit/702a2f7))
+* throw when detecting a shallow clone ([8c354c5](https://github.com/marionebl/conventional-changelog-lint/commit/8c354c5)), closes [#7](https://github.com/marionebl/conventional-changelog-lint/issues/7) [#12](https://github.com/marionebl/conventional-changelog-lint/issues/12)
+
+
+
 <a name="1.1.9"></a>
 ## [1.1.9](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.8...v1.1.9) (2017-04-05)
 
