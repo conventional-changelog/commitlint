@@ -1,5 +1,4 @@
 import test from 'ava';
-import supportsColor from 'supports-color';
 import hasAnsi from 'has-ansi';
 import chalk from 'chalk';
 import {yellow, red, magenta, blue} from 'ansi-styles';
@@ -130,7 +129,7 @@ test('uses appropriate colors by default', t => {
 	t.true(warn.includes(yellow.open));
 });
 
-if (supportsColor) {
+if (process.platform !== 'win32') {
 	test('uses colors as configured', t => {
 		const [err, warn] = format({
 			errors: [
