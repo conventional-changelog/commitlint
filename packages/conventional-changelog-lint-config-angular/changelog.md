@@ -1,3 +1,8 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.4.1...v1.0.0) (2017-07-07)
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/marionebl/conventional-changelog-lint-config-angular/compare/v0.4.0...v0.4.1) (2017-03-23)
 
