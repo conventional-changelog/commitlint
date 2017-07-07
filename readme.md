@@ -1,6 +1,6 @@
 > Lint commit messages
 
-# conventional-changelog-lint [![stability][0]][1]
+# commitlint [![stability][0]][1]
 
 [![npm version][6]][7] [![Travis branch][2]][3] [![AppVeyor branch][4]][5]
 
@@ -13,23 +13,23 @@
 Fetch it with `npm`
 
 ```shell
-npm install --save-dev conventional-changelog-lint
+npm install --save-dev commitlint
 ```
 
 ## Usage
 
-`conventional-changelog-lint` provides a command line and node interface.
+`commitlint` provides a command line and node interface.
 
 ### CLI
 
-![conventional-changelog-lint demo](https://git.io/v2iTI)
+![commitlint demo](https://git.io/v2iTI)
 
-The command line interface reads `.conventional-changelog-lintrc`
+The command line interface reads `.commitlintrc`
 resolves `extends` configurations.
 
 ```shell
-❯ conventional-changelog-lint --help
-  conventional-changelog-lint - Lint commit messages against a conventional-changelog preset and ruleset
+❯ commitlint --help
+  commitlint - Lint commit messages
 
   [input] reads from stdin if --edit, --from, --to are omitted
   --color,-c    toggle formatted output, defaults to: true
@@ -50,7 +50,7 @@ As a `commitmsg` git-hook with ["husky"](https://git.io/JDwyQg)
 ```json
   {
     "scripts": {
-      "commitmsg": "conventional-changelog-lint -e"
+      "commitmsg": "commitlint -e"
     }
   }
 ```
@@ -62,7 +62,7 @@ As part of `npm test`
 ```json
   {
     "scripts": {
-      "test": "conventional-changelog-lint --from=HEAD~1"
+      "test": "commitlint --from=HEAD~1"
     }
   }
 ```
@@ -73,7 +73,7 @@ You can lint all commits in a PR by passing all commits that
 are present in `SOURCE_BRANCH` but unavailable in `BASE_BRANCH`:
 
 ```sh
-conventional-changelog-lint --from=BASE_BRANCH to=SOURCE_BRANCH
+commitlint --from=BASE_BRANCH to=SOURCE_BRANCH
 ```
 
 Most of the time `BASE_BRANCH` will be `master` for Github Flow.
@@ -89,7 +89,7 @@ cd test # make sure CWD is in your repository
 git remote add other-name https://github.com/other-name/test.git
 git fetch other-name
 
-conventional-changelog-lint --from=master --to=other-name/test
+commitlint --from=master --to=other-name/test
 ```
 
 See [scripts/lint:commit.sh](./scripts/lint:commit.sh#6) for an example on how to obtain `SOURCE_BRANCH` from a Github clone automatically on Travis.
@@ -120,7 +120,7 @@ The programming interface does not read configuration by default,
 it has to be provided as second parameter.
 
 ```js
-import lint from 'conventional-changelog-lint';
+import lint from 'commitlint';
 const report = lint(
   'docs: add node api interface usage',
   {
@@ -134,32 +134,32 @@ To achieve the same behavior as with the command line interface
 you can use the provided utility functions:
 
 ```js
-import lint from 'conventional-changelog-lint';
+import lint from 'commitlint';
 import {
   getPreset,
   getConfiguration
-} from 'conventional-changelog-lint';
+} from 'commitlint';
 
 const report = lint(
   'docs: add node api interface usage',
   {
     preset: await getPreset('angular'),
-    configuration: await readConfiguration('conventional-changelog-lint')
+    configuration: await readConfiguration('commitlint')
   }
 );
 ```
 
 ## Configuration
 
-`conventional-changelog-lint` is configured via
-`.conventional-changelog-lintrc` and shareable configuration.
+`commitlint` is configured via
+`.commitlintrc` and shareable configuration.
 
-When no `.conventional-changelog-lintrc` is found it will use the
-[angular](https://github.com/marionebl/conventional-changelog-lint-config-angular#rules)
+When no `.commitlintrc` is found it will use the
+[angular](https://github.com/marionebl/commitlint-config-angular#rules)
 shareable config.
 See the documentation there for default rules.
 
-When a `.conventional-changelog-lintrc` is found it will **not** load any preset
+When a `.commitlintrc` is found it will **not** load any preset
 unless specified via [extends](#extends) configuration.
 
 ### extends
@@ -171,9 +171,9 @@ unless specified via [extends](#extends) configuration.
 ```
 
 Array of shareable configurations to extend.
-Configurations are resolved as `conventional-changelog-lint-config-${name}`
+Configurations are resolved as `commitlint-config-${name}`
 and have to be installed.
-See [npm search](https://www.npmjs.com/search?q=conventional-changelog-lint-config)
+See [npm search](https://www.npmjs.com/search?q=commitlint-config)
 for available shareable configurations.
 
 ---
@@ -211,7 +211,7 @@ Rules applicable to the linted commit messages.
 By default all rules are turned off via a level of 0.
 They can be enabled by shareable configuration,
 such as the
-[angular config](https://github.com/marionebl/conventional-changelog-lint-config-angular),
+[angular config](https://github.com/marionebl/commitlint-config-angular),
 which is loaded by default.
 
 ---
@@ -253,7 +253,7 @@ Most likely you are reading this because you where presented with an error messa
 ### Explanation
 
 git supports checking out `shallow` clones of a repository to save bandwith in times.
-These limited copies do not contain a full git history. This makes `conventional-changelog-lint`
+These limited copies do not contain a full git history. This makes `commitlint`
 fail, especially when running on large commit ranges.
 To ensure linting works every time you should convert a shallow git repo to a complete one.
 Use `git fetch --shallow` to do so.
@@ -277,7 +277,7 @@ shallow_clone: false
 
 ## Supported Node.js versions
 
-conventional-changelog-lint supports the active Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) version and higher: `>= 4`
+commitlint supports the active Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) version and higher: `>= 4`
 
 ## Related projects
 
@@ -287,19 +287,19 @@ conventional-changelog-lint supports the active Node.js [LTS](https://github.com
 *   [conventional-changelog-cli](https://git.io/vwTDA)
 – Generate a changelog from conventional commit history
 
-*   [cz-conventional-changelog-lint](https://git.io/vwTyf)
+*   [cz-commitlint](https://git.io/vwTyf)
 – Let an interactive command line interface help you with creating commit
-messages matching your `conventional-changelog-lint` configuration
+messages matching your `commitlint` configuration
 
-*   [conventional-changelog-lint-config-angular](https://git.io/vwTy4)
-– Shareable conventional-changelog-lint config enforcing the angular
+*   [commitlint-config-angular](https://git.io/vwTy4)
+– Shareable commitlint config enforcing the angular
 commit convention
 
-*   [conventional-changelog-lint-config-atom](https://git.io/vwTy9)
-– Shareable configuration for conventional-changelog-lint based on the
+*   [commitlint-config-atom](https://git.io/vwTy9)
+– Shareable configuration for commitlint based on the
 atom commit guidelines
 
-*   [conventional-changelog-lint-config-patternplate](https://git.io/vwTyz)
+*   [commitlint-config-patternplate](https://git.io/vwTyz)
 – Lint your commits, patternplate-style
 
 *   [conventional-commits-detector](https://git.io/vwTyk)
@@ -326,9 +326,9 @@ Released under the [MIT license]('./license.md').
 
 [0]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
-[2]: https://img.shields.io/travis/marionebl/conventional-changelog-lint/master.svg?style=flat-square
-[3]: https://travis-ci.org/marionebl/conventional-changelog-lint
-[4]: https://img.shields.io/appveyor/ci/marionebl/conventional-changelog-lint/master.svg?style=flat-square
-[5]: https://ci.appveyor.com/project/marionebl/conventional-changelog-lint
-[6]: https://img.shields.io/npm/v/conventional-changelog-lint.svg?style=flat-square
-[7]: https://npmjs.org/package/conventional-changelog-lint
+[2]: https://img.shields.io/travis/marionebl/commitlint/master.svg?style=flat-square
+[3]: https://travis-ci.org/marionebl/commitlint
+[4]: https://img.shields.io/appveyor/ci/marionebl/commitlint/master.svg?style=flat-square
+[5]: https://ci.appveyor.com/project/marionebl/commitlint
+[6]: https://img.shields.io/npm/v/commitlint.svg?style=flat-square
+[7]: https://npmjs.org/package/commitlint

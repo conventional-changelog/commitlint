@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "conventional-changelog-lint",
   "version": "2.1.1",
   "description": "Lint commit messages against a conventional-changelog preset and ruleset",
@@ -9,117 +10,30 @@
   "bin": {
     "conventional-changelog-lint": "distribution/cli.js"
   },
+=======
+  "name": "commitlint",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Lint commit messages",
+  "license": "MIT",
+>>>>>>> chore: lerna setup
   "scripts": {
-    "start": "npm run watch",
-    "build": "cross-env BABEL_ENV=production babel source --out-dir distribution",
-    "watch": "npm run build -- --watch",
-    "commit": "git-cz",
-    "commitmsg": "npm run build && node distribution/cli.js --edit",
-    "changelog": "conventional-changelog --preset angular --infile changelog.md --same-file --output-unreleased",
-    "push": "git push && git push --tags && hub release create \"v$npm_package_version\" --message=\"v$npm_package_version\n$(conventional-changelog -p angular)\" && npm publish",
-    "prepretest": "npm run lint",
-    "pretest": "npm run deps",
-    "test": "nyc ava -c=4",
-    "lint": "xo",
-    "deps": "npm run build && dependency-check . --missing && dependency-check . --extra --no-dev -i conventional-changelog-angular -i conventional-changelog-lint-config-angular",
-    "commitlint": "node distribution/cli.js --from=HEAD~1",
-    "preversion": "npm run build && npm test",
-    "release": "npm version --no-git-tag-version $(conventional-recommended-bump -p angular)",
-    "version": "npm run changelog && git add .",
-    "postversion": "git commit -m \"chore(release): v$npm_package_version\n$(conventional-changelog -p angular)\" && git tag -a v$npm_package_version -m \"$(conventional-changelog -p angular)\"",
-    "travis:lint:commits": "./scripts/lint:commits.sh"
-  },
-  "ava": {
-    "files": [
-      "source/**/*.test.js",
-      "!distribution/**/*"
-    ],
-    "source": [
-      "source/**/*.js",
-      "!distribution/**/*"
-    ],
-    "babel": "inherit",
-    "require": [
-      "babel-register",
-      "babel-polyfill"
-    ]
-  },
-  "babel": {
-    "env": {
-      "development": {
-        "sourceMaps": "inline",
-        "plugins": [
-          "add-module-exports",
-          "istanbul",
-          [
-            "transform-runtime",
-            {
-              "polyfill": false,
-              "regenerator": true
-            }
-          ]
-        ]
-      },
-      "production": {
-        "ignore": [
-          "**/*.test.js"
-        ]
-      }
-    },
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": 4
-          }
-        }
-      ],
-      "stage-0"
-    ],
-    "plugins": [
-      "add-module-exports",
-      [
-        "transform-runtime",
-        {
-          "polyfill": false,
-          "regenerator": true
-        }
-      ]
-    ]
-  },
-  "nyc": {
-    "all": true,
-    "sourceMap": false,
-    "instrument": false,
-    "include": [
-      "source/**/*.js"
-    ]
-  },
-  "xo": {
-    "plugins": [
-      "flow-check"
-    ],
-    "rules": {
-      "flow-check/check": "error"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog-lint"
-    }
+    "lerna": "lerna",
+    "postinstall": "npm run lerna bootstrap",
+    "reinstall": "npm run clean && npm install",
+    "clean": "npm run lerna clean --yes && npm run lerna run clean"
   },
   "engines": {
     "node": ">=4"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marionebl/conventional-changelog-lint.git"
+    "url": "https://github.com/marionebl/commitlint.git"
   },
   "bugs": {
-    "url": "https://github.com/marionebl/conventional-changelog-lint/issues"
+    "url": "https://github.com/marionebl/commitlint/issues"
   },
-  "homepage": "https://github.com/marionebl/conventional-changelog-lint#readme",
+  "homepage": "https://github.com/marionebl/commitlint#readme",
   "keywords": [
     "conventional",
     "conventional-changelog",
@@ -132,8 +46,8 @@
     "name": "Mario Nebl",
     "email": "hello@herebecode.com"
   },
-  "license": "MIT",
   "devDependencies": {
+<<<<<<< HEAD
     "ansi-styles": "3.1.0",
     "ava": "0.18.2",
     "babel-cli": "6.18.0",
@@ -178,5 +92,8 @@
     "pos": "0.4.2",
     "rc": "1.1.7",
     "semver": "^5.3.0"
+=======
+    "lerna": "^2.0.0"
+>>>>>>> chore: lerna setup
   }
 }
