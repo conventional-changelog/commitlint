@@ -1,4 +1,5 @@
 import test from 'ava';
+import supportsColor from 'supports-color';
 import hasAnsi from 'has-ansi';
 import chalk from 'chalk';
 import {yellow, red, magenta, blue} from 'ansi-styles';
@@ -129,26 +130,28 @@ test('uses appropriate colors by default', t => {
 	t.true(warn.includes(yellow.open));
 });
 
-test('uses colors as configured', t => {
-	const [err, warn] = format({
-		errors: [
-			{
-				level: 2,
-				name: 'error-name',
-				message: 'There was an error'
-			}
-		],
-		warnings: [
-			{
-				level: 1,
-				name: 'warning-name',
-				message: 'There was a problem'
-			}
-		]
-	}, {
-		colors: ['white', 'magenta', 'blue']
-	});
+if (supportsColor) {
+	test('uses colors as configured', t => {
+		const [err, warn] = format({
+			errors: [
+				{
+					level: 2,
+					name: 'error-name',
+					message: 'There was an error'
+				}
+			],
+			warnings: [
+				{
+					level: 1,
+					name: 'warning-name',
+					message: 'There was a problem'
+				}
+			]
+		}, {
+			colors: ['white', 'magenta', 'blue']
+		});
 
-	t.true(err.includes(blue.open));
-	t.true(warn.includes(magenta.open));
-});
+		t.true(err.includes(blue.open));
+		t.true(warn.includes(magenta.open));
+	});
+}
