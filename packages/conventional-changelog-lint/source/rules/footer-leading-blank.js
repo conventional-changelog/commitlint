@@ -1,16 +1,21 @@
 export default (parsed, when) => {
-	// flunk if no footer is found
+	// Flunk if no footer is found
 	if (!parsed.footer) {
 		return [true];
 	}
 
 	const negated = when === 'never';
 
-	// get complete body split into lines
-	const lines = (parsed.raw || '').split(/\r|\n/).slice(2);
+	const count = (parsed.body || '').split(/\r|\n/).length;
+
+	// Get complete message split into lines
+	const lines = (parsed.raw || '')
+		.split(/\r|\n/)
+		.slice(count + 1);
+
 	const [leading] = lines;
 
-	// check if the first line of body is empty
+	// Check if the first line of footer is empty
 	const succeeds = leading === '';
 
 	return [

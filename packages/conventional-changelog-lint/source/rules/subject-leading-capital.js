@@ -1,9 +1,17 @@
+// TODO
+// * rename this to "subject-first-character"
 import ensureCase from '../library/ensure-case';
 
-export default (parsed, when, value) => {
+export default (parsed, when = 'always', value = 'uppercase') => {
+	const input = parsed.subject;
+
+	if (!input) {
+		return [true];
+	}
+
 	const negated = when === 'never';
-	const {subject} = parsed;
-	const result = ensureCase(subject[0], value);
+	const result = ensureCase(input[0], value);
+
 	return [
 		negated ? !result : result,
 		[

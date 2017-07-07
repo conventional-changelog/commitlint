@@ -43,7 +43,7 @@ export default async (name = defaultName, settings = defaultSettings, seed = {})
 			const [key, value] = item;
 			const executedValue = await Promise.all(
 				Object.entries(value || {})
-					.map(async entry => await executeRule(entry))
+					.map(entry => executeRule(entry))
 			);
 			return [key, executedValue.reduce((registry, item) => {
 				const [key, value] = item;

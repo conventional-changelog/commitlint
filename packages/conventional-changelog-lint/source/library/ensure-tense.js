@@ -26,7 +26,7 @@ function getTags(lemmata) {
 	}
 }
 
-export default (input, allowed) => {
+export default (input, allowed, options = {}) => {
 	const lemmata = getLemmata(input);
 	const tagged = getTags(lemmata);
 	const verbs = tagged.filter(tag => tag[1][0] === 'V');
@@ -41,6 +41,10 @@ export default (input, allowed) => {
 		.filter(verb => {
 			const [, tag] = verb;
 			return tags.length > 0 && tags.indexOf(tag) === -1;
+		})
+		.filter(verb => {
+			const [word] = verb;
+			return !(options.ignored || []).some(ignored => ignored.indexOf(word) > -1);
 		})
 		.filter(Boolean)
 		.map(verb => {
