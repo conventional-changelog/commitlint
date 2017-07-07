@@ -45,7 +45,6 @@
     ]
   },
   "babel": {
-    "ignore": ["**/*.test.js"],
     "env": {
       "development": {
         "sourceMaps": "inline",
@@ -60,6 +59,9 @@
             }
           ]
         ]
+      },
+      "production": {
+        "ignore": ["**/*.test.js"]
       }
     },
     "presets": [

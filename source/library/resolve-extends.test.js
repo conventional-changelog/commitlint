@@ -46,8 +46,6 @@ test('propagates return value of require function', t => {
 		return propagated;
 	});
 
-	console.log({actual});
-
 	t.is(actual.foo, 'bar');
 });
 
