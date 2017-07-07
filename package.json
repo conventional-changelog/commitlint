@@ -1,27 +1,15 @@
 {
-<<<<<<< HEAD
-  "name": "conventional-changelog-lint",
-  "version": "2.1.1",
-  "description": "Lint commit messages against a conventional-changelog preset and ruleset",
-  "main": "distribution/index.js",
-  "files": [
-    "distribution"
-  ],
-  "bin": {
-    "conventional-changelog-lint": "distribution/cli.js"
-  },
-=======
-  "name": "commitlint",
+  "name": "@commitlint/root",
+  "description": "Lint commit messages",
   "private": true,
   "version": "1.0.0",
-  "description": "Lint commit messages",
   "license": "MIT",
->>>>>>> chore: lerna setup
   "scripts": {
     "lerna": "lerna",
+    "test": "npm run lerna run test",
     "postinstall": "npm run lerna bootstrap",
     "reinstall": "npm run clean && npm install",
-    "clean": "npm run lerna clean --yes && npm run lerna run clean"
+    "clean": "npm run lerna clean -- --yes && npm run lerna run clean"
   },
   "engines": {
     "node": ">=4"
@@ -47,53 +35,6 @@
     "email": "hello@herebecode.com"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "ansi-styles": "3.1.0",
-    "ava": "0.18.2",
-    "babel-cli": "6.18.0",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-plugin-istanbul": "4.1.3",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-polyfill": "6.20.0",
-    "babel-preset-env": "1.2.1",
-    "babel-preset-stage-0": "6.16.0",
-    "babel-register": "6.24.1",
-    "conventional-changelog-cli": "1.2.0",
-    "conventional-recommended-bump": "0.3.0",
-    "cross-env": "5.0.1",
-    "cz-conventional-changelog-lint": "0.1.3",
-    "denodeify": "1.2.1",
-    "dependency-check": "2.7.0",
-    "eslint-plugin-flow-check": "1.1.1",
-    "execa": "0.6.3",
-    "globby": "6.1.0",
-    "has-ansi": "3.0.0",
-    "nyc": "10.3.2",
-    "path-exists": "3.0.0",
-    "resolve-from": "3.0.0",
-    "rimraf": "2.6.1",
-    "xo": "0.18.2"
-  },
-  "dependencies": {
-    "babel-polyfill": "6.20.0",
-    "babel-runtime": "6.23.0",
-    "chalk": "1.1.3",
-    "conventional-changelog-angular": "1.3.0",
-    "conventional-changelog-lint-config-angular": "^1.0.0",
-    "conventional-commits-parser": "1.3.0",
-    "franc": "2.0.0",
-    "get-stdin": "5.0.1",
-    "git-raw-commits": "1.1.2",
-    "git-toplevel": "1.1.1",
-    "import-from": "^2.1.0",
-    "lodash": "4.17.4",
-    "meow": "3.7.0",
-    "mz": "2.6.0",
-    "pos": "0.4.2",
-    "rc": "1.1.7",
-    "semver": "^5.3.0"
-=======
     "lerna": "^2.0.0"
->>>>>>> chore: lerna setup
   }
 }

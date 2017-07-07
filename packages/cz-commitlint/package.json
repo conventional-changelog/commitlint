@@ -1,0 +1,86 @@
+{
+  "name": "cz-commitlint",
+  "version": "3.0.0",
+  "description": "commit prompt using .commitlintrc",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "clean": "rimraf lib",
+    "test": "exit 0",
+    "prepublish": "npm run build"
+  },
+  "babel": {
+    "env": {
+      "development": {
+        "sourceMaps": "inline",
+        "plugins": [
+          "add-module-exports",
+          "istanbul",
+          [
+            "transform-runtime",
+            {
+              "polyfill": false,
+              "regenerator": true
+            }
+          ]
+        ]
+      },
+      "production": {
+        "ignore": [
+          "**/*.test.js"
+        ]
+      }
+    },
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": 4
+          }
+        }
+      ],
+      "stage-0"
+    ],
+    "plugins": [
+      "add-module-exports",
+      [
+        "transform-runtime",
+        {
+          "polyfill": false,
+          "regenerator": true
+        }
+      ]
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marionebl/commitlint.git"
+  },
+  "keywords": [
+    "commitizen",
+    "commitlint",
+    "cz",
+    "conventional-changelog-lint",
+    "angular",
+    "commit"
+  ],
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "devDependencies": {
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-transform-runtime": "6.23.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "6.7.2",
+    "chalk": "1.1.1",
+    "@commitlint/cli": "^3.0.0",
+    "inquirer": "0.12.0",
+    "lodash": "4.5.1",
+    "vorpal": "1.10.0"
+  }
+}
