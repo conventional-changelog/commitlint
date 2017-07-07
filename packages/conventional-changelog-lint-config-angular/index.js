@@ -60,19 +60,5 @@ module.exports = {
 				'test'
 			]
 		]
-	},
-	wildcards: {
-		merge: [
-			'^(Merge pull request)|(Merge (.*?) into (.*?)|(Merge (.*?) branch (.*?))$)'
-		],
-		release: [
-			'^\\d+.\\d+.\\d+\n?$'
-		],
-		revert: [
-			'^revert: (.*)'
-		],
-		prerelease: [
-			'^(\\d*.\\d*.\\d*)(?:-)(?:(\\d.{0,3})|alpha|beta|rc)(.\\d*)?$'
-		]
 	}
 };
