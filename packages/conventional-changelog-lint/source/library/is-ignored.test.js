@@ -40,3 +40,11 @@ test('should return true for npm version commits', t => {
 	t.true(isIgnored(`0.0.1-some-crazy-tag.999`));
 	t.true(isIgnored(`0.0.1-1e69d54`));
 });
+
+test('should return true fixup commits', t => {
+	t.true(isIgnored('fixup! initial commit'));
+});
+
+test('should return true squash commits', t => {
+	t.true(isIgnored('squash! initial commit'));
+});
