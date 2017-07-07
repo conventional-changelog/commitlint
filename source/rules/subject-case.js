@@ -1,12 +1,19 @@
 import ensureCase from '../library/ensure-case';
 
 export default (parsed, when, value) => {
+	const {subject} = parsed;
+
+	if (!subject) {
+		return [true];
+	}
+
 	const negated = when === 'never';
-	const result = ensureCase(parsed.subject, value);
+
+	const result = ensureCase(subject, value);
 	return [
 		negated ? !result : result,
 		[
-			`message must`,
+			`subject must`,
 			negated ? `not` : null,
 			`be ${value}`
 		]

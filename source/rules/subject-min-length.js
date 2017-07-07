@@ -1,8 +1,12 @@
 import ensureMinLength from '../library/ensure-min-length';
 
 export default (parsed, when, value) => {
+	const input = parsed.subject;
+	if (!input) {
+		return [true];
+	}
 	return [
-		ensureMinLength(parsed.subject, value),
-		`message must not be shorter than ${value} characters`
+		ensureMinLength(input, value),
+		`subject must not be shorter than ${value} characters`
 	];
 };

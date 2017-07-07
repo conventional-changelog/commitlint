@@ -1,6 +1,6 @@
 import test from 'ava';
-import parse from '../../source/library/parse';
-import scopeEnum from '../../source/rules/scope-enum';
+import parse from '../library/parse';
+import scopeEnum from './scope-enum';
 
 const messages = {
 	plain: 'foo(bar): baz',
@@ -26,7 +26,7 @@ test('scope-enum with plain message and never should error empty enum', t => {
 	t.deepEqual(actual, expected);
 });
 
-test('scope-enum with plain message should succeed correct enum', t => {
+test('with plain message should succeed correct enum', t => {
 	const [actual] = scopeEnum(parsed.plain, 'always', ['bar']);
 	const expected = true;
 	t.deepEqual(actual, expected);

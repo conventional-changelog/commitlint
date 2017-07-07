@@ -1,4 +1,11 @@
-export default (a, stringCase) => {
-	const method = `to${stringCase[0].toUpperCase()}${stringCase.slice(1)}`;
-	return typeof a !== 'string' || a[method]() === a;
+export default (raw = '', target = 'lowercase') => {
+	const normalized = String(raw);
+
+	switch (target) {
+		case 'uppercase':
+			return normalized.toUpperCase() === normalized;
+		case 'lowercase':
+		default:
+			return normalized.toLowerCase() === normalized;
+	}
 };
