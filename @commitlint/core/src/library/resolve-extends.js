@@ -20,8 +20,7 @@ export default function resolveExtends(config = {}, prefix = '', key = 'extends'
 function loadExtends(config = {}, prefix = '', key = 'extends', require = cwd) {
 	const toExtend = Object.values(config[key] || []);
 	return toExtend.reduce((configs, raw) => {
-		const scoped = (raw || '').charAt(0) === '@';
-		const id = scoped ? raw : [prefix, raw].filter(String).join('-');
+		const id = getId(raw, prefix);
 		const c = require(id);
 
 		// Remove deprecation warning in version 3
@@ -31,4 +30,11 @@ function loadExtends(config = {}, prefix = '', key = 'extends', require = cwd) {
 
 		return [...configs, c, ...loadExtends(c, prefix, key, require)];
 	}, []);
+}
+
+function getId(raw = '', prefix = '') {
+	const first = raw.charAt(0);
+	const scoped = first === '@';
+	const relative = first === '.';
+	return (scoped || relative) ? raw : [prefix, raw].filter(String).join('-');
 }
