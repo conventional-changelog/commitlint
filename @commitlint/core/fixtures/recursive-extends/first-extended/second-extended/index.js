@@ -1,5 +1,5 @@
 module.exports = {
 	rules: {
-		level: 2
+		two: 2
 	}
 };

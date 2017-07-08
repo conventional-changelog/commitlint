@@ -1,12 +1,12 @@
-import importFrom from 'import-from';
+import path from 'path';
+import from from 'resolve-from';
 import {merge, omit} from 'lodash';
 
-const cwd = importFrom.bind(null, process.cwd());
-
 // Resolve extend configs
-export default function resolveExtends(config = {}, prefix = '', key = 'extends', require = cwd) {
-	const extended = loadExtends(config, prefix, key, require)
-		.reduceRight((r, c) => merge(r, omit(c, [key])), config[key] ? {[key]: config[key]} : {});
+export default function resolveExtends(config = {}, context = {}) {
+	const {extends: e} = config;
+	const extended = loadExtends(config, context)
+		.reduceRight((r, c) => merge(r, omit(c, 'extends')), e ? {extends: e} : {});
 
 	// Remove deprecation warning in version 3
 	if (typeof config === 'object' && 'wildcards' in config) {
@@ -17,18 +17,25 @@ export default function resolveExtends(config = {}, prefix = '', key = 'extends'
 }
 
 // (any, string, string, Function) => any[];
-function loadExtends(config = {}, prefix = '', key = 'extends', require = cwd) {
-	const toExtend = Object.values(config[key] || []);
+function loadExtends(config = {}, context = {}) {
+	const toExtend = Object.values(config.extends || []);
 	return toExtend.reduce((configs, raw) => {
-		const id = getId(raw, prefix);
-		const c = require(id);
+		const id = getId(raw, context.prefix);
+		const resolve = context.resolve || resolveId;
+		const resolved = resolve(id, context);
+		const load = context.require || require;
+		const c = load(resolved);
 
 		// Remove deprecation warning in version 3
 		if (typeof c === 'object' && 'wildcards' in c) {
 			console.warn(`'wildcards' found in '${id}' ignored. Raise an issue at 'npm repo ${id}' to remove the wildcards and silence this warning.`);
 		}
 
-		return [...configs, c, ...loadExtends(c, prefix, key, require)];
+		const ctx = merge({}, context, {
+			cwd: path.dirname(resolved)
+		});
+
+		return [...configs, c, ...loadExtends(c, ctx)];
 	}, []);
 }
 
@@ -37,4 +44,9 @@ function getId(raw = '', prefix = '') {
 	const scoped = first === '@';
 	const relative = first === '.';
 	return (scoped || relative) ? raw : [prefix, raw].filter(String).join('-');
+}
+
+function resolveId(id, context) {
+	const cwd = context.cwd || process.cwd();
+	return from(cwd, id);
 }

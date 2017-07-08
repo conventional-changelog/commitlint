@@ -39,6 +39,19 @@ test('empty file should extend nothing', async t => {
 	t.deepEqual(actual.extends, []);
 });
 
+test('recursive extends', async t => {
+	t.context.back = chdir('fixtures/recursive-extends');
+	const actual = await getConfiguration();
+	t.deepEqual(actual, {
+		extends: ['./first-extended'],
+		rules: {
+			zero: 0,
+			one: 1,
+			two: 2
+		}
+	});
+});
+
 function chdir(target) {
 	const to = path.resolve(cwd, target.split('/').join(path.sep));
 	process.chdir(to);

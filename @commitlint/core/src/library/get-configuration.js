@@ -1,6 +1,5 @@
 import path from 'path';
-import {omit, merge, mergeWith, pick} from 'lodash';
-import from from 'import-from';
+import {merge, mergeWith, pick} from 'lodash';
 import rc from 'rc';
 
 import resolveExtends from './resolve-extends';
@@ -20,18 +19,21 @@ export default async (name = defaultName, settings = defaultSettings, seed = {})
 	// Obtain config from .rc files
 	const raw = rc(name, settings.defaults);
 	const found = typeof raw.config === 'string';
-	const load = found ? from.bind(null, path.dirname(raw.config)) : undefined;
 
 	// Use the default extends config if there is no userConfig file found
 	// See https://git.io/vwT1C for reference
 	const applicable = found ? {} : defaults;
 
 	// Merge passed config with file based options
-	const config = omit(merge(raw, seed), '_');
+	const config = pick(merge(raw, seed), 'extends', 'rules');
 	const opts = merge({}, applicable, pick(config, 'extends'));
 
 	// Resolve extends key
-	const extended = resolveExtends(opts, settings.prefix, 'extends', load);
+	const extended = resolveExtends(opts, {
+		prefix: settings.prefix,
+		cwd: found ? path.dirname(raw.config) : undefined
+	});
+
 	const preset = mergeWith({}, extended, config, (a, b) => {
 		if (Array.isArray(b)) {
 			return b;
@@ -39,7 +41,7 @@ export default async (name = defaultName, settings = defaultSettings, seed = {})
 	});
 
 	// Execute rule config functions if needed
-	const executed = await Promise.all(['rules', 'wildcards']
+	const executed = await Promise.all(['rules']
 		.map(key => {
 			return [key, preset[key]];
 		})
