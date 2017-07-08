@@ -1,5 +1,5 @@
 {
-  "name": "cz-commitlint",
+  "name": "@commitlint/prompt",
   "version": "3.0.0",
   "description": "commit prompt using .commitlintrc",
   "main": "index.js",
@@ -58,12 +58,11 @@
     "url": "git+https://github.com/marionebl/commitlint.git"
   },
   "keywords": [
-    "commitizen",
+    "conventional-changelog",
     "commitlint",
+    "prompt",
     "cz",
-    "conventional-changelog-lint",
-    "angular",
-    "commit"
+    "commitizen"
   ],
   "author": "Mario Nebl <hello@herebecode.com>",
   "license": "MIT",
@@ -72,14 +71,17 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-plugin-transform-runtime": "6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
     "cross-env": "5.0.1"
   },
   "dependencies": {
-    "babel-polyfill": "6.7.2",
-    "chalk": "1.1.1",
     "@commitlint/cli": "^3.0.0",
+    "babel-polyfill": "^6.23.0",
+    "chalk": "1.1.1",
     "inquirer": "0.12.0",
     "lodash": "4.5.1",
     "vorpal": "1.10.0"
