@@ -9,7 +9,7 @@ test.afterEach.always(t => {
 	t.context.back();
 });
 
-test.failing('overridden-type-enums should return the exact type-enum', async t => {
+test('overridden-type-enums should return the exact type-enum', async t => {
 	t.context.back = chdir('fixtures/overridden-type-enums');
 	const actual = await getConfiguration();
 	const expected = ['a', 'b', 'c', 'd'];
@@ -22,10 +22,10 @@ test('extends-empty should have no rules', async t => {
 	t.deepEqual(actual.rules, {});
 });
 
-/* Failing: test('invalid extend should throw', async t => {
+test('invalid extend should throw', t => {
 	t.context.back = chdir('fixtures/extends-invalid');
 	t.throws(getConfiguration());
-}); */
+});
 
 test('empty file should have no rules', async t => {
 	t.context.back = chdir('fixtures/empty-object-file');
