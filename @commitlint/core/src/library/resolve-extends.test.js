@@ -38,7 +38,7 @@ test('ignores prefix for scoped extends', t => {
 	});
 });
 
-test.failing('ignores prefix for relative extends', t => {
+test('ignores prefix for relative extends', t => {
 	const input = {extends: ['./extender']};
 
 	resolveExtends(input, 'prefix', _, id => {
