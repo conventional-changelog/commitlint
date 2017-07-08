@@ -1,7 +1,7 @@
 {
-  "name": "@commitlint/config-lerna-scopes",
+  "name": "@commitlint/config-angular",
   "version": "3.0.0",
-  "description": "Shareable commitlint config enforcing lerna package names as scopes",
+  "description": "Shareable commitlint config enforcing the angular commit convention",
   "scripts": {
     "test": "exit 0",
     "clean": "exit 0"
@@ -11,22 +11,15 @@
     "url": "git+https://github.com/marionebl/commitlint.git"
   },
   "keywords": [
-    "commitlint",
     "conventional-changelog",
-    "changelog",
-    "commit",
-    "config",
-    "lint",
-    "lerna"
+    "commitlint",
+    "commitlint-config",
+    "angular"
   ],
   "author": "Mario Nebl <hello@herebecode.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/marionebl/commitlint/issues"
   },
-  "homepage": "https://github.com/marionebl/commitlint#readme",
-  "dependencies": {
-    "globby": "6.1.0",
-    "load-json-file": "2.0.0"
-  }
+  "homepage": "https://github.com/marionebl/commitlint#readme"
 }
