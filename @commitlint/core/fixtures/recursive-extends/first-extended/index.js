@@ -1,6 +1,6 @@
 module.exports = {
 	extends: ['./second-extended'],
 	rules: {
-		level: 1
+		one: 1
 	}
 };
