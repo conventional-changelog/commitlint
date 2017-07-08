@@ -1,4 +1,6 @@
+import path from 'path';
 import {omit, merge, mergeWith, pick} from 'lodash';
+import from from 'import-from';
 import rc from 'rc';
 
 import resolveExtends from './resolve-extends';
@@ -16,18 +18,20 @@ const defaultSettings = {
 
 export default async (name = defaultName, settings = defaultSettings, seed = {}) => {
 	// Obtain config from .rc files
-	const userConfig = omit(rc(name, settings.defaults), '_');
+	const raw = rc(name, settings.defaults);
+	const found = typeof raw.config === 'string';
+	const load = found ? from.bind(null, path.dirname(raw.config)) : undefined;
 
 	// Use the default extends config if there is no userConfig file found
 	// See https://git.io/vwT1C for reference
-	const applicableDefaults = userConfig.config ? {} : defaults;
+	const applicable = found ? {} : defaults;
 
 	// Merge passed config with file based options
-	const config = merge(userConfig, seed);
-	const opts = merge({}, applicableDefaults, pick(config, 'extends'));
+	const config = omit(merge(raw, seed), '_');
+	const opts = merge({}, applicable, pick(config, 'extends'));
 
 	// Resolve extends key
-	const extended = resolveExtends(opts, settings.prefix);
+	const extended = resolveExtends(opts, settings.prefix, 'extends', load);
 	const preset = mergeWith({}, extended, config, (a, b) => {
 		if (Array.isArray(b)) {
 			return b;
