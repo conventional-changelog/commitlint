@@ -15,7 +15,7 @@ function getPatternIDs() {
 }
 
 module.exports = merge(
-	require('conventional-changelog-lint-config-angular'),
+	require('@commitlint/config-angular'),
 	{
 		rules: {
 			'scope-enum': () => getPatternIDs()

@@ -1,15 +1,14 @@
 {
-  "name": "@commitlint/cli",
+  "name": "@commitlint/utils",
   "version": "3.0.0",
-  "description": "Lint your commit messages",
+  "description": "Development utilities for @commitlint",
   "bin": {
-    "commitlint": "cli.js"
+    "dep-check": "./dep-check.js"
   },
   "scripts": {
     "build": "exit 0",
     "clean": "exit 0",
-    "pretest": "dep-check",
-    "test": "ava",
+    "test": "exit 0",
     "prepublish": "npm test"
   },
   "ava": {
@@ -39,20 +38,10 @@
     "email": "hello@herebecode.com"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@commitlint/utils": "^3.0.0",
-    "ava": "^0.18.2",
-    "dependency-check": "^2.9.1",
-    "execa": "^0.7.0",
-    "string-to-stream": "^1.1.0",
-    "xo": "^0.18.2"
-  },
   "dependencies": {
-    "@commitlint/core": "^3.0.0",
-    "babel-polyfill": "^6.23.0",
-    "chalk": "^2.0.1",
-    "get-stdin": "^5.0.1",
-    "lodash": "^4.17.4",
-    "meow": "^3.7.0"
+    "execa": "^0.7.0"
+  },
+  "devDependencies": {
+    "xo": "^0.18.2"
   }
 }

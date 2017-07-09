@@ -1,6 +1,5 @@
 import chalk from 'chalk';
-import {getPreset, getConfiguration} from '@commitlint/core';
-import {merge} from 'lodash';
+import {load} from '@commitlint/core';
 import vorpal from 'vorpal';
 
 /**
@@ -147,7 +146,6 @@ function getForcedCaseFn(rule) {
 		return noop;
 	}
 
-	// const case = getForcedCase(rule);
 	const forcedCase = getForcedCase(rule);
 
 	if (forcedCase === null) {
@@ -215,7 +213,7 @@ function getForcedLeadingFn(rule) {
 }
 
 /**
- * get a cli prompt based on rule configuration
+ * Get a cli prompt based on rule configuration
  * @param  {string} type     type of the data to gather
  * @param  {array} rules     rules to parse
  * @param  {object} settings = {} additional display settings
@@ -393,11 +391,11 @@ function getPrompt(type, rules, settings = {}, results = {}) {
 		prompt.addListener('client_prompt_submit', onSubmit);
 
 		prompt.log(`\n\nPlease enter a ${chalk.bold(type)}: ${meta({
-			'optional': !mayNotBeEmpty,
-			'required': mayNotBeEmpty,
+			optional: !mayNotBeEmpty,
+			required: mayNotBeEmpty,
 			'tab-completion': typeof enumRule !== 'undefined',
-			'header': typeof settings.header !== 'undefined',
-			'case': forcedCase,
+			header: typeof settings.header !== 'undefined',
+			case: forcedCase,
 			'multi-line': settings.multiline
 		})}`);
 
@@ -468,7 +466,6 @@ const settings = {
  * @return {string}        formatted debug message
  */
 function format(input, debug = false) {
-	// show debug format data if debug = true
 	const results = debug ?
 		Object.entries(input)
 			.reduce((registry, item) => {
@@ -506,10 +503,7 @@ export default async () => {
 		footer: null
 	};
 
-	// Get the current conventional-changelog-lint configuration
-	const configuration = await getConfiguration('conventional-changelog-lint');
-	const preset = await getPreset(configuration.preset || 'angular');
-	const {rules} = merge({}, configuration, preset);
+	const {rules} = await load();
 
 	for (const input of ['type', 'scope', 'subject', 'body', 'footer']) {
 		const inputRules = getRules(input, rules);
@@ -529,7 +523,7 @@ export default async () => {
 			}
 		}
 
-		results[input] = await getPrompt(input, inputRules, inputSettings, results);
+		results[input] = await getPrompt(input, inputRules, inputSettings, results); // eslint-disable-line no-await-in-loop
 	}
 
 	// Return the results
