@@ -1,26 +1,14 @@
 > Lint your commits, angular-style
 
-# commitlint-config-angular
+# @commitlint/config-angular
 Shareable `commitlint` config enforcing the angular commit convention.
 
-## Installation
+## Getting started
 
 ```sh
 npm install --save-dev @commitlint/config-angular @commitlint/cli
+echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
 ```
-
-## Usage
-Install and use as `commitlint` shareable config.
-
-```js
-// .commitlintrc
-{
-  "extends": ["angular"]
-}
-```
-
----
-⇨ See [commitlint/shareable-config](../../docs/shareable-config.md) for details
 
 ## Rules
 ### Problems
@@ -101,6 +89,3 @@ The following rules are considered warnings for `@commitlint/config-angular` and
 ```js
   eng
 ```
-
----
-⇨ See [commitlint/shareable-config](../../docs/rules.md) for available rules

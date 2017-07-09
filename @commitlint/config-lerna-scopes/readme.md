@@ -3,19 +3,10 @@
 # @commitlint/config-lerna-scopes
 Shareable `commitlint` config enforcing lerna package names as scopes.
 
-## Installation
-
-```shell
+## Getting started
+```sh
 npm install --save-dev @commitlint/config-lerna-scopes @commitlint/cli
-```
-
-## Usage
-Install and use as `commitlint` shareable config.
-```js
-// .commitlintrc
-{
-  "extends": ["angular", "lerna-scopes"]
-}
+echo '{"extends": ["@commitlint/config-lerna-scopes"]}' > .commitlintrc
 ```
 
 ## Examples
@@ -46,9 +37,3 @@ packages
 ⧗   input: chore: do some general maintenance
 ✔   found 0 problems, 0 warnings
 ```
-
----
-⇨ See [commitlint/shareable-config](/marionebl/commitlint/documentation/shareable-config.md) for details
-
----
-Copyright (c) by [Mario Nebl](https://github.com/marionebl) and [contributors](./graphs/contributors). Released under the [MIT license]('./license.md').
