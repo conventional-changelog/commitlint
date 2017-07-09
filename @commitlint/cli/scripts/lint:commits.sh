@@ -17,8 +17,8 @@ fi
 # Lint all commits in the PR
 # - Covers fork pull requests (when TO=slug/branch)
 # - Covers branch pull requests (when TO=branch)
-conventional-changelog-lint --from="$TRAVIS_BRANCH" --to="$TO"
+commitlint --from="$TRAVIS_BRANCH" --to="$TO"
 
 # Always lint the triggerig commit
 # - Covers direct commits
-conventional-changelog-lint --from="$TRAVIS_COMMIT"
+commitlint --from="$TRAVIS_COMMIT"

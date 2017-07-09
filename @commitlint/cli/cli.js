@@ -22,13 +22,12 @@ const rules = {
 };
 
 const configuration = {
-	string: ['from', 'to', 'preset', 'extends'],
+	string: ['from', 'to', 'extends'],
 	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
 	alias: {
 		c: 'color',
 		e: 'edit',
 		f: 'from',
-		p: 'preset',
 		t: 'to',
 		q: 'quiet',
 		h: 'help',
@@ -40,7 +39,6 @@ const configuration = {
 		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
 		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
-		preset: 'conventional-changelog-preset to use for commit message parsing',
 		to: 'upper end of the commit range to lint; applies if edit=false',
 		quiet: 'toggle console output'
 	},
@@ -48,7 +46,6 @@ const configuration = {
 		color: true,
 		edit: false,
 		from: null,
-		preset: 'angular',
 		to: null,
 		quiet: false
 	},
