@@ -1,6 +1,6 @@
 import path from 'path';
 import from from 'resolve-from';
-import {merge, omit} from 'lodash';
+import {merge, omit, values} from 'lodash';
 
 // Resolve extend configs
 export default function resolveExtends(config = {}, context = {}) {
@@ -18,7 +18,7 @@ export default function resolveExtends(config = {}, context = {}) {
 
 // (any, string, string, Function) => any[];
 function loadExtends(config = {}, context = {}) {
-	const toExtend = Object.values(config.extends || []);
+	const toExtend = values(config.extends || []);
 	return toExtend.reduce((configs, raw) => {
 		const id = getId(raw, context.prefix);
 		const resolve = context.resolve || resolveId;

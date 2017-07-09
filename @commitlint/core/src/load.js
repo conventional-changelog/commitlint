@@ -1,44 +1,33 @@
 import path from 'path';
-import {merge, mergeWith, pick} from 'lodash';
+import {entries, merge, mergeWith, pick} from 'lodash';
 import rc from 'rc';
 
-import resolveExtends from './resolve-extends';
-import executeRule from './execute-rule';
+import resolveExtends from './library/resolve-extends';
+import executeRule from './library/execute-rule';
 
-const defaults = {
-	extends: []
-};
+const w = (a, b) => Array.isArray(b) ? b : undefined;
+const valid = input => pick(input, 'extends', 'rules');
 
-const defaultName = 'commitlint';
-
-const defaultSettings = {
-	prefix: 'commitlint-config'
-};
-
-export default async (name = defaultName, settings = defaultSettings, seed = {}) => {
+export default async (seed = {}) => {
 	// Obtain config from .rc files
-	const raw = rc(name, settings.defaults);
+	const raw = rc('commitlint');
 	const found = typeof raw.config === 'string';
 
 	// Use the default extends config if there is no userConfig file found
 	// See https://git.io/vwT1C for reference
-	const applicable = found ? {} : defaults;
+	const applicable = found ? {} : {extends: []};
 
 	// Merge passed config with file based options
-	const config = pick(merge(raw, seed), 'extends', 'rules');
+	const config = valid(merge(raw, seed));
 	const opts = merge({}, applicable, pick(config, 'extends'));
 
 	// Resolve extends key
 	const extended = resolveExtends(opts, {
-		prefix: settings.prefix,
+		prefix: 'commitlint-config',
 		cwd: found ? path.dirname(raw.config) : undefined
 	});
 
-	const preset = mergeWith({}, extended, config, (a, b) => {
-		if (Array.isArray(b)) {
-			return b;
-		}
-	});
+	const preset = valid(mergeWith({}, extended, config, w));
 
 	// Execute rule config functions if needed
 	const executed = await Promise.all(['rules']
@@ -48,7 +37,7 @@ export default async (name = defaultName, settings = defaultSettings, seed = {})
 		.map(async item => {
 			const [key, value] = item;
 			const executedValue = await Promise.all(
-				Object.entries(value || {})
+				entries(value || {})
 					.map(entry => executeRule(entry))
 			);
 			return [key, executedValue.reduce((registry, item) => {

@@ -29,7 +29,7 @@ async function getCommitMessages(settings) {
 }
 
 // Get commit messages from history
-// Object => Promise<Array<String>>
+// Object => Promise<string[]>
 function getHistoryCommits(options) {
 	return new Promise((resolve, reject) => {
 		const data = [];

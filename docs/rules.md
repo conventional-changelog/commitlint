@@ -1,4 +1,5 @@
 # Rules
+
 Rules are made up by a name and a configuration array. The configuration array contains:
 * **Level** `[0..2]`: `0` disables the rule. For `1` it will be considered a warning for `2` an error.
 * **Applicable** `always|never`: `never` inverts the rule.

@@ -1,6 +1,7 @@
 import path from 'path';
 import test from 'ava';
 import globby from 'globby';
+import {values} from 'lodash';
 import rules from '.';
 
 test('exports all rules', async t => {
@@ -10,7 +11,7 @@ test('exports all rules', async t => {
 });
 
 test('rules export functions', t => {
-	const actual = Object.values(rules);
+	const actual = values(rules);
 	t.true(actual.every(rule => typeof rule === 'function'));
 });
 

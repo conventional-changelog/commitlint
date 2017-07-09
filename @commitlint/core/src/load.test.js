@@ -1,7 +1,7 @@
 import path from 'path';
 import test from 'ava';
 
-import getConfiguration from './get-configuration';
+import load from './load';
 
 const cwd = process.cwd();
 
@@ -9,45 +9,67 @@ test.afterEach.always(t => {
 	t.context.back();
 });
 
-test('overridden-type-enums should return the exact type-enum', async t => {
-	t.context.back = chdir('fixtures/overridden-type-enums');
-	const actual = await getConfiguration();
-	const expected = ['a', 'b', 'c', 'd'];
-	t.deepEqual(actual.rules['type-enum'][2], expected);
-});
-
 test('extends-empty should have no rules', async t => {
 	t.context.back = chdir('fixtures/extends-empty');
-	const actual = await getConfiguration();
+	const actual = await load();
 	t.deepEqual(actual.rules, {});
+});
+
+test('uses seed as configured', async t => {
+	t.context.back = chdir('fixtures/extends-empty');
+	const actual = await load({rules: {foo: 'bar'}});
+	t.is(actual.rules.foo, 'bar');
 });
 
 test('invalid extend should throw', t => {
 	t.context.back = chdir('fixtures/extends-invalid');
-	t.throws(getConfiguration());
+	t.throws(load());
 });
 
 test('empty file should have no rules', async t => {
 	t.context.back = chdir('fixtures/empty-object-file');
-	const actual = await getConfiguration();
+	const actual = await load();
 	t.deepEqual(actual.rules, {});
 });
 
 test('empty file should extend nothing', async t => {
 	t.context.back = chdir('fixtures/empty-file');
-	const actual = await getConfiguration();
+	const actual = await load();
 	t.deepEqual(actual.extends, []);
 });
 
 test('recursive extends', async t => {
 	t.context.back = chdir('fixtures/recursive-extends');
-	const actual = await getConfiguration();
+	const actual = await load();
 	t.deepEqual(actual, {
 		extends: ['./first-extended'],
 		rules: {
 			zero: 0,
 			one: 1,
 			two: 2
+		}
+	});
+});
+
+test('ignores unknow keys', async t => {
+	t.context.back = chdir('fixtures/trash-file');
+	const actual = await load();
+	t.deepEqual(actual, {
+		rules: {
+			foo: 'bar',
+			baz: 'bar'
+		}
+	});
+});
+
+test('ignores unknow keys recursively', async t => {
+	t.context.back = chdir('fixtures/trash-extend');
+	const actual = await load();
+	t.deepEqual(actual, {
+		extends: ['./one'],
+		rules: {
+			zero: 0,
+			one: 1
 		}
 	});
 });

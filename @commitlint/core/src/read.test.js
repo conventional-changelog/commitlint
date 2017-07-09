@@ -9,8 +9,8 @@ import {mkdir, writeFile} from 'mz/fs';
 import exists from 'path-exists';
 import rimraf from 'rimraf';
 
-import pkg from '../../package';
-import getMessages from './get-messages';
+import pkg from '../package';
+import read from './read';
 
 const rm = denodeify(rimraf);
 
@@ -32,7 +32,7 @@ test.serial('get edit commit message from git root', async t => {
 	await execa('git', ['add', '.']);
 	await execa('git', ['commit', '-m', 'alpha']);
 	const expected = ['alpha\n\n'];
-	const actual = await getMessages({edit: true});
+	const actual = await read({edit: true});
 	t.deepEqual(actual, expected);
 });
 
@@ -44,7 +44,7 @@ test.serial('get history commit messages', async t => {
 	await execa('git', ['commit', '-m', 'remove alpha']);
 
 	const expected = ['remove alpha\n\n', 'alpha\n\n'];
-	const actual = await getMessages({});
+	const actual = await read({});
 	t.deepEqual(actual, expected);
 });
 
@@ -56,7 +56,7 @@ test.serial('get edit commit message from git subdirectory', async t => {
 	await execa('git', ['commit', '-m', 'beta']);
 
 	const expected = ['beta\n\n'];
-	const actual = await getMessages({edit: true});
+	const actual = await read({edit: true});
 	t.deepEqual(actual, expected);
 });
 
@@ -70,7 +70,7 @@ test.serial('get history commit messages from shallow clone', async t => {
 	const clone = await cloneRepository(pkg.repository.url, repo, '--depth', '1');
 	t.context.repos = [...t.context.repos, clone];
 
-	const err = await t.throws(getMessages({from: 'master'}));
+	const err = await t.throws(read({from: 'master'}));
 	t.true(err.message.indexOf('Could not get git history from shallow clone') > -1);
 });
 
