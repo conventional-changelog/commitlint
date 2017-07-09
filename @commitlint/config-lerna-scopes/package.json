@@ -3,9 +3,11 @@
   "version": "3.0.0",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "scripts": {
+    "pretest": "dep-check",
     "test": "exit 0",
     "clean": "exit 0"
   },
+  "xo": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"
@@ -25,5 +27,8 @@
   "dependencies": {
     "globby": "6.1.0",
     "load-json-file": "2.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/utils": "^3.0.0"
   }
 }

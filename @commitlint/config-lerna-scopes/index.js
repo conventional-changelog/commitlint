@@ -3,9 +3,7 @@ const globby = require('globby');
 const jsonfile = require('load-json-file');
 
 module.exports = {
-	utils: {
-		getPackages: getPackages
-	},
+	utils: {getPackages},
 	rules: {
 		'scope-enum': () => getPackages()
 			.then(names => [2, 'always', names])

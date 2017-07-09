@@ -6,10 +6,14 @@
   "license": "MIT",
   "scripts": {
     "lerna": "lerna",
+    "pretest": "xo",
     "test": "npm run lerna run test",
     "postinstall": "npm run lerna bootstrap",
     "reinstall": "npm run clean && npm install",
     "clean": "npm run lerna clean -- --yes && npm run lerna run clean"
+  },
+  "xo": {
+    "ignore": ["lib/**"]
   },
   "engines": {
     "node": ">=4"
@@ -35,6 +39,7 @@
     "email": "hello@herebecode.com"
   },
   "devDependencies": {
-    "lerna": "^2.0.0"
+    "lerna": "^2.0.0",
+    "xo": "^0.18.2"
   }
 }
