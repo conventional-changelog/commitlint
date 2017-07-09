@@ -168,3 +168,33 @@ test('extending contents should take precedence', t => {
 
 	t.deepEqual(actual, expected);
 });
+
+test('should fall back to conventional-changelog-lint-config prefix', t => {
+	const input = {extends: ['extender-name']};
+
+	const actual = resolveExtends(input, {
+		prefix: 'prefix',
+		resolve(id) {
+			if (id === 'conventional-changelog-lint-config-extender-name') {
+				return 'conventional-changelog-lint-config-extender-name';
+			}
+			throw new Error(`Could not find module "*${id}"`);
+		},
+		require(id) {
+			if (id === 'conventional-changelog-lint-config-extender-name') {
+				return {
+					rules: {
+						fallback: true
+					}
+				};
+			}
+		}
+	});
+
+	t.deepEqual(actual, {
+		extends: ['extender-name'],
+		rules: {
+			fallback: true
+		}
+	});
+});
