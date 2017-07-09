@@ -1,6 +1,6 @@
 import path from 'path';
 import from from 'resolve-from';
-import {merge, omit, values} from 'lodash';
+import {merge, omit} from 'lodash';
 
 // Resolve extend configs
 export default function resolveExtends(config = {}, context = {}) {
@@ -18,8 +18,7 @@ export default function resolveExtends(config = {}, context = {}) {
 
 // (any, string, string, Function) => any[];
 function loadExtends(config = {}, context = {}) {
-	const toExtend = values(config.extends || []);
-	return toExtend.reduce((configs, raw) => {
+	return (config.extends || []).reduce((configs, raw) => {
 		const id = getId(raw, context.prefix);
 		const resolve = context.resolve || resolveId;
 		const resolved = resolve(id, context);
@@ -46,7 +45,6 @@ function getId(raw = '', prefix = '') {
 	return (scoped || relative) ? raw : [prefix, raw].filter(String).join('-');
 }
 
-function resolveId(id, context) {
-	const cwd = context.cwd || process.cwd();
-	return from(cwd, id);
+function resolveId(id, context = {}) {
+	return from(context.cwd || process.cwd(), id);
 }

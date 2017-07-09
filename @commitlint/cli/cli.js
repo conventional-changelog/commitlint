@@ -16,8 +16,8 @@ const help = require('./help');
  */
 const rules = {
 	fromStdin: (input, flags) => input.length === 0 &&
-		flags.from === null &&
-		flags.to === null &&
+		typeof flags.from !== 'string' &&
+		typeof flags.to !== 'string' &&
 		!flags.edit
 };
 
@@ -62,7 +62,8 @@ const cli = meow({
 const load = seed => core.load(seed);
 
 function main(options) {
-	const {input: raw, flags} = options;
+	const raw = options.input;
+	const flags = options.flags;
 	const fromStdin = rules.fromStdin(raw, flags);
 
 	const range = pick(flags, 'edit', 'from', 'to');
@@ -93,8 +94,10 @@ function main(options) {
 	));
 }
 
-function getSeed({extends: e}) {
-	return e ? {extends: e.split(', ')} : {};
+function getSeed(seed) {
+	const e = Array.isArray(seed.extends) ? seed.extends : [seed.extends];
+	const n = e.filter(i => typeof i === 'string');
+	return n.length > 0 ? {extends: n} : {};
 }
 
 // Start the engine
