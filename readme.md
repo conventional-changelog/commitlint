@@ -6,86 +6,60 @@
 *  🤖  Plays nice with `conventional-changelog`
 *  📦  Supports shareable configuration
 
+## Getting started
+
+```
+npm install --save-dev @commitlint/{angular,cli}
+echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
+```
+
 ## CLI
 
 * Primary way to interact with commitlint.
-* Install `@commitlint/cli`
+* `npm install --save-dev @commitlint/cli`
 * Packages: [cli](./@commitlint/cli)
-
-```
-❯ npm install -g @commitlint/cli
-
-❯ commitlint --help
-  commitlint - Lint commit messages
-
-  [input] reads from stdin if --edit, --from and --to are omitted
-  --color,-c    toggle formatted output, defaults to: true
-  --edit,-e     read last commit message found in ./git/COMMIT_EDITMSG
-  --extends,-x  array of shareable configurations to extend
-  --from,-f     lower end of the commit range to lint; applies if edit=false
-  --to,-t       upper end of the commit range to lint; applies if edit=false
-  --quiet,-q    toggle console output
-
-```
 
 ## Config
 
 * Configuration is picked up from `.commitlint` files
 * Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 * See [Rules](./docs/rules) for a complete list of possible rules
+* An example configurations can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)
 
-```js
-{
-  "extends": ["@commitlint/config-angular"], // pull in rules from packages
-  "rules": { // overriding rules from extended packages
-    "body-leading-blank": [0], // disable rule body-leading-blank,
-    "footer-leading-blank": [1, "always"], // footer-leading-blank is a warning if not met
-    "body-tense": [2, "always", ["present-imperative"]], // body-tense is an error if not met
-  }
-}
-```
+## Shared configurations
+
+A number of shared configurations are available to install and use with `commitlint`:
+
+* [@commitlint/config-angular](./@commitlint/config-angular)
+* [@commitlint/config-lerna-scopes](./@commitlint/config-lerna-scopes)
+* [@commitlint/config-patternplate](./@commitlint/config-patternplate)
+* [conventional-changelog-lint-config-atom](https://github.com/erikmueller/conventional-changelog-lint-config-atom)
+* [conventional-changelog-lint-config-canonical](https://github.com/gajus/conventional-changelog-lint-config-canonical)
+
 
 ## API
 
 * Alternative, programatic way to interact with `commitlint`
-* Install `@commitlint/core`
+* `npm install --save @commitlint/core`
 * Packages: [core](./@commitlint/core)
-* See [API](./docs/api) for a complete list of methods and parameters
-
-```js
-// example
-const {lint} = require('@commitlint/core');
-
-// Pass in configuration manually
-lint('docs: add node api', {
-	configuration: {
-		rules: {
-			'scope-empty': [2, 'never']
-		}
-	}
-})
-.then(report => {
-	console.log(JSON.stringify(report, null, '  '));
-});
-/* => {
-  "valid": false,
-  "errors": [
-    {
-      "level": 2,
-      "valid": false,
-      "name": "scope-empty",
-      "message": "scope may not be empty"
-    }
-  ],
-  "warnings": []
-} */
-```
+* See [API](./docs/api) for a complete list of methods and examples
 
 ## Tools
 
-* [prompt](./@commitlint/prompt) 
+* [prompt](./@commitlint/prompt)
+
+## Version Support
+
+* Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) version and higher: `>= 4`
+* git `>= 2`
 
 ## Related projects
+
+* [angular-precommit](https://git.io/vwTDd) – Pre commit with angular conventions
+* [conventional-changelog](https://git.io/v18sw) – Generate a changelog from conventional commit history
+* [conventional-commits-detector](https://git.io/vwTyk) – Detect what commit message convention your repository is using
+* [conventional-github-releaser](https://git.io/vwTyI) – Make a new GitHub release from git metadata
+* [commitizen](https://git.io/vwTym) – Simple commit conventions for internet citizens
 
 ## License
 Copyright by @marionebl. All `commitlint` packages are released under the MIT license.
