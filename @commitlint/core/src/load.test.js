@@ -74,6 +74,26 @@ test('ignores unknow keys recursively', async t => {
 	});
 });
 
+test('supports legacy .conventional-changelog-lintrc', async t => {
+	t.context.back = chdir('fixtures/legacy');
+	const actual = await load();
+	t.deepEqual(actual, {
+		rules: {
+			legacy: true
+		}
+	});
+});
+
+test('.commitlintrc overrides .conventional-changelog-lintrc', async t => {
+	t.context.back = chdir('fixtures/overriden-legacy');
+	const actual = await load();
+	t.deepEqual(actual, {
+		rules: {
+			legacy: false
+		}
+	});
+});
+
 function chdir(target) {
 	const to = path.resolve(cwd, target.split('/').join(path.sep));
 	process.chdir(to);

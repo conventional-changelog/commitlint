@@ -10,7 +10,7 @@ const valid = input => pick(input, 'extends', 'rules');
 
 export default async (seed = {}) => {
 	// Obtain config from .rc files
-	const raw = rc('commitlint');
+	const raw = file();
 	const found = typeof raw.config === 'string';
 
 	// Use the default extends config if there is no userConfig file found
@@ -58,3 +58,25 @@ export default async (seed = {}) => {
 		};
 	}, preset);
 };
+
+function file() {
+	const legacy = rc('conventional-changelog-lint');
+	const legacyFound = typeof legacy.config === 'string';
+
+	const raw = rc('commitlint');
+	const rawFound = typeof raw.config === 'string';
+
+	if (legacyFound && !rawFound) {
+		console.warn(`Using legacy ${path.relative(process.cwd(), legacy.config)}. Rename to .commitlintrc to silence this warning.`);
+	}
+
+	if (legacyFound && rawFound) {
+		console.warn(`Ignored legacy ${path.relative(process.cwd(), legacy.config)} as ${path.relative(process.cwd(), raw.config)} superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`);
+	}
+
+	if (rawFound) {
+		return raw;
+	}
+
+	return legacy;
+}
