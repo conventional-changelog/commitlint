@@ -19,15 +19,13 @@ export default function resolveExtends(config = {}, context = {}) {
 // (any, string, string, Function) => any[];
 function loadExtends(config = {}, context = {}) {
 	return (config.extends || []).reduce((configs, raw) => {
-		const id = getId(raw, context.prefix);
-		const resolve = context.resolve || resolveId;
-		const resolved = resolve(id, context);
 		const load = context.require || require;
+		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
 
 		// Remove deprecation warning in version 3
 		if (typeof c === 'object' && 'wildcards' in c) {
-			console.warn(`'wildcards' found in '${id}' ignored. Raise an issue at 'npm repo ${id}' to remove the wildcards and silence this warning.`);
+			console.warn(`'wildcards' found in '${raw}' ignored. To silence this warning raise an issue at 'npm repo ${raw}' to remove the wildcards.`);
 		}
 
 		const ctx = merge({}, context, {
@@ -43,6 +41,20 @@ function getId(raw = '', prefix = '') {
 	const scoped = first === '@';
 	const relative = first === '.';
 	return (scoped || relative) ? raw : [prefix, raw].filter(String).join('-');
+}
+
+function resolveConfig(raw, context = {}) {
+	const resolve = context.resolve || resolveId;
+	const id = getId(raw, context.prefix);
+
+	try {
+		return resolve(id, context);
+	} catch (err) {
+		const legacy = getId(raw, 'conventional-changelog-lint-config');
+		const resolved = resolve(legacy, context);
+		console.warn(`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`);
+		return resolved;
+	}
 }
 
 function resolveId(id, context = {}) {
