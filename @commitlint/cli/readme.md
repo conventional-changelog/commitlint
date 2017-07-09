@@ -20,10 +20,8 @@ echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
   --edit,-e     read last commit message found in ./git/COMMIT_EDITMSG
   --extends,-x  array of shareable configurations to extend
   --from,-f     lower end of the commit range to lint; applies if edit=false
-  --preset,-p   conventional-changelog-preset to use for commit message parsing, defaults to: angular.
   --to,-t       upper end of the commit range to lint; applies if edit=false
   --quiet,-q    toggle console output
-
 ```
 
 ### Recipes
