@@ -1,10 +1,9 @@
+import {entries} from 'lodash';
 import isIgnored from './library/is-ignored';
 import parse from './library/parse';
-import rules from './rules';
+import implementations from './rules';
 
-export default async (message, options = {}) => {
-	const {configuration} = options;
-
+export default (message, rules = {}) => {
 	// Found a wildcard match, skip
 	if (isIgnored(message)) {
 		return {
@@ -18,7 +17,7 @@ export default async (message, options = {}) => {
 	const parsed = parse(message);
 
 	// Validate against all rules
-	const results = Object.entries(configuration.rules)
+	const results = entries(rules)
 		.filter(entry => {
 			const [, [level]] = entry;
 			return level > 0;
@@ -32,7 +31,7 @@ export default async (message, options = {}) => {
 				return null;
 			}
 
-			const rule = rules[name];
+			const rule = implementations[name];
 			const [valid, message] = rule(parsed, when, value);
 
 			return {

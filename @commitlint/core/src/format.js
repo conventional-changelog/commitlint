@@ -12,7 +12,7 @@ export default function format(report = {}, options = {}) {
 			const sign = signs[problem.level] || '';
 			const color = colors[problem.level] || 'white';
 			const decoration = enabled ? chalk[color](sign) : sign;
-			const name = chalk.grey(`[${problem.name}]`);
+			const name = enabled ? chalk.grey(`[${problem.name}]`) : `[${problem.name}]`;
 			return `${decoration}   ${problem.message} ${name}`;
 		});
 

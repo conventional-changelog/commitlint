@@ -1,4 +1,5 @@
 import {Lexer, Tagger} from 'pos';
+import {entries} from 'lodash';
 
 const lexer = new Lexer();
 const tagger = new Tagger();
@@ -49,7 +50,7 @@ export default (input, allowed, options = {}) => {
 		.filter(Boolean)
 		.map(verb => {
 			const [lemma, tag] = verb;
-			const tense = Object.entries(tenses)
+			const tense = entries(tenses)
 				.filter(item => {
 					const [, tags] = item;
 					return tags.indexOf(tag) > -1;

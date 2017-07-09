@@ -58,32 +58,25 @@ const configuration = {
 };
 
 const cli = meow({
-	help: `[input] reads from stdin if --edit, --from, --to are omitted\n${help(configuration)}`,
+	help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(configuration)}`,
 	description: `${pkg.name}@${pkg.version} - ${pkg.description}`
 }, configuration);
 
-const load = seed => core.getConfiguration('commitlint', {prefix: 'commitlint-config'}, seed);
+const load = seed => core.load(seed);
 
 function main(options) {
 	const {input: raw, flags} = options;
 	const fromStdin = rules.fromStdin(raw, flags);
 
-	const input = fromStdin ? stdin() : core.getMessages(pick(flags, 'edit', 'from', 'to'));
+	const range = pick(flags, 'edit', 'from', 'to');
+	const input = fromStdin ? stdin() : core.read(range);
 	const fmt = new chalk.constructor({enabled: flags.color});
-	const seed = {};
 
 	return input
 		.then(raw => Array.isArray(raw) ? raw : [raw])
 		.then(messages => Promise.all(messages.map(commit => {
-			if (flags.extends) {
-				seed.extends = flags.extends.split(',');
-			}
-
-			return Promise.all([core.getPreset(flags.preset), load(seed)])
-				.then(tasks => {
-					const [preset, configuration] = tasks;
-					return core.lint(commit, {preset, configuration});
-				})
+			return load(getSeed(flags))
+				.then(opts => core.lint(commit, opts.rules))
 				.then(report => {
 					const formatted = core.format(report, {color: flags.color});
 
@@ -97,11 +90,14 @@ function main(options) {
 						error.type = pkg.name;
 						throw error;
 					}
-
 					return console.log('');
 				});
 		})
 	));
+}
+
+function getSeed({extends: e}) {
+	return e ? {extends: e.split(', ')} : {};
 }
 
 // Start the engine

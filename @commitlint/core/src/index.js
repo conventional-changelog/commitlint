@@ -1,7 +1,6 @@
-import format from './library/format';
-import getConfiguration from './library/get-configuration';
-import getMessages from './library/get-messages';
-import getPreset from './library/get-preset';
+import format from './format';
 import lint from './lint';
+import load from './load';
+import read from './read';
 
-export {format, getConfiguration, getMessages, getPreset, lint};
+export {format, load, read, lint};
