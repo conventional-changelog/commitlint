@@ -1,0 +1,22 @@
+{
+  "name": "@commitlint/example-prompt",
+  "private": true,
+  "version": "3.0.0",
+  "description": "Example for prompt guide",
+  "scripts": {
+    "commit": "commit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marionebl/commitlint.git"
+  },
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "devDependencies": {
+    "@commitlint/prompt-cli": "^3.0.0"
+  }
+}
