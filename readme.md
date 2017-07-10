@@ -46,7 +46,8 @@ A number of shared configurations are available to install and use with `commitl
 
 ## Tools
 
-* [prompt](./@commitlint/prompt)
+* [commitizen adapter](./@commitlint/prompt)
+* [prompt](./@commitlint/prompt-cli)
 
 ## Version Support
 
