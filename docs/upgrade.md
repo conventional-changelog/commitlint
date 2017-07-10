@@ -14,7 +14,7 @@ npm install --save-dev conventional-changelog-lint@latest
 
 #### Config
 
-* **wildcards** config is ignored - as of version `2.0.0` the former `.wildcards` configuration is ignored entirely. If your `.commitlintrc` or an extended shareable configuration has a `.wildcards` key a warning will be issued.
+* **wildcards** config is ignored - as of version `2.0.0` the former `.wildcards` configuration is ignored entirely. If your `.conventional-changelog-lintrc`, `commitlint.config.js` or an extended shareable configuration has a `.wildcards` key a warning will be issued.
 
 #### API
 
@@ -36,7 +36,8 @@ mv .conventional-changelog-lintrc .commitlintrc
 
 * `conventional-changelog-lint` command now is called `commitlint`
 * `commitlint` command now is installed via `@commitlint/cli`
-* `.conventional-changelog-lintrc` now is called `.commitlintrc`
+* `.conventional-changelog-lintrc` now is called `commitlint.config.js`
+* `commitlint` does not search upwards in the directory structure for config
 * `--preset | -p` flag was removed. The `angular` preset is used always.
 
 #### Config

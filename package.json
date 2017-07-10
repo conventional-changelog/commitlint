@@ -16,8 +16,9 @@
     "commit": "./@commitlint/prompt-cli/cli.js"
   },
   "xo": {
-    "ignore": [
-      "lib/**"
+    "ignores": [
+      "@commitlint/**/lib/**",
+      "@commitlint/**/node_modules"
     ]
   },
   "engines": {

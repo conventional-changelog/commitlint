@@ -6,7 +6,7 @@ Shareable `commitlint` config enforcing lerna package names as scopes.
 ## Getting started
 ```sh
 npm install --save-dev @commitlint/config-lerna-scopes @commitlint/cli
-echo '{"extends": ["@commitlint/config-lerna-scopes"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-lerna-scopes']};" > .commitlint.config.js
 ```
 
 ## Examples

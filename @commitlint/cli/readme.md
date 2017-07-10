@@ -6,7 +6,7 @@
 
 ```shell
 npm install --save-dev @commitlint/cli @commitlint/config-angular
-echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
 ```
 
 Consult [docs/cli](../../docs/cli) for comprehensive documentation.

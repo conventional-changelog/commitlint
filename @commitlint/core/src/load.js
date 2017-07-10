@@ -1,6 +1,8 @@
 import path from 'path';
+import importFrom from 'import-from';
 import {entries, merge, mergeWith, pick} from 'lodash';
 import rc from 'rc';
+import resolveFrom from 'resolve-from';
 
 import resolveExtends from './library/resolve-extends';
 import executeRule from './library/execute-rule';
@@ -11,20 +13,15 @@ const valid = input => pick(input, 'extends', 'rules');
 export default async (seed = {}) => {
 	// Obtain config from .rc files
 	const raw = file();
-	const found = typeof raw.config === 'string';
-
-	// Use the default extends config if there is no userConfig file found
-	// See https://git.io/vwT1C for reference
-	const applicable = found ? {} : {extends: []};
 
 	// Merge passed config with file based options
 	const config = valid(merge(raw, seed));
-	const opts = merge({}, applicable, pick(config, 'extends'));
+	const opts = merge({extends: [], rules: {}}, pick(config, 'extends'));
 
 	// Resolve extends key
 	const extended = resolveExtends(opts, {
 		prefix: 'commitlint-config',
-		cwd: found ? path.dirname(raw.config) : undefined
+		cwd: raw.config ? path.dirname(raw.config) : process.cwd()
 	});
 
 	const preset = valid(mergeWith({}, extended, config, w));
@@ -63,20 +60,29 @@ function file() {
 	const legacy = rc('conventional-changelog-lint');
 	const legacyFound = typeof legacy.config === 'string';
 
-	const raw = rc('commitlint');
-	const rawFound = typeof raw.config === 'string';
+	const found = resolveable('./commitlint.config');
+	const raw = found ? importFrom(process.cwd(), './commitlint.config') : {};
 
-	if (legacyFound && !rawFound) {
-		console.warn(`Using legacy ${path.relative(process.cwd(), legacy.config)}. Rename to .commitlintrc to silence this warning.`);
+	if (legacyFound && !found) {
+		console.warn(`Using legacy ${path.relative(process.cwd(), legacy.config)}. Rename to commitlint.config.js to silence this warning.`);
 	}
 
-	if (legacyFound && rawFound) {
-		console.warn(`Ignored legacy ${path.relative(process.cwd(), legacy.config)} as ${path.relative(process.cwd(), raw.config)} superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`);
+	if (legacyFound && found) {
+		console.warn(`Ignored legacy ${path.relative(process.cwd(), legacy.config)} as commitlint.config.js superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`);
 	}
 
-	if (rawFound) {
+	if (found) {
 		return raw;
 	}
 
 	return legacy;
+}
+
+function resolveable(id) {
+	try {
+		resolveFrom(process.cwd(), id);
+		return true;
+	} catch (err) {
+		return false;
+	}
 }

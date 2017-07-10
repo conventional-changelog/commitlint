@@ -6,7 +6,7 @@
 
 ```bash
 npm install --save @commitlint/prompt @commitlint/config-angular commitizen
-echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
 ```
 
 In package.json
