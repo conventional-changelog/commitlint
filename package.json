@@ -5,15 +5,16 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "lerna": "lerna",
-    "pretest": "xo",
-    "test": "npm run lerna run test",
-    "travis": "trevor",
-    "postinstall": "npm run lerna bootstrap",
-    "reinstall": "npm run clean && npm install",
     "clean": "npm run lerna clean -- --yes && npm run lerna run clean",
+    "commit": "./@commitlint/prompt-cli/cli.js",
     "commitmsg": "./@commitlint/cli/cli.js -e",
-    "commit": "./@commitlint/prompt-cli/cli.js"
+    "docs": "docsify serve docs",
+    "lerna": "lerna",
+    "postinstall": "npm run lerna bootstrap",
+    "pretest": "xo",
+    "reinstall": "npm run clean && npm install",
+    "test": "npm run lerna run test",
+    "travis": "trevor"
   },
   "xo": {
     "ignores": [
@@ -45,6 +46,7 @@
     "email": "hello@herebecode.com"
   },
   "devDependencies": {
+    "docsify-cli": "^4.1.8",
     "husky": "^0.14.3",
     "lerna": "^2.0.0",
     "trevor": "^2.3.0",
