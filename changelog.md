@@ -1,3 +1,8 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/marionebl/conventional-changelog-lint/compare/v2.1.0...v2.1.1) (2017-07-10)
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/marionebl/conventional-changelog-lint/compare/v1.1.9...v2.1.0) (2017-07-07)
 
