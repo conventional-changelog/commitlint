@@ -1,3 +1,9 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/marionebl/conventional-changelog-lint/compare/v2.1.0...v2.1.1) (2017-07-10)
 
@@ -320,6 +326,3 @@
 * add extends flag ([276dcaf](https://github.com/marionebl/commitlint/commit/276dcaf))
 * add input from git history ([d426b34](https://github.com/marionebl/commitlint/commit/d426b34))
 * support multiple inputs ([0a11c72](https://github.com/marionebl/commitlint/commit/0a11c72))
-
-
-
