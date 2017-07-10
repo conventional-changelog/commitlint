@@ -8,26 +8,26 @@ This works recursively, enabling shareable configuration to extend on an indefin
 
 
 ```js
-// .commitlint
-{
-  "extends": ["example"] // => @commitlint-config-example
-}
+// .commitlint.config.js
+module.exports = {
+  extends: ['example'] // => @commitlint-config-example
+};
 ```
 
 Special cases are scoped extend items those are not prefixed.
 
 ```js
-// .commitlint
-{
-  "extends": ["@commitlint/config-angular"] // => @commitlint/config-angular
-}
+// .commitlint.config.js
+module.exports = {
+  extends: ['@commitlint/config-angular'] // => @commitlint/config-angular
+};
 ```
 
 The same is true for relative imports
 
 ```js
 // .commitlint
-{
-  "extends": ["./example"] // => ./example.js
+module.expors = {
+  extends: ['./example'] // => ./example.js
 }
 ```

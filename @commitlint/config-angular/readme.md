@@ -7,7 +7,7 @@ Shareable `commitlint` config enforcing the angular commit convention.
 
 ```sh
 npm install --save-dev @commitlint/config-angular @commitlint/cli
-echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
 ```
 
 ## Rules

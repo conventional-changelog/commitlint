@@ -55,6 +55,7 @@ test('ignores unknow keys', async t => {
 	t.context.back = chdir('fixtures/trash-file');
 	const actual = await load();
 	t.deepEqual(actual, {
+		extends: [],
 		rules: {
 			foo: 'bar',
 			baz: 'bar'
@@ -78,16 +79,18 @@ test('supports legacy .conventional-changelog-lintrc', async t => {
 	t.context.back = chdir('fixtures/legacy');
 	const actual = await load();
 	t.deepEqual(actual, {
+		extends: [],
 		rules: {
 			legacy: true
 		}
 	});
 });
 
-test('.commitlintrc overrides .conventional-changelog-lintrc', async t => {
+test('commitlint.config.js overrides .conventional-changelog-lintrc', async t => {
 	t.context.back = chdir('fixtures/overriden-legacy');
 	const actual = await load();
 	t.deepEqual(actual, {
+		extends: [],
 		rules: {
 			legacy: false
 		}

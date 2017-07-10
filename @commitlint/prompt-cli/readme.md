@@ -6,7 +6,7 @@
 
 ```bash
 npm install --g @commitlint/prompt-cli @commitlint/config-angular
-echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
 ```
 
 ```bash

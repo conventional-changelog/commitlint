@@ -6,7 +6,7 @@ Shareable `commitlint` config enforcing the patternplate commit convention.
 ## Getting started
 ```sh
 npm install --save-dev @commitlint/config-patternplate @commitlint/cli
-echo '{"extends": ["@commitlint/config-patternplate"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-patternplate']};" > .commitlint.config.js
 ```
 
 ## Rules
