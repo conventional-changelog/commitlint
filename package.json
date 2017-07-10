@@ -11,10 +11,13 @@
     "postinstall": "npm run lerna bootstrap",
     "reinstall": "npm run clean && npm install",
     "clean": "npm run lerna clean -- --yes && npm run lerna run clean",
+    "commitmsg": "./@commitlint/cli/cli.js -e",
     "commit": "./@commitlint/prompt-cli/cli.js"
   },
   "xo": {
-    "ignore": ["lib/**"]
+    "ignore": [
+      "lib/**"
+    ]
   },
   "engines": {
     "node": ">=4"
@@ -40,6 +43,7 @@
     "email": "hello@herebecode.com"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "lerna": "^2.0.0",
     "xo": "^0.18.2"
   }
