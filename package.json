@@ -8,6 +8,7 @@
     "lerna": "lerna",
     "pretest": "xo",
     "test": "npm run lerna run test",
+    "travis": "trevor",
     "postinstall": "npm run lerna bootstrap",
     "reinstall": "npm run clean && npm install",
     "clean": "npm run lerna clean -- --yes && npm run lerna run clean",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "husky": "^0.14.3",
     "lerna": "^2.0.0",
+    "trevor": "^2.3.0",
     "xo": "^0.18.2"
   }
 }
