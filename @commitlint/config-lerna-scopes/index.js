@@ -1,20 +1,15 @@
-const path = require('path');
-const globby = require('globby');
-const jsonfile = require('load-json-file');
+const Repository = require('lerna/lib/Repository');
 
 module.exports = {
 	utils: {getPackages},
 	rules: {
-		'scope-enum': () => getPackages()
-			.then(names => [2, 'always', names])
+		'scope-enum': () => [2, 'always', getPackages()]
 	}
 };
 
 function getPackages() {
-	const root = path.resolve(process.cwd(), './packages');
-	const glob = path.resolve(root, '*/package.json');
-
-	return globby(glob)
-		.then(paths => Promise.all(paths.map(jsonfile)))
-		.then(manifests => manifests.map(manifest => manifest.name));
+	const repo = new Repository(process.cwd());
+	return repo.packages
+		.map(pkg => pkg.name)
+		.map(name => name.charAt(0) === '@' ? name.split('/')[1] : name);
 }
