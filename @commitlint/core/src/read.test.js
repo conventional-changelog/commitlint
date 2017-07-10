@@ -60,7 +60,7 @@ test.serial('get edit commit message from git subdirectory', async t => {
 	t.deepEqual(actual, expected);
 });
 
-test.serial('get history commit messages from shallow clone', async t => {
+test.serial.failing('get history commit messages from shallow clone', async t => {
 	const [repo] = t.context.repos;
 
 	await writeFile('alpha.txt', 'alpha');
