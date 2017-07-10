@@ -1,20 +1,20 @@
-> commit prompt using .commitlintrc
+> commitizen adapter using .commitlintrc
 
 # @commitlint/prompt
 
-## Installation
+## Getting started
 
 ```bash
-npm install --save @commitlint/prompt commitizen
+npm install --save @commitlint/prompt @commitlint/config-angular commitizen
+echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
 ```
 
-## Configuration
-
-`@commitlint/prompt` is a `commitizen` adapter.
-Configure `commitizen` to use it:
-
-```json
+In package.json
+```
 {
+  "scripts": {
+    "commit": "git-cz"
+  },
   "config": {
     "commitizen": {
       "path": "@commitlint/prompt"
@@ -23,17 +23,7 @@ Configure `commitizen` to use it:
 }
 ```
 
-## Usage
-
-Use the [commitizen](https://github.com/commitizen/cz-cli) command line
-interface to start `@commitlint/prompt`.
-
 ```bash
-# do stuff in your project …
-
-# … then stage your changes
-git add
-
-# Execute the commitizen cli
-git-cz
+git add .
+npm run commit
 ```
