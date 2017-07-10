@@ -1,0 +1,36 @@
+{
+  "name": "@commitlint/prompt",
+  "version": "3.0.0",
+  "description": "commit prompt using .commitlintrc",
+  "bin": {
+    "commit": "./cli.js"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "commit": "$npm_package_bin_commit",
+    "pretest": "dep-check"
+  },
+  "xo": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marionebl/commitlint.git"
+  },
+  "keywords": [
+    "commitlint",
+    "prompt"
+  ],
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "devDependencies": {
+    "@commitlint/utils": "^3.0.0"
+  },
+  "dependencies": {
+    "@commitlint/prompt": "^3.0.0",
+    "execa": "^0.7.0",
+    "meow": "^3.7.0"
+  }
+}
