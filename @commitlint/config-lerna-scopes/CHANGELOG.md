@@ -1,0 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="3.0.0"></a>
+# 3.0.0 (2017-07-10)
+
+
+### Features
+
+* **config-lerna-scopes:** support non-standard lerna repos ([903df4b](https://github.com/marionebl/commitlint/commit/903df4b))
