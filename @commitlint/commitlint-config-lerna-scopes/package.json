@@ -1,9 +1,8 @@
 {
   "name": "commitlint-config-lerna-scopes",
   "version": "3.0.0",
-  "description": "Shareable commitlint config enforcing the angular commit convention",
+  "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "scripts": {
-    "pretest": "dep-check",
     "test": "exit 0",
     "clean": "exit 0"
   },

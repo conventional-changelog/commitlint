@@ -1,9 +1,8 @@
 {
   "name": "commitlint-config-patternplate",
   "version": "3.0.0",
-  "description": "Shareable commitlint config enforcing the angular commit convention",
+  "description": "Lint your commits, patternplate-style",
   "scripts": {
-    "pretest": "dep-check",
     "test": "exit 0",
     "clean": "exit 0"
   },
