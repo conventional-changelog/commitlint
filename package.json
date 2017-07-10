@@ -10,7 +10,8 @@
     "test": "npm run lerna run test",
     "postinstall": "npm run lerna bootstrap",
     "reinstall": "npm run clean && npm install",
-    "clean": "npm run lerna clean -- --yes && npm run lerna run clean"
+    "clean": "npm run lerna clean -- --yes && npm run lerna run clean",
+    "commit": "./@commitlint/prompt-cli/cli.js"
   },
   "xo": {
     "ignore": ["lib/**"]
