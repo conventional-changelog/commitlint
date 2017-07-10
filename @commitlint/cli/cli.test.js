@@ -7,6 +7,7 @@ const here = path.join.bind(null, __dirname);
 
 const SIMPLE = here('fixtures/simple');
 const EXTENDS_ROOT = here('fixtures/extends-root');
+const EMPTY = here('fixtures/empty');
 
 const cli = (input = '', args = [], opts = {}) => {
 	const c = execa(here('cli.js'), args, {
@@ -22,24 +23,24 @@ test('should throw when called without [input]', t => {
 });
 
 test('should reprint input from stdin', async t => {
-	const actual = await cli('foo: bar');
+	const actual = await cli('foo: bar', [], {cwd: EMPTY});
 	t.true(actual.stdout.includes('foo: bar'));
 });
 
 test('should produce no success output with --quiet flag', async t => {
-	const actual = await cli('foo: bar', ['--quiet']);
+	const actual = await cli('foo: bar', ['--quiet'], {cwd: EMPTY});
 	t.is(actual.stdout, '');
 	t.is(actual.stderr, '');
 });
 
 test('should produce no success output with -q flag', async t => {
-	const actual = await cli('foo: bar', ['-q']);
+	const actual = await cli('foo: bar', ['-q'], {cwd: EMPTY});
 	t.is(actual.stdout, '');
 	t.is(actual.stderr, '');
 });
 
 test('should succeed for input from stdin without rules', async t => {
-	const actual = await cli('foo: bar');
+	const actual = await cli('foo: bar', [], {cwd: EMPTY});
 	t.is(actual.code, 0);
 });
 
