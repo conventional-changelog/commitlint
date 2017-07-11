@@ -12,38 +12,38 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test('without type should succeed for empty keyword', t => {
-	const [actual] = typeEmpty(parsed.empty);
+test('without type should succeed for empty keyword', async t => {
+	const [actual] = typeEmpty(await parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('without type should fail for "never"', t => {
-	const [actual] = typeEmpty(parsed.empty, 'never');
+test('without type should fail for "never"', async t => {
+	const [actual] = typeEmpty(await parsed.empty, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without type should succeed for "always"', t => {
-	const [actual] = typeEmpty(parsed.empty, 'always');
+test('without type should succeed for "always"', async t => {
+	const [actual] = typeEmpty(await parsed.empty, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with type fail for empty keyword', t => {
-	const [actual] = typeEmpty(parsed.filled);
+test('with type fail for empty keyword', async t => {
+	const [actual] = typeEmpty(await parsed.filled);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with type succeed for "never"', t => {
-	const [actual] = typeEmpty(parsed.filled, 'never');
+test('with type succeed for "never"', async t => {
+	const [actual] = typeEmpty(await parsed.filled, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with type fail for "always"', t => {
-	const [actual] = typeEmpty(parsed.filled, 'always');
+test('with type fail for "always"', async t => {
+	const [actual] = typeEmpty(await parsed.filled, 'always');
 	const expected = false;
 	t.is(actual, expected);
 });

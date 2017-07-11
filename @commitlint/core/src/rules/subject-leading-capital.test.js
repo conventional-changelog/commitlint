@@ -14,56 +14,56 @@ const parsed = {
 	without: parse(messages.without)
 };
 
-test('empty should succeed', t => {
-	const [actual] = check(parsed.empty);
+test('empty should succeed', async t => {
+	const [actual] = check(await parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty against "always" should succeed', t => {
-	const [actual] = check(parsed.empty, 'always', 'uppercase');
+test('empty against "always" should succeed', async t => {
+	const [actual] = check(await parsed.empty, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty against "never" should succeed', t => {
-	const [actual] = check(parsed.empty, 'never', 'uppercase');
+test('empty against "never" should succeed', async t => {
+	const [actual] = check(await parsed.empty, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with should succeed', t => {
-	const [actual] = check(parsed.with);
+test('with should succeed', async t => {
+	const [actual] = check(await parsed.with);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with against "always" should succeed', t => {
-	const [actual] = check(parsed.with, 'always', 'uppercase');
+test('with against "always" should succeed', async t => {
+	const [actual] = check(await parsed.with, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with against "never" should fail', t => {
-	const [actual] = check(parsed.with, 'never', 'uppercase');
+test('with against "never" should fail', async t => {
+	const [actual] = check(await parsed.with, 'never', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without should fail', t => {
-	const [actual] = check(parsed.without, 'always', 'uppercase');
+test('without should fail', async t => {
+	const [actual] = check(await parsed.without, 'always', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without against "always" should fail', t => {
-	const [actual] = check(parsed.without, 'always', 'uppercase');
+test('without against "always" should fail', async t => {
+	const [actual] = check(await parsed.without, 'always', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without against "never" should succeed', t => {
-	const [actual] = check(parsed.without, 'never', 'uppercase');
+test('without against "never" should succeed', async t => {
+	const [actual] = check(await parsed.without, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });

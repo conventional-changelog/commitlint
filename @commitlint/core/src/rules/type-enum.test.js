@@ -14,110 +14,110 @@ const parsed = {
 	b: parse(messages.b)
 };
 
-test('empty succeeds', t => {
-	const [actual] = check(parsed.empty);
+test('empty succeeds', async t => {
+	const [actual] = check(await parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty on "a" succeeds', t => {
-	const [actual] = check(parsed.empty, '', ['a']);
+test('empty on "a" succeeds', async t => {
+	const [actual] = check(await parsed.empty, '', ['a']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty on "always a" succeeds', t => {
-	const [actual] = check(parsed.empty, 'always', ['a']);
+test('empty on "always a" succeeds', async t => {
+	const [actual] = check(await parsed.empty, 'always', ['a']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty on "never a" succeeds', t => {
-	const [actual] = check(parsed.empty, 'never', ['a']);
+test('empty on "never a" succeeds', async t => {
+	const [actual] = check(await parsed.empty, 'never', ['a']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty on "always a, b" succeeds', t => {
-	const [actual] = check(parsed.empty, 'always', ['a', 'b']);
+test('empty on "always a, b" succeeds', async t => {
+	const [actual] = check(await parsed.empty, 'always', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty on "never a, b" succeeds', t => {
-	const [actual] = check(parsed.empty, 'neber', ['a', 'b']);
+test('empty on "never a, b" succeeds', async t => {
+	const [actual] = check(await parsed.empty, 'neber', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('a on "a" succeeds', t => {
-	const [actual] = check(parsed.a, '', ['a']);
+test('a on "a" succeeds', async t => {
+	const [actual] = check(await parsed.a, '', ['a']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('a on "always a" succeeds', t => {
-	const [actual] = check(parsed.a, 'always', ['a']);
+test('a on "always a" succeeds', async t => {
+	const [actual] = check(await parsed.a, 'always', ['a']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('a on "never a" fails', t => {
-	const [actual] = check(parsed.a, 'never', ['a']);
+test('a on "never a" fails', async t => {
+	const [actual] = check(await parsed.a, 'never', ['a']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('b on "b" succeeds', t => {
-	const [actual] = check(parsed.b, '', ['b']);
+test('b on "b" succeeds', async t => {
+	const [actual] = check(await parsed.b, '', ['b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('b on "always b" succeeds', t => {
-	const [actual] = check(parsed.b, 'always', ['b']);
+test('b on "always b" succeeds', async t => {
+	const [actual] = check(await parsed.b, 'always', ['b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('b on "never b" fails', t => {
-	const [actual] = check(parsed.b, 'never', ['b']);
+test('b on "never b" fails', async t => {
+	const [actual] = check(await parsed.b, 'never', ['b']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('a on "a, b" succeeds', t => {
-	const [actual] = check(parsed.a, '', ['a', 'b']);
+test('a on "a, b" succeeds', async t => {
+	const [actual] = check(await parsed.a, '', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('a on "always a, b" succeeds', t => {
-	const [actual] = check(parsed.a, 'always', ['a', 'b']);
+test('a on "always a, b" succeeds', async t => {
+	const [actual] = check(await parsed.a, 'always', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('a on "never a, b" fails', t => {
-	const [actual] = check(parsed.a, 'never', ['a', 'b']);
+test('a on "never a, b" fails', async t => {
+	const [actual] = check(await parsed.a, 'never', ['a', 'b']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('b on "a, b" succeeds', t => {
-	const [actual] = check(parsed.b, '', ['a', 'b']);
+test('b on "a, b" succeeds', async t => {
+	const [actual] = check(await parsed.b, '', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('b on "always a, b" succeeds', t => {
-	const [actual] = check(parsed.b, 'always', ['a', 'b']);
+test('b on "always a, b" succeeds', async t => {
+	const [actual] = check(await parsed.b, 'always', ['a', 'b']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('b on "never a, b" fails', t => {
-	const [actual] = check(parsed.b, 'never', ['a', 'b']);
+test('b on "never a, b" fails', async t => {
+	const [actual] = check(await parsed.b, 'never', ['a', 'b']);
 	const expected = false;
 	t.is(actual, expected);
 });

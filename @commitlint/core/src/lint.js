@@ -3,7 +3,7 @@ import isIgnored from './library/is-ignored';
 import parse from './library/parse';
 import implementations from './rules';
 
-export default (message, rules = {}) => {
+export default async (message, rules = {}) => {
 	// Found a wildcard match, skip
 	if (isIgnored(message)) {
 		return {
@@ -14,7 +14,7 @@ export default (message, rules = {}) => {
 	}
 
 	// Parse the commit message
-	const parsed = parse(message);
+	const parsed = await parse(message);
 
 	// Validate against all rules
 	const results = entries(rules)

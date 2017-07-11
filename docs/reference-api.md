@@ -186,7 +186,7 @@ type Report = {
   warnings: Problem[];
 }
 
-lint(message: string, rules: {[ruleName: string]: Rule}) => Report;
+lint(message: string, rules: {[ruleName: string]: Rule}) => Promise<Report>;
 ```
 
 * **Basic Example**
@@ -194,23 +194,25 @@ lint(message: string, rules: {[ruleName: string]: Rule}) => Report;
 ```js
 const {lint} = require('@commitlint/core');
 
-lint('foo: bar'); // => { valid: true, errors: [], warnings: [] }
+lint('foo: bar')
+  .then(report => console.log(report)); 
+  // => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {
-	'type-enum': [1, 'always', ['foo']]
-}); // => { valid: true, errors: [], warnings: [] }
+lint('foo: bar', {'type-enum': [1, 'always', ['foo']]})
+  .then(report => console.log(report)); 
+  // => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {
-	'type-enum': [1, 'always', ['bar']]
-}); /* =>
-{ valid: true,
-  errors: [],
-  warnings:
-   [ { level: 1,
-       valid: false,
-       name: 'type-enum',
-       message: 'scope must be one of [bar]' } ] }
-*/
+lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
+  .then(report => console.log(report)); 
+  /* =>
+    { valid: true,
+      errors: [],
+      warnings:
+      [ { level: 1,
+          valid: false,
+          name: 'type-enum',
+          message: 'scope must be one of [bar]' } ] }
+  */
 ```
 
 * **Load configuration**
@@ -223,14 +225,17 @@ const CONFIG = {
 };
 
 load(CONFIG)
-  .then(opts => console.log(lint('foo: bar', opts.rules))); /* =>
-{ valid: false,
-  errors:
-   [ { level: 2,
-       valid: false,
-       name: 'type-enum',
-       message: 'scope must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]' } ],
-  warnings: [] } */
+  .then(opts =>lint('foo: bar', opts.rules)) 
+  .then(report => console.log(report));
+  /* =>
+    { valid: false,
+      errors:
+      [ { level: 2,
+          valid: false,
+          name: 'type-enum',
+          message: 'scope must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]' } ],
+      warnings: [] } 
+    */
 ```
 
 * **Read git history**
@@ -245,7 +250,7 @@ const RULES = {
 const check = commit => lint(commit, RULES);
 
 read({to: 'HEAD', from: 'HEAD~2'})
-  .then(commits => commits.map(check));
+  .then(commits => Promise.all(commits.map(check)));
 ```
 
 * **Simplfied last-commit checker**
@@ -256,7 +261,7 @@ const {lint, load, read} = require('@commitlint/core');
 Promise.all([load(), read({from: 'HEAD~1'})])
   .then(tasks => {
     const [{rules}, [commit]] = tasks;
-    const result = lint(commit, rules);
-    console.log(JSON.stringify(result.valid));
-  });
+    return lint(commit, rules);
+  })
+  .then(report => console.log(JSON.stringify(result.valid)));
 ```

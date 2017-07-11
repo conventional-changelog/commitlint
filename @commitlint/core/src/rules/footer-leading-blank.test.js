@@ -20,110 +20,110 @@ const parsed = {
 	withMulitLine: parse(messages.withMulitLine)
 };
 
-test('with simple message should succeed for empty keyword', t => {
-	const [actual] = footerLeadingBlank(parsed.simple);
+test('with simple message should succeed for empty keyword', async t => {
+	const [actual] = footerLeadingBlank(await parsed.simple);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with simple message should succeed for "never"', t => {
-	const [actual] = footerLeadingBlank(parsed.simple, 'never');
+test('with simple message should succeed for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.simple, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with simple message should succeed for "always"', t => {
-	const [actual] = footerLeadingBlank(parsed.simple, 'always');
+test('with simple message should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.simple, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with body message should succeed for empty keyword', t => {
-	const [actual] = footerLeadingBlank(parsed.body);
+test('with body message should succeed for empty keyword', async t => {
+	const [actual] = footerLeadingBlank(await parsed.body);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with body message should succeed for "never"', t => {
-	const [actual] = footerLeadingBlank(parsed.body, 'never');
+test('with body message should succeed for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.body, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with body message should succeed for "always"', t => {
-	const [actual] = footerLeadingBlank(parsed.body, 'always');
+test('with body message should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.body, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with trailing message should succeed for empty keyword', t => {
-	const [actual] = footerLeadingBlank(parsed.trailing);
+test('with trailing message should succeed for empty keyword', async t => {
+	const [actual] = footerLeadingBlank(await parsed.trailing);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with trailing message should succeed for "never"', t => {
-	const [actual] = footerLeadingBlank(parsed.trailing, 'never');
+test('with trailing message should succeed for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.trailing, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with trailing message should succeed for "always"', t => {
-	const [actual] = footerLeadingBlank(parsed.trailing, 'always');
+test('with trailing message should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.trailing, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('without blank line before footer should fail for empty keyword', t => {
-	const [actual] = footerLeadingBlank(parsed.without);
+test('without blank line before footer should fail for empty keyword', async t => {
+	const [actual] = footerLeadingBlank(await parsed.without);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without blank line before footer should succeed for "never"', t => {
-	const [actual] = footerLeadingBlank(parsed.without, 'never');
+test('without blank line before footer should succeed for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.without, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('without blank line before footer should fail for "always"', t => {
-	const [actual] = footerLeadingBlank(parsed.without, 'always');
+test('without blank line before footer should fail for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.without, 'always');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with blank line before footer should succeed for empty keyword', t => {
-	const [actual] = footerLeadingBlank(parsed.with);
+test('with blank line before footer should succeed for empty keyword', async t => {
+	const [actual] = footerLeadingBlank(await parsed.with);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with blank line before footer should fail for "never"', t => {
-	const [actual] = footerLeadingBlank(parsed.with, 'never');
+test('with blank line before footer should fail for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.with, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with blank line before footer should succeed for "always"', t => {
-	const [actual] = footerLeadingBlank(parsed.with, 'always');
+test('with blank line before footer should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.with, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with blank line before footer and multiline body should succeed for empty keyword', t => {
-	const [actual] = footerLeadingBlank(parsed.withMulitLine);
+test('with blank line before footer and multiline body should succeed for empty keyword', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withMulitLine);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with blank line before footer and multiline body should fail for "never"', t => {
-	const [actual] = footerLeadingBlank(parsed.withMulitLine, 'never');
+test('with blank line before footer and multiline body should fail for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withMulitLine, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with blank line before footer and multiline body should succeed for "always"', t => {
-	const [actual] = footerLeadingBlank(parsed.withMulitLine, 'always');
+test('with blank line before footer and multiline body should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withMulitLine, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });

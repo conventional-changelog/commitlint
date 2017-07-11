@@ -16,74 +16,74 @@ const parsed = {
 	uppercase: parse(messages.uppercase)
 };
 
-test('with empty scope should succeed for "never lowercase"', t => {
-	const [actual] = scopeCase(parsed.empty, 'never', 'lowercase');
+test('with empty scope should succeed for "never lowercase"', async t => {
+	const [actual] = scopeCase(await parsed.empty, 'never', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty scope should succeed for "always lowercase"', t => {
-	const [actual] = scopeCase(parsed.empty, 'always', 'lowercase');
+test('with empty scope should succeed for "always lowercase"', async t => {
+	const [actual] = scopeCase(await parsed.empty, 'always', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty scope should succeed for "never uppercase"', t => {
-	const [actual] = scopeCase(parsed.empty, 'never', 'uppercase');
+test('with empty scope should succeed for "never uppercase"', async t => {
+	const [actual] = scopeCase(await parsed.empty, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty scope should succeed for "always uppercase"', t => {
-	const [actual] = scopeCase(parsed.empty, 'always', 'uppercase');
+test('with empty scope should succeed for "always uppercase"', async t => {
+	const [actual] = scopeCase(await parsed.empty, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with lowercase scope should fail for "never lowercase"', t => {
-	const [actual] = scopeCase(parsed.lowercase, 'never', 'lowercase');
+test('with lowercase scope should fail for "never lowercase"', async t => {
+	const [actual] = scopeCase(await parsed.lowercase, 'never', 'lowercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with lowercase scope should succeed for "always lowercase"', t => {
-	const [actual] = scopeCase(parsed.lowercase, 'always', 'lowercase');
+test('with lowercase scope should succeed for "always lowercase"', async t => {
+	const [actual] = scopeCase(await parsed.lowercase, 'always', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with mixedcase scope should succeed for "never lowercase"', t => {
-	const [actual] = scopeCase(parsed.mixedcase, 'never', 'lowercase');
+test('with mixedcase scope should succeed for "never lowercase"', async t => {
+	const [actual] = scopeCase(await parsed.mixedcase, 'never', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with mixedcase scope should fail for "always lowercase"', t => {
-	const [actual] = scopeCase(parsed.mixedcase, 'always', 'lowercase');
+test('with mixedcase scope should fail for "always lowercase"', async t => {
+	const [actual] = scopeCase(await parsed.mixedcase, 'always', 'lowercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with mixedcase scope should succeed for "never uppercase"', t => {
-	const [actual] = scopeCase(parsed.mixedcase, 'never', 'uppercase');
+test('with mixedcase scope should succeed for "never uppercase"', async t => {
+	const [actual] = scopeCase(await parsed.mixedcase, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with mixedcase scope should fail for "always uppercase"', t => {
-	const [actual] = scopeCase(parsed.mixedcase, 'always', 'uppercase');
+test('with mixedcase scope should fail for "always uppercase"', async t => {
+	const [actual] = scopeCase(await parsed.mixedcase, 'always', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with uppercase scope should fail for "never uppercase"', t => {
-	const [actual] = scopeCase(parsed.uppercase, 'never', 'uppercase');
+test('with uppercase scope should fail for "never uppercase"', async t => {
+	const [actual] = scopeCase(await parsed.uppercase, 'never', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with lowercase scope should succeed for "always uppercase"', t => {
-	const [actual] = scopeCase(parsed.uppercase, 'always', 'uppercase');
+test('with lowercase scope should succeed for "always uppercase"', async t => {
+	const [actual] = scopeCase(await parsed.uppercase, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
