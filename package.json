@@ -11,13 +11,24 @@
     "docs": "docsify serve docs",
     "lerna": "lerna",
     "postinstall": "lerna bootstrap",
+    "precommit": "lint-staged",
     "pretest": "xo",
     "reinstall": "npm run clean && npm install",
     "publish": "lerna publish --conventional-commits",
     "test": "lerna run test",
     "travis": "trevor"
   },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --use-tabs --single-quote --no-bracket-spacing",
+      "xo --fix",
+      "git add"
+    ]
+  },
   "xo": {
+    "extends": [
+      "prettier"
+    ],
     "ignores": [
       "@commitlint/**/lib/**",
       "@commitlint/**/node_modules"
@@ -48,8 +59,11 @@
   },
   "devDependencies": {
     "docsify-cli": "^4.1.8",
+    "eslint-config-prettier": "^2.3.0",
     "husky": "^0.14.3",
     "lerna": "^2.0.0",
+    "lint-staged": "^4.0.1",
+    "prettier": "^1.5.2",
     "trevor": "^2.3.0",
     "xo": "^0.18.2"
   }
