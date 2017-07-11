@@ -1,10 +1,16 @@
 > Lint commit messages
 
+# commitlint
+
+[![npm latest][2]][3] [![npm next][10]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
+
+
+
 `commitlint` helps your team adhereing to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
 
 # Getting started
 
-## Install 
+## Install
 
 ```sh
 npm install -g @commitlint/cli @commitlint/config-angular
@@ -38,3 +44,18 @@ commitlint --from=HEAD~1
 * **Concepts** - Overarching topics important to unterstand the use of `commitlint`
 * **Reference** - Mostly technical documentation
 * **Changelog**
+
+
+[0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
+[1]: https://nodejs.org/api/documentation.html#documentation_stability_index
+[2]: https://img.shields.io/npm/v/@commitlint/core.svg?style=flat-square
+[3]: https://npmjs.org/package/@commitlint/core/latest.svg
+[4]: https://img.shields.io/travis/marionebl/commitlint/master.svg?style=flat-square
+[5]: https://travis-ci.org/marionebl/commitlint
+[6]: https://img.shields.io/appveyor/ci/marionebl/commitlint/master.svg?style=flat-square
+[7]: https://ci.appveyor.com/project/marionebl/commitlint
+
+[8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
+[9]: https://nodejs.org/api/documentation.html#documentation_stability_index
+
+[10]: https://img.shields.io/npm/v/@commitlint/core/next.svg?style=flat-square
