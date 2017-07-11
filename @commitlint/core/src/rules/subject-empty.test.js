@@ -12,38 +12,38 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test('without subject should succeed for empty keyword', t => {
-	const [actual] = subjectEmpty(parsed.empty);
+test('without subject should succeed for empty keyword', async t => {
+	const [actual] = subjectEmpty(await parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('without subject should fail for "never"', t => {
-	const [actual] = subjectEmpty(parsed.empty, 'never');
+test('without subject should fail for "never"', async t => {
+	const [actual] = subjectEmpty(await parsed.empty, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without subject should succeed for "always"', t => {
-	const [actual] = subjectEmpty(parsed.empty, 'always');
+test('without subject should succeed for "always"', async t => {
+	const [actual] = subjectEmpty(await parsed.empty, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with subject fail for empty keyword', t => {
-	const [actual] = subjectEmpty(parsed.filled);
+test('with subject fail for empty keyword', async t => {
+	const [actual] = subjectEmpty(await parsed.filled);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with subject succeed for "never"', t => {
-	const [actual] = subjectEmpty(parsed.filled, 'never');
+test('with subject succeed for "never"', async t => {
+	const [actual] = subjectEmpty(await parsed.filled, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with subject fail for "always"', t => {
-	const [actual] = subjectEmpty(parsed.filled, 'always');
+test('with subject fail for "always"', async t => {
+	const [actual] = subjectEmpty(await parsed.filled, 'always');
 	const expected = false;
 	t.is(actual, expected);
 });

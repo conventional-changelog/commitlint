@@ -20,92 +20,92 @@ const parsed = {
 	mixed: parse(messages.mixed)
 };
 
-test('empty succeeds', t => {
-	const [actual] = footerTense(parsed.empty, '', ['present-imperative']);
+test('empty succeeds', async t => {
+	const [actual] = footerTense(await parsed.empty, '', ['present-imperative']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('present succeeds "always present-imperative"', t => {
-	const [actual] = footerTense(parsed.presentImperative, 'always', ['present-imperative']);
+test('present succeeds "always present-imperative"', async t => {
+	const [actual] = footerTense(await parsed.presentImperative, 'always', ['present-imperative']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('present fails "never present-imperative"', t => {
-	const [actual] = footerTense(parsed.presentImperative, 'never', ['present-imperative']);
+test('present fails "never present-imperative"', async t => {
+	const [actual] = footerTense(await parsed.presentImperative, 'never', ['present-imperative']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('present succeeds "always present-participle"', t => {
-	const [actual] = footerTense(parsed.presentParticiple, 'always', ['present-participle']);
+test('present succeeds "always present-participle"', async t => {
+	const [actual] = footerTense(await parsed.presentParticiple, 'always', ['present-participle']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('present fails "never present-participle"', t => {
-	const [actual] = footerTense(parsed.presentParticiple, 'never', ['present-participle']);
+test('present fails "never present-participle"', async t => {
+	const [actual] = footerTense(await parsed.presentParticiple, 'never', ['present-participle']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('present succeeds "always present-third-person"', t => {
-	const [actual] = footerTense(parsed.presentThirdPerson, 'always', ['present-third-person']);
+test('present succeeds "always present-third-person"', async t => {
+	const [actual] = footerTense(await parsed.presentThirdPerson, 'always', ['present-third-person']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('present fails "never present-third-person"', t => {
-	const [actual] = footerTense(parsed.presentThirdPerson, 'never', ['present-third-person']);
+test('present fails "never present-third-person"', async t => {
+	const [actual] = footerTense(await parsed.presentThirdPerson, 'never', ['present-third-person']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('past should succedd "always past-tense"', t => {
-	const [actual] = footerTense(parsed.past, 'always', ['past-tense']);
+test('past should succedd "always past-tense"', async t => {
+	const [actual] = footerTense(await parsed.past, 'always', ['past-tense']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('past fails "never past-tense"', t => {
-	const [actual] = footerTense(parsed.past, 'never', ['past-tense']);
+test('past fails "never past-tense"', async t => {
+	const [actual] = footerTense(await parsed.past, 'never', ['past-tense']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('mixed fails "always present-third-person"', t => {
-	const [actual] = footerTense(parsed.mixed, 'always', ['present-third-person']);
+test('mixed fails "always present-third-person"', async t => {
+	const [actual] = footerTense(await parsed.mixed, 'always', ['present-third-person']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('mixed fails "always present-imperative"', t => {
-	const [actual] = footerTense(parsed.mixed, 'always', ['present-imperative']);
+test('mixed fails "always present-imperative"', async t => {
+	const [actual] = footerTense(await parsed.mixed, 'always', ['present-imperative']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('present fails "always present-participle"', t => {
-	const [actual] = footerTense(parsed.mixed, 'always', ['present-participle']);
+test('present fails "always present-participle"', async t => {
+	const [actual] = footerTense(await parsed.mixed, 'always', ['present-participle']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('mixed fails "always past-tense"', t => {
-	const [actual] = footerTense(parsed.mixed, 'always', ['past-tense']);
+test('mixed fails "always past-tense"', async t => {
+	const [actual] = footerTense(await parsed.mixed, 'always', ['past-tense']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('mixed succeeds "always present-third-person, present-imperative, present-participle, past-tense"', t => {
-	const [actual] = footerTense(parsed.mixed, 'always', ['present-third-person', 'present-imperative', 'present-participle', 'past-tense']);
+test('mixed succeeds "always present-third-person, present-imperative, present-participle, past-tense"', async t => {
+	const [actual] = footerTense(await parsed.mixed, 'always', ['present-third-person', 'present-imperative', 'present-participle', 'past-tense']);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('mixed succeeds "never allowed: present-third-person" and matching ignored: implements', t => {
-	const [actual] = footerTense(parsed.mixed, 'never', {
+test('mixed succeeds "never allowed: present-third-person" and matching ignored: implements', async t => {
+	const [actual] = footerTense(await parsed.mixed, 'never', {
 		allowed: ['present-third-person'],
 		ignored: ['implements']
 	});

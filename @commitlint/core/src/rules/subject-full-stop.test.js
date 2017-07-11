@@ -14,38 +14,38 @@ const parsed = {
 	without: parse(messages.without)
 };
 
-test('empty against "always" should succeed', t => {
-	const [actual] = check(parsed.empty, 'always', '.');
+test('empty against "always" should succeed', async t => {
+	const [actual] = check(await parsed.empty, 'always', '.');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('empty against "never ." should succeed', t => {
-	const [actual] = check(parsed.empty, 'never', '.');
+test('empty against "never ." should succeed', async t => {
+	const [actual] = check(await parsed.empty, 'never', '.');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with against "always ." should succeed', t => {
-	const [actual] = check(parsed.with, 'always', '.');
+test('with against "always ." should succeed', async t => {
+	const [actual] = check(await parsed.with, 'always', '.');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with against "never ." should fail', t => {
-	const [actual] = check(parsed.with, 'never', '.');
+test('with against "never ." should fail', async t => {
+	const [actual] = check(await parsed.with, 'never', '.');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without against "always ." should fail', t => {
-	const [actual] = check(parsed.without, 'always', '.');
+test('without against "always ." should fail', async t => {
+	const [actual] = check(await parsed.without, 'always', '.');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without against "never ." should succeed', t => {
-	const [actual] = check(parsed.without, 'never', '.');
+test('without against "never ." should succeed', async t => {
+	const [actual] = check(await parsed.without, 'never', '.');
 	const expected = true;
 	t.is(actual, expected);
 });

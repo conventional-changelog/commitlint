@@ -14,56 +14,56 @@ const parsed = {
 	with: parse(messages.with)
 };
 
-test('with simple message should succeed for empty keyword', t => {
-	const [actual] = bodyLeadingBlank(parsed.simple);
+test('with simple message should succeed for empty keyword', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.simple);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with simple message should succeed for "never"', t => {
-	const [actual] = bodyLeadingBlank(parsed.simple, 'never');
+test('with simple message should succeed for "never"', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.simple, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with simple message should succeed for "always"', t => {
-	const [actual] = bodyLeadingBlank(parsed.simple, 'always');
+test('with simple message should succeed for "always"', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.simple, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('without blank line before body should fail for empty keyword', t => {
-	const [actual] = bodyLeadingBlank(parsed.without);
+test('without blank line before body should fail for empty keyword', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.without);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('without blank line before body should succeed for "never"', t => {
-	const [actual] = bodyLeadingBlank(parsed.without, 'never');
+test('without blank line before body should succeed for "never"', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.without, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('without blank line before body should fail for "always"', t => {
-	const [actual] = bodyLeadingBlank(parsed.without, 'always');
+test('without blank line before body should fail for "always"', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.without, 'always');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with blank line before body should succeed for empty keyword', t => {
-	const [actual] = bodyLeadingBlank(parsed.with);
+test('with blank line before body should succeed for empty keyword', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.with);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with blank line before body should fail for "never"', t => {
-	const [actual] = bodyLeadingBlank(parsed.with, 'never');
+test('with blank line before body should fail for "never"', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.with, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with blank line before body should succeed for "always"', t => {
-	const [actual] = bodyLeadingBlank(parsed.with, 'always');
+test('with blank line before body should succeed for "always"', async t => {
+	const [actual] = bodyLeadingBlank(await parsed.with, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });

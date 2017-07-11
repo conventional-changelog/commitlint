@@ -14,56 +14,56 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test('with simple message should succeed for empty keyword', t => {
-	const [actual] = footerEmpty(parsed.simple);
+test('with simple message should succeed for empty keyword', async t => {
+	const [actual] = footerEmpty(await parsed.simple);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with simple message should fail for "never"', t => {
-	const [actual] = footerEmpty(parsed.simple, 'never');
+test('with simple message should fail for "never"', async t => {
+	const [actual] = footerEmpty(await parsed.simple, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with simple message should succeed for "always"', t => {
-	const [actual] = footerEmpty(parsed.simple, 'always');
+test('with simple message should succeed for "always"', async t => {
+	const [actual] = footerEmpty(await parsed.simple, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty footer should succeed for empty keyword', t => {
-	const [actual] = footerEmpty(parsed.empty);
+test('with empty footer should succeed for empty keyword', async t => {
+	const [actual] = footerEmpty(await parsed.empty);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty footer should fail for "never"', t => {
-	const [actual] = footerEmpty(parsed.empty, 'never');
+test('with empty footer should fail for "never"', async t => {
+	const [actual] = footerEmpty(await parsed.empty, 'never');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with empty footer should succeed for "always"', t => {
-	const [actual] = footerEmpty(parsed.empty, 'always');
+test('with empty footer should succeed for "always"', async t => {
+	const [actual] = footerEmpty(await parsed.empty, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with footer should fail for empty keyword', t => {
-	const [actual] = footerEmpty(parsed.filled);
+test('with footer should fail for empty keyword', async t => {
+	const [actual] = footerEmpty(await parsed.filled);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with footer should succeed for "never"', t => {
-	const [actual] = footerEmpty(parsed.filled, 'never');
+test('with footer should succeed for "never"', async t => {
+	const [actual] = footerEmpty(await parsed.filled, 'never');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with footer should fail for "always"', t => {
-	const [actual] = footerEmpty(parsed.filled, 'always');
+test('with footer should fail for "always"', async t => {
+	const [actual] = footerEmpty(await parsed.filled, 'always');
 	const expected = false;
 	t.is(actual, expected);
 });

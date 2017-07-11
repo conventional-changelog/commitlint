@@ -21,26 +21,26 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with simple should succeed', t => {
-	const [actual] = check(parsed.simple, '', value);
+test('with simple should succeed', async t => {
+	const [actual] = check(await parsed.simple, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty should succeed', t => {
-	const [actual] = check(parsed.empty, '', value);
+test('with empty should succeed', async t => {
+	const [actual] = check(await parsed.empty, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with short should succeed', t => {
-	const [actual] = check(parsed.short, '', value);
+test('with short should succeed', async t => {
+	const [actual] = check(await parsed.short, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with long should fail', t => {
-	const [actual] = check(parsed.long, '', value);
+test('with long should fail', async t => {
+	const [actual] = check(await parsed.long, '', value);
 	const expected = false;
 	t.is(actual, expected);
 });

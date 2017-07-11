@@ -17,14 +17,14 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with short should fail', t => {
-	const [actual] = check(parsed.short, '', value);
+test('with short should fail', async t => {
+	const [actual] = check(await parsed.short, '', value);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with long should succeed', t => {
-	const [actual] = check(parsed.long, '', value);
+test('with long should succeed', async t => {
+	const [actual] = check(await parsed.long, '', value);
 	const expected = true;
 	t.is(actual, expected);
 });

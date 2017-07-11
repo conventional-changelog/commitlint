@@ -14,62 +14,62 @@ const parsed = {
 	deu: parse(messages.deu)
 };
 
-test('empty succeeds', t => {
-	const [actual] = check(parsed.eng, '', 'eng');
+test('empty succeeds', async t => {
+	const [actual] = check(await parsed.eng, '', 'eng');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('english against "eng" succeeds', t => {
-	const [actual] = check(parsed.eng, '', 'eng');
+test('english against "eng" succeeds', async t => {
+	const [actual] = check(await parsed.eng, '', 'eng');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('english against "always eng" succeeds', t => {
-	const [actual] = check(parsed.eng, 'always', 'eng');
+test('english against "always eng" succeeds', async t => {
+	const [actual] = check(await parsed.eng, 'always', 'eng');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('english against "never eng" fails', t => {
-	const [actual] = check(parsed.eng, 'never', 'eng');
+test('english against "never eng" fails', async t => {
+	const [actual] = check(await parsed.eng, 'never', 'eng');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('english against "deu" fails', t => {
-	const [actual] = check(parsed.eng, '', 'deu+');
+test('english against "deu" fails', async t => {
+	const [actual] = check(await parsed.eng, '', 'deu+');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('english against "always deu" fails', t => {
-	const [actual] = check(parsed.eng, 'always', 'deu');
+test('english against "always deu" fails', async t => {
+	const [actual] = check(await parsed.eng, 'always', 'deu');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('english against "never deu" succeeds', t => {
-	const [actual] = check(parsed.eng, 'never', 'deu');
+test('english against "never deu" succeeds', async t => {
+	const [actual] = check(await parsed.eng, 'never', 'deu');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('german against "deu" succeeds', t => {
-	const [actual] = check(parsed.deu, '', 'deu');
+test('german against "deu" succeeds', async t => {
+	const [actual] = check(await parsed.deu, '', 'deu');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('german against "always deu" succeeds', t => {
-	const [actual] = check(parsed.deu, 'always', 'deu');
+test('german against "always deu" succeeds', async t => {
+	const [actual] = check(await parsed.deu, 'always', 'deu');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('german against "never deu" fails', t => {
-	const [actual] = check(parsed.deu, 'never', 'deu');
+test('german against "never deu" fails', async t => {
+	const [actual] = check(await parsed.deu, 'never', 'deu');
 	const expected = false;
 	t.is(actual, expected);
 });

@@ -16,74 +16,74 @@ const parsed = {
 	uppercase: parse(messages.uppercase)
 };
 
-test('with empty body should succeed for "never lowercase"', t => {
-	const [actual] = bodyCase(parsed.empty, 'never', 'lowercase');
+test('with empty body should succeed for "never lowercase"', async t => {
+	const [actual] = bodyCase(await parsed.empty, 'never', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty body should succeed for "always lowercase"', t => {
-	const [actual] = bodyCase(parsed.empty, 'always', 'lowercase');
+test('with empty body should succeed for "always lowercase"', async t => {
+	const [actual] = bodyCase(await parsed.empty, 'always', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty body should succeed for "never uppercase"', t => {
-	const [actual] = bodyCase(parsed.empty, 'never', 'uppercase');
+test('with empty body should succeed for "never uppercase"', async t => {
+	const [actual] = bodyCase(await parsed.empty, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with empty body should succeed for "always uppercase"', t => {
-	const [actual] = bodyCase(parsed.empty, 'always', 'uppercase');
+test('with empty body should succeed for "always uppercase"', async t => {
+	const [actual] = bodyCase(await parsed.empty, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with lowercase body should fail for "never lowercase"', t => {
-	const [actual] = bodyCase(parsed.lowercase, 'never', 'lowercase');
+test('with lowercase body should fail for "never lowercase"', async t => {
+	const [actual] = bodyCase(await parsed.lowercase, 'never', 'lowercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with lowercase body should succeed for "always lowercase"', t => {
-	const [actual] = bodyCase(parsed.lowercase, 'always', 'lowercase');
+test('with lowercase body should succeed for "always lowercase"', async t => {
+	const [actual] = bodyCase(await parsed.lowercase, 'always', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with mixedcase body should succeed for "never lowercase"', t => {
-	const [actual] = bodyCase(parsed.mixedcase, 'never', 'lowercase');
+test('with mixedcase body should succeed for "never lowercase"', async t => {
+	const [actual] = bodyCase(await parsed.mixedcase, 'never', 'lowercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with mixedcase body should fail for "always lowercase"', t => {
-	const [actual] = bodyCase(parsed.mixedcase, 'always', 'lowercase');
+test('with mixedcase body should fail for "always lowercase"', async t => {
+	const [actual] = bodyCase(await parsed.mixedcase, 'always', 'lowercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with mixedcase body should succeed for "never uppercase"', t => {
-	const [actual] = bodyCase(parsed.mixedcase, 'never', 'uppercase');
+test('with mixedcase body should succeed for "never uppercase"', async t => {
+	const [actual] = bodyCase(await parsed.mixedcase, 'never', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
 
-test('with mixedcase body should fail for "always uppercase"', t => {
-	const [actual] = bodyCase(parsed.mixedcase, 'always', 'uppercase');
+test('with mixedcase body should fail for "always uppercase"', async t => {
+	const [actual] = bodyCase(await parsed.mixedcase, 'always', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with uppercase body should fail for "never uppercase"', t => {
-	const [actual] = bodyCase(parsed.uppercase, 'never', 'uppercase');
+test('with uppercase body should fail for "never uppercase"', async t => {
+	const [actual] = bodyCase(await parsed.uppercase, 'never', 'uppercase');
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with lowercase body should succeed for "always uppercase"', t => {
-	const [actual] = bodyCase(parsed.uppercase, 'always', 'uppercase');
+test('with lowercase body should succeed for "always uppercase"', async t => {
+	const [actual] = bodyCase(await parsed.uppercase, 'always', 'uppercase');
 	const expected = true;
 	t.is(actual, expected);
 });
