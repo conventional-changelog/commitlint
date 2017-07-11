@@ -7,6 +7,18 @@ See [standard-version](https://github.com/conventional-changelog/standard-versio
 ## 3.0.1 (2017-07-11)
 
 
+### Bug Fixes
+
+* **cli:** remove destructuring for node 4 support ([fe8caff](https://github.com/marionebl/commitlint/commit/fe8caff))
+* ensure node4 compat ([bfeb653](https://github.com/marionebl/commitlint/commit/bfeb653))
+
+
+
+
+<a name="3.0.1"></a>
+## 3.0.1 (2017-07-11)
+
+
 
 <a name="3.0.0"></a>
 # 3.0.0 (2017-07-10)

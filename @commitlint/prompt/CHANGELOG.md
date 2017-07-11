@@ -8,6 +8,12 @@ See [standard-version](https://github.com/conventional-changelog/standard-versio
 
 
 
+
+<a name="3.0.1"></a>
+## 3.0.1 (2017-07-11)
+
+
+
 <a name="3.0.0"></a>
 # 3.0.0 (2017-07-10)
 
