@@ -2,6 +2,10 @@
 
 # @commitlint/prompt
 
+This is the library and commitizen adapter version of commitlint prompt.
+A ready-to-use cli version is available at [@commitlint/prompt-cli](../prompt-cli).
+Learn how to use it at [docs/prompt](http://marionebl.github.io/commitlint/#/guides-use-prompt).
+
 ## Getting started
 
 ```bash

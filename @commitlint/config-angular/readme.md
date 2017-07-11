@@ -1,7 +1,9 @@
 > Lint your commits, angular-style
 
 # @commitlint/config-angular
+
 Shareable `commitlint` config enforcing the angular commit convention.
+Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
 
@@ -14,6 +16,8 @@ echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint
 ### Problems
 
 The following rules are considered problems for `@commitlint/config-angular` and will yield a non-zero exit code when not met.
+Consult [docs/rules](http://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.
+
 
 #### type-enum
 * **condition**: `type` is found in value

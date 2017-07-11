@@ -8,4 +8,4 @@
 npm install --save-dev @commitlint/core
 ```
 
-Consult [docs/api](../../docs/api) for comprehensive documentation.
+Consult [docs/api](http://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.

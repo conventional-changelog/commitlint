@@ -2,6 +2,7 @@
 
 # @commitlint/config-patternplate
 Shareable `commitlint` config enforcing the patternplate commit convention.
+Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
 ```sh
@@ -10,7 +11,8 @@ echo "module.exports = {extends: ['@commitlint/config-patternplate']};" > .commi
 ```
 
 ## Rules
-`@commitlint/config-patternplate` extends the [shareable angular config](../config-angular#rules). Additionally these rules apply:
+`@commitlint/config-patternplate` extends the [shareable angular config](../config-angular#rules).
+Additionally these rules apply:
 
 ### Problems
 The following rules are considered problems for `@commitlint/config-patterplate` and will yield a non-zero exit code when not met.
@@ -19,3 +21,5 @@ The following rules are considered problems for `@commitlint/config-patterplate`
 * **description**: `scope` is found in `value`
 * **rule**: `always`
 * **value**: determined based on pattern tree. `system` and all pattern ids present in `patterns` are allowed
+
+Consult [docs/rules](http://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.

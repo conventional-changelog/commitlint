@@ -2,6 +2,7 @@
 
 # @commitlint/config-lerna-scopes
 Shareable `commitlint` config enforcing lerna package names as scopes.
+Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
 ```sh
@@ -37,3 +38,5 @@ packages
 ⧗   input: chore: do some general maintenance
 ✔   found 0 problems, 0 warnings
 ```
+
+Consult [docs/rules](http://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.

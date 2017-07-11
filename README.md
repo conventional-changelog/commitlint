@@ -81,8 +81,8 @@ npm run build # run build tasks
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
-[2]: https://img.shields.io/npm/v/@commitlint/core.svg?style=flat-square
-[3]: https://npmjs.org/package/@commitlint/core/latest.svg
+[2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
+[3]: https://npmjs.org/package/@commitlint/cli
 [4]: https://img.shields.io/travis/marionebl/commitlint/master.svg?style=flat-square
 [5]: https://travis-ci.org/marionebl/commitlint
 [6]: https://img.shields.io/appveyor/ci/marionebl/commitlint/master.svg?style=flat-square
@@ -91,4 +91,4 @@ npm run build # run build tasks
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
 
-[10]: https://img.shields.io/npm/v/@commitlint/core/next.svg?style=flat-square
+[10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square

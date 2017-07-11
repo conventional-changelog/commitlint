@@ -13,3 +13,5 @@ echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint
 git add .
 commit
 ```
+
+A full usage guide is available at [docs/prompt](http://marionebl.github.io/commitlint/#/guides-use-prompt).
