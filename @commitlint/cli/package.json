@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Lint your commit messages",
   "bin": {
     "commitlint": "cli.js"
@@ -48,7 +48,7 @@
     "xo": "^0.18.2"
   },
   "dependencies": {
-    "@commitlint/core": "^3.0.0",
+    "@commitlint/core": "^3.0.1",
     "babel-polyfill": "^6.23.0",
     "chalk": "^2.0.1",
     "get-stdin": "^5.0.1",
