@@ -12,5 +12,3 @@
   * [CLI](reference-cli.md)
   * [Rules](reference-rules.md)
   * [API](reference-api.md)
-
-* [**Changelog**](changelog.md)
