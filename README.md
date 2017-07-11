@@ -58,10 +58,7 @@ A number of shared configurations are available to install and use with `commitl
 
 ## Related projects
 
-* [angular-precommit](https://git.io/vwTDd) – Pre commit with angular conventions
 * [conventional-changelog](https://git.io/v18sw) – Generate a changelog from conventional commit history
-* [conventional-commits-detector](https://git.io/vwTyk) – Detect what commit message convention your repository is using
-* [conventional-github-releaser](https://git.io/vwTyI) – Make a new GitHub release from git metadata
 * [commitizen](https://git.io/vwTym) – Simple commit conventions for internet citizens
 
 ## License
