@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.2"></a>
+## 3.0.2 (2017-07-11)
+
+
+### Bug Fixes
+
+* enable recursive relative extends ([4decd4d](https://github.com/marionebl/commitlint/commit/4decd4d))
+* ensure node4 compat ([bfeb653](https://github.com/marionebl/commitlint/commit/bfeb653))
+* **core:** ignore version commits with leading whitespace ([9551bd6](https://github.com/marionebl/commitlint/commit/9551bd6))
+* **core:** resolve extends relative to config file ([0dd18bc](https://github.com/marionebl/commitlint/commit/0dd18bc))
+* use conventional-changelog-angular again ([633d835](https://github.com/marionebl/commitlint/commit/633d835))
+
+
+### Features
+
+* **core:** do not prefix relative extends ([8fbbaed](https://github.com/marionebl/commitlint/commit/8fbbaed))
+* **core:** readd support for .conventional-changelog-lintrc ([02e4f43](https://github.com/marionebl/commitlint/commit/02e4f43))
+* **core:** support conventional-changelog-lint-config-* ([c80766b](https://github.com/marionebl/commitlint/commit/c80766b))
+
+
+
+
 <a name="3.0.1"></a>
 ## 3.0.1 (2017-07-11)
 

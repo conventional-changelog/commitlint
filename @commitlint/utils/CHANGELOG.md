@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.2"></a>
+## 3.0.2 (2017-07-11)
+
+
+### Bug Fixes
+
+* **utils:** better cross-version support ([856f3da](https://github.com/marionebl/commitlint/commit/856f3da))
+
+
+
+
 <a name="3.0.1"></a>
 ## 3.0.1 (2017-07-11)
 
