@@ -6,12 +6,6 @@ export default (parsed, when) => {
 
 	return [
 		negated ? notEmpty : !notEmpty,
-		[
-			'body',
-			negated ? 'may not' : 'must',
-			'be empty'
-		]
-		.filter(Boolean)
-		.join(' ')
+		['body', negated ? 'may not' : 'must', 'be empty'].filter(Boolean).join(' ')
 	];
 };

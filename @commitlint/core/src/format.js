@@ -4,17 +4,22 @@ const DEFAULT_SIGNS = [' ', '⚠', '✖'];
 const DEFAULT_COLORS = ['white', 'yellow', 'red'];
 
 export default function format(report = {}, options = {}) {
-	const {signs = DEFAULT_SIGNS, colors = DEFAULT_COLORS, color: enabled = true} = options;
+	const {
+		signs = DEFAULT_SIGNS,
+		colors = DEFAULT_COLORS,
+		color: enabled = true
+	} = options;
 	const {errors = [], warnings = []} = report;
 
-	const problems = [...errors, ...warnings]
-		.map(problem => {
-			const sign = signs[problem.level] || '';
-			const color = colors[problem.level] || 'white';
-			const decoration = enabled ? chalk[color](sign) : sign;
-			const name = enabled ? chalk.grey(`[${problem.name}]`) : `[${problem.name}]`;
-			return `${decoration}   ${problem.message} ${name}`;
-		});
+	const problems = [...errors, ...warnings].map(problem => {
+		const sign = signs[problem.level] || '';
+		const color = colors[problem.level] || 'white';
+		const decoration = enabled ? chalk[color](sign) : sign;
+		const name = enabled
+			? chalk.grey(`[${problem.name}]`)
+			: `[${problem.name}]`;
+		return `${decoration}   ${problem.message} ${name}`;
+	});
 
 	const sign = selectSign({errors, warnings});
 	const color = selectColor({errors, warnings});

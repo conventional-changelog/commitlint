@@ -18,7 +18,7 @@ export default (parsed, when, value) => {
 			negated ? `not` : null,
 			`be ${value}. Verbs in other tenses: ${offenders}`
 		]
-		.filter(Boolean)
-		.join(' ')
+			.filter(Boolean)
+			.join(' ')
 	];
 };

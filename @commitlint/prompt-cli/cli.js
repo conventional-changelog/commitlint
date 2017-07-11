@@ -11,12 +11,11 @@ const HELP = `
 const _ = undefined;
 const prompt = () => prompter(_, commit);
 
-main(meow(HELP))
-	.catch(err => {
-		setTimeout(() => {
-			throw err;
-		});
+main(meow(HELP)).catch(err => {
+	setTimeout(() => {
+		throw err;
 	});
+});
 
 function main() {
 	return prompt();

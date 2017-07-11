@@ -20,7 +20,5 @@ export default function getForcedCaseFn(rule) {
 		return noop;
 	}
 
-	return forcedCase === 'lowerCase' ?
-		lowerCase :
-		upperCase;
+	return forcedCase === 'lowerCase' ? lowerCase : upperCase;
 }

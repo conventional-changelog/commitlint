@@ -15,12 +15,8 @@ export default (parsed, when) => {
 
 	return [
 		negated ? !succeeds : succeeds,
-		[
-			'body',
-			negated ? 'may not' : 'must',
-			'have leading blank line'
-		]
-		.filter(Boolean)
-		.join(' ')
+		['body', negated ? 'may not' : 'must', 'have leading blank line']
+			.filter(Boolean)
+			.join(' ')
 	];
 };

@@ -6,7 +6,9 @@ export default (parsed, when, value) => {
 
 	const negated = when === 'never';
 	const ignored = [...ignoreConfig, ...parsed.notes.map(note => note.title)];
-	const {matches, offending} = ensureTense(parsed.footer, tenses, {ignored});
+	const {matches, offending} = ensureTense(parsed.footer, tenses, {
+		ignored
+	});
 	const offenders = offending
 		.map(item => [item.lemma, item.tense].join(' - '))
 		.join(',');
@@ -18,7 +20,7 @@ export default (parsed, when, value) => {
 			negated ? `not` : null,
 			`be ${value}. Verbs in other tenses: ${offenders}`
 		]
-		.filter(Boolean)
-		.join(' ')
+			.filter(Boolean)
+			.join(' ')
 	];
 };

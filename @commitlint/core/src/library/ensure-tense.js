@@ -32,10 +32,7 @@ export default (input, allowed, options = {}) => {
 	const tagged = getTags(lemmata);
 	const verbs = tagged.filter(tag => tag[1][0] === 'V');
 	const tags = allowed.reduce((registry, name) => {
-		return [
-			...registry,
-			...(tenses[name] || [])
-		];
+		return [...registry, ...(tenses[name] || [])];
 	}, []);
 
 	const offending = verbs
@@ -45,7 +42,8 @@ export default (input, allowed, options = {}) => {
 		})
 		.filter(verb => {
 			const [word] = verb;
-			return !(options.ignored || []).some(ignored => ignored.indexOf(word) > -1);
+			return !(options.ignored || [])
+				.some(ignored => ignored.indexOf(word) > -1);
 		})
 		.filter(Boolean)
 		.map(verb => {

@@ -12,12 +12,8 @@ export default (parsed, when, value) => {
 	const result = ensureCase(scope, value);
 	return [
 		negated ? !result : result,
-		[
-			`scope must`,
-			negated ? `not` : null,
-			`be ${value}`
-		]
-		.filter(Boolean)
-		.join(' ')
+		[`scope must`, negated ? `not` : null, `be ${value}`]
+			.filter(Boolean)
+			.join(' ')
 	];
 };

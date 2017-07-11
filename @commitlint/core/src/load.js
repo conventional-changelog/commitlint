@@ -7,7 +7,7 @@ import resolveFrom from 'resolve-from';
 import resolveExtends from './library/resolve-extends';
 import executeRule from './library/execute-rule';
 
-const w = (a, b) => Array.isArray(b) ? b : undefined;
+const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules');
 
 export default async (seed = {}) => {
@@ -27,24 +27,28 @@ export default async (seed = {}) => {
 	const preset = valid(mergeWith({}, extended, config, w));
 
 	// Execute rule config functions if needed
-	const executed = await Promise.all(['rules']
-		.map(key => {
-			return [key, preset[key]];
-		})
-		.map(async item => {
-			const [key, value] = item;
-			const executedValue = await Promise.all(
-				entries(value || {})
-					.map(entry => executeRule(entry))
-			);
-			return [key, executedValue.reduce((registry, item) => {
+	const executed = await Promise.all(
+		['rules']
+			.map(key => {
+				return [key, preset[key]];
+			})
+			.map(async item => {
 				const [key, value] = item;
-				return {
-					...registry,
-					[key]: value
-				};
-			}, {})];
-		}));
+				const executedValue = await Promise.all(
+					entries(value || {}).map(entry => executeRule(entry))
+				);
+				return [
+					key,
+					executedValue.reduce((registry, item) => {
+						const [key, value] = item;
+						return {
+							...registry,
+							[key]: value
+						};
+					}, {})
+				];
+			})
+	);
 
 	// Merge executed config keys into preset
 	return executed.reduce((registry, item) => {
@@ -64,11 +68,21 @@ function file() {
 	const raw = found ? importFrom(process.cwd(), './commitlint.config') : {};
 
 	if (legacyFound && !found) {
-		console.warn(`Using legacy ${path.relative(process.cwd(), legacy.config)}. Rename to commitlint.config.js to silence this warning.`);
+		console.warn(
+			`Using legacy ${path.relative(
+				process.cwd(),
+				legacy.config
+			)}. Rename to commitlint.config.js to silence this warning.`
+		);
 	}
 
 	if (legacyFound && found) {
-		console.warn(`Ignored legacy ${path.relative(process.cwd(), legacy.config)} as commitlint.config.js superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`);
+		console.warn(
+			`Ignored legacy ${path.relative(
+				process.cwd(),
+				legacy.config
+			)} as commitlint.config.js superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`
+		);
 	}
 
 	if (found) {

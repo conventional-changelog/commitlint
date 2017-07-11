@@ -5,7 +5,5 @@
  */
 export default function getRuleName(id) {
 	const fragments = id.split('-');
-	return fragments.length > 1 ?
-		fragments.slice(1).join('-') :
-		fragments[0];
+	return fragments.length > 1 ? fragments.slice(1).join('-') : fragments[0];
 }

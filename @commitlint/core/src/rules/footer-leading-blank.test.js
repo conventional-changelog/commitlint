@@ -8,7 +8,8 @@ const messages = {
 	trailing: 'chore: subject\nbody\n\n',
 	without: 'chore: subject\nbody\nBREAKING CHANGE: something important',
 	with: 'chore: subject\nbody\n\nBREAKING CHANGE: something important',
-	withMulitLine: 'chore: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
+	withMulitLine:
+		'chore: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
 };
 
 const parsed = {

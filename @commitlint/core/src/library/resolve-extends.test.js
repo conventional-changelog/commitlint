@@ -113,7 +113,10 @@ test('uses prefix key recursively', t => {
 		}
 	});
 
-	t.deepEqual(actual, ['prefix-extender-name', 'prefix-recursive-extender-name']);
+	t.deepEqual(actual, [
+		'prefix-extender-name',
+		'prefix-recursive-extender-name'
+	]);
 });
 
 test('propagates contents recursively', t => {
@@ -150,7 +153,12 @@ test('extending contents should take precedence', t => {
 				return {extends: ['recursive-extender-name'], zero: id, one: id};
 			}
 			if (id === 'recursive-extender-name') {
-				return {extends: ['second-recursive-extender-name'], zero: id, one: id, two: id};
+				return {
+					extends: ['second-recursive-extender-name'],
+					zero: id,
+					one: id,
+					two: id
+				};
 			}
 			if (id === 'second-recursive-extender-name') {
 				return {zero: id, one: id, two: id, three: id};

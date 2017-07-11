@@ -5,12 +5,16 @@ import {merge, omit} from 'lodash';
 // Resolve extend configs
 export default function resolveExtends(config = {}, context = {}) {
 	const {extends: e} = config;
-	const extended = loadExtends(config, context)
-		.reduceRight((r, c) => merge(r, omit(c, 'extends')), e ? {extends: e} : {});
+	const extended = loadExtends(config, context).reduceRight(
+		(r, c) => merge(r, omit(c, 'extends')),
+		e ? {extends: e} : {}
+	);
 
 	// Remove deprecation warning in version 3
 	if (typeof config === 'object' && 'wildcards' in config) {
-		console.warn(`'wildcards' found in top-level configuration ignored. Remove them from your config to silence this warning.`);
+		console.warn(
+			`'wildcards' found in top-level configuration ignored. Remove them from your config to silence this warning.`
+		);
 	}
 
 	return merge({}, extended, config);
@@ -25,7 +29,9 @@ function loadExtends(config = {}, context = {}) {
 
 		// Remove deprecation warning in version 3
 		if (typeof c === 'object' && 'wildcards' in c) {
-			console.warn(`'wildcards' found in '${raw}' ignored. To silence this warning raise an issue at 'npm repo ${raw}' to remove the wildcards.`);
+			console.warn(
+				`'wildcards' found in '${raw}' ignored. To silence this warning raise an issue at 'npm repo ${raw}' to remove the wildcards.`
+			);
 		}
 
 		const ctx = merge({}, context, {
@@ -40,7 +46,7 @@ function getId(raw = '', prefix = '') {
 	const first = raw.charAt(0);
 	const scoped = first === '@';
 	const relative = first === '.';
-	return (scoped || relative) ? raw : [prefix, raw].filter(String).join('-');
+	return scoped || relative ? raw : [prefix, raw].filter(String).join('-');
 }
 
 function resolveConfig(raw, context = {}) {
@@ -52,7 +58,9 @@ function resolveConfig(raw, context = {}) {
 	} catch (err) {
 		const legacy = getId(raw, 'conventional-changelog-lint-config');
 		const resolved = resolve(legacy, context);
-		console.warn(`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`);
+		console.warn(
+			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
+		);
 		return resolved;
 	}
 }

@@ -1,4 +1,5 @@
-import 'babel-polyfill';  // eslint-disable-line import/no-unassigned-import
+/* eslint-disable import/no-unassigned-import, import/prefer-default-export */
+import 'babel-polyfill';
 import vorpal from 'vorpal';
 import input from './input';
 
@@ -8,7 +9,7 @@ import input from './input';
  * @param {function} commit callback to execute with complete commit message
  * @return {string} genersated commit message
  */
-export const prompter = async (_, commit) => { // eslint-disable-line import/prefer-default-export
+export const prompter = async (_, commit) => {
 	const message = await input(vorpal);
 	commit(message);
 };

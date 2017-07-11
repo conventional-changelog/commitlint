@@ -84,24 +84,27 @@ test('uses appropriate signs by default', t => {
 });
 
 test('uses signs as configured', t => {
-	const [err, warn] = format({
-		errors: [
-			{
-				level: 2,
-				name: 'error-name',
-				message: 'There was an error'
-			}
-		],
-		warnings: [
-			{
-				level: 1,
-				name: 'warning-name',
-				message: 'There was a problem'
-			}
-		]
-	}, {
-		signs: ['HNT', 'WRN', 'ERR']
-	});
+	const [err, warn] = format(
+		{
+			errors: [
+				{
+					level: 2,
+					name: 'error-name',
+					message: 'There was an error'
+				}
+			],
+			warnings: [
+				{
+					level: 1,
+					name: 'warning-name',
+					message: 'There was a problem'
+				}
+			]
+		},
+		{
+			signs: ['HNT', 'WRN', 'ERR']
+		}
+	);
 
 	t.true(err.includes('ERR'));
 	t.true(warn.includes('WRN'));
@@ -131,24 +134,27 @@ test('uses appropriate colors by default', t => {
 
 if (process.platform !== 'win32') {
 	test('uses colors as configured', t => {
-		const [err, warn] = format({
-			errors: [
-				{
-					level: 2,
-					name: 'error-name',
-					message: 'There was an error'
-				}
-			],
-			warnings: [
-				{
-					level: 1,
-					name: 'warning-name',
-					message: 'There was a problem'
-				}
-			]
-		}, {
-			colors: ['white', 'magenta', 'blue']
-		});
+		const [err, warn] = format(
+			{
+				errors: [
+					{
+						level: 2,
+						name: 'error-name',
+						message: 'There was an error'
+					}
+				],
+				warnings: [
+					{
+						level: 1,
+						name: 'warning-name',
+						message: 'There was a problem'
+					}
+				]
+			},
+			{
+				colors: ['white', 'magenta', 'blue']
+			}
+		);
 
 		t.true(err.includes(blue.open));
 		t.true(warn.includes(magenta.open));

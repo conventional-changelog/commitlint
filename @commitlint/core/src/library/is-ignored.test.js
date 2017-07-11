@@ -14,7 +14,7 @@ test('should return false for normal commit', t => {
 });
 
 test('should return false for branch merges', t => {
-	t.true(isIgnored('Merge branch \'iss53\''));
+	t.true(isIgnored("Merge branch 'iss53'"));
 });
 
 test('should return true for merged PRs', t => {
@@ -22,8 +22,16 @@ test('should return true for merged PRs', t => {
 });
 
 test('should return true for revert commits', t => {
-	t.true(isIgnored(`Revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`));
-	t.true(isIgnored(`revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`));
+	t.true(
+		isIgnored(
+			`Revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	);
+	t.true(
+		isIgnored(
+			`revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	);
 });
 
 test('should return true for npm version commits', t => {

@@ -34,11 +34,11 @@ function getHistoryCommits(options) {
 	return new Promise((resolve, reject) => {
 		const data = [];
 		gitRawCommits(options)
-		.on('data', chunk => data.push(chunk.toString('utf-8')))
-		.on('error', reject)
-		.on('end', () => {
-			resolve(data);
-		});
+			.on('data', chunk => data.push(chunk.toString('utf-8')))
+			.on('error', reject)
+			.on('end', () => {
+				resolve(data);
+			});
 	});
 }
 

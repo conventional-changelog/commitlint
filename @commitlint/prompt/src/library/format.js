@@ -10,24 +10,25 @@ export default format;
  * @return {string}        formatted debug message
  */
 function format(input, debug = false) {
-	const results = debug ?
-		entries(input)
-			.reduce((registry, item) => {
+	const results = debug
+		? entries(input).reduce((registry, item) => {
 				const [name, value] = item;
 				return {
 					...registry,
-					[name]: value === null ?
-						chalk.grey(`<${name}>`) :
-						chalk.bold(value)
+					[name]: value === null ? chalk.grey(`<${name}>`) : chalk.bold(value)
 				};
-			}, {}) :
-		input;
+			}, {})
+		: input;
 
 	// Return formatted string
 	const {type, scope, subject, body, footer} = results;
 	return [
-		`${type}${scope ? '(' : ''}${scope}${scope ? ')' : ''}${type || scope ? ':' : ''} ${subject}`,
+		`${type}${scope ? '(' : ''}${scope}${scope ? ')' : ''}${type || scope
+			? ':'
+			: ''} ${subject}`,
 		body,
 		footer
-	].filter(Boolean).join('\n');
+	]
+		.filter(Boolean)
+		.join('\n');
 }

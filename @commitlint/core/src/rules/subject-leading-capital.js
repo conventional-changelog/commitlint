@@ -14,12 +14,8 @@ export default (parsed, when = 'always', value = 'uppercase') => {
 
 	return [
 		negated ? !result : result,
-		[
-			`message must`,
-			negated ? `not` : null,
-			`be ${value}`
-		]
-		.filter(Boolean)
-		.join(' ')
+		[`message must`, negated ? `not` : null, `be ${value}`]
+			.filter(Boolean)
+			.join(' ')
 	];
 };

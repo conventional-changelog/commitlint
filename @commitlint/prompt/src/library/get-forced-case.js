@@ -16,12 +16,8 @@ export default function getForcedCase(rule) {
 	}
 
 	if (negated) {
-		return value === 'lowerCase' ?
-			'upperCase' :
-			'lowerCase';
+		return value === 'lowerCase' ? 'upperCase' : 'lowerCase';
 	}
 
-	return value === 'lowerCase' ?
-		'lowerCase' :
-		'upperCase';
+	return value === 'lowerCase' ? 'lowerCase' : 'upperCase';
 }

@@ -8,7 +8,5 @@ import ruleIsActive from './rule-is-active';
  */
 export default function enumRuleIsActive(rule) {
 	const [, [, , value]] = rule;
-	return ruleIsActive(rule) &&
-		ruleIsApplicable(rule) &&
-		value.length > 0;
+	return ruleIsActive(rule) && ruleIsApplicable(rule) && value.length > 0;
 }

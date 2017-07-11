@@ -1,6 +1,7 @@
 module.exports = {
 	rules: {
-		'type-enum': [2,
+		'type-enum': [
+			2,
 			'always',
 			[
 				'build',

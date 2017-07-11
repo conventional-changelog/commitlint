@@ -15,7 +15,8 @@ const help = require('./help');
  * Behavioural rules
  */
 const rules = {
-	fromStdin: (input, flags) => input.length === 0 &&
+	fromStdin: (input, flags) =>
+		input.length === 0 &&
 		typeof flags.from !== 'string' &&
 		typeof flags.to !== 'string' &&
 		!flags.edit
@@ -54,10 +55,15 @@ const configuration = {
 	}
 };
 
-const cli = meow({
-	help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(configuration)}`,
-	description: `${pkg.name}@${pkg.version} - ${pkg.description}`
-}, configuration);
+const cli = meow(
+	{
+		help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(
+			configuration
+		)}`,
+		description: `${pkg.name}@${pkg.version} - ${pkg.description}`
+	},
+	configuration
+);
 
 const load = seed => core.load(seed);
 
@@ -70,28 +76,31 @@ function main(options) {
 	const input = fromStdin ? stdin() : core.read(range);
 	const fmt = new chalk.constructor({enabled: flags.color});
 
-	return input
-		.then(raw => Array.isArray(raw) ? raw : [raw])
-		.then(messages => Promise.all(messages.map(commit => {
-			return load(getSeed(flags))
-				.then(opts => core.lint(commit, opts.rules))
-				.then(report => {
-					const formatted = core.format(report, {color: flags.color});
+	return input.then(raw => (Array.isArray(raw) ? raw : [raw])).then(messages =>
+		Promise.all(
+			messages.map(commit => {
+				return load(getSeed(flags))
+					.then(opts => core.lint(commit, opts.rules))
+					.then(report => {
+						const formatted = core.format(report, {color: flags.color});
 
-					if (!flags.quiet) {
-						console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(commit.split('\n')[0])}`);
-						console.log(formatted.join('\n'));
-					}
+						if (!flags.quiet) {
+							console.log(
+								`${fmt.grey('⧗')}   input: ${fmt.bold(commit.split('\n')[0])}`
+							);
+							console.log(formatted.join('\n'));
+						}
 
-					if (report.errors.length > 0) {
-						const error = new Error(formatted[formatted.length - 1]);
-						error.type = pkg.name;
-						throw error;
-					}
-					return console.log('');
-				});
-		})
-	));
+						if (report.errors.length > 0) {
+							const error = new Error(formatted[formatted.length - 1]);
+							error.type = pkg.name;
+							throw error;
+						}
+						return console.log('');
+					});
+			})
+		)
+	);
 }
 
 function getSeed(seed) {
@@ -101,15 +110,14 @@ function getSeed(seed) {
 }
 
 // Start the engine
-main(cli)
-	.catch(err =>
-		setTimeout(() => {
-			if (err.type === pkg.name) {
-				process.exit(1);
-			}
-			throw err;
-		})
-	);
+main(cli).catch(err =>
+	setTimeout(() => {
+		if (err.type === pkg.name) {
+			process.exit(1);
+		}
+		throw err;
+	})
+);
 
 // Catch unhandled rejections globally
 process.on('unhandledRejection', (reason, promise) => {

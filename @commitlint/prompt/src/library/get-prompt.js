@@ -26,7 +26,9 @@ function getPrompt(type, context = {}) {
 	const prompt = prompter();
 
 	if (typeof prompt.removeAllListeners !== 'function') {
-		throw new TypeError('getPrompt: prompt.removeAllListeners is not a function');
+		throw new TypeError(
+			'getPrompt: prompt.removeAllListeners is not a function'
+		);
 	}
 
 	if (typeof prompt.command !== 'function') {
@@ -53,22 +55,17 @@ function getPrompt(type, context = {}) {
 		throw new TypeError('getPrompt: prompt.show is not a function');
 	}
 
-	const enumRule = rules
-		.filter(getHasName('enum'))
-		.filter(enumRuleIsActive)[0];
+	const enumRule = rules.filter(getHasName('enum')).filter(enumRuleIsActive)[0];
 
-	const emptyRule = rules
-		.filter(getHasName('empty'))[0];
+	const emptyRule = rules.filter(getHasName('empty'))[0];
 
-	const mustBeEmpty = emptyRule ?
-		emptyRule[1][0] > 0 &&
-		emptyRule[1][1] === 'always' :
-		false;
+	const mustBeEmpty = emptyRule
+		? emptyRule[1][0] > 0 && emptyRule[1][1] === 'always'
+		: false;
 
-	const mayNotBeEmpty = emptyRule ?
-		emptyRule[1][0] > 0 &&
-		emptyRule[1][1] === 'never' :
-		false;
+	const mayNotBeEmpty = emptyRule
+		? emptyRule[1][0] > 0 && emptyRule[1][1] === 'never'
+		: false;
 
 	const mayBeEmpty = !mayNotBeEmpty;
 
@@ -79,39 +76,33 @@ function getPrompt(type, context = {}) {
 		return Promise.resolve();
 	}
 
-	const caseRule = rules
-		.filter(getHasName('case'))[0];
+	const caseRule = rules.filter(getHasName('case'))[0];
 
 	const forcedCase = getForcedCase(caseRule);
 	const forceCaseFn = getForcedCaseFn(caseRule);
 
-	const leadingBlankRule = rules
-		.filter(getHasName('leading-blank'))[0];
+	const leadingBlankRule = rules.filter(getHasName('leading-blank'))[0];
 
 	const forceLeadingBlankFn = getForcedLeadingFn(leadingBlankRule);
 
-	const maxLenghtRule = rules
-		.filter(getHasName('max-length'))[0];
+	const maxLenghtRule = rules.filter(getHasName('max-length'))[0];
 
 	const hasMaxLength = maxLenghtRule && maxLenghtRule[1][0] > 0;
 
-	const inputMaxLength = hasMaxLength ?
-		maxLenghtRule[1][1] :
-		Infinity;
+	const inputMaxLength = hasMaxLength ? maxLenghtRule[1][1] : Infinity;
 
-	const headerLength = settings.header ?
-		settings.header.length :
-		Infinity;
+	const headerLength = settings.header ? settings.header.length : Infinity;
 
-	const remainingHeaderLength = headerLength ?
-		headerLength - [
-			results.type,
-			results.scope,
-			results.scope ? '()' : '',
-			results.type && results.scope ? ':' : '',
-			results.subject
-		].join('').length :
-		Infinity;
+	const remainingHeaderLength = headerLength
+		? headerLength -
+			[
+				results.type,
+				results.scope,
+				results.scope ? '()' : '',
+				results.type && results.scope ? ':' : '',
+				results.subject
+			].join('').length
+		: Infinity;
 
 	const maxLength = Math.min(inputMaxLength, remainingHeaderLength);
 
@@ -132,14 +123,12 @@ function getPrompt(type, context = {}) {
 					});
 			});
 		} else {
-			prompt
-				.catch('[text...]')
-				.action(parameters => {
-					const {text = ''} = parameters;
-					prompt.removeAllListeners();
-					prompt.ui.redraw.done();
-					return resolve(forceLeadingBlankFn(forceCaseFn(text.join(' '))));
-				});
+			prompt.catch('[text...]').action(parameters => {
+				const {text = ''} = parameters;
+				prompt.removeAllListeners();
+				prompt.ui.redraw.done();
+				return resolve(forceLeadingBlankFn(forceCaseFn(text.join(' '))));
+			});
 		}
 
 		if (mayBeEmpty) {
@@ -166,7 +155,11 @@ function getPrompt(type, context = {}) {
 			}
 
 			if (mayBeEmpty) {
-				prompt.ui.log(chalk.blue(`ℹ Enter ${chalk.bold(':skip')} to omit ${chalk.bold(type)}.`));
+				prompt.ui.log(
+					chalk.blue(
+						`ℹ Enter ${chalk.bold(':skip')} to omit ${chalk.bold(type)}.`
+					)
+				);
 			}
 
 			if (enumRule) {
@@ -220,14 +213,16 @@ function getPrompt(type, context = {}) {
 		prompt.addListener('keypress', onKey);
 		prompt.addListener('client_prompt_submit', onSubmit);
 
-		prompt.log(`\n\nPlease enter a ${chalk.bold(type)}: ${meta({
-			optional: !mayNotBeEmpty,
-			required: mayNotBeEmpty,
-			'tab-completion': typeof enumRule !== 'undefined',
-			header: typeof settings.header !== 'undefined',
-			case: forcedCase,
-			'multi-line': settings.multiline
-		})}`);
+		prompt.log(
+			`\n\nPlease enter a ${chalk.bold(type)}: ${meta({
+				optional: !mayNotBeEmpty,
+				required: mayNotBeEmpty,
+				'tab-completion': typeof enumRule !== 'undefined',
+				header: typeof settings.header !== 'undefined',
+				case: forcedCase,
+				'multi-line': settings.multiline
+			})}`
+		);
 
 		if (settings.description) {
 			prompt.log(chalk.grey(`${settings.description}\n`));
@@ -237,8 +232,6 @@ function getPrompt(type, context = {}) {
 
 		drawRemaining(maxLength);
 
-		prompt
-			.delimiter(`❯ ${type}:`)
-			.show();
+		prompt.delimiter(`❯ ${type}:`).show();
 	});
 }

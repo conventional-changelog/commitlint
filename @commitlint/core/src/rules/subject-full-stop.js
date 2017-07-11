@@ -10,12 +10,8 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !hasStop : hasStop,
-		[
-			'message',
-			negated ? 'may not' : 'must',
-			'end with full stop'
-		]
-		.filter(Boolean)
-		.join(' ')
+		['message', negated ? 'may not' : 'must', 'end with full stop']
+			.filter(Boolean)
+			.join(' ')
 	];
 };

@@ -10,16 +10,14 @@ function pathToId(root, filePath) {
 function getPatternIDs() {
 	const root = path.resolve(process.cwd(), './patterns');
 	const glob = path.resolve(root, '**/pattern.json');
-	return globby(glob)
-		.then(results => results.map(result => pathToId(root, result)));
+	return globby(glob).then(results =>
+		results.map(result => pathToId(root, result))
+	);
 }
 
-module.exports = merge(
-	require('@commitlint/config-angular'),
-	{
-		rules: {
-			'scope-enum': () => getPatternIDs()
-				.then(ids => [2, 'always', ids.concat(['system'])])
-		}
+module.exports = merge(require('@commitlint/config-angular'), {
+	rules: {
+		'scope-enum': () =>
+			getPatternIDs().then(ids => [2, 'always', ids.concat(['system'])])
 	}
-);
+});

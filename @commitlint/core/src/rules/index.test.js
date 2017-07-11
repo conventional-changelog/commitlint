@@ -20,9 +20,7 @@ async function glob(pattern) {
 		ignore: ['**/index.js', '**/*.test.js'],
 		cwd: __dirname
 	});
-	return files
-		.map(relative)
-		.map(toExport);
+	return files.map(relative).map(toExport);
 }
 
 function relative(filePath) {

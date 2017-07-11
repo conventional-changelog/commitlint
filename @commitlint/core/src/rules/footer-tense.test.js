@@ -27,37 +27,49 @@ test('with empty footer should succeed', async t => {
 });
 
 test('with present footer should succeed for "always present-imperative"', async t => {
-	const [actual] = footerTense(await parsed.presentImperative, 'always', ['present-imperative']);
+	const [actual] = footerTense(await parsed.presentImperative, 'always', [
+		'present-imperative'
+	]);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with present footer should fail for "never present-imperative"', async t => {
-	const [actual] = footerTense(await parsed.presentImperative, 'never', ['present-imperative']);
+	const [actual] = footerTense(await parsed.presentImperative, 'never', [
+		'present-imperative'
+	]);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with present footer should succeed for "always present-participle"', async t => {
-	const [actual] = footerTense(await parsed.presentParticiple, 'always', ['present-participle']);
+	const [actual] = footerTense(await parsed.presentParticiple, 'always', [
+		'present-participle'
+	]);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with present footer should fail for "never present-participle"', async t => {
-	const [actual] = footerTense(await parsed.presentParticiple, 'never', ['present-participle']);
+	const [actual] = footerTense(await parsed.presentParticiple, 'never', [
+		'present-participle'
+	]);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with present footer should succeed for "always present-third-person"', async t => {
-	const [actual] = footerTense(await parsed.presentThirdPerson, 'always', ['present-third-person']);
+	const [actual] = footerTense(await parsed.presentThirdPerson, 'always', [
+		'present-third-person'
+	]);
 	const expected = true;
 	t.is(actual, expected);
 });
 
 test('with present footer should fail for "never present-third-person"', async t => {
-	const [actual] = footerTense(await parsed.presentThirdPerson, 'never', ['present-third-person']);
+	const [actual] = footerTense(await parsed.presentThirdPerson, 'never', [
+		'present-third-person'
+	]);
 	const expected = false;
 	t.is(actual, expected);
 });
@@ -75,19 +87,25 @@ test('with past footer should fail for "never past-tense"', async t => {
 });
 
 test('with mixed footer should fail for "always present-third-person"', async t => {
-	const [actual] = footerTense(await parsed.mixed, 'always', ['present-third-person']);
+	const [actual] = footerTense(await parsed.mixed, 'always', [
+		'present-third-person'
+	]);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with mixed footer should fail for "always present-imperative"', async t => {
-	const [actual] = footerTense(await parsed.mixed, 'always', ['present-imperative']);
+	const [actual] = footerTense(await parsed.mixed, 'always', [
+		'present-imperative'
+	]);
 	const expected = false;
 	t.is(actual, expected);
 });
 
 test('with present footer should fail for "always present-participle"', async t => {
-	const [actual] = footerTense(await parsed.mixed, 'always', ['present-participle']);
+	const [actual] = footerTense(await parsed.mixed, 'always', [
+		'present-participle'
+	]);
 	const expected = false;
 	t.is(actual, expected);
 });
@@ -99,7 +117,12 @@ test('with mixed footer should fail for "always past-tense"', async t => {
 });
 
 test('with mixed footer should succeed for "always present-third-person, present-imperative, present-participle, past-tense"', async t => {
-	const [actual] = footerTense(await parsed.mixed, 'always', ['present-third-person', 'present-imperative', 'present-participle', 'past-tense']);
+	const [actual] = footerTense(await parsed.mixed, 'always', [
+		'present-third-person',
+		'present-imperative',
+		'present-participle',
+		'past-tense'
+	]);
 	const expected = true;
 	t.is(actual, expected);
 });

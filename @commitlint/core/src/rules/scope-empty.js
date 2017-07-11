@@ -5,12 +5,8 @@ export default (parsed, when = 'never') => {
 	const notEmpty = ensureNotEmpty(parsed.scope);
 	return [
 		negated ? !notEmpty : notEmpty,
-		[
-			'scope',
-			negated ? 'must' : 'may not',
-			'be empty'
-		]
-		.filter(Boolean)
-		.join(' ')
+		['scope', negated ? 'must' : 'may not', 'be empty']
+			.filter(Boolean)
+			.join(' ')
 	];
 };

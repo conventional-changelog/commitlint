@@ -12,12 +12,8 @@ export default (parsed, when, value) => {
 	const result = ensureCase(body, value);
 	return [
 		negated ? !result : result,
-		[
-			`body must`,
-			negated ? `not` : null,
-			`be ${value}`
-		]
-		.filter(Boolean)
-		.join(' ')
+		[`body must`, negated ? `not` : null, `be ${value}`]
+			.filter(Boolean)
+			.join(' ')
 	];
 };

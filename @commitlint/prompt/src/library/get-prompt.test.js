@@ -6,11 +6,15 @@ test('throws without params', t => {
 });
 
 test('throws with incompatible prompter', t => {
-	t.throws(() => getPrompt('type', {
-		prompter() {
-			return {};
-		}
-	}), /prompt.removeAllListeners/);
+	t.throws(
+		() =>
+			getPrompt('type', {
+				prompter() {
+					return {};
+				}
+			}),
+		/prompt.removeAllListeners/
+	);
 });
 
 test('returns input unaltered wihtout rules', async t => {

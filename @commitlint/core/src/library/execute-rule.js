@@ -3,7 +3,7 @@ export default async entry => {
 		return null;
 	}
 	const [name, config] = entry;
-	return typeof config === 'function' ?
-		[name, await config()] :
-		[name, await config];
+	return typeof config === 'function'
+		? [name, await config()]
+		: [name, await config];
 };

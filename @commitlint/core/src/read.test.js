@@ -71,7 +71,9 @@ test.serial('get history commit messages from shallow clone', async t => {
 	t.context.repos = [...t.context.repos, clone];
 
 	const err = await t.throws(read({from: 'master'}));
-	t.true(err.message.indexOf('Could not get git history from shallow clone') > -1);
+	t.true(
+		err.message.indexOf('Could not get git history from shallow clone') > -1
+	);
 });
 
 async function initRepository() {

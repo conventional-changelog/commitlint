@@ -12,12 +12,8 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !result : result,
-		[
-			`scope must`,
-			negated ? `not` : null,
-			`be one of [${value.join(', ')}]`
-		]
-		.filter(Boolean)
-		.join(' ')
+		[`scope must`, negated ? `not` : null, `be one of [${value.join(', ')}]`]
+			.filter(Boolean)
+			.join(' ')
 	];
 };

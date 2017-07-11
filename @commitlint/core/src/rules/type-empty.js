@@ -5,12 +5,6 @@ export default (parsed, when) => {
 	const notEmpty = ensureNotEmpty(parsed.type);
 	return [
 		negated ? notEmpty : !notEmpty,
-		[
-			'type',
-			negated ? 'may not' : 'must',
-			'be empty'
-		]
-		.filter(Boolean)
-		.join(' ')
+		['type', negated ? 'may not' : 'must', 'be empty'].filter(Boolean).join(' ')
 	];
 };

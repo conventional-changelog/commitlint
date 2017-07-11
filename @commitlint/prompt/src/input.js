@@ -26,36 +26,40 @@ async function input(prompter) {
 
 	const {rules} = await load();
 
-	await Promise.all(['type', 'scope', 'subject', 'body', 'footer']
-		.map(throat(1, async input => {
-			const inputRules = getRules(input, rules);
-			const inputSettings = settings[input];
+	await Promise.all(
+		['type', 'scope', 'subject', 'body', 'footer'].map(
+			throat(1, async input => {
+				const inputRules = getRules(input, rules);
+				const inputSettings = settings[input];
 
-			const isHeader = ['type', 'scope', 'subject'].indexOf(input) > -1;
+				const isHeader = ['type', 'scope', 'subject'].indexOf(input) > -1;
 
-			const headerLengthRule = getRules('header', rules)
-				.filter(getHasName('max-length'))[0];
+				const headerLengthRule = getRules('header', rules).filter(
+					getHasName('max-length')
+				)[0];
 
-			if (isHeader && headerLengthRule) {
-				const [, [severity, applicable, length]] = headerLengthRule;
-				if (severity > 0 && applicable === 'always') {
-					inputSettings.header = {
-						length
-					};
+				if (isHeader && headerLengthRule) {
+					const [, [severity, applicable, length]] = headerLengthRule;
+					if (severity > 0 && applicable === 'always') {
+						inputSettings.header = {
+							length
+						};
+					}
 				}
-			}
 
-			results[input] = await getPrompt(input, { // eslint-disable-line no-await-in-loop
-				rules: inputRules,
-				settings: inputSettings,
-				results,
-				prompter
-			});
-		})))
-		.catch(err => {
-			console.error(err);
-			return '';
-		});
+				results[input] = await getPrompt(input, {
+					// eslint-disable-line no-await-in-loop
+					rules: inputRules,
+					settings: inputSettings,
+					results,
+					prompter
+				});
+			})
+		)
+	).catch(err => {
+		console.error(err);
+		return '';
+	});
 
 	// Return the results
 	return format(results);
@@ -69,9 +73,7 @@ async function input(prompter) {
 function getRulePrefix(id) {
 	const fragments = id.split('-');
 	const [prefix] = fragments;
-	return fragments.length > 1 ?
-		prefix :
-		null;
+	return fragments.length > 1 ? prefix : null;
 }
 
 /**

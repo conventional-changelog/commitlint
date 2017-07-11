@@ -12,7 +12,7 @@ export default (parsed, when, value) => {
 			negated ? 'may not' : 'must',
 			`be in languague "${value}", was one of: ${detected.join(', ')}`
 		]
-		.filter(Boolean)
-		.join(' ')
+			.filter(Boolean)
+			.join(' ')
 	];
 };
