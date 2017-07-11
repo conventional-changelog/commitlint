@@ -4,7 +4,7 @@
 
 ## Install
 
-```sh
+```bash
 # Create a git repository if needed
 git init
 
@@ -30,7 +30,7 @@ To make prompt-cli easy to use, add a npm run-script to your `package.json`
 
 Test the prompt by executing
 
-```sh
+```bash
 git add .
 npm run commit
 ```

@@ -2,13 +2,13 @@
 
 ## Installation
 
-```shell
+```bash
 npm install --save-dev @commitlint/cli
 ```
 
 ## Usage
 
-```shell
+```bash
 ❯ commitlint --help
   commitlint - Lint commit messages
 

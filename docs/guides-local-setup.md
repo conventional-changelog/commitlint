@@ -9,7 +9,7 @@ This guide demonstrates how to achieve this via git hooks.
 Install `commitlint` and a `commitlint-config-*` of your choice as devDependency and 
 configure `commitlint` to use it.
 
-```sh
+```bash
 # Create a package.json if needed
 npm init
 
@@ -22,7 +22,7 @@ echo "module.exports = {extends: ['@commitlint/config-angular']};"
 
 Install `husky` as devDependency, a handy git hook helper available on npm.
 
-```sh
+```bash
 npm install --save-dev husky
 ```
 
@@ -42,7 +42,7 @@ Using `commitmsg` gives us exactly what we want: It is executed everytime a new 
 
 You can test the hook by simple commiting. You should see something like this if everything works.
 
-```
+```bash
 git commit -m "foo: this will fail"
 husky > npm run -s commitmsg
 

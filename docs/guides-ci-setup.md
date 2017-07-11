@@ -6,7 +6,7 @@ Enforce commit conventions with confidence by linting on your CI servers with `c
 
 ## Install
 
-```sh
+```bash
 # Create a git repository if needed
 git init
 
@@ -22,7 +22,7 @@ echo "module.exports = {extends: ['@commitlint/config-angular']};"
 
 Add a `.travis.yml` to your project root
 
-```yml
+```yaml
 # .travis.yml
 language: node_js
 before_install: git fetch --unshallow
@@ -34,14 +34,14 @@ script:
 Make sure Travis is connected to your git repository. 
 Trigger a build by pushing to your repository.
 
-```
+```bash
 git add .
 git commit -m "add travis stuff"
 ```
 
 We expect this build to fail:
 
-```
+```yaml
 ...
 ./node_modules/.bin/commitlint --from=HEAD~1
 ⧗   input: add travis stuff
@@ -57,7 +57,7 @@ Let's change that by using environment information provided by TravisCI.
 
 Every build exposes the commit that triggered the build via `TRAVIS_COMMIT`.
 
-```yml
+```yaml
 # .travis.yml
 language: node_js
 before_install: git fetch --unshallow
@@ -68,7 +68,7 @@ script:
 
 That's a bit better, but we are not handling branches at all yet. Travis provides the branch we are on via `TRAVIS_BRANCH`.
 
-```yml
+```yaml
 # .travis.yml
 language: node_js
 before_install: git fetch --unshallow
@@ -84,7 +84,7 @@ Nice. This handles direct commits and PR originating from the same repository. L
 
 We'll have to differentiate between forks and same-repo PRs on our own and move the linting to a dedicated script. 
 
-```yml
+```yaml
 # .travis.yml
 language: node_js
 before_install: git fetch --unshallow
@@ -94,7 +94,7 @@ script:
   - npm test
 ```
 
-```sh
+```bash
 # lint-commits.sh
 #!/bin/bash
 set -e

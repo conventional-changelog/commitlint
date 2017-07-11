@@ -2,7 +2,7 @@
 
 ## Version 1 to 2
 
-```sh
+```bash
 npm install --save-dev conventional-changelog-lint@latest
 ```
 
@@ -22,7 +22,7 @@ npm install --save-dev conventional-changelog-lint@latest
 
 ## Version 2 to 3
 
-```sh
+```bash
 npm remove --save-dev conventional-changelog-lint
 npm install --save commitlint
 mv .conventional-changelog-lintrc .commitlintrc

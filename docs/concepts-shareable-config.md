@@ -12,7 +12,7 @@ module.exports = {
 
 This causes `commitlint` to pick up `commitlint-config-example`. Make it available by installing it.
 
-```
+```bash
 npm install --save-dev commitlint-config-example
 ```
 

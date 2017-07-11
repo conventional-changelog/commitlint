@@ -12,19 +12,19 @@
 
 ## Install
 
-```sh
+```bash
 npm install -g @commitlint/cli @commitlint/config-angular
 ```
 
 ## Configure
 
-```
+```bash
 echo "module.exports = {extends: [@commitlint/config-angular']}" > .commitlint.config.js
 ```
 
 ## Test
 
-```
+```bash
 # Lint from stdin
 echo 'foo: bar' | commitlint
 ⧗   input: foo: bar
