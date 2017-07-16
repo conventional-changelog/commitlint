@@ -1,8 +1,11 @@
 > Lint commit messages
 
+![commitlint demo](http://marionebl.github.io/commitlint/assets/commitlint.svg)
+
 # commitlint
 
 [![npm latest][2]][3] [![npm next][10]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
+
 
 *  🚓  Enforce commit conventions
 *  🤖  Plays nice with `conventional-changelog`
