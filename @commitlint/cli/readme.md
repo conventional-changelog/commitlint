@@ -1,5 +1,9 @@
 > Lint commit messages
 
+<center>
+  <img width="750" height="466" src="https://marionebl.github.io/commitlint/assets/commitlint.svg">
+</center>
+
 # @commitlint/cli
 
 ## Getting started
