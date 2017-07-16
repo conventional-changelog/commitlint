@@ -1,8 +1,8 @@
 > Lint commit messages
 
-<center>
+<p align="center">
   <img width="750" height="466" src="https://marionebl.github.io/commitlint/assets/commitlint.svg">
-</center>
+</p>
 
 # commitlint
 
