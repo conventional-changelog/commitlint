@@ -1,0 +1,12 @@
+
+  Render frames of Asciicasts as SVGs.
+
+  Usage:
+  	asciicast-to-svg
+
+  Options:
+  	--animate
+
+  Examples:
+  	cat asciicast.json | asciicast-to-svg
+  	asciicast-to-svg < asciicast.json

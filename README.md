@@ -1,6 +1,6 @@
 > Lint commit messages
 
-![commitlint demo](http://marionebl.github.io/commitlint/assets/commitlint.svg)
+![commitlint demo](https://marionebl.github.io/commitlint/assets/commitlint.svg)
 
 # commitlint
 
