@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-patternplate",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Lint your commits, patternplate-style",
   "scripts": {
     "pretest": "dep-check",
@@ -25,11 +25,11 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "dependencies": {
-    "@commitlint/config-angular": "^3.0.2",
+    "@commitlint/config-angular": "^3.0.3",
     "globby": "^4.0.0",
     "lodash": "^4.5.1"
   },
   "devDependencies": {
-    "@commitlint/utils": "^3.0.2"
+    "@commitlint/utils": "^3.0.3"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "commitizen prompt using .commitlintrc",
   "main": "./lib/index.js",
   "scripts": {
@@ -90,7 +90,7 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^3.0.2",
+    "@commitlint/utils": "^3.0.3",
     "ava": "^0.20.0",
     "babel-cli": "^6.24.1",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -103,7 +103,7 @@
     "throat": "^4.1.0"
   },
   "dependencies": {
-    "@commitlint/core": "^3.0.2",
+    "@commitlint/core": "^3.0.3",
     "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.23.0",
     "chalk": "^1.1.1",
