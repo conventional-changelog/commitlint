@@ -10,14 +10,14 @@
 
 
 *  🚓  Enforce commit conventions
-*  🤖  Plays nice with `conventional-changelog`
+*  🤖  Plays nicely with `conventional-changelog`
 *  📦  Supports shareable configuration
 
 ## Getting started
 
-```
+```sh
 npm install --save-dev @commitlint/{angular,cli}
-echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
+echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.config.js
 ```
 
 ## CLI
@@ -28,7 +28,7 @@ echo '{"extends": ["@commitlint/config-angular"]}' > .commitlintrc
 
 ## Config
 
-* Configuration is picked up from `.commitlint` files
+* Configuration is picked up from `commitlint.config.js` files
 * Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 * See [Rules](./docs/rules) for a complete list of possible rules
 * An example configurations can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)

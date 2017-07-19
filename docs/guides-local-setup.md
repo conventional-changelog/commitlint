@@ -1,12 +1,12 @@
 # Guide: Local setup
 
-Get high commit message quality and short feedback cycles by linting commit messages right when they are authored. 
+Get high commit message quality and short feedback cycles by linting commit messages right when they are authored.
 
 This guide demonstrates how to achieve this via git hooks.
 
 ## Install commitlint
 
-Install `commitlint` and a `commitlint-config-*` of your choice as devDependency and 
+Install `commitlint` and a `commitlint-config-*` of your choice as devDependency and
 configure `commitlint` to use it.
 
 ```bash
@@ -15,7 +15,7 @@ npm init
 
 # Install and configure if needed
 npm install --save-dev @commitlint-{cli,angular}
-echo "module.exports = {extends: ['@commitlint/config-angular']};"
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
 ## Install husky
@@ -26,7 +26,7 @@ Install `husky` as devDependency, a handy git hook helper available on npm.
 npm install --save-dev husky
 ```
 
-This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/HOOKS.md#hooks) directly into our `package.json` scripts. 
+This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/HOOKS.md#hooks) directly into our `package.json` scripts.
 
 ```json
 {

@@ -1,4 +1,4 @@
-# Guide: CI Setup 
+# Guide: CI Setup
 
 Enforce commit conventions with confidence by linting on your CI servers with `commitlint`.
 
@@ -15,7 +15,7 @@ npm init
 
 # Install and configure if needed
 npm install --save-dev @commitlint-{cli,angular}
-echo "module.exports = {extends: ['@commitlint/config-angular']};"
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
 ## First test run with Travis
@@ -31,7 +31,7 @@ script:
   - npm test
 ```
 
-Make sure Travis is connected to your git repository. 
+Make sure Travis is connected to your git repository.
 Trigger a build by pushing to your repository.
 
 ```bash
@@ -53,7 +53,7 @@ We expect this build to fail:
 ## Linting relevant commits
 
 What we did so far works but is not very useful as it simply lints the last commit in history.
-Let's change that by using environment information provided by TravisCI. 
+Let's change that by using environment information provided by TravisCI.
 
 Every build exposes the commit that triggered the build via `TRAVIS_COMMIT`.
 
@@ -78,11 +78,11 @@ script:
   - npm test
 ```
 
-Nice. This handles direct commits and PR originating from the same repository. Let's add forks to the mix. 
+Nice. This handles direct commits and PR originating from the same repository. Let's add forks to the mix.
 
 ## The full scripts
 
-We'll have to differentiate between forks and same-repo PRs on our own and move the linting to a dedicated script. 
+We'll have to differentiate between forks and same-repo PRs on our own and move the linting to a dedicated script.
 
 ```yaml
 # .travis.yml

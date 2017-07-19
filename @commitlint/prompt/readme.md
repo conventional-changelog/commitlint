@@ -1,4 +1,4 @@
-> commitizen adapter using .commitlintrc
+> commitizen adapter using commitlint.config.js
 
 # @commitlint/prompt
 
@@ -10,7 +10,7 @@ Learn how to use it at [docs/prompt](http://marionebl.github.io/commitlint/#/gui
 
 ```bash
 npm install --save @commitlint/prompt @commitlint/config-angular commitizen
-echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
 In package.json

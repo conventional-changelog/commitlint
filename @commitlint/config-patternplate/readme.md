@@ -7,7 +7,7 @@ Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 ## Getting started
 ```sh
 npm install --save-dev @commitlint/config-patternplate @commitlint/cli
-echo "module.exports = {extends: ['@commitlint/config-patternplate']};" > .commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-patternplate']};" > commitlint.config.js
 ```
 
 ## Rules
