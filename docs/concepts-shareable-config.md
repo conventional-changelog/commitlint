@@ -1,6 +1,6 @@
 # Concept: Shareable configuration
 
-Most commonly shareable configuration is delivered as npm package exporting 
+Most commonly shareable configuration is delivered as npm package exporting
 an object containing `.rules` as default. To use shared configuration you specify it as item in the `.extends` array:
 
 ```js
@@ -25,7 +25,7 @@ This works recursively, enabling shareable configuration to extend on an indefin
 Scoped npm packages are not prefixed.
 
 ```js
-// .commitlint.config.js
+// commitlint.config.js
 module.exports = {
   extends: ['@commitlint/config-angular'] // => @commitlint/config-angular
 };
@@ -34,7 +34,7 @@ module.exports = {
 The same is true for relative imports
 
 ```js
-// .commitlint
+// commitlint.config.js
 module.expors = {
   extends: ['./example'] // => ./example.js
 }

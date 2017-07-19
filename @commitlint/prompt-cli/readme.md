@@ -1,4 +1,4 @@
-> commit prompt using .commitlintrc
+> commit prompt using commitlint.config.js
 
 # @commitlint/prompt-cli
 
@@ -6,7 +6,7 @@
 
 ```bash
 npm install --g @commitlint/prompt-cli @commitlint/config-angular
-echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
 ```bash

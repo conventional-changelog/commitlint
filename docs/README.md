@@ -37,7 +37,7 @@ npm install -g @commitlint/cli @commitlint/config-angular
 ## Configure
 
 ```bash
-echo "module.exports = {extends: [@commitlint/config-angular']}" > .commitlint.config.js
+echo "module.exports = {extends: [@commitlint/config-angular']}" > commitlint.config.js
 ```
 
 ## Test

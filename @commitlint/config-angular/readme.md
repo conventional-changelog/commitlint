@@ -9,7 +9,7 @@ Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ```sh
 npm install --save-dev @commitlint/config-angular @commitlint/cli
-echo "module.exports = {extends: ['@commitlint/config-angular']};" > .commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
 ## Rules

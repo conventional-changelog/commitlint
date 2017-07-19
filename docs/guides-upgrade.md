@@ -25,7 +25,7 @@ npm install --save-dev conventional-changelog-lint@latest
 ```bash
 npm remove --save-dev conventional-changelog-lint
 npm install --save commitlint
-mv .conventional-changelog-lintrc .commitlintrc
+mv .conventional-changelog-lintrc commitlint.config.js
 ```
 
 * Rename all calls to `conventional-changelog-lint` to `commitlint`
