@@ -263,6 +263,3 @@ Rule configurations are either of type `array` residing on a key with the rule's
 ```js
   0
 ```
-
----
-Copyright 2016 by [Mario Nebl](https://github.com/marionebl) and [contributors](./graphs/contributors). Released under the [MIT license]('../license.md').
