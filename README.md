@@ -30,7 +30,7 @@ echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.c
 
 * Configuration is picked up from `commitlint.config.js` files
 * Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
-* See [Rules](./docs/reference-rules) for a complete list of possible rules
+* See [Rules](./docs/reference-rules.md) for a complete list of possible rules
 * An example configurations can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)
 
 ## Shared configurations
@@ -49,7 +49,7 @@ A number of shared configurations are available to install and use with `commitl
 * Alternative, programatic way to interact with `commitlint`
 * `npm install --save @commitlint/core`
 * Packages: [core](./@commitlint/core)
-* See [API](./docs/reference-api) for a complete list of methods and examples
+* See [API](./docs/reference-api.md) for a complete list of methods and examples
 
 ## Tools
 
