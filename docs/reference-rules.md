@@ -264,18 +264,5 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
-
-### Wildcards
-The following rules identify commits that pass linting by skipping all other rules.
-
-#### merge
-* **condition**: `header` matches `pattern`
-
-#### release
-* **condition**: `header` matches `pattern`
-
-#### revert
-* **condition**: `header` matches `pattern`
-
 ---
 Copyright 2016 by [Mario Nebl](https://github.com/marionebl) and [contributors](./graphs/contributors). Released under the [MIT license]('../license.md').
