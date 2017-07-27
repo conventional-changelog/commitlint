@@ -16,7 +16,7 @@
 ## Getting started
 
 ```sh
-npm install --save-dev @commitlint/{angular,cli}
+npm install --save-dev @commitlint/{config-angular,cli}
 echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.config.js
 ```
 
