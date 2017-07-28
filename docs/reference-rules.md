@@ -263,3 +263,11 @@ Rule configurations are either of type `array` residing on a key with the rule's
 ```js
   0
 ```
+
+#### signed-off-by
+* **condition**: `message` has `value`
+* **rule**: `always`
+* **value**
+```js
+  'Signed-off-by:'
+```

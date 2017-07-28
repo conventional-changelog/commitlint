@@ -18,6 +18,7 @@ export default {
 	'scope-enum': require('./scope-enum'),
 	'scope-max-length': require('./scope-max-length'),
 	'scope-min-length': require('./scope-min-length'),
+	'signed-off-by': require('./signed-off-by'),
 	'subject-case': require('./subject-case'),
 	'subject-empty': require('./subject-empty'),
 	'subject-full-stop': require('./subject-full-stop'),
