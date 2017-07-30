@@ -1,4 +1,5 @@
 import ensureCase from '../library/ensure-case';
+import message from '../library/message';
 
 export default (parsed, when, value) => {
 	const {body} = parsed;
@@ -12,8 +13,6 @@ export default (parsed, when, value) => {
 	const result = ensureCase(body, value);
 	return [
 		negated ? !result : result,
-		[`body must`, negated ? `not` : null, `be ${value}`]
-			.filter(Boolean)
-			.join(' ')
+		message([`body must`, negated ? `not` : null, `be ${value}`])
 	];
 };

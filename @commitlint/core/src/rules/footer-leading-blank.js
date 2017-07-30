@@ -1,4 +1,5 @@
 import toLines from '../library/to-lines';
+import message from '../library/message';
 
 export default (parsed, when) => {
 	// Flunk if no footer is found
@@ -14,8 +15,6 @@ export default (parsed, when) => {
 
 	return [
 		negated ? !succeeds : succeeds,
-		['footer', negated ? 'may not' : 'must', 'have leading blank line']
-			.filter(Boolean)
-			.join(' ')
+		message(['footer', negated ? 'may not' : 'must', 'have leading blank line'])
 	];
 };

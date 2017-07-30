@@ -1,4 +1,5 @@
 import ensureEnum from '../library/ensure-enum';
+import message from '../library/message';
 
 export default (parsed, when, value) => {
 	if (!parsed.scope) {
@@ -10,8 +11,10 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !result : result,
-		[`scope must`, negated ? `not` : null, `be one of [${value.join(', ')}]`]
-			.filter(Boolean)
-			.join(' ')
+		message([
+			`scope must`,
+			negated ? `not` : null,
+			`be one of [${value.join(', ')}]`
+		])
 	];
 };
