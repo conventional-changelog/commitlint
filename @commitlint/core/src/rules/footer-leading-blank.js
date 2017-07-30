@@ -1,3 +1,5 @@
+import toLines from '../library/to-lines';
+
 export default (parsed, when) => {
 	// Flunk if no footer is found
 	if (!parsed.footer) {
@@ -5,13 +7,7 @@ export default (parsed, when) => {
 	}
 
 	const negated = when === 'never';
-
-	const count = (parsed.body || '').split(/\r|\n/).length;
-
-	// Get complete message split into lines
-	const lines = (parsed.raw || '').split(/\r|\n/).slice(count + 1);
-
-	const [leading] = lines;
+	const [leading] = toLines(parsed.raw).slice(toLines(parsed.body).length + 1);
 
 	// Check if the first line of footer is empty
 	const succeeds = leading === '';

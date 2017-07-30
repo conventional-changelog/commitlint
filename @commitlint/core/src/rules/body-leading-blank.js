@@ -1,3 +1,5 @@
+import toLines from '../library/to-lines';
+
 export default (parsed, when) => {
 	// Flunk if no body is found
 	if (!parsed.body) {
@@ -5,10 +7,7 @@ export default (parsed, when) => {
 	}
 
 	const negated = when === 'never';
-
-	// Get complete body split into lines
-	const lines = (parsed.raw || '').split(/\r|\n/).slice(1);
-	const [leading] = lines;
+	const [leading] = toLines(parsed.raw).slice(1);
 
 	// Check if the first line of body is empty
 	const succeeds = leading === '';
