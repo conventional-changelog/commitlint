@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "clean": "lerna clean -- --yes && lerna run clean",
+    "clean": "lerna clean --yes && lerna run clean",
     "commit": "./@commitlint/prompt-cli/cli.js",
     "commitmsg": "./@commitlint/cli/cli.js -e",
     "docs": "docsify serve docs",
