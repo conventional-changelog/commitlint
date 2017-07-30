@@ -1,3 +1,5 @@
+import message from '../library/message';
+
 export default (parsed, when, value) => {
 	const input = parsed.subject;
 
@@ -10,8 +12,6 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !hasStop : hasStop,
-		['message', negated ? 'may not' : 'must', 'end with full stop']
-			.filter(Boolean)
-			.join(' ')
+		message(['message', negated ? 'may not' : 'must', 'end with full stop'])
 	];
 };

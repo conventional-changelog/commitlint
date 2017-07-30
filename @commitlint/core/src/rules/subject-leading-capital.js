@@ -1,5 +1,6 @@
 // TODO
 // * rename this to "subject-first-character"
+import message from '../library/message';
 import ensureCase from '../library/ensure-case';
 
 export default (parsed, when = 'always', value = 'uppercase') => {
@@ -14,8 +15,6 @@ export default (parsed, when = 'always', value = 'uppercase') => {
 
 	return [
 		negated ? !result : result,
-		[`message must`, negated ? `not` : null, `be ${value}`]
-			.filter(Boolean)
-			.join(' ')
+		message([`message must`, negated ? `not` : null, `be ${value}`])
 	];
 };

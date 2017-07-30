@@ -1,4 +1,5 @@
 import ensureCase from '../library/ensure-case';
+import message from '../library/message';
 
 export default (parsed, when, value) => {
 	const {subject} = parsed;
@@ -12,8 +13,6 @@ export default (parsed, when, value) => {
 	const result = ensureCase(subject, value);
 	return [
 		negated ? !result : result,
-		[`subject must`, negated ? `not` : null, `be ${value}`]
-			.filter(Boolean)
-			.join(' ')
+		message([`subject must`, negated ? `not` : null, `be ${value}`])
 	];
 };

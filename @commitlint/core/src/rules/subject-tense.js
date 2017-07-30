@@ -1,4 +1,5 @@
 import ensureTense from '../library/ensure-tense';
+import message from '../library/message';
 
 export default (parsed, when, value) => {
 	const tenses = Array.isArray(value) ? value : value.allowed || [];
@@ -15,12 +16,10 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !matches : matches,
-		[
+		message([
 			`tense of subject must`,
 			negated ? `not` : null,
 			`be ${value}. Verbs in other tenses: ${offenders}`
-		]
-			.filter(Boolean)
-			.join(' ')
+		])
 	];
 };

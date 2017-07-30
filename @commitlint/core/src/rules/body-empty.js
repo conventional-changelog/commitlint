@@ -1,4 +1,5 @@
 import ensureNotEmpty from '../library/ensure-not-empty';
+import message from '../library/message';
 
 export default (parsed, when) => {
 	const negated = when === 'never';
@@ -6,6 +7,6 @@ export default (parsed, when) => {
 
 	return [
 		negated ? notEmpty : !notEmpty,
-		['body', negated ? 'may not' : 'must', 'be empty'].filter(Boolean).join(' ')
+		message(['body', negated ? 'may not' : 'must', 'be empty'])
 	];
 };

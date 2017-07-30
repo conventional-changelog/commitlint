@@ -1,4 +1,5 @@
 import toLines from '../library/to-lines';
+import message from '../library/message';
 
 export default (parsed, when, value) => {
 	const lines = toLines(parsed.raw).filter(Boolean);
@@ -9,8 +10,6 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !hasSignedOffBy : hasSignedOffBy,
-		['message', negated ? 'must not' : 'must', 'be signed off']
-			.filter(Boolean)
-			.join(' ')
+		message(['message', negated ? 'must not' : 'must', 'be signed off'])
 	];
 };
