@@ -1,8 +1,11 @@
+import toLines from '../library/to-lines';
+
 export default (parsed, when, value) => {
-	const input = /.*\n(Signed-off-by:).*\n+/g.exec(parsed.raw);
+	const lines = toLines(parsed.raw).filter(Boolean);
+	const last = lines[lines.length - 1];
 
 	const negated = when === 'never';
-	const hasSignedOffBy = Boolean(input && input[1] === value);
+	const hasSignedOffBy = last.startsWith(value);
 
 	return [
 		negated ? !hasSignedOffBy : hasSignedOffBy,
