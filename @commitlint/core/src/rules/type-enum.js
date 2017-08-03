@@ -14,7 +14,7 @@ export default (parsed, when, value) => {
 	return [
 		negated ? !result : result,
 		message([
-			`scope must`,
+			`type must`,
 			negated ? `not` : null,
 			`be one of [${value.join(', ')}]`
 		])
