@@ -46,7 +46,7 @@ test('should succeed for input from stdin without rules', async t => {
 
 test('should fail for input from stdin with rule from rc', async t => {
 	const actual = await t.throws(cli('foo: bar', [], {cwd: SIMPLE}));
-	t.true(actual.stdout.includes('scope must not be one of [foo]'));
+	t.true(actual.stdout.includes('type must not be one of [foo]'));
 	t.is(actual.code, 1);
 });
 
@@ -54,7 +54,7 @@ test('should fail for input from stdin with rule from js', async t => {
 	const actual = await t.throws(
 		cli('foo: bar', ['--extends', './extended'], {cwd: EXTENDS_ROOT})
 	);
-	t.true(actual.stdout.includes('scope must not be one of [foo]'));
+	t.true(actual.stdout.includes('type must not be one of [foo]'));
 	t.is(actual.code, 1);
 });
 
