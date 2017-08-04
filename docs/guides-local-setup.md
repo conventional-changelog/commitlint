@@ -47,7 +47,7 @@ git commit -m "foo: this will fail"
 husky > npm run -s commitmsg
 
 ⧗   input: foo: this will fail
-✖   scope must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
+✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
 ✖   found 1 problems, 0 warnings
 
 husky > commit-msg hook failed (add --no-verify to bypass)

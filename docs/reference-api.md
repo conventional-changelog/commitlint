@@ -195,15 +195,15 @@ lint(message: string, rules: {[ruleName: string]: Rule}) => Promise<Report>;
 const {lint} = require('@commitlint/core');
 
 lint('foo: bar')
-  .then(report => console.log(report)); 
+  .then(report => console.log(report));
   // => { valid: true, errors: [], warnings: [] }
 
 lint('foo: bar', {'type-enum': [1, 'always', ['foo']]})
-  .then(report => console.log(report)); 
+  .then(report => console.log(report));
   // => { valid: true, errors: [], warnings: [] }
 
 lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
-  .then(report => console.log(report)); 
+  .then(report => console.log(report));
   /* =>
     { valid: true,
       errors: [],
@@ -211,7 +211,7 @@ lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
       [ { level: 1,
           valid: false,
           name: 'type-enum',
-          message: 'scope must be one of [bar]' } ] }
+          message: 'type must be one of [bar]' } ] }
   */
 ```
 
@@ -225,7 +225,7 @@ const CONFIG = {
 };
 
 load(CONFIG)
-  .then(opts =>lint('foo: bar', opts.rules)) 
+  .then(opts =>lint('foo: bar', opts.rules))
   .then(report => console.log(report));
   /* =>
     { valid: false,
@@ -233,8 +233,8 @@ load(CONFIG)
       [ { level: 2,
           valid: false,
           name: 'type-enum',
-          message: 'scope must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]' } ],
-      warnings: [] } 
+          message: 'type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]' } ],
+      warnings: [] }
     */
 ```
 
