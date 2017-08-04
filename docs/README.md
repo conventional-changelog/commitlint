@@ -46,7 +46,7 @@ echo "module.exports = {extends: [@commitlint/config-angular']}" > commitlint.co
 # Lint from stdin
 echo 'foo: bar' | commitlint
 ⧗   input: foo: bar
-✖   scope must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
+✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
 ✖   found 1 problems, 0 warnings
 
 # Lint last commit from history
