@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Lint your commit messages",
   "bin": {
     "commitlint": "cli.js"
@@ -40,7 +40,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^3.1.0",
+    "@commitlint/utils": "^3.1.1",
     "ava": "^0.18.2",
     "dependency-check": "^2.9.1",
     "execa": "^0.7.0",
@@ -48,7 +48,7 @@
     "xo": "^0.18.2"
   },
   "dependencies": {
-    "@commitlint/core": "^3.1.0",
+    "@commitlint/core": "^3.1.1",
     "babel-polyfill": "^6.23.0",
     "chalk": "^2.0.1",
     "get-stdin": "^5.0.1",
