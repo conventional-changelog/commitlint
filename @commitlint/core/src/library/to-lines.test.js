@@ -5,7 +5,7 @@ test('should return an array for empty input', t => {
 	t.deepEqual(toLines(), []);
 });
 
-test.failing('should return an array for null input', t => {
+test('should return an array for null input', t => {
 	t.deepEqual(toLines(null), []);
 });
 
