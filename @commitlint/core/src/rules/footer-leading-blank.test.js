@@ -78,13 +78,13 @@ test('with trailing message should succeed for "always"', async t => {
 	t.is(actual, expected);
 });
 
-test.failing('without body should succeed for "never"', async t => {
+test('without body should fail for "never"', async t => {
 	const [actual] = footerLeadingBlank(await parsed.withoutBody, 'never');
-	const expected = true;
+	const expected = false;
 	t.is(actual, expected);
 });
 
-test.failing('without body should succeed for "always"', async t => {
+test('without body should succeed for "always"', async t => {
 	const [actual] = footerLeadingBlank(await parsed.withoutBody, 'always');
 	const expected = true;
 	t.is(actual, expected);
