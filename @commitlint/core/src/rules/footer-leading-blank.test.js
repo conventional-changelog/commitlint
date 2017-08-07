@@ -7,6 +7,8 @@ const messages = {
 	body: 'chore: subject\nbody',
 	trailing: 'chore: subject\nbody\n\n',
 	without: 'chore: subject\nbody\nBREAKING CHANGE: something important',
+	withoutBody:
+		'feat(new-parser): introduces a new parsing library\n\nBREAKING CHANGE: new library does not support foo-construct',
 	with: 'chore: subject\nbody\n\nBREAKING CHANGE: something important',
 	withMulitLine:
 		'chore: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
@@ -17,6 +19,7 @@ const parsed = {
 	body: parse(messages.body),
 	trailing: parse(messages.trailing),
 	without: parse(messages.without),
+	withoutBody: parse(messages.withoutBody),
 	with: parse(messages.with),
 	withMulitLine: parse(messages.withMulitLine)
 };
@@ -71,6 +74,18 @@ test('with trailing message should succeed for "never"', async t => {
 
 test('with trailing message should succeed for "always"', async t => {
 	const [actual] = footerLeadingBlank(await parsed.trailing, 'always');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test.failing('without body should succeed for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withoutBody, 'never');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test.failing('without body should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withoutBody, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
