@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.1.2"></a>
+## 3.1.2 (2017-08-07)
+
+
+
+<a name="3.1.1"></a>
+## 3.1.1 (2017-08-07)
+
+
+
+<a name="3.0.4"></a>
+## 3.0.4 (2017-08-04)
+
+
+### Bug Fixes
+
+* **core:** correct type validation message ([09c2b26](https://github.com/marionebl/commitlint/commit/09c2b26))
+
+
+
+<a name="3.0.3"></a>
+## 3.0.3 (2017-07-16)
+
+
+
+<a name="3.0.2"></a>
+## 3.0.2 (2017-07-11)
+
+
+### Bug Fixes
+
+* **cli:** remove destructuring for node 4 support ([fe8caff](https://github.com/marionebl/commitlint/commit/fe8caff))
+* ensure node4 compat ([bfeb653](https://github.com/marionebl/commitlint/commit/bfeb653))
+
+
+
+
 <a name="3.0.4"></a>
 ## 3.0.4 (2017-08-04)
 
