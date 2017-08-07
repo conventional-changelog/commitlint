@@ -10,7 +10,7 @@ export default (parsed, when, value) => {
 		message([
 			'commit',
 			negated ? 'may not' : 'must',
-			`be in languague "${value}", was one of: ${detected.join(', ')}`
+			`be in language "${value}", was one of: ${detected.join(', ')}`
 		])
 	];
 };
