@@ -9,9 +9,9 @@
 [![npm latest][2]][3] [![npm next][10]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
 
 
-*  🚓  Enforce commit conventions
-*  🤖  Plays nicely with `conventional-changelog`
-*  📦  Supports shareable configuration
+*  🚓  Be a good `commitizen`
+*  📦  Share configuration via `npm`
+*  🤖  Tap into `conventional-changelog` 
 
 ## Getting started
 
@@ -31,9 +31,9 @@ echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.c
 * Configuration is picked up from `commitlint.config.js` files
 * Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 * See [Rules](./docs/reference-rules.md) for a complete list of possible rules
-* An example configurations can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)
+* An example configuration can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)
 
-## Shared configurations
+## Shared configuration
 
 A number of shared configurations are available to install and use with `commitlint`:
 
