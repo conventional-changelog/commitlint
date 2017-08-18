@@ -54,7 +54,7 @@ commitlint --from=HEAD~1
 ```
 
 
-?> To get the most out of `commitlint` you'll want to autmate its use in your project lifecycle. See our [Local setup guide](./guides-local-setup?id=guide-local-setup) for next steps.
+?> To get the most out of `commitlint` you'll want to automate it in your project lifecycle. See our [Local setup guide](./guides-local-setup?id=guide-local-setup) for next steps.
 
 ## Documentation
 
