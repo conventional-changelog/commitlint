@@ -4,7 +4,8 @@
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "watch": "babel src --out-dir lib --watch  --source-maps",
     "clean": "rimraf lib",
     "commit": "git-cz",
     "pretest": "dep-check",
@@ -24,26 +25,6 @@
     ]
   },
   "babel": {
-    "env": {
-      "development": {
-        "sourceMaps": "inline",
-        "plugins": [
-          "add-module-exports",
-          [
-            "transform-runtime",
-            {
-              "polyfill": false,
-              "regenerator": true
-            }
-          ]
-        ]
-      },
-      "production": {
-        "ignore": [
-          "**/*.test.js"
-        ]
-      }
-    },
     "presets": [
       [
         "env",
@@ -52,8 +33,7 @@
             "node": 4
           }
         }
-      ],
-      "stage-0"
+      ]
     ],
     "plugins": [
       "add-module-exports",
@@ -96,7 +76,6 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
     "commitizen": "^2.9.6",
     "cross-env": "^5.0.1",

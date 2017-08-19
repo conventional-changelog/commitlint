@@ -6,7 +6,8 @@
   "scripts": {
     "pretest": "dep-check",
     "test": "ava -c 4",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+    "watch": "babel src --out-dir lib --watch --source-maps",
     "clean": "rimraf lib",
     "prepublish": "npm run build"
   },
@@ -31,7 +32,6 @@
         "sourceMaps": "inline",
         "plugins": [
           "add-module-exports",
-          "istanbul",
           [
             "transform-runtime",
             {
@@ -39,11 +39,6 @@
               "regenerator": true
             }
           ]
-        ]
-      },
-      "production": {
-        "ignore": [
-          "**/*.test.js"
         ]
       }
     },
@@ -55,8 +50,7 @@
             "node": 4
           }
         }
-      ],
-      "stage-0"
+      ]
     ],
     "plugins": [
       "add-module-exports",
@@ -106,11 +100,11 @@
     "ava": "0.18.2",
     "babel-cli": "^6.18.0",
     "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-istanbul": "4.1.3",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-env": "^1.2.1",
-    "babel-preset-stage-0": "^6.16.0",
     "babel-register": "6.24.1",
     "conventional-changelog-cli": "1.2.0",
     "conventional-recommended-bump": "0.3.0",
