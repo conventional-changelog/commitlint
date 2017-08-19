@@ -1,7 +1,7 @@
-import {join} from 'path';
+import path from 'path';
 import exists from 'path-exists';
+import up from 'find-up';
 import gitRawCommits from 'git-raw-commits';
-import gitToplevel from 'git-toplevel';
 import {readFile} from 'mz/fs';
 
 export default getCommitMessages;
@@ -45,16 +45,38 @@ function getHistoryCommits(options) {
 // Check if the current repository is shallow
 // () => Promise<Boolean>
 async function isShallow() {
-	const top = await gitToplevel();
-	const shallow = join(top, '.git/shallow');
+	const top = await toplevel();
+
+	if (typeof top !== 'string') {
+		throw new TypeError(`Could not find git root - is this a git repository?`);
+	}
+
+	const shallow = path.join(top, '.git/shallow');
 	return exists(shallow);
 }
 
 // Get recently edited commit message
 // () => Promise<Array<String>>
 async function getEditCommit() {
-	const top = await gitToplevel();
-	const editFilePath = join(top, '.git/COMMIT_EDITMSG');
+	const top = await toplevel();
+
+	if (typeof top !== 'string') {
+		throw new TypeError(`Could not find git root - is this a git repository?`);
+	}
+
+	const editFilePath = path.join(top, '.git/COMMIT_EDITMSG');
 	const editFile = await readFile(editFilePath);
 	return [`${editFile.toString('utf-8')}\n`];
+}
+
+// Find the next git root
+// (start: string) => Promise<string | null>
+async function toplevel(cwd = process.cwd()) {
+	const found = await up('.git', {cwd});
+
+	if (typeof found !== 'string') {
+		return found;
+	}
+
+	return path.join(found, '..');
 }

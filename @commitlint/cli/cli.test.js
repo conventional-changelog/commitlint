@@ -108,7 +108,7 @@ test('should work with husky commitmsg hook', async () => {
 	await rm([HUSKY])();
 });
 
-test.failing('should work with husky commitmsg hook in sub packages', async () => {
+test('should work with husky commitmsg hook in sub packages', async () => {
 	const cwd = HUSKY_INTEGRATION;
 	const upper = path.dirname(HUSKY_INTEGRATION);
 
@@ -123,12 +123,7 @@ test.failing('should work with husky commitmsg hook in sub packages', async () =
 	await npm(['install', 'husky'], {cwd})();
 	await git(['add', 'package.json'], {cwd})();
 
-	try {
-		await git(['commit', '-m', '"chore: this should work"'], {cwd})();
-	} catch (err) {
-		console.log(err.stderr);
-		throw err;
-	}
+	await git(['commit', '-m', '"chore: this should work"'], {cwd})();
 
 	await rm([upper])();
 });
