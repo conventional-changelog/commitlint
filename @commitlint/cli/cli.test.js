@@ -95,11 +95,8 @@ test('should produce no error output with -q flag', async t => {
 test('should work with husky commitmsg hook', async () => {
 	const cwd = HUSKY;
 
-	await git(['init'], {cwd})();
-	await git(['config', 'user.email', '"commitlint@gitub.com"'])();
-	await git(['config', 'user.name', '"commitlint"'])();
-
-	await sander.writeFile(cwd, 'package.json', JSON.stringify({scripts: {commitmsg: `${CLI} -e`}}));
+	await init(cwd);
+	await pkg(cwd);
 
 	await npm(['install', 'husky'], {cwd})();
 	await git(['add', 'package.json'], {cwd})();
@@ -113,12 +110,8 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 	const upper = path.dirname(HUSKY_INTEGRATION);
 
 	await mkdir([cwd])();
-
-	await git(['init'], {cwd: upper})();
-	await git(['config', 'user.email', '"commitlint@gitub.com"'])();
-	await git(['config', 'user.name', '"commitlint"'])();
-
-	await sander.writeFile(cwd, 'package.json', JSON.stringify({scripts: {commitmsg: `${CLI} -e`}}));
+	await init(upper);
+	await pkg(cwd);
 
 	await npm(['install', 'husky'], {cwd})();
 	await git(['add', 'package.json'], {cwd})();
@@ -127,3 +120,16 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 
 	await rm([upper])();
 });
+
+async function init(cwd) {
+	await git(['init'], {cwd})();
+
+	return Promise.all([
+		git(['config', 'user.email', '"commitlint@gitub.com"'], {cwd})(),
+		git(['config', 'user.name', '"commitlint"'], {cwd})()
+	]);
+}
+
+function pkg(cwd) {
+	return sander.writeFile(cwd, 'package.json', JSON.stringify({scripts: {commitmsg: `${CLI} -e`}}));
+}
