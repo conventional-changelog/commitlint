@@ -22,46 +22,11 @@
     ],
     "babel": "inherit",
     "require": [
-      "babel-register",
-      "babel-polyfill"
+      "babel-register"
     ]
   },
   "babel": {
-    "env": {
-      "development": {
-        "sourceMaps": "inline",
-        "plugins": [
-          "add-module-exports",
-          [
-            "transform-runtime",
-            {
-              "polyfill": false,
-              "regenerator": true
-            }
-          ]
-        ]
-      }
-    },
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": 4
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      "add-module-exports",
-      [
-        "transform-runtime",
-        {
-          "polyfill": false,
-          "regenerator": true
-        }
-      ]
-    ]
+    "presets": ["babel-preset-commitlint"]
   },
   "xo": false,
   "nyc": {
@@ -99,20 +64,11 @@
     "ansi-styles": "3.1.0",
     "ava": "0.18.2",
     "babel-cli": "^6.18.0",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-plugin-async-to-promises": "^1.0.5",
-    "babel-plugin-istanbul": "4.1.3",
-    "babel-plugin-transform-runtime": "6.23.0",
-    "babel-polyfill": "^6.20.0",
-    "babel-preset-env": "^1.2.1",
+    "babel-preset-commitlint": "^3.1.3",
     "babel-register": "6.24.1",
-    "conventional-changelog-cli": "1.2.0",
-    "conventional-recommended-bump": "0.3.0",
     "cross-env": "^5.0.1",
-    "cz-conventional-changelog-lint": "0.1.3",
     "denodeify": "1.2.1",
     "dependency-check": "2.7.0",
-    "eslint-plugin-flow-check": "1.1.1",
     "execa": "0.6.3",
     "globby": "6.1.0",
     "has-ansi": "3.0.0",

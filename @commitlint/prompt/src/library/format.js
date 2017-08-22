@@ -13,10 +13,8 @@ function format(input, debug = false) {
 	const results = debug
 		? entries(input).reduce((registry, item) => {
 				const [name, value] = item;
-				return {
-					...registry,
-					[name]: value === null ? chalk.grey(`<${name}>`) : chalk.bold(value)
-				};
+				registry[name] = value === null ? chalk.grey(`<${name}>`) : chalk.bold(value)
+				return registry;
 			}, {})
 		: input;
 
