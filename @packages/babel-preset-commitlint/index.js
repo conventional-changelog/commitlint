@@ -16,7 +16,7 @@ function preset() {
 	return {
 		env: {
 			development: {
-				plugins: [...plugins, istanbul]
+				plugins: plugins.concat([istanbul])
 			}
 		},
 		plugins,
