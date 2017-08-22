@@ -10,6 +10,16 @@ test('returns an object', t => {
 	t.is(typeof preset(), 'object');
 });
 
-test('does not throw for a simple babel transformation', t => {
+test('succeeds for a simple babel transformation', t => {
 	t.notThrows(() => babel.transform('code();', preset));
+});
+
+test('produces valid values in plugins', t => {
+	const config = preset();
+	t.true(config.plugins.every(plugin => {
+		if (Array.isArray(plugin)) {
+			return typeof plugin[0] === 'function';
+		}
+		return typeof plugin === 'function';
+	}));
 });

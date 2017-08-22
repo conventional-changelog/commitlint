@@ -1,5 +1,5 @@
-const addModuleExports = require('babel-plugin-add-module-exports').default;
-const fastAsync = require('fast-async').default;
+const addModuleExports = require('babel-plugin-add-module-exports');
+const fastAsync = require('fast-async');
 const istanbul = require('babel-plugin-istanbul').default;
 const transformRuntime = require('babel-plugin-transform-runtime').default;
 const env = require('babel-preset-env').default;
