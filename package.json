@@ -9,7 +9,6 @@
     "commit": "./@commitlint/prompt-cli/cli.js",
     "commitmsg": "./@commitlint/cli/cli.js -e",
     "docs": "docsify serve docs",
-    "lerna": "lerna",
     "postinstall": "lerna bootstrap",
     "precommit": "lint-staged",
     "pretest": "xo",

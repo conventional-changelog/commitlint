@@ -41,10 +41,8 @@ export default async (seed = {}) => {
 					key,
 					executedValue.reduce((registry, item) => {
 						const [key, value] = item;
-						return {
-							...registry,
-							[key]: value
-						};
+						registry[key] = value;
+						return registry;
 					}, {})
 				];
 			})
@@ -53,10 +51,8 @@ export default async (seed = {}) => {
 	// Merge executed config keys into preset
 	return executed.reduce((registry, item) => {
 		const [key, value] = item;
-		return {
-			...registry,
-			[key]: value
-		};
+		registry[key] = value;
+		return registry;
 	}, preset);
 };
 

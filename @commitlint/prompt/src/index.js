@@ -1,5 +1,4 @@
 /* eslint-disable import/no-unassigned-import, import/prefer-default-export */
-import 'babel-polyfill';
 import vorpal from 'vorpal';
 import input from './input';
 

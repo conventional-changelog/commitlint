@@ -2,6 +2,7 @@ import test from 'ava';
 import hasAnsi from 'has-ansi';
 import chalk from 'chalk';
 import {yellow, red, magenta, blue} from 'ansi-styles';
+import {includes} from 'lodash';
 import format from './format';
 
 const ok = chalk.bold(`${chalk.green('✔')}   found 0 problems, 0 warnings`);
@@ -43,9 +44,9 @@ test('returns a correct of empty .errors and .warnings', t => {
 		]
 	});
 
-	t.true(err.includes('There was an error'));
-	t.true(prob.includes('There was a problem'));
-	t.true(msg.includes('1 problems, 1 warnings'));
+	t.true(includes(err, 'There was an error'));
+	t.true(includes(prob, 'There was a problem'));
+	t.true(includes(msg, '1 problems, 1 warnings'));
 });
 
 test('colors messages by default', t => {
@@ -79,8 +80,8 @@ test('uses appropriate signs by default', t => {
 		]
 	});
 
-	t.true(err.includes('✖'));
-	t.true(warn.includes('⚠'));
+	t.true(includes(err, '✖'));
+	t.true(includes(warn, '⚠'));
 });
 
 test('uses signs as configured', t => {
@@ -106,8 +107,8 @@ test('uses signs as configured', t => {
 		}
 	);
 
-	t.true(err.includes('ERR'));
-	t.true(warn.includes('WRN'));
+	t.true(includes(err, 'ERR'));
+	t.true(includes(warn, 'WRN'));
 });
 
 test('uses appropriate colors by default', t => {
@@ -128,8 +129,8 @@ test('uses appropriate colors by default', t => {
 		]
 	});
 
-	t.true(err.includes(red.open));
-	t.true(warn.includes(yellow.open));
+	t.true(includes(err, red.open));
+	t.true(includes(warn, yellow.open));
 });
 
 if (process.platform !== 'win32') {
@@ -156,7 +157,7 @@ if (process.platform !== 'win32') {
 			}
 		);
 
-		t.true(err.includes(blue.open));
-		t.true(warn.includes(magenta.open));
+		t.true(includes(err, blue.open));
+		t.true(includes(warn, magenta.open));
 	});
 }
