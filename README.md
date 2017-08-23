@@ -11,7 +11,7 @@
 
 *  🚓  Be a good `commitizen`
 *  📦  Share configuration via `npm`
-*  🤖  Tap into `conventional-changelog` 
+*  🤖  Tap into `conventional-changelog`
 
 ## Getting started
 
@@ -58,7 +58,7 @@ A number of shared configurations are available to install and use with `commitl
 
 ## Version Support
 
-* Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) version and higher: `>= 4`
+* Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 4.8`
 * git `>= 2`
 
 ## Related projects

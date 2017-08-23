@@ -22,10 +22,9 @@ function preset() {
 		plugins,
 		presets: [
 			[env, {
+				debug: process.env.DEBUG === 'true',
 				exclude: ['transform-regenerator', 'transform-async-to-generator'],
-				include: ['es7.array.includes'],
-				target: {node: 4},
-				useBuiltins: true
+				targets: {node: '4.8'}
 			}]
 		],
 	};
