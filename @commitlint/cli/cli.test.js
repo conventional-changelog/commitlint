@@ -1,6 +1,7 @@
 import path from 'path';
 import test from 'ava';
 import execa from 'execa';
+import {includes} from 'lodash';
 import {sync as bin} from 'resolve-bin';
 import * as sander from 'sander';
 import stream from 'string-to-stream';
@@ -44,7 +45,7 @@ test('should throw when called without [input]', t => {
 
 test('should reprint input from stdin', async t => {
 	const actual = await cli([], {cwd: EMPTY})('foo: bar');
-	t.true(actual.stdout.includes('foo: bar'));
+	t.true(includes(actual.stdout, 'foo: bar'));
 });
 
 test('should produce no success output with --quiet flag', async t => {
@@ -66,7 +67,7 @@ test('should succeed for input from stdin without rules', async t => {
 
 test('should fail for input from stdin with rule from rc', async t => {
 	const actual = await t.throws(cli([], {cwd: SIMPLE})('foo: bar'));
-	t.true(actual.stdout.includes('type must not be one of [foo]'));
+	t.true(includes(actual.stdout, 'type must not be one of [foo]'));
 	t.is(actual.code, 1);
 });
 
@@ -74,7 +75,7 @@ test('should fail for input from stdin with rule from js', async t => {
 	const actual = await t.throws(
 		cli(['--extends', './extended'], {cwd: EXTENDS_ROOT})('foo: bar')
 	);
-	t.true(actual.stdout.includes('type must not be one of [foo]'));
+	t.true(includes(actual.stdout, 'type must not be one of [foo]'));
 	t.is(actual.code, 1);
 });
 

@@ -23,6 +23,7 @@ function preset() {
 		presets: [
 			[env, {
 				exclude: ['transform-regenerator', 'transform-async-to-generator'],
+				include: ['es7.array.includes'],
 				target: {node: 4},
 				useBuiltins: true
 			}]
