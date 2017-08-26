@@ -17,8 +17,10 @@ test('extends-empty should have no rules', async t => {
 
 test('uses seed as configured', async t => {
 	t.context.back = chdir('fixtures/extends-empty');
-	const actual = await load({rules: {foo: 'bar'}});
+	const preset = 'parser-preset-file';
+	const actual = await load({rules: {foo: 'bar'}, parserPreset: preset});
 	t.is(actual.rules.foo, 'bar');
+	t.is(actual.parserPreset, preset);
 });
 
 test('invalid extend should throw', t => {

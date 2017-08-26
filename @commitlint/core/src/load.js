@@ -8,12 +8,11 @@ import resolveExtends from './library/resolve-extends';
 import executeRule from './library/execute-rule';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
-const valid = input => pick(input, 'extends', 'rules');
+const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
 export default async (seed = {}) => {
 	// Obtain config from .rc files
 	const raw = file();
-
 	// Merge passed config with file based options
 	const config = valid(merge(raw, seed));
 	const opts = merge({extends: [], rules: {}}, pick(config, 'extends'));

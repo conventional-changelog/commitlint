@@ -1,17 +1,17 @@
+import importFrom from 'import-from';
 import {sync} from 'conventional-commits-parser';
+import opts from 'conventional-changelog-angular';
 
 export default parse;
 
-async function parse(message, parser = sync) {
-	// Prevent conventional-changelog-angular from spamming startup
-	// TODO: Remove when https://github.com/conventional-changelog/conventional-changelog/pull/206 lands
-	const _error = console.error;
-	console.error = () => {};
-	const opts = require('conventional-changelog-angular');
-	console.error = _error;
+async function parse(message, parser = sync, parserPreset) {
+	let presetOpts = await opts;
 
-	const {parserOpts} = await opts;
-	const parsed = parser(message, parserOpts);
+	if (parserPreset) {
+		presetOpts = await importFrom(process.cwd(), parserPreset);
+	}
+
+	const parsed = parser(message, presetOpts.parserOpts);
 	parsed.raw = message;
 	return parsed;
 }

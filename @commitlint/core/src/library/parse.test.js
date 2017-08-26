@@ -1,5 +1,8 @@
+import path from 'path';
 import test from 'ava';
 import parse from './parse';
+
+const cwd = process.cwd();
 
 test('throws when called without params', t => {
 	t.throws(parse(), /Expected a raw commit/);
@@ -71,9 +74,51 @@ test('uses angular grammar', async t => {
 	t.deepEqual(actual, expected);
 });
 
+test('uses custom preset parser', async t => {
+	const back = chdir('fixtures/parser-preset-file');
+
+	const message = 'type(scope)-subject';
+	const actual = await parse(
+		message,
+		undefined,
+		'./conventional-changelog-custom'
+	);
+	const expected = {
+		body: null,
+		footer: null,
+		header: 'type(scope)-subject',
+		mentions: [],
+		merge: null,
+		notes: [],
+		raw: 'type(scope)-subject',
+		references: [],
+		revert: null,
+		scope: 'scope',
+		subject: 'subject',
+		type: 'type'
+	};
+	t.deepEqual(actual, expected);
+
+	back();
+});
+
+test('uses invalid preset parser', async t => {
+	const back = chdir('fixtures/parser-preset-file');
+	const message = 'type(scope)-subject';
+
+	await t.throws(parse(message, undefined, './conventional-changelog-invalid'));
+	back();
+});
+
 test('supports scopes with /', async t => {
 	const message = 'type(some/scope): subject';
 	const actual = await parse(message);
 	t.is(actual.scope, 'some/scope');
 	t.is(actual.subject, 'subject');
 });
+
+function chdir(target) {
+	const to = path.resolve(cwd, target.split('/').join(path.sep));
+	process.chdir(to);
+	return () => process.chdir(cwd);
+}
