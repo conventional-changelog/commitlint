@@ -1,3 +1,4 @@
+import importFrom from 'import-from';
 import test from 'ava';
 import parse from './parse';
 
@@ -62,6 +63,30 @@ test('uses angular grammar', async t => {
 		merge: null,
 		notes: [],
 		raw: 'type(scope): subject',
+		references: [],
+		revert: null,
+		scope: 'scope',
+		subject: 'subject',
+		type: 'type'
+	};
+	t.deepEqual(actual, expected);
+});
+
+test('uses custom opts parser', async t => {
+	const message = 'type(scope)-subject';
+	const changelogOpts = await importFrom(
+		process.cwd(),
+		'./fixtures/parser-preset/conventional-changelog-custom'
+	);
+	const actual = await parse(message, undefined, changelogOpts.parserOpts);
+	const expected = {
+		body: null,
+		footer: null,
+		header: 'type(scope)-subject',
+		mentions: [],
+		merge: null,
+		notes: [],
+		raw: 'type(scope)-subject',
 		references: [],
 		revert: null,
 		scope: 'scope',

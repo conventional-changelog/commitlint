@@ -23,7 +23,7 @@ const rules = {
 };
 
 const configuration = {
-	string: ['from', 'to', 'extends'],
+	string: ['from', 'to', 'extends', 'parserPreset'],
 	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
 	alias: {
 		c: 'color',
@@ -33,7 +33,8 @@ const configuration = {
 		q: 'quiet',
 		h: 'help',
 		v: 'version',
-		x: 'extends'
+		x: 'extends',
+		p: 'parserPreset'
 	},
 	description: {
 		color: 'toggle colored output',
@@ -41,7 +42,8 @@ const configuration = {
 		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		to: 'upper end of the commit range to lint; applies if edit=false',
-		quiet: 'toggle console output'
+		quiet: 'toggle console output',
+		parserPreset: 'preset parser'
 	},
 	default: {
 		color: true,
@@ -80,7 +82,7 @@ function main(options) {
 		Promise.all(
 			messages.map(commit => {
 				return load(getSeed(flags))
-					.then(opts => core.lint(commit, opts.rules))
+					.then(opts => core.lint(commit, opts.rules, opts))
 					.then(report => {
 						const formatted = core.format(report, {color: flags.color});
 
@@ -106,7 +108,9 @@ function main(options) {
 function getSeed(seed) {
 	const e = Array.isArray(seed.extends) ? seed.extends : [seed.extends];
 	const n = e.filter(i => typeof i === 'string');
-	return n.length > 0 ? {extends: n} : {};
+	return n.length > 0
+		? {extends: n, parserPreset: seed.parserPreset}
+		: {parserPreset: seed.parserPreset};
 }
 
 // Start the engine
