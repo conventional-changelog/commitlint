@@ -5,11 +5,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
   - npm install -g npm@3
-  - npm config delete access
-  - npm config delete https-proxy
-  - npm config delete init-author-url
-  - npm config delete proxy
-  - npm config delete loglevel
+  - npm config delete onload-script npm-autoinit/autoinit
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
 matrix:
