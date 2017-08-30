@@ -4,7 +4,12 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
-  - npm install -g npm@5
+  - npm install -g npm@3
+  - npm config unset access
+  - npm config unset https-proxy
+  - npm config unset init-author-url
+  - npm config unset proxy
+  - npm config unset loglevel
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install
 matrix:
