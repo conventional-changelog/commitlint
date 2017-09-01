@@ -8,7 +8,7 @@ import resolveExtends from './library/resolve-extends';
 import executeRule from './library/execute-rule';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
-const valid = input => pick(input, 'extends', 'rules');
+const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
 export default async (seed = {}) => {
 	// Obtain config from .rc files
@@ -24,7 +24,11 @@ export default async (seed = {}) => {
 		cwd: raw.config ? path.dirname(raw.config) : process.cwd()
 	});
 
-	const preset = valid(mergeWith({}, extended, config, w));
+	const preset = valid(mergeWith(extended, config, w));
+
+	if (preset.parserPreset) {
+		preset.parserOpts = await importFrom(process.cwd(), preset.parserPreset);
+	}
 
 	// Execute rule config functions if needed
 	const executed = await Promise.all(

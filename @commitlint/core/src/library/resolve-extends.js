@@ -38,6 +38,10 @@ function loadExtends(config = {}, context = {}) {
 			cwd: path.dirname(resolved)
 		});
 
+		if (c && c.parserPreset) {
+			c.parserPreset = resolveId(c.parserPreset, ctx);
+		}
+
 		return [...configs, c, ...loadExtends(c, ctx)];
 	}, []);
 }

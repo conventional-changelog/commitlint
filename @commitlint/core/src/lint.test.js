@@ -34,3 +34,19 @@ test('positive on ignored message and broken rule', async t => {
 	});
 	t.true(actual.valid);
 });
+
+test('positive on stub message and opts', async t => {
+	const actual = await lint(
+		'foo-bar',
+		{
+			'type-enum': [2, 'always', ['foo']],
+			'type-empty': [2, 'never']
+		},
+		{
+			parserOpts: {
+				headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
+			}
+		}
+	);
+	t.true(actual.valid);
+});
