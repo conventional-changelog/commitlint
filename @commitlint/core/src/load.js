@@ -18,16 +18,29 @@ export default async (seed = {}) => {
 	const config = valid(merge(raw, seed));
 	const opts = merge({extends: [], rules: {}}, pick(config, 'extends'));
 
+	// Resolve parserPreset key
+	if (typeof config.parserPreset === 'string') {
+		const resolvedParserPreset = resolveFrom(process.cwd(), config.parserPreset);
+
+		config.parserPreset = {
+			name: config.parserPreset,
+			path: `./${path.posix.relative(process.cwd(), resolvedParserPreset)}`.split(path.sep).join('/'),
+			opts: require(resolvedParserPreset)
+		};
+	}
+
 	// Resolve extends key
 	const extended = resolveExtends(opts, {
 		prefix: 'commitlint-config',
-		cwd: raw.config ? path.dirname(raw.config) : process.cwd()
+		cwd: raw.config ? path.dirname(raw.config) : process.cwd(),
+		parserPreset: config.parserPreset
 	});
 
 	const preset = valid(mergeWith(extended, config, w));
 
-	if (preset.parserPreset) {
-		preset.parserOpts = await importFrom(process.cwd(), preset.parserPreset);
+	// Await parser-preset if applicable
+	if (typeof preset.parserPreset === 'object' && typeof preset.parserPreset.opts === 'object') {
+		preset.parserPreset.opts = await preset.parserPreset.opts;
 	}
 
 	// Execute rule config functions if needed

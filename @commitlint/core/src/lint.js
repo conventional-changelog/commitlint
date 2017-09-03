@@ -55,3 +55,4 @@ export default async (message, rules = {}, opts = {}) => {
 		warnings
 	};
 };
+

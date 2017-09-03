@@ -23,8 +23,17 @@ test('uses seed as configured', async t => {
 
 test('uses seed with parserPreset', async t => {
 	t.context.back = chdir('fixtures/parser-preset');
+
 	const actual = await load({parserPreset: './conventional-changelog-custom'});
-	t.truthy(actual.parserOpts);
+	t.deepEqual(actual.parserPreset, {
+		name: './conventional-changelog-custom',
+		path: './conventional-changelog-custom.js',
+		opts: {
+			parserOpts: {
+				headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
+			}
+		}
+	});
 });
 
 test('invalid extend should throw', t => {
@@ -57,10 +66,29 @@ test('recursive extends', async t => {
 	});
 });
 
+test('parser preset overwrites completely instead of merging', async t => {
+	t.context.back = chdir('fixtures/parser-preset-override');
+	const actual = await load();
+
+	t.is(actual.parserPreset.name, './custom');
+	t.is(actual.parserPreset.path, './custom.js');
+	t.is(typeof actual.parserPreset.opts, 'object');
+	t.deepEqual(actual.parserPreset.opts, {
+		b: 'b',
+		parserOpts: {
+			headerPattern: /.*/
+		}
+	});
+});
+
 test('recursive extends with parserPreset', async t => {
 	t.context.back = chdir('fixtures/recursive-parser-preset');
 	const actual = await load();
-	t.truthy(actual.parserOpts);
+
+	t.is(actual.parserPreset.name, './conventional-changelog-custom');
+	t.is(actual.parserPreset.path, './first-extended/second-extended/conventional-changelog-custom.js');
+	t.is(typeof actual.parserPreset.opts, 'object');
+	t.deepEqual(actual.parserPreset.opts.parserOpts.headerPattern, /^(\w*)(?:\((.*)\))?-(.*)$/);
 });
 
 test('ignores unknow keys', async t => {

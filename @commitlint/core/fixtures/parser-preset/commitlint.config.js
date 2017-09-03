@@ -1,3 +1,5 @@
 module.exports = {
-	parserPreset: './conventional-changelog-custom'
+	parserOpts: {
+		parserPreset: './conventional-changelog-custom'
+	}
 };

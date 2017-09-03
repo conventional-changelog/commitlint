@@ -22,7 +22,7 @@ module.exports = configuration => {
 			const desc = line[1];
 			const defaults = line[2];
 			const fs = flags.map(
-				flag => (flag.length > 1 ? `--${flag}` : `-${flag}`)
+				flag => (flag.length > 1 ? `--${flag}` : ` -${flag}`)
 			);
 			const ds = defaults ? `, defaults to: ${defaults}` : '';
 			const length = flags.reduce((sum, flag) => sum + flag.length, 0);

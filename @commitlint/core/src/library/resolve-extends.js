@@ -1,5 +1,5 @@
 import path from 'path';
-import from from 'resolve-from';
+import resolveFrom from 'resolve-from';
 import {merge, omit} from 'lodash';
 
 // Resolve extend configs
@@ -26,6 +26,7 @@ function loadExtends(config = {}, context = {}) {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
+		const cwd = path.dirname(resolved);
 
 		// Remove deprecation warning in version 3
 		if (typeof c === 'object' && 'wildcards' in c) {
@@ -34,12 +35,20 @@ function loadExtends(config = {}, context = {}) {
 			);
 		}
 
-		const ctx = merge({}, context, {
-			cwd: path.dirname(resolved)
-		});
+		const ctx = merge({}, context, {cwd});
 
-		if (c && c.parserPreset) {
-			c.parserPreset = resolveId(c.parserPreset, ctx);
+		// Resolve parser preset if none was present before
+		if (!context.parserPreset && typeof c === 'object' && typeof c.parserPreset === 'string') {
+			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
+
+			const parserPreset = {
+				name: c.parserPreset,
+				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`.split(path.sep).join('/'),
+				opts: require(resolvedParserPreset)
+			};
+
+			ctx.parserPreset = parserPreset;
+			config.parserPreset = parserPreset;
 		}
 
 		return [...configs, c, ...loadExtends(c, ctx)];
@@ -70,5 +79,5 @@ function resolveConfig(raw, context = {}) {
 }
 
 function resolveId(id, context = {}) {
-	return from(context.cwd || process.cwd(), id);
+	return resolveFrom(context.cwd || process.cwd(), id);
 }

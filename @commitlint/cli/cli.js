@@ -23,7 +23,7 @@ const rules = {
 };
 
 const configuration = {
-	string: ['from', 'to', 'extends', 'parserPreset'],
+	string: ['from', 'to', 'extends', 'parser-preset'],
 	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
 	alias: {
 		c: 'color',
@@ -34,7 +34,7 @@ const configuration = {
 		h: 'help',
 		v: 'version',
 		x: 'extends',
-		p: 'parserPreset'
+		p: 'parser-preset'
 	},
 	description: {
 		color: 'toggle colored output',
@@ -43,7 +43,7 @@ const configuration = {
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		to: 'upper end of the commit range to lint; applies if edit=false',
 		quiet: 'toggle console output',
-		parserPreset: 'preset parser'
+		'parser-preset': 'configuration preset to use for conventional-commits-parser'
 	},
 	default: {
 		color: true,
@@ -82,7 +82,11 @@ function main(options) {
 		Promise.all(
 			messages.map(commit => {
 				return load(getSeed(flags))
-					.then(opts => core.lint(commit, opts.rules, opts))
+					.then(loaded => {
+						const parserOpts = selectParserOpts(loaded.parserPreset);
+						const opts = parserOpts ? {parserOpts} : undefined;
+						return core.lint(commit, loaded.rules, opts);
+					})
 					.then(report => {
 						const formatted = core.format(report, {color: flags.color});
 
@@ -122,6 +126,21 @@ main(cli).catch(err =>
 		throw err;
 	})
 );
+
+
+function selectParserOpts(parserPreset) {
+	if (typeof parserPreset !== 'object') {
+		return undefined;
+	}
+
+	const opts = parserPreset.opts;
+
+	if (typeof opts !== 'object') {
+		return undefined;
+	}
+
+	return opts.parserOpts;
+}
 
 // Catch unhandled rejections globally
 process.on('unhandledRejection', (reason, promise) => {

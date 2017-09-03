@@ -14,6 +14,7 @@ const CLI = here('cli.js');
 const SIMPLE = fix('simple');
 const EXTENDS_ROOT = fix('extends-root');
 const EMPTY = fix('empty');
+const PARSER_PRESET = fix('parser-preset');
 
 const HUSKY = tmp.dirSync().name;
 const HUSKY_INTEGRATION = path.join(tmp.dirSync().name, 'integration');
@@ -120,6 +121,15 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 	await git(['commit', '-m', '"chore: this should work"'], {cwd})();
 
 	await rm([upper])();
+});
+
+test('should pick up parser preset', async t => {
+	const cwd = PARSER_PRESET;
+
+	const actual = await t.throws(cli([], {cwd})('type(scope)-ticket subject'));
+	t.true(includes(actual.stdout, 'message may not be empty [subject-empty]'));
+
+	await cli(['--parser-preset', './parser-preset'], {cwd})('type(scope)-ticket subject');
 });
 
 async function init(cwd) {
