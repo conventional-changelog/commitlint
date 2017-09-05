@@ -10,5 +10,6 @@
 
 * **Reference**
   * [CLI](reference-cli.md)
+  * [Configuration](reference-configuration.md)
   * [Rules](reference-rules.md)
   * [API](reference-api.md)

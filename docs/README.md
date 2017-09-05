@@ -61,7 +61,6 @@ commitlint --from=HEAD~1
 * **Guides** - Common use cases explained in a step-by-step pace
 * **Concepts** - Overarching topics important to unterstand the use of `commitlint`
 * **Reference** - Mostly technical documentation
-* **Changelog**
 
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
