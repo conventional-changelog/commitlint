@@ -89,21 +89,98 @@ format({
 * **Signature**
 
 ```ts
+/**
+ * How to handle violation of rule
+ * 0 - ignore
+ * 1 - warn
+ * 2 - throw
+ */
 type RuleLevel = 0 | 1 | 2;
+
+/*
+ * Application of rule
+ * always - positive
+ * never - negative
+ */
 type RuleCondition = 'always' | 'never';
+
+/*
+ * Additional, optional options to pass to rule
+ */
 type RuleOption = any;
+
+/**
+ * Basic complete rule definition
+ */
 type PrimitiveRule = [RuleLevel, RuleCondition, RuleOption?];
+
+/*
+ * Async rules are resolved during config lookup.
+ * They can be used to set up linting rules based on e.g. the project fs
+ */
 type AsyncRule = Promise<PrimitiveRule>;
+
+/*
+ * Function rules are executed during config lookup.
+ * They can be used to set up linting rules based on e.g. the project fs
+ */
 type FunctionRule = () => PrimitiveRule;
+
+/*
+ * Async function rules are executed and awaited during config lookup.
+ * They can be used to set up linting rules based on e.g. the project fs
+ */
 type AsyncFunctionRule () => Promise<PrimitiveRule>;
+
+/*
+ * Polymorphic rule struct
+ */
 type Rule = PrimitiveRule | FunctionRule | AsyncFunctionRule;
 
-type Config = {
-  extends: string[];
-  rules: {[ruleName: string]: Rule};
-}
+/*
+ * Parser preset for conventional commits
+ */
+type ParserPreset = {
+  name: string;
+  path: string;
+  opts: any;
+};
 
-load(seed: Config = {}) => Promise<Config>;
+type Seed = {
+  /*
+   * ids resolveable from cwd or configuration file.
+   * Imported and merged into configuration
+   * with increasing precedence, with top level config taking the highest.
+   */
+  extends?: string[];
+  /*
+   * id resolveable from cwd or configuration file.
+   * Imported and expanded to {ParserPreset}.
+   * Top level parserPresets override presets in extended configuration.
+   */
+  parserPreset?: string;
+  /**
+   * Initial map of rules to check against
+   */
+  rules?: {[ruleName: string]: Rule};
+};
+
+type Config = {
+  /*
+   * Relatives path to all extendend configurations.
+   */
+  extends: string[];
+  /*
+   * Expanded parser preset, if any
+   */
+  parserPreset?: ParserPreset;
+  /*
+   * Merged map of rules to check against
+   */
+  rules: {[ruleName: string]: Rule};
+};
+
+load(seed: Seed = {}) => Promise<Config>;
 ```
 
 * **Example**
@@ -121,7 +198,11 @@ load({
 
 load({extends: ['./package']})
 .then(config => console.log(config));
-// => { extends: [], rules: {} }
+// => { extends: ['./package', './package-b'], rules: {} }
+
+load({parserPreset: './parser-preset.js'})
+.then(config => console.log(config));
+// => { extends: [], rules: {}, parserPreset: {name: './parser-preset.js', path: './parser-preset.js', opts: {}}}
 ```
 
 ### read
@@ -186,7 +267,11 @@ type Report = {
   warnings: Problem[];
 }
 
-lint(message: string, rules: {[ruleName: string]: Rule}) => Promise<Report>;
+type Options = {
+  parserOpts?: any;
+};
+
+lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Promise<Report>;
 ```
 
 * **Basic Example**
@@ -213,6 +298,11 @@ lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
           name: 'type-enum',
           message: 'type must be one of [bar]' } ] }
   */
+
+const opts = {parserOpts: {headerPattern: /^(\w*)-(\w*)/, headerCorrespondence: ['type', 'scope']}};
+
+lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then(report => console.log(report));
+// => { valid: true, errors: [], warnings: [] }
 ```
 
 * **Load configuration**
@@ -225,7 +315,7 @@ const CONFIG = {
 };
 
 load(CONFIG)
-  .then(opts =>lint('foo: bar', opts.rules))
+  .then(opts => lint('foo: bar', opts.rules, opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}))
   .then(report => console.log(report));
   /* =>
     { valid: false,
@@ -260,8 +350,8 @@ const {lint, load, read} = require('@commitlint/core');
 
 Promise.all([load(), read({from: 'HEAD~1'})])
   .then(tasks => {
-    const [{rules}, [commit]] = tasks;
-    return lint(commit, rules);
+    const [{rules, parserPreset}, [commit]] = tasks;
+    return lint(commit, rules, parserPreset ? {parserOpts: parserPreset.parserOpts}: {});
   })
   .then(report => console.log(JSON.stringify(result.valid)));
 ```
