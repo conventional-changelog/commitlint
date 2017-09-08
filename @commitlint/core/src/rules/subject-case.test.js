@@ -6,14 +6,24 @@ const messages = {
 	empty: 'chore:\n',
 	lowercase: 'chore: subject',
 	mixedcase: 'chore: sUbJeCt',
-	uppercase: 'chore: SUBJECT'
+	uppercase: 'chore: SUBJECT',
+	camelcase: 'chore: subJect',
+	kebabcase: 'chore: sub-ject',
+	pascalcase: 'chore: SubJect',
+	snakecase: 'chore: sub_ject',
+	startcase: 'chore: Sub Ject'
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	lowercase: parse(messages.lowercase),
 	mixedcase: parse(messages.mixedcase),
-	uppercase: parse(messages.uppercase)
+	uppercase: parse(messages.uppercase),
+	camelcase: parse(messages.camelcase),
+	kebabcase: parse(messages.kebabcase),
+	pascalcase: parse(messages.pascalcase),
+	snakecase: parse(messages.snakecase),
+	startcase: parse(messages.startcase)
 };
 
 test('with empty subject should succeed for "never lowercase"', async t => {
@@ -84,6 +94,160 @@ test('with uppercase subject should fail for "never uppercase"', async t => {
 
 test('with lowercase subject should succeed for "always uppercase"', async t => {
 	const [actual] = subjectCase(await parsed.uppercase, 'always', 'uppercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with camelcase subject should fail for "always uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.camelcase, 'always', 'uppercase');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with camelcase subject should succeed for "never uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.camelcase, 'never', 'uppercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with camelcase subject should fail for "always pascalcase"', async t => {
+	const [actual] = subjectCase(await parsed.camelcase, 'always', 'pascal-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with camelcase subject should fail for "always kebabcase"', async t => {
+	const [actual] = subjectCase(await parsed.camelcase, 'always', 'kebab-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with camelcase subject should fail for "always snakecase"', async t => {
+	const [actual] = subjectCase(await parsed.camelcase, 'always', 'snake-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with camelcase subject should succeed for "always camelcase"', async t => {
+	const [actual] = subjectCase(await parsed.camelcase, 'always', 'camel-case');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with pascalcase subject should fail for "always uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.pascalcase, 'always', 'uppercase');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with pascalcase subject should succeed for "never uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.pascalcase, 'never', 'uppercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with pascalcase subject should succeed for "always pascalcase"', async t => {
+	const [actual] = subjectCase(
+		await parsed.pascalcase,
+		'always',
+		'pascal-case'
+	);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with pascalcase subject should fail for "always kebabcase"', async t => {
+	const [actual] = subjectCase(await parsed.pascalcase, 'always', 'kebab-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with pascalcase subject should fail for "always snakecase"', async t => {
+	const [actual] = subjectCase(await parsed.pascalcase, 'always', 'snake-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with pascalcase subject should fail for "always camelcase"', async t => {
+	const [actual] = subjectCase(await parsed.pascalcase, 'always', 'camel-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with snakecase subject should fail for "always uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.snakecase, 'always', 'uppercase');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with snakecase subject should succeed for "never uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.snakecase, 'never', 'uppercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with snakecase subject should fail for "always pascalcase"', async t => {
+	const [actual] = subjectCase(await parsed.snakecase, 'always', 'pascal-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with snakecase subject should fail for "always kebabcase"', async t => {
+	const [actual] = subjectCase(await parsed.snakecase, 'always', 'kebab-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with snakecase subject should succeed for "always snakecase"', async t => {
+	const [actual] = subjectCase(await parsed.snakecase, 'always', 'snake-case');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with snakecase subject should fail for "always camelcase"', async t => {
+	const [actual] = subjectCase(await parsed.snakecase, 'always', 'camel-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should fail for "always uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'always', 'uppercase');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should succeed for "never uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'never', 'uppercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should fail for "always pascalcase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'always', 'pascal-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should fail for "always kebabcase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'always', 'kebab-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should fail for "always snakecase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'always', 'snake-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should fail for "always camelcase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'always', 'camel-case');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with startcase subject should succeed for "always startcase"', async t => {
+	const [actual] = subjectCase(await parsed.startcase, 'always', 'start-case');
 	const expected = true;
 	t.is(actual, expected);
 });
