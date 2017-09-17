@@ -31,7 +31,7 @@ const exec = (command, args = [], opts = {}) => {
 			console.log(result.stderr);
 		}
 		return result;
-	}
+	};
 };
 
 const cli = exec.bind(null, CLI);
@@ -40,8 +40,12 @@ const mkdir = exec.bind(null, bin('mkdirp'));
 const npm = exec.bind(null, 'npm');
 const rm = exec.bind(null, bin('rimraf'));
 
-test('should throw when called without [input]', t => {
-	t.throws(cli()(), /Expected a raw commit/);
+test('should throw when called without [input]', async t => {
+	const dir = tmp.dirSync().name;
+
+	await init(dir);
+	await t.throws(cli([], {cwd: dir})(), /Expected a raw commit/);
+	await rm([dir])();
 });
 
 test('should reprint input from stdin', async t => {
@@ -73,11 +77,19 @@ test('should fail for input from stdin with rule from rc', async t => {
 });
 
 test('should fail for input from stdin with rule from js', async t => {
+	const dir = tmp.dirSync().name;
+
+	await init(dir);
+	await sander.copydir(EXTENDS_ROOT).to(dir);
+
 	const actual = await t.throws(
-		cli(['--extends', './extended'], {cwd: EXTENDS_ROOT})('foo: bar')
+		cli(['--extends', './extended'], {cwd: dir})('foo: bar')
 	);
+
 	t.true(includes(actual.stdout, 'type must not be one of [foo]'));
 	t.is(actual.code, 1);
+
+	await rm([dir])();
 });
 
 test('should produce no error output with --quiet flag', async t => {
@@ -129,7 +141,9 @@ test('should pick up parser preset', async t => {
 	const actual = await t.throws(cli([], {cwd})('type(scope)-ticket subject'));
 	t.true(includes(actual.stdout, 'message may not be empty [subject-empty]'));
 
-	await cli(['--parser-preset', './parser-preset'], {cwd})('type(scope)-ticket subject');
+	await cli(['--parser-preset', './parser-preset'], {cwd})(
+		'type(scope)-ticket subject'
+	);
 });
 
 async function init(cwd) {
@@ -142,5 +156,9 @@ async function init(cwd) {
 }
 
 function pkg(cwd) {
-	return sander.writeFile(cwd, 'package.json', JSON.stringify({scripts: {commitmsg: `${CLI} -e`}}));
+	return sander.writeFile(
+		cwd,
+		'package.json',
+		JSON.stringify({scripts: {commitmsg: `${CLI} -e`}})
+	);
 }

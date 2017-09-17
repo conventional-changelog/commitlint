@@ -18,6 +18,8 @@ npm install --save-dev @commitlint-{cli,angular}
 echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
+Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
+
 ## Install husky
 
 Install `husky` as devDependency, a handy git hook helper available on npm.
