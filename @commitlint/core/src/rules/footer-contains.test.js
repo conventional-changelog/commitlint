@@ -4,7 +4,11 @@ import footerContains from './footer-contains';
 
 const messages = {
 	empty: 'foo(bar): baz',
-	matched: 'foo(bar): baz\n\nbody\n\nqux',
+	matched: `foo(bar): baz
+
+body
+
+qux`,
 	unmatched: 'foo(bar): baz\n\nbody\n\nquux'
 };
 
