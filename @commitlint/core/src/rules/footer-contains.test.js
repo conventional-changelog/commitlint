@@ -4,11 +4,7 @@ import footerContains from './footer-contains';
 
 const messages = {
 	empty: 'foo(bar): baz',
-	matched: `foo(bar): baz
-
-qux
-
-Closes PROJECT-001`,
+	matched: 'chore: subject\nBREAKING CHANGE: something important',
 	unmatched: 'foo(bar): baz\n\nbody\n\nPROJEKT-001'
 };
 
@@ -25,7 +21,11 @@ test('footer-contains with no footer should not succeed', async t => {
 });
 
 test('footer-contains with matching footer should succeed', async t => {
-	const [actual] = footerContains(await parsed.matched, 'always', /qux$/gi);
+	const [actual] = footerContains(
+		await parsed.matched,
+		'always',
+		/important$/gi
+	);
 	// Const expected = true;
 	t.deepEqual(actual, await parsed.matched);
 });
