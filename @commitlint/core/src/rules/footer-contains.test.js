@@ -26,8 +26,8 @@ test('footer-contains with matching footer should succeed', async t => {
 		'always',
 		/important$/gi
 	);
-	// Const expected = true;
-	t.deepEqual(actual, await parsed.matched);
+	const expected = true;
+	t.deepEqual(actual, expected);
 });
 
 test('footer-contains with non-matching footer should not succeed', async t => {
