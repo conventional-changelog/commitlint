@@ -5,9 +5,10 @@ import footerContains from './footer-contains';
 const messages = {
 	empty: 'foo(bar): baz',
 	matched: `foo(bar): baz
-bla bla bla
 
-PROJECT-001`,
+qux
+
+Closes PROJECT-001`,
 	unmatched: 'foo(bar): baz\n\nbody\n\nPROJEKT-001'
 };
 
