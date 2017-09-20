@@ -35,7 +35,7 @@ test('footer-contains with matching footer should succeed', async t => {
 
 test('footer-contains with alternate matching footer should succeed', async t => {
 	const [actual] = footerContains(
-		await parsed.matched,
+		await parsed.matchedAlt,
 		'always',
 		/Closes #\d+$/gi
 	);
