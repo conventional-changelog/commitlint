@@ -4,7 +4,7 @@ import footerContains from './footer-contains';
 
 const messages = {
 	empty: 'foo(bar): baz',
-	matched: 'foo(bar): baz\n\nbody\n\nqux',
+	matched: 'foo(bar): baz\n\nbody\nqux',
 	unmatched: 'foo(bar): baz\n\nbody\n\nquux'
 };
 
@@ -22,8 +22,8 @@ test('footer-contains with no footer should not succeed', async t => {
 
 test('footer-contains with matching footer should succeed', async t => {
 	const [actual] = footerContains(await parsed.matched, 'always', /qux$/gi);
-	const expected = true;
-	t.deepEqual(actual, expected);
+	// Const expected = true;
+	t.deepEqual(actual, await parsed.matched);
 });
 
 test('footer-contains with non-matching footer should not succeed', async t => {
