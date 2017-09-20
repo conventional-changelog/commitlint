@@ -15,19 +15,19 @@ const parsed = {
 };
 
 test('footer-contains with no footer should not succeed', async t => {
-	const [actual] = footerContains(await parsed.empty, 'always', /qux/gi);
+	const [actual] = footerContains(await parsed.empty, 'always', /qux$/gi);
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
 
 test('footer-contains with matching footer should succeed', async t => {
-	const [actual] = footerContains(await parsed.matched, 'always', /qux/gi);
+	const [actual] = footerContains(await parsed.matched, 'always', /qux$/gi);
 	const expected = true;
 	t.deepEqual(actual, expected);
 });
 
 test('footer-contains with non-matching footer should not succeed', async t => {
-	const [actual] = footerContains(await parsed.unmatched, 'always', /qux/gi);
+	const [actual] = footerContains(await parsed.unmatched, 'always', /qux$/gi);
 	const expected = false;
 	t.deepEqual(actual, expected);
 });
