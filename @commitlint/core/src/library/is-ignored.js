@@ -7,7 +7,13 @@ const WILDCARDS = [
 		),
 	c => c.match(/^(R|r)evert (.*)/),
 	c => c.match(/^(fixup|squash)!/),
-	c => semver.valid(c.trim())
+	c =>
+		semver.valid(
+			c
+				.split('\n')
+				.shift()
+				.trim()
+		)
 ];
 
 export default function isIgnored(commit = '') {
