@@ -34,22 +34,38 @@ test('should return true for revert commits', t => {
 	);
 });
 
-test('should return true for npm version commits', t => {
-	t.true(isIgnored(`0.0.1`));
-	t.true(isIgnored(`0.1.0`));
-	t.true(isIgnored(`1.0.0`));
-	t.true(isIgnored(`0.0.1-alpha`));
-	t.true(isIgnored(`0.0.1-some-crazy-tag`));
-	t.true(isIgnored(`0.0.1-0`));
-	t.true(isIgnored(`0.0.1-999`));
-	t.true(isIgnored(`0.0.1-alpha.0`));
-	t.true(isIgnored(`0.0.1-alpha.999`));
-	t.true(isIgnored(`0.0.1-some-crazy-tag.0`));
-	t.true(isIgnored(`0.0.1-some-crazy-tag.999`));
-	t.true(isIgnored(`0.0.1-1e69d54`));
-	t.true(isIgnored(`v0.0.1`));
-	t.true(isIgnored(` v3.0.0`));
-});
+const versionCommitInputs = [
+	'0.0.1',
+	'0.1.0',
+	'1.0.0',
+	'0.0.1-alpha',
+	'0.0.1-some-crazy-tag',
+	'0.0.1-0',
+	'0.0.1-999',
+	'0.0.1-alpha.0',
+	'0.0.1-alpha.999',
+	'0.0.1-some-crazy-tag.0',
+	'0.0.1-some-crazy-tag.999',
+	'0.0.1-1e69d54',
+	'v0.0.1',
+	' v3.0.0'
+];
+for (let i = 0, len = versionCommitInputs.length; i < len; i++) {
+	const input = versionCommitInputs[i];
+	const commitMsg1 = input;
+	const commitMsg2 = `${input}\n\nSigned-off-by: Developer <example@example.com>`;
+	const commitMsg3 = `${input}\n\nChange-Id: I895114872a515a269487a683124b63303818e19c`;
+	const commitMsg4 = `${input}\n\nSigned-off-by: Developer <example@example.com>\nChange-Id: I895114872a515a269487a683124b63303818e19c`;
+
+	console.log(commitMsg1, commitMsg2, commitMsg3, commitMsg4);
+
+	test(`should return true for version commit permutations of '${input}'`, t => {
+		t.true(isIgnored(commitMsg1));
+		t.true(isIgnored(commitMsg2));
+		t.true(isIgnored(commitMsg3));
+		t.true(isIgnored(commitMsg4));
+	});
+}
 
 test('should return true fixup commits', t => {
 	t.true(isIgnored('fixup! initial commit'));
