@@ -14,7 +14,7 @@ git init
 npm init
 
 # Install and configure if needed
-npm install --save-dev @commitlint-{cli,angular}
+npm install --save-dev @commitlint/{config-angular,cli}
 echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
