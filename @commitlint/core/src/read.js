@@ -8,7 +8,7 @@ export default getCommitMessages;
 
 const SHALLOW_MESSAGE = [
 	'Could not get git history from shallow clone.',
-	'Use git fetch --shallow before linting.',
+	'Use git fetch --unshallow before linting.',
 	'Original issue: https://git.io/vyKMq\n Refer to https://git.io/vyKMv for details.'
 ].join('\n');
 
