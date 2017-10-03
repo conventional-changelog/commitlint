@@ -56,6 +56,9 @@
     "name": "Mario Nebl",
     "email": "hello@herebecode.com"
   },
+  "dependencies": {
+    "@marionebl/sander": "^0.6.1"
+  },
   "devDependencies": {
     "docsify-cli": "^4.1.8",
     "eslint-config-prettier": "^2.3.0",
@@ -65,8 +68,5 @@
     "prettier": "^1.5.2",
     "trevor": "^2.3.0",
     "xo": "^0.18.2"
-  },
-  "dependencies": {
-    "@marionebl/sander": "^0.6.1"
   }
 }
