@@ -17,21 +17,20 @@ async function bootstrap(fixture) {
 	}
 
 	await execa('git', ['init', cwd]);
-
-	await Promise.all([
-		execa('git', ['config', 'user.name', 'ava'], {cwd}),
-		execa('git', ['config', 'user.email', 'test@example.com'], {cwd})
-	]);
-
+	await setup(cwd);
 	return cwd;
 }
 
 async function clone(source, ...args) {
 	const cwd = path.join(os.tmpdir(), rand());
 	await execa('git', ['clone', ...args, source, cwd]);
-	await execa('git', ['config', 'user.email', 'test@example.com'], {cwd});
-	await execa('git', ['config', 'user.name', 'ava'], {cwd});
+	await setup(cwd);
 	return cwd;
+}
+
+async function setup(cwd) {
+	await execa('git', ['config', 'user.name', 'ava'], {cwd});
+	await execa('git', ['config', 'user.email', 'test@example.com'], {cwd});
 }
 
 function rand() {
