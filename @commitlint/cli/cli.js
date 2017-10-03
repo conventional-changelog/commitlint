@@ -23,10 +23,11 @@ const rules = {
 };
 
 const configuration = {
-	string: ['from', 'to', 'extends', 'parser-preset'],
+	string: ['cwd', 'from', 'to', 'extends', 'parser-preset'],
 	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
 	alias: {
 		c: 'color',
+		d: 'cwd',
 		e: 'edit',
 		f: 'from',
 		t: 'to',
@@ -38,15 +39,18 @@ const configuration = {
 	},
 	description: {
 		color: 'toggle colored output',
+		cwd: 'directory to execute in',
 		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
 		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		to: 'upper end of the commit range to lint; applies if edit=false',
 		quiet: 'toggle console output',
-		'parser-preset': 'configuration preset to use for conventional-commits-parser'
+		'parser-preset':
+			'configuration preset to use for conventional-commits-parser'
 	},
 	default: {
 		color: true,
+		cwd: process.cwd(),
 		edit: false,
 		from: null,
 		to: null,
@@ -67,7 +71,7 @@ const cli = meow(
 	configuration
 );
 
-const load = seed => core.load(seed);
+const load = (seed, opts) => core.load(seed, opts);
 
 function main(options) {
 	const raw = options.input;
@@ -75,13 +79,13 @@ function main(options) {
 	const fromStdin = rules.fromStdin(raw, flags);
 
 	const range = pick(flags, 'edit', 'from', 'to');
-	const input = fromStdin ? stdin() : core.read(range);
+	const input = fromStdin ? stdin() : core.read(range, {cwd: flags.cwd});
 	const fmt = new chalk.constructor({enabled: flags.color});
 
 	return input.then(raw => (Array.isArray(raw) ? raw : [raw])).then(messages =>
 		Promise.all(
 			messages.map(commit => {
-				return load(getSeed(flags))
+				return load(getSeed(flags), {cwd: flags.cwd})
 					.then(loaded => {
 						const parserOpts = selectParserOpts(loaded.parserPreset);
 						const opts = parserOpts ? {parserOpts} : undefined;
@@ -126,7 +130,6 @@ main(cli).catch(err =>
 		throw err;
 	})
 );
-
 
 function selectParserOpts(parserPreset) {
 	if (typeof parserPreset !== 'object') {

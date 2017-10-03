@@ -1,8 +1,9 @@
 import path from 'path';
 import exists from 'path-exists';
-import up from 'find-up';
-import gitRawCommits from 'git-raw-commits';
-import {readFile} from '@marionebl/sander';
+import gitRawCommits from '@marionebl/git-raw-commits';
+import * as sander from '@marionebl/sander';
+
+import toplevel from './library/toplevel';
 
 export default getCommitMessages;
 
@@ -15,25 +16,25 @@ const SHALLOW_MESSAGE = [
 // Get commit messages
 // Object => Promise<Array<String>>
 async function getCommitMessages(settings) {
-	const {from, to, edit} = settings;
+	const {cwd, from, to, edit} = settings;
 
 	if (edit) {
-		return getEditCommit();
+		return getEditCommit(cwd);
 	}
 
-	if (await isShallow()) {
+	if (await isShallow(cwd)) {
 		throw new Error(SHALLOW_MESSAGE);
 	}
 
-	return getHistoryCommits({from, to});
+	return getHistoryCommits({from, to}, {cwd});
 }
 
 // Get commit messages from history
 // Object => Promise<string[]>
-function getHistoryCommits(options) {
+function getHistoryCommits(options, opts = {}) {
 	return new Promise((resolve, reject) => {
 		const data = [];
-		gitRawCommits(options)
+		gitRawCommits(options, {cwd: opts.cwd})
 			.on('data', chunk => data.push(chunk.toString('utf-8')))
 			.on('error', reject)
 			.on('end', () => {
@@ -43,12 +44,12 @@ function getHistoryCommits(options) {
 }
 
 // Check if the current repository is shallow
-// () => Promise<Boolean>
-async function isShallow() {
-	const top = await toplevel();
+// (cwd: string) => Promise<Boolean>
+async function isShallow(cwd) {
+	const top = await toplevel(cwd);
 
 	if (typeof top !== 'string') {
-		throw new TypeError(`Could not find git root - is this a git repository?`);
+		throw new TypeError(`Could not find git root from ${cwd}`);
 	}
 
 	const shallow = path.join(top, '.git/shallow');
@@ -56,27 +57,15 @@ async function isShallow() {
 }
 
 // Get recently edited commit message
-// () => Promise<Array<String>>
-async function getEditCommit() {
-	const top = await toplevel();
+// (cwd: string) => Promise<Array<String>>
+async function getEditCommit(cwd) {
+	const top = await toplevel(cwd);
 
 	if (typeof top !== 'string') {
-		throw new TypeError(`Could not find git root - is this a git repository?`);
+		throw new TypeError(`Could not find git root from ${cwd}`);
 	}
 
 	const editFilePath = path.join(top, '.git/COMMIT_EDITMSG');
-	const editFile = await readFile(editFilePath);
+	const editFile = await sander.readFile(editFilePath);
 	return [`${editFile.toString('utf-8')}\n`];
-}
-
-// Find the next git root
-// (start: string) => Promise<string | null>
-async function toplevel(cwd = process.cwd()) {
-	const found = await up('.git', {cwd});
-
-	if (typeof found !== 'string') {
-		return found;
-	}
-
-	return path.join(found, '..');
 }

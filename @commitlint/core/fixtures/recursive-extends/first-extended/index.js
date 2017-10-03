@@ -1,6 +1,1 @@
-module.exports = {
-	extends: ['./second-extended'],
-	rules: {
-		one: 1
-	}
-};
+module.exports = require('./commitlint.config.js');

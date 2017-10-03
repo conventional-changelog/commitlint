@@ -1,35 +1,35 @@
 import path from 'path';
-import {entries, merge, mergeWith, pick} from 'lodash';
-import rc from 'rc';
 import cosmiconfig from 'cosmiconfig';
+import {entries, merge, mergeWith, pick} from 'lodash';
 import resolveFrom from 'resolve-from';
-import up from 'find-up';
 
-import resolveExtends from './library/resolve-extends';
 import executeRule from './library/execute-rule';
+import resolveExtends from './library/resolve-extends';
+import toplevel from './library/toplevel';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
-export default async (seed = {}) => {
-	// Obtain config from .rc files
-	const raw = await file();
+export default async (seed = {}, options = {cwd: ''}) => {
+	const explorer = cosmiconfig('commitlint', {
+		rcExtensions: true,
+		stopDir: await toplevel(options.cwd)
+	});
+
+	const raw = (await explorer.load(options.cwd)) || {};
+	const base = raw.filepath ? path.dirname(raw.filepath) : options.cwd;
+
 	// Merge passed config with file based options
-	const config = valid(merge(raw, seed));
+	const config = valid(merge(raw.config, seed));
 	const opts = merge({extends: [], rules: {}}, pick(config, 'extends'));
 
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === 'string') {
-		const resolvedParserPreset = resolveFrom(
-			process.cwd(),
-			config.parserPreset
-		);
+		const resolvedParserPreset = resolveFrom(base, config.parserPreset);
 
 		config.parserPreset = {
 			name: config.parserPreset,
-			path: `./${path.posix.relative(process.cwd(), resolvedParserPreset)}`
-				.split(path.sep)
-				.join('/'),
+			path: resolvedParserPreset,
 			opts: require(resolvedParserPreset)
 		};
 	}
@@ -37,7 +37,7 @@ export default async (seed = {}) => {
 	// Resolve extends key
 	const extended = resolveExtends(opts, {
 		prefix: 'commitlint-config',
-		cwd: raw.config ? path.dirname(raw.config) : process.cwd(),
+		cwd: base,
 		parserPreset: config.parserPreset
 	});
 
@@ -80,49 +80,3 @@ export default async (seed = {}) => {
 		return registry;
 	}, preset);
 };
-
-async function file() {
-	const legacy = rc('conventional-changelog-lint');
-	const legacyFound = typeof legacy.config === 'string';
-	const explorer = cosmiconfig('commitlint', {
-		rcExtensions: true,
-		stopDir: await toplevel()
-	});
-	const config = await explorer.load('.');
-
-	if (legacyFound && !config) {
-		console.warn(
-			`Using legacy ${path.relative(
-				process.cwd(),
-				legacy.config
-			)}. Rename to commitlint.config.js to silence this warning.`
-		);
-	}
-
-	if (legacyFound && config) {
-		console.warn(
-			`Ignored legacy ${path.relative(
-				process.cwd(),
-				legacy.config
-			)} as commitlint.config.js superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`
-		);
-	}
-
-	if (config) {
-		return config.config;
-	}
-
-	return legacy;
-}
-
-// Find the next git root
-// (start: string) => Promise<string | null>
-async function toplevel(cwd = process.cwd()) {
-	const found = await up('.git', {cwd});
-
-	if (typeof found !== 'string') {
-		return found;
-	}
-
-	return path.join(found, '..');
-}

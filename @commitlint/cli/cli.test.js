@@ -137,8 +137,8 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 
 test('should pick up parser preset', async t => {
 	const cwd = PARSER_PRESET;
-
 	const actual = await t.throws(cli([], {cwd})('type(scope)-ticket subject'));
+
 	t.true(includes(actual.stdout, 'message may not be empty [subject-empty]'));
 
 	await cli(['--parser-preset', './parser-preset'], {cwd})(
