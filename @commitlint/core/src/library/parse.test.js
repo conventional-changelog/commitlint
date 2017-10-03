@@ -2,12 +2,14 @@ import importFrom from 'import-from';
 import test from 'ava';
 import parse from './parse';
 
-test('throws when called without params', t => {
-	t.throws(parse(), /Expected a raw commit/);
+test('throws when called without params', async t => {
+	const error = await t.throws(parse());
+	t.is(error.message, 'Expected a raw commit');
 });
 
-test('throws when called with empty message', t => {
-	t.throws(parse(''), /Expected a raw commit/);
+test('throws when called with empty message', async t => {
+	const error = await t.throws(parse());
+	t.is(error.message, 'Expected a raw commit');
 });
 
 test('returns object with raw message', async t => {
@@ -16,10 +18,10 @@ test('returns object with raw message', async t => {
 	t.is(actual.raw, message);
 });
 
-test('calls parser with message and passed options', t => {
+test('calls parser with message and passed options', async t => {
 	const message = 'message';
 
-	parse(message, m => {
+	await parse(message, m => {
 		t.is(message, m);
 		return {};
 	});

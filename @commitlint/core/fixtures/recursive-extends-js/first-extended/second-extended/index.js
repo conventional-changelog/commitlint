@@ -1,5 +1,5 @@
 module.exports = {
 	rules: {
-		legacy: false
+		two: 2
 	}
 };

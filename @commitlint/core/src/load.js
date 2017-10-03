@@ -1,30 +1,35 @@
 import path from 'path';
-import importFrom from 'import-from';
+import cosmiconfig from 'cosmiconfig';
 import {entries, merge, mergeWith, pick} from 'lodash';
-import rc from 'rc';
 import resolveFrom from 'resolve-from';
 
-import resolveExtends from './library/resolve-extends';
 import executeRule from './library/execute-rule';
+import resolveExtends from './library/resolve-extends';
+import toplevel from './library/toplevel';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
-export default async (seed = {}) => {
-	// Obtain config from .rc files
-	const raw = file();
+export default async (seed = {}, options = {cwd: ''}) => {
+	const explorer = cosmiconfig('commitlint', {
+		rcExtensions: true,
+		stopDir: await toplevel(options.cwd)
+	});
+
+	const raw = (await explorer.load(options.cwd)) || {};
+	const base = raw.filepath ? path.dirname(raw.filepath) : options.cwd;
 
 	// Merge passed config with file based options
-	const config = valid(merge(raw, seed));
+	const config = valid(merge(raw.config, seed));
 	const opts = merge({extends: [], rules: {}}, pick(config, 'extends'));
 
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === 'string') {
-		const resolvedParserPreset = resolveFrom(process.cwd(), config.parserPreset);
+		const resolvedParserPreset = resolveFrom(base, config.parserPreset);
 
 		config.parserPreset = {
 			name: config.parserPreset,
-			path: `./${path.posix.relative(process.cwd(), resolvedParserPreset)}`.split(path.sep).join('/'),
+			path: resolvedParserPreset,
 			opts: require(resolvedParserPreset)
 		};
 	}
@@ -32,14 +37,17 @@ export default async (seed = {}) => {
 	// Resolve extends key
 	const extended = resolveExtends(opts, {
 		prefix: 'commitlint-config',
-		cwd: raw.config ? path.dirname(raw.config) : process.cwd(),
+		cwd: base,
 		parserPreset: config.parserPreset
 	});
 
 	const preset = valid(mergeWith(extended, config, w));
 
 	// Await parser-preset if applicable
-	if (typeof preset.parserPreset === 'object' && typeof preset.parserPreset.opts === 'object') {
+	if (
+		typeof preset.parserPreset === 'object' &&
+		typeof preset.parserPreset.opts === 'object'
+	) {
 		preset.parserPreset.opts = await preset.parserPreset.opts;
 	}
 
@@ -72,44 +80,3 @@ export default async (seed = {}) => {
 		return registry;
 	}, preset);
 };
-
-function file() {
-	const legacy = rc('conventional-changelog-lint');
-	const legacyFound = typeof legacy.config === 'string';
-
-	const found = resolveable('./commitlint.config');
-	const raw = found ? importFrom(process.cwd(), './commitlint.config') : {};
-
-	if (legacyFound && !found) {
-		console.warn(
-			`Using legacy ${path.relative(
-				process.cwd(),
-				legacy.config
-			)}. Rename to commitlint.config.js to silence this warning.`
-		);
-	}
-
-	if (legacyFound && found) {
-		console.warn(
-			`Ignored legacy ${path.relative(
-				process.cwd(),
-				legacy.config
-			)} as commitlint.config.js superseeds it. Remove .conventional-changelog-lintrc to silence this warning.`
-		);
-	}
-
-	if (found) {
-		return raw;
-	}
-
-	return legacy;
-}
-
-function resolveable(id) {
-	try {
-		resolveFrom(process.cwd(), id);
-		return true;
-	} catch (err) {
-		return false;
-	}
-}
