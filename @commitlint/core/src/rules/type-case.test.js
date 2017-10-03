@@ -23,7 +23,10 @@ const parsed = {
 	pascalcase: parse(messages.pascalcase),
 	snakecase: parse(messages.snakecase),
 	kebabcase: parse(messages.kebabcase),
-	startcase: parse(messages.startcase)
+	startcase: parse(messages.startcase, undefined, {
+		headerPattern: /^(.*): (.*)$/,
+		headerCorrespondence: ['type', 'subject']
+	})
 };
 
 test('with empty type should succeed for "never lowercase"', async t => {
@@ -172,7 +175,7 @@ test('with pascalcase type should fail for "always snakecase"', async t => {
 
 test('with pascalcase type should fail for "always startcase"', async t => {
 	const [actual] = typeCase(await parsed.pascalcase, 'always', 'start-case');
-	const expected = true;
+	const expected = false;
 	t.is(actual, expected);
 });
 
