@@ -28,7 +28,7 @@ echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.c
 
 ## Config
 
-* Configuration is picked up from `commitlint.config.js` files
+* Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`
 * Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 * See [Rules](./docs/reference-rules.md) for a complete list of possible rules
 * An example configuration can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)
