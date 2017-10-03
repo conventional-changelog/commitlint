@@ -2,7 +2,7 @@ import path from 'path';
 import exists from 'path-exists';
 import up from 'find-up';
 import gitRawCommits from 'git-raw-commits';
-import {readFile} from 'mz/fs';
+import {readFile} from '@marionebl/sander';
 
 export default getCommitMessages;
 

@@ -1,12 +1,14 @@
 import test from 'ava';
 import lint from './lint';
 
-test('throws without params', t => {
-	t.throws(lint());
+test('throws without params', async t => {
+	const error = await t.throws(lint());
+	t.is(error.message, 'Expected a raw commit');
 });
 
-test('throws with empty message', t => {
-	t.throws(lint(''));
+test('throws with empty message', async t => {
+	const error = await t.throws(lint(''));
+	t.is(error.message, 'Expected a raw commit');
 });
 
 test('positive on stub message and no rule', async t => {

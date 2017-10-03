@@ -3,16 +3,12 @@ import crypto from 'crypto';
 import {join} from 'path';
 
 import test from 'ava';
-import denodeify from 'denodeify';
 import execa from 'execa';
-import {mkdir, writeFile} from 'mz/fs';
 import exists from 'path-exists';
-import rimraf from 'rimraf';
+import * as sander from '@marionebl/sander';
 
 import pkg from '../package';
 import read from './read';
-
-const rm = denodeify(rimraf);
 
 test.beforeEach(async t => {
 	t.context.repos = [await initRepository()];
@@ -28,7 +24,7 @@ test.afterEach.always(async t => {
 });
 
 test.serial('get edit commit message from git root', async t => {
-	await writeFile('alpha.txt', 'alpha');
+	await sander.writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', '.']);
 	await execa('git', ['commit', '-m', 'alpha']);
 	const expected = ['alpha\n\n'];
@@ -37,7 +33,7 @@ test.serial('get edit commit message from git root', async t => {
 });
 
 test.serial('get history commit messages', async t => {
-	await writeFile('alpha.txt', 'alpha');
+	await sander.writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt']);
 	await execa('git', ['commit', '-m', 'alpha']);
 	await execa('git', ['rm', 'alpha.txt']);
@@ -49,8 +45,8 @@ test.serial('get history commit messages', async t => {
 });
 
 test.serial('get edit commit message from git subdirectory', async t => {
-	await mkdir('beta');
-	await writeFile('beta/beta.txt', 'beta');
+	await sander.mkdir('beta');
+	await sander.writeFile('beta/beta.txt', 'beta');
 	process.chdir('beta');
 	await execa('git', ['add', '.']);
 	await execa('git', ['commit', '-m', 'beta']);
@@ -63,7 +59,7 @@ test.serial('get edit commit message from git subdirectory', async t => {
 test.serial('get history commit messages from shallow clone', async t => {
 	const [repo] = t.context.repos;
 
-	await writeFile('alpha.txt', 'alpha');
+	await sander.writeFile('alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt']);
 	await execa('git', ['commit', '-m', 'alpha']);
 
@@ -107,10 +103,13 @@ async function cleanRepository(repo) {
 	}
 
 	if (await exists(repo.directory)) {
-		await rm(repo.directory);
+		await sander.rimraf(repo.directory);
 	}
 }
 
 function rand() {
-	return crypto.randomBytes(Math.ceil(6)).toString('hex').slice(0, 12);
+	return crypto
+		.randomBytes(Math.ceil(6))
+		.toString('hex')
+		.slice(0, 12);
 }

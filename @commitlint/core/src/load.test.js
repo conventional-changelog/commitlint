@@ -3,30 +3,22 @@ import crypto from 'crypto';
 import path from 'path';
 import test from 'ava';
 import exists from 'path-exists';
-import rimraf from 'rimraf';
 import execa from 'execa';
-import denodeify from 'denodeify';
-import * as sander from 'sander';
+import * as sander from '@marionebl/sander';
 
 import load from './load';
 
-const rm = denodeify(rimraf);
-
 test.beforeEach(async t => {
-	t.context.repos = [await initRepository()];
+	t.context.repo = await initRepository();
 });
 
 test.afterEach.always(async t => {
-	try {
-		await Promise.all(t.context.repos.map(async repo => cleanRepository(repo)));
-		t.context.repos = [];
-	} catch (err) {
-		console.log({err});
-	}
+	await cleanRepository(t.context.repo);
 });
 
 test.serial('extends-empty should have no rules', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/extends-empty'))
 		.to(repo.directory);
@@ -36,7 +28,8 @@ test.serial('extends-empty should have no rules', async t => {
 });
 
 test.serial('uses seed as configured', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/extends-empty'))
 		.to(repo.directory);
@@ -46,7 +39,8 @@ test.serial('uses seed as configured', async t => {
 });
 
 test.serial('uses seed with parserPreset', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/parser-preset'))
 		.to(repo.directory);
@@ -54,6 +48,7 @@ test.serial('uses seed with parserPreset', async t => {
 	const {parserPreset: actual} = await load({
 		parserPreset: './conventional-changelog-custom'
 	});
+
 	t.is(actual.name, './conventional-changelog-custom');
 	t.deepEqual(actual.opts, {
 		parserOpts: {
@@ -63,16 +58,18 @@ test.serial('uses seed with parserPreset', async t => {
 });
 
 test.serial('invalid extend should throw', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/extends-invalid'))
 		.to(repo.directory);
 
-	t.throws(load());
+	await t.throws(load());
 });
 
 test.serial('empty file should have no rules', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/empty-object-file'))
 		.to(repo.directory);
@@ -82,7 +79,8 @@ test.serial('empty file should have no rules', async t => {
 });
 
 test.serial('empty file should extend nothing', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/empty-file'))
 		.to(repo.directory);
@@ -92,7 +90,8 @@ test.serial('empty file should extend nothing', async t => {
 });
 
 test.serial('recursive extends', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/recursive-extends'))
 		.to(repo.directory);
@@ -109,7 +108,8 @@ test.serial('recursive extends', async t => {
 });
 
 test.serial('recursive extends with json file', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/recursive-extends-json'))
 		.to(repo.directory);
@@ -126,7 +126,8 @@ test.serial('recursive extends with json file', async t => {
 });
 
 test.serial('recursive extends with yaml file', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/recursive-extends-yaml'))
 		.to(repo.directory);
@@ -143,7 +144,8 @@ test.serial('recursive extends with yaml file', async t => {
 });
 
 test.serial('recursive extends with js file', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/recursive-extends-js'))
 		.to(repo.directory);
@@ -160,7 +162,8 @@ test.serial('recursive extends with js file', async t => {
 });
 
 test.serial('recursive extends with package.json file', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/recursive-extends-package'))
 		.to(repo.directory);
@@ -179,7 +182,7 @@ test.serial('recursive extends with package.json file', async t => {
 test.serial(
 	'parser preset overwrites completely instead of merging',
 	async t => {
-		const [repo] = t.context.repos;
+		const {repo} = t.context;
 
 		await sander
 			.copydir(path.join(repo.previous, 'fixtures/parser-preset-override'))
@@ -198,11 +201,12 @@ test.serial(
 );
 
 test.serial('recursive extends with parserPreset', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
 
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/recursive-parser-preset'))
 		.to(repo.directory);
+
 	await sander
 		.copydir(path.join(repo.previous, 'node_modules'))
 		.to(path.join('node_modules'));
@@ -218,7 +222,8 @@ test.serial('recursive extends with parserPreset', async t => {
 });
 
 test.serial('ignores unknow keys', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/trash-file'))
 		.to(repo.directory);
@@ -234,7 +239,8 @@ test.serial('ignores unknow keys', async t => {
 });
 
 test.serial('ignores unknow keys recursively', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/trash-extend'))
 		.to(repo.directory);
@@ -250,7 +256,8 @@ test.serial('ignores unknow keys recursively', async t => {
 });
 
 test.serial('supports legacy .conventional-changelog-lintrc', async t => {
-	const [repo] = t.context.repos;
+	const {repo} = t.context;
+
 	await sander
 		.copydir(path.join(repo.previous, 'fixtures/legacy'))
 		.to(repo.directory);
@@ -267,7 +274,8 @@ test.serial('supports legacy .conventional-changelog-lintrc', async t => {
 test.serial(
 	'commitlint.config.js overrides .conventional-changelog-lintrc',
 	async t => {
-		const [repo] = t.context.repos;
+		const {repo} = t.context;
+
 		await sander
 			.copydir(path.join(repo.previous, 'fixtures/overriden-legacy'))
 			.to(repo.directory);
@@ -302,7 +310,7 @@ async function cleanRepository(repo) {
 	}
 
 	if (await exists(repo.directory)) {
-		await rm(repo.directory);
+		await sander.rimraf(repo.directory);
 	}
 }
 
