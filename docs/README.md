@@ -24,7 +24,7 @@
 
 [![npm latest][2]][3] [![npm next][10]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
 
-`commitlint` helps your team adhereing to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
+`commitlint` helps your team adhering to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
 
 # Getting started
 
@@ -37,7 +37,7 @@ npm install -g @commitlint/cli @commitlint/config-angular
 ## Configure
 
 ```bash
-echo "module.exports = {extends: [@commitlint/config-angular']}" > commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.config.js
 ```
 
 ## Test
@@ -59,7 +59,7 @@ commitlint --from=HEAD~1
 ## Documentation
 
 * **Guides** - Common use cases explained in a step-by-step pace
-* **Concepts** - Overarching topics important to unterstand the use of `commitlint`
+* **Concepts** - Overarching topics important to understand the use of `commitlint`
 * **Reference** - Mostly technical documentation
 
 
