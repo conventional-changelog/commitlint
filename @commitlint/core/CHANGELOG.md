@@ -1,7 +1,31 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/marionebl/commitlint/compare/v3.2.0...v4.0.0) (2017-10-04)
+
+
+### Bug Fixes
+
+* incorrect 'git fetch' option ([5826c11](https://github.com/marionebl/commitlint/commit/5826c11))
+
+
+### Features
+
+* enable alternative config formats  ([#83](https://github.com/marionebl/commitlint/issues/83)) ([91968b8](https://github.com/marionebl/commitlint/commit/91968b8)), closes [#73](https://github.com/marionebl/commitlint/issues/73)
+* **core:** add additional case options ([#84](https://github.com/marionebl/commitlint/issues/84)) ([79c0cee](https://github.com/marionebl/commitlint/commit/79c0cee))
+
+
+### BREAKING CHANGES
+
+* discontinue support of conventional-changelog-lintrc
+
+* test: make git setup reliable
+
+
+
 
 <a name="3.2.0"></a>
 # 3.2.0 (2017-09-05)
