@@ -29,8 +29,12 @@ async function clone(source, ...args) {
 }
 
 async function setup(cwd) {
-	await execa('git', ['config', 'user.name', 'ava'], {cwd});
-	await execa('git', ['config', 'user.email', 'test@example.com'], {cwd});
+	try {
+		await execa('git', ['config', 'user.name', 'ava'], {cwd});
+		await execa('git', ['config', 'user.email', 'test@example.com'], {cwd});
+	} catch (err) {
+		console.warn(`git config in ${cwd} failed`, err.message);
+	}
 }
 
 function rand() {
