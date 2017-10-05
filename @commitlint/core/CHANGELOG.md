@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/marionebl/commitlint/compare/v4.0.0...v4.1.0) (2017-10-05)
+
+
+### Features
+
+* **core:** ignore version commits with footers ([3804176](https://github.com/marionebl/commitlint/commit/3804176))
+
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/marionebl/commitlint/compare/v3.2.0...v4.0.0) (2017-10-04)
 
