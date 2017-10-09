@@ -16,9 +16,15 @@
 ## Getting started
 
 ```sh
+# Install commitlint cli and angular config
 npm install --save-dev @commitlint/{config-angular,cli}
+
+# Configure commitlint to use angular config
 echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.config.js
 ```
+
+* [Local setup](http://marionebl.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
+* [CI setup](http://marionebl.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
 
 ## CLI
 
