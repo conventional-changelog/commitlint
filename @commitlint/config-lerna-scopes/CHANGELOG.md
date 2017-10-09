@@ -1,7 +1,18 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/marionebl/commitlint/compare/v4.1.0...v4.1.1) (2017-10-09)
+
+
+### Bug Fixes
+
+* **config-lerna-scopes:** fix package list get with recent lerna versions ([8f35dae](https://github.com/marionebl/commitlint/commit/8f35dae))
+
+
+
 
 <a name="3.0.4"></a>
 ## 3.0.4 (2017-08-04)
