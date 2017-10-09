@@ -4,10 +4,19 @@
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "scripts": {
     "pretest": "dep-check",
-    "test": "exit 0",
+    "test": "ava",
     "clean": "exit 0"
   },
   "xo": false,
+  "ava": {
+    "files": [
+      "test.js"
+    ],
+    "sources": [
+      "index.js",
+      "fixtures/**/*"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"
@@ -25,9 +34,12 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "dependencies": {
+    "import-from": "^2.1.0",
     "lerna": "^2.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^3.1.1"
+    "@commitlint/utils": "^3.1.1",
+    "@commitlint/test": "^3.1.1",
+    "ava": "^0.22.0"
   }
 }
