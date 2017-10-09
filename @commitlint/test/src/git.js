@@ -2,18 +2,17 @@ import crypto from 'crypto';
 import os from 'os';
 import path from 'path';
 
-import execa from 'execa';
 import * as sander from '@marionebl/sander';
+import execa from 'execa';
+import pkgDir from 'pkg-dir';
 
 export {bootstrap, clone};
-
-const PKG_ROOT = path.join(__dirname, '..');
 
 async function bootstrap(fixture) {
 	const cwd = path.join(os.tmpdir(), rand());
 
 	if (typeof fixture !== 'undefined') {
-		await sander.copydir(PKG_ROOT, fixture).to(cwd);
+		await sander.copydir(await pkgDir(), fixture).to(cwd);
 	}
 
 	await execa('git', ['init', cwd]);

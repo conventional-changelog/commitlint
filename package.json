@@ -31,7 +31,10 @@
     "ignores": [
       "@commitlint/**/lib/**",
       "@commitlint/**/node_modules"
-    ]
+    ],
+    "rules": {
+      "import/prefer-default-export": "off"
+    }
   },
   "engines": {
     "node": ">=4"

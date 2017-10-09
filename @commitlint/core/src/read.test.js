@@ -1,13 +1,13 @@
+import {git} from '@commitlint/test';
 import test from 'ava';
 import execa from 'execa';
 import * as sander from '@marionebl/sander';
 
 import pkg from '../package';
-import {bootstrap, clone} from './test-git';
 import read from './read';
 
 test('get edit commit message from git root', async t => {
-	const cwd = await bootstrap();
+	const cwd = await git.bootstrap();
 
 	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
 	await execa('git', ['add', '.'], {cwd});
@@ -18,7 +18,7 @@ test('get edit commit message from git root', async t => {
 });
 
 test('get history commit messages', async t => {
-	const cwd = await bootstrap();
+	const cwd = await git.bootstrap();
 	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt'], {cwd});
 	await execa('git', ['commit', '-m', 'alpha'], {cwd});
@@ -31,7 +31,7 @@ test('get history commit messages', async t => {
 });
 
 test('get edit commit message from git subdirectory', async t => {
-	const cwd = await bootstrap();
+	const cwd = await git.bootstrap();
 	await sander.mkdir(cwd, 'beta');
 	await sander.writeFile(cwd, 'beta/beta.txt', 'beta');
 
@@ -44,7 +44,7 @@ test('get edit commit message from git subdirectory', async t => {
 });
 
 test('get history commit messages from shallow clone', async t => {
-	const cwd = await clone(pkg.repository.url, '--depth', '1');
+	const cwd = await git.clone(pkg.repository.url, '--depth', '1');
 	const err = await t.throws(read({from: 'master', cwd}));
 
 	t.true(
