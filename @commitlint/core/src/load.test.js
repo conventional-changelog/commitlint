@@ -1,22 +1,22 @@
+import {git} from '@commitlint/test';
 import test from 'ava';
 
-import {bootstrap} from './test-git';
 import load from './load';
 
 test('extends-empty should have no rules', async t => {
-	const cwd = await bootstrap('fixtures/extends-empty');
+	const cwd = await git.bootstrap('fixtures/extends-empty');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual.rules, {});
 });
 
 test('uses seed as configured', async t => {
-	const cwd = await bootstrap('fixtures/extends-empty');
+	const cwd = await git.bootstrap('fixtures/extends-empty');
 	const actual = await load({rules: {foo: 'bar'}}, {cwd});
 	t.is(actual.rules.foo, 'bar');
 });
 
 test('uses seed with parserPreset', async t => {
-	const cwd = await bootstrap('fixtures/parser-preset');
+	const cwd = await git.bootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(
 		{
 			parserPreset: './conventional-changelog-custom'
@@ -33,24 +33,24 @@ test('uses seed with parserPreset', async t => {
 });
 
 test('invalid extend should throw', async t => {
-	const cwd = await bootstrap('fixtures/extends-invalid');
+	const cwd = await git.bootstrap('fixtures/extends-invalid');
 	await t.throws(load({}, {cwd}));
 });
 
 test('empty file should have no rules', async t => {
-	const cwd = await bootstrap('fixtures/empty-object-file');
+	const cwd = await git.bootstrap('fixtures/empty-object-file');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual.rules, {});
 });
 
 test('empty file should extend nothing', async t => {
-	const cwd = await bootstrap('fixtures/empty-file');
+	const cwd = await git.bootstrap('fixtures/empty-file');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual.extends, []);
 });
 
 test('respects cwd option', async t => {
-	const cwd = await bootstrap('fixtures/recursive-extends/first-extended');
+	const cwd = await git.bootstrap('fixtures/recursive-extends/first-extended');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual, {
 		extends: ['./second-extended'],
@@ -62,7 +62,7 @@ test('respects cwd option', async t => {
 });
 
 test('recursive extends', async t => {
-	const cwd = await bootstrap('fixtures/recursive-extends');
+	const cwd = await git.bootstrap('fixtures/recursive-extends');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual, {
 		extends: ['./first-extended'],
@@ -75,7 +75,7 @@ test('recursive extends', async t => {
 });
 
 test('recursive extends with json file', async t => {
-	const cwd = await bootstrap('fixtures/recursive-extends-json');
+	const cwd = await git.bootstrap('fixtures/recursive-extends-json');
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
@@ -89,7 +89,7 @@ test('recursive extends with json file', async t => {
 });
 
 test('recursive extends with yaml file', async t => {
-	const cwd = await bootstrap('fixtures/recursive-extends-yaml');
+	const cwd = await git.bootstrap('fixtures/recursive-extends-yaml');
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
@@ -103,7 +103,7 @@ test('recursive extends with yaml file', async t => {
 });
 
 test('recursive extends with js file', async t => {
-	const cwd = await bootstrap('fixtures/recursive-extends-js');
+	const cwd = await git.bootstrap('fixtures/recursive-extends-js');
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
@@ -117,7 +117,7 @@ test('recursive extends with js file', async t => {
 });
 
 test('recursive extends with package.json file', async t => {
-	const cwd = await bootstrap('fixtures/recursive-extends-package');
+	const cwd = await git.bootstrap('fixtures/recursive-extends-package');
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
@@ -131,7 +131,7 @@ test('recursive extends with package.json file', async t => {
 });
 
 test('parser preset overwrites completely instead of merging', async t => {
-	const cwd = await bootstrap('fixtures/parser-preset-override');
+	const cwd = await git.bootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
 
 	t.is(actual.parserPreset.name, './custom');
@@ -145,7 +145,7 @@ test('parser preset overwrites completely instead of merging', async t => {
 });
 
 test('recursive extends with parserPreset', async t => {
-	const cwd = await bootstrap('fixtures/recursive-parser-preset');
+	const cwd = await git.bootstrap('fixtures/recursive-parser-preset');
 	const actual = await load({}, {cwd});
 
 	t.is(actual.parserPreset.name, './conventional-changelog-custom');
@@ -157,7 +157,7 @@ test('recursive extends with parserPreset', async t => {
 });
 
 test('ignores unknow keys', async t => {
-	const cwd = await bootstrap('fixtures/trash-file');
+	const cwd = await git.bootstrap('fixtures/trash-file');
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
@@ -170,7 +170,7 @@ test('ignores unknow keys', async t => {
 });
 
 test('ignores unknow keys recursively', async t => {
-	const cwd = await bootstrap('fixtures/trash-extend');
+	const cwd = await git.bootstrap('fixtures/trash-extend');
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
