@@ -33,7 +33,8 @@
       "@commitlint/**/node_modules"
     ],
     "rules": {
-      "import/prefer-default-export": "off"
+      "import/prefer-default-export": "off",
+      "ava/no-ignored-test-files": "off"
     }
   },
   "engines": {
