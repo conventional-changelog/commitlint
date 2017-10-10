@@ -40,7 +40,7 @@ const configuration = {
 	description: {
 		color: 'toggle colored output',
 		cwd: 'directory to execute in',
-		edit: 'read last commit message found in ./git/COMMIT_EDITMSG',
+		edit: 'read last commit message found in ./.git/COMMIT_EDITMSG',
 		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		to: 'upper end of the commit range to lint; applies if edit=false',
