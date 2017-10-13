@@ -6,6 +6,16 @@ import * as sander from '@marionebl/sander';
 import pkg from '../package';
 import read from './read';
 
+test('get edit commit message specified by the `edit` flag', async t => {
+	const cwd = await git.bootstrap();
+
+	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
+
+	const expected = ['foo\n'];
+	const actual = await read({edit: 'commit-msg-file', cwd});
+	t.deepEqual(actual, expected);
+});
+
 test('get edit commit message from git root', async t => {
 	const cwd = await git.bootstrap();
 
