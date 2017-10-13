@@ -23,8 +23,8 @@ const rules = {
 };
 
 const configuration = {
-	string: ['cwd', 'from', 'to', 'extends', 'parser-preset'],
-	boolean: ['edit', 'help', 'version', 'quiet', 'color'],
+	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
+	boolean: ['help', 'version', 'quiet', 'color'],
 	alias: {
 		c: 'color',
 		d: 'cwd',
@@ -40,7 +40,8 @@ const configuration = {
 	description: {
 		color: 'toggle colored output',
 		cwd: 'directory to execute in',
-		edit: 'read last commit message found in ./.git/COMMIT_EDITMSG',
+		edit:
+			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
 		extends: 'array of shareable configurations to extend',
 		from: 'lower end of the commit range to lint; applies if edit=false',
 		to: 'upper end of the commit range to lint; applies if edit=false',
@@ -74,6 +75,8 @@ const cli = meow(
 const load = (seed, opts) => core.load(seed, opts);
 
 function main(options) {
+	normalizeOptions(options);
+
 	const raw = options.input;
 	const flags = options.flags;
 	const fromStdin = rules.fromStdin(raw, flags);
@@ -111,6 +114,17 @@ function main(options) {
 			})
 		)
 	);
+}
+
+function normalizeOptions(options) {
+	const flags = options.flags;
+
+	// The `edit` flag is either a boolean or a string but we are only allowed
+	// to specify one of them in minimist
+	if (flags.edit === '') {
+		flags.edit = true;
+		flags.e = true;
+	}
 }
 
 function getSeed(seed) {

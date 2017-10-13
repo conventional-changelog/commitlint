@@ -19,7 +19,7 @@ async function getCommitMessages(settings) {
 	const {cwd, from, to, edit} = settings;
 
 	if (edit) {
-		return getEditCommit(cwd);
+		return getEditCommit(cwd, edit);
 	}
 
 	if (await isShallow(cwd)) {
@@ -57,15 +57,19 @@ async function isShallow(cwd) {
 }
 
 // Get recently edited commit message
-// (cwd: string) => Promise<Array<String>>
-async function getEditCommit(cwd) {
+// (cwd: string, edit: any) => Promise<Array<String>>
+async function getEditCommit(cwd, edit) {
 	const top = await toplevel(cwd);
 
 	if (typeof top !== 'string') {
 		throw new TypeError(`Could not find git root from ${cwd}`);
 	}
 
-	const editFilePath = path.join(top, '.git/COMMIT_EDITMSG');
+	const editFilePath =
+		typeof edit === 'string'
+			? path.resolve(top, edit)
+			: path.join(top, '.git/COMMIT_EDITMSG');
+
 	const editFile = await sander.readFile(editFilePath);
 	return [`${editFile.toString('utf-8')}\n`];
 }
