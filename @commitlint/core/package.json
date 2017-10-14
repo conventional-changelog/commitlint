@@ -4,13 +4,12 @@
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
-    "clean": "rimraf lib",
-    "prepublish": "npm run build",
+    "build": "npx cross-env NODE_ENV=production npx babel src --out-dir lib  --source-maps",
+    "clean": "npx rimraf lib",
     "pretest": "dep-check",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"npm run watch\"",
-    "test": "ava -c 4 $AVA_VERBOSE",
-    "watch": "babel src --out-dir lib --watch --source-maps"
+    "start": "npx concurrently \"npx ava -c 4 --verbose --watch\" \"npx yarn run watch\"",
+    "test": "npx ava -c 4 $AVA_VERBOSE",
+    "watch": "npx babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
     "files": [

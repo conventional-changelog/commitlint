@@ -10,7 +10,6 @@
     "commit": "npx -p @commitlint/prompt-cli commit",
     "commitmsg": "npx commitlint -e $GIT_PARAMS",
     "docs": "npx docsify serve docs",
-    "postinstall": "npx lerna bootstrap",
     "precommit": "lint-staged",
     "pretest": "npx xo",
     "publish": "npx lerna publish --conventional-commits",
@@ -39,6 +38,11 @@
       "ava/no-ignored-test-files": "off"
     }
   },
+  "workspaces": [
+    "@alias/*",
+    "@commitlint/*",
+    "@packages/*"
+  ],
   "engines": {
     "node": ">=4"
   },
@@ -67,13 +71,15 @@
   },
   "devDependencies": {
     "docsify-cli": "^4.1.8",
+    "eslint": "^4.8.0",
     "eslint-config-prettier": "^2.3.0",
     "husky": "^0.14.3",
-    "lerna": "^2.0.0",
+    "lerna": "^2.4.0",
     "lint-staged": "^4.0.1",
     "npx": "^9.6.0",
     "prettier": "^1.5.2",
     "trevor": "^2.3.0",
-    "xo": "^0.18.2"
+    "xo": "^0.18.2",
+    "yarn": "^1.2.1"
   }
 }

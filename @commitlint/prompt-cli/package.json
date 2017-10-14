@@ -6,7 +6,7 @@
     "commit": "./cli.js"
   },
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "npx rimraf lib",
     "commit": "$npm_package_bin_commit",
     "pretest": "dep-check"
   },

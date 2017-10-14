@@ -1,9 +1,6 @@
 {
   "lerna": "2.0.0",
-  "packages": [
-    "@alias/*",
-    "@commitlint/*",
-    "@packages/*"
-  ],
+  "npmClient": "yarn",
+  "useWorkspaces": true,
   "version": "4.2.0"
 }

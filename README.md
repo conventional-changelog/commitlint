@@ -84,18 +84,19 @@ Copyright by @marionebl. All `commitlint` packages are released under the MIT li
 ```sh
 git clone git@github.com:marionebl/commitlint.git
 cd commitlint
-npx npm install
-npx npm start # run tests, again on change
-npx npm run build # run build tasks
+npx yarn install
+npx yarn run build # run build tasks
+npx yarn start # run tests, again on change
 ```
 
 ### Publishing a release
 
 ```sh
-npx npm run clean
-npx npm install
-npx npm test
-npx npm run publish
+npx yarn run clean
+npx yarn install
+npx yarn run build
+npx yarn test
+npx yarn run publish
 ```
 
 

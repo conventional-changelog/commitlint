@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "pretest": "dep-check",
-    "start": "ava --watch --verbose",
-    "test": "ava $AVA_VERBOSE"
+    "start": "npx ava --watch --verbose",
+    "test": "npx ava $AVA_VERBOSE"
   },
   "ava": {
     "files": [
