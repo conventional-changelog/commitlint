@@ -8,9 +8,10 @@
   "scripts": {
     "build": "exit 0",
     "clean": "exit 0",
+    "prepublish": "npm test",
     "pretest": "dep-check",
-    "test": "ava",
-    "prepublish": "npm test"
+    "start": "ava --watch --verbose",
+    "test": "ava $AVA_VERBOSE"
   },
   "ava": {
     "files": [

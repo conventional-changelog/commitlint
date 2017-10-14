@@ -5,12 +5,13 @@
   "main": "./lib/index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
-    "watch": "babel src --out-dir lib --watch  --source-maps",
     "clean": "rimraf lib",
     "commit": "git-cz",
+    "prepublish": "npm run build",
     "pretest": "dep-check",
-    "test": "ava",
-    "prepublish": "npm run build"
+    "start": "concurrently \"ava --watch --verbose\" \"npm run watch\"",
+    "test": "ava $AVA_VERBOSE",
+    "watch": "babel src --out-dir lib --watch  --source-maps"
   },
   "ava": {
     "babel": "inherit",
@@ -59,6 +60,7 @@
     "babel-preset-commitlint": "^3.2.0",
     "babel-register": "^6.24.1",
     "commitizen": "^2.9.6",
+    "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",
     "throat": "^4.1.0"
   },

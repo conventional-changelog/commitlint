@@ -3,9 +3,10 @@
   "version": "3.1.1",
   "description": "Shareable commitlint config enforcing the angular commit convention",
   "scripts": {
+    "clean": "exit 0",
     "pretest": "dep-check",
-    "test": "exit 0",
-    "clean": "exit 0"
+    "start": "exit 0",
+    "test": "exit 0"
   },
   "xo": false,
   "repository": {

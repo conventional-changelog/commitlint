@@ -5,16 +5,18 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "clean": "lerna clean --yes && lerna run clean",
+    "build": "lerna run build --stream --parallel --include-filtered-dependencies",
+    "clean": "lerna clean --yes && lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "./@commitlint/prompt-cli/cli.js",
     "commitmsg": "./@commitlint/cli/cli.js -e",
     "docs": "docsify serve docs",
     "postinstall": "lerna bootstrap",
     "precommit": "lint-staged",
     "pretest": "xo",
-    "reinstall": "npm run clean && npm install",
     "publish": "lerna publish --conventional-commits",
-    "test": "lerna run test",
+    "reinstall": "npm run clean && npm install",
+    "start": "lerna run start --stream --parallel --include-filtered-dependencies",
+    "test": "AVA_VERBOSE=--verbose lerna run test --stream --parallel --include-filtered-dependencies",
     "travis": "trevor"
   },
   "lint-staged": {

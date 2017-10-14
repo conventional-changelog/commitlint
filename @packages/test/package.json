@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "pretest": "dep-check",
-    "test": "ava -c 4",
+    "start": "concurrently \"ava --watch --verbose\" \"npm run watch\"",
+    "test": "ava $AVA_VERBOSE",
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "watch": "babel src --out-dir lib --watch --source-maps",
     "clean": "rimraf lib",
@@ -64,6 +65,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-commitlint": "^3.2.0",
     "babel-register": "^6.26.0",
+    "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",
     "rimraf": "2.6.1"
   }
