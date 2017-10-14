@@ -15,8 +15,7 @@
     "publish": "npx lerna publish --conventional-commits",
     "reinstall": "npm run clean && npm install",
     "start": "npx lerna run start --stream --parallel --include-filtered-dependencies",
-    "test": "npx cross-env AVA_VERBOSE=--verbose npx lerna run test --stream --parallel --include-filtered-dependencies",
-    "travis": "npx trevor"
+    "test": "npx cross-env AVA_VERBOSE=--verbose npx lerna run test --stream --parallel --include-filtered-dependencies"
   },
   "lint-staged": {
     "*.js": [
@@ -79,7 +78,6 @@
     "lint-staged": "^4.0.1",
     "npx": "^9.6.0",
     "prettier": "^1.5.2",
-    "trevor": "^2.3.0",
     "xo": "^0.18.2",
     "yarn": "^1.2.1"
   }
