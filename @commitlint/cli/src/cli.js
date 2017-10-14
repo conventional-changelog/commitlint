@@ -10,14 +10,6 @@ const stdin = require('get-stdin');
 const pkg = require('../package');
 const help = require('./help');
 
-const rules = {
-	fromStdin: (input, flags) =>
-		input.length === 0 &&
-		typeof flags.from !== 'string' &&
-		typeof flags.to !== 'string' &&
-		!flags.edit
-};
-
 const configuration = {
 	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
 	boolean: ['help', 'version', 'quiet', 'color'],
@@ -80,7 +72,7 @@ main(cli).catch(err =>
 async function main(options) {
 	const raw = options.input;
 	const flags = normalizeFlags(options.flags);
-	const fromStdin = rules.fromStdin(raw, flags);
+	const fromStdin = checkFromStdin(raw, flags);
 
 	const range = pick(flags, 'edit', 'from', 'to');
 	const fmt = new chalk.constructor({enabled: flags.color});
@@ -88,7 +80,20 @@ async function main(options) {
 	const input = await (fromStdin
 		? stdin()
 		: core.read(range, {cwd: flags.cwd}));
-	const messages = Array.isArray(input) ? input : [input];
+
+	const messages = (Array.isArray(input) ? input : [input])
+		.filter(message => typeof message === 'string')
+		.filter(Boolean);
+
+	if (messages.length === 0 && !checkFromRepository(flags)) {
+		const err = new Error(
+			'[input] is required: supply via stdin, or --edit or --from and --to'
+		);
+		err.type = pkg.name;
+		console.log(`${cli.help}\n`);
+		console.log(err.message);
+		throw err;
+	}
 
 	return Promise.all(
 		messages.map(async message => {
@@ -113,6 +118,22 @@ async function main(options) {
 			console.log('');
 		})
 	);
+}
+
+function checkFromStdin(input, flags) {
+	return input.length === 0 && !checkFromRepository(flags);
+}
+
+function checkFromRepository(flags) {
+	return checkFromHistory(flags) || checkFromEdit(flags);
+}
+
+function checkFromEdit(flags) {
+	return Boolean(flags.edit);
+}
+
+function checkFromHistory(flags) {
+	return typeof flags.from === 'string' || typeof flags.to === 'string';
 }
 
 function normalizeFlags(flags) {
