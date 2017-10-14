@@ -1,0 +1,35 @@
+{
+  "name": "commitlint",
+  "version": "4.1.1",
+  "description": "Lint your commit messages",
+  "bin": {
+    "commitlint": "cli.js"
+  },
+  "xo": false,
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marionebl/commitlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "cli"
+  ],
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@commitlint/cli": "^4.1.1",
+    "read-pkg": "^2.0.0",
+    "resolve-pkg": "^1.0.0"
+  }
+}
