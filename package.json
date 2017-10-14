@@ -15,7 +15,7 @@
     "publish": "npx lerna publish --conventional-commits",
     "reinstall": "npm run clean && npm install",
     "start": "npx lerna run start --stream --parallel --include-filtered-dependencies",
-    "test": "AVA_VERBOSE=--verbose npx lerna run test --stream --parallel --include-filtered-dependencies",
+    "test": "npx cross-env AVA_VERBOSE=--verbose npx lerna run test --stream --parallel --include-filtered-dependencies",
     "travis": "npx trevor"
   },
   "lint-staged": {
@@ -70,6 +70,7 @@
     "@marionebl/sander": "^0.6.1"
   },
   "devDependencies": {
+    "cross-env": "^5.0.5",
     "docsify-cli": "^4.1.8",
     "eslint": "^4.8.0",
     "eslint-config-prettier": "^2.3.0",
