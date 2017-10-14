@@ -15,7 +15,7 @@
     "publish": "npx lerna publish --conventional-commits",
     "reinstall": "npm run clean && npm install",
     "start": "npx lerna run start --stream --parallel --include-filtered-dependencies",
-    "test": "npx cross-env AVA_VERBOSE=--verbose npx lerna run test --stream --parallel --include-filtered-dependencies"
+    "test": "npx cross-env npx lerna run test --stream --parallel --include-filtered-dependencies"
   },
   "lint-staged": {
     "*.js": [

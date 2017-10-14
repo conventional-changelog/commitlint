@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "dep-check",
     "start": "npx ava --watch --verbose",
-    "test": "npx ava $AVA_VERBOSE"
+    "test": "npx ava --verbose"
   },
   "ava": {
     "files": [

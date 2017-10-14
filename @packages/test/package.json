@@ -7,7 +7,7 @@
   "scripts": {
     "pretest": "dep-check",
     "start": "npx concurrently \"npx ava --watch --verbose\" \"npx yarn run watch\"",
-    "test": "npx ava $AVA_VERBOSE",
+    "test": "npx ava --verbose",
     "build": "npx cross-env NODE_ENV=production npx babel src --out-dir lib  --source-maps",
     "watch": "npx babel src --out-dir lib --watch --source-maps",
     "clean": "npx rimraf lib"
