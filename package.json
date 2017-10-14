@@ -8,7 +8,7 @@
     "build": "lerna run build --stream --parallel --include-filtered-dependencies",
     "clean": "lerna clean --yes && lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "./@commitlint/prompt-cli/cli.js",
-    "commitmsg": "./@commitlint/cli/cli.js -e",
+    "commitmsg": "./@commitlint/cli/cli.js -e $GIT_PARAMS",
     "docs": "docsify serve docs",
     "postinstall": "lerna bootstrap",
     "precommit": "lint-staged",
