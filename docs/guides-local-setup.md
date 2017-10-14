@@ -33,12 +33,12 @@ This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/
 ```json
 {
   "scripts": {
-    "commitmsg": "commitlint -e"
+    "commitmsg": "commitlint -e $GIT_PARAMS"
   }
 }
 ```
 
-Using `commitmsg` gives us exactly what we want: It is executed everytime a new commit is created. Invoking `commitlint` with the `-e|--edit` flag causes it to correctly read the commit message from `.git/COMMIT_MSG`.
+Using `commitmsg` gives us exactly what we want: It is executed everytime a new commit is created. Passimg husky's `$GIT_PARAMS` to `commitlint` via the `-e|--edit` flag directs it to the relevant edit file. `-e` defaults to `.git/COMMIT_EDITMSG`.
 
 ## Test
 
