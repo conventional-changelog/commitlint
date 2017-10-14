@@ -213,9 +213,12 @@ load({parserPreset: './parser-preset.js'})
 
 ```ts
 type Range = {
+  /* Lower end of the commit range to read */
   from: string;
+  /* Upper end of the commit range to read */
   to: string;
-  edit?: boolean;
+  /* Wether (boolean) to read from ./.git/COMMIT_EDITMSG or where to read from (string) */
+  edit?: boolean | string;
 };
 
 read(range: Range) => Promise<string[]>
@@ -230,6 +233,10 @@ const {read} = require('@commitlint/core');
 read({edit: true})
  .then(messages => console.log(messages));
 // => ['I did something\n\n']
+
+read({edit: './git/GITGUI_EDITMESSAGE'})
+ .then(messages => console.log(messages));
+// => ['I did something via git gui\n\n']
 
 read({from: 'HEAD~2'})
   .then(messages => console.log(messages));
