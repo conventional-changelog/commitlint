@@ -29,8 +29,8 @@
       "prettier"
     ],
     "ignores": [
-      "@commitlint/**/lib/**",
-      "@commitlint/**/node_modules"
+      "@*/**/lib/**",
+      "@*/**/node_modules"
     ],
     "rules": {
       "import/prefer-default-export": "off",
