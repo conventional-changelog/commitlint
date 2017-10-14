@@ -1,7 +1,15 @@
 # Change Log
 
 All notable changes to this project will be documented in this file.
-See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/marionebl/commitlint/compare/v4.1.1...v4.2.0) (2017-10-14)
+
+
+
+
+**Note:** Version bump only for package @commitlint/config-patternplate
 
 <a name="3.0.4"></a>
 ## 3.0.4 (2017-08-04)

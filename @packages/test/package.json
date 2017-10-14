@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/test",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "test utilities for @commitlint",
   "main": "lib/",
   "private": true,
@@ -60,10 +60,10 @@
     "pkg-dir": "^2.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^3.1.1",
+    "@commitlint/utils": "^4.2.0",
     "ava": "0.22.0",
     "babel-cli": "^6.26.0",
-    "babel-preset-commitlint": "^3.2.0",
+    "babel-preset-commitlint": "^4.2.0",
     "babel-register": "^6.26.0",
     "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",

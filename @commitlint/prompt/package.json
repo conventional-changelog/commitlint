@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "scripts": {
@@ -54,10 +54,10 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^3.1.1",
+    "@commitlint/utils": "^4.2.0",
     "ava": "^0.20.0",
     "babel-cli": "^6.24.1",
-    "babel-preset-commitlint": "^3.2.0",
+    "babel-preset-commitlint": "^4.2.0",
     "babel-register": "^6.24.1",
     "commitizen": "^2.9.6",
     "concurrently": "^3.5.0",
@@ -65,7 +65,7 @@
     "throat": "^4.1.0"
   },
   "dependencies": {
-    "@commitlint/core": "^4.1.1",
+    "@commitlint/core": "^4.2.0",
     "babel-runtime": "^6.23.0",
     "chalk": "^1.1.1",
     "lodash": "^4.17.4",

@@ -9,12 +9,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-**Note:** Version bump only for package @commitlint/test
-
-<a name="4.1.1"></a>
-## [4.1.1](https://github.com/marionebl/commitlint/compare/v4.1.0...v4.1.1) (2017-10-09)
-
-
-
-
-**Note:** Version bump only for package @commitlint/test
+**Note:** Version bump only for package commitlint

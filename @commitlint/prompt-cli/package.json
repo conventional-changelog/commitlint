@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt-cli",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "commit prompt using commitlint.config.js",
   "bin": {
     "commit": "./cli.js"
@@ -26,10 +26,10 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^3.1.1"
+    "@commitlint/utils": "^4.2.0"
   },
   "dependencies": {
-    "@commitlint/prompt": "^4.1.1",
+    "@commitlint/prompt": "^4.2.0",
     "execa": "^0.7.0",
     "meow": "^3.7.0"
   }
