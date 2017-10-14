@@ -3,19 +3,29 @@
   "version": "4.2.0",
   "description": "Lint your commit messages",
   "bin": {
-    "commitlint": "cli.js"
+    "commitlint": "./lib/cli.js"
   },
   "scripts": {
-    "build": "exit 0",
-    "clean": "exit 0",
-    "prepublish": "npm test",
-    "pretest": "dep-check",
-    "start": "ava --watch --verbose",
-    "test": "ava $AVA_VERBOSE"
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+    "clean": "rimraf lib",
+    "prepublish": "npm run build",
+    "prestart": "dep-check && npm run build",
+    "pretest": "dep-check && npm run build",
+    "start": "concurrently \"ava -c 4 --verbose --watch\" \"npm run watch\"",
+    "test": "ava -c 4 $AVA_VERBOSE",
+    "watch": "babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
     "files": [
-      "cli.test.js"
+      "lib/**/*.test.js"
+    ],
+    "source": [
+      "lib/**/*.js"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-commitlint"
     ]
   },
   "xo": false,
@@ -41,13 +51,19 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/test": "^4.2.0",
     "@commitlint/utils": "^4.2.0",
     "ava": "^0.18.2",
+    "babel-cli": "^6.26.0",
+    "babel-preset-commitlint": "^4.2.0",
+    "babel-register": "^6.26.0",
+    "concurrently": "^3.5.0",
+    "cross-env": "^5.0.5",
     "dependency-check": "^2.9.1",
     "execa": "^0.7.0",
     "mkdirp": "^0.5.1",
     "resolve-bin": "^0.4.0",
-    "rimraf": "^2.6.1",
+    "rimraf": "^2.6.2",
     "sander": "^0.6.0",
     "string-to-stream": "^1.1.0",
     "tmp": "0.0.33",

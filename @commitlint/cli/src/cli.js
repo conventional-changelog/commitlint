@@ -1,26 +1,14 @@
 #!/usr/bin/env node
 require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 
-// npm modules
 const core = require('@commitlint/core');
 const chalk = require('chalk');
 const meow = require('meow');
-const pick = require('lodash').pick;
+const {merge, pick} = require('lodash');
 const stdin = require('get-stdin');
 
-const pkg = require('./package');
+const pkg = require('../package');
 const help = require('./help');
-
-/**
- * Behavioural rules
- */
-const rules = {
-	fromStdin: (input, flags) =>
-		input.length === 0 &&
-		typeof flags.from !== 'string' &&
-		typeof flags.to !== 'string' &&
-		!flags.edit
-};
 
 const configuration = {
 	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
@@ -72,59 +60,90 @@ const cli = meow(
 	configuration
 );
 
-const load = (seed, opts) => core.load(seed, opts);
+main(cli).catch(err =>
+	setTimeout(() => {
+		if (err.type === pkg.name) {
+			process.exit(1);
+		}
+		throw err;
+	})
+);
 
-function main(options) {
-	normalizeOptions(options);
-
+async function main(options) {
 	const raw = options.input;
-	const flags = options.flags;
-	const fromStdin = rules.fromStdin(raw, flags);
+	const flags = normalizeFlags(options.flags);
+	const fromStdin = checkFromStdin(raw, flags);
 
 	const range = pick(flags, 'edit', 'from', 'to');
-	const input = fromStdin ? stdin() : core.read(range, {cwd: flags.cwd});
 	const fmt = new chalk.constructor({enabled: flags.color});
 
-	return input.then(raw => (Array.isArray(raw) ? raw : [raw])).then(messages =>
-		Promise.all(
-			messages.map(commit => {
-				return load(getSeed(flags), {cwd: flags.cwd})
-					.then(loaded => {
-						const parserOpts = selectParserOpts(loaded.parserPreset);
-						const opts = parserOpts ? {parserOpts} : undefined;
-						return core.lint(commit, loaded.rules, opts);
-					})
-					.then(report => {
-						const formatted = core.format(report, {color: flags.color});
+	const input = await (fromStdin
+		? stdin()
+		: core.read(range, {cwd: flags.cwd}));
 
-						if (!flags.quiet) {
-							console.log(
-								`${fmt.grey('⧗')}   input: ${fmt.bold(commit.split('\n')[0])}`
-							);
-							console.log(formatted.join('\n'));
-						}
+	const messages = (Array.isArray(input) ? input : [input])
+		.filter(message => typeof message === 'string')
+		.filter(Boolean);
 
-						if (report.errors.length > 0) {
-							const error = new Error(formatted[formatted.length - 1]);
-							error.type = pkg.name;
-							throw error;
-						}
-						return console.log('');
-					});
-			})
-		)
+	if (messages.length === 0 && !checkFromRepository(flags)) {
+		const err = new Error(
+			'[input] is required: supply via stdin, or --edit or --from and --to'
+		);
+		err.type = pkg.name;
+		console.log(`${cli.help}\n`);
+		console.log(err.message);
+		throw err;
+	}
+
+	return Promise.all(
+		messages.map(async message => {
+			const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
+			const parserOpts = selectParserOpts(loaded.parserPreset);
+			const opts = parserOpts ? {parserOpts} : undefined;
+			const report = await core.lint(message, loaded.rules, opts);
+			const formatted = core.format(report, {color: flags.color});
+
+			if (!flags.quiet) {
+				console.log(
+					`${fmt.grey('⧗')}   input: ${fmt.bold(message.split('\n')[0])}`
+				);
+				console.log(formatted.join('\n'));
+			}
+
+			if (report.errors.length > 0) {
+				const error = new Error(formatted[formatted.length - 1]);
+				error.type = pkg.name;
+				throw error;
+			}
+			console.log('');
+		})
 	);
 }
 
-function normalizeOptions(options) {
-	const flags = options.flags;
+function checkFromStdin(input, flags) {
+	return input.length === 0 && !checkFromRepository(flags);
+}
 
+function checkFromRepository(flags) {
+	return checkFromHistory(flags) || checkFromEdit(flags);
+}
+
+function checkFromEdit(flags) {
+	return Boolean(flags.edit);
+}
+
+function checkFromHistory(flags) {
+	return typeof flags.from === 'string' || typeof flags.to === 'string';
+}
+
+function normalizeFlags(flags) {
 	// The `edit` flag is either a boolean or a string but we are only allowed
 	// to specify one of them in minimist
 	if (flags.edit === '') {
-		flags.edit = true;
-		flags.e = true;
+		return merge({}, flags, {edit: true, e: true});
 	}
+
+	return flags;
 }
 
 function getSeed(seed) {
@@ -134,16 +153,6 @@ function getSeed(seed) {
 		? {extends: n, parserPreset: seed.parserPreset}
 		: {parserPreset: seed.parserPreset};
 }
-
-// Start the engine
-main(cli).catch(err =>
-	setTimeout(() => {
-		if (err.type === pkg.name) {
-			process.exit(1);
-		}
-		throw err;
-	})
-);
 
 function selectParserOpts(parserPreset) {
 	if (typeof parserPreset !== 'object') {

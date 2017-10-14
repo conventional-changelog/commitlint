@@ -5,24 +5,24 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "lerna run build --stream --parallel --include-filtered-dependencies",
-    "clean": "lerna clean --yes && lerna run clean --stream --parallel --include-filtered-dependencies",
-    "commit": "./@commitlint/prompt-cli/cli.js",
-    "commitmsg": "./@commitlint/cli/cli.js -e $GIT_PARAMS",
-    "docs": "docsify serve docs",
-    "postinstall": "lerna bootstrap",
+    "build": "npx lerna run build --stream --parallel --include-filtered-dependencies",
+    "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
+    "commit": "npx -p @commitlint/prompt-cli commit",
+    "commitmsg": "npx commitlint -e $GIT_PARAMS",
+    "docs": "npx docsify serve docs",
+    "postinstall": "npx lerna bootstrap",
     "precommit": "lint-staged",
-    "pretest": "xo",
-    "publish": "lerna publish --conventional-commits",
+    "pretest": "npx xo",
+    "publish": "npx lerna publish --conventional-commits",
     "reinstall": "npm run clean && npm install",
-    "start": "lerna run start --stream --parallel --include-filtered-dependencies",
-    "test": "AVA_VERBOSE=--verbose lerna run test --stream --parallel --include-filtered-dependencies",
-    "travis": "trevor"
+    "start": "npx lerna run start --stream --parallel --include-filtered-dependencies",
+    "test": "AVA_VERBOSE=--verbose npx lerna run test --stream --parallel --include-filtered-dependencies",
+    "travis": "npx trevor"
   },
   "lint-staged": {
     "*.js": [
-      "prettier --write --use-tabs --single-quote --no-bracket-spacing",
-      "xo --fix",
+      "npx prettier --write --use-tabs --single-quote --no-bracket-spacing",
+      "npx xo --fix",
       "git add"
     ]
   },
@@ -71,6 +71,7 @@
     "husky": "^0.14.3",
     "lerna": "^2.0.0",
     "lint-staged": "^4.0.1",
+    "npx": "^9.6.0",
     "prettier": "^1.5.2",
     "trevor": "^2.3.0",
     "xo": "^0.18.2"
