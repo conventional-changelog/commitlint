@@ -62,6 +62,11 @@ commitlint --from=HEAD~1
 * **Concepts** - Overarching topics important to understand the use of `commitlint`
 * **Reference** - Mostly technical documentation
 
+## Attributions
+
+* `commitlint` is possible because of the hard work of the folks of the `conventional-changelog` project
+* Thanks [@markusoelhafen](https://github.com/markusoelhafen) for providing
+the `commitlint` icon
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index

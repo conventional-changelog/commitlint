@@ -7,7 +7,15 @@
 	<meta name="description" content="Lint commit messages">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link rel="stylesheet" href="https://unpkg.com/docsify/lib/themes/dark.css">
+	<link rel="icon" type="image/png" href="./assets/icon.png">
+	<link rel="icon" type="image/svg+xml" href="./assets/icon.svg">
 	<style>
+		:root {
+			--theme-color: #51b1dd;
+		}
+		body {
+			background: #121212;
+		}
 		.app-nav.app-nav {
 			display: flex;
 			justify-content: flex-end;
@@ -16,7 +24,7 @@
 			margin: 0;
 			padding: 0 15px;
 			height: 60px;
-			background: #3f3f3f;
+			background: #121212;
 		}
 		svg {
 			pointer-events: none;
@@ -27,7 +35,16 @@
 		}
 		a:hover svg {
 			fill: #ea6f5a;
-			fill: var(--theme-color,#ea6f5a);
+			fill: var(--theme-color, #51b1dd);
+		}
+		.results-panel {
+			background: #121212;
+		}
+		.sidebar.sidebar {
+			background: #121212;
+		}
+		.sidebar-toggle.sidebar-toggle {
+			background: #121212;
 		}
 		.search.search {
 			border: none;
@@ -37,7 +54,7 @@
 			background: transparent;
 			line-height: 40px;
 			padding: 6px;
-			background: rgba(255, 255, 255, 0.05);
+			background: #000;
 			border-bottom: 1px solid transparent;
 		}
 		.search.search input:focus {
@@ -74,6 +91,27 @@
 			left: 0;
 			right: 0;
 			bottom: 0;
+		}
+		.app-name-link {
+			display: flex;
+			align-items: center;
+			margin: 6px 15px;
+		}
+		.app-name-link::before {
+			content: '';
+			display: inline-block;
+			width: 40px;
+			height: 40px;
+			background: url(./assets/icon.svg);
+			background-size: 100%;
+			margin-right: 15px;
+		}
+		.markdown-section.markdown-section p.warn {
+			background: var(--theme-color, #51b1dd);
+			color: #fff;
+		}
+		.markdown-section.markdown-section a {
+			color: #fff;
 		}
 	</style>
 </head>
