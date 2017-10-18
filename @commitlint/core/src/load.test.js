@@ -1,4 +1,5 @@
-import {git} from '@commitlint/test';
+import path from 'path';
+import {fix, git} from '@commitlint/test';
 import test from 'ava';
 
 import load from './load';
@@ -178,6 +179,38 @@ test('ignores unknow keys recursively', async t => {
 		rules: {
 			zero: 0,
 			one: 1
+		}
+	});
+});
+
+test('find up from given cwd', async t => {
+	const outer = await fix.bootstrap('fixtures/outer-scope');
+	await git.init(path.join(outer, 'inner-scope'));
+	const cwd = path.join(outer, 'inner-scope', 'child-scope');
+
+	const actual = await load({}, {cwd});
+
+	t.deepEqual(actual, {
+		extends: [],
+		rules: {
+			child: true,
+			inner: false,
+			outer: false
+		}
+	});
+});
+
+test('find up config from outside current git repo', async t => {
+	const outer = await fix.bootstrap('fixtures/outer-scope');
+	const cwd = await git.init(path.join(outer, 'inner-scope'));
+	const actual = await load({}, {cwd});
+
+	t.deepEqual(actual, {
+		extends: [],
+		rules: {
+			child: false,
+			inner: false,
+			outer: true
 		}
 	});
 });
