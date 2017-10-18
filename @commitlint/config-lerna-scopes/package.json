@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-lerna-scopes",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "scripts": {
     "start": "npx ava --watch --verbose",
@@ -38,7 +38,7 @@
     "lerna": "^2.0.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^4.2.0",
+    "@commitlint/test": "^4.2.1",
     "ava": "^0.22.0"
   }
 }
