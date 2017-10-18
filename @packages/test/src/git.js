@@ -6,7 +6,7 @@ import * as sander from '@marionebl/sander';
 import execa from 'execa';
 import pkgDir from 'pkg-dir';
 
-export {bootstrap, clone};
+export {bootstrap, clone, init};
 
 async function bootstrap(fixture) {
 	const cwd = path.join(os.tmpdir(), rand());
@@ -15,14 +15,19 @@ async function bootstrap(fixture) {
 		await sander.copydir(await pkgDir(), fixture).to(cwd);
 	}
 
-	await execa('git', ['init', cwd]);
-	await setup(cwd);
+	await init(cwd);
 	return cwd;
 }
 
 async function clone(source, ...args) {
 	const cwd = path.join(os.tmpdir(), rand());
 	await execa('git', ['clone', ...args, source, cwd]);
+	await setup(cwd);
+	return cwd;
+}
+
+async function init(cwd) {
+	await execa('git', ['init', cwd]);
 	await setup(cwd);
 	return cwd;
 }

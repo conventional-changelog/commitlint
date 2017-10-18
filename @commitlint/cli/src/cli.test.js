@@ -1,5 +1,5 @@
 import path from 'path';
-import {git} from '@commitlint/test';
+import {fix, git} from '@commitlint/test';
 import test from 'ava';
 import execa from 'execa';
 import {merge} from 'lodash';
@@ -116,6 +116,38 @@ test('should pick up parser preset and succeed accordingly', async t => {
 		'----type(scope): subject'
 	);
 	t.is(actual.code, 0);
+});
+
+test('should pick up config from outside git repo and fail accordingly', async t => {
+	const outer = await fix.bootstrap('fixtures/outer-scope');
+	const cwd = await git.init(path.join(outer, 'inner-scope'));
+
+	const actual = await cli([], {cwd})('inner: bar');
+	t.is(actual.code, 1);
+});
+
+test('should pick up config from outside git repo and succeed accordingly', async t => {
+	const outer = await fix.bootstrap('fixtures/outer-scope');
+	const cwd = await git.init(path.join(outer, 'inner-scope'));
+
+	const actual = await cli([], {cwd})('outer: bar');
+	t.is(actual.code, 0);
+});
+
+test('should pick up config from inside git repo with precedence and succeed accordingly', async t => {
+	const outer = await fix.bootstrap('fixtures/inner-scope');
+	const cwd = await git.init(path.join(outer, 'inner-scope'));
+
+	const actual = await cli([], {cwd})('inner: bar');
+	t.is(actual.code, 0);
+});
+
+test('should pick up config from inside git repo with precedence and fail accordingly', async t => {
+	const outer = await fix.bootstrap('fixtures/inner-scope');
+	const cwd = await git.init(path.join(outer, 'inner-scope'));
+
+	const actual = await cli([], {cwd})('outer: bar');
+	t.is(actual.code, 1);
 });
 
 async function writePkg(payload, options) {

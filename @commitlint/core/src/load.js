@@ -5,22 +5,16 @@ import resolveFrom from 'resolve-from';
 
 import executeRule from './library/execute-rule';
 import resolveExtends from './library/resolve-extends';
-import toplevel from './library/toplevel';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
 export default async (seed = {}, options = {cwd: ''}) => {
-	const explorer = cosmiconfig('commitlint', {
-		rcExtensions: true,
-		stopDir: await toplevel(options.cwd)
-	});
-
-	const raw = (await explorer.load(options.cwd)) || {};
-	const base = raw.filepath ? path.dirname(raw.filepath) : options.cwd;
+	const loaded = await loadConfig(options.cwd);
+	const base = loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
 
 	// Merge passed config with file based options
-	const config = valid(merge(raw.config, seed));
+	const config = valid(merge(loaded.config, seed));
 	const opts = merge({extends: [], rules: {}}, pick(config, 'extends'));
 
 	// Resolve parserPreset key
@@ -80,3 +74,17 @@ export default async (seed = {}, options = {cwd: ''}) => {
 		return registry;
 	}, preset);
 };
+
+async function loadConfig(cwd) {
+	const explorer = cosmiconfig('commitlint', {
+		rcExtensions: true
+	});
+
+	const local = await explorer.load(cwd);
+
+	if (local) {
+		return local;
+	}
+
+	return {};
+}
