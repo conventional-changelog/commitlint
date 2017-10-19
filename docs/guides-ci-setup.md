@@ -92,7 +92,6 @@ language: node_js
 before_install: git fetch --unshallow
 script:
   - /bin/bash lint-commits.sh"
-  - ./node_modules/.bin/commitlint --from=$TRAVIS_COMMIT
   - npm test
 ```
 
