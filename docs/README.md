@@ -20,9 +20,9 @@
     <img src="./assets/commitlint.svg"/>
 </div>
 
-# commitlint
+# commitlint &nbsp; [![slack][11]][12]
 
-[![npm latest][2]][3] [![npm next][10]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
+[![npm latest][2]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
 
 `commitlint` helps your team adhering to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
 
@@ -81,3 +81,6 @@ the `commitlint` icon
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
 
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square
+
+[11]: http://devtoolscommunity.herokuapp.com/badge.svg?style=flat-square
+[12]: http://devtoolscommunity.herokuapp.com
