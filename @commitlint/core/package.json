@@ -8,7 +8,7 @@
     "clean": "npx rimraf lib",
     "pretest": "dep-check",
     "start": "npx concurrently \"npx ava -c 4 --verbose --watch\" \"npx yarn run watch\"",
-    "test": "npx ava -c 4 --verbose",
+    "test": "npx ava -c 4 --verbose && npx ava \"src/*.serial-test.js\" --verbose",
     "watch": "npx babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
