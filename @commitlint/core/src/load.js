@@ -9,7 +9,7 @@ import resolveExtends from './library/resolve-extends';
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
-export default async (seed = {}, options = {cwd: ''}) => {
+export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd);
 	const base = loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
 
