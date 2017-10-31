@@ -5,6 +5,7 @@ export default {
 	'body-max-length': require('./body-max-length'),
 	'body-min-length': require('./body-min-length'),
 	'body-tense': require('./body-tense'),
+	'footer-contains': require('./footer-contains'),
 	'footer-empty': require('./footer-empty'),
 	'footer-leading-blank': require('./footer-leading-blank'),
 	'footer-max-length': require('./footer-max-length'),

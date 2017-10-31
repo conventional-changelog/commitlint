@@ -71,6 +71,14 @@ Rule configurations are either of type `array` residing on a key with the rule's
   ]
 ```
 
+#### footer-contains
+* **condition**: `footer` matches regular expression
+* **rules**: `always`
+* **value**
+```js
+  RegExp
+```
+
 #### footer-leading-blank
 * **condition**: `footer` begins with blank line
 * **rule**: `always`
