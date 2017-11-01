@@ -104,3 +104,19 @@ test('supports scopes with /', async t => {
 	t.is(actual.scope, 'some/scope');
 	t.is(actual.subject, 'subject');
 });
+
+test('ignores comments', async t => {
+	const message = 'type(some/scope): subject\n# some comment';
+	const actual = await parse(message);
+	t.is(actual.body, null);
+	t.is(actual.footer, null);
+	t.is(actual.subject, 'subject');
+});
+
+test('registers inline #', async t => {
+	const message =
+		'type(some/scope): subject #reference\n# some comment\nthings #reference';
+	const actual = await parse(message);
+	t.is(actual.subject, 'subject #reference');
+	t.is(actual.body, 'things #reference');
+});
