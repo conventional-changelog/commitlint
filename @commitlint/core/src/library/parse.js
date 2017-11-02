@@ -1,4 +1,4 @@
-import {sync} from 'conventional-commits-parser';
+import {sync} from '@marionebl/conventional-commits-parser';
 import defaultChangelogOpts from 'conventional-changelog-angular';
 
 export default parse;
