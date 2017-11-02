@@ -6,13 +6,13 @@
     "commitlint": "./lib/cli.js"
   },
   "scripts": {
-    "build": "npx cross-env NODE_ENV=production npx babel src --out-dir lib  --source-maps",
+    "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "prestart": "dep-check && npx yarn run build",
     "pretest": "dep-check && npx yarn run build",
     "start": "npx concurrently \"npx ava -c 4 --verbose --watch\" \"npx yarn run watch\"",
     "test": "npx ava -c 4 --verbose",
-    "watch": "npx babel src --out-dir lib --watch --source-maps"
+    "watch": "npx -p babel-cli babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
     "files": [
