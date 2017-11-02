@@ -43,9 +43,10 @@ export default async (message, rules = {}, opts = {}) => {
 		})
 		.filter(Boolean);
 
-	const errors = results.filter(result => result.level > 1 && !result.valid);
-
-	const warnings = results.filter(result => result.level < 2 && !result.valid);
+	const errors = results.filter(result => result.level === 2 && !result.valid);
+	const warnings = results.filter(
+		result => result.level === 1 && !result.valid
+	);
 
 	const valid = errors.length === 0;
 
@@ -55,4 +56,3 @@ export default async (message, rules = {}, opts = {}) => {
 		warnings
 	};
 };
-

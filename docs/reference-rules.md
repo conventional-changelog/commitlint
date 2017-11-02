@@ -54,23 +54,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
-#### body-tense
-* **condition**: `body` is verbalized in tense present in `value`
-* **rule**: `always`
-* **value**
-```js
-  ['present-imperative']
-```
-* **possible values**
-```js
-  [
-    'past-tense', // did
-    'present-imperative', // do
-    'present-participle', // doing
-    'present-third-person' // does
-  ]
-```
-
 #### footer-leading-blank
 * **condition**: `footer` begins with blank line
 * **rule**: `always`
@@ -91,23 +74,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
-#### footer-tense
-* **condition**: `footer` is verbalized in tense present in `value`
-* **rule**: `always`
-* **value**
-```js
-  ['present-imperative']
-```
-* **possible values**
-```js
-  [
-    'past-tense', // did
-    'present-imperative', // do
-    'present-participle', // doing
-    'present-third-person' // does
-  ]
-```
-
 #### header-max-length
 * **condition**: `header` has `value` or less characters
 * **rule**: `always`
@@ -122,14 +88,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
 * **value**
 ```js
   0
-```
-
-#### lang
-* **condition**: `subject` is of language `value`
-* **rule**: `always`
-* **value**
-```js
-  eng
 ```
 
 #### scope-enum
@@ -226,23 +184,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
-#### subject-tense
-* **condition**: `subject` is verbalized in tense present in `value`
-* **rule**: `always`
-* **value**
-```js
-  ['present-imperative']
-```
-* **possible values**
-```js
-  [
-    'past-tense', // did
-    'present-imperative', // do
-    'present-participle', // doing
-    'present-third-person' // does
-  ]
-```
-
 #### type-enum
 * **condition**: `type` is found in value
 * **rule**: `always`
@@ -306,4 +247,65 @@ Rule configurations are either of type `array` residing on a key with the rule's
 * **value**
 ```js
   'Signed-off-by:'
+```
+
+### Deprecated rules
+
+#### body-tense `deprecated`
+* **condition**: `body` is verbalized in tense present in `value`
+* **rule**: `always`
+* **value**
+```js
+  ['present-imperative']
+```
+* **possible values**
+```js
+  [
+    'past-tense', // did
+    'present-imperative', // do
+    'present-participle', // doing
+    'present-third-person' // does
+  ]
+```
+
+#### footer-tense `deprecated`
+* **condition**: `footer` is verbalized in tense present in `value`
+* **rule**: `always`
+* **value**
+```js
+  ['present-imperative']
+```
+* **possible values**
+```js
+  [
+    'past-tense', // did
+    'present-imperative', // do
+    'present-participle', // doing
+    'present-third-person' // does
+  ]
+```
+
+#### lang `deprecated`
+* **condition**: `subject` is of language `value`
+* **rule**: `always`
+* **value**
+```js
+  eng
+```
+
+#### subject-tense `deprecated`
+* **condition**: `subject` is verbalized in tense present in `value`
+* **rule**: `always`
+* **value**
+```js
+  ['present-imperative']
+```
+* **possible values**
+```js
+  [
+    'past-tense', // did
+    'present-imperative', // do
+    'present-participle', // doing
+    'present-third-person' // does
+  ]
 ```
