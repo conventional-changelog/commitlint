@@ -6,10 +6,11 @@ node_js:
 install:
   - npm install -g npx
   - npx yarn install
-  - npx lerna bootstrap
+  - $(npm bin)/lerna bootstrap
   - npm --version
   - yarn --version
   - npx --version
+  - $(npm bin)/lerna --version
 script:
   - npx yarn build
   - npx yarn test
