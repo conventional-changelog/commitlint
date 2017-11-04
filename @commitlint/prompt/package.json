@@ -4,13 +4,13 @@
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "scripts": {
-    "build": "npx cross-env NODE_ENV=production npx babel src --out-dir lib --source-maps",
+    "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "commit": "npx git-cz",
     "pretest": "dep-check",
     "start": "npx concurrently \"npx ava --watch --verbose\" \"npx yarn run watch\"",
     "test": "npx ava --verbose",
-    "watch": "npx babel src --out-dir lib --watch  --source-maps"
+    "watch": "npx -p babel-cli babel src --out-dir lib --watch  --source-maps"
   },
   "ava": {
     "babel": "inherit",
