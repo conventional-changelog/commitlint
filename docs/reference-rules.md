@@ -90,6 +90,10 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
+#### references-empty
+* **condition**: `references` has at least one entry
+* **rule**: `never`
+
 #### scope-enum
 * **condition**: `scope` is found in value
 * **rule**: `always`
