@@ -13,6 +13,7 @@ export default {
 	'header-max-length': require('./header-max-length'),
 	'header-min-length': require('./header-min-length'),
 	lang: require('./lang'),
+	'references-empty': require('./references-empty'),
 	'scope-case': require('./scope-case'),
 	'scope-empty': require('./scope-empty'),
 	'scope-enum': require('./scope-enum'),
