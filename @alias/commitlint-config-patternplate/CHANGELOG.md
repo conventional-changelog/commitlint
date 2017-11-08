@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/marionebl/commitlint/compare/v4.2.2...v4.3.0) (2017-11-08)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-patternplate
+
 <a name="4.2.1"></a>
 ## [4.2.1](https://github.com/marionebl/commitlint/compare/v4.2.0...v4.2.1) (2017-10-18)
 
