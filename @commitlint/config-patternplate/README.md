@@ -10,6 +10,21 @@ npm install --save-dev @commitlint/config-patternplate @commitlint/cli
 echo "module.exports = {extends: ['@commitlint/config-patternplate']};" > commitlint.config.js
 ```
 
+## Configuring patterns
+
+Create a `.commitlint-patterns.json` with an array of patterns you want to use in your project:
+
+```json
+{
+  "patterns": [
+    "core",
+    "navigation"
+  ]
+}
+```
+
+Commitlint will limit the `scope` to only allow those defined, plus a catch-all "system".
+
 ## Rules
 `@commitlint/config-patternplate` extends the [shareable angular config](../config-angular#rules).
 Additionally these rules apply:
