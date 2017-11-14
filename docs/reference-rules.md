@@ -117,7 +117,8 @@ Rule configurations are either of type `array` residing on a key with the rule's
     'kebab-case', // kebab-case
     'pascal-case', // PascalCase
     'snake-case', // snake_case
-    'start-case' // Start Case
+    'start-case', // Start Case
+    'sentence-case' // Sentence case
   ]
 ```
 
@@ -156,7 +157,8 @@ Rule configurations are either of type `array` residing on a key with the rule's
     'kebab-case', // kebab-case
     'pascal-case', // PascalCase
     'snake-case', // snake_case
-    'start-case' // Start Case
+    'start-case', // Start Case
+    'sentence-case' // Sentence case
   ]
 ```
 
@@ -221,7 +223,8 @@ Rule configurations are either of type `array` residing on a key with the rule's
     'kebab-case', // kebab-case
     'pascal-case', // PascalCase
     'snake-case', // snake_case
-    'start-case' // Start Case
+    'start-case', // Start Case
+    'sentence-case' // Sentence case
   ]
 ```
 

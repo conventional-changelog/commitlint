@@ -1,5 +1,9 @@
 import {camelCase, kebabCase, snakeCase, upperFirst, startCase} from 'lodash';
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export default (raw = '', target = 'lowercase') => {
 	const input = String(raw);
 
@@ -17,6 +21,9 @@ export default (raw = '', target = 'lowercase') => {
 		case 'upper-case':
 		case 'uppercase':
 			return input.toUpperCase() === input;
+		case 'sentence-case':
+		case 'sentencecase':
+			return capitalizeFirstLetter(input.toLowerCase()) === input;
 		case 'lower-case':
 		case 'lowercase':
 		default:
