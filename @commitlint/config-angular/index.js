@@ -1,3 +1,5 @@
+const typeEnum = require('@commitlint/config-angular-type-enum');
+
 module.exports = {
 	rules: {
 		'body-leading-blank': [1, 'always'],
@@ -8,22 +10,6 @@ module.exports = {
 		'subject-full-stop': [2, 'never', '.'],
 		'type-case': [2, 'always', 'lowerCase'],
 		'type-empty': [2, 'never'],
-		'type-enum': [
-			2,
-			'always',
-			[
-				'build',
-				'chore',
-				'ci',
-				'docs',
-				'feat',
-				'fix',
-				'perf',
-				'refactor',
-				'revert',
-				'style',
-				'test'
-			]
-		]
+		'type-enum': typeEnum.rules['type-enum']
 	}
 };
