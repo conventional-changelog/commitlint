@@ -1,18 +1,32 @@
 import ensureCase from '../library/ensure-case';
 import message from '../library/message';
 
+const negated = when => when === 'never';
+
 export default (parsed, when, value) => {
 	const {subject} = parsed;
 
-	if (!subject) {
+	if (typeof subject !== 'string') {
 		return [true];
 	}
 
-	const negated = when === 'never';
+	const checks = (Array.isArray(value) ? value : [value]).map(check => {
+		if (typeof check === 'string') {
+			return {
+				when: 'always',
+				case: check
+			};
+		}
+		return check;
+	});
 
-	const result = ensureCase(subject, value);
+	const result = checks.every(check => {
+		const r = ensureCase(subject, check.case);
+		return negated(check.when) ? !r : r;
+	});
+
 	return [
-		negated ? !result : result,
+		negated(when) ? !result : result,
 		message([`subject must`, negated ? `not` : null, `be ${value}`])
 	];
 };
