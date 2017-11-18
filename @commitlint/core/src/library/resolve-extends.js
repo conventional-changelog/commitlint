@@ -1,3 +1,4 @@
+import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
 import path from 'path';
 import requireUncached from 'require-uncached';
 import resolveFrom from 'resolve-from';
