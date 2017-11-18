@@ -2,7 +2,7 @@
 
 # @commitlint/config-angular
 
-Shareable `commitlint` config enforcing the angular commit convention.
+Shareable `commitlint` config enforcing the [Angular commit convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines).
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
