@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/marionebl/commitlint/compare/v4.3.0...v5.0.0) (2017-11-18)
+
+### Bug fixes
+
+* core: interprets array values for subject-case correctly
+
+### Features
+
+* config-angular: disallow subject with uppercase first character, #114
+* config-angular-type-enum: remove chore type
+
+
+BREAKING CHANGE
+
+TL;DR
+* chore is no longer a valid commit type
+* subject with leading capitalized letter are forbidden now
+
+Angular has removed the chore type from their
+conventions as of January 2017
+
+See angular/angular@dff6ee3#diff-6a3371457528722a734f3c51d9238c13L204
+for reference
+
+This removes the previous chore type from the list
+of allowed types.
+
+Projects using the Angular commit convention will identify commits with chore type as faulty.
+
+Also, formerly working commit messages are now considered problems:
+
+*  type: SOME MESSAGE
+*  type: SomeMessage
+*  type: Some Message
+
 <a name="4.3.0"></a>
 # [4.3.0](https://github.com/marionebl/commitlint/compare/v4.2.2...v4.3.0) (2017-11-08)
 
