@@ -1,6 +1,8 @@
 import {camelCase, kebabCase, snakeCase, upperFirst, startCase} from 'lodash';
 
-export default (raw = '', target = 'lowercase') => {
+export default ensureCase;
+
+function ensureCase(raw = '', target = 'lowercase') {
 	const input = String(raw);
 
 	switch (target) {
@@ -17,9 +19,16 @@ export default (raw = '', target = 'lowercase') => {
 		case 'upper-case':
 		case 'uppercase':
 			return input.toUpperCase() === input;
+		case 'sentence-case':
+		case 'sentencecase':
+			return (
+				ensureCase(raw.charAt(0), 'upper-case') &&
+				ensureCase(raw.substring(1), 'lower-case')
+			);
 		case 'lower-case':
 		case 'lowercase':
-		default:
 			return input.toLowerCase() === input;
+		default:
+			throw new TypeError(`ensure-case: Unknown target case "${target}"`);
 	}
-};
+}

@@ -159,11 +159,7 @@ test('with kebabcase scope should fail for "always pascalcase"', async t => {
 });
 
 test('with kebabcase scope should succeed for "always kebabcase"', async t => {
-	const [actual] = scopeCase(
-		await parsed.kebabcase,
-		'always',
-		'kebabcase-case'
-	);
+	const [actual] = scopeCase(await parsed.kebabcase, 'always', 'kebab-case');
 	const expected = true;
 	t.is(actual, expected);
 });

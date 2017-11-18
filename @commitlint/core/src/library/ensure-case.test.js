@@ -40,3 +40,36 @@ test('false for lowercase on lowercase', t => {
 	const actual = ensure('a', 'uppercase');
 	t.is(actual, false);
 });
+
+test('true for sentencecase on sentencecase', t => {
+	const actual = ensure('Sentence case', 'sentence-case');
+	t.is(actual, true);
+});
+
+test('false for lowsercase on sentencecase', t => {
+	t.is(ensure('sentence case', 'sentence-case'), false);
+});
+
+test('false for UPPERCASE on sentencecase', t => {
+	t.is(ensure('UPPERCASE', 'sentence-case'), false);
+});
+
+test('false for Start Case on sentencecase', t => {
+	t.is(ensure('Start Case', 'sentence-case'), false);
+});
+
+test('false for PascalCase on sentencecase', t => {
+	t.is(ensure('PascalCase', 'sentence-case'), false);
+});
+
+test('false for kebab-case on sentencecase', t => {
+	t.is(ensure('kebab-case', 'sentence-case'), false);
+});
+
+test('false for snake_case on sentencecase', t => {
+	t.is(ensure('snake_case', 'sentence-case'), false);
+});
+
+test('false for camelCase on sentencecase', t => {
+	t.is(ensure('camelCase', 'sentence-case'), false);
+});
