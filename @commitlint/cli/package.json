@@ -52,28 +52,28 @@
   "devDependencies": {
     "@commitlint/test": "^4.3.0",
     "@commitlint/utils": "^4.2.1",
-    "ava": "^0.18.2",
-    "babel-cli": "^6.26.0",
+    "ava": "0.18.2",
+    "babel-cli": "6.26.0",
     "babel-preset-commitlint": "^4.2.1",
-    "babel-register": "^6.26.0",
-    "concurrently": "^3.5.0",
-    "cross-env": "^5.0.5",
-    "dependency-check": "^2.9.1",
-    "execa": "^0.7.0",
-    "mkdirp": "^0.5.1",
-    "resolve-bin": "^0.4.0",
-    "rimraf": "^2.6.2",
-    "sander": "^0.6.0",
-    "string-to-stream": "^1.1.0",
+    "babel-register": "6.26.0",
+    "concurrently": "3.5.0",
+    "cross-env": "5.1.1",
+    "dependency-check": "2.9.1",
+    "execa": "0.7.0",
+    "mkdirp": "0.5.1",
+    "resolve-bin": "0.4.0",
+    "rimraf": "2.6.2",
+    "sander": "0.6.0",
+    "string-to-stream": "1.1.0",
     "tmp": "0.0.33",
-    "xo": "^0.18.2"
+    "xo": "0.18.2"
   },
   "dependencies": {
     "@commitlint/core": "^4.3.0",
-    "babel-polyfill": "^6.23.0",
-    "chalk": "^2.0.1",
-    "get-stdin": "^5.0.1",
-    "lodash": "^4.17.4",
-    "meow": "^3.7.0"
+    "babel-polyfill": "6.26.0",
+    "chalk": "2.3.0",
+    "get-stdin": "5.0.1",
+    "lodash": "4.17.4",
+    "meow": "3.7.0"
   }
 }
