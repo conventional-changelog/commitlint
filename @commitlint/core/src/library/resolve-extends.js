@@ -1,6 +1,6 @@
 import path from 'path';
+import requireUncached from 'require-uncached';
 import resolveFrom from 'resolve-from';
-import resolveGlobal from 'resolve-global';
 import {merge, omit} from 'lodash';
 
 // Resolve extend configs
@@ -93,6 +93,7 @@ function resolveId(id, context = {}) {
 		return localPath;
 	}
 
+	const resolveGlobal = requireUncached('resolve-global');
 	const globalPath = resolveGlobal.silent(id);
 
 	if (typeof globalPath === 'string') {
