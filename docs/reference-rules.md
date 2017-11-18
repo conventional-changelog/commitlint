@@ -119,7 +119,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
     'sentence-case', // Sentence case
     'snake-case', // snake_case
     'start-case', // Start Case
-    'sentence-case' // Sentence case
   ]
 ```
 
@@ -160,7 +159,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
     'sentence-case', // Sentence case
     'snake-case', // snake_case
     'start-case', // Start Case
-    'sentence-case' // Sentence case
   ]
 ```
 
@@ -226,7 +224,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
     'sentence-case', // Sentence case
     'snake-case', // snake_case
     'start-case', // Start Case
-    'sentence-case' // Sentence case
   ]
 ```
 
