@@ -3,11 +3,11 @@ import parse from '../library/parse';
 import check from './signed-off-by';
 
 const messages = {
-	empty: 'chore:\n',
-	with: `chore: subject\nbody\nfooter\nSigned-off-by:\n\n`,
-	without: `chore: subject\nbody\nfooter\n\n`,
-	inSubject: `chore: subject Signed-off-by:\nbody\nfooter\n\n`,
-	inBody: `chore: subject\nbody Signed-off-by:\nfooter\n\n`
+	empty: 'test:\n',
+	with: `test: subject\nbody\nfooter\nSigned-off-by:\n\n`,
+	without: `test: subject\nbody\nfooter\n\n`,
+	inSubject: `test: subject Signed-off-by:\nbody\nfooter\n\n`,
+	inBody: `test: subject\nbody Signed-off-by:\nfooter\n\n`
 };
 
 const parsed = {

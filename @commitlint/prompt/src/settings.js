@@ -23,9 +23,6 @@ export default {
 			},
 			test: {
 				description: 'Adds or modifies tests.'
-			},
-			chore: {
-				description: 'Change build process, tooling or dependencies.'
 			}
 		}
 	},

@@ -3,9 +3,9 @@ import parse from '../library/parse';
 import bodyLeadingBlank from './body-leading-blank';
 
 const messages = {
-	simple: 'chore: subject',
-	without: 'chore: subject\nbody',
-	with: 'chore: subject\n\nbody'
+	simple: 'test: subject',
+	without: 'test: subject\nbody',
+	with: 'test: subject\n\nbody'
 };
 
 const parsed = {

@@ -3,7 +3,7 @@ import parse from '../library/parse';
 import bodyTense from './body-tense';
 
 test('returns deprecation warning', async t => {
-	const actual = bodyTense(await parse('chore: \n'), 'always', [
+	const actual = bodyTense(await parse('test: \n'), 'always', [
 		'present-imperative'
 	]);
 	t.deepEqual(actual, [

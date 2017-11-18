@@ -3,15 +3,15 @@ import parse from '../library/parse';
 import subjectCase from './subject-case';
 
 const messages = {
-	empty: 'chore:\n',
-	lowercase: 'chore: subject',
-	mixedcase: 'chore: sUbJeCt',
-	uppercase: 'chore: SUBJECT',
-	camelcase: 'chore: subJect',
-	kebabcase: 'chore: sub-ject',
-	pascalcase: 'chore: SubJect',
-	snakecase: 'chore: sub_ject',
-	startcase: 'chore: Sub Ject'
+	empty: 'test:\n',
+	lowercase: 'test: subject',
+	mixedcase: 'test: sUbJeCt',
+	uppercase: 'test: SUBJECT',
+	camelcase: 'test: subJect',
+	kebabcase: 'test: sub-ject',
+	pascalcase: 'test: SubJect',
+	snakecase: 'test: sub_ject',
+	startcase: 'test: Sub Ject'
 };
 
 const parsed = {

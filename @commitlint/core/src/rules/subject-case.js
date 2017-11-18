@@ -25,8 +25,10 @@ export default (parsed, when, value) => {
 		return negated(check.when) ? !r : r;
 	});
 
+	const list = checks.map(c => c.case).join(', ');
+
 	return [
 		negated(when) ? !result : result,
-		message([`subject must`, negated ? `not` : null, `be ${value.join(', ')}`])
+		message([`subject must`, negated ? `not` : null, `be ${list}`])
 	];
 };

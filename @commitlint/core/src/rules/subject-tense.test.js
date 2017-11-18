@@ -3,7 +3,7 @@ import parse from '../library/parse';
 import subjectTense from './subject-tense';
 
 test('returns deprecation warning', async t => {
-	const actual = subjectTense(await parse('chore: '), 'always', [
+	const actual = subjectTense(await parse('test: '), 'always', [
 		'present-imperative'
 	]);
 	t.deepEqual(actual, [

@@ -8,10 +8,10 @@ const long = 'BREAKING CHANGE: ab';
 const value = short.length;
 
 const messages = {
-	simple: 'chore: subject',
-	empty: 'chore: subject\nbody',
-	short: `chore: subject\n${short}`,
-	long: `chore: subject\n${long}`
+	simple: 'test: subject',
+	empty: 'test: subject\nbody',
+	short: `test: subject\n${short}`,
+	long: `test: subject\n${long}`
 };
 
 const parsed = {

@@ -3,8 +3,8 @@ import parse from '../library/parse';
 import subjectEmpty from './subject-empty';
 
 const messages = {
-	empty: 'chore: \nbody',
-	filled: 'chore: subject\nbody'
+	empty: 'test: \nbody',
+	filled: 'test: subject\nbody'
 };
 
 const parsed = {
