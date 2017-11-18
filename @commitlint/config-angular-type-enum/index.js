@@ -1,7 +1,6 @@
 const types = [
 	'build',
 	'ci',
-	'chore',
 	'docs',
 	'feat',
 	'fix',
