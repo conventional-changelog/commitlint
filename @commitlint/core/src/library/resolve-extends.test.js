@@ -17,7 +17,7 @@ test('returns an equivalent object as passed in', t => {
 	t.deepEqual(actual, expected);
 });
 
-test.serial.failing('falls back to global install', async t => {
+test.serial('falls back to global install', async t => {
 	const prev = process.env.NPM_PACKAGES;
 
 	const cwd = await fix.bootstrap('fixtures/global-install');
@@ -26,7 +26,13 @@ test.serial.failing('falls back to global install', async t => {
 	const npm = args => execa('npm', args, {cwd});
 
 	await sander.mkdir(cwd, 'commitlint-npm-packages');
-	await npm(['install', '--global', '@commitlint/config-angular', '--prefix', prefix]);
+	await npm([
+		'install',
+		'--global',
+		'@commitlint/config-angular',
+		'--prefix',
+		prefix
+	]);
 
 	process.env.NPM_PACKAGES = prefix;
 
@@ -41,7 +47,10 @@ test.serial('fails for missing extends', async t => {
 	const cwd = await fix.bootstrap('fixtures/missing-install');
 	const input = {extends: ['@commitlint/foo-bar']};
 
-	t.throws(() => resolveExtends(input, {cwd}), /Cannot find module "@commitlint\/foo-bar" from/);
+	t.throws(
+		() => resolveExtends(input, {cwd}),
+		/Cannot find module "@commitlint\/foo-bar" from/
+	);
 });
 
 test('uses empty prefix by default', t => {
