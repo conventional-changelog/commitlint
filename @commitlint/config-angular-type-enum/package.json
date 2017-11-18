@@ -1,7 +1,7 @@
 {
-  "name": "@commitlint/config-angular",
+  "name": "@commitlint/config-angular-type-enum",
   "version": "4.3.0",
-  "description": "Shareable commitlint config enforcing the angular commit convention",
+  "description": "Shareable commitlint config enforcing the angular commit convention types",
   "scripts": {
     "clean": "exit 0",
     "pretest": "dep-check",
@@ -27,8 +27,5 @@
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
     "@commitlint/utils": "^4.2.1"
-  },
-  "dependencies": {
-    "@commitlint/config-angular-type-enum": "^4.3.0"
   }
 }

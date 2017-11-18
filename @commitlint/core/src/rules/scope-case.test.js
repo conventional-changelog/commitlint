@@ -3,15 +3,15 @@ import parse from '../library/parse';
 import scopeCase from './scope-case';
 
 const messages = {
-	empty: 'chore: subject',
-	lowercase: 'chore(scope): subject',
-	mixedcase: 'chore(sCoPe): subject',
-	uppercase: 'chore(SCOPE): subject',
-	camelcase: 'chore(myScope): subject',
-	kebabcase: 'chore(my-scope): subject',
-	pascalcase: 'chore(MyScope): subject',
-	snakecase: 'chore(my_scope): subject',
-	startcase: 'chore(My Scope): subject'
+	empty: 'test: subject',
+	lowercase: 'test(scope): subject',
+	mixedcase: 'test(sCoPe): subject',
+	uppercase: 'test(SCOPE): subject',
+	camelcase: 'test(myScope): subject',
+	kebabcase: 'test(my-scope): subject',
+	pascalcase: 'test(MyScope): subject',
+	snakecase: 'test(my_scope): subject',
+	startcase: 'test(My Scope): subject'
 };
 
 const parsed = {

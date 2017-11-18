@@ -3,15 +3,15 @@ import parse from '../library/parse';
 import footerLeadingBlank from './footer-leading-blank';
 
 const messages = {
-	simple: 'chore: subject',
-	body: 'chore: subject\nbody',
-	trailing: 'chore: subject\nbody\n\n',
-	without: 'chore: subject\nbody\nBREAKING CHANGE: something important',
+	simple: 'test: subject',
+	body: 'test: subject\nbody',
+	trailing: 'test: subject\nbody\n\n',
+	without: 'test: subject\nbody\nBREAKING CHANGE: something important',
 	withoutBody:
 		'feat(new-parser): introduces a new parsing library\n\nBREAKING CHANGE: new library does not support foo-construct',
-	with: 'chore: subject\nbody\n\nBREAKING CHANGE: something important',
+	with: 'test: subject\nbody\n\nBREAKING CHANGE: something important',
 	withMulitLine:
-		'chore: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
+		'test: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
 };
 
 const parsed = {

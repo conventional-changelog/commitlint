@@ -3,9 +3,9 @@ import parse from '../library/parse';
 import check from './subject-full-stop';
 
 const messages = {
-	empty: 'chore:\n',
-	with: `chore: subject.\n`,
-	without: `chore: subject\n`
+	empty: 'test:\n',
+	with: `test: subject.\n`,
+	without: `test: subject\n`
 };
 
 const parsed = {

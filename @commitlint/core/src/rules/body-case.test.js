@@ -3,10 +3,10 @@ import parse from '../library/parse';
 import bodyCase from './body-case';
 
 const messages = {
-	empty: 'chore: subject',
-	lowercase: 'chore: subject\nbody',
-	mixedcase: 'chore: subject\nBody',
-	uppercase: 'chore: subject\nBODY'
+	empty: 'test: subject',
+	lowercase: 'test: subject\nbody',
+	mixedcase: 'test: subject\nBody',
+	uppercase: 'test: subject\nBODY'
 };
 
 const parsed = {

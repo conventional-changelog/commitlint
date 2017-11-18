@@ -88,7 +88,7 @@ test('should work with husky commitmsg hook and git commit', async () => {
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"chore: this should work"'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
 });
 
 test('should work with husky commitmsg hook in sub packages', async () => {
@@ -98,7 +98,7 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"chore: this should work"'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
 });
 
 test('should pick up parser preset and fail accordingly', async t => {

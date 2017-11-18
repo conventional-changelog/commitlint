@@ -204,7 +204,6 @@ Rule configurations are either of type `array` residing on a key with the rule's
       'style',
       'refactor',
       'test',
-      'chore',
       'revert'
     ]
   ```
@@ -214,7 +213,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 * **rule**: `always`
 * **value**
   ```js
-    'lowerCase'
+    'lower-case'
   ```
 * **possible values**
 ```js

@@ -26,17 +26,17 @@ packages
 ├── app
 └── web
 
-❯ echo "chore(api): fix something in api's build" | commitlint
-⧗   input: chore(api): fix something in api's build
+❯ echo "buid(api): change something in api's build" | commitlint
+⧗   input: build(api): change something in api's build
 ✔   found 0 problems, 0 warnings
 
-❯ echo "chore(foo): this won't pass" | commitlint
-⧗   input: chore(foo): this won't pass
+❯ echo "test(foo): this won't pass" | commitlint
+⧗   input: test(foo): this won't pass
 ✖   scope must be one of [api, app, web] [scope-enum]
 ✖   found 1 problems, 0 warnings
 
-❯ echo "chore: do some general maintenance" | commitlint
-⧗   input: chore: do some general maintenance
+❯ echo "ci: do some general maintenance" | commitlint
+⧗   input: ci: do some general maintenance
 ✔   found 0 problems, 0 warnings
 ```
 

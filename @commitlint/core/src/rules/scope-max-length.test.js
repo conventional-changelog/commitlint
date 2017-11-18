@@ -8,9 +8,9 @@ const long = 'ab';
 const value = short.length;
 
 const messages = {
-	empty: 'chore: \n',
-	short: `chore(${short}): \n`,
-	long: `chore(${long}): \n`
+	empty: 'test: \n',
+	short: `test(${short}): \n`,
+	long: `test(${long}): \n`
 };
 
 const parsed = {

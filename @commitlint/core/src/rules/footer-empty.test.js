@@ -3,9 +3,9 @@ import parse from '../library/parse';
 import footerEmpty from './footer-empty';
 
 const messages = {
-	simple: 'chore: subject',
-	empty: 'chore: subject\nbody',
-	filled: 'chore: subject\nBREAKING CHANGE: something important'
+	simple: 'test: subject',
+	empty: 'test: subject\nbody',
+	filled: 'test: subject\nBREAKING CHANGE: something important'
 };
 
 const parsed = {

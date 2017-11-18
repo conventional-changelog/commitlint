@@ -2,8 +2,8 @@ import test from 'ava';
 import parse from '../library/parse';
 import check from './header-max-length';
 
-const short = 'chore: a';
-const long = 'chore: ab';
+const short = 'test: a';
+const long = 'test: ab';
 
 const value = short.length;
 

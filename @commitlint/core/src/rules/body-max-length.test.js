@@ -8,9 +8,9 @@ const long = 'ab';
 const value = short.length;
 
 const messages = {
-	empty: 'chore: subject',
-	short: `chore: subject\n${short}`,
-	long: `chore: subject\n${long}`
+	empty: 'test: subject',
+	short: `test: subject\n${short}`,
+	long: `test: subject\n${long}`
 };
 
 const parsed = {

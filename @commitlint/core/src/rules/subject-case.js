@@ -20,13 +20,15 @@ export default (parsed, when, value) => {
 		return check;
 	});
 
-	const result = checks.every(check => {
+	const result = checks.some(check => {
 		const r = ensureCase(subject, check.case);
 		return negated(check.when) ? !r : r;
 	});
 
+	const list = checks.map(c => c.case).join(', ');
+
 	return [
 		negated(when) ? !result : result,
-		message([`subject must`, negated ? `not` : null, `be ${value}`])
+		message([`subject must`, negated ? `not` : null, `be ${list}`])
 	];
 };
