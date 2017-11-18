@@ -42,17 +42,34 @@ test('false for lowercase on lowercase', t => {
 });
 
 test('true for sentencecase on sentencecase', t => {
-	const actual = ensure('Sentence case', 'sentencecase');
+	const actual = ensure('Sentence case', 'sentence-case');
 	t.is(actual, true);
 });
 
-test('false for sentencecase on sentencecase', t => {
-    const testCase = 'sentencecase';
-	t.is(ensure('sentence case', testCase), false);
-	t.is(ensure('SENTENCE CASE', testCase), false);
-	t.is(ensure('Sentence Case', testCase), false);
-	t.is(ensure('sentence-case', testCase), false);
-	t.is(ensure('SentenceCase', testCase), false);
-	t.is(ensure('sentence_case', testCase), false);
-	t.is(ensure('sentenceCase', testCase), false);
+test('false for lowsercase on sentencecase', t => {
+	t.is(ensure('sentence case', 'sentence-case'), false);
+});
+
+test('false for UPPERCASE on sentencecase', t => {
+	t.is(ensure('UPPERCASE', 'sentence-case'), false);
+});
+
+test('false for Start Case on sentencecase', t => {
+	t.is(ensure('Start Case', 'sentence-case'), false);
+});
+
+test('false for PascalCase on sentencecase', t => {
+	t.is(ensure('PascalCase', 'sentence-case'), false);
+});
+
+test('false for kebab-case on sentencecase', t => {
+	t.is(ensure('kebab-case', 'sentence-case'), false);
+});
+
+test('false for snake_case on sentencecase', t => {
+	t.is(ensure('snake_case', 'sentence-case'), false);
+});
+
+test('false for camelCase on sentencecase', t => {
+	t.is(ensure('camelCase', 'sentence-case'), false);
 });

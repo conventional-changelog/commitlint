@@ -1,10 +1,8 @@
 import {camelCase, kebabCase, snakeCase, upperFirst, startCase} from 'lodash';
 
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+export default ensureCase;
 
-export default (raw = '', target = 'lowercase') => {
+function ensureCase(raw = '', target = 'lowercase') {
 	const input = String(raw);
 
 	switch (target) {
@@ -23,10 +21,14 @@ export default (raw = '', target = 'lowercase') => {
 			return input.toUpperCase() === input;
 		case 'sentence-case':
 		case 'sentencecase':
-			return capitalizeFirstLetter(input.toLowerCase()) === input;
+			return (
+				ensureCase(raw.charAt(0), 'upper-case') &&
+				ensureCase(raw.substring(1), 'lower-case')
+			);
 		case 'lower-case':
 		case 'lowercase':
-		default:
 			return input.toLowerCase() === input;
+		default:
+			throw new TypeError(`ensure-case: Unknown target case "${target}"`);
 	}
-};
+}
