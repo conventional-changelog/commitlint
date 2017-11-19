@@ -57,8 +57,7 @@
   "dependencies": {
     "@marionebl/sander": "^0.6.1",
     "execa": "^0.8.0",
-    "pkg-dir": "^2.0.0",
-    "xo": "^0.18.2"
+    "pkg-dir": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/utils": "^4.2.1",
@@ -68,6 +67,7 @@
     "babel-register": "^6.26.0",
     "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",
-    "rimraf": "2.6.1"
+    "rimraf": "2.6.1",
+    "xo": "^0.18.2"
   }
 }
