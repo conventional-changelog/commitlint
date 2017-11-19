@@ -7,7 +7,7 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   - npm install -g npx
   - npx yarn install
-  - npx lerna bootstrap --since origin/master --include-filtered-dependencies --stream
+  - npx lerna bootstrap --since %APPVEYOR_REPO_BRANCH% --include-filtered-dependencies --stream
   - npm --version
   - yarn --version
   - npx --version
@@ -16,5 +16,5 @@ matrix:
 build: off
 version: '{build}'
 test_script:
-  - npx yarn build --since origin/master --include-filtered-dependencies --stream
-  - npx yarn test --since origin/master --include-filtered-dependencies --stream
+  - npx yarn build --since %APPVEYOR_REPO_BRANCH% --include-filtered-dependencies --stream
+  - npx yarn test --since %APPVEYOR_REPO_BRANCH% --include-filtered-dependencies --stream
