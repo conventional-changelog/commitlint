@@ -36,7 +36,7 @@ TL;DR
 Angular has removed the chore type from their
 conventions as of January 2017
 
-See angular/angular@dff6ee3#diff-6a3371457528722a734f3c51d9238c13L204
+See [angular/angular@dff6ee](https://github.com/angular/angular/commit/dff6ee32725197bdb81f3f63c5bd9805f2ed22bb#diff-6a3371457528722a734f3c51d9238c13L204)
 for reference
 
 This removes the previous chore type from the list
