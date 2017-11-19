@@ -1,4 +1,6 @@
+import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
 import path from 'path';
+import requireUncached from 'require-uncached';
 import resolveFrom from 'resolve-from';
 import {merge, omit} from 'lodash';
 
@@ -38,12 +40,18 @@ function loadExtends(config = {}, context = {}) {
 		const ctx = merge({}, context, {cwd});
 
 		// Resolve parser preset if none was present before
-		if (!context.parserPreset && typeof c === 'object' && typeof c.parserPreset === 'string') {
+		if (
+			!context.parserPreset &&
+			typeof c === 'object' &&
+			typeof c.parserPreset === 'string'
+		) {
 			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
 
 			const parserPreset = {
 				name: c.parserPreset,
-				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`.split(path.sep).join('/'),
+				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
+					.split(path.sep)
+					.join('/'),
 				opts: require(resolvedParserPreset)
 			};
 
@@ -79,5 +87,21 @@ function resolveConfig(raw, context = {}) {
 }
 
 function resolveId(id, context = {}) {
-	return resolveFrom(context.cwd || process.cwd(), id);
+	const cwd = context.cwd || process.cwd();
+	const localPath = resolveFrom.silent(cwd, id);
+
+	if (typeof localPath === 'string') {
+		return localPath;
+	}
+
+	const resolveGlobal = requireUncached('resolve-global');
+	const globalPath = resolveGlobal.silent(id);
+
+	if (typeof globalPath === 'string') {
+		return globalPath;
+	}
+
+	const err = new Error(`Cannot find module "${id}" from "${cwd}"`);
+	err.code = 'MODULE_NOT_FOUND';
+	throw err;
 }
