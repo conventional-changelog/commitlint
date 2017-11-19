@@ -3,10 +3,11 @@
   "version": "5.0.0",
   "description": "Lint your commits, patternplate-style",
   "scripts": {
-    "pretest": "dep-check",
+    "clean": "exit 0",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "exit 0",
-    "test": "exit 0",
-    "clean": "exit 0"
+    "test": "exit 0"
   },
   "xo": false,
   "repository": {
@@ -31,6 +32,7 @@
     "lodash": "^4.5.1"
   },
   "devDependencies": {
-    "@commitlint/utils": "^4.2.1"
+    "@commitlint/utils": "^4.2.1",
+    "xo": "^0.18.2"
   }
 }

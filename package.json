@@ -9,9 +9,10 @@
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "npx -p @commitlint/prompt-cli commit",
     "commitmsg": "npx commitlint -e $GIT_PARAMS",
+    "deps": "npx lerna run deps",
     "docs": "npx docsify serve docs",
+    "lint": "npx lerna run lint",
     "precommit": "lint-staged",
-    "pretest": "npx xo",
     "publish": "npx lerna publish --conventional-commits",
     "reinstall": "npm run clean && npm install",
     "start": "npx lerna run start --stream --parallel --include-filtered-dependencies",
@@ -40,8 +41,8 @@
       "prettier"
     ],
     "ignores": [
-      "@*/**/lib/**",
-      "@*/**/node_modules"
+      "lib/**",
+      "node_modules/**"
     ],
     "rules": {
       "import/prefer-default-export": "off",

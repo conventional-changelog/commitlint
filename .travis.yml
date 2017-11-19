@@ -6,10 +6,12 @@ node_js:
 install:
   - npm install -g npx
   - npx yarn install
-  - npx lerna bootstrap
+  - npx lerna bootstrap --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
   - npm --version
   - yarn --version
   - npx --version
 script:
-  - npx yarn build
-  - npx yarn test
+  - npx yarn build --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
+  - npx yarn lint --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
+  - npx yarn deps --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
+  - npx yarn test --since $TRAVIS_BRANCH --include-filtered-dependencies --stream

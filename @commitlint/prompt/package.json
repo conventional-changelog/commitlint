@@ -7,7 +7,8 @@
     "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "commit": "npx git-cz",
-    "pretest": "dep-check",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "npx concurrently \"npx ava --watch --verbose\" \"npx yarn run watch\"",
     "test": "npx ava --verbose",
     "watch": "npx -p babel-cli babel src --out-dir lib --watch  --source-maps"
@@ -61,7 +62,8 @@
     "commitizen": "^2.9.6",
     "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",
-    "throat": "^4.1.0"
+    "throat": "^4.1.0",
+    "xo": "^0.18.2"
   },
   "dependencies": {
     "@commitlint/core": "^5.0.0",

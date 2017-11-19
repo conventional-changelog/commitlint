@@ -5,12 +5,13 @@
   "main": "lib/",
   "private": true,
   "scripts": {
-    "pretest": "dep-check",
+    "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib  --source-maps",
+    "clean": "npx rimraf lib",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "npx concurrently \"npx ava --watch --verbose\" \"npx yarn run watch\"",
     "test": "npx ava --verbose",
-    "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib  --source-maps",
-    "watch": "npx -p babel-cli babel src --out-dir lib --watch --source-maps",
-    "clean": "npx rimraf lib"
+    "watch": "npx -p babel-cli babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
     "files": [
@@ -66,6 +67,7 @@
     "babel-register": "^6.26.0",
     "concurrently": "^3.5.0",
     "cross-env": "^5.0.1",
-    "rimraf": "2.6.1"
+    "rimraf": "2.6.1",
+    "xo": "^0.18.2"
   }
 }
