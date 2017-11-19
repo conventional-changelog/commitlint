@@ -7,7 +7,8 @@
     "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "commit": "npx git-cz",
-    "pretest": "dep-check",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "npx concurrently \"npx ava --watch --verbose\" \"npx yarn run watch\"",
     "test": "npx ava --verbose",
     "watch": "npx -p babel-cli babel src --out-dir lib --watch  --source-maps"
@@ -69,6 +70,7 @@
     "chalk": "^1.1.1",
     "lodash": "^4.17.4",
     "throat": "^4.1.0",
-    "vorpal": "^1.10.0"
+    "vorpal": "^1.10.0",
+    "xo": "^0.18.2"
   }
 }

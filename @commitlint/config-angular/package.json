@@ -4,7 +4,8 @@
   "description": "Shareable commitlint config enforcing the angular commit convention",
   "scripts": {
     "clean": "exit 0",
-    "pretest": "dep-check",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "exit 0",
     "test": "exit 0"
   },
@@ -29,6 +30,7 @@
     "@commitlint/utils": "^4.2.1"
   },
   "dependencies": {
-    "@commitlint/config-angular-type-enum": "^5.0.0"
+    "@commitlint/config-angular-type-enum": "^5.0.0",
+    "xo": "^0.18.2"
   }
 }

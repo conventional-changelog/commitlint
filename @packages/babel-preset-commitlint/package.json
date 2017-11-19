@@ -4,7 +4,8 @@
   "description": "Lint your commit messages",
   "main": "index.js",
   "scripts": {
-    "pretest": "dep-check",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "npx ava --watch --verbose",
     "test": "npx ava --verbose"
   },

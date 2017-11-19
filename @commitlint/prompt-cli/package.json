@@ -8,7 +8,8 @@
   "scripts": {
     "clean": "npx rimraf lib",
     "commit": "$npm_package_bin_commit",
-    "pretest": "dep-check"
+    "deps": "dep-check",
+    "lint": "npx xo"
   },
   "xo": false,
   "repository": {
@@ -26,7 +27,8 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^4.2.1"
+    "@commitlint/utils": "^4.2.1",
+    "xo": "^0.18.2"
   },
   "dependencies": {
     "@commitlint/prompt": "^5.0.0",

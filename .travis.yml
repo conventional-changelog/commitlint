@@ -12,4 +12,6 @@ install:
   - npx --version
 script:
   - npx yarn build --since origin/master --include-filtered-dependencies --stream
+  - npx yarn lint --since origin/master --include-filtered-dependencies --stream
+  - npx yarn deps --since origin/master --include-filtered-dependencies --stream
   - npx yarn test --since origin/master --include-filtered-dependencies --stream

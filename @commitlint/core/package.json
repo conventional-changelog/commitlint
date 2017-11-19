@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib  --source-maps",
     "clean": "npx rimraf lib",
-    "pretest": "dep-check",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "npx concurrently \"npx ava -c 4 --verbose --watch\" \"npx yarn run watch\"",
     "test": "npx ava -c 4 --verbose && npx ava \"src/*.serial-test.js\" --verbose",
     "watch": "npx -p babel-cli babel src --out-dir lib --watch --source-maps"
@@ -95,6 +96,7 @@
     "require-uncached": "^1.0.3",
     "resolve-from": "^3.0.0",
     "resolve-global": "^0.1.0",
-    "semver": "^5.3.0"
+    "semver": "^5.3.0",
+    "xo": "^0.18.2"
   }
 }

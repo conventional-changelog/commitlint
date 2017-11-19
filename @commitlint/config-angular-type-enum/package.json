@@ -4,7 +4,8 @@
   "description": "Shareable commitlint config enforcing the angular commit convention types",
   "scripts": {
     "clean": "exit 0",
-    "pretest": "dep-check",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "exit 0",
     "test": "exit 0"
   },
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^4.2.1"
+    "@commitlint/utils": "^4.2.1",
+    "xo": "^0.18.2"
   }
 }

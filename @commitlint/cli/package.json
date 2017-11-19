@@ -8,8 +8,8 @@
   "scripts": {
     "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
-    "prestart": "dep-check && npx yarn run build",
-    "pretest": "dep-check && npx yarn run build",
+    "deps": "dep-check",
+    "lint": "npx xo",
     "start": "npx concurrently \"npx ava -c 4 --verbose --watch\" \"npx yarn run watch\"",
     "test": "npx ava -c 4 --verbose",
     "watch": "npx -p babel-cli babel src --out-dir lib --watch --source-maps"
@@ -74,6 +74,7 @@
     "chalk": "^2.0.1",
     "get-stdin": "^5.0.1",
     "lodash": "^4.17.4",
-    "meow": "^3.7.0"
+    "meow": "^3.7.0",
+    "xo": "^0.18.2"
   }
 }
