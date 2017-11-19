@@ -1,6 +1,6 @@
 import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
 import path from 'path';
-import requireUncached from 'require-uncached';
+import importFresh from 'import-fresh';
 import resolveFrom from 'resolve-from';
 import {merge, omit} from 'lodash';
 
@@ -94,7 +94,7 @@ function resolveId(id, context = {}) {
 		return localPath;
 	}
 
-	const resolveGlobal = requireUncached('resolve-global');
+	const resolveGlobal = importFresh('resolve-global');
 	const globalPath = resolveGlobal.silent(id);
 
 	if (typeof globalPath === 'string') {
