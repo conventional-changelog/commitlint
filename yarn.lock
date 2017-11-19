@@ -342,7 +342,7 @@ async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
 
-async@^1.0.0, async@^1.4.0, async@^1.5.0:
+async@^1.4.0, async@^1.5.0:
   version "1.5.2"
   resolved "https://registry.npmjs.org/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -2180,19 +2180,6 @@ denodeify@1.2.1:
 depd@1.1.1, depd@~1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
-
-dependency-check@2.7.0:
-  version "2.7.0"
-  resolved "https://registry.npmjs.org/dependency-check/-/dependency-check-2.7.0.tgz#7fd13368d90047b4c2d65923ff22a023ef4caf8d"
-  dependencies:
-    async "^1.0.0"
-    builtins "^1.0.0"
-    debug "^2.2.0"
-    detective "^4.0.0"
-    is-relative "^0.2.1"
-    minimist "^1.2.0"
-    read-package-json "^2.0.4"
-    resolve "^1.1.7"
 
 dependency-check@2.9.1:
   version "2.9.1"
