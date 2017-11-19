@@ -1,6 +1,6 @@
 {
   "name": "commitlint",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Lint your commit messages",
   "bin": {
     "commitlint": "cli.js"
@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^5.0.0",
+    "@commitlint/cli": "^5.0.1",
     "read-pkg": "^2.0.0",
     "resolve-pkg": "^1.0.0"
   }
