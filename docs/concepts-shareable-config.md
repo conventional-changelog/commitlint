@@ -27,7 +27,7 @@ Scoped npm packages are not prefixed.
 ```js
 // commitlint.config.js
 module.exports = {
-  extends: ['@commitlint/config-angular'] // => @commitlint/config-angular
+  extends: ['@commitlint/config-angular'] // => commitlint/config-angular
 };
 ```
 
