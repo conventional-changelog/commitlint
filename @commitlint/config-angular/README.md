@@ -5,6 +5,10 @@
 Shareable `commitlint` config enforcing the [Angular commit convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines).
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
+|:warning:|  |
+|:-------:|--|
+| **IMPORTANT** | Currently @commitlint/config-angular resolves the `latest` tag to version 4.3.0, while `next` resolves to 5.0.1. Installing 4.3.0 gives you the more compatible but older `Angular.js` conventions (with chore), while installing 5.0.0 uses the more recent  yet incompatible `Angular` conventions. We are working to resolve this situation. See [#146](https://github.com/marionebl/commitlint/issues/146) for details.  |
+
 ## Getting started
 
 ```sh
