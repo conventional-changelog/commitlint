@@ -27,6 +27,7 @@ function ensureCase(raw = '', target = 'lowercase') {
 			);
 		case 'lower-case':
 		case 'lowercase':
+		case 'lowerCase': // Backwards compat config-angular v4
 			return input.toLowerCase() === input;
 		default:
 			throw new TypeError(`ensure-case: Unknown target case "${target}"`);
