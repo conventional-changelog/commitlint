@@ -7,7 +7,8 @@ import executeRule from './library/execute-rule';
 import resolveExtends from './library/resolve-extends';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
-const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
+const valid = input =>
+	pick(input, 'extends', 'rules', 'settings', 'parserPreset');
 
 export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd);
