@@ -23,6 +23,12 @@ export default {
 			},
 			test: {
 				description: 'Adds or modifies tests.'
+			},
+			build: {
+				description: 'Affects the build system or external dependencies.'
+			},
+			ci: {
+				description: 'Changes CI configuration files and scripts.'
 			}
 		}
 	},
