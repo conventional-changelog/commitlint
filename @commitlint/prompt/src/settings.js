@@ -29,6 +29,9 @@ export default {
 			},
 			ci: {
 				description: 'Changes CI configuration files and scripts.'
+			},
+			revert: {
+				description: 'Reverts a previous commit.'
 			}
 		}
 	},
