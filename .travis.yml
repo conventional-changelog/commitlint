@@ -11,8 +11,9 @@ install:
   - yarn --version
   - npx --version
 script:
-  - commitlint-travis
   - npx yarn build --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
+  - npx lerna link
+  - commitlint-travis
   - npx yarn lint --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
   - npx yarn deps --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
   - npx yarn test --since $TRAVIS_BRANCH --include-filtered-dependencies --stream
