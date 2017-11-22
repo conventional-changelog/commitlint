@@ -53,6 +53,14 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
+"@commitlint/travis-cli@file:./@commitlint/travis-cli":
+  version "5.0.1"
+  dependencies:
+    "@commitlint/cli" "^5.0.1"
+    execa "^0.8.0"
+    is-travis "^1.0.0"
+    meow "3.7.0"
+
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
@@ -3954,6 +3962,10 @@ is-text-path@^1.0.0:
   resolved "https://registry.npmjs.org/is-text-path/-/is-text-path-1.0.1.tgz#4e1aa0fb51bfbcb3e92688001397202c1775b66e"
   dependencies:
     text-extensions "^1.0.0"
+
+is-travis@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/is-travis/-/is-travis-1.0.0.tgz#89d40ed56d9b8f8c36dfbe5811ba7e5e14944df9"
 
 is-typedarray@~1.0.0:
   version "1.0.0"

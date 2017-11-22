@@ -81,6 +81,7 @@
     "@marionebl/sander": "0.6.1"
   },
   "devDependencies": {
+    "@commitlint/travis-cli": "file:./@commitlint/travis-cli",
     "docsify-cli": "4.1.12",
     "eslint": "4.11.0",
     "eslint-config-prettier": "2.8.0",

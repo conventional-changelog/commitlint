@@ -1,0 +1,54 @@
+{
+  "name": "@commitlint/travis-cli",
+  "version": "5.0.1",
+  "description": "Lint all relevant commits for a change or PR on Travis CI",
+  "bin": {
+    "commitlint-travis": "./cli.js"
+  },
+  "scripts": {
+    "deps": "dep-check",
+    "lint": "npx xo",
+    "start": "npx ava -c 4 --verbose --watch",
+    "test": "npx ava -c 4 --verbose"
+  },
+  "ava": {
+    "files": [
+      "*.test.js"
+    ],
+    "source": [
+      "*.js"
+    ]
+  },
+  "xo": false,
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marionebl/commitlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "cli"
+  ],
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/utils": "^5.0.1",
+    "ava": "0.18.2"
+  },
+  "dependencies": {
+    "@commitlint/cli": "^5.0.1",
+    "execa": "^0.8.0",
+    "is-travis": "^1.0.0",
+    "meow": "3.7.0"
+  }
+}
