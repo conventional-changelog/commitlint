@@ -14,45 +14,43 @@ main().catch(err => {
 });
 
 function main() {
-	return new Promise((resolve, reject) => {
-		if (!isTravis) {
-			return reject(
-				new Error(`@commitlint/travis-cli is inteded of usage on Travis CI`)
-			);
-		}
+	if (!isTravis) {
+		return Promise.reject(
+			new Error(`@commitlint/travis-cli is inteded of usage on Travis CI`)
+		);
+	}
 
-		const missing = REQUIRED.filter(envVar => !(envVar in process.env));
+	const missing = REQUIRED.filter(envVar => !(envVar in process.env));
 
-		if (missing.length > 0) {
-			const stanza = missing.length > 1 ? 'they were not' : 'it was not';
-			return reject(
-				new Error(
-					`Expected ${missing.join(', ')} to be defined globally, ${stanza}.`
-				)
-			);
-		}
-
-		return execa(
-			GIT,
-			['remote', 'set-branches', 'origin', process.env.TRAVIS_BRANCH],
-			{stdio: 'inherit'}
-		)
-			.then(() => execa(GIT, ['fetch', '--unshallow'], {stdio: 'inherit'}))
-			.then(() =>
-				execa(GIT, ['checkout', process.env.TRAVIS_BRANCH], {stdio: 'inherit'})
+	if (missing.length > 0) {
+		const stanza = missing.length > 1 ? 'they were not' : 'it was not';
+		return Promise.reject(
+			new Error(
+				`Expected ${missing.join(', ')} to be defined globally, ${stanza}.`
 			)
-			.then(() => execa(GIT, ['checkout', '-'], {stdio: 'inherit'}))
-			.then(() =>
-				execa(
-					COMMITLINT,
-					[
-						'--from',
-						process.env.TRAVIS_BRANCH,
-						'--to',
-						process.env.TRAVIS_COMMIT
-					],
-					{stdio: 'inherit'}
-				)
-			);
-	});
+		);
+	}
+
+	return execa(
+		GIT,
+		['remote', 'set-branches', 'origin', process.env.TRAVIS_BRANCH],
+		{stdio: 'inherit'}
+	)
+		.then(() => execa(GIT, ['fetch', '--unshallow'], {stdio: 'inherit'}))
+		.then(() =>
+			execa(GIT, ['checkout', process.env.TRAVIS_BRANCH], {stdio: 'inherit'})
+		)
+		.then(() => execa(GIT, ['checkout', '-'], {stdio: 'inherit'}))
+		.then(() =>
+			execa(
+				COMMITLINT,
+				[
+					'--from',
+					process.env.TRAVIS_BRANCH,
+					'--to',
+					process.env.TRAVIS_COMMIT
+				],
+				{stdio: 'inherit'}
+			)
+		);
 }
