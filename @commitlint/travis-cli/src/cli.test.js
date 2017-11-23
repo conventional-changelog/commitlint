@@ -6,8 +6,8 @@ const which = require('which');
 const NODE_BIN = which.sync('node');
 const BIN = require.resolve('./cli.js');
 
-const TRAVIS_COMMITLINT_BIN = require.resolve('./fixtures/commitlint');
-const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('./fixtures/git');
+const TRAVIS_COMMITLINT_BIN = require.resolve('../fixtures/commitlint');
+const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('../fixtures/git');
 const TRAVIS_BRANCH = 'TRAVIS_BRANCH';
 const TRAVIS_COMMIT = 'TRAVIS_COMMIT';
 
