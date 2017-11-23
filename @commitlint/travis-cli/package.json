@@ -13,6 +13,10 @@
     "test": "npx ava -c 4 --verbose"
   },
   "ava": {
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ],
     "files": [
       "src/*.test.js"
     ],
