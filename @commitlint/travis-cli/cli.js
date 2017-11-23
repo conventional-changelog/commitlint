@@ -1,8 +1,11 @@
 #!/usr/bin/env node
-const path = require('path');
 const execa = require('execa');
 const isTravis = require('is-travis');
 
+// Allow to override used bins for testing purposes
+const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';
+const COMMITLINT =
+	process.env.TRAVIS_COMMITLINT_BIN || require('@commitlint/cli'); // eslint-disable-line import/newline-after-import
 const REQUIRED = ['TRAVIS_COMMIT', 'TRAVIS_BRANCH'];
 
 main().catch(err => {
@@ -32,20 +35,27 @@ function main() {
 			);
 		}
 
-		return execa('git', ['remote', 'set-branches', 'origin', 'master'])
-			.then(() => execa('git', ['fetch', '--unshallow']))
-			.then(() => execa('git', ['checkout', 'master']))
-			.then(() => execa('git', ['checkout', '-']))
-			.then(() => {
-				return execa('npm', ['bin']).then(result => {
-					const bin = result.stdout.split('\n')[0];
-					return execa(path.join(bin, 'commitlint'), [
+		return execa(
+			GIT,
+			['remote', 'set-branches', 'origin', process.env.TRAVIS_BRANCH],
+			{stdio: 'inherit'}
+		)
+			.then(() => execa(GIT, ['fetch', '--unshallow'], {stdio: 'inherit'}))
+			.then(() =>
+				execa(GIT, ['checkout', process.env.TRAVIS_BRANCH], {stdio: 'inherit'})
+			)
+			.then(() => execa(GIT, ['checkout', '-'], {stdio: 'inherit'}))
+			.then(() =>
+				execa(
+					COMMITLINT,
+					[
 						'--from',
 						process.env.TRAVIS_BRANCH,
 						'--to',
 						process.env.TRAVIS_COMMIT
-					]);
-				});
-			});
+					],
+					{stdio: 'inherit'}
+				)
+			);
 	});
 }
