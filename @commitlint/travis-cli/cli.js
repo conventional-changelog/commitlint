@@ -9,11 +9,8 @@ const COMMITLINT =
 const REQUIRED = ['TRAVIS_COMMIT', 'TRAVIS_BRANCH'];
 
 main().catch(err => {
-	console.log({err});
-	setTimeout(() => {
-		console.log({err});
-		throw err;
-	}, 0);
+	console.log(err);
+	process.exit(1);
 });
 
 function main() {
