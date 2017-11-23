@@ -4,7 +4,7 @@ const execa = require('execa');
 const which = require('which');
 
 const NODE_BIN = which.sync('node');
-const BIN = require.resolve('./cli.js');
+const BIN = require.resolve('../lib/cli.js');
 
 const TRAVIS_COMMITLINT_BIN = require.resolve('../fixtures/commitlint');
 const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('../fixtures/git');
@@ -22,7 +22,7 @@ const bin = async (env = {}) => {
 test('should throw when not on travis ci', async t => {
 	await t.throws(
 		bin(),
-		/@commitlint\/travis-cli is inteded of usage on Travis CI/
+		/@commitlint\/travis-cli is inteded to be used on Travis CI/
 	);
 });
 

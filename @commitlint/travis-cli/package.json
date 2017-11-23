@@ -10,23 +10,24 @@
     "deps": "dep-check",
     "lint": "npx xo",
     "start": "npx ava -c 4 --verbose --watch",
-    "test": "npx ava -c 4 --verbose"
+    "test": "npx ava -c 4 --verbose",
+    "watch": "babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
+    "files": [
+      "src/**/*.test.js"
+    ],
+    "source": [
+      "lib/**/*.js"
+    ],
     "babel": "inherit",
     "require": [
       "babel-register"
-    ],
-    "files": [
-      "src/*.test.js"
-    ],
-    "source": [
-      "src/*.js"
     ]
   },
   "babel": {
     "presets": [
-      "commitlint"
+      "babel-preset-commitlint"
     ]
   },
   "xo": false,

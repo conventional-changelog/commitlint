@@ -18,7 +18,9 @@ main().catch(err => {
 
 async function main() {
 	if (!isTravis) {
-		throw new Error(`@commitlint/travis-cli is inteded of usage on Travis CI`);
+		throw new Error(
+			`@commitlint/travis-cli is inteded to be used on Travis CI`
+		);
 	}
 
 	const missing = REQUIRED.filter(envVar => !(envVar in process.env));
