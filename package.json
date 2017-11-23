@@ -7,8 +7,8 @@
   "scripts": {
     "build": "npx lerna run build --stream --parallel --include-filtered-dependencies",
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
-    "commit": "npx -p @commitlint/prompt-cli commit",
-    "commitmsg": "npx commitlint -e $GIT_PARAMS",
+    "commit": "node @commitlint/prompt-cli/cli.js",
+    "commitmsg": "node @commitlint/cli/lib/cli.js -e $GIT_PARAMS",
     "deps": "npx lerna run deps",
     "docs": "npx docsify serve docs",
     "lint": "npx lerna run lint",
@@ -81,7 +81,6 @@
     "@marionebl/sander": "0.6.1"
   },
   "devDependencies": {
-    "@commitlint/travis-cli": "file:./@commitlint/travis-cli",
     "docsify-cli": "4.1.12",
     "eslint": "4.11.0",
     "eslint-config-prettier": "2.8.0",

@@ -12,8 +12,7 @@ install:
   - npx --version
 script:
   - npx yarn build
-  - npx lerna link
-  - commitlint-travis
+  - node @commitlint/travis-cli/lib/cli.js
   - npx yarn lint
   - npx yarn deps
   - npx yarn test
