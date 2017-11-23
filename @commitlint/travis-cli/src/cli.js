@@ -39,9 +39,13 @@ async function main() {
 }
 
 async function git(args, options) {
-	return execa(GIT, args, {stdio: 'inherit', ...options});
+	return execa(GIT, args, Object.assign({}, {stdio: 'inherit'}, options));
 }
 
 async function lint(args, options) {
-	return execa(COMMITLINT, args, {stdio: 'inherit', ...options});
+	return execa(
+		COMMITLINT,
+		args,
+		Object.assign({}, {stdio: 'inherit'}, options)
+	);
 }
