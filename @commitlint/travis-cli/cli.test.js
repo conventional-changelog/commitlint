@@ -1,3 +1,4 @@
+const os = require('os');
 const test = require('ava');
 const execa = require('execa');
 const which = require('which');
@@ -53,6 +54,11 @@ test('should throw when on travis ci, but TRAVIS_BRANCH is missing', async t => 
 });
 
 test('should call git with expected args if requirements are fulfilled', async t => {
+	if (os.platform() === 'win32') {
+		t.pass();
+		return;
+	}
+
 	const env = {
 		TRAVIS: true,
 		CI: true,
