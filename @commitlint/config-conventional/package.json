@@ -1,0 +1,35 @@
+{
+    "name": "@commitlint/config-conventional",
+    "version": "5.0.1",
+    "description": "Shareable commitlint config enforcing conventional commits",
+    "scripts": {
+      "clean": "exit 0",
+      "deps": "dep-check",
+      "lint": "xo",
+      "start": "exit 0",
+      "test": "exit 0"
+    },
+    "xo": false,
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/marionebl/commitlint.git"
+    },
+    "keywords": [
+      "conventional-changelog",
+      "commitlint",
+      "commitlint-config",
+      "angular"
+    ],
+    "author": "Mario Nebl <hello@herebecode.com>",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/marionebl/commitlint/issues"
+    },
+    "homepage": "https://github.com/marionebl/commitlint#readme",
+    "devDependencies": {
+      "@commitlint/utils": "^5.0.1"
+    },
+    "dependencies": {
+      "@commitlint/config-angular-type-enum": "^5.0.1"
+    }
+  }
