@@ -146,3 +146,18 @@ mv .conventional-changelog-lintrc commitlint.config.js
 * `getPreset(name, require)` removed
 * `format(report, options)` now only respects `.color` on `options`
 * `lint(message, options)` changed to `lint(message, rules)`
+
+## Version 4 to 5
+
+```bash
+npm remove --save-dev @commitlint/config-angular
+npm install --save @commitlint/cli @commitlint/config-conventional
+echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
+```
+
+### Breaking changes
+
+#### Config
+
+* `config-angular` dropped support for the `chore` type, breaking compat with conventional-changelog,
+use `config-conventional` instead.
