@@ -90,6 +90,8 @@ npx yarn run build # run build tasks
 npx yarn start # run tests, again on change
 ```
 
+For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).
+
 ### Publishing a release
 
 ```sh
