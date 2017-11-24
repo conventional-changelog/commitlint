@@ -26,17 +26,17 @@ type Config = {
 
 const Configuration: Config = {
     /*
-     * Resolve and load @commitlint/config-angular from node_modules.
+     * Resolve and load @commitlint/config-conventional from node_modules.
      * Referenced packages must be installed
      */
-    extends: ['@commitlint/config-angular'],
+    extends: ['@commitlint/config-conventional'],
     /*
      * Resolve and load conventional-changelog-atom from node_modules. 
      * Referenced packages must be installed
      */
     parserPreset: 'conventional-changelog-atom',
     /*
-     * Any rules defined here will override rules from @commitlint/config-angular
+     * Any rules defined here will override rules from @commitlint/config-conventional
      */
     rules: {
         'type-enum': [2, 'always', ['foo']]
@@ -57,7 +57,7 @@ This means installed npm packages and local files can be used.
 * npm
 
 ```
-npm install --save-dev commitlint-config-lerna @commitlint/config-angular
+npm install --save-dev commitlint-config-lerna @commitlint/config-conventional
 ```
 
 ```js
@@ -65,7 +65,7 @@ npm install --save-dev commitlint-config-lerna @commitlint/config-angular
 module.exports = {
     extends: [
         'lerna' // prefixed with commitlint-config-*,
-        '@commitlint/config-angular' // scoped packages are not prefixed
+        '@commitlint/config-conventional' // scoped packages are not prefixed
     ]
 }
 ```
@@ -92,7 +92,7 @@ module.exports = {
 ```js
 // commitlint.base.js, will be picked up by commitlint.config.js
 module.exports = {
-    extends: ['@commitlint/config-angular'], // extends can be nested
+    extends: ['@commitlint/config-conventional'], // extends can be nested
     parserPreset: 'conventional-changelog-atom'
 }
 ```

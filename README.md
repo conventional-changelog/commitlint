@@ -17,10 +17,10 @@
 
 ```sh
 # Install commitlint cli and angular config
-npm install --save-dev @commitlint/{config-angular,cli}
+npm install --save-dev @commitlint/{config-conventional,cli}
 
 # Configure commitlint to use angular config
-echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.config.js
+echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 ```
 
 * [Local setup](http://marionebl.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
@@ -37,13 +37,14 @@ echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.c
 * Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`
 * Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 * See [Rules](./docs/reference-rules.md) for a complete list of possible rules
-* An example configuration can be found at [@commitlint/config-angular](./@commitlint/config-angular/index.js)
+* An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/index.js)
 
 ## Shared configuration
 
 A number of shared configurations are available to install and use with `commitlint`:
 
 * [@commitlint/config-angular](./@commitlint/config-angular)
+* [@commitlint/config-conventional](./@commitlint/config-conventional)
 * [@commitlint/config-lerna-scopes](./@commitlint/config-lerna-scopes)
 * [@commitlint/config-patternplate](./@commitlint/config-patternplate)
 * [conventional-changelog-lint-config-atom](https://github.com/erikmueller/conventional-changelog-lint-config-atom)

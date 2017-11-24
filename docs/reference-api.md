@@ -318,7 +318,7 @@ lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then(report => cons
 const {lint, load} = require('@commitlint/core');
 
 const CONFIG = {
-  extends: ['./@commitlint/config-angular']
+  extends: ['./@commitlint/config-conventional']
 };
 
 load(CONFIG)

@@ -12,7 +12,7 @@ The most common `validate-commit-msg` use cases can be recreated with minor chan
 
 ```sh
 npm remove validate-commit-msg --save-dev
-npm install --save-dev @commitlint/cli @commitint/config-angular
+npm install --save-dev @commitlint/cli @commitint/config-conventional
 ```
 
 **Add a commitmsg run-script to package.json**
@@ -20,7 +20,7 @@ npm install --save-dev @commitlint/cli @commitint/config-angular
 ```
 {
   "scripts": {
-    "commitmsg": "commitlint -x @commitlint/config-angular -e $GIT_PARAMS"
+    "commitmsg": "commitlint -x @commitlint/config-conventional -e $GIT_PARAMS"
   }
 }
 ```
@@ -39,7 +39,7 @@ If you used `validate-commit-msg` with custom configuration you might want to cu
 
 ```sh
 npm remove validate-commit-msg --save-dev
-npm install --save-dev @commitlint/cli @commitint/config-angular
+npm install --save-dev @commitlint/cli @commitint/config-conventional
 ```
 
 **Add a commitmsg run-script to package.json**
@@ -62,7 +62,7 @@ npm install --save-dev husky
 
 ```js
 module.exports = {
-  extends: ['@commitlint/config-angular'],
+  extends: ['@commitlint/config-conventional'],
   rules: {
     // Place your rules here
     'scope-enum': [2, 'always', ['a', 'b']] // error if scope is given but not in provided list
