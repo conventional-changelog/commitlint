@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.1.2"></a>
+## [5.1.2](https://github.com/marionebl/commitlint/compare/v5.1.1...v5.1.2) (2017-11-24)
+
+
+### Bug Fixes
+
+* **prompt:** apply forced cases properly ([3a569a7](https://github.com/marionebl/commitlint/commit/3a569a7)), closes [#145](https://github.com/marionebl/commitlint/issues/145)
+
+
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/marionebl/commitlint/compare/v5.1.0...v5.1.1) (2017-11-24)
 
