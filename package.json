@@ -5,18 +5,18 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "npx lerna run build --stream --parallel --include-filtered-dependencies",
+    "build": "lerna run build --stream --parallel --include-filtered-dependencies",
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "node @commitlint/prompt-cli/cli.js",
     "commitmsg": "node @commitlint/cli/lib/cli.js -e $GIT_PARAMS",
-    "deps": "npx lerna run deps",
-    "docs": "npx docsify serve docs",
-    "lint": "npx lerna run lint",
+    "deps": "lerna run deps",
+    "docs": "docsify serve docs",
+    "lint": "lerna run lint",
     "precommit": "lint-staged",
-    "publish": "npx lerna publish --conventional-commits",
-    "reinstall": "npm run clean && npm install",
-    "start": "npx lerna run start --stream --parallel --include-filtered-dependencies",
-    "test": "npx lerna run test --stream --parallel --include-filtered-dependencies"
+    "publish": "lerna publish --conventional-commits",
+    "reinstall": "yarn clean && yarn install",
+    "start": "lerna run start --stream --parallel --include-filtered-dependencies",
+    "test": "lerna run test --stream --parallel --include-filtered-dependencies"
   },
   "commitlint": {
     "extends": [
