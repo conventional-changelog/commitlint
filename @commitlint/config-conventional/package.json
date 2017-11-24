@@ -10,6 +10,9 @@
     "test": "exit 0"
   },
   "xo": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"
