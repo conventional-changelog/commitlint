@@ -13,6 +13,23 @@
 *  📦  Share configuration via `npm`
 *  🤖  Tap into `conventional-changelog`
 
+## Contents
+
+* [Getting started](#getting-started)
+* [CLI](#cli)
+* [Config](#config)
+* [Shared configuration](#shared-configuration)
+* [API](#api)
+* [Tools](#tools)
+* [Version Support](#version-support)
+* [Related projects](#related-projects)
+* [License](#license)
+* [Development](#development)
+  * [Install and run](#install-and-run)
+  * [Publishing a release](#publishing-a-release)
+
+* * *
+
 ## Getting started
 
 ```sh
@@ -80,7 +97,7 @@ Copyright by @marionebl. All `commitlint` packages are released under the MIT li
 
 `commitlint` is developed in a mono repository.
 
-### Getting started
+### Install and run
 
 ```sh
 git clone git@github.com:marionebl/commitlint.git
