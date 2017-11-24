@@ -1,5 +1,7 @@
 #!/usr/bin/env node
+const sander = require('@marionebl/sander');
 const execa = require('execa');
+const findUp = require('find-up');
 const isTravis = require('is-travis');
 
 // Allow to override used bins for testing purposes
@@ -23,6 +25,7 @@ async function main() {
 		);
 	}
 
+	const gitRoot = await findUp('.git');
 	const missing = REQUIRED.filter(envVar => !(envVar in process.env));
 
 	if (missing.length > 0) {
@@ -35,7 +38,11 @@ async function main() {
 	const pop = await stash();
 
 	await git(['remote', 'set-branches', 'origin', TRAVIS_BRANCH]);
-	await git(['fetch', '--unshallow', '--quiet']);
+
+	if (await sander.exists(gitRoot, 'shallow')) {
+		await git(['fetch', '--unshallow', '--quiet']);
+	}
+
 	await git(['checkout', TRAVIS_BRANCH, '--quiet']);
 	await git(['checkout', '-', '--quiet']);
 

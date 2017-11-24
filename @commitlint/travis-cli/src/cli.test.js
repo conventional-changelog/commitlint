@@ -1,4 +1,5 @@
 const os = require('os');
+const {git} = require('@commitlint/test');
 const test = require('ava');
 const execa = require('execa');
 const which = require('which');
@@ -53,11 +54,15 @@ test('should throw when on travis ci, but TRAVIS_BRANCH is missing', async t => 
 	await t.throws(bin({env}), /TRAVIS_BRANCH/);
 });
 
-test('should call git with expected args if requirements are fulfilled', async t => {
+test('should call git with expected args on shallow repo', async t => {
 	if (os.platform() === 'win32') {
 		t.pass();
 		return;
 	}
+
+	const cwd = await git.clone('https://github.com/marionebl/commitlint.git', [
+		'--depth=10'
+	]);
 
 	const env = {
 		TRAVIS: true,
@@ -68,7 +73,7 @@ test('should call git with expected args if requirements are fulfilled', async t
 		TRAVIS_COMMITLINT_GIT_BIN
 	};
 
-	const result = await bin({env});
+	const result = await bin({cwd, env});
 	const invocations = await getInvocations(result.stdout);
 	t.is(invocations.length, 7);
 
@@ -97,6 +102,63 @@ test('should call git with expected args if requirements are fulfilled', async t
 		'fetch',
 		'--unshallow',
 		'--quiet'
+	]);
+	t.deepEqual(checkout, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'checkout',
+		TRAVIS_BRANCH,
+		'--quiet'
+	]);
+	t.deepEqual(back, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'checkout',
+		'-',
+		'--quiet'
+	]);
+	t.deepEqual(pop, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash', 'pop']);
+	t.deepEqual(commilint, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_BIN,
+		'--from',
+		TRAVIS_BRANCH,
+		'--to',
+		TRAVIS_COMMIT
+	]);
+});
+
+test('should call git with expected args on unshallow repo', async t => {
+	if (os.platform() === 'win32') {
+		t.pass();
+		return;
+	}
+
+	const cwd = await git.clone('https://github.com/marionebl/commitlint.git');
+
+	const env = {
+		TRAVIS: true,
+		CI: true,
+		TRAVIS_BRANCH,
+		TRAVIS_COMMIT,
+		TRAVIS_COMMITLINT_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN
+	};
+
+	const result = await bin({cwd, env});
+	const invocations = await getInvocations(result.stdout);
+	t.is(invocations.length, 6);
+
+	const [stash, branches, checkout, back, pop, commilint] = invocations;
+
+	t.deepEqual(stash, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash']);
+	t.deepEqual(branches, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'remote',
+		'set-branches',
+		'origin',
+		TRAVIS_BRANCH
 	]);
 	t.deepEqual(checkout, [
 		NODE_BIN,
