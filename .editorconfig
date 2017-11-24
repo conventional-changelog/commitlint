@@ -4,7 +4,7 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 indent_style = tab
 
-[{.*rc,*.yml,*.md,package.json,*.svg}]
+[{.*rc,*.yml,*.md,package.json,lerna.json,*.svg}]
 indent_style = space
 
 [*.md]

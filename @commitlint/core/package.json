@@ -4,13 +4,13 @@
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib  --source-maps",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "clean": "npx rimraf lib",
     "deps": "dep-check",
-    "lint": "npx xo",
-    "start": "npx concurrently \"npx ava -c 4 --verbose --watch\" \"npx yarn run watch\"",
-    "test": "npx ava -c 4 --verbose && npx ava \"src/*.serial-test.js\" --verbose",
-    "watch": "npx -p babel-cli babel src --out-dir lib --watch --source-maps"
+    "lint": "xo",
+    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
+    "test": "ava -c 4 --verbose && ava \"src/*.serial-test.js\" --verbose",
+    "watch": "babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
     "files": [

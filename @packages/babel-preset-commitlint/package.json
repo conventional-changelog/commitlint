@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "deps": "dep-check",
-    "lint": "npx xo",
-    "start": "npx ava --watch --verbose",
-    "test": "npx ava --verbose"
+    "lint": "xo",
+    "start": "ava --watch --verbose",
+    "test": "ava --verbose"
   },
   "ava": {
     "files": [
