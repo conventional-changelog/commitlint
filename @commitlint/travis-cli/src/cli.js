@@ -32,10 +32,10 @@ async function main() {
 		);
 	}
 
-	await git(['remote', 'set-branches', 'origin', TRAVIS_BRANCH]);
-	await git(['fetch', '--unshallow']);
-	await git(['checkout', TRAVIS_BRANCH]);
-	await git(['checkout', '-']);
+	await git(['remote', 'set-branches', 'origin', TRAVIS_BRANCH, '--quiet']);
+	await git(['fetch', '--unshallow', '--quiet']);
+	await git(['checkout', TRAVIS_BRANCH, '--quiet']);
+	await git(['checkout', '-', '--quiet']);
 
 	await lint(['--from', TRAVIS_BRANCH, '--to', TRAVIS_COMMIT]);
 }

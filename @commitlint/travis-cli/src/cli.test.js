@@ -80,21 +80,30 @@ test('should call git with expected args if requirements are fulfilled', async t
 		'remote',
 		'set-branches',
 		'origin',
-		TRAVIS_BRANCH
+		TRAVIS_BRANCH,
+		'--quiet'
 	]);
 	t.deepEqual(unshallow, [
 		NODE_BIN,
 		TRAVIS_COMMITLINT_GIT_BIN,
 		'fetch',
-		'--unshallow'
+		'--unshallow',
+		'--quiet'
 	]);
 	t.deepEqual(checkout, [
 		NODE_BIN,
 		TRAVIS_COMMITLINT_GIT_BIN,
 		'checkout',
-		TRAVIS_BRANCH
+		TRAVIS_BRANCH,
+		'--quiet'
 	]);
-	t.deepEqual(back, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'checkout', '-']);
+	t.deepEqual(back, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'checkout',
+		'-',
+		'--quiet'
+	]);
 	t.deepEqual(commilint, [
 		NODE_BIN,
 		TRAVIS_COMMITLINT_BIN,
