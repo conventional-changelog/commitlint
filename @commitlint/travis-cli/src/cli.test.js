@@ -80,8 +80,7 @@ test('should call git with expected args if requirements are fulfilled', async t
 		'remote',
 		'set-branches',
 		'origin',
-		TRAVIS_BRANCH,
-		'--quiet'
+		TRAVIS_BRANCH
 	]);
 	t.deepEqual(unshallow, [
 		NODE_BIN,
