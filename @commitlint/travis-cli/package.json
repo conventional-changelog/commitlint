@@ -6,11 +6,12 @@
     "commitlint-travis": "./lib/cli.js"
   },
   "scripts": {
-    "build": "npx cross-env NODE_ENV=production npx -p babel-cli babel src --out-dir lib --source-maps",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
+    "clean": "npx rimraf lib",
     "deps": "dep-check",
-    "lint": "npx xo",
-    "start": "npx ava -c 4 --verbose --watch",
-    "test": "npx ava -c 4 --verbose",
+    "lint": "xo",
+    "start": "ava -c 4 --verbose --watch",
+    "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
   },
   "ava": {

@@ -9,7 +9,7 @@
     "clean": "npx rimraf lib",
     "commit": "$npm_package_bin_commit",
     "deps": "dep-check",
-    "lint": "npx xo"
+    "lint": "xo"
   },
   "xo": false,
   "repository": {

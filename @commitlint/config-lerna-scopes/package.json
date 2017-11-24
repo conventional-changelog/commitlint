@@ -4,9 +4,9 @@
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "scripts": {
     "clean": "exit 0",
-    "lint": "npx xo",
-    "start": "npx ava --watch --verbose",
-    "test": "npx ava --verbose"
+    "lint": "xo",
+    "start": "ava --watch --verbose",
+    "test": "ava --verbose"
   },
   "xo": false,
   "ava": {
