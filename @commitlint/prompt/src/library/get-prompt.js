@@ -2,7 +2,6 @@ import chalk from 'chalk';
 
 import enumRuleIsActive from './enum-rule-is-active';
 import format from './format';
-import getForcedCase from './get-forced-case';
 import getForcedCaseFn from './get-forced-case-fn';
 import getForcedLeadingFn from './get-forced-leading-fn';
 import getHasName from './get-has-name';
@@ -78,7 +77,6 @@ function getPrompt(type, context = {}) {
 
 	const caseRule = rules.filter(getHasName('case'))[0];
 
-	const forcedCase = getForcedCase(caseRule);
 	const forceCaseFn = getForcedCaseFn(caseRule);
 
 	const leadingBlankRule = rules.filter(getHasName('leading-blank'))[0];
@@ -219,7 +217,6 @@ function getPrompt(type, context = {}) {
 				required: mayNotBeEmpty,
 				'tab-completion': typeof enumRule !== 'undefined',
 				header: typeof settings.header !== 'undefined',
-				case: forcedCase,
 				'multi-line': settings.multiline
 			})}`
 		);
