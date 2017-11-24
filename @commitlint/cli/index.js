@@ -1,1 +1,3 @@
-module.exports = require.resolve('./src/cli.js');
+const path = require('path');
+
+module.exports = path.join(__dirname, 'lib/cli.js');
