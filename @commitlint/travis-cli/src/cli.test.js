@@ -22,8 +22,8 @@ const bin = async (config = {}) => {
 
 test('should throw when not on travis ci', async t => {
 	const env = {
-		CI: null,
-		TRAVIS: null
+		CI: false,
+		TRAVIS: false
 	};
 
 	await t.throws(

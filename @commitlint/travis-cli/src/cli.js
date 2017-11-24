@@ -2,7 +2,6 @@
 const sander = require('@marionebl/sander');
 const execa = require('execa');
 const findUp = require('find-up');
-const isTravis = require('is-travis');
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';
@@ -19,7 +18,7 @@ main().catch(err => {
 });
 
 async function main() {
-	if (!isTravis) {
+	if (process.env.CI !== 'true' || process.env.TRAVIS !== 'true') {
 		throw new Error(
 			`@commitlint/travis-cli is inteded to be used on Travis CI`
 		);
