@@ -11,9 +11,9 @@ const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('../fixtures/git');
 const TRAVIS_BRANCH = 'TRAVIS_BRANCH';
 const TRAVIS_COMMIT = 'TRAVIS_COMMIT';
 
-const bin = async (env = {}) => {
+const bin = async (config = {}) => {
 	try {
-		return await execa(BIN, {env, extendEnv: false});
+		return await execa(BIN, Object.assign({extendEnv: false}, config));
 	} catch (err) {
 		throw new Error([err.stdout, err.stderr].join('\n'));
 	}
@@ -32,7 +32,7 @@ test('should throw when on travis ci, but env vars are missing', async t => {
 		CI: true
 	};
 
-	await t.throws(bin(env), /TRAVIS_COMMIT, TRAVIS_BRANCH/);
+	await t.throws(bin({env}), /TRAVIS_COMMIT, TRAVIS_BRANCH/);
 });
 
 test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async t => {
@@ -41,7 +41,7 @@ test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async t => 
 		CI: true
 	};
 
-	await t.throws(bin(env), /TRAVIS_COMMIT/);
+	await t.throws(bin({env}), /TRAVIS_COMMIT/);
 });
 
 test('should throw when on travis ci, but TRAVIS_BRANCH is missing', async t => {
@@ -50,7 +50,7 @@ test('should throw when on travis ci, but TRAVIS_BRANCH is missing', async t => 
 		CI: true
 	};
 
-	await t.throws(bin(env), /TRAVIS_BRANCH/);
+	await t.throws(bin({env}), /TRAVIS_BRANCH/);
 });
 
 test('should call git with expected args if requirements are fulfilled', async t => {
@@ -68,12 +68,21 @@ test('should call git with expected args if requirements are fulfilled', async t
 		TRAVIS_COMMITLINT_GIT_BIN
 	};
 
-	const result = await bin(env);
+	const result = await bin({env});
 	const invocations = await getInvocations(result.stdout);
-	t.is(invocations.length, 5);
+	t.is(invocations.length, 7);
 
-	const [branches, unshallow, checkout, back, commilint] = invocations;
+	const [
+		stash,
+		branches,
+		unshallow,
+		checkout,
+		back,
+		pop,
+		commilint
+	] = invocations;
 
+	t.deepEqual(stash, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash']);
 	t.deepEqual(branches, [
 		NODE_BIN,
 		TRAVIS_COMMITLINT_GIT_BIN,
@@ -103,6 +112,7 @@ test('should call git with expected args if requirements are fulfilled', async t
 		'-',
 		'--quiet'
 	]);
+	t.deepEqual(pop, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash', 'pop']);
 	t.deepEqual(commilint, [
 		NODE_BIN,
 		TRAVIS_COMMITLINT_BIN,
