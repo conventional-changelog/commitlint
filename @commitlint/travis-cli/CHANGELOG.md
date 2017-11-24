@@ -10,14 +10,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **travis-cli:** add reusable travis command line interface ([3e6e6a8](https://github.com/marionebl/commitlint/commit/3e6e6a8))
-
-
-
-
-<a name="5.0.1"></a>
-## [5.0.1](https://github.com/marionebl/commitlint/compare/v5.0.0...v5.0.1) (2017-11-19)
-
-
-
-
-**Note:** Version bump only for package @commitlint/config-angular-type-enum

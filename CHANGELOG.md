@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/marionebl/commitlint/compare/v5.0.2...v5.1.0) (2017-11-24)
+
+
+### Bug Fixes
+
+* update dependency concurrently to v3.5.1 ([#147](https://github.com/marionebl/commitlint/issues/147)) ([a809d0f](https://github.com/marionebl/commitlint/commit/a809d0f))
+* **config-conventional:** remove unneeded dependency ([d0e62fd](https://github.com/marionebl/commitlint/commit/d0e62fd))
+
+
+### Features
+
+* **prompt:** add description for build, ci and revert ([#148](https://github.com/marionebl/commitlint/issues/148)) ([ee6ec6e](https://github.com/marionebl/commitlint/commit/ee6ec6e))
+* **travis-cli:** add reusable travis command line interface ([3e6e6a8](https://github.com/marionebl/commitlint/commit/3e6e6a8))
+* add conventional-changelog package ([8bb0a85](https://github.com/marionebl/commitlint/commit/8bb0a85))
+
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/marionebl/commitlint/compare/v5.0.0...v5.0.1) (2017-11-19)
 
