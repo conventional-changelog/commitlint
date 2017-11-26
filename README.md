@@ -89,6 +89,7 @@ A number of shared configurations are available to install and use with `commitl
 
 * [conventional-changelog](https://git.io/v18sw) – Generate a changelog from conventional commit history
 * [commitizen](https://git.io/vwTym) – Simple commit conventions for internet citizens
+* [create-semantic-module](https://git.io/vFjFg) – CLI for quickly integrating commitizen and commitlint in new or existing projects
 
 ## License
 Copyright by @marionebl. All `commitlint` packages are released under the MIT license.
