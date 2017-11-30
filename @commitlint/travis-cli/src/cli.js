@@ -9,6 +9,7 @@ const COMMITLINT = process.env.TRAVIS_COMMITLINT_BIN;
 const REQUIRED = [
 	'TRAVIS_COMMIT',
 	'TRAVIS_COMMIT_RANGE',
+	'TRAVIS_EVENT_TYPE',
 	'TRAVIS_REPO_SLUG',
 	'TRAVIS_PULL_REQUEST_SLUG'
 ];
@@ -17,6 +18,7 @@ const COMMIT = process.env.TRAVIS_COMMIT;
 const REPO_SLUG = process.env.TRAVIS_REPO_SLUG;
 const PR_SLUG = process.env.TRAVIS_PULL_REQUEST_SLUG || REPO_SLUG;
 const RANGE = process.env.TRAVIS_COMMIT_RANGE;
+const IS_PR = process.env.TRAVIS_EVENT_TYPE === 'pull_request';
 
 main().catch(err => {
 	console.log(err);
@@ -32,20 +34,21 @@ async function main() {
 	// Make base and source available as dedicated remotes
 	await Promise.all([
 		() => fetch({name: 'base', url: `https://github.com/${REPO_SLUG}.git`}),
-		() => fetch({name: 'source', url: `https://github.com/${PR_SLUG}.git`})
+		IS_PR
+			? () => fetch({name: 'source', url: `https://github.com/${PR_SLUG}.git`})
+			: async () => {}
 	]);
 
 	// Restore stashed changes if any
 	await pop();
 
 	// Lint all commits in TRAVIS_COMMIT_RANGE if available
-	if (RANGE) {
+	if (IS_PR && RANGE) {
 		const [start, end] = RANGE.split('.').filter(Boolean);
 		await lint(['--from', start, '--to', end]);
+	} else {
+		await lint(['--from', COMMIT]);
 	}
-
-	// Always lint the triggering commit indicated by TRAVIS_COMMIT
-	await lint(['--from', COMMIT]);
 }
 
 async function git(args, options) {
