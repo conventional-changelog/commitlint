@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/marionebl/commitlint/compare/v5.1.3...v5.2.0) (2017-11-30)
+
+
+### Bug Fixes
+
+* consider pull requests from forks ([4653c2c](https://github.com/marionebl/commitlint/commit/4653c2c))
+
+
+### Features
+
+* **babel-preset-commitlint:** add jsx tranform ([#163](https://github.com/marionebl/commitlint/issues/163)) ([5190241](https://github.com/marionebl/commitlint/commit/5190241))
+
+
+
+
 <a name="5.1.3"></a>
 ## [5.1.3](https://github.com/marionebl/commitlint/compare/v5.1.2...v5.1.3) (2017-11-24)
 
