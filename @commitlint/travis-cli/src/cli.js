@@ -47,7 +47,8 @@ async function main() {
 		const [start, end] = RANGE.split('.').filter(Boolean);
 		await lint(['--from', start, '--to', end]);
 	} else {
-		await lint(['--from', COMMIT]);
+		const input = await log(COMMIT);
+		await lint([], {input});
 	}
 }
 
@@ -71,8 +72,19 @@ async function lint(args, options) {
 	return execa(
 		COMMITLINT || commitlint,
 		args,
-		Object.assign({}, {stdio: 'inherit'}, options)
+		Object.assign({}, {stdio: ['pipe', 'inherit', 'inherit']}, options)
 	);
+}
+
+async function log(hash) {
+	const result = await execa('git', [
+		'log',
+		'-n',
+		'1',
+		'--pretty=format:%B',
+		hash
+	]);
+	return result.stdout;
 }
 
 async function stash() {
