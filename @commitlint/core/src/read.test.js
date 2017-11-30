@@ -3,7 +3,6 @@ import test from 'ava';
 import execa from 'execa';
 import * as sander from '@marionebl/sander';
 
-import pkg from '../package';
 import read from './read';
 
 test('get edit commit message specified by the `edit` flag', async t => {
@@ -51,13 +50,4 @@ test('get edit commit message from git subdirectory', async t => {
 	const expected = ['beta\n\n'];
 	const actual = await read({edit: true, cwd});
 	t.deepEqual(actual, expected);
-});
-
-test('get history commit messages from shallow clone', async t => {
-	const cwd = await git.clone(pkg.repository.url, '--depth', '1');
-	const err = await t.throws(read({from: 'master', cwd}));
-
-	t.true(
-		err.message.indexOf('Could not get git history from shallow clone') > -1
-	);
 });
