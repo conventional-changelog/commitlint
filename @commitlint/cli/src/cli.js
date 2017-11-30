@@ -1,68 +1,74 @@
 #!/usr/bin/env node
 require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 
-const core = require('@commitlint/core');
-const chalk = require('chalk');
 const meow = require('meow');
-const {merge, pick} = require('lodash');
-const stdin = require('get-stdin');
+const merge = require('lodash/merge');
 
 const pkg = require('../package');
-const help = require('./help');
-
-const configuration = {
-	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
-	boolean: ['help', 'version', 'quiet', 'color'],
-	alias: {
-		c: 'color',
-		d: 'cwd',
-		e: 'edit',
-		f: 'from',
-		t: 'to',
-		q: 'quiet',
-		h: 'help',
-		v: 'version',
-		x: 'extends',
-		p: 'parser-preset'
-	},
-	description: {
-		color: 'toggle colored output',
-		cwd: 'directory to execute in',
-		edit:
-			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
-		extends: 'array of shareable configurations to extend',
-		from: 'lower end of the commit range to lint; applies if edit=false',
-		to: 'upper end of the commit range to lint; applies if edit=false',
-		quiet: 'toggle console output',
-		'parser-preset':
-			'configuration preset to use for conventional-commits-parser'
-	},
-	default: {
-		color: true,
-		cwd: process.cwd(),
-		edit: false,
-		from: null,
-		to: null,
-		quiet: false
-	},
-	unknown(arg) {
-		throw new Error(`unknown flags: ${arg}`);
-	}
-};
+const commands = require('./commands');
 
 const cli = meow(
 	{
-		help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(
-			configuration
-		)}`,
+		help: `
+		Commands
+		  commitlint              lint commits, [input] reads from stdin if --edit, --from and --to are omitted
+
+		Options
+		  --cwd, -d              directory to execute in, defaults to: process.cwd()
+		  --extends, -x          array of shareable configurations to extend
+		  --parser-preset, -p    configuration preset to use for conventional-commits-parser
+		  --quiet, -q            toggle console output
+
+		  commitlint
+		    --color, -c            toggle colored output, defaults to: true
+		    --edit, -e             read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG
+		    --from, -f             lower end of the commit range to lint; applies if edit=false
+		  --to, -t               upper end of the commit range to lint; applies if edit=false
+
+		Usage
+		  $ echo "some commit" | commitlint
+		  $ commitlint --to=master
+		  $ commitlint --from=HEAD~1
+		`,
 		description: `${pkg.name}@${pkg.version} - ${pkg.description}`
 	},
-	configuration
+	{
+		string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
+		boolean: ['help', 'version', 'quiet', 'color'],
+		alias: {
+			c: 'color',
+			d: 'cwd',
+			e: 'edit',
+			f: 'from',
+			t: 'to',
+			q: 'quiet',
+			h: 'help',
+			v: 'version',
+			x: 'extends',
+			p: 'parser-preset'
+		},
+		default: {
+			color: true,
+			cwd: process.cwd(),
+			edit: false,
+			from: null,
+			to: null,
+			quiet: false
+		},
+		unknown(arg) {
+			console.log(`unknown flags: ${arg}`);
+			process.exit(1);
+		}
+	}
 );
 
 main(cli).catch(err =>
 	setTimeout(() => {
+		if (err.help) {
+			console.log(`${cli.help}\n`);
+		}
 		if (err.type === pkg.name) {
+			console.log(err.message);
 			process.exit(1);
 		}
 		throw err;
@@ -70,70 +76,12 @@ main(cli).catch(err =>
 );
 
 async function main(options) {
-	const raw = options.input;
-	const flags = normalizeFlags(options.flags);
-	const fromStdin = checkFromStdin(raw, flags);
+	const raw = Array.isArray(options.input) ? options.input : [];
+	const [command] = raw;
 
-	const range = pick(flags, 'edit', 'from', 'to');
-	const fmt = new chalk.constructor({enabled: flags.color});
-
-	const input = await (fromStdin
-		? stdin()
-		: core.read(range, {cwd: flags.cwd}));
-
-	const messages = (Array.isArray(input) ? input : [input])
-		.filter(message => typeof message === 'string')
-		.filter(Boolean);
-
-	if (messages.length === 0 && !checkFromRepository(flags)) {
-		const err = new Error(
-			'[input] is required: supply via stdin, or --edit or --from and --to'
-		);
-		err.type = pkg.name;
-		console.log(`${cli.help}\n`);
-		console.log(err.message);
-		throw err;
+	if (!command) {
+		return commands.lint(raw, normalizeFlags(options.flags));
 	}
-
-	return Promise.all(
-		messages.map(async message => {
-			const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
-			const parserOpts = selectParserOpts(loaded.parserPreset);
-			const opts = parserOpts ? {parserOpts} : undefined;
-			const report = await core.lint(message, loaded.rules, opts);
-			const formatted = core.format(report, {color: flags.color});
-
-			if (!flags.quiet) {
-				console.log(
-					`${fmt.grey('⧗')}   input: ${fmt.bold(message.split('\n')[0])}`
-				);
-				console.log(formatted.join('\n'));
-			}
-
-			if (report.errors.length > 0) {
-				const error = new Error(formatted[formatted.length - 1]);
-				error.type = pkg.name;
-				throw error;
-			}
-			console.log('');
-		})
-	);
-}
-
-function checkFromStdin(input, flags) {
-	return input.length === 0 && !checkFromRepository(flags);
-}
-
-function checkFromRepository(flags) {
-	return checkFromHistory(flags) || checkFromEdit(flags);
-}
-
-function checkFromEdit(flags) {
-	return Boolean(flags.edit);
-}
-
-function checkFromHistory(flags) {
-	return typeof flags.from === 'string' || typeof flags.to === 'string';
 }
 
 function normalizeFlags(flags) {
@@ -144,28 +92,6 @@ function normalizeFlags(flags) {
 	}
 
 	return flags;
-}
-
-function getSeed(seed) {
-	const e = Array.isArray(seed.extends) ? seed.extends : [seed.extends];
-	const n = e.filter(i => typeof i === 'string');
-	return n.length > 0
-		? {extends: n, parserPreset: seed.parserPreset}
-		: {parserPreset: seed.parserPreset};
-}
-
-function selectParserOpts(parserPreset) {
-	if (typeof parserPreset !== 'object') {
-		return undefined;
-	}
-
-	const opts = parserPreset.opts;
-
-	if (typeof opts !== 'object') {
-		return undefined;
-	}
-
-	return opts.parserOpts;
 }
 
 // Catch unhandled rejections globally
