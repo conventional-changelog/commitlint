@@ -6,14 +6,16 @@ const messages = {
 	plain: 'foo: bar',
 	comment: 'foo: baz\n#1 Comment',
 	reference: '#comment\nfoo: baz \nCloses #1',
-	references: '#comment\nfoo: bar \nCloses #1, #2, #3'
+	references: '#comment\nfoo: bar \nCloses #1, #2, #3',
+	issue: 'foo: bar #1'
 };
 
 const parsed = {
 	plain: parse(messages.plain),
 	comment: parse(messages.comment),
 	reference: parse(messages.reference),
-	references: parse(messages.references)
+	references: parse(messages.references),
+	issue: parse(messages.issue)
 };
 
 test('defaults to never and fails for plain', async t => {
@@ -60,6 +62,18 @@ test('succeeds for references with never', async t => {
 
 test('fails for references with always', async t => {
 	const [actual] = referencesEmpty(await parsed.references, 'always');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test.failing('succeeds for issue with never', async t => {
+	const [actual] = referencesEmpty(await parsed.issue, 'never');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test.failing('fails for issue with always', async t => {
+	const [actual] = referencesEmpty(await parsed.issue, 'always');
 	const expected = false;
 	t.is(actual, expected);
 });
