@@ -23,7 +23,7 @@ const cli = meow(
 		    --color, -c            toggle colored output, defaults to: true
 		    --edit, -e             read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG
 		    --from, -f             lower end of the commit range to lint; applies if edit=false
-		  --to, -t               upper end of the commit range to lint; applies if edit=false
+		    --to, -t               upper end of the commit range to lint; applies if edit=false
 
 		Usage
 		  $ echo "some commit" | commitlint
