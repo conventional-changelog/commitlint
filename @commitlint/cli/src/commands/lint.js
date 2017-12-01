@@ -12,7 +12,6 @@ async function lint(rawInput, flags) {
 	const fromStdin = checkFromStdin(rawInput, flags);
 
 	const range = pick(flags, 'edit', 'from', 'to');
-	const fmt = new chalk.constructor({enabled: flags.color});
 
 	const input = await (fromStdin
 		? stdin()
@@ -23,39 +22,74 @@ async function lint(rawInput, flags) {
 		.filter(Boolean);
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
-		const err = new Error(
-			'[input] is required: supply via stdin, or --edit or --from and --to'
+		throw error(
+			'[input] is required: supply via stdin, or --edit or --from and --to',
+			{
+				quiet: flags.quiet,
+				help: true,
+				type: pkg.name
+			}
 		);
-		err.quiet = flags.quiet;
-		err.help = true;
-		err.type = pkg.name;
-		throw err;
 	}
 
-	return Promise.all(
-		messages.map(async message => {
-			const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
-			const parserOpts = selectParserOpts(loaded.parserPreset);
-			const opts = parserOpts ? {parserOpts} : undefined;
-			const report = await core.lint(message, loaded.rules, opts);
-			const formatted = core.format(report, {color: flags.color});
+	const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
+	const parserOpts = selectParserOpts(loaded.parserPreset);
+	const opts = parserOpts ? {parserOpts} : undefined;
 
-			if (!flags.quiet) {
+	const results = await all(messages, async msg => {
+		return {
+			report: await core.lint(msg, loaded.rules, opts),
+			input: msg
+		};
+	});
+
+	const valid = results.every(result => result.report.valid);
+
+	if (flags.quiet && valid) {
+		return;
+	}
+
+	if (flags.quiet && !valid) {
+		throw error('linting failed', {type: pkg.name, quiet: true});
+	}
+
+	switch (flags.format) {
+		case 'commitlint': {
+			const fmt = new chalk.constructor({enabled: flags.color});
+			const icon = fmt.grey('⧗');
+			const formatted = results.map(result => {
+				result.formatted = core.format(result.report, {color: flags.color});
+				return result;
+			});
+			formatted.forEach(result => {
+				const subject = fmt.bold(result.input.split('\n')[0]);
 				console.log(
-					`${fmt.grey('⧗')}   input: ${fmt.bold(message.split('\n')[0])}`
+					`${icon}   input: ${subject}\n${result.formatted.join('\n')}\n`
 				);
-				console.log(formatted.join('\n'));
-			}
+			});
+			break;
+		}
+		case 'json':
+			console.log(JSON.stringify({valid, results}));
+			break;
+		default: {
+			throw error(`unknown format: ${flags.format}`);
+		}
+	}
 
-			if (report.errors.length > 0) {
-				const error = new Error(formatted[formatted.length - 1]);
-				error.quiet = flags.quiet;
-				error.type = pkg.name;
-				throw error;
-			}
-			console.log('');
-		})
-	);
+	if (!valid) {
+		throw error('linting failed', {type: pkg.name, quiet: true});
+	}
+}
+
+function all(things, predecate) {
+	return Promise.all(things.map(thing => predecate(thing)));
+}
+
+function error(message, opts = {}) {
+	const err = new Error(message);
+	Object.assign(err, opts);
+	return err;
 }
 
 function selectParserOpts(parserPreset) {

@@ -7,6 +7,8 @@ const merge = require('lodash/merge');
 const pkg = require('../package');
 const commands = require('./commands');
 
+const FORMATS = ['commitlint', 'json'];
+
 const cli = meow(
 	{
 		help: `
@@ -16,12 +18,13 @@ const cli = meow(
 		Options
 		  --cwd, -d              directory to execute in, defaults to: process.cwd()
 		  --extends, -x          array of shareable configurations to extend
+		  --format, -o           formatter to use, defaults to "commitlint". available: "commitlint", "json"
 		  --parser-preset, -p    configuration preset to use for conventional-commits-parser
 		  --quiet, -q            toggle console output
 
 		  commitlint
 		    --color, -c            toggle colored output, defaults to: true
-		    --edit, -e             read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG
+		    --edit, -e             read last commit message from the specified file or falls back to ./.git/COMMIT_EDITMSG
 		    --from, -f             lower end of the commit range to lint; applies if edit=false
 		    --to, -t               upper end of the commit range to lint; applies if edit=false
 
@@ -33,19 +36,20 @@ const cli = meow(
 		description: `${pkg.name}@${pkg.version} - ${pkg.description}`
 	},
 	{
-		string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
+		string: ['cwd', 'format', 'from', 'to', 'edit', 'extends', 'parser-preset'],
 		boolean: ['help', 'version', 'quiet', 'color'],
 		alias: {
 			c: 'color',
 			d: 'cwd',
 			e: 'edit',
 			f: 'from',
-			t: 'to',
-			q: 'quiet',
 			h: 'help',
+			o: 'format',
+			p: 'parser-preset',
+			q: 'quiet',
+			t: 'to',
 			v: 'version',
-			x: 'extends',
-			p: 'parser-preset'
+			x: 'extends'
 		},
 		default: {
 			color: true,
@@ -92,6 +96,22 @@ function normalizeFlags(flags) {
 	// to specify one of them in minimist
 	if (flags.edit === '') {
 		return merge({}, flags, {edit: true, e: true});
+	}
+
+	if (!('format' in flags)) {
+		flags.format = 'commitlint';
+	}
+
+	if (!FORMATS.includes(flags.format)) {
+		const err = new Error(
+			`--format must be on of: [${FORMATS.join(',')}], received "${
+				flags.format
+			}".`
+		);
+		err.quiet = flags.quiet;
+		err.help = true;
+		err.type = pkg.name;
+		throw err;
 	}
 
 	return flags;

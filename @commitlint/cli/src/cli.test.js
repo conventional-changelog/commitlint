@@ -82,6 +82,56 @@ test('should produce no error output with -q flag', async t => {
 	t.is(actual.code, 1);
 });
 
+test('should produce json output with --format=json', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=json'], {cwd})('foo: bar');
+	t.notThrows(() => JSON.parse(actual.stdout));
+});
+
+test('should produce no output when --quiet and --format=json', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=json', '--quiet'], {cwd})('foo: bar');
+	t.is(actual.stdout, '');
+	t.is(actual.stderr, '');
+});
+
+test('should produce json with expected truthy valid key', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=json'], {cwd})('foo: bar');
+	const data = JSON.parse(actual.stdout);
+	t.is(data.valid, true);
+});
+
+test('should produce json with expected falsy valid key', async t => {
+	const cwd = await git.bootstrap('fixtures/simple');
+	const actual = await cli(['--format=json'], {cwd})('foo: bar');
+	const data = JSON.parse(actual.stdout);
+	t.is(data.valid, false);
+});
+
+test('should produce json with results array', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=json'], {cwd})('foo: bar');
+	const data = JSON.parse(actual.stdout);
+	t.is(Array.isArray(data.results), true);
+});
+
+test('results array has one report for one message', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=json'], {cwd})('foo: bar');
+	const data = JSON.parse(actual.stdout);
+	t.is(data.results.length, 1);
+});
+
+test('report has expected schema', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=json'], {cwd})('foo: bar');
+	const data = JSON.parse(actual.stdout);
+	const result = data.results[0];
+	t.is('report' in result, true);
+	t.is('input' in result, true);
+});
+
 test('should work with husky commitmsg hook and git commit', async () => {
 	const cwd = await git.bootstrap('fixtures/husky/integration');
 	await writePkg({scripts: {commitmsg: `${bin} -e`}}, {cwd});
