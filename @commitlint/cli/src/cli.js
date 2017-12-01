@@ -64,6 +64,9 @@ const cli = meow(
 
 main(cli).catch(err =>
 	setTimeout(() => {
+		if (err.quiet) {
+			process.exit(1);
+		}
 		if (err.help) {
 			console.log(`${cli.help}\n`);
 		}

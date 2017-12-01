@@ -26,6 +26,7 @@ async function lint(rawInput, flags) {
 		const err = new Error(
 			'[input] is required: supply via stdin, or --edit or --from and --to'
 		);
+		err.quiet = flags.quiet;
 		err.help = true;
 		err.type = pkg.name;
 		throw err;
@@ -48,6 +49,7 @@ async function lint(rawInput, flags) {
 
 			if (report.errors.length > 0) {
 				const error = new Error(formatted[formatted.length - 1]);
+				error.quiet = flags.quiet;
 				error.type = pkg.name;
 				throw error;
 			}
