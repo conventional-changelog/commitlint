@@ -82,6 +82,17 @@ test('should produce no error output with -q flag', async t => {
 	t.is(actual.code, 1);
 });
 
+test('should throw for unknown --format', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['--format=foo'], {cwd})('foo: bar');
+	t.is(actual.code, 1);
+	t.true(
+		actual.stdout.includes(
+			'--format must be on of: [commitlint,json], received "foo"'
+		)
+	);
+});
+
 test('should produce json output with --format=json', async t => {
 	const cwd = await git.bootstrap('fixtures/empty');
 	const actual = await cli(['--format=json'], {cwd})('foo: bar');
