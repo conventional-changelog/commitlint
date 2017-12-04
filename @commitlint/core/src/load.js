@@ -6,6 +6,10 @@ import resolveFrom from 'resolve-from';
 import executeRule from './library/execute-rule';
 import resolveExtends from './library/resolve-extends';
 
+const DEFAULT_NAME = 'conventional-changelog-angular';
+const DEFAULT_RESOLVED = require.resolve(DEFAULT_NAME);
+const DEFAULT_PRESET = require(DEFAULT_RESOLVED);
+
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
@@ -43,6 +47,15 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 		typeof preset.parserPreset.opts === 'object'
 	) {
 		preset.parserPreset.opts = await preset.parserPreset.opts;
+	}
+
+	// Resolve to default preset if none set
+	if (typeof preset.parserPreset === 'undefined') {
+		preset.parserPreset = {
+			name: DEFAULT_NAME,
+			path: DEFAULT_RESOLVED,
+			opts: DEFAULT_PRESET
+		};
 	}
 
 	// Execute rule config functions if needed

@@ -1,4 +1,7 @@
 import importFrom from 'import-from';
+import {sync} from '@marionebl/conventional-commits-parser';
+import angular from 'conventional-changelog-angular';
+
 import test from 'ava';
 import parse from './parse';
 
@@ -13,30 +16,40 @@ test('throws when called with empty message', async t => {
 });
 
 test('returns object with raw message', async t => {
+	const {parserOpts} = await angular;
 	const message = 'type(scope): subject';
-	const actual = await parse(message);
+	const actual = await parse(message, sync, parserOpts);
 	t.is(actual.raw, message);
 });
 
 test('calls parser with message and passed options', async t => {
 	const message = 'message';
+	const {parserOpts} = await angular;
 
-	await parse(message, m => {
-		t.is(message, m);
-		return {};
-	});
+	await parse(
+		message,
+		m => {
+			t.is(message, m);
+			return {};
+		},
+		parserOpts
+	);
 });
 
 test('passes object up from parser function', async t => {
 	const message = 'message';
+	const {parserOpts} = await angular;
+
 	const result = {};
-	const actual = await parse(message, () => result);
+	const actual = await parse(message, () => result, parserOpts);
 	t.is(actual, result);
 });
 
 test('returns object with expected keys', async t => {
 	const message = 'message';
-	const actual = await parse(message);
+	const {parserOpts} = await angular;
+
+	const actual = await parse(message, sync, parserOpts);
 	const expected = {
 		body: null,
 		footer: null,
@@ -56,7 +69,9 @@ test('returns object with expected keys', async t => {
 
 test('uses angular grammar', async t => {
 	const message = 'type(scope): subject';
-	const actual = await parse(message);
+	const {parserOpts} = await angular;
+
+	const actual = await parse(message, sync, parserOpts);
 	const expected = {
 		body: null,
 		footer: null,
@@ -100,14 +115,18 @@ test('uses custom opts parser', async t => {
 
 test('supports scopes with /', async t => {
 	const message = 'type(some/scope): subject';
-	const actual = await parse(message);
+	const {parserOpts} = await angular;
+
+	const actual = await parse(message, sync, parserOpts);
 	t.is(actual.scope, 'some/scope');
 	t.is(actual.subject, 'subject');
 });
 
 test('ignores comments', async t => {
 	const message = 'type(some/scope): subject\n# some comment';
-	const actual = await parse(message);
+	const {parserOpts} = await angular;
+
+	const actual = await parse(message, sync, parserOpts);
 	t.is(actual.body, null);
 	t.is(actual.footer, null);
 	t.is(actual.subject, 'subject');
@@ -116,7 +135,8 @@ test('ignores comments', async t => {
 test('registers inline #', async t => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
-	const actual = await parse(message);
+	const {parserOpts} = await angular;
+	const actual = await parse(message, sync, parserOpts);
 	t.is(actual.subject, 'subject #reference');
 	t.is(actual.body, 'things #reference');
 });

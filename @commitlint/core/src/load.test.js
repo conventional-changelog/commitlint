@@ -33,6 +33,12 @@ test('uses seed with parserPreset', async t => {
 	});
 });
 
+test('defaults to expected preset', async t => {
+	const cwd = await git.bootstrap('fixtures/extends-empty');
+	const actual = await load({}, {cwd});
+	t.is(actual.parserPreset.name, 'conventional-changelog-angular');
+});
+
 test('invalid extend should throw', async t => {
 	const cwd = await git.bootstrap('fixtures/extends-invalid');
 	await t.throws(load({}, {cwd}));
@@ -53,25 +59,22 @@ test('empty file should extend nothing', async t => {
 test('respects cwd option', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends/first-extended');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual, {
-		extends: ['./second-extended'],
-		rules: {
-			one: 1,
-			two: 2
-		}
+	t.deepEqual(actual.extends, ['./second-extended']);
+	t.deepEqual(actual.rules, {
+		one: 1,
+		two: 2
 	});
 });
 
 test('recursive extends', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual, {
-		extends: ['./first-extended'],
-		rules: {
-			zero: 0,
-			one: 1,
-			two: 2
-		}
+
+	t.deepEqual(actual.extends, ['./first-extended']);
+	t.deepEqual(actual.rules, {
+		zero: 0,
+		one: 1,
+		two: 2
 	});
 });
 
@@ -79,13 +82,11 @@ test('recursive extends with json file', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-json');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: ['./first-extended'],
-		rules: {
-			zero: 0,
-			one: 1,
-			two: 2
-		}
+	t.deepEqual(actual.extends, ['./first-extended']);
+	t.deepEqual(actual.rules, {
+		zero: 0,
+		one: 1,
+		two: 2
 	});
 });
 
@@ -93,13 +94,11 @@ test('recursive extends with yaml file', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-yaml');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: ['./first-extended'],
-		rules: {
-			zero: 0,
-			one: 1,
-			two: 2
-		}
+	t.deepEqual(actual.extends, ['./first-extended']);
+	t.deepEqual(actual.rules, {
+		zero: 0,
+		one: 1,
+		two: 2
 	});
 });
 
@@ -107,13 +106,11 @@ test('recursive extends with js file', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-js');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: ['./first-extended'],
-		rules: {
-			zero: 0,
-			one: 1,
-			two: 2
-		}
+	t.deepEqual(actual.extends, ['./first-extended']);
+	t.deepEqual(actual.rules, {
+		zero: 0,
+		one: 1,
+		two: 2
 	});
 });
 
@@ -121,13 +118,11 @@ test('recursive extends with package.json file', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-package');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: ['./first-extended'],
-		rules: {
-			zero: 0,
-			one: 1,
-			two: 2
-		}
+	t.deepEqual(actual.extends, ['./first-extended']);
+	t.deepEqual(actual.rules, {
+		zero: 0,
+		one: 1,
+		two: 2
 	});
 });
 
@@ -161,12 +156,10 @@ test('ignores unknow keys', async t => {
 	const cwd = await git.bootstrap('fixtures/trash-file');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: [],
-		rules: {
-			foo: 'bar',
-			baz: 'bar'
-		}
+	t.deepEqual(actual.extends, []);
+	t.deepEqual(actual.rules, {
+		foo: 'bar',
+		baz: 'bar'
 	});
 });
 
@@ -174,12 +167,10 @@ test('ignores unknow keys recursively', async t => {
 	const cwd = await git.bootstrap('fixtures/trash-extend');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: ['./one'],
-		rules: {
-			zero: 0,
-			one: 1
-		}
+	t.deepEqual(actual.extends, ['./one']);
+	t.deepEqual(actual.rules, {
+		zero: 0,
+		one: 1
 	});
 });
 
@@ -190,13 +181,11 @@ test('find up from given cwd', async t => {
 
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: [],
-		rules: {
-			child: true,
-			inner: false,
-			outer: false
-		}
+	t.deepEqual(actual.extends, []);
+	t.deepEqual(actual.rules, {
+		child: true,
+		inner: false,
+		outer: false
 	});
 });
 
@@ -205,12 +194,10 @@ test('find up config from outside current git repo', async t => {
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
-		extends: [],
-		rules: {
-			child: false,
-			inner: false,
-			outer: true
-		}
+	t.deepEqual(actual.extends, []);
+	t.deepEqual(actual.rules, {
+		child: false,
+		inner: false,
+		outer: true
 	});
 });
