@@ -1,3 +1,4 @@
 module.exports = {
-	lint: require('./lint').lint
+	config: require('./cmd-config').config,
+	lint: require('./cmd-lint').lint
 };

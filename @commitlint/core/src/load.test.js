@@ -27,9 +27,7 @@ test('uses seed with parserPreset', async t => {
 
 	t.is(actual.name, './conventional-changelog-custom');
 	t.deepEqual(actual.opts, {
-		parserOpts: {
-			headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
-		}
+		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
 	});
 });
 
@@ -133,10 +131,7 @@ test('parser preset overwrites completely instead of merging', async t => {
 	t.is(actual.parserPreset.name, './custom');
 	t.is(typeof actual.parserPreset.opts, 'object');
 	t.deepEqual(actual.parserPreset.opts, {
-		b: 'b',
-		parserOpts: {
-			headerPattern: /.*/
-		}
+		headerPattern: /.*/
 	});
 });
 
@@ -147,7 +142,7 @@ test('recursive extends with parserPreset', async t => {
 	t.is(actual.parserPreset.name, './conventional-changelog-custom');
 	t.is(typeof actual.parserPreset.opts, 'object');
 	t.deepEqual(
-		actual.parserPreset.opts.parserOpts.headerPattern,
+		actual.parserPreset.opts.headerPattern,
 		/^(\w*)(?:\((.*)\))?-(.*)$/
 	);
 });

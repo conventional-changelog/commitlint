@@ -5,9 +5,10 @@ import resolveFrom from 'resolve-from';
 import {merge, omit} from 'lodash';
 
 // Resolve extend configs
-export default function resolveExtends(config = {}, context = {}) {
+export default async function resolveExtends(config = {}, context = {}) {
 	const {extends: e} = config;
-	const extended = loadExtends(config, context).reduceRight(
+
+	const extended = (await loadExtends(config, context)).reduceRight(
 		(r, c) => merge(r, omit(c, 'extends')),
 		e ? {extends: e} : {}
 	);
@@ -23,8 +24,38 @@ export default function resolveExtends(config = {}, context = {}) {
 }
 
 // (any, string, string, Function) => any[];
-function loadExtends(config = {}, context = {}) {
-	return (config.extends || []).reduce((configs, raw) => {
+async function loadExtends(config = {}, context = {}) {
+	return (config.extends || []).reduce(async (configs, raw) => {
+		const load = context.require || require;
+		const resolved = resolveConfig(raw, context);
+		const c = load(resolved);
+		const cwd = path.dirname(resolved);
+
+		const ctx = merge({}, context, {cwd});
+
+		if (
+			!context.parserPreset &&
+			typeof c === 'object' &&
+			typeof c.parserPreset === 'string'
+		) {
+			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
+
+			const parserPreset = {
+				name: c.parserPreset,
+				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
+					.split(path.sep)
+					.join('/'),
+				opts: (await require(resolvedParserPreset)).parserOpts
+			};
+
+			ctx.parserPreset = parserPreset;
+			config.parserPreset = parserPreset;
+		}
+
+		return [...configs, c, ...(await loadExtends(c, ctx))];
+	}, Promise.resolve([]));
+
+	/* Return (config.extends || []).reduce((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
@@ -60,7 +91,7 @@ function loadExtends(config = {}, context = {}) {
 		}
 
 		return [...configs, c, ...loadExtends(c, ctx)];
-	}, []);
+	}, []); */
 }
 
 function getId(raw = '', prefix = '') {
@@ -80,7 +111,11 @@ function resolveConfig(raw, context = {}) {
 		const legacy = getId(raw, 'conventional-changelog-lint-config');
 		const resolved = resolve(legacy, context);
 		console.warn(
-			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
+			`Resolving ${raw} to legacy config ${
+				legacy
+			}. To silence this warning raise an issue at 'npm repo ${
+				legacy
+			}' to rename to ${id}.`
 		);
 		return resolved;
 	}

@@ -8,31 +8,34 @@ const pkg = require('../package');
 const commands = require('./commands');
 
 const FORMATS = ['commitlint', 'json'];
+const COMMANDS = ['config'];
+
+const HELP = `
+Commands
+commitlint              lint commits, [input] reads from stdin if --edit, --from and --to are omitted
+
+Options
+--cwd, -d              directory to execute in, defaults to: process.cwd()
+--extends, -x          array of shareable configurations to extend
+--format, -o           format to use, defaults to "commitlint". available: "commitlint", "json"
+--parser-preset, -p    configuration preset to use for conventional-commits-parser
+--quiet, -q            toggle console output
+
+commitlint
+  --color, -c            toggle colored output, defaults to: true
+  --edit, -e             read last commit message from the specified file or falls back to ./.git/COMMIT_EDITMSG
+  --from, -f             lower end of the commit range to lint; applies if edit=false
+  --to, -t               upper end of the commit range to lint; applies if edit=false
+
+Usage
+$ echo "some commit" | commitlint
+$ commitlint --to=master
+$ commitlint --from=HEAD~1
+`;
 
 const cli = meow(
 	{
-		help: `
-		Commands
-		  commitlint              lint commits, [input] reads from stdin if --edit, --from and --to are omitted
-
-		Options
-		  --cwd, -d              directory to execute in, defaults to: process.cwd()
-		  --extends, -x          array of shareable configurations to extend
-		  --format, -o           formatter to use, defaults to "commitlint". available: "commitlint", "json"
-		  --parser-preset, -p    configuration preset to use for conventional-commits-parser
-		  --quiet, -q            toggle console output
-
-		  commitlint
-		    --color, -c            toggle colored output, defaults to: true
-		    --edit, -e             read last commit message from the specified file or falls back to ./.git/COMMIT_EDITMSG
-		    --from, -f             lower end of the commit range to lint; applies if edit=false
-		    --to, -t               upper end of the commit range to lint; applies if edit=false
-
-		Usage
-		  $ echo "some commit" | commitlint
-		  $ commitlint --to=master
-		  $ commitlint --from=HEAD~1
-		`,
+		help: HELP,
 		description: `${pkg.name}@${pkg.version} - ${pkg.description}`
 	},
 	{
@@ -60,7 +63,18 @@ const cli = meow(
 			quiet: false
 		},
 		unknown(arg) {
-			console.log(`unknown flags: ${arg}`);
+			if (COMMANDS.includes(arg)) {
+				return;
+			}
+
+			console.log(HELP);
+
+			if (!arg.startsWith('-') && !COMMANDS.includes(arg)) {
+				console.log(`<command> must be on of: [config], received "${arg}"`);
+			} else {
+				console.log(`unknown flags: ${arg}`);
+			}
+
 			process.exit(1);
 		}
 	}
@@ -86,8 +100,28 @@ async function main(options) {
 	const raw = Array.isArray(options.input) ? options.input : [];
 	const [command] = raw;
 
+	const flags = normalizeFlags(options.flags);
+
 	if (!command) {
-		return commands.lint(raw, normalizeFlags(options.flags));
+		return commands.lint(raw, flags);
+	}
+
+	switch (command) {
+		case 'config':
+			return commands.config(raw, {
+				cwd: flags.cwd,
+				extends: flags.extends,
+				format: flags.format,
+				parserPreset: flags.parserPreset
+			});
+		default: {
+			const err = new Error(
+				`<command> must be on of: [config], received "${command}"`
+			);
+			err.help = true;
+			err.type = pkg.name;
+			throw err;
+		}
 	}
 }
 

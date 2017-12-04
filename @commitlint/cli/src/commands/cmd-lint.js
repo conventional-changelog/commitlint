@@ -33,12 +33,12 @@ async function lint(rawInput, flags) {
 	}
 
 	const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
-	const parserOpts = selectParserOpts(loaded.parserPreset);
-	const opts = parserOpts ? {parserOpts} : undefined;
 
 	const results = await all(messages, async msg => {
 		return {
-			report: await core.lint(msg, loaded.rules, opts),
+			report: await core.lint(msg, loaded.rules, {
+				parserOpts: loaded.parserPreset.opts
+			}),
 			input: msg
 		};
 	});
@@ -90,20 +90,6 @@ function error(message, opts = {}) {
 	const err = new Error(message);
 	Object.assign(err, opts);
 	return err;
-}
-
-function selectParserOpts(parserPreset) {
-	if (typeof parserPreset !== 'object') {
-		return undefined;
-	}
-
-	const opts = parserPreset.opts;
-
-	if (typeof opts !== 'object') {
-		return undefined;
-	}
-
-	return opts.parserOpts;
 }
 
 function checkFromStdin(input, flags) {

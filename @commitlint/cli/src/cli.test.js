@@ -32,6 +32,15 @@ test('should reprint input from stdin', async t => {
 	t.true(actual.stdout.includes('foo: bar'));
 });
 
+test('should throw for unknown command', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli(['foo'], {cwd})();
+	t.is(actual.code, 1);
+	t.true(
+		actual.stdout.includes('<command> must be on of: [config], received "foo"')
+	);
+});
+
 test('should produce no success output with --quiet flag', async t => {
 	const cwd = await git.bootstrap('fixtures/empty');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');
