@@ -91,11 +91,13 @@ async function main(options) {
 	}
 }
 
-function normalizeFlags(flags) {
+function normalizeFlags(raw) {
+	const flags = merge({}, raw);
+
 	// The `edit` flag is either a boolean or a string but we are only allowed
 	// to specify one of them in minimist
 	if (flags.edit === '') {
-		return merge({}, flags, {edit: true, e: true});
+		merge(flags, {edit: true, e: true});
 	}
 
 	if (!('format' in flags)) {
