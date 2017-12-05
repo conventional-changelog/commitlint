@@ -139,11 +139,28 @@ function checkFromHistory(flags) {
 function normalizeFlags(flags) {
 	// The `edit` flag is either a boolean or a string but we are only allowed
 	// to specify one of them in minimist
+	let edit = normalizeEdit(flags.edit);
 	if (flags.edit === '') {
-		return merge({}, flags, {edit: true, e: true});
+		edit = true;
 	}
+	return merge({}, flags, {edit, e: edit});
+}
 
-	return flags;
+function normalizeEdit(edit) {
+	if (typeof edit === 'boolean') {
+		return edit;
+	}
+	if (edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%') {
+		if (!('GIT_PARAMS' in process.env)) {
+			throw new Error(
+				`Received ${
+					edit
+				} as value for -e | --edit, but GIT_PARAMS is not available globally.`
+			);
+		}
+		return process.env.GIT_PARAMS;
+	}
+	return edit;
 }
 
 function getSeed(seed) {
