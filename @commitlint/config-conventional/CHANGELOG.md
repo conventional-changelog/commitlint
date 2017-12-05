@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.2.3"></a>
+## [5.2.3](https://github.com/marionebl/commitlint/compare/v5.2.2...v5.2.3) (2017-12-05)
+
+
+
+
+**Note:** Version bump only for package @commitlint/config-conventional
+
 <a name="5.1.3"></a>
 ## [5.1.3](https://github.com/marionebl/commitlint/compare/v5.1.2...v5.1.3) (2017-11-24)
 

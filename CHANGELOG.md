@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.2.3"></a>
+## [5.2.3](https://github.com/marionebl/commitlint/compare/v5.2.2...v5.2.3) (2017-12-05)
+
+
+### Bug Fixes
+
+* **cli:** add support for GIT_PARAMS on windows ([c62bd41](https://github.com/marionebl/commitlint/commit/c62bd41)), closes [#103](https://github.com/marionebl/commitlint/issues/103) [#175](https://github.com/marionebl/commitlint/issues/175)
+
+
+
+
 <a name="5.2.2"></a>
 ## [5.2.2](https://github.com/marionebl/commitlint/compare/v5.2.1...v5.2.2) (2017-11-30)
 
