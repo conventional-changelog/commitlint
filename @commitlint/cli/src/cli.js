@@ -139,11 +139,29 @@ function checkFromHistory(flags) {
 function normalizeFlags(flags) {
 	// The `edit` flag is either a boolean or a string but we are only allowed
 	// to specify one of them in minimist
-	if (flags.edit === '') {
-		return merge({}, flags, {edit: true, e: true});
-	}
+	const edit = flags.edit === '' ? true : normalizeEdit(flags.edit);
+	return merge({}, flags, {edit, e: edit});
+}
 
-	return flags;
+function normalizeEdit(edit) {
+	if (typeof edit === 'boolean') {
+		return edit;
+	}
+	// The recommended method to specify -e with husky is commitlint -e $GIT_PARAMS
+	// This does not work properly with win32 systems, where env variable declarations
+	// use a different syntax
+	// See https://github.com/marionebl/commitlint/issues/103 for details
+	if (edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%') {
+		if (!('GIT_PARAMS' in process.env)) {
+			throw new Error(
+				`Received ${
+					edit
+				} as value for -e | --edit, but GIT_PARAMS is not available globally.`
+			);
+		}
+		return process.env.GIT_PARAMS;
+	}
+	return edit;
 }
 
 function getSeed(seed) {
