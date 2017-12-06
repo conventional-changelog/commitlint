@@ -9,8 +9,8 @@ export default {
 				description: 'Solves a bug.'
 			},
 			chore: {
-			  description: 'Other changes that don\'t modify src or test files',
-			}
+				description: "Other changes that don't modify src or test files"
+			},
 			docs: {
 				description: 'Adds or alters documentation.'
 			},
