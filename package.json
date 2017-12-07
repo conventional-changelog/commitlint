@@ -32,10 +32,16 @@
     ]
   },
   "renovate": {
+    "dependencies": {
+      "semanticPrefix": "chore:"
+    },
     "extends": [
       "config:base"
     ],
-    "semanticPrefix": "chore: "
+    "pin": {
+      "semanticPrefix": "chore:"
+    },
+    "semanticPrefix": "chore:"
   },
   "xo": {
     "extends": [
