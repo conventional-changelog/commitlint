@@ -34,7 +34,8 @@
   "renovate": {
     "extends": [
       "config:base"
-    ]
+    ],
+    "semanticPrefix": "chore: "
   },
   "xo": {
     "extends": [
