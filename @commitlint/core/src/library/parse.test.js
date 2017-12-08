@@ -107,7 +107,12 @@ test('supports scopes with /', async t => {
 
 test('ignores comments', async t => {
 	const message = 'type(some/scope): subject\n# some comment';
-	const actual = await parse(message);
+	const changelogOpts = await importFrom(
+		process.cwd(),
+		'conventional-changelog-angular'
+	);
+	const opts = Object.assign({}, changelogOpts.parserOpts, {commentChar: '#'});
+	const actual = await parse(message, undefined, opts);
 	t.is(actual.body, null);
 	t.is(actual.footer, null);
 	t.is(actual.subject, 'subject');
@@ -116,7 +121,22 @@ test('ignores comments', async t => {
 test('registers inline #', async t => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
-	const actual = await parse(message);
+	const changelogOpts = await importFrom(
+		process.cwd(),
+		'conventional-changelog-angular'
+	);
+	const opts = Object.assign({}, changelogOpts.parserOpts, {commentChar: '#'});
+	const actual = await parse(message, undefined, opts);
 	t.is(actual.subject, 'subject #reference');
 	t.is(actual.body, 'things #reference');
+});
+
+test('parses references leading subject', async t => {
+	const message = '#1 some subject';
+	const opts = await importFrom(
+		process.cwd(),
+		'conventional-changelog-angular'
+	);
+	const {references: [actual]} = await parse(message, undefined, opts);
+	t.is(actual.issue, '1');
 });
