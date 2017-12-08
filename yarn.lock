@@ -59,28 +59,6 @@
   dependencies:
     arrify "^1.0.1"
 
-"@marionebl/conventional-commits-parser@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/@marionebl/conventional-commits-parser/-/conventional-commits-parser-3.0.0.tgz#9da29b4d2c8f05c0f9cdd02936713b8096c958d3"
-  dependencies:
-    JSONStream "^1.0.4"
-    is-text-path "^1.0.0"
-    lodash "^4.2.1"
-    meow "^3.3.0"
-    split2 "^2.0.0"
-    through2 "^2.0.0"
-    trim-off-newlines "^1.0.0"
-
-"@marionebl/git-raw-commits@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/@marionebl/git-raw-commits/-/git-raw-commits-1.2.0.tgz#7cd8a6dfc09a96df98d8fbe9175c5971cc07c82b"
-  dependencies:
-    dargs "^4.0.1"
-    lodash.template "^4.0.2"
-    meow "^3.3.0"
-    split2 "^2.0.0"
-    through2 "^2.0.0"
-
 "@marionebl/sander@0.6.1", "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "https://registry.npmjs.org/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"
@@ -1904,6 +1882,18 @@ conventional-commits-filter@^1.1.0:
 conventional-commits-parser@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/conventional-commits-parser/-/conventional-commits-parser-2.0.1.tgz#1f15ce6b844f7ca41495c8190c0833c30b8b1693"
+  dependencies:
+    JSONStream "^1.0.4"
+    is-text-path "^1.0.0"
+    lodash "^4.2.1"
+    meow "^3.3.0"
+    split2 "^2.0.0"
+    through2 "^2.0.0"
+    trim-off-newlines "^1.0.0"
+
+conventional-commits-parser@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/conventional-commits-parser/-/conventional-commits-parser-2.1.0.tgz#9b4b7c91124bf2a1a9a2cc1c72760d382cbbb229"
   dependencies:
     JSONStream "^1.0.4"
     is-text-path "^1.0.0"

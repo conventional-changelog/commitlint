@@ -1,4 +1,5 @@
 import test from 'ava';
+import preset from 'conventional-changelog-angular';
 import parse from '../library/parse';
 import referencesEmpty from './references-empty';
 
@@ -9,11 +10,21 @@ const messages = {
 	references: '#comment\nfoo: bar \nCloses #1, #2, #3'
 };
 
+const opts = (async () => {
+	const o = await preset;
+	o.parserOpts.commentChar = '#';
+	return o;
+})();
+
 const parsed = {
-	plain: parse(messages.plain),
-	comment: parse(messages.comment),
-	reference: parse(messages.reference),
-	references: parse(messages.references)
+	plain: (async () =>
+		parse(messages.plain, undefined, (await opts).parserOpts))(),
+	comment: (async () =>
+		parse(messages.comment, undefined, (await opts).parserOpts))(),
+	reference: (async () =>
+		parse(messages.reference, undefined, (await opts).parserOpts))(),
+	references: (async () =>
+		parse(messages.references, undefined, (await opts).parserOpts))()
 };
 
 test('defaults to never and fails for plain', async t => {

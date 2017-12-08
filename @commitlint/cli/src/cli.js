@@ -99,7 +99,13 @@ async function main(options) {
 		messages.map(async message => {
 			const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
 			const parserOpts = selectParserOpts(loaded.parserPreset);
-			const opts = parserOpts ? {parserOpts} : undefined;
+			const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
+
+			// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
+			if (range.edit) {
+				opts.parserOpts.commentChar = '#';
+			}
+
 			const report = await core.lint(message, loaded.rules, opts);
 			const formatted = core.format(report, {color: flags.color});
 
@@ -154,9 +160,7 @@ function normalizeEdit(edit) {
 	if (edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%') {
 		if (!('GIT_PARAMS' in process.env)) {
 			throw new Error(
-				`Received ${
-					edit
-				} as value for -e | --edit, but GIT_PARAMS is not available globally.`
+				`Received ${edit} as value for -e | --edit, but GIT_PARAMS is not available globally.`
 			);
 		}
 		return process.env.GIT_PARAMS;

@@ -1,5 +1,5 @@
 import path from 'path';
-import gitRawCommits from '@marionebl/git-raw-commits';
+import gitRawCommits from 'git-raw-commits';
 import * as sander from '@marionebl/sander';
 
 import toplevel from './library/toplevel';
