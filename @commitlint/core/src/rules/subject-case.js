@@ -29,6 +29,6 @@ export default (parsed, when, value) => {
 
 	return [
 		negated(when) ? !result : result,
-		message([`subject must`, negated ? `not` : null, `be ${list}`])
+		message([`subject must`, negated(when) ? `not` : null, `be ${list}`])
 	];
 };

@@ -251,3 +251,21 @@ test('with startcase subject should succeed for "always startcase"', async t => 
 	const expected = true;
 	t.is(actual, expected);
 });
+
+test('should use expected message with "always"', async t => {
+	const [, message] = subjectCase(
+		await parsed.uppercase,
+		'always',
+		'lower-case'
+	);
+	t.true(message.indexOf('must be lower-case') > -1);
+});
+
+test('should use expected message with "never"', async t => {
+	const [, message] = subjectCase(
+		await parsed.uppercase,
+		'never',
+		'upper-case'
+	);
+	t.true(message.indexOf('must not be upper-case') > -1);
+});
