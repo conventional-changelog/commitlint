@@ -168,6 +168,20 @@ test('should pick up config from inside git repo with precedence and fail accord
 	t.is(actual.code, 1);
 });
 
+test('should handle --amend with signoff', async () => {
+	const cwd = await git.bootstrap('fixtures/signoff');
+	await writePkg({scripts: {commitmsg: `${bin} -e`}}, {cwd});
+
+	await execa('npm', ['install'], {cwd});
+	await execa('git', ['add', 'package.json'], {cwd});
+	await execa(
+		'git',
+		['commit', '-m', '"test: this should work"', '--signoff'],
+		{cwd}
+	);
+	await execa('git', ['commit', '--amend', '--no-edit'], {cwd});
+});
+
 async function writePkg(payload, options) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await sander.readFile(pkgPath));
