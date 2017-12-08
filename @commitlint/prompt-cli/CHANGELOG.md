@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.2.4"></a>
+## [5.2.4](https://github.com/marionebl/commitlint/compare/v5.2.3...v5.2.4) (2017-12-08)
+
+
+
+
+**Note:** Version bump only for package @commitlint/prompt-cli
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/marionebl/commitlint/compare/v5.1.3...v5.2.0) (2017-11-30)
 
