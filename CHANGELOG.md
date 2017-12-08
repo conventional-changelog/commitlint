@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.2.5"></a>
+## [5.2.5](https://github.com/marionebl/commitlint/compare/v5.2.4...v5.2.5) (2017-12-08)
+
+
+### Bug Fixes
+
+* **core:** use correct report message [#192](https://github.com/marionebl/commitlint/issues/192) ([e3a78bc](https://github.com/marionebl/commitlint/commit/e3a78bc))
+
+
+
+
 <a name="5.2.4"></a>
 ## [5.2.4](https://github.com/marionebl/commitlint/compare/v5.2.3...v5.2.4) (2017-12-08)
 
