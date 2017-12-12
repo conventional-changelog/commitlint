@@ -38,7 +38,7 @@ This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/
 }
 ```
 
-Using `commitmsg` gives us exactly what we want: It is executed everytime a new commit is created. Passimg husky's `$GIT_PARAMS` to `commitlint` via the `-e|--edit` flag directs it to the relevant edit file. `-e` defaults to `.git/COMMIT_EDITMSG`.
+Using `commitmsg` gives us exactly what we want: It is executed everytime a new commit is created. Passing husky's `$GIT_PARAMS` to `commitlint` via the `-e|--edit` flag directs it to the relevant edit file. `-e` defaults to `.git/COMMIT_EDITMSG`.
 
 ## Test
 
