@@ -1253,9 +1253,15 @@ builtin-modules@^1.0.0, builtin-modules@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/builtin-modules/-/builtin-modules-1.1.1.tgz#270f076c5a72c02f5b65a47df94c5fe3a278892f"
 
-builtins@^1.0.0, builtins@^1.0.3:
+builtins@^1.0.3:
   version "1.0.3"
   resolved "https://registry.npmjs.org/builtins/-/builtins-1.0.3.tgz#cb94faeb61c8696451db36534e1422f94f0aee88"
+
+builtins@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/builtins/-/builtins-2.0.0.tgz#018999641e11252188652dbb2db01ad386fcdc46"
+  dependencies:
+    semver "^5.4.1"
 
 byline@^5.0.0:
   version "5.0.0"
@@ -2162,17 +2168,17 @@ depd@1.1.1, depd@~1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
 
-dependency-check@2.9.1:
-  version "2.9.1"
-  resolved "https://registry.npmjs.org/dependency-check/-/dependency-check-2.9.1.tgz#228bdba768e3bf819a2a68c36f3f6a773c426ebf"
+dependency-check@2.9.2:
+  version "2.9.2"
+  resolved "https://registry.npmjs.org/dependency-check/-/dependency-check-2.9.2.tgz#537688db4a2c529c49f183cc298fb4d17d1ef433"
   dependencies:
     async "^2.1.4"
-    builtins "^1.0.0"
+    builtins "^2.0.0"
     debug "^2.2.0"
     detective "^4.0.0"
     is-relative "^0.2.1"
     minimist "^1.2.0"
-    read-package-json "^2.0.4"
+    read-package-json "2.0.10"
     resolve "^1.1.7"
 
 destroy@~1.0.4:
@@ -4081,6 +4087,10 @@ jest-validate@^21.1.0:
     leven "^2.1.0"
     pretty-format "^21.2.1"
 
+jju@^1.1.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/jju/-/jju-1.3.0.tgz#dadd9ef01924bc728b03f2f7979bdbd62f7a2aaa"
+
 js-string-escape@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
@@ -4115,6 +4125,12 @@ jsesc@~0.5.0:
 json-parse-better-errors@^1.0.0, json-parse-better-errors@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/json-parse-better-errors/-/json-parse-better-errors-1.0.1.tgz#50183cd1b2d25275de069e9e71b467ac9eab973a"
+
+json-parse-helpfulerror@^1.0.2:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/json-parse-helpfulerror/-/json-parse-helpfulerror-1.0.3.tgz#13f14ce02eed4e981297b64eb9e3b932e2dd13dc"
+  dependencies:
+    jju "^1.1.0"
 
 json-schema-traverse@^0.3.0:
   version "0.3.1"
@@ -5701,7 +5717,7 @@ read-installed@~4.0.3:
   optionalDependencies:
     graceful-fs "^4.1.2"
 
-"read-package-json@1 || 2", read-package-json@^2.0.0, read-package-json@^2.0.4, read-package-json@~2.0.9:
+"read-package-json@1 || 2", read-package-json@^2.0.0, read-package-json@~2.0.9:
   version "2.0.12"
   resolved "https://registry.npmjs.org/read-package-json/-/read-package-json-2.0.12.tgz#68ea45f98b3741cb6e10ae3bbd42a605026a6951"
   dependencies:
@@ -5709,6 +5725,16 @@ read-installed@~4.0.3:
     json-parse-better-errors "^1.0.0"
     normalize-package-data "^2.0.0"
     slash "^1.0.0"
+  optionalDependencies:
+    graceful-fs "^4.1.2"
+
+read-package-json@2.0.10:
+  version "2.0.10"
+  resolved "https://registry.npmjs.org/read-package-json/-/read-package-json-2.0.10.tgz#dc0229f6dde6b4b705b39e25b2d970ebe95685ae"
+  dependencies:
+    glob "^7.1.1"
+    json-parse-helpfulerror "^1.0.2"
+    normalize-package-data "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.2"
 
