@@ -33,15 +33,18 @@
   },
   "renovate": {
     "dependencies": {
-      "semanticPrefix": "chore:"
+      "semanticPrefix": "chore:",
+      "semanticCommitScope": ""
     },
     "extends": [
       "config:base"
     ],
     "pin": {
-      "semanticPrefix": "chore:"
+      "semanticPrefix": "chore:",
+      "semanticCommitScope": ""
     },
-    "semanticPrefix": "chore:"
+    "semanticPrefix": "chore:",
+    "semanticCommitScope": ""
   },
   "xo": {
     "extends": [
