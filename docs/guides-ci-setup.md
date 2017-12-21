@@ -91,7 +91,7 @@ We'll have to differentiate between forks and same-repo PRs on our own and move 
 language: node_js
 before_install: git fetch --unshallow
 script:
-  - /bin/bash lint-commits.sh"
+  - /bin/bash lint-commits.sh
   - npm test
 ```
 
