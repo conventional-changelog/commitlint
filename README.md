@@ -40,8 +40,23 @@ npm install --save-dev @commitlint/{config-conventional,cli}
 echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 ```
 
+
+To lint commits before they are created you can use the 'commitmsg' hook as described [here](https://github.com/typicode/husky/blob/master/HOOKS.md#hooks)
+
+```json
+{
+  "scripts": {
+    "commitmsg": "commitlint -e $GIT_PARAMS"
+  }
+}
+```
+
+
+**Detailed Setup instructions**
+
 * [Local setup](http://marionebl.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
 * [CI setup](http://marionebl.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
+
 
 ## CLI
 
