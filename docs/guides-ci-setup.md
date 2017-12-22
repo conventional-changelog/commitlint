@@ -118,7 +118,7 @@ fi
 # - Covers branch pull requests (when TO=branch)
 ./node_modules/.bin/commitlint --from="$TRAVIS_BRANCH" --to="$TO"
 
-# Always lint the triggerig commit
+# Always lint the triggering commit
 # - Covers direct commits
 ./node_modules/.bin/commitlint --from="$TRAVIS_COMMIT"
 ```
