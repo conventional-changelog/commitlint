@@ -1,8 +1,12 @@
 > Lint commit messages
 
 <p align="center">
-  <img width="750" src="https://marionebl.github.io/commitlint/assets/commitlint.svg">
+  <img width="600" src="https://cdn.rawgit.com/marionebl/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg">
 </p>
+
+> Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
+>
+> `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
 
 # commitlint [![slack][11]][12]
 
