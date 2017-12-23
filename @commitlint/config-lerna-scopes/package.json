@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-lerna-scopes",
-  "version": "5.2.6",
+  "version": "5.3.0-1",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "scripts": {
     "clean": "exit 0",
@@ -39,7 +39,7 @@
     "lerna": "2.5.1"
   },
   "devDependencies": {
-    "@commitlint/test": "^5.2.6",
+    "@commitlint/test": "^5.3.0-1",
     "ava": "0.22.0",
     "xo": "0.18.2"
   }
