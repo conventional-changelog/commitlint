@@ -12,6 +12,7 @@ const WILDCARDS = [
 			c
 				.split('\n')
 				.shift()
+				.replace(/^chore(\([^)]+\))?:/, '')
 				.trim()
 		)
 ];

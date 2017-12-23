@@ -68,6 +68,13 @@ test('should ignore npm semver commits', t => {
 	VERSION_MESSAGES.forEach(message => t.true(isIgnored(message)));
 });
 
+test('should ignore npm semver commits with chore', t => {
+	VERSION_MESSAGES.forEach(message => t.true(isIgnored(`chore: ${message}`)));
+	VERSION_MESSAGES.forEach(message =>
+		t.true(isIgnored(`chore(release): ${message}`))
+	);
+});
+
 test('should ignore npm semver commits with footers', t => {
 	AMENDED_VERSION_MESSAGES.forEach(message => t.true(isIgnored(message)));
 });

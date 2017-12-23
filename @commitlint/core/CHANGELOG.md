@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.2.6"></a>
+## [5.2.6](https://github.com/marionebl/commitlint/compare/v5.2.5...v5.2.6) (2017-12-21)
+
+
+### Bug Fixes
+
+* ignore semver commits with chore type ([cdbb085](https://github.com/marionebl/commitlint/commit/cdbb085)), closes [#198](https://github.com/marionebl/commitlint/issues/198)
+
+
+
+
+<a name="5.2.5"></a>
+## [5.2.5](https://github.com/marionebl/commitlint/compare/v5.2.4...v5.2.5) (2017-12-08)
+
+
+### Bug Fixes
+
+* **core:** use correct report message [#192](https://github.com/marionebl/commitlint/issues/192) ([e3a78bc](https://github.com/marionebl/commitlint/commit/e3a78bc))
+
+
+
+
+<a name="5.2.4"></a>
+## [5.2.4](https://github.com/marionebl/commitlint/compare/v5.2.3...v5.2.4) (2017-12-08)
+
+
+
+
+**Note:** Version bump only for package @commitlint/core
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/marionebl/commitlint/compare/v5.1.3...v5.2.0) (2017-11-30)
 

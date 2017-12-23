@@ -91,7 +91,7 @@ We'll have to differentiate between forks and same-repo PRs on our own and move 
 language: node_js
 before_install: git fetch --unshallow
 script:
-  - /bin/bash lint-commits.sh"
+  - /bin/bash lint-commits.sh
   - npm test
 ```
 
@@ -118,7 +118,7 @@ fi
 # - Covers branch pull requests (when TO=branch)
 ./node_modules/.bin/commitlint --from="$TRAVIS_BRANCH" --to="$TO"
 
-# Always lint the triggerig commit
+# Always lint the triggering commit
 # - Covers direct commits
 ./node_modules/.bin/commitlint --from="$TRAVIS_COMMIT"
 ```

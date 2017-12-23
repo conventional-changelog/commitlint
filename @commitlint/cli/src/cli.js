@@ -134,6 +134,21 @@ function normalizeFlags(raw) {
 		merge(flags, {edit: true, e: true});
 	}
 
+	// The recommended method to specify -e with husky is commitlint -e $GIT_PARAMS
+	// This does not work properly with win32 systems, where env variable declarations
+	// use a different syntax
+	// See https://github.com/marionebl/commitlint/issues/103 for details
+	if (flags.edit === '$GIT_PARAMS' || flags.edit === '%GIT_PARAMS%') {
+		if (!('GIT_PARAMS' in process.env)) {
+			throw new Error(
+				`Received ${
+					flags.edit
+				} as value for -e | --edit, but GIT_PARAMS is not available globally.`
+			);
+		}
+		return process.env.GIT_PARAMS;
+	}
+
 	if (!('format' in flags)) {
 		flags.format = 'commitlint';
 	}

@@ -171,6 +171,24 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
 });
 
+test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
+	const cwd = await git.bootstrap('fixtures/husky/integration');
+	await writePkg({scripts: {commitmsg: `${bin} -e $GIT_PARAMS`}}, {cwd});
+
+	await execa('npm', ['install'], {cwd});
+	await execa('git', ['add', 'package.json'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+});
+
+test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
+	const cwd = await git.bootstrap('fixtures/husky/integration');
+	await writePkg({scripts: {commitmsg: `${bin} -e %GIT_PARAMS%`}}, {cwd});
+
+	await execa('npm', ['install'], {cwd});
+	await execa('git', ['add', 'package.json'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+});
+
 test('should pick up parser preset and fail accordingly', async t => {
 	const cwd = await git.bootstrap('fixtures/parser-preset');
 	const actual = await cli(['--parser-preset', './parser-preset'], {cwd})(
@@ -218,6 +236,20 @@ test('should pick up config from inside git repo with precedence and fail accord
 
 	const actual = await cli([], {cwd})('outer: bar');
 	t.is(actual.code, 1);
+});
+
+test('should handle --amend with signoff', async () => {
+	const cwd = await git.bootstrap('fixtures/signoff');
+	await writePkg({scripts: {commitmsg: `${bin} -e`}}, {cwd});
+
+	await execa('npm', ['install'], {cwd});
+	await execa('git', ['add', 'package.json'], {cwd});
+	await execa(
+		'git',
+		['commit', '-m', '"test: this should work"', '--signoff'],
+		{cwd}
+	);
+	await execa('git', ['commit', '--amend', '--no-edit'], {cwd});
 });
 
 async function writePkg(payload, options) {

@@ -34,6 +34,11 @@ async function lint(rawInput, flags) {
 
 	const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
 
+	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
+	if (range.edit) {
+		loaded.parserOpts.commentChar = '#';
+	}
+
 	const results = await all(messages, async msg => {
 		return {
 			report: await core.lint(msg, loaded.rules, {

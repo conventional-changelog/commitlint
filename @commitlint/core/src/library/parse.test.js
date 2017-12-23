@@ -126,7 +126,8 @@ test('ignores comments', async t => {
 	const message = 'type(some/scope): subject\n# some comment';
 	const {parserOpts} = await angular;
 
-	const actual = await parse(message, sync, parserOpts);
+	const opts = Object.assign({}, parserOpts, {commentChar: '#'});
+	const actual = await parse(message, undefined, opts);
 	t.is(actual.body, null);
 	t.is(actual.footer, null);
 	t.is(actual.subject, 'subject');
@@ -136,7 +137,18 @@ test('registers inline #', async t => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
 	const {parserOpts} = await angular;
-	const actual = await parse(message, sync, parserOpts);
+	const opts = Object.assign({}, parserOpts, {commentChar: '#'});
+	const actual = await parse(message, undefined, opts);
 	t.is(actual.subject, 'subject #reference');
 	t.is(actual.body, 'things #reference');
+});
+
+test('parses references leading subject', async t => {
+	const message = '#1 some subject';
+	const opts = await importFrom(
+		process.cwd(),
+		'conventional-changelog-angular'
+	);
+	const {references: [actual]} = await parse(message, undefined, opts);
+	t.is(actual.issue, '1');
 });

@@ -1,24 +1,10 @@
 > Lint commit messages
 
 <div class="sequence">
-    <svg class="placeholder" width="832" height="517">
-        <style>
-            .tuohi3 {fill: #50b3dd}
-            .tZ1XQohX {fill: #d4d6d6}
-            .t1b70aa {fill: #1d262b}
-            .tZLMqtg {fill: #9fcc4e}
-        </style>
-        <circle cx="18" cy="18" r="7.5" fill="#999"></circle>
-        <circle cx="42" cy="18" r="7.5" fill="#999"></circle>
-        <circle cx="65" cy="18" r="7.5" fill="#999"></circle>
-        <svg x="15" y="50">
-            <rect class="text tuohi3" x="0" y="0" width="250" height="14"/>
-            <rect class="text t1b70aa" x="255" y="0" width="68" height="14"/>
-            <rect class="text tZLMqtg" x="0" y="19" width="10" height="14"/>
-        </svg>
-    </svg>
-    <img src="./assets/commitlint.svg"/>
+    <img src="https://cdn.rawgit.com/marionebl/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg"/>
 </div>
+
+> Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
 
 # commitlint &nbsp; [![slack][11]][12]
 
