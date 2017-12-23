@@ -36,7 +36,7 @@ async function lint(rawInput, flags) {
 
 	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
 	if (range.edit) {
-		loaded.parserOpts.commentChar = '#';
+		loaded.parserPreset.opts.commentChar = '#';
 	}
 
 	const results = await all(messages, async msg => {

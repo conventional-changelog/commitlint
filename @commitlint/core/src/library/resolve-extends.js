@@ -25,7 +25,7 @@ export default async function resolveExtends(config = {}, context = {}) {
 
 // (any, string, string, Function) => any[];
 async function loadExtends(config = {}, context = {}) {
-	return (config.extends || []).reduce(async (configs, raw) => {
+	return (config.extends || []).reduce(async (accing, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
@@ -52,46 +52,11 @@ async function loadExtends(config = {}, context = {}) {
 			config.parserPreset = parserPreset;
 		}
 
-		return [...configs, c, ...(await loadExtends(c, ctx))];
+		const acc = await accing;
+		acc.push(c);
+		acc.push(...(await loadExtends(c, ctx)));
+		return acc;
 	}, Promise.resolve([]));
-
-	/* Return (config.extends || []).reduce((configs, raw) => {
-		const load = context.require || require;
-		const resolved = resolveConfig(raw, context);
-		const c = load(resolved);
-		const cwd = path.dirname(resolved);
-
-		// Remove deprecation warning in version 3
-		if (typeof c === 'object' && 'wildcards' in c) {
-			console.warn(
-				`'wildcards' found in '${raw}' ignored. To silence this warning raise an issue at 'npm repo ${raw}' to remove the wildcards.`
-			);
-		}
-
-		const ctx = merge({}, context, {cwd});
-
-		// Resolve parser preset if none was present before
-		if (
-			!context.parserPreset &&
-			typeof c === 'object' &&
-			typeof c.parserPreset === 'string'
-		) {
-			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
-
-			const parserPreset = {
-				name: c.parserPreset,
-				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
-					.split(path.sep)
-					.join('/'),
-				opts: require(resolvedParserPreset)
-			};
-
-			ctx.parserPreset = parserPreset;
-			config.parserPreset = parserPreset;
-		}
-
-		return [...configs, c, ...loadExtends(c, ctx)];
-	}, []); */
 }
 
 function getId(raw = '', prefix = '') {
@@ -111,11 +76,7 @@ function resolveConfig(raw, context = {}) {
 		const legacy = getId(raw, 'conventional-changelog-lint-config');
 		const resolved = resolve(legacy, context);
 		console.warn(
-			`Resolving ${raw} to legacy config ${
-				legacy
-			}. To silence this warning raise an issue at 'npm repo ${
-				legacy
-			}' to rename to ${id}.`
+			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
 		);
 		return resolved;
 	}
