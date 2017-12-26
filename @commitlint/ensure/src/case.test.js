@@ -54,8 +54,8 @@ test('false for UPPERCASE on sentencecase', t => {
 	t.is(ensure('UPPERCASE', 'sentence-case'), false);
 });
 
-test('false for Start Case on sentencecase', t => {
-	t.is(ensure('Start Case', 'sentence-case'), false);
+test('true for Start Case on sentencecase', t => {
+	t.is(ensure('Start Case', 'sentence-case'), true);
 });
 
 test('false for PascalCase on sentencecase', t => {
