@@ -52,3 +52,11 @@ test('positive on stub message and opts', async t => {
 	);
 	t.true(actual.valid);
 });
+
+test('should throw for invalid rule names', async t => {
+	const error = await t.throws(
+		lint('foo', {foo: [2, 'always'], bar: [1, 'never']})
+	);
+
+	t.is(error.message.indexOf('Found invalid rule names: foo, bar'), 0);
+});
