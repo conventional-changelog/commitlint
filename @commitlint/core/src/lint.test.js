@@ -53,10 +53,81 @@ test('positive on stub message and opts', async t => {
 	t.true(actual.valid);
 });
 
-test('should throw for invalid rule names', async t => {
+test('throws for invalid rule names', async t => {
 	const error = await t.throws(
 		lint('foo', {foo: [2, 'always'], bar: [1, 'never']})
 	);
 
-	t.is(error.message.indexOf('Found invalid rule names: foo, bar'), 0);
+	t.is(error.message.indexOf('Found missing rule names: foo, bar'), 0);
+});
+
+test('throws for invalid rule config', async t => {
+	const error = await t.throws(
+		lint('type(scope): foo', {
+			'type-enum': 1,
+			'scope-enum': {0: 2, 1: 'never', 2: ['foo'], length: 3}
+		})
+	);
+
+	t.true(error.message.indexOf('type-enum must be array') > -1);
+	t.true(error.message.indexOf('scope-enum must be array') > -1);
+});
+
+test('throws for rule with invalid length', async t => {
+	const error = await t.throws(
+		lint('type(scope): foo', {'type-enum': [], 'scope-enum': [1, 2, 3, 4]})
+	);
+
+	t.true(error.message.indexOf('type-enum must be 2 or 3 items long') > -1);
+	t.true(error.message.indexOf('scope-enum must be 2 or 3 items long') > -1);
+});
+
+test('throws for rule with invalid level', async t => {
+	const error = await t.throws(
+		lint('type(scope): foo', {
+			'type-enum': ['2', 'always'],
+			'header-max-length': [{}, 'always']
+		})
+	);
+
+	t.true(error.message.indexOf('rule type-enum must be number') > -1);
+	t.true(error.message.indexOf('rule type-enum must be number') > -1);
+});
+
+test('throws for rule with out of range level', async t => {
+	const error = await t.throws(
+		lint('type(scope): foo', {
+			'type-enum': [-1, 'always'],
+			'header-max-length': [3, 'always']
+		})
+	);
+
+	t.true(error.message.indexOf('rule type-enum must be between 0 and 2') > -1);
+	t.true(error.message.indexOf('rule type-enum must be between 0 and 2') > -1);
+});
+
+test('throws for rule with invalid condition', async t => {
+	const error = await t.throws(
+		lint('type(scope): foo', {
+			'type-enum': [1, 2],
+			'header-max-length': [1, {}]
+		})
+	);
+
+	t.true(error.message.indexOf('type-enum must be string') > -1);
+	t.true(error.message.indexOf('header-max-length must be string') > -1);
+});
+
+test('throws for rule with out of range condition', async t => {
+	const error = await t.throws(
+		lint('type(scope): foo', {
+			'type-enum': [1, 'foo'],
+			'header-max-length': [1, 'bar']
+		})
+	);
+
+	t.true(error.message.indexOf('type-enum must be "always" or "never"') > -1);
+	t.true(
+		error.message.indexOf('header-max-length must be "always" or "never"') > -1
+	);
 });
