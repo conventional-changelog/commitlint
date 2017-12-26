@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import {entries} from 'lodash';
+import entries from 'lodash.topairs';
 
 export default format;
 
@@ -13,7 +13,8 @@ function format(input, debug = false) {
 	const results = debug
 		? entries(input).reduce((registry, item) => {
 				const [name, value] = item;
-				registry[name] = value === null ? chalk.grey(`<${name}>`) : chalk.bold(value)
+				registry[name] =
+					value === null ? chalk.grey(`<${name}>`) : chalk.bold(value);
 				return registry;
 			}, {})
 		: input;
@@ -21,9 +22,9 @@ function format(input, debug = false) {
 	// Return formatted string
 	const {type, scope, subject, body, footer} = results;
 	return [
-		`${type}${scope ? '(' : ''}${scope}${scope ? ')' : ''}${type || scope
-			? ':'
-			: ''} ${subject}`,
+		`${type}${scope ? '(' : ''}${scope}${scope ? ')' : ''}${
+			type || scope ? ':' : ''
+		} ${subject}`,
 		body,
 		footer
 	]

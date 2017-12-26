@@ -1,0 +1,53 @@
+{
+    "name": "@commitlint/top-level",
+    "version": "5.2.6",
+    "description": "Lint your commit messages",
+    "main": "lib/index.js",
+    "scripts": {
+      "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+      "clean": "npx rimraf lib",
+      "deps": "dep-check",
+      "lint": "xo",
+      "start": "yarn watch",
+      "watch": "babel src --out-dir lib --watch --source-maps"
+    },
+    "babel": {
+      "presets": [
+        "babel-preset-commitlint"
+      ]
+    },
+    "xo": false,
+    "engines": {
+      "node": ">=4"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/marionebl/commitlint.git"
+    },
+    "bugs": {
+      "url": "https://github.com/marionebl/commitlint/issues"
+    },
+    "homepage": "https://github.com/marionebl/commitlint#readme",
+    "keywords": [
+      "conventional-changelog",
+      "commitlint",
+      "library",
+      "core"
+    ],
+    "author": {
+      "name": "Mario Nebl",
+      "email": "hello@herebecode.com"
+    },
+    "license": "MIT",
+    "devDependencies": {
+      "babel-cli": "6.26.0",
+      "babel-preset-commitlint": "^5.2.0",
+      "babel-register": "6.26.0",
+      "cross-env": "5.1.1",
+      "rimraf": "2.6.1",
+      "xo": "0.18.2"
+    },
+    "dependencies": {
+      "find-up": "^2.1.0"
+    }
+  }

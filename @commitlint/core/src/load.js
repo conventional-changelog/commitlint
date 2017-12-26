@@ -1,10 +1,12 @@
 import path from 'path';
+import executeRule from '@commitlint/execute-rule';
+import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
-import {entries, merge, mergeWith, pick} from 'lodash';
+import entries from 'lodash.topairs';
+import merge from 'lodash.merge';
+import mergeWith from 'lodash.mergewith';
+import pick from 'lodash.pick';
 import resolveFrom from 'resolve-from';
-
-import executeRule from './library/execute-rule';
-import resolveExtends from './library/resolve-extends';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
