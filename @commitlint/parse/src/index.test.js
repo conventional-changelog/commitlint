@@ -1,6 +1,6 @@
 import importFrom from 'import-from';
 import test from 'ava';
-import parse from './parse';
+import parse from '.';
 
 test('throws when called without params', async t => {
 	const error = await t.throws(parse());

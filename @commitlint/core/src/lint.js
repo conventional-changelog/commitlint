@@ -1,6 +1,6 @@
+import parse from '@commitlint/parse';
 import {entries} from 'lodash';
 import isIgnored from './library/is-ignored';
-import parse from './library/parse';
 import implementations from './rules';
 
 export default async (message, rules = {}, opts = {}) => {

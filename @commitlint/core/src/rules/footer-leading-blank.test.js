@@ -1,5 +1,5 @@
 import test from 'ava';
-import parse from '../library/parse';
+import parse from '@commitlint/parse';
 import footerLeadingBlank from './footer-leading-blank';
 
 const messages = {
