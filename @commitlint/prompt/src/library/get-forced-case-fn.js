@@ -1,4 +1,8 @@
-import {camelCase, kebabCase, snakeCase, upperFirst, startCase} from 'lodash';
+import camelCase from 'lodash.camelcase';
+import kebabCase from 'lodash.kebabcase';
+import snakeCase from 'lodash.snakecase';
+import upperFirst from 'lodash.upperfirst';
+import startCase from 'lodash.startcase';
 
 /**
  * Get forced case for rule

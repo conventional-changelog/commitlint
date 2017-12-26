@@ -4,7 +4,8 @@ require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 const core = require('@commitlint/core');
 const chalk = require('chalk');
 const meow = require('meow');
-const {merge, pick} = require('lodash');
+const merge = require('lodash.merge');
+const pick = require('lodash.pick');
 const stdin = require('get-stdin');
 
 const pkg = require('../package');

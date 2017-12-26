@@ -2,7 +2,7 @@ import path from 'path';
 import gitRawCommits from 'git-raw-commits';
 import * as sander from '@marionebl/sander';
 
-import toplevel from './library/toplevel';
+import toplevel from '@commitlint/top-level';
 
 export default getCommitMessages;
 

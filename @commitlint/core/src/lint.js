@@ -1,7 +1,7 @@
+import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
-import {entries} from 'lodash';
-import isIgnored from './library/is-ignored';
-import implementations from './rules';
+import implementations from '@commitlint/rules';
+import entries from 'lodash.topairs';
 
 export default async (message, rules = {}, opts = {}) => {
 	// Found a wildcard match, skip
