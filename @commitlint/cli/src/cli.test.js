@@ -182,6 +182,12 @@ test('should handle --amend with signoff', async () => {
 	await execa('git', ['commit', '--amend', '--no-edit'], {cwd});
 });
 
+test('should handle linting with issue prefixes', async t => {
+	const cwd = await git.bootstrap('fixtures/issue-prefixes');
+	const actual = await cli([], {cwd})('foobar REF-1');
+	t.is(actual.code, 0);
+});
+
 async function writePkg(payload, options) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await sander.readFile(pkgPath));

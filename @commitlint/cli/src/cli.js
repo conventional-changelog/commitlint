@@ -96,17 +96,17 @@ async function main(options) {
 		throw err;
 	}
 
+	const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
+	const parserOpts = selectParserOpts(loaded.parserPreset);
+	const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
+
+	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
+	if (range.edit) {
+		opts.parserOpts.commentChar = '#';
+	}
+
 	return Promise.all(
 		messages.map(async message => {
-			const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
-			const parserOpts = selectParserOpts(loaded.parserPreset);
-			const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
-
-			// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
-			if (range.edit) {
-				opts.parserOpts.commentChar = '#';
-			}
-
 			const report = await core.lint(message, loaded.rules, opts);
 			const formatted = core.format(report, {color: flags.color});
 
@@ -182,13 +182,11 @@ function selectParserOpts(parserPreset) {
 		return undefined;
 	}
 
-	const opts = parserPreset.opts;
-
-	if (typeof opts !== 'object') {
+	if (typeof parserPreset.parserOpts !== 'object') {
 		return undefined;
 	}
 
-	return opts.parserOpts;
+	return parserPreset.parserOpts;
 }
 
 // Catch unhandled rejections globally

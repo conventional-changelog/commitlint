@@ -26,7 +26,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 		config.parserPreset = {
 			name: config.parserPreset,
 			path: resolvedParserPreset,
-			opts: require(resolvedParserPreset)
+			parserOpts: (await require(resolvedParserPreset)).parserOpts
 		};
 	}
 
@@ -38,13 +38,14 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	});
 
 	const preset = valid(mergeWith(extended, config, w));
-
 	// Await parser-preset if applicable
 	if (
 		typeof preset.parserPreset === 'object' &&
-		typeof preset.parserPreset.opts === 'object'
+		typeof preset.parserPreset.parserOpts === 'object' &&
+		typeof preset.parserPreset.parserOpts.then === 'function'
 	) {
-		preset.parserPreset.opts = await preset.parserPreset.opts;
+		preset.parserPreset.parserOpts = (await preset.parserPreset
+			.parserOpts).parserOpts;
 	}
 
 	// Execute rule config functions if needed
