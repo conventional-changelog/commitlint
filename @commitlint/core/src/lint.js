@@ -41,14 +41,6 @@ export default async (message, rules = {}, opts = {}) => {
 				);
 			}
 
-			if (config.length !== 2 && config.length !== 3) {
-				return new Error(
-					`config for rule ${name} must be 2 or 3 items long, received ${util.inspect(
-						config
-					)} of length ${config.length}`
-				);
-			}
-
 			const [level, when] = config;
 
 			if (typeof level !== 'number' || isNaN(level)) {
@@ -56,6 +48,18 @@ export default async (message, rules = {}, opts = {}) => {
 					`level for rule ${name} must be number, received ${util.inspect(
 						level
 					)} of type ${typeof level}`
+				);
+			}
+
+			if (level === 0 && config.length === 1) {
+				return null;
+			}
+
+			if (config.length !== 2 && config.length !== 3) {
+				return new Error(
+					`config for rule ${name} must be 2 or 3 items long, received ${util.inspect(
+						config
+					)} of length ${config.length}`
 				);
 			}
 

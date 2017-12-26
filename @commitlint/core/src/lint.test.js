@@ -73,12 +73,15 @@ test('throws for invalid rule config', async t => {
 	t.true(error.message.indexOf('scope-enum must be array') > -1);
 });
 
+test('allows disable shorthand', async t => {
+	await t.notThrows(lint('foo', {'type-enum': [0], 'scope-enum': [0]}));
+});
+
 test('throws for rule with invalid length', async t => {
 	const error = await t.throws(
-		lint('type(scope): foo', {'type-enum': [], 'scope-enum': [1, 2, 3, 4]})
+		lint('type(scope): foo', {'scope-enum': [1, 2, 3, 4]})
 	);
 
-	t.true(error.message.indexOf('type-enum must be 2 or 3 items long') > -1);
 	t.true(error.message.indexOf('scope-enum must be 2 or 3 items long') > -1);
 });
 
