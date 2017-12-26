@@ -16,6 +16,20 @@ export default async (message, rules = {}, opts = {}) => {
 	// Parse the commit message
 	const parsed = await parse(message, undefined, opts.parserOpts);
 
+	// Find invalid rules configs
+	const missing = Object.keys(rules).filter(
+		name => typeof implementations[name] !== 'function'
+	);
+
+	if (missing.length > 0) {
+		const names = Object.keys(implementations);
+		throw new RangeError(
+			`Found missing rule names: ${missing.join(
+				', '
+			)}. Supported rule names are: ${names.join(', ')}`
+		);
+	}
+
 	// Validate against all rules
 	const results = entries(rules)
 		.filter(entry => {
@@ -32,6 +46,7 @@ export default async (message, rules = {}, opts = {}) => {
 			}
 
 			const rule = implementations[name];
+
 			const [valid, message] = rule(parsed, when, value);
 
 			return {
