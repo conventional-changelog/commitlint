@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/core",
-  "version": "5.2.6",
+  "version": "5.2.7",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "scripts": {
@@ -55,8 +55,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^5.2.6",
-    "@commitlint/test": "^5.2.6",
+    "@commitlint/parse": "^5.2.7",
+    "@commitlint/test": "^5.2.7",
     "@commitlint/utils": "^5.1.1",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
@@ -72,12 +72,12 @@
     "xo": "0.18.2"
   },
   "dependencies": {
-    "@commitlint/execute-rule": "5.2.6",
-    "@commitlint/is-ignored": "5.2.6",
-    "@commitlint/parse": "5.2.6",
-    "@commitlint/resolve-extends": "5.2.6",
-    "@commitlint/rules": "5.2.6",
-    "@commitlint/top-level": "5.2.6",
+    "@commitlint/execute-rule": "^5.2.7",
+    "@commitlint/is-ignored": "^5.2.7",
+    "@commitlint/parse": "^5.2.7",
+    "@commitlint/resolve-extends": "^5.2.7",
+    "@commitlint/rules": "^5.2.7",
+    "@commitlint/top-level": "^5.2.7",
     "@marionebl/sander": "^0.6.0",
     "babel-runtime": "^6.23.0",
     "chalk": "^2.0.1",
