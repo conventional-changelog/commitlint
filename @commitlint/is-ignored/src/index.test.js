@@ -47,6 +47,11 @@ test('should return true for branch merges', t => {
 	t.true(isIgnored("Merge branch 'iss53'"));
 });
 
+test('should return true for branch merges with newline characters', t => {
+	t.true(isIgnored("Merge branch 'ctrom-YarnBuild'\n"));
+	t.true(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n"));
+});
+
 test('should return true for merged PRs', t => {
 	t.true(isIgnored('Merge pull request #369'));
 });
