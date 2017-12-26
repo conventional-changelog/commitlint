@@ -1,6 +1,6 @@
 import test from 'ava';
 import preset from 'conventional-changelog-angular';
-import parse from '../library/parse';
+import parse from '@commitlint/parse';
 import referencesEmpty from './references-empty';
 
 const messages = {

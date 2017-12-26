@@ -1,5 +1,5 @@
 import test from 'ava';
-import parse from '../library/parse';
+import parse from '@commitlint/parse';
 import check from './header-min-length';
 
 const short = 'BREAKING CHANGE: a';

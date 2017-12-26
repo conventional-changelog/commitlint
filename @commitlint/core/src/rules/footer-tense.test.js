@@ -1,5 +1,5 @@
 import test from 'ava';
-import parse from '../library/parse';
+import parse from '@commitlint/parse';
 import footerTense from './footer-tense';
 
 test('returns deprecation warning', async t => {
