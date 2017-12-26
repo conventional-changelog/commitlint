@@ -48,13 +48,12 @@ function loadExtends(config = {}, context = {}) {
 			typeof c.parserPreset === 'string'
 		) {
 			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
-
 			const parserPreset = {
 				name: c.parserPreset,
 				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
 					.split(path.sep)
 					.join('/'),
-				opts: require(resolvedParserPreset)
+				parserOpts: require(resolvedParserPreset)
 			};
 
 			ctx.parserPreset = parserPreset;
