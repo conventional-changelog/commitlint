@@ -35,6 +35,9 @@
   "engines": {
     "node": ">=4"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/marionebl/commitlint.git"
