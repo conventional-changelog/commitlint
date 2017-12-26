@@ -1,3 +1,4 @@
+import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import implementations from '@commitlint/rules';
@@ -28,6 +29,66 @@ export default async (message, rules = {}, opts = {}) => {
 				', '
 			)}. Supported rule names are: ${names.join(', ')}`
 		);
+	}
+
+	const invalid = entries(rules)
+		.map(([name, config]) => {
+			if (!Array.isArray(config)) {
+				return new Error(
+					`config for rule ${name} must be array, received ${util.inspect(
+						config
+					)} of type ${typeof config}`
+				);
+			}
+
+			if (config.length !== 2 && config.length !== 3) {
+				return new Error(
+					`config for rule ${name} must be 2 or 3 items long, received ${util.inspect(
+						config
+					)} of length ${config.length}`
+				);
+			}
+
+			const [level, when] = config;
+
+			if (typeof level !== 'number' || isNaN(level)) {
+				return new Error(
+					`level for rule ${name} must be number, received ${util.inspect(
+						level
+					)} of type ${typeof level}`
+				);
+			}
+
+			if (level < 0 || level > 2) {
+				return new RangeError(
+					`level for rule ${name} must be between 0 and 2, received ${util.inspect(
+						level
+					)}`
+				);
+			}
+
+			if (typeof when !== 'string') {
+				return new Error(
+					`condition for rule ${name} must be string, received ${util.inspect(
+						when
+					)} of type ${typeof when}`
+				);
+			}
+
+			if (when !== 'never' && when !== 'always') {
+				return new Error(
+					`condition for rule ${name} must be "always" or "never", received ${util.inspect(
+						when
+					)}`
+				);
+			}
+
+			return null;
+		})
+		.filter(item => item instanceof Error);
+
+	if (invalid.length > 0) {
+		throw new Error(invalid.map(i => i.message).join('\n'));
 	}
 
 	// Validate against all rules
