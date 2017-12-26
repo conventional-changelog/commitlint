@@ -7,7 +7,8 @@ const messages = {
 	plain: 'foo: bar',
 	comment: 'foo: baz\n#1 Comment',
 	reference: '#comment\nfoo: baz \nCloses #1',
-	references: '#comment\nfoo: bar \nCloses #1, #2, #3'
+	references: '#comment\nfoo: bar \nCloses #1, #2, #3',
+	prefix: 'bar REF-1234'
 };
 
 const opts = (async () => {
@@ -24,7 +25,10 @@ const parsed = {
 	reference: (async () =>
 		parse(messages.reference, undefined, (await opts).parserOpts))(),
 	references: (async () =>
-		parse(messages.references, undefined, (await opts).parserOpts))()
+		parse(messages.references, undefined, (await opts).parserOpts))(),
+	prefix: parse(messages.prefix, undefined, {
+		issuePrefixes: ['REF-']
+	})
 };
 
 test('defaults to never and fails for plain', async t => {
@@ -72,5 +76,11 @@ test('succeeds for references with never', async t => {
 test('fails for references with always', async t => {
 	const [actual] = referencesEmpty(await parsed.references, 'always');
 	const expected = false;
+	t.is(actual, expected);
+});
+
+test('succeeds for custom references with always', async t => {
+	const [actual] = referencesEmpty(await parsed.prefix, 'never');
+	const expected = true;
 	t.is(actual, expected);
 });
