@@ -24,11 +24,13 @@ function ensureCase(raw = '', target = 'lowercase') {
 		case 'uppercase':
 			return input.toUpperCase() === input;
 		case 'sentence-case':
-		case 'sentencecase':
+		case 'sentencecase': {
+			const word = input.split(' ')[0];
 			return (
-				ensureCase(raw.charAt(0), 'upper-case') &&
-				ensureCase(raw.substring(1), 'lower-case')
+				ensureCase(word.charAt(0), 'upper-case') &&
+				ensureCase(word.slice(1), 'lower-case')
 			);
+		}
 		case 'lower-case':
 		case 'lowercase':
 		case 'lowerCase': // Backwards compat config-angular v4
