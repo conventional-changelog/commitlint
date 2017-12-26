@@ -5,7 +5,6 @@ import entries from 'lodash.topairs';
 
 export default async (message, rules = {}, opts = {}) => {
 	// Found a wildcard match, skip
-	console.log({isIgnored: isIgnored(message)});
 	if (isIgnored(message)) {
 		return {
 			valid: true,
