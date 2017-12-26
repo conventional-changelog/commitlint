@@ -134,3 +134,51 @@ test('throws for rule with out of range condition', async t => {
 		error.message.indexOf('header-max-length must be "always" or "never"') > -1
 	);
 });
+
+test('succeds for issue', async t => {
+	const report = await lint('somehting #1', {
+		'references-empty': [2, 'never']
+	});
+
+	t.true(report.valid);
+});
+
+test('fails for issue', async t => {
+	const report = await lint('somehting #1', {
+		'references-empty': [2, 'always']
+	});
+
+	t.false(report.valid);
+});
+
+test('succeds for custom issue prefix', async t => {
+	const report = await lint(
+		'somehting REF-1',
+		{
+			'references-empty': [2, 'never']
+		},
+		{
+			parserOpts: {
+				issuePrefixes: ['REF-']
+			}
+		}
+	);
+
+	t.true(report.valid);
+});
+
+test('fails for custom issue prefix', async t => {
+	const report = await lint(
+		'somehting #1',
+		{
+			'references-empty': [2, 'never']
+		},
+		{
+			parserOpts: {
+				issuePrefixes: ['REF-']
+			}
+		}
+	);
+
+	t.false(report.valid);
+});
