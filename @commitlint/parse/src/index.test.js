@@ -140,3 +140,20 @@ test('parses references leading subject', async t => {
 	const {references: [actual]} = await parse(message, undefined, opts);
 	t.is(actual.issue, '1');
 });
+
+test('parses custom references', async t => {
+	const message = '#1 some subject PREFIX-2';
+	const {references} = await parse(message, undefined, {
+		issuePrefixes: ['PREFIX-']
+	});
+
+	t.falsy(references.find(ref => ref.issue === '1'));
+	t.deepEqual(references.find(ref => ref.issue === '2'), {
+		action: null,
+		issue: '2',
+		owner: null,
+		prefix: 'PREFIX-',
+		raw: '#1 some subject PREFIX-2',
+		repository: null
+	});
+});
