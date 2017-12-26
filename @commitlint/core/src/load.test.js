@@ -24,12 +24,9 @@ test('uses seed with parserPreset', async t => {
 		},
 		{cwd}
 	);
-
 	t.is(actual.name, './conventional-changelog-custom');
-	t.deepEqual(actual.opts, {
-		parserOpts: {
-			headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
-		}
+	t.deepEqual(actual.parserOpts, {
+		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
 	});
 });
 
@@ -134,25 +131,19 @@ test('recursive extends with package.json file', async t => {
 test('parser preset overwrites completely instead of merging', async t => {
 	const cwd = await git.bootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
-
 	t.is(actual.parserPreset.name, './custom');
-	t.is(typeof actual.parserPreset.opts, 'object');
-	t.deepEqual(actual.parserPreset.opts, {
-		b: 'b',
-		parserOpts: {
-			headerPattern: /.*/
-		}
+	t.deepEqual(actual.parserPreset.parserOpts, {
+		headerPattern: /.*/
 	});
 });
 
 test('recursive extends with parserPreset', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-parser-preset');
 	const actual = await load({}, {cwd});
-
 	t.is(actual.parserPreset.name, './conventional-changelog-custom');
-	t.is(typeof actual.parserPreset.opts, 'object');
+	t.is(typeof actual.parserPreset.parserOpts, 'object');
 	t.deepEqual(
-		actual.parserPreset.opts.parserOpts.headerPattern,
+		actual.parserPreset.parserOpts.headerPattern,
 		/^(\w*)(?:\((.*)\))?-(.*)$/
 	);
 });
