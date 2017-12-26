@@ -2,7 +2,9 @@
 
 Enforce commit conventions with confidence by linting on your CI servers with `commitlint`.
 
-?> This guide assumes you have a already configured `commitlint` for local usage. Follow the [Getting Started](readme.md#getting-started) for basic installation and configuration instructions.
+This guide assumes you have a already configured `commitlint` for local usage. 
+
+Follow the [Getting Started](./?id=getting-started) for basic installation and configuration instructions.
 
 ```bash
 # Install and configure if needed
