@@ -109,10 +109,10 @@ A number of shared configurations are available to install and use with `commitl
 We indentify **ease of adoption** and **developer experience** as fields where there
 is room and need for improvement. The items on the roadmap should enhance `commitlint` regarding those aspects.
 
-* [x] **Adoption** Provide reusable Travis CI integration: `@commitlint/travis-cli` (https://github.com/marionebl/commitlint/releases/tag/v5.1.0)
-* [ ] **DX** Support PR squash scenario via [ahmed-taj/commitlint-bot](https://github.com/ahmed-taj/commitlint-bot/) and `@commitlint/travis-cli`
-* [ ] **Adoption** Make [ahmed-taj/commitlint-bot](https://github.com/ahmed-taj/commitlint-bot/) configurable via `commitlint` configuration
-* [ ] **Adoption** Create `commitlint init`
+* [x] **Adoption**: Provide reusable Travis CI integration: `@commitlint/travis-cli` (https://github.com/marionebl/commitlint/releases/tag/v5.1.0)
+* [ ] **DX**: Support PR squash scenario via [ahmed-taj/commitlint-bot](https://github.com/ahmed-taj/commitlint-bot/) and `@commitlint/travis-cli`
+* [ ] **Adoption**: Make [ahmed-taj/commitlint-bot](https://github.com/ahmed-taj/commitlint-bot/) configurable via `commitlint` configuration
+* [ ] **Adoption**: Create `commitlint init`
 * [ ] **DX**: Extend the configuration schema to allow for additional fields (descriptions, examples, fixes) on both the rule and value level
 * [ ] **DX**: Incorporate an extended version of [lennym/commit-template](https://github.com/lennym/commit-template) deducing a template from commitlint configuration
 * [ ] **DX**: Rewrite `@commitlint/prompt` for better usability (might involve a lot of yak-shaving)
