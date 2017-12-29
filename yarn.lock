@@ -2230,18 +2230,19 @@ diff@^3.0.0, diff@^3.0.1:
   version "3.4.0"
   resolved "https://registry.npmjs.org/diff/-/diff-3.4.0.tgz#b1d85507daf3964828de54b37d0d73ba67dda56c"
 
-docsify-cli@4.1.12:
-  version "4.1.12"
-  resolved "https://registry.npmjs.org/docsify-cli/-/docsify-cli-4.1.12.tgz#43645ede4b9e6a25a79f1227f223e26054eacc86"
+docsify-cli@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.npmjs.org/docsify-cli/-/docsify-cli-4.2.0.tgz#a56174bc24d80e03a86aadf3f627a4d7c5a6c69a"
   dependencies:
     chalk "^1.1.3"
     connect "^3.6.0"
     connect-livereload "^0.6.0"
     cp-file "^4.1.1"
     docsify ">=3"
-    docsify-server-renderer "^4.1.9"
+    docsify-server-renderer "^4.5.7"
     fs-extra "^2.1.2"
     livereload "^0.6.2"
+    lru-cache "^4.1.1"
     open "^0.0.5"
     serve-static "^1.12.1"
     update-notifier "^2.1.0"
@@ -2249,9 +2250,9 @@ docsify-cli@4.1.12:
     yargonaut "^1.1.2"
     yargs "^7.0.2"
 
-docsify-server-renderer@^4.1.9:
-  version "4.5.3"
-  resolved "https://registry.npmjs.org/docsify-server-renderer/-/docsify-server-renderer-4.5.3.tgz#062df846ba258ec1f07cc71141a971ccabb863b0"
+docsify-server-renderer@^4.5.7:
+  version "4.5.7"
+  resolved "https://registry.npmjs.org/docsify-server-renderer/-/docsify-server-renderer-4.5.7.tgz#8bc3c49238552b501e15ec06b9af0cba368495eb"
   dependencies:
     debug "^2.6.8"
     node-fetch "^1.7.0"
