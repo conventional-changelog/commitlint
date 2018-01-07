@@ -15,7 +15,7 @@ npm install --save-dev @commitlint/travis-cli
 # travis.yml
 language: node_js
 script:
-  - $(npm bin)/travis-cli
+  - commitlint-travis
 ```
 
 ?> Help yourself adopting a commit convention by using an interactive commit prompt. Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](guides-use-prompt.md)
