@@ -13,6 +13,6 @@ export default (parsed, when, value) => {
 	const result = ensure.case(type, value);
 	return [
 		negated ? !result : result,
-		message([`subject must`, negated ? `not` : null, `be ${value}`])
+		message([`type must`, negated ? `not` : null, `be ${value}`])
 	];
 };
