@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.0"></a>
+# [6.0.0](https://github.com/marionebl/commitlint/compare/v5.2.6...v6.0.0) (2018-01-09)
+
+
+### Bug Fixes
+
+* allow [0] shorthand ([84cf938](https://github.com/marionebl/commitlint/commit/84cf938))
+* correctly resolve parserOpts [#115](https://github.com/marionebl/commitlint/issues/115) [#95](https://github.com/marionebl/commitlint/issues/95) ([1353dd5](https://github.com/marionebl/commitlint/commit/1353dd5))
+
+
+### Styles
+
+* validate rule configuration ([edf7187](https://github.com/marionebl/commitlint/commit/edf7187))
+
+
+### BREAKING CHANGES
+
+* Due to additional validation while reading
+commitlint config, previously ignored rule
+settings are now considered critical errors
+when starting the CLI. The new behaviour is
+designed to help developers find issues with
+their configuration quicker.
+
+
+
+
 <a name="5.2.6"></a>
 ## [5.2.6](https://github.com/marionebl/commitlint/compare/v5.2.5...v5.2.6) (2017-12-21)
 
