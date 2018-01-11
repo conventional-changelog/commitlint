@@ -3,7 +3,7 @@ import semver from 'semver';
 const WILDCARDS = [
 	c =>
 		c.match(
-			/^(Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?))(?:\r?\n)?$)/
+			/^(Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?))(?:\r?\n)*$)/
 		),
 	c => c.match(/^(R|r)evert (.*)/),
 	c => c.match(/^(fixup|squash)!/),
