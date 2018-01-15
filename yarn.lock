@@ -53,6 +53,12 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
+"@browserify/acorn5-object-spread@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/@browserify/acorn5-object-spread/-/acorn5-object-spread-5.0.1.tgz#92e9b37f97beac9ec429a3cc479ded380297540c"
+  dependencies:
+    acorn "^5.2.1"
+
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
@@ -95,10 +101,6 @@ acorn@>=2.5.2, acorn@^5.2.1:
 acorn@^3.0.4:
   version "3.3.0"
   resolved "https://registry.npmjs.org/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
-
-acorn@^4.0.3:
-  version "4.0.13"
-  resolved "https://registry.npmjs.org/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
 add-stream@^1.0.0:
   version "1.0.0"
@@ -321,12 +323,6 @@ async-each@^1.0.0:
 async@^1.4.0, async@^1.5.0:
   version "1.5.2"
   resolved "https://registry.npmjs.org/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
-
-async@^2.1.4:
-  version "2.6.0"
-  resolved "https://registry.npmjs.org/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
-  dependencies:
-    lodash "^4.14.0"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -2175,17 +2171,16 @@ depd@1.1.1, depd@~1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/depd/-/depd-1.1.1.tgz#5783b4e1c459f06fa5ca27f991f3d06e7a310359"
 
-dependency-check@2.10.0:
-  version "2.10.0"
-  resolved "https://registry.npmjs.org/dependency-check/-/dependency-check-2.10.0.tgz#3cf866290efd284b471afe80c09861ee6f78d36d"
+dependency-check@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/dependency-check/-/dependency-check-3.0.0.tgz#92e2a4141812d4e99cb91298c36a7435b848b1c6"
   dependencies:
-    async "^2.1.4"
     builtins "^2.0.0"
-    debug "^2.2.0"
-    detective "^4.0.0"
-    is-relative "^0.2.1"
+    debug "^3.1.0"
+    detective "^5.0.2"
+    is-relative "^1.0.0"
     minimist "^1.2.0"
-    read-package-json "2.0.10"
+    read-package-json "^2.0.10"
     resolve "^1.1.7"
 
 destroy@~1.0.4:
@@ -2212,11 +2207,12 @@ detect-libc@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/detect-libc/-/detect-libc-1.0.2.tgz#71ad5d204bf17a6a6ca8f450c61454066ef461e1"
 
-detective@^4.0.0:
-  version "4.5.0"
-  resolved "https://registry.npmjs.org/detective/-/detective-4.5.0.tgz#6e5a8c6b26e6c7a254b1c6b6d7490d98ec91edd1"
+detective@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/detective/-/detective-5.0.2.tgz#84ec2e1c581e74211e2ae4ffce1edf52c3263f84"
   dependencies:
-    acorn "^4.0.3"
+    "@browserify/acorn5-object-spread" "^5.0.1"
+    acorn "^5.2.1"
     defined "^1.0.0"
 
 dezalgo@^1.0.0, dezalgo@~1.0.3:
@@ -3958,11 +3954,11 @@ is-regexp@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/is-regexp/-/is-regexp-1.0.0.tgz#fd2d883545c46bac5a633e7b9a09e87fa2cb5069"
 
-is-relative@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/is-relative/-/is-relative-0.2.1.tgz#d27f4c7d516d175fb610db84bbeef23c3bc97aa5"
+is-relative@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/is-relative/-/is-relative-1.0.0.tgz#a1bb6935ce8c5dba1e8b9754b9b2dcc020e2260d"
   dependencies:
-    is-unc-path "^0.1.1"
+    is-unc-path "^1.0.0"
 
 is-resolvable@^1.0.0:
   version "1.0.0"
@@ -3992,11 +3988,11 @@ is-typedarray@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
 
-is-unc-path@^0.1.1:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/is-unc-path/-/is-unc-path-0.1.2.tgz#6ab053a72573c10250ff416a3814c35178af39b9"
+is-unc-path@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/is-unc-path/-/is-unc-path-1.0.0.tgz#d731e8898ed090a12c352ad2eaed5095ad322c9d"
   dependencies:
-    unc-path-regex "^0.1.0"
+    unc-path-regex "^0.1.2"
 
 is-url@^1.2.1:
   version "1.2.2"
@@ -4111,10 +4107,6 @@ jest-validate@^21.1.0:
     leven "^2.1.0"
     pretty-format "^21.2.1"
 
-jju@^1.1.0:
-  version "1.3.0"
-  resolved "https://registry.npmjs.org/jju/-/jju-1.3.0.tgz#dadd9ef01924bc728b03f2f7979bdbd62f7a2aaa"
-
 js-string-escape@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/js-string-escape/-/js-string-escape-1.0.1.tgz#e2625badbc0d67c7533e9edc1068c587ae4137ef"
@@ -4149,12 +4141,6 @@ jsesc@~0.5.0:
 json-parse-better-errors@^1.0.0, json-parse-better-errors@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/json-parse-better-errors/-/json-parse-better-errors-1.0.1.tgz#50183cd1b2d25275de069e9e71b467ac9eab973a"
-
-json-parse-helpfulerror@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/json-parse-helpfulerror/-/json-parse-helpfulerror-1.0.3.tgz#13f14ce02eed4e981297b64eb9e3b932e2dd13dc"
-  dependencies:
-    jju "^1.1.0"
 
 json-schema-traverse@^0.3.0:
   version "0.3.1"
@@ -4593,7 +4579,7 @@ lodash@^3.3.1:
   version "3.10.1"
   resolved "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1:
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.13.1, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.1:
   version "4.17.4"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -5761,7 +5747,7 @@ read-installed@~4.0.3:
   optionalDependencies:
     graceful-fs "^4.1.2"
 
-"read-package-json@1 || 2", read-package-json@^2.0.0, read-package-json@~2.0.9:
+"read-package-json@1 || 2", read-package-json@^2.0.0, read-package-json@^2.0.10, read-package-json@~2.0.9:
   version "2.0.12"
   resolved "https://registry.npmjs.org/read-package-json/-/read-package-json-2.0.12.tgz#68ea45f98b3741cb6e10ae3bbd42a605026a6951"
   dependencies:
@@ -5769,16 +5755,6 @@ read-installed@~4.0.3:
     json-parse-better-errors "^1.0.0"
     normalize-package-data "^2.0.0"
     slash "^1.0.0"
-  optionalDependencies:
-    graceful-fs "^4.1.2"
-
-read-package-json@2.0.10:
-  version "2.0.10"
-  resolved "https://registry.npmjs.org/read-package-json/-/read-package-json-2.0.10.tgz#dc0229f6dde6b4b705b39e25b2d970ebe95685ae"
-  dependencies:
-    glob "^7.1.1"
-    json-parse-helpfulerror "^1.0.2"
-    normalize-package-data "^2.0.0"
   optionalDependencies:
     graceful-fs "^4.1.2"
 
@@ -6891,7 +6867,7 @@ umask@~1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/umask/-/umask-1.1.0.tgz#f29cebf01df517912bb58ff9c4e50fde8e33320d"
 
-unc-path-regex@^0.1.0:
+unc-path-regex@^0.1.2:
   version "0.1.2"
   resolved "https://registry.npmjs.org/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
 
