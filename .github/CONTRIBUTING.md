@@ -40,7 +40,7 @@ To keep the code base of commitlint neat and tidy the following rules apply to e
 
 > Coding standards
 
-* [Happiness](/sindresorhus/xo) enforced
+* [Happiness](https://github.com/sindresorhus/xo) enforced
 * Favor micro library over swiss army knives (rimraf, ncp vs. fs-extra)
 * Be awesome
 
@@ -50,7 +50,7 @@ To make your life easier commitlint is commitizen-friendly and provides the npm 
 
 > Commit standards
 
-* [conventional-changelog](./@commitlint/prompt)
+* [conventional-changelog](https://github.com/marionebl/commitlint/tree/master/%40commitlint/prompt)
 * husky commit message hook available
 * present tense
 * maximum of 100 characters
