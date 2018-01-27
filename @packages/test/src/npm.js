@@ -1,11 +1,16 @@
 import path from 'path';
+import fs from 'fs';
+import zlib from 'zlib';
 import * as sander from '@marionebl/sander';
 import execa from 'execa';
 import globby from 'globby';
+import tar from 'tar-fs';
+import packlist from 'npm-packlist';
 
+import * as fix from './fix';
 import * as git from './git';
 
-export {bootstrap, testPackingFiles};
+export {bootstrap, getTarballFiles, getPackageFiles};
 
 async function bootstrap(fixture) {
 	const cwd = await git.bootstrap(fixture);
@@ -17,30 +22,37 @@ async function bootstrap(fixture) {
 	return cwd;
 }
 
-async function testPackingFiles(t, expectedFiles) {
-	let packFile;
+async function getTarballFiles({cwd}) {
+	const tarballFilename = await execa.stdout('npm', ['pack'], {cwd});
+	const tarballFile = path.resolve(cwd, tarballFilename);
+	const workDir = await fix.bootstrap();
+
 	try {
-		// Setup temporary npm project
-		const cwd = await bootstrap();
-		await execa('npm', ['init', '--yes'], {cwd});
+		// Extract tarball
+		await new Promise((resolve, reject) => {
+			fs
+				.createReadStream(tarballFile)
+				.pipe(zlib.createGunzip())
+				.pipe(tar.extract(workDir))
+				.once('error', err => reject(err))
+				.once('finish', () => resolve());
+		});
 
-		// Install pack file
-		packFile = path.resolve(await execa.stdout('npm', ['pack']));
-		await execa('npm', ['install', '--no-progress', packFile], {cwd});
-
-		// Assert packing files
-		const pkgName = JSON.parse(await sander.readFile('package.json')).name;
-		const actualFiles = await globby(['**', '!node_modules'], {
-			cwd: path.resolve(cwd, 'node_modules', pkgName),
+		// List all files
+		return (await globby(['**'], {
+			cwd: path.resolve(workDir, 'package'),
 			dot: true,
 			nodir: true,
 			nosort: true
-		});
-		t.deepEqual(actualFiles.sort(), expectedFiles.sort());
+		})).sort();
 	} finally {
-		// Cleanup
-		if (packFile) {
-			sander.unlink(packFile);
-		}
+		sander.rimraf(tarballFile);
+		sander.rimraf(workDir);
 	}
+}
+
+async function getPackageFiles({cwd, npmignore}) {
+	return (await packlist({path: cwd}))
+		.concat(npmignore ? '.npmignore' : [])
+		.sort();
 }

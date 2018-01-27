@@ -1,15 +1,10 @@
+import pkgDir from 'pkg-dir';
 import {npm} from '@commitlint/test';
 import test from 'ava';
 
-test('should publish the minimum files', async t => {
-	await npm.testPackingFiles(t, [
-		'CHANGELOG.md',
-		'README.md',
-		'index.js',
-		'lib/cli.js',
-		'lib/cli.js.map',
-		'lib/help.js',
-		'lib/help.js.map',
-		'package.json'
-	]);
+test('should publish required files', async t => {
+	const cwd = await pkgDir(__dirname);
+	const actual = await npm.getTarballFiles({cwd});
+	const expected = await npm.getPackageFiles({cwd, npmignore: true});
+	t.deepEqual(actual, expected);
 });
