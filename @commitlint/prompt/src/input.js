@@ -1,10 +1,11 @@
 import {load} from '@commitlint/core';
 import throat from 'throat';
+import {merge} from 'lodash';
 
 import format from './library/format';
 import getHasName from './library/get-has-name';
 import getPrompt from './library/get-prompt';
-import settings from './settings';
+import defaultSettings from './settings';
 
 export default input;
 
@@ -24,7 +25,8 @@ async function input(prompter) {
 		footer: null
 	};
 
-	const {rules} = await load();
+	const {rules, settings: configSettings} = await load();
+	const settings = merge(defaultSettings, configSettings);
 
 	await Promise.all(
 		['type', 'scope', 'subject', 'body', 'footer'].map(
