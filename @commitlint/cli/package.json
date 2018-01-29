@@ -2,6 +2,11 @@
   "name": "@commitlint/cli",
   "version": "6.0.2",
   "description": "Lint your commit messages",
+  "files": [
+    "index.js",
+    "lib",
+    "!*.test.js*"
+  ],
   "bin": {
     "commitlint": "./lib/cli.js"
   },
@@ -76,6 +81,7 @@
     "get-stdin": "5.0.1",
     "lodash.merge": "4.6.0",
     "lodash.pick": "4.4.0",
-    "meow": "3.7.0"
+    "meow": "3.7.0",
+    "unexpected": "^10.36.3"
   }
 }
