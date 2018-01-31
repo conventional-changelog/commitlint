@@ -3,7 +3,6 @@
   "version": "6.0.2",
   "description": "test utilities for @commitlint",
   "main": "lib/",
-  "private": true,
   "files": ["lib/"],
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
