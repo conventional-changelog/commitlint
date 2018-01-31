@@ -53,13 +53,22 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
+"@commitlint/test@6.0.4":
+  version "6.0.4"
+  resolved "https://registry.npmjs.org/@commitlint/test/-/test-6.0.4.tgz#18a16e96a79848cfb322150123aff1251e8aec29"
+  dependencies:
+    "@commitlint/utils" "^6.0.4"
+    "@marionebl/sander" "0.6.1"
+    execa "0.9.0"
+    pkg-dir "2.0.0"
+
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
   dependencies:
     arrify "^1.0.1"
 
-"@marionebl/sander@0.6.1", "@marionebl/sander@^0.6.0", "@marionebl/sander@^0.6.1":
+"@marionebl/sander@0.6.1", "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "https://registry.npmjs.org/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"
   dependencies:
@@ -3753,17 +3762,17 @@ is-buffer@^1.1.5:
   version "1.1.6"
   resolved "https://registry.npmjs.org/is-buffer/-/is-buffer-1.1.6.tgz#efaa2ea9daa0d7ab2ea13a97b2b8ad51fefbe8be"
 
+is-builtin-module@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/is-builtin-module/-/is-builtin-module-2.0.0.tgz#431104b3b4ba838ec7a17d82bb3bccd2233e8cd9"
+  dependencies:
+    builtin-modules "^2.0.0"
+
 is-builtin-module@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/is-builtin-module/-/is-builtin-module-1.0.0.tgz#540572d34f7ac3119f8f76c30cbc1b1e037affbe"
   dependencies:
     builtin-modules "^1.0.0"
-
-is-builtin-module@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/is-builtin-module/-/is-builtin-module-2.0.0.tgz#431104b3b4ba838ec7a17d82bb3bccd2233e8cd9"
-  dependencies:
-    builtin-modules "^2.0.0"
 
 is-ci@^1.0.10, is-ci@^1.0.7:
   version "1.0.10"
@@ -4549,7 +4558,7 @@ lodash.upperfirst@4.3.1, lodash.upperfirst@^4.2.0:
   version "4.3.1"
   resolved "https://registry.npmjs.org/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz#1365edf431480481ef0d1c68957a5ed99d49f7ce"
 
-lodash.values@4.3.0, lodash.values@^4.3.0:
+lodash.values@4.3.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/lodash.values/-/lodash.values-4.3.0.tgz#a3a6c2b0ebecc5c2cba1c17e6e620fe81b53d347"
 
@@ -4707,7 +4716,7 @@ meow@3.7.0, meow@^3.3.0, meow@^3.4.2, meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
-meow@^4.0.0:
+meow@4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/meow/-/meow-4.0.0.tgz#fd5855dd008db5b92c552082db1c307cba20b29d"
   dependencies:
@@ -6040,7 +6049,7 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
 
-require-from-string@^2.0.1:
+require-from-string@2.0.1, require-from-string@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/require-from-string/-/require-from-string-2.0.1.tgz#c545233e9d7da6616e9d59adfb39fc9f588676ff"
 
@@ -6672,7 +6681,7 @@ table@^4.0.1:
     slice-ansi "1.0.0"
     string-width "^2.1.1"
 
-tar-fs@^1.15.3, tar-fs@^1.16.0:
+tar-fs@1.16.0, tar-fs@^1.15.3:
   version "1.16.0"
   resolved "https://registry.npmjs.org/tar-fs/-/tar-fs-1.16.0.tgz#e877a25acbcc51d8c790da1c57c9cf439817b896"
   dependencies:
