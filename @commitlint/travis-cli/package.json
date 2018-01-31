@@ -2,6 +2,7 @@
   "name": "@commitlint/travis-cli",
   "version": "6.0.2",
   "description": "Lint all relevant commits for a change or PR on Travis CI",
+  "files": ["lib/"],
   "bin": {
     "commitlint-travis": "./lib/cli.js"
   },
@@ -9,6 +10,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "deps": "dep-check",
+    "pkg": "pkg-check --skip-main",
     "lint": "xo",
     "start": "ava -c 4 --verbose --watch",
     "test": "ava -c 4 --verbose",

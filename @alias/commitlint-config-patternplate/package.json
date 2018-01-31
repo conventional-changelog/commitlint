@@ -2,9 +2,12 @@
   "name": "commitlint-config-patternplate",
   "version": "6.0.2",
   "description": "Lint your commits, patternplate-style",
+  "files": ["index.js"],
   "scripts": {
     "test": "exit 0",
-    "clean": "exit 0"
+    "clean": "exit 0",
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
   "xo": false,
   "repository": {
@@ -24,6 +27,7 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "dependencies": {
-    "@commitlint/config-patternplate": "^6.0.2"
+    "@commitlint/config-patternplate": "^6.0.2",
+    "@commitlint/utils": "^6.0.2"
   }
 }

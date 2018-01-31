@@ -3,11 +3,13 @@
   "version": "6.0.2",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
+  "files": ["lib/"],
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "commit": "git-cz",
     "deps": "dep-check",
+    "pkg": "pkg-check --skip-import",
     "lint": "xo",
     "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
     "test": "ava --verbose",

@@ -3,8 +3,10 @@
   "version": "6.0.2",
   "description": "Lint your commit messages",
   "main": "index.js",
+  "files": ["index.js"],
   "scripts": {
     "deps": "dep-check",
+    "pkg": "pkg-check",
     "lint": "xo",
     "start": "ava --watch --verbose",
     "test": "ava --verbose"

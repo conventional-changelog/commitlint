@@ -2,9 +2,11 @@
   "name": "@commitlint/config-angular-type-enum",
   "version": "6.0.2",
   "description": "Shareable commitlint config enforcing the angular commit convention types",
+  "files": ["index.js"],
   "scripts": {
     "clean": "exit 0",
     "deps": "dep-check",
+    "pkg": "pkg-check",
     "lint": "xo",
     "start": "exit 0",
     "test": "exit 0"

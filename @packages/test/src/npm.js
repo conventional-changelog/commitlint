@@ -1,5 +1,5 @@
-import * as sander from '@marionebl/sander';
 import execa from 'execa';
+import * as sander from '@marionebl/sander';
 
 import * as git from './git';
 
