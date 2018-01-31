@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.5"></a>
+## [6.0.5](https://github.com/marionebl/commitlint/compare/v6.0.4...v6.0.5) (2018-01-31)
+
+
+### Bug Fixes
+
+* remove utils from prod dependencies ([4fb858a](https://github.com/marionebl/commitlint/commit/4fb858a))
+
+
+
+
 <a name="6.0.4"></a>
 ## [6.0.4](https://github.com/marionebl/commitlint/compare/v6.0.3...v6.0.4) (2018-01-31)
 
