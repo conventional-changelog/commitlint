@@ -143,10 +143,10 @@ function getTarballFiles(source, options) {
 		.then(cwd =>
 			execa('npm', ['pack'], {cwd}).then(cp => path.join(cwd, cp.stdout))
 		)
-		.then(tarball => getArchveFiles(tarball, options));
+		.then(tarball => getArchiveFiles(tarball, options));
 }
 
-function getArchveFiles(filePath, options) {
+function getArchiveFiles(filePath, options) {
 	const write = typeof options.write === 'boolean' ? options.write : true;
 
 	return new Promise((resolve, reject) => {
