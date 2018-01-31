@@ -8,6 +8,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "clean": "npx rimraf lib",
     "deps": "dep-check",
+    "pkg": "pkg-check --skip-import",
     "lint": "xo",
     "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
     "test": "ava --verbose",
@@ -55,12 +56,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@commitlint/utils": "^6.0.2",
     "@marionebl/sander": "0.6.1",
     "execa": "0.9.0",
-    "lodash.values": "^4.3.0",
-    "pkg-dir": "2.0.0",
-    "read-pkg": "^3.0.0",
-    "tar-fs": "1.16.0"
+    "pkg-dir": "2.0.0"
   },
   "devDependencies": {
     "@commitlint/utils": "^6.0.2",

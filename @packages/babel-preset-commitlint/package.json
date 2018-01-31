@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deps": "dep-check",
+    "pkg": "pkg-check",
     "lint": "xo",
     "start": "ava --watch --verbose",
     "test": "ava --verbose"

@@ -7,6 +7,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "clean": "npx rimraf lib",
     "deps": "dep-check",
+    "pkg": "pkg-check --skip-import",
     "lint": "xo",
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
     "test": "ava -c 4 --verbose && ava \"src/*.serial-test.js\" --verbose",

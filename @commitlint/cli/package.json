@@ -14,6 +14,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "deps": "dep-check",
+    "pkg": "pkg-check",
     "lint": "xo",
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
     "test": "ava -c 4 --verbose",
@@ -63,7 +64,6 @@
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
-    "dependency-check": "2.10.0",
     "execa": "0.9.0",
     "mkdirp": "0.5.1",
     "pkg-dir": "2.0.0",
@@ -72,7 +72,6 @@
     "sander": "0.6.0",
     "string-to-stream": "1.1.0",
     "tmp": "0.0.33",
-    "unexpected": "^10.36.3",
     "xo": "0.18.2"
   },
   "dependencies": {

@@ -20,7 +20,7 @@ function check(args) {
 main().then(args => {
 	const err = args[0];
 	const out = args[1];
-	console.log(`Checking ${path.join(cwd, 'package.json')}`);
+	console.log(`Checking dependencies ${path.join(cwd, 'package.json')}`);
 	if (err) {
 		console.error(err.stderr);
 		process.exit(err.code);

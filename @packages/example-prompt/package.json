@@ -4,7 +4,9 @@
   "version": "6.0.2",
   "description": "Example for prompt guide",
   "scripts": {
-    "commit": "commit"
+    "commit": "commit",
+    "pkg": "pkg-check --skip-main",
+    "deps": "dep-check"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,7 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/prompt-cli": "^6.0.2"
+    "@commitlint/prompt-cli": "^6.0.2",
+    "@commitlint/utils": "^6.0.2"
   }
 }

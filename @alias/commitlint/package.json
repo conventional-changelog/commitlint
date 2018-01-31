@@ -5,6 +5,10 @@
   "bin": {
     "commitlint": "cli.js"
   },
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-main"
+  },
   "xo": false,
   "engines": {
     "node": ">=4"
@@ -31,5 +35,8 @@
     "@commitlint/cli": "^6.0.2",
     "read-pkg": "3.0.0",
     "resolve-pkg": "1.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/utils": "^6.0.2"
   }
 }

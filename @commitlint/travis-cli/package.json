@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
     "deps": "dep-check",
+    "pkg": "pkg-check --skip-main",
     "lint": "xo",
     "start": "ava -c 4 --verbose --watch",
     "test": "ava -c 4 --verbose",
