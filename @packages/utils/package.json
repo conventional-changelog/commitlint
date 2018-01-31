@@ -8,8 +8,7 @@
   ],
   "bin": {
     "dep-check": "./dep-check.js",
-    "pkg-check": "./pkg-check.js",
-    "lint": "xo"
+    "pkg-check": "./pkg-check.js"
   },
   "scripts": {
     "build": "exit 0",
