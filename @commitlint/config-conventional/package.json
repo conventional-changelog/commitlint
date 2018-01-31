@@ -2,6 +2,7 @@
   "name": "@commitlint/config-conventional",
   "version": "6.0.2",
   "description": "Shareable commitlint config enforcing conventional commits",
+  "files": ["index.js"],
   "scripts": {
     "clean": "exit 0",
     "deps": "dep-check",
