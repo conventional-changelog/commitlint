@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.0.4"></a>
+## [6.0.4](https://github.com/marionebl/commitlint/compare/v6.0.3...v6.0.4) (2018-01-31)
+
+
+### Bug Fixes
+
+* remove faulty bin entry [#259](https://github.com/marionebl/commitlint/issues/259) ([beafbc6](https://github.com/marionebl/commitlint/commit/beafbc6))
+
+
+
+
 <a name="6.0.3"></a>
 ## [6.0.3](https://github.com/marionebl/commitlint/compare/v6.0.2...v6.0.3) (2018-01-31)
 
