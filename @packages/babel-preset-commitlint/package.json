@@ -1,9 +1,11 @@
 {
   "name": "babel-preset-commitlint",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "Lint your commit messages",
   "main": "index.js",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "deps": "dep-check",
     "pkg": "pkg-check",
@@ -49,7 +51,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^6.0.2",
+    "@commitlint/utils": "^6.0.3",
     "ava": "0.22.0",
     "babel-core": "6.26.0",
     "xo": "0.18.2"

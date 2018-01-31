@@ -1,8 +1,10 @@
 {
   "name": "@commitlint/config-angular",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "Shareable commitlint config enforcing the angular commit convention",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "scripts": {
     "clean": "exit 0",
     "deps": "dep-check",
@@ -29,9 +31,9 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^6.0.2"
+    "@commitlint/utils": "^6.0.3"
   },
   "dependencies": {
-    "@commitlint/config-angular-type-enum": "^6.0.2"
+    "@commitlint/config-angular-type-enum": "^6.0.3"
   }
 }

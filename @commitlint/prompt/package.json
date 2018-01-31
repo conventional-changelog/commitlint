@@ -1,9 +1,11 @@
 {
   "name": "@commitlint/prompt",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "clean": "npx rimraf lib",
@@ -56,10 +58,10 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^6.0.2",
+    "@commitlint/utils": "^6.0.3",
     "ava": "0.20.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^6.0.2",
+    "babel-preset-commitlint": "^6.0.3",
     "babel-register": "6.26.0",
     "commitizen": "2.9.6",
     "concurrently": "3.5.1",
@@ -68,7 +70,7 @@
     "xo": "0.18.2"
   },
   "dependencies": {
-    "@commitlint/core": "^6.0.2",
+    "@commitlint/core": "^6.0.3",
     "babel-runtime": "^6.23.0",
     "chalk": "^2.0.0",
     "lodash.camelcase": "4.3.0",
