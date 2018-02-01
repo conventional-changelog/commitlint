@@ -12,7 +12,7 @@ const pkg = require('../package');
 const help = require('./help');
 
 const configuration = {
-	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset'],
+	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset', 'config'],
 	boolean: ['help', 'version', 'quiet', 'color'],
 	alias: {
 		c: 'color',
@@ -22,6 +22,7 @@ const configuration = {
 		t: 'to',
 		q: 'quiet',
 		h: 'help',
+		g: 'config',
 		v: 'version',
 		x: 'extends',
 		p: 'parser-preset'
@@ -29,6 +30,7 @@ const configuration = {
 	description: {
 		color: 'toggle colored output',
 		cwd: 'directory to execute in',
+		config: 'path to the config file',
 		edit:
 			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
 		extends: 'array of shareable configurations to extend',
@@ -41,6 +43,7 @@ const configuration = {
 	default: {
 		color: true,
 		cwd: process.cwd(),
+		config: null,
 		edit: false,
 		from: null,
 		to: null,
@@ -96,7 +99,8 @@ async function main(options) {
 		throw err;
 	}
 
-	const loaded = await core.load(getSeed(flags), {cwd: flags.cwd});
+	const loadOpts = {cwd: flags.cwd, file: flags.config};
+	const loaded = await core.load(getSeed(flags), loadOpts);
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
 
