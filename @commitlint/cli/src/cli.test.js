@@ -59,6 +59,14 @@ test('should fail for input from stdin with rule from rc', async t => {
 	t.is(actual.code, 1);
 });
 
+test('should work with --config option', async t => {
+	const file = 'config/commitlint.config.js';
+	const cwd = await git.bootstrap('fixtures/specify-config-file');
+	const actual = await cli(['--config', file], {cwd})('foo: bar');
+	t.true(actual.stdout.includes('type must not be one of [foo]'));
+	t.is(actual.code, 1);
+});
+
 test('should fail for input from stdin with rule from js', async t => {
 	const cwd = await git.bootstrap('fixtures/extends-root');
 	const actual = await cli(['--extends', './extended'], {cwd})('foo: bar');

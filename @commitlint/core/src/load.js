@@ -81,7 +81,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 async function loadConfig(cwd, configPath) {
 	const explorer = cosmiconfig('commitlint', {
 		rcExtensions: true,
-		configPath
+		configPath: configPath ? path.resolve(cwd, configPath) : null
 	});
 
 	const local = await explorer.load(cwd);

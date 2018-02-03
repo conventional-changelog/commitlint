@@ -16,6 +16,13 @@ test('uses seed as configured', async t => {
 	t.is(actual.rules.foo, 'bar');
 });
 
+test('rules should be loaded from specify config file', async t => {
+	const file = 'config/commitlint.config.js';
+	const cwd = await git.bootstrap('fixtures/specify-config-file');
+	const actual = await load({}, {cwd, file});
+	t.is(actual.rules.foo, 'bar');
+});
+
 test('uses seed with parserPreset', async t => {
 	const cwd = await git.bootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(
