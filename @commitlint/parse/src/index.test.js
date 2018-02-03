@@ -105,6 +105,13 @@ test('supports scopes with /', async t => {
 	t.is(actual.subject, 'subject');
 });
 
+test('supports scopes with / and empty parserOpts', async t => {
+	const message = 'type(some/scope): subject';
+	const actual = await parse(message, undefined, {});
+	t.is(actual.scope, 'some/scope');
+	t.is(actual.subject, 'subject');
+});
+
 test('ignores comments', async t => {
 	const message = 'type(some/scope): subject\n# some comment';
 	const changelogOpts = await importFrom(
