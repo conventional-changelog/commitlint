@@ -4,7 +4,7 @@ import defaultChangelogOpts from 'conventional-changelog-angular';
 export default parse;
 
 async function parse(message, parser = sync, parserOpts) {
-	if (!parserOpts) {
+	if (!parserOpts || Object.keys(parserOpts || {}).length === 0) {
 		const changelogOpts = await defaultChangelogOpts;
 		parserOpts = changelogOpts.parserOpts;
 	}
