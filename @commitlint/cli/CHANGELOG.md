@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/marionebl/commitlint/compare/v6.0.5...v6.1.0) (2018-02-03)
+
+
+### Features
+
+* add "--config" option ([#261](https://github.com/marionebl/commitlint/issues/261)) ([2c03ec6](https://github.com/marionebl/commitlint/commit/2c03ec6))
+
+
+
+
 <a name="6.0.5"></a>
 ## [6.0.5](https://github.com/marionebl/commitlint/compare/v6.0.4...v6.0.5) (2018-01-31)
 

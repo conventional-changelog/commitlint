@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.1.0"></a>
+# [6.1.0](https://github.com/marionebl/commitlint/compare/v6.0.5...v6.1.0) (2018-02-03)
+
+
+### Bug Fixes
+
+* **parse:** default to angular preset for empty parserOpts ([#265](https://github.com/marionebl/commitlint/issues/265)) ([ccb03b4](https://github.com/marionebl/commitlint/commit/ccb03b4)), closes [#262](https://github.com/marionebl/commitlint/issues/262)
+
+
+
+
 <a name="6.0.4"></a>
 ## [6.0.4](https://github.com/marionebl/commitlint/compare/v6.0.3...v6.0.4) (2018-01-31)
 
