@@ -12,7 +12,7 @@ const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input => pick(input, 'extends', 'rules', 'parserPreset');
 
 export default async (seed = {}, options = {cwd: process.cwd()}) => {
-	const loaded = await loadConfig(options.cwd);
+	const loaded = await loadConfig(options.cwd, options.file);
 	const base = loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
 
 	// Merge passed config with file based options
@@ -78,9 +78,10 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	}, preset);
 };
 
-async function loadConfig(cwd) {
+async function loadConfig(cwd, configPath) {
 	const explorer = cosmiconfig('commitlint', {
-		rcExtensions: true
+		rcExtensions: true,
+		configPath: configPath ? path.resolve(cwd, configPath) : null
 	});
 
 	const local = await explorer.load(cwd);
