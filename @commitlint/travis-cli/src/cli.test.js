@@ -32,7 +32,7 @@ test('should throw when not on travis ci', async t => {
 
 	await t.throws(
 		bin({env}),
-		/@commitlint\/travis-cli is inteded to be used on Travis CI/
+		/@commitlint\/travis-cli is intended to be used on Travis CI/
 	);
 });
 
