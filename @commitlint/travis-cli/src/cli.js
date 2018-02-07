@@ -98,7 +98,7 @@ async function stash() {
 function validate() {
 	if (process.env.CI !== 'true' || process.env.TRAVIS !== 'true') {
 		throw new Error(
-			`@commitlint/travis-cli is inteded to be used on Travis CI`
+			`@commitlint/travis-cli is intended to be used on Travis CI`
 		);
 	}
 
