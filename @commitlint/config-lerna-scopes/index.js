@@ -21,6 +21,5 @@ function getPackages(context) {
 	});
 
 	return packages
-		.map(pkg => pkg.name)
-		.map(name => (name.charAt(0) === '@' ? name.split('/')[1] : name));
+		.map(({ name }) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 }
