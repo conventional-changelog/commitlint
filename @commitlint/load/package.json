@@ -1,0 +1,86 @@
+{
+    "name": "@commitlint/load",
+    "version": "6.1.0",
+    "description": "Lint your commit messages",
+    "main": "lib/index.js",
+    "files": [
+      "lib/"
+    ],
+    "scripts": {
+      "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+      "clean": "npx rimraf lib",
+      "deps": "dep-check",
+      "pkg": "pkg-check --skip-import",
+      "lint": "xo",
+      "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
+      "test": "ava -c 4 --verbose && ava \"src/*.serial-test.js\" --verbose",
+      "watch": "babel src --out-dir lib --watch --source-maps"
+    },
+    "ava": {
+      "files": [
+        "src/**/*.test.js",
+        "!lib/**/*"
+      ],
+      "source": [
+        "src/**/*.js",
+        "!lib/**/*"
+      ],
+      "babel": "inherit",
+      "require": [
+        "babel-register"
+      ]
+    },
+    "babel": {
+      "presets": [
+        "babel-preset-commitlint"
+      ]
+    },
+    "xo": false,
+    "engines": {
+      "node": ">=4"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/marionebl/commitlint.git"
+    },
+    "bugs": {
+      "url": "https://github.com/marionebl/commitlint/issues"
+    },
+    "homepage": "https://github.com/marionebl/commitlint#readme",
+    "keywords": [
+      "conventional-changelog",
+      "commitlint",
+      "library",
+      "core"
+    ],
+    "author": {
+      "name": "Mario Nebl",
+      "email": "hello@herebecode.com"
+    },
+    "license": "MIT",
+    "devDependencies": {
+      "@commitlint/test": "^6.1.0",
+      "@commitlint/utils": "^6.1.0",
+      "ava": "0.22.0",
+      "babel-cli": "6.26.0",
+      "babel-preset-commitlint": "^6.1.0",
+      "babel-register": "6.26.0",
+      "concurrently": "3.5.1",
+      "cross-env": "5.1.1",
+      "execa": "0.9.0",
+      "globby": "6.1.0",
+      "rimraf": "2.6.1",
+      "xo": "0.18.2"
+    },
+    "dependencies": {
+      "@commitlint/execute-rule": "^6.1.0",
+      "@commitlint/resolve-extends": "^6.1.0",
+      "babel-runtime": "^6.23.0",
+      "cosmiconfig": "^4.0.0",
+      "lodash.merge": "4.6.0",
+      "lodash.mergewith": "4.6.0",
+      "lodash.pick": "4.4.0",
+      "lodash.topairs": "4.3.0",
+      "resolve-from": "4.0.0"
+    }
+  }

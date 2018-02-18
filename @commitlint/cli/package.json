@@ -75,7 +75,10 @@
     "xo": "0.18.2"
   },
   "dependencies": {
-    "@commitlint/core": "^6.1.0",
+    "@commitlint/format": "^6.1.0",
+    "@commitlint/lint": "^6.1.0",
+    "@commitlint/load": "^6.1.0",
+    "@commitlint/read": "^6.1.0",
     "babel-polyfill": "6.26.0",
     "chalk": "2.3.0",
     "get-stdin": "5.0.1",
