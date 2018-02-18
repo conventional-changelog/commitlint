@@ -1,7 +1,7 @@
 > Lint commit messages
 
 <p align="center">
-  <img width="600" src="https://cdn.rawgit.com/marionebl/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg">
+  <img width="600" src="./docs/assets/commitlint.svg">
 </p>
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 

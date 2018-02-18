@@ -12,7 +12,10 @@ async function bootstrap(fixture) {
 	const cwd = path.join(os.tmpdir(), rand());
 
 	if (typeof fixture !== 'undefined') {
-		await sander.copydir(await pkgDir(), fixture).to(cwd);
+		const first = fixture.charAt(0);
+		const source =
+			first === '.' || first === '/' ? [fixture] : [await pkgDir(), fixture];
+		await sander.copydir(...source).to(cwd);
 	}
 
 	await init(cwd);
