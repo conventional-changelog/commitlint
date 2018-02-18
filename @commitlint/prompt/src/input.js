@@ -1,4 +1,4 @@
-import {load} from '@commitlint/core';
+import load from '@commitlint/load';
 import throat from 'throat';
 
 import format from './library/format';

@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 
-const core = require('@commitlint/core');
+const format = require('@commitlint/format');
+const load = require('@commitlint/load');
+const lint = require('@commitlint/lint');
+const read = require('@commitlint/read');
 const chalk = require('chalk');
 const meow = require('meow');
 const merge = require('lodash.merge');
@@ -81,9 +84,7 @@ async function main(options) {
 	const range = pick(flags, 'edit', 'from', 'to');
 	const fmt = new chalk.constructor({enabled: flags.color});
 
-	const input = await (fromStdin
-		? stdin()
-		: core.read(range, {cwd: flags.cwd}));
+	const input = await (fromStdin ? stdin() : read(range, {cwd: flags.cwd}));
 
 	const messages = (Array.isArray(input) ? input : [input])
 		.filter(message => typeof message === 'string')
@@ -100,7 +101,7 @@ async function main(options) {
 	}
 
 	const loadOpts = {cwd: flags.cwd, file: flags.config};
-	const loaded = await core.load(getSeed(flags), loadOpts);
+	const loaded = await load(getSeed(flags), loadOpts);
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
 
@@ -111,8 +112,8 @@ async function main(options) {
 
 	return Promise.all(
 		messages.map(async message => {
-			const report = await core.lint(message, loaded.rules, opts);
-			const formatted = core.format(report, {color: flags.color});
+			const report = await lint(message, loaded.rules, opts);
+			const formatted = format(report, {color: flags.color});
 
 			if (!flags.quiet) {
 				console.log(
