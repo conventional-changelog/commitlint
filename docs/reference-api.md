@@ -1,15 +1,16 @@
 # API
 
-## Install
+## @commitlint/format
+
+> Format commitlint reports
+
+### Install 
 
 ```
-npm install --save @commitlint/core
+npm install --save @commitlint/format
 ```
 
-## Methods
-
-### format
-> Format commitlint report data to a human-readable format
+### Usage
 
 * **Signature**
 
@@ -47,7 +48,7 @@ format(report?: Report = {}, options?: formatOptions = {}) => string[];
 * **Example**
 
 ```js
-const {format} = require('@commitlint/core');
+const format = require('@commitlint/format');
 
 format(); // => [ '\u001b[1m\u001b[32m✔\u001b[39m   found 0 problems, 0 warnings\u001b[22m' ]
 
@@ -82,9 +83,17 @@ format({
 ] */
 ```
 
-### load
+## @commitlint/load
 
-> load all relevant shared configuration
+> Load shared commitlint configuration
+
+### Install 
+
+```
+npm install --save @commitlint/load
+```
+
+### Usage
 
 * **Signature**
 
@@ -186,7 +195,7 @@ load(seed: Seed = {}) => Promise<Config>;
 * **Example**
 
 ```js
-const {load} = require('@commitlint/core');
+const load = require('@commitlint/load');
 
 load({
   rules: {
@@ -205,9 +214,17 @@ load({parserPreset: './parser-preset.js'})
 // => { extends: [], rules: {}, parserPreset: {name: './parser-preset.js', path: './parser-preset.js', opts: {}}}
 ```
 
-### read
+### @commitlint/read
 
-> Read commit messages from as specified range
+> Read commit messages from a specified range or disk
+
+### Install 
+
+```
+npm install --save @commitlint/read
+```
+
+### Usage
 
 * **Signature**
 
@@ -228,7 +245,7 @@ read(range: Range) => Promise<string[]>
 
 ```js
 // git commit -m "I did something"
-const {read} = require('@commitlint/core');
+const read = require('@commitlint/read');
 
 read({edit: true})
  .then(messages => console.log(messages));
@@ -248,6 +265,16 @@ read({from: 'HEAD~2', to: 'HEAD~1'})
 ```
 
 ### lint
+
+> Lint a string against commitlint rules
+
+### Install 
+
+```
+npm install --save @commitlint/lint
+```
+
+### Usage
 
 * **Signature**
 
@@ -284,7 +311,7 @@ lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Prom
 * **Basic Example**
 
 ```js
-const {lint} = require('@commitlint/core');
+const lint = require('@commitlint/lint');
 
 lint('foo: bar')
   .then(report => console.log(report));
@@ -315,10 +342,11 @@ lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then(report => cons
 * **Load configuration**
 
 ```js
-const {lint, load} = require('@commitlint/core');
+const load = require('@commitlint/load');
+const lint = require('@commitlint/lint');
 
 const CONFIG = {
-  extends: ['./@commitlint/config-conventional']
+  extends: ['@commitlint/config-conventional']
 };
 
 load(CONFIG)
@@ -338,7 +366,8 @@ load(CONFIG)
 * **Read git history**
 
 ```js
-const {lint, read} = require('@commitlint/core');
+const lint = require('@commitlint/lint');
+const read = require('@commitlint/read');
 
 const RULES = {
   'type-enum': [2, 'always', ['foo']]
@@ -353,7 +382,9 @@ read({to: 'HEAD', from: 'HEAD~2'})
 * **Simplfied last-commit checker**
 
 ```js
-const {lint, load, read} = require('@commitlint/core');
+const load = require('@commitlint/load');
+const read = require('@commitlint/read');
+const lint = require('@commitlint/lint');
 
 Promise.all([load(), read({from: 'HEAD~1'})])
   .then(tasks => {
