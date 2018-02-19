@@ -1780,46 +1780,53 @@ conventional-changelog-angular@1.6.0:
     compare-func "^1.3.1"
     q "^1.4.1"
 
-conventional-changelog-angular@^1.3.3, conventional-changelog-angular@^1.5.2:
+conventional-changelog-angular@^1.3.3:
   version "1.5.2"
   resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-1.5.2.tgz#2b38f665fe9c5920af1a2f82f547f4babe6de57c"
   dependencies:
     compare-func "^1.3.1"
     q "^1.4.1"
 
-conventional-changelog-atom@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/conventional-changelog-atom/-/conventional-changelog-atom-0.1.2.tgz#12595ad5267a6937c34cf900281b1c65198a4c63"
+conventional-changelog-angular@^1.6.4:
+  version "1.6.4"
+  resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-1.6.4.tgz#47debaf92b75b0bd6b39fcba8f9c70dd97552be6"
+  dependencies:
+    compare-func "^1.3.1"
+    q "^1.4.1"
+
+conventional-changelog-atom@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.npmjs.org/conventional-changelog-atom/-/conventional-changelog-atom-0.2.2.tgz#2c7326a8f24686f51500a290ed897d47612be4c3"
   dependencies:
     q "^1.4.1"
 
-conventional-changelog-cli@^1.3.2:
-  version "1.3.5"
-  resolved "https://registry.npmjs.org/conventional-changelog-cli/-/conventional-changelog-cli-1.3.5.tgz#46c51496216b7406588883defa6fac589e9bb31e"
+conventional-changelog-cli@^1.3.13:
+  version "1.3.13"
+  resolved "https://registry.npmjs.org/conventional-changelog-cli/-/conventional-changelog-cli-1.3.13.tgz#8cb5855bc3c684aa8f5dc96e848d1fa5a82eee1e"
   dependencies:
     add-stream "^1.0.0"
-    conventional-changelog "^1.1.7"
+    conventional-changelog "^1.1.15"
     lodash "^4.1.0"
     meow "^3.7.0"
     tempfile "^1.1.1"
 
-conventional-changelog-codemirror@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/conventional-changelog-codemirror/-/conventional-changelog-codemirror-0.2.1.tgz#299a4f7147baf350e6c8158fc54954a291c5cc09"
+conventional-changelog-codemirror@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npmjs.org/conventional-changelog-codemirror/-/conventional-changelog-codemirror-0.3.2.tgz#65ef0ab738c40bdf953951edfdb0cb17302606aa"
   dependencies:
     q "^1.4.1"
 
-conventional-changelog-core@^1.9.3:
-  version "1.9.3"
-  resolved "https://registry.npmjs.org/conventional-changelog-core/-/conventional-changelog-core-1.9.3.tgz#2899fe779389a329f0ec4b2746c36ddefb98da2d"
+conventional-changelog-core@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/conventional-changelog-core/-/conventional-changelog-core-2.0.3.tgz#30797b91d5f510188288d5ff54905e5cf4628e3c"
   dependencies:
-    conventional-changelog-writer "^2.0.2"
-    conventional-commits-parser "^2.0.1"
+    conventional-changelog-writer "^3.0.2"
+    conventional-commits-parser "^2.1.3"
     dateformat "^1.0.12"
     get-pkg-repo "^1.0.0"
-    git-raw-commits "^1.3.0"
+    git-raw-commits "^1.3.2"
     git-remote-origin-url "^2.0.0"
-    git-semver-tags "^1.2.3"
+    git-semver-tags "^1.3.2"
     lodash "^4.0.0"
     normalize-package-data "^2.3.5"
     q "^1.4.1"
@@ -1827,21 +1834,21 @@ conventional-changelog-core@^1.9.3:
     read-pkg-up "^1.0.1"
     through2 "^2.0.0"
 
-conventional-changelog-ember@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.npmjs.org/conventional-changelog-ember/-/conventional-changelog-ember-0.2.9.tgz#8ec73cc054e3ab064667fb1feb52fe8ef1b16438"
+conventional-changelog-ember@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.npmjs.org/conventional-changelog-ember/-/conventional-changelog-ember-0.3.4.tgz#76240e769b2f5298e78e85cb4eda69ef2f1358d2"
   dependencies:
     q "^1.4.1"
 
-conventional-changelog-eslint@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/conventional-changelog-eslint/-/conventional-changelog-eslint-0.2.1.tgz#2c2a11beb216f80649ba72834180293b687c0662"
+conventional-changelog-eslint@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/conventional-changelog-eslint/-/conventional-changelog-eslint-1.0.2.tgz#3f9e6b0b60f98042f6f4dfc85a611a50b5e79cf9"
   dependencies:
     q "^1.4.1"
 
-conventional-changelog-express@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/conventional-changelog-express/-/conventional-changelog-express-0.2.1.tgz#838d9e1e6c9099703b150b9c19aa2d781742bd6c"
+conventional-changelog-express@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npmjs.org/conventional-changelog-express/-/conventional-changelog-express-0.3.2.tgz#f5af4770a31f147986db548b49f9952fc55e3eb6"
   dependencies:
     q "^1.4.1"
 
@@ -1857,19 +1864,23 @@ conventional-changelog-jscs@^0.1.0:
   dependencies:
     q "^1.4.1"
 
-conventional-changelog-jshint@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/conventional-changelog-jshint/-/conventional-changelog-jshint-0.2.1.tgz#86139bb3ac99899f2b177e9617e09b37d99bcf3a"
+conventional-changelog-jshint@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.npmjs.org/conventional-changelog-jshint/-/conventional-changelog-jshint-0.3.2.tgz#4d45d2601c944687abceabbc1789323719234cbe"
   dependencies:
     compare-func "^1.3.1"
     q "^1.4.1"
 
-conventional-changelog-writer@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/conventional-changelog-writer/-/conventional-changelog-writer-2.0.2.tgz#b5857ded1b001daf9a78b9cd40926f45c134949b"
+conventional-changelog-preset-loader@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.npmjs.org/conventional-changelog-preset-loader/-/conventional-changelog-preset-loader-1.1.4.tgz#5096165f2742a18dc0e33ff2ab9ee08dc9d77f08"
+
+conventional-changelog-writer@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/conventional-changelog-writer/-/conventional-changelog-writer-3.0.2.tgz#f3f934028379c0cab90aecfcaf009bf8a187ef14"
   dependencies:
     compare-func "^1.3.1"
-    conventional-commits-filter "^1.1.0"
+    conventional-commits-filter "^1.1.3"
     dateformat "^1.0.11"
     handlebars "^4.0.2"
     json-stringify-safe "^5.0.1"
@@ -1879,43 +1890,32 @@ conventional-changelog-writer@^2.0.2:
     split "^1.0.0"
     through2 "^2.0.0"
 
-conventional-changelog@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.npmjs.org/conventional-changelog/-/conventional-changelog-1.1.7.tgz#9151a62b1d8edb2d82711dabf5b7cf71041f82b1"
+conventional-changelog@^1.1.15:
+  version "1.1.15"
+  resolved "https://registry.npmjs.org/conventional-changelog/-/conventional-changelog-1.1.15.tgz#a5c3d281efb40f61c7d21eeffb19e6f6a8429df0"
   dependencies:
-    conventional-changelog-angular "^1.5.2"
-    conventional-changelog-atom "^0.1.2"
-    conventional-changelog-codemirror "^0.2.1"
-    conventional-changelog-core "^1.9.3"
-    conventional-changelog-ember "^0.2.9"
-    conventional-changelog-eslint "^0.2.1"
-    conventional-changelog-express "^0.2.1"
+    conventional-changelog-angular "^1.6.4"
+    conventional-changelog-atom "^0.2.2"
+    conventional-changelog-codemirror "^0.3.2"
+    conventional-changelog-core "^2.0.3"
+    conventional-changelog-ember "^0.3.4"
+    conventional-changelog-eslint "^1.0.2"
+    conventional-changelog-express "^0.3.2"
     conventional-changelog-jquery "^0.1.0"
     conventional-changelog-jscs "^0.1.0"
-    conventional-changelog-jshint "^0.2.1"
+    conventional-changelog-jshint "^0.3.2"
+    conventional-changelog-preset-loader "^1.1.4"
 
 conventional-commit-types@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/conventional-commit-types/-/conventional-commit-types-2.2.0.tgz#5db95739d6c212acbe7b6f656a11b940baa68946"
 
-conventional-commits-filter@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/conventional-commits-filter/-/conventional-commits-filter-1.1.0.tgz#1fc29af30b5edab76f54e229c411b0c663d0f9eb"
+conventional-commits-filter@^1.1.1, conventional-commits-filter@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/conventional-commits-filter/-/conventional-commits-filter-1.1.3.tgz#5bf591bc4882fc8c9bd329e5a83ca1fa8721d9fb"
   dependencies:
     is-subset "^0.1.1"
     modify-values "^1.0.0"
-
-conventional-commits-parser@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/conventional-commits-parser/-/conventional-commits-parser-2.0.1.tgz#1f15ce6b844f7ca41495c8190c0833c30b8b1693"
-  dependencies:
-    JSONStream "^1.0.4"
-    is-text-path "^1.0.0"
-    lodash "^4.2.1"
-    meow "^3.3.0"
-    split2 "^2.0.0"
-    through2 "^2.0.0"
-    trim-off-newlines "^1.0.0"
 
 conventional-commits-parser@^2.1.0:
   version "2.1.0"
@@ -1929,15 +1929,27 @@ conventional-commits-parser@^2.1.0:
     through2 "^2.0.0"
     trim-off-newlines "^1.0.0"
 
-conventional-recommended-bump@^1.0.1:
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/conventional-recommended-bump/-/conventional-recommended-bump-1.0.3.tgz#472b69b1b8f09c5c4ed40fe28a41e63cc04bd736"
+conventional-commits-parser@^2.1.1, conventional-commits-parser@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.npmjs.org/conventional-commits-parser/-/conventional-commits-parser-2.1.3.tgz#fbbfcfe4901ccbae63bb3834f982325e0b7c663f"
+  dependencies:
+    JSONStream "^1.0.4"
+    is-text-path "^1.0.0"
+    lodash "^4.2.1"
+    meow "^3.3.0"
+    split2 "^2.0.0"
+    through2 "^2.0.0"
+    trim-off-newlines "^1.0.0"
+
+conventional-recommended-bump@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/conventional-recommended-bump/-/conventional-recommended-bump-1.2.1.tgz#1b7137efb5091f99fe009e2fe9ddb7cc490e9375"
   dependencies:
     concat-stream "^1.4.10"
-    conventional-commits-filter "^1.1.0"
-    conventional-commits-parser "^2.0.1"
+    conventional-commits-filter "^1.1.1"
+    conventional-commits-parser "^2.1.1"
     git-raw-commits "^1.3.0"
-    git-semver-tags "^1.2.3"
+    git-semver-tags "^1.3.0"
     meow "^3.3.0"
     object-assign "^4.0.1"
 
@@ -3209,6 +3221,16 @@ git-raw-commits@^1.3.0:
     split2 "^2.0.0"
     through2 "^2.0.0"
 
+git-raw-commits@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/git-raw-commits/-/git-raw-commits-1.3.2.tgz#0766c14d33566ba0094869697e13b0eb06147c07"
+  dependencies:
+    dargs "^4.0.1"
+    lodash.template "^4.0.2"
+    meow "^3.3.0"
+    split2 "^2.0.0"
+    through2 "^2.0.0"
+
 git-remote-origin-url@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/git-remote-origin-url/-/git-remote-origin-url-2.0.0.tgz#5282659dae2107145a11126112ad3216ec5fa65f"
@@ -3216,9 +3238,9 @@ git-remote-origin-url@^2.0.0:
     gitconfiglocal "^1.0.0"
     pify "^2.3.0"
 
-git-semver-tags@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.npmjs.org/git-semver-tags/-/git-semver-tags-1.2.3.tgz#188b453882bf9d7a23afd31baba537dab7388d5d"
+git-semver-tags@^1.3.0, git-semver-tags@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/git-semver-tags/-/git-semver-tags-1.3.2.tgz#94afa43c9070ae527a3ab86b978e59ae207803cc"
   dependencies:
     meow "^3.3.0"
     semver "^5.0.1"
@@ -4262,17 +4284,17 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lerna@2.7.1:
-  version "2.7.1"
-  resolved "https://registry.npmjs.org/lerna/-/lerna-2.7.1.tgz#abd536376eca5e9f41a6d611da5b744534ef906f"
+lerna@2.9.0:
+  version "2.9.0"
+  resolved "https://registry.npmjs.org/lerna/-/lerna-2.9.0.tgz#303f70bc50b1c4541bdcf54eda13c36fe54401f3"
   dependencies:
     async "^1.5.0"
     chalk "^2.1.0"
     cmd-shim "^2.0.2"
     columnify "^1.5.4"
     command-join "^2.0.0"
-    conventional-changelog-cli "^1.3.2"
-    conventional-recommended-bump "^1.0.1"
+    conventional-changelog-cli "^1.3.13"
+    conventional-recommended-bump "^1.2.1"
     dedent "^0.7.0"
     execa "^0.8.0"
     find-up "^2.1.0"
