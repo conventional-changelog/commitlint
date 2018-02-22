@@ -1,45 +1,45 @@
 {
-    "name": "@commitlint/core",
-    "version": "6.1.0",
-    "description": "Lint your commit messages",
-    "files": [
-      "index.js"
-    ],
-    "scripts": {
-      "deps": "dep-check",
-      "pkg": "pkg-check --skip-import",
-      "lint": "xo"
-    },
-    "xo": false,
-    "engines": {
-      "node": ">=4"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/marionebl/commitlint.git"
-    },
-    "bugs": {
-      "url": "https://github.com/marionebl/commitlint/issues"
-    },
-    "homepage": "https://github.com/marionebl/commitlint#readme",
-    "keywords": [
-      "conventional-changelog",
-      "commitlint",
-      "library",
-      "core"
-    ],
-    "author": {
-      "name": "Mario Nebl",
-      "email": "hello@herebecode.com"
-    },
-    "license": "MIT",
-    "devDependencies": {
-      "xo": "0.20.3"
-    },
-    "dependencies": {
-      "@commitlint/format": "^6.1.0",
-      "@commitlint/lint": "^6.1.0",
-      "@commitlint/load": "^6.1.0",
-      "@commitlint/read": "^6.1.0"
-    }
+  "name": "@commitlint/core",
+  "version": "6.1.1",
+  "description": "Lint your commit messages",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-import",
+    "lint": "xo"
+  },
+  "xo": false,
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marionebl/commitlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "library",
+    "core"
+  ],
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "xo": "0.20.3"
+  },
+  "dependencies": {
+    "@commitlint/format": "^6.1.1",
+    "@commitlint/lint": "^6.1.1",
+    "@commitlint/load": "^6.1.1",
+    "@commitlint/read": "^6.1.1"
   }
+}

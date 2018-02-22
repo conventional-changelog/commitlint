@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="6.1.1"></a>
+## [6.1.1](https://github.com/marionebl/commitlint/compare/v6.1.0...v6.1.1) (2018-02-22)
+
+
+### Bug Fixes
+
+* **ensure:** ignore word delimiters for case matching [#291](https://github.com/marionebl/commitlint/issues/291) ([fa69299](https://github.com/marionebl/commitlint/commit/fa69299))
+
+
+
+
 <a name="6.1.0"></a>
 # [6.1.0](https://github.com/marionebl/commitlint/compare/v6.0.5...v6.1.0) (2018-02-03)
 

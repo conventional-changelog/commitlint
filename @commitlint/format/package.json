@@ -1,78 +1,78 @@
 {
-    "name": "@commitlint/format",
-    "version": "6.1.0",
-    "description": "Format commitlint reports",
-    "main": "lib/index.js",
+  "name": "@commitlint/format",
+  "version": "6.1.1",
+  "description": "Format commitlint reports",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+    "clean": "npx rimraf lib",
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-import",
+    "lint": "xo",
+    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
+    "test": "ava -c 4 --verbose",
+    "watch": "babel src --out-dir lib --watch --source-maps"
+  },
+  "ava": {
     "files": [
-      "lib/"
+      "src/**/*.test.js",
+      "!lib/**/*"
     ],
-    "scripts": {
-      "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
-      "clean": "npx rimraf lib",
-      "deps": "dep-check",
-      "pkg": "pkg-check --skip-import",
-      "lint": "xo",
-      "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-      "test": "ava -c 4 --verbose",
-      "watch": "babel src --out-dir lib --watch --source-maps"
-    },
-    "ava": {
-      "files": [
-        "src/**/*.test.js",
-        "!lib/**/*"
-      ],
-      "source": [
-        "src/**/*.js",
-        "!lib/**/*"
-      ],
-      "babel": "inherit",
-      "require": [
-        "babel-register"
-      ]
-    },
-    "babel": {
-      "presets": [
-        "babel-preset-commitlint"
-      ]
-    },
-    "xo": false,
-    "engines": {
-      "node": ">=4"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/marionebl/commitlint.git"
-    },
-    "bugs": {
-      "url": "https://github.com/marionebl/commitlint/issues"
-    },
-    "homepage": "https://github.com/marionebl/commitlint#readme",
-    "keywords": [
-      "conventional-changelog",
-      "commitlint",
-      "library",
-      "core"
+    "source": [
+      "src/**/*.js",
+      "!lib/**/*"
     ],
-    "author": {
-      "name": "Mario Nebl",
-      "email": "hello@herebecode.com"
-    },
-    "license": "MIT",
-    "devDependencies": {
-      "@commitlint/test": "6.1.0",
-      "@commitlint/utils": "^6.1.0",
-      "ava": "0.22.0",
-      "babel-cli": "6.26.0",
-      "babel-preset-commitlint": "^6.1.0",
-      "babel-register": "6.26.0",
-      "concurrently": "3.5.1",
-      "cross-env": "5.1.1",
-      "lodash.includes": "4.3.0",
-      "rimraf": "2.6.1",
-      "xo": "0.20.3"
-    },
-    "dependencies": {
-      "babel-runtime": "^6.23.0",
-      "chalk": "^2.0.1"
-    }
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-commitlint"
+    ]
+  },
+  "xo": false,
+  "engines": {
+    "node": ">=4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marionebl/commitlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marionebl/commitlint/issues"
+  },
+  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "library",
+    "core"
+  ],
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/test": "^6.1.1",
+    "@commitlint/utils": "^6.1.1",
+    "ava": "0.22.0",
+    "babel-cli": "6.26.0",
+    "babel-preset-commitlint": "^6.1.1",
+    "babel-register": "6.26.0",
+    "concurrently": "3.5.1",
+    "cross-env": "5.1.1",
+    "lodash.includes": "4.3.0",
+    "rimraf": "2.6.1",
+    "xo": "0.20.3"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "chalk": "^2.0.1"
   }
+}
