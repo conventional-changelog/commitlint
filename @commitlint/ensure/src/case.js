@@ -8,33 +8,42 @@ export default ensureCase;
 
 function ensureCase(raw = '', target = 'lowercase') {
 	const input = String(raw);
+	const transformed = toCase(input, target);
 
+	if (transformed === '') {
+		return true;
+	}
+
+	return transformed === input;
+}
+
+function toCase(input, target) {
 	switch (target) {
 		case 'camel-case':
-			return camelCase(input) === input;
+			return camelCase(input);
 		case 'kebab-case':
-			return kebabCase(input) === input;
+			return kebabCase(input);
 		case 'snake-case':
-			return snakeCase(input) === input;
+			return snakeCase(input);
 		case 'pascal-case':
-			return upperFirst(camelCase(input)) === input;
+			return upperFirst(camelCase(input));
 		case 'start-case':
-			return startCase(input) === input;
+			return startCase(input);
 		case 'upper-case':
 		case 'uppercase':
-			return input.toUpperCase() === input;
+			return input.toUpperCase();
 		case 'sentence-case':
 		case 'sentencecase': {
 			const word = input.split(' ')[0];
-			return (
-				ensureCase(word.charAt(0), 'upper-case') &&
-				ensureCase(word.slice(1), 'lower-case')
-			);
+			return `${toCase(word.charAt(0), 'upper-case')}${toCase(
+				word.slice(1),
+				'lower-case'
+			)}${input.slice(word.length)}`;
 		}
 		case 'lower-case':
 		case 'lowercase':
 		case 'lowerCase': // Backwards compat config-angular v4
-			return input.toLowerCase() === input;
+			return input.toLowerCase();
 		default:
 			throw new TypeError(`ensure-case: Unknown target case "${target}"`);
 	}
