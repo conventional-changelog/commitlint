@@ -31,14 +31,25 @@ test('false for uppercase on lowercase', t => {
 	t.is(actual, false);
 });
 
+test('true for * on lowercase', t => {
+	const actual = ensure('*', 'lowercase');
+	console.log({actual});
+	t.is(actual, true);
+});
+
 test('true for uppercase on uppercase', t => {
 	const actual = ensure('A', 'uppercase');
 	t.is(actual, true);
 });
 
-test('false for lowercase on lowercase', t => {
+test('false for lowercase on uppercase', t => {
 	const actual = ensure('a', 'uppercase');
 	t.is(actual, false);
+});
+
+test('true for * on uppercase', t => {
+	const actual = ensure('*', 'uppercase');
+	t.is(actual, true);
 });
 
 test('true for sentencecase on sentencecase', t => {
@@ -46,7 +57,7 @@ test('true for sentencecase on sentencecase', t => {
 	t.is(actual, true);
 });
 
-test('false for lowsercase on sentencecase', t => {
+test('false for lowercase on sentencecase', t => {
 	t.is(ensure('sentence case', 'sentence-case'), false);
 });
 
@@ -72,4 +83,34 @@ test('false for snake_case on sentencecase', t => {
 
 test('false for camelCase on sentencecase', t => {
 	t.is(ensure('camelCase', 'sentence-case'), false);
+});
+
+test('true for * on sentence-case', t => {
+	const actual = ensure('*', 'sentence-case');
+	t.is(actual, true);
+});
+
+test('true for * on camel-case', t => {
+	const actual = ensure('*', 'camel-case');
+	t.is(actual, true);
+});
+
+test('true for * on kebab-case', t => {
+	const actual = ensure('*', 'kebab-case');
+	t.is(actual, true);
+});
+
+test('true for * on snake-case', t => {
+	const actual = ensure('*', 'snake-case');
+	t.is(actual, true);
+});
+
+test('true for * on pascal-case', t => {
+	const actual = ensure('*', 'snake-case');
+	t.is(actual, true);
+});
+
+test('true for * on start-case', t => {
+	const actual = ensure('*', 'snake-case');
+	t.is(actual, true);
 });
