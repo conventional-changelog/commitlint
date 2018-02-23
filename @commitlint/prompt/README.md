@@ -9,7 +9,7 @@ Learn how to use it at [docs/prompt](http://marionebl.github.io/commitlint/#/gui
 ## Getting started
 
 ```bash
-npm install --save @commitlint/prompt @commitlint/config-angular commitizen
+npm install --save-dev @commitlint/prompt @commitlint/config-angular commitizen
 echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
