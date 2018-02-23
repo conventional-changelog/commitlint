@@ -91,7 +91,7 @@ A number of shared configurations are available to install and use with `commitl
 ## API
 
 * Alternative, programatic way to interact with `commitlint`
-* `npm install --save @commitlint/core`
+* `npm install --save-dev @commitlint/core`
 * Packages: [core](./@commitlint/core)
 * See [API](./docs/reference-api.md) for a complete list of methods and examples
 
