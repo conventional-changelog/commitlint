@@ -91,8 +91,11 @@ A number of shared configurations are available to install and use with `commitl
 ## API
 
 * Alternative, programatic way to interact with `commitlint`
-* `npm install --save-dev @commitlint/core`
-* Packages: [core](./@commitlint/core)
+* Packages: 
+  * [format](./@commitlint/format) - Format commitlint reports
+  * [lint](./@commitlint/lint) - Lint a string against commitlint rules
+  * [load](./@commitlint/load) - Load shared commitlint configuration
+  * [read](./@commitlint/read) - Read commit messages from a specified range or last edit
 * See [API](./docs/reference-api.md) for a complete list of methods and examples
 
 ## Tools
