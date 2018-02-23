@@ -12,7 +12,7 @@ The most common `validate-commit-msg` use cases can be recreated with minor chan
 
 ```sh
 npm remove validate-commit-msg --save-dev
-npm install --save-dev @commitlint/cli @commitint/config-conventional
+npm install --save-dev @commitlint/cli @commitlint/config-conventional
 ```
 
 **Add a commitmsg run-script to package.json**
