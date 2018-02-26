@@ -4,13 +4,23 @@ import parse from '@commitlint/parse';
 import implementations from '@commitlint/rules';
 import entries from 'lodash.topairs';
 
+const buildCommitMesage = ({header, body, footer}) => {
+	let message = header;
+
+	message = body ? `${message}\n\n${body}` : message;
+	message = footer ? `${message}\n\n${footer}` : message;
+
+	return message;
+};
+
 export default async (message, rules = {}, opts = {}) => {
 	// Found a wildcard match, skip
 	if (isIgnored(message)) {
 		return {
 			valid: true,
 			errors: [],
-			warnings: []
+			warnings: [],
+			input: message
 		};
 	}
 
@@ -133,6 +143,7 @@ export default async (message, rules = {}, opts = {}) => {
 	return {
 		valid,
 		errors,
-		warnings
+		warnings,
+		input: buildCommitMesage(parsed)
 	};
 };

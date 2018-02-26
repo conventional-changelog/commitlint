@@ -196,6 +196,25 @@ test('should handle linting with issue prefixes', async t => {
 	t.is(actual.code, 0);
 });
 
+test('should print full commit message when input from stdin fails', async t => {
+	const cwd = await git.bootstrap('fixtures/simple');
+	const input = 'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
+	const actual = await cli([], {cwd})(input);
+
+	t.true(actual.stdout.includes(input));
+	t.is(actual.code, 1);
+});
+
+test('should not print full commit message when input succeeds', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const message = 'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
+	const actual = await cli([], {cwd})(message);
+
+	t.false(actual.stdout.includes(message));
+	t.true(actual.stdout.includes(message.split('\n')[0]));
+	t.is(actual.code, 0);
+});
+
 async function writePkg(payload, options) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await sander.readFile(pkgPath));
