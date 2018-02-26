@@ -35,6 +35,7 @@ test('positive on ignored message and broken rule', async t => {
 		'type-empty': [2, 'never']
 	});
 	t.true(actual.valid);
+	t.is(actual.input, 'Revert "some bogus commit"');
 });
 
 test('positive on stub message and opts', async t => {
@@ -181,4 +182,43 @@ test('fails for custom issue prefix', async t => {
 	);
 
 	t.false(report.valid);
+});
+
+test('returns original message only with commit header', async t => {
+	const message = 'foo: bar';
+	const report = await lint(message);
+
+	t.is(report.input, message);
+});
+
+test('returns original message with commit header and body', async t => {
+	const message = 'foo: bar/n/nFoo bar bizz buzz.';
+	const report = await lint(message);
+
+	t.is(report.input, message);
+});
+
+test('returns original message with commit header, body and footer', async t => {
+	const message = 'foo: bar/n/nFoo bar bizz buzz./n/nCloses #1';
+	const report = await lint(message);
+
+	t.is(report.input, message);
+});
+
+test('returns original message with commit header, body and footer, parsing comments', async t => {
+	const expected = 'foo: bar/n/nFoo bar bizz buzz./n/nCloses #1';
+	const message = `${expected}\n\n# Some comment to ignore`;
+	const report = await lint(
+		message,
+		{
+			'references-empty': [2, 'never']
+		},
+		{
+			parserOpts: {
+				commentChar: '#'
+			}
+		}
+	);
+
+	t.is(report.input, expected);
 });

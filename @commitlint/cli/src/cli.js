@@ -114,11 +114,13 @@ async function main(options) {
 		messages.map(async message => {
 			const report = await lint(message, loaded.rules, opts);
 			const formatted = format(report, {color: flags.color});
+			const input =
+				report.errors.length > 0
+					? `\n${report.input}\n`
+					: message.split('\n')[0];
 
 			if (!flags.quiet) {
-				console.log(
-					`${fmt.grey('⧗')}   input: ${fmt.bold(message.split('\n')[0])}`
-				);
+				console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(input)}`);
 				console.log(formatted.join('\n'));
 			}
 
