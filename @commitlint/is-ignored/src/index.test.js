@@ -96,3 +96,10 @@ test('should return true fixup commits', t => {
 test('should return true squash commits', t => {
 	t.true(isIgnored('squash! initial commit'));
 });
+
+test('should return true for bitbucket merge commits', t => {
+	t.true(
+		isIgnored('Merged in feature/facebook-friends-sync (pull request #8)')
+	);
+	t.true(isIgnored('Merged develop into feature/component-form-select-card'));
+});
