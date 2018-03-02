@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/format",
-  "version": "6.1.2",
+  "version": "6.1.3",
   "description": "Format commitlint reports",
   "main": "lib/index.js",
   "files": [
@@ -59,11 +59,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "6.1.2",
-    "@commitlint/utils": "^6.1.2",
+    "@commitlint/test": "^6.1.3",
+    "@commitlint/utils": "^6.1.3",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^6.1.2",
+    "babel-preset-commitlint": "^6.1.3",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
