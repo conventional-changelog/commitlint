@@ -268,3 +268,58 @@ test('with startcase type should succeed for "always startcase"', async t => {
 	const expected = true;
 	t.is(actual, expected);
 });
+
+test('with uppercase scope should succeed for "always [uppercase, lowercase]"', async t => {
+	const [actual] = typeCase(await parsed.uppercase, 'always', [
+		'uppercase',
+		'lowercase'
+	]);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with lowercase subject should succeed for "always [uppercase, lowercase]"', async t => {
+	const [actual] = typeCase(await parsed.lowercase, 'always', [
+		'uppercase',
+		'lowercase'
+	]);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with mixedcase subject should fail for "always [uppercase, lowercase]"', async t => {
+	const [actual] = typeCase(await parsed.mixedcase, 'always', [
+		'uppercase',
+		'lowercase'
+	]);
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with mixedcase subject should pass for "always [uppercase, lowercase, camel-case]"', async t => {
+	const [actual] = typeCase(await parsed.mixedcase, 'always', [
+		'uppercase',
+		'lowercase',
+		'camel-case'
+	]);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with mixedcase scope should pass for "never [uppercase, lowercase]"', async t => {
+	const [actual] = typeCase(await parsed.mixedcase, 'never', [
+		'uppercase',
+		'lowercase'
+	]);
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with uppercase scope should fail for "never [uppercase, lowercase]"', async t => {
+	const [actual] = typeCase(await parsed.uppercase, 'never', [
+		'uppercase',
+		'lowercase'
+	]);
+	const expected = false;
+	t.is(actual, expected);
+});
