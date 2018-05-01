@@ -14,58 +14,80 @@ const stdin = require('get-stdin');
 const pkg = require('../package');
 const help = require('./help');
 
-const configuration = {
-	string: ['cwd', 'from', 'to', 'edit', 'extends', 'parser-preset', 'config'],
-	boolean: ['help', 'version', 'quiet', 'color'],
-	alias: {
-		c: 'color',
-		d: 'cwd',
-		e: 'edit',
-		f: 'from',
-		t: 'to',
-		q: 'quiet',
-		h: 'help',
-		g: 'config',
-		v: 'version',
-		x: 'extends',
-		p: 'parser-preset'
+const flags = {
+	color: {
+		alias: 'c',
+		default: true,
+		description: 'toggle colored output',
+		type: 'boolean'
 	},
-	description: {
-		color: 'toggle colored output',
-		cwd: 'directory to execute in',
-		config: 'path to the config file',
-		edit:
+	config: {
+		alias: 'g',
+		default: null,
+		description: 'path to the config file',
+		type: 'string'
+	},
+	cwd: {
+		alias: 'd',
+		default: process.cwd(),
+		description: 'directory to execute in',
+		type: 'string'
+	},
+	edit: {
+		alias: 'e',
+		default: false,
+		description:
 			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
-		extends: 'array of shareable configurations to extend',
-		from: 'lower end of the commit range to lint; applies if edit=false',
-		to: 'upper end of the commit range to lint; applies if edit=false',
-		quiet: 'toggle console output',
-		'parser-preset':
-			'configuration preset to use for conventional-commits-parser'
+		type: 'string'
 	},
-	default: {
-		color: true,
-		cwd: process.cwd(),
-		config: null,
-		edit: false,
-		from: null,
-		to: null,
-		quiet: false
+	extends: {
+		alias: 'x',
+		description: 'array of shareable configurations to extend',
+		type: 'string'
 	},
-	unknown(arg) {
-		throw new Error(`unknown flags: ${arg}`);
+	help: {
+		alias: 'h',
+		type: 'boolean'
+	},
+	from: {
+		alias: 'f',
+		default: null,
+		description: 'lower end of the commit range to lint; applies if edit=false',
+		type: 'string'
+	},
+	'parser-preset': {
+		alias: 'p',
+		description: 'configuration preset to use for conventional-commits-parser',
+		type: 'string'
+	},
+	quiet: {
+		alias: 'q',
+		default: false,
+		description: 'toggle console output',
+		type: 'boolean'
+	},
+	to: {
+		alias: 't',
+		default: null,
+		description: 'upper end of the commit range to lint; applies if edit=false',
+		type: 'string'
+	},
+	version: {
+		alias: 'v',
+		type: 'boolean'
 	}
 };
 
-const cli = meow(
-	{
-		help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(
-			configuration
-		)}`,
-		description: `${pkg.name}@${pkg.version} - ${pkg.description}`
-	},
-	configuration
-);
+const cli = meow({
+	description: `${pkg.name}@${pkg.version} - ${pkg.description}`,
+	flags,
+	help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(
+		flags
+	)}`,
+	unknown(arg) {
+		throw new Error(`unknown flags: ${arg}`);
+	}
+});
 
 main(cli).catch(err =>
 	setTimeout(() => {

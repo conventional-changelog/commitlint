@@ -1,12 +1,12 @@
-module.exports = configuration => {
-	const lines = Object.entries(configuration.description).map(entry => {
+module.exports = flags => {
+	const lines = Object.entries(flags).map(entry => {
 		const name = entry[0];
-		const desc = entry[1];
-		const alias = Object.entries(configuration.alias)
-			.find(entry => entry[1] === name)
-			.map(entry => entry[0])[0];
-		const defaults = configuration.default[name];
-		return [[name, alias].filter(Boolean), desc, defaults].filter(Boolean);
+		const value = entry[1];
+		return [
+			[name, value.alias].filter(Boolean),
+			value.description,
+			value.default
+		].filter(Boolean);
 	});
 
 	const longest = lines
@@ -14,7 +14,7 @@ module.exports = configuration => {
 			const flags = line[0];
 			return flags.reduce((sum, flag) => sum + flag.length, 0);
 		})
-		.sort(Number)[0];
+		.sort((a, b) => b - a)[0];
 
 	return lines
 		.map(line => {
