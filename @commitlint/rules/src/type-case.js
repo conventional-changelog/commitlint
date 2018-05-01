@@ -1,6 +1,8 @@
 import * as ensure from '@commitlint/ensure';
 import message from '@commitlint/message';
 
+const negated = when => when === 'never';
+
 export default (parsed, when, value) => {
 	const {type} = parsed;
 
@@ -8,11 +10,25 @@ export default (parsed, when, value) => {
 		return [true];
 	}
 
-	const negated = when === 'never';
+	const checks = (Array.isArray(value) ? value : [value]).map(check => {
+		if (typeof check === 'string') {
+			return {
+				when: 'always',
+				case: check
+			};
+		}
+		return check;
+	});
 
-	const result = ensure.case(type, value);
+	const result = checks.some(check => {
+		const r = ensure.case(type, check.case);
+		return negated(check.when) ? !r : r;
+	});
+
+	const list = checks.map(c => c.case).join(', ');
+
 	return [
-		negated ? !result : result,
-		message([`type must`, negated ? `not` : null, `be ${value}`])
+		negated(when) ? !result : result,
+		message([`type must`, negated(when) ? `not` : null, `be ${list}`])
 	];
 };
