@@ -15,7 +15,8 @@ const WILDCARDS = [
 				.replace(/^chore(\([^)]+\))?:/, '')
 				.trim()
 		),
-	c => c.match(/^Merged (.*?)(in|into) (.*)/)
+	c => c.match(/^Merged (.*?)(in|into) (.*)/),
+	c => c.match(/^Auto-merged (.*?) into (.*)/)
 ];
 
 export default function isIgnored(commit = '') {
