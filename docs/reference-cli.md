@@ -10,6 +10,7 @@ commitlint@4.2.0 - Lint your commit messages
   --cwd, -d              directory to execute in, defaults to: /Users/marneb/Documents/oss/commitlint
   --edit, -e             read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG
   --extends, -x          array of shareable configurations to extend
+  --config, -g           path to a custom configuration
   --from, -f             lower end of the commit range to lint; applies if edit=false
   --to, -t               upper end of the commit range to lint; applies if edit=false
   --quiet, -q            toggle console output
