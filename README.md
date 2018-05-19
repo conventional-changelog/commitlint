@@ -53,7 +53,7 @@ To lint commits before they are created you can use the 'commitmsg' hook as desc
 ```json
 {
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -E GIT_PARAMS"
   }
 }
 ```
@@ -92,7 +92,7 @@ A number of shared configurations are available to install and use with `commitl
 
 ## API
 
-* Alternative, programatic way to interact with `commitlint`
+* Alternative, programmatic way to interact with `commitlint`
 * Packages: 
   * [format](./@commitlint/format) - Format commitlint reports
   * [lint](./@commitlint/lint) - Lint a string against commitlint rules
@@ -111,7 +111,7 @@ A number of shared configurations are available to install and use with `commitl
 
 `commitlint` is considered stable and is used in various projects as development tool. 
 
-We indentify **ease of adoption** and **developer experience** as fields where there
+We identify **ease of adoption** and **developer experience** as fields where there
 is room and need for improvement. The items on the roadmap should enhance `commitlint` regarding those aspects.
 
 * [x] **Adoption**: Provide reusable Travis CI integration: `@commitlint/travis-cli` (https://github.com/marionebl/commitlint/releases/tag/v5.1.0)

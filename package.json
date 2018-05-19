@@ -8,7 +8,7 @@
     "build": "lerna run build --stream --parallel --include-filtered-dependencies",
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "node @commitlint/prompt-cli/cli.js",
-    "commitmsg": "node @commitlint/cli/lib/cli.js -e $GIT_PARAMS",
+    "commitmsg": "node @commitlint/cli/lib/cli.js -E GIT_PARAMS",
     "deps": "lerna run deps",
     "pkg": "lerna run pkg",
     "docs": "docsify serve docs",
