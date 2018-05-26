@@ -26,7 +26,7 @@ packages
 ├── app
 └── web
 
-❯ echo "buid(api): change something in api's build" | commitlint
+❯ echo "build(api): change something in api's build" | commitlint
 ⧗   input: build(api): change something in api's build
 ✔   found 0 problems, 0 warnings
 
