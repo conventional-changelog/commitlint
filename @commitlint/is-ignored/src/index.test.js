@@ -103,3 +103,7 @@ test('should return true for bitbucket merge commits', t => {
 	);
 	t.true(isIgnored('Merged develop into feature/component-form-select-card'));
 });
+
+test('should return true for automatic merge commits', t => {
+	t.true(isIgnored('Auto-merged develop into master'));
+});
