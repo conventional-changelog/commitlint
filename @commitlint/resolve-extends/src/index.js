@@ -89,14 +89,13 @@ function resolveConfig(raw, context = {}) {
 
 function resolveId(id, context = {}) {
 	const cwd = context.cwd || process.cwd();
-	const localPath = resolveFrom.silent(cwd, id);
+	const localPath = resolveFromSilent(cwd, id);
 
 	if (typeof localPath === 'string') {
 		return localPath;
 	}
 
-	const resolveGlobal = requireUncached('resolve-global');
-	const globalPath = resolveGlobal.silent(id);
+	const globalPath = resolveGlobalSilent(id);
 
 	if (typeof globalPath === 'string') {
 		return globalPath;
@@ -105,4 +104,17 @@ function resolveId(id, context = {}) {
 	const err = new Error(`Cannot find module "${id}" from "${cwd}"`);
 	err.code = 'MODULE_NOT_FOUND';
 	throw err;
+}
+
+function resolveFromSilent(cwd, id) {
+	try {
+		return resolveFrom(cwd, id);
+	} catch (err) {}
+}
+
+function resolveGlobalSilent(id) {
+	try {
+		const resolveGlobal = requireUncached('resolve-global');
+		return resolveGlobal(id);
+	} catch (err) {}
 }

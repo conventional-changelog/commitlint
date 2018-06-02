@@ -28,7 +28,7 @@ function preset() {
 				{
 					debug: process.env.DEBUG === 'true',
 					exclude: ['transform-regenerator', 'transform-async-to-generator'],
-					targets: {node: '4.8'}
+					targets: {node: '6'}
 				}
 			]
 		]

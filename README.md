@@ -124,7 +124,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 
 ## Version Support
 
-* Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 4.8`
+* Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 6`
 * git `>= 2`
 
 ## Related projects
