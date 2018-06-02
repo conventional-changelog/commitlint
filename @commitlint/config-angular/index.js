@@ -8,8 +8,8 @@ module.exports = {
 		'scope-case': [2, 'always', 'lower-case'],
 		'subject-case': [
 			2,
-			'always',
-			['camel-case', 'kebab-case', 'lower-case', 'snake-case']
+			'never',
+			['sentence-case', 'start-case', 'pascal-case', 'upper-case']
 		],
 		'subject-empty': [2, 'never'],
 		'subject-full-stop': [2, 'never', '.'],
