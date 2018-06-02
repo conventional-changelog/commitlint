@@ -20,7 +20,7 @@ npm install --save-dev @commitlint/cli @commitlint/config-conventional
 ```
 {
   "scripts": {
-    "commitmsg": "commitlint -x @commitlint/config-conventional -e $GIT_PARAMS"
+    "commitmsg": "commitlint -x @commitlint/config-conventional -E GIT_PARAMS"
   }
 }
 ```
@@ -47,7 +47,7 @@ npm install --save-dev @commitlint/cli @commitint/config-conventional
 ```
 {
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -E GIT_PARAMS"
   }
 }
 ```

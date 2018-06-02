@@ -92,7 +92,7 @@ test('should produce no error output with -q flag', async t => {
 
 test('should work with husky commitmsg hook and git commit', async () => {
 	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `${bin} -e`}}, {cwd});
+	await writePkg({scripts: {commitmsg: `'${bin}' -e`}}, {cwd});
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});
@@ -102,7 +102,7 @@ test('should work with husky commitmsg hook and git commit', async () => {
 test('should work with husky commitmsg hook in sub packages', async () => {
 	const upper = await git.bootstrap('fixtures/husky');
 	const cwd = path.join(upper, 'integration');
-	await writePkg({scripts: {commitmsg: `${bin} -e`}}, {cwd: upper});
+	await writePkg({scripts: {commitmsg: `'${bin}' -e`}}, {cwd: upper});
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});
@@ -111,7 +111,7 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 
 test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
 	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `${bin} -e $GIT_PARAMS`}}, {cwd});
+	await writePkg({scripts: {commitmsg: `'${bin}' -e $GIT_PARAMS`}}, {cwd});
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});
@@ -120,11 +120,35 @@ test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
 
 test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
 	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `${bin} -e %GIT_PARAMS%`}}, {cwd});
+	await writePkg({scripts: {commitmsg: `'${bin}' -e %GIT_PARAMS%`}}, {cwd});
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});
 	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+});
+
+test('should allow reading of environment variables for edit file, succeeding if valid', async t => {
+	const cwd = await git.bootstrap();
+	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
+	const actual = await cli(['--env', 'variable'], {
+		cwd,
+		env: {variable: 'commit-msg-file'}
+	})();
+	t.is(actual.code, 0);
+});
+
+test('should allow reading of environment variables for edit file, failing if invalid', async t => {
+	const cwd = await git.bootstrap('fixtures/simple');
+	await sander.writeFile(
+		cwd,
+		'commit-msg-file',
+		'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.'
+	);
+	const actual = await cli(['--env', 'variable'], {
+		cwd,
+		env: {variable: 'commit-msg-file'}
+	})();
+	t.is(actual.code, 1);
 });
 
 test('should pick up parser preset and fail accordingly', async t => {
@@ -178,7 +202,7 @@ test('should pick up config from inside git repo with precedence and fail accord
 
 test('should handle --amend with signoff', async () => {
 	const cwd = await git.bootstrap('fixtures/signoff');
-	await writePkg({scripts: {commitmsg: `${bin} -e`}}, {cwd});
+	await writePkg({scripts: {commitmsg: `'${bin}' -e`}}, {cwd});
 
 	await execa('npm', ['install'], {cwd});
 	await execa('git', ['add', 'package.json'], {cwd});

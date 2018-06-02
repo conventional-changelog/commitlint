@@ -40,6 +40,13 @@ const flags = {
 			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
 		type: 'string'
 	},
+	env: {
+		alias: 'E',
+		default: null,
+		description:
+			'check message in the file at path given by environment variable value',
+		type: 'string'
+	},
 	extends: {
 		alias: 'x',
 		description: 'array of shareable configurations to extend',
@@ -47,7 +54,8 @@ const flags = {
 	},
 	help: {
 		alias: 'h',
-		type: 'boolean'
+		type: 'boolean',
+		description: 'display this help message'
 	},
 	from: {
 		alias: 'f',
@@ -74,14 +82,15 @@ const flags = {
 	},
 	version: {
 		alias: 'v',
-		type: 'boolean'
+		type: 'boolean',
+		description: 'display version information'
 	}
 };
 
 const cli = meow({
 	description: `${pkg.name}@${pkg.version} - ${pkg.description}`,
 	flags,
-	help: `[input] reads from stdin if --edit, --from and --to are omitted\n${help(
+	help: `[input] reads from stdin if --edit, --env, --from and --to are omitted\n${help(
 		flags
 	)}`,
 	unknown(arg) {
@@ -114,7 +123,7 @@ async function main(options) {
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
 		const err = new Error(
-			'[input] is required: supply via stdin, or --edit or --from and --to'
+			'[input] is required: supply via stdin, or --env or --edit or --from and --to'
 		);
 		err.type = pkg.name;
 		console.log(`${cli.help}\n`);
@@ -165,7 +174,7 @@ function checkFromRepository(flags) {
 }
 
 function checkFromEdit(flags) {
-	return Boolean(flags.edit);
+	return Boolean(flags.edit) || flags.env;
 }
 
 function checkFromHistory(flags) {
@@ -173,21 +182,40 @@ function checkFromHistory(flags) {
 }
 
 function normalizeFlags(flags) {
-	// The `edit` flag is either a boolean or a string but we are only allowed
-	// to specify one of them in minimist
-	const edit = flags.edit === '' ? true : normalizeEdit(flags.edit);
+	const edit = getEditValue(flags);
 	return merge({}, flags, {edit, e: edit});
 }
 
-function normalizeEdit(edit) {
+function getEditValue(flags) {
+	if (flags.env) {
+		if (!(flags.env in process.env)) {
+			throw new Error(
+				`Recieved '${
+					flags.env
+				}' as value for -E | --env, but environment variable '${
+					flags.env
+				}' is not available globally`
+			);
+		}
+		return process.env[flags.env];
+	}
+	const edit = flags.edit;
+	// If the edit flag is set but empty (i.e '-e') we default
+	// to .git/COMMIT_EDITMSG
+	if (edit === '') {
+		return true;
+	}
 	if (typeof edit === 'boolean') {
 		return edit;
 	}
-	// The recommended method to specify -e with husky is commitlint -e $GIT_PARAMS
+	// The recommended method to specify -e with husky was `commitlint -e $GIT_PARAMS`
 	// This does not work properly with win32 systems, where env variable declarations
 	// use a different syntax
 	// See https://github.com/marionebl/commitlint/issues/103 for details
+	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
 	if (edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%') {
+		console.warn(`Using environment variable syntax (${edit}) in -e |\
+--edit is deprecated. Use '{-E|--env} GIT_PARAMS instead'`);
 		if (!('GIT_PARAMS' in process.env)) {
 			throw new Error(
 				`Received ${edit} as value for -e | --edit, but GIT_PARAMS is not available globally.`

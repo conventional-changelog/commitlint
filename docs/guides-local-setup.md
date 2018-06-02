@@ -33,16 +33,16 @@ This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/
 ```json
 {
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "commitmsg": "commitlint -E GIT_PARAMS"
   }
 }
 ```
 
-Using `commitmsg` gives us exactly what we want: It is executed everytime a new commit is created. Passing husky's `$GIT_PARAMS` to `commitlint` via the `-e|--edit` flag directs it to the relevant edit file. `-e` defaults to `.git/COMMIT_EDITMSG`.
+Using `commitmsg` gives us exactly what we want: It is executed whenever a new commit is created. Passing husky's `GIT_PARAMS` to `commitlint` via the `-E|--env` flag directs it to the relevant edit file. `-e` would default to `.git/COMMIT_EDITMSG`.
 
 ## Test
 
-You can test the hook by simple commiting. You should see something like this if everything works.
+You can test the hook by simply committing. You should see something like this if everything works.
 
 ```bash
 git commit -m "foo: this will fail"
