@@ -35,7 +35,7 @@ The same is true for relative imports
 
 ```js
 // commitlint.config.js
-module.expors = {
+module.exports = {
   extends: ['./example'] // => ./example.js
 }
 ```
