@@ -2,7 +2,7 @@
 
 # @commitlint/config-conventional
 
-Shareable `commitlint` config enforcing [convention commits](https://conventionalcommits.org/).
+Shareable `commitlint` config enforcing [conventional commits](https://conventionalcommits.org/).
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 | :warning: |  |
