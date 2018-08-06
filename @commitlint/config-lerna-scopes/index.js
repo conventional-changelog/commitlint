@@ -3,22 +3,18 @@ const importFrom = require('import-from');
 module.exports = {
 	utils: {getPackages},
 	rules: {
-		'scope-enum': ctx => [2, 'always', getPackages(ctx)]
+		'scope-enum': async ctx => [2, 'always', await getPackages(ctx)]
 	}
 };
 
-function getPackages(context) {
+async function getPackages(context) {
 	const ctx = context || {};
 	const cwd = ctx.cwd || process.cwd();
 
-	const Repository = importFrom(cwd, 'lerna/lib/Repository');
-	const PackageUtilities = importFrom(cwd, 'lerna/lib/PackageUtilities');
+	const Project = importFrom(cwd, '@lerna/project');
 
-	const repository = new Repository(cwd);
-	const packages = PackageUtilities.getPackages({
-		packageConfigs: repository.packageConfigs,
-		rootPath: cwd
-	});
+	const project = new Project(cwd);
+	const packages = await project.getPackages();
 
 	return packages
 		.map(pkg => pkg.name)

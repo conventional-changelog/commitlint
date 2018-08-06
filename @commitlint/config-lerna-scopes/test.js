@@ -19,34 +19,34 @@ test('scope-enum is function', t => {
 	t.is(typeof fn, 'function');
 });
 
-test('scope-enum does not throw for missing context', t => {
+test('scope-enum does not throw for missing context', async t => {
 	const {'scope-enum': fn} = config.rules;
-	t.notThrows(() => fn());
+	await t.notThrows(async () => fn());
 });
 
-test('scope-enum has expected severity', t => {
+test('scope-enum has expected severity', async t => {
 	const {'scope-enum': fn} = config.rules;
-	const [severity] = fn();
+	const [severity] = await fn();
 	t.is(severity, 2);
 });
 
-test('scope-enum has expected modifier', t => {
+test('scope-enum has expected modifier', async t => {
 	const {'scope-enum': fn} = config.rules;
-	const [, modifier] = fn();
+	const [, modifier] = await fn();
 	t.is(modifier, 'always');
 });
 
 test('returns empty value for empty lerna repository', async t => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/empty');
-	const [, , value] = fn({cwd});
+	const [, , value] = await fn({cwd});
 	t.deepEqual(value, []);
 });
 
 test('returns expected value for basic lerna repository', async t => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/basic');
-	const [, , value] = fn({cwd});
+	const [, , value] = await fn({cwd});
 	t.deepEqual(value, ['a', 'b']);
 });
 
@@ -55,27 +55,13 @@ test.failing(
 	async t => {
 		const {'scope-enum': fn} = config.rules;
 		const cwd = await npm.bootstrap('fixtures/version-mismatch');
-		await t.throws(() => fn({cwd}));
+		await t.throws(async () => fn({cwd}));
 	}
 );
 
 test('returns expected value for scoped lerna repository', async t => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/scoped');
-	const [, , value] = fn({cwd});
-	t.deepEqual(value, ['a', 'b']);
-});
-
-test('works with lerna 2.0', async t => {
-	const {'scope-enum': fn} = config.rules;
-	const cwd = await npm.bootstrap('fixtures/lerna-2.4');
-	const [, , value] = fn({cwd});
-	t.deepEqual(value, ['a', 'b']);
-});
-
-test('works with lerna 2.4', async t => {
-	const {'scope-enum': fn} = config.rules;
-	const cwd = await npm.bootstrap('fixtures/lerna-2.4');
-	const [, , value] = fn({cwd});
+	const [, , value] = await fn({cwd});
 	t.deepEqual(value, ['a', 'b']);
 });
