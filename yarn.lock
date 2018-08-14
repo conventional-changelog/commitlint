@@ -59,43 +59,44 @@
   dependencies:
     arrify "^1.0.1"
 
-"@lerna/add@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/add/-/add-3.0.0-rc.0.tgz#a2963cecda704b0030601c1db2aee3a579d3af74"
+"@lerna/add@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/add/-/add-3.0.4.tgz#635b9569ac156151f158e6ede47428bc39f1d459"
   dependencies:
-    "@lerna/bootstrap" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/filter-options" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/bootstrap" "^3.0.4"
+    "@lerna/command" "^3.0.0"
+    "@lerna/filter-options" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     dedent "^0.7.0"
     npm-package-arg "^6.0.0"
     p-map "^1.2.0"
     package-json "^4.0.1"
     semver "^5.5.0"
 
-"@lerna/batch-packages@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/batch-packages/-/batch-packages-3.0.0-rc.0.tgz#8e630a8042da8dd8cf5d3c61ab55f669d9a67d56"
+"@lerna/batch-packages@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/batch-packages/-/batch-packages-3.0.0.tgz#960a3dbb5fbc17283e2850448c76c023f6a35200"
   dependencies:
-    "@lerna/package-graph" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/package-graph" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     npmlog "^4.1.2"
 
-"@lerna/bootstrap@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/bootstrap/-/bootstrap-3.0.0-rc.0.tgz#8a36f1ebfa17faf6d483fa5e8e73c2c22fbc608c"
+"@lerna/bootstrap@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/bootstrap/-/bootstrap-3.0.4.tgz#54a4a7ee1432016783c735c140d09e94fae26564"
   dependencies:
-    "@lerna/batch-packages" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/filter-options" "^3.0.0-rc.0"
-    "@lerna/npm-conf" "^3.0.0-rc.0"
-    "@lerna/npm-install" "^3.0.0-rc.0"
-    "@lerna/rimraf-dir" "^3.0.0-rc.0"
-    "@lerna/run-lifecycle" "^3.0.0-rc.0"
-    "@lerna/run-parallel-batches" "^3.0.0-rc.0"
-    "@lerna/symlink-binary" "^3.0.0-rc.0"
-    "@lerna/symlink-dependencies" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/batch-packages" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/filter-options" "^3.0.0"
+    "@lerna/has-npm-version" "^3.0.4"
+    "@lerna/npm-conf" "^3.0.0"
+    "@lerna/npm-install" "^3.0.0"
+    "@lerna/rimraf-dir" "^3.0.0"
+    "@lerna/run-lifecycle" "^3.0.0"
+    "@lerna/run-parallel-batches" "^3.0.0"
+    "@lerna/symlink-binary" "^3.0.0"
+    "@lerna/symlink-dependencies" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     dedent "^0.7.0"
     get-port "^3.2.0"
     multimatch "^2.1.0"
@@ -108,90 +109,90 @@
     read-package-tree "^5.1.6"
     semver "^5.5.0"
 
-"@lerna/changed@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/changed/-/changed-3.0.0-rc.0.tgz#7686a93dcd0630eac3b6114153dc8a301df6870c"
+"@lerna/changed@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@lerna/changed/-/changed-3.0.2.tgz#c90b8d1a00c93ce99b4f6dc34653c3b835d8d468"
   dependencies:
-    "@lerna/collect-updates" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/output" "^3.0.0-rc.0"
-    "@lerna/publish" "^3.0.0-rc.0"
-    chalk "^2.3.1"
+    "@lerna/collect-updates" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/listable" "^3.0.0"
+    "@lerna/output" "^3.0.0"
+    "@lerna/version" "^3.0.2"
 
-"@lerna/child-process@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/child-process/-/child-process-3.0.0-rc.0.tgz#52bede46bd244992bbea41c79893cefe5c90e17a"
+"@lerna/child-process@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/child-process/-/child-process-3.0.0.tgz#5b93ac65347eb5e317e9ce2524ab2bdd59f37cb7"
   dependencies:
     chalk "^2.3.1"
     execa "^0.10.0"
     strong-log-transformer "^1.0.6"
 
-"@lerna/clean@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/clean/-/clean-3.0.0-rc.0.tgz#bc65a7b4ec1b404e42d508b9c2a0c67d02665efc"
+"@lerna/clean@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/clean/-/clean-3.0.0.tgz#5e4dcf0fb376dda6fd5c717b4a6d1ceaff6284e9"
   dependencies:
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/filter-options" "^3.0.0-rc.0"
-    "@lerna/prompt" "^3.0.0-rc.0"
-    "@lerna/rimraf-dir" "^3.0.0-rc.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/filter-options" "^3.0.0"
+    "@lerna/prompt" "^3.0.0"
+    "@lerna/rimraf-dir" "^3.0.0"
     p-map "^1.2.0"
     p-map-series "^1.0.0"
     p-waterfall "^1.0.0"
 
-"@lerna/cli@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/cli/-/cli-3.0.0-rc.0.tgz#0934ca57f26570359cc8be9bda5ae80ba911e650"
+"@lerna/cli@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/cli/-/cli-3.0.4.tgz#9339c47d2298607c01d8913537c160cfe3302354"
   dependencies:
-    "@lerna/add" "^3.0.0-rc.0"
-    "@lerna/bootstrap" "^3.0.0-rc.0"
-    "@lerna/changed" "^3.0.0-rc.0"
-    "@lerna/clean" "^3.0.0-rc.0"
-    "@lerna/create" "^3.0.0-rc.0"
-    "@lerna/diff" "^3.0.0-rc.0"
-    "@lerna/exec" "^3.0.0-rc.0"
-    "@lerna/global-options" "^3.0.0-rc.0"
-    "@lerna/import" "^3.0.0-rc.0"
-    "@lerna/init" "^3.0.0-rc.0"
-    "@lerna/link" "^3.0.0-rc.0"
-    "@lerna/list" "^3.0.0-rc.0"
-    "@lerna/publish" "^3.0.0-rc.0"
-    "@lerna/run" "^3.0.0-rc.0"
+    "@lerna/add" "^3.0.4"
+    "@lerna/bootstrap" "^3.0.4"
+    "@lerna/changed" "^3.0.2"
+    "@lerna/clean" "^3.0.0"
+    "@lerna/create" "^3.0.0"
+    "@lerna/diff" "^3.0.0"
+    "@lerna/exec" "^3.0.2"
+    "@lerna/global-options" "^3.0.0"
+    "@lerna/import" "^3.0.0"
+    "@lerna/init" "^3.0.0"
+    "@lerna/link" "^3.0.0"
+    "@lerna/list" "^3.0.0"
+    "@lerna/publish" "^3.0.4"
+    "@lerna/run" "^3.0.2"
+    "@lerna/version" "^3.0.2"
     dedent "^0.7.0"
     is-ci "^1.0.10"
     npmlog "^4.1.2"
     yargs "^12.0.1"
 
-"@lerna/collect-updates@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/collect-updates/-/collect-updates-3.0.0-rc.0.tgz#f00f4b70750d21fa14100dcc83f665d8ee7c1e53"
+"@lerna/collect-updates@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/collect-updates/-/collect-updates-3.0.0.tgz#be4436e479adfc5540d9fb36e764d514ba9fb1c7"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
     minimatch "^3.0.4"
     npmlog "^4.1.2"
-    semver "^5.5.0"
     slash "^1.0.0"
 
-"@lerna/command@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/command/-/command-3.0.0-rc.0.tgz#2bf6b25468f95d7c4a9e947f0c5cb1acd598eb44"
+"@lerna/command@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/command/-/command-3.0.0.tgz#c974029dac0486688dcf3e01351b982e45727aae"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/collect-updates" "^3.0.0-rc.0"
-    "@lerna/filter-packages" "^3.0.0-rc.0"
-    "@lerna/package-graph" "^3.0.0-rc.0"
-    "@lerna/project" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
-    "@lerna/write-log-file" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/collect-updates" "^3.0.0"
+    "@lerna/filter-packages" "^3.0.0"
+    "@lerna/package-graph" "^3.0.0"
+    "@lerna/project" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
+    "@lerna/write-log-file" "^3.0.0"
     dedent "^0.7.0"
     execa "^0.10.0"
     lodash "^4.17.5"
     npmlog "^4.1.2"
 
-"@lerna/conventional-commits@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/conventional-commits/-/conventional-commits-3.0.0-rc.0.tgz#da5e1a0f6f6cc6bd7426a54274cccdfefa761d7c"
+"@lerna/conventional-commits@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@lerna/conventional-commits/-/conventional-commits-3.0.2.tgz#1089d06c4022bbea1d56e7e0b3801c9be9a62d71"
   dependencies:
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/validation-error" "^3.0.0"
     conventional-changelog-angular "^1.6.6"
     conventional-changelog-core "^2.0.5"
     conventional-recommended-bump "^2.0.6"
@@ -202,22 +203,22 @@
     npmlog "^4.1.2"
     semver "^5.5.0"
 
-"@lerna/create-symlink@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/create-symlink/-/create-symlink-3.0.0-rc.0.tgz#88c998cb352194ecc0596fcab132e657f1ada02d"
+"@lerna/create-symlink@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/create-symlink/-/create-symlink-3.0.0.tgz#f7281028c011d0524f362531a36211724793f77f"
   dependencies:
     cmd-shim "^2.0.2"
     fs-extra "^6.0.1"
     npmlog "^4.1.2"
 
-"@lerna/create@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/create/-/create-3.0.0-rc.0.tgz#5607b7791d652f3754a9360199253605b8d3fd13"
+"@lerna/create@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/create/-/create-3.0.0.tgz#93945e4f71cf2c3fc13500bc91526d7a5c07a84c"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/npm-conf" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/npm-conf" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     camelcase "^4.1.0"
     dedent "^0.7.0"
     fs-extra "^6.0.1"
@@ -230,161 +231,187 @@
     validate-npm-package-license "^3.0.3"
     validate-npm-package-name "^3.0.0"
 
-"@lerna/diff@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/diff/-/diff-3.0.0-rc.0.tgz#e52e54c104618ca60d3e55a314cf8312f6005df9"
+"@lerna/diff@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/diff/-/diff-3.0.0.tgz#7e7d175c5f6555d700b8b0592f154b11d2f7b646"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     npmlog "^4.1.2"
 
-"@lerna/exec@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/exec/-/exec-3.0.0-rc.0.tgz#5b42b876354e6643b792f7be66e71e8be25f0173"
+"@lerna/exec@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@lerna/exec/-/exec-3.0.2.tgz#97c055e5d636e4510362f0542f8b85ce9bc0a19b"
   dependencies:
-    "@lerna/batch-packages" "^3.0.0-rc.0"
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/filter-options" "^3.0.0-rc.0"
-    "@lerna/run-parallel-batches" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/batch-packages" "^3.0.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/filter-options" "^3.0.0"
+    "@lerna/run-parallel-batches" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
 
-"@lerna/filter-options@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/filter-options/-/filter-options-3.0.0-rc.0.tgz#9e22b3326eece8f45adad878d44c905271967a59"
+"@lerna/filter-options@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/filter-options/-/filter-options-3.0.0.tgz#db329277f9c482b12993fa5c0ec4d145201ab399"
   dependencies:
     dedent "^0.7.0"
 
-"@lerna/filter-packages@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/filter-packages/-/filter-packages-3.0.0-rc.0.tgz#e78b48d000301d6750fff9a777988563d5cae0ed"
+"@lerna/filter-packages@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/filter-packages/-/filter-packages-3.0.0.tgz#5eb25ad1610f3e2ab845133d1f8d7d40314e838f"
   dependencies:
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/validation-error" "^3.0.0"
     multimatch "^2.1.0"
     npmlog "^4.1.2"
 
-"@lerna/get-npm-exec-opts@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/get-npm-exec-opts/-/get-npm-exec-opts-3.0.0-rc.0.tgz#74cf4364fac1b3c8b6645259e892e34509c3b1d9"
+"@lerna/get-npm-exec-opts@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/get-npm-exec-opts/-/get-npm-exec-opts-3.0.0.tgz#8fc7866e8d8e9a2f2dc385287ba32eb44de8bdeb"
   dependencies:
     npmlog "^4.1.2"
 
-"@lerna/global-options@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/global-options/-/global-options-3.0.0-rc.0.tgz#1745cf71c473099f8e0fb12cf426dc6a2dd1f2c5"
+"@lerna/global-options@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/global-options/-/global-options-3.0.0.tgz#85d4878317816eba538b0d637e30dae89a2a9a92"
 
-"@lerna/import@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/import/-/import-3.0.0-rc.0.tgz#3b0b86ac89039d0a94b326013de8595d8d5ea214"
+"@lerna/has-npm-version@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/has-npm-version/-/has-npm-version-3.0.4.tgz#d8c639a9a07a3fe0e9539585da074661adf69353"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/prompt" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    semver "^5.5.0"
+
+"@lerna/import@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/import/-/import-3.0.0.tgz#2fd206c41aa9e4bab2fbb362aefa31c8a340f61e"
+  dependencies:
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/prompt" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     dedent "^0.7.0"
     fs-extra "^6.0.1"
     p-map-series "^1.0.0"
 
-"@lerna/init@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/init/-/init-3.0.0-rc.0.tgz#d75929096b3a2b09de2afa067cb9ea36f2a284cb"
+"@lerna/init@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/init/-/init-3.0.0.tgz#11d7726bc65b9dbf67668be3b218c1e19d7ac541"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/command" "^3.0.0"
     fs-extra "^6.0.1"
     p-map "^1.2.0"
     write-json-file "^2.3.0"
 
-"@lerna/link@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/link/-/link-3.0.0-rc.0.tgz#87e7c59914ee205d79383d967e694e0acfaebb73"
+"@lerna/link@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/link/-/link-3.0.0.tgz#874d57b104f1609e0e5887f795896c6983a2e229"
   dependencies:
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/package-graph" "^3.0.0-rc.0"
-    "@lerna/symlink-dependencies" "^3.0.0-rc.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/package-graph" "^3.0.0"
+    "@lerna/symlink-dependencies" "^3.0.0"
     p-map "^1.2.0"
     slash "^1.0.0"
 
-"@lerna/list@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/list/-/list-3.0.0-rc.0.tgz#14acc6839f8fe1e1a0f3c20e9b2312160bda5b85"
+"@lerna/list@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/list/-/list-3.0.0.tgz#509bfe9853f18742f5375b8cc693ea843d27405a"
   dependencies:
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/filter-options" "^3.0.0-rc.0"
-    "@lerna/output" "^3.0.0-rc.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/filter-options" "^3.0.0"
+    "@lerna/listable" "^3.0.0"
+    "@lerna/output" "^3.0.0"
+
+"@lerna/listable@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/listable/-/listable-3.0.0.tgz#27209b1382c87abdbc964220e75c247d803d4199"
+  dependencies:
     chalk "^2.3.1"
     columnify "^1.5.4"
 
-"@lerna/npm-conf@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/npm-conf/-/npm-conf-3.0.0-rc.0.tgz#8b38a3ce8280c9f5cd2958ef7a14861f2e540060"
+"@lerna/log-packed@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/log-packed/-/log-packed-3.0.4.tgz#6d1f6ce5ca68b9971f2a27f0ecf3c50684be174a"
+  dependencies:
+    byte-size "^4.0.3"
+    columnify "^1.5.4"
+    has-unicode "^2.0.1"
+    npmlog "^4.1.2"
+
+"@lerna/npm-conf@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/npm-conf/-/npm-conf-3.0.0.tgz#7a4b8304a0ecd1e366208f656bd3d7f4dcb3b5e7"
   dependencies:
     config-chain "^1.1.11"
     pify "^3.0.0"
 
-"@lerna/npm-dist-tag@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/npm-dist-tag/-/npm-dist-tag-3.0.0-rc.0.tgz#77efdc087f44de5853cbe47cebf0307b47d4fd99"
+"@lerna/npm-dist-tag@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/npm-dist-tag/-/npm-dist-tag-3.0.0.tgz#73d9c37e4032c981bdfcea2fefef5eedd63966ec"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/get-npm-exec-opts" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/get-npm-exec-opts" "^3.0.0"
     npmlog "^4.1.2"
 
-"@lerna/npm-install@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/npm-install/-/npm-install-3.0.0-rc.0.tgz#0a338f7b4dbed4b504f1fabe66c1c008d1e5ed98"
+"@lerna/npm-install@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/npm-install/-/npm-install-3.0.0.tgz#189c0481721e0c36c622b3c415915cb43cb41eb4"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/get-npm-exec-opts" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/get-npm-exec-opts" "^3.0.0"
     fs-extra "^6.0.1"
     npm-package-arg "^6.0.0"
     npmlog "^4.1.2"
     signal-exit "^3.0.2"
     write-pkg "^3.1.0"
 
-"@lerna/npm-publish@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/npm-publish/-/npm-publish-3.0.0-rc.0.tgz#9c3058ca5a35e239f4219a84b0ae76b1589f7de3"
+"@lerna/npm-publish@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/npm-publish/-/npm-publish-3.0.4.tgz#0013bd7df93461efb3b5380c0f244c5c5924faae"
   dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/get-npm-exec-opts" "^3.0.0-rc.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/get-npm-exec-opts" "^3.0.0"
+    "@lerna/has-npm-version" "^3.0.4"
+    "@lerna/log-packed" "^3.0.4"
+    fs-extra "^6.0.1"
+    npmlog "^4.1.2"
+    p-map "^1.2.0"
+
+"@lerna/npm-run-script@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/npm-run-script/-/npm-run-script-3.0.0.tgz#771be1f9bd96f1ab35870334d2011dff0b0e7997"
+  dependencies:
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/get-npm-exec-opts" "^3.0.0"
     npmlog "^4.1.2"
 
-"@lerna/npm-run-script@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/npm-run-script/-/npm-run-script-3.0.0-rc.0.tgz#3f9906a80908529cda1832522834fce1cb165303"
-  dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/get-npm-exec-opts" "^3.0.0-rc.0"
-    npmlog "^4.1.2"
-
-"@lerna/output@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/output/-/output-3.0.0-rc.0.tgz#5d7f4278842d79be0636a1863e23ba478116c0c9"
+"@lerna/output@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/output/-/output-3.0.0.tgz#4ed4a30ed2f311046b714b3840a090990ba3ce35"
   dependencies:
     npmlog "^4.1.2"
 
-"@lerna/package-graph@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/package-graph/-/package-graph-3.0.0-rc.0.tgz#0a63ec93e4613ee58f753fcb53b2f4c6cb678d8d"
+"@lerna/package-graph@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/package-graph/-/package-graph-3.0.0.tgz#f2e9131856c4f43ea91f2cab1bfe5c9264079f53"
   dependencies:
     npm-package-arg "^6.0.0"
     semver "^5.5.0"
 
-"@lerna/package@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/package/-/package-3.0.0-rc.0.tgz#40dd1939d8a644b6ab4afa297d35ef52b1997d4e"
+"@lerna/package@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/package/-/package-3.0.0.tgz#14afc9a6cb1f7f7b23c1d7c7aa81bdac7d44c0e5"
   dependencies:
     npm-package-arg "^6.0.0"
     write-pkg "^3.1.0"
 
-"@lerna/project@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/project/-/project-3.0.0-rc.0.tgz#82c9194e602e35b5574d6d238da33a537fe8b160"
+"@lerna/project@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/project/-/project-3.0.0.tgz#4320d2a2b4080cabcf95161d9c48475217d8a545"
   dependencies:
-    "@lerna/package" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
+    "@lerna/package" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
     cosmiconfig "^5.0.2"
     dedent "^0.7.0"
     dot-prop "^4.2.0"
@@ -396,119 +423,136 @@
     resolve-from "^4.0.0"
     write-json-file "^2.3.0"
 
-"@lerna/prompt@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/prompt/-/prompt-3.0.0-rc.0.tgz#5d9a4c192f10f3a0050869c5cfefc7671229b3fd"
+"@lerna/prompt@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/prompt/-/prompt-3.0.0.tgz#8e506de608d16d78d39f5dde59e81b4f8ecf720e"
   dependencies:
     inquirer "^5.1.0"
     npmlog "^4.1.2"
 
-"@lerna/publish@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/publish/-/publish-3.0.0-rc.0.tgz#ddbd7170c9169f84517f5e0c839acfddad4c2714"
+"@lerna/publish@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/@lerna/publish/-/publish-3.0.4.tgz#ce720869746f1d38a857add8b0fc96a9c5ff2633"
   dependencies:
-    "@lerna/batch-packages" "^3.0.0-rc.0"
-    "@lerna/child-process" "^3.0.0-rc.0"
-    "@lerna/collect-updates" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/conventional-commits" "^3.0.0-rc.0"
-    "@lerna/npm-dist-tag" "^3.0.0-rc.0"
-    "@lerna/npm-publish" "^3.0.0-rc.0"
-    "@lerna/output" "^3.0.0-rc.0"
-    "@lerna/prompt" "^3.0.0-rc.0"
-    "@lerna/run-lifecycle" "^3.0.0-rc.0"
-    "@lerna/run-parallel-batches" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
-    chalk "^2.3.1"
-    dedent "^0.7.0"
+    "@lerna/batch-packages" "^3.0.0"
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/collect-updates" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/get-npm-exec-opts" "^3.0.0"
+    "@lerna/npm-dist-tag" "^3.0.0"
+    "@lerna/npm-publish" "^3.0.4"
+    "@lerna/output" "^3.0.0"
+    "@lerna/run-lifecycle" "^3.0.0"
+    "@lerna/run-parallel-batches" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
+    "@lerna/version" "^3.0.2"
     fs-extra "^6.0.1"
-    minimatch "^3.0.4"
+    npm-package-arg "^6.0.0"
     npmlog "^4.1.2"
     p-finally "^1.0.0"
+    p-map "^1.2.0"
+    p-reduce "^1.0.0"
+    semver "^5.5.0"
+
+"@lerna/resolve-symlink@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/resolve-symlink/-/resolve-symlink-3.0.0.tgz#40e2c59faa9298cd2003eeb8433b6a3b28f57c84"
+  dependencies:
+    fs-extra "^6.0.1"
+    npmlog "^4.1.2"
+    read-cmd-shim "^1.0.1"
+
+"@lerna/rimraf-dir@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/rimraf-dir/-/rimraf-dir-3.0.0.tgz#6d3a4872e79f86c152630454ecd27f211125bad0"
+  dependencies:
+    "@lerna/child-process" "^3.0.0"
+    npmlog "^4.1.2"
+    path-exists "^3.0.0"
+    rimraf "^2.6.2"
+
+"@lerna/run-lifecycle@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/run-lifecycle/-/run-lifecycle-3.0.0.tgz#3d9a09b390f53dd321ae4be8c7b779714d4037fe"
+  dependencies:
+    "@lerna/npm-conf" "^3.0.0"
+    npm-lifecycle "^2.0.0"
+    npmlog "^4.1.2"
+
+"@lerna/run-parallel-batches@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/run-parallel-batches/-/run-parallel-batches-3.0.0.tgz#468704934084c74991d3124d80607857d4dfa840"
+  dependencies:
+    p-map "^1.2.0"
+    p-map-series "^1.0.0"
+
+"@lerna/run@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@lerna/run/-/run-3.0.2.tgz#ebda5894cf6c5b78442d510c6d6d86579945e8fb"
+  dependencies:
+    "@lerna/batch-packages" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/filter-options" "^3.0.0"
+    "@lerna/npm-run-script" "^3.0.0"
+    "@lerna/output" "^3.0.0"
+    "@lerna/run-parallel-batches" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
+    p-map "^1.2.0"
+
+"@lerna/symlink-binary@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/symlink-binary/-/symlink-binary-3.0.0.tgz#f4ea3817c0a38316eddc8a7a75311e8b85731240"
+  dependencies:
+    "@lerna/create-symlink" "^3.0.0"
+    "@lerna/package" "^3.0.0"
+    fs-extra "^6.0.1"
+    p-map "^1.2.0"
+    read-pkg "^3.0.0"
+
+"@lerna/symlink-dependencies@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/symlink-dependencies/-/symlink-dependencies-3.0.0.tgz#649f4dc9225dfb047bd49fa4204b4859a7008db2"
+  dependencies:
+    "@lerna/create-symlink" "^3.0.0"
+    "@lerna/resolve-symlink" "^3.0.0"
+    "@lerna/symlink-binary" "^3.0.0"
+    fs-extra "^6.0.1"
+    p-finally "^1.0.0"
+    p-map "^1.2.0"
+    p-map-series "^1.0.0"
+
+"@lerna/validation-error@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/validation-error/-/validation-error-3.0.0.tgz#a27e90051c3ba71995e2a800a43d94ad04b3e3f4"
+  dependencies:
+    npmlog "^4.1.2"
+
+"@lerna/version@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.npmjs.org/@lerna/version/-/version-3.0.2.tgz#befa2a09be44af56668ef34785269187fe08f7bb"
+  dependencies:
+    "@lerna/child-process" "^3.0.0"
+    "@lerna/collect-updates" "^3.0.0"
+    "@lerna/command" "^3.0.0"
+    "@lerna/conventional-commits" "^3.0.2"
+    "@lerna/output" "^3.0.0"
+    "@lerna/prompt" "^3.0.0"
+    "@lerna/run-lifecycle" "^3.0.0"
+    "@lerna/validation-error" "^3.0.0"
+    chalk "^2.3.1"
+    dedent "^0.7.0"
+    minimatch "^3.0.4"
+    npmlog "^4.1.2"
     p-map "^1.2.0"
     p-reduce "^1.0.0"
     p-waterfall "^1.0.0"
     semver "^5.5.0"
     slash "^1.0.0"
     temp-write "^3.4.0"
-    write-json-file "^2.3.0"
 
-"@lerna/resolve-symlink@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/resolve-symlink/-/resolve-symlink-3.0.0-rc.0.tgz#fe7c8663e36761e51ffb6977de142fa6ea960bdd"
-  dependencies:
-    fs-extra "^6.0.1"
-    npmlog "^4.1.2"
-    read-cmd-shim "^1.0.1"
-
-"@lerna/rimraf-dir@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/rimraf-dir/-/rimraf-dir-3.0.0-rc.0.tgz#9942a5fbb084dea251ac9fda98ea242b7672126b"
-  dependencies:
-    "@lerna/child-process" "^3.0.0-rc.0"
-    npmlog "^4.1.2"
-    path-exists "^3.0.0"
-    rimraf "^2.6.2"
-
-"@lerna/run-lifecycle@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/run-lifecycle/-/run-lifecycle-3.0.0-rc.0.tgz#50787d9d8726723fe625f7b6418f41f446c86b21"
-  dependencies:
-    "@lerna/npm-conf" "^3.0.0-rc.0"
-    npm-lifecycle "^2.0.0"
-    npmlog "^4.1.2"
-
-"@lerna/run-parallel-batches@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/run-parallel-batches/-/run-parallel-batches-3.0.0-rc.0.tgz#80265e1fe6cad8d321297c7445b0e6f57984fa3e"
-  dependencies:
-    p-map "^1.2.0"
-    p-map-series "^1.0.0"
-
-"@lerna/run@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/run/-/run-3.0.0-rc.0.tgz#f2ae27dcc35eb32854ffe89764d425ecc013961b"
-  dependencies:
-    "@lerna/batch-packages" "^3.0.0-rc.0"
-    "@lerna/command" "^3.0.0-rc.0"
-    "@lerna/filter-options" "^3.0.0-rc.0"
-    "@lerna/npm-run-script" "^3.0.0-rc.0"
-    "@lerna/output" "^3.0.0-rc.0"
-    "@lerna/run-parallel-batches" "^3.0.0-rc.0"
-    "@lerna/validation-error" "^3.0.0-rc.0"
-    p-map "^1.2.0"
-
-"@lerna/symlink-binary@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/symlink-binary/-/symlink-binary-3.0.0-rc.0.tgz#0b3a6723fb857942baec6118ecee35ee0c6d082e"
-  dependencies:
-    "@lerna/create-symlink" "^3.0.0-rc.0"
-    "@lerna/package" "^3.0.0-rc.0"
-    fs-extra "^6.0.1"
-    p-map "^1.2.0"
-    read-pkg "^3.0.0"
-
-"@lerna/symlink-dependencies@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/symlink-dependencies/-/symlink-dependencies-3.0.0-rc.0.tgz#bbd73ca0835bbb005e5ee8df875d8f6f80ee6038"
-  dependencies:
-    "@lerna/create-symlink" "^3.0.0-rc.0"
-    "@lerna/resolve-symlink" "^3.0.0-rc.0"
-    "@lerna/symlink-binary" "^3.0.0-rc.0"
-    fs-extra "^6.0.1"
-    p-finally "^1.0.0"
-    p-map "^1.2.0"
-    p-map-series "^1.0.0"
-
-"@lerna/validation-error@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/validation-error/-/validation-error-3.0.0-rc.0.tgz#da81862666992b6befab25a4c855440679005e46"
-  dependencies:
-    npmlog "^4.1.2"
-
-"@lerna/write-log-file@^3.0.0-rc.0":
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/@lerna/write-log-file/-/write-log-file-3.0.0-rc.0.tgz#c506b0024f77ee8333c5b825b4bfae2243c471ab"
+"@lerna/write-log-file@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@lerna/write-log-file/-/write-log-file-3.0.0.tgz#2f95fee80c6821fe1ee6ccf8173d2b4079debbd2"
   dependencies:
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
@@ -1770,6 +1814,10 @@ builtins@^1.0.3:
 byline@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/byline/-/byline-5.0.0.tgz#741c5216468eadc457b03410118ad77de8c1ddb1"
+
+byte-size@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.npmjs.org/byte-size/-/byte-size-4.0.3.tgz#b7c095efc68eadf82985fccd9a2df43a74fa2ccd"
 
 cacache@^10.0.0:
   version "10.0.1"
@@ -4130,7 +4178,7 @@ has-flag@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
 
-has-unicode@^2.0.0, has-unicode@~2.0.1:
+has-unicode@^2.0.0, has-unicode@^2.0.1, has-unicode@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/has-unicode/-/has-unicode-2.0.1.tgz#e0e6fe6a28cf51138855e086d1691e771de2a8b9"
 
@@ -5109,11 +5157,11 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lerna@3.0.0-rc.0:
-  version "3.0.0-rc.0"
-  resolved "https://registry.npmjs.org/lerna/-/lerna-3.0.0-rc.0.tgz#ce7aa6a13151d75e36fe92cf6c9dd27821acae30"
+lerna@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/lerna/-/lerna-3.0.4.tgz#e072601abde4f1b2123bc459f6e1df1060feb71e"
   dependencies:
-    "@lerna/cli" "^3.0.0-rc.0"
+    "@lerna/cli" "^3.0.4"
     import-local "^1.0.0"
     npmlog "^4.1.2"
 
