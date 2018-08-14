@@ -21,7 +21,12 @@ test('scope-enum is function', t => {
 
 test('scope-enum does not throw for missing context', async t => {
 	const {'scope-enum': fn} = config.rules;
-	await t.notThrows(async () => fn());
+	try {
+		await fn();
+		t.pass();
+	} catch (err) {
+		t.fail();
+	}
 });
 
 test('scope-enum has expected severity', async t => {
@@ -55,7 +60,12 @@ test.failing(
 	async t => {
 		const {'scope-enum': fn} = config.rules;
 		const cwd = await npm.bootstrap('fixtures/version-mismatch');
-		await t.throws(async () => fn({cwd}));
+		try {
+			await fn({cwd});
+			t.fail();
+		} catch (err) {
+			t.pass();
+		}
 	}
 );
 
