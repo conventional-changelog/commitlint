@@ -3,11 +3,11 @@
 # @commitlint/config-conventional
 
 Shareable `commitlint` config enforcing [conventional commits](https://conventionalcommits.org/).
-Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
+Use with [@commitlint/cli](https://npm.im/@commitlint/cli) and [@commitlint/prompt-cli](https://npm.im/@commitlint/prompt-cli).
 
 | :warning: |  |
 |:-------:|--|
-| **IMPORTANT** | This is a direct replacement for [@commitlint/config-angular](../config-angular) prior to version 4. `config-angular` diverged from the conventional commit convention as of version 5. See [#146](https://github.com/marionebl/commitlint/issues/146) for details.  |
+| **IMPORTANT** | This is a direct replacement for [@commitlint/config-angular](https://npm.im/@commitlint/config-angular) prior to version 4. `config-angular` diverged from the conventional commit convention as of version 5. See [#146](https://github.com/marionebl/commitlint/issues/146) for details.  |
 
 ## Getting started
 
@@ -21,7 +21,7 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 
 The following rules are considered problems for `@commitlint/config-conventional` and will yield a non-zero exit code when not met.
 
-Consult [docs/rules](http://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [docs/rules](https://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.
 
 
 #### type-enum
