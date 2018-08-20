@@ -16,6 +16,8 @@ const WILDCARDS = [
 				.trim()
 		),
 	c => c.match(/^Merged (.*?)(in|into) (.*)/),
+	c => c.match(/^Merge remote-tracking branch (.*)/),
+	c => c.match(/^Automatic merge from (.*)/),
 	c => c.match(/^Auto-merged (.*?) into (.*)/)
 ];
 

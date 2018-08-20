@@ -46,6 +46,14 @@ Rule configurations are either of type `array` residing on a key with the rule's
   Infinity
 ```
 
+#### body-max-line-length
+* **condition**: `body` lines has `value` or less characters
+* **rule**: `always`
+* **value**
+```js
+  Infinity
+```
+
 #### body-min-length
 * **condition**: `body` has `value` or more characters
 * **rule**: `always`
@@ -60,6 +68,14 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 #### footer-max-length
 * **condition**: `footer` has `value` or less characters
+* **rule**: `always`
+* **value**
+```js
+  Infinity
+```
+
+#### footer-max-line-length
+* **condition**: `footer` lines has `value` or less characters
 * **rule**: `always`
 * **value**
 ```js
