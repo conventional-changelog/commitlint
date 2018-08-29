@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/lint",
-  "version": "7.0.0",
+  "version": "7.1.0",
   "description": "Lint a string against commitlint rules",
   "main": "lib/index.js",
   "files": [
@@ -74,9 +74,9 @@
     "xo": "0.20.3"
   },
   "dependencies": {
-    "@commitlint/is-ignored": "^7.0.0",
+    "@commitlint/is-ignored": "^7.1.0",
     "@commitlint/parse": "^7.0.0",
-    "@commitlint/rules": "^7.0.0",
+    "@commitlint/rules": "^7.1.0",
     "babel-runtime": "^6.23.0",
     "lodash.topairs": "4.3.0"
   }
