@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.1.0"></a>
+# [7.1.0](https://github.com/marionebl/commitlint/compare/v7.0.1...v7.1.0) (2018-08-29)
+
+
+### Features
+
+* **wildcards:** add new wildcard patterns [#315](https://github.com/marionebl/commitlint/issues/315) ([e9ea17f](https://github.com/marionebl/commitlint/commit/e9ea17f))
+
+
+
+
 <a name="6.1.1"></a>
 ## [6.1.1](https://github.com/marionebl/commitlint/compare/v6.1.0...v6.1.1) (2018-02-22)
 
