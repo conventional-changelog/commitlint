@@ -7443,7 +7443,7 @@ resolve-pathname@^2.1.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
 
-resolve-pkg@1.0.0:
+resolve-pkg@1.0.0, resolve-pkg@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/resolve-pkg/-/resolve-pkg-1.0.0.tgz#e19a15e78aca2e124461dc92b2e3943ef93494d9"
   dependencies:
@@ -7594,6 +7594,10 @@ semver-diff@^2.0.0:
 semver@5.5.0, semver@^5.5.0:
   version "5.5.0"
   resolved "https://registry.npmjs.org/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
+
+semver@^5.5.1:
+  version "5.5.1"
+  resolved "https://registry.npmjs.org/semver/-/semver-5.5.1.tgz#7dfdd8814bdb7cabc7be0fb1d734cfb66c940477"
 
 semver@~5.3.0:
   version "5.3.0"

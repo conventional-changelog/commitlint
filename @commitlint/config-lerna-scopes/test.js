@@ -55,23 +55,15 @@ test('returns expected value for basic lerna repository', async t => {
 	t.deepEqual(value, ['a', 'b']);
 });
 
-test.failing(
-	'throws for repository with .lerna vs .devDependencies.lerna mismatch',
-	async t => {
-		const {'scope-enum': fn} = config.rules;
-		const cwd = await npm.bootstrap('fixtures/version-mismatch');
-		try {
-			await fn({cwd});
-			t.fail();
-		} catch (err) {
-			t.pass();
-		}
-	}
-);
-
 test('returns expected value for scoped lerna repository', async t => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/scoped');
 	const [, , value] = await fn({cwd});
 	t.deepEqual(value, ['a', 'b']);
+});
+
+test('works with lerna version < 3', async t => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = await npm.bootstrap('fixtures/lerna-two');
+	await t.notThrows(async () => fn({cwd}));
 });
