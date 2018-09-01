@@ -48,12 +48,13 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitl
 ```
 
 
-To lint commits before they are created you can use the 'commitmsg' hook as described [here](https://github.com/typicode/husky/blob/master/HOOKS.md#hooks)
-
+To lint commits before they are created you can use Husky's 'commit-msg' hook:
 ```json
 {
-  "scripts": {
-    "commitmsg": "commitlint -E GIT_PARAMS"
+  "husky": {
+    "hooks": {
+      "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
+    }  
   }
 }
 ```
