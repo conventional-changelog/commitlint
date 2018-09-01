@@ -133,6 +133,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 * [conventional-changelog](https://git.io/v18sw) – Generate a changelog from conventional commit history
 * [commitizen](https://git.io/vwTym) – Simple commit conventions for internet citizens
 * [create-semantic-module](https://git.io/vFjFg) – CLI for quickly integrating commitizen and commitlint in new or existing projects
+* [commitlint.io](https://commitlint.io/) - helps your project to ensures nice and tidy commit messages without needing any download or installation
 
 ## License
 Copyright by @marionebl. All `commitlint` packages are released under the MIT license.
