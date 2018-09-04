@@ -53,7 +53,7 @@ To lint commits before they are created you can use Husky's 'commit-msg' hook:
 {
   "husky": {
     "hooks": {
-      "commitmsg": "commitlint -E HUSKY_GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }  
   }
 }
