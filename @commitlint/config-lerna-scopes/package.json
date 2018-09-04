@@ -44,13 +44,13 @@
   },
   "dependencies": {
     "import-from": "2.1.0",
-    "resolve-pkg": "^1.0.0",
-    "semver": "^5.5.1"
+    "resolve-pkg": "1.0.0",
+    "semver": "5.5.1"
   },
   "devDependencies": {
-    "@commitlint/test": "^7.1.1",
+    "@commitlint/test": "7.1.1",
     "@commitlint/utils": "^7.1.1",
-    "@lerna/project": "^3.0.0",
+    "@lerna/project": "3.0.0",
     "ava": "0.22.0",
     "lerna": "3.1.1",
     "xo": "0.20.3"
