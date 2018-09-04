@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/read",
-  "version": "7.1.1",
+  "version": "7.1.2",
   "description": "Read commit messages from a specified range or last edit",
   "main": "lib/index.js",
   "files": [
@@ -59,11 +59,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "7.1.1",
-    "@commitlint/utils": "^7.1.1",
+    "@commitlint/test": "^7.1.2",
+    "@commitlint/utils": "^7.1.2",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.1.1",
+    "babel-preset-commitlint": "^7.1.2",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
@@ -72,7 +72,7 @@
     "xo": "0.20.3"
   },
   "dependencies": {
-    "@commitlint/top-level": "^7.1.1",
+    "@commitlint/top-level": "^7.1.2",
     "@marionebl/sander": "^0.6.0",
     "babel-runtime": "^6.23.0",
     "git-raw-commits": "^1.3.0"

@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-patternplate",
-  "version": "7.1.1",
+  "version": "7.1.2",
   "description": "Lint your commits, patternplate-style",
   "files": [
     "index.js"
@@ -31,12 +31,12 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "dependencies": {
-    "@commitlint/config-angular": "^7.1.1",
+    "@commitlint/config-angular": "^7.1.2",
     "globby": "8.0.1",
     "lodash.merge": "4.6.1"
   },
   "devDependencies": {
-    "@commitlint/utils": "^7.1.1",
+    "@commitlint/utils": "^7.1.2",
     "xo": "0.20.3"
   }
 }
