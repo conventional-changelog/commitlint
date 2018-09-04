@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/assets/logo/logotype_horizontal.png" alt="commitlint" height="100px"></p>
+
 > Lint commit messages
 
 <p align="center">
