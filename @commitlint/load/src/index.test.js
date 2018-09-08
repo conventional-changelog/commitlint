@@ -58,6 +58,7 @@ test('respects cwd option', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends/first-extended');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./second-extended'],
 		rules: {
 			one: 1,
@@ -70,6 +71,7 @@ test('recursive extends', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends');
 	const actual = await load({}, {cwd});
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		rules: {
 			zero: 0,
@@ -84,6 +86,7 @@ test('recursive extends with json file', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		rules: {
 			zero: 0,
@@ -98,6 +101,7 @@ test('recursive extends with yaml file', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		rules: {
 			zero: 0,
@@ -112,6 +116,7 @@ test('recursive extends with js file', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		rules: {
 			zero: 0,
@@ -126,6 +131,7 @@ test('recursive extends with package.json file', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		rules: {
 			zero: 0,
@@ -160,6 +166,7 @@ test('ignores unknow keys', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: [],
 		rules: {
 			foo: 'bar',
@@ -173,6 +180,7 @@ test('ignores unknow keys recursively', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: ['./one'],
 		rules: {
 			zero: 0,
@@ -189,6 +197,7 @@ test('find up from given cwd', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: [],
 		rules: {
 			child: true,
@@ -204,11 +213,23 @@ test('find up config from outside current git repo', async t => {
 	const actual = await load({}, {cwd});
 
 	t.deepEqual(actual, {
+		formatter: '@commitlint/format',
 		extends: [],
 		rules: {
 			child: false,
 			inner: false,
 			outer: true
 		}
+	});
+});
+
+test('respects formatter option', async t => {
+	const cwd = await git.bootstrap('fixtures/formatter');
+	const actual = await load({}, {cwd});
+
+	t.deepEqual(actual, {
+		formatter: 'commitlint-junit',
+		extends: [],
+		rules: {}
 	});
 });
