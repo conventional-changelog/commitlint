@@ -7,91 +7,138 @@ const ok = chalk.bold(`${chalk.green('✔')}   found 0 problems, 0 warnings`);
 
 test('does nothing without arguments', t => {
 	const actual = format();
-	t.deepEqual(actual, [ok]);
+	t.deepEqual(actual, ok);
+});
+
+test('does nothing without report results', t => {
+	const actual = format({results: []});
+	t.deepEqual(actual, ok);
 });
 
 test('does nothing without .errors and .warnings', t => {
-	const actual = format({});
-	t.deepEqual(actual, [ok]);
+	const actual = format({results: [{}]});
+	t.deepEqual(actual, ok);
 });
 
 test('returns empty summary of problems for empty .errors and .warnings', t => {
-	const [msg] = format({
-		errors: [],
-		warnings: []
+	const actual = format({
+		results: [
+			{
+				errors: [],
+				warnings: []
+			}
+		]
 	});
 
-	t.true(msg.includes('0 problems, 0 warnings'));
+	t.true(actual.includes('0 problems, 0 warnings'));
 });
 
 test('returns a correct of empty .errors and .warnings', t => {
-	const [err, prob, msg] = format({
-		errors: [
+	const actualError = format({
+		results: [
 			{
-				level: 2,
-				name: 'error-name',
-				message: 'There was an error'
-			}
-		],
-		warnings: [
-			{
-				level: 1,
-				name: 'warning-name',
-				message: 'There was a problem'
+				errors: [
+					{
+						level: 2,
+						name: 'error-name',
+						message: 'There was an error'
+					}
+				]
 			}
 		]
 	});
 
-	t.true(includes(err, 'There was an error'));
-	t.true(includes(prob, 'There was a problem'));
-	t.true(includes(msg, '1 problems, 1 warnings'));
+	const actualWarning = format({
+		results: [
+			{
+				warnings: [
+					{
+						level: 1,
+						name: 'warning-name',
+						message: 'There was a problem'
+					}
+				]
+			}
+		]
+	});
+
+	t.true(includes(actualError, 'There was an error'));
+	t.true(includes(actualError, '1 problems, 0 warnings'));
+	t.true(includes(actualWarning, 'There was a problem'));
+	t.true(includes(actualWarning, '0 problems, 1 warnings'));
 });
 
 test('uses appropriate signs by default', t => {
-	const [err, warn] = format({
-		errors: [
+	const actualError = format({
+		results: [
 			{
-				level: 2,
-				name: 'error-name',
-				message: 'There was an error'
-			}
-		],
-		warnings: [
-			{
-				level: 1,
-				name: 'warning-name',
-				message: 'There was a problem'
+				errors: [
+					{
+						level: 2,
+						name: 'error-name',
+						message: 'There was an error'
+					}
+				]
 			}
 		]
 	});
 
-	t.true(includes(err, '✖'));
-	t.true(includes(warn, '⚠'));
+	const actualWarning = format({
+		results: [
+			{
+				warnings: [
+					{
+						level: 1,
+						name: 'warning-name',
+						message: 'There was a problem'
+					}
+				]
+			}
+		]
+	});
+
+	t.true(includes(actualError, '✖'));
+	t.true(includes(actualWarning, '⚠'));
 });
 
 test('uses signs as configured', t => {
-	const [err, warn] = format(
+	const options = {signs: ['HNT', 'WRN', 'ERR']};
+	const actualError = format(
 		{
-			errors: [
+			results: [
 				{
-					level: 2,
-					name: 'error-name',
-					message: 'There was an error'
-				}
-			],
-			warnings: [
-				{
-					level: 1,
-					name: 'warning-name',
-					message: 'There was a problem'
+					errors: [
+						{
+							level: 2,
+							name: 'error-name',
+							message: 'There was an error'
+						}
+					]
 				}
 			]
 		},
-		{
-			signs: ['HNT', 'WRN', 'ERR']
-		}
+		{},
+		options
 	);
 
-	t.true(includes(err, 'ERR'));
-	t.true(includes(warn, 'WRN'));
+	const actualWarning = format(
+		{
+			results: [
+				{
+					warnings: [
+						{
+							level: 1,
+							name: 'warning-name',
+							message: 'There was a problem'
+						}
+					]
+				}
+			]
+		},
+		{},
+		options
+	);
+
+	t.true(includes(actualError, 'ERR'));
+	t.true(includes(actualWarning, 'WRN'));
 });
