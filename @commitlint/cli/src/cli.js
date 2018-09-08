@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 
-const format = require('@commitlint/format');
 const load = require('@commitlint/load');
 const lint = require('@commitlint/lint');
 const read = require('@commitlint/read');
@@ -61,6 +60,12 @@ const flags = {
 		alias: 'f',
 		default: null,
 		description: 'lower end of the commit range to lint; applies if edit=false',
+		type: 'string'
+	},
+	format: {
+		alias: 'o',
+		default: null,
+		description: 'output format of the results',
 		type: 'string'
 	},
 	'parser-preset': {
@@ -135,6 +140,7 @@ async function main(options) {
 	const loaded = await load(getSeed(flags), loadOpts);
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
+	const format = loadFormatter(loaded, flags);
 
 	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
 	if (range.edit) {
@@ -246,6 +252,19 @@ function selectParserOpts(parserPreset) {
 	}
 
 	return parserPreset.parserOpts;
+}
+
+function loadFormatter(config, flags) {
+	const moduleName = flags.format || config.formatter;
+	let modulePath;
+
+	try {
+		modulePath = require.resolve(`${moduleName}`);
+	} catch (error) {
+		throw new Error(`Using format ${moduleName}, but cannot find the module.`);
+	}
+
+	return require(modulePath);
 }
 
 // Catch unhandled rejections globally

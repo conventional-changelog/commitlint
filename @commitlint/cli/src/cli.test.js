@@ -239,6 +239,30 @@ test('should not print full commit message when input succeeds', async t => {
 	t.is(actual.code, 0);
 });
 
+test('should fail for invalid formatters from configuration', async t => {
+	const cwd = await git.bootstrap('fixtures/custom-formatter');
+	const actual = await cli([], {cwd})('foo: bar');
+	t.true(
+		actual.stderr.includes(
+			`Using format custom-formatter, but cannot find the module`
+		)
+	);
+	t.is(actual.stdout, '');
+	t.is(actual.code, 1);
+});
+
+test('should fail for invalid formatters from flags', async t => {
+	const cwd = await git.bootstrap('fixtures/custom-formatter');
+	const actual = await cli(['--format', 'through-flag'], {cwd})('foo: bar');
+	t.true(
+		actual.stderr.includes(
+			`Using format through-flag, but cannot find the module`
+		)
+	);
+	t.is(actual.stdout, '');
+	t.is(actual.code, 1);
+});
+
 async function writePkg(payload, options) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await sander.readFile(pkgPath));
