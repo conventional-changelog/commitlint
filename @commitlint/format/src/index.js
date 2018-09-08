@@ -1,15 +1,50 @@
 import chalk from 'chalk';
+import merge from 'lodash.merge';
 
 const DEFAULT_SIGNS = [' ', '⚠', '✖'];
 const DEFAULT_COLORS = ['white', 'yellow', 'red'];
 
-export default function format(report = {}, options = {}) {
+export default function format(report = {}, flags = {}, options = {}) {
+	const opts = merge({color: flags.color}, options);
+	const {results = []} = report;
+
+	if (results.length > 0) {
+		return results
+			.map(
+				result =>
+					`${formatInput(result, opts)}${formatResult(result, opts).join('\n')}`
+			)
+			.join('\n');
+	}
+
+	// Output a summary when nothing is found
+	return formatResult({}, opts).join('\n');
+}
+
+function formatInput(result = {}, options = {}) {
+	const {color: enabled = true} = options;
+	const {errors = [], input = ''} = result;
+
+	if (!input) {
+		return '';
+	}
+
+	const sign = '⧗';
+	const decoration = enabled ? chalk.gray(sign) : sign;
+	const commitText = errors.length > 0 ? `\n${input}\n` : input.split('\n')[0];
+
+	const decoratedInput = enabled ? chalk.bold(commitText) : commitText;
+
+	return `\n${decoration}   input: ${decoratedInput}\n`;
+}
+
+function formatResult(result = {}, options = {}) {
 	const {
 		signs = DEFAULT_SIGNS,
 		colors = DEFAULT_COLORS,
 		color: enabled = true
 	} = options;
-	const {errors = [], warnings = []} = report;
+	const {errors = [], warnings = []} = result;
 
 	const problems = [...errors, ...warnings].map(problem => {
 		const sign = signs[problem.level] || '';
@@ -31,16 +66,16 @@ export default function format(report = {}, options = {}) {
 	return [...problems, enabled ? chalk.bold(summary) : summary];
 }
 
-function selectSign(report) {
-	if (report.errors.length > 0) {
+function selectSign(result) {
+	if (result.errors.length > 0) {
 		return '✖';
 	}
-	return report.warnings.length ? '⚠' : '✔';
+	return result.warnings.length ? '⚠' : '✔';
 }
 
-function selectColor(report) {
-	if (report.errors.length > 0) {
+function selectColor(result) {
+	if (result.errors.length > 0) {
 		return 'red';
 	}
-	return report.warnings.length ? 'yellow' : 'green';
+	return result.warnings.length ? 'yellow' : 'green';
 }
