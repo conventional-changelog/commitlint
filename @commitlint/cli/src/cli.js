@@ -141,28 +141,30 @@ async function main(options) {
 		opts.parserOpts.commentChar = '#';
 	}
 
-	return Promise.all(
-		messages.map(async message => {
-			const report = await lint(message, loaded.rules, opts);
-			const formatted = format(report, {color: flags.color});
-			const input =
-				report.errors.length > 0
-					? `\n${report.input}\n`
-					: message.split('\n')[0];
-
-			if (!flags.quiet) {
-				console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(input)}`);
-				console.log(formatted.join('\n'));
-			}
-
-			if (report.errors.length > 0) {
-				const error = new Error(formatted[formatted.length - 1]);
-				error.type = pkg.name;
-				throw error;
-			}
-			console.log('');
-		})
+	const reports = await Promise.all(
+		messages.map(message => lint(message, loaded.rules, opts))
 	);
+
+	return reports.map(report => {
+		const formatted = format(report, {color: flags.color});
+		const input =
+			report.errors.length > 0
+				? `\n${report.input}\n`
+				: report.input.split('\n')[0];
+
+		if (!flags.quiet) {
+			console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(input)}`);
+			console.log(formatted.join('\n'));
+		}
+
+		if (report.errors.length > 0) {
+			const error = new Error(formatted[formatted.length - 1]);
+			error.type = pkg.name;
+			throw error;
+		}
+		console.log('');
+		return '';
+	});
 }
 
 function checkFromStdin(input, flags) {
@@ -199,7 +201,7 @@ function getEditValue(flags) {
 		}
 		return process.env[flags.env];
 	}
-	const edit = flags.edit;
+	const {edit} = flags;
 	// If the edit flag is set but empty (i.e '-e') we default
 	// to .git/COMMIT_EDITMSG
 	if (edit === '') {
