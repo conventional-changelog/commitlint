@@ -4,7 +4,6 @@ require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 const load = require('@commitlint/load');
 const lint = require('@commitlint/lint');
 const read = require('@commitlint/read');
-const chalk = require('chalk');
 const meow = require('meow');
 const merge = require('lodash.merge');
 const pick = require('lodash.pick');
@@ -118,7 +117,6 @@ async function main(options) {
 	const fromStdin = checkFromStdin(raw, flags);
 
 	const range = pick(flags, 'edit', 'from', 'to');
-	const fmt = new chalk.constructor({enabled: flags.color});
 
 	const input = await (fromStdin ? stdin() : read(range, {cwd: flags.cwd}));
 
@@ -147,30 +145,32 @@ async function main(options) {
 		opts.parserOpts.commentChar = '#';
 	}
 
-	const reports = await Promise.all(
+	const results = await Promise.all(
 		messages.map(message => lint(message, loaded.rules, opts))
 	);
 
-	return reports.map(report => {
-		const formatted = format(report, {color: flags.color});
-		const input =
-			report.errors.length > 0
-				? `\n${report.input}\n`
-				: report.input.split('\n')[0];
+	const report = results.reduce(
+		(info, result) => {
+			info.valid = result.valid ? info.valid : false;
+			info.errorCount += result.errors.length;
+			info.warningCount += result.warnings.length;
+			info.results.push(result);
 
-		if (!flags.quiet) {
-			console.log(`${fmt.grey('⧗')}   input: ${fmt.bold(input)}`);
-			console.log(formatted.join('\n'));
+			return info;
+		},
+		{
+			valid: true,
+			errorCount: 0,
+			warningCount: 0,
+			results: []
 		}
+	);
 
-		if (report.errors.length > 0) {
-			const error = new Error(formatted[formatted.length - 1]);
-			error.type = pkg.name;
-			throw error;
-		}
-		console.log('');
-		return '';
-	});
+	if (!flags.quiet) {
+		process.stdout.write(format(report, flags));
+	}
+
+	process.exit(report.errorCount === 0 ? 0 : 1);
 }
 
 function checkFromStdin(input, flags) {
