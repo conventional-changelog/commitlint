@@ -14,6 +14,7 @@
 --extends, -x          array of shareable configurations to extend
 --help, -h             display this help message
 --from, -f             lower end of the commit range to lint; applies if edit=false
+--format, -o           output format of the results
 --parser-preset, -p    configuration preset to use for conventional-commits-parser
 --quiet, -q            toggle console output
 --to, -t               upper end of the commit range to lint; applies if edit=false
