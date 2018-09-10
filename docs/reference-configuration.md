@@ -19,6 +19,10 @@ type Config = {
      */
     parserPreset?: string;
     /*
+     * Resolveable id to package, from node_modules, which formats the output.
+     */
+    formatter: string;
+    /*
      * Rules to check against
      */
     rules?: {[name: string]: Rule};
@@ -35,6 +39,11 @@ const Configuration: Config = {
      * Referenced packages must be installed
      */
     parserPreset: 'conventional-changelog-atom',
+    /*
+     * Resolve and load @commitlint/format from node_modules.
+     * Referenced package must be installed
+     */
+    formatter: '@commitlint/format',
     /*
      * Any rules defined here will override rules from @commitlint/config-conventional
      */
@@ -133,6 +142,17 @@ module.exports = {
         headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
         headerCorrespondence: ['type', 'scope', 'ticket', 'subject']
     }
+};
+```
+
+## Formatter
+
+Commitlint can output the issues encountered in different formats, if necessary.
+Use ids resolvable by the node resolve algorithm.
+
+```js
+module.exports = {
+    formatter: '@commitlint/format'
 };
 ```
 
