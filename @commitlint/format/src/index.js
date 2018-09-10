@@ -1,24 +1,24 @@
 import chalk from 'chalk';
-import merge from 'lodash.merge';
 
 const DEFAULT_SIGNS = [' ', '⚠', '✖'];
 const DEFAULT_COLORS = ['white', 'yellow', 'red'];
 
-export default function format(report = {}, flags = {}, options = {}) {
-	const opts = merge({color: flags.color}, options);
+export default function format(report = {}, options = {}) {
 	const {results = []} = report;
 
 	if (results.length > 0) {
 		return results
 			.map(
 				result =>
-					`${formatInput(result, opts)}${formatResult(result, opts).join('\n')}`
+					`${formatInput(result, options)}${formatResult(result, options).join(
+						'\n'
+					)}`
 			)
 			.join('\n');
 	}
 
 	// Output a summary when nothing is found
-	return formatResult({}, opts).join('\n');
+	return formatResult({}, options).join('\n');
 }
 
 function formatInput(result = {}, options = {}) {
