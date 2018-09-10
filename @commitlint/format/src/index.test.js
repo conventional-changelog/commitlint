@@ -117,7 +117,6 @@ test('uses signs as configured', t => {
 				}
 			]
 		},
-		{},
 		options
 	);
 
@@ -135,7 +134,6 @@ test('uses signs as configured', t => {
 				}
 			]
 		},
-		{},
 		options
 	);
 
