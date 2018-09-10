@@ -166,11 +166,17 @@ async function main(options) {
 		}
 	);
 
+	const output = format(report, flags);
+
 	if (!flags.quiet) {
-		process.stdout.write(format(report, flags));
+		process.stdout.write(output);
 	}
 
-	process.exit(report.errorCount === 0 ? 0 : 1);
+	if (!report.valid) {
+		const err = new Error(output);
+		err.type = pkg.name;
+		throw err;
+	}
 }
 
 function checkFromStdin(input, flags) {
