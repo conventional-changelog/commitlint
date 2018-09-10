@@ -35,7 +35,7 @@ export default async (message, rules = {}, opts = {}) => {
 	if (missing.length > 0) {
 		const names = Object.keys(implementations);
 		throw new RangeError(
-			`Found missing rule names: ${missing.join(
+			`Found invalid rule names: ${missing.join(
 				', '
 			)}. Supported rule names are: ${names.join(', ')}`
 		);
