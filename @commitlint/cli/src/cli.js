@@ -166,7 +166,7 @@ async function main(options) {
 		}
 	);
 
-	const output = format(report, flags);
+	const output = format(report, {color: flags.color});
 
 	if (!flags.quiet) {
 		process.stdout.write(output);
