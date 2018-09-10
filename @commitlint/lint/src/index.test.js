@@ -59,7 +59,7 @@ test('throws for invalid rule names', async t => {
 		lint('foo', {foo: [2, 'always'], bar: [1, 'never']})
 	);
 
-	t.is(error.message.indexOf('Found missing rule names: foo, bar'), 0);
+	t.is(error.message.indexOf('Found invalid rule names: foo, bar'), 0);
 });
 
 test('throws for invalid rule config', async t => {
