@@ -90,6 +90,7 @@ A number of shared configurations are available to install and use with `commitl
 * [conventional-changelog-lint-config-atom](https://github.com/erikmueller/conventional-changelog-lint-config-atom)
 * [conventional-changelog-lint-config-canonical](https://github.com/gajus/conventional-changelog-lint-config-canonical)
 
+>⚠️ If you want to publish your own shareable config then make sure it has a name of this patter `commitlint-config-emoji-log` or `commitlint-config-your-config-name` — then in extend all you have to write is `emoji-log` or `your-config-name`. 
 
 ## API
 
