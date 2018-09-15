@@ -107,3 +107,7 @@ test('should return true for bitbucket merge commits', t => {
 test('should return true for automatic merge commits', t => {
 	t.true(isIgnored('Auto-merged develop into master'));
 });
+
+test('should return false for commits containing, but not starting, with merge branch', t => {
+	t.false(isIgnored('foo bar Merge branch xxx'));
+});
