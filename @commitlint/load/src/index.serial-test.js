@@ -17,3 +17,19 @@ test.serial('default cwd option to process.cwd()', async t => {
 		process.chdir(before);
 	}
 });
+
+// Test.serial('empty cwd option to process.cwd() should throw error message', async t => {
+// 	const cwd = await fix.bootstrap('fixtures/empty-file');
+// 	const before = process.cwd();
+// 	process.chdir(cwd);
+
+// 	try {
+// 		const actual = await load();
+// 	} catch (err) {
+// 		console.log('-------------------------')
+// 		// t.true(err.includes('OTTO'));
+// 		// throw err;
+// 	} finally {
+// 		process.chdir(before);
+// 	}
+// });
