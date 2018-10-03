@@ -11,7 +11,8 @@ const messages = {
 		'feat(new-parser): introduces a new parsing library\n\nBREAKING CHANGE: new library does not support foo-construct',
 	with: 'test: subject\nbody\n\nBREAKING CHANGE: something important',
 	withMulitLine:
-		'test: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important'
+		'test: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important',
+	withDoubleNewLine: 'fix: some issue\n\ndetailed explanation\n\ncloses #123'
 };
 
 const parsed = {
@@ -21,7 +22,8 @@ const parsed = {
 	without: parse(messages.without),
 	withoutBody: parse(messages.withoutBody),
 	with: parse(messages.with),
-	withMulitLine: parse(messages.withMulitLine)
+	withMulitLine: parse(messages.withMulitLine),
+	withDoubleNewLine: parse(messages.withDoubleNewLine)
 };
 
 test('with simple message should succeed for empty keyword', async t => {
@@ -140,6 +142,18 @@ test('with blank line before footer and multiline body should fail for "never"',
 
 test('with blank line before footer and multiline body should succeed for "always"', async t => {
 	const [actual] = footerLeadingBlank(await parsed.withMulitLine, 'always');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with double blank line before footer and double line in body should fail for "never"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withDoubleNewLine, 'never');
+	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with double blank line before footer and double line in body should succeed for "always"', async t => {
+	const [actual] = footerLeadingBlank(await parsed.withDoubleNewLine, 'always');
 	const expected = true;
 	t.is(actual, expected);
 });
