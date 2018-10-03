@@ -8,7 +8,10 @@ export default (parsed, when) => {
 	}
 
 	const negated = when === 'never';
-	const [leading] = toLines(parsed.raw).slice(toLines(parsed.body).length + 1);
+	const rawLines = toLines(parsed.raw);
+	const bodyLines = toLines(parsed.body);
+	const bodyOffset = bodyLines.length > 0 ? rawLines.indexOf(bodyLines[0]) : 1;
+	const [leading] = rawLines.slice(bodyLines.length + bodyOffset);
 
 	// Check if the first line of footer is empty
 	const succeeds = leading === '';
