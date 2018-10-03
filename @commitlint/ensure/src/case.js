@@ -14,7 +14,7 @@ function ensureCase(raw = '', target = 'lowercase') {
 		.trim();
 	const transformed = toCase(input, target);
 
-	if (transformed === '') {
+	if (transformed === '' || transformed.match(/^\d/)) {
 		return true;
 	}
 
@@ -38,7 +38,7 @@ function toCase(input, target) {
 			return input.toUpperCase();
 		case 'sentence-case':
 		case 'sentencecase': {
-			const word = input.split(' ')[0];
+			const [word] = input.split(' ');
 			return `${toCase(word.charAt(0), 'upper-case')}${toCase(
 				word.slice(1),
 				'lower-case'

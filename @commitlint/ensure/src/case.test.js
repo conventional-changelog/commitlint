@@ -291,3 +291,31 @@ test('false for `LOWERCASE on lowercase', t => {
 	const actual = ensure('`LOWERCASE', 'lowercase');
 	t.is(actual, false);
 });
+
+test('true for numeric on camel-case', t => {
+	t.true(ensure('1.0.0', 'camel-case'));
+});
+
+test('true for numeric on kebab-case', t => {
+	t.true(ensure('1.0.0', 'kebab-case'));
+});
+
+test('true for numeric on snake-case', t => {
+	t.true(ensure('1.0.0', 'snake-case'));
+});
+
+test('true for numeric on pascal-case', t => {
+	t.true(ensure('1.0.0', 'pascal-case'));
+});
+
+test('true for numeric on uppercase', t => {
+	t.true(ensure('1.0.0', 'uppercase'));
+});
+
+test('true for numeric on sentencecase', t => {
+	t.true(ensure('1.0.0', 'sentencecase'));
+});
+
+test('true for numeric on lowercase', t => {
+	t.true(ensure('1.0.0', 'lowercase'));
+});
