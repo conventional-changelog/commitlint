@@ -6,7 +6,7 @@ const negated = when => when === 'never';
 export default (parsed, when, value) => {
 	const {subject} = parsed;
 
-	if (typeof subject !== 'string') {
+	if (typeof subject !== 'string' || !subject.match(/^[a-z]/i)) {
 		return [true];
 	}
 
