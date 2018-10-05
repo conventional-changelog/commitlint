@@ -4,6 +4,7 @@ import subjectCase from './subject-case';
 
 const messages = {
 	empty: 'test:\n',
+	numeric: 'test: 1.0.0',
 	lowercase: 'test: subject',
 	mixedcase: 'test: sUbJeCt',
 	uppercase: 'test: SUBJECT',
@@ -16,6 +17,7 @@ const messages = {
 
 const parsed = {
 	empty: parse(messages.empty),
+	numeric: parse(messages.numeric),
 	lowercase: parse(messages.lowercase),
 	mixedcase: parse(messages.mixedcase),
 	uppercase: parse(messages.uppercase),
@@ -322,5 +324,29 @@ test('with uppercase scope should fail for "never [uppercase, lowercase]"', asyn
 		'lowercase'
 	]);
 	const expected = false;
+	t.is(actual, expected);
+});
+
+test('with numeric subject should succeed for "never lowercase"', async t => {
+	const [actual] = subjectCase(await parsed.numeric, 'never', 'lowercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with numeric subject should succeed for "always lowercase"', async t => {
+	const [actual] = subjectCase(await parsed.numeric, 'always', 'lowercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with numeric subject should succeed for "never uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.numeric, 'never', 'uppercase');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with numeric subject should succeed for "always uppercase"', async t => {
+	const [actual] = subjectCase(await parsed.numeric, 'always', 'uppercase');
+	const expected = true;
 	t.is(actual, expected);
 });
