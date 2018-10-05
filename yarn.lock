@@ -53,11 +53,11 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
-"@commitlint/test@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.1.1.tgz#2fcdd5b94313c71d902c800ff95592a7422033ac"
+"@commitlint/test@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.1.2.tgz#a9d196b8a7550ff11a65746e89a1d329cde6c815"
   dependencies:
-    "@commitlint/utils" "^7.1.1"
+    "@commitlint/utils" "^7.1.2"
     "@marionebl/sander" "0.6.1"
     execa "0.9.0"
     pkg-dir "2.0.0"
@@ -5662,7 +5662,21 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-meow@3.7.0, meow@^3.3.0, meow@^3.7.0:
+meow@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
+  dependencies:
+    camelcase-keys "^4.0.0"
+    decamelize-keys "^1.0.0"
+    loud-rejection "^1.0.0"
+    minimist-options "^3.0.1"
+    normalize-package-data "^2.3.4"
+    read-pkg-up "^3.0.0"
+    redent "^2.0.0"
+    trim-newlines "^2.0.0"
+    yargs-parser "^10.0.0"
+
+meow@^3.3.0, meow@^3.7.0:
   version "3.7.0"
   resolved "https://registry.npmjs.org/meow/-/meow-3.7.0.tgz#72cb668b425228290abbfa856892587308a801fb"
   dependencies:
@@ -5677,7 +5691,7 @@ meow@3.7.0, meow@^3.3.0, meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
-meow@4.0.0, meow@^4.0.0:
+meow@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/meow/-/meow-4.0.0.tgz#fd5855dd008db5b92c552082db1c307cba20b29d"
   dependencies:
@@ -5690,20 +5704,6 @@ meow@4.0.0, meow@^4.0.0:
     read-pkg-up "^3.0.0"
     redent "^2.0.0"
     trim-newlines "^2.0.0"
-
-meow@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
-  dependencies:
-    camelcase-keys "^4.0.0"
-    decamelize-keys "^1.0.0"
-    loud-rejection "^1.0.0"
-    minimist-options "^3.0.1"
-    normalize-package-data "^2.3.4"
-    read-pkg-up "^3.0.0"
-    redent "^2.0.0"
-    trim-newlines "^2.0.0"
-    yargs-parser "^10.0.0"
 
 merge2@1.2.1:
   version "1.2.1"
