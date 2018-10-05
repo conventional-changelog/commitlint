@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const execa = require('execa');
 const meow = require('meow');
-const prompter = require('@commitlint/prompt').prompter;
+const {prompter} = require('@commitlint/prompt');
 
 const HELP = `
 	Usage
@@ -17,8 +17,20 @@ main(meow(HELP)).catch(err => {
 	});
 });
 
-function main() {
+async function main() {
+	if (await isStageEmpty()) {
+		console.log(
+			`Nothing to commit. Stage your changes via "git add" execute "commit" again`
+		);
+		process.exit(1);
+	}
+
 	return prompt();
+}
+
+async function isStageEmpty() {
+	const result = await execa('git', ['diff', '--cached']);
+	return result.stdout === '';
 }
 
 function commit(message) {
