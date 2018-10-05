@@ -53,11 +53,11 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
-"@commitlint/test@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.1.1.tgz#2fcdd5b94313c71d902c800ff95592a7422033ac"
+"@commitlint/test@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.1.2.tgz#a9d196b8a7550ff11a65746e89a1d329cde6c815"
   dependencies:
-    "@commitlint/utils" "^7.1.1"
+    "@commitlint/utils" "^7.1.2"
     "@marionebl/sander" "0.6.1"
     execa "0.9.0"
     pkg-dir "2.0.0"
@@ -2458,19 +2458,19 @@ contains-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/contains-path/-/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"
 
-conventional-changelog-angular@1.6.6, conventional-changelog-angular@^1.6.6:
+conventional-changelog-angular@5.0.1, conventional-changelog-angular@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-5.0.1.tgz#f96431b76de453333a909decd02b15cb5bd2d364"
+  dependencies:
+    compare-func "^1.3.1"
+    q "^1.5.1"
+
+conventional-changelog-angular@^1.6.6:
   version "1.6.6"
   resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-1.6.6.tgz#b27f2b315c16d0a1f23eb181309d0e6a4698ea0f"
   dependencies:
     compare-func "^1.3.1"
     q "^1.5.1"
-
-conventional-changelog-angular@^1.3.3:
-  version "1.5.2"
-  resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-1.5.2.tgz#2b38f665fe9c5920af1a2f82f547f4babe6de57c"
-  dependencies:
-    compare-func "^1.3.1"
-    q "^1.4.1"
 
 conventional-changelog-atom@^0.2.8:
   version "0.2.8"
