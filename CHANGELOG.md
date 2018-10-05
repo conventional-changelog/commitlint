@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/marionebl/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
+
+
+### Bug Fixes
+
+* **rules:** include possible body offset in footer leading blank ([ff0111a](https://github.com/marionebl/commitlint/commit/ff0111a))
+* handle case rules for numerics correctly ([cadcfed](https://github.com/marionebl/commitlint/commit/cadcfed))
+* ignore merge messages with text after newline ([b32bc93](https://github.com/marionebl/commitlint/commit/b32bc93))
+* use grouped regex to ignore merge commits ([#439](https://github.com/marionebl/commitlint/issues/439)) ([905e9d5](https://github.com/marionebl/commitlint/commit/905e9d5))
+
+
+### Features
+
+* **cli:** add format option for report output ([1ecf097](https://github.com/marionebl/commitlint/commit/1ecf097))
+* **load:** add formatter option with default value ([b0e63d9](https://github.com/marionebl/commitlint/commit/b0e63d9))
+
+
+
+
 <a name="7.1.2"></a>
 ## [7.1.2](https://github.com/marionebl/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
 

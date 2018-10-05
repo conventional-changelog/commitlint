@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/marionebl/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
+
+
+### Bug Fixes
+
+* ignore merge messages with text after newline ([b32bc93](https://github.com/marionebl/commitlint/commit/b32bc93))
+* use grouped regex to ignore merge commits ([#439](https://github.com/marionebl/commitlint/issues/439)) ([905e9d5](https://github.com/marionebl/commitlint/commit/905e9d5))
+
+
+
+
 <a name="7.1.2"></a>
 ## [7.1.2](https://github.com/marionebl/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
 

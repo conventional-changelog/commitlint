@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/marionebl/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
+
+
+### Features
+
+* **load:** add formatter option with default value ([b0e63d9](https://github.com/marionebl/commitlint/commit/b0e63d9))
+
+
+
+
 <a name="7.1.2"></a>
 ## [7.1.2](https://github.com/marionebl/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
 

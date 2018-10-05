@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.2.0"></a>
+# [7.2.0](https://github.com/marionebl/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
+
+
+### Bug Fixes
+
+* **rules:** include possible body offset in footer leading blank ([ff0111a](https://github.com/marionebl/commitlint/commit/ff0111a))
+* handle case rules for numerics correctly ([cadcfed](https://github.com/marionebl/commitlint/commit/cadcfed))
+
+
+
+
 <a name="7.1.2"></a>
 ## [7.1.2](https://github.com/marionebl/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
 
