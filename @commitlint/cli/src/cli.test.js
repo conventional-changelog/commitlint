@@ -263,6 +263,23 @@ test('should fail for invalid formatters from flags', async t => {
 	t.is(actual.code, 1);
 });
 
+test('should work with absolute formatter path', async t => {
+	const formatterPath = path.resolve(__dirname, '../fixtures/custom-formatter/formatters/custom.js');
+	const cwd = await git.bootstrap('fixtures/custom-formatter');
+	const actual = await cli(['--format', formatterPath], {cwd})('test: this should work');
+
+	t.true(actual.stdout.includes('custom-formatter-ok'));
+	t.is(actual.code, 0);
+});
+
+test('should work with relative formatter path', async t => {
+	const cwd = path.resolve(await git.bootstrap('fixtures/custom-formatter'), './formatters');
+	const actual = await cli(['--format', './custom.js'], {cwd})('test: this should work');
+
+	t.true(actual.stdout.includes('custom-formatter-ok'));
+	t.is(actual.code, 0);
+});
+
 async function writePkg(payload, options) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await sander.readFile(pkgPath));

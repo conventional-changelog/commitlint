@@ -8,6 +8,8 @@ const meow = require('meow');
 const merge = require('lodash.merge');
 const pick = require('lodash.pick');
 const stdin = require('get-stdin');
+const resolveFrom = require('resolve-from');
+const resolveGlobal = require('resolve-global');
 
 const pkg = require('../package');
 const help = require('./help');
@@ -260,17 +262,23 @@ function selectParserOpts(parserPreset) {
 	return parserPreset.parserOpts;
 }
 
+function resolveModulePath(name, cwd) {
+	try {
+		return require.resolve(name);
+	} catch (error) {
+		return resolveFrom.silent(cwd, name) || resolveGlobal.silent(name);
+	}
+}
+
 function loadFormatter(config, flags) {
 	const moduleName = flags.format || config.formatter;
-	let modulePath;
+	const modulePath = moduleName && resolveModulePath(moduleName, flags.cwd);
 
-	try {
-		modulePath = require.resolve(`${moduleName}`);
-	} catch (error) {
-		throw new Error(`Using format ${moduleName}, but cannot find the module.`);
+	if (modulePath) {
+		return require(modulePath);
 	}
 
-	return require(modulePath);
+	throw new Error(`Using format ${moduleName}, but cannot find the module.`);
 }
 
 // Catch unhandled rejections globally
