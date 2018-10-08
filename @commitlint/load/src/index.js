@@ -52,6 +52,11 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 			.parserOpts).parserOpts;
 	}
 
+	// Resolve config-relative formatter module
+	if (typeof config.formatter === 'string') {
+		preset.formatter = resolveFrom.silent(base, config.formatter) || config.formatter;
+	}
+
 	// Execute rule config functions if needed
 	const executed = await Promise.all(
 		['rules']

@@ -1,6 +1,7 @@
 import path from 'path';
 import {fix, git} from '@commitlint/test';
 import test from 'ava';
+import resolveFrom from 'resolve-from';
 
 import load from '.';
 
@@ -229,6 +230,28 @@ test('respects formatter option', async t => {
 
 	t.deepEqual(actual, {
 		formatter: 'commitlint-junit',
+		extends: [],
+		rules: {}
+	});
+});
+
+test('resolves formatter relative from config directory', async t => {
+	const cwd = await git.bootstrap('fixtures/formatter-local-module');
+	const actual = await load({}, {cwd});
+
+	t.deepEqual(actual, {
+		formatter: resolveFrom(cwd, './formatters/custom.js'),
+		extends: [],
+		rules: {}
+	});
+});
+
+test('returns formatter name when unable to resolve from config directory', async t => {
+	const cwd = await git.bootstrap('fixtures/formatter-local-module');
+	const actual = await load({formatter: './doesnt/exists.js'}, {cwd});
+
+	t.deepEqual(actual, {
+		formatter: './doesnt/exists.js',
 		extends: [],
 		rules: {}
 	});
