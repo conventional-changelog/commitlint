@@ -262,17 +262,12 @@ function selectParserOpts(parserPreset) {
 	return parserPreset.parserOpts;
 }
 
-function resolveModulePath(name, cwd) {
-	try {
-		return require.resolve(name);
-	} catch (error) {
-		return resolveFrom.silent(cwd, name) || resolveGlobal.silent(name);
-	}
-}
-
 function loadFormatter(config, flags) {
 	const moduleName = flags.format || config.formatter;
-	const modulePath = moduleName && resolveModulePath(moduleName, flags.cwd);
+	const modulePath =
+		resolveFrom.silent(__dirname, moduleName) ||
+		resolveFrom.silent(flags.cwd, moduleName) ||
+		resolveGlobal.silent(moduleName);
 
 	if (modulePath) {
 		return require(modulePath);
