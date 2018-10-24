@@ -61,7 +61,7 @@ async function getEditFilePath(top, edit) {
 		} else {
 			const gitFile = await sander.readFile(dotgitPath, 'utf8');
 			const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');
-			editFilePath = path.join(top, relativeGitPath, 'COMMIT_EDITMSG');
+			editFilePath = path.resolve(top, relativeGitPath, 'COMMIT_EDITMSG');
 		}
 	}
 
