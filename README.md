@@ -62,8 +62,8 @@ To lint commits before they are created you can use Husky's 'commit-msg' hook:
 
 **Detailed Setup instructions**
 
-* [Local setup](http://marionebl.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
-* [CI setup](http://marionebl.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
+* [Local setup](https://marionebl.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
+* [CI setup](https://marionebl.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
 
 
 ## CLI
@@ -180,5 +180,5 @@ npx yarn run publish
 
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square
 
-[11]: http://devtoolscommunity.herokuapp.com/badge.svg?style=flat-square
-[12]: http://devtoolscommunity.herokuapp.com
+[11]: https://devtoolscommunity.herokuapp.com/badge.svg?style=flat-square
+[12]: https://devtoolscommunity.herokuapp.com
