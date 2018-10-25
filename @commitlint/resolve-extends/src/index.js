@@ -3,8 +3,8 @@ import path from 'path';
 import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
 import requireUncached from 'require-uncached';
 import resolveFrom from 'resolve-from';
-import merge from 'lodash.merge';
-import omit from 'lodash.omit';
+import merge from 'lodash/merge';
+import omit from 'lodash/omit';
 
 // Resolve extend configs
 export default function resolveExtends(config = {}, context = {}) {

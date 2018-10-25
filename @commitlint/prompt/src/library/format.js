@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import entries from 'lodash.topairs';
+import entries from 'lodash/topairs';
 
 export default format;
 

@@ -8,7 +8,7 @@ const meow = require('meow');
 const readPkg = require('read-pkg');
 const requireFromString = require('require-from-string');
 const tar = require('tar-fs');
-const values = require('lodash.values');
+const values = require('lodash/values');
 const fix = require('@commitlint/test').fix;
 
 const builtin = require.resolve('is-builtin-module');

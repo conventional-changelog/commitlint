@@ -1,6 +1,6 @@
 import test from 'ava';
 import chalk from 'chalk';
-import includes from 'lodash.includes';
+import includes from 'lodash/includes';
 import format from '.';
 
 const ok = chalk.bold(`${chalk.green('✔')}   found 0 problems, 0 warnings`);

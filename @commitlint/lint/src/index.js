@@ -2,7 +2,7 @@ import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import implementations from '@commitlint/rules';
-import entries from 'lodash.topairs';
+import entries from 'lodash/topairs';
 
 const buildCommitMesage = ({header, body, footer}) => {
 	let message = header;

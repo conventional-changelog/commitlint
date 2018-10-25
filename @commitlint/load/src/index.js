@@ -2,10 +2,10 @@ import path from 'path';
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
-import entries from 'lodash.topairs';
-import merge from 'lodash.merge';
-import mergeWith from 'lodash.mergewith';
-import pick from 'lodash.pick';
+import entries from 'lodash/topairs';
+import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergewith';
+import pick from 'lodash/pick';
 import resolveFrom from 'resolve-from';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
@@ -54,7 +54,8 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 
 	// Resolve config-relative formatter module
 	if (typeof config.formatter === 'string') {
-		preset.formatter = resolveFrom.silent(base, config.formatter) || config.formatter;
+		preset.formatter =
+			resolveFrom.silent(base, config.formatter) || config.formatter;
 	}
 
 	// Execute rule config functions if needed
