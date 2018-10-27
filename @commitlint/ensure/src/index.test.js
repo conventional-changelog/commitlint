@@ -1,7 +1,7 @@
 import path from 'path';
 import test from 'ava';
 import globby from 'globby';
-import camelCase from 'lodash/camelcase';
+import camelCase from 'lodash/camelCase';
 import values from 'lodash/values';
 import * as ensure from '.';
 

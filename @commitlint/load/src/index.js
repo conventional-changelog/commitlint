@@ -2,9 +2,9 @@ import path from 'path';
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
-import entries from 'lodash/topairs';
+import entries from 'lodash/toPairs';
 import merge from 'lodash/merge';
-import mergeWith from 'lodash/mergewith';
+import mergeWith from 'lodash/mergeWith';
 import pick from 'lodash/pick';
 import resolveFrom from 'resolve-from';
 
