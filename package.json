@@ -8,12 +8,10 @@
     "build": "lerna run build --stream --parallel --include-filtered-dependencies",
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "node @commitlint/prompt-cli/cli.js",
-    "commitmsg": "node @commitlint/cli/lib/cli.js -E GIT_PARAMS",
     "deps": "lerna run deps",
     "pkg": "lerna run pkg",
     "docs": "docsify serve docs",
     "lint": "lerna run lint",
-    "precommit": "lint-staged",
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "lerna run start --stream --parallel --include-filtered-dependencies",
@@ -101,5 +99,11 @@
     "npx": "9.7.1",
     "prettier": "1.10.2",
     "xo": "0.20.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node @commitlint/cli/lib/cli.js -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   }
 }
