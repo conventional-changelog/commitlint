@@ -21,34 +21,40 @@ const cli = (args, options) => {
 };
 
 test('should throw when called without [input]', async t => {
-	const cwd = await git.bootstrap('fixtures/empty');
+	const cwd = await git.bootstrap('fixtures/default');
 	const actual = await cli([], {cwd})();
 	t.is(actual.code, 1);
 });
 
 test('should reprint input from stdin', async t => {
-	const cwd = await git.bootstrap('fixtures/empty');
+	const cwd = await git.bootstrap('fixtures/default');
 	const actual = await cli([], {cwd})('foo: bar');
 	t.true(actual.stdout.includes('foo: bar'));
 });
 
 test('should produce no success output with --quiet flag', async t => {
-	const cwd = await git.bootstrap('fixtures/empty');
+	const cwd = await git.bootstrap('fixtures/default');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');
 	t.is(actual.stdout, '');
 	t.is(actual.stderr, '');
 });
 
 test('should produce no success output with -q flag', async t => {
-	const cwd = await git.bootstrap('fixtures/empty');
+	const cwd = await git.bootstrap('fixtures/default');
 	const actual = await cli(['-q'], {cwd})('foo: bar');
 	t.is(actual.stdout, '');
 	t.is(actual.stderr, '');
 });
 
-test('should succeed for input from stdin without rules', async t => {
+test('should fail for input from stdin without rules', async t => {
 	const cwd = await git.bootstrap('fixtures/empty');
 	const actual = await cli([], {cwd})('foo: bar');
+	t.is(actual.code, 1);
+});
+
+test('should succeed for input from stdin with rules', async t => {
+	const cwd = await git.bootstrap('fixtures/default');
+	const actual = await cli([], {cwd})('type: bar');
 	t.is(actual.code, 0);
 });
 
@@ -118,14 +124,17 @@ test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
 	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
 });
 
-test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
-	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `'${bin}' -e %GIT_PARAMS%`}}, {cwd});
+test.failing(
+	'should work with husky via commitlint -e %GIT_PARAMS%',
+	async () => {
+		const cwd = await git.bootstrap('fixtures/husky/integration');
+		await writePkg({scripts: {commitmsg: `'${bin}' -e %GIT_PARAMS%`}}, {cwd});
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
-});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	}
+);
 
 test('should work with husky via commitlint -e $HUSKY_GIT_PARAMS', async () => {
 	const cwd = await git.bootstrap('fixtures/husky/integration');
@@ -152,7 +161,7 @@ test('should work with husky via commitlint -e %HUSKY_GIT_PARAMS%', async () => 
 });
 
 test('should allow reading of environment variables for edit file, succeeding if valid', async t => {
-	const cwd = await git.bootstrap();
+	const cwd = await git.bootstrap('fixtures/simple');
 	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
 	const actual = await cli(['--env', 'variable'], {
 		cwd,
@@ -254,8 +263,8 @@ test('should print full commit message when input from stdin fails', async t => 
 });
 
 test('should not print full commit message when input succeeds', async t => {
-	const cwd = await git.bootstrap('fixtures/empty');
-	const message = 'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
+	const cwd = await git.bootstrap('fixtures/default');
+	const message = 'type: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
 	const actual = await cli([], {cwd})(message);
 
 	t.false(actual.stdout.includes(message));

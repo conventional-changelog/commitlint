@@ -150,6 +150,26 @@ async function main(options) {
 		messages.map(message => lint(message, loaded.rules, opts))
 	);
 
+	if (Object.keys(loaded.rules).length === 0) {
+		results.push({
+			valid: false,
+			errors: [
+				{
+					level: 2,
+					valid: false,
+					name: 'empty-rules',
+					message: [
+						'Please add rules to your `commitlint.config.js`',
+						'    - Getting started guide: https://git.io/fpUzJ',
+						'    - Example config: https://git.io/fpUzm'
+					].join('\n')
+				}
+			],
+			warnings: [],
+			input: ''
+		});
+	}
+
 	const report = results.reduce(
 		(info, result) => {
 			info.valid = result.valid ? info.valid : false;
@@ -270,7 +290,7 @@ function selectParserOpts(parserPreset) {
 }
 
 function loadFormatter(config, flags) {
-	const moduleName = flags.format || config.formatter;
+	const moduleName = flags.format || config.formatter || '@commitlint/format';
 	const modulePath =
 		resolveFrom.silent(__dirname, moduleName) ||
 		resolveFrom.silent(flags.cwd, moduleName) ||

@@ -4,7 +4,6 @@ import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
 import {toPairs, merge, mergeWith, pick} from 'lodash';
 import resolveFrom from 'resolve-from';
-// Import chalk from 'chalk';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input =>
@@ -97,13 +96,6 @@ async function loadConfig(cwd, configPath) {
 	if (local) {
 		return local;
 	}
-	// Because local is `null`
-	// throw new Error(`123`);
-
-	console.log('NEIN DER ZWERG DAS IST JA OTTO');
-
-	// This does not show up in tests
-	// chalk.yellow(`⚠ ${chalk.bold('config file')} may not be empty.`);
 
 	return {};
 }
