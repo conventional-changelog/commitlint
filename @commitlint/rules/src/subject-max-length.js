@@ -9,6 +9,6 @@ export default (parsed, when, value) => {
 
 	return [
 		maxLength(input, value),
-		`footer must not be longer than ${value} characters`
+		`subject must not be longer than ${value} characters`
 	];
 };
