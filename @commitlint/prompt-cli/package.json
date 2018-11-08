@@ -13,7 +13,8 @@
     "commit": "$npm_package_bin_commit",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-main",
-    "lint": "xo"
+    "lint": "xo",
+    "test": "ava -c 4 --verbose"
   },
   "xo": false,
   "repository": {
@@ -36,7 +37,10 @@
   },
   "dependencies": {
     "@commitlint/prompt": "^7.2.0",
+    "@commitlint/test": "^7.1.2",
+    "ava": "^0.25.0",
     "execa": "0.9.0",
-    "meow": "3.7.0"
+    "meow": "3.7.0",
+    "string-to-stream": "^1.1.1"
   }
 }
