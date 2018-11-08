@@ -12,6 +12,6 @@ export default (parsed, when, value) => {
 
 	return [
 		negated ? !hasStop : hasStop,
-		message(['message', negated ? 'may not' : 'must', 'end with full stop'])
+		message(['subject', negated ? 'may not' : 'must', 'end with full stop'])
 	];
 };
