@@ -28,7 +28,7 @@ Install `husky` as devDependency, a handy git hook helper available on npm.
 npm install --save-dev husky
 ```
 
-This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/HOOKS.md#hooks) directly into our `package.json` scripts.
+This allows us to add [git hooks](https://git-scm.com/docs/githooks) directly into our `package.json` scripts.
 
 ```json
 {
