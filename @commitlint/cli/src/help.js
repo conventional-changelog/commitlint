@@ -26,7 +26,7 @@ module.exports = flags => {
 			);
 			const ds = defaults ? `, defaults to: ${defaults}` : '';
 			const length = flags.reduce((sum, flag) => sum + flag.length, 0);
-			return `${fs.join(',')}${' '.repeat(4 + longest - length)}${desc}${ds}`;
+			return `${fs.join(',')}${' '.repeat(Math.max(4 + longest - length, 0))}${desc}${ds}`;
 		})
 		.join('\n');
 };
