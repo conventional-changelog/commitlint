@@ -28,17 +28,20 @@ Install `husky` as devDependency, a handy git hook helper available on npm.
 npm install --save-dev husky
 ```
 
-This allows us to add [git hooks](https://github.com/typicode/husky/blob/master/HOOKS.md#hooks) directly into our `package.json` scripts.
+This allows us to add [git hooks](https://git-scm.com/docs/githooks) directly into our `package.json` via the `husky.hooks` field.
 
 ```json
+// package.json
 {
-  "scripts": {
-    "commitmsg": "commitlint -E GIT_PARAMS"
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }  
   }
 }
 ```
 
-Using `commitmsg` gives us exactly what we want: It is executed whenever a new commit is created. Passing husky's `GIT_PARAMS` to `commitlint` via the `-E|--env` flag directs it to the relevant edit file. `-e` would default to `.git/COMMIT_EDITMSG`.
+Using `commit-msg` gives us exactly what we want: It is executed whenever a new commit is created. Passing husky's `HUSKY_GIT_PARAMS` to `commitlint` via the `-E|--env` flag directs it to the relevant edit file. `-e` would default to `.git/COMMIT_EDITMSG`.
 
 ## Test
 
