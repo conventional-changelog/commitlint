@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build --stream --parallel --include-filtered-dependencies",
+    "watch": "lerna run watch --stream --parallel --include-filtered-dependencies",
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "node @commitlint/prompt-cli/cli.js",
     "deps": "lerna run deps",
