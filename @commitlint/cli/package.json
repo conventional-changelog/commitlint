@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "7.2.0",
+  "version": "7.2.1",
   "description": "Lint your commit messages",
   "files": [
     "index.js",
@@ -75,15 +75,17 @@
     "xo": "0.20.3"
   },
   "dependencies": {
-    "@commitlint/format": "^7.2.0",
-    "@commitlint/lint": "^7.2.0",
-    "@commitlint/load": "^7.2.0",
+    "@commitlint/format": "^7.2.1",
+    "@commitlint/lint": "^7.2.1",
+    "@commitlint/load": "^7.2.1",
     "@commitlint/read": "^7.1.2",
     "babel-polyfill": "6.26.0",
     "chalk": "2.3.1",
     "get-stdin": "5.0.1",
     "lodash.merge": "4.6.1",
     "lodash.pick": "4.4.0",
-    "meow": "5.0.0"
+    "meow": "5.0.0",
+    "resolve-from": "^4.0.0",
+    "resolve-global": "^0.1.0"
   }
 }

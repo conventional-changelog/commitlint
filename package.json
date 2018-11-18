@@ -6,14 +6,13 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run build --stream --parallel --include-filtered-dependencies",
+    "watch": "lerna run watch --stream --parallel --include-filtered-dependencies",
     "clean": "npx lerna clean --yes && npx lerna run clean --stream --parallel --include-filtered-dependencies",
     "commit": "node @commitlint/prompt-cli/cli.js",
-    "commitmsg": "node @commitlint/cli/lib/cli.js -E GIT_PARAMS",
     "deps": "lerna run deps",
     "pkg": "lerna run pkg",
     "docs": "docsify serve docs",
     "lint": "lerna run lint",
-    "precommit": "lint-staged",
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "lerna run start --stream --parallel --include-filtered-dependencies",
@@ -92,14 +91,20 @@
     "@marionebl/sander": "0.6.1"
   },
   "devDependencies": {
-    "docsify-cli": "4.2.0",
+    "docsify-cli": "4.2.1",
     "eslint": "4.18.1",
     "eslint-config-prettier": "2.9.0",
-    "husky": "0.14.3",
+    "husky": "1.1.2",
     "lerna": "2.11.0",
     "lint-staged": "6.1.1",
     "npx": "9.7.1",
     "prettier": "1.10.2",
     "xo": "0.20.3"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node @commitlint/cli/lib/cli.js -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
   }
 }

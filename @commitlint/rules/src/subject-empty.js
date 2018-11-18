@@ -7,6 +7,6 @@ export default (parsed, when) => {
 
 	return [
 		negated ? notEmpty : !notEmpty,
-		message(['message', negated ? 'may not' : 'must', 'be empty'])
+		message(['subject', negated ? 'may not' : 'must', 'be empty'])
 	];
 };
