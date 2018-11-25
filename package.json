@@ -91,13 +91,12 @@
     "@marionebl/sander": "0.6.1"
   },
   "devDependencies": {
-    "docsify-cli": "4.2.1",
+    "docsify-cli": "^4.3.0",
     "eslint": "4.18.1",
     "eslint-config-prettier": "2.9.0",
     "husky": "1.1.2",
     "lerna": "2.11.0",
     "lint-staged": "6.1.1",
-    "npx": "9.7.1",
     "prettier": "1.10.2",
     "xo": "0.20.3"
   },
@@ -106,5 +105,16 @@
       "commit-msg": "node @commitlint/cli/lib/cli.js -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
+  },
+  "resolutions": {
+    "**/lodash": "4.17.11",
+    "docsify-cli/**/randomatic": "3",
+    "docsify-cli/**/stringstream": "0.0.6",
+    "docsify-cli/**/sshpk": "1.14.1",
+    "docsify-cli/**/marked": "0.3.9",
+    "docsify-cli/**/hoek": "5.0.3",
+    "deep-extend": "0.5.1",
+    "moment": "2.19.3",
+    "xo/**/atob": "2.1.0"
   }
 }

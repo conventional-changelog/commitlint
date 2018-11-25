@@ -1,8 +1,7 @@
 import path from 'path';
 import test from 'ava';
 import globby from 'globby';
-import camelCase from 'lodash.camelcase';
-import values from 'lodash.values';
+import {camelCase, values} from 'lodash';
 import * as ensure from '.';
 
 test('exports all rules', async t => {

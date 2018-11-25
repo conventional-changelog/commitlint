@@ -1,6 +1,6 @@
 import test from 'ava';
 import chalk from 'chalk';
-import includes from 'lodash.includes';
+import {includes} from 'lodash';
 import format from '.';
 
 const ok = chalk.bold(

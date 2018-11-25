@@ -1,6 +1,6 @@
 const path = require('path');
 const globby = require('globby');
-const merge = require('lodash.merge');
+const {merge} = require('lodash');
 
 function pathToId(root, filePath) {
 	const relativePath = path.relative(root, filePath);

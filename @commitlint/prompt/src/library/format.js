@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import entries from 'lodash.topairs';
+import {toPairs} from 'lodash';
 
 export default format;
 
@@ -11,7 +11,7 @@ export default format;
  */
 function format(input, debug = false) {
 	const results = debug
-		? entries(input).reduce((registry, item) => {
+		? toPairs(input).reduce((registry, item) => {
 				const [name, value] = item;
 				registry[name] =
 					value === null ? chalk.grey(`<${name}>`) : chalk.bold(value);

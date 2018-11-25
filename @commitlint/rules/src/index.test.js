@@ -1,7 +1,7 @@
 import path from 'path';
 import test from 'ava';
 import globby from 'globby';
-import values from 'lodash.values';
+import {values} from 'lodash';
 import rules from '.';
 
 test('exports all rules', async t => {

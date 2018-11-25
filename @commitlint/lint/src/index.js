@@ -2,7 +2,7 @@ import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import implementations from '@commitlint/rules';
-import entries from 'lodash.topairs';
+import {toPairs} from 'lodash';
 
 const buildCommitMesage = ({header, body, footer}) => {
 	let message = header;
@@ -41,7 +41,7 @@ export default async (message, rules = {}, opts = {}) => {
 		);
 	}
 
-	const invalid = entries(rules)
+	const invalid = toPairs(rules)
 		.map(([name, config]) => {
 			if (!Array.isArray(config)) {
 				return new Error(
@@ -106,9 +106,9 @@ export default async (message, rules = {}, opts = {}) => {
 	}
 
 	// Validate against all rules
-	const results = entries(rules)
+	const results = toPairs(rules)
 		.filter(entry => {
-			const [, [level]] = entry;
+			const [, [level]] = toPairs(entry);
 			return level > 0;
 		})
 		.map(entry => {

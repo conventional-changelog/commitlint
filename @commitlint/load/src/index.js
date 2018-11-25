@@ -2,10 +2,7 @@ import path from 'path';
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
-import entries from 'lodash.topairs';
-import merge from 'lodash.merge';
-import mergeWith from 'lodash.mergewith';
-import pick from 'lodash.pick';
+import {toPairs, merge, mergeWith, pick} from 'lodash';
 import resolveFrom from 'resolve-from';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
@@ -67,7 +64,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 			.map(async item => {
 				const [key, value] = item;
 				const executedValue = await Promise.all(
-					entries(value || {}).map(entry => executeRule(entry))
+					toPairs(value || {}).map(entry => executeRule(entry))
 				);
 				return [
 					key,

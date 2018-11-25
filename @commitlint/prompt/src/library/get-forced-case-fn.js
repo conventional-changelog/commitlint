@@ -1,8 +1,4 @@
-import camelCase from 'lodash.camelcase';
-import kebabCase from 'lodash.kebabcase';
-import snakeCase from 'lodash.snakecase';
-import upperFirst from 'lodash.upperfirst';
-import startCase from 'lodash.startcase';
+import * as _ from 'lodash';
 
 /**
  * Get forced case for rule
@@ -42,15 +38,15 @@ export default function getForcedCaseFn(rule) {
 
 	switch (target) {
 		case 'camel-case':
-			return input => camelCase(input);
+			return input => _.camelCase(input);
 		case 'kebab-case':
-			return input => kebabCase(input);
+			return input => _.kebabCase(input);
 		case 'snake-case':
-			return input => snakeCase(input);
+			return input => _.snakeCase(input);
 		case 'pascal-case':
-			return input => upperFirst(camelCase(input));
+			return input => _.upperFirst(_.camelCase(input));
 		case 'start-case':
-			return input => startCase(input);
+			return input => _.startCase(input);
 		case 'upper-case':
 		case 'uppercase':
 			return input => input.toUpperCase();
