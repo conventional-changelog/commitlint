@@ -67,7 +67,7 @@ Common types according to [commitlint-config-conventional (based on the the Angu
 - style
 - test
 
-These can be modified by your own configuration.
+These can be modified by [your own configuration](#config).
 
 ### Benefits using commitlint
 - [Why Use Conventional Commits?](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits)
