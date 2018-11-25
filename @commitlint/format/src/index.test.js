@@ -3,7 +3,11 @@ import chalk from 'chalk';
 import includes from 'lodash.includes';
 import format from '.';
 
-const ok = chalk.bold(`${chalk.green('✔')}   found 0 problems, 0 warnings`);
+const ok = chalk.bold(
+	`${chalk.green(
+		'✔'
+	)}   found 0 problems, 0 warnings \n    (Need help? -> https://github.com/marionebl/commitlint#what-is-commitlint)`
+);
 
 test('does nothing without arguments', t => {
 	const actual = format();
