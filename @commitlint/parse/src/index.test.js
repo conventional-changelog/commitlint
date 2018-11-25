@@ -164,3 +164,28 @@ test('parses custom references', async t => {
 		repository: null
 	});
 });
+
+test('uses permissive default regex without parser opts', async t => {
+	const message = 'chore(component,demo): bump';
+	const actual = await parse(message);
+
+	t.is(actual.scope, 'component,demo');
+});
+
+test('uses permissive default regex with other parser opts', async t => {
+	const message = 'chore(component,demo): bump';
+	const actual = await parse(message, undefined, {commentChar: '#'});
+
+	t.is(actual.scope, 'component,demo');
+});
+
+test('uses restrictive default regex in passed parser opts', async t => {
+	const message = 'chore(component,demo): bump';
+	const actual = await parse(message, undefined, {
+		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/
+	});
+
+	t.is(actual.subject, null);
+	t.is(actual.message, undefined);
+	t.is(actual.scope, null);
+});
