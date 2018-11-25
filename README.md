@@ -38,7 +38,7 @@
 * * *
 
 ## What is commitlint
-Commitlint is a linter which is linting your commit-messages according to the [conventional commit format](https://conventionalcommits.org).
+commitlint checks if your commit messages meet the [conventional commit format](https://conventionalcommits.org).
 
 In general the pattern mostly looks like this:
 ```sh
