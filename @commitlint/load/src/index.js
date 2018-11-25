@@ -54,7 +54,8 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 
 	// Resolve config-relative formatter module
 	if (typeof config.formatter === 'string') {
-		preset.formatter = resolveFrom.silent(base, config.formatter) || config.formatter;
+		preset.formatter =
+			resolveFrom.silent(base, config.formatter) || config.formatter;
 	}
 
 	// Execute rule config functions if needed

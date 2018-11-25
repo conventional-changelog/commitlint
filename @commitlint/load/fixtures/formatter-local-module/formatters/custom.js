@@ -1,3 +1,3 @@
-module.exports = function (report) {
+module.exports = function(_report) {
 	return 'ok';
-}
+};
