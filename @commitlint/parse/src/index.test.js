@@ -186,6 +186,23 @@ test('uses restrictive default regex in passed parser opts', async t => {
 	});
 
 	t.is(actual.subject, null);
-	t.is(actual.message, undefined);
+	t.is(actual.scope, null);
+});
+
+test('works with chinese scope by default', async t => {
+	const message = 'fix(面试评价): 测试';
+	const actual = await parse(message, undefined, {commentChar: '#'});
+
+	t.not(actual.subject, null);
+	t.not(actual.scope, null);
+});
+
+test('does not work with chinese scopes with incompatible pattern', async t => {
+	const message = 'fix(面试评价): 测试';
+	const actual = await parse(message, undefined, {
+		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/
+	});
+
+	t.is(actual.subject, null);
 	t.is(actual.scope, null);
 });
