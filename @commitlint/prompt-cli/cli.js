@@ -17,20 +17,21 @@ main(meow(HELP)).catch(err => {
 	});
 });
 
-async function main() {
-	if (await isStageEmpty()) {
-		console.log(
-			`Nothing to commit. Stage your changes via "git add" execute "commit" again`
-		);
-		process.exit(1);
-	}
-
-	return prompt();
+function main() {
+	return isStageEmpty()
+		.then(empty => {
+			if (empty) {
+				console.log(
+					`Nothing to commit. Stage your changes via "git add" execute "commit" again`
+				);
+				process.exit(1);
+			}
+		})
+		.then(() => prompt());
 }
 
-async function isStageEmpty() {
-	const result = await execa('git', ['diff', '--cached']);
-	return result.stdout === '';
+function isStageEmpty() {
+	return execa('git', ['diff', '--cached']).then(r => r.stdout === '');
 }
 
 function commit(message) {
