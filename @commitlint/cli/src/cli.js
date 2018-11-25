@@ -224,21 +224,6 @@ function getEditValue(flags) {
 	if (typeof edit === 'boolean') {
 		return edit;
 	}
-	// The recommended method to specify -e with husky was `commitlint -e $GIT_PARAMS`
-	// This does not work properly with win32 systems, where env variable declarations
-	// use a different syntax
-	// See https://github.com/marionebl/commitlint/issues/103 for details
-	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
-	if (edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%') {
-		console.warn(`Using environment variable syntax (${edit}) in -e |\
---edit is deprecated. Use '{-E|--env} GIT_PARAMS instead'`);
-		if (!('GIT_PARAMS' in process.env)) {
-			throw new Error(
-				`Received ${edit} as value for -e | --edit, but GIT_PARAMS is not available globally.`
-			);
-		}
-		return process.env.GIT_PARAMS;
-	}
 	return edit;
 }
 
