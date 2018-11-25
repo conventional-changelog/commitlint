@@ -62,7 +62,7 @@ function formatResult(result = {}, options = {}) {
 	const decoration = enabled ? chalk[color](sign) : sign;
 	const summary = `${decoration}   found ${errors.length} problems, ${
 		warnings.length
-	} warnings`;
+	} warnings \n    (Need help? -> https://github.com/marionebl/commitlint#what-is-commitlint)`;
 	return [...problems, enabled ? chalk.bold(summary) : summary];
 }
 

@@ -19,6 +19,8 @@
 
 ## Contents
 
+* [What is commitlint](#what-is-commitlint)
+  * [Benefits using commitlint](#benefits-using-commitlint)
 * [Getting started](#getting-started)
 * [CLI](#cli)
 * [Config](#config)
@@ -34,6 +36,43 @@
   * [Publishing a release](#publishing-a-release)
 
 * * *
+
+## What is commitlint
+commitlint checks if your commit messages meet the [conventional commit format](https://conventionalcommits.org).
+
+In general the pattern mostly looks like this:
+```sh
+type(scope?): subject  #scope is optional
+```
+Real world examples can look like this:
+```
+chore: run tests on travis ci
+```
+```
+fix(server): send cors headers
+```
+```
+feat(blog): add comment section
+```
+Common types according to [commitlint-config-conventional (based on the the Angular convention)](https://github.com/marionebl/commitlint/tree/master/%40commitlint/config-conventional#type-enum) can be:
+- build
+- ci
+- chore
+- docs
+- feat
+- fix
+- perf
+- refactor
+- revert
+- style
+- test
+
+These can be modified by [your own configuration](#config).
+
+### Benefits using commitlint
+- [Why Use Conventional Commits?](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits)
+- ["The perks of committing with conventions" (Talk slides)](https://slides.com/marionebl/the-perks-of-committing-with-conventions#/)
+
 
 ## Getting started
 
