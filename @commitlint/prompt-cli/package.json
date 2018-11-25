@@ -32,7 +32,9 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
+    "@commitlint/test": "^7.1.2",
     "@commitlint/utils": "^7.1.2",
+    "ava": "^0.25.0",
     "xo": "0.20.3"
   },
   "dependencies": {
