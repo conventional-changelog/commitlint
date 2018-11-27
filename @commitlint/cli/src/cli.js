@@ -228,16 +228,24 @@ function getEditValue(flags) {
 	// This does not work properly with win32 systems, where env variable declarations
 	// use a different syntax
 	// See https://github.com/marionebl/commitlint/issues/103 for details
-	// This has been superceded by the `-E HUSKY_GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
-	if (edit === '$HUSKY_GIT_PARAMS' || edit === '%HUSKY_GIT_PARAMS%') {
+	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
+	const isGitParams = edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%';
+	const isHuskyParams =
+		edit === '$HUSKY_GIT_PARAMS' || edit === '%HUSKY_GIT_PARAMS%';
+
+	if (isGitParams || isHuskyParams) {
 		console.warn(`Using environment variable syntax (${edit}) in -e |\
 --edit is deprecated. Use '{-E|--env} HUSKY_GIT_PARAMS instead'`);
-		if (!('HUSKY_GIT_PARAMS' in process.env)) {
-			throw new Error(
-				`Received ${edit} as value for -e | --edit, but HUSKY_GIT_PARAMS is not available globally.`
-			);
+
+		if (isGitParams && 'GIT_PARAMS' in process.env) {
+			return process.env.GIT_PARAMS;
 		}
-		return process.env.HUSKY_GIT_PARAMS;
+		if ('HUSKY_GIT_PARAMS' in process.env) {
+			return process.env.HUSKY_GIT_PARAMS;
+		}
+		throw new Error(
+			`Received ${edit} as value for -e | --edit, but GIT_PARAMS or HUSKY_GIT_PARAMS are not available globally.`
+		);
 	}
 	return edit;
 }
