@@ -54,6 +54,7 @@ commands:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
+      - update-yarn
       - install
       - audit
       - build
