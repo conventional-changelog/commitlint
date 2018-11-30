@@ -1,6 +1,11 @@
 version: 2.1
 
 commands:
+  update-yarn:
+    steps:
+      - run:
+          name: Update yarn
+          command: yarn global add yarn@latest
   install:
     steps:
       - run:
