@@ -4,9 +4,9 @@ import globby from 'globby';
 import {camelCase, values} from 'lodash';
 import * as ensure from '.';
 
-test('exports all rules', async t => {
-	const expected = (await glob('*.js')).map(f => camelCase(f));
-	const actual = Object.keys(ensure);
+test('exports all checkers', async t => {
+	const expected = (await glob('*.js')).map(f => camelCase(f)).sort();
+	const actual = Object.keys(ensure).sort();
 	t.deepEqual(actual, expected);
 });
 
