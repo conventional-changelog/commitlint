@@ -5,7 +5,7 @@ node_js:
   - '6'
 install:
   - npm install -g npx
-  - npx yarn install
+  - npx yarn install --ignore-engines
   - npx lerna bootstrap
   - npm --version
   - yarn --version
