@@ -12,7 +12,7 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
-          command: yarn install
+          command: yarn install --ignore-engines
       - run:
           name: Audit dependencies
           command: yarn audit
