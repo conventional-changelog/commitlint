@@ -1,35 +1,62 @@
 version: 2.1
 
 commands:
+  install:
+    steps:
+      - run:
+          name: Install dependencies
+          command: yarn install --ignore-engines
+  audit:
+    steps:
+      - run:
+          name: Audit dependencies
+          command: yarn audit
+  build:
+    steps:
+      - run:
+          name: Build packages
+          command: yarn build
+  lint:
+    steps:
+      - run:
+          name: Lint project
+          command: yarn lint
+  deps:
+    steps:
+      - run:
+          name: Check dependencies
+          command: yarn deps
   test:
     steps:
       - run:
-          name: Versions
-          command: npm version
+          name: Test
+          command: yarn test
+  run-node-6:
+    steps:
       - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install dependencies
-          command: yarn install --ignore-engines
-      - run:
-          name: Audit dependencies
-          command: yarn audit
-      - run:
-          name: Build packages
-          command: yarn build
-      - run:
-          name: Lint project
-          command: yarn lint
-      - run:
-          name: Check dependencies
-          command: yarn deps
-      - run:
-          name: Test
-          command: yarn test
-      - save-npm-cache
-  save-npm-cache:
+      - install
+      - build
+      - lint
+      - deps
+      - test
+      - save-cache
+  run-node:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+      - install
+      - audit
+      - build
+      - lint
+      - deps
+      - test
+      - save-cache
+  save-cache:
     steps:
       - save_cache:
           key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
