@@ -10,7 +10,7 @@
 
 # commitlint [![slack][11]][12]
 
-[![npm latest][2]][3] [![Travis branch][4]][5] [![AppVeyor branch][6]][7]
+[![npm latest][2]][3] [![CircleCI][4]][5] [![AppVeyor][6]][7]
 
 
 *  🚓  Be a good `commitizen`
@@ -209,8 +209,8 @@ npx yarn run publish
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
 [3]: https://npmjs.org/package/@commitlint/cli
-[4]: https://img.shields.io/travis/marionebl/commitlint/master.svg?style=flat-square
-[5]: https://travis-ci.org/marionebl/commitlint
+[4]: https://img.shields.io/circleci/project/github/marionebl/commitlint/master.svg?style=flat-square
+[5]: https://circleci.com/gh/marionebl/commitlint
 [6]: https://img.shields.io/appveyor/ci/marionebl/commitlint/master.svg?style=flat-square
 [7]: https://ci.appveyor.com/project/marionebl/commitlint
 
