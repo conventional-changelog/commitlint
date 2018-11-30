@@ -1,0 +1,61 @@
+version: 2.1
+
+commands:
+  test:
+    steps:
+      - run:
+          name: Versions
+          command: npm version
+      - checkout
+      - restore_cache:
+          keys:
+            - {{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install
+      - run:
+          name: Audit dependencies
+          command: yarn audit
+      - run:
+          name: Build packages
+          command: yarn build
+      - run:
+          name: Lint project
+          command: yarn lint
+      - run:
+          name: Check dependencies
+          command: yarn deps
+      - run:
+          name: Test
+          command: yarn test
+      - save-npm-cache
+  save-npm-cache:
+    steps:
+      - save_cache:
+          key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+jobs:
+  node-v6:
+    docker:
+      - image: node:6
+    steps:
+      - test
+  node-v8:
+    docker:
+      - image: node:8
+    steps:
+      - test
+  node-v10:
+    docker:
+      - image: node:10
+    steps:
+      - test
+
+workflows:
+  node-multi-build:
+    jobs:
+      - node-v6
+      - node-v8
+      - node-v10
