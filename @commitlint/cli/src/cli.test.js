@@ -124,17 +124,14 @@ test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
 	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
 });
 
-test.failing(
-	'should work with husky via commitlint -e %GIT_PARAMS%',
-	async () => {
-		const cwd = await git.bootstrap('fixtures/husky/integration');
-		await writePkg({scripts: {commitmsg: `'${bin}' -e %GIT_PARAMS%`}}, {cwd});
+test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
+	const cwd = await git.bootstrap('fixtures/husky/integration');
+	await writePkg({scripts: {commitmsg: `'${bin}' -e %GIT_PARAMS%`}}, {cwd});
 
-		await execa('npm', ['install'], {cwd});
-		await execa('git', ['add', 'package.json'], {cwd});
-		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
-	}
-);
+	await execa('npm', ['install'], {cwd});
+	await execa('git', ['add', 'package.json'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+});
 
 test('should work with husky via commitlint -e $HUSKY_GIT_PARAMS', async () => {
 	const cwd = await git.bootstrap('fixtures/husky/integration');
