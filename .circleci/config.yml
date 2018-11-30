@@ -9,7 +9,7 @@ commands:
       - checkout
       - restore_cache:
           keys:
-            - {{ checksum "yarn.lock" }}
+            - v1-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies
           command: yarn install
