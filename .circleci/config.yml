@@ -68,17 +68,17 @@ jobs:
     docker:
       - image: node:6
     steps:
-      - test
+      - run-node-6
   node-v8:
     docker:
       - image: node:8
     steps:
-      - test
+      - run-node
   node-v10:
     docker:
       - image: node:10
     steps:
-      - test
+      - run-node
 
 workflows:
   node-multi-build:
