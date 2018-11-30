@@ -5,8 +5,8 @@ import {values} from 'lodash';
 import rules from '.';
 
 test('exports all rules', async t => {
-	const expected = await glob('*.js');
-	const actual = Object.keys(rules);
+	const expected = (await glob('*.js')).sort();
+	const actual = Object.keys(rules).sort();
 	t.deepEqual(actual, expected);
 });
 
