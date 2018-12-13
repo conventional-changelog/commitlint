@@ -5,7 +5,7 @@ Commit conventions allow your team to add more semantic meaning to your git hist
 With this additional information tools can derive useful human-readable information for releases of your project. Some examples are
 
 * Automated, rich changelogs
-* Aumomatic version bumps
+* Automatic version bumps
 * Filter fo test harnesses to run
 
 The most common commit conventions follow this pattern:
