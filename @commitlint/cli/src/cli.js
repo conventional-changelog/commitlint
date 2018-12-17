@@ -123,6 +123,7 @@ async function main(options) {
 
 	const messages = (Array.isArray(input) ? input : [input])
 		.filter(message => typeof message === 'string')
+		.filter(message => message.trim() !== '')
 		.filter(Boolean);
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
