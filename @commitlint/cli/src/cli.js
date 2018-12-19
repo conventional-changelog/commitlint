@@ -156,10 +156,9 @@ async function main(options) {
 		if (results.length !== 0) {
 			const originalInput = results[0].input;
 			input = originalInput;
-			results.pop();
 		}
 
-		results.push({
+		results.splice(0, results.length, {
 			valid: false,
 			errors: [
 				{
