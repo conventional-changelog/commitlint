@@ -61,16 +61,16 @@ test('false for lowercase on sentencecase', t => {
 	t.is(ensure('sentence case', 'sentence-case'), false);
 });
 
-test('false for UPPERCASE on sentencecase', t => {
-	t.is(ensure('UPPERCASE', 'sentence-case'), false);
+test('true for UPPERCASE on sentencecase', t => {
+	t.is(ensure('UPPERCASE', 'sentence-case'), true);
 });
 
 test('true for Start Case on sentencecase', t => {
 	t.is(ensure('Start Case', 'sentence-case'), true);
 });
 
-test('false for PascalCase on sentencecase', t => {
-	t.is(ensure('PascalCase', 'sentence-case'), false);
+test('true for PascalCase on sentencecase', t => {
+	t.is(ensure('PascalCase', 'sentence-case'), true);
 });
 
 test('false for kebab-case on sentencecase', t => {
