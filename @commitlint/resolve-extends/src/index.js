@@ -1,7 +1,7 @@
 import path from 'path';
 
 import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
-import requireUncached from 'require-uncached';
+import importFresh from 'import-fresh';
 import resolveFrom from 'resolve-from';
 import {merge, omit} from 'lodash';
 
@@ -113,7 +113,7 @@ function resolveFromSilent(cwd, id) {
 
 function resolveGlobalSilent(id) {
 	try {
-		const resolveGlobal = requireUncached('resolve-global');
+		const resolveGlobal = importFresh('resolve-global');
 		return resolveGlobal(id);
 	} catch (err) {}
 }
