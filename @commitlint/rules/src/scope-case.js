@@ -21,7 +21,7 @@ export default (parsed, when, value) => {
 	});
 
 	const result = checks.some(check => {
-		const r = ensure.case(scope, check.case); // Type "Modules/Graph" creates false here
+		const r = ensure.case(scope, check.case);
 		return negated(check.when) ? !r : r;
 	});
 
