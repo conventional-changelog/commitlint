@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.3.0"></a>
+# [7.3.0](https://github.com/marionebl/commitlint/compare/v7.2.1...v7.3.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* **format:** add new line to result ([#518](https://github.com/marionebl/commitlint/issues/518)) ([f1d443b](https://github.com/marionebl/commitlint/commit/f1d443b)), closes [#504](https://github.com/marionebl/commitlint/issues/504)
+* add fallback with husky git params to deprecation handling ([#498](https://github.com/marionebl/commitlint/issues/498)) ([5a34b8c](https://github.com/marionebl/commitlint/commit/5a34b8c))
+* avoid truncated output on macOS ([#503](https://github.com/marionebl/commitlint/issues/503)) ([3192368](https://github.com/marionebl/commitlint/commit/3192368))
+* fall back to conventional commit-parser settings for missing keys ([#496](https://github.com/marionebl/commitlint/issues/496)) ([831a141](https://github.com/marionebl/commitlint/commit/831a141)), closes [#399](https://github.com/marionebl/commitlint/issues/399)
+* respect String.protoype.repeat API contract ([f27e7ac](https://github.com/marionebl/commitlint/commit/f27e7ac))
+* update to security-patched dependency versions ([97c033b](https://github.com/marionebl/commitlint/commit/97c033b))
+* use correct label for failing empty subjects ([#481](https://github.com/marionebl/commitlint/issues/481)) ([2e7e34d](https://github.com/marionebl/commitlint/commit/2e7e34d)), closes [#476](https://github.com/marionebl/commitlint/issues/476)
+
+
+### Features
+
+* check stage before entering prompt ([#495](https://github.com/marionebl/commitlint/issues/495)) ([3b3667a](https://github.com/marionebl/commitlint/commit/3b3667a)), closes [#51](https://github.com/marionebl/commitlint/issues/51) [#51](https://github.com/marionebl/commitlint/issues/51)
+* warn on empty config ([#491](https://github.com/marionebl/commitlint/issues/491)) ([b6bd36e](https://github.com/marionebl/commitlint/commit/b6bd36e)), closes [#107](https://github.com/marionebl/commitlint/issues/107) [#107](https://github.com/marionebl/commitlint/issues/107)
+
+
+
+
 <a name="7.2.1"></a>
 ## [7.2.1](https://github.com/marionebl/commitlint/compare/v7.2.0...v7.2.1) (2018-10-11)
 
