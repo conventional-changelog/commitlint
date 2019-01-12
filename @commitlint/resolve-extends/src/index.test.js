@@ -190,6 +190,34 @@ test('propagates contents recursively', t => {
 	t.deepEqual(actual, expected);
 });
 
+test('propagates contents recursively with overlap', t => {
+	const input = {extends: ['extender-name']};
+
+	const actual = resolveExtends(input, {
+		resolve: id,
+		require(id) {
+			if (id === 'extender-name') {
+				return {
+					extends: ['recursive-extender-name'],
+					rules: {rule: ['zero', 'one']}
+				};
+			}
+			if (id === 'recursive-extender-name') {
+				return {rules: {rule: ['two', 'three', 'four']}};
+			}
+		}
+	});
+
+	const expected = {
+		extends: ['extender-name'],
+		rules: {
+			rule: ['zero', 'one']
+		}
+	};
+
+	t.deepEqual(actual, expected);
+});
+
 test('extending contents should take precedence', t => {
 	const input = {extends: ['extender-name'], zero: 'root'};
 
