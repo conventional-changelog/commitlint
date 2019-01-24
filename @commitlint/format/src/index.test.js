@@ -6,7 +6,7 @@ import format from '.';
 const ok = chalk.bold(
 	`${chalk.green(
 		'✔'
-	)}   found 0 problems, 0 warnings \n    (Need help? -> https://github.com/marionebl/commitlint#what-is-commitlint)\n\n`
+	)}   found 0 problems, 0 warnings \n    (Need help? -> https://github.com/marionebl/commitlint#what-is-commitlint )\n\n`
 );
 
 test('does nothing without arguments', t => {
