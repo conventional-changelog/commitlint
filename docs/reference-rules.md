@@ -90,6 +90,14 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
+#### header-full-stop
+* **condition**: `header` ends with `value`
+* **rule**: `never`
+* **value**
+```js
+  '.'
+```
+
 #### header-max-length
 * **condition**: `header` has `value` or less characters
 * **rule**: `always`

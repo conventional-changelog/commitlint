@@ -10,6 +10,7 @@ export default {
 	'footer-max-length': require('./footer-max-length'),
 	'footer-max-line-length': require('./footer-max-line-length'),
 	'footer-min-length': require('./footer-min-length'),
+	'header-full-stop': require('./header-full-stop'),
 	'header-max-length': require('./header-max-length'),
 	'header-min-length': require('./header-min-length'),
 	'references-empty': require('./references-empty'),
