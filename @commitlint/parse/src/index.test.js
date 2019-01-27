@@ -118,7 +118,9 @@ test('ignores comments', async t => {
 		process.cwd(),
 		'conventional-changelog-angular'
 	);
-	const opts = Object.assign({}, changelogOpts.parserOpts, {commentChar: '#'});
+	const opts = Object.assign({}, changelogOpts.parserOpts, {
+		commentChar: '#'
+	});
 	const actual = await parse(message, undefined, opts);
 	t.is(actual.body, null);
 	t.is(actual.footer, null);
@@ -132,7 +134,9 @@ test('registers inline #', async t => {
 		process.cwd(),
 		'conventional-changelog-angular'
 	);
-	const opts = Object.assign({}, changelogOpts.parserOpts, {commentChar: '#'});
+	const opts = Object.assign({}, changelogOpts.parserOpts, {
+		commentChar: '#'
+	});
 	const actual = await parse(message, undefined, opts);
 	t.is(actual.subject, 'subject #reference');
 	t.is(actual.body, 'things #reference');
@@ -144,7 +148,9 @@ test('parses references leading subject', async t => {
 		process.cwd(),
 		'conventional-changelog-angular'
 	);
-	const {references: [actual]} = await parse(message, undefined, opts);
+	const {
+		references: [actual]
+	} = await parse(message, undefined, opts);
 	t.is(actual.issue, '1');
 });
 

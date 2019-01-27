@@ -9,11 +9,9 @@
     "clean": "exit 0",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "lint": "xo",
     "start": "exit 0",
     "test": "exit 0"
   },
-  "xo": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"

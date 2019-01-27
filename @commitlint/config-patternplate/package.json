@@ -9,11 +9,9 @@
     "clean": "exit 0",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "lint": "xo",
     "start": "exit 0",
     "test": "exit 0"
   },
-  "xo": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"
@@ -36,7 +34,6 @@
     "lodash": "4.17.11"
   },
   "devDependencies": {
-    "@commitlint/utils": "^7.3.1",
-    "xo": "0.20.3"
+    "@commitlint/utils": "^7.3.1"
   }
 }

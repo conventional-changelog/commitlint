@@ -7,10 +7,8 @@
   ],
   "scripts": {
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-import",
-    "lint": "xo"
+    "pkg": "pkg-check --skip-import"
   },
-  "xo": false,
   "engines": {
     "node": ">=4"
   },
@@ -33,9 +31,6 @@
     "email": "hello@herebecode.com"
   },
   "license": "MIT",
-  "devDependencies": {
-    "xo": "0.20.3"
-  },
   "dependencies": {
     "@commitlint/format": "^7.4.0",
     "@commitlint/lint": "^7.4.0",

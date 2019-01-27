@@ -12,7 +12,7 @@
     "commit": "git-cz",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "lint": "xo",
+    
     "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
     "test": "ava --verbose",
     "watch": "babel src --out-dir lib --watch  --source-maps"
@@ -39,7 +39,7 @@
       "path": "./@commitlint/prompt"
     }
   },
-  "xo": false,
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"
@@ -65,9 +65,7 @@
     "babel-register": "6.26.0",
     "commitizen": "3.0.5",
     "concurrently": "3.5.1",
-    "cross-env": "5.1.1",
-    "xo": "0.20.3"
-  },
+    "cross-env": "5.1.1"  },
   "dependencies": {
     "@commitlint/load": "^7.3.1",
     "babel-runtime": "^6.23.0",

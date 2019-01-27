@@ -93,13 +93,13 @@ function getPrompt(type, context = {}) {
 
 	const remainingHeaderLength = headerLength
 		? headerLength -
-			[
+		  [
 				results.type,
 				results.scope,
 				results.scope ? '()' : '',
 				results.type && results.scope ? ':' : '',
 				results.subject
-			].join('').length
+		  ].join('').length
 		: Infinity;
 
 	const maxLength = Math.min(inputMaxLength, remainingHeaderLength);

@@ -9,11 +9,9 @@
     "clean": "exit 0",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "lint": "xo",
     "start": "exit 0",
     "test": "exit 0"
   },
-  "xo": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/marionebl/commitlint.git"
@@ -31,7 +29,6 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^7.3.1",
-    "xo": "0.20.3"
+    "@commitlint/utils": "^7.3.1"
   }
 }
