@@ -151,7 +151,14 @@ async function main(options) {
 	);
 
 	if (Object.keys(loaded.rules).length === 0) {
-		results.push({
+		let input = '';
+
+		if (results.length !== 0) {
+			const originalInput = results[0].input;
+			input = originalInput;
+		}
+
+		results.splice(0, results.length, {
 			valid: false,
 			errors: [
 				{
@@ -166,7 +173,7 @@ async function main(options) {
 				}
 			],
 			warnings: [],
-			input: ''
+			input
 		});
 	}
 

@@ -31,7 +31,7 @@ function formatInput(result = {}, options = {}) {
 
 	const sign = '⧗';
 	const decoration = enabled ? chalk.gray(sign) : sign;
-	const commitText = errors.length > 0 ? `\n${input}\n` : input.split('\n')[0];
+	const commitText = errors.length > 0 ? input : input.split('\n')[0];
 
 	const decoratedInput = enabled ? chalk.bold(commitText) : commitText;
 
