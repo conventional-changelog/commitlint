@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.3.1"></a>
+## [7.3.1](https://github.com/marionebl/commitlint/compare/v7.3.0...v7.3.1) (2019-01-11)
+
+
+
+
+**Note:** Version bump only for package @commitlint/load
+
+<a name="7.3.0"></a>
+# [7.3.0](https://github.com/marionebl/commitlint/compare/v7.2.1...v7.3.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* update to security-patched dependency versions ([97c033b](https://github.com/marionebl/commitlint/commit/97c033b))
+
+
+### Features
+
+* check stage before entering prompt ([#495](https://github.com/marionebl/commitlint/issues/495)) ([3b3667a](https://github.com/marionebl/commitlint/commit/3b3667a)), closes [#51](https://github.com/marionebl/commitlint/issues/51) [#51](https://github.com/marionebl/commitlint/issues/51)
+
+
+
+
 <a name="7.2.1"></a>
 ## [7.2.1](https://github.com/marionebl/commitlint/compare/v7.2.0...v7.2.1) (2018-10-11)
 

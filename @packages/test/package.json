@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/test",
-  "version": "7.1.2",
+  "version": "7.3.1",
   "description": "test utilities for @commitlint",
   "main": "lib/",
   "files": [
@@ -58,16 +58,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/utils": "^7.1.2",
+    "@commitlint/utils": "^7.3.1",
     "@marionebl/sander": "0.6.1",
     "execa": "0.9.0",
     "pkg-dir": "2.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^7.1.2",
+    "@commitlint/utils": "^7.3.1",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.1.2",
+    "babel-preset-commitlint": "^7.3.1",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",

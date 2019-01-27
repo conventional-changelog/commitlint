@@ -1,3 +1,5 @@
+# [Get Started](https://marionebl.github.io/commitlint/#/?id=getting-started) | [Let's chat][12] ![slack][11] | [Website](https://marionebl.github.io/commitlint)
+
 > Lint commit messages
 
 <p align="center">
@@ -7,8 +9,6 @@
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
 >
 > `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
-
-# commitlint [![slack][11]][12]
 
 [![npm latest][2]][3] [![CircleCI][4]][5] [![AppVeyor][6]][7]
 

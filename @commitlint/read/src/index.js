@@ -41,11 +41,29 @@ async function getEditCommit(cwd, edit) {
 		throw new TypeError(`Could not find git root from ${cwd}`);
 	}
 
-	const editFilePath =
-		typeof edit === 'string'
-			? path.resolve(top, edit)
-			: path.join(top, '.git/COMMIT_EDITMSG');
+	const editFilePath = await getEditFilePath(top, edit);
 
 	const editFile = await sander.readFile(editFilePath);
 	return [`${editFile.toString('utf-8')}\n`];
+}
+
+// Get path to recently edited commit message file
+// (top: string, edit: any) => Promise<String>
+async function getEditFilePath(top, edit) {
+	let editFilePath;
+	if (typeof edit === 'string') {
+		editFilePath = path.resolve(top, edit);
+	} else {
+		const dotgitPath = path.join(top, '.git');
+		const dotgitStats = sander.lstatSync(dotgitPath);
+		if (dotgitStats.isDirectory()) {
+			editFilePath = path.join(top, '.git/COMMIT_EDITMSG');
+		} else {
+			const gitFile = await sander.readFile(dotgitPath, 'utf8');
+			const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');
+			editFilePath = path.resolve(top, relativeGitPath, 'COMMIT_EDITMSG');
+		}
+	}
+
+	return editFilePath;
 }

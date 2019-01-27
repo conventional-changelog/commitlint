@@ -31,7 +31,7 @@ function formatInput(result = {}, options = {}) {
 
 	const sign = '⧗';
 	const decoration = enabled ? chalk.gray(sign) : sign;
-	const commitText = errors.length > 0 ? `\n${input}\n` : input.split('\n')[0];
+	const commitText = errors.length > 0 ? input : input.split('\n')[0];
 
 	const decoratedInput = enabled ? chalk.bold(commitText) : commitText;
 
@@ -62,7 +62,7 @@ function formatResult(result = {}, options = {}) {
 	const decoration = enabled ? chalk[color](sign) : sign;
 	const summary = `${decoration}   found ${errors.length} problems, ${
 		warnings.length
-	} warnings \n    (Need help? -> https://github.com/marionebl/commitlint#what-is-commitlint)\n\n`;
+	} warnings \n    (Need help? -> https://github.com/marionebl/commitlint#what-is-commitlint )\n\n`;
 	return [...problems, enabled ? chalk.bold(summary) : summary];
 }
 

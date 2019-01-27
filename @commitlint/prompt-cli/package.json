@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt-cli",
-  "version": "7.2.1",
+  "version": "7.3.1",
   "description": "commit prompt using commitlint.config.js",
   "files": [
     "cli.js"
@@ -32,13 +32,13 @@
   },
   "homepage": "https://github.com/marionebl/commitlint#readme",
   "devDependencies": {
-    "@commitlint/test": "7.1.2",
-    "@commitlint/utils": "^7.1.2",
+    "@commitlint/test": "^7.3.1",
+    "@commitlint/utils": "^7.3.1",
     "ava": "0.25.0",
     "xo": "0.20.3"
   },
   "dependencies": {
-    "@commitlint/prompt": "^7.2.1",
+    "@commitlint/prompt": "^7.3.1",
     "execa": "0.9.0",
     "meow": "3.7.0",
     "string-to-stream": "1.1.1"
