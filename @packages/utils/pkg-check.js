@@ -46,10 +46,10 @@ function main(cli) {
 	return readPkg(cwd).then(pkg => {
 		return getTarballFiles(cwd, {write: !skipImport}).then(tarball => {
 			return getPackageFiles(cwd).then(pkgFiles => {
-				const problems = [];
+				let problems = [];
 
 				if (!cli.flags.skipBin) {
-					problems.concat(
+					problems = problems.concat(
 						pkgFiles.bin
 							.filter(binFile => tarball.files.indexOf(binFile) === -1)
 							.map(binFile => ({
