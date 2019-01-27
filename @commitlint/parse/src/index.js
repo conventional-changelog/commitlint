@@ -4,7 +4,7 @@ import {merge} from 'lodash';
 
 export default parse;
 
-async function parse(message, parser = sync, parserOpts) {
+async function parse(message, parser = sync, parserOpts = undefined) {
 	const defaultOpts = (await defaultChangelogOpts).parserOpts;
 	const parsed = parser(message, merge({}, defaultOpts, parserOpts));
 	parsed.raw = message;
