@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.4.0"></a>
+# [7.4.0](https://github.com/marionebl/commitlint/compare/v7.3.2...v7.4.0) (2019-01-27)
+
+
+### Bug Fixes
+
+* correction to need help link ([#540](https://github.com/marionebl/commitlint/issues/540)) ([fa6168a](https://github.com/marionebl/commitlint/commit/fa6168a))
+
+
+### Features
+
+* **rules:** create header-case and header-full-stop rules ([#547](https://github.com/marionebl/commitlint/issues/547)) ([4c36cbd](https://github.com/marionebl/commitlint/commit/4c36cbd))
+
+
+
+
 <a name="7.3.2"></a>
 ## [7.3.2](https://github.com/marionebl/commitlint/compare/v7.3.1...v7.3.2) (2019-01-15)
 
