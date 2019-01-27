@@ -1,17 +1,11 @@
 #!/usr/bin/env node
 const execa = require('execa');
-const meow = require('meow');
 const {prompter} = require('@commitlint/prompt');
-
-const HELP = `
-	Usage
-		$ commit
-`;
 
 const _ = undefined;
 const prompt = () => prompter(_, commit);
 
-main(meow(HELP)).catch(err => {
+main().catch(err => {
 	setTimeout(() => {
 		throw err;
 	});
