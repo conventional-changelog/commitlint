@@ -3,13 +3,18 @@ import path from 'path';
 import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
 import requireUncached from 'require-uncached';
 import resolveFrom from 'resolve-from';
-import {merge, omit} from 'lodash';
+import {isArray, merge, mergeWith, omit} from 'lodash';
 
 // Resolve extend configs
 export default function resolveExtends(config = {}, context = {}) {
 	const {extends: e} = config;
 	const extended = loadExtends(config, context).reduceRight(
-		(r, c) => merge(r, omit(c, 'extends')),
+		(r, c) =>
+			mergeWith(r, omit(c, 'extends'), (objValue, srcValue) => {
+				if (isArray(objValue)) {
+					return srcValue;
+				}
+			}),
 		e ? {extends: e} : {}
 	);
 
