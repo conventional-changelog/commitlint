@@ -90,6 +90,34 @@ Rule configurations are either of type `array` residing on a key with the rule's
   0
 ```
 
+#### header-case
+* **condition**: `header` is in case `value`
+* **rule**: `always`
+```js
+  'lowerCase'
+```
+* **possible values**
+```js
+  [
+    'lower-case', // default
+    'upper-case', // UPPERCASE
+    'camel-case', // camelCase
+    'kebab-case', // kebab-case
+    'pascal-case', // PascalCase
+    'sentence-case', // Sentence case
+    'snake-case', // snake_case
+    'start-case', // Start Case
+  ]
+```
+
+#### header-full-stop
+* **condition**: `header` ends with `value`
+* **rule**: `never`
+* **value**
+```js
+  '.'
+```
+
 #### header-max-length
 * **condition**: `header` has `value` or less characters
 * **rule**: `always`
