@@ -37,13 +37,8 @@ function toCase(input, target) {
 		case 'uppercase':
 			return input.toUpperCase();
 		case 'sentence-case':
-		case 'sentencecase': {
-			const [word] = input.split(' ');
-			return `${toCase(word.charAt(0), 'upper-case')}${toCase(
-				word.slice(1),
-				'lower-case'
-			)}${input.slice(word.length)}`;
-		}
+		case 'sentencecase':
+			return input.charAt(0).toUpperCase() + input.slice(1);
 		case 'lower-case':
 		case 'lowercase':
 		case 'lowerCase': // Backwards compat config-angular v4
