@@ -15,6 +15,20 @@
     "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
   },
+  "ava": {
+    "files": [
+      "src/**/*.test.js",
+      "!lib/**/*"
+    ],
+    "source": [
+      "src/**/*.js",
+      "!lib/**/*"
+    ],
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
+  },
   "babel": {
     "presets": [
       "babel-preset-commitlint"
