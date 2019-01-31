@@ -254,7 +254,7 @@ function getEditValue(flags) {
 	// The recommended method to specify -e with husky was `commitlint -e $HUSKY_GIT_PARAMS`
 	// This does not work properly with win32 systems, where env variable declarations
 	// use a different syntax
-	// See https://github.com/marionebl/commitlint/issues/103 for details
+	// See https://github.com/conventional-changelog/commitlint/issues/103 for details
 	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
 	const isGitParams = edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%';
 	const isHuskyParams =

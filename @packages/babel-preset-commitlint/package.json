@@ -9,7 +9,7 @@
   "scripts": {
     "deps": "dep-check",
     "pkg": "pkg-check",
-    
+
     "start": "ava --watch --verbose",
     "test": "ava --verbose"
   },
@@ -19,7 +19,7 @@
       "*.test.js"
     ]
   },
-  
+
   "nyc": {
     "all": true,
     "sourceMap": false,
@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marionebl/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git"
   },
   "bugs": {
-    "url": "https://github.com/marionebl/commitlint/issues"
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "keywords": [
     "babel",
     "conventional-changelog",

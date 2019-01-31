@@ -1,7 +1,7 @@
 > Lint commit messages
 
 <div class="sequence">
-    <img src="https://cdn.rawgit.com/marionebl/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg"/>
+    <img src="https://cdn.rawgit.com/conventional-changelog/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg"/>
 </div>
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
@@ -58,10 +58,10 @@ the `commitlint` icon
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
 [3]: https://npmjs.org/package/@commitlint/cli
-[4]: https://img.shields.io/circleci/project/github/marionebl/commitlint/master.svg?style=flat-square
-[5]: https://circleci.com/gh/marionebl/commitlint
-[6]: https://img.shields.io/appveyor/ci/marionebl/commitlint/master.svg?style=flat-square
-[7]: https://ci.appveyor.com/project/marionebl/commitlint
+[4]: https://img.shields.io/circleci/project/github/conventional-changelog/commitlint/master.svg?style=flat-square
+[5]: https://circleci.com/gh/conventional-changelog/commitlint
+[6]: https://img.shields.io/appveyor/ci/conventional-changelog/commitlint/master.svg?style=flat-square
+[7]: https://ci.appveyor.com/project/conventional-changelog/commitlint
 
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index

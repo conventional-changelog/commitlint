@@ -12,7 +12,7 @@
     "commit": "git-cz",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    
+
     "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
     "test": "ava --verbose",
     "watch": "babel src --out-dir lib --watch  --source-maps"
@@ -39,10 +39,10 @@
       "path": "./@commitlint/prompt"
     }
   },
-  
+
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marionebl/commitlint.git"
+    "url": "git+https://github.com/conventional-changelog/commitlint.git"
   },
   "keywords": [
     "conventional-changelog",
@@ -54,9 +54,9 @@
   "author": "Mario Nebl <hello@herebecode.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/marionebl/commitlint/issues"
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "devDependencies": {
     "@commitlint/utils": "^7.3.1",
     "ava": "0.20.0",
