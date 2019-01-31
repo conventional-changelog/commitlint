@@ -1,7 +1,7 @@
 > Lint commit messages
 
 <div class="sequence">
-    <img src="https://cdn.rawgit.com/conventional-changelog/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg"/>
+    <img src="./assets/commitlint.svg"/>
 </div>
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
