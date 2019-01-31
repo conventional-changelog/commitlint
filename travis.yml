@@ -1,0 +1,8 @@
+os: windows
+language: node_js
+cache:
+  yarn
+node_js:
+  - lts/*
+before_script:
+  - yarn build

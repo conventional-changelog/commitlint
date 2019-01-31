@@ -8,7 +8,7 @@
 
 # commitlint &nbsp; [![slack][11]][12]
 
-[![npm latest][2]][3] [![CircleCI][4]][5] [![AppVeyor][6]][7]
+[![npm latest][2]][3] [![CircleCI][4]][5] <!-- [![AppVeyor][6]][7] -->
 
 `commitlint` helps your team adhering to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
 
@@ -60,8 +60,8 @@ the `commitlint` icon
 [3]: https://npmjs.org/package/@commitlint/cli
 [4]: https://img.shields.io/circleci/project/github/conventional-changelog/commitlint/master.svg?style=flat-square
 [5]: https://circleci.com/gh/conventional-changelog/commitlint
-[6]: https://img.shields.io/appveyor/ci/conventional-changelog/commitlint/master.svg?style=flat-square
-[7]: https://ci.appveyor.com/project/conventional-changelog/commitlint
+<!-- [6]: https://img.shields.io/appveyor/ci/conventional-changelog/commitlint/master.svg?style=flat-square
+[7]: https://ci.appveyor.com/project/conventional-changelog/commitlint -->
 
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
