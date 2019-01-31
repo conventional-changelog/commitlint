@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.5.0"></a>
+# [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
+
+
+### Bug Fixes
+
+* `sentence-case` allow upper-case characters in first word ([#531](https://github.com/conventional-changelog/commitlint/issues/531)) ([5a6a4a8](https://github.com/conventional-changelog/commitlint/commit/5a6a4a8)), closes [#211](https://github.com/conventional-changelog/commitlint/issues/211)
+* replace all repository references with conventional changelog ([#561](https://github.com/conventional-changelog/commitlint/issues/561)) ([6c3afcd](https://github.com/conventional-changelog/commitlint/commit/6c3afcd))
+* slash in scope [#291](https://github.com/conventional-changelog/commitlint/issues/291) ([#529](https://github.com/conventional-changelog/commitlint/issues/529)) ([b2b63e5](https://github.com/conventional-changelog/commitlint/commit/b2b63e5))
+
+
+
+
 <a name="7.3.1"></a>
 ## [7.3.1](https://github.com/conventional-changelog/commitlint/compare/v7.3.0...v7.3.1) (2019-01-11)
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.5.0"></a>
+# [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
+
+
+### Bug Fixes
+
+* **resolve-extends:** override array on extending rules ([#470](https://github.com/conventional-changelog/commitlint/issues/470)) ([#539](https://github.com/conventional-changelog/commitlint/issues/539)) ([b35000c](https://github.com/conventional-changelog/commitlint/commit/b35000c))
+* replace all repository references with conventional changelog ([#561](https://github.com/conventional-changelog/commitlint/issues/561)) ([6c3afcd](https://github.com/conventional-changelog/commitlint/commit/6c3afcd))
+* replace old require-uncached with import-fresh ([#533](https://github.com/conventional-changelog/commitlint/issues/533)) ([b636e8c](https://github.com/conventional-changelog/commitlint/commit/b636e8c))
+
+
+
+
 <a name="7.3.1"></a>
 ## [7.3.1](https://github.com/conventional-changelog/commitlint/compare/v7.3.0...v7.3.1) (2019-01-11)
 

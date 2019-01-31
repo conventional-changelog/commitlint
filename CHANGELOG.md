@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="7.5.0"></a>
+# [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
+
+
+### Bug Fixes
+
+* `sentence-case` allow upper-case characters in first word ([#531](https://github.com/conventional-changelog/commitlint/issues/531)) ([5a6a4a8](https://github.com/conventional-changelog/commitlint/commit/5a6a4a8)), closes [#211](https://github.com/conventional-changelog/commitlint/issues/211)
+* **resolve-extends:** override array on extending rules ([#470](https://github.com/conventional-changelog/commitlint/issues/470)) ([#539](https://github.com/conventional-changelog/commitlint/issues/539)) ([b35000c](https://github.com/conventional-changelog/commitlint/commit/b35000c))
+* all broken website references ([#564](https://github.com/conventional-changelog/commitlint/issues/564)) ([82eeb5a](https://github.com/conventional-changelog/commitlint/commit/82eeb5a))
+* cleanup message for input with no config ([#519](https://github.com/conventional-changelog/commitlint/issues/519)) ([7d9e760](https://github.com/conventional-changelog/commitlint/commit/7d9e760))
+* **cli:** avoid linebreak in empty input ([#523](https://github.com/conventional-changelog/commitlint/issues/523)) ([3141882](https://github.com/conventional-changelog/commitlint/commit/3141882))
+* mark optional parameter with undefined ([#553](https://github.com/conventional-changelog/commitlint/issues/553)) ([6720284](https://github.com/conventional-changelog/commitlint/commit/6720284))
+* replace all repository references with conventional changelog ([#561](https://github.com/conventional-changelog/commitlint/issues/561)) ([6c3afcd](https://github.com/conventional-changelog/commitlint/commit/6c3afcd))
+* replace all website references with conventional changelog ([#563](https://github.com/conventional-changelog/commitlint/issues/563)) ([6b86fb1](https://github.com/conventional-changelog/commitlint/commit/6b86fb1))
+* replace old require-uncached with import-fresh ([#533](https://github.com/conventional-changelog/commitlint/issues/533)) ([b636e8c](https://github.com/conventional-changelog/commitlint/commit/b636e8c))
+* resolve path to commit message for git submodules ([83b1a47](https://github.com/conventional-changelog/commitlint/commit/83b1a47))
+* slash in scope [#291](https://github.com/conventional-changelog/commitlint/issues/291) ([#529](https://github.com/conventional-changelog/commitlint/issues/529)) ([b2b63e5](https://github.com/conventional-changelog/commitlint/commit/b2b63e5))
+* store concatenated array to problems variable ([#551](https://github.com/conventional-changelog/commitlint/issues/551)) ([434a70f](https://github.com/conventional-changelog/commitlint/commit/434a70f))
+
+
+### Features
+
+* add support for git submodules ([cc575fa](https://github.com/conventional-changelog/commitlint/commit/cc575fa))
+* **rule-header-length:** show current header length ([6d61c4f](https://github.com/conventional-changelog/commitlint/commit/6d61c4f))
+
+
+
+
 <a name="7.4.0"></a>
 # [7.4.0](https://github.com/conventional-changelog/commitlint/compare/v7.3.2...v7.4.0) (2019-01-27)
 

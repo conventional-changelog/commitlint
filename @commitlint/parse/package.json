@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/parse",
-  "version": "7.3.1",
+  "version": "7.5.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "files": [
@@ -11,7 +11,6 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check",
-
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
     "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
@@ -35,7 +34,6 @@
       "babel-preset-commitlint"
     ]
   },
-
   "engines": {
     "node": ">=4"
   },
@@ -59,16 +57,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "7.3.1",
-    "@commitlint/utils": "^7.3.1",
+    "@commitlint/test": "^7.5.0",
+    "@commitlint/utils": "^7.5.0",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.3.1",
+    "babel-preset-commitlint": "^7.5.0",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
     "import-from": "2.1.0",
-    "rimraf": "2.6.1"  },
+    "rimraf": "2.6.1"
+  },
   "dependencies": {
     "conventional-changelog-angular": "^1.3.3",
     "conventional-commits-parser": "^2.1.0",

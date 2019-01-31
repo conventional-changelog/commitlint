@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-commitlint",
-  "version": "7.3.1",
+  "version": "7.5.0",
   "description": "Lint your commit messages",
   "main": "index.js",
   "files": [
@@ -9,7 +9,6 @@
   "scripts": {
     "deps": "dep-check",
     "pkg": "pkg-check",
-
     "start": "ava --watch --verbose",
     "test": "ava --verbose"
   },
@@ -19,7 +18,6 @@
       "*.test.js"
     ]
   },
-
   "nyc": {
     "all": true,
     "sourceMap": false,
@@ -51,9 +49,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^7.3.1",
+    "@commitlint/utils": "^7.5.0",
     "ava": "0.22.0",
-    "babel-core": "6.26.0"  },
+    "babel-core": "6.26.0"
+  },
   "dependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-react-jsx": "^6.24.1",

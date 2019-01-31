@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/top-level",
-  "version": "7.3.1",
+  "version": "7.5.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "files": [
@@ -11,7 +11,6 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check",
-
     "start": "yarn watch",
     "watch": "babel src --out-dir lib --watch --source-maps"
   },
@@ -20,7 +19,6 @@
       "babel-preset-commitlint"
     ]
   },
-
   "engines": {
     "node": ">=4"
   },
@@ -44,12 +42,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^7.3.1",
+    "@commitlint/utils": "^7.5.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.3.1",
+    "babel-preset-commitlint": "^7.5.0",
     "babel-register": "6.26.0",
     "cross-env": "5.1.1",
-    "rimraf": "2.6.1"  },
+    "rimraf": "2.6.1"
+  },
   "dependencies": {
     "find-up": "^2.1.0"
   }
