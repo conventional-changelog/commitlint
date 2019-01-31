@@ -75,7 +75,7 @@ test.failing('should call git with expected args on shallow repo', async t => {
 		return;
 	}
 
-	const cwd = await git.clone('https://github.com/marionebl/commitlint.git', [
+	const cwd = await git.clone('https://github.com/conventional-changelog/commitlint.git', [
 		'--depth=10'
 	]);
 
@@ -151,7 +151,7 @@ test.failing(
 			return;
 		}
 
-		const cwd = await git.clone('https://github.com/marionebl/commitlint.git');
+		const cwd = await git.clone('https://github.com/conventional-changelog/commitlint.git');
 
 		const env = {
 			TRAVIS: true,

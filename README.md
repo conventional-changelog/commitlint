@@ -3,7 +3,7 @@
 > Lint commit messages
 
 <p align="center">
-  <img width="600" src="https://cdn.rawgit.com/marionebl/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg">
+  <img width="600" src="https://cdn.rawgit.com/conventional-changelog/commitlint/3594397919c6188ce31ccfc94a0113d625d55516/docs/assets/commitlint.svg">
 </p>
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
@@ -54,7 +54,7 @@ fix(server): send cors headers
 ```
 feat(blog): add comment section
 ```
-Common types according to [commitlint-config-conventional (based on the the Angular convention)](https://github.com/marionebl/commitlint/tree/master/%40commitlint/config-conventional#type-enum) can be:
+Common types according to [commitlint-config-conventional (based on the the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum) can be:
 - build
 - ci
 - chore
@@ -148,14 +148,14 @@ A number of shared configurations are available to install and use with `commitl
 
 ## Roadmap
 
-> **Ideas**: [marionebl/commitlint#94](https://github.com/marionebl/commitlint/issues/94)
+> **Ideas**: [conventional-changelog/commitlint#94](https://github.com/conventional-changelog/commitlint/issues/94)
 
 `commitlint` is considered stable and is used in various projects as development tool. 
 
 We identify **ease of adoption** and **developer experience** as fields where there
 is room and need for improvement. The items on the roadmap should enhance `commitlint` regarding those aspects.
 
-* [x] **Adoption**: Provide reusable Travis CI integration: `@commitlint/travis-cli` (https://github.com/marionebl/commitlint/releases/tag/v5.1.0)
+* [x] **Adoption**: Provide reusable Travis CI integration: `@commitlint/travis-cli` (https://github.com/conventional-changelog/commitlint/releases/tag/v5.1.0)
 * [ ] **DX**: Support PR squash scenario via [ahmed-taj/commitlint-bot](https://github.com/ahmed-taj/commitlint-bot/) and `@commitlint/travis-cli`
 * [ ] **Adoption**: Make [ahmed-taj/commitlint-bot](https://github.com/ahmed-taj/commitlint-bot/) configurable via `commitlint` configuration
 * [ ] **Adoption**: Create `commitlint init`
@@ -185,7 +185,7 @@ Copyright by @marionebl. All `commitlint` packages are released under the MIT li
 ### Install and run
 
 ```sh
-git clone git@github.com:marionebl/commitlint.git
+git clone git@github.com:conventional-changelog/commitlint.git
 cd commitlint
 npx yarn install
 npx yarn run build # run build tasks
@@ -209,10 +209,10 @@ npx yarn run publish
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
 [3]: https://npmjs.org/package/@commitlint/cli
-[4]: https://img.shields.io/circleci/project/github/marionebl/commitlint/master.svg?style=flat-square
-[5]: https://circleci.com/gh/marionebl/commitlint
-[6]: https://img.shields.io/appveyor/ci/marionebl/commitlint/master.svg?style=flat-square
-[7]: https://ci.appveyor.com/project/marionebl/commitlint
+[4]: https://img.shields.io/circleci/project/github/conventional-changelog/commitlint/master.svg?style=flat-square
+[5]: https://circleci.com/gh/conventional-changelog/commitlint
+[6]: https://img.shields.io/appveyor/ci/conventional-changelog/commitlint/master.svg?style=flat-square
+[7]: https://ci.appveyor.com/project/conventional-changelog/commitlint
 
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index

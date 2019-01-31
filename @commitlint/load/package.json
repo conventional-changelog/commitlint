@@ -11,7 +11,7 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    
+
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
     "test": "ava -c 4 --verbose && ava \"src/*.serial-test.js\" --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
@@ -35,18 +35,18 @@
       "babel-preset-commitlint"
     ]
   },
-  
+
   "engines": {
     "node": ">=4"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/marionebl/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git"
   },
   "bugs": {
-    "url": "https://github.com/marionebl/commitlint/issues"
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/marionebl/commitlint#readme",
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "keywords": [
     "conventional-changelog",
     "commitlint",

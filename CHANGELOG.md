@@ -4,34 +4,34 @@ All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 <a name="7.4.0"></a>
-# [7.4.0](https://github.com/marionebl/commitlint/compare/v7.3.2...v7.4.0) (2019-01-27)
+# [7.4.0](https://github.com/conventional-changelog/commitlint/compare/v7.3.2...v7.4.0) (2019-01-27)
 
 
 ### Bug Fixes
 
-* correction to need help link ([#540](https://github.com/marionebl/commitlint/issues/540)) ([fa6168a](https://github.com/marionebl/commitlint/commit/fa6168a))
+* correction to need help link ([#540](https://github.com/conventional-changelog/commitlint/issues/540)) ([fa6168a](https://github.com/conventional-changelog/commitlint/commit/fa6168a))
 
 
 ### Features
 
-* **rules:** create header-case and header-full-stop rules ([#547](https://github.com/marionebl/commitlint/issues/547)) ([4c36cbd](https://github.com/marionebl/commitlint/commit/4c36cbd))
+* **rules:** create header-case and header-full-stop rules ([#547](https://github.com/conventional-changelog/commitlint/issues/547)) ([4c36cbd](https://github.com/conventional-changelog/commitlint/commit/4c36cbd))
 
 
 
 
 <a name="7.3.2"></a>
-## [7.3.2](https://github.com/marionebl/commitlint/compare/v7.3.1...v7.3.2) (2019-01-15)
+## [7.3.2](https://github.com/conventional-changelog/commitlint/compare/v7.3.1...v7.3.2) (2019-01-15)
 
 
 ### Bug Fixes
 
-* move loadsh to dependencies ([1bb66a4](https://github.com/marionebl/commitlint/commit/1bb66a4))
+* move loadsh to dependencies ([1bb66a4](https://github.com/conventional-changelog/commitlint/commit/1bb66a4))
 
 
 
 
 <a name="7.3.1"></a>
-## [7.3.1](https://github.com/marionebl/commitlint/compare/v7.3.0...v7.3.1) (2019-01-11)
+## [7.3.1](https://github.com/conventional-changelog/commitlint/compare/v7.3.0...v7.3.1) (2019-01-11)
 
 
 
@@ -39,61 +39,61 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @commitlint/root
 
 <a name="7.3.0"></a>
-# [7.3.0](https://github.com/marionebl/commitlint/compare/v7.2.1...v7.3.0) (2019-01-11)
+# [7.3.0](https://github.com/conventional-changelog/commitlint/compare/v7.2.1...v7.3.0) (2019-01-11)
 
 
 ### Bug Fixes
 
-* **format:** add new line to result ([#518](https://github.com/marionebl/commitlint/issues/518)) ([f1d443b](https://github.com/marionebl/commitlint/commit/f1d443b)), closes [#504](https://github.com/marionebl/commitlint/issues/504)
-* add fallback with husky git params to deprecation handling ([#498](https://github.com/marionebl/commitlint/issues/498)) ([5a34b8c](https://github.com/marionebl/commitlint/commit/5a34b8c))
-* avoid truncated output on macOS ([#503](https://github.com/marionebl/commitlint/issues/503)) ([3192368](https://github.com/marionebl/commitlint/commit/3192368))
-* fall back to conventional commit-parser settings for missing keys ([#496](https://github.com/marionebl/commitlint/issues/496)) ([831a141](https://github.com/marionebl/commitlint/commit/831a141)), closes [#399](https://github.com/marionebl/commitlint/issues/399)
-* respect String.protoype.repeat API contract ([f27e7ac](https://github.com/marionebl/commitlint/commit/f27e7ac))
-* update to security-patched dependency versions ([97c033b](https://github.com/marionebl/commitlint/commit/97c033b))
-* use correct label for failing empty subjects ([#481](https://github.com/marionebl/commitlint/issues/481)) ([2e7e34d](https://github.com/marionebl/commitlint/commit/2e7e34d)), closes [#476](https://github.com/marionebl/commitlint/issues/476)
+* **format:** add new line to result ([#518](https://github.com/conventional-changelog/commitlint/issues/518)) ([f1d443b](https://github.com/conventional-changelog/commitlint/commit/f1d443b)), closes [#504](https://github.com/conventional-changelog/commitlint/issues/504)
+* add fallback with husky git params to deprecation handling ([#498](https://github.com/conventional-changelog/commitlint/issues/498)) ([5a34b8c](https://github.com/conventional-changelog/commitlint/commit/5a34b8c))
+* avoid truncated output on macOS ([#503](https://github.com/conventional-changelog/commitlint/issues/503)) ([3192368](https://github.com/conventional-changelog/commitlint/commit/3192368))
+* fall back to conventional commit-parser settings for missing keys ([#496](https://github.com/conventional-changelog/commitlint/issues/496)) ([831a141](https://github.com/conventional-changelog/commitlint/commit/831a141)), closes [#399](https://github.com/conventional-changelog/commitlint/issues/399)
+* respect String.protoype.repeat API contract ([f27e7ac](https://github.com/conventional-changelog/commitlint/commit/f27e7ac))
+* update to security-patched dependency versions ([97c033b](https://github.com/conventional-changelog/commitlint/commit/97c033b))
+* use correct label for failing empty subjects ([#481](https://github.com/conventional-changelog/commitlint/issues/481)) ([2e7e34d](https://github.com/conventional-changelog/commitlint/commit/2e7e34d)), closes [#476](https://github.com/conventional-changelog/commitlint/issues/476)
 
 
 ### Features
 
-* check stage before entering prompt ([#495](https://github.com/marionebl/commitlint/issues/495)) ([3b3667a](https://github.com/marionebl/commitlint/commit/3b3667a)), closes [#51](https://github.com/marionebl/commitlint/issues/51) [#51](https://github.com/marionebl/commitlint/issues/51)
-* warn on empty config ([#491](https://github.com/marionebl/commitlint/issues/491)) ([b6bd36e](https://github.com/marionebl/commitlint/commit/b6bd36e)), closes [#107](https://github.com/marionebl/commitlint/issues/107) [#107](https://github.com/marionebl/commitlint/issues/107)
+* check stage before entering prompt ([#495](https://github.com/conventional-changelog/commitlint/issues/495)) ([3b3667a](https://github.com/conventional-changelog/commitlint/commit/3b3667a)), closes [#51](https://github.com/conventional-changelog/commitlint/issues/51) [#51](https://github.com/conventional-changelog/commitlint/issues/51)
+* warn on empty config ([#491](https://github.com/conventional-changelog/commitlint/issues/491)) ([b6bd36e](https://github.com/conventional-changelog/commitlint/commit/b6bd36e)), closes [#107](https://github.com/conventional-changelog/commitlint/issues/107) [#107](https://github.com/conventional-changelog/commitlint/issues/107)
 
 
 
 
 <a name="7.2.1"></a>
-## [7.2.1](https://github.com/marionebl/commitlint/compare/v7.2.0...v7.2.1) (2018-10-11)
+## [7.2.1](https://github.com/conventional-changelog/commitlint/compare/v7.2.0...v7.2.1) (2018-10-11)
 
 
 ### Bug Fixes
 
-* improve format module resolving ([#464](https://github.com/marionebl/commitlint/issues/464)) ([baed8b1](https://github.com/marionebl/commitlint/commit/baed8b1))
+* improve format module resolving ([#464](https://github.com/conventional-changelog/commitlint/issues/464)) ([baed8b1](https://github.com/conventional-changelog/commitlint/commit/baed8b1))
 
 
 
 
 <a name="7.2.0"></a>
-# [7.2.0](https://github.com/marionebl/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
+# [7.2.0](https://github.com/conventional-changelog/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
 
 
 ### Bug Fixes
 
-* **rules:** include possible body offset in footer leading blank ([ff0111a](https://github.com/marionebl/commitlint/commit/ff0111a))
-* handle case rules for numerics correctly ([cadcfed](https://github.com/marionebl/commitlint/commit/cadcfed))
-* ignore merge messages with text after newline ([b32bc93](https://github.com/marionebl/commitlint/commit/b32bc93))
-* use grouped regex to ignore merge commits ([#439](https://github.com/marionebl/commitlint/issues/439)) ([905e9d5](https://github.com/marionebl/commitlint/commit/905e9d5))
+* **rules:** include possible body offset in footer leading blank ([ff0111a](https://github.com/conventional-changelog/commitlint/commit/ff0111a))
+* handle case rules for numerics correctly ([cadcfed](https://github.com/conventional-changelog/commitlint/commit/cadcfed))
+* ignore merge messages with text after newline ([b32bc93](https://github.com/conventional-changelog/commitlint/commit/b32bc93))
+* use grouped regex to ignore merge commits ([#439](https://github.com/conventional-changelog/commitlint/issues/439)) ([905e9d5](https://github.com/conventional-changelog/commitlint/commit/905e9d5))
 
 
 ### Features
 
-* **cli:** add format option for report output ([1ecf097](https://github.com/marionebl/commitlint/commit/1ecf097))
-* **load:** add formatter option with default value ([b0e63d9](https://github.com/marionebl/commitlint/commit/b0e63d9))
+* **cli:** add format option for report output ([1ecf097](https://github.com/conventional-changelog/commitlint/commit/1ecf097))
+* **load:** add formatter option with default value ([b0e63d9](https://github.com/conventional-changelog/commitlint/commit/b0e63d9))
 
 
 
 
 <a name="7.1.2"></a>
-## [7.1.2](https://github.com/marionebl/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
+## [7.1.2](https://github.com/conventional-changelog/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
 
 
 
@@ -101,104 +101,104 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @commitlint/root
 
 <a name="7.1.0"></a>
-# [7.1.0](https://github.com/marionebl/commitlint/compare/v7.0.1...v7.1.0) (2018-08-29)
+# [7.1.0](https://github.com/conventional-changelog/commitlint/compare/v7.0.1...v7.1.0) (2018-08-29)
 
 
 ### Features
 
-* **wildcards:** add new wildcard patterns [#315](https://github.com/marionebl/commitlint/issues/315) ([e9ea17f](https://github.com/marionebl/commitlint/commit/e9ea17f))
-* add max line length to body/footer  ([542f50e](https://github.com/marionebl/commitlint/commit/542f50e))
+* **wildcards:** add new wildcard patterns [#315](https://github.com/conventional-changelog/commitlint/issues/315) ([e9ea17f](https://github.com/conventional-changelog/commitlint/commit/e9ea17f))
+* add max line length to body/footer  ([542f50e](https://github.com/conventional-changelog/commitlint/commit/542f50e))
 
 
 
 
 <a name="6.2.0"></a>
-# [6.2.0](https://github.com/marionebl/commitlint/compare/v6.1.3...v6.2.0) (2018-05-01)
+# [6.2.0](https://github.com/conventional-changelog/commitlint/compare/v6.1.3...v6.2.0) (2018-05-01)
 
 
 ### Features
 
-* print commit message when the message is invalid ([86c34f1](https://github.com/marionebl/commitlint/commit/86c34f1)), closes [#222](https://github.com/marionebl/commitlint/issues/222)
-* **rules:** support array for scope-case and type-case ([#312](https://github.com/marionebl/commitlint/issues/312)) ([1f46b9f](https://github.com/marionebl/commitlint/commit/1f46b9f)), closes [#307](https://github.com/marionebl/commitlint/issues/307)
+* print commit message when the message is invalid ([86c34f1](https://github.com/conventional-changelog/commitlint/commit/86c34f1)), closes [#222](https://github.com/conventional-changelog/commitlint/issues/222)
+* **rules:** support array for scope-case and type-case ([#312](https://github.com/conventional-changelog/commitlint/issues/312)) ([1f46b9f](https://github.com/conventional-changelog/commitlint/commit/1f46b9f)), closes [#307](https://github.com/conventional-changelog/commitlint/issues/307)
 
 
 
 
 <a name="6.1.1"></a>
-## [6.1.1](https://github.com/marionebl/commitlint/compare/v6.1.0...v6.1.1) (2018-02-22)
+## [6.1.1](https://github.com/conventional-changelog/commitlint/compare/v6.1.0...v6.1.1) (2018-02-22)
 
 
 ### Bug Fixes
 
-* **ensure:** ignore word delimiters for case matching [#291](https://github.com/marionebl/commitlint/issues/291) ([fa69299](https://github.com/marionebl/commitlint/commit/fa69299))
+* **ensure:** ignore word delimiters for case matching [#291](https://github.com/conventional-changelog/commitlint/issues/291) ([fa69299](https://github.com/conventional-changelog/commitlint/commit/fa69299))
 
 
 
 
 <a name="6.1.0"></a>
-# [6.1.0](https://github.com/marionebl/commitlint/compare/v6.0.5...v6.1.0) (2018-02-03)
+# [6.1.0](https://github.com/conventional-changelog/commitlint/compare/v6.0.5...v6.1.0) (2018-02-03)
 
 
 ### Bug Fixes
 
-* **parse:** default to angular preset for empty parserOpts ([#265](https://github.com/marionebl/commitlint/issues/265)) ([ccb03b4](https://github.com/marionebl/commitlint/commit/ccb03b4)), closes [#262](https://github.com/marionebl/commitlint/issues/262)
+* **parse:** default to angular preset for empty parserOpts ([#265](https://github.com/conventional-changelog/commitlint/issues/265)) ([ccb03b4](https://github.com/conventional-changelog/commitlint/commit/ccb03b4)), closes [#262](https://github.com/conventional-changelog/commitlint/issues/262)
 
 
 ### Features
 
-* add "--config" option ([#261](https://github.com/marionebl/commitlint/issues/261)) ([2c03ec6](https://github.com/marionebl/commitlint/commit/2c03ec6))
+* add "--config" option ([#261](https://github.com/conventional-changelog/commitlint/issues/261)) ([2c03ec6](https://github.com/conventional-changelog/commitlint/commit/2c03ec6))
 
 
 
 
 <a name="6.0.5"></a>
-## [6.0.5](https://github.com/marionebl/commitlint/compare/v6.0.4...v6.0.5) (2018-01-31)
+## [6.0.5](https://github.com/conventional-changelog/commitlint/compare/v6.0.4...v6.0.5) (2018-01-31)
 
 
 ### Bug Fixes
 
-* remove utils from prod dependencies ([4fb858a](https://github.com/marionebl/commitlint/commit/4fb858a))
+* remove utils from prod dependencies ([4fb858a](https://github.com/conventional-changelog/commitlint/commit/4fb858a))
 
 
 
 
 <a name="6.0.4"></a>
-## [6.0.4](https://github.com/marionebl/commitlint/compare/v6.0.3...v6.0.4) (2018-01-31)
+## [6.0.4](https://github.com/conventional-changelog/commitlint/compare/v6.0.3...v6.0.4) (2018-01-31)
 
 
 ### Bug Fixes
 
-* remove faulty bin entry [#259](https://github.com/marionebl/commitlint/issues/259) ([beafbc6](https://github.com/marionebl/commitlint/commit/beafbc6))
+* remove faulty bin entry [#259](https://github.com/conventional-changelog/commitlint/issues/259) ([beafbc6](https://github.com/conventional-changelog/commitlint/commit/beafbc6))
 
 
 
 
 <a name="6.0.3"></a>
-## [6.0.3](https://github.com/marionebl/commitlint/compare/v6.0.2...v6.0.3) (2018-01-31)
+## [6.0.3](https://github.com/conventional-changelog/commitlint/compare/v6.0.2...v6.0.3) (2018-01-31)
 
 
 ### Bug Fixes
 
-* update dependency cosmiconfig to ^4.0.0 ([#234](https://github.com/marionebl/commitlint/issues/234)) ([7f94ac5](https://github.com/marionebl/commitlint/commit/7f94ac5))
-* update dependency semver to v5.5.0 ([#236](https://github.com/marionebl/commitlint/issues/236)) ([6c52bd9](https://github.com/marionebl/commitlint/commit/6c52bd9))
+* update dependency cosmiconfig to ^4.0.0 ([#234](https://github.com/conventional-changelog/commitlint/issues/234)) ([7f94ac5](https://github.com/conventional-changelog/commitlint/commit/7f94ac5))
+* update dependency semver to v5.5.0 ([#236](https://github.com/conventional-changelog/commitlint/issues/236)) ([6c52bd9](https://github.com/conventional-changelog/commitlint/commit/6c52bd9))
 
 
 
 
 <a name="6.0.2"></a>
-## [6.0.2](https://github.com/marionebl/commitlint/compare/v6.0.0...v6.0.2) (2018-01-12)
+## [6.0.2](https://github.com/conventional-changelog/commitlint/compare/v6.0.0...v6.0.2) (2018-01-12)
 
 
 ### Bug Fixes
 
-* ignore branch merges with multiple newlines ([#227](https://github.com/marionebl/commitlint/issues/227)) ([1f0c5ca](https://github.com/marionebl/commitlint/commit/1f0c5ca))
-* remove typo in error message of type-case ([cb577cb](https://github.com/marionebl/commitlint/commit/cb577cb))
+* ignore branch merges with multiple newlines ([#227](https://github.com/conventional-changelog/commitlint/issues/227)) ([1f0c5ca](https://github.com/conventional-changelog/commitlint/commit/1f0c5ca))
+* remove typo in error message of type-case ([cb577cb](https://github.com/conventional-changelog/commitlint/commit/cb577cb))
 
 
 
 
 <a name="6.0.1"></a>
-## [6.0.1](https://github.com/marionebl/commitlint/compare/v6.0.0...v6.0.1) (2018-01-09)
+## [6.0.1](https://github.com/conventional-changelog/commitlint/compare/v6.0.0...v6.0.1) (2018-01-09)
 
 
 
@@ -206,20 +206,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @commitlint/root
 
 <a name="6.0.0"></a>
-# [6.0.0](https://github.com/marionebl/commitlint/compare/v5.2.6...v6.0.0) (2018-01-09)
+# [6.0.0](https://github.com/conventional-changelog/commitlint/compare/v5.2.6...v6.0.0) (2018-01-09)
 
 
 ### Bug Fixes
 
-* allow [0] shorthand ([84cf938](https://github.com/marionebl/commitlint/commit/84cf938))
-* correctly resolve parserOpts [#115](https://github.com/marionebl/commitlint/issues/115) [#95](https://github.com/marionebl/commitlint/issues/95) ([1353dd5](https://github.com/marionebl/commitlint/commit/1353dd5))
-* ignore branch merges with newlines ([#214](https://github.com/marionebl/commitlint/issues/214)) ([c94c4dc](https://github.com/marionebl/commitlint/commit/c94c4dc))
-* sanitize ensure.case [#211](https://github.com/marionebl/commitlint/issues/211) ([#217](https://github.com/marionebl/commitlint/issues/217)) ([03aeefc](https://github.com/marionebl/commitlint/commit/03aeefc))
+* allow [0] shorthand ([84cf938](https://github.com/conventional-changelog/commitlint/commit/84cf938))
+* correctly resolve parserOpts [#115](https://github.com/conventional-changelog/commitlint/issues/115) [#95](https://github.com/conventional-changelog/commitlint/issues/95) ([1353dd5](https://github.com/conventional-changelog/commitlint/commit/1353dd5))
+* ignore branch merges with newlines ([#214](https://github.com/conventional-changelog/commitlint/issues/214)) ([c94c4dc](https://github.com/conventional-changelog/commitlint/commit/c94c4dc))
+* sanitize ensure.case [#211](https://github.com/conventional-changelog/commitlint/issues/211) ([#217](https://github.com/conventional-changelog/commitlint/issues/217)) ([03aeefc](https://github.com/conventional-changelog/commitlint/commit/03aeefc))
 
 
 ### Styles
 
-* validate rule configuration ([edf7187](https://github.com/marionebl/commitlint/commit/edf7187))
+* validate rule configuration ([edf7187](https://github.com/conventional-changelog/commitlint/commit/edf7187))
 
 
 ### BREAKING CHANGES
@@ -235,29 +235,29 @@ their configuration quicker.
 
 
 <a name="5.2.6"></a>
-## [5.2.6](https://github.com/marionebl/commitlint/compare/v5.2.5...v5.2.6) (2017-12-21)
+## [5.2.6](https://github.com/conventional-changelog/commitlint/compare/v5.2.5...v5.2.6) (2017-12-21)
 
 
 ### Bug Fixes
 
-* ignore semver commits with chore type ([cdbb085](https://github.com/marionebl/commitlint/commit/cdbb085)), closes [#198](https://github.com/marionebl/commitlint/issues/198)
+* ignore semver commits with chore type ([cdbb085](https://github.com/conventional-changelog/commitlint/commit/cdbb085)), closes [#198](https://github.com/conventional-changelog/commitlint/issues/198)
 
 
 
 
 <a name="5.2.5"></a>
-## [5.2.5](https://github.com/marionebl/commitlint/compare/v5.2.4...v5.2.5) (2017-12-08)
+## [5.2.5](https://github.com/conventional-changelog/commitlint/compare/v5.2.4...v5.2.5) (2017-12-08)
 
 
 ### Bug Fixes
 
-* **core:** use correct report message [#192](https://github.com/marionebl/commitlint/issues/192) ([e3a78bc](https://github.com/marionebl/commitlint/commit/e3a78bc))
+* **core:** use correct report message [#192](https://github.com/conventional-changelog/commitlint/issues/192) ([e3a78bc](https://github.com/conventional-changelog/commitlint/commit/e3a78bc))
 
 
 
 
 <a name="5.2.4"></a>
-## [5.2.4](https://github.com/marionebl/commitlint/compare/v5.2.3...v5.2.4) (2017-12-08)
+## [5.2.4](https://github.com/conventional-changelog/commitlint/compare/v5.2.3...v5.2.4) (2017-12-08)
 
 
 
@@ -265,119 +265,119 @@ their configuration quicker.
 **Note:** Version bump only for package @commitlint/root
 
 <a name="5.2.3"></a>
-## [5.2.3](https://github.com/marionebl/commitlint/compare/v5.2.2...v5.2.3) (2017-12-05)
+## [5.2.3](https://github.com/conventional-changelog/commitlint/compare/v5.2.2...v5.2.3) (2017-12-05)
 
 
 ### Bug Fixes
 
-* **cli:** add support for GIT_PARAMS on windows ([c62bd41](https://github.com/marionebl/commitlint/commit/c62bd41)), closes [#103](https://github.com/marionebl/commitlint/issues/103) [#175](https://github.com/marionebl/commitlint/issues/175)
+* **cli:** add support for GIT_PARAMS on windows ([c62bd41](https://github.com/conventional-changelog/commitlint/commit/c62bd41)), closes [#103](https://github.com/conventional-changelog/commitlint/issues/103) [#175](https://github.com/conventional-changelog/commitlint/issues/175)
 
 
 
 
 <a name="5.2.2"></a>
-## [5.2.2](https://github.com/marionebl/commitlint/compare/v5.2.1...v5.2.2) (2017-11-30)
+## [5.2.2](https://github.com/conventional-changelog/commitlint/compare/v5.2.1...v5.2.2) (2017-11-30)
 
 
 ### Bug Fixes
 
-* **travis-cli:** read push commits directly ([9bc56c6](https://github.com/marionebl/commitlint/commit/9bc56c6))
+* **travis-cli:** read push commits directly ([9bc56c6](https://github.com/conventional-changelog/commitlint/commit/9bc56c6))
 
 
 
 
 <a name="5.2.1"></a>
-## [5.2.1](https://github.com/marionebl/commitlint/compare/v5.2.0...v5.2.1) (2017-11-30)
+## [5.2.1](https://github.com/conventional-changelog/commitlint/compare/v5.2.0...v5.2.1) (2017-11-30)
 
 
 ### Bug Fixes
 
-* **travis-cli:** lint ranges only for pr builds ([85b201f](https://github.com/marionebl/commitlint/commit/85b201f))
+* **travis-cli:** lint ranges only for pr builds ([85b201f](https://github.com/conventional-changelog/commitlint/commit/85b201f))
 
 
 
 
 <a name="5.2.0"></a>
-# [5.2.0](https://github.com/marionebl/commitlint/compare/v5.1.3...v5.2.0) (2017-11-30)
+# [5.2.0](https://github.com/conventional-changelog/commitlint/compare/v5.1.3...v5.2.0) (2017-11-30)
 
 
 ### Bug Fixes
 
-* consider pull requests from forks ([4653c2c](https://github.com/marionebl/commitlint/commit/4653c2c))
+* consider pull requests from forks ([4653c2c](https://github.com/conventional-changelog/commitlint/commit/4653c2c))
 
 
 ### Features
 
-* **babel-preset-commitlint:** add jsx tranform ([#163](https://github.com/marionebl/commitlint/issues/163)) ([5190241](https://github.com/marionebl/commitlint/commit/5190241))
+* **babel-preset-commitlint:** add jsx tranform ([#163](https://github.com/conventional-changelog/commitlint/issues/163)) ([5190241](https://github.com/conventional-changelog/commitlint/commit/5190241))
 
 
 
 
 <a name="5.1.3"></a>
-## [5.1.3](https://github.com/marionebl/commitlint/compare/v5.1.2...v5.1.3) (2017-11-24)
+## [5.1.3](https://github.com/conventional-changelog/commitlint/compare/v5.1.2...v5.1.3) (2017-11-24)
 
 
 ### Bug Fixes
 
-* **config-conventional:** add missing applicable attribute to type-enum ([a8db0b1](https://github.com/marionebl/commitlint/commit/a8db0b1))
+* **config-conventional:** add missing applicable attribute to type-enum ([a8db0b1](https://github.com/conventional-changelog/commitlint/commit/a8db0b1))
 
 
 
 
 <a name="5.1.2"></a>
-## [5.1.2](https://github.com/marionebl/commitlint/compare/v5.1.1...v5.1.2) (2017-11-24)
+## [5.1.2](https://github.com/conventional-changelog/commitlint/compare/v5.1.1...v5.1.2) (2017-11-24)
 
 
 ### Bug Fixes
 
-* **prompt:** apply forced cases properly ([3a569a7](https://github.com/marionebl/commitlint/commit/3a569a7)), closes [#145](https://github.com/marionebl/commitlint/issues/145)
+* **prompt:** apply forced cases properly ([3a569a7](https://github.com/conventional-changelog/commitlint/commit/3a569a7)), closes [#145](https://github.com/conventional-changelog/commitlint/issues/145)
 
 
 
 
 <a name="5.1.1"></a>
-## [5.1.1](https://github.com/marionebl/commitlint/compare/v5.1.0...v5.1.1) (2017-11-24)
+## [5.1.1](https://github.com/conventional-changelog/commitlint/compare/v5.1.0...v5.1.1) (2017-11-24)
 
 
 ### Bug Fixes
 
-* set access for npm ([8aeaec2](https://github.com/marionebl/commitlint/commit/8aeaec2))
+* set access for npm ([8aeaec2](https://github.com/conventional-changelog/commitlint/commit/8aeaec2))
 
 
 
 
 <a name="5.1.0"></a>
-# [5.1.0](https://github.com/marionebl/commitlint/compare/v5.0.2...v5.1.0) (2017-11-24)
+# [5.1.0](https://github.com/conventional-changelog/commitlint/compare/v5.0.2...v5.1.0) (2017-11-24)
 
 
 ### Bug Fixes
 
-* update dependency concurrently to v3.5.1 ([#147](https://github.com/marionebl/commitlint/issues/147)) ([a809d0f](https://github.com/marionebl/commitlint/commit/a809d0f))
-* **config-conventional:** remove unneeded dependency ([d0e62fd](https://github.com/marionebl/commitlint/commit/d0e62fd))
+* update dependency concurrently to v3.5.1 ([#147](https://github.com/conventional-changelog/commitlint/issues/147)) ([a809d0f](https://github.com/conventional-changelog/commitlint/commit/a809d0f))
+* **config-conventional:** remove unneeded dependency ([d0e62fd](https://github.com/conventional-changelog/commitlint/commit/d0e62fd))
 
 
 ### Features
 
-* **prompt:** add description for build, ci and revert ([#148](https://github.com/marionebl/commitlint/issues/148)) ([ee6ec6e](https://github.com/marionebl/commitlint/commit/ee6ec6e))
-* **travis-cli:** add reusable travis command line interface ([3e6e6a8](https://github.com/marionebl/commitlint/commit/3e6e6a8))
-* add conventional-changelog package ([8bb0a85](https://github.com/marionebl/commitlint/commit/8bb0a85))
+* **prompt:** add description for build, ci and revert ([#148](https://github.com/conventional-changelog/commitlint/issues/148)) ([ee6ec6e](https://github.com/conventional-changelog/commitlint/commit/ee6ec6e))
+* **travis-cli:** add reusable travis command line interface ([3e6e6a8](https://github.com/conventional-changelog/commitlint/commit/3e6e6a8))
+* add conventional-changelog package ([8bb0a85](https://github.com/conventional-changelog/commitlint/commit/8bb0a85))
 
 
 
 
 <a name="5.0.1"></a>
-## [5.0.1](https://github.com/marionebl/commitlint/compare/v5.0.0...v5.0.1) (2017-11-19)
+## [5.0.1](https://github.com/conventional-changelog/commitlint/compare/v5.0.0...v5.0.1) (2017-11-19)
 
 
 ### Bug Fixes
 
-* **core:** fall back to globally installed config if available ([#127](https://github.com/marionebl/commitlint/issues/127)) ([8612eb3](https://github.com/marionebl/commitlint/commit/8612eb3))
+* **core:** fall back to globally installed config if available ([#127](https://github.com/conventional-changelog/commitlint/issues/127)) ([8612eb3](https://github.com/conventional-changelog/commitlint/commit/8612eb3))
 
 
 
 
 <a name="5.0.0"></a>
-# [5.0.0](https://github.com/marionebl/commitlint/compare/v4.3.0...v5.0.0) (2017-11-18)
+# [5.0.0](https://github.com/conventional-changelog/commitlint/compare/v4.3.0...v5.0.0) (2017-11-18)
 
 ### Bug fixes
 
@@ -413,15 +413,15 @@ Also, formerly working commit messages are now considered problems:
 *  type: Some Message
 
 <a name="4.3.0"></a>
-# [4.3.0](https://github.com/marionebl/commitlint/compare/v4.2.2...v4.3.0) (2017-11-08)
+# [4.3.0](https://github.com/conventional-changelog/commitlint/compare/v4.2.2...v4.3.0) (2017-11-08)
 
 
 ### Bug Fixes
 
-* **core:** deprecate nlp rules  ([bbab1d8](https://github.com/marionebl/commitlint/commit/bbab1d8)), closes [#54](https://github.com/marionebl/commitlint/issues/54)
-* **core:** ignore comments ([f3beda1](https://github.com/marionebl/commitlint/commit/f3beda1)), closes [#78](https://github.com/marionebl/commitlint/issues/78)
+* **core:** deprecate nlp rules  ([bbab1d8](https://github.com/conventional-changelog/commitlint/commit/bbab1d8)), closes [#54](https://github.com/conventional-changelog/commitlint/issues/54)
+* **core:** ignore comments ([f3beda1](https://github.com/conventional-changelog/commitlint/commit/f3beda1)), closes [#78](https://github.com/conventional-changelog/commitlint/issues/78)
 
 
 ### Features
 
-* add references-empty rule ([4fc8d5d](https://github.com/marionebl/commitlint/commit/4fc8d5d))
+* add references-empty rule ([4fc8d5d](https://github.com/conventional-changelog/commitlint/commit/4fc8d5d))

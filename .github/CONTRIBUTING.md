@@ -50,7 +50,7 @@ To make your life easier commitlint is commitizen-friendly and provides the npm 
 
 > Commit standards
 
-* [conventional-changelog](https://github.com/marionebl/commitlint/tree/master/%40commitlint/prompt)
+* [conventional-changelog](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/prompt)
 * husky commit message hook available
 * present tense
 * maximum of 100 characters
