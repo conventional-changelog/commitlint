@@ -1,7 +1,7 @@
 > Lint commit messages
 
 <p align="center">
-  <img width="750" src="https://marionebl.github.io/commitlint/assets/commitlint.svg">
+  <img width="750" src="https://conventional-changelog.github.io/assets/commitlint.svg">
 </p>
 
 # @commitlint/cli
@@ -13,4 +13,4 @@ npm install --save-dev @commitlint/cli @commitlint/config-angular
 echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
 ```
 
-Consult [docs/cli](https://marionebl.github.io/commitlint/#/reference-cli) for comprehensive documentation.
+Consult [docs/cli](https://conventional-changelog.github.io/#/reference-cli) for comprehensive documentation.

@@ -14,4 +14,4 @@ git add .
 commit
 ```
 
-A full usage guide is available at [docs/prompt](https://marionebl.github.io/commitlint/#/guides-use-prompt).
+A full usage guide is available at [docs/prompt](https://conventional-changelog.github.io/#/guides-use-prompt).
