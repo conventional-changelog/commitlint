@@ -16,10 +16,12 @@ test('succeeds for a simple babel transformation', t => {
 
 test('produces valid values in plugins', t => {
 	const config = preset();
-	t.true(config.plugins.every(plugin => {
-		if (Array.isArray(plugin)) {
-			return typeof plugin[0] === 'function';
-		}
-		return typeof plugin === 'function';
-	}));
+	t.true(
+		config.plugins.every(plugin => {
+			if (Array.isArray(plugin)) {
+				return typeof plugin[0] === 'function';
+			}
+			return typeof plugin === 'function';
+		})
+	);
 });

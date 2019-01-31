@@ -40,7 +40,7 @@ To keep the code base of commitlint neat and tidy the following rules apply to e
 
 > Coding standards
 
-* [Happiness](https://github.com/sindresorhus/xo) enforced
+* `prettier` is king
 * Favor micro library over swiss army knives (rimraf, ncp vs. fs-extra)
 * Be awesome
 

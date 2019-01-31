@@ -15,7 +15,6 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "lint": "xo",
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
     "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
@@ -33,7 +32,6 @@
       "babel-preset-commitlint"
     ]
   },
-  "xo": false,
   "engines": {
     "node": ">=4"
   },
@@ -71,8 +69,7 @@
     "rimraf": "2.6.2",
     "sander": "0.6.0",
     "string-to-stream": "1.1.0",
-    "tmp": "0.0.33",
-    "xo": "0.20.3"
+    "tmp": "0.0.33"
   },
   "dependencies": {
     "@commitlint/format": "^7.4.0",

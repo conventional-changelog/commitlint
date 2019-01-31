@@ -11,7 +11,7 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "lint": "xo",
+    
     "start": "yarn watch",
     "watch": "babel src --out-dir lib --watch --source-maps"
   },
@@ -20,7 +20,7 @@
       "babel-preset-commitlint"
     ]
   },
-  "xo": false,
+  
   "engines": {
     "node": ">=4"
   },
@@ -49,9 +49,7 @@
     "babel-preset-commitlint": "^7.3.1",
     "babel-register": "6.26.0",
     "cross-env": "5.1.1",
-    "rimraf": "2.6.1",
-    "xo": "0.20.3"
-  },
+    "rimraf": "2.6.1"  },
   "dependencies": {
     "find-up": "^2.1.0"
   }

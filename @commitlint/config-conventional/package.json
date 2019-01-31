@@ -9,11 +9,9 @@
     "clean": "exit 0",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "lint": "xo",
     "start": "exit 0",
     "test": "exit 0"
   },
-  "xo": false,
   "publishConfig": {
     "access": "public"
   },

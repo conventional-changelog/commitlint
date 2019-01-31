@@ -11,7 +11,7 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "lint": "xo",
+    
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
     "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
@@ -35,7 +35,7 @@
       "babel-preset-commitlint"
     ]
   },
-  "xo": false,
+  
   "engines": {
     "node": ">=4"
   },
@@ -70,9 +70,7 @@
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
     "execa": "0.9.0",
-    "rimraf": "2.6.1",
-    "xo": "0.20.3"
-  },
+    "rimraf": "2.6.1"  },
   "dependencies": {
     "babel-runtime": "6.26.0",
     "import-fresh": "^3.0.0",

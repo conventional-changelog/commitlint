@@ -16,7 +16,7 @@ function format(input, debug = false) {
 				registry[name] =
 					value === null ? chalk.grey(`<${name}>`) : chalk.bold(value);
 				return registry;
-			}, {})
+		  }, {})
 		: input;
 
 	// Return formatted string

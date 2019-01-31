@@ -13,7 +13,7 @@
     "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-main",
-    "lint": "xo",
+    
     "start": "ava -c 4 --verbose --watch",
     "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
@@ -35,7 +35,7 @@
       "babel-preset-commitlint"
     ]
   },
-  "xo": false,
+  
   "engines": {
     "node": ">=4"
   },

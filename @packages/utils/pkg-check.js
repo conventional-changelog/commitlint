@@ -151,8 +151,7 @@ function getArchiveFiles(filePath, options) {
 
 	return new Promise((resolve, reject) => {
 		const files = [];
-		fs
-			.createReadStream(filePath)
+		fs.createReadStream(filePath)
 			.pipe(zlib.createGunzip())
 			.pipe(
 				tar.extract(path.dirname(filePath), {

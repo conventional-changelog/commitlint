@@ -21,12 +21,14 @@ module.exports = flags => {
 			const flags = line[0];
 			const desc = line[1];
 			const defaults = line[2];
-			const fs = flags.map(
-				flag => (flag.length > 1 ? `--${flag}` : ` -${flag}`)
+			const fs = flags.map(flag =>
+				flag.length > 1 ? `--${flag}` : ` -${flag}`
 			);
 			const ds = defaults ? `, defaults to: ${defaults}` : '';
 			const length = flags.reduce((sum, flag) => sum + flag.length, 0);
-			return `${fs.join(',')}${' '.repeat(Math.max(4 + longest - length, 0))}${desc}${ds}`;
+			return `${fs.join(',')}${' '.repeat(
+				Math.max(4 + longest - length, 0)
+			)}${desc}${ds}`;
 		})
 		.join('\n');
 };
