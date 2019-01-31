@@ -20,7 +20,7 @@ echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.
 ### Problems
 
 The following rules are considered problems for `@commitlint/config-angular` and will yield a non-zero exit code when not met.
-Consult [docs/rules](https://conventional-changelog.github.io/#/reference-rules) for a list of available rules.
+Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
 
 
 #### type-enum

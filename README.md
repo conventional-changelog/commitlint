@@ -1,4 +1,4 @@
-# [Get Started](https://conventional-changelog.github.io/#/?id=getting-started) | [Let's chat][12] ![slack][11] | [Website](https://conventional-changelog.github.io)
+# [Get Started](https://conventional-changelog.github.io/commitlint/#/?id=getting-started) | [Let's chat][12] ![slack][11] | [Website](https://conventional-changelog.github.io/commitlint)
 
 > Lint commit messages
 
@@ -101,8 +101,8 @@ To lint commits before they are created you can use Husky's 'commit-msg' hook:
 
 **Detailed Setup instructions**
 
-* [Local setup](https://conventional-changelog.github.io/#/guides-local-setup) - Lint messages on commit with husky
-* [CI setup](https://conventional-changelog.github.io/#/guides-ci-setup) - Lint messages during CI builds
+* [Local setup](https://conventional-changelog.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
+* [CI setup](https://conventional-changelog.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
 
 
 ## CLI
