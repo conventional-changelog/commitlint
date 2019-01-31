@@ -30,4 +30,4 @@ lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
   */
 ```
 
-Consult [docs/api](https://conventional-changelog.github.io/#/reference-api) for comprehensive documentation.
+Consult [docs/api](https://conventional-changelog.github.io/commitlint/#/reference-api) for comprehensive documentation.
