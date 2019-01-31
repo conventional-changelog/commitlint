@@ -18,4 +18,4 @@ load({extends: ['./package']})
 // => { extends: ['./package', './package-b'], rules: {} }
 ```
 
-Consult [docs/api](http://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.
+Consult [docs/api](https://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.

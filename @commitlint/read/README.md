@@ -24,4 +24,4 @@ read({from: 'HEAD~2', to: 'HEAD~1'})
   // => ['Initial commit\n\n']
 ```
 
-Consult [docs/api](http://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.
+Consult [docs/api](https://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.

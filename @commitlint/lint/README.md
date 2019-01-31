@@ -30,4 +30,4 @@ lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
   */
 ```
 
-Consult [docs/api](http://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.
+Consult [docs/api](https://marionebl.github.io/commitlint/#/reference-api) for comprehensive documentation.

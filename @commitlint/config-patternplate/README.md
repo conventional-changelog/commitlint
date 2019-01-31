@@ -22,4 +22,4 @@ The following rules are considered problems for `@commitlint/config-patterplate`
 * **rule**: `always`
 * **value**: determined based on pattern tree. `system` and all pattern ids present in `patterns` are allowed
 
-Consult [docs/rules](http://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [docs/rules](https://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.

@@ -40,4 +40,4 @@ packages
 ✔   found 0 problems, 0 warnings
 ```
 
-Consult [docs/rules](http://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [docs/rules](https://marionebl.github.io/commitlint/#/reference-rules) for a list of available rules.
