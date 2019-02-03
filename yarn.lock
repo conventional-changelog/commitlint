@@ -59,6 +59,16 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
+"@commitlint/test@^7.5.0":
+  version "7.5.0"
+  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.5.0.tgz#2c68ba0b49096978cf6e82fa2f6208a7f3f9bbc9"
+  integrity sha512-LIFXGS2h7VGpNNouJ2ymmqPyF3KjAfIBqJfb6VBEGLAnMgiQeX7Qx3BYMFkZlDFrxSY2GpNKqB3LCITYYMsbDA==
+  dependencies:
+    "@commitlint/utils" "^7.5.0"
+    "@marionebl/sander" "0.6.1"
+    execa "0.9.0"
+    pkg-dir "2.0.0"
+
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
@@ -7020,10 +7030,10 @@ preserve@^0.2.0:
   resolved "https://registry.npmjs.org/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
   integrity sha1-gV7R9uvGWSb4ZbMQwHE7yzMVzks=
 
-prettier@1.16.3:
-  version "1.16.3"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.3.tgz#8c62168453badef702f34b45b6ee899574a6a65d"
-  integrity sha512-kn/GU6SMRYPxUakNXhpP0EedT/KmaPzr0H5lIsDogrykbaxOpOfAFfk5XA7DZrJyMAv1wlMV3CPcZruGXVVUZw==
+prettier@1.16.4:
+  version "1.16.4"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+  integrity sha512-ZzWuos7TI5CKUeQAtFd6Zhm2s6EpAD/ZLApIhsF9pRvRtM1RFo61dM/4MSRUA0SuLugA/zgrZD8m0BaY46Og7g==
 
 pretty-format@^18.1.0:
   version "18.1.0"
