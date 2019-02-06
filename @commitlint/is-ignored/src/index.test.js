@@ -107,6 +107,7 @@ test('should return true for bitbucket merge commits', t => {
 		isIgnored('Merged in feature/facebook-friends-sync (pull request #8)')
 	);
 	t.true(isIgnored('Merged develop into feature/component-form-select-card'));
+	t.true(isIgnored('Automatic merge'));
 });
 
 test('should return true for automatic merge commits', t => {
