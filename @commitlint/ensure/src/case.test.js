@@ -324,3 +324,7 @@ test('true for numeric on sentencecase', t => {
 test('true for numeric on lowercase', t => {
 	t.true(ensure('1.0.0', 'lowercase'));
 });
+
+test(`true for subject-slash on sentence-case`, t => {
+	t.true(ensure('chore: Update @angular/core', 'sentence-case'));
+});
