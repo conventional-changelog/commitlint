@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.5.1](https://github.com/conventional-changelog/commitlint/compare/v7.5.0...v7.5.1) (2019-02-09)
+
+
+### Bug Fixes
+
+* **is-ignored:** ignore bitbuckets automatic merge ([#573](https://github.com/conventional-changelog/commitlint/issues/573)) ([e5bdc5c](https://github.com/conventional-changelog/commitlint/commit/e5bdc5c))
+
+
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 
