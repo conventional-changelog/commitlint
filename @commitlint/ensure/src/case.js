@@ -9,13 +9,7 @@ function ensureCase(raw = '', target = 'lowercase') {
 		.replace(/`.*?`|".*?"|'.*?'/g, '')
 		.trim();
 
-	const delimiters = /(\/|\\)/g;
-	const transformed = input
-		.split(delimiters)
-		.map(segment =>
-			delimiters.test(segment) ? segment : toCase(segment, target)
-		)
-		.join('');
+	const transformed = toCase(input, target);
 
 	if (transformed === '' || transformed.match(/^\d/)) {
 		return true;

@@ -110,11 +110,6 @@ test('true for * on pascal-case', t => {
 	t.is(actual, true);
 });
 
-test('true for Modules/Graph on pascal-case', t => {
-	const actual = ensure('Modules/Graph', 'pascal-case');
-	t.is(actual, true);
-});
-
 test('true for * on start-case', t => {
 	const actual = ensure('*', 'start-case');
 	t.is(actual, true);
@@ -323,8 +318,4 @@ test('true for numeric on sentencecase', t => {
 
 test('true for numeric on lowercase', t => {
 	t.true(ensure('1.0.0', 'lowercase'));
-});
-
-test(`true for subject-slash on sentence-case`, t => {
-	t.true(ensure('chore: Update @angular/core', 'sentence-case'));
 });
