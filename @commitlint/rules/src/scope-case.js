@@ -20,8 +20,16 @@ export default (parsed, when, value) => {
 		return check;
 	});
 
+	// Scopes may contain slash-delimiters to separate them and mark them as individual segments.
+	// This means that each of these segments should be tested separately with `ensure`.
+	const delimiters = /(\/|\\)/g;
+	const scopeSegments = scope.split(delimiters);
+
 	const result = checks.some(check => {
-		const r = ensure.case(scope, check.case);
+		const r = scopeSegments.every(
+			segment => delimiters.test(segment) || ensure.case(segment, check.case)
+		);
+
 		return negated(check.when) ? !r : r;
 	});
 

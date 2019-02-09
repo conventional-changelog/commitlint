@@ -308,3 +308,17 @@ test('with uppercase scope should fail for "never [uppercase, lowercase]"', asyn
 	const expected = false;
 	t.is(actual, expected);
 });
+
+test('with slash in scope should succeed for "always pascal-case"', async t => {
+	const commit = await parse('feat(Modules/Graph): add Pie Chart');
+	const [actual] = scopeCase(commit, 'always', 'pascal-case');
+	const expected = true;
+	t.is(actual, expected);
+});
+
+test('with slash in subject should succeed for "always sentence case"', async t => {
+	const commit = await parse('chore: Update @angular/core');
+	const [actual] = scopeCase(commit, 'always', 'sentencecase');
+	const expected = true;
+	t.is(actual, expected);
+});
