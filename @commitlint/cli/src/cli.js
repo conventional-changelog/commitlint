@@ -168,8 +168,8 @@ async function main(options) {
 					name: 'empty-rules',
 					message: [
 						'Please add rules to your `commitlint.config.js`',
-						'    - Getting started guide: https://git.io/fpUzJ',
-						'    - Example config: https://git.io/fpUzm'
+						'    - Getting started guide: https://git.io/fhHij',
+						'    - Example config: https://git.io/fhHip'
 					].join('\n')
 				}
 			],
