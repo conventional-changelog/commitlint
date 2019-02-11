@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/rules",
-  "version": "7.5.0",
+  "version": "7.5.2",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "files": [
@@ -72,7 +72,7 @@
     "rimraf": "2.6.1"
   },
   "dependencies": {
-    "@commitlint/ensure": "^7.5.0",
+    "@commitlint/ensure": "^7.5.2",
     "@commitlint/message": "^7.5.0",
     "@commitlint/to-lines": "^7.5.0",
     "babel-runtime": "^6.23.0"

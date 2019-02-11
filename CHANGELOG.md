@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.5.2](https://github.com/conventional-changelog/commitlint/compare/v7.5.1...v7.5.2) (2019-02-11)
+
+
+### Bug Fixes
+
+* failing sentence-case for subjects with slashes ([#574](https://github.com/conventional-changelog/commitlint/issues/574)) ([48a8602](https://github.com/conventional-changelog/commitlint/commit/48a8602))
+* **cli:** replace old links with new organisation links ([#578](https://github.com/conventional-changelog/commitlint/issues/578)) ([4075903](https://github.com/conventional-changelog/commitlint/commit/4075903))
+
+
+
+
+
 ## [7.5.1](https://github.com/conventional-changelog/commitlint/compare/v7.5.0...v7.5.1) (2019-02-09)
 
 
