@@ -110,11 +110,6 @@ test('true for * on pascal-case', t => {
 	t.is(actual, true);
 });
 
-test('true for Modules/Graph on pascal-case', t => {
-	const actual = ensure('Modules/Graph', 'pascal-case');
-	t.is(actual, true);
-});
-
 test('true for * on start-case', t => {
 	const actual = ensure('*', 'start-case');
 	t.is(actual, true);
