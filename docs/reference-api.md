@@ -31,6 +31,10 @@ type Problem = {
 }
 
 type Report = {
+  results: ReportResult[];
+}
+
+type ReportResult = {
   errors: Problem[];
   warnings: Problem[];
 }
@@ -53,23 +57,27 @@ const format = require('@commitlint/format');
 format(); // => [ '\u001b[1m\u001b[32m✔\u001b[39m   found 0 problems, 0 warnings\u001b[22m' ]
 
 format({
-  warnings: [
+  results: [
     {
-      level: 0,
-      name: 'some-hint',
-      message: 'This will not show up as it has level 0'
-    },
-    {
-      level: 1,
-      name: 'some-warning',
-      message: 'This will show up yellow as it has level 1'
-    }
-  ],
-  errors: [
-    {
-      level: 2,
-      name: 'some-error',
-      message: 'This will show up red as it has level 2'
+      warnings: [
+        {
+          level: 0,
+          name: 'some-hint',
+          message: 'This will not show up as it has level 0'
+        },
+        {
+          level: 1,
+          name: 'some-warning',
+          message: 'This will show up yellow as it has level 1'
+        }
+      ],
+      errors: [
+        {
+          level: 2,
+          name: 'some-error',
+          message: 'This will show up red as it has level 2'
+        }
+      ]
     }
   ]
 }, {
