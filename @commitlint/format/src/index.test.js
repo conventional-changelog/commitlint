@@ -1,7 +1,7 @@
 import test from 'ava';
 import chalk from 'chalk';
 import {includes} from 'lodash';
-import format from '.';
+import format, {formatResult} from '.';
 
 const ok = chalk.bold(
 	`${chalk.green(
@@ -143,4 +143,47 @@ test('uses signs as configured', t => {
 
 	t.true(includes(actualError, 'ERR'));
 	t.true(includes(actualWarning, 'WRN'));
+});
+
+test('format result provides summary without arguments', t => {
+	const actual = formatResult();
+	const actualText = actual.join('\n');
+
+	t.true(includes(actualText, '0 problems, 0 warnings'));
+});
+
+test('format result transforms error to text', t => {
+	const actual = formatResult({
+		errors: [
+			{
+				level: 2,
+				name: 'error-name',
+				message: 'There was an error'
+			}
+		]
+	});
+
+	const actualText = actual.join('\n');
+
+	t.true(includes(actualText, 'error-name'));
+	t.true(includes(actualText, 'There was an error'));
+	t.true(includes(actualText, '1 problems, 0 warnings'));
+});
+
+test('format result transforms warning to text', t => {
+	const actual = formatResult({
+		warnings: [
+			{
+				level: 1,
+				name: 'warning-name',
+				message: 'There was a warning'
+			}
+		]
+	});
+
+	const actualText = actual.join('\n');
+
+	t.true(includes(actualText, 'warning-name'));
+	t.true(includes(actualText, 'There was a warning'));
+	t.true(includes(actualText, '0 problems, 1 warnings'));
 });
