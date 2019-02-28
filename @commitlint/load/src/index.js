@@ -4,10 +4,11 @@ import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
 import {toPairs, merge, mergeWith, pick} from 'lodash';
 import resolveFrom from 'resolve-from';
+import loadPlugin from './utils/loadPlugin';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input =>
-	pick(input, 'extends', 'rules', 'parserPreset', 'formatter');
+	pick(input, 'extends', 'plugins', 'rules', 'parserPreset', 'formatter');
 
 export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd, options.file);
@@ -16,8 +17,8 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	// Merge passed config with file based options
 	const config = valid(merge(loaded.config, seed));
 	const opts = merge(
-		{extends: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends')
+		{extends: [], plugins: [], rules: {}, formatter: '@commitlint/format'},
+		pick(config, 'extends', 'plugins')
 	);
 
 	// Resolve parserPreset key
@@ -53,6 +54,14 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	if (typeof config.formatter === 'string') {
 		preset.formatter =
 			resolveFrom.silent(base, config.formatter) || config.formatter;
+	}
+
+	// resolve plugins
+	preset.plugins = {};
+	if (config.plugins && config.plugins.length) {
+		config.plugins.forEach(pluginKey => {
+			loadPlugin(preset.plugins, pluginKey, process.env.DEBUG === 'true');
+		});
 	}
 
 	// Execute rule config functions if needed
