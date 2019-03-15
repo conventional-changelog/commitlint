@@ -7,7 +7,15 @@ import resolveFrom from 'resolve-from';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input =>
-	pick(input, 'extends', 'rules', 'parserPreset', 'formatter');
+	pick(
+		input,
+		'extends',
+		'rules',
+		'parserPreset',
+		'formatter',
+		'ignoredMessages',
+		'disableDefaultIgnoredMessages'
+	);
 
 export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd, options.file);
@@ -17,7 +25,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const config = valid(merge(loaded.config, seed));
 	const opts = merge(
 		{extends: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends')
+		pick(config, 'extends', 'ignoredMessages', 'disableDefaultIgnoredMessages')
 	);
 
 	// Resolve parserPreset key
