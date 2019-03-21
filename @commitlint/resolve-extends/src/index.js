@@ -72,7 +72,12 @@ function getId(raw = '', prefix = '') {
 	const first = raw.charAt(0);
 	const scoped = first === '@';
 	const relative = first === '.';
-	return scoped || relative ? raw : [prefix, raw].filter(String).join('-');
+
+	if (scoped) {
+		return raw.includes('/') ? raw : [raw, prefix].filter(String).join('/');
+	}
+
+	return relative ? raw : [prefix, raw].filter(String).join('-');
 }
 
 function resolveConfig(raw, context = {}) {
