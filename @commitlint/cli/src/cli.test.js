@@ -46,10 +46,10 @@ test('should produce no success output with -q flag', async t => {
 	t.is(actual.stderr, '');
 });
 
-test('should fail for input from stdin without rules', async t => {
+test('should succeed for input from stdin without configuration', async t => {
 	const cwd = await git.bootstrap('fixtures/empty');
-	const actual = await cli([], {cwd})('foo: bar');
-	t.is(actual.code, 1);
+	const actual = await cli([], {cwd})('feat: support zero configuration');
+	t.is(actual.code, 0);
 });
 
 test('should succeed for input from stdin with rules', async t => {

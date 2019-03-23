@@ -77,13 +77,12 @@ These can be modified by [your own configuration](#config).
 ## Getting started
 
 ```sh
-# Install commitlint cli and conventional config
-npm install --save-dev @commitlint/{config-conventional,cli}
-# For Windows:
-npm install --save-dev @commitlint/config-conventional @commitlint/cli
+# Install commitlint cli
+npm install --save-dev @commitlint/cli
 
-# Configure commitlint to use conventional config
-echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
+# Configure commitlint to use other conventions
+npm install --save-dev @commitlint/cli @commitlint/config-angular
+echo "module.exports = {extends: ['@commitlint/config-angular']}" > commitlint.config.js
 ```
 
 
