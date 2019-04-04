@@ -79,6 +79,12 @@ const flags = {
 		description: 'toggle console output',
 		type: 'boolean'
 	},
+	verbose: {
+		alias: 'vb',
+		default: false,
+		description: 'show console output even on success',
+		type: 'boolean'
+	},
 	to: {
 		alias: 't',
 		default: null,
@@ -207,7 +213,9 @@ async function main(options) {
 	const output = format(report, {color: flags.color});
 
 	if (!flags.quiet) {
-		console.log(output);
+		if (!report.valid || report.warningCount > 0 || flags.verbose) {
+			console.log(output);
+		}
 	}
 
 	if (!report.valid) {
