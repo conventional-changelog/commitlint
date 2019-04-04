@@ -137,6 +137,16 @@ Rule configurations are either of type `array` residing on a key with the rule's
 #### references-empty
 * **condition**: `references` has at least one entry
 * **rule**: `never`
+* **value**
+```js
+  []
+```
+* **possible values**
+```js
+  [
+    'fix' // when type-enum is fix
+  ]
+```
 
 #### scope-enum
 * **condition**: `scope` is found in value
