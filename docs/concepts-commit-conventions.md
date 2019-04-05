@@ -6,7 +6,7 @@ With this additional information tools can derive useful human-readable informat
 
 * Automated, rich changelogs
 * Automatic version bumps
-* Filter fo test harnesses to run
+* Filter for test harnesses to run
 
 The most common commit conventions follow this pattern:
 
