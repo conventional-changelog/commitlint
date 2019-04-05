@@ -8,8 +8,7 @@ const messages = {
 	comment: 'foo: baz\n#1 Comment',
 	reference: '#comment\nfoo: baz \nCloses #1',
 	references: '#comment\nfoo: bar \nCloses #1, #2, #3',
-	prefix: 'bar REF-1234',
-	foo: 'foo: bar'
+	prefix: 'bar REF-1234'
 };
 
 const opts = (async () => {
@@ -29,8 +28,7 @@ const parsed = {
 		parse(messages.references, undefined, (await opts).parserOpts))(),
 	prefix: parse(messages.prefix, undefined, {
 		issuePrefixes: ['REF-']
-	}),
-	foo: (async () => parse(messages.foo, undefined, (await opts).parserOpts))()
+	})
 };
 
 test('defaults to never and fails for plain', async t => {
@@ -87,14 +85,14 @@ test('succeeds for custom references with always', async t => {
 	t.is(actual, expected);
 });
 
-test('with foo type should fail for "never [foo]"', async t => {
-	const [actual] = referencesEmpty(await parsed.foo, 'never', ['foo']);
+test('plain with foo type should fail for "never [foo]"', async t => {
+	const [actual] = referencesEmpty(await parsed.plain, 'never', ['foo']);
 	const expected = false;
 	t.is(actual, expected);
 });
 
-test('with foo type should succeed for "never [bar]"', async t => {
-	const [actual] = referencesEmpty(await parsed.foo, 'never', ['bar']);
+test('plain with foo type should succeed for "never [bar]"', async t => {
+	const [actual] = referencesEmpty(await parsed.plain, 'never', ['bar']);
 	const expected = true;
 	t.is(actual, expected);
 });
