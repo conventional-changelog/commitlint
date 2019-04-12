@@ -182,16 +182,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@commitlint/test@7.5.0":
-  version "7.5.0"
-  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.5.0.tgz#2c68ba0b49096978cf6e82fa2f6208a7f3f9bbc9"
-  integrity sha512-LIFXGS2h7VGpNNouJ2ymmqPyF3KjAfIBqJfb6VBEGLAnMgiQeX7Qx3BYMFkZlDFrxSY2GpNKqB3LCITYYMsbDA==
-  dependencies:
-    "@commitlint/utils" "^7.5.0"
-    "@marionebl/sander" "0.6.1"
-    execa "0.9.0"
-    pkg-dir "2.0.0"
-
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
@@ -12197,9 +12187,10 @@ prepend-http@^1.0.0, prepend-http@^1.0.1:
   version "1.0.4"
   resolved "https://registry.npmjs.org/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
-prettier@1.16.4:
-  version "1.16.4"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-1.16.4.tgz#73e37e73e018ad2db9c76742e2647e21790c9717"
+prettier@1.17.0:
+  version "1.17.0"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-1.17.0.tgz#53b303676eed22cc14a9f0cec09b477b3026c008"
+  integrity sha512-sXe5lSt2WQlCbydGETgfm1YBShgOX4HxQkFPvbxkcwgDvGDeqVau8h+12+lmSVlP3rHPz0oavfddSZg/q+Szjw==
 
 pretty-bytes@^4.0.2:
   version "4.0.2"
