@@ -38,6 +38,34 @@ test('positive on ignored message and broken rule', async t => {
 	t.is(actual.input, 'Revert "some bogus commit"');
 });
 
+test('negative on ignored message, disabled ignored messages and broken rule', async t => {
+	const actual = await lint(
+		'Revert "some bogus commit"',
+		{
+			'type-empty': [2, 'never']
+		},
+		{
+			defaultIgnores: false
+		}
+	);
+	t.false(actual.valid);
+});
+
+test('positive on custom ignored message and broken rule', async t => {
+	const ignoredMessage = 'some ignored custom message';
+	const actual = await lint(
+		ignoredMessage,
+		{
+			'type-empty': [2, 'never']
+		},
+		{
+			ignores: [c => c === ignoredMessage]
+		}
+	);
+	t.true(actual.valid);
+	t.is(actual.input, ignoredMessage);
+});
+
 test('positive on stub message and opts', async t => {
 	const actual = await lint(
 		'foo-bar',

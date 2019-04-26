@@ -117,3 +117,37 @@ test('should return true for automatic merge commits', t => {
 test('should return false for commits containing, but not starting, with merge branch', t => {
 	t.false(isIgnored('foo bar Merge branch xxx'));
 });
+
+test('should return false for ignored message if defaults is false', t => {
+	t.false(
+		isIgnored('Auto-merged develop into master', {
+			defaults: false
+		})
+	);
+});
+
+test('should return false for ignored message if custom ignores and defaults is false', t => {
+	t.false(
+		isIgnored('Auto-merged develop into master', {
+			defaults: false
+		})
+	);
+});
+
+test('should throw error if ignores is not an array', t => {
+	const ignoredString = 'this should be ignored';
+	t.throws(() => {
+		isIgnored(ignoredString, {
+			ignores: 'throws error'
+		});
+	});
+});
+
+test('should return true for custom ignores as function', t => {
+	const ignoredString = 'this should be ignored';
+	t.true(
+		isIgnored(ignoredString, {
+			ignores: [c => c === ignoredString]
+		})
+	);
+});

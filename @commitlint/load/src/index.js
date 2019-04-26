@@ -8,7 +8,16 @@ import loadPlugin from './utils/loadPlugin';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input =>
-	pick(input, 'extends', 'plugins', 'rules', 'parserPreset', 'formatter');
+	pick(
+		input,
+		'extends',
+		'rules',
+		'plugins',
+		'parserPreset',
+		'formatter',
+		'ignores',
+		'defaultIgnores'
+	);
 
 export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd, options.file);
@@ -17,8 +26,8 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	// Merge passed config with file based options
 	const config = valid(merge(loaded.config, seed));
 	const opts = merge(
-		{extends: [], plugins: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends', 'plugins')
+		{extends: [], rules: {}, formatter: '@commitlint/format'},
+		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')
 	);
 
 	// Resolve parserPreset key
