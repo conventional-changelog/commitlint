@@ -27,11 +27,11 @@ type Config = {
      */
     rules?: {[name: string]: Rule};
     /*
-     * If any of the ignores functions returns true for a given message it will not be linted.
+     * Functions that return true if commitlint should ignore the given message.
      */
     ignores?: ((message: string) => boolean)[];
     /*
-     * Wether the default ignore rules should be used
+     * Whether commitlint uses the default ignore rules.
      */
     defaultIgnores?: boolean;
 }
@@ -59,14 +59,13 @@ const Configuration: Config = {
         'type-enum': [2, 'always', ['foo']]
     },
     /*
-     * Functions used to ignore messages that shouldn't be linted.
+     * Functions that return true if commitlint should ignore the given message.
      */
     ignores: [
         (commit) => commit === ''
     ],
     /*
-     * If this is false then the default ignores like `Merge commit` are not ignored
-     * and will cause commitlint to fail
+     * Whether commitlint uses the default ignore rules.
      */
     defaultIgnores: true
 };
