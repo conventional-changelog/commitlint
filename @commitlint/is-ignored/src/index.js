@@ -22,31 +22,24 @@ export const WILDCARDS = [
 ];
 
 export default function isIgnored(commit = '', opts = {}) {
-	let wildcards = [];
-	if (opts.ignoredMessages) {
-		if (opts.disableDefaultIgnoredMessages) {
-			wildcards = wildcards.concat(WILDCARDS);
-		}
-		if (!Array.isArray(opts.ignoredMessages)) {
-			throw new Error('ignoredMessages must be an Array');
-		}
-		opts.ignoredMessages.forEach(ignoreConfig => {
-			if (typeof ignoreConfig === 'function') {
-				wildcards.push(ignoreConfig);
-			} else if (ignoreConfig instanceof RegExp) {
-				wildcards.push(c => c.match(ignoreConfig));
-			} else if (typeof ignoreConfig === 'string') {
-				wildcards.push(c => c.match(new RegExp(ignoreConfig)));
-			} else {
-				throw new Error(
-					'ignoredMessage element must be a function, string or RegExp'
-				);
-			}
-		});
-	} else if (opts.disableDefaultIgnoredMessages) {
-		return false;
-	} else {
-		wildcards = WILDCARDS;
+	const ignores = typeof opts.ignores === 'undefined' ? [] : opts.ignores;
+
+	if (!Array.isArray(ignores)) {
+		throw new Error(
+			`ignores must be of type array, received ${ignores} of type ${typeof ignores}`
+		);
 	}
-	return wildcards.some(w => w(commit));
+
+	const invalids = ignores.filter(c => typeof c !== 'function');
+
+	if (invalids.length > 0) {
+		throw new Error(
+			`ignores must be array of type function, received items of type: ${invalids
+				.map(i => typeof i)
+				.join(', ')}`
+		);
+	}
+
+	const base = opts.defaults === false ? [] : WILDCARDS;
+	return [...base, ...ignores].some(w => w(commit));
 }

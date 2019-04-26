@@ -45,7 +45,7 @@ test('negative on ignored message, disabled ignored messages and broken rule', a
 			'type-empty': [2, 'never']
 		},
 		{
-			disableDefaultIgnoredMessages: true
+			defaultIgnores: false
 		}
 	);
 	t.false(actual.valid);
@@ -59,7 +59,7 @@ test('positive on custom ignored message and broken rule', async t => {
 			'type-empty': [2, 'never']
 		},
 		{
-			ignoredMessages: [c => c === ignoredMessage]
+			ignores: [c => c === ignoredMessage]
 		}
 	);
 	t.true(actual.valid);

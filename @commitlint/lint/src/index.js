@@ -15,7 +15,9 @@ const buildCommitMesage = ({header, body, footer}) => {
 
 export default async (message, rules = {}, opts = {}) => {
 	// Found a wildcard match, skip
-	if (isIgnored(message, opts)) {
+	if (
+		isIgnored(message, {defaults: opts.defaultIgnores, ignores: opts.ignores})
+	) {
 		return {
 			valid: true,
 			errors: [],

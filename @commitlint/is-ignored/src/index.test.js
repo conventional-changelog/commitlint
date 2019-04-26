@@ -118,61 +118,36 @@ test('should return false for commits containing, but not starting, with merge b
 	t.false(isIgnored('foo bar Merge branch xxx'));
 });
 
-test('should return false for ignored message if disableDefaultIgnoredMessages is true', t => {
+test('should return false for ignored message if defaults is false', t => {
 	t.false(
 		isIgnored('Auto-merged develop into master', {
-			disableDefaultIgnoredMessages: true
+			defaults: false
 		})
 	);
 });
 
-test('should return false for ignored message if custom ignoredMessages and disableDefaultIgnoredMessages is true', t => {
+test('should return false for ignored message if custom ignores and defaults is false', t => {
 	t.false(
 		isIgnored('Auto-merged develop into master', {
-			disableDefaultIgnoredMessages: true,
-			ignoredMessages: []
+			defaults: false
 		})
 	);
 });
 
-test('should throw error if ignoredMessages is not an array', t => {
+test('should throw error if ignores is not an array', t => {
 	const ignoredString = 'this should be ignored';
-	t.throws(
+	t.throws(() => {
 		isIgnored(ignoredString, {
-			ignoredMessages: 'throws error'
-		})
-	);
+			ignores: 'throws error'
+		});
+	});
 });
 
-test('should return true for custom ignoredMessages as function', t => {
+test('should return true for custom ignores as function', t => {
 	const ignoredString = 'this should be ignored';
 	t.true(
 		isIgnored(ignoredString, {
-			ignoredMessages: [c => c === ignoredString]
-		})
-	);
-});
-
-test('should return true for custom ignoredMessages as RegExp', t => {
-	t.true(
-		isIgnored('Should Ignore', {
-			ignoredMessages: [/^should ignore$/i]
-		})
-	);
-});
-
-test('should return true for custom ignoredMessages as string', t => {
-	t.true(
-		isIgnored('Should Ignore', {
-			ignoredMessages: ['[sS]hould [iI]gnore']
-		})
-	);
-});
-
-test('should throw error if ignoredMessage value is not an RegExp, string or function', t => {
-	t.throws(
-		isIgnored('some commit message', {
-			ignoredMessages: [true]
+			ignores: [c => c === ignoredString]
 		})
 	);
 });
