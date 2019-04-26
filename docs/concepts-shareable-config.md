@@ -20,9 +20,24 @@ The rules found in `commitlint-config-example` are merged with the rules in `com
 
 This works recursively, enabling shareable configuration to extend on an indefinite chain of other shareable configurations.
 
-## Special cases
+## Relative config
 
-Scoped npm packages are not prefixed.
+You can also load local configuration by using a relative path to the file.
+
+> This must always start with a `.` (dot).
+
+```js
+// commitlint.config.js
+module.exports = {
+  extends: ['./example'] // => ./example.js
+}
+```
+
+## Scoped packages
+
+When using scoped packages you have two options.
+
+You can provide the full path of the package like:
 
 ```js
 // commitlint.config.js
@@ -31,11 +46,15 @@ module.exports = {
 };
 ```
 
-The same is true for relative imports
+Or just the scope/owner of the package.
+
+> Just like "normal" extends listed above, this will add `<scope>/commitlint-config`.
 
 ```js
 // commitlint.config.js
 module.exports = {
-  extends: ['./example'] // => ./example.js
-}
+  extends: ['@coolcompany'] // => coolcompany/commitlint-config
+};
 ```
+
+If you don't use the exact `<scope>/commitlint-config` pattern, you have to provide the full name of the package.
