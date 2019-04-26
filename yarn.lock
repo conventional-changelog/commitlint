@@ -182,16 +182,6 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@commitlint/test@7.5.0":
-  version "7.5.0"
-  resolved "https://registry.npmjs.org/@commitlint/test/-/test-7.5.0.tgz#2c68ba0b49096978cf6e82fa2f6208a7f3f9bbc9"
-  integrity sha512-LIFXGS2h7VGpNNouJ2ymmqPyF3KjAfIBqJfb6VBEGLAnMgiQeX7Qx3BYMFkZlDFrxSY2GpNKqB3LCITYYMsbDA==
-  dependencies:
-    "@commitlint/utils" "^7.5.0"
-    "@marionebl/sander" "0.6.1"
-    execa "0.9.0"
-    pkg-dir "2.0.0"
-
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
@@ -6977,6 +6967,14 @@ filesize@3.6.1, filesize@^3.5.11:
   resolved "https://registry.npmjs.org/filesize/-/filesize-3.6.1.tgz#090bb3ee01b6f801a8a8be99d31710b3422bb317"
   integrity sha512-7KjR1vv6qnicaPMi1iiTcI85CyYwRO/PSFCu6SvqL8jN2Wjt/NIYQTFtFs7fSDCYOstUkEWIQGFUg5YZQfjlcg==
 
+fill-keys@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/fill-keys/-/fill-keys-1.0.2.tgz#9a8fa36f4e8ad634e3bf6b4f3c8882551452eb20"
+  integrity sha1-mo+jb06K1jTjv2tPPIiCVRRS6yA=
+  dependencies:
+    is-object "~1.0.1"
+    merge-descriptors "~1.0.0"
+
 fill-range@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/fill-range/-/fill-range-4.0.0.tgz#d544811d428f98eb06a63dc402d2403c328c38f7"
@@ -8700,6 +8698,11 @@ is-obj@^1.0.0, is-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/is-obj/-/is-obj-1.0.1.tgz#3e4729ac1f5fde025cd7d83a896dab9f4f67db0f"
 
+is-object@~1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/is-object/-/is-object-1.0.1.tgz#8952688c5ec2ffd6b03ecc85e769e02903083470"
+  integrity sha1-iVJojF7C/9awPsyF52ngKQMINHA=
+
 is-observable@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/is-observable/-/is-observable-0.2.0.tgz#b361311d83c6e5d726cabf5e250b0237106f5ae2"
@@ -10230,7 +10233,7 @@ meow@^3.3.0, meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
-merge-descriptors@1.0.1:
+merge-descriptors@1.0.1, merge-descriptors@~1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/merge-descriptors/-/merge-descriptors-1.0.1.tgz#b00aaa556dd8b44568150ec9d1b953f3f90cbb61"
   integrity sha1-sAqqVW3YtEVoFQ7J0blT8/kMu2E=
@@ -10502,6 +10505,11 @@ mkpath@^0.1.0:
 modify-values@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/modify-values/-/modify-values-1.0.0.tgz#e2b6cdeb9ce19f99317a53722f3dbf5df5eaaab2"
+
+module-not-found-error@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/module-not-found-error/-/module-not-found-error-1.0.1.tgz#cf8b4ff4f29640674d6cdd02b0e3bc523c2bbdc0"
+  integrity sha1-z4tP9PKWQGdNbN0CsOO8UjwrvcA=
 
 moment@2.19.3, moment@^2.18.1:
   version "2.19.3"
@@ -12361,6 +12369,15 @@ proxy-addr@~2.0.4:
     forwarded "~0.1.2"
     ipaddr.js "1.8.0"
 
+proxyquire@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/proxyquire/-/proxyquire-2.1.0.tgz#c2263a38bf0725f2ae950facc130e27510edce8d"
+  integrity sha512-kptdFArCfGRtQFv3Qwjr10lwbEV0TBJYvfqzhwucyfEXqVgmnAkyEw/S3FYzR5HI9i5QOq4rcqQjZ6AlknlCDQ==
+  dependencies:
+    fill-keys "^1.0.2"
+    module-not-found-error "^1.0.0"
+    resolve "~1.8.1"
+
 prr@~1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/prr/-/prr-1.0.1.tgz#d3fc114ba06995a45ec6893f484ceb1d78f5f476"
@@ -13409,6 +13426,11 @@ resolve-from@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-3.0.0.tgz#b22c7af7d9d6881bc8b6e653335eebcb0a188748"
 
+resolve-from@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/resolve-from/-/resolve-from-5.0.0.tgz#c35225843df8f776df21c57557bc087e9dfdfc69"
+  integrity sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==
+
 resolve-global@0.1.0, resolve-global@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/resolve-global/-/resolve-global-0.1.0.tgz#8fb02cfd5b7db20118e886311f15af95bd15fbd9"
@@ -13419,11 +13441,12 @@ resolve-pathname@^2.1.0, resolve-pathname@^2.2.0:
   version "2.2.0"
   resolved "https://registry.npmjs.org/resolve-pathname/-/resolve-pathname-2.2.0.tgz#7e9ae21ed815fd63ab189adeee64dc831eefa879"
 
-resolve-pkg@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/resolve-pkg/-/resolve-pkg-1.0.0.tgz#e19a15e78aca2e124461dc92b2e3943ef93494d9"
+resolve-pkg@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/resolve-pkg/-/resolve-pkg-2.0.0.tgz#ac06991418a7623edc119084edc98b0e6bf05a41"
+  integrity sha512-+1lzwXehGCXSeryaISr6WujZzowloigEofRB+dj75y9RRa/obVcYgbHJd53tdYw8pvZj8GojXaaENws8Ktw/hQ==
   dependencies:
-    resolve-from "^2.0.0"
+    resolve-from "^5.0.0"
 
 resolve-url@^0.2.1:
   version "0.2.1"
@@ -13446,6 +13469,13 @@ resolve@^1.5.0, resolve@^1.8.1, resolve@^1.9.0:
   integrity sha512-3sUr9aq5OfSg2S9pNtPA9hL1FVEAjvfOC4leW0SNf/mpnaakz2a9femSd6LqAww2RaFctwyf1lCqnTHuF1rxDg==
   dependencies:
     path-parse "^1.0.6"
+
+resolve@~1.8.1:
+  version "1.8.1"
+  resolved "https://registry.npmjs.org/resolve/-/resolve-1.8.1.tgz#82f1ec19a423ac1fbd080b0bab06ba36e84a7a26"
+  integrity sha512-AicPrAC7Qu1JxPCZ9ZgCZlY35QgFnNqc+0LtbRNxnVw4TXvjQ72wnuL9JQcEBgXkI9JM8MsT9kaQoHcpCRJOYA==
+  dependencies:
+    path-parse "^1.0.5"
 
 restore-cursor@^1.0.1:
   version "1.0.1"
