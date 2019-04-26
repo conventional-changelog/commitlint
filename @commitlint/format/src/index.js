@@ -38,7 +38,7 @@ function formatInput(result = {}, options = {}) {
 	return `\n${decoration}   input: ${decoratedInput}\n`;
 }
 
-function formatResult(result = {}, options = {}) {
+export function formatResult(result = {}, options = {}) {
 	const {
 		signs = DEFAULT_SIGNS,
 		colors = DEFAULT_COLORS,

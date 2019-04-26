@@ -5,7 +5,7 @@ const load = require('@commitlint/load');
 const lint = require('@commitlint/lint');
 const read = require('@commitlint/read');
 const meow = require('meow');
-const {merge, pick} = require('lodash');
+const {merge, pick, isFunction} = require('lodash');
 const stdin = require('get-stdin');
 const resolveFrom = require('resolve-from');
 const resolveGlobal = require('resolve-global');
@@ -314,7 +314,13 @@ function loadFormatter(config, flags) {
 		resolveGlobal.silent(moduleName);
 
 	if (modulePath) {
-		return require(modulePath);
+		const moduleInstance = require(modulePath);
+
+		if (isFunction(moduleInstance.default)) {
+			return moduleInstance.default;
+		}
+
+		return moduleInstance;
 	}
 
 	throw new Error(`Using format ${moduleName}, but cannot find the module.`);
