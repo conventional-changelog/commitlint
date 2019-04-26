@@ -12,7 +12,7 @@ const valid = input =>
 		input,
 		'extends',
 		'rules',
-    'plugins',
+		'plugins',
 		'parserPreset',
 		'formatter',
 		'ignoredMessages',
@@ -27,7 +27,13 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const config = valid(merge(loaded.config, seed));
 	const opts = merge(
 		{extends: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends', 'plugins', 'ignoredMessages', 'disableDefaultIgnoredMessages')
+		pick(
+			config,
+			'extends',
+			'plugins',
+			'ignoredMessages',
+			'disableDefaultIgnoredMessages'
+		)
 	);
 
 	// Resolve parserPreset key
