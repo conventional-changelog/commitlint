@@ -98,6 +98,28 @@ test('uses custom opts parser', async t => {
 	t.deepEqual(actual, expected);
 });
 
+test('does not merge array properties with custom opts', async t => {
+	const message = 'type: subject';
+	const actual = await parse(message, undefined, {
+		headerPattern: /^(.*):\s(.*)$/,
+		headerCorrespondence: ['type', 'subject']
+	});
+	const expected = {
+		body: null,
+		footer: null,
+		header: 'type: subject',
+		mentions: [],
+		merge: null,
+		notes: [],
+		raw: 'type: subject',
+		references: [],
+		revert: null,
+		subject: 'subject',
+		type: 'type'
+	};
+	t.deepEqual(actual, expected);
+});
+
 test('supports scopes with /', async t => {
 	const message = 'type(some/scope): subject';
 	const actual = await parse(message);
