@@ -27,13 +27,13 @@ type Config = {
      */
     rules?: {[name: string]: Rule};
     /*
-     * Custom list of Messages to Ignore, string values will be compiled as RegExp
+     * If any of the ignores functions returns true for a given message it will not be linted.
      */
-    ignoredMessages?: Array<string | RegExp | string => boolean>;
+    ignores?: ((message: string) => boolean)[];
     /*
-     * If this is true we will not use any of the default is-ignored rules
+     * Wether the default ignore rules should be used
      */
-    disableDefaultIgnoredMessages?: boolean;
+    defaultIgnores?: boolean;
 }
 
 const Configuration: Config = {
@@ -59,18 +59,16 @@ const Configuration: Config = {
         'type-enum': [2, 'always', ['foo']]
     },
     /*
-     * These RegExp and functions are used to ignore messages that shouldn't be linted
+     * Functions used to ignore messages that shouldn't be linted.
      */
-    ignoredMessages: [
-        '^Entire Message to Ignore$',
-        /^(ci|github):/,
+    ignores: [
         (commit) => commit === ''
     ],
     /*
-     * If this is true then the default ignores like `Merge commit` are not ignored
+     * If this is false then the default ignores like `Merge commit` are not ignored
      * and will cause commitlint to fail
      */
-    disableDefaultIgnoredMessages: true
+    defaultIgnores: true
 };
 
 module.exports = Configuration;
