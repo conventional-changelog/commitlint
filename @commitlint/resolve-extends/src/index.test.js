@@ -96,6 +96,18 @@ test('ignores prefix for scoped extends', t => {
 	});
 });
 
+test('adds prefix as suffix for scopes only', t => {
+	const input = {extends: ['@scope']};
+
+	resolveExtends(input, {
+		prefix: 'prefix',
+		resolve: id,
+		require(id) {
+			t.is(id, '@scope/prefix');
+		}
+	});
+});
+
 test('ignores prefix for relative extends', t => {
 	const input = {extends: ['./extender']};
 

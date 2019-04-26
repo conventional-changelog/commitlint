@@ -5,6 +5,10 @@ import resolveFrom from 'resolve-from';
 
 import load from '.';
 
+const proxyquire = require('proxyquire')
+	.noCallThru()
+	.noPreserveCache();
+
 test('extends-empty should have no rules', async t => {
 	const cwd = await git.bootstrap('fixtures/extends-empty');
 	const actual = await load({}, {cwd});
@@ -22,6 +26,41 @@ test('rules should be loaded from specify config file', async t => {
 	const cwd = await git.bootstrap('fixtures/specify-config-file');
 	const actual = await load({}, {cwd, file});
 	t.is(actual.rules.foo, 'bar');
+});
+
+test('plugins should be loaded from seed', async t => {
+	const plugin = {'@global': true};
+	const scopedPlugin = {'@global': true};
+	const stubbedLoad = proxyquire('.', {
+		'commitlint-plugin-example': plugin,
+		'@scope/commitlint-plugin-example': scopedPlugin
+	});
+
+	const cwd = await git.bootstrap('fixtures/extends-empty');
+	const actual = await stubbedLoad(
+		{plugins: ['example', '@scope/example']},
+		{cwd}
+	);
+	t.deepEqual(actual.plugins, {
+		example: plugin,
+		'@scope/example': scopedPlugin
+	});
+});
+
+test('plugins should be loaded from config', async t => {
+	const plugin = {'@global': true};
+	const scopedPlugin = {'@global': true};
+	const stubbedLoad = proxyquire('.', {
+		'commitlint-plugin-example': plugin,
+		'@scope/commitlint-plugin-example': scopedPlugin
+	});
+
+	const cwd = await git.bootstrap('fixtures/extends-plugins');
+	const actual = await stubbedLoad({}, {cwd});
+	t.deepEqual(actual.plugins, {
+		example: plugin,
+		'@scope/example': scopedPlugin
+	});
 });
 
 test('uses seed with parserPreset', async t => {
@@ -61,6 +100,7 @@ test('respects cwd option', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./second-extended'],
+		plugins: {},
 		rules: {
 			one: 1,
 			two: 2
@@ -74,6 +114,7 @@ test('recursive extends', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
+		plugins: {},
 		rules: {
 			zero: 0,
 			one: 1,
@@ -89,6 +130,7 @@ test('recursive extends with json file', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
+		plugins: {},
 		rules: {
 			zero: 0,
 			one: 1,
@@ -104,6 +146,7 @@ test('recursive extends with yaml file', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
+		plugins: {},
 		rules: {
 			zero: 0,
 			one: 1,
@@ -119,6 +162,7 @@ test('recursive extends with js file', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
+		plugins: {},
 		rules: {
 			zero: 0,
 			one: 1,
@@ -134,6 +178,7 @@ test('recursive extends with package.json file', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
+		plugins: {},
 		rules: {
 			zero: 0,
 			one: 1,
@@ -169,6 +214,7 @@ test('ignores unknow keys', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: [],
+		plugins: {},
 		rules: {
 			foo: 'bar',
 			baz: 'bar'
@@ -183,6 +229,7 @@ test('ignores unknow keys recursively', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: ['./one'],
+		plugins: {},
 		rules: {
 			zero: 0,
 			one: 1
@@ -200,6 +247,7 @@ test('find up from given cwd', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: [],
+		plugins: {},
 		rules: {
 			child: true,
 			inner: false,
@@ -216,6 +264,7 @@ test('find up config from outside current git repo', async t => {
 	t.deepEqual(actual, {
 		formatter: '@commitlint/format',
 		extends: [],
+		plugins: {},
 		rules: {
 			child: false,
 			inner: false,
@@ -231,6 +280,7 @@ test('respects formatter option', async t => {
 	t.deepEqual(actual, {
 		formatter: 'commitlint-junit',
 		extends: [],
+		plugins: {},
 		rules: {}
 	});
 });
@@ -242,6 +292,7 @@ test('resolves formatter relative from config directory', async t => {
 	t.deepEqual(actual, {
 		formatter: resolveFrom(cwd, './formatters/custom.js'),
 		extends: [],
+		plugins: {},
 		rules: {}
 	});
 });
@@ -253,6 +304,7 @@ test('returns formatter name when unable to resolve from config directory', asyn
 	t.deepEqual(actual, {
 		formatter: './doesnt/exists.js',
 		extends: [],
+		plugins: {},
 		rules: {}
 	});
 });

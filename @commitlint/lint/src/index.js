@@ -2,7 +2,7 @@ import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import implementations from '@commitlint/rules';
-import {toPairs} from 'lodash';
+import {toPairs, values} from 'lodash';
 
 const buildCommitMesage = ({header, body, footer}) => {
 	let message = header;
@@ -27,13 +27,24 @@ export default async (message, rules = {}, opts = {}) => {
 	// Parse the commit message
 	const parsed = await parse(message, undefined, opts.parserOpts);
 
+	const mergedImplementations = Object.assign({}, implementations);
+	if (opts.plugins) {
+		values(opts.plugins).forEach(plugin => {
+			if (plugin.rules) {
+				Object.keys(plugin.rules).forEach(ruleKey => {
+					mergedImplementations[ruleKey] = plugin.rules[ruleKey];
+				});
+			}
+		});
+	}
+
 	// Find invalid rules configs
 	const missing = Object.keys(rules).filter(
-		name => typeof implementations[name] !== 'function'
+		name => typeof mergedImplementations[name] !== 'function'
 	);
 
 	if (missing.length > 0) {
-		const names = Object.keys(implementations);
+		const names = Object.keys(mergedImplementations);
 		throw new RangeError(
 			`Found invalid rule names: ${missing.join(
 				', '
@@ -120,7 +131,7 @@ export default async (message, rules = {}, opts = {}) => {
 				return null;
 			}
 
-			const rule = implementations[name];
+			const rule = mergedImplementations[name];
 
 			const [valid, message] = rule(parsed, when, value);
 

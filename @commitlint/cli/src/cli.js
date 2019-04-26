@@ -139,7 +139,16 @@ async function main(options) {
 	const loadOpts = {cwd: flags.cwd, file: flags.config};
 	const loaded = await load(getSeed(flags), loadOpts);
 	const parserOpts = selectParserOpts(loaded.parserPreset);
-	const opts = parserOpts ? {parserOpts} : {parserOpts: {}};
+	const opts = {
+		parserOpts: {},
+		plugins: {}
+	};
+	if (parserOpts) {
+		opts.parserOpts = parserOpts;
+	}
+	if (loaded.plugins) {
+		opts.plugins = loaded.plugins;
+	}
 	const format = loadFormatter(loaded, flags);
 
 	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`

@@ -56,7 +56,6 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
       - update-yarn
       - install
-      - audit
       - build
       - lint
       - deps

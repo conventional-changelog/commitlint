@@ -212,6 +212,46 @@ test('fails for custom issue prefix', async t => {
 	t.false(report.valid);
 });
 
+test('fails for custom plugin rule', async t => {
+	const report = await lint(
+		'somehting #1',
+		{
+			'plugin-rule': [2, 'never']
+		},
+		{
+			plugins: {
+				'plugin-example': {
+					rules: {
+						'plugin-rule': () => [false]
+					}
+				}
+			}
+		}
+	);
+
+	t.false(report.valid);
+});
+
+test('passes for custom plugin rule', async t => {
+	const report = await lint(
+		'somehting #1',
+		{
+			'plugin-rule': [2, 'never']
+		},
+		{
+			plugins: {
+				'plugin-example': {
+					rules: {
+						'plugin-rule': () => [true]
+					}
+				}
+			}
+		}
+	);
+
+	t.true(report.valid);
+});
+
 test('returns original message only with commit header', async t => {
 	const message = 'foo: bar';
 	const report = await lint(message);

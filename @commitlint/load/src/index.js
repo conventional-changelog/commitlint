@@ -4,6 +4,7 @@ import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
 import {toPairs, merge, mergeWith, pick} from 'lodash';
 import resolveFrom from 'resolve-from';
+import loadPlugin from './utils/loadPlugin';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input =>
@@ -11,6 +12,7 @@ const valid = input =>
 		input,
 		'extends',
 		'rules',
+    'plugins',
 		'parserPreset',
 		'formatter',
 		'ignoredMessages',
@@ -25,7 +27,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const config = valid(merge(loaded.config, seed));
 	const opts = merge(
 		{extends: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends', 'ignoredMessages', 'disableDefaultIgnoredMessages')
+		pick(config, 'extends', 'plugins', 'ignoredMessages', 'disableDefaultIgnoredMessages')
 	);
 
 	// Resolve parserPreset key
@@ -63,6 +65,14 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 			resolveFrom.silent(base, config.formatter) || config.formatter;
 	}
 
+	// resolve plugins
+	preset.plugins = {};
+	if (config.plugins && config.plugins.length) {
+		config.plugins.forEach(pluginKey => {
+			loadPlugin(preset.plugins, pluginKey, process.env.DEBUG === 'true');
+		});
+	}
+
 	// Execute rule config functions if needed
 	const executed = await Promise.all(
 		['rules']
@@ -94,12 +104,12 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 };
 
 async function loadConfig(cwd, configPath) {
-	const explorer = cosmiconfig('commitlint', {
-		rcExtensions: true,
-		configPath: configPath ? path.resolve(cwd, configPath) : null
-	});
+	const explorer = cosmiconfig('commitlint');
 
-	const local = await explorer.load(cwd);
+	const explicitPath = configPath ? path.join(cwd, configPath) : undefined;
+	const explore = explicitPath ? explorer.load : explorer.search;
+	const searchPath = explicitPath ? explicitPath : cwd;
+	const local = await explore(searchPath);
 
 	if (local) {
 		return local;
