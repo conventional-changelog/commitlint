@@ -211,7 +211,7 @@ async function main(options) {
 			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	});
 
-	if (!flags.quiet) {
+	if (!flags.quiet && output !== '') {
 		console.log(output);
 	}
 
