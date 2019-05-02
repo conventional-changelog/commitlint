@@ -43,7 +43,7 @@ export function format(
 
 	return results
 		.filter(r => Array.isArray(r.warnings) || Array.isArray(r.errors))
-		.map(result => [fi(result), fr(result), ''].join('\n'))
+		.map(result => [fi(result), ...fr(result)].join('\n'))
 		.join('\n');
 }
 
@@ -52,7 +52,7 @@ function formatInput(
 	options: FormatOptions = {}
 ): string {
 	const {color: enabled = true} = options;
-	const {errors = [], input = ''} = result;
+	const {errors = [], warnings = [], input = ''} = result;
 
 	if (!input) {
 		return '';
@@ -63,8 +63,11 @@ function formatInput(
 	const commitText = errors.length > 0 ? input : input.split('\n')[0];
 
 	const decoratedInput = enabled ? chalk.bold(commitText) : commitText;
+	const hasProblems = errors.length > 0 || warnings.length > 0;
 
-	return `${decoration}   input: ${decoratedInput}`;
+	return options.verbose || hasProblems
+		? `${decoration}   input: ${decoratedInput}`
+		: '';
 }
 
 export function formatResult(
@@ -94,18 +97,13 @@ export function formatResult(
 	const deco = enabled ? (chalk[color] as any)(sign) : sign;
 	const el = errors.length;
 	const wl = warnings.length;
-	const needsHelp = errors.length > 0 || warnings.length > 0;
+	const hasProblems = errors.length > 0 || warnings.length > 0;
 
-	const lines = [
-		`${deco}   found ${el} problems, ${wl} warnings`,
-		options.helpUrl && needsHelp ? `Get help: ${options.helpUrl}` : undefined
-	];
+	const summary = (options.verbose || hasProblems) ? `${deco}   found ${el} problems, ${wl} warnings` : undefined;
+	const fmtSummary = enabled && typeof summary === 'string' ? chalk.bold(summary) : summary;
+	const help = hasProblems ? `ⓘ   Get help: ${options.helpUrl}` : undefined;
 
-	const summary = lines
-		.filter(line => typeof line === 'string')
-		.join('\n');
-
-	return [...problems, enabled ? chalk.bold(summary) : summary];
+	return [...problems, '', fmtSummary, help].filter((line): line is string => typeof line === 'string');
 }
 
 export default format;

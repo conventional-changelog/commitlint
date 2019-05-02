@@ -138,11 +138,10 @@ test('uses signs as configured', () => {
 	expect(actualWarning).toContain('WRN');
 });
 
-test('format result provides summary without arguments', () => {
+test('format result is empty without arguments', () => {
 	const actual = formatResult();
 	const actualText = actual.join('\n');
-
-	expect(actualText).toContain('0 problems, 0 warnings');
+	expect(actualText).toBe('');
 });
 
 test('format result transforms error to text', () => {
