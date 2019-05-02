@@ -18,5 +18,6 @@
 --parser-preset, -p    configuration preset to use for conventional-commits-parser
 --quiet, -q            toggle console output
 --to, -t               upper end of the commit range to lint; applies if edit=false
---version, -v          display version information
+--version, -v          display version informationv
+--verbose, -V          print summary and inputs for reports without problems
 ```

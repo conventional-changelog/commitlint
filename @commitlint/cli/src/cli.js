@@ -89,6 +89,11 @@ const flags = {
 		alias: 'v',
 		type: 'boolean',
 		description: 'display version information'
+	},
+	verbose: {
+		alias: 'V',
+		type: 'boolean',
+		description: 'enable verbose output for reports without problems'
 	}
 };
 
