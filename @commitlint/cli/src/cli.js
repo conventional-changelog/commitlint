@@ -204,7 +204,12 @@ async function main(options) {
 		}
 	);
 
-	const output = format(report, {color: flags.color});
+	const output = format(report, {
+		color: flags.color,
+		verbose: flags.verbose,
+		helpUrl:
+			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+	});
 
 	if (!flags.quiet) {
 		console.log(output);
