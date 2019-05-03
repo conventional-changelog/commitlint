@@ -1,4 +1,2 @@
-import format from "./format";
-
-export default format;
-export * from "./format";
+export { default } from './format';
+export * from './format';
