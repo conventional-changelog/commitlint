@@ -53,24 +53,18 @@
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
+"@babel/runtime@^7.0.0":
+  version "7.4.4"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.4.4.tgz#dc2e34982eb236803aa27a07fea6857af1b9171d"
+  integrity sha512-w0+uT71b6Yi7i5SE0co4NioIpSYS6lLiXvCzWzGSKvpK5vdQtCbICHMj+gbAKAOtxiV6HsVh/MBdaF9EQ6faSg==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@concordance/react@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@concordance/react/-/react-1.0.0.tgz#fcf3cad020e5121bfd1c61d05bc3516aac25f734"
   dependencies:
     arrify "^1.0.1"
-
-"@iamstarkov/listr-update-renderer@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.npmjs.org/@iamstarkov/listr-update-renderer/-/listr-update-renderer-0.4.1.tgz#d7c48092a2dcf90fd672b6c8b458649cb350c77e"
-  dependencies:
-    chalk "^1.1.3"
-    cli-truncate "^0.2.1"
-    elegant-spinner "^1.0.1"
-    figures "^1.7.0"
-    indent-string "^3.0.0"
-    log-symbols "^1.0.2"
-    log-update "^2.3.0"
-    strip-ansi "^3.0.1"
 
 "@ladjs/time-require@^0.1.4":
   version "0.1.4"
@@ -2788,12 +2782,14 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-cosmiconfig@5.0.6:
-  version "5.0.6"
-  resolved "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-5.0.6.tgz#dca6cf680a0bd03589aff684700858c81abeeb39"
+cosmiconfig@^5.0.2, cosmiconfig@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-5.2.0.tgz#45038e4d28a7fe787203aede9c25bca4a08b12c8"
+  integrity sha512-nxt+Nfc3JAqf4WIWd0jXLjTJZmsPLrA9DDc4nRw2KFJQJK7DNooqSXrNI7tzLG50CF8axczly5UV929tBmh/7g==
   dependencies:
+    import-fresh "^2.0.0"
     is-directory "^0.3.1"
-    js-yaml "^3.9.0"
+    js-yaml "^3.13.0"
     parse-json "^4.0.0"
 
 cosmiconfig@^5.1.0:
@@ -2804,16 +2800,6 @@ cosmiconfig@^5.1.0:
     is-directory "^0.3.1"
     js-yaml "^3.9.0"
     lodash.get "^4.4.2"
-    parse-json "^4.0.0"
-
-cosmiconfig@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.npmjs.org/cosmiconfig/-/cosmiconfig-5.2.0.tgz#45038e4d28a7fe787203aede9c25bca4a08b12c8"
-  integrity sha512-nxt+Nfc3JAqf4WIWd0jXLjTJZmsPLrA9DDc4nRw2KFJQJK7DNooqSXrNI7tzLG50CF8axczly5UV929tBmh/7g==
-  dependencies:
-    import-fresh "^2.0.0"
-    is-directory "^0.3.1"
-    js-yaml "^3.13.0"
     parse-json "^4.0.0"
 
 cp-file@^4.1.1:
@@ -3574,9 +3560,10 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
-fn-name@^2.0.0:
+fn-name@^2.0.0, fn-name@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/fn-name/-/fn-name-2.0.1.tgz#5214d7537a4d06a4a301c0cc262feb84188002e7"
+  integrity sha1-UhTXU3pNBqSjAcDMJi/rhBiAAuc=
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -4729,10 +4716,6 @@ jest-file-exists@^17.0.0:
   version "17.0.0"
   resolved "https://registry.npmjs.org/jest-file-exists/-/jest-file-exists-17.0.0.tgz#7f63eb73a1c43a13f461be261768b45af2cdd169"
 
-jest-get-type@^22.1.0:
-  version "22.4.3"
-  resolved "https://registry.npmjs.org/jest-get-type/-/jest-get-type-22.4.3.tgz#e3a8504d8479342dd4420236b322869f18900ce4"
-
 jest-matcher-utils@^18.1.0:
   version "18.1.0"
   resolved "https://registry.npmjs.org/jest-matcher-utils/-/jest-matcher-utils-18.1.0.tgz#1ac4651955ee2a60cef1e7fcc98cdfd773c0f932"
@@ -4765,15 +4748,6 @@ jest-util@^18.1.0:
     jest-file-exists "^17.0.0"
     jest-mock "^18.0.0"
     mkdirp "^0.5.1"
-
-jest-validate@^23.5.0:
-  version "23.6.0"
-  resolved "https://registry.npmjs.org/jest-validate/-/jest-validate-23.6.0.tgz#36761f99d1ed33fcd425b4e4c5595d62b6597474"
-  dependencies:
-    chalk "^2.0.1"
-    jest-get-type "^22.1.0"
-    leven "^2.1.0"
-    pretty-format "^23.6.0"
 
 js-string-escape@^1.0.1:
   version "1.0.1"
@@ -4935,10 +4909,6 @@ lerna@3.13.4:
     import-local "^1.0.0"
     npmlog "^4.1.2"
 
-leven@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/leven/-/leven-2.1.0.tgz#c2e7a9f772094dee9d34202ae8acce4687875580"
-
 libnpmaccess@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/libnpmaccess/-/libnpmaccess-3.0.1.tgz#5b3a9de621f293d425191aa2e779102f84167fa8"
@@ -4962,14 +4932,14 @@ libnpmpublish@^1.1.1:
     semver "^5.5.1"
     ssri "^6.0.1"
 
-lint-staged@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.npmjs.org/lint-staged/-/lint-staged-8.1.0.tgz#dbc3ae2565366d8f20efb9f9799d076da64863f2"
+lint-staged@8.1.6:
+  version "8.1.6"
+  resolved "https://registry.npmjs.org/lint-staged/-/lint-staged-8.1.6.tgz#128a9bc5effbf69a359fb8f7eeb2da71a998daf6"
+  integrity sha512-QT13AniHN6swAtTjsrzxOfE4TVCiQ39xESwLmjGVNCMMZ/PK5aopwvbxLrzw+Zf9OxM3cQG6WCx9lceLzETOnQ==
   dependencies:
-    "@iamstarkov/listr-update-renderer" "0.4.1"
     chalk "^2.3.1"
     commander "^2.14.1"
-    cosmiconfig "5.0.6"
+    cosmiconfig "^5.0.2"
     debug "^3.1.0"
     dedent "^0.7.0"
     del "^3.0.0"
@@ -4978,9 +4948,9 @@ lint-staged@8.1.0:
     g-status "^2.0.2"
     is-glob "^4.0.0"
     is-windows "^1.0.2"
-    jest-validate "^23.5.0"
     listr "^0.14.2"
-    lodash "^4.17.5"
+    listr-update-renderer "^0.5.0"
+    lodash "^4.17.11"
     log-symbols "^2.2.0"
     micromatch "^3.1.8"
     npm-which "^3.0.1"
@@ -4991,6 +4961,7 @@ lint-staged@8.1.0:
     staged-git-files "1.1.2"
     string-argv "^0.0.2"
     stringify-object "^3.2.2"
+    yup "^0.27.0"
 
 listr-silent-renderer@^1.1.1:
   version "1.1.1"
@@ -6390,13 +6361,6 @@ pretty-format@^18.1.0:
   dependencies:
     ansi-styles "^2.2.1"
 
-pretty-format@^23.6.0:
-  version "23.6.0"
-  resolved "https://registry.npmjs.org/pretty-format/-/pretty-format-23.6.0.tgz#5eaac8eeb6b33b987b7fe6097ea6a8a146ab5760"
-  dependencies:
-    ansi-regex "^3.0.0"
-    ansi-styles "^3.2.0"
-
 pretty-ms@^0.2.1:
   version "0.2.2"
   resolved "https://registry.npmjs.org/pretty-ms/-/pretty-ms-0.2.2.tgz#da879a682ff33a37011046f13d627f67c73b84f6"
@@ -6457,6 +6421,11 @@ promzard@^0.3.0:
   resolved "https://registry.npmjs.org/promzard/-/promzard-0.3.0.tgz#26a5d6ee8c7dee4cb12208305acfb93ba382a9ee"
   dependencies:
     read "1"
+
+property-expr@^1.5.0:
+  version "1.5.1"
+  resolved "https://registry.npmjs.org/property-expr/-/property-expr-1.5.1.tgz#22e8706894a0c8e28d58735804f6ba3a3673314f"
+  integrity sha512-CGuc0VUTGthpJXL36ydB6jnbyOf/rAHFvmVrJlH+Rg0DqqLFQGAP6hIaxD/G0OAmBJPhXDHuEJigrp0e0wFV6g==
 
 proto-list@~1.2.1:
   version "1.2.4"
@@ -6752,6 +6721,11 @@ regenerator-runtime@^0.10.0, regenerator-runtime@^0.10.5:
 regenerator-runtime@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.11.0.tgz#7e54fe5b5ccd5d6624ea6255c3473be090b802e1"
+
+regenerator-runtime@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
+  integrity sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
 
 regenerator-transform@^0.10.0:
   version "0.10.1"
@@ -7677,6 +7651,11 @@ symbol-observable@^1.1.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
 
+synchronous-promise@^2.0.6:
+  version "2.0.7"
+  resolved "https://registry.npmjs.org/synchronous-promise/-/synchronous-promise-2.0.7.tgz#3574b3d2fae86b145356a4b89103e1577f646fe3"
+  integrity sha512-16GbgwTmFMYFyQMLvtQjvNWh30dsFe1cAW5Fg1wm5+dg84L9Pe36mftsIRU95/W2YsISxsz/xq4VB23sqpgb/A==
+
 tar-fs@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/tar-fs/-/tar-fs-2.0.0.tgz#677700fc0c8b337a78bee3623fdc235f21d7afad"
@@ -7848,6 +7827,11 @@ to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+toposort@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
+  integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
 
 tough-cookie@~2.3.0:
   version "2.3.3"
@@ -8357,3 +8341,15 @@ yargs@^7.0.2:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
+
+yup@^0.27.0:
+  version "0.27.0"
+  resolved "https://registry.npmjs.org/yup/-/yup-0.27.0.tgz#f8cb198c8e7dd2124beddc2457571329096b06e7"
+  integrity sha512-v1yFnE4+u9za42gG/b/081E7uNW9mUj3qtkmelLbW5YPROZzSH/KUUyJu9Wt8vxFJcT9otL/eZopS0YK1L5yPQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    fn-name "~2.0.1"
+    lodash "^4.17.11"
+    property-expr "^1.5.0"
+    synchronous-promise "^2.0.6"
+    toposort "^2.0.2"
