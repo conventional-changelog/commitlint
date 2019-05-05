@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "build": "tsc",
-    "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
     "start": "concurrently \"yarn test --watchAll\" \"yarn run watch\"",
@@ -47,7 +46,8 @@
     "jest": "24.8.0",
     "rimraf": "2.6.1",
     "ts-jest": "24.0.2",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "lodash": "4.17.11"
   },
   "dependencies": {
     "chalk": "^2.0.1"

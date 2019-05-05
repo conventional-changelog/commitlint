@@ -8,9 +8,6 @@
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
-    "clean": "npx rimraf lib",
-    "deps": "dep-check",
-    "pkg": "pkg-check --skip-import",
     "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
     "test": "ava --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
@@ -56,19 +53,15 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/utils": "^7.5.0",
     "@marionebl/sander": "0.6.1",
     "execa": "0.9.0",
     "pkg-dir": "2.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^7.5.0",
-    "ava": "0.22.0",
     "babel-cli": "6.26.0",
     "babel-preset-commitlint": "^7.5.0",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
-    "cross-env": "5.1.1",
-    "rimraf": "2.6.1"
+    "cross-env": "5.1.1"
   }
 }
