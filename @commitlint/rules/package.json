@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
-    "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
@@ -68,8 +67,7 @@
     "conventional-changelog-angular": "1.6.6",
     "cross-env": "5.1.1",
     "globby": "8.0.1",
-    "lodash": "4.17.11",
-    "rimraf": "2.6.1"
+    "lodash": "4.17.11"
   },
   "dependencies": {
     "@commitlint/ensure": "^7.5.2",

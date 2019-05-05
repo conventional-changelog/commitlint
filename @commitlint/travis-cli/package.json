@@ -10,7 +10,6 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
-    "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-main",
     "start": "ava -c 4 --verbose --watch",

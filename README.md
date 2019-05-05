@@ -187,9 +187,9 @@ Copyright by @marionebl. All `commitlint` packages are released under the MIT li
 ```sh
 git clone git@github.com:conventional-changelog/commitlint.git
 cd commitlint
-npx yarn install
-npx yarn run build # run build tasks
-npx yarn start # run tests, again on change
+yarn
+yarn run build # run build tasks
+yarn start # run tests, again on change
 ```
 
 For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).
@@ -197,11 +197,11 @@ For more information on how to contribute please take a look at our [contributio
 ### Publishing a release
 
 ```sh
-npx yarn run clean
-npx yarn install
-npx yarn run build
-npx yarn test
-npx yarn run publish
+yarn clean
+yarn install
+yarn run build
+yarn test
+yarn run publish
 ```
 
 
