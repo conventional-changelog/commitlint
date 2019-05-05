@@ -32,18 +32,43 @@ test('should reprint input from stdin', async t => {
 	t.true(actual.stdout.includes('foo: bar'));
 });
 
-test('should produce no success output with --quiet flag', async t => {
+test('should produce success output with --verbose flag', async t => {
+	const cwd = await git.bootstrap('fixtures/default');
+	const actual = await cli(['--verbose'], {cwd})('type: bar');
+	t.true(actual.stdout.includes('0 problems, 0 warnings'));
+	t.is(actual.stderr, '');
+});
+
+test('should produce no output with --quiet flag', async t => {
 	const cwd = await git.bootstrap('fixtures/default');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');
 	t.is(actual.stdout, '');
 	t.is(actual.stderr, '');
 });
 
-test('should produce no success output with -q flag', async t => {
+test('should produce no output with -q flag', async t => {
 	const cwd = await git.bootstrap('fixtures/default');
 	const actual = await cli(['-q'], {cwd})('foo: bar');
 	t.is(actual.stdout, '');
 	t.is(actual.stderr, '');
+});
+
+test('should produce help for empty config', async t => {
+	const cwd = await git.bootstrap('fixtures/empty');
+	const actual = await cli([], {cwd})('foo: bar');
+	t.true(actual.stdout.includes('Please add rules'));
+	t.is(actual.code, 1);
+});
+
+test('should produce help for problems', async t => {
+	const cwd = await git.bootstrap('fixtures/default');
+	const actual = await cli([], {cwd})('foo: bar');
+	t.true(
+		actual.stdout.includes(
+			'Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+		)
+	);
+	t.is(actual.code, 1);
 });
 
 test('should fail for input from stdin without rules', async t => {
@@ -259,13 +284,13 @@ test('should print full commit message when input from stdin fails', async t => 
 	t.is(actual.code, 1);
 });
 
-test('should not print full commit message when input succeeds', async t => {
+test('should not print commit message fully or partially when input succeeds', async t => {
 	const cwd = await git.bootstrap('fixtures/default');
 	const message = 'type: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
 	const actual = await cli([], {cwd})(message);
 
 	t.false(actual.stdout.includes(message));
-	t.true(actual.stdout.includes(message.split('\n')[0]));
+	t.false(actual.stdout.includes(message.split('\n')[0]));
 	t.is(actual.code, 0);
 });
 

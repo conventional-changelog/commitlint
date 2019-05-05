@@ -40,10 +40,30 @@ type ReportResult = {
 }
 
 type formatOptions = {
-  /*
+  /**
    * Color the output
-   */
+   **/
   color: boolean = true;
+
+  /**
+   * Signs to use as decoration for messages with severy 0, 1, 2
+   **/
+  signs: readonly [string; string; string] = [' ', '⚠', '✖'];
+  
+  /**
+   * Colors to use for messages with severy 0, 1, 2
+   **/
+  colors: readonly [string; string; string] = ['white', 'yellow', 'red'];
+
+  /**
+   * Print summary and inputs for reports without problems
+   **/
+  verbose: boolean = false;
+
+  /**
+   * URL to print as help for reports with problems
+   **/
+  helpUrl: string;
 }
 
 format(report?: Report = {}, options?: formatOptions = {}) => string[];
