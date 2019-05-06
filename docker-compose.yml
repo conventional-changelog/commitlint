@@ -1,0 +1,10 @@
+version: "3"
+services:
+  commitlint:
+    build: .
+    image: marionebl/commitlint-cubicle
+    ports:
+      - "8443:8443"
+    volumes:
+      - .:/root/repo
+    command: code-server --no-auth /root/repo 
