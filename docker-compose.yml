@@ -11,6 +11,5 @@ services:
     volumes:
       - .:/root/repo
       - $SSH_AUTH_SOCK:/.ssh-agent/socket
-      - $SSH_AUTH_PROXY_SOCK:/.ssh-agent/proxy-socket
     command: code-server --no-auth /root/repo 
 
