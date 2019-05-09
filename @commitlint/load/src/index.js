@@ -24,7 +24,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const base = loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
 
 	// Merge passed config with file based options
-	const config = valid(merge(loaded.config, seed));
+	const config = valid(merge({}, loaded.config, seed));
 	const opts = merge(
 		{extends: [], rules: {}, formatter: '@commitlint/format'},
 		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')

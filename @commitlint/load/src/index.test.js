@@ -308,3 +308,15 @@ test('returns formatter name when unable to resolve from config directory', asyn
 		rules: {}
 	});
 });
+
+test('does not mutate config module reference', async t => {
+	const file = 'config/commitlint.config.js';
+	const cwd = await git.bootstrap('fixtures/specify-config-file');
+
+	const configPath = path.join(cwd, file);
+	const before = JSON.stringify(require(configPath));
+	await load({arbitraryField: true}, {cwd, file});
+	const after = JSON.stringify(require(configPath));
+
+	t.is(before, after);
+});
