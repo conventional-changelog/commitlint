@@ -3,7 +3,12 @@ import chalk from 'chalk';
 const DEFAULT_SIGNS = [' ', '⚠', '✖'];
 const DEFAULT_COLORS = ['white', 'yellow', 'red'];
 
-export default function format(report = {}, options = {}) {
+module.exports = format;
+module.exports.default = format;
+module.exports.format = format;
+module.exports.formatResult = formatResult;
+
+function format(report = {}, options = {}) {
 	const {results = []} = report;
 
 	if (results.length > 0) {
@@ -38,7 +43,7 @@ function formatInput(result = {}, options = {}) {
 	return `\n${decoration}   input: ${decoratedInput}\n`;
 }
 
-export function formatResult(result = {}, options = {}) {
+function formatResult(result = {}, options = {}) {
 	const {
 		signs = DEFAULT_SIGNS,
 		colors = DEFAULT_COLORS,
