@@ -7,31 +7,11 @@
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+    "build": "tsc",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js",
-      "!lib/**/*"
-    ],
-    "source": [
-      "src/**/*.js",
-      "!lib/**/*"
-    ],
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
+    "start": "concurrently \"jest --watchAll\" \"tsc -w\"",
+    "test": "jest"
   },
   "engines": {
     "node": ">=4"
@@ -60,16 +40,17 @@
     "@commitlint/test": "7.6.0",
     "@commitlint/utils": "^7.5.0",
     "@marionebl/sander": "0.6.1",
-    "ava": "0.22.0",
-    "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.5.0",
-    "babel-register": "6.26.0",
+    "@types/execa": "^0.9.0",
+    "@types/jest": "24.0.13",
+    "@types/lodash": "^4.14.130",
+    "@types/resolve-from": "^5.0.1",
     "concurrently": "3.5.1",
-    "cross-env": "5.1.1",
-    "execa": "0.9.0"
+    "execa": "0.9.0",
+    "jest": "24.8.0",
+    "ts-jest": "24.0.2",
+    "typescript": "3.4.5"
   },
   "dependencies": {
-    "babel-runtime": "6.26.0",
     "import-fresh": "^3.0.0",
     "lodash": "4.17.11",
     "resolve-from": "^5.0.0",

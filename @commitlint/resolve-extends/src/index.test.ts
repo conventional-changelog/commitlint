@@ -1,23 +1,23 @@
-import test from 'ava';
 import execa from 'execa';
-import {fix} from '@commitlint/test';
-import * as sander from '@marionebl/sander';
 import resolveExtends from '.';
 
-const id = id => id;
+const {fix} = require('@commitlint/test');
+const sander = require('@marionebl/sander');
 
-test('returns empty object when called without params', t => {
+const id = (id: unknown) => id;
+
+test('returns empty object when called without params', () => {
 	const actual = resolveExtends();
-	t.deepEqual(actual, {});
+	expect(actual).toEqual({});
 });
 
-test('returns an equivalent object as passed in', t => {
+test('returns an equivalent object as passed in', () => {
 	const expected = {foo: 'bar'};
 	const actual = resolveExtends(expected);
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test.serial('falls back to global install', async t => {
+test('falls back to global install', async () => {
 	const prev = process.env.PREFIX;
 
 	const cwd = await fix.bootstrap('fixtures/global-install');
@@ -38,12 +38,12 @@ test.serial('falls back to global install', async t => {
 	]);
 
 	const expected = {extends: ['@commitlint/config-angular']};
-	t.notThrows(() => resolveExtends(expected));
 
+	expect(() => resolveExtends(expected)).not.toThrow();
 	process.env.PREFIX = prev;
 });
 
-test.serial('fails for missing extends', async t => {
+test('fails for missing extends', async () => {
 	const prev = process.env.PREFIX;
 
 	const cwd = await fix.bootstrap('fixtures/missing-install');
@@ -53,21 +53,18 @@ test.serial('fails for missing extends', async t => {
 
 	const input = {extends: ['@commitlint/foo-bar']};
 
-	t.throws(
-		() => resolveExtends(input, {cwd}),
-		/Cannot find module "@commitlint\/foo-bar" from/
-	);
+	expect(() => resolveExtends(input, {cwd})).toThrow(/Cannot find module "@commitlint\/foo-bar" from/);
 
 	process.env.PREFIX = prev;
 });
 
-test('uses empty prefix by default', t => {
+test('uses empty prefix by default', () => {
 	const input = {extends: ['extender-name']};
 
 	resolveExtends(input, {
 		resolve: id,
 		require(id) {
-			t.is(id, 'extender-name');
+			expect(id).toBe('extender-name')
 		}
 	});
 });
@@ -79,7 +76,7 @@ test('uses prefix as configured', t => {
 		prefix: 'prefix',
 		resolve: id,
 		require(id) {
-			t.is(id, 'prefix-extender-name');
+			expect(id).toBe('prefix-extender-name')
 		}
 	});
 });
@@ -91,7 +88,7 @@ test('ignores prefix for scoped extends', t => {
 		prefix: 'prefix',
 		resolve: id,
 		require(id) {
-			t.is(id, '@scope/extender-name');
+			expect(id).toBe('@scope/extender-name');
 		}
 	});
 });
@@ -103,7 +100,7 @@ test('adds prefix as suffix for scopes only', t => {
 		prefix: 'prefix',
 		resolve: id,
 		require(id) {
-			t.is(id, '@scope/prefix');
+			expect(id).toBe('@scope/prefix');
 		}
 	});
 });
@@ -115,7 +112,7 @@ test('ignores prefix for relative extends', t => {
 		prefix: 'prefix',
 		resolve: id,
 		require(id) {
-			t.is(id, './extender');
+			expect(id).toBe('./extender');
 		}
 	});
 });
@@ -131,12 +128,12 @@ test('propagates return value of require function', t => {
 		}
 	});
 
-	t.is(actual.foo, 'bar');
+	expect(actual.foo).toBe('bar');
 });
 
 test('resolves extends recursively', t => {
 	const input = {extends: ['extender-name']};
-	const actual = [];
+	const actual: string[] = [];
 
 	resolveExtends(input, {
 		resolve: id,
@@ -151,12 +148,12 @@ test('resolves extends recursively', t => {
 		}
 	});
 
-	t.deepEqual(actual, ['extender-name', 'recursive-extender-name']);
+	expect(actual).toBe(['extender-name', 'recursive-extender-name']);
 });
 
 test('uses prefix key recursively', t => {
 	const input = {extends: ['extender-name']};
-	const actual = [];
+	const actual: string[] = [];
 
 	resolveExtends(input, {
 		prefix: 'prefix',
@@ -172,7 +169,7 @@ test('uses prefix key recursively', t => {
 		}
 	});
 
-	t.deepEqual(actual, [
+	expect(actual).toEqual([
 		'prefix-extender-name',
 		'prefix-recursive-extender-name'
 	]);
@@ -199,7 +196,7 @@ test('propagates contents recursively', t => {
 		baz: 'bar'
 	};
 
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
 test('propagates contents recursively with overlap', t => {
@@ -227,7 +224,7 @@ test('propagates contents recursively with overlap', t => {
 		}
 	};
 
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
 test('extending contents should take precedence', t => {
@@ -261,7 +258,7 @@ test('extending contents should take precedence', t => {
 		three: 'second-recursive-extender-name'
 	};
 
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
 test('should fall back to conventional-changelog-lint-config prefix', t => {
@@ -286,7 +283,7 @@ test('should fall back to conventional-changelog-lint-config prefix', t => {
 		}
 	});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		extends: ['extender-name'],
 		rules: {
 			fallback: true
