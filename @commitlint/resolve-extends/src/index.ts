@@ -7,18 +7,22 @@ import { isArray, merge, mergeWith, omit } from 'lodash';
 const importFresh = require('import-fresh');
 
 export interface ResolvedConfig {
-
+	parserPreset?: unknown;
+	[key: string]: unknown;
 }
 
 export interface ResolveExtendsConfig {
 	parserPreset?: unknown;
 	extends?: string[];
+	[key: string]: unknown;
 }
 
 export interface ResolveExtendsContext {
+	cwd?: string;
 	parserPreset?: unknown;
 	prefix?: string;
 	resolve?(id: string, ctx?: { prefix?: string, cwd?: string }): string;
+	resolveGlobal?: (id: string) => string;
 	require?<T>(id: string): T;
 }
 
@@ -96,7 +100,7 @@ function resolveConfig<T>(raw: string, context: ResolveExtendsContext = {}): str
 	}
 }
 
-function resolveId(id: string, context: { cwd?: string } = {}): string {
+function resolveId(id: string, context: { cwd?: string, resolveGlobal?: (id: string) => string | void } = {}): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(cwd, id);
 
@@ -104,7 +108,8 @@ function resolveId(id: string, context: { cwd?: string } = {}): string {
 		return localPath;
 	}
 
-	const globalPath = resolveGlobalSilent(id);
+	const resolveGlobal = context.resolveGlobal || resolveGlobalSilent;
+	const globalPath = resolveGlobal(id);
 
 	if (typeof globalPath === 'string') {
 		return globalPath;
