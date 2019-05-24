@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/lint",
-  "version": "7.5.2",
+  "version": "7.6.0",
   "description": "Lint a string against commitlint rules",
   "main": "lib/index.js",
   "files": [
@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
-    "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
@@ -57,23 +56,22 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "7.6.0",
-    "@commitlint/utils": "^7.5.0",
+    "@commitlint/test": "^7.6.0",
+    "@commitlint/utils": "^7.6.0",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.5.0",
+    "babel-preset-commitlint": "^7.6.0",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
     "execa": "0.9.0",
     "globby": "8.0.1",
-    "rimraf": "2.6.1",
     "proxyquire": "2.1.0"
   },
   "dependencies": {
-    "@commitlint/is-ignored": "^7.5.1",
-    "@commitlint/parse": "^7.5.0",
-    "@commitlint/rules": "^7.5.2",
+    "@commitlint/is-ignored": "^7.6.0",
+    "@commitlint/parse": "^7.6.0",
+    "@commitlint/rules": "^7.6.0",
     "babel-runtime": "^6.23.0",
     "lodash": "4.17.11"
   }

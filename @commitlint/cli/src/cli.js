@@ -89,11 +89,6 @@ const flags = {
 		alias: 'v',
 		type: 'boolean',
 		description: 'display version information'
-	},
-	verbose: {
-		alias: 'V',
-		type: 'boolean',
-		description: 'enable verbose output for reports without problems'
 	}
 };
 
@@ -209,14 +204,9 @@ async function main(options) {
 		}
 	);
 
-	const output = format(report, {
-		color: flags.color,
-		verbose: flags.verbose,
-		helpUrl:
-			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
-	});
+	const output = format(report, {color: flags.color});
 
-	if (!flags.quiet && output !== '') {
+	if (!flags.quiet) {
 		console.log(output);
 	}
 
