@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "7.6.2",
+  "version": "8.0.0",
   "description": "Load shared commitlint configuration",
   "main": "lib/index.js",
   "files": [
@@ -56,11 +56,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^7.6.0",
-    "@commitlint/utils": "^7.6.0",
+    "@commitlint/test": "^8.0.0",
+    "@commitlint/utils": "^8.0.0",
     "ava": "0.22.0",
     "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.6.0",
+    "babel-preset-commitlint": "^8.0.0",
     "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1",
@@ -68,8 +68,8 @@
     "globby": "8.0.1"
   },
   "dependencies": {
-    "@commitlint/execute-rule": "^7.6.0",
-    "@commitlint/resolve-extends": "^7.6.0",
+    "@commitlint/execute-rule": "^8.0.0",
+    "@commitlint/resolve-extends": "^8.0.0",
     "babel-runtime": "^6.23.0",
     "cosmiconfig": "^5.2.0",
     "lodash": "4.17.11",
