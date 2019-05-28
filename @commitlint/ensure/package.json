@@ -7,31 +7,12 @@
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
+    "build": "tsc",
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js",
-      "!lib/**/*"
-    ],
-    "source": [
-      "src/**/*.js",
-      "!lib/**/*"
-    ],
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
+    "pkg": "pkg-check",
+    "start": "concurrently \"yarn test --watchAll\" \"yarn run watch\"",
+    "test": "jest",
+    "watch": "tsc -w"
   },
   "engines": {
     "node": ">=4"
@@ -56,15 +37,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "7.6.0",
     "@commitlint/utils": "^7.5.0",
     "@types/jest": "^24.0.13",
-    "ava": "0.22.0",
-    "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.5.0",
-    "babel-register": "6.26.0",
     "concurrently": "3.5.1",
-    "cross-env": "5.1.1",
     "globby": "^9.2.0",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
