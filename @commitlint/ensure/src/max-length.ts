@@ -1,1 +1,1 @@
-export default (value: string, max: number) => typeof value === 'string' && value.length <= max;
+export default (value: string, max: number): boolean => typeof value === 'string' && value.length <= max;
