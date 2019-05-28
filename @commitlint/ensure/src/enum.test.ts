@@ -2,7 +2,7 @@
 import ensure from './enum';
 
 test('false for no params', () => {
-	const actual = ensure();
+	const actual = (ensure as () => boolean)();
 	expect(actual).toBe(false);
 });
 
