@@ -1,5 +1,5 @@
 import ensure from './max-length';
 
-export default (value, max) =>
+export default (value: string, max: number) =>
 	typeof value === 'string' &&
 	value.split(/\r?\n/).every(line => ensure(line, max));
