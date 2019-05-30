@@ -306,6 +306,18 @@ test('should fail for invalid formatters from configuration', async t => {
 	t.is(actual.code, 1);
 });
 
+test('should skip linting if message matches ignores config', async t => {
+	const cwd = await git.bootstrap('fixtures/ignores');
+	const actual = await cli([], {cwd})('WIP');
+	t.is(actual.code, 0);
+});
+
+test('should not skip linting if message does not match ignores config', async t => {
+	const cwd = await git.bootstrap('fixtures/ignores');
+	const actual = await cli([], {cwd})('foo');
+	t.is(actual.code, 1);
+});
+
 test('should fail for invalid formatters from flags', async t => {
 	const cwd = await git.bootstrap('fixtures/custom-formatter');
 	const actual = await cli(['--format', 'through-flag'], {cwd})('foo: bar');

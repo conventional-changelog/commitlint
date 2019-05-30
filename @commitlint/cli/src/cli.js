@@ -146,13 +146,17 @@ async function main(options) {
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts = {
 		parserOpts: {},
-		plugins: {}
+		plugins: {},
+		ignores: []
 	};
 	if (parserOpts) {
 		opts.parserOpts = parserOpts;
 	}
 	if (loaded.plugins) {
 		opts.plugins = loaded.plugins;
+	}
+	if (loaded.ignores) {
+		opts.ignores = loaded.ignores;
 	}
 	const format = loadFormatter(loaded, flags);
 
