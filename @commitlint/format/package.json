@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/format",
-  "version": "7.5.0",
+  "version": "8.0.0",
   "description": "Format commitlint reports",
   "main": "lib/index.js",
   "files": [
@@ -37,12 +37,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^7.5.0",
+    "@commitlint/test": "^8.0.0",
     "@types/jest": "24.0.13",
     "@types/lodash": "4.14.130",
     "concurrently": "3.5.1",
     "jest": "24.8.0",
-    "rimraf": "2.6.1",
     "ts-jest": "24.0.2",
     "typescript": "3.4.5",
     "lodash": "4.17.11"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Bug Fixes
+
+* use sander.readFile correctly ([#448](https://github.com/conventional-changelog/commitlint/issues/448)) ([#630](https://github.com/conventional-changelog/commitlint/issues/630)) ([8e47985](https://github.com/conventional-changelog/commitlint/commit/8e47985))
+
+
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 
