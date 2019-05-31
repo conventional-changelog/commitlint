@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"lib": [
+			"dom",
+			"es2015"
+		],
+		"rootDir": "src",
+		"outDir": "lib",
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"strict": true
+	},
+	"include": [
+		"./src"
+	],
+	"exclude": [
+		"./src/**/*.test.ts"
+	]
+}

@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/format",
-  "version": "7.5.0",
+  "version": "8.0.0",
   "description": "Format commitlint reports",
   "main": "lib/index.js",
   "files": [
@@ -8,7 +8,6 @@
   ],
   "scripts": {
     "build": "tsc",
-    "clean": "npx rimraf lib",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
     "start": "concurrently \"yarn test --watchAll\" \"yarn run watch\"",
@@ -38,16 +37,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "7.6.0",
-    "@commitlint/utils": "^7.5.0",
+    "@commitlint/utils": "^8.0.0",
     "@types/jest": "24.0.13",
-    "@types/lodash": "4.14.130",
+    "@types/lodash": "4.14.133",
     "concurrently": "3.5.1",
-    "cross-env": "5.1.1",
     "jest": "24.8.0",
-    "rimraf": "2.6.1",
     "ts-jest": "24.0.2",
-    "typescript": "3.4.5"
+    "typescript": "3.5.1",
+    "lodash": "4.17.11"
   },
   "dependencies": {
     "chalk": "^2.0.1"

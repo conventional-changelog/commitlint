@@ -21,10 +21,17 @@ test('uses seed as configured', async t => {
 	t.is(actual.rules.foo, 'bar');
 });
 
-test('rules should be loaded from specify config file', async t => {
+test('rules should be loaded from relative config file', async t => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await git.bootstrap('fixtures/specify-config-file');
 	const actual = await load({}, {cwd, file});
+	t.is(actual.rules.foo, 'bar');
+});
+
+test('rules should be loaded from absolute config file', async t => {
+	const cwd = await git.bootstrap('fixtures/specify-config-file');
+	const file = path.join(cwd, 'config/commitlint.config.js');
+	const actual = await load({}, {cwd: process.cwd(), file});
 	t.is(actual.rules.foo, 'bar');
 });
 
