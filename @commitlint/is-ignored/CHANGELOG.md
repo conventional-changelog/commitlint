@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Features
+
+* config based is-ignored overrides ([#595](https://github.com/conventional-changelog/commitlint/issues/595)) ([2434d71](https://github.com/conventional-changelog/commitlint/commit/2434d71))
+
+
+
+
+
 ## [7.5.1](https://github.com/conventional-changelog/commitlint/compare/v7.5.0...v7.5.1) (2019-02-09)
 
 

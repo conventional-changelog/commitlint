@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.6.1](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.1) (2019-05-09)
+
+
+### Bug Fixes
+
+* ensure format() is available as commonjs default export [#645](https://github.com/conventional-changelog/commitlint/issues/645) ([ec3da92](https://github.com/conventional-changelog/commitlint/commit/ec3da92))
+
+
+
+
+
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Bug Fixes
+
+* avoid excessive help text [#606](https://github.com/conventional-changelog/commitlint/issues/606) ([#637](https://github.com/conventional-changelog/commitlint/issues/637)) ([8f3c3b1](https://github.com/conventional-changelog/commitlint/commit/8f3c3b1))
+
+
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 

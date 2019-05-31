@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Features
+
+* **resolve-extends:** accept short scoped package names in extends ([#597](https://github.com/conventional-changelog/commitlint/issues/597)) ([ba90e8e](https://github.com/conventional-changelog/commitlint/commit/ba90e8e))
+
+
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 

@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.6.1](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.1) (2019-05-09)
+
+
+### Bug Fixes
+
+* handle absolute config paths correctly [#647](https://github.com/conventional-changelog/commitlint/issues/647) ([49b3a77](https://github.com/conventional-changelog/commitlint/commit/49b3a77))
+
+
+
+
+
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Bug Fixes
+
+* remove unneeded dev dependency ([6ccaf79](https://github.com/conventional-changelog/commitlint/commit/6ccaf79))
+* update cosmiconfig to safe >=5 [#599](https://github.com/conventional-changelog/commitlint/issues/599) ([f186fcb](https://github.com/conventional-changelog/commitlint/commit/f186fcb))
+
+
+### Features
+
+* adds support for plugins ([#228](https://github.com/conventional-changelog/commitlint/issues/228)) ([#588](https://github.com/conventional-changelog/commitlint/issues/588)) ([cea4564](https://github.com/conventional-changelog/commitlint/commit/cea4564))
+* config based is-ignored overrides ([#595](https://github.com/conventional-changelog/commitlint/issues/595)) ([2434d71](https://github.com/conventional-changelog/commitlint/commit/2434d71))
+
+
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 
