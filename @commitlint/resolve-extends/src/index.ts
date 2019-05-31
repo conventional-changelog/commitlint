@@ -1,13 +1,33 @@
 import path from 'path';
 
-import 'resolve-global'; // eslint-disable-line import/no-unassigned-import
-import importFresh from 'import-fresh';
+import 'resolve-global';
 import resolveFrom from 'resolve-from';
-import {isArray, merge, mergeWith, omit} from 'lodash';
+import { isArray, merge, mergeWith, omit } from 'lodash';
 
-// Resolve extend configs
-export default function resolveExtends(config = {}, context = {}) {
-	const {extends: e} = config;
+const importFresh = require('import-fresh');
+
+export interface ResolvedConfig {
+	parserPreset?: unknown;
+	[key: string]: unknown;
+}
+
+export interface ResolveExtendsConfig {
+	parserPreset?: unknown;
+	extends?: string[];
+	[key: string]: unknown;
+}
+
+export interface ResolveExtendsContext {
+	cwd?: string;
+	parserPreset?: unknown;
+	prefix?: string;
+	resolve?(id: string, ctx?: { prefix?: string, cwd?: string }): string;
+	resolveGlobal?: (id: string) => string;
+	require?<T>(id: string): T;
+}
+
+export default function resolveExtends(config: ResolveExtendsConfig = {}, context: ResolveExtendsContext = {}) {
+	const { extends: e } = config;
 	const extended = loadExtends(config, context).reduceRight(
 		(r, c) =>
 			mergeWith(r, omit(c, 'extends'), (objValue, srcValue) => {
@@ -15,35 +35,19 @@ export default function resolveExtends(config = {}, context = {}) {
 					return srcValue;
 				}
 			}),
-		e ? {extends: e} : {}
+		e ? { extends: e } : {}
 	);
-
-	// Remove deprecation warning in version 3
-	if (typeof config === 'object' && 'wildcards' in config) {
-		console.warn(
-			`'wildcards' found in top-level configuration ignored. Remove them from your config to silence this warning.`
-		);
-	}
 
 	return merge({}, extended, config);
 }
 
-// (any, string, string, Function) => any[];
-function loadExtends(config = {}, context = {}) {
-	return (config.extends || []).reduce((configs, raw) => {
+function loadExtends(config: ResolveExtendsConfig = {}, context: ResolveExtendsContext = {}): ResolvedConfig[] {
+	return (config.extends || []).reduce<ResolvedConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
 		const cwd = path.dirname(resolved);
-
-		// Remove deprecation warning in version 3
-		if (typeof c === 'object' && 'wildcards' in c) {
-			console.warn(
-				`'wildcards' found in '${raw}' ignored. To silence this warning raise an issue at 'npm repo ${raw}' to remove the wildcards.`
-			);
-		}
-
-		const ctx = merge({}, context, {cwd});
+		const ctx = merge({}, context, { cwd });
 
 		// Resolve parser preset if none was present before
 		if (
@@ -68,7 +72,7 @@ function loadExtends(config = {}, context = {}) {
 	}, []);
 }
 
-function getId(raw = '', prefix = '') {
+function getId(raw: string = '', prefix: string = ''): string {
 	const first = raw.charAt(0);
 	const scoped = first === '@';
 	const relative = first === '.';
@@ -80,7 +84,7 @@ function getId(raw = '', prefix = '') {
 	return relative ? raw : [prefix, raw].filter(String).join('-');
 }
 
-function resolveConfig(raw, context = {}) {
+function resolveConfig<T>(raw: string, context: ResolveExtendsContext = {}): string {
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
 
@@ -96,7 +100,7 @@ function resolveConfig(raw, context = {}) {
 	}
 }
 
-function resolveId(id, context = {}) {
+function resolveId(id: string, context: { cwd?: string, resolveGlobal?: (id: string) => string | void } = {}): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(cwd, id);
 
@@ -104,26 +108,27 @@ function resolveId(id, context = {}) {
 		return localPath;
 	}
 
-	const globalPath = resolveGlobalSilent(id);
+	const resolveGlobal = context.resolveGlobal || resolveGlobalSilent;
+	const globalPath = resolveGlobal(id);
 
 	if (typeof globalPath === 'string') {
 		return globalPath;
 	}
 
 	const err = new Error(`Cannot find module "${id}" from "${cwd}"`);
-	err.code = 'MODULE_NOT_FOUND';
+	(err as any).code = 'MODULE_NOT_FOUND';
 	throw err;
 }
 
-function resolveFromSilent(cwd, id) {
+function resolveFromSilent(cwd: string, id: string): string | void {
 	try {
 		return resolveFrom(cwd, id);
-	} catch (err) {}
+	} catch (err) { }
 }
 
-function resolveGlobalSilent(id) {
+function resolveGlobalSilent(id: string): string | void {
 	try {
 		const resolveGlobal = importFresh('resolve-global');
 		return resolveGlobal(id);
-	} catch (err) {}
+	} catch (err) { }
 }
