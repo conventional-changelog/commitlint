@@ -1,4 +1,4 @@
-export default (value, enums = []) => {
+export default (value: any, enums: any[] = []): boolean => {
 	if (value === undefined) {
 		return false;
 	}
