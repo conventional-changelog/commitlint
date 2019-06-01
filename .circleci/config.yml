@@ -42,7 +42,7 @@ commands:
           key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-  run:
+  run-node:
     steps:
       - checkout
       - restore_cache:
@@ -60,17 +60,17 @@ jobs:
     docker:
       - image: node:8
     steps:
-      - run
+      - run-node
   v10:
     docker:
       - image: node:10
     steps:
-      - run
+      - run-node
   v12:
     docker:
       - image: node:12
     steps:
-      - run
+      - run-node
 
 workflows:
   node:
