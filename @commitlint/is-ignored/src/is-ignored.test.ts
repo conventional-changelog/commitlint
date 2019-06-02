@@ -1,0 +1,152 @@
+import isIgnored from './is-ignored';
+
+const VERSION_MESSAGES = [
+	'0.0.1',
+	'0.1.0',
+	'1.0.0',
+	'0.0.1-alpha',
+	'0.0.1-some-crazy-tag',
+	'0.0.1-0',
+	'0.0.1-999',
+	'0.0.1-alpha.0',
+	'0.0.1-alpha.999',
+	'0.0.1-some-crazy-tag.0',
+	'0.0.1-some-crazy-tag.999',
+	'0.0.1-1e69d54',
+	'v0.0.1',
+	' v3.0.0'
+];
+
+const AMENDMENTS = [
+	'Signed-off-by: Developer <example@example.com>',
+	'Change-Id: I895114872a515a269487a683124b63303818e19c',
+	'Signed-off-by: Developer <example@example.com>\nChange-Id: I895114872a515a269487a683124b63303818e19c'
+];
+
+const AMENDED_VERSION_MESSAGES = VERSION_MESSAGES.reduce<string[]>((results, message) => {
+	return [
+		...results,
+		...AMENDMENTS.map(amendment => `${message}\n\n${amendment}`)
+	];
+}, []);
+
+test('should return false when called without arguments', () => {
+	expect(isIgnored()).toBe(false);
+});
+
+test('should return false when called with empty string', () => {
+	expect(isIgnored('')).toBe(false);
+});
+
+test('should return false for normal commit', () => {
+	expect(isIgnored('initial commit')).toBe(false);
+});
+
+test('should return true for branch merges', () => {
+	expect(isIgnored("Merge branch 'iss53'")).toBe(true);
+});
+
+test('should return true for branch merges with newline characters', () => {
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\n")).toBe(true);
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n")).toBe(true);
+});
+
+test('should return true for branch merges with multiple newline characters', () => {
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\n\n\n")).toBe(true);
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n\r\n\r\n")).toBe(true);
+});
+
+test('should return true for merged PRs', () => {
+	expect(isIgnored('Merge pull request #369')).toBe(true);
+});
+
+test('should return true for branch merges with newline characters and more characters after it', () => {
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\n ")).toBe(true);
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n # some comment")).toBe(true);
+});
+
+test('should return true for revert commits', () => {
+	expect(
+		isIgnored(
+			`Revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	).toBe(true);
+	expect(
+		isIgnored(
+			`revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	).toBe(true);
+});
+
+test('should ignore npm semver commits', () => {
+	VERSION_MESSAGES.forEach(message => expect(isIgnored(message)).toBe(true));
+});
+
+test('should ignore npm semver commits with chore', () => {
+	VERSION_MESSAGES.forEach(message => expect(isIgnored(`chore: ${message}`)).toBe(true));
+	VERSION_MESSAGES.forEach(message =>
+		expect(isIgnored(`chore(release): ${message}`)).toBe(true)
+	);
+});
+
+test('should ignore npm semver commits with footers', () => {
+	AMENDED_VERSION_MESSAGES.forEach(message => expect(isIgnored(message)).toBe(true));
+});
+
+test('should return true fixup commits', () => {
+	expect(isIgnored('fixup! initial commit')).toBe(true);
+});
+
+test('should return true squash commits', () => {
+	expect(isIgnored('squash! initial commit')).toBe(true);
+});
+
+test('should return true for bitbucket merge commits', () => {
+	expect(
+		isIgnored('Merged in feature/facebook-friends-sync (pull request #8)')
+	).toBe(true);
+	expect(isIgnored('Merged develop into feature/component-form-select-card')).toBe(true);
+	expect(isIgnored('Automatic merge')).toBe(true);
+});
+
+test('should return true for automatic merge commits', () => {
+	expect(isIgnored('Auto-merged develop into master')).toBe(true);
+});
+
+test('should return false for commits containing, but not starting, with merge branch', () => {
+	expect(isIgnored('foo bar Merge branch xxx')).toBe(false);
+});
+
+test('should return false for ignored message if defaults is false', () => {
+	expect(
+		isIgnored('Auto-merged develop into master', {
+			defaults: false
+		})
+	).toBe(false);
+});
+
+test('should return false for ignored message if custom ignores and defaults is false', () => {
+	expect(
+		isIgnored('Auto-merged develop into master', {
+			defaults: false
+		})
+	).toBe(false);
+});
+
+test('should throw error if ignores is not an array', () => {
+	const ignoredString = 'this should be ignored';
+	expect(() => {
+		isIgnored(ignoredString, ({
+			ignores: 'throws error'
+		} as any));
+	}).toThrow();
+});
+
+test('should return true for custom ignores as function', () => {
+	const ignoredString = 'this should be ignored';
+	expect(
+		isIgnored(ignoredString, {
+			ignores: [c => c === ignoredString]
+		})
+	).toBe(true);
+});
