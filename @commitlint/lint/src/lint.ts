@@ -35,6 +35,21 @@ export default async function lint(
 
 	// Parse the commit message
 	const parsed = await parse(message, undefined, opts.parserOpts);
+
+	if (
+		parsed.header === null &&
+		parsed.body === null &&
+		parsed.footer === null
+	) {
+		// Commit is empty, skip
+		return {
+			valid: true,
+			errors: [],
+			warnings: [],
+			input: message
+		};
+	}
+
 	const allRules: Map<string, Rule<unknown> | Rule<never>> = new Map(
 		Object.entries(defaultRules)
 	);

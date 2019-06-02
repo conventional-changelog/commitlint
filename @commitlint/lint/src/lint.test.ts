@@ -5,9 +5,12 @@ test('throws without params', async () => {
 	await expect(error).rejects.toThrow('Expected a raw commit');
 });
 
-test('throws with empty message', async () => {
-	const error = (lint as any)('');
-	await expect(error).rejects.toThrow('Expected a raw commit');
+test('positive on empty message', async () => {
+	expect(await lint('')).toMatchObject({
+		valid: true,
+		errors: [],
+		warnings: []
+	});
 });
 
 test('positive on stub message and no rule', async () => {
