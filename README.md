@@ -8,7 +8,7 @@
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
 >
-> `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
+> `cat docs/assets/commitlint.cast | svg-term --out docs/assets/commitlint.svg --profile=Seti --height=20 --width=80 --term iterm2 --window`
 
 [![npm latest][2]][3] [![CircleCI][4]][5] <!-- [![TravisCI][6]][7] -->
 
