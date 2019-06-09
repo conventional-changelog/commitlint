@@ -49,19 +49,25 @@ You can test the hook by simply committing. You should see something like this i
 
 ```bash
 git commit -m "foo: this will fail"
-husky > npm run -s commitmsg
-
+husky > commit-msg (node v10.1.0)
+No staged files match any of provided globs.
 ⧗   input: foo: this will fail
 ✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
+
 ✖   found 1 problems, 0 warnings
+ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
 
 husky > commit-msg hook failed (add --no-verify to bypass)
+```
 
+Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.  
+(You can use the `--verbose` flag to get positive output)
+
+```bash
 git commit -m "chore: lint on commitmsg"
-husky > npm run -s commitmsg
-
-⧗   input: chore: lint on commitmsg
-✔   found 0 problems, 0 warnings
+husky > pre-commit (node v10.1.0)
+No staged files match any of provided globs.
+husky > commit-msg (node v10.1.0)
 ```
 
 ?> Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server to. Learn how to in the [CI Setup guide](guides-ci-setup.md).
