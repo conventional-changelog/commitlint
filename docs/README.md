@@ -33,8 +33,12 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitl
 echo 'foo: bar' | commitlint
 ⧗   input: foo: bar
 ✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
-✖   found 1 problems, 0 warnings
 
+✖   found 1 problems, 0 warnings
+ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+```
+
+```bash
 # Lint last commit from history
 commitlint --from=HEAD~1
 ```
