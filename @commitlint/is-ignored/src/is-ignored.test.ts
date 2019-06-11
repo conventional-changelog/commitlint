@@ -23,12 +23,15 @@ const AMENDMENTS = [
 	'Signed-off-by: Developer <example@example.com>\nChange-Id: I895114872a515a269487a683124b63303818e19c'
 ];
 
-const AMENDED_VERSION_MESSAGES = VERSION_MESSAGES.reduce<string[]>((results, message) => {
-	return [
-		...results,
-		...AMENDMENTS.map(amendment => `${message}\n\n${amendment}`)
-	];
-}, []);
+const AMENDED_VERSION_MESSAGES = VERSION_MESSAGES.reduce<string[]>(
+	(results, message) => {
+		return [
+			...results,
+			...AMENDMENTS.map(amendment => `${message}\n\n${amendment}`)
+		];
+	},
+	[]
+);
 
 test('should return false when called without arguments', () => {
 	expect(isIgnored()).toBe(false);
@@ -62,7 +65,9 @@ test('should return true for merged PRs', () => {
 
 test('should return true for branch merges with newline characters and more characters after it', () => {
 	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\n ")).toBe(true);
-	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n # some comment")).toBe(true);
+	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n # some comment")).toBe(
+		true
+	);
 });
 
 test('should return true for revert commits', () => {
@@ -83,14 +88,18 @@ test('should ignore npm semver commits', () => {
 });
 
 test('should ignore npm semver commits with chore', () => {
-	VERSION_MESSAGES.forEach(message => expect(isIgnored(`chore: ${message}`)).toBe(true));
+	VERSION_MESSAGES.forEach(message =>
+		expect(isIgnored(`chore: ${message}`)).toBe(true)
+	);
 	VERSION_MESSAGES.forEach(message =>
 		expect(isIgnored(`chore(release): ${message}`)).toBe(true)
 	);
 });
 
 test('should ignore npm semver commits with footers', () => {
-	AMENDED_VERSION_MESSAGES.forEach(message => expect(isIgnored(message)).toBe(true));
+	AMENDED_VERSION_MESSAGES.forEach(message =>
+		expect(isIgnored(message)).toBe(true)
+	);
 });
 
 test('should return true fixup commits', () => {
@@ -105,7 +114,9 @@ test('should return true for bitbucket merge commits', () => {
 	expect(
 		isIgnored('Merged in feature/facebook-friends-sync (pull request #8)')
 	).toBe(true);
-	expect(isIgnored('Merged develop into feature/component-form-select-card')).toBe(true);
+	expect(
+		isIgnored('Merged develop into feature/component-form-select-card')
+	).toBe(true);
 	expect(isIgnored('Automatic merge')).toBe(true);
 });
 
@@ -136,9 +147,9 @@ test('should return false for ignored message if custom ignores and defaults is 
 test('should throw error if ignores is not an array', () => {
 	const ignoredString = 'this should be ignored';
 	expect(() => {
-		isIgnored(ignoredString, ({
+		isIgnored(ignoredString, {
 			ignores: 'throws error'
-		} as any));
+		} as any);
 	}).toThrow();
 });
 

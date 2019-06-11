@@ -5,7 +5,10 @@ export interface IsIgnoredOptions {
 	defaults?: boolean;
 }
 
-export default function isIgnored(commit: string = '', opts: IsIgnoredOptions = {}): boolean {
+export default function isIgnored(
+	commit: string = '',
+	opts: IsIgnoredOptions = {}
+): boolean {
 	const ignores = typeof opts.ignores === 'undefined' ? [] : opts.ignores;
 
 	if (!Array.isArray(ignores)) {
