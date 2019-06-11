@@ -12,7 +12,7 @@
     "deps": "lerna run deps",
     "pkg": "lerna run pkg",
     "docs": "docsify serve docs",
-    "lint": "prettier @{alias,commitlint,packages}/**/*.js -l",
+    "lint": "prettier @{alias,commitlint,packages}/**/*.{ts,js} -l",
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "lerna run start --stream --parallel --include-filtered-dependencies",
@@ -30,7 +30,7 @@
     "bracketSpacing": false
   },
   "lint-staged": {
-    "*.js": [
+    "*.{ts,js}": [
       "prettier --write",
       "git add"
     ]

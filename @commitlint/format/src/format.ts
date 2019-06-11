@@ -44,7 +44,10 @@ export function format(
 	return results
 		.filter(r => Array.isArray(r.warnings) || Array.isArray(r.errors))
 		.map(result => [...fi(result), ...fr(result)])
-		.reduce((acc, item) => Array.isArray(item) ? [...acc, ...item] : [...acc, item], [])
+		.reduce(
+			(acc, item) => (Array.isArray(item) ? [...acc, ...item] : [...acc, item]),
+			[]
+		)
 		.join('\n');
 }
 

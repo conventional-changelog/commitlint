@@ -2,7 +2,7 @@ import path from 'path';
 
 import 'resolve-global';
 import resolveFrom from 'resolve-from';
-import { isArray, merge, mergeWith, omit } from 'lodash';
+import {isArray, merge, mergeWith, omit} from 'lodash';
 
 const importFresh = require('import-fresh');
 
@@ -21,13 +21,16 @@ export interface ResolveExtendsContext {
 	cwd?: string;
 	parserPreset?: unknown;
 	prefix?: string;
-	resolve?(id: string, ctx?: { prefix?: string, cwd?: string }): string;
+	resolve?(id: string, ctx?: {prefix?: string; cwd?: string}): string;
 	resolveGlobal?: (id: string) => string;
 	require?<T>(id: string): T;
 }
 
-export default function resolveExtends(config: ResolveExtendsConfig = {}, context: ResolveExtendsContext = {}) {
-	const { extends: e } = config;
+export default function resolveExtends(
+	config: ResolveExtendsConfig = {},
+	context: ResolveExtendsContext = {}
+) {
+	const {extends: e} = config;
 	const extended = loadExtends(config, context).reduceRight(
 		(r, c) =>
 			mergeWith(r, omit(c, 'extends'), (objValue, srcValue) => {
@@ -35,19 +38,22 @@ export default function resolveExtends(config: ResolveExtendsConfig = {}, contex
 					return srcValue;
 				}
 			}),
-		e ? { extends: e } : {}
+		e ? {extends: e} : {}
 	);
 
 	return merge({}, extended, config);
 }
 
-function loadExtends(config: ResolveExtendsConfig = {}, context: ResolveExtendsContext = {}): ResolvedConfig[] {
+function loadExtends(
+	config: ResolveExtendsConfig = {},
+	context: ResolveExtendsContext = {}
+): ResolvedConfig[] {
 	return (config.extends || []).reduce<ResolvedConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
 		const cwd = path.dirname(resolved);
-		const ctx = merge({}, context, { cwd });
+		const ctx = merge({}, context, {cwd});
 
 		// Resolve parser preset if none was present before
 		if (
@@ -84,7 +90,10 @@ function getId(raw: string = '', prefix: string = ''): string {
 	return relative ? raw : [prefix, raw].filter(String).join('-');
 }
 
-function resolveConfig<T>(raw: string, context: ResolveExtendsContext = {}): string {
+function resolveConfig<T>(
+	raw: string,
+	context: ResolveExtendsContext = {}
+): string {
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
 
@@ -100,7 +109,10 @@ function resolveConfig<T>(raw: string, context: ResolveExtendsContext = {}): str
 	}
 }
 
-function resolveId(id: string, context: { cwd?: string, resolveGlobal?: (id: string) => string | void } = {}): string {
+function resolveId(
+	id: string,
+	context: {cwd?: string; resolveGlobal?: (id: string) => string | void} = {}
+): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(cwd, id);
 
@@ -123,12 +135,12 @@ function resolveId(id: string, context: { cwd?: string, resolveGlobal?: (id: st
 function resolveFromSilent(cwd: string, id: string): string | void {
 	try {
 		return resolveFrom(cwd, id);
-	} catch (err) { }
+	} catch (err) {}
 }
 
 function resolveGlobalSilent(id: string): string | void {
 	try {
 		const resolveGlobal = importFresh('resolve-global');
 		return resolveGlobal(id);
-	} catch (err) { }
+	} catch (err) {}
 }

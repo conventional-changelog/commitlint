@@ -1,4 +1,4 @@
-import resolveExtends, { ResolveExtendsContext } from '.';
+import resolveExtends, {ResolveExtendsContext} from '.';
 import resolveGlobal from 'resolve-global';
 
 const id = (id: unknown) => id;
@@ -9,7 +9,7 @@ test('returns empty object when called without params', () => {
 });
 
 test('returns an equivalent object as passed in', () => {
-	const expected = { foo: 'bar' };
+	const expected = {foo: 'bar'};
 	const actual = resolveExtends(expected);
 	expect(actual).toEqual(expected);
 });
@@ -20,25 +20,33 @@ test('falls back to global install', async () => {
 
 	const ctx = {resolveGlobal, require} as ResolveExtendsContext;
 
-	resolveExtends({ extends: ['@commitlint/foo-bar'] }, ctx);
+	resolveExtends({extends: ['@commitlint/foo-bar']}, ctx);
 	expect(ctx.resolveGlobal).toBeCalledWith('@commitlint/foo-bar');
 });
 
 test('fails for missing extends', async () => {
-	expect(() => resolveExtends({ extends: ['@commitlint/foo-bar'] })).toThrow(/Cannot find module "@commitlint\/foo-bar" from/);
+	expect(() => resolveExtends({extends: ['@commitlint/foo-bar']})).toThrow(
+		/Cannot find module "@commitlint\/foo-bar" from/
+	);
 });
 
 test('uses empty prefix by default', () => {
-	const input = { extends: ['extender-name'] };
-	const ctx = { resolve: id, require: jest.fn(() => ({})) } as ResolveExtendsContext;
+	const input = {extends: ['extender-name']};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
 	resolveExtends(input, ctx);
 
 	expect(ctx.require).toHaveBeenCalledWith('extender-name');
 });
 
 test('uses prefix as configured', () => {
-	const input = { extends: ['extender-name'] };
-	const ctx = { resolve: id, require: jest.fn(() => ({})) } as ResolveExtendsContext;
+	const input = {extends: ['extender-name']};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
@@ -49,8 +57,11 @@ test('uses prefix as configured', () => {
 });
 
 test('ignores prefix for scoped extends', () => {
-	const input = { extends: ['@scope/extender-name'] };
-	const ctx = { resolve: id, require: jest.fn(() => ({})) } as ResolveExtendsContext;
+	const input = {extends: ['@scope/extender-name']};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
@@ -61,8 +72,11 @@ test('ignores prefix for scoped extends', () => {
 });
 
 test('adds prefix as suffix for scopes only', () => {
-	const input = { extends: ['@scope'] };
-	const ctx = { resolve: id, require: jest.fn(() => ({})) } as ResolveExtendsContext;
+	const input = {extends: ['@scope']};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
@@ -73,8 +87,11 @@ test('adds prefix as suffix for scopes only', () => {
 });
 
 test('ignores prefix for relative extends', () => {
-	const input = { extends: ['./extender'] };
-	const ctx = { resolve: id, require: jest.fn(() => ({})) } as ResolveExtendsContext;
+	const input = {extends: ['./extender']};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
@@ -85,29 +102,32 @@ test('ignores prefix for relative extends', () => {
 });
 
 test('propagates return value of require function', () => {
-	const input = { extends: ['extender-name'] };
-	const propagated = { foo: 'bar' };
-	const ctx = { resolve: id, require: jest.fn(() => propagated) } as ResolveExtendsContext;
+	const input = {extends: ['extender-name']};
+	const propagated = {foo: 'bar'};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => propagated)
+	} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, ctx);
 	expect(actual).toEqual(expect.objectContaining(propagated));
 });
 
 test('resolves extends recursively', () => {
-	const input = { extends: ['extender-name'] };
+	const input = {extends: ['extender-name']};
 
 	const require = (id: string) => {
 		switch (id) {
 			case 'extender-name':
-				return { extends: ['recursive-extender-name'] };
+				return {extends: ['recursive-extender-name']};
 			case 'recursive-extender-name':
-				return { foo: 'bar' };
+				return {foo: 'bar'};
 			default:
 				return {};
 		}
 	};
 
-	const ctx = { resolve: id, require: jest.fn(require) } as ResolveExtendsContext;
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
 	resolveExtends(input, ctx);
 
 	expect(ctx.require).toHaveBeenCalledWith('extender-name');
@@ -115,20 +135,20 @@ test('resolves extends recursively', () => {
 });
 
 test('uses prefix key recursively', () => {
-	const input = { extends: ['extender-name'] };
+	const input = {extends: ['extender-name']};
 
 	const require = (id: string) => {
 		switch (id) {
 			case 'prefix-extender-name':
-				return { extends: ['recursive-extender-name'] };
+				return {extends: ['recursive-extender-name']};
 			case 'prefix-recursive-extender-name':
-				return { foo: 'bar' };
+				return {foo: 'bar'};
 			default:
 				return {};
 		}
 	};
 
-	const ctx = { resolve: id, require: jest.fn(require) } as ResolveExtendsContext;
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
@@ -140,20 +160,20 @@ test('uses prefix key recursively', () => {
 });
 
 test('propagates contents recursively', () => {
-	const input = { extends: ['extender-name'] };
+	const input = {extends: ['extender-name']};
 
 	const require = (id: string) => {
 		switch (id) {
 			case 'extender-name':
-				return { extends: ['recursive-extender-name'], foo: 'bar' };
+				return {extends: ['recursive-extender-name'], foo: 'bar'};
 			case 'recursive-extender-name':
-				return { baz: 'bar' };
+				return {baz: 'bar'};
 			default:
 				return {};
 		}
 	};
 
-	const ctx = { resolve: id, require: jest.fn(require) } as ResolveExtendsContext;
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, ctx);
 
@@ -167,20 +187,23 @@ test('propagates contents recursively', () => {
 });
 
 test('propagates contents recursively with overlap', () => {
-	const input = { extends: ['extender-name'] };
+	const input = {extends: ['extender-name']};
 
 	const require = (id: string) => {
 		switch (id) {
 			case 'extender-name':
-				return { extends: ['recursive-extender-name'], rules: { rule: ['zero', 'one'] } };
+				return {
+					extends: ['recursive-extender-name'],
+					rules: {rule: ['zero', 'one']}
+				};
 			case 'recursive-extender-name':
-				return { rules: { rule: ['two', 'three', 'four'] } };
+				return {rules: {rule: ['two', 'three', 'four']}};
 			default:
 				return {};
 		}
 	};
 
-	const ctx = { resolve: id, require: jest.fn(require) } as ResolveExtendsContext;
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, ctx);
 
@@ -195,12 +218,12 @@ test('propagates contents recursively with overlap', () => {
 });
 
 test('extending contents should take precedence', () => {
-	const input = { extends: ['extender-name'], zero: 'root' };
+	const input = {extends: ['extender-name'], zero: 'root'};
 
 	const require = (id: string) => {
 		switch (id) {
 			case 'extender-name':
-				return { extends: ['recursive-extender-name'], zero: id, one: id };
+				return {extends: ['recursive-extender-name'], zero: id, one: id};
 			case 'recursive-extender-name':
 				return {
 					extends: ['second-recursive-extender-name'],
@@ -209,13 +232,13 @@ test('extending contents should take precedence', () => {
 					two: id
 				};
 			case 'second-recursive-extender-name':
-				return { zero: id, one: id, two: id, three: id };
+				return {zero: id, one: id, two: id, three: id};
 			default:
 				return {};
 		}
 	};
 
-	const ctx = { resolve: id, require: jest.fn(require) } as ResolveExtendsContext;
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, ctx);
 
@@ -231,7 +254,7 @@ test('extending contents should take precedence', () => {
 });
 
 test('should fall back to conventional-changelog-lint-config prefix', () => {
-	const input = { extends: ['extender-name'] };
+	const input = {extends: ['extender-name']};
 
 	const resolve = (id: string) => {
 		if (id === 'conventional-changelog-lint-config-extender-name') {
@@ -253,7 +276,10 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 		}
 	};
 
-	const ctx = { resolve: jest.fn(resolve), require: jest.fn(require) } as ResolveExtendsContext;
+	const ctx = {
+		resolve: jest.fn(resolve),
+		require: jest.fn(require)
+	} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, {
 		...ctx,

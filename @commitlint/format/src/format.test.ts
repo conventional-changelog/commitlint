@@ -16,16 +16,19 @@ test('does nothing without .errors and .warnings', () => {
 });
 
 test('returns empty summary if verbose', () => {
-	const actual = format({
-		results: [
-			{
-				errors: [],
-				warnings: []
-			}
-		]
-	}, {
-		verbose: true
-	});
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [],
+					warnings: []
+				}
+			]
+		},
+		{
+			verbose: true
+		}
+	);
 
 	expect(actual).toContain('0 problems, 0 warnings');
 });
@@ -181,59 +184,68 @@ test('format result transforms warning to text', () => {
 });
 
 test('format result prints help for errors', () => {
-	const actual = formatResult({
-		errors: [
-			{
-				level: 2,
-				name: 'error-name',
-				message: 'There was an error'
-			}
-		]
-	}, {
-		helpUrl: 'https://example.com'
-	});
+	const actual = formatResult(
+		{
+			errors: [
+				{
+					level: 2,
+					name: 'error-name',
+					message: 'There was an error'
+				}
+			]
+		},
+		{
+			helpUrl: 'https://example.com'
+		}
+	);
 
-	expect(actual).toEqual(expect.arrayContaining([
-		expect.stringContaining('Get help:')
-	]));
+	expect(actual).toEqual(
+		expect.arrayContaining([expect.stringContaining('Get help:')])
+	);
 });
 
 test('format result prints help for warnings', () => {
-	const actual = formatResult({
-		warnings: [
-			{
-				level: 2,
-				name: 'warning-name',
-				message: 'There was a warning'
-			}
-		]
-	}, {
-		helpUrl: 'https://example.com'
-	});
+	const actual = formatResult(
+		{
+			warnings: [
+				{
+					level: 2,
+					name: 'warning-name',
+					message: 'There was a warning'
+				}
+			]
+		},
+		{
+			helpUrl: 'https://example.com'
+		}
+	);
 
-	expect(actual).toEqual(expect.arrayContaining([
-		expect.stringContaining('Get help:')
-	]));
+	expect(actual).toEqual(
+		expect.arrayContaining([expect.stringContaining('Get help:')])
+	);
 });
 
 test('format result help cotains options.helpUrl', () => {
 	const helpUrl = 'https://example.com';
 
-	const actual = formatResult({
-		warnings: [
-			{
-				level: 2,
-				name: 'warning-name',
-				message: 'There was a warning'
-			}
-		]
-	}, {
-		helpUrl
-	});
+	const actual = formatResult(
+		{
+			warnings: [
+				{
+					level: 2,
+					name: 'warning-name',
+					message: 'There was a warning'
+				}
+			]
+		},
+		{
+			helpUrl
+		}
+	);
 
-	expect(actual).toEqual(expect.arrayContaining([
-		expect.stringContaining(helpUrl)
-	]));
+	expect(actual).toEqual(
+		expect.arrayContaining([expect.stringContaining(helpUrl)])
+	);
 });
 
 test('format result omits help for empty problems', () => {
@@ -241,7 +253,7 @@ test('format result omits help for empty problems', () => {
 		warnings: []
 	});
 
-	expect(actual).not.toEqual(expect.arrayContaining([
-		expect.stringContaining('Get help:')
-	]));
+	expect(actual).not.toEqual(
+		expect.arrayContaining([expect.stringContaining('Get help:')])
+	);
 });
