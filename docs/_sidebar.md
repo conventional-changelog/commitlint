@@ -13,4 +13,5 @@
   * [Configuration](reference-configuration.md)
   * [Rules](reference-rules.md)
   * [API](reference-api.md)
+  * [Plugins](reference-plugins.md)
   * [Examples](reference-examples.md)
