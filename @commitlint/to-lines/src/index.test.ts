@@ -17,5 +17,9 @@ test('should split LF newlines', () => {
 });
 
 test('should split CR+LF newlines', () => {
-	expect(toLines('some\r\nweird\r\ntext')).toStrictEqual(['some', 'weird', 'text']);
+	expect(toLines('some\r\nweird\r\ntext')).toStrictEqual([
+		'some',
+		'weird',
+		'text'
+	]);
 });
