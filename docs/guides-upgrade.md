@@ -161,3 +161,11 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 
 * `config-angular` dropped support for the `chore` type, breaking compat with conventional-changelog,
 use `config-conventional` instead.
+
+## Version 7 to 8
+
+### Breaking changes
+
+#### Output on succesful commit will be ommited
+
+* You can use the `--verbose` flag to get positive output
