@@ -12,7 +12,7 @@ export type RuleCondition = 'always' | 'never';
  * For example, when `header-full-stop` detects a full stop and is set as "always"; it's true.
  * If the `header-full-stop` discovers a full stop but is set to "never"; it's false.
  */
-export type RuleOutcome = [boolean, string?];
+export type RuleOutcome = Readonly<[boolean, string?]>;
 
 /**
  * Rules receive a parsed commit, condition, and possible additional settings through value.
@@ -22,4 +22,4 @@ export type Rule<Value = never> = (
 	parsed: Commit,
 	when?: RuleCondition,
 	value?: Value
-) => RuleOutcome;
+) => RuleOutcome | Promise<RuleOutcome>;
