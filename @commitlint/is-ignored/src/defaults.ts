@@ -1,4 +1,4 @@
-import semver from 'semver';
+import * as semver from 'semver';
 
 export type Matcher = (commit: string) => boolean;
 
