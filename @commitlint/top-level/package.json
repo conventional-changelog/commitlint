@@ -3,15 +3,13 @@
   "version": "8.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "tsc",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "yarn watch",
-    "watch": "tsc -w"
+    "pkg": "pkg-check"
   },
   "babel": {
     "presets": [
@@ -42,12 +40,8 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/utils": "^8.0.0",
-    "@types/node": "12.0.8",
-    "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^8.0.0",
-    "babel-register": "6.26.0",
-    "cross-env": "5.1.1",
-    "typescript": "3.5.2"
+    "@types/find-up": "^2.1.1",
+    "@types/node": "12.0.8"
   },
   "dependencies": {
     "find-up": "^4.0.0"

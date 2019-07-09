@@ -5,9 +5,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "lerna run build --stream --parallel --include-filtered-dependencies",
+    "build": "tsc -b && lerna run build --stream --parallel --include-filtered-dependencies",
     "watch": "lerna run watch --stream --parallel --include-filtered-dependencies",
-    "clean": "lerna clean --yes && lerna exec 'git clean -xdf lib' && git clean -xdf node_modules",
+    "clean": "tsc -b --clean && lerna clean --yes && lerna exec 'git clean -xdf lib' && git clean -xdf node_modules",
     "commit": "node @commitlint/prompt-cli/cli.js",
     "deps": "lerna run deps",
     "pkg": "lerna run pkg",
@@ -16,7 +16,7 @@
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "lerna run start --stream --parallel --include-filtered-dependencies",
-    "test": "lerna run test --stream --parallel --include-filtered-dependencies"
+    "test": "jest && lerna run test --stream --parallel --include-filtered-dependencies"
   },
   "commitlint": {
     "extends": [
@@ -83,11 +83,15 @@
   },
   "devDependencies": {
     "@lerna/project": "3.15.0",
+    "@types/jest": "24.0.15",
     "docsify-cli": "4.3.0",
     "husky": "2.4.0",
+    "jest": "24.8.0",
     "lerna": "3.15.0",
     "lint-staged": "8.2.1",
-    "prettier": "1.17.1"
+    "prettier": "1.17.1",
+    "ts-jest": "24.0.2",
+    "typescript": "^3.5.2"
   },
   "husky": {
     "hooks": {

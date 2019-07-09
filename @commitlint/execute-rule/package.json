@@ -3,16 +3,13 @@
   "version": "8.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "tsc",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "concurrently \"yarn test --watchAll\" \"yarn run watch\"",
-    "test": "jest",
-    "watch": "tsc -w"
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=4"
@@ -41,9 +38,7 @@
     "@commitlint/utils": "^8.0.0",
     "@types/jest": "24.0.15",
     "@types/lodash": "4.14.134",
-    "concurrently": "3.5.1",
     "jest": "24.8.0",
-    "ts-jest": "24.0.2",
-    "typescript": "3.5.2"
+    "ts-jest": "24.0.2"
   }
 }

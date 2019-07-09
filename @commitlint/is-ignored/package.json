@@ -2,16 +2,14 @@
   "name": "@commitlint/is-ignored",
   "version": "8.0.0",
   "description": "Lint your commit messages",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "tsc",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "concurrently \"jest --watchAll\" \"tsc -w\"",
-    "test": "jest",
-    "watch": "tsc -w"
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=4"
@@ -38,15 +36,10 @@
   "devDependencies": {
     "@commitlint/parse": "8.0.0",
     "@commitlint/test": "8.0.0",
-    "@commitlint/utils": "8.0.0",
-    "@types/jest": "24.0.15",
-    "concurrently": "3.5.1",
-    "jest": "24.8.0",
-    "ts-jest": "24.0.2",
-    "typescript": "3.5.2"
+    "@commitlint/utils": "8.0.0"
   },
   "dependencies": {
-    "@types/semver": "6.0.0",
+    "@types/semver": "^6.0.1",
     "semver": "6.1.1"
   }
 }
