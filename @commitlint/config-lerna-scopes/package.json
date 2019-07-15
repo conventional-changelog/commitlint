@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-lerna-scopes",
-  "version": "8.0.0",
+  "version": "8.1.0",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "files": [
     "index.js"
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@commitlint/test": "8.0.0",
-    "@commitlint/utils": "^8.0.0",
+    "@commitlint/utils": "^8.1.0",
     "@lerna/project": "3.15.0",
     "ava": "0.22.0",
     "lerna": "3.15.0"
