@@ -1,10 +1,12 @@
+import path from 'path';
+
 // largely adapted from eslint's plugin system
 const NAMESPACE_REGEX = /^@.*\//iu;
 // In eslint this is a parameter - we don't need to support the extra options
 const prefix = 'commitlint-plugin';
 
 // Replace Windows with posix style paths
-function convertPathToPosix(filepath) {
+function convertPathToPosix(filepath: string) {
 	const normalizedFilepath = path.normalize(filepath);
 	const posixFilepath = normalizedFilepath.replace(/\\/gu, '/');
 
@@ -17,7 +19,7 @@ function convertPathToPosix(filepath) {
  * @returns {string} Normalized name of the package
  * @private
  */
-export function normalizePackageName(name) {
+export function normalizePackageName(name: string) {
 	let normalizedName = name;
 
 	/**
@@ -67,7 +69,7 @@ export function normalizePackageName(name) {
  * @param {string} fullname The term which may have the prefix.
  * @returns {string} The term without prefix.
  */
-export function getShorthandName(fullname) {
+export function getShorthandName(fullname: string) {
 	if (fullname[0] === '@') {
 		let matchResult = new RegExp(`^(@[^/]+)/${prefix}$`, 'u').exec(fullname);
 
@@ -91,7 +93,7 @@ export function getShorthandName(fullname) {
  * @param {string} term The term which may have the namespace.
  * @returns {string} The namepace of the term if it has one.
  */
-export function getNamespaceFromTerm(term) {
+export function getNamespaceFromTerm(term: string) {
 	const match = term.match(NAMESPACE_REGEX);
 
 	return match ? match[0] : '';

@@ -1,22 +1,21 @@
 import path from 'path';
 import chalk from 'chalk';
 import {normalizePackageName, getShorthandName} from './pluginNaming';
+import {WhitespacePluginError, MissingPluginError} from './pluginErrors';
 
-export default function loadPlugin(plugins, pluginName, debug = false) {
+export default function loadPlugin(
+	plugins: any,
+	pluginName: string,
+	debug: boolean = false
+) {
 	const longName = normalizePackageName(pluginName);
 	const shortName = getShorthandName(longName);
 	let plugin = null;
 
 	if (pluginName.match(/\s+/u)) {
-		const whitespaceError = new Error(
-			`Whitespace found in plugin name '${pluginName}'`
-		);
-
-		whitespaceError.messageTemplate = 'whitespace-found';
-		whitespaceError.messageData = {
+		throw new WhitespacePluginError(pluginName, {
 			pluginName: longName
-		};
-		throw whitespaceError;
+		});
 	}
 
 	const pluginKey = longName === pluginName ? shortName : pluginName;
@@ -28,18 +27,14 @@ export default function loadPlugin(plugins, pluginName, debug = false) {
 			try {
 				// Check whether the plugin exists
 				require.resolve(longName);
-			} catch (missingPluginErr) {
+			} catch (error) {
 				// If the plugin can't be resolved, display the missing plugin error (usually a config or install error)
 				console.error(chalk.red(`Failed to load plugin ${longName}.`));
-				missingPluginErr.message = `Failed to load plugin ${pluginName}: ${
-					missingPluginErr.message
-				}`;
-				missingPluginErr.messageTemplate = 'plugin-missing';
-				missingPluginErr.messageData = {
+
+				throw new MissingPluginError(pluginName, error.message, {
 					pluginName: longName,
 					commitlintPath: path.resolve(__dirname, '../..')
-				};
-				throw missingPluginErr;
+				});
 			}
 
 			// Otherwise, the plugin exists and is throwing on module load for some reason, so print the stack trace.

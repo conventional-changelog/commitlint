@@ -1,13 +1,13 @@
 import path from 'path';
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
-import cosmiconfig from 'cosmiconfig';
+import cosmiconfig, {CosmiconfigResult} from 'cosmiconfig';
 import {toPairs, merge, mergeWith, pick} from 'lodash';
 import resolveFrom from 'resolve-from';
 import loadPlugin from './utils/loadPlugin';
 
-const w = (a, b) => (Array.isArray(b) ? b : undefined);
-const valid = input =>
+const w = (a: any, b: any) => (Array.isArray(b) ? b : undefined);
+const valid = (input: any) =>
 	pick(
 		input,
 		'extends',
@@ -19,12 +19,13 @@ const valid = input =>
 		'defaultIgnores'
 	);
 
-export default async (seed = {}, options = {cwd: process.cwd()}) => {
+export default async (seed: any = {}, options: any = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd, options.file);
-	const base = loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
+	const base =
+		loaded && loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
 
 	// Merge passed config with file based options
-	const config = valid(merge({}, loaded.config, seed));
+	const config = valid(merge({}, loaded ? loaded.config : null, seed));
 	const opts = merge(
 		{extends: [], rules: {}, formatter: '@commitlint/format'},
 		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')
@@ -68,7 +69,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	// resolve plugins
 	preset.plugins = {};
 	if (config.plugins && config.plugins.length) {
-		config.plugins.forEach(pluginKey => {
+		config.plugins.forEach((pluginKey: string) => {
 			loadPlugin(preset.plugins, pluginKey, process.env.DEBUG === 'true');
 		});
 	}
@@ -77,18 +78,18 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const executed = await Promise.all(
 		['rules']
 			.map(key => {
-				return [key, preset[key]];
+				return [key, (preset as any)[key]];
 			})
 			.map(async item => {
 				const [key, value] = item;
 				const executedValue = await Promise.all(
-					toPairs(value || {}).map(entry => executeRule(entry))
+					toPairs(value || {}).map(entry => executeRule<any>(entry))
 				);
 				return [
 					key,
 					executedValue.reduce((registry, item) => {
-						const [key, value] = item;
-						registry[key] = value;
+						const [key, value] = item as any;
+						(registry as any)[key] = value;
 						return registry;
 					}, {})
 				];
@@ -98,12 +99,15 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	// Merge executed config keys into preset
 	return executed.reduce((registry, item) => {
 		const [key, value] = item;
-		registry[key] = value;
+		(registry as any)[key] = value;
 		return registry;
 	}, preset);
 };
 
-async function loadConfig(cwd, configPath) {
+async function loadConfig(
+	cwd: string,
+	configPath?: string
+): Promise<CosmiconfigResult> {
 	const explorer = cosmiconfig('commitlint');
 
 	const explicitPath = configPath ? path.resolve(cwd, configPath) : undefined;
@@ -115,5 +119,5 @@ async function loadConfig(cwd, configPath) {
 		return local;
 	}
 
-	return {};
+	return null;
 }
