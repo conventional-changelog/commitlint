@@ -1,5 +1,6 @@
-import {fix} from '@commitlint/test';
 import test from 'ava';
+
+const {fix} = require('@commitlint/test');
 
 import load from '.';
 
