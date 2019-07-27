@@ -191,8 +191,8 @@ test('parses custom references', async () => {
 		issuePrefixes: ['PREFIX-']
 	});
 
-	expect(references.find((ref: any) => ref.issue === '1')).toBeFalsy();
-	expect(references.find((ref: any) => ref.issue === '2')).toMatchObject({
+	expect(references.find(ref => ref.issue === '1')).toBeFalsy();
+	expect(references.find(ref => ref.issue === '2')).toMatchObject({
 		action: null,
 		issue: '2',
 		owner: null,
