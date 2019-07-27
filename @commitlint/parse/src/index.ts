@@ -1,10 +1,15 @@
-import {sync} from 'conventional-commits-parser';
-import defaultChangelogOpts from 'conventional-changelog-angular';
 import {isArray, mergeWith} from 'lodash';
+
+const {sync} = require('conventional-commits-parser');
+const defaultChangelogOpts = require('conventional-changelog-angular');
 
 export default parse;
 
-async function parse(message, parser = sync, parserOpts = undefined) {
+async function parse(
+	message?: any,
+	parser: any = sync,
+	parserOpts: any = undefined
+) {
 	const defaultOpts = (await defaultChangelogOpts).parserOpts;
 	const parsed = parser(
 		message,
