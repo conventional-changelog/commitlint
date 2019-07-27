@@ -1,5 +1,5 @@
 export default message;
 
-function message(input = []) {
+function message(input: any[] = []) {
 	return input.filter(Boolean).join(' ');
 }
