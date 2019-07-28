@@ -1,4 +1,5 @@
 module.exports = {
+	parserPreset: 'conventional-changelog-conventionalcommits',
 	rules: {
 		'body-leading-blank': [1, 'always'],
 		'footer-leading-blank': [1, 'always'],
@@ -17,17 +18,17 @@ module.exports = {
 			2,
 			'always',
 			[
-				'build',
-				'chore',
-				'ci',
-				'docs',
 				'feat',
 				'fix',
 				'perf',
-				'refactor',
 				'revert',
+				'docs',
 				'style',
-				'test'
+				'chore',
+				'refactor',
+				'test',
+				'build',
+				'ci'
 			]
 		]
 	}
