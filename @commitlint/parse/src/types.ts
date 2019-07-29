@@ -26,3 +26,15 @@ export interface CommitReference {
 	repository: string | null;
 	issue: string | null;
 }
+
+export interface ParserOptions {
+	commentChar?: string;
+	headerCorrespondence?: string[];
+	headerPattern?: RegExp;
+	issuePrefixes?: string[];
+	mergeCorrespondence?: string[];
+	mergePattern?: RegExp;
+	noteKeywords?: string[];
+	revertCorrespondence?: string[];
+	revertPattern?: RegExp;
+}

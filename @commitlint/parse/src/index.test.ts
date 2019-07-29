@@ -180,7 +180,7 @@ test('parses references leading subject', async () => {
 	);
 	const {
 		references: [actual]
-	} = await parse(message, undefined, opts);
+	} = await parse(message, undefined, opts as any);
 
 	expect(actual.issue).toBe('1');
 });
