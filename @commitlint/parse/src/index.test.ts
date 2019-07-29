@@ -2,11 +2,7 @@ import importFrom from 'import-from';
 import parse from '.';
 
 test('throws when called without params', () => {
-	expect(parse()).rejects.toThrowError('Expected a raw commit');
-});
-
-test('throws when called with empty message', () => {
-	expect(parse()).rejects.toThrowError('Expected a raw commit');
+	expect(parse('')).rejects.toThrowError('Expected a raw commit');
 });
 
 test('returns object with raw message', async () => {
@@ -20,15 +16,18 @@ test('calls parser with message and passed options', async () => {
 	const message = 'message';
 
 	expect.assertions(1);
-	await parse(message, (m: string) => {
-		expect(m).toBe(message);
-		return {};
-	});
+	await parse(
+		message,
+		(m: string): any => {
+			expect(m).toBe(message);
+			return {};
+		}
+	);
 });
 
 test('passes object up from parser function', async () => {
 	const message = 'message';
-	const result = {};
+	const result: any = {};
 	const actual = await parse(message, () => result);
 
 	expect(actual).toBe(result);

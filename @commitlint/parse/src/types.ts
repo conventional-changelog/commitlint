@@ -27,6 +27,11 @@ export interface CommitReference {
 	issue: string | null;
 }
 
+export type Parser = (
+	message: string,
+	options: ParserOptions
+) => Omit<Commit, 'raw'>;
+
 export interface ParserOptions {
 	commentChar?: string;
 	headerCorrespondence?: string[];
