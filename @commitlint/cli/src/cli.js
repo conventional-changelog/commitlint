@@ -148,7 +148,7 @@ async function main(options) {
 		parserOpts: {},
 		plugins: {},
 		ignores: [],
-		defaultIgnores: false
+		defaultIgnores: true
 	};
 	if (parserOpts) {
 		opts.parserOpts = parserOpts;
@@ -159,8 +159,8 @@ async function main(options) {
 	if (loaded.ignores) {
 		opts.ignores = loaded.ignores;
 	}
-	if (loaded.defaultIgnores) {
-		opts.defaultIgnores = loaded.defaultIgnores;
+	if (loaded.defaultIgnores === false) {
+		opts.defaultIgnores = false;
 	}
 	const format = loadFormatter(loaded, flags);
 
