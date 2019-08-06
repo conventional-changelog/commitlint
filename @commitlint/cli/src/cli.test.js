@@ -318,6 +318,24 @@ test('should not skip linting if message does not match ignores config', async t
 	t.is(actual.code, 1);
 });
 
+test('should not skip linting if defaultIgnores is false', async t => {
+	const cwd = await git.bootstrap('fixtures/default-ignores-false');
+	const actual = await cli([], {cwd})('fixup! foo: bar');
+	t.is(actual.code, 1);
+});
+
+test('should skip linting if defaultIgnores is true', async t => {
+	const cwd = await git.bootstrap('fixtures/default-ignores-true');
+	const actual = await cli([], {cwd})('fixup! foo: bar');
+	t.is(actual.code, 0);
+});
+
+test('should skip linting if defaultIgnores is unset', async t => {
+	const cwd = await git.bootstrap('fixtures/default-ignores-unset');
+	const actual = await cli([], {cwd})('fixup! foo: bar');
+	t.is(actual.code, 0);
+});
+
 test('should fail for invalid formatters from flags', async t => {
 	const cwd = await git.bootstrap('fixtures/custom-formatter');
 	const actual = await cli(['--format', 'through-flag'], {cwd})('foo: bar');
