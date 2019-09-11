@@ -3,35 +3,13 @@
   "version": "8.1.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js",
-      "!lib/**/*"
-    ],
-    "source": [
-      "src/**/*.js",
-      "!lib/**/*"
-    ],
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=4"
@@ -58,11 +36,6 @@
   "devDependencies": {
     "@commitlint/test": "8.0.0",
     "@commitlint/utils": "^8.1.0",
-    "ava": "0.22.0",
-    "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^8.0.0",
-    "babel-register": "6.26.0",
-    "concurrently": "3.6.1",
-    "cross-env": "5.1.1"
+    "typescript": "3.5.3"
   }
 }
