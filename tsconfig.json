@@ -1,0 +1,14 @@
+{
+    "files": [],
+    "include": [],
+    "extends": "./tsconfig.shared.json",
+    "references": [
+        { "path": "@commitlint/ensure" },
+        { "path": "@commitlint/execute-rule" },
+        { "path": "@commitlint/format" },
+        { "path": "@commitlint/is-ignored" },
+        { "path": "@commitlint/resolve-extends" },
+        { "path": "@commitlint/to-lines" },
+        { "path": "@commitlint/top-level" },
+    ]
+}

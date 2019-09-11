@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
+
+This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659). 
+
+### Bug Fixes
+
+* add explicit dependency on chalk ([#687](https://github.com/conventional-changelog/commitlint/issues/687)) ([9075844](https://github.com/conventional-changelog/commitlint/commit/9075844))
+* pass ignores from configuration in @commitlint/cli ([#668](https://github.com/conventional-changelog/commitlint/issues/668)) ([da99aaa](https://github.com/conventional-changelog/commitlint/commit/da99aaa))
+
+
+
+
+
+# [8.0.0](https://github.com/conventional-changelog/commitlint/compare/v7.6.2...v8.0.0) 
+
+### Breaking Changes
+
+* fix: avoid excessive help text #606 (#637) 
+  The commitlint default formatter is now silent for reports without warnings or errors. 
+  Scripts relying on the success output of commitlint can restore the former output by specifying the --verbose flag.
+
+
+## [7.6.2](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.2) 
+
+* Republish packages with out of sync artifacts
+
+## [7.6.1](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.1) (2019-05-09)
+
+
+### Bug Fixes
+
+* ensure format() is available as commonjs default export [#645](https://github.com/conventional-changelog/commitlint/issues/645) ([ec3da92](https://github.com/conventional-changelog/commitlint/commit/ec3da92))
+* handle absolute config paths correctly [#647](https://github.com/conventional-changelog/commitlint/issues/647) ([49b3a77](https://github.com/conventional-changelog/commitlint/commit/49b3a77))
+
+
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Bug Fixes
+
+* add @lerna/project to repository dependencies ([#598](https://github.com/conventional-changelog/commitlint/issues/598)) ([56f03ee](https://github.com/conventional-changelog/commitlint/commit/56f03ee))
+* address security warnings for dev dependencies ([3e0d824](https://github.com/conventional-changelog/commitlint/commit/3e0d824))
+* avoid excessive help text [#606](https://github.com/conventional-changelog/commitlint/issues/606) ([#637](https://github.com/conventional-changelog/commitlint/issues/637)) ([8f3c3b1](https://github.com/conventional-changelog/commitlint/commit/8f3c3b1))
+* don't merge array properties with custom opts ([#616](https://github.com/conventional-changelog/commitlint/issues/616)) ([f321647](https://github.com/conventional-changelog/commitlint/commit/f321647)), closes [#594](https://github.com/conventional-changelog/commitlint/issues/594)
+* remove unneeded dev dependency ([6ccaf79](https://github.com/conventional-changelog/commitlint/commit/6ccaf79))
+* update cosmiconfig to safe >=5 [#599](https://github.com/conventional-changelog/commitlint/issues/599) ([f186fcb](https://github.com/conventional-changelog/commitlint/commit/f186fcb))
+* use sander.readFile correctly ([#448](https://github.com/conventional-changelog/commitlint/issues/448)) ([#630](https://github.com/conventional-changelog/commitlint/issues/630)) ([8e47985](https://github.com/conventional-changelog/commitlint/commit/8e47985))
+
+
+### Features
+
+* **resolve-extends:** accept short scoped package names in extends ([#597](https://github.com/conventional-changelog/commitlint/issues/597)) ([ba90e8e](https://github.com/conventional-changelog/commitlint/commit/ba90e8e))
+* adds support for plugins ([#228](https://github.com/conventional-changelog/commitlint/issues/228)) ([#588](https://github.com/conventional-changelog/commitlint/issues/588)) ([cea4564](https://github.com/conventional-changelog/commitlint/commit/cea4564))
+* config based is-ignored overrides ([#595](https://github.com/conventional-changelog/commitlint/issues/595)) ([2434d71](https://github.com/conventional-changelog/commitlint/commit/2434d71))
+
+
+
+
+
 ## [7.5.2](https://github.com/conventional-changelog/commitlint/compare/v7.5.1...v7.5.2) (2019-02-11)
 
 

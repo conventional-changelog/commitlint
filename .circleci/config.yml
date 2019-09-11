@@ -36,18 +36,12 @@ commands:
       - run:
           name: Test
           command: yarn test
-  run-node-6:
+  save-cache:
     steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-      - install
-      - build
-      - lint
-      - deps
-      - test
-      - save-cache
+      - save_cache:
+          key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
   run-node:
     steps:
       - checkout
@@ -56,38 +50,31 @@ commands:
             - v1-dependencies-{{ checksum "yarn.lock" }}
       - update-yarn
       - install
+      - save-cache
       - build
       - lint
       - deps
       - test
-      - save-cache
-  save-cache:
-    steps:
-      - save_cache:
-          key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
-
 jobs:
-  node-v6:
-    docker:
-      - image: node:6
-    steps:
-      - run-node-6
-  node-v8:
+  v8:
     docker:
       - image: node:8
     steps:
       - run-node
-  node-v10:
+  v10:
     docker:
       - image: node:10
     steps:
       - run-node
+  v12:
+    docker:
+      - image: node:12
+    steps:
+      - run-node
 
 workflows:
-  node-multi-build:
+  node:
     jobs:
-      - node-v6
-      - node-v8
-      - node-v10
+      - v8
+      - v10
+      - v12

@@ -26,6 +26,14 @@ type Config = {
      * Rules to check against
      */
     rules?: {[name: string]: Rule};
+    /*
+     * Functions that return true if commitlint should ignore the given message.
+     */
+    ignores?: ((message: string) => boolean)[];
+    /*
+     * Whether commitlint uses the default ignore rules.
+     */
+    defaultIgnores?: boolean;
 }
 
 const Configuration: Config = {
@@ -49,7 +57,17 @@ const Configuration: Config = {
      */
     rules: {
         'type-enum': [2, 'always', ['foo']]
-    }
+    },
+    /*
+     * Functions that return true if commitlint should ignore the given message.
+     */
+    ignores: [
+        (commit) => commit === ''
+    ],
+    /*
+     * Whether commitlint uses the default ignore rules.
+     */
+    defaultIgnores: true
 };
 
 module.exports = Configuration;

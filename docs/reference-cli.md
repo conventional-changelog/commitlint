@@ -3,7 +3,7 @@
 ```bash
 ❯ npx commitlint --help
 
-@commitlint@6.2.0 - Lint your commit messages
+@commitlint/cli@8.0.0 - Lint your commit messages
 
 [input] reads from stdin if --edit, --env, --from and --to are omitted
 --color, -c            toggle colored output, defaults to: true
@@ -19,4 +19,5 @@
 --quiet, -q            toggle console output
 --to, -t               upper end of the commit range to lint; applies if edit=false
 --version, -v          display version information
+--verbose, -V          enable verbose output for reports without problems
 ```

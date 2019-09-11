@@ -1,38 +1,15 @@
 {
   "name": "@commitlint/execute-rule",
-  "version": "7.5.0",
+  "version": "8.1.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
-    "clean": "npx rimraf lib",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js",
-      "!lib/**/*"
-    ],
-    "source": [
-      "src/**/*.js",
-      "!lib/**/*"
-    ],
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=4"
@@ -57,18 +34,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^7.5.0",
-    "@commitlint/test": "7.5.0",
-    "@commitlint/utils": "^7.5.0",
-    "ava": "0.22.0",
-    "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^7.5.0",
-    "babel-register": "6.26.0",
-    "concurrently": "3.5.1",
-    "cross-env": "5.1.1",
-    "rimraf": "2.6.1"
-  },
-  "dependencies": {
-    "babel-runtime": "6.26.0"
+    "@commitlint/parse": "^8.1.0",
+    "@commitlint/utils": "^8.1.0",
+    "@types/jest": "24.0.15",
+    "@types/lodash": "4.14.136",
+    "jest": "24.8.0",
+    "ts-jest": "24.0.2"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-lerna-scopes",
-  "version": "7.5.1",
+  "version": "8.1.0",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "files": [
     "index.js"
@@ -41,15 +41,15 @@
     "lerna": "^3.0.0"
   },
   "dependencies": {
-    "import-from": "2.1.0",
-    "resolve-pkg": "1.0.0",
-    "semver": "5.6.0"
+    "import-from": "3.0.0",
+    "resolve-pkg": "2.0.0",
+    "semver": "6.2.0"
   },
   "devDependencies": {
-    "@commitlint/test": "7.5.0",
-    "@commitlint/utils": "^7.5.0",
-    "@lerna/project": "3.5.0",
+    "@commitlint/test": "8.0.0",
+    "@commitlint/utils": "^8.1.0",
+    "@lerna/project": "3.15.0",
     "ava": "0.22.0",
-    "lerna": "3.10.8"
+    "lerna": "3.15.0"
   }
 }

@@ -8,17 +8,26 @@ import loadPlugin from './utils/loadPlugin';
 
 const w = (a, b) => (Array.isArray(b) ? b : undefined);
 const valid = input =>
-	pick(input, 'extends', 'plugins', 'rules', 'parserPreset', 'formatter');
+	pick(
+		input,
+		'extends',
+		'rules',
+		'plugins',
+		'parserPreset',
+		'formatter',
+		'ignores',
+		'defaultIgnores'
+	);
 
 export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	const loaded = await loadConfig(options.cwd, options.file);
 	const base = loaded.filepath ? path.dirname(loaded.filepath) : options.cwd;
 
 	// Merge passed config with file based options
-	const config = valid(merge(loaded.config, seed));
+	const config = valid(merge({}, loaded.config, seed));
 	const opts = merge(
-		{extends: [], plugins: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends', 'plugins')
+		{extends: [], rules: {}, formatter: '@commitlint/format'},
+		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')
 	);
 
 	// Resolve parserPreset key
@@ -97,7 +106,7 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 async function loadConfig(cwd, configPath) {
 	const explorer = cosmiconfig('commitlint');
 
-	const explicitPath = configPath ? path.join(cwd, configPath) : undefined;
+	const explicitPath = configPath ? path.resolve(cwd, configPath) : undefined;
 	const explore = explicitPath ? explorer.load : explorer.search;
 	const searchPath = explicitPath ? explicitPath : cwd;
 	const local = await explore(searchPath);

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
+
+**Note:** Version bump only for package @commitlint/parse
+
+
+
+
+
+# [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
+
+
+### Bug Fixes
+
+* don't merge array properties with custom opts ([#616](https://github.com/conventional-changelog/commitlint/issues/616)) ([f321647](https://github.com/conventional-changelog/commitlint/commit/f321647)), closes [#594](https://github.com/conventional-changelog/commitlint/issues/594)
+
+
+
+
+
 <a name="7.5.0"></a>
 # [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 

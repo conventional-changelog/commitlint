@@ -5,7 +5,7 @@ const load = require('@commitlint/load');
 const lint = require('@commitlint/lint');
 const read = require('@commitlint/read');
 const meow = require('meow');
-const {merge, pick} = require('lodash');
+const {merge, pick, isFunction} = require('lodash');
 const stdin = require('get-stdin');
 const resolveFrom = require('resolve-from');
 const resolveGlobal = require('resolve-global');
@@ -89,6 +89,11 @@ const flags = {
 		alias: 'v',
 		type: 'boolean',
 		description: 'display version information'
+	},
+	verbose: {
+		alias: 'V',
+		type: 'boolean',
+		description: 'enable verbose output for reports without problems'
 	}
 };
 
@@ -141,13 +146,21 @@ async function main(options) {
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts = {
 		parserOpts: {},
-		plugins: {}
+		plugins: {},
+		ignores: [],
+		defaultIgnores: true
 	};
 	if (parserOpts) {
 		opts.parserOpts = parserOpts;
 	}
 	if (loaded.plugins) {
 		opts.plugins = loaded.plugins;
+	}
+	if (loaded.ignores) {
+		opts.ignores = loaded.ignores;
+	}
+	if (loaded.defaultIgnores === false) {
+		opts.defaultIgnores = false;
 	}
 	const format = loadFormatter(loaded, flags);
 
@@ -204,9 +217,14 @@ async function main(options) {
 		}
 	);
 
-	const output = format(report, {color: flags.color});
+	const output = format(report, {
+		color: flags.color,
+		verbose: flags.verbose,
+		helpUrl:
+			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+	});
 
-	if (!flags.quiet) {
+	if (!flags.quiet && output !== '') {
 		console.log(output);
 	}
 
@@ -314,7 +332,13 @@ function loadFormatter(config, flags) {
 		resolveGlobal.silent(moduleName);
 
 	if (modulePath) {
-		return require(modulePath);
+		const moduleInstance = require(modulePath);
+
+		if (isFunction(moduleInstance.default)) {
+			return moduleInstance.default;
+		}
+
+		return moduleInstance;
 	}
 
 	throw new Error(`Using format ${moduleName}, but cannot find the module.`);
