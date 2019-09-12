@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 
-const load = require('@commitlint/load');
+// fix: commitlint load is ported to typescript, until this one is ported we need to unpack it
+const {default: load} = require('@commitlint/load');
 const lint = require('@commitlint/lint');
 const read = require('@commitlint/read');
 const meow = require('meow');
