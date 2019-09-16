@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.2.0](https://github.com/conventional-changelog/commitlint/compare/v8.1.0...v8.2.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* pass defaultIgnores from configuration in @commitlint/cli ([#771](https://github.com/conventional-changelog/commitlint/issues/771)) ([a259014](https://github.com/conventional-changelog/commitlint/commit/a259014))
+
+
+
+
+
 # [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
 
 This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659). 
