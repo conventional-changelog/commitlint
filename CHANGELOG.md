@@ -5,6 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [8.2.0](https://github.com/conventional-changelog/commitlint/compare/v8.1.0...v8.2.0) (2019-09-16)
 
+This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659).
 
 ### Bug Fixes
 
@@ -16,7 +17,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
 
-This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659). 
+This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659).
 
 ### Bug Fixes
 
@@ -27,16 +28,16 @@ This release is versioned as minor change because some of the core components ar
 
 
 
-# [8.0.0](https://github.com/conventional-changelog/commitlint/compare/v7.6.2...v8.0.0) 
+# [8.0.0](https://github.com/conventional-changelog/commitlint/compare/v7.6.2...v8.0.0)
 
 ### Breaking Changes
 
-* fix: avoid excessive help text #606 (#637) 
-  The commitlint default formatter is now silent for reports without warnings or errors. 
+* fix: avoid excessive help text #606 (#637)
+  The commitlint default formatter is now silent for reports without warnings or errors.
   Scripts relying on the success output of commitlint can restore the former output by specifying the --verbose flag.
 
 
-## [7.6.2](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.2) 
+## [7.6.2](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.2)
 
 * Republish packages with out of sync artifacts
 
