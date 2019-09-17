@@ -225,9 +225,9 @@ async function main(options) {
 	const output = format(report, {
 		color: flags.color,
 		verbose: flags.verbose,
-		helpUrl:
-			flags.helpUrl ||
-			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+		helpUrl: flags.helpUrl
+			? flags.helpUrl.trim()
+			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	});
 
 	if (!flags.quiet && output !== '') {
