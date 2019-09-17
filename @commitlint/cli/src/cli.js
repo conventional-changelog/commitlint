@@ -56,6 +56,11 @@ const flags = {
 		type: 'boolean',
 		description: 'display this help message'
 	},
+	'help-url': {
+		alias: 'H',
+		type: 'string',
+		description: 'helpurl in error message'
+	},
 	from: {
 		alias: 'f',
 		default: null,
@@ -221,6 +226,7 @@ async function main(options) {
 		color: flags.color,
 		verbose: flags.verbose,
 		helpUrl:
+			flags.helpUrl ||
 			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	});
 

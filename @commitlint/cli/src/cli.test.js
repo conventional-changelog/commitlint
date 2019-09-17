@@ -71,6 +71,20 @@ test('should produce help for problems', async t => {
 	t.is(actual.code, 1);
 });
 
+test('should produce help for problems with correct helpurl', async t => {
+	const cwd = await git.bootstrap('fixtures/default');
+	const actual = await cli(
+		['-H https://github.com/conventional-changelog/commitlint/#testhelpurl'],
+		{cwd}
+	)('foo: bar');
+	t.true(
+		actual.stdout.includes(
+			'Get help: https://github.com/conventional-changelog/commitlint/#testhelpurl'
+		)
+	);
+	t.is(actual.code, 1);
+});
+
 test('should fail for input from stdin without rules', async t => {
 	const cwd = await git.bootstrap('fixtures/empty');
 	const actual = await cli([], {cwd})('foo: bar');
