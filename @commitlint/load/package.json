@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "8.1.0",
+  "version": "8.2.0",
   "description": "Load shared commitlint configuration",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -42,11 +42,11 @@
     "typescript": "3.5.3"
   },
   "dependencies": {
-    "@commitlint/execute-rule": "^8.1.0",
-    "@commitlint/resolve-extends": "^8.1.0",
+    "@commitlint/execute-rule": "^8.2.0",
+    "@commitlint/resolve-extends": "^8.2.0",
     "chalk": "2.4.2",
     "cosmiconfig": "^5.2.0",
-    "lodash": "4.17.14",
+    "lodash": "4.17.15",
     "resolve-from": "^5.0.0"
   }
 }

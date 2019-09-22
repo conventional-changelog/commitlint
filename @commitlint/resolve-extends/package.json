@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/resolve-extends",
-  "version": "8.1.0",
+  "version": "8.2.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -34,15 +34,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^8.1.0",
-    "@commitlint/utils": "^8.1.0",
+    "@commitlint/parse": "^8.2.0",
+    "@commitlint/utils": "^8.2.0",
     "@types/lodash": "4.14.136",
     "@types/resolve-from": "5.0.1"
   },
   "dependencies": {
     "@types/node": "^12.0.2",
     "import-fresh": "^3.0.0",
-    "lodash": "4.17.14",
+    "lodash": "4.17.15",
     "resolve-from": "^5.0.0",
     "resolve-global": "^1.0.0"
   }
