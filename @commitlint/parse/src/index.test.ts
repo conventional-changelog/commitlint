@@ -1,40 +1,43 @@
 import importFrom from 'import-from';
-import test from 'ava';
 import parse from '.';
 
-test('throws when called without params', async t => {
-	const error = await t.throws(parse());
-	t.is(error.message, 'Expected a raw commit');
+test('throws when called without params', () => {
+	expect((parse as any)()).rejects.toThrowError('Expected a raw commit');
 });
 
-test('throws when called with empty message', async t => {
-	const error = await t.throws(parse());
-	t.is(error.message, 'Expected a raw commit');
+test('throws when called with empty message', () => {
+	expect(parse('')).rejects.toThrowError('Expected a raw commit');
 });
 
-test('returns object with raw message', async t => {
+test('returns object with raw message', async () => {
 	const message = 'type(scope): subject';
 	const actual = await parse(message);
-	t.is(actual.raw, message);
+
+	expect(actual).toHaveProperty('raw', message);
 });
 
-test('calls parser with message and passed options', async t => {
+test('calls parser with message and passed options', async () => {
 	const message = 'message';
 
-	await parse(message, m => {
-		t.is(message, m);
-		return {};
-	});
+	expect.assertions(1);
+	await parse(
+		message,
+		(m: string): any => {
+			expect(m).toBe(message);
+			return {};
+		}
+	);
 });
 
-test('passes object up from parser function', async t => {
+test('passes object up from parser function', async () => {
 	const message = 'message';
-	const result = {};
+	const result: any = {};
 	const actual = await parse(message, () => result);
-	t.is(actual, result);
+
+	expect(actual).toBe(result);
 });
 
-test('returns object with expected keys', async t => {
+test('returns object with expected keys', async () => {
 	const message = 'message';
 	const actual = await parse(message);
 	const expected = {
@@ -51,10 +54,11 @@ test('returns object with expected keys', async t => {
 		subject: null,
 		type: null
 	};
-	t.deepEqual(actual, expected);
+
+	expect(actual).toMatchObject(expected);
 });
 
-test('uses angular grammar', async t => {
+test('uses angular grammar', async () => {
 	const message = 'type(scope): subject';
 	const actual = await parse(message);
 	const expected = {
@@ -71,14 +75,15 @@ test('uses angular grammar', async t => {
 		subject: 'subject',
 		type: 'type'
 	};
-	t.deepEqual(actual, expected);
+
+	expect(actual).toMatchObject(expected);
 });
 
-test('uses custom opts parser', async t => {
+test('uses custom opts parser', async () => {
 	const message = 'type(scope)-subject';
-	const changelogOpts = await importFrom(
-		process.cwd(),
-		'./fixtures/parser-preset/conventional-changelog-custom'
+	const changelogOpts: any = await importFrom(
+		__dirname,
+		'../fixtures/parser-preset/conventional-changelog-custom.js'
 	);
 	const actual = await parse(message, undefined, changelogOpts.parserOpts);
 	const expected = {
@@ -95,10 +100,11 @@ test('uses custom opts parser', async t => {
 		subject: 'subject',
 		type: 'type'
 	};
-	t.deepEqual(actual, expected);
+
+	expect(actual).toMatchObject(expected);
 });
 
-test('does not merge array properties with custom opts', async t => {
+test('does not merge array properties with custom opts', async () => {
 	const message = 'type: subject';
 	const actual = await parse(message, undefined, {
 		headerPattern: /^(.*):\s(.*)$/,
@@ -117,26 +123,29 @@ test('does not merge array properties with custom opts', async t => {
 		subject: 'subject',
 		type: 'type'
 	};
-	t.deepEqual(actual, expected);
+
+	expect(actual).toMatchObject(expected);
 });
 
-test('supports scopes with /', async t => {
+test('supports scopes with /', async () => {
 	const message = 'type(some/scope): subject';
 	const actual = await parse(message);
-	t.is(actual.scope, 'some/scope');
-	t.is(actual.subject, 'subject');
+
+	expect(actual.scope).toBe('some/scope');
+	expect(actual.subject).toBe('subject');
 });
 
-test('supports scopes with / and empty parserOpts', async t => {
+test('supports scopes with / and empty parserOpts', async () => {
 	const message = 'type(some/scope): subject';
 	const actual = await parse(message, undefined, {});
-	t.is(actual.scope, 'some/scope');
-	t.is(actual.subject, 'subject');
+
+	expect(actual.scope).toBe('some/scope');
+	expect(actual.subject).toBe('subject');
 });
 
-test('ignores comments', async t => {
+test('ignores comments', async () => {
 	const message = 'type(some/scope): subject\n# some comment';
-	const changelogOpts = await importFrom(
+	const changelogOpts: any = await importFrom(
 		process.cwd(),
 		'conventional-changelog-angular'
 	);
@@ -144,15 +153,16 @@ test('ignores comments', async t => {
 		commentChar: '#'
 	});
 	const actual = await parse(message, undefined, opts);
-	t.is(actual.body, null);
-	t.is(actual.footer, null);
-	t.is(actual.subject, 'subject');
+
+	expect(actual.body).toBe(null);
+	expect(actual.footer).toBe(null);
+	expect(actual.subject).toBe('subject');
 });
 
-test('registers inline #', async t => {
+test('registers inline #', async () => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
-	const changelogOpts = await importFrom(
+	const changelogOpts: any = await importFrom(
 		process.cwd(),
 		'conventional-changelog-angular'
 	);
@@ -160,11 +170,12 @@ test('registers inline #', async t => {
 		commentChar: '#'
 	});
 	const actual = await parse(message, undefined, opts);
-	t.is(actual.subject, 'subject #reference');
-	t.is(actual.body, 'things #reference');
+
+	expect(actual.subject).toBe('subject #reference');
+	expect(actual.body).toBe('things #reference');
 });
 
-test('parses references leading subject', async t => {
+test('parses references leading subject', async () => {
 	const message = '#1 some subject';
 	const opts = await importFrom(
 		process.cwd(),
@@ -172,18 +183,19 @@ test('parses references leading subject', async t => {
 	);
 	const {
 		references: [actual]
-	} = await parse(message, undefined, opts);
-	t.is(actual.issue, '1');
+	} = await parse(message, undefined, opts as any);
+
+	expect(actual.issue).toBe('1');
 });
 
-test('parses custom references', async t => {
+test('parses custom references', async () => {
 	const message = '#1 some subject PREFIX-2';
 	const {references} = await parse(message, undefined, {
 		issuePrefixes: ['PREFIX-']
 	});
 
-	t.falsy(references.find(ref => ref.issue === '1'));
-	t.deepEqual(references.find(ref => ref.issue === '2'), {
+	expect(references.find(ref => ref.issue === '1')).toBeFalsy();
+	expect(references.find(ref => ref.issue === '2')).toMatchObject({
 		action: null,
 		issue: '2',
 		owner: null,
@@ -193,44 +205,44 @@ test('parses custom references', async t => {
 	});
 });
 
-test('uses permissive default regex without parser opts', async t => {
+test('uses permissive default regex without parser opts', async () => {
 	const message = 'chore(component,demo): bump';
 	const actual = await parse(message);
 
-	t.is(actual.scope, 'component,demo');
+	expect(actual.scope).toBe('component,demo');
 });
 
-test('uses permissive default regex with other parser opts', async t => {
+test('uses permissive default regex with other parser opts', async () => {
 	const message = 'chore(component,demo): bump';
 	const actual = await parse(message, undefined, {commentChar: '#'});
 
-	t.is(actual.scope, 'component,demo');
+	expect(actual.scope).toBe('component,demo');
 });
 
-test('uses restrictive default regex in passed parser opts', async t => {
+test('uses restrictive default regex in passed parser opts', async () => {
 	const message = 'chore(component,demo): bump';
 	const actual = await parse(message, undefined, {
 		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/
 	});
 
-	t.is(actual.subject, null);
-	t.is(actual.scope, null);
+	expect(actual.subject).toBe(null);
+	expect(actual.scope).toBe(null);
 });
 
-test('works with chinese scope by default', async t => {
+test('works with chinese scope by default', async () => {
 	const message = 'fix(面试评价): 测试';
 	const actual = await parse(message, undefined, {commentChar: '#'});
 
-	t.not(actual.subject, null);
-	t.not(actual.scope, null);
+	expect(actual.subject).not.toBe(null);
+	expect(actual.scope).not.toBe(null);
 });
 
-test('does not work with chinese scopes with incompatible pattern', async t => {
+test('does not work with chinese scopes with incompatible pattern', async () => {
 	const message = 'fix(面试评价): 测试';
 	const actual = await parse(message, undefined, {
 		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/
 	});
 
-	t.is(actual.subject, null);
-	t.is(actual.scope, null);
+	expect(actual.subject).toBe(null);
+	expect(actual.scope).toBe(null);
 });

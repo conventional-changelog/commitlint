@@ -166,7 +166,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 ## Version Support
 
 * Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 6`
-* git `>= 2`
+* git `>= 2.13.2`
 
 ## Related projects
 

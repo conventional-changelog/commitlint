@@ -1,3 +1,11 @@
+const plugin = jest.fn();
+const scopedPlugin = jest.fn();
+
+jest.mock('commitlint-plugin-example', () => plugin, {virtual: true});
+jest.mock('@scope/commitlint-plugin-example', () => scopedPlugin, {
+	virtual: true
+});
+
 import path from 'path';
 import resolveFrom from 'resolve-from';
 
@@ -43,48 +51,30 @@ test('rules should be loaded from absolute config file', async () => {
 	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
 });
 
-// test('plugins should be loaded from seed', async () => {
-// 	const plugin = {'@global': true};
-// 	const scopedPlugin = {'@global': true};
-// 	const {default: stubbedLoad} = proxyquire('../.', {
-// 		'commitlint-plugin-example': plugin,
-// 		'@scope/commitlint-plugin-example': scopedPlugin
-// 	});
+test('plugins should be loaded from seed', async () => {
+	const cwd = await git.bootstrap(fixture('extends-empty'));
+	const actual = await load({plugins: ['example', '@scope/example']}, {cwd});
 
-// 	const cwd = await git.bootstrap(fixture('extends-empty'));
-// 	const actual = await stubbedLoad(
-// 		{plugins: ['example', '@scope/example']},
-// 		{cwd}
-// 	);
+	expect(actual.plugins).toMatchObject({
+		example: plugin,
+		'@scope/example': scopedPlugin
+	});
+});
 
-// 	expect(actual.plugins).toBe({
-// 		example: plugin,
-// 		'@scope/example': scopedPlugin
-// 	});
-// });
+test('plugins should be loaded from config', async () => {
+	const cwd = await git.bootstrap(fixture('extends-plugins'));
+	const actual = await load({}, {cwd});
 
-// test('plugins should be loaded from config', async () => {
-// 	const plugin = {'@global': true};
-// 	const scopedPlugin = {'@global': true};
-// 	const stubbedLoad = proxyquire('.', {
-// 		'commitlint-plugin-example': plugin,
-// 		'@scope/commitlint-plugin-example': scopedPlugin
-// 	});
-
-// 	const cwd = await git.bootstrap(fixture('extends-plugins'));
-// 	const actual = await stubbedLoad({}, {cwd});
-// 	t.deepEqual(actual.plugins, {
-// 		example: plugin,
-// 		'@scope/example': scopedPlugin
-// 	});
-// });
+	expect(actual.plugins).toMatchObject({
+		example: plugin,
+		'@scope/example': scopedPlugin
+	});
+});
 
 test('uses seed with parserPreset', async () => {
 	const cwd = await git.bootstrap(fixture('parser-preset'));
 	const {parserPreset: actual} = await load(
-		{
-			parserPreset: './conventional-changelog-custom'
-		},
+		{parserPreset: './conventional-changelog-custom'},
 		{cwd}
 	);
 
@@ -94,10 +84,11 @@ test('uses seed with parserPreset', async () => {
 	});
 });
 
-// test('invalid extend should throw', async () => {
-// 	const cwd = await git.bootstrap(fixture('extends-invalid'));
-// 	await t.throws(load({}, {cwd}));
-// });
+test('invalid extend should throw', async () => {
+	const cwd = await git.bootstrap(fixture('extends-invalid'));
+
+	await expect(load({}, {cwd})).rejects.toThrow();
+});
 
 test('empty file should have no rules', async () => {
 	const cwd = await git.bootstrap(fixture('empty-object-file'));

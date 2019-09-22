@@ -1292,7 +1292,7 @@
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/lodash@4.14.136":
+"@types/lodash@4.14.136", "@types/lodash@^4.14.136":
   version "4.14.136"
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.136.tgz#413e85089046b865d960c9ff1d400e04c31ab60f"
   integrity sha512-0GJhzBdvsW2RUccNHOBkabI8HZVdOXmXbXhuKlDEd5Vv12P7oAVGfomGp3Ne21o5D/qu1WmthlNKFaoZJJeErA==
@@ -1317,7 +1317,7 @@
   resolved "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
-"@types/resolve-from@5.0.1":
+"@types/resolve-from@5.0.1", "@types/resolve-from@^5.0.1":
   version "5.0.1"
   resolved "https://registry.npmjs.org/@types/resolve-from/-/resolve-from-5.0.1.tgz#2714eaa840c0472dcfa96ec3fb9d170dbf0b677d"
   integrity sha512-1G7n5Jtr5inoS1Ez2Y9Efedk9/wH6uGQslbfhGTOw9J42PCAwuyaDgQHW7fIq02+shwB02kM/w31W8gMxI8ORg==
@@ -10920,7 +10920,7 @@ typedarray@^0.0.6:
   resolved "https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.5.3:
+typescript@3.5.3, typescript@^3.5.3:
   version "3.5.3"
   resolved "https://registry.npmjs.org/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
   integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
