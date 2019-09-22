@@ -45,6 +45,19 @@ Using `commit-msg` gives us exactly what we want: It is executed whenever a new 
 
 ## Test
 
+### Test simple usage
+
+For a first simple usage test of commlitlint you can do the following:
+
+```bash
+npx commitlint --from HEAD~1 --to HEAD --verbose
+```
+
+This will check your last commit and return an error if invalid or a positive output if valid.
+
+
+### Test the hook
+
 You can test the hook by simply committing. You should see something like this if everything works.
 
 ```bash
