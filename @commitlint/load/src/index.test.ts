@@ -5,10 +5,6 @@ const {fix, git} = require('@commitlint/test');
 
 import load from '.';
 
-const proxyquire = require('proxyquire')
-	.noCallThru()
-	.noPreserveCache();
-
 const fixture = (name: string) => path.resolve(__dirname, '../fixtures', name);
 
 test('extends-empty should have no rules', async () => {
@@ -20,25 +16,31 @@ test('extends-empty should have no rules', async () => {
 
 test('uses seed as configured', async () => {
 	const cwd = await git.bootstrap(fixture('extends-empty'));
-	const actual = await load({rules: {foo: 'bar'}}, {cwd});
+	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
 
-	expect(actual.rules.foo).toBe('bar');
+	const actual = await load({rules}, {cwd});
+
+	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
 });
 
 test('rules should be loaded from relative config file', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await git.bootstrap(fixture('specify-config-file'));
-	const actual = await load({}, {cwd, file});
+	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
 
-	expect(actual.rules.foo).toBe('bar');
+	const actual = await load({rules}, {cwd, file});
+
+	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
 });
 
 test('rules should be loaded from absolute config file', async () => {
 	const cwd = await git.bootstrap(fixture('specify-config-file'));
 	const file = path.resolve(cwd, 'config/commitlint.config.js');
-	const actual = await load({}, {cwd: process.cwd(), file});
+	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
 
-	expect(actual.rules.foo).toBe('bar');
+	const actual = await load({rules}, {cwd: process.cwd(), file});
+
+	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
 });
 
 // test('plugins should be loaded from seed', async () => {
@@ -330,10 +332,11 @@ test('returns formatter name when unable to resolve from config directory', asyn
 test('does not mutate config module reference', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await git.bootstrap(fixture('specify-config-file'));
+	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
 
 	const configPath = path.join(cwd, file);
 	const before = JSON.stringify(require(configPath));
-	await load({arbitraryField: true}, {cwd, file});
+	await load({rules}, {cwd, file});
 	const after = JSON.stringify(require(configPath));
 
 	expect(after).toBe(before);
