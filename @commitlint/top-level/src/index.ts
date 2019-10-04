@@ -13,7 +13,7 @@ export default toplevel;
 /**
  * Find the next git root
  */
-async function toplevel(cwd: string) {
+async function toplevel(cwd?: string) {
 	const found = await up('.git', {cwd, type: 'directory'});
 
 	if (typeof found !== 'string') {

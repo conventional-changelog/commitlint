@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
 
+import read from '@commitlint/read';
+
 const load = require('@commitlint/load');
 const lint = require('@commitlint/lint');
-const read = require('@commitlint/read');
 const meow = require('meow');
 const {merge, pick, isFunction} = require('lodash');
 const stdin = require('get-stdin');

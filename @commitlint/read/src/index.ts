@@ -1,14 +1,24 @@
 import path from 'path';
-import gitRawCommits from 'git-raw-commits';
-import * as sander from '@marionebl/sander';
+import {Stats} from 'fs';
+import Buffer from 'buffer';
+import {Readable} from 'stream';
 
 import toplevel from '@commitlint/top-level';
+
+const gitRawCommits = require('git-raw-commits');
+const sander = require('@marionebl/sander');
+
+interface Settings {
+	cwd?: string;
+	from?: string;
+	to?: string;
+	edit?: boolean | string;
+}
 
 export default getCommitMessages;
 
 // Get commit messages
-// Object => Promise<Array<String>>
-async function getCommitMessages(settings) {
+async function getCommitMessages(settings: Settings): Promise<string[]> {
 	const {cwd, from, to, edit} = settings;
 
 	if (edit) {
@@ -19,11 +29,13 @@ async function getCommitMessages(settings) {
 }
 
 // Get commit messages from history
-// Object => Promise<string[]>
-function getHistoryCommits(options, opts = {}) {
+function getHistoryCommits(
+	options: {from?: string; to?: string},
+	opts: {cwd?: string} = {}
+): Promise<string[]> {
 	return new Promise((resolve, reject) => {
-		const data = [];
-		gitRawCommits(options, {cwd: opts.cwd})
+		const data: string[] = [];
+		(gitRawCommits(options, {cwd: opts.cwd}) as Readable)
 			.on('data', chunk => data.push(chunk.toString('utf-8')))
 			.on('error', reject)
 			.on('end', () => {
@@ -33,8 +45,10 @@ function getHistoryCommits(options, opts = {}) {
 }
 
 // Get recently edited commit message
-// (cwd: string, edit: any) => Promise<Array<String>>
-async function getEditCommit(cwd, edit) {
+async function getEditCommit(
+	cwd?: string,
+	edit?: boolean | string
+): Promise<string[]> {
 	const top = await toplevel(cwd);
 
 	if (typeof top !== 'string') {
@@ -43,23 +57,27 @@ async function getEditCommit(cwd, edit) {
 
 	const editFilePath = await getEditFilePath(top, edit);
 
-	const editFile = await sander.readFile(editFilePath);
+	const editFile: Buffer = await sander.readFile(editFilePath);
 	return [`${editFile.toString('utf-8')}\n`];
 }
 
 // Get path to recently edited commit message file
-// (top: string, edit: any) => Promise<String>
-async function getEditFilePath(top, edit) {
-	let editFilePath;
+async function getEditFilePath(
+	top: string,
+	edit?: boolean | string
+): Promise<string> {
+	let editFilePath: string;
 	if (typeof edit === 'string') {
 		editFilePath = path.resolve(top, edit);
 	} else {
 		const dotgitPath = path.join(top, '.git');
-		const dotgitStats = sander.lstatSync(dotgitPath);
+		const dotgitStats: Stats = sander.lstatSync(dotgitPath);
 		if (dotgitStats.isDirectory()) {
 			editFilePath = path.join(top, '.git/COMMIT_EDITMSG');
 		} else {
-			const gitFile = await sander.readFile(dotgitPath, {encoding: 'utf-8'});
+			const gitFile: string = await sander.readFile(dotgitPath, {
+				encoding: 'utf-8'
+			});
 			const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');
 			editFilePath = path.resolve(top, relativeGitPath, 'COMMIT_EDITMSG');
 		}
