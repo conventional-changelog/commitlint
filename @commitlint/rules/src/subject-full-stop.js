@@ -8,7 +8,9 @@ export default (parsed, when, value) => {
 	}
 
 	const negated = when === 'never';
-	const hasStop = input[input.length - 1] === value;
+	const stop = input[input.length - 1];
+	const hasStop =
+		value.length > 1 ? new RegExp(value, 'u').test(stop) : stop === value;
 
 	return [
 		negated ? !hasStop : hasStop,

@@ -111,11 +111,12 @@ Rule configurations are either of type `array` residing on a key with the rule's
 ```
 
 #### header-full-stop
-* **condition**: `header` ends with `value`
+* **condition**: `header` ends with `value` or `header`'s last character matches `value` string regexp
 * **rule**: `never`
-* **value**
+* **possible values**
 ```js
-  '.'
+  '.' // default
+  '[\\.0-9]' // any string regexp to match with last character
 ```
 
 #### header-max-length
@@ -211,11 +212,12 @@ Rule configurations are either of type `array` residing on a key with the rule's
 * **rule**: `never`
 
 #### subject-full-stop
-* **condition**: `subject` ends with `value`
+* **condition**: `subject` ends with `value` or `subject`'s last character matches `value` string regexp
 * **rule**: `never`
-* **value**
+* **possible values**
 ```js
-  '.'
+  '.' // default
+  '[\\.0-9]' // any string regexp to match with last character
 ```
 
 #### subject-max-length
