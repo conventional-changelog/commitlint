@@ -118,6 +118,14 @@ Rule configurations are either of type `array` residing on a key with the rule's
   '.'
 ```
 
+#### header-matches
+* **condition**: `header` matches the `value` string regexp
+* **rule**: `always`
+* **value**
+```js
+  '^(Feat|Bug):\\s[A-Z]{1}.+\\.(\\s#\\d+)?$'
+```
+
 #### header-max-length
 * **condition**: `header` has `value` or less characters
 * **rule**: `always`

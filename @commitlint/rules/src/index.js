@@ -12,6 +12,7 @@ export default {
 	'footer-min-length': require('./footer-min-length'),
 	'header-case': require('./header-case'),
 	'header-full-stop': require('./header-full-stop'),
+	'header-matches': require('./header-matches'),
 	'header-max-length': require('./header-max-length'),
 	'header-min-length': require('./header-min-length'),
 	'references-empty': require('./references-empty'),
