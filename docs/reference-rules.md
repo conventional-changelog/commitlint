@@ -226,6 +226,14 @@ Rule configurations are either of type `array` residing on a key with the rule's
   '.'
 ```
 
+#### subject-matches
+* **condition**: `subject` matches the `value` string regexp
+* **rule**: `always`
+* **value**
+```js
+  '^\\s[A-Z]{1}.+\\.(\\s#\\d+)?$'
+```
+
 #### subject-max-length
 * **condition**: `subject` has `value` or less characters
 * **rule**: `always`

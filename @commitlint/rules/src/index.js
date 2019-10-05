@@ -25,6 +25,7 @@ export default {
 	'subject-case': require('./subject-case'),
 	'subject-empty': require('./subject-empty'),
 	'subject-full-stop': require('./subject-full-stop'),
+	'subject-matches': require('./subject-matches'),
 	'subject-max-length': require('./subject-max-length'),
 	'subject-min-length': require('./subject-min-length'),
 	'type-case': require('./type-case'),
