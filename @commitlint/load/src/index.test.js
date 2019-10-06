@@ -84,6 +84,20 @@ test('uses seed with parserPreset', async t => {
 	});
 });
 
+test('uses seed with parserPreset factory', async t => {
+	const cwd = await git.bootstrap('fixtures/parser-preset-factory');
+	const {parserPreset: actual} = await load(
+		{
+			parserPreset: './conventional-changelog-factory'
+		},
+		{cwd}
+	);
+	t.is(actual.name, './conventional-changelog-factory');
+	t.deepEqual(actual.parserOpts, {
+		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
+	});
+});
+
 test('invalid extend should throw', async t => {
 	const cwd = await git.bootstrap('fixtures/extends-invalid');
 	await t.throws(load({}, {cwd}));

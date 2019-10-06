@@ -33,11 +33,17 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === 'string') {
 		const resolvedParserPreset = resolveFrom(base, config.parserPreset);
+		let resolvedParserConfig = await require(resolvedParserPreset);
+
+		// Resolve loaded parser preset if its a factory
+		if (typeof resolvedParserConfig === 'function') {
+			resolvedParserConfig = await resolvedParserConfig();
+		}
 
 		config.parserPreset = {
 			name: config.parserPreset,
 			path: resolvedParserPreset,
-			parserOpts: (await require(resolvedParserPreset)).parserOpts
+			parserOpts: resolvedParserConfig.parserOpts
 		};
 	}
 
