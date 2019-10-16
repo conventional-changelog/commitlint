@@ -55,7 +55,6 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	});
 
 	const preset = valid(mergeWith(extended, config, w));
-
 	// Await parser-preset if applicable
 	if (
 		typeof preset.parserPreset === 'object' &&
