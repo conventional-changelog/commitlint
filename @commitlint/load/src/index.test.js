@@ -231,7 +231,7 @@ test('recursive extends with parserPreset', async t => {
 test('recursive extends with parserPreset factory', async t => {
 	const cwd = await git.bootstrap('fixtures/recursive-parser-preset-factory');
 	const actual = await load({}, {cwd});
-	// console.log('TEST', actual);
+
 	t.is(actual.parserPreset.name, './conventional-changelog-factory');
 	t.deepEqual(actual.parserPreset.parserOpts, {
 		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
