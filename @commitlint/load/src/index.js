@@ -30,20 +30,14 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')
 	);
 
-	// Resolve parserPreset key from flat-non-extended config
+	// Resolve parserPreset key
 	if (typeof config.parserPreset === 'string') {
 		const resolvedParserPreset = resolveFrom(base, config.parserPreset);
-		let resolvedParserConfig = await require(resolvedParserPreset);
-
-		// Resolve loaded parser preset factory
-		if (typeof resolvedParserConfig === 'function') {
-			resolvedParserConfig = await resolvedParserConfig();
-		}
 
 		config.parserPreset = {
 			name: config.parserPreset,
 			path: resolvedParserPreset,
-			parserOpts: resolvedParserConfig.parserOpts
+			parserOpts: (await require(resolvedParserPreset)).parserOpts
 		};
 	}
 
@@ -61,14 +55,8 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 		typeof preset.parserPreset.parserOpts === 'object' &&
 		typeof preset.parserPreset.parserOpts.then === 'function'
 	) {
-		let parserPreset = await preset.parserPreset.parserOpts;
-
-		// Resolve loaded parser preset factory from extended config
-		if (typeof parserPreset === 'function') {
-			parserPreset = await parserPreset();
-		}
-
-		preset.parserPreset.parserOpts = parserPreset.parserOpts;
+		preset.parserPreset.parserOpts = (await preset.parserPreset
+			.parserOpts).parserOpts;
 	}
 
 	// Resolve config-relative formatter module

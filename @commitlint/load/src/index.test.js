@@ -84,20 +84,6 @@ test('uses seed with parserPreset', async t => {
 	});
 });
 
-test('uses seed with parserPreset factory', async t => {
-	const cwd = await git.bootstrap('fixtures/parser-preset-factory');
-	const {parserPreset: actual} = await load(
-		{
-			parserPreset: './conventional-changelog-factory'
-		},
-		{cwd}
-	);
-	t.is(actual.name, './conventional-changelog-factory');
-	t.deepEqual(actual.parserOpts, {
-		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
-	});
-});
-
 test('invalid extend should throw', async t => {
 	const cwd = await git.bootstrap('fixtures/extends-invalid');
 	await t.throws(load({}, {cwd}));
@@ -226,16 +212,6 @@ test('recursive extends with parserPreset', async t => {
 		actual.parserPreset.parserOpts.headerPattern,
 		/^(\w*)(?:\((.*)\))?-(.*)$/
 	);
-});
-
-test('recursive extends with parserPreset factory', async t => {
-	const cwd = await git.bootstrap('fixtures/recursive-parser-preset-factory');
-	const actual = await load({}, {cwd});
-
-	t.is(actual.parserPreset.name, './conventional-changelog-factory');
-	t.deepEqual(actual.parserPreset.parserOpts, {
-		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
-	});
 });
 
 test('ignores unknow keys', async t => {
