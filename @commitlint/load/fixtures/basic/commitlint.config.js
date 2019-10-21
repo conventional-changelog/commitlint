@@ -1,5 +1,5 @@
 module.exports = {
 	rules: {
-		basic: true
+		'body-case': [1, 'never', 'camel-case']
 	}
 };
