@@ -82,12 +82,13 @@ function getId(raw: string = '', prefix: string = ''): string {
 	const first = raw.charAt(0);
 	const scoped = first === '@';
 	const relative = first === '.';
+	const absolute = path.isAbsolute(raw);
 
 	if (scoped) {
 		return raw.includes('/') ? raw : [raw, prefix].filter(String).join('/');
 	}
 
-	return relative ? raw : [prefix, raw].filter(String).join('-');
+	return relative || absolute ? raw : [prefix, raw].filter(String).join('-');
 }
 
 function resolveConfig<T>(

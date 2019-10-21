@@ -1,6 +1,7 @@
 import path from 'path';
-import {fix, git} from '@commitlint/test';
+import {fix, git, npm} from '@commitlint/test';
 import test from 'ava';
+import execa from 'execa';
 import resolveFrom from 'resolve-from';
 
 import load from '.';
@@ -326,4 +327,44 @@ test('does not mutate config module reference', async t => {
 	const after = JSON.stringify(require(configPath));
 
 	t.is(before, after);
+});
+
+test('resolves parser preset from conventional commits', async t => {
+	const cwd = await npm.bootstrap('fixtures/parser-preset-conventionalcommits');
+	const actual = await load({}, {cwd});
+
+	t.is(actual.parserPreset.name, 'conventional-changelog-conventionalcommits');
+	t.is(typeof actual.parserPreset.parserOpts, 'object');
+	t.deepEqual(
+		actual.parserPreset.parserOpts.headerPattern,
+		/^(\w*)(?:\((.*)\))?!?: (.*)$/
+	);
+});
+
+test('resolves parser preset from conventional angular', async t => {
+	const cwd = await npm.bootstrap('fixtures/parser-preset-angular');
+	const actual = await load({}, {cwd});
+
+	t.is(actual.parserPreset.name, 'conventional-changelog-angular');
+	t.is(typeof actual.parserPreset.parserOpts, 'object');
+	t.deepEqual(
+		actual.parserPreset.parserOpts.headerPattern,
+		/^(\w*)(?:\((.*)\))?: (.*)$/
+	);
+});
+
+test('recursive resolves parser preset from conventional atom', async t => {
+	const cwd = await git.bootstrap(
+		'fixtures/recursive-parser-preset-conventional-atom'
+	);
+	// the package file is nested in 2 folders, `npm.bootstrap` cant do that
+	await execa('npm', ['install'], {
+		cwd: path.resolve(cwd, 'first-extended', 'second-extended')
+	});
+
+	const actual = await load({}, {cwd});
+
+	t.is(actual.parserPreset.name, 'conventional-changelog-atom');
+	t.is(typeof actual.parserPreset.parserOpts, 'object');
+	t.deepEqual(actual.parserPreset.parserOpts.headerPattern, /^(:.*?:) (.*)$/);
 });

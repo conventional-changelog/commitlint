@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.3.1](https://github.com/conventional-changelog/commitlint/compare/v8.3.0...v8.3.1) (2019-10-16)
+
+
+### Bug Fixes
+
+* **load:** resolve nested parser preset factories ([#831](https://github.com/conventional-changelog/commitlint/issues/831)) ([73a7df7](https://github.com/conventional-changelog/commitlint/commit/73a7df7))
+
+
+
+
+
+# [8.3.0](https://github.com/conventional-changelog/commitlint/compare/v8.2.0...v8.3.0) (2019-10-16)
+
+
+### Features
+
+* **cli:** add helpurl flag ([#789](https://github.com/conventional-changelog/commitlint/issues/789)) ([75cef4e](https://github.com/conventional-changelog/commitlint/commit/75cef4e))
+* **config-conventional:** use parser with short breaking change support ([#821](https://github.com/conventional-changelog/commitlint/issues/821)) ([4b5300a](https://github.com/conventional-changelog/commitlint/commit/4b5300a))
+* **resolve-extends:** accept absolute path in extends ([#825](https://github.com/conventional-changelog/commitlint/issues/825)) ([ecac29f](https://github.com/conventional-changelog/commitlint/commit/ecac29f))
+
+
+
+
+
 # [8.2.0](https://github.com/conventional-changelog/commitlint/compare/v8.1.0...v8.2.0) (2019-09-16)
 
 This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659).

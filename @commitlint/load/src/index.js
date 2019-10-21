@@ -2,7 +2,7 @@ import path from 'path';
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
 import cosmiconfig from 'cosmiconfig';
-import {toPairs, merge, mergeWith, pick} from 'lodash';
+import {toPairs, merge, mergeWith, pick, startsWith} from 'lodash';
 import resolveFrom from 'resolve-from';
 import loadPlugin from './utils/loadPlugin';
 
@@ -30,14 +30,14 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')
 	);
 
-	// Resolve parserPreset key
+	// Resolve parserPreset key when overwritten by main config
 	if (typeof config.parserPreset === 'string') {
 		const resolvedParserPreset = resolveFrom(base, config.parserPreset);
 
 		config.parserPreset = {
 			name: config.parserPreset,
 			path: resolvedParserPreset,
-			parserOpts: (await require(resolvedParserPreset)).parserOpts
+			parserOpts: require(resolvedParserPreset)
 		};
 	}
 
@@ -49,14 +49,13 @@ export default async (seed = {}, options = {cwd: process.cwd()}) => {
 	});
 
 	const preset = valid(mergeWith(extended, config, w));
-	// Await parser-preset if applicable
-	if (
-		typeof preset.parserPreset === 'object' &&
-		typeof preset.parserPreset.parserOpts === 'object' &&
-		typeof preset.parserPreset.parserOpts.then === 'function'
-	) {
-		preset.parserPreset.parserOpts = (await preset.parserPreset
-			.parserOpts).parserOpts;
+
+	// Resolve parser-opts from preset
+	if (typeof preset.parserPreset === 'object') {
+		preset.parserPreset.parserOpts = await loadParserOpts(
+			preset.parserPreset.name,
+			preset.parserPreset
+		);
 	}
 
 	// Resolve config-relative formatter module
@@ -116,4 +115,42 @@ async function loadConfig(cwd, configPath) {
 	}
 
 	return {};
+}
+
+async function loadParserOpts(parserName, pendingParser) {
+	// Await for the module, loaded with require
+	const parser = await pendingParser;
+
+	// Await parser opts if applicable
+	if (
+		typeof parser === 'object' &&
+		typeof parser.parserOpts === 'object' &&
+		typeof parser.parserOpts.then === 'function'
+	) {
+		return (await parser.parserOpts).parserOpts;
+	}
+
+	// Create parser opts from factory
+	if (
+		typeof parser === 'object' &&
+		typeof parser.parserOpts === 'function' &&
+		startsWith(parserName, 'conventional-changelog-')
+	) {
+		return await new Promise(resolve => {
+			parser.parserOpts((_, opts) => {
+				resolve(opts.parserOpts);
+			});
+		});
+	}
+
+	// Pull nested paserOpts, might happen if overwritten with a module in main config
+	if (
+		typeof parser === 'object' &&
+		typeof parser.parserOpts === 'object' &&
+		typeof parser.parserOpts.parserOpts === 'object'
+	) {
+		return parser.parserOpts.parserOpts;
+	}
+
+	return parser.parserOpts;
 }

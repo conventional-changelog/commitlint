@@ -101,6 +101,22 @@ test('ignores prefix for relative extends', () => {
 	expect(ctx.require).toHaveBeenCalledWith('./extender');
 });
 
+test('ignores prefix for absolute extends', () => {
+	const absolutePath = require.resolve('@commitlint/config-angular');
+	const input = {extends: [absolutePath]};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
+
+	resolveExtends(input, {
+		...ctx,
+		prefix: 'prefix'
+	});
+
+	expect(ctx.require).toHaveBeenCalledWith(absolutePath);
+});
+
 test('propagates return value of require function', () => {
 	const input = {extends: ['extender-name']};
 	const propagated = {foo: 'bar'};
