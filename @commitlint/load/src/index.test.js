@@ -368,3 +368,17 @@ test('recursive resolves parser preset from conventional atom', async t => {
 	t.is(typeof actual.parserPreset.parserOpts, 'object');
 	t.deepEqual(actual.parserPreset.parserOpts.headerPattern, /^(:.*?:) (.*)$/);
 });
+
+test('resolves parser preset from conventional commits without factory support', async t => {
+	const cwd = await npm.bootstrap(
+		'fixtures/parser-preset-conventional-without-factory'
+	);
+	const actual = await load({}, {cwd});
+
+	t.is(actual.parserPreset.name, 'conventional-changelog-conventionalcommits');
+	t.is(typeof actual.parserPreset.parserOpts, 'object');
+	t.deepEqual(
+		actual.parserPreset.parserOpts.headerPattern,
+		/^(\w*)(?:\((.*)\))?!?: (.*)$/
+	);
+});
