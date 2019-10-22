@@ -137,9 +137,17 @@ async function loadParserOpts(parserName, pendingParser) {
 		startsWith(parserName, 'conventional-changelog-')
 	) {
 		return await new Promise(resolve => {
-			parser.parserOpts((_, opts) => {
+			const result = parser.parserOpts((_, opts) => {
 				resolve(opts.parserOpts);
 			});
+
+			// If result has data or a promise, the parser doesn't support factory-init
+			// due to https://github.com/nodejs/promises-debugging/issues/16 it just quits, so let's use this fallback
+			if (result) {
+				Promise.resolve(result).then(opts => {
+					resolve(opts.parserOpts);
+				});
+			}
 		});
 	}
 
