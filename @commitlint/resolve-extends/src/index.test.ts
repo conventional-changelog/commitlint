@@ -30,6 +30,17 @@ test('fails for missing extends', async () => {
 	);
 });
 
+test('resolves extends for single config', () => {
+	const input = {extends: 'extender-name'};
+	const ctx = {
+		resolve: id,
+		require: jest.fn(() => ({}))
+	} as ResolveExtendsContext;
+	resolveExtends(input, ctx);
+
+	expect(ctx.require).toHaveBeenCalledWith('extender-name');
+});
+
 test('uses empty prefix by default', () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {

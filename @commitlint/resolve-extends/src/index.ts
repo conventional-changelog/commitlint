@@ -13,7 +13,7 @@ export interface ResolvedConfig {
 
 export interface ResolveExtendsConfig {
 	parserPreset?: unknown;
-	extends?: string[];
+	extends?: string | string[];
 	[key: string]: unknown;
 }
 
@@ -48,7 +48,10 @@ function loadExtends(
 	config: ResolveExtendsConfig = {},
 	context: ResolveExtendsContext = {}
 ): ResolvedConfig[] {
-	return (config.extends || []).reduce<ResolvedConfig[]>((configs, raw) => {
+	const {extends: e} = config;
+	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
+
+	return ext.reduce<ResolvedConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
