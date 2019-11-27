@@ -14,6 +14,8 @@ npm install --save-dev @commitlint/travis-cli
 ```yml
 # travis.yml
 language: node_js
+node_js:
+  - node
 script:
   - commitlint-travis
 ```
