@@ -175,6 +175,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 * [commitizen](https://git.io/vwTym) – Simple commit conventions for internet citizens
 * [create-semantic-module](https://git.io/vFjFg) – CLI for quickly integrating commitizen and commitlint in new or existing projects
 * [commitlint.io](https://github.com/tomasen/commitlintio) - helps your project to ensures nice and tidy commit messages without needing any download or installation
+* [Lintush](https://www.npmjs.com/package/lintush) - Lint your commit as you write it, with an interactive CLI
 
 ## License
 Copyright by @marionebl. All `commitlint` packages are released under the MIT license.
