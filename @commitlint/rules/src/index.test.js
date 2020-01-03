@@ -2,7 +2,7 @@ import path from 'path';
 import test from 'ava';
 import globby from 'globby';
 import {values} from 'lodash';
-import rules from './index';
+import rules from '.';
 
 test('exports all rules', async t => {
 	const expected = (await glob('*.js')).sort();
