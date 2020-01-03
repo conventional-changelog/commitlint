@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import 'core-js/stable'; // eslint-disable-line import/no-unassigned-import
+import 'core-js/modules/es7.promise.finally'; // eslint-disable-line import/no-unassigned-import
 import 'regenerator-runtime/runtime'; // eslint-disable-line import/no-unassigned-import
 
 import load from '@commitlint/load';
