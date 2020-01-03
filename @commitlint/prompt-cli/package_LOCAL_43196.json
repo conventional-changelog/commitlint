@@ -1,0 +1,41 @@
+{
+  "name": "@commitlint/prompt-cli",
+  "version": "8.3.3",
+  "description": "commit prompt using commitlint.config.js",
+  "files": [
+    "cli.js"
+  ],
+  "bin": {
+    "commit": "./cli.js"
+  },
+  "scripts": {
+    "commit": "$npm_package_bin_commit",
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-main",
+    "test": "ava -c 4 --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conventional-changelog/commitlint.git"
+  },
+  "keywords": [
+    "commitlint",
+    "prompt"
+  ],
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "devDependencies": {
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.0",
+    "ava": "2.4.0"
+  },
+  "dependencies": {
+    "@commitlint/prompt": "^8.3.3",
+    "execa": "0.11.0",
+    "string-to-stream": "3.0.1"
+  }
+}

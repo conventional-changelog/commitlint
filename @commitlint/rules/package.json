@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/rules",
-  "version": "8.3.2",
+  "version": "8.3.4",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "files": [
@@ -65,9 +65,9 @@
     "@babel/core": "7.7.7",
     "@babel/cli": "7.7.7",
     "@babel/register": "7.7.7",
-    "@commitlint/parse": "^8.3.2",
+    "@commitlint/parse": "^8.3.4",
     "@commitlint/test": "8.2.0",
-    "@commitlint/utils": "^8.3.0",
+    "@commitlint/utils": "^8.3.4",
     "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
     "concurrently": "3.6.1",
@@ -77,8 +77,8 @@
     "lodash": "4.17.15"
   },
   "dependencies": {
-    "@commitlint/ensure": "^8.3.0",
-    "@commitlint/message": "^8.3.2",
-    "@commitlint/to-lines": "^8.3.2"
+    "@commitlint/ensure": "^8.3.4",
+    "@commitlint/message": "^8.3.4",
+    "@commitlint/to-lines": "^8.3.4"
   }
 }

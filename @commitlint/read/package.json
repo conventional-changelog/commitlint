@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/read",
-  "version": "8.3.2",
+  "version": "8.3.4",
   "description": "Read commit messages from a specified range or last edit",
   "main": "lib/index.js",
   "files": [
@@ -66,7 +66,7 @@
     "@babel/cli": "7.7.7",
     "@babel/register": "7.7.7",
     "@commitlint/test": "8.2.0",
-    "@commitlint/utils": "^8.3.0",
+    "@commitlint/utils": "^8.3.4",
     "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
     "concurrently": "3.6.1",
@@ -74,7 +74,7 @@
     "execa": "0.11.0"
   },
   "dependencies": {
-    "@commitlint/top-level": "^8.3.2",
+    "@commitlint/top-level": "^8.3.4",
     "@marionebl/sander": "^0.6.0",
     "git-raw-commits": "^2.0.0"
   }
