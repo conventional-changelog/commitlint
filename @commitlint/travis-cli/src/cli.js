@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const execa = require('execa');
-const commitlint = require('@commitlint/cli');
+import execa from 'execa';
+import commitlint from '@commitlint/cli';
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';

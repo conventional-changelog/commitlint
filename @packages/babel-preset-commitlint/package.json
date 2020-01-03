@@ -43,14 +43,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "ava": "0.22.0",
-    "babel-core": "6.26.3"
+    "@babel/core": "^7.7.7",
+    "ava": "2.4.0"
   },
   "dependencies": {
-    "babel-plugin-add-module-exports": "^0.3.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "fast-async": "^6.3.0"
+    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
+    "@babel/plugin-transform-react-jsx": "^7.7.7",
+    "@babel/plugin-transform-runtime": "^7.7.6",
+    "@babel/preset-env": "^7.7.7",
+    "fast-async": "^7.0.6"
   }
 }

@@ -135,65 +135,86 @@ test('should produce no error output with -q flag', async t => {
 	t.is(actual.code, 1);
 });
 
-test('should work with husky commitmsg hook and git commit', async () => {
-	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `'${bin}' -e`}}, {cwd});
+test('should work with husky commitmsg hook and git commit', async t => {
+	await t.notThrowsAsync(async () => {
+		const cwd = await git.bootstrap('fixtures/husky/integration');
+		await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd});
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	});
 });
 
-test('should work with husky commitmsg hook in sub packages', async () => {
-	const upper = await git.bootstrap('fixtures/husky');
-	const cwd = path.join(upper, 'integration');
-	await writePkg({scripts: {commitmsg: `'${bin}' -e`}}, {cwd: upper});
+test('should work with husky commitmsg hook in sub packages', async t => {
+	await t.notThrowsAsync(async () => {
+		const upper = await git.bootstrap('fixtures/husky');
+		const cwd = path.join(upper, 'integration');
+		await writePkg(
+			{husky: {hooks: {'commit-msg': `'${bin}' -e`}}},
+			{cwd: upper}
+		);
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	});
 });
 
-test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
-	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `'${bin}' -e $GIT_PARAMS`}}, {cwd});
+test('should work with husky via commitlint -e $GIT_PARAMS', async t => {
+	await t.notThrowsAsync(async () => {
+		const cwd = await git.bootstrap('fixtures/husky/integration');
+		await writePkg(
+			{husky: {hooks: {'commit-msg': `'${bin}' -e $GIT_PARAMS`}}},
+			{cwd}
+		);
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	});
 });
 
-test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
-	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg({scripts: {commitmsg: `'${bin}' -e %GIT_PARAMS%`}}, {cwd});
+test('should work with husky via commitlint -e %GIT_PARAMS%', async t => {
+	await t.notThrowsAsync(async () => {
+		const cwd = await git.bootstrap('fixtures/husky/integration');
+		await writePkg(
+			{husky: {hooks: {'commit-msg': `'${bin}' -e %GIT_PARAMS%`}}},
+			{cwd}
+		);
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	});
 });
 
-test('should work with husky via commitlint -e $HUSKY_GIT_PARAMS', async () => {
-	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg(
-		{scripts: {commitmsg: `'${bin}' -e $HUSKY_GIT_PARAMS`}},
-		{cwd}
-	);
+test('should work with husky via commitlint -e $HUSKY_GIT_PARAMS', async t => {
+	await t.notThrowsAsync(async () => {
+		const cwd = await git.bootstrap('fixtures/husky/integration');
+		await writePkg(
+			{husky: {hooks: {'commit-msg': `'${bin}' -e $HUSKY_GIT_PARAMS`}}},
+			{cwd}
+		);
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	});
 });
 
-test('should work with husky via commitlint -e %HUSKY_GIT_PARAMS%', async () => {
-	const cwd = await git.bootstrap('fixtures/husky/integration');
-	await writePkg(
-		{scripts: {commitmsg: `'${bin}' -e %HUSKY_GIT_PARAMS%`}},
-		{cwd}
-	);
+test('should work with husky via commitlint -e %HUSKY_GIT_PARAMS%', async t => {
+	await t.notThrowsAsync(async () => {
+		const cwd = await git.bootstrap('fixtures/husky/integration');
+		await writePkg(
+			{husky: {hooks: {'commit-msg': `'${bin}' -e %HUSKY_GIT_PARAMS%`}}},
+			{cwd}
+		);
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	});
 });
 
 test('should allow reading of environment variables for edit file, succeeding if valid', async t => {
@@ -269,18 +290,20 @@ test('should pick up config from inside git repo with precedence and fail accord
 	t.is(actual.code, 1);
 });
 
-test('should handle --amend with signoff', async () => {
-	const cwd = await git.bootstrap('fixtures/signoff');
-	await writePkg({scripts: {commitmsg: `'${bin}' -e`}}, {cwd});
+test('should handle --amend with signoff', async t => {
+	await t.notThrowsAsync(async () => {
+		const cwd = await git.bootstrap('fixtures/signoff');
+		await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd});
 
-	await execa('npm', ['install'], {cwd});
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa(
-		'git',
-		['commit', '-m', '"test: this should work"', '--signoff'],
-		{cwd}
-	);
-	await execa('git', ['commit', '--amend', '--no-edit'], {cwd});
+		await execa('npm', ['install'], {cwd});
+		await execa('git', ['add', 'package.json'], {cwd});
+		await execa(
+			'git',
+			['commit', '-m', '"test: this should work"', '--signoff'],
+			{cwd}
+		);
+		await execa('git', ['commit', '--amend', '--no-edit'], {cwd});
+	});
 });
 
 test('should handle linting with issue prefixes', async t => {

@@ -4,11 +4,9 @@ import * as sander from '@marionebl/sander';
 
 import toplevel from '@commitlint/top-level';
 
-export default getCommitMessages;
-
 // Get commit messages
 // Object => Promise<Array<String>>
-async function getCommitMessages(settings) {
+export default async function getCommitMessages(settings) {
 	const {cwd, from, to, edit} = settings;
 
 	if (edit) {

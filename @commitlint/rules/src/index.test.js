@@ -2,7 +2,7 @@ import path from 'path';
 import test from 'ava';
 import globby from 'globby';
 import {values} from 'lodash';
-import rules from '.';
+import rules from './index';
 
 test('exports all rules', async t => {
 	const expected = (await glob('*.js')).sort();
@@ -16,7 +16,7 @@ test('rules export functions', t => {
 });
 
 async function glob(pattern) {
-	const files = await globby([path.join(__dirname, pattern)], {
+	const files = await globby(pattern, {
 		ignore: ['**/index.js', '**/*.test.js'],
 		cwd: __dirname
 	});

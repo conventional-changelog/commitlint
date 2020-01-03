@@ -11,7 +11,7 @@
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
     "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose && ava \"src/*.serial-test.js\" --verbose",
+    "test": "ava -c 4 --verbose && ava src/index.serial-test.js --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
   },
   "ava": {
@@ -23,9 +23,15 @@
       "src/**/*.js",
       "!lib/**/*"
     ],
-    "babel": "inherit",
+    "babel": {
+      "testOptions": {
+        "presets": [
+          "babel-preset-commitlint"
+        ]
+      }
+    },
     "require": [
-      "babel-register"
+      "@babel/register"
     ]
   },
   "babel": {
@@ -56,12 +62,13 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "7.7.7",
+    "@babel/cli": "7.7.7",
+    "@babel/register": "7.7.7",
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.0",
-    "ava": "0.22.0",
-    "babel-cli": "6.26.0",
+    "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
-    "babel-register": "6.26.0",
     "concurrently": "3.6.1",
     "cross-env": "6.0.3",
     "execa": "0.11.0",
@@ -70,7 +77,6 @@
   "dependencies": {
     "@commitlint/execute-rule": "^8.3.2",
     "@commitlint/resolve-extends": "^8.3.2",
-    "babel-runtime": "^6.23.0",
     "chalk": "2.4.2",
     "cosmiconfig": "^5.2.0",
     "lodash": "4.17.15",
