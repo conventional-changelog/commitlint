@@ -42,13 +42,15 @@ async function main() {
 	// Restore stashed changes if any
 	await pop();
 
+	const args = process.argv.slice(2);
+
 	// Lint all commits in TRAVIS_COMMIT_RANGE if available
 	if (IS_PR && RANGE) {
 		const [start, end] = RANGE.split('.').filter(Boolean);
-		await lint(['--from', start, '--to', end]);
+		await lint(['--from', start, '--to', end, ...args]);
 	} else {
 		const input = await log(COMMIT);
-		await lint([], {input});
+		await lint(args, {input});
 	}
 }
 

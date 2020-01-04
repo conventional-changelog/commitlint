@@ -18,9 +18,9 @@ const validBaseEnv = {
 	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG'
 };
 
-const cli = async (config = {}) => {
+const cli = async (config = {}, args = []) => {
 	try {
-		return await execa(bin, [], config);
+		return await execa(bin, args, config);
 	} catch (err) {
 		throw new Error([err.stdout, err.stderr].join('\n'));
 	}
@@ -95,6 +95,39 @@ test('should call git with expected args on pull_request', async () => {
 		'TRAVIS_COMMIT_A',
 		'--to',
 		'TRAVIS_COMMIT_B'
+	]);
+});
+
+test('should call git with extra expected args on pull_request', async () => {
+	const cwd = await git.clone(
+		'https://github.com/conventional-changelog/commitlint.git',
+		['--depth=10'],
+		__dirname,
+		TRAVIS_COMMITLINT_GIT_BIN
+	);
+
+	const result = await cli(
+		{
+			cwd,
+			env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'}
+		},
+		['--config', './config/commitlint.config.js']
+	);
+	const invocations = await getInvocations(result.stdout);
+	expect(invocations.length).toBe(3);
+
+	const [stash, branches, commilint] = invocations;
+
+	expect(stash).toEqual(['git', 'stash', '-k', '-u', '--quiet']);
+	expect(branches).toEqual(['git', 'stash', 'pop', '--quiet']);
+	expect(commilint).toEqual([
+		'commitlint',
+		'--from',
+		'TRAVIS_COMMIT_A',
+		'--to',
+		'TRAVIS_COMMIT_B',
+		'--config',
+		'./config/commitlint.config.js'
 	]);
 });
 
