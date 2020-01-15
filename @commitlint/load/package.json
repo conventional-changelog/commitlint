@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "8.3.4",
+  "version": "8.3.5",
   "description": "Load shared commitlint configuration",
   "main": "lib/index.js",
   "files": [
@@ -69,7 +69,7 @@
   },
   "dependencies": {
     "@commitlint/execute-rule": "^8.3.4",
-    "@commitlint/resolve-extends": "^8.3.4",
+    "@commitlint/resolve-extends": "^8.3.5",
     "babel-runtime": "^6.23.0",
     "chalk": "2.4.2",
     "cosmiconfig": "^5.2.0",
