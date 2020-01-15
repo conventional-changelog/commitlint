@@ -217,7 +217,18 @@ type Config = {
   rules: {[ruleName: string]: Rule};
 };
 
-load(seed: Seed = {}) => Promise<Config>;
+type LoadOptions = {
+  /*
+   * Path to the config file to load.
+   */
+  file?: string;
+  /*
+   * The cwd to use when loading config from file parameter.
+   */
+  cwd: string;
+};
+
+load(seed: Seed = {}, options?: LoadOptions = {cwd: process.cwd()}) => Promise<Config>;
 ```
 
 * **Example**
@@ -240,6 +251,10 @@ load({extends: ['./package']})
 load({parserPreset: './parser-preset.js'})
 .then(config => console.log(config));
 // => { extends: [], rules: {}, parserPreset: {name: './parser-preset.js', path: './parser-preset.js', opts: {}}}
+
+load({}, {file: '.commitlintrc.yml', cwd: process.cwd()})
+.then(config => console.log(config));
+// => { extends: [], rules: { 'body-leading-blank': [ 1, 'always' ] }, formatter: '@commitlint/format', plugins: {} }
 ```
 
 ### @commitlint/read
