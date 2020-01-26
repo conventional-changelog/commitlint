@@ -1,4 +1,3 @@
-import test from 'ava';
 import parse from '@commitlint/parse';
 import footerEmpty from './footer-empty';
 
@@ -14,56 +13,56 @@ const parsed = {
 	filled: parse(messages.filled)
 };
 
-test('with simple message should succeed for empty keyword', async t => {
+test('with simple message should succeed for empty keyword', async () => {
 	const [actual] = footerEmpty(await parsed.simple);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with simple message should fail for "never"', async t => {
+test('with simple message should fail for "never"', async () => {
 	const [actual] = footerEmpty(await parsed.simple, 'never');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with simple message should succeed for "always"', async t => {
+test('with simple message should succeed for "always"', async () => {
 	const [actual] = footerEmpty(await parsed.simple, 'always');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with empty footer should succeed for empty keyword', async t => {
+test('with empty footer should succeed for empty keyword', async () => {
 	const [actual] = footerEmpty(await parsed.empty);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with empty footer should fail for "never"', async t => {
+test('with empty footer should fail for "never"', async () => {
 	const [actual] = footerEmpty(await parsed.empty, 'never');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with empty footer should succeed for "always"', async t => {
+test('with empty footer should succeed for "always"', async () => {
 	const [actual] = footerEmpty(await parsed.empty, 'always');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with footer should fail for empty keyword', async t => {
+test('with footer should fail for empty keyword', async () => {
 	const [actual] = footerEmpty(await parsed.filled);
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with footer should succeed for "never"', async t => {
+test('with footer should succeed for "never"', async () => {
 	const [actual] = footerEmpty(await parsed.filled, 'never');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with footer should fail for "always"', async t => {
+test('with footer should fail for "always"', async () => {
 	const [actual] = footerEmpty(await parsed.filled, 'always');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });

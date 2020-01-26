@@ -1,4 +1,3 @@
-import test from 'ava';
 import preset from 'conventional-changelog-angular';
 import parse from '@commitlint/parse';
 import referencesEmpty from './references-empty';
@@ -31,56 +30,56 @@ const parsed = {
 	})
 };
 
-test('defaults to never and fails for plain', async t => {
+test('defaults to never and fails for plain', async () => {
 	const [actual] = referencesEmpty(await parsed.plain);
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('defaults to never and succeeds for reference', async t => {
+test('defaults to never and succeeds for reference', async () => {
 	const [actual] = referencesEmpty(await parsed.reference);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('fails for comment with never', async t => {
+test('fails for comment with never', async () => {
 	const [actual] = referencesEmpty(await parsed.comment, 'never');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('succeeds for comment with always', async t => {
+test('succeeds for comment with always', async () => {
 	const [actual] = referencesEmpty(await parsed.comment, 'always');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('succeeds for reference with never', async t => {
+test('succeeds for reference with never', async () => {
 	const [actual] = referencesEmpty(await parsed.reference, 'never');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('fails for reference with always', async t => {
+test('fails for reference with always', async () => {
 	const [actual] = referencesEmpty(await parsed.reference, 'always');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('succeeds for references with never', async t => {
+test('succeeds for references with never', async () => {
 	const [actual] = referencesEmpty(await parsed.references, 'never');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('fails for references with always', async t => {
+test('fails for references with always', async () => {
 	const [actual] = referencesEmpty(await parsed.references, 'always');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('succeeds for custom references with always', async t => {
+test('succeeds for custom references with always', async () => {
 	const [actual] = referencesEmpty(await parsed.prefix, 'never');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
