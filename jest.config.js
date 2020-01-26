@@ -4,7 +4,6 @@ module.exports = {
 	testRegex: undefined,
 	testMatch: [
 		'**/*.test.ts?(x)',
-		'**/@commitlint/rules/src/*.test.js?(x)',
 		'**/@commitlint/read/src/*.test.js?(x)'
 	]
 };

@@ -8,3 +8,4 @@ import notEmpty from './not-empty';
 export {ensureCase as case};
 export {ensureEnum as enum};
 export {maxLength, maxLineLength, minLength, notEmpty};
+export {TargetCaseType} from './case';
