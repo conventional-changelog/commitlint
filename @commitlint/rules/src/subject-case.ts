@@ -1,12 +1,14 @@
-import * as ensure from '@commitlint/ensure';
+import {TargetCaseType, case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
 import {Rule} from './types';
 
 const negated = (when?: string) => when === 'never';
 
-export const subjectCase: Rule<
-	ensure.TargetCaseType | ensure.TargetCaseType[]
-> = (parsed, when = 'always', value = []) => {
+export const subjectCase: Rule<TargetCaseType | TargetCaseType[]> = (
+	parsed,
+	when = 'always',
+	value = []
+) => {
 	const {subject} = parsed;
 
 	if (typeof subject !== 'string' || !subject.match(/^[a-z]/i)) {
@@ -24,7 +26,7 @@ export const subjectCase: Rule<
 	});
 
 	const result = checks.some(check => {
-		const r = ensure.case(subject, check.case);
+		const r = ensureCase(subject, check.case);
 		return negated(check.when) ? !r : r;
 	});
 

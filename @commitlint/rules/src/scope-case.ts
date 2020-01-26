@@ -1,12 +1,14 @@
-import * as ensure from '@commitlint/ensure';
+import {TargetCaseType, case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
 import {Rule} from './types';
 
 const negated = (when?: string) => when === 'never';
 
-export const scopeCase: Rule<
-	ensure.TargetCaseType | ensure.TargetCaseType[]
-> = (parsed, when = 'always', value = []) => {
+export const scopeCase: Rule<TargetCaseType | TargetCaseType[]> = (
+	parsed,
+	when = 'always',
+	value = []
+) => {
 	const {scope} = parsed;
 
 	if (!scope) {
@@ -30,7 +32,7 @@ export const scopeCase: Rule<
 
 	const result = checks.some(check => {
 		const r = scopeSegments.every(
-			segment => delimiters.test(segment) || ensure.case(segment, check.case)
+			segment => delimiters.test(segment) || ensureCase(segment, check.case)
 		);
 
 		return negated(check.when) ? !r : r;

@@ -1,10 +1,10 @@
-import * as ensure from '@commitlint/ensure';
+import {TargetCaseType, case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
 import {Rule} from './types';
 
 const negated = (when?: string) => when === 'never';
 
-export const typeCase: Rule<ensure.TargetCaseType | ensure.TargetCaseType[]> = (
+export const typeCase: Rule<TargetCaseType | TargetCaseType[]> = (
 	parsed,
 	when = 'always',
 	value = []
@@ -26,7 +26,7 @@ export const typeCase: Rule<ensure.TargetCaseType | ensure.TargetCaseType[]> = (
 	});
 
 	const result = checks.some(check => {
-		const r = ensure.case(type, check.case);
+		const r = ensureCase(type, check.case);
 		return negated(check.when) ? !r : r;
 	});
 
