@@ -5,7 +5,7 @@ import {merge} from 'lodash';
 import * as sander from 'sander';
 import stream from 'string-to-stream';
 
-const bin = path.normalize(path.join(__dirname, '../lib/cli.js'));
+const bin = require.resolve('../lib/cli.js');
 
 const cli = (args, options) => {
 	return (input = '') => {

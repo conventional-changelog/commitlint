@@ -5,6 +5,7 @@ module.exports = {
 	testMatch: [
 		'**/*.test.ts?(x)',
 		'**/@commitlint/read/src/*.test.js?(x)',
+		'**/@commitlint/travis-cli/src/*.test.js?(x)',
 		'**/@commitlint/cli/src/*.test.js?(x)'
 	]
 };

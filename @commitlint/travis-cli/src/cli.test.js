@@ -1,14 +1,11 @@
-// Disable ftb
-// const os = require('os');
-// const {git} = require('@commitlint/test');
-import test from 'ava';
 import execa from 'execa';
 // Disable ftb
-// const which = require('which');
+// import {git} from '@commitlint/test';
+// import which from 'which';
 
 // Disable ftb
 // const NODE_BIN = which.sync('node');
-const BIN = require.resolve('../lib/cli.js');
+const bin = require.resolve('../lib/cli.js');
 
 // Disable ftb
 // const TRAVIS_COMMITLINT_BIN = require.resolve('../fixtures/commitlint');
@@ -16,68 +13,60 @@ const BIN = require.resolve('../lib/cli.js');
 // const TRAVIS_BRANCH = 'TRAVIS_BRANCH';
 // const TRAVIS_COMMIT = 'TRAVIS_COMMIT';
 
-const bin = async (config = {}) => {
+const cli = async (config = {}) => {
 	try {
-		return await execa(BIN, Object.assign({extendEnv: false}, config));
+		return await execa(bin, [], config);
 	} catch (err) {
-		throw new Error([err.stdout, err.stderr].join('\n'));
+		return Promise.reject([err.stdout, err.stderr].join('\n'));
 	}
 };
 
-test('should throw when not on travis ci', async t => {
+test('should throw when not on travis ci', async () => {
 	const env = {
 		CI: false,
 		TRAVIS: false
 	};
 
-	await t.throwsAsync(
-		bin({env}),
-		/@commitlint\/travis-cli is intended to be used on Travis CI/
+	await expect(cli({env})).rejects.toContain(
+		'@commitlint/travis-cli is intended to be used on Travis CI'
 	);
 });
 
-/* Test.failing(
-	'should throw when on travis ci, but env vars are missing',
-	async t => {
-		const env = {
-			TRAVIS: true,
-			CI: true
-		};
-
-		await t.throwsAsync(bin({env}), /TRAVIS_COMMIT, TRAVIS_BRANCH/);
-	}
-); */
-
-test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async t => {
+test('should throw when on travis ci, but env vars are missing', async () => {
 	const env = {
 		TRAVIS: true,
 		CI: true
 	};
 
-	await t.throwsAsync(bin({env}), /TRAVIS_COMMIT/);
+	await expect(cli({env})).rejects.toContain(
+		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG'
+	);
 });
 
-/* Test.failing(
-	'should throw when on travis ci, but TRAVIS_BRANCH is missing',
-	async t => {
-		const env = {
-			TRAVIS: true,
-			CI: true
-		};
+test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async () => {
+	const env = {
+		TRAVIS: true,
+		CI: true
+	};
 
-		await t.throwsAsync(bin({env}), /TRAVIS_BRANCH/);
-	}
-);
+	await expect(cli({env})).rejects.toContain('TRAVIS_COMMIT');
+});
 
-test.failing('should call git with expected args on shallow repo', async t => {
-	if (os.platform() === 'win32') {
-		t.pass();
-		return;
-	}
+test('should throw when on travis ci, but TRAVIS_BRANCH is missing', async () => {
+	const env = {
+		TRAVIS: true,
+		CI: true
+	};
 
-	const cwd = await git.clone('https://github.com/conventional-changelog/commitlint.git', [
-		'--depth=10'
-	]);
+	await expect(cli({env})).rejects.toContain('TRAVIS_BRANCH');
+});
+
+/*
+test('should call git with expected args on shallow repo', async () => {
+	const cwd = await git.clone(
+		'https://github.com/conventional-changelog/commitlint.git',
+		['--depth=10']
+	);
 
 	const env = {
 		TRAVIS: true,
@@ -88,7 +77,7 @@ test.failing('should call git with expected args on shallow repo', async t => {
 		TRAVIS_COMMITLINT_GIT_BIN
 	};
 
-	const result = await bin({cwd, env});
+	const result = await cli({cwd, env});
 	const invocations = await getInvocations(result.stdout);
 	t.is(invocations.length, 7);
 
@@ -143,76 +132,72 @@ test.failing('should call git with expected args on shallow repo', async t => {
 	]);
 });
 
-test.failing(
-	'should call git with expected args on unshallow repo',
-	async t => {
-		if (os.platform() === 'win32') {
-			t.pass();
-			return;
-		}
+test('should call git with expected args on unshallow repo', async () => {
+	const cwd = await git.clone(
+		'https://github.com/conventional-changelog/commitlint.git'
+	);
 
-		const cwd = await git.clone('https://github.com/conventional-changelog/commitlint.git');
+	const env = {
+		TRAVIS: true,
+		CI: true,
+		TRAVIS_BRANCH,
+		TRAVIS_COMMIT,
+		TRAVIS_COMMITLINT_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN
+	};
 
-		const env = {
-			TRAVIS: true,
-			CI: true,
-			TRAVIS_BRANCH,
-			TRAVIS_COMMIT,
-			TRAVIS_COMMITLINT_BIN,
-			TRAVIS_COMMITLINT_GIT_BIN
-		};
+	const result = await cli({cwd, env});
+	const invocations = await getInvocations(result.stdout);
+	t.is(invocations.length, 6);
 
-		const result = await bin({cwd, env});
-		const invocations = await getInvocations(result.stdout);
-		t.is(invocations.length, 6);
+	const [stash, branches, checkout, back, pop, commilint] = invocations;
 
-		const [stash, branches, checkout, back, pop, commilint] = invocations;
-
-		t.deepEqual(stash, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash']);
-		t.deepEqual(branches, [
-			NODE_BIN,
-			TRAVIS_COMMITLINT_GIT_BIN,
-			'remote',
-			'set-branches',
-			'origin',
-			TRAVIS_BRANCH
-		]);
-		t.deepEqual(checkout, [
-			NODE_BIN,
-			TRAVIS_COMMITLINT_GIT_BIN,
-			'checkout',
-			TRAVIS_BRANCH,
-			'--quiet'
-		]);
-		t.deepEqual(back, [
-			NODE_BIN,
-			TRAVIS_COMMITLINT_GIT_BIN,
-			'checkout',
-			'-',
-			'--quiet'
-		]);
-		t.deepEqual(pop, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash', 'pop']);
-		t.deepEqual(commilint, [
-			NODE_BIN,
-			TRAVIS_COMMITLINT_BIN,
-			'--from',
-			TRAVIS_BRANCH,
-			'--to',
-			TRAVIS_COMMIT
-		]);
-	}
-);
+	t.deepEqual(stash, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash']);
+	t.deepEqual(branches, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'remote',
+		'set-branches',
+		'origin',
+		TRAVIS_BRANCH
+	]);
+	t.deepEqual(checkout, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'checkout',
+		TRAVIS_BRANCH,
+		'--quiet'
+	]);
+	t.deepEqual(back, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN,
+		'checkout',
+		'-',
+		'--quiet'
+	]);
+	t.deepEqual(pop, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash', 'pop']);
+	t.deepEqual(commilint, [
+		NODE_BIN,
+		TRAVIS_COMMITLINT_BIN,
+		'--from',
+		TRAVIS_BRANCH,
+		'--to',
+		TRAVIS_COMMIT
+	]);
+});
 
 function getInvocations(stdout) {
 	const matches = stdout.match(/[^[\]]+/g);
 	const raw = Array.isArray(matches) ? matches : [];
 
-	return raw.filter(invocation => invocation !== '\n').map(invocation =>
-		invocation
-			.split(',')
-			.map(fragment => fragment.trim())
-			.map(fragment => fragment.substring(1, fragment.length - 1))
-			.filter(Boolean)
-	);
+	return raw
+		.filter(invocation => invocation !== '\n')
+		.map(invocation =>
+			invocation
+				.split(',')
+				.map(fragment => fragment.trim())
+				.map(fragment => fragment.substring(1, fragment.length - 1))
+				.filter(Boolean)
+		);
 }
 */
