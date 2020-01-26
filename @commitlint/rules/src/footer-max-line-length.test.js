@@ -1,4 +1,3 @@
-import test from 'ava';
 import parse from '@commitlint/parse';
 import check from './footer-max-line-length';
 
@@ -23,38 +22,38 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with simple should succeed', async t => {
+test('with simple should succeed', async () => {
 	const [actual] = check(await parsed.simple, '', value);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with empty should succeed', async t => {
+test('with empty should succeed', async () => {
 	const [actual] = check(await parsed.empty, '', value);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with short should succeed', async t => {
+test('with short should succeed', async () => {
 	const [actual] = check(await parsed.short, '', value);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with long should fail', async t => {
+test('with long should fail', async () => {
 	const [actual] = check(await parsed.long, '', value);
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with short with multiple lines should succeed', async t => {
+test('with short with multiple lines should succeed', async () => {
 	const [actual] = check(await parsed.short, '', value);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with long with multiple lines should fail', async t => {
+test('with long with multiple lines should fail', async () => {
 	const [actual] = check(await parsed.long, '', value);
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });

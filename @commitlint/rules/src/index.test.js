@@ -1,18 +1,17 @@
 import path from 'path';
-import test from 'ava';
 import globby from 'globby';
-import {values} from 'lodash';
+import values from 'lodash/values';
 import rules from '.';
 
-test('exports all rules', async t => {
+test('exports all rules', async () => {
 	const expected = (await glob('*.js')).sort();
 	const actual = Object.keys(rules).sort();
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('rules export functions', t => {
+test('rules export functions', () => {
 	const actual = values(rules);
-	t.true(actual.every(rule => typeof rule === 'function'));
+	expect(actual.every(rule => typeof rule === 'function')).toBe(true);
 });
 
 async function glob(pattern) {

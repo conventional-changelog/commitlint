@@ -1,4 +1,3 @@
-import test from 'ava';
 import parse from '@commitlint/parse';
 import check from './scope-min-length';
 
@@ -19,20 +18,20 @@ const parsed = {
 	long: parse(messages.long)
 };
 
-test('with empty should succeed', async t => {
+test('with empty should succeed', async () => {
 	const [actual] = check(await parsed.empty, '', value);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with short should fail', async t => {
+test('with short should fail', async () => {
 	const [actual] = check(await parsed.short, '', value);
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with long should succeed', async t => {
+test('with long should succeed', async () => {
 	const [actual] = check(await parsed.long, '', value);
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });

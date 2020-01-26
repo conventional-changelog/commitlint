@@ -1,4 +1,3 @@
-import test from 'ava';
 import parse from '@commitlint/parse';
 import check from './subject-full-stop';
 
@@ -14,38 +13,38 @@ const parsed = {
 	without: parse(messages.without)
 };
 
-test('empty against "always" should succeed', async t => {
+test('empty against "always" should succeed', async () => {
 	const [actual] = check(await parsed.empty, 'always', '.');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('empty against "never ." should succeed', async t => {
+test('empty against "never ." should succeed', async () => {
 	const [actual] = check(await parsed.empty, 'never', '.');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with against "always ." should succeed', async t => {
+test('with against "always ." should succeed', async () => {
 	const [actual] = check(await parsed.with, 'always', '.');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('with against "never ." should fail', async t => {
+test('with against "never ." should fail', async () => {
 	const [actual] = check(await parsed.with, 'never', '.');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('without against "always ." should fail', async t => {
+test('without against "always ." should fail', async () => {
 	const [actual] = check(await parsed.without, 'always', '.');
 	const expected = false;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('without against "never ." should succeed', async t => {
+test('without against "never ." should succeed', async () => {
 	const [actual] = check(await parsed.without, 'never', '.');
 	const expected = true;
-	t.is(actual, expected);
+	expect(actual).toEqual(expected);
 });
