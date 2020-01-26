@@ -1,6 +1,7 @@
-import preset from 'conventional-changelog-angular';
 import parse from '@commitlint/parse';
 import {referencesEmpty} from './references-empty';
+
+const preset = require('conventional-changelog-angular');
 
 const messages = {
 	plain: 'foo: bar',
