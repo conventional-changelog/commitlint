@@ -43,24 +43,6 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 	);
 });
 
-test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async () => {
-	const env = {
-		TRAVIS: true,
-		CI: true
-	};
-
-	await expect(cli({env})).rejects.toContain('TRAVIS_COMMIT');
-});
-
-test('should throw when on travis ci, but TRAVIS_BRANCH is missing', async () => {
-	const env = {
-		TRAVIS: true,
-		CI: true
-	};
-
-	await expect(cli({env})).rejects.toContain('TRAVIS_BRANCH');
-});
-
 /*
 test('should call git with expected args on shallow repo', async () => {
 	const cwd = await git.clone(
