@@ -121,7 +121,7 @@ test('should produce no error output with --quiet flag', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');
 	expect(actual.stdout).toEqual('');
-	expect(actual.stdout).toEqual('');
+	expect(actual.stderr).toEqual('');
 	expect(actual.code).toBe(1);
 });
 
@@ -129,7 +129,7 @@ test('should produce no error output with -q flag', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
 	const actual = await cli(['-q'], {cwd})('foo: bar');
 	expect(actual.stdout).toEqual('');
-	expect(actual.stdout).toEqual('');
+	expect(actual.stderr).toEqual('');
 	expect(actual.code).toBe(1);
 });
 
