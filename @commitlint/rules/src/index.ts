@@ -31,6 +31,8 @@ import {typeEnum} from './type-enum';
 import {typeMaxLength} from './type-max-length';
 import {typeMinLength} from './type-min-length';
 
+export * from './types';
+
 export default {
 	'body-case': bodyCase,
 	'body-empty': bodyEmpty,
