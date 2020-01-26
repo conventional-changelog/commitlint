@@ -1,21 +1,20 @@
 import {git} from '@commitlint/test';
-import test from 'ava';
 import execa from 'execa';
 import * as sander from '@marionebl/sander';
 
 import read from '.';
 
-test('get edit commit message specified by the `edit` flag', async t => {
+test('get edit commit message specified by the `edit` flag', async () => {
 	const cwd = await git.bootstrap();
 
 	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
 
 	const expected = ['foo\n'];
 	const actual = await read({edit: 'commit-msg-file', cwd});
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('get edit commit message from git root', async t => {
+test('get edit commit message from git root', async () => {
 	const cwd = await git.bootstrap();
 
 	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
@@ -23,10 +22,10 @@ test('get edit commit message from git root', async t => {
 	await execa('git', ['commit', '-m', 'alpha'], {cwd});
 	const expected = ['alpha\n\n'];
 	const actual = await read({edit: true, cwd});
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('get history commit messages', async t => {
+test('get history commit messages', async () => {
 	const cwd = await git.bootstrap();
 	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt'], {cwd});
@@ -36,10 +35,10 @@ test('get history commit messages', async t => {
 
 	const expected = ['remove alpha\n\n', 'alpha\n\n'];
 	const actual = await read({cwd});
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
 
-test('get edit commit message from git subdirectory', async t => {
+test('get edit commit message from git subdirectory', async () => {
 	const cwd = await git.bootstrap();
 	await sander.mkdir(cwd, 'beta');
 	await sander.writeFile(cwd, 'beta/beta.txt', 'beta');
@@ -49,5 +48,5 @@ test('get edit commit message from git subdirectory', async t => {
 
 	const expected = ['beta\n\n'];
 	const actual = await read({edit: true, cwd});
-	t.deepEqual(actual, expected);
+	expect(actual).toEqual(expected);
 });
