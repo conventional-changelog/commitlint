@@ -329,7 +329,8 @@ test('should handle linting with issue prefixes', async () => {
 test('should print full commit message when input from stdin fails', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
 	const input = 'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
-	const actual = await cli([], {cwd})(input);
+	// output text in plain text so we can compare it
+	const actual = await cli(['--color=false'], {cwd})(input);
 
 	expect(actual.stdout).toContain(input);
 	expect(actual.code).toBe(1);
@@ -338,7 +339,8 @@ test('should print full commit message when input from stdin fails', async () =>
 test('should not print commit message fully or partially when input succeeds', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const message = 'type: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
-	const actual = await cli([], {cwd})(message);
+	// output text in plain text so we can compare it
+	const actual = await cli(['--color=false'], {cwd})(message);
 
 	expect(actual.stdout).not.toContain(message);
 	expect(actual.stdout).not.toContain(message.split('\n')[0]);
