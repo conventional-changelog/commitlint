@@ -3,20 +3,13 @@
   "version": "8.3.4",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=4"
