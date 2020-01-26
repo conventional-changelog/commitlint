@@ -1,17 +1,18 @@
 #!/usr/bin/env node
-require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
+import 'core-js/stable'; // eslint-disable-line import/no-unassigned-import
+import 'regenerator-runtime/runtime'; // eslint-disable-line import/no-unassigned-import
 
-const load = require('@commitlint/load');
-const lint = require('@commitlint/lint');
-const read = require('@commitlint/read');
-const meow = require('meow');
-const {merge, pick, isFunction} = require('lodash');
-const stdin = require('get-stdin');
-const resolveFrom = require('resolve-from');
-const resolveGlobal = require('resolve-global');
+import load from '@commitlint/load';
+import lint from '@commitlint/lint';
+import read from '@commitlint/read';
+import meow from 'meow';
+import {merge, pick, isFunction} from 'lodash';
+import stdin from 'get-stdin';
+import resolveFrom from 'resolve-from';
+import resolveGlobal from 'resolve-global';
 
+import help from './help';
 const pkg = require('../package');
-const help = require('./help');
 
 const flags = {
 	color: {

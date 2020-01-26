@@ -42,7 +42,7 @@ test('plugins should be loaded from seed', async t => {
 	const stubbedLoad = proxyquire('.', {
 		'commitlint-plugin-example': plugin,
 		'@scope/commitlint-plugin-example': scopedPlugin
-	});
+	}).default;
 
 	const cwd = await git.bootstrap('fixtures/extends-empty');
 	const actual = await stubbedLoad(
@@ -61,7 +61,7 @@ test('plugins should be loaded from config', async t => {
 	const stubbedLoad = proxyquire('.', {
 		'commitlint-plugin-example': plugin,
 		'@scope/commitlint-plugin-example': scopedPlugin
-	});
+	}).default;
 
 	const cwd = await git.bootstrap('fixtures/extends-plugins');
 	const actual = await stubbedLoad({}, {cwd});
@@ -87,7 +87,7 @@ test('uses seed with parserPreset', async t => {
 
 test('invalid extend should throw', async t => {
 	const cwd = await git.bootstrap('fixtures/extends-invalid');
-	await t.throws(load({}, {cwd}));
+	await t.throwsAsync(load({}, {cwd}));
 });
 
 test('empty file should have no rules', async t => {

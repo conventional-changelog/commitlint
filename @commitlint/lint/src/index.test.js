@@ -2,12 +2,12 @@ import test from 'ava';
 import lint from '.';
 
 test('throws without params', async t => {
-	const error = await t.throws(lint());
+	const error = await t.throwsAsync(lint());
 	t.is(error.message, 'Expected a raw commit');
 });
 
 test('throws with empty message', async t => {
-	const error = await t.throws(lint(''));
+	const error = await t.throwsAsync(lint(''));
 	t.is(error.message, 'Expected a raw commit');
 });
 
@@ -83,7 +83,7 @@ test('positive on stub message and opts', async t => {
 });
 
 test('throws for invalid rule names', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('foo', {foo: [2, 'always'], bar: [1, 'never']})
 	);
 
@@ -91,7 +91,7 @@ test('throws for invalid rule names', async t => {
 });
 
 test('throws for invalid rule config', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('type(scope): foo', {
 			'type-enum': 1,
 			'scope-enum': {0: 2, 1: 'never', 2: ['foo'], length: 3}
@@ -103,11 +103,11 @@ test('throws for invalid rule config', async t => {
 });
 
 test('allows disable shorthand', async t => {
-	await t.notThrows(lint('foo', {'type-enum': [0], 'scope-enum': [0]}));
+	await t.notThrowsAsync(lint('foo', {'type-enum': [0], 'scope-enum': [0]}));
 });
 
 test('throws for rule with invalid length', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('type(scope): foo', {'scope-enum': [1, 2, 3, 4]})
 	);
 
@@ -115,7 +115,7 @@ test('throws for rule with invalid length', async t => {
 });
 
 test('throws for rule with invalid level', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('type(scope): foo', {
 			'type-enum': ['2', 'always'],
 			'header-max-length': [{}, 'always']
@@ -127,7 +127,7 @@ test('throws for rule with invalid level', async t => {
 });
 
 test('throws for rule with out of range level', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('type(scope): foo', {
 			'type-enum': [-1, 'always'],
 			'header-max-length': [3, 'always']
@@ -139,7 +139,7 @@ test('throws for rule with out of range level', async t => {
 });
 
 test('throws for rule with invalid condition', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('type(scope): foo', {
 			'type-enum': [1, 2],
 			'header-max-length': [1, {}]
@@ -151,7 +151,7 @@ test('throws for rule with invalid condition', async t => {
 });
 
 test('throws for rule with out of range condition', async t => {
-	const error = await t.throws(
+	const error = await t.throwsAsync(
 		lint('type(scope): foo', {
 			'type-enum': [1, 'foo'],
 			'header-max-length': [1, 'bar']

@@ -1,8 +1,8 @@
 // Disable ftb
 // const os = require('os');
 // const {git} = require('@commitlint/test');
-const test = require('ava');
-const execa = require('execa');
+import test from 'ava';
+import execa from 'execa';
 // Disable ftb
 // const which = require('which');
 
@@ -30,7 +30,7 @@ test('should throw when not on travis ci', async t => {
 		TRAVIS: false
 	};
 
-	await t.throws(
+	await t.throwsAsync(
 		bin({env}),
 		/@commitlint\/travis-cli is intended to be used on Travis CI/
 	);
@@ -44,7 +44,7 @@ test('should throw when not on travis ci', async t => {
 			CI: true
 		};
 
-		await t.throws(bin({env}), /TRAVIS_COMMIT, TRAVIS_BRANCH/);
+		await t.throwsAsync(bin({env}), /TRAVIS_COMMIT, TRAVIS_BRANCH/);
 	}
 ); */
 
@@ -54,7 +54,7 @@ test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async t => 
 		CI: true
 	};
 
-	await t.throws(bin({env}), /TRAVIS_COMMIT/);
+	await t.throwsAsync(bin({env}), /TRAVIS_COMMIT/);
 });
 
 /* Test.failing(
@@ -65,7 +65,7 @@ test('should throw when on travis ci, but TRAVIS_COMMIT is missing', async t => 
 			CI: true
 		};
 
-		await t.throws(bin({env}), /TRAVIS_BRANCH/);
+		await t.throwsAsync(bin({env}), /TRAVIS_BRANCH/);
 	}
 );
 

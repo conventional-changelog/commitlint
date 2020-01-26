@@ -21,9 +21,15 @@
       "src/**/*.js",
       "!lib/**/*"
     ],
-    "babel": "inherit",
+    "babel": {
+      "testOptions": {
+        "presets": [
+          "babel-preset-commitlint"
+        ]
+      }
+    },
     "require": [
-      "babel-register"
+      "@babel/register"
     ]
   },
   "babel": {
@@ -54,13 +60,14 @@
   "license": "MIT",
   "dependencies": {
     "@marionebl/sander": "0.6.1",
-    "execa": "0.9.0",
-    "pkg-dir": "2.0.0"
+    "execa": "0.11.0",
+    "pkg-dir": "4.2.0"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
+    "@babel/core": "^7.7.7",
+    "@babel/cli": "^7.7.7",
+    "@babel/register": "^7.7.7",
     "babel-preset-commitlint": "^8.2.0",
-    "babel-register": "6.26.0",
     "concurrently": "3.5.1",
     "cross-env": "5.1.1"
   }

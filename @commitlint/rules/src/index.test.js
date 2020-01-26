@@ -16,7 +16,7 @@ test('rules export functions', t => {
 });
 
 async function glob(pattern) {
-	const files = await globby([path.join(__dirname, pattern)], {
+	const files = await globby(pattern, {
 		ignore: ['**/index.js', '**/*.test.js'],
 		cwd: __dirname
 	});

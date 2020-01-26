@@ -16,9 +16,15 @@
     "watch": "babel src --out-dir lib --watch  --source-maps"
   },
   "ava": {
-    "babel": "inherit",
+    "babel": {
+      "testOptions": {
+        "presets": [
+          "babel-preset-commitlint"
+        ]
+      }
+    },
     "require": [
-      "babel-register"
+      "@babel/register"
     ],
     "files": [
       "src/**/*.test.js"
@@ -55,18 +61,18 @@
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/register": "^7.7.7",
     "@commitlint/utils": "^8.3.4",
-    "ava": "0.20.0",
-    "babel-cli": "6.26.0",
+    "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
-    "babel-register": "6.26.0",
     "commitizen": "3.1.2",
     "concurrently": "3.6.1",
     "cross-env": "6.0.3"
   },
   "dependencies": {
     "@commitlint/load": "^8.3.5",
-    "babel-runtime": "^6.23.0",
     "chalk": "^2.0.0",
     "lodash": "4.17.15",
     "throat": "^5.0.0",
