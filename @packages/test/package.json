@@ -2,11 +2,11 @@
   "name": "@commitlint/test",
   "version": "8.2.0",
   "description": "test utilities for @commitlint",
-  "main": "lib/",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
-  "type": "lib/index.ts",
   "engines": {
     "node": ">=4"
   },
