@@ -3,14 +3,14 @@ import fs from 'fs-extra';
 import path from 'path';
 import pkgDir from 'pkg-dir';
 
-async function bootstrap(fixture?: string): Promise<string> {
+export async function bootstrap(fixture?: string, directory?: string) {
 	const tmpDir = tmp.dirSync({
 		keep: false,
 		unsafeCleanup: true
 	});
 
 	if (typeof fixture !== 'undefined') {
-		const packageDir = await pkgDir();
+		const packageDir = await pkgDir(directory);
 		if (!packageDir) {
 			throw new Error(`ENOENT, no such file or directory '${packageDir}'`);
 		}
@@ -20,5 +20,3 @@ async function bootstrap(fixture?: string): Promise<string> {
 
 	return tmpDir.name;
 }
-
-export {bootstrap};

@@ -2,8 +2,8 @@ import execa from 'execa';
 
 import * as fix from './fix';
 
-export async function bootstrap(fixture?: string) {
-	const cwd = await fix.bootstrap(fixture);
+export async function bootstrap(fixture?: string, directory?: string) {
+	const cwd = await fix.bootstrap(fixture, directory);
 
 	await init(cwd);
 	return cwd;
