@@ -137,9 +137,7 @@ test('should work with husky commitmsg hook and git commit', async () => {
 	const cwd = await gitBootstrap('fixtures/husky/integration');
 	await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd});
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	const commit = await execa(
 		'git',
@@ -155,9 +153,7 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 	const cwd = path.join(upper, 'integration');
 	await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd: upper});
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	const commit = await execa(
 		'git',
@@ -174,9 +170,7 @@ test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
 		{cwd}
 	);
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	const commit = await execa(
 		'git',
@@ -193,9 +187,7 @@ test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
 		{cwd}
 	);
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	const commit = await execa(
 		'git',
@@ -212,9 +204,7 @@ test('should work with husky via commitlint -e $HUSKY_GIT_PARAMS', async () => {
 		{cwd}
 	);
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	const commit = await execa(
 		'git',
@@ -231,9 +221,7 @@ test('should work with husky via commitlint -e %HUSKY_GIT_PARAMS%', async () => 
 		{cwd}
 	);
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	const commit = await execa(
 		'git',
@@ -320,9 +308,7 @@ test('should handle --amend with signoff', async () => {
 	const cwd = await gitBootstrap('fixtures/signoff');
 	await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd});
 
-	// npm install is failing on windows machines
-	// The filename, directory name, or volume label syntax is incorrect.
-	// await execa('npm', ['install'], {cwd});
+	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
 	await execa('git', ['add', 'package.json'], {cwd});
 	await execa(
 		'git',
