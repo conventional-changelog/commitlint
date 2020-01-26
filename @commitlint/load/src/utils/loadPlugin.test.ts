@@ -10,7 +10,7 @@ test.beforeEach(t => {
 	const stubbedLoadPlugin = proxyquire('./loadPlugin', {
 		'commitlint-plugin-example': plugin,
 		'@scope/commitlint-plugin-example': scopedPlugin
-	});
+	}).default;
 	t.context.data = {
 		plugins,
 		plugin,

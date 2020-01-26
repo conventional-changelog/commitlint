@@ -1,17 +1,17 @@
-const addModuleExports = require('babel-plugin-add-module-exports');
 const fastAsync = require('fast-async');
-const jsx = require('babel-plugin-transform-react-jsx');
-const transformRuntime = require('babel-plugin-transform-runtime').default;
-const env = require('babel-preset-env').default;
+const env = require('@babel/preset-env');
+const jsx = require('@babel/plugin-transform-react-jsx');
+const commonjs = require('@babel/plugin-transform-modules-commonjs');
+const transformRuntime = require('@babel/plugin-transform-runtime');
 
 module.exports = preset;
 
 function preset() {
 	const plugins = [
-		addModuleExports,
+		commonjs,
 		[jsx, {pragma: 'h'}],
 		[fastAsync, {spec: true}],
-		[transformRuntime, {polyfill: false, regenerator: false}]
+		[transformRuntime, {regenerator: false}]
 	];
 
 	return {
@@ -27,7 +27,8 @@ function preset() {
 				{
 					debug: process.env.DEBUG === 'true',
 					exclude: ['transform-regenerator', 'transform-async-to-generator'],
-					targets: {node: '6'}
+					targets: {node: '6'},
+					modules: false
 				}
 			]
 		]

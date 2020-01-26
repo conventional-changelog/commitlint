@@ -3,7 +3,7 @@ import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
 import {TargetCaseType} from '@commitlint/ensure';
 import cosmiconfig, {CosmiconfigResult} from 'cosmiconfig';
-import {toPairs, merge, mergeWith, pick} from 'lodash';
+import {toPairs, merge, mergeWith, pick, startsWith} from 'lodash';
 import resolveFrom from 'resolve-from';
 import loadPlugin from './utils/loadPlugin';
 
@@ -153,7 +153,7 @@ export default async (
 		config.parserPreset = {
 			name: config.parserPreset,
 			path: resolvedParserPreset,
-			parserOpts: (await require(resolvedParserPreset)).parserOpts
+			parserOpts: require(resolvedParserPreset)
 		};
 	}
 
@@ -165,18 +165,17 @@ export default async (
 	});
 
 	const preset = valid(mergeWith(extended, config, w));
-	config.extends = Array.isArray(config.extends) ? config.extends : [];
 
-	// Await parser-preset if applicable
-	if (
-		typeof preset.parserPreset === 'object' &&
-		preset.parserPreset !== null &&
-		typeof (preset.parserPreset as any).parserOpts === 'object' &&
-		(preset.parserPreset as any) !== null &&
-		typeof (preset.parserPreset as any).parserOpts.then === 'function'
-	) {
-		(preset.parserPreset as any).parserOpts = (await (preset.parserPreset as any)
-			.parserOpts).parserOpts;
+	// TODO: check if this is still necessary with the new factory based conventional changelog parsers
+	// config.extends = Array.isArray(config.extends) ? config.extends : [];
+
+	// Resolve parser-opts from preset
+	if (typeof preset.parserPreset === 'object') {
+		preset.parserPreset.parserOpts = await loadParserOpts(
+			preset.parserPreset.name,
+			// TODO: fix the types for factory based conventional changelog parsers
+			preset.parserPreset as any
+		);
 	}
 
 	// Resolve config-relative formatter module
@@ -228,4 +227,50 @@ async function loadConfig(
 	}
 
 	return null;
+}
+
+async function loadParserOpts(parserName: string, pendingParser: Promise<any>) {
+	// Await for the module, loaded with require
+	const parser = await pendingParser;
+
+	// Await parser opts if applicable
+	if (
+		typeof parser === 'object' &&
+		typeof parser.parserOpts === 'object' &&
+		typeof parser.parserOpts.then === 'function'
+	) {
+		return (await parser.parserOpts).parserOpts;
+	}
+
+	// Create parser opts from factory
+	if (
+		typeof parser === 'object' &&
+		typeof parser.parserOpts === 'function' &&
+		startsWith(parserName, 'conventional-changelog-')
+	) {
+		return await new Promise(resolve => {
+			const result = parser.parserOpts((_: never, opts: {parserOpts: any}) => {
+				resolve(opts.parserOpts);
+			});
+
+			// If result has data or a promise, the parser doesn't support factory-init
+			// due to https://github.com/nodejs/promises-debugging/issues/16 it just quits, so let's use this fallback
+			if (result) {
+				Promise.resolve(result).then(opts => {
+					resolve(opts.parserOpts);
+				});
+			}
+		});
+	}
+
+	// Pull nested paserOpts, might happen if overwritten with a module in main config
+	if (
+		typeof parser === 'object' &&
+		typeof parser.parserOpts === 'object' &&
+		typeof parser.parserOpts.parserOpts === 'object'
+	) {
+		return parser.parserOpts.parserOpts;
+	}
+
+	return parser.parserOpts;
 }

@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "8.2.0",
+  "version": "8.3.5",
   "description": "Load shared commitlint configuration",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -34,17 +34,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "8.0.0",
-    "@commitlint/utils": "^8.1.0",
-    "@types/cosmiconfig": "5.0.3",
-    "@types/lodash": "4.14.136",
-    "@types/resolve-from": "^5.0.1",
-    "typescript": "3.5.3"
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.4",
+    "@types/cosmiconfig": "^5.0.3",
+    "concurrently": "3.6.1",
+    "cross-env": "6.0.3",
+    "execa": "0.11.0",
+    "globby": "10.0.1"
   },
   "dependencies": {
-    "@commitlint/ensure": "^8.2.0",
-    "@commitlint/execute-rule": "^8.2.0",
-    "@commitlint/resolve-extends": "^8.2.0",
+    "@commitlint/execute-rule": "^8.3.4",
+    "@commitlint/resolve-extends": "^8.3.5",
     "chalk": "2.4.2",
     "cosmiconfig": "^5.2.0",
     "lodash": "4.17.15",

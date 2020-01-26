@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/top-level",
-  "version": "8.2.0",
+  "version": "8.3.4",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -39,9 +39,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^8.2.0",
+    "@commitlint/utils": "^8.3.4",
     "@types/find-up": "2.1.1",
-    "@types/node": "12.6.8"
+    "@types/node": "12.11.5"
   },
   "dependencies": {
     "find-up": "^4.0.0"

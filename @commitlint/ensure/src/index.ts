@@ -6,6 +6,6 @@ import minLength from './min-length';
 import notEmpty from './not-empty';
 
 export {ensureCase as case};
-export {TargetCaseType};
 export {ensureEnum as enum};
+export {TargetCaseType};
 export {maxLength, maxLineLength, minLength, notEmpty};

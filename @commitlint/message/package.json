@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/message",
-  "version": "8.2.0",
+  "version": "8.3.4",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -34,8 +34,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^8.2.0",
-    "@commitlint/utils": "^8.2.0",
-    "typescript": "3.5.3"
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.4",
+    "typescript": "3.6.4"
   }
 }
