@@ -9,11 +9,16 @@ export async function bootstrap(fixture?: string, directory?: string) {
 	return cwd;
 }
 
-export async function clone(source: string, ...args: string[]) {
-	const cwd = await fix.bootstrap();
+export async function clone(
+	source: string,
+	args: string[],
+	directory?: string,
+	gitCommand = 'git'
+) {
+	const cwd = await fix.bootstrap(undefined, directory);
 
-	await execa('git', ['clone', ...args, source, cwd]);
-	await setup(cwd);
+	await execa(gitCommand, ['clone', ...args, source, cwd]);
+	await setup(cwd, gitCommand);
 	return cwd;
 }
 
@@ -23,11 +28,13 @@ export async function init(cwd: string) {
 	return cwd;
 }
 
-async function setup(cwd: string) {
+async function setup(cwd: string, gitCommand = 'git') {
 	try {
-		await execa('git', ['config', 'user.name', 'ava'], {cwd});
-		await execa('git', ['config', 'user.email', 'test@example.com'], {cwd});
-		await execa('git', ['config', 'commit.gpgsign', 'false'], {cwd});
+		await execa(gitCommand, ['config', 'user.name', 'ava'], {cwd});
+		await execa(gitCommand, ['config', 'user.email', 'test@example.com'], {
+			cwd
+		});
+		await execa(gitCommand, ['config', 'commit.gpgsign', 'false'], {cwd});
 	} catch (err) {
 		console.warn(`git config in ${cwd} failed`, err.message);
 	}

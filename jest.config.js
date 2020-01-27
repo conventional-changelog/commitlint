@@ -6,6 +6,7 @@ module.exports = {
 		'**/*.test.ts?(x)',
 		'**/@commitlint/lint/src/*.test.js?(x)',
 		'**/@commitlint/read/src/*.test.js?(x)',
+		'**/@commitlint/travis-cli/src/*.test.js?(x)',
 		'**/@commitlint/cli/src/*.test.js?(x)',
 		'**/@commitlint/prompt-cli/*.test.js?(x)'
 	]

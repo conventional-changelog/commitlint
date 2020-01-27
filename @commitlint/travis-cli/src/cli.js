@@ -77,7 +77,7 @@ async function lint(args, options) {
 }
 
 async function log(hash) {
-	const result = await execa('git', [
+	const result = await execa(GIT, [
 		'log',
 		'-n',
 		'1',
