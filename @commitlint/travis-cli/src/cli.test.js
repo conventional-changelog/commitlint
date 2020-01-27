@@ -22,7 +22,7 @@ const cli = async (config = {}) => {
 	try {
 		return await execa(bin, [], config);
 	} catch (err) {
-		return Promise.reject([err.stdout, err.stderr].join('\n'));
+		throw new Error([err.stdout, err.stderr].join('\n'));
 	}
 };
 
@@ -32,7 +32,7 @@ test('should throw when not on travis ci', async () => {
 		TRAVIS: false
 	};
 
-	await expect(cli({env})).rejects.toContain(
+	await expect(cli({env})).rejects.toThrow(
 		'@commitlint/travis-cli is intended to be used on Travis CI'
 	);
 });
@@ -43,7 +43,7 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 		CI: true
 	};
 
-	await expect(cli({env})).rejects.toContain(
+	await expect(cli({env})).rejects.toThrow(
 		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG'
 	);
 });
