@@ -49,24 +49,24 @@ test('returns empty value for empty lerna repository', async () => {
 	const cwd = await npm.bootstrap('fixtures/empty', __dirname);
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual([]);
-});
+}, 30000);
 
 test('returns expected value for basic lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/basic', __dirname);
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
-});
+}, 30000);
 
 test('returns expected value for scoped lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/scoped', __dirname);
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
-});
+}, 30000);
 
 test('works with lerna version < 3', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/lerna-two', __dirname);
 	await expect(fn({cwd})).resolves.toBeTruthy();
-});
+}, 30000);
