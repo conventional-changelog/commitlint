@@ -20,7 +20,7 @@ export interface LinterOptions {
 	/** The parser configuration to use when linting the commit */
 	parserOpts?: ParserOptions;
 
-	plugins?: any;
+	plugins?: any; // todo: reuse types from `@commitlint/load`
 }
 
 export interface LintOutcome {
