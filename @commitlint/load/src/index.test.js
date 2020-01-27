@@ -1,77 +1,94 @@
 import path from 'path';
 import {fix, git, npm} from '@commitlint/test';
-import test from 'ava';
 import execa from 'execa';
 import resolveFrom from 'resolve-from';
 
 import load from '.';
 
-const proxyquire = require('proxyquire')
-	.noCallThru()
-	.noPreserveCache();
+const baseCwd = process.cwd();
 
-test('extends-empty should have no rules', async t => {
+afterEach(() => {
+	process.chdir(baseCwd);
+
+	jest.restoreAllMocks();
+});
+
+test('default cwd option to process.cwd()', async () => {
+	const cwd = await fix.bootstrap('fixtures/basic');
+	process.chdir(cwd);
+
+	const actual = await load();
+	expect(actual.rules.basic).toBe(true);
+});
+
+test('extends-empty should have no rules', async () => {
 	const cwd = await git.bootstrap('fixtures/extends-empty');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual.rules, {});
+	expect(actual.rules).toEqual({});
 });
 
-test('uses seed as configured', async t => {
+test('uses seed as configured', async () => {
 	const cwd = await git.bootstrap('fixtures/extends-empty');
 	const actual = await load({rules: {foo: 'bar'}}, {cwd});
-	t.is(actual.rules.foo, 'bar');
+	expect(actual.rules.foo).toBe('bar');
 });
 
-test('rules should be loaded from relative config file', async t => {
+test('rules should be loaded from relative config file', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await git.bootstrap('fixtures/specify-config-file');
 	const actual = await load({}, {cwd, file});
-	t.is(actual.rules.foo, 'bar');
+	expect(actual.rules.foo).toBe('bar');
 });
 
-test('rules should be loaded from absolute config file', async t => {
+test('rules should be loaded from absolute config file', async () => {
 	const cwd = await git.bootstrap('fixtures/specify-config-file');
 	const file = path.join(cwd, 'config/commitlint.config.js');
 	const actual = await load({}, {cwd: process.cwd(), file});
-	t.is(actual.rules.foo, 'bar');
+	expect(actual.rules.foo).toBe('bar');
 });
 
-test('plugins should be loaded from seed', async t => {
-	const plugin = {'@global': true};
-	const scopedPlugin = {'@global': true};
-	const stubbedLoad = proxyquire('.', {
-		'commitlint-plugin-example': plugin,
-		'@scope/commitlint-plugin-example': scopedPlugin
-	}).default;
+test('plugins should be loaded from seed', async () => {
+	const mock1 = jest.mock(
+		'commitlint-plugin-example',
+		() => ({'@global': true}),
+		{
+			virtual: true
+		}
+	);
+	const mock2 = jest.mock(
+		'@scope/commitlint-plugin-example',
+		() => ({'@global': true}),
+		{
+			virtual: true
+		}
+	);
 
 	const cwd = await git.bootstrap('fixtures/extends-empty');
-	const actual = await stubbedLoad(
-		{plugins: ['example', '@scope/example']},
-		{cwd}
-	);
-	t.deepEqual(actual.plugins, {
-		example: plugin,
-		'@scope/example': scopedPlugin
+	const actual = await load({plugins: ['example', '@scope/example']}, {cwd});
+
+	expect(actual.plugins).toEqual({
+		example: {'@global': true},
+		'@scope/example': {'@global': true}
 	});
 });
 
-test('plugins should be loaded from config', async t => {
-	const plugin = {'@global': true};
-	const scopedPlugin = {'@global': true};
-	const stubbedLoad = proxyquire('.', {
-		'commitlint-plugin-example': plugin,
-		'@scope/commitlint-plugin-example': scopedPlugin
-	}).default;
+test('plugins should be loaded from config', async () => {
+	jest.mock('commitlint-plugin-example', () => ({'@global': true}), {
+		virtual: true
+	});
+	jest.mock('@scope/commitlint-plugin-example', () => ({'@global': true}), {
+		virtual: true
+	});
 
 	const cwd = await git.bootstrap('fixtures/extends-plugins');
-	const actual = await stubbedLoad({}, {cwd});
-	t.deepEqual(actual.plugins, {
-		example: plugin,
-		'@scope/example': scopedPlugin
+	const actual = await load({}, {cwd});
+	expect(actual.plugins).toEqual({
+		example: {'@global': true},
+		'@scope/example': {'@global': true}
 	});
 });
 
-test('uses seed with parserPreset', async t => {
+test('uses seed with parserPreset', async () => {
 	const cwd = await git.bootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(
 		{
@@ -79,33 +96,35 @@ test('uses seed with parserPreset', async t => {
 		},
 		{cwd}
 	);
-	t.is(actual.name, './conventional-changelog-custom');
-	t.deepEqual(actual.parserOpts, {
+	expect(actual.name).toBe('./conventional-changelog-custom');
+	expect(actual.parserOpts).toEqual({
 		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
 	});
 });
 
-test('invalid extend should throw', async t => {
+test('invalid extend should throw', async () => {
 	const cwd = await git.bootstrap('fixtures/extends-invalid');
-	await t.throwsAsync(load({}, {cwd}));
+	await expect(load({}, {cwd})).rejects.toThrow(
+		'Cannot find module "conventional-changelog-lint-config-____foooooo"'
+	);
 });
 
-test('empty file should have no rules', async t => {
+test('empty file should have no rules', async () => {
 	const cwd = await git.bootstrap('fixtures/empty-object-file');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual.rules, {});
+	expect(actual.rules).toEqual({});
 });
 
-test('empty file should extend nothing', async t => {
+test('empty file should extend nothing', async () => {
 	const cwd = await git.bootstrap('fixtures/empty-file');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual.extends, []);
+	expect(actual.extends).toEqual([]);
 });
 
-test('respects cwd option', async t => {
+test('respects cwd option', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends/first-extended');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./second-extended'],
 		plugins: {},
@@ -116,10 +135,10 @@ test('respects cwd option', async t => {
 	});
 });
 
-test('recursive extends', async t => {
+test('recursive extends', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends');
 	const actual = await load({}, {cwd});
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		plugins: {},
@@ -131,11 +150,11 @@ test('recursive extends', async t => {
 	});
 });
 
-test('recursive extends with json file', async t => {
+test('recursive extends with json file', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-json');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		plugins: {},
@@ -147,11 +166,11 @@ test('recursive extends with json file', async t => {
 	});
 });
 
-test('recursive extends with yaml file', async t => {
+test('recursive extends with yaml file', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-yaml');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		plugins: {},
@@ -163,11 +182,11 @@ test('recursive extends with yaml file', async t => {
 	});
 });
 
-test('recursive extends with js file', async t => {
+test('recursive extends with js file', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-js');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		plugins: {},
@@ -179,11 +198,11 @@ test('recursive extends with js file', async t => {
 	});
 });
 
-test('recursive extends with package.json file', async t => {
+test('recursive extends with package.json file', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-extends-package');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./first-extended'],
 		plugins: {},
@@ -195,31 +214,30 @@ test('recursive extends with package.json file', async t => {
 	});
 });
 
-test('parser preset overwrites completely instead of merging', async t => {
+test('parser preset overwrites completely instead of merging', async () => {
 	const cwd = await git.bootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
-	t.is(actual.parserPreset.name, './custom');
-	t.deepEqual(actual.parserPreset.parserOpts, {
+	expect(actual.parserPreset.name).toBe('./custom');
+	expect(actual.parserPreset.parserOpts).toEqual({
 		headerPattern: /.*/
 	});
 });
 
-test('recursive extends with parserPreset', async t => {
+test('recursive extends with parserPreset', async () => {
 	const cwd = await git.bootstrap('fixtures/recursive-parser-preset');
 	const actual = await load({}, {cwd});
-	t.is(actual.parserPreset.name, './conventional-changelog-custom');
-	t.is(typeof actual.parserPreset.parserOpts, 'object');
-	t.deepEqual(
-		actual.parserPreset.parserOpts.headerPattern,
+	expect(actual.parserPreset.name).toBe('./conventional-changelog-custom');
+	expect(typeof actual.parserPreset.parserOpts).toBe('object');
+	expect(actual.parserPreset.parserOpts.headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?-(.*)$/
 	);
 });
 
-test('ignores unknow keys', async t => {
+test('ignores unknow keys', async () => {
 	const cwd = await git.bootstrap('fixtures/trash-file');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: [],
 		plugins: {},
@@ -230,11 +248,11 @@ test('ignores unknow keys', async t => {
 	});
 });
 
-test('ignores unknow keys recursively', async t => {
+test('ignores unknow keys recursively', async () => {
 	const cwd = await git.bootstrap('fixtures/trash-extend');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: ['./one'],
 		plugins: {},
@@ -245,14 +263,14 @@ test('ignores unknow keys recursively', async t => {
 	});
 });
 
-test('find up from given cwd', async t => {
+test('find up from given cwd', async () => {
 	const outer = await fix.bootstrap('fixtures/outer-scope');
 	await git.init(path.join(outer, 'inner-scope'));
 	const cwd = path.join(outer, 'inner-scope', 'child-scope');
 
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: [],
 		plugins: {},
@@ -264,12 +282,12 @@ test('find up from given cwd', async t => {
 	});
 });
 
-test('find up config from outside current git repo', async t => {
+test('find up config from outside current git repo', async () => {
 	const outer = await fix.bootstrap('fixtures/outer-scope');
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: '@commitlint/format',
 		extends: [],
 		plugins: {},
@@ -281,11 +299,11 @@ test('find up config from outside current git repo', async t => {
 	});
 });
 
-test('respects formatter option', async t => {
+test('respects formatter option', async () => {
 	const cwd = await git.bootstrap('fixtures/formatter');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: 'commitlint-junit',
 		extends: [],
 		plugins: {},
@@ -293,11 +311,11 @@ test('respects formatter option', async t => {
 	});
 });
 
-test('resolves formatter relative from config directory', async t => {
+test('resolves formatter relative from config directory', async () => {
 	const cwd = await git.bootstrap('fixtures/formatter-local-module');
 	const actual = await load({}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: resolveFrom(cwd, './formatters/custom.js'),
 		extends: [],
 		plugins: {},
@@ -305,11 +323,11 @@ test('resolves formatter relative from config directory', async t => {
 	});
 });
 
-test('returns formatter name when unable to resolve from config directory', async t => {
+test('returns formatter name when unable to resolve from config directory', async () => {
 	const cwd = await git.bootstrap('fixtures/formatter-local-module');
 	const actual = await load({formatter: './doesnt/exists.js'}, {cwd});
 
-	t.deepEqual(actual, {
+	expect(actual).toEqual({
 		formatter: './doesnt/exists.js',
 		extends: [],
 		plugins: {},
@@ -317,7 +335,7 @@ test('returns formatter name when unable to resolve from config directory', asyn
 	});
 });
 
-test('does not mutate config module reference', async t => {
+test('does not mutate config module reference', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await git.bootstrap('fixtures/specify-config-file');
 
@@ -326,34 +344,34 @@ test('does not mutate config module reference', async t => {
 	await load({arbitraryField: true}, {cwd, file});
 	const after = JSON.stringify(require(configPath));
 
-	t.is(before, after);
+	expect(before).toEqual(after);
 });
 
-test('resolves parser preset from conventional commits', async t => {
+test('resolves parser preset from conventional commits', async () => {
 	const cwd = await npm.bootstrap('fixtures/parser-preset-conventionalcommits');
 	const actual = await load({}, {cwd});
 
-	t.is(actual.parserPreset.name, 'conventional-changelog-conventionalcommits');
-	t.is(typeof actual.parserPreset.parserOpts, 'object');
-	t.deepEqual(
-		actual.parserPreset.parserOpts.headerPattern,
+	expect(actual.parserPreset.name).toBe(
+		'conventional-changelog-conventionalcommits'
+	);
+	expect(typeof actual.parserPreset.parserOpts).toBe('object');
+	expect(actual.parserPreset.parserOpts.headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });
 
-test('resolves parser preset from conventional angular', async t => {
+test('resolves parser preset from conventional angular', async () => {
 	const cwd = await npm.bootstrap('fixtures/parser-preset-angular');
 	const actual = await load({}, {cwd});
 
-	t.is(actual.parserPreset.name, 'conventional-changelog-angular');
-	t.is(typeof actual.parserPreset.parserOpts, 'object');
-	t.deepEqual(
-		actual.parserPreset.parserOpts.headerPattern,
+	expect(actual.parserPreset.name).toBe('conventional-changelog-angular');
+	expect(typeof actual.parserPreset.parserOpts).toBe('object');
+	expect(actual.parserPreset.parserOpts.headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?: (.*)$/
 	);
 });
 
-test('recursive resolves parser preset from conventional atom', async t => {
+test('recursive resolves parser preset from conventional atom', async () => {
 	const cwd = await git.bootstrap(
 		'fixtures/recursive-parser-preset-conventional-atom'
 	);
@@ -364,21 +382,24 @@ test('recursive resolves parser preset from conventional atom', async t => {
 
 	const actual = await load({}, {cwd});
 
-	t.is(actual.parserPreset.name, 'conventional-changelog-atom');
-	t.is(typeof actual.parserPreset.parserOpts, 'object');
-	t.deepEqual(actual.parserPreset.parserOpts.headerPattern, /^(:.*?:) (.*)$/);
+	expect(actual.parserPreset.name).toBe('conventional-changelog-atom');
+	expect(typeof actual.parserPreset.parserOpts).toBe('object');
+	expect(actual.parserPreset.parserOpts.headerPattern).toEqual(
+		/^(:.*?:) (.*)$/
+	);
 });
 
-test('resolves parser preset from conventional commits without factory support', async t => {
+test('resolves parser preset from conventional commits without factory support', async () => {
 	const cwd = await npm.bootstrap(
 		'fixtures/parser-preset-conventional-without-factory'
 	);
 	const actual = await load({}, {cwd});
 
-	t.is(actual.parserPreset.name, 'conventional-changelog-conventionalcommits');
-	t.is(typeof actual.parserPreset.parserOpts, 'object');
-	t.deepEqual(
-		actual.parserPreset.parserOpts.headerPattern,
+	expect(actual.parserPreset.name).toBe(
+		'conventional-changelog-conventionalcommits'
+	);
+	expect(typeof actual.parserPreset.parserOpts).toBe('object');
+	expect(actual.parserPreset.parserOpts.headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });
