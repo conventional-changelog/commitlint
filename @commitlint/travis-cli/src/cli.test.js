@@ -1,17 +1,22 @@
 import execa from 'execa';
-// Disable ftb
-// import {git} from '@commitlint/test';
-// import which from 'which';
+import {git} from '@commitlint/test';
 
-// Disable ftb
-// const NODE_BIN = which.sync('node');
 const bin = require.resolve('../lib/cli.js');
 
-// Disable ftb
-// const TRAVIS_COMMITLINT_BIN = require.resolve('../fixtures/commitlint');
-// const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('../fixtures/git');
-// const TRAVIS_BRANCH = 'TRAVIS_BRANCH';
-// const TRAVIS_COMMIT = 'TRAVIS_COMMIT';
+const TRAVIS_COMMITLINT_BIN = require.resolve('../fixtures/commitlint');
+const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('../fixtures/git');
+
+const validBaseEnv = {
+	TRAVIS: true,
+	CI: true,
+	TRAVIS_COMMIT: 'TRAVIS_COMMIT',
+	TRAVIS_COMMITLINT_BIN: TRAVIS_COMMITLINT_BIN,
+	TRAVIS_COMMITLINT_GIT_BIN: TRAVIS_COMMITLINT_GIT_BIN,
+	TRAVIS_COMMIT_RANGE: 'TRAVIS_COMMIT_A.TRAVIS_COMMIT_B',
+	TRAVIS_EVENT_TYPE: 'TRAVIS_EVENT_TYPE',
+	TRAVIS_REPO_SLUG: 'TRAVIS_REPO_SLUG',
+	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG'
+};
 
 const cli = async (config = {}) => {
 	try {
@@ -43,128 +48,53 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 	);
 });
 
-/*
-test('should call git with expected args on shallow repo', async () => {
+test('should call git with expected args', async () => {
 	const cwd = await git.clone(
 		'https://github.com/conventional-changelog/commitlint.git',
-		['--depth=10']
+		['--depth=10'],
+		__dirname,
+		TRAVIS_COMMITLINT_GIT_BIN
 	);
 
-	const env = {
-		TRAVIS: true,
-		CI: true,
-		TRAVIS_BRANCH,
-		TRAVIS_COMMIT,
-		TRAVIS_COMMITLINT_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN
-	};
-
-	const result = await cli({cwd, env});
+	const result = await cli({
+		cwd,
+		env: validBaseEnv
+	});
 	const invocations = await getInvocations(result.stdout);
-	t.is(invocations.length, 7);
+	expect(invocations.length).toBe(3);
 
-	const [
-		stash,
-		branches,
-		unshallow,
-		checkout,
-		back,
-		pop,
-		commilint
-	] = invocations;
+	const [stash, branches, commilint] = invocations;
 
-	t.deepEqual(stash, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash']);
-	t.deepEqual(branches, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'remote',
-		'set-branches',
-		'origin',
-		TRAVIS_BRANCH
-	]);
-	t.deepEqual(unshallow, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'fetch',
-		'--unshallow',
-		'--quiet'
-	]);
-	t.deepEqual(checkout, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'checkout',
-		TRAVIS_BRANCH,
-		'--quiet'
-	]);
-	t.deepEqual(back, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'checkout',
-		'-',
-		'--quiet'
-	]);
-	t.deepEqual(pop, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash', 'pop']);
-	t.deepEqual(commilint, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_BIN,
-		'--from',
-		TRAVIS_BRANCH,
-		'--to',
-		TRAVIS_COMMIT
-	]);
+	expect(stash).toEqual(['git', 'stash', '-k', '-u', '--quiet']);
+	expect(branches).toEqual(['git', 'stash', 'pop', '--quiet']);
+	expect(commilint).toEqual(['commitlint']);
 });
 
-test('should call git with expected args on unshallow repo', async () => {
+test('should call git with expected args on pull_request', async () => {
 	const cwd = await git.clone(
-		'https://github.com/conventional-changelog/commitlint.git'
+		'https://github.com/conventional-changelog/commitlint.git',
+		['--depth=10'],
+		__dirname,
+		TRAVIS_COMMITLINT_GIT_BIN
 	);
 
-	const env = {
-		TRAVIS: true,
-		CI: true,
-		TRAVIS_BRANCH,
-		TRAVIS_COMMIT,
-		TRAVIS_COMMITLINT_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN
-	};
-
-	const result = await cli({cwd, env});
+	const result = await cli({
+		cwd,
+		env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'}
+	});
 	const invocations = await getInvocations(result.stdout);
-	t.is(invocations.length, 6);
+	expect(invocations.length).toBe(3);
 
-	const [stash, branches, checkout, back, pop, commilint] = invocations;
+	const [stash, branches, commilint] = invocations;
 
-	t.deepEqual(stash, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash']);
-	t.deepEqual(branches, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'remote',
-		'set-branches',
-		'origin',
-		TRAVIS_BRANCH
-	]);
-	t.deepEqual(checkout, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'checkout',
-		TRAVIS_BRANCH,
-		'--quiet'
-	]);
-	t.deepEqual(back, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_GIT_BIN,
-		'checkout',
-		'-',
-		'--quiet'
-	]);
-	t.deepEqual(pop, [NODE_BIN, TRAVIS_COMMITLINT_GIT_BIN, 'stash', 'pop']);
-	t.deepEqual(commilint, [
-		NODE_BIN,
-		TRAVIS_COMMITLINT_BIN,
+	expect(stash).toEqual(['git', 'stash', '-k', '-u', '--quiet']);
+	expect(branches).toEqual(['git', 'stash', 'pop', '--quiet']);
+	expect(commilint).toEqual([
+		'commitlint',
 		'--from',
-		TRAVIS_BRANCH,
+		'TRAVIS_COMMIT_A',
 		'--to',
-		TRAVIS_COMMIT
+		'TRAVIS_COMMIT_B'
 	]);
 });
 
@@ -182,4 +112,3 @@ function getInvocations(stdout) {
 				.filter(Boolean)
 		);
 }
-*/
