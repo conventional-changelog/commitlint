@@ -3,11 +3,13 @@ import chalk from 'chalk';
 import {normalizePackageName, getShorthandName} from './pluginNaming';
 import {WhitespacePluginError, MissingPluginError} from './pluginErrors';
 
+export type PluginRecords = Record<string, unknown>;
+
 export default function loadPlugin(
-	plugins: any,
+	plugins: PluginRecords,
 	pluginName: string,
 	debug: boolean = false
-) {
+): PluginRecords {
 	const longName = normalizePackageName(pluginName);
 	const shortName = getShorthandName(longName);
 	let plugin = null;
@@ -66,4 +68,6 @@ export default function loadPlugin(
 
 		plugins[pluginKey] = plugin;
 	}
+
+	return plugins;
 }

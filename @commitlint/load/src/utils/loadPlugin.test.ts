@@ -1,80 +1,65 @@
-import test from 'ava';
-const proxyquire = require('proxyquire')
-	.noCallThru()
-	.noPreserveCache();
+import loadPlugin from './loadPlugin';
 
-test.beforeEach(t => {
-	const plugins = {};
-	const plugin = {};
-	const scopedPlugin = {};
-	const stubbedLoadPlugin = proxyquire('./loadPlugin', {
-		'commitlint-plugin-example': plugin,
-		'@scope/commitlint-plugin-example': scopedPlugin
-	}).default;
-	t.context.data = {
-		plugins,
-		plugin,
-		scopedPlugin,
-		stubbedLoadPlugin
-	};
+jest.mock('commitlint-plugin-example', () => ({example: true}), {
+	virtual: true
 });
 
-test('should load a plugin when referenced by short name', t => {
-	const {stubbedLoadPlugin, plugins, plugin} = t.context.data;
-	stubbedLoadPlugin(plugins, 'example');
-	t.is(plugins['example'], plugin);
+jest.mock('@scope/commitlint-plugin-example', () => ({scope: true}), {
+	virtual: true
 });
 
-test('should load a plugin when referenced by long name', t => {
-	const {stubbedLoadPlugin, plugins, plugin} = t.context.data;
-	stubbedLoadPlugin(plugins, 'commitlint-plugin-example');
-	t.is(plugins['example'], plugin);
+test('should load a plugin when referenced by short name', () => {
+	const plugins = loadPlugin({}, 'example');
+	expect(plugins['example']).toBe(require('commitlint-plugin-example'));
 });
 
-test('should throw an error when a plugin has whitespace', t => {
-	const {stubbedLoadPlugin, plugins} = t.context.data;
-	t.throws(() => {
-		stubbedLoadPlugin(plugins, 'whitespace ');
-	}, /Whitespace found in plugin name 'whitespace '/u);
-	t.throws(() => {
-		stubbedLoadPlugin(plugins, 'whitespace\t');
-	}, /Whitespace found in plugin name/u);
-	t.throws(() => {
-		stubbedLoadPlugin(plugins, 'whitespace\n');
-	}, /Whitespace found in plugin name/u);
-	t.throws(() => {
-		stubbedLoadPlugin(plugins, 'whitespace\r');
-	}, /Whitespace found in plugin name/u);
+test('should load a plugin when referenced by long name', () => {
+	const plugins = loadPlugin({}, 'commitlint-plugin-example');
+	expect(plugins['example']).toBe(require('commitlint-plugin-example'));
 });
 
-test("should throw an error when a plugin doesn't exist", t => {
-	const {stubbedLoadPlugin, plugins} = t.context.data;
-	t.throws(() => {
-		stubbedLoadPlugin(plugins, 'nonexistentplugin');
-	}, /Failed to load plugin/u);
+test('should throw an error when a plugin has whitespace', () => {
+	expect(() => loadPlugin({}, 'whitespace ')).toThrow(
+		"Whitespace found in plugin name 'whitespace '"
+	);
+	expect(() => loadPlugin({}, 'whitespace\t')).toThrow(
+		'Whitespace found in plugin name'
+	);
+	expect(() => loadPlugin({}, 'whitespace\n')).toThrow(
+		'Whitespace found in plugin name'
+	);
+	expect(() => loadPlugin({}, 'whitespace\r')).toThrow(
+		'Whitespace found in plugin name'
+	);
 });
 
-test('should load a scoped plugin when referenced by short name', t => {
-	const {stubbedLoadPlugin, plugins, scopedPlugin} = t.context.data;
-	stubbedLoadPlugin(plugins, '@scope/example');
-	t.is(plugins['@scope/example'], scopedPlugin);
+test("should throw an error when a plugin doesn't exist", () => {
+	expect(() => loadPlugin({}, 'nonexistentplugin')).toThrow(
+		'Failed to load plugin'
+	);
 });
 
-test('should load a scoped plugin when referenced by long name', t => {
-	const {stubbedLoadPlugin, plugins, scopedPlugin} = t.context.data;
-	stubbedLoadPlugin(plugins, '@scope/commitlint-plugin-example');
-	t.is(plugins['@scope/example'], scopedPlugin);
+test('should load a scoped plugin when referenced by short name', () => {
+	const plugins = loadPlugin({}, '@scope/example');
+	expect(plugins['@scope/example']).toBe(
+		require('@scope/commitlint-plugin-example')
+	);
+});
+
+test('should load a scoped plugin when referenced by long name', () => {
+	const plugins = loadPlugin({}, '@scope/commitlint-plugin-example');
+	expect(plugins['@scope/example']).toBe(
+		require('@scope/commitlint-plugin-example')
+	);
 });
 
 /* when referencing a scope plugin and omitting @scope/ */
-test("should load a scoped plugin when referenced by short name, but should not get the plugin if '@scope/' is omitted", t => {
-	const {stubbedLoadPlugin, plugins} = t.context.data;
-	stubbedLoadPlugin(plugins, '@scope/example');
-	t.is(plugins['example'], undefined);
+test("should load a scoped plugin when referenced by short name, but should not get the plugin if '@scope/' is omitted", () => {
+	const plugins = loadPlugin({}, '@scope/example');
+	expect(plugins['example']).toBe(undefined);
 });
 
-test("should load a scoped plugin when referenced by long name, but should not get the plugin if '@scope/' is omitted", t => {
-	const {stubbedLoadPlugin, plugins} = t.context.data;
-	stubbedLoadPlugin(plugins, '@scope/commitlint-plugin-example');
-	t.is(plugins['example'], undefined);
+test("should load a scoped plugin when referenced by long name, but should not get the plugin if '@scope/' is omitted", () => {
+	const plugins = loadPlugin({}, '@scope/commitlint-plugin-example');
+	expect(plugins['example']).toBe(undefined);
 });
