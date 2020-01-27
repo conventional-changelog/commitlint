@@ -11,8 +11,7 @@
   "scripts": {
     "commit": "$npm_package_bin_commit",
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-main",
-    "test": "ava -c 4 --verbose"
+    "pkg": "pkg-check --skip-main"
   },
   "repository": {
     "type": "git",
@@ -31,11 +30,10 @@
   "devDependencies": {
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.4",
-    "ava": "2.4.0"
+    "string-to-stream": "3.0.1"
   },
   "dependencies": {
     "@commitlint/prompt": "^8.3.5",
-    "execa": "0.11.0",
-    "string-to-stream": "3.0.1"
+    "execa": "0.11.0"
   }
 }
