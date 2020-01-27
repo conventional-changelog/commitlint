@@ -7,6 +7,10 @@ import load from '.';
 
 const baseCwd = process.cwd();
 
+const fixBootstrap = fixture => fix.bootstrap(fixture, __dirname);
+const gitBootstrap = fixture => git.bootstrap(fixture, __dirname);
+const npmBootstrap = fixture => npm.bootstrap(fixture, __dirname);
+
 afterEach(() => {
 	process.chdir(baseCwd);
 
@@ -14,7 +18,7 @@ afterEach(() => {
 });
 
 test('default cwd option to process.cwd()', async () => {
-	const cwd = await fix.bootstrap('fixtures/basic');
+	const cwd = await fixBootstrap('fixtures/basic');
 	process.chdir(cwd);
 
 	const actual = await load();
@@ -22,26 +26,26 @@ test('default cwd option to process.cwd()', async () => {
 });
 
 test('extends-empty should have no rules', async () => {
-	const cwd = await git.bootstrap('fixtures/extends-empty');
+	const cwd = await gitBootstrap('fixtures/extends-empty');
 	const actual = await load({}, {cwd});
 	expect(actual.rules).toEqual({});
 });
 
 test('uses seed as configured', async () => {
-	const cwd = await git.bootstrap('fixtures/extends-empty');
+	const cwd = await gitBootstrap('fixtures/extends-empty');
 	const actual = await load({rules: {foo: 'bar'}}, {cwd});
 	expect(actual.rules.foo).toBe('bar');
 });
 
 test('rules should be loaded from relative config file', async () => {
 	const file = 'config/commitlint.config.js';
-	const cwd = await git.bootstrap('fixtures/specify-config-file');
+	const cwd = await gitBootstrap('fixtures/specify-config-file');
 	const actual = await load({}, {cwd, file});
 	expect(actual.rules.foo).toBe('bar');
 });
 
 test('rules should be loaded from absolute config file', async () => {
-	const cwd = await git.bootstrap('fixtures/specify-config-file');
+	const cwd = await gitBootstrap('fixtures/specify-config-file');
 	const file = path.join(cwd, 'config/commitlint.config.js');
 	const actual = await load({}, {cwd: process.cwd(), file});
 	expect(actual.rules.foo).toBe('bar');
@@ -63,7 +67,7 @@ test('plugins should be loaded from seed', async () => {
 		}
 	);
 
-	const cwd = await git.bootstrap('fixtures/extends-empty');
+	const cwd = await gitBootstrap('fixtures/extends-empty');
 	const actual = await load({plugins: ['example', '@scope/example']}, {cwd});
 
 	expect(actual.plugins).toEqual({
@@ -80,7 +84,7 @@ test('plugins should be loaded from config', async () => {
 		virtual: true
 	});
 
-	const cwd = await git.bootstrap('fixtures/extends-plugins');
+	const cwd = await gitBootstrap('fixtures/extends-plugins');
 	const actual = await load({}, {cwd});
 	expect(actual.plugins).toEqual({
 		example: {'@global': true},
@@ -89,7 +93,7 @@ test('plugins should be loaded from config', async () => {
 });
 
 test('uses seed with parserPreset', async () => {
-	const cwd = await git.bootstrap('fixtures/parser-preset');
+	const cwd = await gitBootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(
 		{
 			parserPreset: './conventional-changelog-custom'
@@ -103,26 +107,26 @@ test('uses seed with parserPreset', async () => {
 });
 
 test('invalid extend should throw', async () => {
-	const cwd = await git.bootstrap('fixtures/extends-invalid');
+	const cwd = await gitBootstrap('fixtures/extends-invalid');
 	await expect(load({}, {cwd})).rejects.toThrow(
 		'Cannot find module "conventional-changelog-lint-config-____foooooo"'
 	);
 });
 
 test('empty file should have no rules', async () => {
-	const cwd = await git.bootstrap('fixtures/empty-object-file');
+	const cwd = await gitBootstrap('fixtures/empty-object-file');
 	const actual = await load({}, {cwd});
 	expect(actual.rules).toEqual({});
 });
 
 test('empty file should extend nothing', async () => {
-	const cwd = await git.bootstrap('fixtures/empty-file');
+	const cwd = await gitBootstrap('fixtures/empty-file');
 	const actual = await load({}, {cwd});
 	expect(actual.extends).toEqual([]);
 });
 
 test('respects cwd option', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-extends/first-extended');
+	const cwd = await gitBootstrap('fixtures/recursive-extends/first-extended');
 	const actual = await load({}, {cwd});
 	expect(actual).toEqual({
 		formatter: '@commitlint/format',
@@ -136,7 +140,7 @@ test('respects cwd option', async () => {
 });
 
 test('recursive extends', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-extends');
+	const cwd = await gitBootstrap('fixtures/recursive-extends');
 	const actual = await load({}, {cwd});
 	expect(actual).toEqual({
 		formatter: '@commitlint/format',
@@ -151,7 +155,7 @@ test('recursive extends', async () => {
 });
 
 test('recursive extends with json file', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-extends-json');
+	const cwd = await gitBootstrap('fixtures/recursive-extends-json');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -167,7 +171,7 @@ test('recursive extends with json file', async () => {
 });
 
 test('recursive extends with yaml file', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-extends-yaml');
+	const cwd = await gitBootstrap('fixtures/recursive-extends-yaml');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -183,7 +187,7 @@ test('recursive extends with yaml file', async () => {
 });
 
 test('recursive extends with js file', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-extends-js');
+	const cwd = await gitBootstrap('fixtures/recursive-extends-js');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -199,7 +203,7 @@ test('recursive extends with js file', async () => {
 });
 
 test('recursive extends with package.json file', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-extends-package');
+	const cwd = await gitBootstrap('fixtures/recursive-extends-package');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -215,7 +219,7 @@ test('recursive extends with package.json file', async () => {
 });
 
 test('parser preset overwrites completely instead of merging', async () => {
-	const cwd = await git.bootstrap('fixtures/parser-preset-override');
+	const cwd = await gitBootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
 	expect(actual.parserPreset.name).toBe('./custom');
 	expect(actual.parserPreset.parserOpts).toEqual({
@@ -224,7 +228,7 @@ test('parser preset overwrites completely instead of merging', async () => {
 });
 
 test('recursive extends with parserPreset', async () => {
-	const cwd = await git.bootstrap('fixtures/recursive-parser-preset');
+	const cwd = await gitBootstrap('fixtures/recursive-parser-preset');
 	const actual = await load({}, {cwd});
 	expect(actual.parserPreset.name).toBe('./conventional-changelog-custom');
 	expect(typeof actual.parserPreset.parserOpts).toBe('object');
@@ -234,7 +238,7 @@ test('recursive extends with parserPreset', async () => {
 });
 
 test('ignores unknow keys', async () => {
-	const cwd = await git.bootstrap('fixtures/trash-file');
+	const cwd = await gitBootstrap('fixtures/trash-file');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -249,7 +253,7 @@ test('ignores unknow keys', async () => {
 });
 
 test('ignores unknow keys recursively', async () => {
-	const cwd = await git.bootstrap('fixtures/trash-extend');
+	const cwd = await gitBootstrap('fixtures/trash-extend');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -264,7 +268,7 @@ test('ignores unknow keys recursively', async () => {
 });
 
 test('find up from given cwd', async () => {
-	const outer = await fix.bootstrap('fixtures/outer-scope');
+	const outer = await fixBootstrap('fixtures/outer-scope');
 	await git.init(path.join(outer, 'inner-scope'));
 	const cwd = path.join(outer, 'inner-scope', 'child-scope');
 
@@ -283,7 +287,7 @@ test('find up from given cwd', async () => {
 });
 
 test('find up config from outside current git repo', async () => {
-	const outer = await fix.bootstrap('fixtures/outer-scope');
+	const outer = await fixBootstrap('fixtures/outer-scope');
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 	const actual = await load({}, {cwd});
 
@@ -300,7 +304,7 @@ test('find up config from outside current git repo', async () => {
 });
 
 test('respects formatter option', async () => {
-	const cwd = await git.bootstrap('fixtures/formatter');
+	const cwd = await gitBootstrap('fixtures/formatter');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -312,7 +316,7 @@ test('respects formatter option', async () => {
 });
 
 test('resolves formatter relative from config directory', async () => {
-	const cwd = await git.bootstrap('fixtures/formatter-local-module');
+	const cwd = await gitBootstrap('fixtures/formatter-local-module');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toEqual({
@@ -324,7 +328,7 @@ test('resolves formatter relative from config directory', async () => {
 });
 
 test('returns formatter name when unable to resolve from config directory', async () => {
-	const cwd = await git.bootstrap('fixtures/formatter-local-module');
+	const cwd = await gitBootstrap('fixtures/formatter-local-module');
 	const actual = await load({formatter: './doesnt/exists.js'}, {cwd});
 
 	expect(actual).toEqual({
@@ -337,7 +341,7 @@ test('returns formatter name when unable to resolve from config directory', asyn
 
 test('does not mutate config module reference', async () => {
 	const file = 'config/commitlint.config.js';
-	const cwd = await git.bootstrap('fixtures/specify-config-file');
+	const cwd = await gitBootstrap('fixtures/specify-config-file');
 
 	const configPath = path.join(cwd, file);
 	const before = JSON.stringify(require(configPath));
@@ -348,7 +352,7 @@ test('does not mutate config module reference', async () => {
 });
 
 test('resolves parser preset from conventional commits', async () => {
-	const cwd = await npm.bootstrap('fixtures/parser-preset-conventionalcommits');
+	const cwd = await npmBootstrap('fixtures/parser-preset-conventionalcommits');
 	const actual = await load({}, {cwd});
 
 	expect(actual.parserPreset.name).toBe(
@@ -361,7 +365,7 @@ test('resolves parser preset from conventional commits', async () => {
 });
 
 test('resolves parser preset from conventional angular', async () => {
-	const cwd = await npm.bootstrap('fixtures/parser-preset-angular');
+	const cwd = await npmBootstrap('fixtures/parser-preset-angular');
 	const actual = await load({}, {cwd});
 
 	expect(actual.parserPreset.name).toBe('conventional-changelog-angular');
@@ -372,7 +376,7 @@ test('resolves parser preset from conventional angular', async () => {
 });
 
 test('recursive resolves parser preset from conventional atom', async () => {
-	const cwd = await git.bootstrap(
+	const cwd = await gitBootstrap(
 		'fixtures/recursive-parser-preset-conventional-atom'
 	);
 	// the package file is nested in 2 folders, `npm.bootstrap` cant do that
@@ -390,7 +394,7 @@ test('recursive resolves parser preset from conventional atom', async () => {
 });
 
 test('resolves parser preset from conventional commits without factory support', async () => {
-	const cwd = await npm.bootstrap(
+	const cwd = await npmBootstrap(
 		'fixtures/parser-preset-conventional-without-factory'
 	);
 	const actual = await load({}, {cwd});
