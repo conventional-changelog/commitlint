@@ -5,7 +5,7 @@ import {TargetCaseType} from '@commitlint/ensure';
 import cosmiconfig, {CosmiconfigResult} from 'cosmiconfig';
 import {toPairs, merge, mergeWith, pick, startsWith} from 'lodash';
 import resolveFrom from 'resolve-from';
-import loadPlugin from './utils/loadPlugin';
+import loadPlugin, {PluginRecords} from './utils/loadPlugin';
 
 export interface LoadOptions {
 	cwd?: string;
@@ -95,7 +95,17 @@ export interface UserConfig {
 	parserPreset?: string | ParserPreset;
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
-	plugins?: any[];
+	plugins?: string[];
+}
+
+export interface UserPreset {
+	extends?: string[];
+	formatter?: unknown;
+	rules?: Partial<RulesConfig>;
+	parserPreset?: string | ParserPreset;
+	ignores?: ((commit: string) => boolean)[];
+	defaultIgnores?: boolean;
+	plugins: PluginRecords;
 }
 
 export type QualifiedRules = Partial<RulesConfig<RuleConfigQuality.Qualified>>;
@@ -107,7 +117,7 @@ export interface QualifiedConfig {
 	parserPreset: ParserPreset;
 	ignores: ((commit: string) => boolean)[];
 	defaultIgnores: boolean;
-	plugins: any[];
+	plugins: PluginRecords;
 }
 
 export interface ParserPreset {
@@ -164,7 +174,10 @@ export default async (
 		parserPreset: config.parserPreset
 	});
 
-	const preset = valid(mergeWith(extended, config, w));
+	const preset = (valid(
+		mergeWith(extended, config, w)
+	) as unknown) as UserPreset;
+	preset.plugins = {};
 
 	// TODO: check if this is still necessary with the new factory based conventional changelog parsers
 	// config.extends = Array.isArray(config.extends) ? config.extends : [];
