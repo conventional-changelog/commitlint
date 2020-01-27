@@ -10,29 +10,8 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose",
+    "start": "yarn run watch",
     "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js",
-      "!lib/**/*"
-    ],
-    "source": [
-      "src/**/*.js",
-      "!lib/**/*"
-    ],
-    "babel": {
-      "testOptions": {
-        "presets": [
-          "babel-preset-commitlint"
-        ]
-      }
-    },
-    "require": [
-      "@babel/register"
-    ]
   },
   "babel": {
     "presets": [
@@ -67,9 +46,7 @@
     "@babel/register": "^7.7.7",
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.4",
-    "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
-    "concurrently": "3.6.1",
     "cross-env": "6.0.3",
     "execa": "0.11.0",
     "globby": "10.0.1",
