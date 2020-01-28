@@ -10,7 +10,7 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
+    "start": "yarn run watch",
     "watch": "babel src --out-dir lib --watch --source-maps"
   },
   "babel": {
@@ -43,11 +43,9 @@
   "devDependencies": {
     "@babel/core": "7.7.7",
     "@babel/cli": "7.7.7",
-    "@babel/register": "7.7.7",
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.4",
     "babel-preset-commitlint": "^8.2.0",
-    "concurrently": "3.6.1",
     "cross-env": "6.0.3",
     "execa": "0.11.0"
   },

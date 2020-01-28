@@ -18,11 +18,6 @@
     "deps": "node dep-check.js",
     "pkg": "node pkg-check.js --skip-main"
   },
-  "ava": {
-    "files": [
-      "cli.test.js"
-    ]
-  },
   "engines": {
     "node": ">=4"
   },
