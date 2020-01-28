@@ -1,10 +1,8 @@
-import path from 'path';
 import {git} from '@commitlint/test';
-import test from 'ava';
 import execa from 'execa';
 import stream from 'string-to-stream';
 
-const bin = path.join(__dirname, './cli.js');
+const bin = require.resolve('./cli.js');
 
 const cli = (args, options) => {
 	return (input = '') => {
@@ -18,8 +16,9 @@ const cli = (args, options) => {
 	};
 };
 
-test('should print warning if stage is empty', async t => {
+test('should print warning if stage is empty', async () => {
 	const cwd = await git.bootstrap();
 	const actual = await cli([], {cwd})('foo: bar');
-	t.true(actual.stdout.includes('Nothing to commit.'));
+	expect(actual.stdout).toContain('Nothing to commit.');
+	expect(actual.stderr).toBe('');
 });

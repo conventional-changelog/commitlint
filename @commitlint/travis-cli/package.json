@@ -13,26 +13,7 @@
     "deps": "dep-check",
     "pkg": "pkg-check --skip-main",
     "start": "ava -c 4 --verbose --watch",
-    "test": "ava -c 4 --verbose",
     "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js"
-    ],
-    "source": [
-      "lib/**/*.js"
-    ],
-    "babel": {
-      "testOptions": {
-        "presets": [
-          "babel-preset-commitlint"
-        ]
-      }
-    },
-    "require": [
-      "@babel/register"
-    ]
   },
   "babel": {
     "presets": [
@@ -61,15 +42,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "7.7.7",
     "@babel/cli": "7.7.7",
+    "@babel/core": "7.7.7",
     "@babel/register": "7.7.7",
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.4",
-    "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
-    "cross-env": "6.0.3",
-    "which": "2.0.1"
+    "cross-env": "6.0.3"
   },
   "dependencies": {
     "@commitlint/cli": "^8.3.5",
