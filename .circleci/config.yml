@@ -10,7 +10,10 @@ commands:
     steps:
       - run:
           name: Install dependencies
-          command: yarn install --ignore-engines
+          command: yarn install --ignore-engines --frozen-lockfile
+      - run:
+          name: Verify if lockfile is up to date
+          command: git diff --quiet --exit-code
   audit:
     steps:
       - run:
