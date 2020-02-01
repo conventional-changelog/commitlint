@@ -40,22 +40,22 @@ Array [
 
 exports[`rules header-max-length empty 1`] = `
 Array [
-  false,
-  "header must not be longer than 2,always,72 characters, current length is 13",
+  true,
+  "header must not be longer than 72 characters, current length is 13",
 ]
 `;
 
 exports[`rules header-max-length filled 1`] = `
 Array [
-  false,
-  "header must not be longer than 2,always,72 characters, current length is 13",
+  true,
+  "header must not be longer than 72 characters, current length is 13",
 ]
 `;
 
 exports[`rules header-max-length simple 1`] = `
 Array [
-  false,
-  "header must not be longer than 2,always,72 characters, current length is 13",
+  true,
+  "header must not be longer than 72 characters, current length is 13",
 ]
 `;
 
@@ -80,125 +80,125 @@ Array [
 exports[`rules subject-case empty 1`] = `
 Array [
   true,
-  "subject must be , never, ",
+  "subject must not be sentence-case, start-case, pascal-case, upper-case",
 ]
 `;
 
 exports[`rules subject-case filled 1`] = `
 Array [
   true,
-  "subject must be , never, ",
+  "subject must not be sentence-case, start-case, pascal-case, upper-case",
 ]
 `;
 
 exports[`rules subject-case simple 1`] = `
 Array [
   true,
-  "subject must be , never, ",
+  "subject must not be sentence-case, start-case, pascal-case, upper-case",
 ]
 `;
 
 exports[`rules subject-empty empty 1`] = `
 Array [
-  false,
-  "subject must be empty",
+  true,
+  "subject may not be empty",
 ]
 `;
 
 exports[`rules subject-empty filled 1`] = `
 Array [
-  false,
-  "subject must be empty",
+  true,
+  "subject may not be empty",
 ]
 `;
 
 exports[`rules subject-empty simple 1`] = `
 Array [
-  false,
-  "subject must be empty",
+  true,
+  "subject may not be empty",
 ]
 `;
 
 exports[`rules subject-full-stop empty 1`] = `
 Array [
-  false,
-  "subject must end with full stop",
+  true,
+  "subject may not end with full stop",
 ]
 `;
 
 exports[`rules subject-full-stop filled 1`] = `
 Array [
-  false,
-  "subject must end with full stop",
+  true,
+  "subject may not end with full stop",
 ]
 `;
 
 exports[`rules subject-full-stop simple 1`] = `
 Array [
-  false,
-  "subject must end with full stop",
+  true,
+  "subject may not end with full stop",
 ]
 `;
 
 exports[`rules type-case empty 1`] = `
 Array [
   true,
-  "type must be , always, lower-case",
+  "type must be lower-case",
 ]
 `;
 
 exports[`rules type-case filled 1`] = `
 Array [
   true,
-  "type must be , always, lower-case",
+  "type must be lower-case",
 ]
 `;
 
 exports[`rules type-case simple 1`] = `
 Array [
   true,
-  "type must be , always, lower-case",
+  "type must be lower-case",
 ]
 `;
 
 exports[`rules type-empty empty 1`] = `
 Array [
-  false,
-  "type must be empty",
+  true,
+  "type may not be empty",
 ]
 `;
 
 exports[`rules type-empty filled 1`] = `
 Array [
-  false,
-  "type must be empty",
+  true,
+  "type may not be empty",
 ]
 `;
 
 exports[`rules type-empty simple 1`] = `
 Array [
-  false,
-  "type must be empty",
+  true,
+  "type may not be empty",
 ]
 `;
 
 exports[`rules type-enum empty 1`] = `
 Array [
-  false,
-  "type must be one of [2, always, build,chore,ci,docs,feat,fix,improvement,perf,refactor,revert,style,test]",
+  true,
+  "type must be one of [build, chore, ci, docs, feat, fix, improvement, perf, refactor, revert, style, test]",
 ]
 `;
 
 exports[`rules type-enum filled 1`] = `
 Array [
-  false,
-  "type must be one of [2, always, build,chore,ci,docs,feat,fix,improvement,perf,refactor,revert,style,test]",
+  true,
+  "type must be one of [build, chore, ci, docs, feat, fix, improvement, perf, refactor, revert, style, test]",
 ]
 `;
 
 exports[`rules type-enum simple 1`] = `
 Array [
-  false,
-  "type must be one of [2, always, build,chore,ci,docs,feat,fix,improvement,perf,refactor,revert,style,test]",
+  true,
+  "type must be one of [build, chore, ci, docs, feat, fix, improvement, perf, refactor, revert, style, test]",
 ]
 `;

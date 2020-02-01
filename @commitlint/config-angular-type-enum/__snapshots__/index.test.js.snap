@@ -2,21 +2,21 @@
 
 exports[`rules type-enum empty 1`] = `
 Array [
-  false,
-  "type must be one of [2, always, build,ci,docs,feat,fix,perf,refactor,revert,style,test]",
+  true,
+  "type must be one of [build, ci, docs, feat, fix, perf, refactor, revert, style, test]",
 ]
 `;
 
 exports[`rules type-enum filled 1`] = `
 Array [
-  false,
-  "type must be one of [2, always, build,ci,docs,feat,fix,perf,refactor,revert,style,test]",
+  true,
+  "type must be one of [build, ci, docs, feat, fix, perf, refactor, revert, style, test]",
 ]
 `;
 
 exports[`rules type-enum simple 1`] = `
 Array [
-  false,
-  "type must be one of [2, always, build,ci,docs,feat,fix,perf,refactor,revert,style,test]",
+  true,
+  "type must be one of [build, ci, docs, feat, fix, perf, refactor, revert, style, test]",
 ]
 `;

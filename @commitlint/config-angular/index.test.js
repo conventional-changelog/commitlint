@@ -17,10 +17,9 @@ it('should have correct structure', () => {
 
 describe('rules', () => {
 	describe.each(configRules)('%s', (name, options) => {
-		const severity = options.unshift();
 		it.each(messages)('%s', async (type, message) => {
 			expect(
-				rules[name](await parse(message), severity, options)
+				rules[name](await parse(message), ...options.slice(1))
 			).toMatchSnapshot();
 		});
 	});
