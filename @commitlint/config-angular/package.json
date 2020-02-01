@@ -28,8 +28,15 @@
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "babel": {
+    "presets": [
+      "babel-preset-commitlint"
+    ]
+  },
   "devDependencies": {
-    "@commitlint/utils": "^8.3.4"
+    "@commitlint/utils": "^8.3.4",
+    "@commitlint/rules": "^8.3.4",
+    "@commitlint/parse": "^8.3.4"
   },
   "dependencies": {
     "@commitlint/config-angular-type-enum": "^8.3.4"

@@ -1,0 +1,204 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rules body-leading-blank empty 1`] = `
+Array [
+  false,
+  "body must have leading blank line",
+]
+`;
+
+exports[`rules body-leading-blank filled 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules body-leading-blank simple 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules footer-leading-blank empty 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules footer-leading-blank filled 1`] = `
+Array [
+  false,
+  "footer must have leading blank line",
+]
+`;
+
+exports[`rules footer-leading-blank simple 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules header-max-length empty 1`] = `
+Array [
+  false,
+  "header must not be longer than 2,always,72 characters, current length is 13",
+]
+`;
+
+exports[`rules header-max-length filled 1`] = `
+Array [
+  false,
+  "header must not be longer than 2,always,72 characters, current length is 13",
+]
+`;
+
+exports[`rules header-max-length simple 1`] = `
+Array [
+  false,
+  "header must not be longer than 2,always,72 characters, current length is 13",
+]
+`;
+
+exports[`rules scope-case empty 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules scope-case filled 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules scope-case simple 1`] = `
+Array [
+  true,
+]
+`;
+
+exports[`rules subject-case empty 1`] = `
+Array [
+  true,
+  "subject must be , never, ",
+]
+`;
+
+exports[`rules subject-case filled 1`] = `
+Array [
+  true,
+  "subject must be , never, ",
+]
+`;
+
+exports[`rules subject-case simple 1`] = `
+Array [
+  true,
+  "subject must be , never, ",
+]
+`;
+
+exports[`rules subject-empty empty 1`] = `
+Array [
+  false,
+  "subject must be empty",
+]
+`;
+
+exports[`rules subject-empty filled 1`] = `
+Array [
+  false,
+  "subject must be empty",
+]
+`;
+
+exports[`rules subject-empty simple 1`] = `
+Array [
+  false,
+  "subject must be empty",
+]
+`;
+
+exports[`rules subject-full-stop empty 1`] = `
+Array [
+  false,
+  "subject must end with full stop",
+]
+`;
+
+exports[`rules subject-full-stop filled 1`] = `
+Array [
+  false,
+  "subject must end with full stop",
+]
+`;
+
+exports[`rules subject-full-stop simple 1`] = `
+Array [
+  false,
+  "subject must end with full stop",
+]
+`;
+
+exports[`rules type-case empty 1`] = `
+Array [
+  true,
+  "type must be , always, lower-case",
+]
+`;
+
+exports[`rules type-case filled 1`] = `
+Array [
+  true,
+  "type must be , always, lower-case",
+]
+`;
+
+exports[`rules type-case simple 1`] = `
+Array [
+  true,
+  "type must be , always, lower-case",
+]
+`;
+
+exports[`rules type-empty empty 1`] = `
+Array [
+  false,
+  "type must be empty",
+]
+`;
+
+exports[`rules type-empty filled 1`] = `
+Array [
+  false,
+  "type must be empty",
+]
+`;
+
+exports[`rules type-empty simple 1`] = `
+Array [
+  false,
+  "type must be empty",
+]
+`;
+
+exports[`rules type-enum empty 1`] = `
+Array [
+  false,
+  "type must be one of [2, always, build,chore,ci,docs,feat,fix,improvement,perf,refactor,revert,style,test]",
+]
+`;
+
+exports[`rules type-enum filled 1`] = `
+Array [
+  false,
+  "type must be one of [2, always, build,chore,ci,docs,feat,fix,improvement,perf,refactor,revert,style,test]",
+]
+`;
+
+exports[`rules type-enum simple 1`] = `
+Array [
+  false,
+  "type must be one of [2, always, build,chore,ci,docs,feat,fix,improvement,perf,refactor,revert,style,test]",
+]
+`;
