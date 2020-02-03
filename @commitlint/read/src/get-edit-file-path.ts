@@ -8,22 +8,20 @@ export async function getEditFilePath(
 	top: string,
 	edit?: boolean | string
 ): Promise<string> {
-	let editFilePath: string;
 	if (typeof edit === 'string') {
-		editFilePath = path.resolve(top, edit);
-	} else {
-		const dotgitPath = path.join(top, '.git');
-		const dotgitStats: Stats = sander.lstatSync(dotgitPath);
-		if (dotgitStats.isDirectory()) {
-			editFilePath = path.join(top, '.git/COMMIT_EDITMSG');
-		} else {
-			const gitFile: string = await sander.readFile(dotgitPath, {
-				encoding: 'utf-8'
-			});
-			const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');
-			editFilePath = path.resolve(top, relativeGitPath, 'COMMIT_EDITMSG');
-		}
+		return path.resolve(top, edit);
 	}
 
-	return editFilePath;
+	const dotgitPath = path.join(top, '.git');
+	const dotgitStats: Stats = sander.lstatSync(dotgitPath);
+
+	if (dotgitStats.isDirectory()) {
+		return path.join(top, '.git/COMMIT_EDITMSG');
+	}
+
+	const gitFile: string = await sander.readFile(dotgitPath, {
+		encoding: 'utf-8'
+	});
+	const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');
+	return path.resolve(top, relativeGitPath, 'COMMIT_EDITMSG');
 }
