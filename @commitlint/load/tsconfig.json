@@ -13,8 +13,8 @@
         "./lib/**/*"
     ],
     "references": [
-        { "path": "../ensure" },
         { "path": "../execute-rule" },
-        { "path": "../resolve-extends" }
+        { "path": "../resolve-extends" },
+        { "path": "../rules" }
     ]
 }
