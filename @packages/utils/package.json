@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/utils",
-  "version": "8.1.0",
+  "version": "8.3.4",
   "description": "Development utilities for @commitlint",
   "files": [
     "dep-check.js",
@@ -17,11 +17,6 @@
     "test": "exit 0",
     "deps": "node dep-check.js",
     "pkg": "node pkg-check.js --skip-main"
-  },
-  "ava": {
-    "files": [
-      "cli.test.js"
-    ]
   },
   "engines": {
     "node": ">=4"
@@ -45,13 +40,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/test": "8.0.0",
+    "@commitlint/test": "8.2.0",
     "@marionebl/sander": "0.6.1",
     "execa": "0.11.0",
-    "is-builtin-module": "2.0.0",
-    "lodash": "4.17.14",
+    "is-builtin-module": "3.0.0",
+    "lodash": "4.17.15",
     "meow": "4.0.1",
-    "read-pkg": "3.0.0",
+    "read-pkg": "5.2.0",
     "require-from-string": "2.0.2",
     "tar-fs": "2.0.0"
   }

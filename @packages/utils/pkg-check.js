@@ -43,7 +43,7 @@ function main(cli) {
 	const skipImport =
 		typeof cli.flags.skipImport === 'boolean' ? cli.flags.skipImport : false;
 
-	return readPkg(cwd).then(pkg => {
+	return readPkg({cwd}).then(pkg => {
 		return getTarballFiles(cwd, {write: !skipImport}).then(tarball => {
 			return getPackageFiles(cwd).then(pkgFiles => {
 				let problems = [];

@@ -1,28 +1,25 @@
-import test from 'ava';
 import getPrompt from './get-prompt';
 
-test('throws without params', t => {
-	t.throws(() => getPrompt(), /Missing prompter function/);
+test('throws without params', () => {
+	expect(() => getPrompt()).toThrow('Missing prompter function');
 });
 
-test('throws with incompatible prompter', t => {
-	t.throws(
-		() =>
-			getPrompt('type', {
-				prompter() {
-					return {};
-				}
-			}),
-		/prompt.removeAllListeners/
-	);
+test('throws with incompatible prompter', () => {
+	expect(() =>
+		getPrompt('type', {
+			prompter() {
+				return {};
+			}
+		})
+	).toThrow('prompt.removeAllListeners');
 });
 
-test('returns input unaltered wihtout rules', async t => {
+test('returns input unaltered wihtout rules', async () => {
 	const message = await getPrompt('type', {
 		prompter: stub('foobar')
 	});
 
-	t.is(message, 'foobar');
+	expect(message).toEqual('foobar');
 });
 
 function stub(input = '') {

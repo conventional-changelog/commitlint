@@ -1,4 +1,4 @@
-import ensureCase from './case';
+import ensureCase, {TargetCaseType} from './case';
 import ensureEnum from './enum';
 import maxLength from './max-length';
 import maxLineLength from './max-line-length';
@@ -7,4 +7,5 @@ import notEmpty from './not-empty';
 
 export {ensureCase as case};
 export {ensureEnum as enum};
+export {TargetCaseType};
 export {maxLength, maxLineLength, minLength, notEmpty};

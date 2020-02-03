@@ -65,5 +65,5 @@ test('returns expected value for scoped lerna repository', async t => {
 test('works with lerna version < 3', async t => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/lerna-two');
-	await t.notThrows(async () => fn({cwd}));
+	await t.notThrowsAsync(fn({cwd}));
 });

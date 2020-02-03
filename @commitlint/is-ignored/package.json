@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/is-ignored",
-  "version": "8.1.0",
+  "version": "8.3.5",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -34,12 +34,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^8.1.0",
-    "@commitlint/test": "8.0.0",
-    "@commitlint/utils": "^8.1.0"
+    "@commitlint/parse": "^8.3.4",
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.4",
+    "@types/semver": "^6.0.1"
   },
   "dependencies": {
-    "@types/semver": "^6.0.1",
-    "semver": "6.2.0"
+    "semver": "6.3.0"
   }
 }

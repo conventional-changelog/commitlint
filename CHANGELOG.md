@@ -3,9 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.3.5](https://github.com/conventional-changelog/commitlint/compare/v8.3.4...v8.3.5) (2020-01-15)
+
+
+### Bug Fixes
+
+* **is-ignored:** move types to dev dependencies ([#897](https://github.com/conventional-changelog/commitlint/issues/897)) ([aabc549](https://github.com/conventional-changelog/commitlint/commit/aabc549))
+* **resolve-extends:** move node types to dev dependencies ([#883](https://github.com/conventional-changelog/commitlint/issues/883)) ([b131a18](https://github.com/conventional-changelog/commitlint/commit/b131a18)), closes [#874](https://github.com/conventional-changelog/commitlint/issues/874)
+
+
+
+
+
+## [8.3.4](https://github.com/conventional-changelog/commitlint/compare/v8.3.3...v8.3.4) (2020-01-03)
+
+
+### Bug Fixes
+
+* **commitlint:** use new read pkg syntax ([#888](https://github.com/conventional-changelog/commitlint/issues/888)) ([6b3b9a9](https://github.com/conventional-changelog/commitlint/commit/6b3b9a9))
+
+
+
+
+
+## [8.3.1](https://github.com/conventional-changelog/commitlint/compare/v8.3.0...v8.3.1) (2019-10-16)
+
+
+### Bug Fixes
+
+* **load:** resolve nested parser preset factories ([#831](https://github.com/conventional-changelog/commitlint/issues/831)) ([73a7df7](https://github.com/conventional-changelog/commitlint/commit/73a7df7))
+
+
+
+
+
+# [8.3.0](https://github.com/conventional-changelog/commitlint/compare/v8.2.0...v8.3.0) (2019-10-16)
+
+
+### Features
+
+* **cli:** add helpurl flag ([#789](https://github.com/conventional-changelog/commitlint/issues/789)) ([75cef4e](https://github.com/conventional-changelog/commitlint/commit/75cef4e))
+* **config-conventional:** use parser with short breaking change support ([#821](https://github.com/conventional-changelog/commitlint/issues/821)) ([4b5300a](https://github.com/conventional-changelog/commitlint/commit/4b5300a))
+* **resolve-extends:** accept absolute path in extends ([#825](https://github.com/conventional-changelog/commitlint/issues/825)) ([ecac29f](https://github.com/conventional-changelog/commitlint/commit/ecac29f))
+
+
+
+
+
+# [8.2.0](https://github.com/conventional-changelog/commitlint/compare/v8.1.0...v8.2.0) (2019-09-16)
+
+This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659).
+
+### Bug Fixes
+
+* pass defaultIgnores from configuration in @commitlint/cli ([#771](https://github.com/conventional-changelog/commitlint/issues/771)) ([a259014](https://github.com/conventional-changelog/commitlint/commit/a259014))
+
+
+
+
+
 # [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
 
-This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659). 
+This release is versioned as minor change because some of the core components are rewritten to TypeScript. It's part of the full port to TypeScript, currently in progress at [#659](https://github.com/conventional-changelog/commitlint/issues/659).
 
 ### Bug Fixes
 
@@ -16,16 +75,16 @@ This release is versioned as minor change because some of the core components ar
 
 
 
-# [8.0.0](https://github.com/conventional-changelog/commitlint/compare/v7.6.2...v8.0.0) 
+# [8.0.0](https://github.com/conventional-changelog/commitlint/compare/v7.6.2...v8.0.0)
 
 ### Breaking Changes
 
-* fix: avoid excessive help text #606 (#637) 
-  The commitlint default formatter is now silent for reports without warnings or errors. 
+* fix: avoid excessive help text #606 (#637)
+  The commitlint default formatter is now silent for reports without warnings or errors.
   Scripts relying on the success output of commitlint can restore the former output by specifying the --verbose flag.
 
 
-## [7.6.2](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.2) 
+## [7.6.2](https://github.com/conventional-changelog/commitlint/compare/v7.6.0...v7.6.2)
 
 * Republish packages with out of sync artifacts
 

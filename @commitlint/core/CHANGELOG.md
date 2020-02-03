@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.3.5](https://github.com/conventional-changelog/commitlint/compare/v8.3.4...v8.3.5) (2020-01-15)
+
+**Note:** Version bump only for package @commitlint/core
+
+
+
+
+
+## [8.3.4](https://github.com/conventional-changelog/commitlint/compare/v8.3.3...v8.3.4) (2020-01-03)
+
+**Note:** Version bump only for package @commitlint/core
+
+
+
+
+
+## [8.3.1](https://github.com/conventional-changelog/commitlint/compare/v8.3.0...v8.3.1) (2019-10-16)
+
+**Note:** Version bump only for package @commitlint/core
+
+
+
+
+
+# [8.3.0](https://github.com/conventional-changelog/commitlint/compare/v8.2.0...v8.3.0) (2019-10-16)
+
+**Note:** Version bump only for package @commitlint/core
+
+
+
+
+
+# [8.2.0](https://github.com/conventional-changelog/commitlint/compare/v8.1.0...v8.2.0) (2019-09-16)
+
+**Note:** Version bump only for package @commitlint/core
+
+
+
+
+
 # [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
 
 **Note:** Version bump only for package @commitlint/core

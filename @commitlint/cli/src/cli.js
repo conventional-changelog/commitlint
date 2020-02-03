@@ -1,18 +1,18 @@
 #!/usr/bin/env node
-require('babel-polyfill'); // eslint-disable-line import/no-unassigned-import
+import 'core-js/stable'; // eslint-disable-line import/no-unassigned-import
+import 'regenerator-runtime/runtime'; // eslint-disable-line import/no-unassigned-import
 
+import load from '@commitlint/load';
+import lint from '@commitlint/lint';
 import read from '@commitlint/read';
+import meow from 'meow';
+import {merge, pick, isFunction} from 'lodash';
+import stdin from 'get-stdin';
+import resolveFrom from 'resolve-from';
+import resolveGlobal from 'resolve-global';
 
-const load = require('@commitlint/load');
-const lint = require('@commitlint/lint');
-const meow = require('meow');
-const {merge, pick, isFunction} = require('lodash');
-const stdin = require('get-stdin');
-const resolveFrom = require('resolve-from');
-const resolveGlobal = require('resolve-global');
-
+import help from './help';
 const pkg = require('../package');
-const help = require('./help');
 
 const flags = {
 	color: {
@@ -56,6 +56,11 @@ const flags = {
 		alias: 'h',
 		type: 'boolean',
 		description: 'display this help message'
+	},
+	'help-url': {
+		alias: 'H',
+		type: 'string',
+		description: 'helpurl in error message'
 	},
 	from: {
 		alias: 'f',
@@ -221,8 +226,9 @@ async function main(options) {
 	const output = format(report, {
 		color: flags.color,
 		verbose: flags.verbose,
-		helpUrl:
-			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+		helpUrl: flags.helpUrl
+			? flags.helpUrl.trim()
+			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	});
 
 	if (!flags.quiet && output !== '') {

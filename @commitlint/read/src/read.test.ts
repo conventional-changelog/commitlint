@@ -1,6 +1,6 @@
+import {git} from '@commitlint/test';
 import execa from 'execa';
 
-const {git} = require('@commitlint/test');
 const sander = require('@marionebl/sander');
 
 import read from './read';
