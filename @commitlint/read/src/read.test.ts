@@ -1,11 +1,12 @@
 import {git} from '@commitlint/test';
 import execa from 'execa';
-import * as sander from '@marionebl/sander';
 
-import read from '.';
+const sander = require('@marionebl/sander');
+
+import read from './read';
 
 test('get edit commit message specified by the `edit` flag', async () => {
-	const cwd = await git.bootstrap();
+	const cwd: string = await git.bootstrap();
 
 	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
 
@@ -15,7 +16,7 @@ test('get edit commit message specified by the `edit` flag', async () => {
 });
 
 test('get edit commit message from git root', async () => {
-	const cwd = await git.bootstrap();
+	const cwd: string = await git.bootstrap();
 
 	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
 	await execa('git', ['add', '.'], {cwd});
@@ -26,7 +27,7 @@ test('get edit commit message from git root', async () => {
 });
 
 test('get history commit messages', async () => {
-	const cwd = await git.bootstrap();
+	const cwd: string = await git.bootstrap();
 	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
 	await execa('git', ['add', 'alpha.txt'], {cwd});
 	await execa('git', ['commit', '-m', 'alpha'], {cwd});
@@ -39,7 +40,7 @@ test('get history commit messages', async () => {
 });
 
 test('get edit commit message from git subdirectory', async () => {
-	const cwd = await git.bootstrap();
+	const cwd: string = await git.bootstrap();
 	await sander.mkdir(cwd, 'beta');
 	await sander.writeFile(cwd, 'beta/beta.txt', 'beta');
 
