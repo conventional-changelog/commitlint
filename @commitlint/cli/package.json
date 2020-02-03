@@ -46,16 +46,11 @@
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
-    "@babel/register": "^7.7.7",
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.4",
     "babel-preset-commitlint": "^8.2.0",
-    "concurrently": "3.6.1",
     "cross-env": "6.0.3",
     "execa": "0.11.0",
-    "mkdirp": "0.5.1",
-    "pkg-dir": "4.2.0",
-    "resolve-bin": "0.4.0",
     "sander": "0.6.0",
     "string-to-stream": "3.0.1"
   },
@@ -69,6 +64,7 @@
     "get-stdin": "7.0.0",
     "lodash": "4.17.15",
     "meow": "5.0.0",
+    "regenerator-runtime": "0.13.3",
     "resolve-from": "5.0.0",
     "resolve-global": "1.0.0"
   }

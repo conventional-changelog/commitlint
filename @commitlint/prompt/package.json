@@ -11,27 +11,8 @@
     "commit": "git-cz",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
-    "test": "ava --verbose",
+    "start": "yarn run watch",
     "watch": "babel src --out-dir lib --watch  --source-maps"
-  },
-  "ava": {
-    "babel": {
-      "testOptions": {
-        "presets": [
-          "babel-preset-commitlint"
-        ]
-      }
-    },
-    "require": [
-      "@babel/register"
-    ],
-    "files": [
-      "src/**/*.test.js"
-    ],
-    "sources": [
-      "src/**/*.js"
-    ]
   },
   "babel": {
     "presets": [
@@ -63,12 +44,9 @@
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
-    "@babel/register": "^7.7.7",
     "@commitlint/utils": "^8.3.4",
-    "ava": "2.4.0",
     "babel-preset-commitlint": "^8.2.0",
     "commitizen": "3.1.2",
-    "concurrently": "3.6.1",
     "cross-env": "6.0.3"
   },
   "dependencies": {
