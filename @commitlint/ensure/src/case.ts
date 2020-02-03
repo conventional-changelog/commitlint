@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 export default ensureCase;
 
-type TargetCaseType =
+export type TargetCaseType =
 	| 'camel-case'
 	| 'kebab-case'
 	| 'snake-case'

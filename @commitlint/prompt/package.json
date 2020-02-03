@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "8.3.3",
+  "version": "8.3.5",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -11,21 +11,8 @@
     "commit": "git-cz",
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava --watch --verbose\" \"yarn run watch\"",
-    "test": "ava --verbose",
+    "start": "yarn run watch",
     "watch": "babel src --out-dir lib --watch  --source-maps"
-  },
-  "ava": {
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ],
-    "files": [
-      "src/**/*.test.js"
-    ],
-    "sources": [
-      "src/**/*.js"
-    ]
   },
   "babel": {
     "presets": [
@@ -55,18 +42,15 @@
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "devDependencies": {
-    "@commitlint/utils": "^8.3.0",
-    "ava": "0.20.0",
-    "babel-cli": "6.26.0",
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@commitlint/utils": "^8.3.4",
     "babel-preset-commitlint": "^8.2.0",
-    "babel-register": "6.26.0",
     "commitizen": "3.1.2",
-    "concurrently": "3.6.1",
     "cross-env": "6.0.3"
   },
   "dependencies": {
-    "@commitlint/load": "^8.3.3",
-    "babel-runtime": "^6.23.0",
+    "@commitlint/load": "^8.3.5",
     "chalk": "^2.0.0",
     "lodash": "4.17.15",
     "throat": "^5.0.0",

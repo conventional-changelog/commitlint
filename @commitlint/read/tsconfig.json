@@ -1,0 +1,18 @@
+{
+	"extends": "../../tsconfig.shared.json",
+	"compilerOptions": {
+		"composite": true,
+		"rootDir": "./src",
+		"outDir": "./lib"
+	},
+	"include": [
+		"./src"
+	],
+	"exclude": [
+		"./src/**/*.test.ts",
+		"./lib/**/*"
+	],
+	"references": [
+		{ "path": "../top-level" }
+	]
+}

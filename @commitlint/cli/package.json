@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "8.3.3",
+  "version": "8.3.5",
   "description": "Lint your commit messages",
   "files": [
     "index.js",
@@ -14,17 +14,8 @@
     "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "deps": "dep-check",
     "pkg": "pkg-check",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose",
+    "start": "yarn run watch",
     "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "lib/**/*.test.js"
-    ],
-    "source": [
-      "lib/**/*.js"
-    ]
   },
   "babel": {
     "presets": [
@@ -53,32 +44,27 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
     "@commitlint/test": "8.2.0",
-    "@commitlint/utils": "^8.3.0",
-    "ava": "0.18.2",
-    "babel-cli": "6.26.0",
+    "@commitlint/utils": "^8.3.4",
     "babel-preset-commitlint": "^8.2.0",
-    "babel-register": "6.26.0",
-    "concurrently": "3.6.1",
     "cross-env": "6.0.3",
     "execa": "0.11.0",
-    "mkdirp": "0.5.1",
-    "pkg-dir": "4.2.0",
-    "resolve-bin": "0.4.0",
     "sander": "0.6.0",
-    "string-to-stream": "3.0.1",
-    "tmp": "0.1.0"
+    "string-to-stream": "3.0.1"
   },
   "dependencies": {
-    "@commitlint/format": "^8.3.2",
-    "@commitlint/lint": "^8.3.2",
-    "@commitlint/load": "^8.3.3",
-    "@commitlint/read": "^8.3.2",
-    "babel-polyfill": "6.26.0",
+    "@commitlint/format": "^8.3.4",
+    "@commitlint/lint": "^8.3.5",
+    "@commitlint/load": "^8.3.5",
+    "@commitlint/read": "^8.3.4",
     "chalk": "2.4.2",
+    "core-js": "^3.6.1",
     "get-stdin": "7.0.0",
     "lodash": "4.17.15",
     "meow": "5.0.0",
+    "regenerator-runtime": "0.13.3",
     "resolve-from": "5.0.0",
     "resolve-global": "1.0.0"
   }

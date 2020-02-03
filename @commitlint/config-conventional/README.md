@@ -125,7 +125,7 @@ echo "fix: some message" # passes
 * **rule**: `always`
 * **value**
 ```js
-  72
+  100
 ```
 
 ```sh

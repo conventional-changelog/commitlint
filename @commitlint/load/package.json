@@ -1,37 +1,15 @@
 {
   "name": "@commitlint/load",
-  "version": "8.3.3",
+  "version": "8.3.5",
   "description": "Load shared commitlint configuration",
-  "main": "lib/index.js",
+  "main": "lib/load.js",
+  "types": "lib/load.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib  --source-maps",
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-import",
-    "start": "concurrently \"ava -c 4 --verbose --watch\" \"yarn run watch\"",
-    "test": "ava -c 4 --verbose && ava \"src/*.serial-test.js\" --verbose",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "ava": {
-    "files": [
-      "src/**/*.test.js",
-      "!lib/**/*"
-    ],
-    "source": [
-      "src/**/*.js",
-      "!lib/**/*"
-    ],
-    "babel": "inherit",
-    "require": [
-      "babel-register"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
+    "pkg": "pkg-check --skip-import"
   },
   "engines": {
     "node": ">=4"
@@ -57,22 +35,15 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/test": "8.2.0",
-    "@commitlint/utils": "^8.3.0",
-    "ava": "0.22.0",
-    "babel-cli": "6.26.0",
-    "babel-preset-commitlint": "^8.2.0",
-    "babel-register": "6.26.0",
-    "concurrently": "3.6.1",
-    "cross-env": "6.0.3",
-    "execa": "0.11.0",
-    "globby": "10.0.1"
+    "@commitlint/utils": "^8.3.4",
+    "execa": "0.11.0"
   },
   "dependencies": {
-    "@commitlint/execute-rule": "^8.3.2",
-    "@commitlint/resolve-extends": "^8.3.2",
-    "babel-runtime": "^6.23.0",
+    "@commitlint/execute-rule": "^8.3.4",
+    "@commitlint/resolve-extends": "^8.3.5",
+    "@commitlint/rules": "^8.3.4",
     "chalk": "2.4.2",
-    "cosmiconfig": "^5.2.0",
+    "cosmiconfig": "^6.0.0",
     "lodash": "4.17.15",
     "resolve-from": "^5.0.0"
   }

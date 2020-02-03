@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/top-level",
-  "version": "8.3.2",
+  "version": "8.3.4",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,11 +10,6 @@
   "scripts": {
     "deps": "dep-check",
     "pkg": "pkg-check"
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ]
   },
   "engines": {
     "node": ">=4"
@@ -39,9 +34,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^8.3.0",
+    "@commitlint/utils": "^8.3.4",
     "@types/find-up": "2.1.1",
-    "@types/node": "12.11.5"
+    "@types/node": "12.12.26"
   },
   "dependencies": {
     "find-up": "^4.0.0"

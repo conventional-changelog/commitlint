@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const execa = require('execa');
-const commitlint = require('@commitlint/cli');
+import execa from 'execa';
+import commitlint from '@commitlint/cli';
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';
@@ -77,7 +77,7 @@ async function lint(args, options) {
 }
 
 async function log(hash) {
-	const result = await execa('git', [
+	const result = await execa(GIT, [
 		'log',
 		'-n',
 		'1',

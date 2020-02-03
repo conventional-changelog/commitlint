@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/utils",
-  "version": "8.3.0",
+  "version": "8.3.4",
   "description": "Development utilities for @commitlint",
   "files": [
     "dep-check.js",
@@ -17,11 +17,6 @@
     "test": "exit 0",
     "deps": "node dep-check.js",
     "pkg": "node pkg-check.js --skip-main"
-  },
-  "ava": {
-    "files": [
-      "cli.test.js"
-    ]
   },
   "engines": {
     "node": ">=4"

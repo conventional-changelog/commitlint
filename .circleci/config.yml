@@ -35,7 +35,7 @@ commands:
     steps:
       - run:
           name: Test
-          command: yarn test
+          command: yarn test-ci
   save-cache:
     steps:
       - save_cache:
