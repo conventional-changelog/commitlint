@@ -1,11 +1,16 @@
 import path from 'path';
-import {CosmiconfigResult} from 'cosmiconfig';
-import cosmiconfig from 'cosmiconfig';
+import {cosmiconfig} from 'cosmiconfig';
+
+export interface LoadConfigResult {
+	config: unknown;
+	filepath: string;
+	isEmpty?: boolean;
+}
 
 export async function loadConfig(
 	cwd: string,
 	configPath?: string
-): Promise<CosmiconfigResult> {
+): Promise<LoadConfigResult | null> {
 	const explorer = cosmiconfig('commitlint');
 
 	const explicitPath = configPath ? path.resolve(cwd, configPath) : undefined;
