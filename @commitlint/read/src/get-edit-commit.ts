@@ -1,4 +1,7 @@
 import toplevel from '@commitlint/top-level';
+import {getEditFilePath} from './get-edit-file-path';
+
+const sander = require('@marionebl/sander');
 
 // Get recently edited commit message
 export async function getEditCommit(

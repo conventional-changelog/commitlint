@@ -13,7 +13,7 @@ export default toplevel;
 /**
  * Find the next git root
  */
-async function toplevel(cwd: string) {
+async function toplevel(cwd?: string) {
 	const found = await searchDotGit(cwd);
 
 	if (typeof found !== 'string') {
@@ -26,7 +26,7 @@ async function toplevel(cwd: string) {
 /**
  * Search .git, the '.git' can be a file(submodule), also can be a directory(normal)
  */
-async function searchDotGit(cwd: string) {
+async function searchDotGit(cwd?: string) {
 	const foundFile = await up('.git', {cwd, type: 'file'});
 	const foundDir = await up('.git', {cwd, type: 'directory'});
 
