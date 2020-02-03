@@ -30,6 +30,9 @@ export default async function load(
 	const loaded = await loadConfig(cwd, options.file);
 	const base = loaded && loaded.filepath ? Path.dirname(loaded.filepath) : cwd;
 
+	// TODO: validate loaded.config against UserConfig type
+	// Might amount to breaking changes, defer until 9.0.0
+
 	// Merge passed config with file based options
 	const config = pickConfig(merge({}, loaded ? loaded.config : null, seed));
 
