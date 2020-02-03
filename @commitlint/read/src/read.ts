@@ -1,5 +1,5 @@
-import { getHistoryCommits } from './get-history-commits';
-import { getEditCommit } from './get-edit-commit';
+import {getHistoryCommits} from './get-history-commits';
+import {getEditCommit} from './get-edit-commit';
 
 interface GetCommitMessageOptions {
 	cwd?: string;
@@ -9,7 +9,9 @@ interface GetCommitMessageOptions {
 }
 
 // Get commit messages
-export default async function getCommitMessages(settings: GetCommitMessageOptions): Promise<string[]> {
+export default async function getCommitMessages(
+	settings: GetCommitMessageOptions
+): Promise<string[]> {
 	const {cwd, from, to, edit} = settings;
 
 	if (edit) {
