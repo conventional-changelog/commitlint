@@ -11,5 +11,11 @@
 	"exclude": [
 		"./src/**/*.test.ts",
 		"./lib/**/*"
-	]
+    ],
+    "references": [
+        { "path": "../ensure" },
+        { "path": "../message" },
+        { "path": "../parse" },
+        { "path": "../to-lines" }
+    ]
 }
