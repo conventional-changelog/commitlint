@@ -11,7 +11,8 @@ import execa from 'execa';
 import resolveFrom from 'resolve-from';
 import {fix, git, npm} from '@commitlint/test';
 
-import load from '.';
+import load from './load';
+import {RuleSeverity} from './types';
 
 const fixBootstrap = (name: string) => fix.bootstrap(name, __dirname);
 const gitBootstrap = (name: string) => git.bootstrap(name, __dirname);

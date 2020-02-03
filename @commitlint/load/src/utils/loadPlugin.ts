@@ -2,8 +2,7 @@ import path from 'path';
 import chalk from 'chalk';
 import {normalizePackageName, getShorthandName} from './pluginNaming';
 import {WhitespacePluginError, MissingPluginError} from './pluginErrors';
-
-export type PluginRecords = Record<string, unknown>;
+import {PluginRecords} from '../types';
 
 export default function loadPlugin(
 	plugins: PluginRecords,
