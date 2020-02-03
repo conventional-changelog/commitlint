@@ -11,5 +11,8 @@
 	"exclude": [
 		"./src/**/*.test.ts",
 		"./lib/**/*"
+	],
+	"references": [
+		{ "path": "../top-level" }
 	]
 }

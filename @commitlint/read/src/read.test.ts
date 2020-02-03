@@ -3,7 +3,7 @@ import execa from 'execa';
 const {git} = require('@commitlint/test');
 const sander = require('@marionebl/sander');
 
-import read from '.';
+import read from './read';
 
 test('get edit commit message specified by the `edit` flag', async () => {
 	const cwd: string = await git.bootstrap();
