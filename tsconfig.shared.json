@@ -12,6 +12,10 @@
         "strict": true,
         "allowUnreachableCode": false,
         "allowUnusedLabels": false,
-        "noUnusedLocals": true
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "forceConsistentCasingInFileNames": true,
+        "keyofStringsOnly": true,
+        "noFallthroughCasesInSwitch": true
     }
 }

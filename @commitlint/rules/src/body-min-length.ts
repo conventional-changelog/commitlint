@@ -3,7 +3,7 @@ import {Rule} from './types';
 
 export const bodyMinLength: Rule<number> = (
 	parsed,
-	when = undefined,
+	_when = undefined,
 	value = 0
 ) => {
 	if (!parsed.body) {

@@ -3,7 +3,7 @@ import {Rule} from './types';
 
 export const typeMaxLength: Rule<number> = (
 	parsed,
-	when = undefined,
+	_when = undefined,
 	value = 0
 ) => {
 	const input = parsed.type;
