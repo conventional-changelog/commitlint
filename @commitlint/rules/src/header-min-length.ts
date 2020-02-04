@@ -3,13 +3,11 @@ import {Rule} from './types';
 
 export const headerMinLength: Rule<number> = (
 	parsed,
-	when = undefined,
+	_when = undefined,
 	value = 0
 ) => {
 	return [
 		minLength(parsed.header, value),
-		`header must not be shorter than ${value} characters, current length is ${
-			parsed.header.length
-		}`
+		`header must not be shorter than ${value} characters, current length is ${parsed.header.length}`
 	];
 };

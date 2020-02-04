@@ -55,9 +55,7 @@ function main(cli) {
 							.map(binFile => ({
 								type: 'bin',
 								file: binFile,
-								message: `Required bin file ${binFile} not found for ${
-									pkg.name
-								}`
+								message: `Required bin file ${binFile} not found for ${pkg.name}`
 							}))
 					);
 				}
@@ -69,9 +67,7 @@ function main(cli) {
 					problems.push({
 						type: 'main',
 						file: pkgFiles.main,
-						message: `Required main file ${pkgFiles.main} not found for ${
-							pkg.name
-						}`
+						message: `Required main file ${pkgFiles.main} not found for ${pkg.name}`
 					});
 				}
 
@@ -83,9 +79,7 @@ function main(cli) {
 						problems.push({
 							type: 'import',
 							file: pkgFiles.main,
-							message: `Error while importing ${pkgFiles.main}: ${
-								importable[0].message
-							}`
+							message: `Error while importing ${pkgFiles.main}: ${importable[0].message}`
 						});
 					}
 				}
@@ -119,9 +113,7 @@ main(
 	.then(report => {
 		if (report.problems.length > 0) {
 			console.log(
-				`Found ${report.problems.length} problems while checking tarball for ${
-					report.pkg.name
-				}:`
+				`Found ${report.problems.length} problems while checking tarball for ${report.pkg.name}:`
 			);
 
 			report.problems.forEach(problem => {
