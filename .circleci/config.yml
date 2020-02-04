@@ -10,7 +10,7 @@ commands:
     steps:
       - run:
           name: Install dependencies
-          command: yarn install --ignore-engines
+          command: yarn install --ignore-engines --frozen-lockfile
   audit:
     steps:
       - run:
