@@ -94,7 +94,7 @@ function getId(raw: string = '', prefix: string = ''): string {
 	return relative || absolute ? raw : [prefix, raw].filter(String).join('-');
 }
 
-function resolveConfig<T>(
+function resolveConfig(
 	raw: string,
 	context: ResolveExtendsContext = {}
 ): string {

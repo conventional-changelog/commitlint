@@ -1,5 +1,4 @@
 import resolveExtends, {ResolveExtendsContext} from '.';
-import resolveGlobal from 'resolve-global';
 
 const id = (id: unknown) => id;
 
