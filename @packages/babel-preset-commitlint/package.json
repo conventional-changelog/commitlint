@@ -6,20 +6,6 @@
   "files": [
     "index.js"
   ],
-  "ava": {
-    "files": [
-      "test.js",
-      "*.test.js"
-    ]
-  },
-  "nyc": {
-    "all": true,
-    "sourceMap": false,
-    "instrument": false,
-    "include": [
-      "source/**/*.js"
-    ]
-  },
   "engines": {
     "node": ">=4"
   },

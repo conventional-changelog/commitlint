@@ -1,4 +1,3 @@
-// import testAva from 'ava';
 import ensure from './enum';
 
 test('false for no params', () => {
