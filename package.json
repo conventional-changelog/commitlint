@@ -37,19 +37,12 @@
     ]
   },
   "renovate": {
-    "dependencies": {
-      "semanticPrefix": "chore:",
-      "semanticCommitScope": ""
-    },
+    "rangeStrategy": "update-lockfile",
     "extends": [
-      "config:base"
-    ],
-    "pin": {
-      "semanticPrefix": "chore:",
-      "semanticCommitScope": ""
-    },
-    "semanticPrefix": "chore:",
-    "semanticCommitScope": ""
+      "config:base",
+      ":semanticCommitType(chore)",
+      ":semanticCommitScopeDisabled"
+    ]
   },
   "workspaces": [
     "@alias/*",
