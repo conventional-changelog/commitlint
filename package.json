@@ -37,6 +37,7 @@
   },
   "renovate": {
     "rangeStrategy": "update-lockfile",
+    "ignorePaths": ["**/fixtures/**/package.json"],
     "extends": [
       "config:base",
       ":semanticCommitType(chore)",
