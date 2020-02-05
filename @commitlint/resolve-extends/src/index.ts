@@ -2,7 +2,10 @@ import path from 'path';
 
 import 'resolve-global';
 import resolveFrom from 'resolve-from';
-import {isArray, merge, mergeWith, omit} from 'lodash';
+import isArray from 'lodash/isArray';
+import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergeWith';
+import omit from 'lodash/omit';
 
 const importFresh = require('import-fresh');
 

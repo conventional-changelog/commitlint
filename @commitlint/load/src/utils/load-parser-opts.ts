@@ -1,4 +1,4 @@
-import {startsWith} from 'lodash';
+import startsWith from 'lodash/startsWith';
 
 export async function loadParserOpts(
 	parserName: string,

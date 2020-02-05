@@ -1,4 +1,8 @@
-import * as _ from 'lodash';
+import camelCase from 'lodash/camelCase';
+import kebabCase from 'lodash/kebabCase';
+import snakeCase from 'lodash/snakeCase';
+import upperFirst from 'lodash/upperFirst';
+import startCase from 'lodash/startCase';
 
 export default ensureCase;
 
@@ -38,15 +42,15 @@ function ensureCase(
 function toCase(input: string, target: TargetCaseType): string {
 	switch (target) {
 		case 'camel-case':
-			return _.camelCase(input);
+			return camelCase(input);
 		case 'kebab-case':
-			return _.kebabCase(input);
+			return kebabCase(input);
 		case 'snake-case':
-			return _.snakeCase(input);
+			return snakeCase(input);
 		case 'pascal-case':
-			return _.upperFirst(_.camelCase(input));
+			return upperFirst(camelCase(input));
 		case 'start-case':
-			return _.startCase(input);
+			return startCase(input);
 		case 'upper-case':
 		case 'uppercase':
 			return input.toUpperCase();

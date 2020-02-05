@@ -1,7 +1,7 @@
 import path from 'path';
 import {fix, git} from '@commitlint/test';
 import execa from 'execa';
-import {merge} from 'lodash';
+import merge from 'lodash/merge';
 import * as sander from 'sander';
 import stream from 'string-to-stream';
 
