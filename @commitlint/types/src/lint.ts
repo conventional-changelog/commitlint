@@ -35,7 +35,7 @@ export interface LintRuleOutcome {
 	/** If the commit is considered valid for the rule */
 	valid: boolean;
 	/** The "severity" of the rule (1 = warning, 2 = error) */
-	level: 0 | 1 | 2;
+	level: RuleSeverity;
 	/** The name of the rule */
 	name: string;
 	/** The message returned from the rule, if invalid */
