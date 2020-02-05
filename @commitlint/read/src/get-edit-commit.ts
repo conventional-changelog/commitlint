@@ -1,7 +1,6 @@
 import toplevel from '@commitlint/top-level';
+import fs from 'fs-extra';
 import {getEditFilePath} from './get-edit-file-path';
-
-const sander = require('@marionebl/sander');
 
 // Get recently edited commit message
 export async function getEditCommit(
@@ -15,7 +14,7 @@ export async function getEditCommit(
 	}
 
 	const editFilePath = await getEditFilePath(top, edit);
+	const editFile: Buffer = await fs.readFile(editFilePath);
 
-	const editFile: Buffer = await sander.readFile(editFilePath);
 	return [`${editFile.toString('utf-8')}\n`];
 }

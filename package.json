@@ -37,6 +37,7 @@
   },
   "renovate": {
     "rangeStrategy": "update-lockfile",
+    "ignorePaths": ["**/fixtures/**/package.json"],
     "extends": [
       "config:base",
       ":semanticCommitType(chore)",
@@ -70,9 +71,6 @@
   "author": {
     "name": "Mario Nebl",
     "email": "hello@herebecode.com"
-  },
-  "dependencies": {
-    "@marionebl/sander": "0.6.1"
   },
   "devDependencies": {
     "@lerna/project": "3.18.0",

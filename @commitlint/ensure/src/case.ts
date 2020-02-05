@@ -3,22 +3,9 @@ import kebabCase from 'lodash/kebabCase';
 import snakeCase from 'lodash/snakeCase';
 import upperFirst from 'lodash/upperFirst';
 import startCase from 'lodash/startCase';
+import {TargetCaseType} from '.';
 
 export default ensureCase;
-
-export type TargetCaseType =
-	| 'camel-case'
-	| 'kebab-case'
-	| 'snake-case'
-	| 'pascal-case'
-	| 'start-case'
-	| 'upper-case'
-	| 'uppercase'
-	| 'sentence-case'
-	| 'sentencecase'
-	| 'lower-case'
-	| 'lowercase'
-	| 'lowerCase';
 
 function ensureCase(
 	raw: string = '',

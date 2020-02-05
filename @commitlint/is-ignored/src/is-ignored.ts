@@ -1,7 +1,8 @@
-import * as Defaults from './defaults';
+import {wildcards} from './defaults';
+import {Matcher} from './types';
 
 export interface IsIgnoredOptions {
-	ignores?: Defaults.Matcher[];
+	ignores?: Matcher[];
 	defaults?: boolean;
 }
 
@@ -27,6 +28,6 @@ export default function isIgnored(
 		);
 	}
 
-	const base = opts.defaults === false ? [] : Defaults.wildcards;
+	const base = opts.defaults === false ? [] : wildcards;
 	return [...base, ...ignores].some(w => w(commit));
 }
