@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@2.2.0
+
 commands:
   update-yarn:
     steps:
@@ -71,6 +74,10 @@ jobs:
       - image: node:12
     steps:
       - run-node
+  windows-v12:
+    executor: win/default
+    steps:
+      - run-node
 
 workflows:
   node:
@@ -78,3 +85,4 @@ workflows:
       - v8
       - v10
       - v12
+      - windows-v12
