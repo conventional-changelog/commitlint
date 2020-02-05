@@ -1,13 +1,6 @@
 import path from 'path';
 import up from 'find-up';
 
-declare module 'find-up' {
-	interface Options {
-		cwd?: string;
-		type?: 'file' | 'directory';
-	}
-}
-
 export default toplevel;
 
 /**
