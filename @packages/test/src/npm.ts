@@ -40,8 +40,11 @@ export async function bootstrap(fixture: string, directory?: string) {
 	return cwd;
 }
 
-function findParentPath(path: string, dirname: string): string | undefined {
-	const rawFragments = path.split('/');
+function findParentPath(
+	parentPath: string,
+	dirname: string
+): string | undefined {
+	const rawFragments = parentPath.split(path.sep);
 
 	const {matched, fragments} = rawFragments.reduceRight(
 		({fragments, matched}, item) => {
@@ -58,5 +61,5 @@ function findParentPath(path: string, dirname: string): string | undefined {
 		{fragments: rawFragments, matched: false}
 	);
 
-	return matched ? fragments.join('/') : undefined;
+	return matched ? fragments.join(path.sep) : undefined;
 }
