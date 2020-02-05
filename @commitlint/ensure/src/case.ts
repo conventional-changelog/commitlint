@@ -1,20 +1,7 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
+import {TargetCaseType} from '.';
 
 export default ensureCase;
-
-export type TargetCaseType =
-	| 'camel-case'
-	| 'kebab-case'
-	| 'snake-case'
-	| 'pascal-case'
-	| 'start-case'
-	| 'upper-case'
-	| 'uppercase'
-	| 'sentence-case'
-	| 'sentencecase'
-	| 'lower-case'
-	| 'lowercase'
-	| 'lowerCase';
 
 function ensureCase(
 	raw: string = '',

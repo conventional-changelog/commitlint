@@ -4,7 +4,11 @@ import {camelCase, values} from 'lodash';
 import * as ensure from '.';
 
 test('exports all checkers', async () => {
-	const expected = (await glob('*.ts')).map(f => camelCase(f)).sort();
+	const ignore = ['types'];
+	const expected = (await glob('*.ts'))
+		.map(f => camelCase(f))
+		.sort()
+		.filter(item => !ignore.includes(item));
 	const actual = Object.keys(ensure).sort();
 	expect(actual).toEqual(expected);
 });

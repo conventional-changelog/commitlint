@@ -1,6 +1,5 @@
 import * as semver from 'semver';
-
-export type Matcher = (commit: string) => boolean;
+import {Matcher} from './types';
 
 const isSemver = (c: string): boolean => {
 	const firstLine = c.split('\n').shift();

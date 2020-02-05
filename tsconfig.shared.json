@@ -16,6 +16,8 @@
         "noUnusedParameters": true,
         "forceConsistentCasingInFileNames": true,
         "keyofStringsOnly": true,
-        "noFallthroughCasesInSwitch": true
+        "noFallthroughCasesInSwitch": true,
+        "isolatedModules": true,
+        "skipLibCheck": true
     }
 }
