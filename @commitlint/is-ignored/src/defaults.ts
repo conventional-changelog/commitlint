@@ -1,5 +1,5 @@
 import * as semver from 'semver';
-import {Matcher} from './types';
+import {Matcher} from '@commitlint/types';
 
 const isSemver = (c: string): boolean => {
 	const firstLine = c.split('\n').shift();

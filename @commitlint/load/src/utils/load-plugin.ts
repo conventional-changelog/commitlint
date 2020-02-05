@@ -1,8 +1,8 @@
 import path from 'path';
 import chalk from 'chalk';
-import {normalizePackageName, getShorthandName} from './pluginNaming';
-import {WhitespacePluginError, MissingPluginError} from './pluginErrors';
-import {PluginRecords} from '../types';
+import {normalizePackageName, getShorthandName} from './plugin-naming';
+import {WhitespacePluginError, MissingPluginError} from './plugin-errors';
+import {PluginRecords} from '@commitlint/types';
 
 export default function loadPlugin(
 	plugins: PluginRecords,

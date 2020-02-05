@@ -1,8 +1,13 @@
-import {TargetCaseType} from '@commitlint/ensure';
+import {TargetCaseType} from './ensure';
+import {Rule, RuleCondition} from './rules';
 
-export type RuleCondition = 'always' | 'never';
+export type PluginRecords = Record<string, Plugin>;
 
-export type PluginRecords = Record<string, unknown>;
+export interface Plugin {
+	rules: {
+		[ruleName: string]: Rule<unknown>;
+	};
+}
 
 export interface LoadOptions {
 	cwd?: string;
@@ -10,15 +15,14 @@ export interface LoadOptions {
 }
 
 export enum RuleSeverity {
+	Disabled = 0,
 	Warning = 1,
 	Error = 2
 }
 
-export type RuleConfigTuple<T> = ReadonlyArray<
-	T extends void
-		? [RuleSeverity, RuleCondition]
-		: [RuleSeverity, RuleCondition, T]
->;
+export type RuleConfigTuple<T> = T extends void
+	? Readonly<[RuleSeverity, RuleCondition]>
+	: Readonly<[RuleSeverity, RuleCondition, T]>;
 
 export enum RuleConfigQuality {
 	User,
@@ -33,7 +37,9 @@ export type QualifiedRuleConfig<T> =
 export type RuleConfig<
 	V = RuleConfigQuality.Qualified,
 	T = void
-> = V extends false ? RuleConfigTuple<T> : QualifiedRuleConfig<T>;
+> = V extends RuleConfigQuality.Qualified
+	? RuleConfigTuple<T>
+	: QualifiedRuleConfig<T>;
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,

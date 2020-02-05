@@ -3,7 +3,7 @@ import kebabCase from 'lodash/kebabCase';
 import snakeCase from 'lodash/snakeCase';
 import upperFirst from 'lodash/upperFirst';
 import startCase from 'lodash/startCase';
-import {TargetCaseType} from '.';
+import {TargetCaseType} from '@commitlint/types';
 
 export default ensureCase;
 

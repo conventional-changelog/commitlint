@@ -11,5 +11,6 @@
 	"exclude": [
 		"./src/**/*.test.ts",
 		"./lib/**/*"
-	]
+    ],
+    "references": [{"path": "../types"}]
 }

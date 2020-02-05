@@ -1,6 +1,6 @@
 import toLines from '@commitlint/to-lines';
 import message from '@commitlint/message';
-import {Rule} from './types';
+import {Rule} from '@commitlint/types';
 
 export const footerLeadingBlank: Rule = (parsed, when = 'always') => {
 	// Flunk if no footer is found

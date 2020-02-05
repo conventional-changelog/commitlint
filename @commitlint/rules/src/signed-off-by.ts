@@ -1,6 +1,6 @@
 import message from '@commitlint/message';
 import toLines from '@commitlint/to-lines';
-import {Rule} from './types';
+import {Rule} from '@commitlint/types';
 
 export const signedOffBy: Rule<string> = (
 	parsed,

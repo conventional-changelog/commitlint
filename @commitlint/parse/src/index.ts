@@ -1,12 +1,11 @@
 import mergeWith from 'lodash/mergeWith';
 import isArray from 'lodash/isArray';
-import {Commit, Parser, ParserOptions} from './types';
+import {Commit, Parser, ParserOptions} from '@commitlint/types';
 
 const {sync} = require('conventional-commits-parser');
 const defaultChangelogOpts = require('conventional-changelog-angular');
 
 export default parse;
-export * from './types';
 
 async function parse(
 	message: string,

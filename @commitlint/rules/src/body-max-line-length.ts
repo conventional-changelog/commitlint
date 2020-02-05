@@ -1,5 +1,5 @@
 import {maxLineLength} from '@commitlint/ensure';
-import {Rule} from './types';
+import {Rule} from '@commitlint/types';
 
 export const bodyMaxLineLength: Rule<number> = (
 	parsed,

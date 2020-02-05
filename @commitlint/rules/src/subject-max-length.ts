@@ -1,5 +1,5 @@
 import {maxLength} from '@commitlint/ensure';
-import {Rule} from './types';
+import {Rule} from '@commitlint/types';
 
 export const subjectMaxLength: Rule<number> = (
 	parsed,

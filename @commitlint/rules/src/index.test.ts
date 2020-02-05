@@ -16,7 +16,7 @@ test('rules export functions', () => {
 
 async function glob(pattern: string | string[]) {
 	const files = await globby(pattern, {
-		ignore: ['**/index.ts', '**/*.test.ts', '**/types.ts'],
+		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname
 	});
 	return files.map(relative).map(toExport);

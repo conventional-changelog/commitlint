@@ -1,12 +1,12 @@
-import lint from '.';
+import lint from './lint';
 
 test('throws without params', async () => {
-	const error = lint();
+	const error = (lint as any)();
 	await expect(error).rejects.toThrow('Expected a raw commit');
 });
 
 test('throws with empty message', async () => {
-	const error = lint('');
+	const error = (lint as any)('');
 	await expect(error).rejects.toThrow('Expected a raw commit');
 });
 
@@ -91,7 +91,7 @@ test('throws for invalid rule config', async () => {
 	const error = lint('type(scope): foo', {
 		'type-enum': 1,
 		'scope-enum': {0: 2, 1: 'never', 2: ['foo'], length: 3}
-	});
+	} as any);
 
 	await expect(error).rejects.toThrow('type-enum must be array');
 	await expect(error).rejects.toThrow('scope-enum must be array');
@@ -109,15 +109,15 @@ test('allows disable shorthand', async () => {
 });
 
 test('throws for rule with invalid length', async () => {
-	const error = lint('type(scope): foo', {'scope-enum': [1, 2, 3, 4]});
+	const error = lint('type(scope): foo', {'scope-enum': [1, 2, 3, 4]} as any);
 
 	await expect(error).rejects.toThrow('scope-enum must be 2 or 3 items long');
 });
 
 test('throws for rule with invalid level', async () => {
 	const error = lint('type(scope): foo', {
-		'type-enum': ['2', 'always'],
-		'header-max-length': [{}, 'always']
+		'type-enum': ['2', 'always'] as any,
+		'header-max-length': [{}, 'always'] as any
 	});
 	await expect(error).rejects.toThrow('rule type-enum must be number');
 	await expect(error).rejects.toThrow('rule header-max-length must be number');
@@ -137,8 +137,8 @@ test('throws for rule with out of range level', async () => {
 
 test('throws for rule with invalid condition', async () => {
 	const error = lint('type(scope): foo', {
-		'type-enum': [1, 2],
-		'header-max-length': [1, {}]
+		'type-enum': [1, 2] as any,
+		'header-max-length': [1, {}] as any
 	});
 
 	await expect(error).rejects.toThrow('type-enum must be string');
@@ -147,8 +147,8 @@ test('throws for rule with invalid condition', async () => {
 
 test('throws for rule with out of range condition', async () => {
 	const error = lint('type(scope): foo', {
-		'type-enum': [1, 'foo'],
-		'header-max-length': [1, 'bar']
+		'type-enum': [1, 'foo'] as any,
+		'header-max-length': [1, 'bar'] as any
 	});
 
 	await expect(error).rejects.toThrow('type-enum must be "always" or "never"');
