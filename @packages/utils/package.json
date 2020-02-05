@@ -11,10 +11,6 @@
     "pkg-check": "./pkg-check.js"
   },
   "scripts": {
-    "build": "exit 0",
-    "clean": "exit 0",
-    "start": "exit 0",
-    "test": "exit 0",
     "deps": "node dep-check.js",
     "pkg": "node pkg-check.js --skip-main"
   },
