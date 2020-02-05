@@ -8,7 +8,7 @@ import read from './read';
 test('get edit commit message specified by the `edit` flag', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await fs.writeFile(cwd, 'commit-msg-file', 'foo');
+	await fs.writeFile(path.join(cwd, 'commit-msg-file'), 'foo');
 
 	const expected = ['foo\n'];
 	const actual = await read({edit: 'commit-msg-file', cwd});
@@ -42,7 +42,7 @@ test('get history commit messages', async () => {
 test('get edit commit message from git subdirectory', async () => {
 	const cwd: string = await git.bootstrap();
 	await fs.mkdir(path.join(cwd, 'beta'));
-	await fs.writeFile(cwd, 'beta/beta.txt', 'beta');
+	await fs.writeFile(path.join(cwd, 'beta/beta.txt'), 'beta');
 
 	await execa('git', ['add', '.'], {cwd});
 	await execa('git', ['commit', '-m', 'beta'], {cwd});
