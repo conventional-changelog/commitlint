@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
-        "lib": [
-            "es2015"
-        ],
+        "target": "ES2017",
+        "lib": ["es2017"],
         "declaration": true,
         "declarationMap": true,
         "sourceMap": true,

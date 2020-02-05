@@ -41,6 +41,9 @@
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "engines": {
+    "node": ">=8"
+  },
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
