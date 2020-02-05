@@ -1,7 +1,6 @@
 import path from 'path';
 import {Stats} from 'fs';
-
-const sander = require('@marionebl/sander');
+import fs from 'fs-extra';
 
 // Get path to recently edited commit message file
 export async function getEditFilePath(
@@ -13,13 +12,13 @@ export async function getEditFilePath(
 	}
 
 	const dotgitPath = path.join(top, '.git');
-	const dotgitStats: Stats = sander.lstatSync(dotgitPath);
+	const dotgitStats: Stats = await fs.lstat(dotgitPath);
 
 	if (dotgitStats.isDirectory()) {
 		return path.join(top, '.git/COMMIT_EDITMSG');
 	}
 
-	const gitFile: string = await sander.readFile(dotgitPath, {
+	const gitFile: string = await fs.readFile(dotgitPath, {
 		encoding: 'utf-8'
 	});
 	const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');

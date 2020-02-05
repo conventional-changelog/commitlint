@@ -2,7 +2,7 @@ import path from 'path';
 import {fix, git} from '@commitlint/test';
 import execa from 'execa';
 import {merge} from 'lodash';
-import * as sander from 'sander';
+import fs from 'fs-extra';
 import stream from 'string-to-stream';
 
 const bin = require.resolve('../lib/cli.js');
@@ -233,7 +233,7 @@ test('should work with husky via commitlint -e %HUSKY_GIT_PARAMS%', async () => 
 
 test('should allow reading of environment variables for edit file, succeeding if valid', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
-	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
+	await fs.writeFile(path.join(cwd, 'commit-msg-file'), 'foo');
 	const actual = await cli(['--env', 'variable'], {
 		cwd,
 		env: {variable: 'commit-msg-file'}
@@ -243,9 +243,8 @@ test('should allow reading of environment variables for edit file, succeeding if
 
 test('should allow reading of environment variables for edit file, failing if invalid', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
-	await sander.writeFile(
-		cwd,
-		'commit-msg-file',
+	await fs.writeFile(
+		path.join(cwd, 'commit-msg-file'),
 		'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.'
 	);
 	const actual = await cli(['--env', 'variable'], {
@@ -428,7 +427,7 @@ test('should work with relative formatter path', async () => {
 
 async function writePkg(payload, options) {
 	const pkgPath = path.join(options.cwd, 'package.json');
-	const pkg = JSON.parse(await sander.readFile(pkgPath));
+	const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf-8'));
 	const result = merge(pkg, payload);
-	await sander.writeFile(pkgPath, JSON.stringify(result, null, '  '));
+	await fs.writeFile(pkgPath, JSON.stringify(result, null, '  '));
 }
