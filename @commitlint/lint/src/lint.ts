@@ -1,20 +1,23 @@
 import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
-import implementations from '@commitlint/rules';
+import defaultRules, {Rule} from '@commitlint/rules';
 import toPairs from 'lodash/toPairs';
 import values from 'lodash/values';
+import {buildCommitMesage} from './commit-message';
+import {LintRuleConfig, LintOptions, LintRuleOutcome} from './types';
+import {Plugin, RuleSeverity} from '@commitlint/load';
 
-const buildCommitMesage = ({header, body, footer}) => {
-	let message = header;
+export default async function lint(
+	message: string,
+	rawRulesConfig?: LintRuleConfig,
+	rawOpts?: LintOptions
+) {
+	const opts = rawOpts
+		? rawOpts
+		: {defaultIgnores: undefined, ignores: undefined};
+	const rulesConfig = rawRulesConfig || {};
 
-	message = body ? `${message}\n\n${body}` : message;
-	message = footer ? `${message}\n\n${footer}` : message;
-
-	return message;
-};
-
-export default async (message, rules = {}, opts = {}) => {
 	// Found a wildcard match, skip
 	if (
 		isIgnored(message, {defaults: opts.defaultIgnores, ignores: opts.ignores})
@@ -29,25 +32,27 @@ export default async (message, rules = {}, opts = {}) => {
 
 	// Parse the commit message
 	const parsed = await parse(message, undefined, opts.parserOpts);
+	const allRules: Map<string, Rule<unknown> | Rule<never>> = new Map(
+		Object.entries(defaultRules)
+	);
 
-	const mergedImplementations = Object.assign({}, implementations);
 	if (opts.plugins) {
-		values(opts.plugins).forEach(plugin => {
+		values(opts.plugins).forEach((plugin: Plugin) => {
 			if (plugin.rules) {
-				Object.keys(plugin.rules).forEach(ruleKey => {
-					mergedImplementations[ruleKey] = plugin.rules[ruleKey];
-				});
+				Object.keys(plugin.rules).forEach(ruleKey =>
+					allRules.set(ruleKey, plugin.rules[ruleKey])
+				);
 			}
 		});
 	}
 
 	// Find invalid rules configs
-	const missing = Object.keys(rules).filter(
-		name => typeof mergedImplementations[name] !== 'function'
+	const missing = Object.keys(rulesConfig).filter(
+		name => typeof allRules.get(name) !== 'function'
 	);
 
 	if (missing.length > 0) {
-		const names = Object.keys(mergedImplementations);
+		const names = [...allRules.keys()];
 		throw new RangeError(
 			`Found invalid rule names: ${missing.join(
 				', '
@@ -55,7 +60,7 @@ export default async (message, rules = {}, opts = {}) => {
 		);
 	}
 
-	const invalid = toPairs(rules)
+	const invalid = toPairs(rulesConfig)
 		.map(([name, config]) => {
 			if (!Array.isArray(config)) {
 				return new Error(
@@ -65,7 +70,13 @@ export default async (message, rules = {}, opts = {}) => {
 				);
 			}
 
-			const [level, when] = config;
+			const [level] = config;
+
+			if (level === RuleSeverity.Disabled && config.length === 1) {
+				return null;
+			}
+
+			const [, when] = config;
 
 			if (typeof level !== 'number' || isNaN(level)) {
 				return new Error(
@@ -73,10 +84,6 @@ export default async (message, rules = {}, opts = {}) => {
 						level
 					)} of type ${typeof level}`
 				);
-			}
-
-			if (level === 0 && config.length === 1) {
-				return null;
 			}
 
 			if (config.length !== 2 && config.length !== 3) {
@@ -113,18 +120,15 @@ export default async (message, rules = {}, opts = {}) => {
 
 			return null;
 		})
-		.filter(item => item instanceof Error);
+		.filter((item): item is Error => item instanceof Error);
 
 	if (invalid.length > 0) {
 		throw new Error(invalid.map(i => i.message).join('\n'));
 	}
 
 	// Validate against all rules
-	const results = toPairs(rules)
-		.filter(entry => {
-			const [, [level]] = toPairs(entry);
-			return level > 0;
-		})
+	const results = toPairs(rulesConfig)
+		.filter(([, [level]]) => level > 0)
 		.map(entry => {
 			const [name, config] = entry;
 			const [level, when, value] = config;
@@ -134,9 +138,14 @@ export default async (message, rules = {}, opts = {}) => {
 				return null;
 			}
 
-			const rule = mergedImplementations[name];
+			const rule = allRules.get(name);
 
-			const [valid, message] = rule(parsed, when, value);
+			if (!rule) {
+				throw new Error(`Could not find rule implementation for ${name}`);
+			}
+
+			const executableRule = rule as Rule<unknown>;
+			const [valid, message] = executableRule(parsed, when, value);
 
 			return {
 				level,
@@ -145,7 +154,7 @@ export default async (message, rules = {}, opts = {}) => {
 				message
 			};
 		})
-		.filter(Boolean);
+		.filter((result): result is LintRuleOutcome => result !== null);
 
 	const errors = results.filter(result => result.level === 2 && !result.valid);
 	const warnings = results.filter(
@@ -160,4 +169,4 @@ export default async (message, rules = {}, opts = {}) => {
 		warnings,
 		input: buildCommitMesage(parsed)
 	};
-};
+}

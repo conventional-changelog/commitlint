@@ -1,18 +1,15 @@
 import {IsIgnoredOptions} from '@commitlint/is-ignored';
+import {RuleConfigTuple, PluginRecords, RuleSeverity} from '@commitlint/load';
 import {ParserOptions} from '@commitlint/parse';
-import {Rule} from '@commitlint/rules';
 
-export type Linter = (
-	commit: string,
-	config: LinterRuleConfig,
-	options: LinterOptions
-) => Promise<LintOutcome>;
+export type LintRuleConfig = Record<
+	string,
+	| Readonly<[RuleSeverity.Disabled]>
+	| RuleConfigTuple<void>
+	| RuleConfigTuple<unknown>
+>;
 
-export type LinterRuleConfig = {
-	[key: string]: any; // todo: use rule configuration from `@commitlint/load`
-};
-
-export interface LinterOptions {
+export interface LintOptions {
 	/** If it should ignore the default commit messages (defaults to `true`) */
 	defaultIgnores?: IsIgnoredOptions['defaults'];
 	/** Additional commits to ignore, defined by ignore matchers  */
@@ -20,7 +17,7 @@ export interface LinterOptions {
 	/** The parser configuration to use when linting the commit */
 	parserOpts?: ParserOptions;
 
-	plugins?: any; // todo: reuse types from `@commitlint/load`
+	plugins?: PluginRecords;
 }
 
 export interface LintOutcome {
@@ -42,5 +39,5 @@ export interface LintRuleOutcome {
 	/** The name of the rule */
 	name: string;
 	/** The message returned from the rule, if invalid */
-	message?: string;
+	message: string;
 }
