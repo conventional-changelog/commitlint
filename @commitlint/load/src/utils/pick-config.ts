@@ -1,5 +1,5 @@
 import {UserConfig} from '../types';
-import {pick} from 'lodash';
+import pick from 'lodash/pick';
 
 export const pickConfig = (input: unknown): UserConfig =>
 	pick(

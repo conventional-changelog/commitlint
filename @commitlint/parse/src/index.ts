@@ -1,4 +1,5 @@
-import {isArray, mergeWith} from 'lodash';
+import mergeWith from 'lodash/mergeWith';
+import isArray from 'lodash/isArray';
 import {Commit, Parser, ParserOptions} from './types';
 
 const {sync} = require('conventional-commits-parser');

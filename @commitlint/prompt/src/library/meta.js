@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import {toPairs} from 'lodash';
+import toPairs from 'lodash/toPairs';
 
 /**
  * Get formatted meta hints for configuration

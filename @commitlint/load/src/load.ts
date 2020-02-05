@@ -1,6 +1,9 @@
 import Path from 'path';
 
-import {toPairs, merge, mergeWith, pick} from 'lodash';
+import toPairs from 'lodash/toPairs';
+import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergeWith';
+import pick from 'lodash/pick';
 import resolveFrom from 'resolve-from';
 
 import executeRule from '@commitlint/execute-rule';
