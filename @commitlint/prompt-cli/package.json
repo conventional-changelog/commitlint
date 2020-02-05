@@ -27,6 +27,9 @@
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "engines": {
+    "node": ">=8"
+  },
   "devDependencies": {
     "@commitlint/test": "8.2.0",
     "@commitlint/utils": "^8.3.4",

@@ -25,6 +25,9 @@
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "engines": {
+    "node": ">=8"
+  },
   "dependencies": {
     "@commitlint/config-lerna-scopes": "^8.3.4"
   },
