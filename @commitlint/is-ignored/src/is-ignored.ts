@@ -1,10 +1,5 @@
 import {wildcards} from './defaults';
-import {Matcher} from './types';
-
-export interface IsIgnoredOptions {
-	ignores?: Matcher[];
-	defaults?: boolean;
-}
+import {IsIgnoredOptions} from '@commitlint/types';
 
 export default function isIgnored(
 	commit: string = '',

@@ -1,4 +1,4 @@
-import {Commit} from '@commitlint/parse';
+import {Commit} from './parse';
 
 /**
  * Rules always have a condition.

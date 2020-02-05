@@ -8,8 +8,6 @@ import resolveFrom from 'resolve-from';
 
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
-
-import loadPlugin from './utils/loadPlugin';
 import {
 	UserConfig,
 	LoadOptions,
@@ -17,7 +15,9 @@ import {
 	UserPreset,
 	QualifiedRules,
 	ParserPreset
-} from './types';
+} from '@commitlint/types';
+
+import loadPlugin from './utils/load-plugin';
 import {loadConfig} from './utils/load-config';
 import {loadParserOpts} from './utils/load-parser-opts';
 import {pickConfig} from './utils/pick-config';

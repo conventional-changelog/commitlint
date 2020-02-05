@@ -1,4 +1,4 @@
-import loadPlugin from './loadPlugin';
+import loadPlugin from './load-plugin';
 
 jest.mock('commitlint-plugin-example', () => ({example: true}), {
 	virtual: true

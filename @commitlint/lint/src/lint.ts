@@ -1,12 +1,18 @@
 import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
-import defaultRules, {Rule} from '@commitlint/rules';
+import defaultRules from '@commitlint/rules';
 import toPairs from 'lodash/toPairs';
 import values from 'lodash/values';
 import {buildCommitMesage} from './commit-message';
-import {LintRuleConfig, LintOptions, LintRuleOutcome} from './types';
-import {Plugin, RuleSeverity} from '@commitlint/load';
+import {
+	LintRuleConfig,
+	LintOptions,
+	LintRuleOutcome,
+	Rule,
+	Plugin,
+	RuleSeverity
+} from '@commitlint/types';
 
 export default async function lint(
 	message: string,

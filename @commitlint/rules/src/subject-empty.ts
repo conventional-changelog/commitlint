@@ -1,6 +1,6 @@
 import * as ensure from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {Rule} from './types';
+import {Rule} from '@commitlint/types';
 
 export const subjectEmpty: Rule = (parsed, when = 'always') => {
 	const negated = when === 'never';

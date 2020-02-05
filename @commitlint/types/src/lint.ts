@@ -1,6 +1,6 @@
-import {IsIgnoredOptions} from '@commitlint/is-ignored';
-import {RuleConfigTuple, PluginRecords, RuleSeverity} from '@commitlint/load';
-import {ParserOptions} from '@commitlint/parse';
+import {IsIgnoredOptions} from './is-ignored';
+import {RuleConfigTuple, PluginRecords, RuleSeverity} from './load';
+import {ParserOptions} from './parse';
 
 export type LintRuleConfig = Record<
 	string,

@@ -1,7 +1,5 @@
-import {TargetCaseType} from '@commitlint/ensure';
-import {Rule} from '@commitlint/rules';
-
-export type RuleCondition = 'always' | 'never';
+import {TargetCaseType} from './ensure';
+import {Rule, RuleCondition} from './rules';
 
 export type PluginRecords = Record<string, Plugin>;
 

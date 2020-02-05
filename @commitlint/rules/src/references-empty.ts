@@ -1,5 +1,5 @@
 import message from '@commitlint/message';
-import {Rule} from './types';
+import {Rule} from '@commitlint/types';
 
 export const referencesEmpty: Rule = (parsed, when = 'never') => {
 	const negated = when === 'always';

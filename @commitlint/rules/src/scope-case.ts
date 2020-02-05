@@ -1,6 +1,6 @@
-import {TargetCaseType, case as ensureCase} from '@commitlint/ensure';
+import {case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {Rule} from './types';
+import {TargetCaseType, Rule} from '@commitlint/types';
 
 const negated = (when?: string) => when === 'never';
 

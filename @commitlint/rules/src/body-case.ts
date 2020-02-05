@@ -1,8 +1,8 @@
-import * as ensure from '@commitlint/ensure';
+import {case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {Rule} from './types';
+import {TargetCaseType, Rule} from '@commitlint/types';
 
-export const bodyCase: Rule<ensure.TargetCaseType> = (
+export const bodyCase: Rule<TargetCaseType> = (
 	parsed,
 	when = 'always',
 	value = undefined
@@ -15,7 +15,7 @@ export const bodyCase: Rule<ensure.TargetCaseType> = (
 
 	const negated = when === 'never';
 
-	const result = ensure.case(body, value);
+	const result = ensureCase(body, value);
 	return [
 		negated ? !result : result,
 		message([`body must`, negated ? `not` : null, `be ${value}`])
