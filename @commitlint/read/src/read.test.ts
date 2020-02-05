@@ -1,14 +1,14 @@
+import path from 'path';
 import {git} from '@commitlint/test';
 import execa from 'execa';
-
-const sander = require('@marionebl/sander');
+import fs from 'fs-extra';
 
 import read from './read';
 
 test('get edit commit message specified by the `edit` flag', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await sander.writeFile(cwd, 'commit-msg-file', 'foo');
+	await fs.writeFile(cwd, 'commit-msg-file', 'foo');
 
 	const expected = ['foo\n'];
 	const actual = await read({edit: 'commit-msg-file', cwd});
@@ -18,7 +18,7 @@ test('get edit commit message specified by the `edit` flag', async () => {
 test('get edit commit message from git root', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
+	await fs.writeFile(path.join(cwd, 'alpha.txt'), 'alpha');
 	await execa('git', ['add', '.'], {cwd});
 	await execa('git', ['commit', '-m', 'alpha'], {cwd});
 	const expected = ['alpha\n\n'];
@@ -28,7 +28,7 @@ test('get edit commit message from git root', async () => {
 
 test('get history commit messages', async () => {
 	const cwd: string = await git.bootstrap();
-	await sander.writeFile(cwd, 'alpha.txt', 'alpha');
+	await fs.writeFile(path.join(cwd, 'alpha.txt'), 'alpha');
 	await execa('git', ['add', 'alpha.txt'], {cwd});
 	await execa('git', ['commit', '-m', 'alpha'], {cwd});
 	await execa('git', ['rm', 'alpha.txt'], {cwd});
@@ -41,8 +41,8 @@ test('get history commit messages', async () => {
 
 test('get edit commit message from git subdirectory', async () => {
 	const cwd: string = await git.bootstrap();
-	await sander.mkdir(cwd, 'beta');
-	await sander.writeFile(cwd, 'beta/beta.txt', 'beta');
+	await fs.mkdir(path.join(cwd, 'beta'));
+	await fs.writeFile(cwd, 'beta/beta.txt', 'beta');
 
 	await execa('git', ['add', '.'], {cwd});
 	await execa('git', ['commit', '-m', 'beta'], {cwd});
