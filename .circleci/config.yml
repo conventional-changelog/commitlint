@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  win: circleci/windows@2.2.0
+
 commands:
   update-yarn:
     steps:
@@ -42,7 +45,7 @@ commands:
           key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
-  run-node:
+  run-all:
     steps:
       - checkout
       - restore_cache:
@@ -55,22 +58,37 @@ commands:
       - lint
       - deps
       - test
+  run-tests:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+      - update-yarn
+      - install
+      - save-cache
+      - build
+      - test
 jobs:
   v8:
     docker:
       - image: node:8
     steps:
-      - run-node
+      - run-tests
   v10:
     docker:
       - image: node:10
     steps:
-      - run-node
+      - run-tests
   v12:
     docker:
       - image: node:12
     steps:
-      - run-node
+      - run-all
+  windows-v12:
+    executor: win/default
+    steps:
+      - run-tests
 
 workflows:
   node:
@@ -78,3 +96,4 @@ workflows:
       - v8
       - v10
       - v12
+      - windows-v12
