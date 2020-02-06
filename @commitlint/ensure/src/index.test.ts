@@ -1,6 +1,5 @@
 import path from 'path';
 import globby from 'globby';
-import values from 'lodash/values';
 import camelCase from 'lodash/camelCase';
 import * as ensure from '.';
 
@@ -15,7 +14,7 @@ test('exports all checkers', async () => {
 });
 
 test('rules export functions', () => {
-	const actual = values(ensure);
+	const actual = Object.values(ensure);
 	expect(actual.every(rule => typeof rule === 'function')).toBe(true);
 });
 
