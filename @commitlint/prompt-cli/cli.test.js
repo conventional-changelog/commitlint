@@ -1,17 +1,15 @@
 import {git} from '@commitlint/test';
 import execa from 'execa';
-import stream from 'string-to-stream';
 
 const bin = require.resolve('./cli.js');
 
 const cli = (args, options) => {
 	return (input = '') => {
 		const c = execa(bin, args, {
-			capture: ['stdout'],
 			cwd: options.cwd,
-			env: options.env
+			env: options.env,
+			input: input
 		});
-		stream(input).pipe(c.stdin);
 		return c.catch(err => err);
 	};
 };

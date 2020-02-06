@@ -3,18 +3,16 @@ import {fix, git} from '@commitlint/test';
 import execa from 'execa';
 import merge from 'lodash/merge';
 import fs from 'fs-extra';
-import stream from 'string-to-stream';
 
 const bin = require.resolve('../lib/cli.js');
 
 const cli = (args, options) => {
 	return (input = '') => {
 		const c = execa(bin, args, {
-			capture: ['stdout'],
 			cwd: options.cwd,
-			env: options.env
+			env: options.env,
+			input: input
 		});
-		stream(input).pipe(c.stdin);
 		return c.catch(err => err);
 	};
 };
