@@ -5,10 +5,6 @@
 Shareable `commitlint` config enforcing the [Angular commit convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#-commit-message-guidelines).
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
-|   :warning:   |                                                                                                                                                                                                                                                                         |
-| :-----------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **IMPORTANT** | As of version 5.0.0 of this package the `chore` type is no longer allowed. This breaks compat with most of the tooling present in the conventional-changelog community. See [config-conventional](../config-conventional) for a replacement that retains compatibility. |
-
 ## Getting started
 
 ```sh
@@ -29,7 +25,7 @@ Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/refer
 - **rule**: `always`
 - **value**
 
-  ```js
+  ```
   [
     'build',
     'ci',
@@ -41,7 +37,7 @@ Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/refer
     'revert',
     'style',
     'test'
-  ];
+  ]
   ```
 
 ```sh
@@ -54,8 +50,8 @@ echo "fix: some message" # passes
 - **description**: `type` is in case `value`
 - **rule**: `always`
 - **value**
-  ```js
-  'lowerCase';
+  ```
+  'lowerCase'
   ```
 
 ```sh
@@ -78,8 +74,8 @@ echo "fix: some message" # passes
 - **condition**: `scope` is in case `value`
 - **rule**: `always`
 
-```js
-'lowerCase';
+```
+'lowerCase'
 ```
 
 ```sh
@@ -132,8 +128,8 @@ echo "fix: some message" # passes
 - **rule**: `always`
 - **value**
 
-```js
-72;
+```
+72
 ```
 
 ```sh

@@ -5,10 +5,6 @@
 Shareable `commitlint` config enforcing [conventional commits](https://conventionalcommits.org/).
 Use with [@commitlint/cli](https://npm.im/@commitlint/cli) and [@commitlint/prompt-cli](https://npm.im/@commitlint/prompt-cli).
 
-|   :warning:   |                                                                                                                                                                                                                                                                                                          |
-| :-----------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **IMPORTANT** | This is a direct replacement for [@commitlint/config-angular](https://npm.im/@commitlint/config-angular) prior to version 4. `config-angular` diverged from the conventional commit convention as of version 5. See [#146](https://github.com/conventional-changelog/commitlint/issues/146) for details. |
-
 ## Getting started
 
 ```sh
@@ -30,7 +26,7 @@ Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/refer
 - **rule**: `always`
 - **value**
 
-  ```js
+  ```
   [
     'build',
     'ci',
@@ -80,8 +76,8 @@ echo "fix: some message" # passes
 - **condition**: `scope` is in case `value`
 - **rule**: `always`
 
-```js
-'lowerCase';
+```
+'lowerCase'
 ```
 
 ```sh
@@ -119,8 +115,8 @@ echo "fix: some message" # passes
 - **rule**: `never`
 - **value**
 
-```js
-'.';
+```
+'.'
 ```
 
 ```sh
@@ -134,8 +130,8 @@ echo "fix: some message" # passes
 - **rule**: `always`
 - **value**
 
-```js
-100;
+```
+100
 ```
 
 ```sh
