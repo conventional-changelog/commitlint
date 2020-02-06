@@ -36,7 +36,7 @@ This allows us to add [git hooks](https://git-scm.com/docs/githooks) directly in
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }  
+    }
   }
 }
 ```
@@ -54,7 +54,6 @@ npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
 This will check your last commit and return an error if invalid or a positive output if valid.
-
 
 ### Test the hook
 

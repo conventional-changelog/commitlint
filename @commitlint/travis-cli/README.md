@@ -2,7 +2,7 @@
 
 # @commitlint/travis-cli
 
-This package is a convenience wrapper around `commitlint`, 
+This package is a convenience wrapper around `commitlint`,
 providing zero-configuration linting of all relevant commits
 for a given change/build combination.
 
@@ -15,5 +15,5 @@ npm install --save-dev @commitlint/travis-cli
 ```yml
 # .travis.yml
 script
-  - commitlint-travis
+- commitlint-travis
 ```

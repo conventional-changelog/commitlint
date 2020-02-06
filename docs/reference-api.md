@@ -4,7 +4,7 @@
 
 > Format commitlint reports
 
-### Install 
+### Install
 
 ```
 npm install --save @commitlint/format
@@ -12,7 +12,7 @@ npm install --save @commitlint/format
 
 ### Usage
 
-* **Signature**
+- **Signature**
 
 ```ts
 type Problem = {
@@ -49,7 +49,7 @@ type formatOptions = {
    * Signs to use as decoration for messages with severy 0, 1, 2
    **/
   signs: readonly [string; string; string] = [' ', '⚠', '✖'];
-  
+
   /**
    * Colors to use for messages with severy 0, 1, 2
    **/
@@ -69,40 +69,43 @@ type formatOptions = {
 format(report?: Report = {}, options?: formatOptions = {}) => string[];
 ```
 
-* **Example**
+- **Example**
 
 ```js
 const format = require('@commitlint/format');
 
 format(); // => [ '\u001b[1m\u001b[32m✔\u001b[39m   found 0 problems, 0 warnings\u001b[22m' ]
 
-format({
-  results: [
-    {
-      warnings: [
-        {
-          level: 0,
-          name: 'some-hint',
-          message: 'This will not show up as it has level 0'
-        },
-        {
-          level: 1,
-          name: 'some-warning',
-          message: 'This will show up yellow as it has level 1'
-        }
-      ],
-      errors: [
-        {
-          level: 2,
-          name: 'some-error',
-          message: 'This will show up red as it has level 2'
-        }
-      ]
-    }
-  ]
-}, {
-  color: false
-});
+format(
+  {
+    results: [
+      {
+        warnings: [
+          {
+            level: 0,
+            name: 'some-hint',
+            message: 'This will not show up as it has level 0'
+          },
+          {
+            level: 1,
+            name: 'some-warning',
+            message: 'This will show up yellow as it has level 1'
+          }
+        ],
+        errors: [
+          {
+            level: 2,
+            name: 'some-error',
+            message: 'This will show up red as it has level 2'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    color: false
+  }
+);
 /* => [
   '✖   This will show up red as it has level 2 [some-error]',
   '    This will not show up as it has level 0 [some-hint]',
@@ -115,7 +118,7 @@ format({
 
 > Load shared commitlint configuration
 
-### Install 
+### Install
 
 ```
 npm install --save @commitlint/load
@@ -123,7 +126,7 @@ npm install --save @commitlint/load
 
 ### Usage
 
-* **Signature**
+- **Signature**
 
 ```ts
 /**
@@ -231,7 +234,7 @@ type LoadOptions = {
 load(seed: Seed = {}, options?: LoadOptions = {cwd: process.cwd()}) => Promise<Config>;
 ```
 
-* **Example**
+- **Example**
 
 ```js
 const load = require('@commitlint/load');
@@ -240,20 +243,18 @@ load({
   rules: {
     'body-leading-blank': [2, 'always']
   }
-})
-.then(config => console.log(config));
+}).then(config => console.log(config));
 // => { extends: [], rules: { 'body-leading-blank': [ 2, 'always' ] } }
 
-load({extends: ['./package']})
-.then(config => console.log(config));
+load({extends: ['./package']}).then(config => console.log(config));
 // => { extends: ['./package', './package-b'], rules: {} }
 
-load({parserPreset: './parser-preset.js'})
-.then(config => console.log(config));
+load({parserPreset: './parser-preset.js'}).then(config => console.log(config));
 // => { extends: [], rules: {}, parserPreset: {name: './parser-preset.js', path: './parser-preset.js', opts: {}}}
 
-load({}, {file: '.commitlintrc.yml', cwd: process.cwd()})
-.then(config => console.log(config));
+load({}, {file: '.commitlintrc.yml', cwd: process.cwd()}).then(config =>
+  console.log(config)
+);
 // => { extends: [], rules: { 'body-leading-blank': [ 1, 'always' ] }, formatter: '@commitlint/format', plugins: {} }
 ```
 
@@ -261,7 +262,7 @@ load({}, {file: '.commitlintrc.yml', cwd: process.cwd()})
 
 > Read commit messages from a specified range or disk
 
-### Install 
+### Install
 
 ```
 npm install --save @commitlint/read
@@ -269,7 +270,7 @@ npm install --save @commitlint/read
 
 ### Usage
 
-* **Signature**
+- **Signature**
 
 ```ts
 type Range = {
@@ -284,26 +285,24 @@ type Range = {
 read(range: Range) => Promise<string[]>
 ```
 
-* **Example**
+- **Example**
 
 ```js
 // git commit -m "I did something"
 const read = require('@commitlint/read');
 
-read({edit: true})
- .then(messages => console.log(messages));
+read({edit: true}).then(messages => console.log(messages));
 // => ['I did something\n\n']
 
-read({edit: './git/GITGUI_EDITMESSAGE'})
- .then(messages => console.log(messages));
+read({edit: './git/GITGUI_EDITMESSAGE'}).then(messages =>
+  console.log(messages)
+);
 // => ['I did something via git gui\n\n']
 
-read({from: 'HEAD~2'})
-  .then(messages => console.log(messages));
+read({from: 'HEAD~2'}).then(messages => console.log(messages));
 // => ['I did something\n\n', 'Initial commit\n\n']
 
-read({from: 'HEAD~2', to: 'HEAD~1'})
-  .then(messages => console.log(messages));
+read({from: 'HEAD~2', to: 'HEAD~1'}).then(messages => console.log(messages));
 // => ['Initial commit\n\n']
 ```
 
@@ -311,7 +310,7 @@ read({from: 'HEAD~2', to: 'HEAD~1'})
 
 > Lint a string against commitlint rules
 
-### Install 
+### Install
 
 ```
 npm install --save @commitlint/lint
@@ -319,7 +318,7 @@ npm install --save @commitlint/lint
 
 ### Usage
 
-* **Signature**
+- **Signature**
 
 ```ts
 type RuleLevel = 0 | 1 | 2;
@@ -351,22 +350,23 @@ type Options = {
 lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Promise<Report>;
 ```
 
-* **Basic Example**
+- **Basic Example**
 
 ```js
 const lint = require('@commitlint/lint');
 
-lint('foo: bar')
-  .then(report => console.log(report));
-  // => { valid: true, errors: [], warnings: [] }
+lint('foo: bar').then(report => console.log(report));
+// => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {'type-enum': [1, 'always', ['foo']]})
-  .then(report => console.log(report));
-  // => { valid: true, errors: [], warnings: [] }
+lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then(report =>
+  console.log(report)
+);
+// => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
-  .then(report => console.log(report));
-  /* =>
+lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then(report =>
+  console.log(report)
+);
+/* =>
     { valid: true,
       errors: [],
       warnings:
@@ -376,13 +376,20 @@ lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
           message: 'type must be one of [bar]' } ] }
   */
 
-const opts = {parserOpts: {headerPattern: /^(\w*)-(\w*)/, headerCorrespondence: ['type', 'scope']}};
+const opts = {
+  parserOpts: {
+    headerPattern: /^(\w*)-(\w*)/,
+    headerCorrespondence: ['type', 'scope']
+  }
+};
 
-lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then(report => console.log(report));
+lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then(report =>
+  console.log(report)
+);
 // => { valid: true, errors: [], warnings: [] }
 ```
 
-* **Load configuration**
+- **Load configuration**
 
 ```js
 const load = require('@commitlint/load');
@@ -393,9 +400,15 @@ const CONFIG = {
 };
 
 load(CONFIG)
-  .then(opts => lint('foo: bar', opts.rules, opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}))
+  .then(opts =>
+    lint(
+      'foo: bar',
+      opts.rules,
+      opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}
+    )
+  )
   .then(report => console.log(report));
-  /* =>
+/* =>
     { valid: false,
       errors:
       [ { level: 2,
@@ -406,7 +419,7 @@ load(CONFIG)
     */
 ```
 
-* **Read git history**
+- **Read git history**
 
 ```js
 const lint = require('@commitlint/lint');
@@ -418,11 +431,12 @@ const RULES = {
 
 const check = commit => lint(commit, RULES);
 
-read({to: 'HEAD', from: 'HEAD~2'})
-  .then(commits => Promise.all(commits.map(check)));
+read({to: 'HEAD', from: 'HEAD~2'}).then(commits =>
+  Promise.all(commits.map(check))
+);
 ```
 
-* **Simplfied last-commit checker**
+- **Simplfied last-commit checker**
 
 ```js
 const load = require('@commitlint/load');
@@ -432,7 +446,11 @@ const lint = require('@commitlint/lint');
 Promise.all([load(), read({from: 'HEAD~1'})])
   .then(tasks => {
     const [{rules, parserPreset}, [commit]] = tasks;
-    return lint(commit, rules, parserPreset ? {parserOpts: parserPreset.parserOpts}: {});
+    return lint(
+      commit,
+      rules,
+      parserPreset ? {parserOpts: parserPreset.parserOpts} : {}
+    );
   })
   .then(report => console.log(JSON.stringify(result.valid)));
 ```

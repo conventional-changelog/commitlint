@@ -12,7 +12,7 @@
     "deps": "lerna run deps",
     "pkg": "lerna run pkg",
     "docs": "docsify serve docs",
-    "lint": "prettier @{alias,commitlint,packages}/**/*.{ts,js} -l",
+    "lint": "prettier **/*.{ts,js,json,yml,md} -l",
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "lerna run start --stream --parallel --include-filtered-dependencies",
@@ -26,7 +26,6 @@
     ]
   },
   "prettier": {
-    "useTabs": true,
     "singleQuote": true,
     "bracketSpacing": false
   },
@@ -37,7 +36,9 @@
   },
   "renovate": {
     "rangeStrategy": "update-lockfile",
-    "ignorePaths": ["**/fixtures/**/package.json"],
+    "ignorePaths": [
+      "**/fixtures/**/package.json"
+    ],
     "extends": [
       "config:base",
       ":semanticCommitType(chore)",

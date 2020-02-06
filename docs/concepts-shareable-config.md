@@ -30,7 +30,7 @@ You can also load local configuration by using a relative path to the file.
 // commitlint.config.js
 module.exports = {
   extends: ['./example'] // => ./example.js
-}
+};
 ```
 
 ## Scoped packages

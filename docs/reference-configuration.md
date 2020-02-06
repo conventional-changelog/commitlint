@@ -2,72 +2,70 @@
 
 `@commitlint/cli` picks up configuration from `./commitlint.config.js`.
 
-The file is expected 
+The file is expected
 
-* to contain valid JavaScript
-* export a configuration object
-* adhere to the schema outlined below
+- to contain valid JavaScript
+- export a configuration object
+- adhere to the schema outlined below
 
 ```ts
 type Config = {
-    /*
-     * Resolveable ids to commitlint configurations to extend
-     */
-    extends?: string[];
-    /*
-     * Resolveable id to conventional-changelog parser preset to import and use
-     */
-    parserPreset?: string;
-    /*
-     * Resolveable id to package, from node_modules, which formats the output.
-     */
-    formatter: string;
-    /*
-     * Rules to check against
-     */
-    rules?: {[name: string]: Rule};
-    /*
-     * Functions that return true if commitlint should ignore the given message.
-     */
-    ignores?: ((message: string) => boolean)[];
-    /*
-     * Whether commitlint uses the default ignore rules.
-     */
-    defaultIgnores?: boolean;
-}
+  /*
+   * Resolveable ids to commitlint configurations to extend
+   */
+  extends?: string[];
+  /*
+   * Resolveable id to conventional-changelog parser preset to import and use
+   */
+  parserPreset?: string;
+  /*
+   * Resolveable id to package, from node_modules, which formats the output.
+   */
+  formatter: string;
+  /*
+   * Rules to check against
+   */
+  rules?: {[name: string]: Rule};
+  /*
+   * Functions that return true if commitlint should ignore the given message.
+   */
+  ignores?: ((message: string) => boolean)[];
+  /*
+   * Whether commitlint uses the default ignore rules.
+   */
+  defaultIgnores?: boolean;
+};
 
 const Configuration: Config = {
-    /*
-     * Resolve and load @commitlint/config-conventional from node_modules.
-     * Referenced packages must be installed
-     */
-    extends: ['@commitlint/config-conventional'],
-    /*
-     * Resolve and load conventional-changelog-atom from node_modules. 
-     * Referenced packages must be installed
-     */
-    parserPreset: 'conventional-changelog-atom',
-    /*
-     * Resolve and load @commitlint/format from node_modules.
-     * Referenced package must be installed
-     */
-    formatter: '@commitlint/format',
-    /*
-     * Any rules defined here will override rules from @commitlint/config-conventional
-     */
-    rules: {
-        'type-enum': [2, 'always', ['foo']]
-    },
-    /*
-     * Functions that return true if commitlint should ignore the given message.
-     */
-    ignores: [
-        (commit) => commit === ''
-    ],
-    /*
-     * Whether commitlint uses the default ignore rules.
-     */
-    defaultIgnores: true
+  /*
+   * Resolve and load @commitlint/config-conventional from node_modules.
+   * Referenced packages must be installed
+   */
+  extends: ['@commitlint/config-conventional'],
+  /*
+   * Resolve and load conventional-changelog-atom from node_modules.
+   * Referenced packages must be installed
+   */
+  parserPreset: 'conventional-changelog-atom',
+  /*
+   * Resolve and load @commitlint/format from node_modules.
+   * Referenced package must be installed
+   */
+  formatter: '@commitlint/format',
+  /*
+   * Any rules defined here will override rules from @commitlint/config-conventional
+   */
+  rules: {
+    'type-enum': [2, 'always', ['foo']]
+  },
+  /*
+   * Functions that return true if commitlint should ignore the given message.
+   */
+  ignores: [commit => commit === ''],
+  /*
+   * Whether commitlint uses the default ignore rules.
+   */
+  defaultIgnores: true
 };
 
 module.exports = Configuration;
@@ -76,12 +74,12 @@ module.exports = Configuration;
 ## Shareable configuration
 
 Every commitlint configuration can extend other commitlint configurations.
-Specify configurations to extend via the `.extends` key, using ids 
+Specify configurations to extend via the `.extends` key, using ids
 that can be resolved by the node resolve algorithm.
 
 This means installed npm packages and local files can be used.
 
-* npm
+- npm
 
 ```
 npm install --save-dev commitlint-config-lerna @commitlint/config-conventional
@@ -97,41 +95,40 @@ module.exports = {
 }
 ```
 
-* local
-
+- local
 
 ```js
 // commitlint.config.js
 module.exports = {
-    extends: ['./commitlint.base.js', './commitlint.types.js']
-}
+  extends: ['./commitlint.base.js', './commitlint.types.js']
+};
 ```
 
 ```js
 // commitlint.types.js, will be picked up by commitlint.config.js
 module.exports = {
-    rules: {
-        'type-enum': [2, 'always', ['foo']]
-    }
-}
+  rules: {
+    'type-enum': [2, 'always', ['foo']]
+  }
+};
 ```
 
 ```js
 // commitlint.base.js, will be picked up by commitlint.config.js
 module.exports = {
-    extends: ['@commitlint/config-conventional'], // extends can be nested
-    parserPreset: 'conventional-changelog-atom'
-}
+  extends: ['@commitlint/config-conventional'], // extends can be nested
+  parserPreset: 'conventional-changelog-atom'
+};
 ```
 
 ## Parser presets
 
-The parser preset used to parse commit messages can be configured. 
+The parser preset used to parse commit messages can be configured.
 Use ids resolveable by the node resolve algorithm.
 
 This means installed npm packages and local files can be used.
 
-* npm
+- npm
 
 ```
 npm install --save-dev conventional-changelog-atom
@@ -140,26 +137,26 @@ npm install --save-dev conventional-changelog-atom
 ```js
 // commitlint.config.js
 module.exports = {
-    parserPreset: 'conventional-changelog-atom'
-}
+  parserPreset: 'conventional-changelog-atom'
+};
 ```
 
-* local
+- local
 
 ```js
 // commitlint.config.js
 module.exports = {
-    parserPreset: './parser-preset'
-}
+  parserPreset: './parser-preset'
+};
 ```
 
 ```js
 // parser-preset.js
 module.exports = {
-    parserOpts: {
-        headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
-        headerCorrespondence: ['type', 'scope', 'ticket', 'subject']
-    }
+  parserOpts: {
+    headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
+    headerCorrespondence: ['type', 'scope', 'ticket', 'subject']
+  }
 };
 ```
 
@@ -170,7 +167,7 @@ Use ids resolvable by the node resolve algorithm.
 
 ```js
 module.exports = {
-    formatter: '@commitlint/format'
+  formatter: '@commitlint/format'
 };
 ```
 

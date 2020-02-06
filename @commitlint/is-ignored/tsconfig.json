@@ -1,16 +1,11 @@
 {
-	"extends": "../../tsconfig.shared.json",
-	"compilerOptions": {
-		"composite": true,
-		"rootDir": "./src",
-		"outDir": "./lib"
-	},
-	"include": [
-		"./src/**/*.ts"
-	],
-	"exclude": [
-		"./src/**/*.test.ts",
-		"./lib/**/*"
-    ],
-    "references": [{"path": "../types"}]
+  "extends": "../../tsconfig.shared.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
+  "references": [{"path": "../types"}]
 }

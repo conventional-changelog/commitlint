@@ -1,21 +1,16 @@
 {
-	"extends": "../../tsconfig.shared.json",
-	"compilerOptions": {
-		"composite": true,
-		"rootDir": "./src",
-		"outDir": "./lib"
-	},
-	"include": [
-		"./src"
-	],
-	"exclude": [
-		"./src/**/*.test.ts",
-		"./lib/**/*"
-    ],
-    "references": [
-        { "path": "../ensure" },
-        { "path": "../message" },
-        { "path": "../to-lines" },
-        { "path": "../types" },
-    ]
+  "extends": "../../tsconfig.shared.json",
+  "compilerOptions": {
+    "composite": true,
+    "rootDir": "./src",
+    "outDir": "./lib"
+  },
+  "include": ["./src"],
+  "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
+  "references": [
+    {"path": "../ensure"},
+    {"path": "../message"},
+    {"path": "../to-lines"},
+    {"path": "../types"}
+  ]
 }

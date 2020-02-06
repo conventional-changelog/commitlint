@@ -1,15 +1,14 @@
-version: "3"
+version: '3'
 services:
   commitlint:
     build: .
     image: marionebl/commitlint-cubicle
     ports:
-      - "8443:8443"
+      - '8443:8443'
     environment:
       - SSH_AUTH_SOCK=/.ssh-agent/socket
       - SSH_AUTH_PROXY_SOCK=/.ssh-agent/proxy-socket
     volumes:
       - .:/root/repo
       - $SSH_AUTH_SOCK:/.ssh-agent/socket
-    command: code-server --no-auth /root/repo 
-
+    command: code-server --no-auth /root/repo

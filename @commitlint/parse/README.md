@@ -18,9 +18,9 @@ const parse = require('@commitlint/parse');
 
 ### parse(message: string, parser: Function, parserOpts: Object)
 
-* **message**: Commit message to parser
-* **parser**: Sync parser function to use. Defaults to `sync` of `conventional-commits-parser`
-* **parserOpts**: Options to pass to `parser`
+- **message**: Commit message to parser
+- **parser**: Sync parser function to use. Defaults to `sync` of `conventional-commits-parser`
+- **parserOpts**: Options to pass to `parser`
   ```js
   {
     commentChar: null, // character indicating comment lines

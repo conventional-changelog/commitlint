@@ -1,21 +1,21 @@
 {
-    "files": [],
-    "include": [],
-    "extends": "./tsconfig.shared.json",
-    "references": [
-        { "path": "@packages/test" },
-        { "path": "@commitlint/ensure" },
-        { "path": "@commitlint/execute-rule" },
-        { "path": "@commitlint/format" },
-        { "path": "@commitlint/is-ignored" },
-        { "path": "@commitlint/load" },
-        { "path": "@commitlint/message" },
-        { "path": "@commitlint/parse" },
-        { "path": "@commitlint/resolve-extends" },
-        { "path": "@commitlint/to-lines" },
-        { "path": "@commitlint/top-level" },
-        { "path": "@commitlint/read" },
-        { "path": "@commitlint/rules" },
-        { "path": "@commitlint/lint" },
-    ]
+  "files": [],
+  "include": [],
+  "extends": "./tsconfig.shared.json",
+  "references": [
+    {"path": "@packages/test"},
+    {"path": "@commitlint/ensure"},
+    {"path": "@commitlint/execute-rule"},
+    {"path": "@commitlint/format"},
+    {"path": "@commitlint/is-ignored"},
+    {"path": "@commitlint/load"},
+    {"path": "@commitlint/message"},
+    {"path": "@commitlint/parse"},
+    {"path": "@commitlint/resolve-extends"},
+    {"path": "@commitlint/to-lines"},
+    {"path": "@commitlint/top-level"},
+    {"path": "@commitlint/read"},
+    {"path": "@commitlint/rules"},
+    {"path": "@commitlint/lint"}
+  ]
 }

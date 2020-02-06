@@ -1,6 +1,7 @@
 > Lint your commits, angular-style
 
 # @commitlint/config-lerna-scopes
+
 Shareable `commitlint` config enforcing lerna package names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 

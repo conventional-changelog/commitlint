@@ -4,7 +4,7 @@
     <img src="./assets/commitlint.svg"/>
 </div>
 
-> Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli) 
+> Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli)
 
 # commitlint &nbsp; [![slack][11]][12]
 
@@ -43,20 +43,19 @@ echo 'foo: bar' | commitlint
 commitlint --from=HEAD~1
 ```
 
-
 ?> To get the most out of `commitlint` you'll want to automate it in your project lifecycle. See our [Local setup guide](./guides-local-setup.md?id=guides-local-setup) for next steps.
 
 ## Documentation
 
-* **Guides** - Common use cases explained in a step-by-step pace
-* **Concepts** - Overarching topics important to understand the use of `commitlint`
-* **Reference** - Mostly technical documentation
+- **Guides** - Common use cases explained in a step-by-step pace
+- **Concepts** - Overarching topics important to understand the use of `commitlint`
+- **Reference** - Mostly technical documentation
 
 ## Attributions
 
-* `commitlint` is possible because of the hard work of the folks of the `conventional-changelog` project
-* Thanks [@markusoelhafen](https://github.com/markusoelhafen) for providing
-the `commitlint` icon
+- `commitlint` is possible because of the hard work of the folks of the `conventional-changelog` project
+- Thanks [@markusoelhafen](https://github.com/markusoelhafen) for providing
+  the `commitlint` icon
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
@@ -64,13 +63,12 @@ the `commitlint` icon
 [3]: https://npmjs.org/package/@commitlint/cli
 [4]: https://img.shields.io/circleci/project/github/conventional-changelog/commitlint/master.svg?style=flat-square
 [5]: https://circleci.com/gh/conventional-changelog/commitlint
+
 <!-- [6]: https://img.shields.io/appveyor/ci/conventional-changelog/commitlint/master.svg?style=flat-square
 [7]: https://ci.appveyor.com/project/conventional-changelog/commitlint -->
 
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
-
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square
-
 [11]: http://devtoolscommunity.herokuapp.com/badge.svg?style=flat-square
 [12]: http://devtoolscommunity.herokuapp.com

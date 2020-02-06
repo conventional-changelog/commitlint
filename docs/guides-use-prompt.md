@@ -36,5 +36,6 @@ npm run commit
 ```
 
 ## An alternative to `@commitlint/prompt`: commitizen
+
 Another way to author commit messages that adhere to the commit convention configured in `commitlint.config.js` is to use `commitizen`.
 For more information, checkout their [official website](http://commitizen.github.io/cz-cli/).
