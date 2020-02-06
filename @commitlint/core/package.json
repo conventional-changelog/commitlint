@@ -2,8 +2,10 @@
   "name": "@commitlint/core",
   "version": "8.3.5",
   "description": "Lint your commit messages",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
-    "index.js"
+    "lib/"
   ],
   "scripts": {
     "deps": "dep-check",
