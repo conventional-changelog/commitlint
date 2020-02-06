@@ -9,7 +9,6 @@ import {
 	LintOptions,
 	LintRuleOutcome,
 	Rule,
-	Plugin,
 	RuleSeverity
 } from '@commitlint/types';
 
@@ -42,7 +41,7 @@ export default async function lint(
 	);
 
 	if (opts.plugins) {
-		Object.values(opts.plugins).forEach((plugin: Plugin) => {
+		Object.values(opts.plugins).forEach(plugin => {
 			if (plugin.rules) {
 				Object.keys(plugin.rules).forEach(ruleKey =>
 					allRules.set(ruleKey, plugin.rules[ruleKey])
