@@ -34,11 +34,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "read-pkg": "5.2.0",
-    "resolve-pkg": "2.0.0"
+    "@commitlint/cli": "^8.3.5"
   },
   "devDependencies": {
-    "@commitlint/utils": "^8.3.4"
+    "@commitlint/utils": "^8.3.4",
+    "@commitlint/test": "8.2.0"
   }
 }
