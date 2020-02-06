@@ -5,6 +5,7 @@ module.exports = {
 	testMatch: [
 		'**/*.test.ts?(x)',
 		'**/@commitlint/{lint,read,travis-cli,cli,load,prompt}/src/**/*.test.js?(x)',
-		'**/@commitlint/{prompt-cli,config-lerna-scopes}/*.test.js?(x)'
+		'**/@commitlint/{prompt-cli,config-lerna-scopes}/*.test.js?(x)',
+		'**/@alias/commitlint/*.test.js?(x)'
 	]
 };
