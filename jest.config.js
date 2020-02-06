@@ -1,6 +1,6 @@
 module.exports = {
 	preset: 'ts-jest/presets/js-with-babel',
-	testEnvironment: './test/tmp-environment.js',
+	testEnvironment: '@commitlint/test-environment',
 	testRegex: undefined,
 	testMatch: [
 		'**/*.test.ts?(x)',

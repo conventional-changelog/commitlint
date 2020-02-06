@@ -1,0 +1,32 @@
+{
+  "name": "@commitlint/test-environment",
+  "version": "8.3.5",
+  "description": "test environment for @commitlint",
+  "main": "lib/tmp-environment.js",
+  "types": "lib/tmp-environment.d.ts",
+  "files": [
+    "lib/"
+  ],
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conventional-changelog/commitlint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "test",
+    "cli"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@types/tmp": "^0.1.0",
+    "tmp": "0.1.0"
+  }
+}

@@ -1,7 +1,7 @@
 // https://github.com/raszi/node-tmp/issues/229
 
-const NodeEnvironment = require('jest-environment-node');
-const tmp = require('tmp');
+import NodeEnvironment from 'jest-environment-node';
+import tmp from 'tmp';
 
 tmp.setGracefulCleanup();
 
@@ -13,4 +13,4 @@ class TmpEnvironment extends NodeEnvironment {
 	}
 }
 
-module.exports = TmpEnvironment;
+export default TmpEnvironment;
