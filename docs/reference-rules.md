@@ -10,7 +10,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Plain array**
 
-```js
+```
   "rules": {
     "header-max-length": [0, "always", 72],
   }
@@ -18,7 +18,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Function returning array**
 
-```js
+```
   "rules": {
     "header-max-length": () => [0, "always", 72],
   }
@@ -26,7 +26,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Async function returning array**
 
-```js
+```
   "rules": {
     "header-max-length": async () => [0, "always", 72],
   }
@@ -34,7 +34,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Function returning a promise resolving to array**
 
-```js
+```
   "rules": {
     "header-max-length": () => Promise.resolve([0, "always", 72]),
   }
@@ -53,8 +53,8 @@ Rule configurations are either of type `array` residing on a key with the rule's
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### body-max-line-length
@@ -63,8 +63,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### body-min-length
@@ -73,8 +73,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-0;
+```
+0
 ```
 
 #### footer-leading-blank
@@ -88,8 +88,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### footer-max-line-length
@@ -98,8 +98,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### footer-min-length
@@ -108,8 +108,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-0;
+```
+0
 ```
 
 #### header-case
@@ -117,13 +117,13 @@ Infinity;
 - **condition**: `header` is in case `value`
 - **rule**: `always`
 
-```js
-'lowerCase';
+```
+'lowerCase'
 ```
 
 - **possible values**
 
-```js
+```
 [
   'lower-case', // default
   'upper-case', // UPPERCASE
@@ -133,7 +133,7 @@ Infinity;
   'sentence-case', // Sentence case
   'snake-case', // snake_case
   'start-case' // Start Case
-];
+]
 ```
 
 #### header-full-stop
@@ -142,8 +142,8 @@ Infinity;
 - **rule**: `never`
 - **value**
 
-```js
-'.';
+```
+'.'
 ```
 
 #### header-max-length
@@ -152,8 +152,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-72;
+```
+72
 ```
 
 #### header-min-length
@@ -162,8 +162,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-0;
+```
+0
 ```
 
 #### references-empty
@@ -176,8 +176,8 @@ Infinity;
 - **condition**: `scope` is found in value
 - **rule**: `always`
 - **value**
-  ```js
-  [];
+  ```
+  []
   ```
 
 #### scope-case
@@ -185,13 +185,13 @@ Infinity;
 - **condition**: `scope` is in case `value`
 - **rule**: `always`
 
-```js
-'lowerCase';
+```
+'lowerCase'
 ```
 
 - **possible values**
 
-```js
+```
 [
   'lower-case', // default
   'upper-case', // UPPERCASE
@@ -201,7 +201,7 @@ Infinity;
   'sentence-case', // Sentence case
   'snake-case', // snake_case
   'start-case' // Start Case
-];
+]
 ```
 
 #### scope-empty
@@ -215,8 +215,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### scope-min-length
@@ -225,8 +225,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-0;
+```
+0
 ```
 
 #### subject-case
@@ -234,13 +234,13 @@ Infinity;
 - **condition**: `subject` is in case `value`
 - **rule**: `always`
 
-```js
-'lowerCase';
+```
+'lowerCase'
 ```
 
 - **possible values**
 
-```js
+```
 [
   'lower-case', // default
   'upper-case', // UPPERCASE
@@ -250,7 +250,7 @@ Infinity;
   'sentence-case', // Sentence case
   'snake-case', // snake_case
   'start-case' // Start Case
-];
+]
 ```
 
 #### subject-empty
@@ -264,8 +264,8 @@ Infinity;
 - **rule**: `never`
 - **value**
 
-```js
-'.';
+```
+'.'
 ```
 
 #### subject-max-length
@@ -274,8 +274,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### subject-min-length
@@ -284,8 +284,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-0;
+```
+0
 ```
 
 #### type-enum
@@ -293,8 +293,8 @@ Infinity;
 - **condition**: `type` is found in value
 - **rule**: `always`
 - **value**
-  ```js
-  ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert'];
+  ```
+  ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert']
   ```
 
 #### type-case
@@ -302,12 +302,12 @@ Infinity;
 - **description**: `type` is in case `value`
 - **rule**: `always`
 - **value**
-  ```js
-  'lower-case';
+  ```
+  'lower-case'
   ```
 - **possible values**
 
-```js
+```
 [
   'lower-case', // default
   'upper-case', // UPPERCASE
@@ -331,8 +331,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-Infinity;
+```
+Infinity
 ```
 
 #### type-min-length
@@ -341,8 +341,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-0;
+```
+0
 ```
 
 #### signed-off-by
@@ -351,8 +351,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-'Signed-off-by:';
+```
+'Signed-off-by:'
 ```
 
 ### Deprecated rules
@@ -363,19 +363,19 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-['present-imperative'];
+```
+['present-imperative']
 ```
 
 - **possible values**
 
-```js
+```
 [
   'past-tense', // did
   'present-imperative', // do
   'present-participle', // doing
   'present-third-person' // does
-];
+]
 ```
 
 #### footer-tense `deprecated`
@@ -384,19 +384,19 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-['present-imperative'];
+```
+['present-imperative']
 ```
 
 - **possible values**
 
-```js
+```
 [
   'past-tense', // did
   'present-imperative', // do
   'present-participle', // doing
   'present-third-person' // does
-];
+]
 ```
 
 #### lang `deprecated`
@@ -405,8 +405,8 @@ Infinity;
 - **rule**: `always`
 - **value**
 
-```js
-eng;
+```
+eng
 ```
 
 #### subject-tense `deprecated`
@@ -415,17 +415,17 @@ eng;
 - **rule**: `always`
 - **value**
 
-```js
-['present-imperative'];
+```
+['present-imperative']
 ```
 
 - **possible values**
 
-```js
+```
 [
   'past-tense', // did
   'present-imperative', // do
   'present-participle', // doing
   'present-third-person' // does
-];
+]
 ```

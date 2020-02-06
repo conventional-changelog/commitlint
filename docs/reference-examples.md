@@ -6,7 +6,7 @@ These examples show common usages of how commitlint can be configured.
 
 In your `package.json` add:
 
-```js
+```
   commitlint: {
     'rules': {
       'references-empty': [2, 'never'],

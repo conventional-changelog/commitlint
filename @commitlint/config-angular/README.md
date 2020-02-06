@@ -113,8 +113,8 @@ echo "fix: some message" # passes
 - **rule**: `never`
 - **value**
 
-```js
-'.';
+```
+'.'
 ```
 
 ```sh

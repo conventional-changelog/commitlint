@@ -52,8 +52,8 @@ echo "fix: some message" # passes
 - **description**: `type` is in case `value`
 - **rule**: `always`
 - **value**
-  ```js
-  'lowerCase';
+  ```
+  'lowerCase'
   ```
 
 ```sh
