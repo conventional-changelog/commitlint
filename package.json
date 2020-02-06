@@ -30,7 +30,7 @@
     "bracketSpacing": false
   },
   "lint-staged": {
-    "*.{ts,js}": [
+    "*.{ts,js,json,yml,md}": [
       "prettier --write"
     ]
   },
