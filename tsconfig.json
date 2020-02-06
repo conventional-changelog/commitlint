@@ -3,6 +3,7 @@
     "include": [],
     "extends": "./tsconfig.shared.json",
     "references": [
+        { "path": "@packages/test-environment" },
         { "path": "@packages/test" },
         { "path": "@commitlint/ensure" },
         { "path": "@commitlint/execute-rule" },
