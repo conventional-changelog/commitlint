@@ -9,11 +9,11 @@ Plugins can expose additional rules for use in commitlint. To do so, the plugin 
 
 ```js
 module.exports = {
-    rules: {
-        "dollar-sign": function(parsed, when, value) {
-          // rule implementation ...
-        }
+  rules: {
+    'dollar-sign': function(parsed, when, value) {
+      // rule implementation ...
     }
+  }
 };
 ```
 
@@ -26,9 +26,9 @@ The plugin support was introduced in commitlint version `7.6.0`. Ensure the `pee
 
 ```json
 {
-    "peerDependencies": {
-        "@commitlint/lint": ">=7.6.0"
-    }
+  "peerDependencies": {
+    "@commitlint/lint": ">=7.6.0"
+  }
 }
 ```
 
@@ -38,11 +38,11 @@ In order to make your plugin available to the community you have to publish it o
 
 Recommended keywords:
 
-* `commitlint`
-* `commitlintplugin`
+- `commitlint`
+- `commitlintplugin`
 
 Add these keywords into your `package.json` file to make it easy for others to find.
 
 ## Further Reading
 
-* [npm Developer Guide](https://docs.npmjs.com/misc/developers)
+- [npm Developer Guide](https://docs.npmjs.com/misc/developers)

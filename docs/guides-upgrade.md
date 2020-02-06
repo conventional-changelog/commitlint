@@ -2,7 +2,7 @@
 
 ## validate-commit-msg
 
-The maintainers of [validate-commit-msg](https://github.com/conventional-changelog-archived-repos/validate-commit-msg) have deprecated their package in favor of `commitlint`. 
+The maintainers of [validate-commit-msg](https://github.com/conventional-changelog-archived-repos/validate-commit-msg) have deprecated their package in favor of `commitlint`.
 
 ### Migrating with default settings
 
@@ -67,7 +67,7 @@ module.exports = {
     // Place your rules here
     'scope-enum': [2, 'always', ['a', 'b']] // error if scope is given but not in provided list
   }
-}
+};
 ```
 
 ### validate-commit-msg option equivalents
@@ -94,7 +94,6 @@ Refer to the [Rules Referece](reference-rules.md) for a list of all avaiable con
 
 There is also the [#commitlint](https://yargs.slack.com/messages/C7M8XJ4RL/) channel on the DevTools Slack workspace. Join us there and we'll do our best to help you with your migration.
 
-
 ## Version 1 to 2
 
 ```bash
@@ -105,15 +104,15 @@ npm install --save-dev conventional-changelog-lint@latest
 
 #### CLI
 
-* None
+- None
 
 #### Config
 
-* **wildcards** config is ignored - as of version `2.0.0` the former `.wildcards` configuration is ignored entirely. If your `.conventional-changelog-lintrc`, `commitlint.config.js` or an extended shareable configuration has a `.wildcards` key a warning will be issued.
+- **wildcards** config is ignored - as of version `2.0.0` the former `.wildcards` configuration is ignored entirely. If your `.conventional-changelog-lintrc`, `commitlint.config.js` or an extended shareable configuration has a `.wildcards` key a warning will be issued.
 
 #### API
 
-* None
+- None
 
 ## Version 2 to 3
 
@@ -123,29 +122,29 @@ npm install --save commitlint
 mv .conventional-changelog-lintrc commitlint.config.js
 ```
 
-* Rename all calls to `conventional-changelog-lint` to `commitlint`
+- Rename all calls to `conventional-changelog-lint` to `commitlint`
 
 ### Breaking changes
 
 #### CLI
 
-* `conventional-changelog-lint` command now is called `commitlint`
-* `commitlint` command now is installed via `@commitlint/cli`
-* `.conventional-changelog-lintrc` now is called `commitlint.config.js`
-* `commitlint` does not search upwards in the directory structure for config
-* `--preset | -p` flag was removed. The `angular` preset is used always.
+- `conventional-changelog-lint` command now is called `commitlint`
+- `commitlint` command now is installed via `@commitlint/cli`
+- `.conventional-changelog-lintrc` now is called `commitlint.config.js`
+- `commitlint` does not search upwards in the directory structure for config
+- `--preset | -p` flag was removed. The `angular` preset is used always.
 
 #### Config
 
-* `.preset` key is removed. The `angular` preset is used always.
+- `.preset` key is removed. The `angular` preset is used always.
 
 #### API
 
-* `getConfiguration(name, settings, seed)` changed to `load(seed)`
-* `getMessages(range)` changed to `read(range)`
-* `getPreset(name, require)` removed
-* `format(report, options)` now only respects `.color` on `options`
-* `lint(message, options)` changed to `lint(message, rules)`
+- `getConfiguration(name, settings, seed)` changed to `load(seed)`
+- `getMessages(range)` changed to `read(range)`
+- `getPreset(name, require)` removed
+- `format(report, options)` now only respects `.color` on `options`
+- `lint(message, options)` changed to `lint(message, rules)`
 
 ## Version 4 to 5
 
@@ -159,8 +158,8 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 
 #### Config
 
-* `config-angular` dropped support for the `chore` type, breaking compat with conventional-changelog,
-use `config-conventional` instead.
+- `config-angular` dropped support for the `chore` type, breaking compat with conventional-changelog,
+  use `config-conventional` instead.
 
 ## Version 7 to 8
 
@@ -168,4 +167,4 @@ use `config-conventional` instead.
 
 #### Output on succesful commit will be ommited
 
-* You can use the `--verbose` flag to get positive output
+- You can use the `--verbose` flag to get positive output

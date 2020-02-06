@@ -14,6 +14,7 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 ```
 
 In package.json
+
 ```
 {
   "scripts": {

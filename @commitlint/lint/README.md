@@ -13,13 +13,15 @@ npm install --save @commitlint/lint
 ```js
 const lint = require('@commitlint/lint');
 
-lint('foo: bar', {'type-enum': [1, 'always', ['foo']]})
-  .then(report => console.log(report));
-  // => { valid: true, errors: [], warnings: [] }
+lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then(report =>
+  console.log(report)
+);
+// => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {'type-enum': [1, 'always', ['bar']]})
-  .then(report => console.log(report));
-  /* =>
+lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then(report =>
+  console.log(report)
+);
+/* =>
     { valid: true,
       errors: [],
       warnings:

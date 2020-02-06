@@ -23,7 +23,7 @@ echo "build: bar" | commitlint # passes
 
 ```js
 // commitlint.config.js
-const types = require("@commitlint/config-angular-type-enum");
+const types = require('@commitlint/config-angular-type-enum');
 
 // Use as rule creating errors for non-allowed types
 module.exports = {
