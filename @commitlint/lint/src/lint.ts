@@ -2,7 +2,6 @@ import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
-import toPairs from 'lodash/toPairs';
 import {buildCommitMesage} from './commit-message';
 import {
 	LintRuleConfig,
@@ -64,7 +63,7 @@ export default async function lint(
 		);
 	}
 
-	const invalid = toPairs(rulesConfig)
+	const invalid = Object.entries(rulesConfig)
 		.map(([name, config]) => {
 			if (!Array.isArray(config)) {
 				return new Error(
@@ -131,7 +130,7 @@ export default async function lint(
 	}
 
 	// Validate against all rules
-	const results = toPairs(rulesConfig)
+	const results = Object.entries(rulesConfig)
 		.filter(([, [level]]) => level > 0)
 		.map(entry => {
 			const [name, config] = entry;

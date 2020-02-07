@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import toPairs from 'lodash/toPairs';
 
 /**
  * Get formatted meta hints for configuration
@@ -8,7 +7,7 @@ import toPairs from 'lodash/toPairs';
  */
 export default function meta(settings) {
 	return chalk.grey(
-		toPairs(settings)
+		Object.entries(settings || {})
 			.filter(item => item[1])
 			.map(item => {
 				const [name, value] = item;
