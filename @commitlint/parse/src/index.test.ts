@@ -1,4 +1,3 @@
-import importFrom from 'import-from';
 import parse from '.';
 
 test('throws when called without params', async () => {
@@ -81,10 +80,11 @@ test('uses angular grammar', async () => {
 
 test('uses custom opts parser', async () => {
 	const message = 'type(scope)-subject';
-	const changelogOpts: any = await importFrom(
-		__dirname,
-		'../fixtures/parser-preset/conventional-changelog-custom.js'
-	);
+	const changelogOpts = {
+		parserOpts: {
+			headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
+		}
+	};
 	const actual = await parse(message, undefined, changelogOpts.parserOpts);
 	const expected = {
 		body: null,
@@ -145,13 +145,11 @@ test('supports scopes with / and empty parserOpts', async () => {
 
 test('ignores comments', async () => {
 	const message = 'type(some/scope): subject\n# some comment';
-	const changelogOpts: any = await importFrom(
-		process.cwd(),
-		'conventional-changelog-angular'
-	);
-	const opts = Object.assign({}, changelogOpts.parserOpts, {
+	const changelogOpts = await require('conventional-changelog-angular');
+	const opts = {
+		...changelogOpts.parserOpts,
 		commentChar: '#'
-	});
+	};
 	const actual = await parse(message, undefined, opts);
 
 	expect(actual.body).toBe(null);
@@ -162,13 +160,11 @@ test('ignores comments', async () => {
 test('registers inline #', async () => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
-	const changelogOpts: any = await importFrom(
-		process.cwd(),
-		'conventional-changelog-angular'
-	);
-	const opts = Object.assign({}, changelogOpts.parserOpts, {
+	const changelogOpts = await require('conventional-changelog-angular');
+	const opts = {
+		...changelogOpts.parserOpts,
 		commentChar: '#'
-	});
+	};
 	const actual = await parse(message, undefined, opts);
 
 	expect(actual.subject).toBe('subject #reference');
@@ -177,13 +173,10 @@ test('registers inline #', async () => {
 
 test('parses references leading subject', async () => {
 	const message = '#1 some subject';
-	const opts = await importFrom(
-		process.cwd(),
-		'conventional-changelog-angular'
-	);
+	const opts = await require('conventional-changelog-angular');
 	const {
 		references: [actual]
-	} = await parse(message, undefined, opts as any);
+	} = await parse(message, undefined, opts);
 
 	expect(actual.issue).toBe('1');
 });
