@@ -8,7 +8,6 @@ import settings from './settings';
 
 export default input;
 
-/* eslint-disable valid-jsdoc */
 /**
  * Get user input by interactive prompt based on
  * conventional-changelog-lint rules.
@@ -48,7 +47,6 @@ async function input(prompter) {
 				}
 
 				results[input] = await getPrompt(input, {
-					// eslint-disable-line no-await-in-loop
 					rules: inputRules,
 					settings: inputSettings,
 					results,

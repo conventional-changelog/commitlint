@@ -91,10 +91,10 @@ function main(cli) {
 				}
 
 				return {
-					pkg: pkg, // eslint-disable-line object-shorthand
-					pkgFiles: pkgFiles, // eslint-disable-line object-shorthand
+					pkg: pkg,
+					pkgFiles: pkgFiles,
 					files: tarball.files,
-					problems: problems // eslint-disable-line object-shorthand
+					problems: problems
 				};
 			});
 		});
@@ -165,7 +165,7 @@ function getArchiveFiles(filePath, options) {
 			.once('finish', () =>
 				resolve({
 					dirname: path.join(path.dirname(filePath), 'package'),
-					files: files // eslint-disable-line object-shorthand
+					files: files
 				})
 			);
 	});

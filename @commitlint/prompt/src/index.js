@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unassigned-import, import/prefer-default-export */
 import vorpal from 'vorpal';
 import input from './input';
 
