@@ -20,6 +20,9 @@
   "babel": {
     "presets": [
       "babel-preset-commitlint"
+    ],
+    "ignore": [
+      "**/*.test.js"
     ]
   },
   "engines": {

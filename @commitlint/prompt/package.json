@@ -17,6 +17,9 @@
   "babel": {
     "presets": [
       "commitlint"
+    ],
+    "ignore": [
+      "**/*.test.js"
     ]
   },
   "config": {
