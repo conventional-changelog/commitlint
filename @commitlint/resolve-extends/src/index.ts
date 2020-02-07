@@ -2,7 +2,6 @@ import path from 'path';
 
 import 'resolve-global';
 import resolveFrom from 'resolve-from';
-import isArray from 'lodash/isArray';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
 import omit from 'lodash/omit';
@@ -37,7 +36,7 @@ export default function resolveExtends(
 	const extended = loadExtends(config, context).reduceRight(
 		(r, c) =>
 			mergeWith(r, omit(c, 'extends'), (objValue, srcValue) => {
-				if (isArray(objValue)) {
+				if (Array.isArray(objValue)) {
 					return srcValue;
 				}
 			}),
