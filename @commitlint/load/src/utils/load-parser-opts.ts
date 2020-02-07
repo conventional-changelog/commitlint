@@ -1,5 +1,3 @@
-import startsWith from 'lodash/startsWith';
-
 export async function loadParserOpts(
 	parserName: string,
 	pendingParser: Promise<any>
@@ -20,7 +18,7 @@ export async function loadParserOpts(
 	if (
 		typeof parser === 'object' &&
 		typeof parser.parserOpts === 'function' &&
-		startsWith(parserName, 'conventional-changelog-')
+		parserName.startsWith('conventional-changelog-')
 	) {
 		return await new Promise(resolve => {
 			const result = parser.parserOpts((_: never, opts: {parserOpts: any}) => {
