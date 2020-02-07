@@ -1,6 +1,5 @@
 import Path from 'path';
 
-import toPairs from 'lodash/toPairs';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
 import pick from 'lodash/pick';
@@ -94,7 +93,7 @@ export default async function load(
 
 	const rules = preset.rules ? preset.rules : {};
 	const qualifiedRules = (await Promise.all(
-		toPairs(rules || {}).map(entry => executeRule<any>(entry))
+		Object.entries(rules || {}).map(entry => executeRule<any>(entry))
 	)).reduce<QualifiedRules>((registry, item) => {
 		const [key, value] = item as any;
 		(registry as any)[key] = value;
