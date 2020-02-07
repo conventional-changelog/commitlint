@@ -1,7 +1,7 @@
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const headerFullStop: Rule<string> = (
+export const headerFullStop: SyncRule<string> = (
 	parsed,
 	when = 'always',
 	value = '.'

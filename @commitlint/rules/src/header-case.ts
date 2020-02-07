@@ -1,10 +1,10 @@
 import {case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {TargetCaseType, Rule} from '@commitlint/types';
+import {TargetCaseType, SyncRule} from '@commitlint/types';
 
 const negated = (when?: string) => when === 'never';
 
-export const headerCase: Rule<TargetCaseType | TargetCaseType[]> = (
+export const headerCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 	parsed,
 	when = 'always',
 	value = []

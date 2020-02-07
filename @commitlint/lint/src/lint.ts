@@ -8,7 +8,9 @@ import {
 	LintOptions,
 	LintRuleOutcome,
 	Rule,
-	RuleSeverity
+	RuleSeverity,
+	BaseRule,
+	RuleType
 } from '@commitlint/types';
 
 export default async function lint(
@@ -35,7 +37,7 @@ export default async function lint(
 
 	// Parse the commit message
 	const parsed = await parse(message, undefined, opts.parserOpts);
-	const allRules: Map<string, Rule<unknown> | Rule<never>> = new Map(
+	const allRules: Map<string, BaseRule<never, RuleType>> = new Map(
 		Object.entries(defaultRules)
 	);
 

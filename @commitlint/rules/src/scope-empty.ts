@@ -1,8 +1,8 @@
 import * as ensure from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const scopeEmpty: Rule = (parsed, when = 'never') => {
+export const scopeEmpty: SyncRule = (parsed, when = 'never') => {
 	const negated = when === 'always';
 	const notEmpty = ensure.notEmpty(parsed.scope || '');
 	return [
