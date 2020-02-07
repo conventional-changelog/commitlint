@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import 'core-js/stable'; // eslint-disable-line import/no-unassigned-import
-import 'regenerator-runtime/runtime'; // eslint-disable-line import/no-unassigned-import
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
 import load from '@commitlint/load';
 import lint from '@commitlint/lint';
