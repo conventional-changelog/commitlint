@@ -1,12 +1,12 @@
 import importFrom from 'import-from';
 import parse from '.';
 
-test('throws when called without params', () => {
-	expect((parse as any)()).rejects.toThrowError('Expected a raw commit');
+test('throws when called without params', async () => {
+	await expect((parse as any)()).rejects.toThrowError('Expected a raw commit');
 });
 
-test('throws when called with empty message', () => {
-	expect(parse('')).rejects.toThrowError('Expected a raw commit');
+test('throws when called with empty message', async () => {
+	await expect(parse('')).rejects.toThrowError('Expected a raw commit');
 });
 
 test('returns object with raw message', async () => {
