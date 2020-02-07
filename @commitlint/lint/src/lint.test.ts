@@ -294,7 +294,7 @@ test('passes for async rule', async () => {
 			plugins: {
 				'example-plugin': {
 					rules: {
-						'async-rule': async () => ([true, 'all good'] as const)
+						'async-rule': async () => [true, 'all good'] as const
 					}
 				}
 			}
