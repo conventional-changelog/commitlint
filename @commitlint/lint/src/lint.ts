@@ -3,14 +3,12 @@ import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
 import toPairs from 'lodash/toPairs';
-import values from 'lodash/values';
 import {buildCommitMesage} from './commit-message';
 import {
 	LintRuleConfig,
 	LintOptions,
 	LintRuleOutcome,
 	Rule,
-	Plugin,
 	RuleSeverity
 } from '@commitlint/types';
 
@@ -43,7 +41,7 @@ export default async function lint(
 	);
 
 	if (opts.plugins) {
-		values(opts.plugins).forEach((plugin: Plugin) => {
+		Object.values(opts.plugins).forEach(plugin => {
 			if (plugin.rules) {
 				Object.keys(plugin.rules).forEach(ruleKey =>
 					allRules.set(ruleKey, plugin.rules[ruleKey])

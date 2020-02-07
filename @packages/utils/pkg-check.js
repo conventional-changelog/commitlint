@@ -8,7 +8,6 @@ const meow = require('meow');
 const readPkg = require('read-pkg');
 const requireFromString = require('require-from-string');
 const tar = require('tar-fs');
-const values = require('lodash/values');
 const {fix} = require('@commitlint/test');
 
 const builtin = require.resolve('is-builtin-module');
@@ -198,7 +197,7 @@ function getPkgBinFiles(bin) {
 	}
 
 	if (typeof bin === 'object') {
-		return values(bin).map(b => path.normalize(b));
+		return Object.values(bin).map(b => path.normalize(b));
 	}
 }
 

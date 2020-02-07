@@ -1,6 +1,5 @@
 import path from 'path';
 import globby from 'globby';
-import values from 'lodash/values';
 import rules from '.';
 
 test('exports all rules', async () => {
@@ -10,7 +9,7 @@ test('exports all rules', async () => {
 });
 
 test('rules export functions', () => {
-	const actual = values(rules);
+	const actual = Object.values(rules);
 	expect(actual.every(rule => typeof rule === 'function')).toBe(true);
 });
 
