@@ -1,5 +1,4 @@
 import mergeWith from 'lodash/mergeWith';
-import isArray from 'lodash/isArray';
 import {Commit, Parser, ParserOptions} from '@commitlint/types';
 
 const {sync} = require('conventional-commits-parser');
@@ -14,7 +13,7 @@ async function parse(
 ): Promise<Commit> {
 	const defaultOpts = (await defaultChangelogOpts).parserOpts;
 	const opts = mergeWith({}, defaultOpts, parserOpts, (objValue, srcValue) => {
-		if (isArray(objValue)) return srcValue;
+		if (Array.isArray(objValue)) return srcValue;
 	});
 	const parsed = parser(message, opts) as Commit;
 	parsed.raw = message;
