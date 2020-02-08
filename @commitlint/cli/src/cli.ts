@@ -290,7 +290,7 @@ function getEditValue(flags: CliFlags) {
 	if (edit === '') {
 		return true;
 	}
-	if (typeof edit === 'undefined') {
+	if (typeof edit === 'boolean') {
 		return false;
 	}
 	// The recommended method to specify -e with husky was `commitlint -e $HUSKY_GIT_PARAMS`
