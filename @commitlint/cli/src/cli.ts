@@ -103,14 +103,14 @@ const cli = yargs
 			`[input] reads from stdin if --edit, --env, --from and --to are omitted`
 	).argv;
 
-main(cli).catch(err =>
+main(cli).catch(err => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
 			process.exit(1);
 		}
 		throw err;
 	}, 0)
-);
+});
 
 async function main(options: CliFlags) {
 	const raw = options._;

@@ -11,7 +11,7 @@ interface TestOptions {
 	env?: Record<string, string>;
 }
 
-function cli(args: string[], options: TestOptions) {
+const cli = (args: string[], options: TestOptions) => {
 	return (input = '') => {
 		return execa(bin, args, {
 			cwd: options.cwd,
@@ -20,7 +20,7 @@ function cli(args: string[], options: TestOptions) {
 			reject: false
 		});
 	};
-}
+};
 
 const gitBootstrap = (fixture: string) => git.bootstrap(fixture, __dirname);
 const fixBootstrap = (fixture: string) => fix.bootstrap(fixture, __dirname);

@@ -36,7 +36,10 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/execa": "^0.9.0",
     "@types/yargs": "^15.0.3",
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.4",
     "execa": "^3.4.0",
     "fs-extra": "^8.1.0"
   },
