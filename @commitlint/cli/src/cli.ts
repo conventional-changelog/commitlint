@@ -2,7 +2,6 @@
 import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
-import merge from 'lodash/merge';
 import isFunction from 'lodash/isFunction';
 import stdin from 'get-stdin';
 import resolveFrom from 'resolve-from';
@@ -21,81 +20,83 @@ import {
 const pkg = require('../package');
 
 const cli = yargs
-	.option('color', {
-		alias: 'c',
-		default: true,
-		describe: 'toggle colored output',
-		type: 'boolean'
-	})
-	.option('config', {
-		alias: 'g',
-		describe: 'path to the config file',
-		type: 'string'
-	})
-	.option('cwd', {
-		alias: 'd',
-		default: process.cwd(),
-		describe: 'directory to execute in',
-		type: 'string'
-	})
-	.option('edit', {
-		alias: 'e',
-		// default: false,
-		describe:
-			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
-		type: 'string'
-	})
-	.option('env', {
-		alias: 'E',
-		describe:
-			'check message in the file at path given by environment variable value',
-		type: 'string'
-	})
-	.option('extends', {
-		alias: 'x',
-		describe: 'array of shareable configurations to extend',
-		type: 'array'
-	})
-	.option('help-url', {
-		alias: 'H',
-		type: 'string',
-		describe: 'helpurl in error message'
-	})
-	.option('from', {
-		alias: 'f',
-		describe: 'lower end of the commit range to lint; applies if edit=false',
-		type: 'string'
-	})
-	.option('format', {
-		alias: 'o',
-		describe: 'output format of the results',
-		type: 'string'
-	})
-	.option('parser-preset', {
-		alias: 'p',
-		describe: 'configuration preset to use for conventional-commits-parser',
-		type: 'string'
-	})
-	.option('quiet', {
-		alias: 'q',
-		default: false,
-		describe: 'toggle console output',
-		type: 'boolean'
-	})
-	.option('to', {
-		alias: 't',
-		describe: 'upper end of the commit range to lint; applies if edit=false',
-		type: 'string'
-	})
-	.option('version', {
-		alias: 'v',
-		type: 'boolean',
-		describe: 'display version information'
-	})
-	.option('verbose', {
-		alias: 'V',
-		type: 'boolean',
-		describe: 'enable verbose output for reports without problems'
+	.options({
+		color: {
+			alias: 'c',
+			default: true,
+			description: 'toggle colored output',
+			type: 'boolean'
+		},
+		config: {
+			alias: 'g',
+			description: 'path to the config file',
+			type: 'string'
+		},
+		cwd: {
+			alias: 'd',
+			default: process.cwd(),
+			description: 'directory to execute in',
+			type: 'string'
+		},
+		edit: {
+			alias: 'e',
+			default: false,
+			description:
+				'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
+			type: 'string'
+		},
+		env: {
+			alias: 'E',
+			description:
+				'check message in the file at path given by environment variable value',
+			type: 'string'
+		},
+		extends: {
+			alias: 'x',
+			description: 'array of shareable configurations to extend',
+			type: 'array'
+		},
+		'help-url': {
+			alias: 'H',
+			type: 'string',
+			description: 'helpurl in error message'
+		},
+		from: {
+			alias: 'f',
+			description: 'lower end of the commit range to lint; applies if edit=false',
+			type: 'string'
+		},
+		format: {
+			alias: 'o',
+			description: 'output format of the results',
+			type: 'string'
+		},
+		'parser-preset': {
+			alias: 'p',
+			description: 'configuration preset to use for conventional-commits-parser',
+			type: 'string'
+		},
+		quiet: {
+			alias: 'q',
+			default: false,
+			description: 'toggle console output',
+			type: 'boolean'
+		},
+		to: {
+			alias: 't',
+			description: 'upper end of the commit range to lint; applies if edit=false',
+			type: 'string'
+		},
+		version: {
+			alias: 'v',
+			type: 'boolean',
+			description: 'display version information'
+		},
+		verbose: {
+			alias: 'V',
+			type: 'boolean',
+			description: 'enable verbose output for reports without problems'
+		}
 	})
 	.help(
 		'help',
@@ -242,7 +243,7 @@ async function main(options: CliFlags) {
 	}
 }
 
-function checkFromStdin(input: string[], flags: CliFlags) {
+function checkFromStdin(input: string[], flags: CliFlags): boolean {
 	return input.length === 0 && !checkFromRepository(flags);
 }
 
@@ -254,13 +255,16 @@ function checkFromEdit(flags: CliFlags) {
 	return Boolean(flags.edit) || flags.env;
 }
 
-function checkFromHistory(flags: CliFlags) {
+function checkFromHistory(flags: CliFlags): boolean {
 	return typeof flags.from === 'string' || typeof flags.to === 'string';
 }
 
-function normalizeFlags(flags: CliFlags) {
+function normalizeFlags(flags: CliFlags): CliFlags {
 	const edit = getEditValue(flags);
-	return merge({}, flags, {edit, e: edit});
+	return {
+		...flags,
+		edit
+	};
 }
 
 function getEditValue(flags: CliFlags) {

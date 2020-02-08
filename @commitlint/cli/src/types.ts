@@ -2,7 +2,7 @@ export interface CliFlags {
 	color: boolean;
 	config?: string;
 	cwd: string;
-	edit?: string;
+	edit?: string | boolean;
 	env?: string;
 	extends?: (string | number)[];
 	help?: boolean;
