@@ -4,8 +4,8 @@
   "description": "Lint your commit messages",
   "files": [
     "index.js",
-    "lib",
-    "!*.test.js*"
+    "cli-bin.js",
+    "lib"
   ],
   "bin": {
     "commitlint": "./cli-bin.js"
