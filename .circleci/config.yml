@@ -29,6 +29,11 @@ commands:
       - run:
           name: Lint project
           command: yarn lint
+  format:
+    steps:
+      - run:
+        name: Format project
+        command: yarn format
   deps:
     steps:
       - run:
@@ -56,6 +61,7 @@ commands:
       - save-cache
       - build
       - lint
+      - format
       - deps
       - test
   run-tests:
