@@ -32,7 +32,7 @@ test('scope-enum does not throw for missing context', async () => {
 	const semverLt = jest.spyOn(semver, 'lt');
 	const {'scope-enum': fn} = config.rules;
 	await expect(fn()).resolves.toBeTruthy();
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(false);
 });
 
 test('scope-enum has expected severity', async () => {
@@ -40,7 +40,7 @@ test('scope-enum has expected severity', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const [severity] = await fn();
 	expect(severity).toBe(2);
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(false);
 });
 
 test('scope-enum has expected modifier', async () => {
@@ -48,7 +48,7 @@ test('scope-enum has expected modifier', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const [, modifier] = await fn();
 	expect(modifier).toBe('always');
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(false);
 });
 
 test('returns empty value for empty lerna repository', async () => {
@@ -57,7 +57,7 @@ test('returns empty value for empty lerna repository', async () => {
 	const cwd = await lerna.bootstrap('empty', __dirname);
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual([]);
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(false);
 });
 
 test('returns expected value for basic lerna repository', async () => {
@@ -67,7 +67,7 @@ test('returns expected value for basic lerna repository', async () => {
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(false);
 });
 
 test('returns expected value for scoped lerna repository', async () => {
@@ -77,7 +77,7 @@ test('returns expected value for scoped lerna repository', async () => {
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(false);
 });
 
 test('works with lerna version < 3', async () => {
@@ -86,4 +86,5 @@ test('works with lerna version < 3', async () => {
 	const cwd = await lerna.bootstrap('lerna-two', __dirname);
 	await expect(fn({cwd})).resolves.toBeTruthy();
 	expect(semverLt).toHaveBeenLastCalledWith('2.11.0', '3.0.0');
+	expect(semverLt).toHaveLastReturnedWith(true);
 });
