@@ -10,8 +10,7 @@
 Options:
   --color, -c          toggle colored output           [boolean] [default: true]
   --config, -g         path to the config file                          [string]
-  --cwd, -d            directory to execute in
-                                      [string] [default: "/projects/commitlint"]
+  --cwd, -d            directory to execute in           [string] [default: cwd]
   --edit, -e           read last commit message from the specified file or
                        fallbacks to ./.git/COMMIT_EDITMSG
                                                        [string] [default: false]
