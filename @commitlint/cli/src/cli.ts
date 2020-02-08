@@ -1,118 +1,111 @@
 #!/usr/bin/env node
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-
 import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
-import meow from 'meow';
-import {merge, pick, isFunction} from 'lodash';
+import merge from 'lodash/merge';
+import isFunction from 'lodash/isFunction';
 import stdin from 'get-stdin';
 import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
+import yargs from 'yargs';
 
-import help from './help';
+import {CliFlags} from './types';
+import {
+	LintOptions,
+	LintOutcome,
+	ParserOptions,
+	ParserPreset,
+	QualifiedConfig
+} from '@commitlint/types';
+
 const pkg = require('../package');
 
-const flags = {
-	color: {
+const cli = yargs
+	.option('color', {
 		alias: 'c',
 		default: true,
-		description: 'toggle colored output',
+		describe: 'toggle colored output',
 		type: 'boolean'
-	},
-	config: {
+	})
+	.option('config', {
 		alias: 'g',
-		default: null,
-		description: 'path to the config file',
+		describe: 'path to the config file',
 		type: 'string'
-	},
-	cwd: {
+	})
+	.option('cwd', {
 		alias: 'd',
 		default: process.cwd(),
-		description: 'directory to execute in',
+		describe: 'directory to execute in',
 		type: 'string'
-	},
-	edit: {
+	})
+	.option('edit', {
 		alias: 'e',
-		default: false,
-		description:
+		// default: false,
+		describe:
 			'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
 		type: 'string'
-	},
-	env: {
+	})
+	.option('env', {
 		alias: 'E',
-		default: null,
-		description:
+		// default: null,
+		describe:
 			'check message in the file at path given by environment variable value',
 		type: 'string'
-	},
-	extends: {
+	})
+	.option('extends', {
 		alias: 'x',
-		description: 'array of shareable configurations to extend',
-		type: 'string'
-	},
-	help: {
-		alias: 'h',
-		type: 'boolean',
-		description: 'display this help message'
-	},
-	'help-url': {
+		describe: 'array of shareable configurations to extend',
+		type: 'array'
+	})
+	.option('help-url', {
 		alias: 'H',
 		type: 'string',
-		description: 'helpurl in error message'
-	},
-	from: {
+		describe: 'helpurl in error message'
+	})
+	.option('from', {
 		alias: 'f',
-		default: null,
-		description: 'lower end of the commit range to lint; applies if edit=false',
+		// default: null,
+		describe: 'lower end of the commit range to lint; applies if edit=false',
 		type: 'string'
-	},
-	format: {
+	})
+	.option('format', {
 		alias: 'o',
-		default: null,
-		description: 'output format of the results',
+		// default: null,
+		describe: 'output format of the results',
 		type: 'string'
-	},
-	'parser-preset': {
+	})
+	.option('parser-preset', {
 		alias: 'p',
-		description: 'configuration preset to use for conventional-commits-parser',
+		describe: 'configuration preset to use for conventional-commits-parser',
 		type: 'string'
-	},
-	quiet: {
+	})
+	.option('quiet', {
 		alias: 'q',
 		default: false,
-		description: 'toggle console output',
+		describe: 'toggle console output',
 		type: 'boolean'
-	},
-	to: {
+	})
+	.option('to', {
 		alias: 't',
-		default: null,
-		description: 'upper end of the commit range to lint; applies if edit=false',
+		// default: null,
+		describe: 'upper end of the commit range to lint; applies if edit=false',
 		type: 'string'
-	},
-	version: {
+	})
+	.option('version', {
 		alias: 'v',
 		type: 'boolean',
-		description: 'display version information'
-	},
-	verbose: {
+		describe: 'display version information'
+	})
+	.option('verbose', {
 		alias: 'V',
 		type: 'boolean',
-		description: 'enable verbose output for reports without problems'
-	}
-};
-
-const cli = meow({
-	description: `${pkg.name}@${pkg.version} - ${pkg.description}`,
-	flags,
-	help: `[input] reads from stdin if --edit, --env, --from and --to are omitted\n${help(
-		flags
-	)}`,
-	unknown(arg) {
-		throw new Error(`unknown flags: ${arg}`);
-	}
-});
+		describe: 'enable verbose output for reports without problems'
+	})
+	.help(
+		'help',
+		`${pkg.name}@${pkg.version} - ${pkg.description}\n` +
+			`[input] reads from stdin if --edit, --env, --from and --to are omitted`
+	).argv;
 
 main(cli).catch(err =>
 	setTimeout(() => {
@@ -120,17 +113,22 @@ main(cli).catch(err =>
 			process.exit(1);
 		}
 		throw err;
-	})
+	}, 0)
 );
 
-async function main(options) {
-	const raw = options.input;
-	const flags = normalizeFlags(options.flags);
+async function main(options: CliFlags) {
+	const raw = options._;
+	const flags = normalizeFlags(options);
 	const fromStdin = checkFromStdin(raw, flags);
 
-	const range = pick(flags, 'edit', 'from', 'to');
-
-	const input = await (fromStdin ? stdin() : read(range, {cwd: flags.cwd}));
+	const input = await (fromStdin
+		? stdin()
+		: read({
+				to: flags.to,
+				from: flags.from,
+				edit: flags.edit,
+				cwd: flags.cwd
+		  }));
 
 	const messages = (Array.isArray(input) ? input : [input])
 		.filter(message => typeof message === 'string')
@@ -138,10 +136,11 @@ async function main(options) {
 		.filter(Boolean);
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
+		// TODO: create custom error??
 		const err = new Error(
 			'[input] is required: supply via stdin, or --env or --edit or --from and --to'
 		);
-		err.type = pkg.name;
+		(err as any).type = pkg.name; // TODO
 		console.log(`${cli.help}\n`);
 		console.log(err.message);
 		throw err;
@@ -150,7 +149,7 @@ async function main(options) {
 	const loadOpts = {cwd: flags.cwd, file: flags.config};
 	const loaded = await load(getSeed(flags), loadOpts);
 	const parserOpts = selectParserOpts(loaded.parserPreset);
-	const opts = {
+	const opts: LintOptions & {parserOpts: ParserOptions} = {
 		parserOpts: {},
 		plugins: {},
 		ignores: [],
@@ -171,20 +170,19 @@ async function main(options) {
 	const format = loadFormatter(loaded, flags);
 
 	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
-	if (range.edit) {
+	if (flags.edit) {
 		opts.parserOpts.commentChar = '#';
 	}
 
 	const results = await Promise.all(
-		messages.map(message => lint(message, loaded.rules, opts))
+		messages.map(message => lint(message, loaded.rules as any, opts))
 	);
 
 	if (Object.keys(loaded.rules).length === 0) {
 		let input = '';
 
 		if (results.length !== 0) {
-			const originalInput = results[0].input;
-			input = originalInput;
+			input = results[0].input;
 		}
 
 		results.splice(0, results.length, {
@@ -206,7 +204,12 @@ async function main(options) {
 		});
 	}
 
-	const report = results.reduce(
+	const report = results.reduce<{
+		valid: boolean;
+		errorCount: number;
+		warningCount: number;
+		results: LintOutcome[];
+	}>(
 		(info, result) => {
 			info.valid = result.valid ? info.valid : false;
 			info.errorCount += result.errors.length;
@@ -226,8 +229,8 @@ async function main(options) {
 	const output = format(report, {
 		color: flags.color,
 		verbose: flags.verbose,
-		helpUrl: flags.helpUrl
-			? flags.helpUrl.trim()
+		helpUrl: flags['help-url']
+			? flags['help-url'].trim()
 			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	});
 
@@ -236,34 +239,35 @@ async function main(options) {
 	}
 
 	if (!report.valid) {
+		// TODO: create custom error??
 		const err = new Error(output);
-		err.type = pkg.name;
+		(err as any).type = pkg.name;
 		throw err;
 	}
 }
 
-function checkFromStdin(input, flags) {
+function checkFromStdin(input: string[], flags: CliFlags) {
 	return input.length === 0 && !checkFromRepository(flags);
 }
 
-function checkFromRepository(flags) {
+function checkFromRepository(flags: CliFlags) {
 	return checkFromHistory(flags) || checkFromEdit(flags);
 }
 
-function checkFromEdit(flags) {
+function checkFromEdit(flags: CliFlags) {
 	return Boolean(flags.edit) || flags.env;
 }
 
-function checkFromHistory(flags) {
+function checkFromHistory(flags: CliFlags) {
 	return typeof flags.from === 'string' || typeof flags.to === 'string';
 }
 
-function normalizeFlags(flags) {
+function normalizeFlags(flags: CliFlags) {
 	const edit = getEditValue(flags);
 	return merge({}, flags, {edit, e: edit});
 }
 
-function getEditValue(flags) {
+function getEditValue(flags: CliFlags) {
 	if (flags.env) {
 		if (!(flags.env in process.env)) {
 			throw new Error(
@@ -282,8 +286,8 @@ function getEditValue(flags) {
 	if (edit === '') {
 		return true;
 	}
-	if (typeof edit === 'boolean') {
-		return edit;
+	if (typeof edit === 'undefined') {
+		return false;
 	}
 	// The recommended method to specify -e with husky was `commitlint -e $HUSKY_GIT_PARAMS`
 	// This does not work properly with win32 systems, where env variable declarations
@@ -311,15 +315,21 @@ function getEditValue(flags) {
 	return edit;
 }
 
-function getSeed(seed) {
-	const e = Array.isArray(seed.extends) ? seed.extends : [seed.extends];
-	const n = e.filter(i => typeof i === 'string');
+function getSeed(
+	seed: CliFlags
+): {
+	extends?: string[];
+	parserPreset?: string;
+} {
+	const n = (seed.extends || []).filter(
+		(i): i is string => typeof i === 'string'
+	);
 	return n.length > 0
-		? {extends: n, parserPreset: seed.parserPreset}
-		: {parserPreset: seed.parserPreset};
+		? {extends: n, parserPreset: seed['parser-preset']}
+		: {parserPreset: seed['parser-preset']};
 }
 
-function selectParserOpts(parserPreset) {
+function selectParserOpts(parserPreset: ParserPreset) {
 	if (typeof parserPreset !== 'object') {
 		return undefined;
 	}
@@ -331,8 +341,10 @@ function selectParserOpts(parserPreset) {
 	return parserPreset.parserOpts;
 }
 
-function loadFormatter(config, flags) {
-	const moduleName = flags.format || config.formatter || '@commitlint/format';
+function loadFormatter(config: QualifiedConfig, flags: CliFlags) {
+	// TODO: validate why formatter is unknown????
+	const moduleName: string =
+		flags.format || (config.formatter as any) || '@commitlint/format';
 	const modulePath =
 		resolveFrom.silent(__dirname, moduleName) ||
 		resolveFrom.silent(flags.cwd, moduleName) ||

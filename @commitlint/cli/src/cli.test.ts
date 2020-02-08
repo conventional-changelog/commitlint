@@ -6,7 +6,12 @@ import fs from 'fs-extra';
 
 const bin = require.resolve('../lib/cli.js');
 
-const cli = (args, options) => {
+interface TestOptions {
+	cwd: string;
+	env?: Record<string, string>;
+}
+
+function cli(args: string[], options: TestOptions) {
 	return (input = '') => {
 		return execa(bin, args, {
 			cwd: options.cwd,
@@ -15,10 +20,10 @@ const cli = (args, options) => {
 			reject: false
 		});
 	};
-};
+}
 
-const gitBootstrap = fixture => git.bootstrap(fixture, __dirname);
-const fixBootstrap = fixture => fix.bootstrap(fixture, __dirname);
+const gitBootstrap = (fixture: string) => git.bootstrap(fixture, __dirname);
+const fixBootstrap = (fixture: string) => fix.bootstrap(fixture, __dirname);
 
 test('should throw when called without [input]', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
@@ -423,7 +428,7 @@ test('should work with relative formatter path', async () => {
 	expect(actual.exitCode).toBe(0);
 });
 
-async function writePkg(payload, options) {
+async function writePkg(payload: unknown, options: TestOptions) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf-8'));
 	const result = merge(pkg, payload);

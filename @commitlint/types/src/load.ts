@@ -114,7 +114,7 @@ export type QualifiedRules = Partial<RulesConfig<RuleConfigQuality.Qualified>>;
 export interface QualifiedConfig {
 	extends: string[];
 	formatter: unknown;
-	rules: Partial<QualifiedRules>;
+	rules: QualifiedRules;
 	parserPreset: ParserPreset;
 	ignores: ((commit: string) => boolean)[];
 	defaultIgnores: boolean;

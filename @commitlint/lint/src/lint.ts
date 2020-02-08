@@ -6,6 +6,7 @@ import {buildCommitMesage} from './commit-message';
 import {
 	LintRuleConfig,
 	LintOptions,
+	LintOutcome,
 	LintRuleOutcome,
 	Rule,
 	RuleSeverity
@@ -15,7 +16,7 @@ export default async function lint(
 	message: string,
 	rawRulesConfig?: LintRuleConfig,
 	rawOpts?: LintOptions
-) {
+): Promise<LintOutcome> {
 	const opts = rawOpts
 		? rawOpts
 		: {defaultIgnores: undefined, ignores: undefined};
