@@ -7,7 +7,7 @@ import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
 import yargs from 'yargs';
 
-import {CliFlags} from './types';
+import {CliFlags, Seed} from './types';
 import {
 	LintOptions,
 	LintOutcome,
@@ -292,7 +292,7 @@ function getEditValue(flags: CliFlags) {
 		return true;
 	}
 	if (typeof edit === 'boolean') {
-		return false;
+		return edit;
 	}
 	// The recommended method to specify -e with husky was `commitlint -e $HUSKY_GIT_PARAMS`
 	// This does not work properly with win32 systems, where env variable declarations
@@ -320,12 +320,7 @@ function getEditValue(flags: CliFlags) {
 	return edit;
 }
 
-function getSeed(
-	seed: CliFlags
-): {
-	extends?: string[];
-	parserPreset?: string;
-} {
+function getSeed(seed: CliFlags): Seed {
 	const n = (seed.extends || []).filter(
 		(i): i is string => typeof i === 'string'
 	);
