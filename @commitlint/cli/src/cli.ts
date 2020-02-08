@@ -103,7 +103,7 @@ const cli = yargs
 	.alias('v', 'version')
 	.help('help')
 	.alias('h', 'help')
-	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}`)
+	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
 	.usage(
 		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
 	).argv;
