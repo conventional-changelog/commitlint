@@ -89,21 +89,23 @@ const cli = yargs
 				'upper end of the commit range to lint; applies if edit=false',
 			type: 'string'
 		},
-		version: {
-			alias: 'v',
-			type: 'boolean',
-			description: 'display version information'
-		},
 		verbose: {
 			alias: 'V',
 			type: 'boolean',
 			description: 'enable verbose output for reports without problems'
 		}
 	})
-	.help(
-		'help',
-		`${pkg.name}@${pkg.version} - ${pkg.description}\n` +
-			`[input] reads from stdin if --edit, --env, --from and --to are omitted`
+	.version(
+		'version',
+		'display version information',
+		`${pkg.name}@${pkg.version}`
+	)
+	.alias('v', 'version')
+	.help('help')
+	.alias('h', 'help')
+	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}`)
+	.usage(
+		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
 	).argv;
 
 main(cli).catch(err => {
