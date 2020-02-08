@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
@@ -63,7 +62,8 @@ const cli = yargs
 		},
 		from: {
 			alias: 'f',
-			description: 'lower end of the commit range to lint; applies if edit=false',
+			description:
+				'lower end of the commit range to lint; applies if edit=false',
 			type: 'string'
 		},
 		format: {
@@ -73,7 +73,8 @@ const cli = yargs
 		},
 		'parser-preset': {
 			alias: 'p',
-			description: 'configuration preset to use for conventional-commits-parser',
+			description:
+				'configuration preset to use for conventional-commits-parser',
 			type: 'string'
 		},
 		quiet: {
@@ -84,7 +85,8 @@ const cli = yargs
 		},
 		to: {
 			alias: 't',
-			description: 'upper end of the commit range to lint; applies if edit=false',
+			description:
+				'upper end of the commit range to lint; applies if edit=false',
 			type: 'string'
 		},
 		version: {
@@ -110,7 +112,7 @@ main(cli).catch(err => {
 			process.exit(1);
 		}
 		throw err;
-	}, 0)
+	}, 0);
 });
 
 async function main(options: CliFlags) {

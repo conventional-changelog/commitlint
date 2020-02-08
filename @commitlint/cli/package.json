@@ -8,7 +8,7 @@
     "!*.test.js*"
   ],
   "bin": {
-    "commitlint": "./lib/cli.js"
+    "commitlint": "./cli-bin.js"
   },
   "scripts": {
     "deps": "dep-check",
