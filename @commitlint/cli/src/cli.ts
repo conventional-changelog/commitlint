@@ -47,7 +47,6 @@ const cli = yargs
 	})
 	.option('env', {
 		alias: 'E',
-		// default: null,
 		describe:
 			'check message in the file at path given by environment variable value',
 		type: 'string'
@@ -64,13 +63,11 @@ const cli = yargs
 	})
 	.option('from', {
 		alias: 'f',
-		// default: null,
 		describe: 'lower end of the commit range to lint; applies if edit=false',
 		type: 'string'
 	})
 	.option('format', {
 		alias: 'o',
-		// default: null,
 		describe: 'output format of the results',
 		type: 'string'
 	})
@@ -87,7 +84,6 @@ const cli = yargs
 	})
 	.option('to', {
 		alias: 't',
-		// default: null,
 		describe: 'upper end of the commit range to lint; applies if edit=false',
 		type: 'string'
 	})
