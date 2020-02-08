@@ -32,8 +32,8 @@ commands:
   format:
     steps:
       - run:
-        name: Format project
-        command: yarn format
+          name: Format project
+          command: yarn format
   deps:
     steps:
       - run:
