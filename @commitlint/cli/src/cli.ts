@@ -15,6 +15,7 @@ import {
 	ParserPreset,
 	QualifiedConfig
 } from '@commitlint/types';
+import {CliError} from './cli-error';
 
 const pkg = require('../package');
 
@@ -106,9 +107,9 @@ const cli = yargs
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
 	.usage(
 		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
-	).argv;
+	);
 
-main(cli).catch(err => {
+main(cli.argv).catch(err => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
 			process.exit(1);
@@ -137,12 +138,11 @@ async function main(options: CliFlags) {
 		.filter(Boolean);
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
-		// TODO: create custom error??
-		const err = new Error(
-			'[input] is required: supply via stdin, or --env or --edit or --from and --to'
+		const err = new CliError(
+			'[input] is required: supply via stdin, or --env or --edit or --from and --to',
+			pkg.name
 		);
-		(err as any).type = pkg.name; // TODO
-		console.log(`${cli.help}\n`);
+		yargs.showHelp('log');
 		console.log(err.message);
 		throw err;
 	}
@@ -241,10 +241,7 @@ async function main(options: CliFlags) {
 	}
 
 	if (!report.valid) {
-		// TODO: create custom error??
-		const err = new Error(output);
-		(err as any).type = pkg.name;
-		throw err;
+		throw new CliError(output, pkg.name);
 	}
 }
 
