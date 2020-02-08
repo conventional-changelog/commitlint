@@ -4,7 +4,7 @@ import execa from 'execa';
 import merge from 'lodash/merge';
 import fs from 'fs-extra';
 
-const bin = require.resolve('../cli-bin.js');
+const bin = require.resolve('../cli.js');
 
 interface TestOptions {
 	cwd: string;
