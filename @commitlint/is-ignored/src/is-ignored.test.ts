@@ -150,7 +150,7 @@ test('should throw error if ignores is not an array', () => {
 		isIgnored(ignoredString, {
 			ignores: 'throws error'
 		} as any);
-	}).toThrow();
+	}).toThrow('ignores must be of type array, received ');
 });
 
 test('should return true for custom ignores as function', () => {
@@ -160,4 +160,13 @@ test('should return true for custom ignores as function', () => {
 			ignores: [c => c === ignoredString]
 		})
 	).toBe(true);
+});
+
+test('should throw error if any element of ignores is not a function', () => {
+	const ignoredString = 'this should be ignored';
+	expect(() => {
+		isIgnored(ignoredString, {
+			ignores: ['throws error']
+		} as any);
+	}).toThrow('ignores must be array of type function, received items of type:');
 });
