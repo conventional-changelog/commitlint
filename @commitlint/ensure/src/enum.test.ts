@@ -5,6 +5,11 @@ test('false for no params', () => {
 	expect(actual).toBe(false);
 });
 
+test('false for not array enums', () => {
+	const actual = ensure('a', 'a' as any);
+	expect(actual).toBe(false);
+});
+
 test('true for a against a', () => {
 	const actual = ensure('a', ['a']);
 	expect(actual).toBe(true);
