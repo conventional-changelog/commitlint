@@ -23,7 +23,7 @@ main().then(args => {
 	console.log(`Checking dependencies ${path.join(cwd, 'package.json')}`);
 	if (err) {
 		console.error(err.stderr);
-		process.exit(err.code);
+		process.exit(err.exitCode);
 	}
 	if (out) {
 		console.log(out);
