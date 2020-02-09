@@ -13,7 +13,8 @@ import {
 	LintOutcome,
 	ParserOptions,
 	ParserPreset,
-	QualifiedConfig
+	QualifiedConfig,
+	Formatter
 } from '@commitlint/types';
 import {CliError} from './cli-error';
 
@@ -177,7 +178,7 @@ async function main(options: CliFlags) {
 
 	const results = await Promise.all(
 		// TODO: validate why those types do not match
-		messages.map(message => lint(message, loaded.rules as any, opts))
+		messages.map(message => lint(message, loaded.rules, opts))
 	);
 
 	if (Object.keys(loaded.rules).length === 0) {
@@ -338,10 +339,8 @@ function selectParserOpts(parserPreset: ParserPreset) {
 	return parserPreset.parserOpts;
 }
 
-function loadFormatter(config: QualifiedConfig, flags: CliFlags) {
-	// TODO: validate why formatter is unknown????
-	const moduleName: string =
-		flags.format || (config.formatter as any) || '@commitlint/format';
+function loadFormatter(config: QualifiedConfig, flags: CliFlags): Formatter {
+	const moduleName = flags.format || config.formatter || '@commitlint/format';
 	const modulePath =
 		resolveFrom.silent(__dirname, moduleName) ||
 		resolveFrom.silent(flags.cwd, moduleName) ||

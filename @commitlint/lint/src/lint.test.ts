@@ -125,8 +125,8 @@ test('throws for rule with invalid level', async () => {
 
 test('throws for rule with out of range level', async () => {
 	const error = lint('type(scope): foo', {
-		'type-enum': [-1, 'always'],
-		'header-max-length': [3, 'always']
+		'type-enum': [-1, 'always'] as any,
+		'header-max-length': [3, 'always'] as any
 	});
 
 	await expect(error).rejects.toThrow('rule type-enum must be between 0 and 2');

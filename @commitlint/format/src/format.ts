@@ -1,41 +1,19 @@
 import chalk from 'chalk';
+import {
+	ChalkColor,
+	FormattableReport,
+	FormatOptions,
+	FormattableResult,
+	WithInput
+} from '@commitlint/types';
 
 const DEFAULT_SIGNS = [' ', '⚠', '✖'] as const;
 const DEFAULT_COLORS = ['white', 'yellow', 'red'] as const;
 
-export interface FormattableProblem {
-	level: 0 | 1 | 2;
-	name: string;
-	message: string;
-}
-
-export interface FormattableResult {
-	errors?: FormattableProblem[];
-	warnings?: FormattableProblem[];
-}
-
-export interface WithInput {
-	input?: string;
-}
-
-export interface FormattableReport {
-	results?: (FormattableResult & WithInput)[];
-}
-
-export type ChalkColor = keyof typeof chalk;
-
-export interface FormatOptions {
-	color?: boolean;
-	signs?: readonly [string, string, string];
-	colors?: readonly [ChalkColor, ChalkColor, ChalkColor];
-	verbose?: boolean;
-	helpUrl?: string;
-}
-
 export function format(
 	report: FormattableReport = {},
 	options: FormatOptions = {}
-) {
+): string {
 	const {results = []} = report;
 	const fi = (result: FormattableResult & WithInput) =>
 		formatInput(result, options);

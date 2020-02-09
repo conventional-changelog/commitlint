@@ -4,17 +4,17 @@ import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
 import {buildCommitMesage} from './commit-message';
 import {
-	LintRuleConfig,
 	LintOptions,
 	LintOutcome,
 	LintRuleOutcome,
 	Rule,
-	RuleSeverity
+	RuleConfigSeverity,
+	QualifiedRules
 } from '@commitlint/types';
 
 export default async function lint(
 	message: string,
-	rawRulesConfig?: LintRuleConfig,
+	rawRulesConfig?: QualifiedRules,
 	rawOpts?: LintOptions
 ): Promise<LintOutcome> {
 	const opts = rawOpts
@@ -76,7 +76,7 @@ export default async function lint(
 
 			const [level] = config;
 
-			if (level === RuleSeverity.Disabled && config.length === 1) {
+			if (level === RuleConfigSeverity.Disabled && config.length === 1) {
 				return null;
 			}
 
@@ -132,10 +132,10 @@ export default async function lint(
 
 	// Validate against all rules
 	const results = Object.entries(rulesConfig)
-		.filter(([, [level]]) => level > 0)
+		.filter(([, config]) => typeof config !== 'undefined' && config[0] > 0)
 		.map(entry => {
 			const [name, config] = entry;
-			const [level, when, value] = config;
+			const [level, when, value] = config!; //
 
 			// Level 0 rules are ignored
 			if (level === 0) {
@@ -148,8 +148,7 @@ export default async function lint(
 				throw new Error(`Could not find rule implementation for ${name}`);
 			}
 
-			const executableRule = rule as Rule<unknown>;
-			const [valid, message] = executableRule(parsed, when, value);
+			const [valid, message] = rule(parsed, when, value as any);
 
 			return {
 				level,
