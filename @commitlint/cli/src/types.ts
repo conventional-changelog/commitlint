@@ -6,10 +6,10 @@ export interface CliFlags {
 	env?: string;
 	extends?: (string | number)[];
 	help?: boolean;
-	'help-url'?: string;
+	helpUrl?: string;
 	from?: string;
 	format?: string;
-	'parser-preset'?: string;
+	parserPreset?: string;
 	quiet: boolean;
 	to?: string;
 	version?: boolean;

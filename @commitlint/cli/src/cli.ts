@@ -56,7 +56,7 @@ const cli = yargs
 			description: 'array of shareable configurations to extend',
 			type: 'array'
 		},
-		'help-url': {
+		helpUrl: {
 			alias: 'H',
 			type: 'string',
 			description: 'helpurl in error message'
@@ -72,7 +72,7 @@ const cli = yargs
 			description: 'output format of the results',
 			type: 'string'
 		},
-		'parser-preset': {
+		parserPreset: {
 			alias: 'p',
 			description:
 				'configuration preset to use for conventional-commits-parser',
@@ -231,8 +231,8 @@ async function main(options: CliFlags) {
 	const output = format(report, {
 		color: flags.color,
 		verbose: flags.verbose,
-		helpUrl: flags['help-url']
-			? flags['help-url'].trim()
+		helpUrl: flags.helpUrl
+			? flags.helpUrl.trim()
 			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	});
 
@@ -317,13 +317,13 @@ function getEditValue(flags: CliFlags) {
 	return edit;
 }
 
-function getSeed(seed: CliFlags): Seed {
-	const n = (seed.extends || []).filter(
+function getSeed(flags: CliFlags): Seed {
+	const n = (flags.extends || []).filter(
 		(i): i is string => typeof i === 'string'
 	);
 	return n.length > 0
-		? {extends: n, parserPreset: seed['parser-preset']}
-		: {parserPreset: seed['parser-preset']};
+		? {extends: n, parserPreset: flags.parserPreset}
+		: {parserPreset: flags.parserPreset};
 }
 
 function selectParserOpts(parserPreset: ParserPreset) {
