@@ -177,7 +177,6 @@ async function main(options: CliFlags) {
 	}
 
 	const results = await Promise.all(
-		// TODO: validate why those types do not match
 		messages.map(message => lint(message, loaded.rules, opts))
 	);
 
