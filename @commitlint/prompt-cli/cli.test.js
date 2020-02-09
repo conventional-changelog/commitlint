@@ -5,12 +5,12 @@ const bin = require.resolve('./cli.js');
 
 const cli = (args, options) => {
 	return (input = '') => {
-		const c = execa(bin, args, {
+		return execa(bin, args, {
 			cwd: options.cwd,
 			env: options.env,
-			input: input
+			input: input,
+			reject: false
 		});
-		return c.catch(err => err);
 	};
 };
 
