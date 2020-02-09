@@ -108,7 +108,8 @@ const cli = yargs
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
 	.usage(
 		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
-	);
+	)
+	.strict();
 
 main(cli.argv).catch(err => {
 	setTimeout(() => {
