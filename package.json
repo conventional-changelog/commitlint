@@ -102,5 +102,8 @@
       "commit-msg": "node @commitlint/cli/lib/cli.js -E HUSKY_GIT_PARAMS",
       "pre-commit": "lint-staged"
     }
+  },
+  "resolutions": {
+    "**/lodash": "4.17.15"
   }
 }
