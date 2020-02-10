@@ -4,7 +4,6 @@ import 'resolve-global';
 import resolveFrom from 'resolve-from';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
-import omit from 'lodash/omit';
 
 const importFresh = require('import-fresh');
 
@@ -34,8 +33,8 @@ export default function resolveExtends(
 ) {
 	const {extends: e} = config;
 	const extended = loadExtends(config, context).reduceRight(
-		(r, c) =>
-			mergeWith(r, omit(c, 'extends'), (objValue, srcValue) => {
+		(r, {extends: _, ...c}) =>
+			mergeWith(r, c, (objValue, srcValue) => {
 				if (Array.isArray(objValue)) {
 					return srcValue;
 				}
