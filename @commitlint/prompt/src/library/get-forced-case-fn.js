@@ -30,7 +30,7 @@ export default function getForcedCaseFn(rule) {
 
 	const [, when] = config;
 
-	if (when === 'neve') {
+	if (when === 'never') {
 		return;
 	}
 
