@@ -36,6 +36,7 @@ const cli = yargs
 		cwd: {
 			alias: 'd',
 			default: process.cwd(),
+			defaultDescription: '(Working Directory)',
 			description: 'directory to execute in',
 			type: 'string'
 		},
@@ -60,7 +61,7 @@ const cli = yargs
 		'help-url': {
 			alias: 'H',
 			type: 'string',
-			description: 'helpurl in error message'
+			description: 'help url in error message'
 		},
 		from: {
 			alias: 'f',
