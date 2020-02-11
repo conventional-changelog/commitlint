@@ -11,14 +11,6 @@
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import"
   },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ],
-    "ignore": [
-      "**/*.test.js"
-    ]
-  },
   "engines": {
     "node": ">=8"
   },
