@@ -36,7 +36,9 @@ export default async function lint(
 	}
 
 	// Parse the commit message
-	const parsed = await parse(message, undefined, opts.parserOpts);
+	const parsed = message === ''
+		? { header: null, body: null, footer: null }
+		: await parse(message, undefined, opts.parserOpts);
 
 	if (
 		parsed.header === null &&
