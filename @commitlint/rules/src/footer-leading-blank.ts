@@ -1,8 +1,8 @@
 import toLines from '@commitlint/to-lines';
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const footerLeadingBlank: Rule = (parsed, when = 'always') => {
+export const footerLeadingBlank: SyncRule = (parsed, when = 'always') => {
 	// Flunk if no footer is found
 	if (!parsed.footer) {
 		return [true];

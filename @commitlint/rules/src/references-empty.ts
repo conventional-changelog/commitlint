@@ -1,7 +1,7 @@
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const referencesEmpty: Rule = (parsed, when = 'never') => {
+export const referencesEmpty: SyncRule = (parsed, when = 'never') => {
 	const negated = when === 'always';
 	const notEmpty = parsed.references.length > 0;
 	return [

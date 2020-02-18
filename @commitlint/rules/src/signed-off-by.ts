@@ -1,8 +1,8 @@
 import message from '@commitlint/message';
 import toLines from '@commitlint/to-lines';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const signedOffBy: Rule<string> = (
+export const signedOffBy: SyncRule<string> = (
 	parsed,
 	when = 'always',
 	value = ''

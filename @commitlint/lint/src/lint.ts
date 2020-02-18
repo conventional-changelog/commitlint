@@ -8,7 +8,9 @@ import {
 	LintOptions,
 	LintRuleOutcome,
 	Rule,
-	RuleSeverity
+	RuleSeverity,
+	BaseRule,
+	RuleType
 } from '@commitlint/types';
 
 export default async function lint(
@@ -50,7 +52,7 @@ export default async function lint(
 		};
 	}
 
-	const allRules: Map<string, Rule<unknown> | Rule<never>> = new Map(
+	const allRules: Map<string, BaseRule<never, RuleType>> = new Map(
 		Object.entries(defaultRules)
 	);
 
@@ -145,9 +147,9 @@ export default async function lint(
 	}
 
 	// Validate against all rules
-	const results = Object.entries(rulesConfig)
+	const pendingResults = Object.entries(rulesConfig)
 		.filter(([, [level]]) => level > 0)
-		.map(entry => {
+		.map(async entry => {
 			const [name, config] = entry;
 			const [level, when, value] = config;
 
@@ -163,7 +165,7 @@ export default async function lint(
 			}
 
 			const executableRule = rule as Rule<unknown>;
-			const [valid, message] = executableRule(parsed, when, value);
+			const [valid, message] = await executableRule(parsed, when, value);
 
 			return {
 				level,
@@ -171,8 +173,11 @@ export default async function lint(
 				name,
 				message
 			};
-		})
-		.filter((result): result is LintRuleOutcome => result !== null);
+		});
+
+	const results = (await Promise.all(pendingResults)).filter(
+		(result): result is LintRuleOutcome => result !== null
+	);
 
 	const errors = results.filter(result => result.level === 2 && !result.valid);
 	const warnings = results.filter(

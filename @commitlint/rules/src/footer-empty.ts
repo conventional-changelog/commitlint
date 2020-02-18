@@ -1,8 +1,8 @@
 import * as ensure from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const footerEmpty: Rule = (parsed, when = 'always') => {
+export const footerEmpty: SyncRule = (parsed, when = 'always') => {
 	const negated = when === 'never';
 	const notEmpty = ensure.notEmpty(parsed.footer || '');
 
