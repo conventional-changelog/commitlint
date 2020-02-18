@@ -79,7 +79,8 @@ const errors = {
 	},
 	headerMaxLength: {
 		level: 2,
-		message: 'header must not be longer than 100 characters, current length is 112',
+		message:
+			'header must not be longer than 100 characters, current length is 112',
 		name: 'header-max-length',
 		valid: false
 	},

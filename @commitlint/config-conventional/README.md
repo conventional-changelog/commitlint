@@ -148,10 +148,12 @@ echo "fix: some message" # passes
 ```
 
 #### footer-leading-blank
-* **condition**: `footer` should have a leading blank line
-* **rule**: `always`
-* level: `warning`
-* **value**
+
+- **condition**: `footer` should have a leading blank line
+- **rule**: `always`
+- level: `warning`
+- **value**
+
 ```
 100
 ```
@@ -166,10 +168,12 @@ BREAKING CHANGE: It will be significant" # passes
 ```
 
 #### footer-max-line-length
-* **condition**: `footer` each line has `value` or less characters
-* **rule**: `always`
-* level: `error`
-* **value**
+
+- **condition**: `footer` each line has `value` or less characters
+- **rule**: `always`
+- level: `error`
+- **value**
+
 ```
 100
 ```
@@ -187,12 +191,14 @@ but still no line is too long" # passes
 ```
 
 #### body-leading-blank
-* **condition**: `body` should have a leading blank line
-* **rule**: `always`
-* level: `warning`
-* **value**
+
+- **condition**: `body` should have a leading blank line
+- **rule**: `always`
+- level: `warning`
+- **value**
+
 ```js
-100
+100;
 ```
 
 ```sh
@@ -205,12 +211,14 @@ body" # passes
 ```
 
 #### body-max-line-length
-* **condition**: `body` each line has `value` or less characters
-* **rule**: `always`
-* level: `error`
-* **value**
+
+- **condition**: `body` each line has `value` or less characters
+- **rule**: `always`
+- level: `error`
+- **value**
+
 ```js
-100
+100;
 ```
 
 ```sh
@@ -224,4 +232,3 @@ echo "fix: some message
 body with multiple lines
 but still no line is too long" # passes
 ```
-
