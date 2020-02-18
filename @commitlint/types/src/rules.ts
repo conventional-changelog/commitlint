@@ -12,14 +12,26 @@ export type RuleCondition = 'always' | 'never';
  * For example, when `header-full-stop` detects a full stop and is set as "always"; it's true.
  * If the `header-full-stop` discovers a full stop but is set to "never"; it's false.
  */
-export type RuleOutcome = [boolean, string?];
+export type RuleOutcome = Readonly<[boolean, string?]>;
 
 /**
  * Rules receive a parsed commit, condition, and possible additional settings through value.
  * All rules should provide the most sensible rule condition and value.
  */
-export type Rule<Value = never> = (
+export type RuleType = 'async' | 'sync' | 'either';
+
+export type BaseRule<Value = never, Type extends RuleType = 'either'> = (
 	parsed: Commit,
 	when?: RuleCondition,
 	value?: Value
-) => RuleOutcome;
+) => Type extends 'either'
+	? RuleOutcome | Promise<RuleOutcome>
+	: Type extends 'async'
+	? Promise<RuleOutcome>
+	: Type extends 'sync'
+	? RuleOutcome
+	: never;
+
+export type Rule<Value = never> = BaseRule<Value, 'either'>;
+export type AsyncRule<Value = never> = BaseRule<Value, 'async'>;
+export type SyncRule<Value = never> = BaseRule<Value, 'sync'>;

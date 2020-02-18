@@ -1,7 +1,7 @@
 import {maxLength} from '@commitlint/ensure';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const bodyMaxLength: Rule<number> = (
+export const bodyMaxLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
 	value = 0

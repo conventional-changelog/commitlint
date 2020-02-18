@@ -283,3 +283,23 @@ test('returns original message with commit header, body and footer, parsing comm
 
 	expect(report.input).toBe(expected);
 });
+
+test('passes for async rule', async () => {
+	const report = await lint(
+		'somehting #1',
+		{
+			'async-rule': [2, 'never']
+		},
+		{
+			plugins: {
+				'example-plugin': {
+					rules: {
+						'async-rule': async () => [true, 'all good'] as const
+					}
+				}
+			}
+		}
+	);
+
+	expect(report.valid).toBe(true);
+});

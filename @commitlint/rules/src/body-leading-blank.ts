@@ -1,8 +1,8 @@
 import toLines from '@commitlint/to-lines';
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const bodyLeadingBlank: Rule = (parsed, when) => {
+export const bodyLeadingBlank: SyncRule = (parsed, when) => {
 	// Flunk if no body is found
 	if (!parsed.body) {
 		return [true];

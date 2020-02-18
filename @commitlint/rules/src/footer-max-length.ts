@@ -1,7 +1,7 @@
 import {maxLength} from '@commitlint/ensure';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const footerMaxLength: Rule<number> = (
+export const footerMaxLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
 	value = 0

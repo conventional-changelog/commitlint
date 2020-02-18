@@ -1,8 +1,8 @@
 import * as ensure from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const scopeEnum: Rule<string[]> = (
+export const scopeEnum: SyncRule<string[]> = (
 	parsed,
 	when = 'always',
 	value = []

@@ -1,8 +1,8 @@
 import {case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
-import {TargetCaseType, Rule} from '@commitlint/types';
+import {TargetCaseType, SyncRule} from '@commitlint/types';
 
-export const bodyCase: Rule<TargetCaseType> = (
+export const bodyCase: SyncRule<TargetCaseType> = (
 	parsed,
 	when = 'always',
 	value = undefined

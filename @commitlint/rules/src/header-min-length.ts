@@ -1,7 +1,7 @@
 import {minLength} from '@commitlint/ensure';
-import {Rule} from '@commitlint/types';
+import {SyncRule} from '@commitlint/types';
 
-export const headerMinLength: Rule<number> = (
+export const headerMinLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
 	value = 0
