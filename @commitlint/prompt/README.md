@@ -9,7 +9,7 @@ Learn how to use it at [docs/prompt](https://conventional-changelog.github.io/co
 ## Getting started
 
 ```bash
-npm install --save-dev @commitlint/prompt @commitlint/config-angular commitizen
+npm install --save-dev @commitlint/prompt @commitlint/config-conventional commitizen
 echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 ```
 
