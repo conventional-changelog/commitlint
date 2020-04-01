@@ -5,5 +5,11 @@ export default (value: any, enums: any[] = []): boolean => {
 	if (!Array.isArray(enums)) {
 		return false;
 	}
-	return enums.indexOf(value) > -1;
+	return enums.reduce((last, curr) => {
+		if (curr instanceof RegExp) {
+			return last || value.search(curr) !== -1;
+		} else {
+			return last || value === curr;
+		}
+	}, false);
 };

@@ -44,3 +44,13 @@ test('false for c against a, b', () => {
 	const actual = ensure('c', ['a', 'b']);
 	expect(actual).toBe(false);
 });
+
+test('false for ensure/enum against ensure, cli', () => {
+	const actual = ensure('ensure/enum', ['ensure', 'cli']);
+	expect(actual).toBe(false);
+});
+
+test('true for ensure/enum against ensure/*, cli/*', () => {
+	const actual = ensure('ensure/enum', [/ensure\/*/, /cli\/*/]);
+	expect(actual).toBe(true);
+});
