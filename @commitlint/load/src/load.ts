@@ -92,9 +92,11 @@ export default async function load(
 	}
 
 	const rules = preset.rules ? preset.rules : {};
-	const qualifiedRules = (await Promise.all(
-		Object.entries(rules || {}).map(entry => executeRule<any>(entry))
-	)).reduce<QualifiedRules>((registry, item) => {
+	const qualifiedRules = (
+		await Promise.all(
+			Object.entries(rules || {}).map(entry => executeRule<any>(entry))
+		)
+	).reduce<QualifiedRules>((registry, item) => {
 		const [key, value] = item as any;
 		(registry as any)[key] = value;
 		return registry;

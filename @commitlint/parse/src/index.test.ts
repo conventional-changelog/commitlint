@@ -19,13 +19,10 @@ test('calls parser with message and passed options', async () => {
 	const message = 'message';
 
 	expect.assertions(1);
-	await parse(
-		message,
-		(m: string): any => {
-			expect(m).toBe(message);
-			return {};
-		}
-	);
+	await parse(message, (m: string): any => {
+		expect(m).toBe(message);
+		return {};
+	});
 });
 
 test('passes object up from parser function', async () => {
