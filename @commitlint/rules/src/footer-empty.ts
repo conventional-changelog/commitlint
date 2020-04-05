@@ -8,6 +8,6 @@ export const footerEmpty: SyncRule = (parsed, when = 'always') => {
 
 	return [
 		negated ? notEmpty : !notEmpty,
-		message(['footer', negated ? 'may not' : 'must', 'be empty'])
+		message(['footer', negated ? 'may not' : 'must', 'be empty']),
 	];
 };

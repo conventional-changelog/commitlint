@@ -15,6 +15,6 @@ export const signedOffBy: SyncRule<string> = (
 
 	return [
 		negated ? !hasSignedOffBy : hasSignedOffBy,
-		message(['message', negated ? 'must not' : 'must', 'be signed off'])
+		message(['message', negated ? 'must not' : 'must', 'be signed off']),
 	];
 };

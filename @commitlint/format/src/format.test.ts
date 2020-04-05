@@ -21,12 +21,12 @@ test('returns empty summary if verbose', () => {
 			results: [
 				{
 					errors: [],
-					warnings: []
-				}
-			]
+					warnings: [],
+				},
+			],
 		},
 		{
-			verbose: true
+			verbose: true,
 		}
 	);
 
@@ -41,11 +41,11 @@ test('returns a correct summary of empty .errors and .warnings', () => {
 					{
 						level: 2,
 						name: 'error-name',
-						message: 'There was an error'
-					}
-				]
-			}
-		]
+						message: 'There was an error',
+					},
+				],
+			},
+		],
 	});
 
 	const actualWarning = format({
@@ -55,11 +55,11 @@ test('returns a correct summary of empty .errors and .warnings', () => {
 					{
 						level: 1,
 						name: 'warning-name',
-						message: 'There was a problem'
-					}
-				]
-			}
-		]
+						message: 'There was a problem',
+					},
+				],
+			},
+		],
 	});
 
 	expect(actualError).toContain('There was an error');
@@ -76,11 +76,11 @@ test('uses appropriate signs by default', () => {
 					{
 						level: 2,
 						name: 'error-name',
-						message: 'There was an error'
-					}
-				]
-			}
-		]
+						message: 'There was an error',
+					},
+				],
+			},
+		],
 	});
 
 	const actualWarning = format({
@@ -90,11 +90,11 @@ test('uses appropriate signs by default', () => {
 					{
 						level: 1,
 						name: 'warning-name',
-						message: 'There was a problem'
-					}
-				]
-			}
-		]
+						message: 'There was a problem',
+					},
+				],
+			},
+		],
 	});
 
 	expect(actualError).toContain('✖');
@@ -111,11 +111,11 @@ test('uses signs as configured', () => {
 						{
 							level: 2,
 							name: 'error-name',
-							message: 'There was an error'
-						}
-					]
-				}
-			]
+							message: 'There was an error',
+						},
+					],
+				},
+			],
 		},
 		options
 	);
@@ -128,11 +128,11 @@ test('uses signs as configured', () => {
 						{
 							level: 1,
 							name: 'warning-name',
-							message: 'There was a problem'
-						}
-					]
-				}
-			]
+							message: 'There was a problem',
+						},
+					],
+				},
+			],
 		},
 		options
 	);
@@ -153,9 +153,9 @@ test('format result transforms error to text', () => {
 			{
 				level: 2,
 				name: 'error-name',
-				message: 'There was an error'
-			}
-		]
+				message: 'There was an error',
+			},
+		],
 	});
 
 	const actualText = actual.join('\n');
@@ -171,9 +171,9 @@ test('format result transforms warning to text', () => {
 			{
 				level: 1,
 				name: 'warning-name',
-				message: 'There was a warning'
-			}
-		]
+				message: 'There was a warning',
+			},
+		],
 	});
 
 	const actualText = actual.join('\n');
@@ -190,12 +190,12 @@ test('format result prints help for errors', () => {
 				{
 					level: 2,
 					name: 'error-name',
-					message: 'There was an error'
-				}
-			]
+					message: 'There was an error',
+				},
+			],
 		},
 		{
-			helpUrl: 'https://example.com'
+			helpUrl: 'https://example.com',
 		}
 	);
 
@@ -211,12 +211,12 @@ test('format result prints help for warnings', () => {
 				{
 					level: 2,
 					name: 'warning-name',
-					message: 'There was a warning'
-				}
-			]
+					message: 'There was a warning',
+				},
+			],
 		},
 		{
-			helpUrl: 'https://example.com'
+			helpUrl: 'https://example.com',
 		}
 	);
 
@@ -234,12 +234,12 @@ test('format result help cotains options.helpUrl', () => {
 				{
 					level: 2,
 					name: 'warning-name',
-					message: 'There was a warning'
-				}
-			]
+					message: 'There was a warning',
+				},
+			],
 		},
 		{
-			helpUrl
+			helpUrl,
 		}
 	);
 
@@ -250,7 +250,7 @@ test('format result help cotains options.helpUrl', () => {
 
 test('format result omits help for empty problems', () => {
 	const actual = formatResult({
-		warnings: []
+		warnings: [],
 	});
 
 	expect(actual).not.toEqual(

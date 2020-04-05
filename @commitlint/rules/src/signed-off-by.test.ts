@@ -6,7 +6,7 @@ const messages = {
 	with: `test: subject\nbody\nfooter\nSigned-off-by:\n\n`,
 	without: `test: subject\nbody\nfooter\n\n`,
 	inSubject: `test: subject Signed-off-by:\nbody\nfooter\n\n`,
-	inBody: `test: subject\nbody Signed-off-by:\nfooter\n\n`
+	inBody: `test: subject\nbody Signed-off-by:\nfooter\n\n`,
 };
 
 const parsed = {
@@ -14,7 +14,7 @@ const parsed = {
 	with: parse(messages.with),
 	without: parse(messages.without),
 	inSubject: parse(messages.inSubject),
-	inBody: parse(messages.inBody)
+	inBody: parse(messages.inBody),
 };
 
 test('empty against "always signed-off-by" should fail', async () => {

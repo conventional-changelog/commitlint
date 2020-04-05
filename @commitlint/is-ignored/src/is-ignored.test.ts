@@ -14,20 +14,20 @@ const VERSION_MESSAGES = [
 	'0.0.1-some-crazy-tag.999',
 	'0.0.1-1e69d54',
 	'v0.0.1',
-	' v3.0.0'
+	' v3.0.0',
 ];
 
 const AMENDMENTS = [
 	'Signed-off-by: Developer <example@example.com>',
 	'Change-Id: I895114872a515a269487a683124b63303818e19c',
-	'Signed-off-by: Developer <example@example.com>\nChange-Id: I895114872a515a269487a683124b63303818e19c'
+	'Signed-off-by: Developer <example@example.com>\nChange-Id: I895114872a515a269487a683124b63303818e19c',
 ];
 
 const AMENDED_VERSION_MESSAGES = VERSION_MESSAGES.reduce<string[]>(
 	(results, message) => {
 		return [
 			...results,
-			...AMENDMENTS.map(amendment => `${message}\n\n${amendment}`)
+			...AMENDMENTS.map((amendment) => `${message}\n\n${amendment}`),
 		];
 	},
 	[]
@@ -84,20 +84,20 @@ test('should return true for revert commits', () => {
 });
 
 test('should ignore npm semver commits', () => {
-	VERSION_MESSAGES.forEach(message => expect(isIgnored(message)).toBe(true));
+	VERSION_MESSAGES.forEach((message) => expect(isIgnored(message)).toBe(true));
 });
 
 test('should ignore npm semver commits with chore', () => {
-	VERSION_MESSAGES.forEach(message =>
+	VERSION_MESSAGES.forEach((message) =>
 		expect(isIgnored(`chore: ${message}`)).toBe(true)
 	);
-	VERSION_MESSAGES.forEach(message =>
+	VERSION_MESSAGES.forEach((message) =>
 		expect(isIgnored(`chore(release): ${message}`)).toBe(true)
 	);
 });
 
 test('should ignore npm semver commits with footers', () => {
-	AMENDED_VERSION_MESSAGES.forEach(message =>
+	AMENDED_VERSION_MESSAGES.forEach((message) =>
 		expect(isIgnored(message)).toBe(true)
 	);
 });
@@ -131,7 +131,7 @@ test('should return false for commits containing, but not starting, with merge b
 test('should return false for ignored message if defaults is false', () => {
 	expect(
 		isIgnored('Auto-merged develop into master', {
-			defaults: false
+			defaults: false,
 		})
 	).toBe(false);
 });
@@ -139,7 +139,7 @@ test('should return false for ignored message if defaults is false', () => {
 test('should return false for ignored message if custom ignores and defaults is false', () => {
 	expect(
 		isIgnored('Auto-merged develop into master', {
-			defaults: false
+			defaults: false,
 		})
 	).toBe(false);
 });
@@ -148,7 +148,7 @@ test('should throw error if ignores is not an array', () => {
 	const ignoredString = 'this should be ignored';
 	expect(() => {
 		isIgnored(ignoredString, {
-			ignores: 'throws error'
+			ignores: 'throws error',
 		} as any);
 	}).toThrow('ignores must be of type array, received ');
 });
@@ -157,7 +157,7 @@ test('should return true for custom ignores as function', () => {
 	const ignoredString = 'this should be ignored';
 	expect(
 		isIgnored(ignoredString, {
-			ignores: [c => c === ignoredString]
+			ignores: [(c) => c === ignoredString],
 		})
 	).toBe(true);
 });
@@ -166,7 +166,7 @@ test('should throw error if any element of ignores is not a function', () => {
 	const ignoredString = 'this should be ignored';
 	expect(() => {
 		isIgnored(ignoredString, {
-			ignores: ['throws error']
+			ignores: ['throws error'],
 		} as any);
 	}).toThrow('ignores must be array of type function, received items of type:');
 });

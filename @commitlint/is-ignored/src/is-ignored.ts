@@ -13,16 +13,16 @@ export default function isIgnored(
 		);
 	}
 
-	const invalids = ignores.filter(c => typeof c !== 'function');
+	const invalids = ignores.filter((c) => typeof c !== 'function');
 
 	if (invalids.length > 0) {
 		throw new Error(
 			`ignores must be array of type function, received items of type: ${invalids
-				.map(i => typeof i)
+				.map((i) => typeof i)
 				.join(', ')}`
 		);
 	}
 
 	const base = opts.defaults === false ? [] : wildcards;
-	return [...base, ...ignores].some(w => w(commit));
+	return [...base, ...ignores].some((w) => w(commit));
 }

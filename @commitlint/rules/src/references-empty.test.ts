@@ -8,7 +8,7 @@ const messages = {
 	comment: 'foo: baz\n#1 Comment',
 	reference: '#comment\nfoo: baz \nCloses #1',
 	references: '#comment\nfoo: bar \nCloses #1, #2, #3',
-	prefix: 'bar REF-1234'
+	prefix: 'bar REF-1234',
 };
 
 const opts = (async () => {
@@ -27,8 +27,8 @@ const parsed = {
 	references: (async () =>
 		parse(messages.references, undefined, (await opts).parserOpts))(),
 	prefix: parse(messages.prefix, undefined, {
-		issuePrefixes: ['REF-']
-	})
+		issuePrefixes: ['REF-'],
+	}),
 };
 
 test('defaults to never and fails for plain', async () => {

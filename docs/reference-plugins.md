@@ -10,10 +10,10 @@ Plugins can expose additional rules for use in commitlint. To do so, the plugin 
 ```js
 module.exports = {
   rules: {
-    'dollar-sign': function(parsed, when, value) {
+    'dollar-sign': function (parsed, when, value) {
       // rule implementation ...
-    }
-  }
+    },
+  },
 };
 ```
 

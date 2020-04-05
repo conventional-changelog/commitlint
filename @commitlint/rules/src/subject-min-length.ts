@@ -12,6 +12,6 @@ export const subjectMinLength: SyncRule<number> = (
 	}
 	return [
 		minLength(input, value),
-		`subject must not be shorter than ${value} characters`
+		`subject must not be shorter than ${value} characters`,
 	];
 };

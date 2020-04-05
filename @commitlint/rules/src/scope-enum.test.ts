@@ -4,13 +4,13 @@ import {scopeEnum} from './scope-enum';
 const messages = {
 	plain: 'foo(bar): baz',
 	superfluous: 'foo(): baz',
-	empty: 'foo: baz'
+	empty: 'foo: baz',
 };
 
 const parsed = {
 	plain: parse(messages.plain),
 	superfluous: parse(messages.superfluous),
-	empty: parse(messages.empty)
+	empty: parse(messages.empty),
 };
 
 test('scope-enum with plain message and always should succeed empty enum', async () => {

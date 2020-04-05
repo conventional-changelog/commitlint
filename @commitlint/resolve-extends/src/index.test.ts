@@ -33,7 +33,7 @@ test('resolves extends for single config', () => {
 	const input = {extends: 'extender-name'};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 	resolveExtends(input, ctx);
 
@@ -44,7 +44,7 @@ test('uses empty prefix by default', () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 	resolveExtends(input, ctx);
 
@@ -55,12 +55,12 @@ test('uses prefix as configured', () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(ctx.require).toHaveBeenCalledWith('prefix-extender-name');
@@ -70,12 +70,12 @@ test('ignores prefix for scoped extends', () => {
 	const input = {extends: ['@scope/extender-name']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(ctx.require).toHaveBeenCalledWith('@scope/extender-name');
@@ -85,12 +85,12 @@ test('adds prefix as suffix for scopes only', () => {
 	const input = {extends: ['@scope']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(ctx.require).toHaveBeenCalledWith('@scope/prefix');
@@ -100,12 +100,12 @@ test('ignores prefix for relative extends', () => {
 	const input = {extends: ['./extender']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(ctx.require).toHaveBeenCalledWith('./extender');
@@ -116,12 +116,12 @@ test('ignores prefix for absolute extends', () => {
 	const input = {extends: [absolutePath]};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({}))
+		require: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(ctx.require).toHaveBeenCalledWith(absolutePath);
@@ -132,7 +132,7 @@ test('propagates return value of require function', () => {
 	const propagated = {foo: 'bar'};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => propagated)
+		require: jest.fn(() => propagated),
 	} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, ctx);
@@ -178,7 +178,7 @@ test('uses prefix key recursively', () => {
 
 	resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(ctx.require).toHaveBeenCalledWith('prefix-extender-name');
@@ -206,7 +206,7 @@ test('propagates contents recursively', () => {
 	const expected = {
 		extends: ['extender-name'],
 		foo: 'bar',
-		baz: 'bar'
+		baz: 'bar',
 	};
 
 	expect(actual).toEqual(expected);
@@ -220,7 +220,7 @@ test('propagates contents recursively with overlap', () => {
 			case 'extender-name':
 				return {
 					extends: ['recursive-extender-name'],
-					rules: {rule: ['zero', 'one']}
+					rules: {rule: ['zero', 'one']},
 				};
 			case 'recursive-extender-name':
 				return {rules: {rule: ['two', 'three', 'four']}};
@@ -236,8 +236,8 @@ test('propagates contents recursively with overlap', () => {
 	const expected = {
 		extends: ['extender-name'],
 		rules: {
-			rule: ['zero', 'one']
-		}
+			rule: ['zero', 'one'],
+		},
 	};
 
 	expect(actual).toEqual(expected);
@@ -255,7 +255,7 @@ test('extending contents should take precedence', () => {
 					extends: ['second-recursive-extender-name'],
 					zero: id,
 					one: id,
-					two: id
+					two: id,
 				};
 			case 'second-recursive-extender-name':
 				return {zero: id, one: id, two: id, three: id};
@@ -273,7 +273,7 @@ test('extending contents should take precedence', () => {
 		zero: 'root',
 		one: 'extender-name',
 		two: 'recursive-extender-name',
-		three: 'second-recursive-extender-name'
+		three: 'second-recursive-extender-name',
 	};
 
 	expect(actual).toEqual(expected);
@@ -294,8 +294,8 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 			case 'conventional-changelog-lint-config-extender-name':
 				return {
 					rules: {
-						fallback: true
-					}
+						fallback: true,
+					},
 				};
 			default:
 				return {};
@@ -304,18 +304,18 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 
 	const ctx = {
 		resolve: jest.fn(resolve),
-		require: jest.fn(require)
+		require: jest.fn(require),
 	} as ResolveExtendsContext;
 
 	const actual = resolveExtends(input, {
 		...ctx,
-		prefix: 'prefix'
+		prefix: 'prefix',
 	});
 
 	expect(actual).toEqual({
 		extends: ['extender-name'],
 		rules: {
-			fallback: true
-		}
+			fallback: true,
+		},
 	});
 });

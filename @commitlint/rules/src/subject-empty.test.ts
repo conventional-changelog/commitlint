@@ -3,12 +3,12 @@ import {subjectEmpty} from './subject-empty';
 
 const messages = {
 	empty: 'test: \nbody',
-	filled: 'test: subject\nbody'
+	filled: 'test: subject\nbody',
 };
 
 const parsed = {
 	empty: parse(messages.empty),
-	filled: parse(messages.filled)
+	filled: parse(messages.filled),
 };
 
 test('without subject should succeed for empty keyword', async () => {

@@ -4,13 +4,13 @@ import {scopeEmpty} from './scope-empty';
 const messages = {
 	plain: 'foo(bar): baz',
 	superfluous: 'foo(): baz',
-	empty: 'foo: baz'
+	empty: 'foo: baz',
 };
 
 const parsed = {
 	plain: parse(messages.plain),
 	superfluous: parse(messages.superfluous),
-	empty: parse(messages.empty)
+	empty: parse(messages.empty),
 };
 
 test('with plain message it should succeed for empty keyword', async () => {

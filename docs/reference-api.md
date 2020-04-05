@@ -84,26 +84,26 @@ format(
           {
             level: 0,
             name: 'some-hint',
-            message: 'This will not show up as it has level 0'
+            message: 'This will not show up as it has level 0',
           },
           {
             level: 1,
             name: 'some-warning',
-            message: 'This will show up yellow as it has level 1'
-          }
+            message: 'This will show up yellow as it has level 1',
+          },
         ],
         errors: [
           {
             level: 2,
             name: 'some-error',
-            message: 'This will show up red as it has level 2'
-          }
-        ]
-      }
-    ]
+            message: 'This will show up red as it has level 2',
+          },
+        ],
+      },
+    ],
   },
   {
-    color: false
+    color: false,
   }
 );
 /* => [
@@ -241,18 +241,20 @@ const load = require('@commitlint/load');
 
 load({
   rules: {
-    'body-leading-blank': [2, 'always']
-  }
-}).then(config => console.log(config));
+    'body-leading-blank': [2, 'always'],
+  },
+}).then((config) => console.log(config));
 // => { extends: [], rules: { 'body-leading-blank': [ 2, 'always' ] } }
 
-load({extends: ['./package']}).then(config => console.log(config));
+load({extends: ['./package']}).then((config) => console.log(config));
 // => { extends: ['./package', './package-b'], rules: {} }
 
-load({parserPreset: './parser-preset.js'}).then(config => console.log(config));
+load({parserPreset: './parser-preset.js'}).then((config) =>
+  console.log(config)
+);
 // => { extends: [], rules: {}, parserPreset: {name: './parser-preset.js', path: './parser-preset.js', opts: {}}}
 
-load({}, {file: '.commitlintrc.yml', cwd: process.cwd()}).then(config =>
+load({}, {file: '.commitlintrc.yml', cwd: process.cwd()}).then((config) =>
   console.log(config)
 );
 // => { extends: [], rules: { 'body-leading-blank': [ 1, 'always' ] }, formatter: '@commitlint/format', plugins: {} }
@@ -291,18 +293,18 @@ read(range: Range) => Promise<string[]>
 // git commit -m "I did something"
 const read = require('@commitlint/read');
 
-read({edit: true}).then(messages => console.log(messages));
+read({edit: true}).then((messages) => console.log(messages));
 // => ['I did something\n\n']
 
-read({edit: './git/GITGUI_EDITMESSAGE'}).then(messages =>
+read({edit: './git/GITGUI_EDITMESSAGE'}).then((messages) =>
   console.log(messages)
 );
 // => ['I did something via git gui\n\n']
 
-read({from: 'HEAD~2'}).then(messages => console.log(messages));
+read({from: 'HEAD~2'}).then((messages) => console.log(messages));
 // => ['I did something\n\n', 'Initial commit\n\n']
 
-read({from: 'HEAD~2', to: 'HEAD~1'}).then(messages => console.log(messages));
+read({from: 'HEAD~2', to: 'HEAD~1'}).then((messages) => console.log(messages));
 // => ['Initial commit\n\n']
 ```
 
@@ -355,15 +357,15 @@ lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Prom
 ```js
 const lint = require('@commitlint/lint');
 
-lint('foo: bar').then(report => console.log(report));
+lint('foo: bar').then((report) => console.log(report));
 // => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then(report =>
+lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then((report) =>
   console.log(report)
 );
 // => { valid: true, errors: [], warnings: [] }
 
-lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then(report =>
+lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then((report) =>
   console.log(report)
 );
 /* =>
@@ -379,11 +381,11 @@ lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then(report =>
 const opts = {
   parserOpts: {
     headerPattern: /^(\w*)-(\w*)/,
-    headerCorrespondence: ['type', 'scope']
-  }
+    headerCorrespondence: ['type', 'scope'],
+  },
 };
 
-lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then(report =>
+lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then((report) =>
   console.log(report)
 );
 // => { valid: true, errors: [], warnings: [] }
@@ -396,18 +398,18 @@ const load = require('@commitlint/load');
 const lint = require('@commitlint/lint');
 
 const CONFIG = {
-  extends: ['@commitlint/config-conventional']
+  extends: ['@commitlint/config-conventional'],
 };
 
 load(CONFIG)
-  .then(opts =>
+  .then((opts) =>
     lint(
       'foo: bar',
       opts.rules,
       opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}
     )
   )
-  .then(report => console.log(report));
+  .then((report) => console.log(report));
 /* =>
     { valid: false,
       errors:
@@ -426,12 +428,12 @@ const lint = require('@commitlint/lint');
 const read = require('@commitlint/read');
 
 const RULES = {
-  'type-enum': [2, 'always', ['foo']]
+  'type-enum': [2, 'always', ['foo']],
 };
 
-const check = commit => lint(commit, RULES);
+const check = (commit) => lint(commit, RULES);
 
-read({to: 'HEAD', from: 'HEAD~2'}).then(commits =>
+read({to: 'HEAD', from: 'HEAD~2'}).then((commits) =>
   Promise.all(commits.map(check))
 );
 ```
@@ -444,7 +446,7 @@ const read = require('@commitlint/read');
 const lint = require('@commitlint/lint');
 
 Promise.all([load(), read({from: 'HEAD~1'})])
-  .then(tasks => {
+  .then((tasks) => {
     const [{rules, parserPreset}, [commit]] = tasks;
     return lint(
       commit,
@@ -452,5 +454,5 @@ Promise.all([load(), read({from: 'HEAD~1'})])
       parserPreset ? {parserOpts: parserPreset.parserOpts} : {}
     );
   })
-  .then(report => console.log(JSON.stringify(result.valid)));
+  .then((report) => console.log(JSON.stringify(result.valid)));
 ```

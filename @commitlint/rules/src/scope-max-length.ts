@@ -14,6 +14,6 @@ export const scopeMaxLength: SyncRule<number> = (
 
 	return [
 		maxLength(input, value),
-		`scope must not be longer than ${value} characters`
+		`scope must not be longer than ${value} characters`,
 	];
 };

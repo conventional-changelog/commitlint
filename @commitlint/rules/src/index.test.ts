@@ -10,13 +10,13 @@ test('exports all rules', async () => {
 
 test('rules export functions', () => {
 	const actual = Object.values(rules);
-	expect(actual.every(rule => typeof rule === 'function')).toBe(true);
+	expect(actual.every((rule) => typeof rule === 'function')).toBe(true);
 });
 
 async function glob(pattern: string | string[]) {
 	const files = await globby(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
-		cwd: __dirname
+		cwd: __dirname,
 	});
 	return files.map(relative).map(toExport);
 }

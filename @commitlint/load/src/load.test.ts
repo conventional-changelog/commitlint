@@ -3,7 +3,7 @@ const scopedPlugin = jest.fn();
 
 jest.mock('commitlint-plugin-example', () => plugin, {virtual: true});
 jest.mock('@scope/commitlint-plugin-example', () => scopedPlugin, {
-	virtual: true
+	virtual: true,
 });
 
 import path from 'path';
@@ -59,7 +59,7 @@ test('plugins should be loaded from seed', async () => {
 
 	expect(actual.plugins).toMatchObject({
 		example: plugin,
-		'@scope/example': scopedPlugin
+		'@scope/example': scopedPlugin,
 	});
 });
 
@@ -69,7 +69,7 @@ test('plugins should be loaded from config', async () => {
 
 	expect(actual.plugins).toMatchObject({
 		example: plugin,
-		'@scope/example': scopedPlugin
+		'@scope/example': scopedPlugin,
 	});
 });
 
@@ -82,7 +82,7 @@ test('uses seed with parserPreset', async () => {
 
 	expect(actual.name).toBe('./conventional-changelog-custom');
 	expect(actual.parserOpts).toMatchObject({
-		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
+		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
 	});
 });
 
@@ -116,8 +116,8 @@ test('respects cwd option', async () => {
 		plugins: {},
 		rules: {
 			one: 1,
-			two: 2
-		}
+			two: 2,
+		},
 	});
 });
 
@@ -132,8 +132,8 @@ test('recursive extends', async () => {
 		rules: {
 			zero: 0,
 			one: 1,
-			two: 2
-		}
+			two: 2,
+		},
 	});
 });
 
@@ -148,8 +148,8 @@ test('recursive extends with json file', async () => {
 		rules: {
 			zero: 0,
 			one: 1,
-			two: 2
-		}
+			two: 2,
+		},
 	});
 });
 
@@ -164,8 +164,8 @@ test('recursive extends with yaml file', async () => {
 		rules: {
 			zero: 0,
 			one: 1,
-			two: 2
-		}
+			two: 2,
+		},
 	});
 });
 
@@ -180,8 +180,8 @@ test('recursive extends with js file', async () => {
 		rules: {
 			zero: 0,
 			one: 1,
-			two: 2
-		}
+			two: 2,
+		},
 	});
 });
 
@@ -196,8 +196,8 @@ test('recursive extends with package.json file', async () => {
 		rules: {
 			zero: 0,
 			one: 1,
-			two: 2
-		}
+			two: 2,
+		},
 	});
 });
 
@@ -207,7 +207,7 @@ test('parser preset overwrites completely instead of merging', async () => {
 
 	expect(actual.parserPreset.name).toBe('./custom');
 	expect(actual.parserPreset.parserOpts).toMatchObject({
-		headerPattern: /.*/
+		headerPattern: /.*/,
 	});
 });
 
@@ -217,7 +217,7 @@ test('recursive extends with parserPreset', async () => {
 
 	expect(actual.parserPreset.name).toBe('./conventional-changelog-custom');
 	expect(actual.parserPreset.parserOpts).toMatchObject({
-		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
+		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
 	});
 });
 
@@ -231,8 +231,8 @@ test('ignores unknow keys', async () => {
 		plugins: {},
 		rules: {
 			foo: 'bar',
-			baz: 'bar'
-		}
+			baz: 'bar',
+		},
 	});
 });
 
@@ -246,8 +246,8 @@ test('ignores unknow keys recursively', async () => {
 		plugins: {},
 		rules: {
 			zero: 0,
-			one: 1
-		}
+			one: 1,
+		},
 	});
 });
 
@@ -264,8 +264,8 @@ test('find up from given cwd', async () => {
 		rules: {
 			child: true,
 			inner: false,
-			outer: false
-		}
+			outer: false,
+		},
 	});
 });
 
@@ -281,8 +281,8 @@ test('find up config from outside current git repo', async () => {
 		rules: {
 			child: false,
 			inner: false,
-			outer: true
-		}
+			outer: true,
+		},
 	});
 });
 
@@ -294,7 +294,7 @@ test('respects formatter option', async () => {
 		formatter: 'commitlint-junit',
 		extends: [],
 		plugins: {},
-		rules: {}
+		rules: {},
 	});
 });
 
@@ -306,7 +306,7 @@ test('resolves formatter relative from config directory', async () => {
 		formatter: resolveFrom(cwd, './formatters/custom.js'),
 		extends: [],
 		plugins: {},
-		rules: {}
+		rules: {},
 	});
 });
 
@@ -318,7 +318,7 @@ test('returns formatter name when unable to resolve from config directory', asyn
 		formatter: './doesnt/exists.js',
 		extends: [],
 		plugins: {},
-		rules: {}
+		rules: {},
 	});
 });
 
@@ -365,7 +365,7 @@ test('recursive resolves parser preset from conventional atom', async () => {
 	);
 	// the package file is nested in 2 folders, `npm.bootstrap` cant do that
 	await execa('npm', ['install'], {
-		cwd: path.resolve(cwd, 'first-extended', 'second-extended')
+		cwd: path.resolve(cwd, 'first-extended', 'second-extended'),
 	});
 
 	const actual = await load({}, {cwd});

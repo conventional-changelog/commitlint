@@ -4,13 +4,13 @@ import {bodyLeadingBlank} from './body-leading-blank';
 const messages = {
 	simple: 'test: subject',
 	without: 'test: subject\nbody',
-	with: 'test: subject\n\nbody'
+	with: 'test: subject\n\nbody',
 };
 
 const parsed = {
 	simple: parse(messages.simple),
 	without: parse(messages.without),
-	with: parse(messages.with)
+	with: parse(messages.with),
 };
 
 test('with simple message should succeed for empty keyword', async () => {

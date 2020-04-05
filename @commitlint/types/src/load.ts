@@ -17,7 +17,7 @@ export interface LoadOptions {
 export enum RuleSeverity {
 	Disabled = 0,
 	Warning = 1,
-	Error = 2
+	Error = 2,
 }
 
 export type RuleConfigTuple<T> = T extends void
@@ -26,7 +26,7 @@ export type RuleConfigTuple<T> = T extends void
 
 export enum RuleConfigQuality {
 	User,
-	Qualified
+	Qualified,
 }
 
 export type QualifiedRuleConfig<T> =

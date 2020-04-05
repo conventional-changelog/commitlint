@@ -9,7 +9,7 @@ declare global {
 export async function bootstrap(fixture?: string, directory?: string) {
 	const tmpDir = tmp.dirSync({
 		keep: false,
-		unsafeCleanup: true
+		unsafeCleanup: true,
 	});
 
 	if (typeof fixture !== 'undefined') {

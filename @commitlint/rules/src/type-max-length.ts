@@ -14,6 +14,6 @@ export const typeMaxLength: SyncRule<number> = (
 
 	return [
 		maxLength(input, value),
-		`type must not be longer than ${value} characters`
+		`type must not be longer than ${value} characters`,
 	];
 };

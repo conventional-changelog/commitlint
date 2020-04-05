@@ -19,7 +19,7 @@ export const scopeEnum: SyncRule<string[]> = (
 		message([
 			`scope must`,
 			negated ? `not` : null,
-			`be one of [${value.join(', ')}]`
-		])
+			`be one of [${value.join(', ')}]`,
+		]),
 	];
 };
