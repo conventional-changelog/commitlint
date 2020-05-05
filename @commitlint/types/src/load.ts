@@ -96,7 +96,7 @@ export interface UserConfig {
 	parserPreset?: string | ParserPreset;
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
-	plugins?: string[];
+	plugins?: (string | Plugin)[];
 }
 
 export interface UserPreset {
