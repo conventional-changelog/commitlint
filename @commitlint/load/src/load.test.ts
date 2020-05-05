@@ -63,6 +63,28 @@ test('plugins should be loaded from seed', async () => {
 	});
 });
 
+test('plugins should be loaded from local', async () => {
+	const actual = await load({
+		plugins: [
+			{
+				rules: {
+					test: () => [true, 'asd']
+				}
+			}
+		]
+	});
+
+	expect(actual.plugins).toEqual(
+		expect.objectContaining({
+			local: {
+				rules: {
+					test: expect.any(Function)
+				}
+			}
+		})
+	);
+});
+
 test('plugins should be loaded from config', async () => {
 	const cwd = await gitBootstrap('fixtures/extends-plugins');
 	const actual = await load({}, {cwd});
