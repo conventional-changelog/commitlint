@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/utils",
-  "version": "8.3.4",
+  "version": "9.0.0",
   "description": "Development utilities for @commitlint",
   "files": [
     "dep-check.js",
@@ -36,7 +36,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/test": "8.2.0",
+    "@commitlint/test": "^9.0.0",
     "execa": "^3.4.0",
     "is-builtin-module": "3.0.0",
     "meow": "4.0.1",

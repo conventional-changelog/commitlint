@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v9.0.0) (2020-05-21)
+
+
+### Bug Fixes
+
+* [#840](https://github.com/conventional-changelog/commitlint/issues/840) add caret to lodash versions ([#843](https://github.com/conventional-changelog/commitlint/issues/843)) ([ffc0bac](https://github.com/conventional-changelog/commitlint/commit/ffc0bac26993acb2ab6a8fa51065f93c92b0d644))
+* ignore empty commit messages [#615](https://github.com/conventional-changelog/commitlint/issues/615) ([#676](https://github.com/conventional-changelog/commitlint/issues/676)) ([c3eb1a7](https://github.com/conventional-changelog/commitlint/commit/c3eb1a76e08213d7ce1f200e35f8d5d6de18982a))
+
+
+### Features
+
+* add async promise based rules methods into lint ([#976](https://github.com/conventional-changelog/commitlint/issues/976)) ([4443062](https://github.com/conventional-changelog/commitlint/commit/444306249b8a3d04524538f61edca8f6cc10d75f))
+
+
+
+
+
 ## [8.3.5](https://github.com/conventional-changelog/commitlint/compare/v8.3.4...v8.3.5) (2020-01-15)
 
 **Note:** Version bump only for package @commitlint/lint

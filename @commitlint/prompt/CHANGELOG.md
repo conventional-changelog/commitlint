@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v9.0.0) (2020-05-21)
+
+
+### Bug Fixes
+
+* [#840](https://github.com/conventional-changelog/commitlint/issues/840) add caret to lodash versions ([#843](https://github.com/conventional-changelog/commitlint/issues/843)) ([ffc0bac](https://github.com/conventional-changelog/commitlint/commit/ffc0bac26993acb2ab6a8fa51065f93c92b0d644))
+* incorrect use of when in getForcedCaseFn ([#993](https://github.com/conventional-changelog/commitlint/issues/993)) ([34c11b8](https://github.com/conventional-changelog/commitlint/commit/34c11b8f3f233eca51866274a10d35231e8eb3d4))
+
+
+
+
+
 ## [8.3.5](https://github.com/conventional-changelog/commitlint/compare/v8.3.4...v8.3.5) (2020-01-15)
 
 **Note:** Version bump only for package @commitlint/prompt

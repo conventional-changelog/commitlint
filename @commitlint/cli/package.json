@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "8.3.5",
+  "version": "9.0.0",
   "description": "Lint your commit messages",
   "files": [
     "index.js",
@@ -49,18 +49,18 @@
   "devDependencies": {
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
-    "@commitlint/test": "8.2.0",
-    "@commitlint/utils": "^8.3.4",
-    "babel-preset-commitlint": "^8.2.0",
+    "@commitlint/test": "^9.0.0",
+    "@commitlint/utils": "^9.0.0",
+    "babel-preset-commitlint": "^9.0.0",
     "cross-env": "7.0.0",
     "execa": "^3.4.0",
     "fs-extra": "^8.1.0"
   },
   "dependencies": {
-    "@commitlint/format": "^8.3.4",
-    "@commitlint/lint": "^8.3.5",
-    "@commitlint/load": "^8.3.5",
-    "@commitlint/read": "^8.3.4",
+    "@commitlint/format": "^9.0.0",
+    "@commitlint/lint": "^9.0.0",
+    "@commitlint/load": "^9.0.0",
+    "@commitlint/read": "^9.0.0",
     "chalk": "3.0.0",
     "core-js": "^3.6.1",
     "get-stdin": "7.0.0",
