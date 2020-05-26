@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
+
+
+### Bug Fixes
+
+* add missing @babel/runtime dep [#1738](https://github.com/conventional-changelog/commitlint/issues/1738) ([#1754](https://github.com/conventional-changelog/commitlint/issues/1754)) ([09afcd6](https://github.com/conventional-changelog/commitlint/commit/09afcd647a2c1d00538cf1c970e3790d936111f8))
+
+
+
+
+
 # [9.0.0](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v9.0.0) (2020-05-21)
 
 
