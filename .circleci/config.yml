@@ -91,6 +91,16 @@ jobs:
       - image: node:12
     steps:
       - run-all
+  v13:
+    docker:
+      - image: node:13
+    steps:
+      - run-all
+  v14:
+    docker:
+      - image: node:14
+    steps:
+      - run-all
   windows-v12:
     executor: win/default
     steps:
@@ -102,4 +112,6 @@ workflows:
       - v8
       - v10
       - v12
+      - v13
+      - v14
       - windows-v12
