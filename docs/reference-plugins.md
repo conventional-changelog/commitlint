@@ -43,6 +43,41 @@ Recommended keywords:
 
 Add these keywords into your `package.json` file to make it easy for others to find.
 
+## Local Plugins
+
+In case you want to develop your plugins locally without the need to publish to `npm`, you can send declare your plugins inside your project locally. Please be aware that you can declare **only one** local plugin.
+
+### Usage Example
+
+```js
+// commitlint.config.js
+module.exports = {
+  rules: {
+    'hello-world-rule': [2, 'always']
+  },
+  plugins: [
+    {
+      rules: {
+        'hello-world-rule': ({subject}) => {
+          const HELLO_WORLD = 'Hello World';
+          return [
+            subject.includes(HELLO_WORLD),
+            `Your subject should contain ${HELLO_WORLD} message`
+          ];
+        }
+      }
+    }
+  ]
+};
+```
+
+### Usage Example
+
+```bash
+> echo "feat: random subject" | commitlint # fails
+> echo "feat: Hello World" | commitlint # passes
+```
+
 ## Further Reading
 
 - [npm Developer Guide](https://docs.npmjs.com/misc/developers)
