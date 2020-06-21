@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
+
+
+### Bug Fixes
+
+* update dependency semver to v7.3.2 ([#1369](https://github.com/conventional-changelog/commitlint/issues/1369)) ([3c09722](https://github.com/conventional-changelog/commitlint/commit/3c09722d2db85a94cd1f4bf25c6b4251b2c41bbb))
+
+
+
+
+
 ## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
 
 **Note:** Version bump only for package @commitlint/config-lerna-scopes

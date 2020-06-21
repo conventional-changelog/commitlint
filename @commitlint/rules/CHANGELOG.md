@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
+
+
+### Features
+
+* enable multiple scopes in scope-enum and scope-case rules ([#901](https://github.com/conventional-changelog/commitlint/issues/901)) ([73632ce](https://github.com/conventional-changelog/commitlint/commit/73632cec299d5c3a980d07037c08633c843a8555))
+
+
+
+
+
 ## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
 
 **Note:** Version bump only for package @commitlint/rules

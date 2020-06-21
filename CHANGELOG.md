@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
+
+
+### Bug Fixes
+
+* update dependency chalk to v4 ([#1275](https://github.com/conventional-changelog/commitlint/issues/1275)) ([a5d8fa1](https://github.com/conventional-changelog/commitlint/commit/a5d8fa118e8221361f14f5fd2b21d7aaad008a27))
+* update dependency conventional-changelog-conventionalcommits to v4.3.0 ([#1816](https://github.com/conventional-changelog/commitlint/issues/1816)) ([f99aeda](https://github.com/conventional-changelog/commitlint/commit/f99aeda068aabdb250e2c9819da7229a695154b9))
+* update dependency regenerator-runtime to v0.13.5 ([#1017](https://github.com/conventional-changelog/commitlint/issues/1017)) ([9c4fdf1](https://github.com/conventional-changelog/commitlint/commit/9c4fdf1b5f42677422532dad655af9aed9b43881))
+* update dependency semver to v7.3.2 ([#1369](https://github.com/conventional-changelog/commitlint/issues/1369)) ([3c09722](https://github.com/conventional-changelog/commitlint/commit/3c09722d2db85a94cd1f4bf25c6b4251b2c41bbb))
+* update dependency tar-fs to v2.1.0 ([#1103](https://github.com/conventional-changelog/commitlint/issues/1103)) ([7882036](https://github.com/conventional-changelog/commitlint/commit/788203689ebf51343ccf2e6eab530e19f4faf122))
+* update dependency tmp to v0.2.1 ([#1817](https://github.com/conventional-changelog/commitlint/issues/1817)) ([0ff72f4](https://github.com/conventional-changelog/commitlint/commit/0ff72f41bd48b3dd37f881f6fb11477d8f643735))
+
+
+### Features
+
+* add local plugins support ([#1692](https://github.com/conventional-changelog/commitlint/issues/1692)) ([7b29c48](https://github.com/conventional-changelog/commitlint/commit/7b29c48321b513e091849fbb2cc2bf0e6ebb94a6))
+* enable multiple scopes in scope-enum and scope-case rules ([#901](https://github.com/conventional-changelog/commitlint/issues/901)) ([73632ce](https://github.com/conventional-changelog/commitlint/commit/73632cec299d5c3a980d07037c08633c843a8555))
+
+
+
+
+
 ## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
 
 

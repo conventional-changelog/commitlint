@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
+
+
+### Bug Fixes
+
+* update dependency chalk to v4 ([#1275](https://github.com/conventional-changelog/commitlint/issues/1275)) ([a5d8fa1](https://github.com/conventional-changelog/commitlint/commit/a5d8fa118e8221361f14f5fd2b21d7aaad008a27))
+* update dependency regenerator-runtime to v0.13.5 ([#1017](https://github.com/conventional-changelog/commitlint/issues/1017)) ([9c4fdf1](https://github.com/conventional-changelog/commitlint/commit/9c4fdf1b5f42677422532dad655af9aed9b43881))
+
+
+
+
+
 ## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
 
 

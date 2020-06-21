@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
+
+
+### Bug Fixes
+
+* update dependency tar-fs to v2.1.0 ([#1103](https://github.com/conventional-changelog/commitlint/issues/1103)) ([7882036](https://github.com/conventional-changelog/commitlint/commit/788203689ebf51343ccf2e6eab530e19f4faf122))
+
+
+
+
+
 ## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
 
 **Note:** Version bump only for package @commitlint/utils
