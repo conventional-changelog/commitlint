@@ -211,7 +211,7 @@ yarn clean
 yarn install
 yarn run build
 yarn test
-yarn run publish
+yarn run publish --otp <one-time password>
 ```
 
 #### Publish a `next` release
@@ -221,7 +221,7 @@ yarn clean
 yarn install
 yarn run build
 yarn test
-npx lerna publish --conventional-commits --dist-tag next
+npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
 ```
 
 ##### Move `next` to `latest`
