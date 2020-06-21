@@ -43,7 +43,7 @@ commitlint checks if your commit messages meet the [conventional commit format](
 In general the pattern mostly looks like this:
 
 ```sh
-type(scope?): subject  #scope is optional
+type(scope?): subject  #scope is optional; multiple scopes are supported (current delimiter options: "/", "\" and ",")
 ```
 
 Real world examples can look like this:
