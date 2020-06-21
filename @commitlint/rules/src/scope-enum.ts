@@ -11,8 +11,15 @@ export const scopeEnum: SyncRule<string[]> = (
 		return [true, ''];
 	}
 
+	// Scopes may contain slash or comma delimiters to separate them and mark them as individual segments.
+	// This means that each of these segments should be tested separately with `ensure`.
+	const delimiters = /\/|\\|,/g;
+	const scopeSegments = parsed.scope.split(delimiters);
+
 	const negated = when === 'never';
-	const result = value.length === 0 || ensure.enum(parsed.scope, value);
+	const result =
+		value.length === 0 ||
+		scopeSegments.every(scope => ensure.enum(scope, value));
 
 	return [
 		negated ? !result : result,

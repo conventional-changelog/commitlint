@@ -25,9 +25,9 @@ export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 		return check;
 	});
 
-	// Scopes may contain slash-delimiters to separate them and mark them as individual segments.
+	// Scopes may contain slash or comma delimiters to separate them and mark them as individual segments.
 	// This means that each of these segments should be tested separately with `ensure`.
-	const delimiters = /(\/|\\)/g;
+	const delimiters = /\/|\\|,/g;
 	const scopeSegments = scope.split(delimiters);
 
 	const result = checks.some(check => {
