@@ -45,7 +45,7 @@ Add these keywords into your `package.json` file to make it easy for others to f
 
 ## Local Plugins
 
-In case you want to develop your plugins locally without the need to publish to `npm`, you can send declare your plugins inside your project locally. Please be aware that you can declare **only one** local plugin.
+In case you want to develop your plugins locally without the need to publish to `npm`, you can send declare your plugins inside your project locally. This is also a great way to include specific rules in a [shareable configuration](https://commitlint.js.org/#/reference-configuration?id=shareable-configuration).
 
 ### Usage Example
 
