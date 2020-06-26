@@ -76,7 +76,7 @@ test('plugins should be loaded from local', async () => {
 
 	expect(actual.plugins).toEqual(
 		expect.objectContaining({
-			local: {
+			'local-0': {
 				rules: {
 					test: expect.any(Function)
 				}
@@ -103,9 +103,13 @@ test('multiple local plugins should be supported', async () => {
 
 	expect(actual.plugins).toEqual(
 		expect.objectContaining({
-			local: {
+			'local-0': {
 				rules: {
-					test1: expect.any(Function),
+					test1: expect.any(Function)
+				}
+			},
+			'local-1': {
+				rules: {
 					test2: expect.any(Function)
 				}
 			}

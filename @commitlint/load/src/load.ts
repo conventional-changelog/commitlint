@@ -24,6 +24,12 @@ import {pickConfig} from './utils/pick-config';
 const w = <T>(_: unknown, b: ArrayLike<T> | null | undefined | false) =>
 	Array.isArray(b) ? b : undefined;
 
+const generateLocalId = () => {
+	let id = 0;
+
+	return () => `local-${id++}`;
+};
+
 export default async function load(
 	seed: UserConfig = {},
 	options: LoadOptions = {}
@@ -86,11 +92,13 @@ export default async function load(
 
 	// resolve plugins
 	if (Array.isArray(config.plugins)) {
+		const localIdGenerator = generateLocalId();
+
 		config.plugins.forEach(plugin => {
 			if (typeof plugin === 'string') {
 				loadPlugin(preset.plugins, plugin, process.env.DEBUG === 'true');
 			} else {
-				preset.plugins.local = plugin;
+				preset.plugins[localIdGenerator()] = plugin;
 			}
 		});
 	}
