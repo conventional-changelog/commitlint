@@ -85,6 +85,34 @@ test('plugins should be loaded from local', async () => {
 	);
 });
 
+test('multiple local plugins should be supported', async () => {
+	const actual = await load({
+		plugins: [
+			{
+				rules: {
+					test1: () => [true, 'asd']
+				}
+			},
+			{
+				rules: {
+					test2: () => [true, 'fgh']
+				}
+			}
+		]
+	});
+
+	expect(actual.plugins).toEqual(
+		expect.objectContaining({
+			local: {
+				rules: {
+					test1: expect.any(Function),
+					test2: expect.any(Function)
+				}
+			}
+		})
+	);
+});
+
 test('plugins should be loaded from config', async () => {
 	const cwd = await gitBootstrap('fixtures/extends-plugins');
 	const actual = await load({}, {cwd});
