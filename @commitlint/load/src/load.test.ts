@@ -95,6 +95,16 @@ test('plugins should be loaded from config', async () => {
 	});
 });
 
+test('plugins should be loaded from shareable config', async () => {
+	const cwd = await gitBootstrap('fixtures/extends-with-plugins');
+	const actual = await load({}, {cwd});
+
+	expect(actual.plugins).toMatchObject({
+		example: plugin,
+		'@scope/example': scopedPlugin
+	});
+});
+
 test('uses seed with parserPreset', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(
