@@ -113,8 +113,8 @@ test('local plugins should be loaded from shareable configs', async () => {
 		expect.objectContaining({
 			local: {
 				rules: {
-					test1: expect.any(Function),
-					test2: expect.any(Function)
+					'hello-world-rule': expect.any(Function),
+					'is-positive': expect.any(Function)
 				}
 			}
 		})
