@@ -86,8 +86,9 @@ export default async function load(
 	}
 
 	// Read plugins from extends
-	if (Array.isArray(extended.plugins))
+	if (Array.isArray(extended.plugins)) {
 		config.plugins = union(config.plugins, extended.plugins || []);
+	}
 
 	// resolve plugins
 	if (Array.isArray(config.plugins)) {
