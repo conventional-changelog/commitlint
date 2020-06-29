@@ -95,6 +95,32 @@ test('plugins should be loaded from config', async () => {
 	});
 });
 
+test('plugins should be loaded from shareable config', async () => {
+	const cwd = await gitBootstrap('fixtures/extends-with-plugins');
+	const actual = await load({}, {cwd});
+
+	expect(actual.plugins).toMatchObject({
+		example: plugin,
+		'@scope/example': scopedPlugin
+	});
+});
+
+test('local plugins should be loaded from shareable configs', async () => {
+	const cwd = await gitBootstrap('fixtures/extends-with-local-plugins');
+	const actual = await load({}, {cwd});
+
+	expect(actual.plugins).toEqual(
+		expect.objectContaining({
+			local: {
+				rules: {
+					'hello-world-rule': expect.any(Function),
+					'is-positive': expect.any(Function)
+				}
+			}
+		})
+	);
+});
+
 test('uses seed with parserPreset', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(

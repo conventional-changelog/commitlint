@@ -3,6 +3,7 @@ import Path from 'path';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
 import pick from 'lodash/pick';
+import union from 'lodash/union';
 import resolveFrom from 'resolve-from';
 
 import executeRule from '@commitlint/execute-rule';
@@ -82,6 +83,11 @@ export default async function load(
 	if (typeof config.formatter === 'string') {
 		preset.formatter =
 			resolveFrom.silent(base, config.formatter) || config.formatter;
+	}
+
+	// Read plugins from extends
+	if (Array.isArray(extended.plugins)) {
+		config.plugins = union(config.plugins, extended.plugins || []);
 	}
 
 	// resolve plugins
