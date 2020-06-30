@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.1.1](https://github.com/conventional-changelog/commitlint/compare/v9.1.0...v9.1.1) (2020-06-30)
+
+
+### Bug Fixes
+
+* **load:** resolve plugins from extended configs ([#1976](https://github.com/conventional-changelog/commitlint/issues/1976)) ([d0f0eb9](https://github.com/conventional-changelog/commitlint/commit/d0f0eb9fde7efc2dff7a3aad190ded14303d3079))
+* mark internal packages as private [#972](https://github.com/conventional-changelog/commitlint/issues/972) ([#1970](https://github.com/conventional-changelog/commitlint/issues/1970)) ([2351124](https://github.com/conventional-changelog/commitlint/commit/23511248b2b4020ee87d04a838c7ce31e094c128))
+
+
+
+
+
 # [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
 
 
