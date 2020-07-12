@@ -8,16 +8,10 @@ import {
 	LintOutcome,
 	LintRuleOutcome,
 	Rule,
-<<<<<<< HEAD
-	RuleSeverity,
-	BaseRule,
-	RuleType
-||||||| f74e036
-	RuleSeverity
-=======
 	RuleConfigSeverity,
+	BaseRule,
+	RuleType,
 	QualifiedRules
->>>>>>> armano2/refactor-cli
 } from '@commitlint/types';
 
 export default async function lint(
@@ -157,26 +151,12 @@ export default async function lint(
 	}
 
 	// Validate against all rules
-<<<<<<< HEAD
 	const pendingResults = Object.entries(rulesConfig)
-		.filter(([, [level]]) => level > 0)
+		// Level 0 rules are ignored
+		.filter(([, config]) => !!config && config.length && config[0] > 0)
 		.map(async entry => {
-||||||| f74e036
-	const results = Object.entries(rulesConfig)
-		.filter(([, [level]]) => level > 0)
-		.map(entry => {
-=======
-	const results = Object.entries(rulesConfig)
-		.filter(([, config]) => typeof config !== 'undefined' && config[0] > 0)
-		.map(entry => {
->>>>>>> armano2/refactor-cli
 			const [name, config] = entry;
 			const [level, when, value] = config!; //
-
-			// Level 0 rules are ignored
-			if (level === 0) {
-				return null;
-			}
 
 			const rule = allRules.get(name);
 
@@ -184,15 +164,8 @@ export default async function lint(
 				throw new Error(`Could not find rule implementation for ${name}`);
 			}
 
-<<<<<<< HEAD
 			const executableRule = rule as Rule<unknown>;
 			const [valid, message] = await executableRule(parsed, when, value);
-||||||| f74e036
-			const executableRule = rule as Rule<unknown>;
-			const [valid, message] = executableRule(parsed, when, value);
-=======
-			const [valid, message] = rule(parsed, when, value as any);
->>>>>>> armano2/refactor-cli
 
 			return {
 				level,

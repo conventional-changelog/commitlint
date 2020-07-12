@@ -18,7 +18,6 @@ export type BaseRule<Value = never, Type extends RuleType = 'either'> = (
 	parsed: Commit,
 	when?: RuleConfigCondition,
 	value?: Value
-<<<<<<< HEAD
 ) => Type extends 'either'
 	? RuleOutcome | Promise<RuleOutcome>
 	: Type extends 'async'
@@ -30,10 +29,6 @@ export type BaseRule<Value = never, Type extends RuleType = 'either'> = (
 export type Rule<Value = never> = BaseRule<Value, 'either'>;
 export type AsyncRule<Value = never> = BaseRule<Value, 'async'>;
 export type SyncRule<Value = never> = BaseRule<Value, 'sync'>;
-||||||| f74e036
-) => RuleOutcome;
-=======
-) => RuleOutcome;
 
 /**
  * Rules always have a severity.
@@ -131,4 +126,3 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 };
 
 export type AnyRuleConfig<V> = RuleConfig<V, unknown> | RuleConfig<V, void>;
->>>>>>> armano2/refactor-cli
