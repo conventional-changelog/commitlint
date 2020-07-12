@@ -4,26 +4,15 @@
   "description": "Lint your commit messages",
   "files": [
     "index.js",
-    "lib",
-    "!*.test.js*"
+    "cli.js",
+    "lib"
   ],
   "bin": {
-    "commitlint": "./lib/cli.js"
+    "commitlint": "./cli.js"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "yarn run watch",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ],
-    "ignore": [
-      "**/*.test.js"
-    ]
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=v8.17.0"
@@ -47,16 +36,30 @@
   },
   "license": "MIT",
   "devDependencies": {
+<<<<<<< HEAD
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@commitlint/test": "^9.1.1",
     "@commitlint/utils": "^9.1.1",
     "babel-preset-commitlint": "^9.1.1",
     "cross-env": "7.0.2",
+||||||| f74e036
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.4",
+    "babel-preset-commitlint": "^8.2.0",
+    "cross-env": "7.0.0",
+=======
+    "@types/yargs": "^15.0.3",
+    "@commitlint/test": "8.2.0",
+    "@commitlint/utils": "^8.3.4",
+>>>>>>> armano2/refactor-cli
     "execa": "^3.4.0",
     "fs-extra": "^8.1.0"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@babel/runtime": "^7.9.6",
     "@commitlint/format": "^9.1.1",
     "@commitlint/lint": "^9.1.1",
@@ -64,12 +67,41 @@
     "@commitlint/read": "^9.1.1",
     "chalk": "4.1.0",
     "core-js": "^3.6.1",
+||||||| f74e036
+    "@commitlint/format": "^8.3.4",
+    "@commitlint/lint": "^8.3.5",
+    "@commitlint/load": "^8.3.5",
+    "@commitlint/read": "^8.3.4",
+    "chalk": "3.0.0",
+    "core-js": "^3.6.1",
+=======
+    "@commitlint/format": "^8.3.4",
+    "@commitlint/lint": "^8.3.5",
+    "@commitlint/load": "^8.3.5",
+    "@commitlint/read": "^8.3.4",
+    "chalk": "3.0.0",
+>>>>>>> armano2/refactor-cli
     "get-stdin": "7.0.0",
     "lodash": "^4.17.15",
+<<<<<<< HEAD
     "meow": "5.0.0",
     "regenerator-runtime": "0.13.5",
+||||||| f74e036
+    "meow": "5.0.0",
+    "regenerator-runtime": "0.13.3",
+=======
+>>>>>>> armano2/refactor-cli
     "resolve-from": "5.0.0",
+<<<<<<< HEAD
     "resolve-global": "1.0.0"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
+||||||| f74e036
+    "resolve-global": "1.0.0"
+  }
+=======
+    "resolve-global": "1.0.0",
+    "yargs": "^15.1.0"
+  }
+>>>>>>> armano2/refactor-cli
 }
