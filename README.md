@@ -207,6 +207,10 @@ For more information on how to contribute please take a look at our [contributio
 ### Publishing a release
 
 ```sh
+npm login
+```
+
+```sh
 yarn clean
 yarn install
 yarn run build
@@ -215,6 +219,10 @@ yarn run publish --otp <one-time password>
 ```
 
 #### Publish a `next` release
+
+```sh
+npm login
+```
 
 ```sh
 yarn clean
@@ -226,16 +234,20 @@ npx lerna publish --conventional-commits --dist-tag next --otp <one-time passwor
 
 ##### Move `next` to `latest`
 
+```sh
+npm login
+```
+
 Move next to latest:
 
 ```sh
-npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>
+npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>'
 ```
 
 Remove next:
 
 ```sh
-npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag rm ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>
+npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag rm ${LERNA_PACKAGE_NAME} next --otp <one-time password>'
 ```
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
