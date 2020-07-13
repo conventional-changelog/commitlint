@@ -4,20 +4,21 @@ import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
 import {buildCommitMesage} from './commit-message';
 import {
-	LintRuleConfig,
 	LintOptions,
+	LintOutcome,
 	LintRuleOutcome,
 	Rule,
-	RuleSeverity,
+	RuleConfigSeverity,
 	BaseRule,
-	RuleType
+	RuleType,
+	QualifiedRules
 } from '@commitlint/types';
 
 export default async function lint(
 	message: string,
-	rawRulesConfig?: LintRuleConfig,
+	rawRulesConfig?: QualifiedRules,
 	rawOpts?: LintOptions
-) {
+): Promise<LintOutcome> {
 	const opts = rawOpts
 		? rawOpts
 		: {defaultIgnores: undefined, ignores: undefined};
@@ -95,7 +96,7 @@ export default async function lint(
 
 			const [level] = config;
 
-			if (level === RuleSeverity.Disabled && config.length === 1) {
+			if (level === RuleConfigSeverity.Disabled && config.length === 1) {
 				return null;
 			}
 
@@ -151,15 +152,11 @@ export default async function lint(
 
 	// Validate against all rules
 	const pendingResults = Object.entries(rulesConfig)
-		.filter(([, [level]]) => level > 0)
+		// Level 0 rules are ignored
+		.filter(([, config]) => !!config && config.length && config[0] > 0)
 		.map(async entry => {
 			const [name, config] = entry;
-			const [level, when, value] = config;
-
-			// Level 0 rules are ignored
-			if (level === 0) {
-				return null;
-			}
+			const [level, when, value] = config!; //
 
 			const rule = allRules.get(name);
 

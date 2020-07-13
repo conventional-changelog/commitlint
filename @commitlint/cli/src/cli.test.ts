@@ -4,9 +4,14 @@ import execa from 'execa';
 import merge from 'lodash/merge';
 import fs from 'fs-extra';
 
-const bin = require.resolve('../lib/cli.js');
+const bin = require.resolve('../cli.js');
 
-const cli = (args, options) => {
+interface TestOptions {
+	cwd: string;
+	env?: Record<string, string>;
+}
+
+const cli = (args: string[], options: TestOptions) => {
 	return (input = '') => {
 		return execa(bin, args, {
 			cwd: options.cwd,
@@ -17,8 +22,8 @@ const cli = (args, options) => {
 	};
 };
 
-const gitBootstrap = fixture => git.bootstrap(fixture, __dirname);
-const fixBootstrap = fixture => fix.bootstrap(fixture, __dirname);
+const gitBootstrap = (fixture: string) => git.bootstrap(fixture, __dirname);
+const fixBootstrap = (fixture: string) => fix.bootstrap(fixture, __dirname);
 
 test('should throw when called without [input]', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
@@ -423,7 +428,48 @@ test('should work with relative formatter path', async () => {
 	expect(actual.exitCode).toBe(0);
 });
 
-async function writePkg(payload, options) {
+test('should print help', async () => {
+	const cwd = await gitBootstrap('fixtures/default');
+	const actual = await cli(['--help'], {cwd})();
+	expect(actual.stdout).toMatchInlineSnapshot(`
+		"@commitlint/cli@9.1.1 - Lint your commit messages
+
+		[input] reads from stdin if --edit, --env, --from and --to are omitted
+
+		Options:
+		  --color, -c          toggle colored output           [boolean] [default: true]
+		  --config, -g         path to the config file                          [string]
+		  --cwd, -d            directory to execute in
+		                                         [string] [default: (Working Directory)]
+		  --edit, -e           read last commit message from the specified file or
+		                       fallbacks to ./.git/COMMIT_EDITMSG
+		                                                       [string] [default: false]
+		  --env, -E            check message in the file at path given by environment
+		                       variable value                                   [string]
+		  --extends, -x        array of shareable configurations to extend       [array]
+		  --help-url, -H       help url in error message                        [string]
+		  --from, -f           lower end of the commit range to lint; applies if
+		                       edit=false                                       [string]
+		  --format, -o         output format of the results                     [string]
+		  --parser-preset, -p  configuration preset to use for
+		                       conventional-commits-parser                      [string]
+		  --quiet, -q          toggle console output          [boolean] [default: false]
+		  --to, -t             upper end of the commit range to lint; applies if
+		                       edit=false                                       [string]
+		  --verbose, -V        enable verbose output for reports without problems
+		                                                                       [boolean]
+		  -v, --version        display version information                     [boolean]
+		  -h, --help           Show help                                       [boolean]"
+	`);
+});
+
+test('should print version', async () => {
+	const cwd = await gitBootstrap('fixtures/default');
+	const actual = await cli(['--version'], {cwd})();
+	expect(actual.stdout).toMatch('@commitlint/cli@');
+});
+
+async function writePkg(payload: unknown, options: TestOptions) {
 	const pkgPath = path.join(options.cwd, 'package.json');
 	const pkg = JSON.parse(await fs.readFile(pkgPath, 'utf-8'));
 	const result = merge(pkg, payload);

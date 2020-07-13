@@ -4,26 +4,15 @@
   "description": "Lint your commit messages",
   "files": [
     "index.js",
-    "lib",
-    "!*.test.js*"
+    "cli.js",
+    "lib"
   ],
   "bin": {
-    "commitlint": "./lib/cli.js"
+    "commitlint": "./cli.js"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "deps": "dep-check",
-    "pkg": "pkg-check",
-    "start": "yarn run watch",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ],
-    "ignore": [
-      "**/*.test.js"
-    ]
+    "pkg": "pkg-check"
   },
   "engines": {
     "node": ">=v8.17.0"
@@ -51,6 +40,7 @@
     "@babel/core": "^7.7.7",
     "@commitlint/test": "^9.1.1",
     "@commitlint/utils": "^9.1.1",
+    "@types/yargs": "^15.0.3",
     "babel-preset-commitlint": "^9.1.1",
     "cross-env": "7.0.2",
     "execa": "^3.4.0",
@@ -65,11 +55,9 @@
     "chalk": "4.1.0",
     "core-js": "^3.6.1",
     "get-stdin": "7.0.0",
-    "lodash": "^4.17.15",
-    "meow": "5.0.0",
-    "regenerator-runtime": "0.13.5",
+    "lodash": "^4.17.19",
     "resolve-from": "5.0.0",
-    "resolve-global": "1.0.0"
-  },
-  "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
+    "resolve-global": "1.0.0",
+    "yargs": "^15.1.0"
+  }
 }
