@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/travis-cli",
-  "version": "9.1.1",
+  "version": "9.1.2",
   "description": "Lint all relevant commits for a change or PR on Travis CI",
   "files": [
     "lib/"
@@ -47,14 +47,14 @@
   "devDependencies": {
     "@babel/cli": "7.10.3",
     "@babel/core": "7.10.3",
-    "@commitlint/test": "^9.1.1",
-    "@commitlint/utils": "^9.1.1",
-    "babel-preset-commitlint": "^9.1.1",
+    "@commitlint/test": "^9.1.2",
+    "@commitlint/utils": "^9.1.2",
+    "babel-preset-commitlint": "^9.1.2",
     "cross-env": "7.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.6",
-    "@commitlint/cli": "^9.1.1",
+    "@commitlint/cli": "^9.1.2",
     "execa": "^3.4.0"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
