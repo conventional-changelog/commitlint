@@ -423,7 +423,7 @@ test('recursive resolves parser preset from conventional atom', async () => {
 	expect((actual.parserPreset.parserOpts as any).headerPattern).toEqual(
 		/^(:.*?:) (.*)$/
 	);
-});
+}, 10000);
 
 test('resolves parser preset from conventional commits without factory support', async () => {
 	const cwd = await npmBootstrap(
