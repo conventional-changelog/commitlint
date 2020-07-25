@@ -4,13 +4,13 @@ import {subjectFullStop} from './subject-full-stop';
 const messages = {
 	empty: 'test:\n',
 	with: `test: subject.\n`,
-	without: `test: subject\n`
+	without: `test: subject\n`,
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	with: parse(messages.with),
-	without: parse(messages.without)
+	without: parse(messages.without),
 };
 
 test('empty against "always" should succeed', async () => {

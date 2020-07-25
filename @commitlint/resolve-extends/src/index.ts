@@ -71,7 +71,7 @@ function loadExtends(
 				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
 					.split(path.sep)
 					.join('/'),
-				parserOpts: require(resolvedParserPreset)
+				parserOpts: require(resolvedParserPreset),
 			};
 
 			ctx.parserPreset = parserPreset;

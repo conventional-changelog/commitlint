@@ -12,6 +12,6 @@ export const footerMinLength: SyncRule<number> = (
 
 	return [
 		minLength(parsed.footer, value),
-		`footer must not be shorter than ${value} characters`
+		`footer must not be shorter than ${value} characters`,
 	];
 };

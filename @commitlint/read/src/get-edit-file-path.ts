@@ -19,7 +19,7 @@ export async function getEditFilePath(
 	}
 
 	const gitFile: string = await fs.readFile(dotgitPath, {
-		encoding: 'utf-8'
+		encoding: 'utf-8',
 	});
 	const relativeGitPath = gitFile.replace('gitdir: ', '').replace('\n', '');
 	return path.resolve(top, relativeGitPath, 'COMMIT_EDITMSG');

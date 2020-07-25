@@ -40,7 +40,7 @@ export type SyncRule<Value = never> = BaseRule<Value, 'sync'>;
 export enum RuleConfigSeverity {
 	Disabled = 0,
 	Warning = 1,
-	Error = 2
+	Error = 2,
 }
 
 /**
@@ -60,7 +60,7 @@ export type RuleConfigTuple<T> = T extends void
 
 export enum RuleConfigQuality {
 	User,
-	Qualified
+	Qualified,
 }
 
 export type QualifiedRuleConfig<T> =

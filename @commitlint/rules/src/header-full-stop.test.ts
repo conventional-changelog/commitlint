@@ -3,12 +3,12 @@ import {headerFullStop} from './header-full-stop';
 
 const messages = {
 	with: `header.\n`,
-	without: `header\n`
+	without: `header\n`,
 };
 
 const parsed = {
 	with: parse(messages.with),
-	without: parse(messages.without)
+	without: parse(messages.without),
 };
 
 test('with against "always ." should succeed', async () => {

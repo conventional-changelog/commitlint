@@ -19,14 +19,14 @@ export const scopeEnum: SyncRule<string[]> = (
 	const negated = when === 'never';
 	const result =
 		value.length === 0 ||
-		scopeSegments.every(scope => ensure.enum(scope, value));
+		scopeSegments.every((scope) => ensure.enum(scope, value));
 
 	return [
 		negated ? !result : result,
 		message([
 			`scope must`,
 			negated ? `not` : null,
-			`be one of [${value.join(', ')}]`
-		])
+			`be one of [${value.join(', ')}]`,
+		]),
 	];
 };

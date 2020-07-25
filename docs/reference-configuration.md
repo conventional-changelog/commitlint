@@ -56,16 +56,16 @@ const Configuration: Config = {
    * Any rules defined here will override rules from @commitlint/config-conventional
    */
   rules: {
-    'type-enum': [2, 'always', ['foo']]
+    'type-enum': [2, 'always', ['foo']],
   },
   /*
    * Functions that return true if commitlint should ignore the given message.
    */
-  ignores: [commit => commit === ''],
+  ignores: [(commit) => commit === ''],
   /*
    * Whether commitlint uses the default ignore rules.
    */
-  defaultIgnores: true
+  defaultIgnores: true,
 };
 
 module.exports = Configuration;
@@ -100,7 +100,7 @@ module.exports = {
 ```js
 // commitlint.config.js
 module.exports = {
-  extends: ['./commitlint.base.js', './commitlint.types.js']
+  extends: ['./commitlint.base.js', './commitlint.types.js'],
 };
 ```
 
@@ -108,8 +108,8 @@ module.exports = {
 // commitlint.types.js, will be picked up by commitlint.config.js
 module.exports = {
   rules: {
-    'type-enum': [2, 'always', ['foo']]
-  }
+    'type-enum': [2, 'always', ['foo']],
+  },
 };
 ```
 
@@ -117,7 +117,7 @@ module.exports = {
 // commitlint.base.js, will be picked up by commitlint.config.js
 module.exports = {
   extends: ['@commitlint/config-conventional'], // extends can be nested
-  parserPreset: 'conventional-changelog-atom'
+  parserPreset: 'conventional-changelog-atom',
 };
 ```
 
@@ -137,7 +137,7 @@ npm install --save-dev conventional-changelog-atom
 ```js
 // commitlint.config.js
 module.exports = {
-  parserPreset: 'conventional-changelog-atom'
+  parserPreset: 'conventional-changelog-atom',
 };
 ```
 
@@ -146,7 +146,7 @@ module.exports = {
 ```js
 // commitlint.config.js
 module.exports = {
-  parserPreset: './parser-preset'
+  parserPreset: './parser-preset',
 };
 ```
 
@@ -155,8 +155,8 @@ module.exports = {
 module.exports = {
   parserOpts: {
     headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
-    headerCorrespondence: ['type', 'scope', 'ticket', 'subject']
-  }
+    headerCorrespondence: ['type', 'scope', 'ticket', 'subject'],
+  },
 };
 ```
 
@@ -167,7 +167,7 @@ Use ids resolvable by the node resolve algorithm.
 
 ```js
 module.exports = {
-  formatter: '@commitlint/format'
+  formatter: '@commitlint/format',
 };
 ```
 

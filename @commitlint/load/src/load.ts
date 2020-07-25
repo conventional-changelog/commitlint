@@ -14,7 +14,7 @@ import {
 	QualifiedConfig,
 	UserPreset,
 	QualifiedRules,
-	ParserPreset
+	ParserPreset,
 } from '@commitlint/types';
 
 import loadPlugin from './utils/load-plugin';
@@ -51,7 +51,7 @@ export default async function load(
 		config.parserPreset = {
 			name: config.parserPreset,
 			path: resolvedParserPreset,
-			parserOpts: require(resolvedParserPreset)
+			parserOpts: require(resolvedParserPreset),
 		};
 	}
 
@@ -59,7 +59,7 @@ export default async function load(
 	const extended = resolveExtends(opts, {
 		prefix: 'commitlint-config',
 		cwd: base,
-		parserPreset: config.parserPreset
+		parserPreset: config.parserPreset,
 	});
 
 	const preset = (pickConfig(
@@ -92,7 +92,7 @@ export default async function load(
 
 	// resolve plugins
 	if (Array.isArray(config.plugins)) {
-		config.plugins.forEach(plugin => {
+		config.plugins.forEach((plugin) => {
 			if (typeof plugin === 'string') {
 				loadPlugin(preset.plugins, plugin, process.env.DEBUG === 'true');
 			} else {
@@ -102,9 +102,11 @@ export default async function load(
 	}
 
 	const rules = preset.rules ? preset.rules : {};
-	const qualifiedRules = (await Promise.all(
-		Object.entries(rules || {}).map(entry => executeRule<any>(entry))
-	)).reduce<QualifiedRules>((registry, item) => {
+	const qualifiedRules = (
+		await Promise.all(
+			Object.entries(rules || {}).map((entry) => executeRule<any>(entry))
+		)
+	).reduce<QualifiedRules>((registry, item) => {
 		const [key, value] = item as any;
 		(registry as any)[key] = value;
 		return registry;
@@ -117,6 +119,6 @@ export default async function load(
 		ignores: preset.ignores!,
 		defaultIgnores: preset.defaultIgnores!,
 		plugins: preset.plugins!,
-		rules: qualifiedRules
+		rules: qualifiedRules,
 	};
 }

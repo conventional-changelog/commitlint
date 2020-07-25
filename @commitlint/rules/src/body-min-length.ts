@@ -12,6 +12,6 @@ export const bodyMinLength: SyncRule<number> = (
 
 	return [
 		minLength(parsed.body, value),
-		`body must not be shorter than ${value} characters`
+		`body must not be shorter than ${value} characters`,
 	];
 };

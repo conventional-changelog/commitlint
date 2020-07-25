@@ -9,13 +9,13 @@ const value = short.length;
 const messages = {
 	empty: '():\n',
 	short: `${short}: \n`,
-	long: `${long}: \n`
+	long: `${long}: \n`,
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	short: parse(messages.short),
-	long: parse(messages.long)
+	long: parse(messages.long),
 };
 
 test('with empty should succeed', async () => {

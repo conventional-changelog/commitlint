@@ -14,6 +14,6 @@ export const footerMaxLength: SyncRule<number> = (
 
 	return [
 		maxLength(input, value),
-		`footer must not be longer than ${value} characters`
+		`footer must not be longer than ${value} characters`,
 	];
 };

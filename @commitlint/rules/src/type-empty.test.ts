@@ -3,12 +3,12 @@ import {typeEmpty} from './type-empty';
 
 const messages = {
 	empty: '(scope):',
-	filled: 'type: subject'
+	filled: 'type: subject',
 };
 
 const parsed = {
 	empty: parse(messages.empty),
-	filled: parse(messages.filled)
+	filled: parse(messages.filled),
 };
 
 test('without type should succeed for empty keyword', async () => {

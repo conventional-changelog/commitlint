@@ -11,7 +11,7 @@ import {
 	RuleConfigSeverity,
 	BaseRule,
 	RuleType,
-	QualifiedRules
+	QualifiedRules,
 } from '@commitlint/types';
 
 export default async function lint(
@@ -32,7 +32,7 @@ export default async function lint(
 			valid: true,
 			errors: [],
 			warnings: [],
-			input: message
+			input: message,
 		};
 	}
 
@@ -52,7 +52,7 @@ export default async function lint(
 			valid: true,
 			errors: [],
 			warnings: [],
-			input: message
+			input: message,
 		};
 	}
 
@@ -61,9 +61,9 @@ export default async function lint(
 	);
 
 	if (opts.plugins) {
-		Object.values(opts.plugins).forEach(plugin => {
+		Object.values(opts.plugins).forEach((plugin) => {
 			if (plugin.rules) {
-				Object.keys(plugin.rules).forEach(ruleKey =>
+				Object.keys(plugin.rules).forEach((ruleKey) =>
 					allRules.set(ruleKey, plugin.rules[ruleKey])
 				);
 			}
@@ -72,7 +72,7 @@ export default async function lint(
 
 	// Find invalid rules configs
 	const missing = Object.keys(rulesConfig).filter(
-		name => typeof allRules.get(name) !== 'function'
+		(name) => typeof allRules.get(name) !== 'function'
 	);
 
 	if (missing.length > 0) {
@@ -147,14 +147,14 @@ export default async function lint(
 		.filter((item): item is Error => item instanceof Error);
 
 	if (invalid.length > 0) {
-		throw new Error(invalid.map(i => i.message).join('\n'));
+		throw new Error(invalid.map((i) => i.message).join('\n'));
 	}
 
 	// Validate against all rules
 	const pendingResults = Object.entries(rulesConfig)
 		// Level 0 rules are ignored
 		.filter(([, config]) => !!config && config.length && config[0] > 0)
-		.map(async entry => {
+		.map(async (entry) => {
 			const [name, config] = entry;
 			const [level, when, value] = config!; //
 
@@ -171,7 +171,7 @@ export default async function lint(
 				level,
 				valid,
 				name,
-				message
+				message,
 			};
 		});
 
@@ -179,9 +179,11 @@ export default async function lint(
 		(result): result is LintRuleOutcome => result !== null
 	);
 
-	const errors = results.filter(result => result.level === 2 && !result.valid);
+	const errors = results.filter(
+		(result) => result.level === 2 && !result.valid
+	);
 	const warnings = results.filter(
-		result => result.level === 1 && !result.valid
+		(result) => result.level === 1 && !result.valid
 	);
 
 	const valid = errors.length === 0;
@@ -190,6 +192,6 @@ export default async function lint(
 		valid,
 		errors,
 		warnings,
-		input: buildCommitMesage(parsed)
+		input: buildCommitMesage(parsed),
 	};
 }

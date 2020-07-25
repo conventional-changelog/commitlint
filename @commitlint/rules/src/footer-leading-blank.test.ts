@@ -11,7 +11,7 @@ const messages = {
 	with: 'test: subject\nbody\n\nBREAKING CHANGE: something important',
 	withMulitLine:
 		'test: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important',
-	withDoubleNewLine: 'fix: some issue\n\ndetailed explanation\n\ncloses #123'
+	withDoubleNewLine: 'fix: some issue\n\ndetailed explanation\n\ncloses #123',
 };
 
 const parsed = {
@@ -22,7 +22,7 @@ const parsed = {
 	withoutBody: parse(messages.withoutBody),
 	with: parse(messages.with),
 	withMulitLine: parse(messages.withMulitLine),
-	withDoubleNewLine: parse(messages.withDoubleNewLine)
+	withDoubleNewLine: parse(messages.withDoubleNewLine),
 };
 
 test('with simple message should succeed for empty keyword', async () => {

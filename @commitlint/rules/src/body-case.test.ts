@@ -5,14 +5,14 @@ const messages = {
 	empty: 'test: subject',
 	lowercase: 'test: subject\nbody',
 	mixedcase: 'test: subject\nBody',
-	uppercase: 'test: subject\nBODY'
+	uppercase: 'test: subject\nBODY',
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	lowercase: parse(messages.lowercase),
 	mixedcase: parse(messages.mixedcase),
-	uppercase: parse(messages.uppercase)
+	uppercase: parse(messages.uppercase),
 };
 
 test('with empty body should succeed for "never lowercase"', async () => {

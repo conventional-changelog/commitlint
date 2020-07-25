@@ -9,13 +9,13 @@ const value = long.length;
 const messages = {
 	simple: 'test: subject',
 	short: `test: subject\n${short}`,
-	long: `test: subject\n${long}`
+	long: `test: subject\n${long}`,
 };
 
 const parsed = {
 	simple: parse(messages.simple),
 	short: parse(messages.short),
-	long: parse(messages.long)
+	long: parse(messages.long),
 };
 
 test('with simple should succeed', async () => {

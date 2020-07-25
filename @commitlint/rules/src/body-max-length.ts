@@ -14,6 +14,6 @@ export const bodyMaxLength: SyncRule<number> = (
 
 	return [
 		maxLength(input, value),
-		`body must not be longer than ${value} characters`
+		`body must not be longer than ${value} characters`,
 	];
 };

@@ -10,14 +10,14 @@ const messages = {
 	simple: 'test: subject',
 	empty: 'test: subject\nbody',
 	short: `test: subject\n${short}`,
-	long: `test: subject\n${long}`
+	long: `test: subject\n${long}`,
 };
 
 const parsed = {
 	simple: parse(messages.simple),
 	empty: parse(messages.empty),
 	short: parse(messages.short),
-	long: parse(messages.long)
+	long: parse(messages.long),
 };
 
 test('with simple should succeed', async () => {

@@ -7,7 +7,7 @@ export interface CommitMessageData {
 export const buildCommitMesage = ({
 	header,
 	body,
-	footer
+	footer,
 }: CommitMessageData): string => {
 	let message = header;
 

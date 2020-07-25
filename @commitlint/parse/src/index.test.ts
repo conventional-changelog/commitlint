@@ -19,13 +19,10 @@ test('calls parser with message and passed options', async () => {
 	const message = 'message';
 
 	expect.assertions(1);
-	await parse(
-		message,
-		(m: string): any => {
-			expect(m).toBe(message);
-			return {};
-		}
-	);
+	await parse(message, (m: string): any => {
+		expect(m).toBe(message);
+		return {};
+	});
 });
 
 test('passes object up from parser function', async () => {
@@ -51,7 +48,7 @@ test('returns object with expected keys', async () => {
 		revert: null,
 		scope: null,
 		subject: null,
-		type: null
+		type: null,
 	};
 
 	expect(actual).toMatchObject(expected);
@@ -72,7 +69,7 @@ test('uses angular grammar', async () => {
 		revert: null,
 		scope: 'scope',
 		subject: 'subject',
-		type: 'type'
+		type: 'type',
 	};
 
 	expect(actual).toMatchObject(expected);
@@ -82,8 +79,8 @@ test('uses custom opts parser', async () => {
 	const message = 'type(scope)-subject';
 	const changelogOpts = {
 		parserOpts: {
-			headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/
-		}
+			headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
+		},
 	};
 	const actual = await parse(message, undefined, changelogOpts.parserOpts);
 	const expected = {
@@ -98,7 +95,7 @@ test('uses custom opts parser', async () => {
 		revert: null,
 		scope: 'scope',
 		subject: 'subject',
-		type: 'type'
+		type: 'type',
 	};
 
 	expect(actual).toMatchObject(expected);
@@ -108,7 +105,7 @@ test('does not merge array properties with custom opts', async () => {
 	const message = 'type: subject';
 	const actual = await parse(message, undefined, {
 		headerPattern: /^(.*):\s(.*)$/,
-		headerCorrespondence: ['type', 'subject']
+		headerCorrespondence: ['type', 'subject'],
 	});
 	const expected = {
 		body: null,
@@ -121,7 +118,7 @@ test('does not merge array properties with custom opts', async () => {
 		references: [],
 		revert: null,
 		subject: 'subject',
-		type: 'type'
+		type: 'type',
 	};
 
 	expect(actual).toMatchObject(expected);
@@ -148,7 +145,7 @@ test('ignores comments', async () => {
 	const changelogOpts = await require('conventional-changelog-angular');
 	const opts = {
 		...changelogOpts.parserOpts,
-		commentChar: '#'
+		commentChar: '#',
 	};
 	const actual = await parse(message, undefined, opts);
 
@@ -163,7 +160,7 @@ test('registers inline #', async () => {
 	const changelogOpts = await require('conventional-changelog-angular');
 	const opts = {
 		...changelogOpts.parserOpts,
-		commentChar: '#'
+		commentChar: '#',
 	};
 	const actual = await parse(message, undefined, opts);
 
@@ -175,7 +172,7 @@ test('parses references leading subject', async () => {
 	const message = '#1 some subject';
 	const opts = await require('conventional-changelog-angular');
 	const {
-		references: [actual]
+		references: [actual],
 	} = await parse(message, undefined, opts);
 
 	expect(actual.issue).toBe('1');
@@ -184,17 +181,17 @@ test('parses references leading subject', async () => {
 test('parses custom references', async () => {
 	const message = '#1 some subject PREFIX-2';
 	const {references} = await parse(message, undefined, {
-		issuePrefixes: ['PREFIX-']
+		issuePrefixes: ['PREFIX-'],
 	});
 
-	expect(references.find(ref => ref.issue === '1')).toBeFalsy();
-	expect(references.find(ref => ref.issue === '2')).toMatchObject({
+	expect(references.find((ref) => ref.issue === '1')).toBeFalsy();
+	expect(references.find((ref) => ref.issue === '2')).toMatchObject({
 		action: null,
 		issue: '2',
 		owner: null,
 		prefix: 'PREFIX-',
 		raw: '#1 some subject PREFIX-2',
-		repository: null
+		repository: null,
 	});
 });
 
@@ -215,7 +212,7 @@ test('uses permissive default regex with other parser opts', async () => {
 test('uses restrictive default regex in passed parser opts', async () => {
 	const message = 'chore(component,demo): bump';
 	const actual = await parse(message, undefined, {
-		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/
+		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/,
 	});
 
 	expect(actual.subject).toBe(null);
@@ -233,7 +230,7 @@ test('works with chinese scope by default', async () => {
 test('does not work with chinese scopes with incompatible pattern', async () => {
 	const message = 'fix(面试评价): 测试';
 	const actual = await parse(message, undefined, {
-		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/
+		headerPattern: /^(\w*)(?:\(([a-z]*)\))?: (.*)$/,
 	});
 
 	expect(actual.subject).toBe(null);

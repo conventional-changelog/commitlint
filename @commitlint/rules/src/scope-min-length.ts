@@ -12,6 +12,6 @@ export const scopeMinLength: SyncRule<number> = (
 	}
 	return [
 		minLength(input, value),
-		`scope must not be shorter than ${value} characters`
+		`scope must not be shorter than ${value} characters`,
 	];
 };

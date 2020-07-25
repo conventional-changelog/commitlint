@@ -8,6 +8,6 @@ export const subjectEmpty: SyncRule = (parsed, when = 'always') => {
 
 	return [
 		negated ? notEmpty : !notEmpty,
-		message(['subject', negated ? 'may not' : 'must', 'be empty'])
+		message(['subject', negated ? 'may not' : 'must', 'be empty']),
 	];
 };

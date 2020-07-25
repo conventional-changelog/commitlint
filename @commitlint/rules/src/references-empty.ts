@@ -6,6 +6,6 @@ export const referencesEmpty: SyncRule = (parsed, when = 'never') => {
 	const notEmpty = parsed.references.length > 0;
 	return [
 		negated ? !notEmpty : notEmpty,
-		message(['references', negated ? 'must' : 'may not', 'be empty'])
+		message(['references', negated ? 'must' : 'may not', 'be empty']),
 	];
 };

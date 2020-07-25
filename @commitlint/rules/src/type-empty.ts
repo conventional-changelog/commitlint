@@ -7,6 +7,6 @@ export const typeEmpty: SyncRule = (parsed, when = 'always') => {
 	const notEmpty = ensure.notEmpty(parsed.type || '');
 	return [
 		negated ? notEmpty : !notEmpty,
-		message(['type', negated ? 'may not' : 'must', 'be empty'])
+		message(['type', negated ? 'may not' : 'must', 'be empty']),
 	];
 };

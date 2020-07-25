@@ -15,7 +15,7 @@ export default function loadPlugin(
 
 	if (pluginName.match(/\s+/u)) {
 		throw new WhitespacePluginError(pluginName, {
-			pluginName: longName
+			pluginName: longName,
 		});
 	}
 
@@ -34,7 +34,7 @@ export default function loadPlugin(
 
 				throw new MissingPluginError(pluginName, error.message, {
 					pluginName: longName,
-					commitlintPath: path.resolve(__dirname, '../..')
+					commitlintPath: path.resolve(__dirname, '../..'),
 				});
 			}
 
