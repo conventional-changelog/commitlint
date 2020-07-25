@@ -90,7 +90,7 @@ jobs:
     docker:
       - image: node:14
     steps:
-      - run-all
+      - run-tests
   windows-v12:
     executor: win/default
     steps:
