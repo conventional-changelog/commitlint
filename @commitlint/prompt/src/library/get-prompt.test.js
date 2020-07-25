@@ -9,14 +9,14 @@ test('throws with incompatible prompter', () => {
 		getPrompt('type', {
 			prompter() {
 				return {};
-			}
+			},
 		})
 	).toThrow('prompt.removeAllListeners');
 });
 
 test('returns input unaltered wihtout rules', async () => {
 	const message = await getPrompt('type', {
-		prompter: stub('foobar')
+		prompter: stub('foobar'),
 	});
 
 	expect(message).toEqual('foobar');
@@ -68,15 +68,15 @@ function stub(input = '') {
 				redraw: {
 					done(...args) {
 						called.push([instance.ui.redraw.done, args]);
-					}
-				}
+					},
+				},
 			},
-			called
+			called,
 		};
 
 		setTimeout(() => {
 			actions[0]({
-				text: Array.isArray(input) ? input : [input]
+				text: Array.isArray(input) ? input : [input],
 			});
 		});
 

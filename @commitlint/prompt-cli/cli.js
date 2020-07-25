@@ -5,7 +5,7 @@ const {prompter} = require('@commitlint/prompt');
 const _ = undefined;
 const prompt = () => prompter(_, commit);
 
-main().catch(err => {
+main().catch((err) => {
 	setTimeout(() => {
 		throw err;
 	});
@@ -13,7 +13,7 @@ main().catch(err => {
 
 function main() {
 	return isStageEmpty()
-		.then(empty => {
+		.then((empty) => {
 			if (empty) {
 				console.log(
 					`Nothing to commit. Stage your changes via "git add" execute "commit" again`
@@ -25,7 +25,7 @@ function main() {
 }
 
 function isStageEmpty() {
-	return execa('git', ['diff', '--cached']).then(r => r.stdout === '');
+	return execa('git', ['diff', '--cached']).then((r) => r.stdout === '');
 }
 
 function commit(message) {

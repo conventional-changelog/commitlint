@@ -8,8 +8,8 @@ import chalk from 'chalk';
 export default function meta(settings) {
 	return chalk.grey(
 		Object.entries(settings || {})
-			.filter(item => item[1])
-			.map(item => {
+			.filter((item) => item[1])
+			.map((item) => {
 				const [name, value] = item;
 				return typeof value === 'boolean' ? `[${name}]` : `[${name}=${value}]`;
 			})

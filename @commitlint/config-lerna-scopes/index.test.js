@@ -8,23 +8,23 @@ test('exports rules key', () => {
 
 test('rules hold object', () => {
 	expect(config).toMatchObject({
-		rules: expect.any(Object)
+		rules: expect.any(Object),
 	});
 });
 
 test('rules contain scope-enum', () => {
 	expect(config).toMatchObject({
 		rules: {
-			'scope-enum': expect.anything()
-		}
+			'scope-enum': expect.anything(),
+		},
 	});
 });
 
 test('scope-enum is function', () => {
 	expect(config).toMatchObject({
 		rules: {
-			'scope-enum': expect.any(Function)
-		}
+			'scope-enum': expect.any(Function),
+		},
 	});
 });
 

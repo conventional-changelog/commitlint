@@ -8,11 +8,11 @@ const types = [
 	'refactor',
 	'revert',
 	'style',
-	'test'
+	'test',
 ];
 
 module.exports.rules = {
-	'type-enum': [2, 'always', types]
+	'type-enum': [2, 'always', types],
 };
 
 module.exports.value = () => types;

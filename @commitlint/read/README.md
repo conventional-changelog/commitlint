@@ -14,11 +14,11 @@ npm install --save @commitlint/read
 const read = require('@commitlint/read');
 
 // Read last edited commit message
-read({edit: true}).then(messages => console.log(messages));
+read({edit: true}).then((messages) => console.log(messages));
 // => ['I did something\n\n']
 
 // Read from the third to second commit message from HEAD
-read({from: 'HEAD~2', to: 'HEAD~1'}).then(messages => console.log(messages));
+read({from: 'HEAD~2', to: 'HEAD~1'}).then((messages) => console.log(messages));
 // => ['Initial commit\n\n']
 ```
 
