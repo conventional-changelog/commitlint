@@ -7,17 +7,17 @@ const cwd = process.cwd();
 function main() {
 	return Promise.all([
 		check(['--missing', '--no-dev', '.']),
-		check(['--extra', '--no-dev', '.'])
+		check(['--extra', '--no-dev', '.']),
 	])
-		.then(tasks => [null, tasks.map(t => t.stdout).join('\n')])
-		.catch(err => [err]);
+		.then((tasks) => [null, tasks.map((t) => t.stdout).join('\n')])
+		.catch((err) => [err]);
 }
 
 function check(args) {
 	return execa('dependency-check', args, {cwd});
 }
 
-main().then(args => {
+main().then((args) => {
 	const err = args[0];
 	const out = args[1];
 	console.log(`Checking dependencies ${path.join(cwd, 'package.json')}`);

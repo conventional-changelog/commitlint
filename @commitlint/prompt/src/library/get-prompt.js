@@ -98,18 +98,18 @@ function getPrompt(type, context = {}) {
 				results.scope,
 				results.scope ? '()' : '',
 				results.type && results.scope ? ':' : '',
-				results.subject
+				results.subject,
 		  ].join('').length
 		: Infinity;
 
 	const maxLength = Math.min(inputMaxLength, remainingHeaderLength);
 
-	return new Promise(resolve => {
+	return new Promise((resolve) => {
 		// Add the defined enums as sub commands if applicable
 		if (enumRule) {
 			const [, [, , enums]] = enumRule;
 
-			enums.forEach(enumerable => {
+			enums.forEach((enumerable) => {
 				const enumSettings = (settings.enumerables || {})[enumerable] || {};
 				prompt
 					.command(enumerable)
@@ -121,7 +121,7 @@ function getPrompt(type, context = {}) {
 					});
 			});
 		} else {
-			prompt.catch('[text...]').action(parameters => {
+			prompt.catch('[text...]').action((parameters) => {
 				const {text = ''} = parameters;
 				prompt.removeAllListeners();
 				prompt.ui.redraw.done();
@@ -142,7 +142,7 @@ function getPrompt(type, context = {}) {
 		}
 
 		// Handle empty input
-		const onSubmit = input => {
+		const onSubmit = (input) => {
 			if (input.length > 0) {
 				return;
 			}
@@ -165,34 +165,34 @@ function getPrompt(type, context = {}) {
 			}
 		};
 
-		const drawRemaining = length => {
+		const drawRemaining = (length) => {
 			if (length < Infinity) {
 				const colors = [
 					{
 						threshold: 5,
-						color: 'red'
+						color: 'red',
 					},
 					{
 						threshold: 10,
-						color: 'yellow'
+						color: 'yellow',
 					},
 					{
 						threshold: Infinity,
-						color: 'grey'
-					}
+						color: 'grey',
+					},
 				];
 
 				const color = colors
-					.filter(item => {
+					.filter((item) => {
 						return item.threshold >= length;
 					})
-					.map(item => item.color)[0];
+					.map((item) => item.color)[0];
 
 				prompt.ui.redraw(chalk[color](`${length} characters left`));
 			}
 		};
 
-		const onKey = event => {
+		const onKey = (event) => {
 			const sanitized = forceCaseFn(event.value);
 			const cropped = sanitized.slice(0, maxLength);
 
@@ -217,7 +217,7 @@ function getPrompt(type, context = {}) {
 				required: mayNotBeEmpty,
 				'tab-completion': typeof enumRule !== 'undefined',
 				header: typeof settings.header !== 'undefined',
-				'multi-line': settings.multiline
+				'multi-line': settings.multiline,
 			})}`
 		);
 

@@ -6,9 +6,9 @@ const semver = require('semver');
 module.exports = {
 	utils: {getPackages},
 	rules: {
-		'scope-enum': ctx =>
-			getPackages(ctx).then(packages => [2, 'always', packages])
-	}
+		'scope-enum': (ctx) =>
+			getPackages(ctx).then((packages) => [2, 'always', packages]),
+	},
 };
 
 function getPackages(context) {
@@ -25,7 +25,7 @@ function getPackages(context) {
 				const repository = new Repository(cwd);
 				return PackageUtilities.getPackages({
 					packageConfigs: repository.packageConfigs,
-					rootPath: cwd
+					rootPath: cwd,
 				});
 			}
 
@@ -33,10 +33,10 @@ function getPackages(context) {
 			const project = new Project(cwd);
 			return project.getPackages();
 		})
-		.then(packages => {
+		.then((packages) => {
 			return packages
-				.map(pkg => pkg.name)
-				.map(name => (name.charAt(0) === '@' ? name.split('/')[1] : name));
+				.map((pkg) => pkg.name)
+				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 		});
 }
 

@@ -10,7 +10,7 @@ import startCase from 'lodash/startCase';
  * @return {fn} transform function applying the enforced case
  */
 export default function getForcedCaseFn(rule) {
-	const noop = input => input;
+	const noop = (input) => input;
 
 	if (!rule) {
 		return noop;
@@ -42,26 +42,26 @@ export default function getForcedCaseFn(rule) {
 
 	switch (target) {
 		case 'camel-case':
-			return input => camelCase(input);
+			return (input) => camelCase(input);
 		case 'kebab-case':
-			return input => kebabCase(input);
+			return (input) => kebabCase(input);
 		case 'snake-case':
-			return input => snakeCase(input);
+			return (input) => snakeCase(input);
 		case 'pascal-case':
-			return input => upperFirst(camelCase(input));
+			return (input) => upperFirst(camelCase(input));
 		case 'start-case':
-			return input => startCase(input);
+			return (input) => startCase(input);
 		case 'upper-case':
 		case 'uppercase':
-			return input => input.toUpperCase();
+			return (input) => input.toUpperCase();
 		case 'sentence-case':
 		case 'sentencecase':
-			return input =>
+			return (input) =>
 				`${input.charAt(0).toUpperCase()}${input.substring(1).toLowerCase()}`;
 		case 'lower-case':
 		case 'lowercase':
 		case 'lowerCase': // Backwards compat config-angular v4
-			return input => input.toLowerCase() === input;
+			return (input) => input.toLowerCase() === input;
 		default:
 			throw new TypeError(`Unknown target case "${rule[2]}"`);
 	}

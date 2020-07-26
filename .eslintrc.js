@@ -3,14 +3,14 @@ module.exports = {
 	plugins: ['@typescript-eslint', 'jest', 'import'],
 	env: {
 		es6: true,
-		node: true
+		node: true,
 	},
 	parserOptions: {
 		sourceType: 'module',
 		ecmaVersion: 11,
 		ecmaFeatures: {
-			jsx: false
-		}
+			jsx: false,
+		},
 	},
 	extends: ['eslint:recommended', 'prettier'],
 	rules: {
@@ -25,7 +25,7 @@ module.exports = {
 		// Prevent importing the default as if it were named
 		'import/no-named-default': 'error',
 		// Forbid a module from importing itself
-		'import/no-self-import': 'error'
+		'import/no-self-import': 'error',
 
 		// Enable after https://github.com/benmosher/eslint-plugin-import/issues/1650 is fixed
 		// Forbid the use of extraneous packages
@@ -41,7 +41,7 @@ module.exports = {
 			extends: [
 				'plugin:@typescript-eslint/eslint-recommended',
 				'plugin:@typescript-eslint/recommended',
-				'prettier/@typescript-eslint'
+				'prettier/@typescript-eslint',
 			],
 			rules: {
 				'@typescript-eslint/no-unused-vars': 'off',
@@ -54,21 +54,21 @@ module.exports = {
 
 				// TODO: enable those rules?
 				'no-empty': 'off',
-				'no-var': 'off'
-			}
+				'no-var': 'off',
+			},
 		},
 		{
 			files: ['*.test.ts', '*.test.js'],
 			env: {
-				jest: true
+				jest: true,
 			},
 			extends: ['plugin:jest/recommended'],
 			rules: {
 				'@typescript-eslint/no-explicit-any': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
 				// disallow non-import statements appearing before import statements
-				'import/first': 'off'
-			}
-		}
-	]
+				'import/first': 'off',
+			},
+		},
+	],
 };

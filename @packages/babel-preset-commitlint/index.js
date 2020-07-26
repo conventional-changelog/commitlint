@@ -11,14 +11,14 @@ function preset() {
 		commonjs,
 		[jsx, {pragma: 'h'}],
 		[fastAsync, {spec: true}],
-		[transformRuntime, {regenerator: false}]
+		[transformRuntime, {regenerator: false}],
 	];
 
 	return {
 		env: {
 			development: {
-				plugins
-			}
+				plugins,
+			},
 		},
 		plugins,
 		presets: [
@@ -28,9 +28,9 @@ function preset() {
 					debug: process.env.DEBUG === 'true',
 					exclude: ['transform-regenerator', 'transform-async-to-generator'],
 					targets: {node: '6'},
-					modules: false
-				}
-			]
-		]
+					modules: false,
+				},
+			],
+		],
 	};
 }
