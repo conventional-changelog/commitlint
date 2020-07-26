@@ -14,6 +14,6 @@ export const subjectMaxLength: SyncRule<number> = (
 
 	return [
 		maxLength(input, value),
-		`subject must not be longer than ${value} characters`
+		`subject must not be longer than ${value} characters`,
 	];
 };

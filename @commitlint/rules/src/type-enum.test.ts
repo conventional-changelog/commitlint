@@ -4,13 +4,13 @@ import {typeEnum} from './type-enum';
 const messages = {
 	empty: '(): \n',
 	a: 'a(): \n',
-	b: 'b(): \n'
+	b: 'b(): \n',
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	a: parse(messages.a),
-	b: parse(messages.b)
+	b: parse(messages.b),
 };
 
 test('empty succeeds', async () => {

@@ -4,7 +4,7 @@ import {
 	FormattableReport,
 	FormatOptions,
 	FormattableResult,
-	WithInput
+	WithInput,
 } from '@commitlint/types';
 
 const DEFAULT_SIGNS = [' ', '⚠', '✖'] as const;
@@ -20,8 +20,8 @@ export function format(
 	const fr = (result: FormattableResult) => formatResult(result, options);
 
 	return results
-		.filter(r => Array.isArray(r.warnings) || Array.isArray(r.errors))
-		.map(result => [...fi(result), ...fr(result)])
+		.filter((r) => Array.isArray(r.warnings) || Array.isArray(r.errors))
+		.map((result) => [...fi(result), ...fr(result)])
 		.reduce(
 			(acc, item) => (Array.isArray(item) ? [...acc, ...item] : [...acc, item]),
 			[]
@@ -59,11 +59,11 @@ export function formatResult(
 	const {
 		signs = DEFAULT_SIGNS,
 		colors = DEFAULT_COLORS,
-		color: enabled = true
+		color: enabled = true,
 	} = options;
 	const {errors = [], warnings = []} = result;
 
-	const problems = [...errors, ...warnings].map(problem => {
+	const problems = [...errors, ...warnings].map((problem) => {
 		const sign = signs[problem.level] || '';
 		const color: ChalkColor = colors[problem.level] || ('white' as const);
 		const decoration = enabled ? ((chalk as any)[color] as any)(sign) : sign;
@@ -96,7 +96,7 @@ export function formatResult(
 		hasProblems ? '' : undefined,
 		fmtSummary,
 		help,
-		help ? '' : undefined
+		help ? '' : undefined,
 	].filter((line): line is string => typeof line === 'string');
 }
 

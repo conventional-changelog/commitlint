@@ -20,14 +20,14 @@ async function input(prompter) {
 		scope: null,
 		subject: null,
 		body: null,
-		footer: null
+		footer: null,
 	};
 
 	const {rules} = await load();
 
 	await Promise.all(
 		['type', 'scope', 'subject', 'body', 'footer'].map(
-			throat(1, async input => {
+			throat(1, async (input) => {
 				const inputRules = getRules(input, rules);
 				const inputSettings = settings[input];
 
@@ -41,7 +41,7 @@ async function input(prompter) {
 					const [, [severity, applicable, length]] = headerLengthRule;
 					if (severity > 0 && applicable === 'always') {
 						inputSettings.header = {
-							length
+							length,
 						};
 					}
 				}
@@ -50,11 +50,11 @@ async function input(prompter) {
 					rules: inputRules,
 					settings: inputSettings,
 					results,
-					prompter
+					prompter,
 				});
 			})
 		)
-	).catch(err => {
+	).catch((err) => {
 		console.error(err);
 		return '';
 	});
@@ -80,7 +80,7 @@ function getRulePrefix(id) {
  * @return {[type]}      [description]
  */
 function getHasPrefix(name) {
-	return rule => getRulePrefix(rule[0]) === name;
+	return (rule) => getRulePrefix(rule[0]) === name;
 }
 
 /**

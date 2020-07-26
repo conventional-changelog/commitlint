@@ -5,14 +5,14 @@ const messages = {
 	plain: 'foo(bar): baz',
 	superfluous: 'foo(): baz',
 	empty: 'foo: baz',
-	multiple: 'foo(bar,baz): qux'
+	multiple: 'foo(bar,baz): qux',
 };
 
 const parsed = {
 	plain: parse(messages.plain),
 	superfluous: parse(messages.superfluous),
 	empty: parse(messages.empty),
-	multiple: parse(messages.multiple)
+	multiple: parse(messages.multiple),
 };
 
 test('scope-enum with plain message and always should succeed empty enum', async () => {

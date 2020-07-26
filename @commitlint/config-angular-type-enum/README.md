@@ -28,14 +28,14 @@ const types = require('@commitlint/config-angular-type-enum');
 // Use as rule creating errors for non-allowed types
 module.exports = {
   rules: {
-    ...types.rules
-  }
+    ...types.rules,
+  },
 };
 
 // Warn for non-allowed types
 module.exports = {
   rules: {
-    'type-enum': [1, 'always', types.values()]
-  }
+    'type-enum': [1, 'always', types.values()],
+  },
 };
 ```

@@ -4,13 +4,13 @@ import {footerEmpty} from './footer-empty';
 const messages = {
 	simple: 'test: subject',
 	empty: 'test: subject\nbody',
-	filled: 'test: subject\nBREAKING CHANGE: something important'
+	filled: 'test: subject\nBREAKING CHANGE: something important',
 };
 
 const parsed = {
 	simple: parse(messages.simple),
 	empty: parse(messages.empty),
-	filled: parse(messages.filled)
+	filled: parse(messages.filled),
 };
 
 test('with simple message should succeed for empty keyword', async () => {

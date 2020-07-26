@@ -27,28 +27,28 @@ const output = format(
             valid: false,
             level: 2,
             name: 'some-error',
-            message: 'This will show up red as it has level 2'
-          }
+            message: 'This will show up red as it has level 2',
+          },
         ],
         warnings: [
           {
             valid: true,
             level: 0,
             name: 'some-hint',
-            message: 'This will not show up as it has level 0'
+            message: 'This will not show up as it has level 0',
           },
           {
             valid: false,
             level: 1,
             name: 'some-warning',
-            message: 'This will show up yellow as it has level 1'
-          }
-        ]
-      }
-    ]
+            message: 'This will show up yellow as it has level 1',
+          },
+        ],
+      },
+    ],
   },
   {
-    color: false
+    color: false,
   }
 );
 

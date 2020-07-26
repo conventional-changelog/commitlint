@@ -7,12 +7,12 @@ function cli(args, options, input) {
 	const c = execa(bin, args, {
 		cwd: options.cwd,
 		env: options.env,
-		input: input
+		input: input,
 	});
-	return c.catch(err => err);
+	return c.catch((err) => err);
 }
 
-const fixBootstrap = fixture => fix.bootstrap(fixture, __dirname);
+const fixBootstrap = (fixture) => fix.bootstrap(fixture, __dirname);
 
 test('should reprint input from stdin', async () => {
 	const cwd = await fixBootstrap('fixtures/default');

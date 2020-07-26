@@ -17,7 +17,7 @@ const cli = (args: string[], options: TestOptions) => {
 			cwd: options.cwd,
 			env: options.env,
 			input: input,
-			reject: false
+			reject: false,
 		});
 	};
 };
@@ -239,7 +239,7 @@ test('should allow reading of environment variables for edit file, succeeding if
 	await fs.writeFile(path.join(cwd, 'commit-msg-file'), 'foo');
 	const actual = await cli(['--env', 'variable'], {
 		cwd,
-		env: {variable: 'commit-msg-file'}
+		env: {variable: 'commit-msg-file'},
 	})();
 	expect(actual.exitCode).toBe(0);
 });
@@ -252,7 +252,7 @@ test('should allow reading of environment variables for edit file, failing if in
 	);
 	const actual = await cli(['--env', 'variable'], {
 		cwd,
-		env: {variable: 'commit-msg-file'}
+		env: {variable: 'commit-msg-file'},
 	})();
 	expect(actual.exitCode).toBe(1);
 });

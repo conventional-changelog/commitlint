@@ -15,7 +15,7 @@ const validBaseEnv = {
 	TRAVIS_COMMIT_RANGE: 'TRAVIS_COMMIT_A.TRAVIS_COMMIT_B',
 	TRAVIS_EVENT_TYPE: 'TRAVIS_EVENT_TYPE',
 	TRAVIS_REPO_SLUG: 'TRAVIS_REPO_SLUG',
-	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG'
+	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG',
 };
 
 const cli = async (config = {}, args = []) => {
@@ -29,7 +29,7 @@ const cli = async (config = {}, args = []) => {
 test('should throw when not on travis ci', async () => {
 	const env = {
 		CI: false,
-		TRAVIS: false
+		TRAVIS: false,
 	};
 
 	await expect(cli({env})).rejects.toThrow(
@@ -40,7 +40,7 @@ test('should throw when not on travis ci', async () => {
 test('should throw when on travis ci, but env vars are missing', async () => {
 	const env = {
 		TRAVIS: true,
-		CI: true
+		CI: true,
 	};
 
 	await expect(cli({env})).rejects.toThrow(
@@ -58,7 +58,7 @@ test('should call git with expected args', async () => {
 
 	const result = await cli({
 		cwd,
-		env: validBaseEnv
+		env: validBaseEnv,
 	});
 	const invocations = await getInvocations(result.stdout);
 	expect(invocations.length).toBe(3);
@@ -80,7 +80,7 @@ test('should call git with expected args on pull_request', async () => {
 
 	const result = await cli({
 		cwd,
-		env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'}
+		env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'},
 	});
 	const invocations = await getInvocations(result.stdout);
 	expect(invocations.length).toBe(3);
@@ -94,7 +94,7 @@ test('should call git with expected args on pull_request', async () => {
 		'--from',
 		'TRAVIS_COMMIT_A',
 		'--to',
-		'TRAVIS_COMMIT_B'
+		'TRAVIS_COMMIT_B',
 	]);
 });
 
@@ -109,7 +109,7 @@ test('should call git with extra expected args on pull_request', async () => {
 	const result = await cli(
 		{
 			cwd,
-			env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'}
+			env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'},
 		},
 		['--config', './config/commitlint.config.js']
 	);
@@ -127,7 +127,7 @@ test('should call git with extra expected args on pull_request', async () => {
 		'--to',
 		'TRAVIS_COMMIT_B',
 		'--config',
-		'./config/commitlint.config.js'
+		'./config/commitlint.config.js',
 	]);
 });
 
@@ -136,12 +136,12 @@ function getInvocations(stdout) {
 	const raw = Array.isArray(matches) ? matches : [];
 
 	return raw
-		.filter(invocation => invocation !== '\n')
-		.map(invocation =>
+		.filter((invocation) => invocation !== '\n')
+		.map((invocation) =>
 			invocation
 				.split(',')
-				.map(fragment => fragment.trim())
-				.map(fragment => fragment.substring(1, fragment.length - 1))
+				.map((fragment) => fragment.trim())
+				.map((fragment) => fragment.substring(1, fragment.length - 1))
 				.filter(Boolean)
 		);
 }

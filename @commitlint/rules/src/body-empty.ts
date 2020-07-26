@@ -8,6 +8,6 @@ export const bodyEmpty: SyncRule = (parsed, when = 'always') => {
 
 	return [
 		negated ? notEmpty : !notEmpty,
-		message(['body', negated ? 'may not' : 'must', 'be empty'])
+		message(['body', negated ? 'may not' : 'must', 'be empty']),
 	];
 };

@@ -7,5 +7,5 @@ export = {
 	format,
 	load,
 	lint,
-	read
+	read,
 };

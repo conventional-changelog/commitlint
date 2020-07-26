@@ -15,25 +15,25 @@ export const typeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 		return [true];
 	}
 
-	const checks = (Array.isArray(value) ? value : [value]).map(check => {
+	const checks = (Array.isArray(value) ? value : [value]).map((check) => {
 		if (typeof check === 'string') {
 			return {
 				when: 'always',
-				case: check
+				case: check,
 			};
 		}
 		return check;
 	});
 
-	const result = checks.some(check => {
+	const result = checks.some((check) => {
 		const r = ensureCase(type, check.case);
 		return negated(check.when) ? !r : r;
 	});
 
-	const list = checks.map(c => c.case).join(', ');
+	const list = checks.map((c) => c.case).join(', ');
 
 	return [
 		negated(when) ? !result : result,
-		message([`type must`, negated(when) ? `not` : null, `be ${list}`])
+		message([`type must`, negated(when) ? `not` : null, `be ${list}`]),
 	];
 };

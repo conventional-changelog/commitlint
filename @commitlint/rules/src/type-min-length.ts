@@ -12,6 +12,6 @@ export const typeMinLength: SyncRule<number> = (
 	}
 	return [
 		minLength(input, value),
-		`type must not be shorter than ${value} characters`
+		`type must not be shorter than ${value} characters`,
 	];
 };

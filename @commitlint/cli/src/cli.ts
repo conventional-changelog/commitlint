@@ -14,7 +14,7 @@ import {
 	ParserOptions,
 	ParserPreset,
 	QualifiedConfig,
-	Formatter
+	Formatter,
 } from '@commitlint/types';
 import {CliError} from './cli-error';
 
@@ -26,77 +26,77 @@ const cli = yargs
 			alias: 'c',
 			default: true,
 			description: 'toggle colored output',
-			type: 'boolean'
+			type: 'boolean',
 		},
 		config: {
 			alias: 'g',
 			description: 'path to the config file',
-			type: 'string'
+			type: 'string',
 		},
 		cwd: {
 			alias: 'd',
 			default: process.cwd(),
 			defaultDescription: '(Working Directory)',
 			description: 'directory to execute in',
-			type: 'string'
+			type: 'string',
 		},
 		edit: {
 			alias: 'e',
 			default: false,
 			description:
 				'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
-			type: 'string'
+			type: 'string',
 		},
 		env: {
 			alias: 'E',
 			description:
 				'check message in the file at path given by environment variable value',
-			type: 'string'
+			type: 'string',
 		},
 		extends: {
 			alias: 'x',
 			description: 'array of shareable configurations to extend',
-			type: 'array'
+			type: 'array',
 		},
 		'help-url': {
 			alias: 'H',
 			type: 'string',
-			description: 'help url in error message'
+			description: 'help url in error message',
 		},
 		from: {
 			alias: 'f',
 			description:
 				'lower end of the commit range to lint; applies if edit=false',
-			type: 'string'
+			type: 'string',
 		},
 		format: {
 			alias: 'o',
 			description: 'output format of the results',
-			type: 'string'
+			type: 'string',
 		},
 		'parser-preset': {
 			alias: 'p',
 			description:
 				'configuration preset to use for conventional-commits-parser',
-			type: 'string'
+			type: 'string',
 		},
 		quiet: {
 			alias: 'q',
 			default: false,
 			description: 'toggle console output',
-			type: 'boolean'
+			type: 'boolean',
 		},
 		to: {
 			alias: 't',
 			description:
 				'upper end of the commit range to lint; applies if edit=false',
-			type: 'string'
+			type: 'string',
 		},
 		verbose: {
 			alias: 'V',
 			type: 'boolean',
-			description: 'enable verbose output for reports without problems'
-		}
+			description: 'enable verbose output for reports without problems',
+		},
 	})
 	.version(
 		'version',
@@ -112,7 +112,7 @@ const cli = yargs
 	)
 	.strict();
 
-main(cli.argv).catch(err => {
+main(cli.argv).catch((err) => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
 			process.exit(1);
@@ -132,12 +132,12 @@ async function main(options: CliFlags) {
 				to: flags.to,
 				from: flags.from,
 				edit: flags.edit,
-				cwd: flags.cwd
+				cwd: flags.cwd,
 		  }));
 
 	const messages = (Array.isArray(input) ? input : [input])
-		.filter(message => typeof message === 'string')
-		.filter(message => message.trim() !== '')
+		.filter((message) => typeof message === 'string')
+		.filter((message) => message.trim() !== '')
 		.filter(Boolean);
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
@@ -157,7 +157,7 @@ async function main(options: CliFlags) {
 		parserOpts: {},
 		plugins: {},
 		ignores: [],
-		defaultIgnores: true
+		defaultIgnores: true,
 	};
 	if (parserOpts) {
 		opts.parserOpts = parserOpts;
@@ -179,7 +179,7 @@ async function main(options: CliFlags) {
 	}
 
 	const results = await Promise.all(
-		messages.map(message => lint(message, loaded.rules, opts))
+		messages.map((message) => lint(message, loaded.rules, opts))
 	);
 
 	if (Object.keys(loaded.rules).length === 0) {
@@ -199,12 +199,12 @@ async function main(options: CliFlags) {
 					message: [
 						'Please add rules to your `commitlint.config.js`',
 						'    - Getting started guide: https://git.io/fhHij',
-						'    - Example config: https://git.io/fhHip'
-					].join('\n')
-				}
+						'    - Example config: https://git.io/fhHip',
+					].join('\n'),
+				},
 			],
 			warnings: [],
-			input
+			input,
 		});
 	}
 
@@ -226,7 +226,7 @@ async function main(options: CliFlags) {
 			valid: true,
 			errorCount: 0,
 			warningCount: 0,
-			results: []
+			results: [],
 		}
 	);
 
@@ -235,7 +235,7 @@ async function main(options: CliFlags) {
 		verbose: flags.verbose,
 		helpUrl: flags['help-url']
 			? flags['help-url'].trim()
-			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
 	});
 
 	if (!flags.quiet && output !== '') {
@@ -267,7 +267,7 @@ function normalizeFlags(flags: CliFlags): CliFlags {
 	const edit = getEditValue(flags);
 	return {
 		...flags,
-		edit
+		edit,
 	};
 }
 
@@ -275,11 +275,7 @@ function getEditValue(flags: CliFlags) {
 	if (flags.env) {
 		if (!(flags.env in process.env)) {
 			throw new Error(
-				`Recieved '${
-					flags.env
-				}' as value for -E | --env, but environment variable '${
-					flags.env
-				}' is not available globally`
+				`Recieved '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
 			);
 		}
 		return process.env[flags.env];

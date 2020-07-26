@@ -12,6 +12,6 @@ export const headerFullStop: SyncRule<string> = (
 
 	return [
 		negated ? !hasStop : hasStop,
-		message(['header', negated ? 'may not' : 'must', 'end with full stop'])
+		message(['header', negated ? 'may not' : 'must', 'end with full stop']),
 	];
 };

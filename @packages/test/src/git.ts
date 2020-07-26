@@ -32,7 +32,7 @@ async function setup(cwd: string, gitCommand = 'git') {
 	try {
 		await execa(gitCommand, ['config', 'user.name', 'ava'], {cwd});
 		await execa(gitCommand, ['config', 'user.email', 'test@example.com'], {
-			cwd
+			cwd,
 		});
 		await execa(gitCommand, ['config', 'commit.gpgsign', 'false'], {cwd});
 	} catch (err) {

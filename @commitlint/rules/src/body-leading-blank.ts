@@ -16,6 +16,6 @@ export const bodyLeadingBlank: SyncRule = (parsed, when) => {
 
 	return [
 		negated ? !succeeds : succeeds,
-		message(['body', negated ? 'may not' : 'must', 'have leading blank line'])
+		message(['body', negated ? 'may not' : 'must', 'have leading blank line']),
 	];
 };

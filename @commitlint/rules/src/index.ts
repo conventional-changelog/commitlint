@@ -63,5 +63,5 @@ export default {
 	'type-empty': typeEmpty,
 	'type-enum': typeEnum,
 	'type-max-length': typeMaxLength,
-	'type-min-length': typeMinLength
+	'type-min-length': typeMinLength,
 };

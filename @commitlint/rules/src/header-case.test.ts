@@ -10,7 +10,7 @@ const messages = {
 	kebabcase: 'hea-der\n',
 	pascalcase: 'HeaDer\n',
 	snakecase: 'hea_der\n',
-	startcase: 'Hea Der\n'
+	startcase: 'Hea Der\n',
 };
 
 const parsed = {
@@ -22,7 +22,7 @@ const parsed = {
 	kebabcase: parse(messages.kebabcase),
 	pascalcase: parse(messages.pascalcase),
 	snakecase: parse(messages.snakecase),
-	startcase: parse(messages.startcase)
+	startcase: parse(messages.startcase),
 };
 
 test('with lowercase header should fail for "never lowercase"', async () => {
@@ -240,7 +240,7 @@ test('should use expected message with "never"', async () => {
 test('with uppercase scope should succeed for "always [uppercase, lowercase]"', async () => {
 	const [actual] = headerCase(await parsed.uppercase, 'always', [
 		'uppercase',
-		'lowercase'
+		'lowercase',
 	]);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -249,7 +249,7 @@ test('with uppercase scope should succeed for "always [uppercase, lowercase]"', 
 test('with lowercase header should succeed for "always [uppercase, lowercase]"', async () => {
 	const [actual] = headerCase(await parsed.lowercase, 'always', [
 		'uppercase',
-		'lowercase'
+		'lowercase',
 	]);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -258,7 +258,7 @@ test('with lowercase header should succeed for "always [uppercase, lowercase]"',
 test('with mixedcase header should fail for "always [uppercase, lowercase]"', async () => {
 	const [actual] = headerCase(await parsed.mixedcase, 'always', [
 		'uppercase',
-		'lowercase'
+		'lowercase',
 	]);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -268,7 +268,7 @@ test('with mixedcase header should pass for "always [uppercase, lowercase, camel
 	const [actual] = headerCase(await parsed.mixedcase, 'always', [
 		'uppercase',
 		'lowercase',
-		'camel-case'
+		'camel-case',
 	]);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -277,7 +277,7 @@ test('with mixedcase header should pass for "always [uppercase, lowercase, camel
 test('with mixedcase scope should pass for "never [uppercase, lowercase]"', async () => {
 	const [actual] = headerCase(await parsed.mixedcase, 'never', [
 		'uppercase',
-		'lowercase'
+		'lowercase',
 	]);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -286,7 +286,7 @@ test('with mixedcase scope should pass for "never [uppercase, lowercase]"', asyn
 test('with uppercase scope should fail for "never [uppercase, lowercase]"', async () => {
 	const [actual] = headerCase(await parsed.uppercase, 'never', [
 		'uppercase',
-		'lowercase'
+		'lowercase',
 	]);
 	const expected = false;
 	expect(actual).toEqual(expected);

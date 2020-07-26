@@ -14,6 +14,6 @@ export const bodyMaxLineLength: SyncRule<number> = (
 
 	return [
 		maxLineLength(input, value),
-		`body's lines must not be longer than ${value} characters`
+		`body's lines must not be longer than ${value} characters`,
 	];
 };

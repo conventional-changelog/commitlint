@@ -11,7 +11,7 @@ const REQUIRED = [
 	'TRAVIS_COMMIT_RANGE',
 	'TRAVIS_EVENT_TYPE',
 	'TRAVIS_REPO_SLUG',
-	'TRAVIS_PULL_REQUEST_SLUG'
+	'TRAVIS_PULL_REQUEST_SLUG',
 ];
 
 const COMMIT = process.env.TRAVIS_COMMIT;
@@ -20,7 +20,7 @@ const PR_SLUG = process.env.TRAVIS_PULL_REQUEST_SLUG || REPO_SLUG;
 const RANGE = process.env.TRAVIS_COMMIT_RANGE;
 const IS_PR = process.env.TRAVIS_EVENT_TYPE === 'pull_request';
 
-main().catch(err => {
+main().catch((err) => {
 	console.log(err);
 	process.exit(1);
 });
@@ -36,7 +36,7 @@ async function main() {
 		() => fetch({name: 'base', url: `https://github.com/${REPO_SLUG}.git`}),
 		IS_PR
 			? () => fetch({name: 'source', url: `https://github.com/${PR_SLUG}.git`})
-			: async () => {}
+			: async () => {},
 	]);
 
 	// Restore stashed changes if any
@@ -65,7 +65,7 @@ async function fetch({name, url}) {
 
 async function isClean() {
 	const result = await git(['status', '--porcelain'], {
-		stdio: ['pipe', 'pipe', 'pipe']
+		stdio: ['pipe', 'pipe', 'pipe'],
 	});
 	return !(result.stdout && result.stdout.trim());
 }
@@ -84,7 +84,7 @@ async function log(hash) {
 		'-n',
 		'1',
 		'--pretty=format:%B',
-		hash
+		hash,
 	]);
 	return result.stdout;
 }
@@ -104,7 +104,7 @@ function validate() {
 		);
 	}
 
-	const missing = REQUIRED.filter(envVar => !(envVar in process.env));
+	const missing = REQUIRED.filter((envVar) => !(envVar in process.env));
 
 	if (missing.length > 0) {
 		const stanza = missing.length > 1 ? 'they were not' : 'it was not';

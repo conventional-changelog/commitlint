@@ -17,6 +17,6 @@ export const subjectFullStop: SyncRule<string> = (
 
 	return [
 		negated ? !hasStop : hasStop,
-		message(['subject', negated ? 'may not' : 'must', 'end with full stop'])
+		message(['subject', negated ? 'may not' : 'must', 'end with full stop']),
 	];
 };

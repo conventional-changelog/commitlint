@@ -21,7 +21,7 @@ export const typeEnum: SyncRule<string[]> = (
 		message([
 			`type must`,
 			negated ? `not` : null,
-			`be one of [${value.join(', ')}]`
-		])
+			`be one of [${value.join(', ')}]`,
+		]),
 	];
 };

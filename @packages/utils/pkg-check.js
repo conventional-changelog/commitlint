@@ -42,21 +42,19 @@ function main(cli) {
 	const skipImport =
 		typeof cli.flags.skipImport === 'boolean' ? cli.flags.skipImport : false;
 
-	return readPkg({cwd}).then(pkg => {
-		return getTarballFiles(cwd, {write: !skipImport}).then(tarball => {
-			return getPackageFiles(cwd).then(pkgFiles => {
+	return readPkg({cwd}).then((pkg) => {
+		return getTarballFiles(cwd, {write: !skipImport}).then((tarball) => {
+			return getPackageFiles(cwd).then((pkgFiles) => {
 				let problems = [];
 
 				if (!cli.flags.skipBin) {
 					problems = problems.concat(
 						pkgFiles.bin
-							.filter(binFile => tarball.files.indexOf(binFile) === -1)
-							.map(binFile => ({
+							.filter((binFile) => tarball.files.indexOf(binFile) === -1)
+							.map((binFile) => ({
 								type: 'bin',
 								file: binFile,
-								message: `Required bin file ${binFile} not found for ${
-									pkg.name
-								}`
+								message: `Required bin file ${binFile} not found for ${pkg.name}`,
 							}))
 					);
 				}
@@ -68,9 +66,7 @@ function main(cli) {
 					problems.push({
 						type: 'main',
 						file: pkgFiles.main,
-						message: `Required main file ${pkgFiles.main} not found for ${
-							pkg.name
-						}`
+						message: `Required main file ${pkgFiles.main} not found for ${pkg.name}`,
 					});
 				}
 
@@ -82,9 +78,7 @@ function main(cli) {
 						problems.push({
 							type: 'import',
 							file: pkgFiles.main,
-							message: `Error while importing ${pkgFiles.main}: ${
-								importable[0].message
-							}`
+							message: `Error while importing ${pkgFiles.main}: ${importable[0].message}`,
 						});
 					}
 				}
@@ -93,7 +87,7 @@ function main(cli) {
 					pkg: pkg,
 					pkgFiles: pkgFiles,
 					files: tarball.files,
-					problems: problems
+					problems: problems,
 				};
 			});
 		});
@@ -115,22 +109,20 @@ main(
 	  $ pkg-check
 `)
 )
-	.then(report => {
+	.then((report) => {
 		if (report.problems.length > 0) {
 			console.log(
-				`Found ${report.problems.length} problems while checking tarball for ${
-					report.pkg.name
-				}:`
+				`Found ${report.problems.length} problems while checking tarball for ${report.pkg.name}:`
 			);
 
-			report.problems.forEach(problem => {
+			report.problems.forEach((problem) => {
 				console.log(problem.message);
 			});
 
 			process.exit(1);
 		}
 	})
-	.catch(err => {
+	.catch((err) => {
 		setTimeout(() => {
 			throw err;
 		});
@@ -139,10 +131,10 @@ main(
 function getTarballFiles(source, options) {
 	return fix
 		.bootstrap(source)
-		.then(cwd =>
-			execa('npm', ['pack'], {cwd}).then(cp => path.join(cwd, cp.stdout))
+		.then((cwd) =>
+			execa('npm', ['pack'], {cwd}).then((cp) => path.join(cwd, cp.stdout))
 		)
-		.then(tarball => getArchiveFiles(tarball, options));
+		.then((tarball) => getArchiveFiles(tarball, options));
 }
 
 function getArchiveFiles(filePath, options) {
@@ -157,24 +149,24 @@ function getArchiveFiles(filePath, options) {
 					ignore(_, header) {
 						files.push(path.relative('package', header.name));
 						return !write;
-					}
+					},
 				})
 			)
-			.once('error', err => reject(err))
+			.once('error', (err) => reject(err))
 			.once('finish', () =>
 				resolve({
 					dirname: path.join(path.dirname(filePath), 'package'),
-					files: files
+					files: files,
 				})
 			);
 	});
 }
 
 function getPackageFiles(source) {
-	return readPkg(source).then(pkg => {
+	return readPkg(source).then((pkg) => {
 		return {
 			main: normalizeMainPath(pkg.main || './index.js'),
-			bin: getPkgBinFiles(pkg.bin)
+			bin: getPkgBinFiles(pkg.bin),
 		};
 	});
 }
@@ -197,7 +189,7 @@ function getPkgBinFiles(bin) {
 	}
 
 	if (typeof bin === 'object') {
-		return Object.values(bin).map(b => path.normalize(b));
+		return Object.values(bin).map((b) => path.normalize(b));
 	}
 }
 

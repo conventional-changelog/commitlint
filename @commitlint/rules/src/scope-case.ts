@@ -15,11 +15,11 @@ export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 		return [true];
 	}
 
-	const checks = (Array.isArray(value) ? value : [value]).map(check => {
+	const checks = (Array.isArray(value) ? value : [value]).map((check) => {
 		if (typeof check === 'string') {
 			return {
 				when: 'always',
-				case: check
+				case: check,
 			};
 		}
 		return check;
@@ -30,18 +30,18 @@ export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 	const delimiters = /\/|\\|,/g;
 	const scopeSegments = scope.split(delimiters);
 
-	const result = checks.some(check => {
+	const result = checks.some((check) => {
 		const r = scopeSegments.every(
-			segment => delimiters.test(segment) || ensureCase(segment, check.case)
+			(segment) => delimiters.test(segment) || ensureCase(segment, check.case)
 		);
 
 		return negated(check.when) ? !r : r;
 	});
 
-	const list = checks.map(c => c.case).join(', ');
+	const list = checks.map((c) => c.case).join(', ');
 
 	return [
 		negated(when) ? !result : result,
-		message([`scope must`, negated(when) ? `not` : null, `be ${list}`])
+		message([`scope must`, negated(when) ? `not` : null, `be ${list}`]),
 	];
 };

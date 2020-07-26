@@ -6,5 +6,5 @@ import getRuleName from './get-rule-name';
  * @return {[type]}      [description]
  */
 export default function getHasName(name) {
-	return rule => getRuleName(rule[0]) === name;
+	return (rule) => getRuleName(rule[0]) === name;
 }

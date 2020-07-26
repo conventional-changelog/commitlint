@@ -4,12 +4,12 @@
  * @return {fn} transform function applying the leading
  */
 export default function getForcedLeadingFn(rule) {
-	const noop = input => input;
-	const remove = input => {
+	const noop = (input) => input;
+	const remove = (input) => {
 		const fragments = input.split('\n');
 		return fragments[0] === '' ? fragments.slice(1).join('\n') : input;
 	};
-	const lead = input => {
+	const lead = (input) => {
 		const fragments = input.split('\n');
 		return fragments[0] === '' ? input : ['', ...fragments].join('\n');
 	};

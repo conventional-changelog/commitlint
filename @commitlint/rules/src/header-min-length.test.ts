@@ -8,12 +8,12 @@ const value = long.length;
 
 const messages = {
 	short,
-	long
+	long,
 };
 
 const parsed = {
 	short: parse(messages.short),
-	long: parse(messages.long)
+	long: parse(messages.long),
 };
 
 test('with short should fail', async () => {

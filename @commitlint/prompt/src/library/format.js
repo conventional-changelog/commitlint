@@ -25,7 +25,7 @@ function format(input, debug = false) {
 			type || scope ? ':' : ''
 		} ${subject}`,
 		body,
-		footer
+		footer,
 	]
 		.filter(Boolean)
 		.join('\n');

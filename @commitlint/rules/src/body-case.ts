@@ -18,6 +18,6 @@ export const bodyCase: SyncRule<TargetCaseType> = (
 	const result = ensureCase(body, value);
 	return [
 		negated ? !result : result,
-		message([`body must`, negated ? `not` : null, `be ${value}`])
+		message([`body must`, negated ? `not` : null, `be ${value}`]),
 	];
 };

@@ -10,7 +10,7 @@ const messages = {
 		'fix(scope): Some message',
 		'fix(scope): Some Message',
 		'fix(scope): SomeMessage',
-		'fix(scope): SOMEMESSAGE'
+		'fix(scope): SOMEMESSAGE',
 	],
 	invalidSubjectEmpty: 'fix:',
 	invalidSubjectFullStop: 'fix: some message.',
@@ -28,8 +28,8 @@ const messages = {
 		'fix(scope): some message',
 		'fix(scope): some Message',
 		'fix(scope): some message\n\nBREAKING CHANGE: it will be significant!',
-		'fix(scope): some message\n\nbody'
-	]
+		'fix(scope): some message\n\nbody',
+	],
 };
 
 const errors = {
@@ -38,64 +38,64 @@ const errors = {
 		message:
 			'type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]',
 		name: 'type-enum',
-		valid: false
+		valid: false,
 	},
 	typeCase: {
 		level: 2,
 		message: 'type must be lower-case',
 		name: 'type-case',
-		valid: false
+		valid: false,
 	},
 	typeEmpty: {
 		level: 2,
 		message: 'type may not be empty',
 		name: 'type-empty',
-		valid: false
+		valid: false,
 	},
 	scopeCase: {
 		level: 2,
 		message: 'scope must be lower-case',
 		name: 'scope-case',
-		valid: false
+		valid: false,
 	},
 	subjectCase: {
 		level: 2,
 		message:
 			'subject must not be sentence-case, start-case, pascal-case, upper-case',
 		name: 'subject-case',
-		valid: false
+		valid: false,
 	},
 	subjectEmpty: {
 		level: 2,
 		message: 'subject may not be empty',
 		name: 'subject-empty',
-		valid: false
+		valid: false,
 	},
 	subjectFullStop: {
 		level: 2,
 		message: 'subject may not end with full stop',
 		name: 'subject-full-stop',
-		valid: false
+		valid: false,
 	},
 	headerMaxLength: {
 		level: 2,
 		message:
 			'header must not be longer than 100 characters, current length is 112',
 		name: 'header-max-length',
-		valid: false
+		valid: false,
 	},
 	footerMaxLineLength: {
 		level: 2,
 		message: "footer's lines must not be longer than 100 characters",
 		name: 'footer-max-line-length',
-		valid: false
+		valid: false,
 	},
 	bodyMaxLineLength: {
 		level: 2,
 		message: "body's lines must not be longer than 100 characters",
 		name: 'body-max-line-length',
-		valid: false
-	}
+		valid: false,
+	},
 };
 
 const warnings = {
@@ -103,14 +103,14 @@ const warnings = {
 		level: 1,
 		message: 'footer must have leading blank line',
 		name: 'footer-leading-blank',
-		valid: false
+		valid: false,
 	},
 	bodyLeadingBlank: {
 		level: 1,
 		message: 'body must have leading blank line',
 		name: 'body-leading-blank',
-		valid: false
-	}
+		valid: false,
+	},
 };
 
 test('type-enum', async () => {
@@ -143,10 +143,12 @@ test('scope-case', async () => {
 
 test('subject-case', async () => {
 	const invalidInputs = await Promise.all(
-		messages.invalidSubjectCases.map(invalidInput => lint(invalidInput, rules))
+		messages.invalidSubjectCases.map((invalidInput) =>
+			lint(invalidInput, rules)
+		)
 	);
 
-	invalidInputs.forEach(result => {
+	invalidInputs.forEach((result) => {
 		expect(result.valid).toBe(false);
 		expect(result.errors).toEqual([errors.subjectCase]);
 	});
@@ -203,10 +205,10 @@ test('body-max-line-length', async () => {
 
 test('valid messages', async () => {
 	const validInputs = await Promise.all(
-		messages.validMessages.map(input => lint(input, rules))
+		messages.validMessages.map((input) => lint(input, rules))
 	);
 
-	validInputs.forEach(result => {
+	validInputs.forEach((result) => {
 		expect(result.valid).toBe(true);
 		expect(result.errors).toEqual([]);
 		expect(result.warnings).toEqual([]);

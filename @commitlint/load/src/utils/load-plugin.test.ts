@@ -1,11 +1,11 @@
 import loadPlugin from './load-plugin';
 
 jest.mock('commitlint-plugin-example', () => ({example: true}), {
-	virtual: true
+	virtual: true,
 });
 
 jest.mock('@scope/commitlint-plugin-example', () => ({scope: true}), {
-	virtual: true
+	virtual: true,
 });
 
 test('should load a plugin when referenced by short name', () => {
