@@ -49,4 +49,4 @@ jobs:
       - name: Build packages
         run: yarn build
       - name: Test packages
-        run: yarn test-ci
+        run: yarn test
