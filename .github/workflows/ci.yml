@@ -1,0 +1,52 @@
+---
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    types: [opened, synchronize]
+jobs:
+  build:
+    name: Test and build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node: [10, 12, 14]
+        os: [ubuntu-latest]
+        include:
+          - node: 14
+            os: windows-latest
+          - node: 12
+            checkAll: true
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Find yarn cache
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache yarn
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Lint packages
+        if: ${{ matrix.checkAll }}
+        run: yarn lint
+      - name: Format packages
+        if: ${{ matrix.checkAll }}
+        run: yarn format
+      - name: Check dependencies
+        if: ${{ matrix.checkAll }}
+        run: yarn deps
+      - name: Build packages
+        run: yarn build
+      - name: Test packages
+        run: yarn test-ci
