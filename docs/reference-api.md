@@ -291,7 +291,7 @@ read(range: Range) => Promise<string[]>
 
 ```js
 // git commit -m "I did something"
-const read = require('@commitlint/read');
+const read = require('@commitlint/read').default;
 
 read({edit: true}).then((messages) => console.log(messages));
 // => ['I did something\n\n']
