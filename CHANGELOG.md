@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/conventional-changelog/commitlint/compare/v9.1.2...v10.0.0) (2020-08-16)
+
+
+### Bug Fixes
+
+* update dependency ([#1993](https://github.com/conventional-changelog/commitlint/issues/1993)) ([32667e8](https://github.com/conventional-changelog/commitlint/commit/32667e8aa665cf94fe669ba048ad7abaf6abac6e))
+* update dependency cosmiconfig to v7 ([#2044](https://github.com/conventional-changelog/commitlint/issues/2044)) ([f4db933](https://github.com/conventional-changelog/commitlint/commit/f4db93324698ea39528be0d2692151546c2b5517))
+* update dependency execa to v4 ([#1936](https://github.com/conventional-changelog/commitlint/issues/1936)) ([8efb441](https://github.com/conventional-changelog/commitlint/commit/8efb44193058d286f7325327a6d33936b273ec91))
+* update dependency find-up to v5 ([#2060](https://github.com/conventional-changelog/commitlint/issues/2060)) ([25d42f4](https://github.com/conventional-changelog/commitlint/commit/25d42f4179396bdfbfc622a401d8ca8877102286))
+* update dependency fs-extra to v9 ([#1018](https://github.com/conventional-changelog/commitlint/issues/1018)) ([2df49fa](https://github.com/conventional-changelog/commitlint/commit/2df49fac907993ae78199a1012e918b0e2ff5621))
+* update dependency get-stdin to v8 ([#1938](https://github.com/conventional-changelog/commitlint/issues/1938)) ([f94a5c8](https://github.com/conventional-changelog/commitlint/commit/f94a5c82861523aa1cf407ffe062f99ecbbfb4e4))
+
+
+* refactor!: drop support for node 8 (#1999) ([751f39f](https://github.com/conventional-changelog/commitlint/commit/751f39f284ef232574a176c3c11b1982ee544166)), closes [#1999](https://github.com/conventional-changelog/commitlint/issues/1999)
+
+
+### BREAKING CHANGES
+
+* remove node 8 from circle-ci checks
+
+also remove node 13 because we do not support experimental versions
+
+* docs: update node v10 to latest LTS 10 version
+
+Co-authored-by: Cedric van Putten <me@bycedric.com>
+
+Co-authored-by: Cedric van Putten <me@bycedric.com>
+
+
+
+
+
 ## [9.1.2](https://github.com/conventional-changelog/commitlint/compare/v9.1.1...v9.1.2) (2020-07-13)
 
 **Note:** Version bump only for package @commitlint/root

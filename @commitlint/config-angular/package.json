@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-angular",
-  "version": "9.1.2",
+  "version": "10.0.0",
   "description": "Shareable commitlint config enforcing the angular commit convention",
   "files": [
     "index.js"
@@ -29,10 +29,10 @@
     "node": ">=v10.22.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^9.1.2"
+    "@commitlint/utils": "^10.0.0"
   },
   "dependencies": {
-    "@commitlint/config-angular-type-enum": "^9.1.2"
+    "@commitlint/config-angular-type-enum": "^10.0.0"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
 }

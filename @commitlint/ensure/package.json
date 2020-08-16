@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/ensure",
-  "version": "9.1.2",
+  "version": "10.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -34,12 +34,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^9.1.2",
+    "@commitlint/utils": "^10.0.0",
     "@types/lodash": "4.14.159",
     "globby": "^11.0.0"
   },
   "dependencies": {
-    "@commitlint/types": "^9.1.2",
+    "@commitlint/types": "^10.0.0",
     "lodash": "^4.17.19"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"

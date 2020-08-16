@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/conventional-changelog/commitlint/compare/v9.1.2...v10.0.0) (2020-08-16)
+
+
+### Bug Fixes
+
+* update dependency ([#1993](https://github.com/conventional-changelog/commitlint/issues/1993)) ([32667e8](https://github.com/conventional-changelog/commitlint/commit/32667e8aa665cf94fe669ba048ad7abaf6abac6e))
+
+
+* refactor!: drop support for node 8 (#1999) ([751f39f](https://github.com/conventional-changelog/commitlint/commit/751f39f284ef232574a176c3c11b1982ee544166)), closes [#1999](https://github.com/conventional-changelog/commitlint/issues/1999)
+
+
+### BREAKING CHANGES
+
+* remove node 8 from circle-ci checks
+
+also remove node 13 because we do not support experimental versions
+
+* docs: update node v10 to latest LTS 10 version
+
+Co-authored-by: Cedric van Putten <me@bycedric.com>
+
+Co-authored-by: Cedric van Putten <me@bycedric.com>
+
+
+
+
+
 ## [9.1.2](https://github.com/conventional-changelog/commitlint/compare/v9.1.1...v9.1.2) (2020-07-13)
 
 **Note:** Version bump only for package @commitlint/config-conventional
