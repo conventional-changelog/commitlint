@@ -44,8 +44,9 @@ const cli = yargs
 			alias: 'e',
 			default: false,
 			description:
-				'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
+				"read last commit message from the specified file or use '' as fallback to ./.git/COMMIT_EDITMSG",
 			type: 'string',
+			requiresArg: true,
 		},
 		env: {
 			alias: 'E',
@@ -281,7 +282,7 @@ function getEditValue(flags: CliFlags) {
 		return process.env[flags.env];
 	}
 	const {edit} = flags;
-	// If the edit flag is set but empty (i.e '-e') we default
+	// If the edit flag is set but empty (i.e "-e ''") we default
 	// to .git/COMMIT_EDITMSG
 	if (edit === '') {
 		return true;

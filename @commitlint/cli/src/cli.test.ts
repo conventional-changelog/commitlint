@@ -441,8 +441,8 @@ test('should print help', async () => {
 		  --config, -g         path to the config file                          [string]
 		  --cwd, -d            directory to execute in
 		                                         [string] [default: (Working Directory)]
-		  --edit, -e           read last commit message from the specified file or
-		                       fallbacks to ./.git/COMMIT_EDITMSG
+		  --edit, -e           read last commit message from the specified file or use
+		                       '' as fallback to ./.git/COMMIT_EDITMSG
 		                                                       [string] [default: false]
 		  --env, -E            check message in the file at path given by environment
 		                       variable value                                   [string]
