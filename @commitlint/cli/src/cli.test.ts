@@ -432,7 +432,7 @@ test('should print help', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--help'], {cwd})();
 	expect(actual.stdout).toMatchInlineSnapshot(`
-		"@commitlint/cli@10.0.0 - Lint your commit messages
+		"@commitlint/cli@11.0.0 - Lint your commit messages
 
 		[input] reads from stdin if --edit, --env, --from and --to are omitted
 
