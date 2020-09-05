@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -50,14 +50,14 @@
   "devDependencies": {
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
-    "@commitlint/utils": "^10.0.0",
-    "babel-preset-commitlint": "^10.0.0",
+    "@commitlint/utils": "^11.0.0",
+    "babel-preset-commitlint": "^11.0.0",
     "commitizen": "4.2.1",
     "cross-env": "7.0.2"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@commitlint/load": "^10.0.0",
+    "@commitlint/load": "^11.0.0",
     "chalk": "^4.0.0",
     "lodash": "^4.17.19",
     "throat": "^5.0.0",

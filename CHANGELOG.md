@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
+
+
+### Bug Fixes
+
+* **cli:** remove default value from edit option [#2065](https://github.com/conventional-changelog/commitlint/issues/2065) ([3d4116d](https://github.com/conventional-changelog/commitlint/commit/3d4116d044a2f5149a9c9c1d9fa35abf5e232479))
+* **rules:** ignore comments in `signed-off-by` ([#2098](https://github.com/conventional-changelog/commitlint/issues/2098)) ([b610bcd](https://github.com/conventional-changelog/commitlint/commit/b610bcd15215cc5f14fb6de07914ed595cc3047b))
+* update dependency @types/fs-extra to ^9.0.1 ([#2088](https://github.com/conventional-changelog/commitlint/issues/2088)) ([cb1028e](https://github.com/conventional-changelog/commitlint/commit/cb1028ef2700d86991c69a1e2ad391bc1bdc9d90))
+
+
+* refactor!: drop support for lerna v2 ([59667b3](https://github.com/conventional-changelog/commitlint/commit/59667b376118323b1312d3d1084b9178918f3d23))
+
+
+### BREAKING CHANGES
+
+* remove lerna v2 support and tests
+
+
+
+
+
 # [10.0.0](https://github.com/conventional-changelog/commitlint/compare/v9.1.2...v10.0.0) (2020-08-16)
 
 

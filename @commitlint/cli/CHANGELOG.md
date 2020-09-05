@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
+
+
+### Bug Fixes
+
+* **cli:** remove default value from edit option [#2065](https://github.com/conventional-changelog/commitlint/issues/2065) ([3d4116d](https://github.com/conventional-changelog/commitlint/commit/3d4116d044a2f5149a9c9c1d9fa35abf5e232479))
+
+
+
+
+
 # [10.0.0](https://github.com/conventional-changelog/commitlint/compare/v9.1.2...v10.0.0) (2020-08-16)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
+
+
+### Bug Fixes
+
+* **rules:** ignore comments in `signed-off-by` ([#2098](https://github.com/conventional-changelog/commitlint/issues/2098)) ([b610bcd](https://github.com/conventional-changelog/commitlint/commit/b610bcd15215cc5f14fb6de07914ed595cc3047b))
+
+
+
+
+
 # [10.0.0](https://github.com/conventional-changelog/commitlint/compare/v9.1.2...v10.0.0) (2020-08-16)
 
 

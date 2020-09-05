@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt-cli",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "commit prompt using commitlint.config.js",
   "files": [
     "cli.js"
@@ -31,11 +31,11 @@
     "node": ">=v10.22.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^10.0.0",
-    "@commitlint/utils": "^10.0.0"
+    "@commitlint/test": "^11.0.0",
+    "@commitlint/utils": "^11.0.0"
   },
   "dependencies": {
-    "@commitlint/prompt": "^10.0.0",
+    "@commitlint/prompt": "^11.0.0",
     "execa": "^4.0.0"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
