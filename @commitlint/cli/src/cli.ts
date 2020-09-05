@@ -42,7 +42,6 @@ const cli = yargs
 		},
 		edit: {
 			alias: 'e',
-			default: false,
 			description:
 				'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
 			type: 'string',
@@ -112,7 +111,7 @@ const cli = yargs
 	)
 	.strict();
 
-main(cli.argv).catch((err) => {
+main({edit: false, ...cli.argv}).catch((err) => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
 			process.exit(1);

@@ -442,8 +442,7 @@ test('should print help', async () => {
 		  --cwd, -d            directory to execute in
 		                                         [string] [default: (Working Directory)]
 		  --edit, -e           read last commit message from the specified file or
-		                       fallbacks to ./.git/COMMIT_EDITMSG
-		                                                       [string] [default: false]
+		                       fallbacks to ./.git/COMMIT_EDITMSG               [string]
 		  --env, -E            check message in the file at path given by environment
 		                       variable value                                   [string]
 		  --extends, -x        array of shareable configurations to extend       [array]
