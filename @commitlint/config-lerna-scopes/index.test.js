@@ -1,6 +1,5 @@
 import {lerna} from '@commitlint/test';
 import config from '.';
-import semver from 'semver';
 
 test('exports rules key', () => {
 	expect(config).toHaveProperty('rules');
@@ -66,32 +65,4 @@ test('returns expected value for scoped lerna repository', async () => {
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
-});
-
-test('works with lerna version < 3', async () => {
-	const {'scope-enum': fn} = config.rules;
-	const cwd = await lerna.bootstrap('lerna-two', __dirname);
-	const [, , value] = await fn({cwd});
-	expect(value).toEqual(['a2', 'b2']);
-});
-
-test('uses lerna version < 3 if installed', async () => {
-	const semverLt = jest.spyOn(semver, 'lt');
-	const cwd = await lerna.bootstrap('lerna-two', __dirname);
-	const packages = await config.utils.getPackages({cwd});
-
-	expect(packages).toEqual(['a2', 'b2']);
-	expect(semverLt).toHaveBeenLastCalledWith('2.11.0', '3.0.0');
-	expect(semverLt).toHaveLastReturnedWith(true);
-});
-
-test('uses lerna version >= 3 if installed', async () => {
-	const semverLt = jest.spyOn(semver, 'lt');
-	const cwd = await lerna.bootstrap('basic', __dirname);
-
-	const packages = await config.utils.getPackages({cwd});
-
-	expect(packages).toEqual(['a', 'b']);
-	expect(semverLt).toHaveBeenLastCalledWith('3.20.2', '3.0.0');
-	expect(semverLt).toHaveLastReturnedWith(false);
 });
