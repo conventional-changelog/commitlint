@@ -7,6 +7,15 @@ const messages = {
 	without: `test: subject\nbody\nfooter\n\n`,
 	inSubject: `test: subject Signed-off-by:\nbody\nfooter\n\n`,
 	inBody: `test: subject\nbody Signed-off-by:\nfooter\n\n`,
+	withSignoffAndComments: `test: subject
+
+message body
+
+Signed-off-by:
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+`,
 };
 
 const parsed = {
@@ -15,6 +24,7 @@ const parsed = {
 	without: parse(messages.without),
 	inSubject: parse(messages.inSubject),
 	inBody: parse(messages.inBody),
+	withSignoffAndComments: parse(messages.withSignoffAndComments),
 };
 
 test('empty against "always signed-off-by" should fail', async () => {
@@ -53,6 +63,16 @@ test('without against "always signed-off-by" should fail', async () => {
 
 test('without against "never signed-off-by" should succeed', async () => {
 	const [actual] = signedOffBy(await parsed.without, 'never', 'Signed-off-by:');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('trailing comments should be ignored', async () => {
+	const [actual] = signedOffBy(
+		await parsed.withSignoffAndComments,
+		'always',
+		'Signed-off-by:'
+	);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });

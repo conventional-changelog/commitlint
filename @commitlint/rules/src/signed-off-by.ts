@@ -7,7 +7,14 @@ export const signedOffBy: SyncRule<string> = (
 	when = 'always',
 	value = ''
 ) => {
-	const lines = toLines(parsed.raw).filter(Boolean);
+	const lines = toLines(parsed.raw).filter(
+		(ln) =>
+			// skip comments
+			!ln.startsWith('#') &&
+			// ignore empty lines
+			Boolean(ln)
+	);
+
 	const last = lines[lines.length - 1];
 
 	const negated = when === 'never';
