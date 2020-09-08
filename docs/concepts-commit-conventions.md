@@ -22,5 +22,5 @@ Commitlint supports multiple scopes.
 Current delimiter options are:
 
 - "/"
-- "\"
+- "\\"
 - ","
