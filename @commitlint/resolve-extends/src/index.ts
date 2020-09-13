@@ -32,7 +32,7 @@ export default function resolveExtends(
 	context: ResolveExtendsContext = {}
 ) {
 	const {extends: e} = config;
-	const extended = loadExtends(config, context).reduceRight(
+	const extended = loadExtends(config, context).reduce(
 		(r, {extends: _, ...c}) =>
 			mergeWith(r, c, (objValue, srcValue) => {
 				if (Array.isArray(objValue)) {
@@ -78,7 +78,7 @@ function loadExtends(
 			config.parserPreset = parserPreset;
 		}
 
-		return [...configs, c, ...loadExtends(c, ctx)];
+		return [...configs, ...loadExtends(c, ctx), c];
 	}, []);
 }
 

@@ -243,6 +243,35 @@ test('propagates contents recursively with overlap', () => {
 	expect(actual).toEqual(expected);
 });
 
+test('extends rules from left to right with overlap', () => {
+	const input = {extends: ['left', 'right']};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'left':
+				return {rules: {a: true}};
+			case 'right':
+				return {rules: {a: false, b: true}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['left', 'right'],
+		rules: {
+			a: false,
+			b: true,
+		},
+	};
+
+	expect(actual).toEqual(expected);
+});
+
 test('extending contents should take precedence', () => {
 	const input = {extends: ['extender-name'], zero: 'root'};
 
