@@ -168,3 +168,27 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 #### Output on succesful commit will be ommited
 
 - You can use the `--verbose` flag to get positive output
+
+## Version 8 to 9
+
+### Breaking changes
+
+#### Possible types
+
+- `improvement` type will now be rejected by this config
+
+## Version 9 to 10
+
+### Breaking changes
+
+#### Node support
+
+- node v8 is not supported anymore
+
+## Version 10 to 11
+
+### Breaking changes
+
+#### Lerna support
+
+- lerna v2 is not supported anymore
