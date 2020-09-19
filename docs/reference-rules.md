@@ -116,6 +116,7 @@ Infinity
 
 - **condition**: `header` is in case `value`
 - **rule**: `always`
+- **value**
 
 ```
 'lowerCase'
@@ -184,6 +185,7 @@ Infinity
 
 - **condition**: `scope` is in case `value`
 - **rule**: `always`
+- **value**
 
 ```
 'lowerCase'
@@ -233,6 +235,7 @@ Infinity
 
 - **condition**: `subject` is in case `value`
 - **rule**: `always`
+- **value**
 
 ```
 'lowerCase'
