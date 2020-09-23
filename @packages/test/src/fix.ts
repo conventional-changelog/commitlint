@@ -13,7 +13,7 @@ export async function bootstrap(fixture?: string, directory?: string) {
 	});
 
 	if (typeof fixture !== 'undefined') {
-		const packageDir = await pkgDir(directory);
+		var packageDir = await pkgDir(directory);
 		if (!packageDir) {
 			throw new Error(`ENOENT, no such file or directory '${packageDir}'`);
 		}
