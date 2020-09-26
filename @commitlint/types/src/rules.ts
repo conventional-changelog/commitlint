@@ -91,6 +91,7 @@ export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 export type RulesConfig<V = RuleConfigQuality.User> = {
 	'body-case': CaseRuleConfig<V>;
 	'body-empty': RuleConfig<V>;
+	'body-full-stop': RuleConfig<V>;
 	'body-leading-blank': RuleConfig<V>;
 	'body-max-length': LengthRuleConfig<V>;
 	'body-max-line-length': LengthRuleConfig<V>;

@@ -42,6 +42,16 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 ### Available rules
 
+#### body-full-stop
+
+- **condition**: `body` ends with `value`
+- **rule**: `never`
+- **value**
+
+```
+'.'
+```
+
 #### body-leading-blank
 
 - **condition**: `body` begins with blank line
