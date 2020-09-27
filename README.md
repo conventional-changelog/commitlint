@@ -101,6 +101,11 @@ After that, you can create a `.huskyrc` file or add to your `package.json` the f
 
 ```json
 {
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
