@@ -72,5 +72,5 @@ test('returns expected value for yarn workspaces', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = Path.join(__dirname, 'fixtures', 'yarn');
 	const [, , value] = await fn({cwd});
-	expect(value).toEqual(['a', 'b']);
+	expect(value.sort()).toEqual(['a', 'b']);
 });

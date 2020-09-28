@@ -22,9 +22,9 @@ function getPackages(context) {
 			if (Array.isArray(workspaces) && workspaces.length) {
 				// use yarn workspaces
 				return Globby(
-					workspaces.map((ws) =>
-						Path.join(ws.replace(/\//, Path.sep), 'package.json')
-					),
+					workspaces.map((ws) => {
+						return Path.posix.join(ws, 'package.json');
+					}),
 					{cwd}
 				).then((pJsons = []) => {
 					return pJsons.map((pJson) => require(Path.join(cwd, pJson)));
