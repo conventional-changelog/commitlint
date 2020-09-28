@@ -2,7 +2,7 @@
 
 # @commitlint/config-lerna-scopes
 
-Shareable `commitlint` config enforcing lerna package names as scopes.
+Shareable `commitlint` config enforcing lerna/yarn package/workspace names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
