@@ -34,6 +34,10 @@ type Config = {
    * Whether commitlint uses the default ignore rules.
    */
   defaultIgnores?: boolean;
+  /*
+   * Custom URL to show upon failure
+   */
+  helpUrl?: string;
 };
 
 const Configuration: Config = {
@@ -66,6 +70,11 @@ const Configuration: Config = {
    * Whether commitlint uses the default ignore rules.
    */
   defaultIgnores: true,
+  /*
+   * Custom URL to show upon failure
+   */
+  helpUrl:
+    'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
 };
 
 module.exports = Configuration;

@@ -203,6 +203,10 @@ type Seed = {
    * Initial map of rules to check against
    */
   rules?: {[ruleName: string]: Rule};
+  /**
+   * URL to print as help for reports with problems
+   */
+  helpUrl?: string;
 };
 
 type Config = {
@@ -218,6 +222,10 @@ type Config = {
    * Merged map of rules to check against
    */
   rules: {[ruleName: string]: Rule};
+  /**
+   * URL to print as help for reports with problems
+   */
+  helpUrl?: string;
 };
 
 type LoadOptions = {

@@ -10,5 +10,6 @@ export const pickConfig = (input: unknown): UserConfig =>
 		'parserPreset',
 		'formatter',
 		'ignores',
-		'defaultIgnores'
+		'defaultIgnores',
+		'helpUrl'
 	);
