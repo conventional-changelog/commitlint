@@ -21,8 +21,8 @@ export const wildcards: Matcher[] = [
 	test(/^(R|r)evert (.*)/),
 	test(/^(fixup|squash)!/),
 	isSemver,
-	test(/^Merged (.*?)(in|into) (.*)/),
-	test(/^Merge remote-tracking branch (.*)/),
+	test(/^(Merged (.*?)(in|into) (.*)|Merged PR (.*): (.*))/),
+	test(/^Merge remote-tracking branch(\s*)(.*)/),
 	test(/^Automatic merge(.*)/),
 	test(/^Auto-merged (.*?) into (.*)/),
 ];
