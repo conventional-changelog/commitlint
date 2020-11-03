@@ -122,6 +122,11 @@ test('should return true for bitbucket merge commits', () => {
 
 test('should return true for automatic merge commits', () => {
 	expect(isIgnored('Auto-merged develop into master')).toBe(true);
+	expect(isIgnored('Merge remote-tracking branch')).toBe(true);
+});
+
+test('should return true for azure devops merge commits', () => {
+	expect(isIgnored('Merged PR 123: Description here')).toBe(true);
 });
 
 test('should return false for commits containing, but not starting, with merge branch', () => {
