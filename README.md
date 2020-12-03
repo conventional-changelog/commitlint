@@ -97,7 +97,7 @@ To lint commits before they are created you can use Husky's 'commit-msg' hook.
 
 Install in your project `npm install husky --save-dev` or `yarn add -D husky`.
 
-After that, you can create a `.huskyrc` file or add to your `package.json` the following code for 
+After that, you can create a `.huskyrc` file or add to your `package.json` the following code for
 
 Husky V4:
 
@@ -112,6 +112,7 @@ Husky V4:
 ```
 
 Husky V5
+
 ```
 # .husky/pre-commit
 # ...
