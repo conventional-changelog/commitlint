@@ -1,10 +1,9 @@
-#!/usr/bin/env node
 import execa from 'execa';
-import commitlint from '@commitlint/cli';
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';
-const COMMITLINT = process.env.TRAVIS_COMMITLINT_BIN;
+const COMMITLINT =
+	process.env.TRAVIS_COMMITLINT_BIN || require('@commitlint/cli');
 
 const REQUIRED = [
 	'TRAVIS_COMMIT',
@@ -14,7 +13,7 @@ const REQUIRED = [
 	'TRAVIS_PULL_REQUEST_SLUG',
 ];
 
-const COMMIT = process.env.TRAVIS_COMMIT;
+const COMMIT = process.env.TRAVIS_COMMIT || '';
 const REPO_SLUG = process.env.TRAVIS_REPO_SLUG;
 const PR_SLUG = process.env.TRAVIS_PULL_REQUEST_SLUG || REPO_SLUG;
 const RANGE = process.env.TRAVIS_COMMIT_RANGE;
@@ -36,7 +35,7 @@ async function main() {
 		() => fetch({name: 'base', url: `https://github.com/${REPO_SLUG}.git`}),
 		IS_PR
 			? () => fetch({name: 'source', url: `https://github.com/${PR_SLUG}.git`})
-			: async () => {},
+			: () => Promise.resolve()
 	]);
 
 	// Restore stashed changes if any
@@ -54,11 +53,14 @@ async function main() {
 	}
 }
 
-async function git(args, options) {
-	return execa(GIT, args, Object.assign({}, {stdio: 'inherit'}, options));
+async function git(args: string[], options: execa.Options = {}) {
+	return execa(GIT, args, {
+		stdio: 'inherit',
+		...options
+	});
 }
 
-async function fetch({name, url}) {
+async function fetch({name, url}: {name: string; url: string}) {
 	await git(['remote', 'add', name, url]);
 	await git(['fetch', name, '--quiet']);
 }
@@ -70,28 +72,23 @@ async function isClean() {
 	return !(result.stdout && result.stdout.trim());
 }
 
-async function lint(args, options) {
-	return execa(
-		COMMITLINT || commitlint,
-		args,
-		Object.assign({}, {stdio: ['pipe', 'inherit', 'inherit']}, options)
-	);
+async function lint(args: string[], options: execa.Options = {}) {
+	return execa(COMMITLINT, args, {
+		stdio: ['pipe', 'inherit', 'inherit'],
+		...options
+	});
 }
 
-async function log(hash) {
-	const result = await execa(GIT, [
-		'log',
-		'-n',
-		'1',
-		'--pretty=format:%B',
-		hash,
-	]);
+async function log(hash: string) {
+	const result = await git(['log', '-n', '1', '--pretty=format:%B', hash], {
+		stdio: 'pipe'
+	});
 	return result.stdout;
 }
 
 async function stash() {
 	if (await isClean()) {
-		return async () => {};
+		return () => Promise.resolve();
 	}
 	await git(['stash', '-k', '-u', '--quiet']);
 	return () => git(['stash', 'pop', '--quiet']);
