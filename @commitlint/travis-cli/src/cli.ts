@@ -35,7 +35,7 @@ async function main() {
 		() => fetch({name: 'base', url: `https://github.com/${REPO_SLUG}.git`}),
 		IS_PR
 			? () => fetch({name: 'source', url: `https://github.com/${PR_SLUG}.git`})
-			: () => Promise.resolve()
+			: () => Promise.resolve(),
 	]);
 
 	// Restore stashed changes if any
@@ -56,7 +56,7 @@ async function main() {
 async function git(args: string[], options: execa.Options = {}) {
 	return execa(GIT, args, {
 		stdio: 'inherit',
-		...options
+		...options,
 	});
 }
 
@@ -75,13 +75,13 @@ async function isClean() {
 async function lint(args: string[], options: execa.Options = {}) {
 	return execa(COMMITLINT, args, {
 		stdio: ['pipe', 'inherit', 'inherit'],
-		...options
+		...options,
 	});
 }
 
 async function log(hash: string) {
 	const result = await git(['log', '-n', '1', '--pretty=format:%B', hash], {
-		stdio: 'pipe'
+		stdio: 'pipe',
 	});
 	return result.stdout;
 }

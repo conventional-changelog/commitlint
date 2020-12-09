@@ -29,7 +29,7 @@ const cli = async (config: execa.Options = {}, args: string[] = []) => {
 test('should throw when not on travis ci', async () => {
 	const env = {
 		CI: 'false',
-		TRAVIS: 'false'
+		TRAVIS: 'false',
 	};
 
 	await expect(cli({env})).rejects.toThrow(
@@ -40,7 +40,7 @@ test('should throw when not on travis ci', async () => {
 test('should throw when on travis ci, but env vars are missing', async () => {
 	const env = {
 		TRAVIS: 'true',
-		CI: 'true'
+		CI: 'true',
 	};
 
 	await expect(cli({env})).rejects.toThrow(
