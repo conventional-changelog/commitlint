@@ -1,14 +1,14 @@
 import execa from 'execa';
 import {git} from '@commitlint/test';
 
-const bin = require.resolve('../lib/cli.js');
+const bin = require.resolve('../cli.js');
 
 const TRAVIS_COMMITLINT_BIN = require.resolve('../fixtures/commitlint');
 const TRAVIS_COMMITLINT_GIT_BIN = require.resolve('../fixtures/git');
 
 const validBaseEnv = {
-	TRAVIS: true,
-	CI: true,
+	TRAVIS: 'true',
+	CI: 'true',
 	TRAVIS_COMMIT: 'TRAVIS_COMMIT',
 	TRAVIS_COMMITLINT_BIN: TRAVIS_COMMITLINT_BIN,
 	TRAVIS_COMMITLINT_GIT_BIN: TRAVIS_COMMITLINT_GIT_BIN,
@@ -18,7 +18,7 @@ const validBaseEnv = {
 	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG',
 };
 
-const cli = async (config = {}, args = []) => {
+const cli = async (config: execa.Options = {}, args: string[] = []) => {
 	try {
 		return await execa(bin, args, config);
 	} catch (err) {
@@ -28,8 +28,8 @@ const cli = async (config = {}, args = []) => {
 
 test('should throw when not on travis ci', async () => {
 	const env = {
-		CI: false,
-		TRAVIS: false,
+		CI: 'false',
+		TRAVIS: 'false',
 	};
 
 	await expect(cli({env})).rejects.toThrow(
@@ -39,8 +39,8 @@ test('should throw when not on travis ci', async () => {
 
 test('should throw when on travis ci, but env vars are missing', async () => {
 	const env = {
-		TRAVIS: true,
-		CI: true,
+		TRAVIS: 'true',
+		CI: 'true',
 	};
 
 	await expect(cli({env})).rejects.toThrow(
@@ -131,7 +131,7 @@ test('should call git with extra expected args on pull_request', async () => {
 	]);
 });
 
-function getInvocations(stdout) {
+function getInvocations(stdout: string): string[][] {
 	const matches = stdout.match(/[^[\]]+/g);
 	const raw = Array.isArray(matches) ? matches : [];
 
