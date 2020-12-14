@@ -1,53 +1,51 @@
 #!/usr/bin/env node
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs-extra');
 const zlib = require('zlib');
 
 const execa = require('execa');
-const meow = require('meow');
+const yargs = require('yargs');
 const readPkg = require('read-pkg');
 const requireFromString = require('require-from-string');
 const tar = require('tar-fs');
-const {fix} = require('@commitlint/test');
+const tmp = require('tmp');
 
-const builtin = require.resolve('is-builtin-module');
+tmp.setGracefulCleanup();
 
 const PRELUDE = `
-var _require = require;
+var Module = require('module');
+var originalLoader = Module._load
 
-require = function(id) {
+Module._load = function(path, parent) {
+	if (path.startsWith('.') || Module.builtinModules.includes(path)) {
+	  return originalLoader.apply(this, arguments);
+	}
 	var dummy = new Proxy({}, {
 		get() {
 			return dummy;
 		}
 	});
-
-	var _isBuiltIn = _require('${builtin}');
-	if (id[0] === '.' || _isBuiltIn(id)) {
-		return _require(id);
-	} else {
-		return dummy;
-	}
+	return dummy;
 };
 `;
 
-function main(cli) {
+function main(flags) {
 	if (!Proxy) {
 		console
 			.warn('Skipping pkg-check, detected missing Proxy support')
 			.process.exit(0);
 	}
 
-	const cwd = cli.flags.cwd || process.cwd();
+	const cwd = flags.cwd || process.cwd();
 	const skipImport =
-		typeof cli.flags.skipImport === 'boolean' ? cli.flags.skipImport : false;
+		typeof flags.skipImport === 'boolean' ? flags.skipImport : false;
 
 	return readPkg({cwd}).then((pkg) => {
 		return getTarballFiles(cwd, {write: !skipImport}).then((tarball) => {
 			return getPackageFiles(cwd).then((pkgFiles) => {
 				let problems = [];
 
-				if (!cli.flags.skipBin) {
+				if (!flags.skipBin) {
 					problems = problems.concat(
 						pkgFiles.bin
 							.filter((binFile) => tarball.files.indexOf(binFile) === -1)
@@ -59,10 +57,7 @@ function main(cli) {
 					);
 				}
 
-				if (
-					!cli.flags.skipMain &&
-					tarball.files.indexOf(pkgFiles.main) === -1
-				) {
+				if (!flags.skipMain && tarball.files.indexOf(pkgFiles.main) === -1) {
 					problems.push({
 						type: 'main',
 						file: pkgFiles.main,
@@ -70,7 +65,7 @@ function main(cli) {
 					});
 				}
 
-				if (!cli.flags.skipImport && !cli.flags.skipMain) {
+				if (!flags.skipImport && !flags.skipMain) {
 					const importable = fileImportable(
 						path.join(tarball.dirname, pkgFiles.main)
 					);
@@ -94,20 +89,36 @@ function main(cli) {
 	});
 }
 
-main(
-	meow(`
-	pkg-check
-
-	Check if a package creates valid tarballs
-
-	Options
-		--skip-main    Skip main checks
-		--skip-bin     Skip bin checks
-		--skip-import  Skip import smoke test
-
-	Examples
-	  $ pkg-check
-`)
+main(yargs
+	.options({
+		cwd: {
+			description: 'directory to execute in',
+			type: 'string',
+		},
+		skipMain: {
+			default: false,
+			type: 'boolean',
+			description: 'Skip main checks',
+		},
+		skipBin: {
+			default: false,
+			type: 'boolean',
+			description: 'Skip bin checks',
+		},
+		skipImport: {
+			default: false,
+			type: 'boolean',
+			description: 'Skip import smoke test',
+		},
+	})
+	.scriptName('pkg-check')
+	.usage('pkg-check\n')
+	.usage('Check if a package creates valid tarballs')
+	.example('$0', '')
+	.help()
+	.version()
+	.strict()
+	.argv
 )
 	.then((report) => {
 		if (report.problems.length > 0) {
@@ -125,16 +136,20 @@ main(
 	.catch((err) => {
 		setTimeout(() => {
 			throw err;
-		});
+		}, 0);
 	});
 
-function getTarballFiles(source, options) {
-	return fix
-		.bootstrap(source)
-		.then((cwd) =>
-			execa('npm', ['pack'], {cwd}).then((cp) => path.join(cwd, cp.stdout))
-		)
-		.then((tarball) => getArchiveFiles(tarball, options));
+async function getTarballFiles(source, options) {
+	const tmpDir = tmp.dirSync({
+		keep: false,
+		unsafeCleanup: true,
+	});
+	const cwd = tmpDir.name;
+	await fs.copy(source, cwd);
+	const tarball = path.join(cwd, 'test-archive.tgz');
+	await execa('yarn', ['pack', '--filename', tarball], {cwd: source});
+
+	return getArchiveFiles(tarball, options);
 }
 
 function getArchiveFiles(filePath, options) {
@@ -173,7 +188,7 @@ function getPackageFiles(source) {
 
 function normalizeMainPath(mainPath) {
 	const norm = path.normalize(mainPath);
-	if (norm[norm.length - 1] === '/') {
+	if (norm[norm.length - 1] === path.sep) {
 		return `${norm}index.js`;
 	}
 	return norm;
