@@ -89,36 +89,36 @@ function main(flags) {
 	});
 }
 
-main(yargs
-	.options({
-		cwd: {
-			description: 'directory to execute in',
-			type: 'string',
-		},
-		skipMain: {
-			default: false,
-			type: 'boolean',
-			description: 'Skip main checks',
-		},
-		skipBin: {
-			default: false,
-			type: 'boolean',
-			description: 'Skip bin checks',
-		},
-		skipImport: {
-			default: false,
-			type: 'boolean',
-			description: 'Skip import smoke test',
-		},
-	})
-	.scriptName('pkg-check')
-	.usage('pkg-check\n')
-	.usage('Check if a package creates valid tarballs')
-	.example('$0', '')
-	.help()
-	.version()
-	.strict()
-	.argv
+main(
+	yargs
+		.options({
+			cwd: {
+				description: 'directory to execute in',
+				type: 'string',
+			},
+			skipMain: {
+				default: false,
+				type: 'boolean',
+				description: 'Skip main checks',
+			},
+			skipBin: {
+				default: false,
+				type: 'boolean',
+				description: 'Skip bin checks',
+			},
+			skipImport: {
+				default: false,
+				type: 'boolean',
+				description: 'Skip import smoke test',
+			},
+		})
+		.scriptName('pkg-check')
+		.usage('pkg-check\n')
+		.usage('Check if a package creates valid tarballs')
+		.example('$0', '')
+		.help()
+		.version()
+		.strict().argv
 )
 	.then((report) => {
 		if (report.problems.length > 0) {
