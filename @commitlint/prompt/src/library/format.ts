@@ -5,9 +5,9 @@ export default format;
 
 /**
  * Get formatted commit message
- * @param  {object}  input object containing structured results
- * @param  {boolean} debug show debug information in commit message
- * @return {string}        formatted debug message
+ * @param input object containing structured results
+ * @param debug show debug information in commit message
+ * @return formatted debug message
  */
 function format(input: Result, debug = false): string {
 	const results = debug

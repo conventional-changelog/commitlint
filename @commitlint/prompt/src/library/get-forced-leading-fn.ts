@@ -2,7 +2,7 @@ import {RuleEntry} from './types';
 
 /**
  * Get forced leading for rule
- * @param {object} rule to parse
+ * @param rule to parse
  * @return transform function applying the leading
  */
 export default function getForcedLeadingFn(

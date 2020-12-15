@@ -1,11 +1,12 @@
-/**
- * Check if a rule definition is applicable
- * @param {object} rule to check
- * @return {boolean} if the rule definition is appliable
- */
+
 import {RuleEntry} from './types';
 import {RuleConfigSeverity} from '@commitlint/types';
 
+/**
+ * Check if a rule definition is applicable
+ * @param rule to check
+ * @return if the rule definition is applicable
+ */
 export default function ruleIsApplicable(
 	rule: RuleEntry
 ): rule is

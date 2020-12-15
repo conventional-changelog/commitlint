@@ -3,11 +3,6 @@ import ruleIsActive from './rule-is-active';
 import {RuleEntry} from './types';
 import {RuleConfigSeverity} from '@commitlint/types';
 
-/**
- * [enumRuleIsActive description]
- * @param  {[type]} rule [description]
- * @return {[type]}      [description]
- */
 export default function enumRuleIsActive(
 	rule: RuleEntry
 ): rule is [

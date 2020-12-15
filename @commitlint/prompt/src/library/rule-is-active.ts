@@ -3,8 +3,8 @@ import {RuleConfigSeverity} from '@commitlint/types';
 
 /**
  * Check if a rule definition is active
- * @param {object} rule to check
- * @return {boolean} if the rule definition is active
+ * @param rule to check
+ * @return if the rule definition is active
  */
 export default function ruleIsActive<T extends RuleEntry>(
 	rule: T
