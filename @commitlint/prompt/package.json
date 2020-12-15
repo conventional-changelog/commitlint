@@ -7,20 +7,8 @@
     "lib/"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
-    "commit": "git-cz",
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-import",
-    "start": "yarn run watch",
-    "watch": "babel src --out-dir lib --watch  --source-maps"
-  },
-  "babel": {
-    "presets": [
-      "commitlint"
-    ],
-    "ignore": [
-      "**/*.test.js"
-    ]
+    "pkg": "pkg-check --skip-import"
   },
   "config": {
     "commitizen": {
@@ -48,15 +36,10 @@
     "node": ">=v10.22.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.11.6",
-    "@babel/core": "^7.11.6",
     "@commitlint/utils": "^11.0.0",
-    "babel-preset-commitlint": "^11.0.0",
-    "commitizen": "4.2.2",
-    "cross-env": "7.0.3"
+    "commitizen": "4.2.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
     "@commitlint/load": "^11.0.0",
     "chalk": "^4.0.0",
     "lodash": "^4.17.19",

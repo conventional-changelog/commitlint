@@ -5,17 +5,19 @@ import format from './library/format';
 import getHasName from './library/get-has-name';
 import getPrompt from './library/get-prompt';
 import settings from './settings';
+import {InputSetting, Prompter, Result, RuleEntry} from './library/types';
+import {QualifiedRules} from '@commitlint/types';
 
 export default input;
 
 /**
  * Get user input by interactive prompt based on
  * conventional-changelog-lint rules.
- * @param {function} prompter
- * @return {Promise<string>} commit message
+ * @param prompter
+ * @return commit message
  */
-async function input(prompter) {
-	const results = {
+async function input(prompter: () => Prompter): Promise<string> {
+	const results: Result = {
 		type: null,
 		scope: null,
 		subject: null,
@@ -26,32 +28,37 @@ async function input(prompter) {
 	const {rules} = await load();
 
 	await Promise.all(
-		['type', 'scope', 'subject', 'body', 'footer'].map(
+		(['type', 'scope', 'subject', 'body', 'footer'] as const).map(
 			throat(1, async (input) => {
 				const inputRules = getRules(input, rules);
-				const inputSettings = settings[input];
+				const inputSettings: InputSetting = settings[input];
 
 				const isHeader = ['type', 'scope', 'subject'].indexOf(input) > -1;
 
-				const headerLengthRule = getRules('header', rules).filter(
+				const headerLengthRule = getRules('header', rules).find(
 					getHasName('max-length')
-				)[0];
+				);
 
 				if (isHeader && headerLengthRule) {
 					const [, [severity, applicable, length]] = headerLengthRule;
-					if (severity > 0 && applicable === 'always') {
+					if (
+						severity > 0 &&
+						applicable === 'always' &&
+						typeof length === 'number'
+					) {
 						inputSettings.header = {
 							length,
 						};
 					}
 				}
 
-				results[input] = await getPrompt(input, {
-					rules: inputRules,
-					settings: inputSettings,
-					results,
-					prompter,
-				});
+				results[input] =
+					(await getPrompt(input, {
+						rules: inputRules,
+						settings: inputSettings,
+						results,
+						prompter,
+					})) || null;
 			})
 		)
 	).catch((err) => {
@@ -65,30 +72,23 @@ async function input(prompter) {
 
 /**
  * Get prefix for a given rule id
- * @param  {string} id of the rule
- * @return {string} prefix of the rule
+ * @param id of the rule
+ * @return prefix of the rule
  */
-function getRulePrefix(id) {
+function getRulePrefix(id: string) {
 	const fragments = id.split('-');
 	const [prefix] = fragments;
 	return fragments.length > 1 ? prefix : null;
 }
 
 /**
- * Get a predecate matching rule definitions with a given prefix
- * @param  {[type]} name [description]
- * @return {[type]}      [description]
- */
-function getHasPrefix(name) {
-	return (rule) => getRulePrefix(rule[0]) === name;
-}
-
-/**
  * Get rules for a given prefix
- * @param  {string} prefix to search in rule names
- * @param  {object} rules  rules to search in
- * @return {object}        rules matching the prefix search
+ * @param prefix to search in rule names
+ * @param rules  rules to search in
+ * @return rules matching the prefix search
  */
-function getRules(prefix, rules) {
-	return Object.entries(rules).filter(getHasPrefix(prefix));
+function getRules(prefix: string, rules: QualifiedRules) {
+	return Object.entries(rules).filter(
+		(rule): rule is RuleEntry => getRulePrefix(rule[0]) === prefix
+	);
 }

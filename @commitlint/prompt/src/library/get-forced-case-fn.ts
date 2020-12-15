@@ -3,14 +3,17 @@ import kebabCase from 'lodash/kebabCase';
 import snakeCase from 'lodash/snakeCase';
 import upperFirst from 'lodash/upperFirst';
 import startCase from 'lodash/startCase';
+import {RuleEntry} from './types';
 
 /**
  * Get forced case for rule
- * @param {object} rule to parse
- * @return {fn} transform function applying the enforced case
+ * @param rule to parse
+ * @return transform function applying the enforced case
  */
-export default function getForcedCaseFn(rule) {
-	const noop = (input) => input;
+export default function getForcedCaseFn(
+	rule?: RuleEntry
+): (input: string) => string {
+	const noop = (input: string) => input;
 
 	if (!rule) {
 		return noop;
@@ -25,13 +28,13 @@ export default function getForcedCaseFn(rule) {
 	const [level] = config;
 
 	if (level === 0) {
-		return;
+		return noop;
 	}
 
 	const [, when] = config;
 
 	if (when === 'never') {
-		return;
+		return noop;
 	}
 
 	const [, , target] = config;
@@ -42,27 +45,27 @@ export default function getForcedCaseFn(rule) {
 
 	switch (target) {
 		case 'camel-case':
-			return (input) => camelCase(input);
+			return (input: string) => camelCase(input);
 		case 'kebab-case':
-			return (input) => kebabCase(input);
+			return (input: string) => kebabCase(input);
 		case 'snake-case':
-			return (input) => snakeCase(input);
+			return (input: string) => snakeCase(input);
 		case 'pascal-case':
-			return (input) => upperFirst(camelCase(input));
+			return (input: string) => upperFirst(camelCase(input));
 		case 'start-case':
-			return (input) => startCase(input);
+			return (input: string) => startCase(input);
 		case 'upper-case':
 		case 'uppercase':
-			return (input) => input.toUpperCase();
+			return (input: string) => input.toUpperCase();
 		case 'sentence-case':
 		case 'sentencecase':
-			return (input) =>
+			return (input: string) =>
 				`${input.charAt(0).toUpperCase()}${input.substring(1).toLowerCase()}`;
 		case 'lower-case':
 		case 'lowercase':
 		case 'lowerCase': // Backwards compat config-angular v4
-			return (input) => input.toLowerCase() === input;
+			return (input: string) => input.toLowerCase();
 		default:
-			throw new TypeError(`Unknown target case "${rule[2]}"`);
+			throw new TypeError(`Unknown target case "${target}"`);
 	}
 }

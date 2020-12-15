@@ -2,10 +2,10 @@ import chalk from 'chalk';
 
 /**
  * Get formatted meta hints for configuration
- * @param  {object} settings dictionary to parse
- * @return {string}          formatted meta information
+ * @param settings dictionary to parse
+ * @return formatted meta information
  */
-export default function meta(settings) {
+export default function meta(settings: Record<string, unknown>): string {
 	return chalk.grey(
 		Object.entries(settings || {})
 			.filter((item) => item[1])
