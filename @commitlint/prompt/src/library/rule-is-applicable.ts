@@ -1,4 +1,3 @@
-
 import {RuleEntry} from './types';
 import {RuleConfigSeverity} from '@commitlint/types';
 
