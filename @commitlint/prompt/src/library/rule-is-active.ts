@@ -8,7 +8,7 @@ import {RuleConfigSeverity} from '@commitlint/types';
  */
 export default function ruleIsActive<T extends RuleEntry>(
 	rule: T
-): rule is Exclude<T, Readonly<[RuleConfigSeverity.Disabled]>> {
+): rule is Exclude<T, [string, Readonly<[RuleConfigSeverity.Disabled]>]> {
 	const [, value] = rule;
 	if (value) {
 		return value[0] > RuleConfigSeverity.Disabled;
