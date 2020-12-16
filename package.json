@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc -b",
-    "watch": "tsc --watch",
+    "watch": "tsc -b --watch",
     "clean": "tsc -b --clean && lerna clean --yes && lerna exec 'git clean -xdf lib' && git clean -xdf node_modules",
     "commit": "node @commitlint/prompt-cli/cli.js",
     "deps": "lerna run deps",
