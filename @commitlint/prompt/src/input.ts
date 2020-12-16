@@ -52,13 +52,12 @@ async function input(prompter: () => Prompter): Promise<string> {
 					}
 				}
 
-				results[input] =
-					(await getPrompt(input, {
-						rules: inputRules,
-						settings: inputSettings,
-						results,
-						prompter,
-					})) || null;
+				results[input] = await getPrompt(input, {
+					rules: inputRules,
+					settings: inputSettings,
+					results,
+					prompter,
+				});
 			})
 		)
 	).catch((err) => {

@@ -11,20 +11,11 @@ export default format;
  */
 function format(input: Result, debug = false): string {
 	const results = debug
-		? Object.entries(input).reduce<Result>(
-				(registry, [name, value]) => {
-					registry[name as 'type' | 'scope' | 'subject' | 'body' | 'footer'] =
-						value === null ? chalk.grey(`<${name}>`) : chalk.bold(value);
-					return registry;
-				},
-				{
-					type: null,
-					scope: null,
-					subject: null,
-					body: null,
-					footer: null,
-				}
-		  )
+		? Object.entries(input).reduce<Result>((registry, [name, value]) => {
+				registry[name as 'type' | 'scope' | 'subject' | 'body' | 'footer'] =
+					value === null ? chalk.grey(`<${name}>`) : chalk.bold(value);
+				return registry;
+		  }, {})
 		: input;
 
 	// Return formatted string

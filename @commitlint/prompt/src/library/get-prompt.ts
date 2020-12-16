@@ -25,7 +25,7 @@ function getPrompt(
 		results?: Result;
 		prompter?: () => Prompter;
 	} = {}
-): Promise<string | void> {
+): Promise<string | undefined> {
 	const {rules = [], settings = {}, results = {}, prompter} = context;
 
 	if (typeof prompter !== 'function') {
@@ -82,7 +82,7 @@ function getPrompt(
 		prompt.removeAllListeners('keypress');
 		prompt.removeAllListeners('client_prompt_submit');
 		prompt.ui.redraw.done();
-		return Promise.resolve();
+		return Promise.resolve(undefined);
 	}
 
 	const caseRule = rules.find(getHasName('case'));
