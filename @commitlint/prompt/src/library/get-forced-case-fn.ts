@@ -4,6 +4,7 @@ import snakeCase from 'lodash/snakeCase';
 import upperFirst from 'lodash/upperFirst';
 import startCase from 'lodash/startCase';
 import {RuleEntry} from './types';
+import {ruleIsActive, ruleIsNotApplicable} from './utils';
 
 /**
  * Get forced case for rule
@@ -15,29 +16,11 @@ export default function getForcedCaseFn(
 ): (input: string) => string {
 	const noop = (input: string) => input;
 
-	if (!rule) {
+	if (!rule || !ruleIsActive(rule) || ruleIsNotApplicable(rule)) {
 		return noop;
 	}
 
-	const [config] = rule;
-
-	if (!Array.isArray(config)) {
-		return noop;
-	}
-
-	const [level] = config;
-
-	if (level === 0) {
-		return noop;
-	}
-
-	const [, when] = config;
-
-	if (when === 'never') {
-		return noop;
-	}
-
-	const [, , target] = config;
+	const target = rule[1][2];
 
 	if (Array.isArray(target)) {
 		return noop;

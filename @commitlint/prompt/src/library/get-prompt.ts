@@ -2,14 +2,18 @@ import chalk from 'chalk';
 
 import type {InputSetting, Prompter, Result, RuleEntry} from './types';
 
-import enumRuleIsActive from './enum-rule-is-active';
 import format from './format';
 import getForcedCaseFn from './get-forced-case-fn';
 import getForcedLeadingFn from './get-forced-leading-fn';
-import getHasName from './get-has-name';
 import meta from './meta';
-
-export default getPrompt;
+import {
+	enumRuleIsActive,
+	ruleIsNotApplicable,
+	ruleIsApplicable,
+	ruleIsActive,
+	getHasName,
+	getMaxLength,
+} from './utils';
 
 /**
  * Get a cli prompt based on rule configuration
@@ -17,7 +21,7 @@ export default getPrompt;
  * @param context rules to parse
  * @return prompt instance
  */
-function getPrompt(
+export default function getPrompt(
 	type: string,
 	context: {
 		rules?: RuleEntry[];
@@ -68,13 +72,11 @@ function getPrompt(
 
 	const emptyRule = rules.find(getHasName('empty'));
 
-	const mustBeEmpty = emptyRule
-		? emptyRule[1][0] > 0 && emptyRule[1][1] === 'always'
-		: false;
+	const mustBeEmpty =
+		emptyRule && ruleIsActive(emptyRule) && ruleIsApplicable(emptyRule);
 
-	const mayNotBeEmpty = emptyRule
-		? emptyRule[1][0] > 0 && emptyRule[1][1] === 'never'
-		: false;
+	const mayNotBeEmpty =
+		emptyRule && ruleIsActive(emptyRule) && ruleIsNotApplicable(emptyRule);
 
 	const mayBeEmpty = !mayNotBeEmpty;
 
@@ -94,14 +96,7 @@ function getPrompt(
 	const forceLeadingBlankFn = getForcedLeadingFn(leadingBlankRule);
 
 	const maxLengthRule = rules.find(getHasName('max-length'));
-
-	const inputMaxLength =
-		maxLengthRule &&
-		maxLengthRule[1] &&
-		maxLengthRule[1][0] > 0 &&
-		typeof maxLengthRule[1][1] === 'number'
-			? maxLengthRule[1][1]
-			: Infinity;
+	const inputMaxLength = getMaxLength(maxLengthRule);
 
 	const headerLength = settings.header ? settings.header.length : Infinity;
 

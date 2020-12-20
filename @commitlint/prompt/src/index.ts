@@ -11,7 +11,7 @@ type Commit = (input: string) => void;
  * @param commit callback to execute with complete commit message
  * @return generated commit message
  */
-export const prompter = async (_: unknown, commit: Commit): Promise<void> => {
+export async function prompter(_: unknown, commit: Commit): Promise<void> {
 	const message = await input(vorpal);
 	commit(message);
-};
+}
