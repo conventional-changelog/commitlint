@@ -114,7 +114,7 @@ Husky V4:
 Husky V5
 
 ```
-# .husky/pre-commit
+# .husky/commit-msg
 # ...
 npx --no-install commitlint --edit $1
 # or
