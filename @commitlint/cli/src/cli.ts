@@ -229,12 +229,12 @@ async function main(options: CliFlags) {
 		}
 	);
 
+	const helpUrl = flags['help-url']?.trim() || loaded.helpUrl;
+
 	const output = format(report, {
 		color: flags.color,
 		verbose: flags.verbose,
-		helpUrl: flags['help-url']
-			? flags['help-url'].trim()
-			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+		helpUrl,
 	});
 
 	if (!flags.quiet && output !== '') {

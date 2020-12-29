@@ -112,6 +112,11 @@ export default async function load(
 		return registry;
 	}, {});
 
+	const helpUrl =
+		typeof config.helpUrl === 'string'
+			? config.helpUrl
+			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
+
 	return {
 		extends: preset.extends!,
 		formatter: preset.formatter!,
@@ -120,5 +125,6 @@ export default async function load(
 		defaultIgnores: preset.defaultIgnores!,
 		plugins: preset.plugins!,
 		rules: qualifiedRules,
+		helpUrl,
 	};
 }
