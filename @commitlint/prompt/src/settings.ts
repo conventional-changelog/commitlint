@@ -46,7 +46,7 @@ export default {
 	},
 	body: {
 		description: '<body> holds additional information about the change',
-		multline: true,
+		multiline: true,
 	},
 	footer: {
 		description:

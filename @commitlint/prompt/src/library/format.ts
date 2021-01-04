@@ -1,18 +1,18 @@
 import chalk from 'chalk';
+import {Result} from './types';
 
 export default format;
 
 /**
  * Get formatted commit message
- * @param  {object}  input object containing structured results
- * @param  {boolean} debug show debug information in commit message
- * @return {string}        formatted debug message
+ * @param input object containing structured results
+ * @param debug show debug information in commit message
+ * @return formatted debug message
  */
-function format(input, debug = false) {
+function format(input: Result, debug = false): string {
 	const results = debug
-		? Object.entries(input || {}).reduce((registry, item) => {
-				const [name, value] = item;
-				registry[name] =
+		? Object.entries(input).reduce<Result>((registry, [name, value]) => {
+				registry[name as 'type' | 'scope' | 'subject' | 'body' | 'footer'] =
 					value === null ? chalk.grey(`<${name}>`) : chalk.bold(value);
 				return registry;
 		  }, {})

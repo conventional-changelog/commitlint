@@ -1,21 +1,35 @@
 import chalk from 'chalk';
 
-import enumRuleIsActive from './enum-rule-is-active';
+import type {InputSetting, Prompter, Result, RuleEntry} from './types';
+
 import format from './format';
 import getForcedCaseFn from './get-forced-case-fn';
 import getForcedLeadingFn from './get-forced-leading-fn';
-import getHasName from './get-has-name';
 import meta from './meta';
-
-export default getPrompt;
+import {
+	enumRuleIsActive,
+	ruleIsNotApplicable,
+	ruleIsApplicable,
+	ruleIsActive,
+	getHasName,
+	getMaxLength,
+} from './utils';
 
 /**
  * Get a cli prompt based on rule configuration
- * @param  {string} type     type of the data to gather
- * @param  {object} context     rules to parse
- * @return {object}          prompt instance
+ * @param type type of the data to gather
+ * @param context rules to parse
+ * @return prompt instance
  */
-function getPrompt(type, context = {}) {
+export default function getPrompt(
+	type: string,
+	context: {
+		rules?: RuleEntry[];
+		settings?: InputSetting;
+		results?: Result;
+		prompter?: () => Prompter;
+	} = {}
+): Promise<string | undefined> {
 	const {rules = [], settings = {}, results = {}, prompter} = context;
 
 	if (typeof prompter !== 'function') {
@@ -54,17 +68,15 @@ function getPrompt(type, context = {}) {
 		throw new TypeError('getPrompt: prompt.show is not a function');
 	}
 
-	const enumRule = rules.filter(getHasName('enum')).filter(enumRuleIsActive)[0];
+	const enumRule = rules.filter(getHasName('enum')).find(enumRuleIsActive);
 
-	const emptyRule = rules.filter(getHasName('empty'))[0];
+	const emptyRule = rules.find(getHasName('empty'));
 
-	const mustBeEmpty = emptyRule
-		? emptyRule[1][0] > 0 && emptyRule[1][1] === 'always'
-		: false;
+	const mustBeEmpty =
+		emptyRule && ruleIsActive(emptyRule) && ruleIsApplicable(emptyRule);
 
-	const mayNotBeEmpty = emptyRule
-		? emptyRule[1][0] > 0 && emptyRule[1][1] === 'never'
-		: false;
+	const mayNotBeEmpty =
+		emptyRule && ruleIsActive(emptyRule) && ruleIsNotApplicable(emptyRule);
 
 	const mayBeEmpty = !mayNotBeEmpty;
 
@@ -72,22 +84,19 @@ function getPrompt(type, context = {}) {
 		prompt.removeAllListeners('keypress');
 		prompt.removeAllListeners('client_prompt_submit');
 		prompt.ui.redraw.done();
-		return Promise.resolve();
+		return Promise.resolve(undefined);
 	}
 
-	const caseRule = rules.filter(getHasName('case'))[0];
+	const caseRule = rules.find(getHasName('case'));
 
 	const forceCaseFn = getForcedCaseFn(caseRule);
 
-	const leadingBlankRule = rules.filter(getHasName('leading-blank'))[0];
+	const leadingBlankRule = rules.find(getHasName('leading-blank'));
 
 	const forceLeadingBlankFn = getForcedLeadingFn(leadingBlankRule);
 
-	const maxLenghtRule = rules.filter(getHasName('max-length'))[0];
-
-	const hasMaxLength = maxLenghtRule && maxLenghtRule[1][0] > 0;
-
-	const inputMaxLength = hasMaxLength ? maxLenghtRule[1][1] : Infinity;
+	const maxLengthRule = rules.find(getHasName('max-length'));
+	const inputMaxLength = getMaxLength(maxLengthRule);
 
 	const headerLength = settings.header ? settings.header.length : Infinity;
 
@@ -142,7 +151,7 @@ function getPrompt(type, context = {}) {
 		}
 
 		// Handle empty input
-		const onSubmit = (input) => {
+		const onSubmit = (input: string) => {
 			if (input.length > 0) {
 				return;
 			}
@@ -165,34 +174,30 @@ function getPrompt(type, context = {}) {
 			}
 		};
 
-		const drawRemaining = (length) => {
+		const drawRemaining = (length: number) => {
 			if (length < Infinity) {
 				const colors = [
 					{
 						threshold: 5,
-						color: 'red',
+						color: chalk.red,
 					},
 					{
 						threshold: 10,
-						color: 'yellow',
+						color: chalk.yellow,
 					},
 					{
 						threshold: Infinity,
-						color: 'grey',
+						color: chalk.grey,
 					},
 				];
 
-				const color = colors
-					.filter((item) => {
-						return item.threshold >= length;
-					})
-					.map((item) => item.color)[0];
-
-				prompt.ui.redraw(chalk[color](`${length} characters left`));
+				const el = colors.find((item) => item.threshold >= length);
+				const color = el ? el.color : chalk.grey;
+				prompt.ui.redraw(color(`${length} characters left`));
 			}
 		};
 
-		const onKey = (event) => {
+		const onKey = (event: {value: string}) => {
 			const sanitized = forceCaseFn(event.value);
 			const cropped = sanitized.slice(0, maxLength);
 
