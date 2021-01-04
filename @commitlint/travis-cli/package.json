@@ -3,25 +3,15 @@
   "version": "11.0.0",
   "description": "Lint all relevant commits for a change or PR on Travis CI",
   "files": [
-    "lib/"
+    "lib/",
+    "cli.js"
   ],
   "bin": {
-    "commitlint-travis": "./lib/cli.js"
+    "commitlint-travis": "./cli.js"
   },
   "scripts": {
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --source-maps",
     "deps": "dep-check",
-    "pkg": "pkg-check --skip-main",
-    "start": "yarn run watch",
-    "watch": "babel src --out-dir lib --watch --source-maps"
-  },
-  "babel": {
-    "presets": [
-      "babel-preset-commitlint"
-    ],
-    "ignore": [
-      "**/*.test.js"
-    ]
+    "pkg": "pkg-check --skip-main"
   },
   "engines": {
     "node": ">=v10.22.1"
@@ -45,17 +35,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@babel/cli": "7.11.6",
-    "@babel/core": "7.11.6",
     "@commitlint/test": "^11.0.0",
-    "@commitlint/utils": "^11.0.0",
-    "babel-preset-commitlint": "^11.0.0",
-    "cross-env": "7.0.2"
+    "@commitlint/utils": "^11.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "^7.11.2",
     "@commitlint/cli": "^11.0.0",
-    "execa": "^4.0.0"
+    "execa": "^5.0.0"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
 }

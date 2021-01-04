@@ -19,6 +19,7 @@ export interface LintOptions {
 	parserOpts?: ParserOptions;
 
 	plugins?: PluginRecords;
+	helpUrl?: string;
 }
 
 export interface LintOutcome {

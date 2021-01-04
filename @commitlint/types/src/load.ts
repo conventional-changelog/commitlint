@@ -21,6 +21,7 @@ export interface UserConfig {
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
 	plugins?: (string | Plugin)[];
+	helpUrl?: string;
 }
 
 export interface UserPreset {
@@ -43,6 +44,7 @@ export interface QualifiedConfig {
 	ignores: ((commit: string) => boolean)[];
 	defaultIgnores: boolean;
 	plugins: PluginRecords;
+	helpUrl: string;
 }
 
 export interface ParserPreset {

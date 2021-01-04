@@ -92,7 +92,7 @@ module.exports = {
 
 Refer to the [Rules Referece](reference-rules.md) for a list of all avaiable configuration options.
 
-There is also the [#commitlint](https://yargs.slack.com/messages/C7M8XJ4RL/) channel on the DevTools Slack workspace. Join us there and we'll do our best to help you with your migration.
+There is also the [#commitlint](https://node-tooling.slack.com/messages/C7M8XJ4RL/) channel on the DevTools Slack workspace. Join us there and we'll do our best to help you with your migration.
 
 ## Version 1 to 2
 

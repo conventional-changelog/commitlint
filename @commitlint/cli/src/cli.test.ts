@@ -120,6 +120,13 @@ test('should fail for input from stdin with rule from js', async () => {
 	expect(actual.exitCode).toBe(1);
 });
 
+test('should output help URL defined in config file', async () => {
+	const cwd = await gitBootstrap('fixtures/help-url');
+	const actual = await cli([], {cwd})('foo: bar');
+	expect(actual.stdout).toContain('Get help: https://www.example.com/foo');
+	expect(actual.exitCode).toBe(1);
+});
+
 test('should produce no error output with --quiet flag', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');

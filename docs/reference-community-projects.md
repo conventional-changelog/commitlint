@@ -11,3 +11,4 @@ If you want to add a project to this list [open a pull request](https://github.c
 ## List of Projects
 
 - [commitlint.io](https://github.com/tomasen/commitlintio) - helps your project to ensures nice and tidy commit messages without needing any download or installation
+- [commitlint plugin function rules](https://github.com/vidavidorra/commitlint-plugin-function-rules) - use functions as rule value to create rules based on commit messages, with regular expressions and more

@@ -1,5 +1,6 @@
 import {bodyCase} from './body-case';
 import {bodyEmpty} from './body-empty';
+import {bodyFullStop} from './body-full-stop';
 import {bodyLeadingBlank} from './body-leading-blank';
 import {bodyMaxLength} from './body-max-length';
 import {bodyMaxLineLength} from './body-max-line-length';
@@ -34,6 +35,7 @@ import {typeMinLength} from './type-min-length';
 export default {
 	'body-case': bodyCase,
 	'body-empty': bodyEmpty,
+	'body-full-stop': bodyFullStop,
 	'body-leading-blank': bodyLeadingBlank,
 	'body-max-length': bodyMaxLength,
 	'body-max-line-length': bodyMaxLineLength,
