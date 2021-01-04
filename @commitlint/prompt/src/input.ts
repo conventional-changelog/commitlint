@@ -1,13 +1,13 @@
 import load from '@commitlint/load';
-import throat from 'throat';
+import {DistinctQuestion, PromptModule} from 'inquirer';
 
 import format from './library/format';
 import getPrompt from './library/get-prompt';
 import settings from './settings';
-import {InputSetting, Prompter, Result} from './library/types';
-import {getHasName, getMaxLength, getRules} from './library/utils';
+import {InputSetting, Result} from './library/types';
 
-export default input;
+import {getHasName, getMaxLength, getRules} from './library/utils';
+import InputCustomPrompt from './inquirer/InputCustomPrompt';
 
 /**
  * Get user input by interactive prompt based on
@@ -15,15 +15,7 @@ export default input;
  * @param prompter
  * @return commit message
  */
-async function input(prompter: () => Prompter): Promise<string> {
-	const results: Result = {
-		type: null,
-		scope: null,
-		subject: null,
-		body: null,
-		footer: null,
-	};
-
+export default async function input(prompter: PromptModule): Promise<string> {
 	const {rules} = await load();
 	const parts = ['type', 'scope', 'subject', 'body', 'footer'] as const;
 	const headerParts = ['type', 'scope', 'subject'];
@@ -33,31 +25,28 @@ async function input(prompter: () => Prompter): Promise<string> {
 	);
 	const maxLength = getMaxLength(headerLengthRule);
 
-	await Promise.all(
-		parts.map(
-			throat(1, async (input) => {
-				const inputRules = getRules(input, rules);
-				const inputSettings: InputSetting = settings[input];
+	try {
+		const questions: DistinctQuestion<Result>[] = [];
+		prompter.registerPrompt('input-custom', InputCustomPrompt);
 
-				if (headerParts.includes(input) && maxLength < Infinity) {
-					inputSettings.header = {
-						length: maxLength,
-					};
-				}
+		for (const input of parts) {
+			const inputSettings: InputSetting = settings[input];
+			const inputRules = getRules(input, rules);
+			if (headerParts.includes(input) && maxLength < Infinity) {
+				inputSettings.header = {
+					length: maxLength,
+				};
+			}
+			const question = getPrompt(input, inputRules, inputSettings);
+			if (question) {
+				questions.push(question);
+			}
+		}
 
-				results[input] = await getPrompt(input, {
-					rules: inputRules,
-					settings: inputSettings,
-					results,
-					prompter,
-				});
-			})
-		)
-	).catch((err) => {
+		const results = await prompter<Result>(questions);
+		return format(results);
+	} catch (err) {
 		console.error(err);
 		return '';
-	});
-
-	// Return the results
-	return format(results);
+	}
 }
