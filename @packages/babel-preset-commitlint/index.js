@@ -1,4 +1,3 @@
-const fastAsync = require('fast-async');
 const env = require('@babel/preset-env');
 const jsx = require('@babel/plugin-transform-react-jsx');
 const commonjs = require('@babel/plugin-transform-modules-commonjs');
@@ -10,7 +9,6 @@ function preset() {
 	const plugins = [
 		commonjs,
 		[jsx, {pragma: 'h'}],
-		[fastAsync, {spec: true}],
 		[transformRuntime, {regenerator: false}],
 	];
 
@@ -27,7 +25,7 @@ function preset() {
 				{
 					debug: process.env.DEBUG === 'true',
 					exclude: ['transform-regenerator', 'transform-async-to-generator'],
-					targets: {node: '6'},
+					targets: {node: '10'},
 					modules: false,
 				},
 			],
