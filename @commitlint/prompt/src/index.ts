@@ -1,17 +1,18 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import vorpal from 'vorpal';
+import inquirer from 'inquirer';
 import input from './input';
 
 type Commit = (input: string) => void;
 
 /**
  * Entry point for commitizen
- * @param _ inquirer instance passed by commitizen, unused
+ * @param cz inquirer instance passed by commitizen
  * @param commit callback to execute with complete commit message
  * @return generated commit message
  */
-export async function prompter(_: unknown, commit: Commit): Promise<void> {
-	const message = await input(vorpal);
+export async function prompter(
+	cz: typeof inquirer,
+	commit: Commit
+): Promise<void> {
+	const message = await input(cz.prompt);
 	commit(message);
 }
