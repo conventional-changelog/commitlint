@@ -145,7 +145,6 @@ async function getTarballFiles(source, options) {
 		unsafeCleanup: true,
 	});
 	const cwd = tmpDir.name;
-	await fs.copy(source, cwd);
 	const tarball = path.join(cwd, 'test-archive.tgz');
 	await execa('yarn', ['pack', '--filename', tarball], {cwd: source});
 
