@@ -24,7 +24,6 @@ function preset() {
 				env,
 				{
 					debug: process.env.DEBUG === 'true',
-					exclude: ['transform-regenerator', 'transform-async-to-generator'],
 					targets: {node: '10'},
 					modules: false,
 				},
