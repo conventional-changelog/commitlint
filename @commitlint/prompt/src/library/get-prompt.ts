@@ -64,10 +64,9 @@ export default function getPrompt(
 		},
 		tabCompletion: enumRule
 			? enumRule[1][2].map((enumerable) => {
-					const value = forceLeadingBlankFn(forceCaseFn(enumerable));
 					const enumSettings = (settings.enumerables || {})[enumerable] || {};
 					return {
-						value: value,
+						value: forceLeadingBlankFn(forceCaseFn(enumerable)),
 						description: enumSettings.description || '',
 					};
 			  })
@@ -92,13 +91,15 @@ export default function getPrompt(
 			return prefix + EOL;
 		},
 		maxLength(res: Result) {
-			const headerLength = settings.header ? settings.header.length : Infinity;
-			const header = `${res.type}${res.scope ? `(${res.scope})` : ''}${
-				res.type || res.scope ? ': ' : ''
-			}${res.subject}`;
-			const remainingHeaderLength = headerLength
-				? headerLength - header.length
-				: Infinity;
+			let remainingHeaderLength = Infinity;
+			if (settings.header && settings.header.length) {
+				const header = format({
+					type: res.type,
+					scope: res.scope,
+					subject: res.subject,
+				});
+				remainingHeaderLength = settings.header.length - header.length;
+			}
 			return Math.min(inputMaxLength, remainingHeaderLength);
 		},
 		transformer(value: string) {
