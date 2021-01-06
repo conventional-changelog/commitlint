@@ -479,7 +479,11 @@ test('should print version', async () => {
 test('should print config', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--print-config', '--no-color'], {cwd})();
-	expect(actual.stdout).toMatchInlineSnapshot(`
+	const stdout = actual.stdout
+		.replace(/^{[^\n]/g, '{\n  ')
+		.replace(/[^\n]}$/g, '\n}')
+		.replace(/(helpUrl:)\n[ ]+/, '$1 ');
+	expect(stdout).toMatchInlineSnapshot(`
 		"{
 		  extends: [],
 		  formatter: '@commitlint/format',
