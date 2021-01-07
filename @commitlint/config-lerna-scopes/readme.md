@@ -1,4 +1,4 @@
-> Lint your commits, angular-style
+> Lint your lerna project commits
 
 # @commitlint/config-lerna-scopes
 
