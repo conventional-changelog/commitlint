@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./inquirer.d.ts" />
 import {Interface as ReadlineInterface, Key} from 'readline';
 
@@ -10,7 +9,6 @@ import type {Subscription} from 'rxjs/internal/Subscription';
 
 import Answers = inquirer.Answers;
 import InputCustomOptions = inquirer.InputCustomOptions;
-import Validator = inquirer.Validator;
 import SuccessfulPromptStateData = inquirer.prompts.SuccessfulPromptStateData;
 
 interface KeyDescriptor {
@@ -46,40 +44,11 @@ export default class InputCustomPrompt<
 		this.tabCompletion = (this.opt.tabCompletion || [])
 			.map((item) => item.value)
 			.sort((a, b) => a.localeCompare(b));
-
-		this.opt.validate = this.extendedValidate(this.opt.validate);
 	}
 
 	onEnd(state: SuccessfulPromptStateData): void {
 		this.lineSubscription.unsubscribe();
 		super.onEnd(state);
-	}
-
-	extendedValidate(validate?: Validator<TQuestion>): Validator<TQuestion> {
-		return (input, answers) => {
-			if (input.length > this.opt.maxLength(answers)) {
-				return 'Input contains too many characters!';
-			}
-			if (this.opt.required && input.trim().length === 0) {
-				// Show help if enum is defined and input may not be empty
-				return `⚠ ${chalk.bold(this.opt.name)} may not be empty.`;
-			}
-
-			if (
-				input.length > 0 &&
-				this.tabCompletion.length > 0 &&
-				!this.tabCompletion.includes(input)
-			) {
-				return `⚠ ${chalk.bold(
-					this.opt.name
-				)} must be one of ${this.tabCompletion.join(', ')}.`;
-			}
-
-			if (validate) {
-				return validate(input, answers);
-			}
-			return true;
-		};
 	}
 
 	/**

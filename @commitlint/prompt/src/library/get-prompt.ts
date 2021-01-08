@@ -1,6 +1,5 @@
 import chalk from 'chalk';
-
-import {InputCustomOptions, InputQuestion, ListQuestion} from 'inquirer';
+import {InputCustomOptions} from 'inquirer';
 
 import type {InputSetting, RuleEntry, Result, ResultPart} from './types';
 
@@ -30,11 +29,7 @@ export default function getPrompt(
 	type: ResultPart,
 	rules: RuleEntry[] = [],
 	settings: InputSetting = {}
-):
-	| InputQuestion<Result>
-	| ListQuestion<Result>
-	| InputCustomOptions<Result>
-	| null {
+): InputCustomOptions<Result> | null {
 	const emptyRule = rules.filter(getHasName('empty')).find(ruleIsActive);
 
 	const mustBeEmpty = emptyRule ? ruleIsApplicable(emptyRule) : false;
@@ -55,23 +50,53 @@ export default function getPrompt(
 
 	const enumRule = rules.filter(getHasName('enum')).find(enumRuleIsActive);
 
+	const tabCompletion = enumRule
+		? enumRule[1][2].map((enumerable) => {
+				const enumSettings = (settings.enumerables || {})[enumerable] || {};
+				return {
+					value: forceLeadingBlankFn(forceCaseFn(enumerable)),
+					description: enumSettings.description || '',
+				};
+		  })
+		: [];
+
+	const maxLength = (res: Result) => {
+		let remainingHeaderLength = Infinity;
+		if (settings.header && settings.header.length) {
+			const header = format({
+				type: res.type,
+				scope: res.scope,
+				subject: res.subject,
+			});
+			remainingHeaderLength = settings.header.length - header.length;
+		}
+		return Math.min(inputMaxLength, remainingHeaderLength);
+	};
+
 	return {
 		type: 'input-custom',
 		name: type,
 		message: `${type}:`,
-		validate(): boolean | string {
+		validate(input, answers) {
+			if (input.length > maxLength(answers || {})) {
+				return 'Input contains too many characters!';
+			}
+			if (required && input.trim().length === 0) {
+				// Show help if enum is defined and input may not be empty
+				return `⚠ ${chalk.bold(type)} may not be empty.`;
+			}
+
+			const tabValues = tabCompletion.map((item) => item.value);
+			if (
+				input.length > 0 &&
+				tabValues.length > 0 &&
+				!tabValues.includes(input)
+			) {
+				return `⚠ ${chalk.bold(type)} must be one of ${tabValues.join(', ')}.`;
+			}
 			return true;
 		},
-		tabCompletion: enumRule
-			? enumRule[1][2].map((enumerable) => {
-					const enumSettings = (settings.enumerables || {})[enumerable] || {};
-					return {
-						value: forceLeadingBlankFn(forceCaseFn(enumerable)),
-						description: enumSettings.description || '',
-					};
-			  })
-			: [],
-		required,
+		tabCompletion,
 		log(answers?: Result) {
 			let prefix =
 				`${chalk.white('Please enter a')} ${chalk.bold(type)}: ${meta({
@@ -90,18 +115,7 @@ export default function getPrompt(
 			}
 			return prefix + EOL;
 		},
-		maxLength(res: Result) {
-			let remainingHeaderLength = Infinity;
-			if (settings.header && settings.header.length) {
-				const header = format({
-					type: res.type,
-					scope: res.scope,
-					subject: res.subject,
-				});
-				remainingHeaderLength = settings.header.length - header.length;
-			}
-			return Math.min(inputMaxLength, remainingHeaderLength);
-		},
+		maxLength,
 		transformer(value: string) {
 			return forceCaseFn(value);
 		},

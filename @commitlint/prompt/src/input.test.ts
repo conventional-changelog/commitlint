@@ -1,6 +1,6 @@
 import {Answers, PromptModule, QuestionCollection} from 'inquirer';
+/// <reference path="./inquirer/inquirer.d.ts" />
 import input from './input';
-import InputCustomPrompt from './inquirer/InputCustomPrompt';
 import chalk from 'chalk';
 
 jest.mock(
@@ -75,15 +75,7 @@ function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 			if (answer == null) {
 				throw new Error(`Unexpected config name: ${promptConfig.name}`);
 			}
-			let validate = promptConfig.validate;
-			if (promptConfig.type === 'input-custom') {
-				const customInput = new InputCustomPrompt(
-					promptConfig,
-					{write: () => true} as any,
-					result
-				) as any;
-				validate = customInput.opt.validate.bind(customInput);
-			}
+			const validate = promptConfig.validate;
 			if (validate) {
 				const validationResult = validate(answer, result);
 				if (validationResult !== true) {
