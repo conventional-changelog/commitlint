@@ -12,7 +12,6 @@ declare module 'inquirer' {
 		 * @inheritdoc
 		 */
 		type?: 'input-custom';
-		required?: boolean;
 		log?(answers?: T): string;
 		tabCompletion?: InputCustomCompletionOption[];
 		maxLength(answers?: T): number;
