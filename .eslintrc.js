@@ -27,12 +27,13 @@ module.exports = {
 		// Forbid a module from importing itself
 		'import/no-self-import': 'error',
 
-		// Enable after https://github.com/benmosher/eslint-plugin-import/issues/1650 is fixed
 		// Forbid the use of extraneous packages
-		// 'import/no-extraneous-dependencies': [
-		// 	'error',
-		// 	{devDependencies: ['**/*.test.js']}
-		// ]
+		'import/no-extraneous-dependencies': [
+			'error',
+			{
+				devDependencies: ['**/*.test.js', '**/*.test.ts'],
+			},
+		],
 	},
 	overrides: [
 		{
