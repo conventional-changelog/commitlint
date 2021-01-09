@@ -34,11 +34,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^11.0.0"
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/types": "^11.0.0"
   },
   "devDependencies": {
     "@commitlint/test": "^11.0.0",
-    "@commitlint/utils": "^11.0.0"
+    "@commitlint/utils": "^11.0.0",
+    "execa": "^5.0.0"
   },
   "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
 }
