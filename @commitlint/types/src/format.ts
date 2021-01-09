@@ -1,4 +1,4 @@
-import type chalk from 'chalk';
+import chalk from 'chalk';
 import {QualifiedRules} from './load';
 import {RuleConfigSeverity} from './rules';
 
