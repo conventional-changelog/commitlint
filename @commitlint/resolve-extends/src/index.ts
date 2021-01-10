@@ -4,17 +4,12 @@ import 'resolve-global';
 import resolveFrom from 'resolve-from';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
+import {UserConfig} from '@commitlint/types';
 
 const importFresh = require('import-fresh');
 
 export interface ResolvedConfig {
 	parserPreset?: unknown;
-	[key: string]: unknown;
-}
-
-export interface ResolveExtendsConfig {
-	parserPreset?: unknown;
-	extends?: string | string[];
 	[key: string]: unknown;
 }
 
@@ -28,7 +23,7 @@ export interface ResolveExtendsContext {
 }
 
 export default function resolveExtends(
-	config: ResolveExtendsConfig = {},
+	config: UserConfig = {},
 	context: ResolveExtendsContext = {}
 ) {
 	const {extends: e} = config;
@@ -46,7 +41,7 @@ export default function resolveExtends(
 }
 
 function loadExtends(
-	config: ResolveExtendsConfig = {},
+	config: UserConfig = {},
 	context: ResolveExtendsContext = {}
 ): ResolvedConfig[] {
 	const {extends: e} = config;
