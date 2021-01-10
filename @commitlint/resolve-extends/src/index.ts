@@ -4,9 +4,13 @@ import 'resolve-global';
 import resolveFrom from 'resolve-from';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
-import {UserConfig} from '@commitlint/types';
 
 const importFresh = require('import-fresh');
+
+export interface ResolveExtendsConfig {
+	extends?: string | string[];
+	[key: string]: unknown;
+}
 
 export interface ResolvedConfig {
 	parserPreset?: unknown;
@@ -22,32 +26,45 @@ export interface ResolveExtendsContext {
 	require?<T>(id: string): T;
 }
 
+function mergeStrategy(objValue: unknown, srcValue: unknown, key: string) {
+	if (key === 'parserPreset') {
+		if (typeof srcValue !== 'object') {
+			return objValue;
+		}
+	} else if (key === 'rules') {
+		if (typeof objValue !== 'object') {
+			return srcValue;
+		}
+	} else if (key === 'plugins') {
+		if (!Array.isArray(objValue)) {
+			return srcValue;
+		}
+	} else if (Array.isArray(objValue)) {
+		return srcValue;
+	}
+}
+
 export default function resolveExtends(
-	config: UserConfig = {},
+	config: ResolveExtendsConfig = {},
 	context: ResolveExtendsContext = {}
-) {
+): ResolvedConfig {
 	const {extends: e} = config;
-	const extended = loadExtends(config, context).reduce(
-		(r, {extends: _, ...c}) =>
-			mergeWith(r, c, (objValue, srcValue) => {
-				if (Array.isArray(objValue)) {
-					return srcValue;
-				}
-			}),
+	const extended = loadExtends(config, context);
+	extended.push(config);
+	return extended.reduce(
+		(r, {extends: _, ...c}) => mergeWith(r, c, mergeStrategy),
 		e ? {extends: e} : {}
 	);
-
-	return merge({}, extended, config);
 }
 
 function loadExtends(
-	config: UserConfig = {},
+	config: ResolveExtendsConfig = {},
 	context: ResolveExtendsContext = {}
 ): ResolvedConfig[] {
 	const {extends: e} = config;
-	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
+	const ext = e ? (Array.isArray(e) ? [...e] : [e]) : [];
 
-	return ext.reduce<ResolvedConfig[]>((configs, raw) => {
+	return ext.reverse().reduce<ResolvedConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
@@ -73,7 +90,7 @@ function loadExtends(
 			config.parserPreset = parserPreset;
 		}
 
-		return [...configs, ...loadExtends(c, ctx), c];
+		return [...loadExtends(c, ctx), c, ...configs];
 	}, []);
 }
 

@@ -1,7 +1,7 @@
 import Path from 'path';
 
 import merge from 'lodash/merge';
-import union from 'lodash/union';
+import uniq from 'lodash/uniq';
 import resolveFrom from 'resolve-from';
 
 import executeRule from '@commitlint/execute-rule';
@@ -35,6 +35,8 @@ export default async function load(
 	const config = pickConfig(
 		merge(
 			{
+				extends: [],
+				plugins: [],
 				rules: {},
 				formatter: '@commitlint/format',
 				helpUrl:
@@ -57,7 +59,7 @@ export default async function load(
 	}
 
 	// Resolve extends key
-	const extended = resolveExtends(config, {
+	const extended = resolveExtends(config as any, {
 		prefix: 'commitlint-config',
 		cwd: base,
 		parserPreset: config.parserPreset,
@@ -66,13 +68,7 @@ export default async function load(
 	validateConfig(extended);
 
 	let plugins: PluginRecords = {};
-	// TODO: this object merging should be done in resolveExtends
-	union(
-		// Read plugins from config
-		Array.isArray(config.plugins) ? config.plugins : [],
-		// Read plugins from extends
-		Array.isArray(extended.plugins) ? extended.plugins : []
-	).forEach((plugin) => {
+	uniq(extended.plugins || []).forEach((plugin) => {
 		if (typeof plugin === 'string') {
 			plugins = loadPlugin(plugins, plugin, process.env.DEBUG === 'true');
 		} else {
@@ -82,10 +78,7 @@ export default async function load(
 
 	const rules = (
 		await Promise.all(
-			Object.entries({
-				...(typeof extended.rules === 'object' ? extended.rules || {} : {}),
-				...(typeof config.rules === 'object' ? config.rules || {} : {}),
-			}).map((entry) => executeRule(entry))
+			Object.entries(extended.rules || {}).map((entry) => executeRule(entry))
 		)
 	).reduce<QualifiedRules>((registry, item) => {
 		// type of `item` can be null, but Object.entries always returns key pair
@@ -111,9 +104,6 @@ export default async function load(
 		defaultIgnores: extended.defaultIgnores,
 		plugins: plugins,
 		rules: rules,
-		helpUrl:
-			typeof extended.helpUrl === 'string'
-				? extended.helpUrl
-				: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+		helpUrl: extended.helpUrl,
 	};
 }
