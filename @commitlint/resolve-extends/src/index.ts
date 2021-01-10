@@ -26,24 +26,6 @@ export interface ResolveExtendsContext {
 	require?<T>(id: string): T;
 }
 
-function mergeStrategy(objValue: unknown, srcValue: unknown, key: string) {
-	if (key === 'parserPreset') {
-		if (typeof srcValue !== 'object') {
-			return objValue;
-		}
-	} else if (key === 'rules') {
-		if (typeof objValue !== 'object') {
-			return srcValue;
-		}
-	} else if (key === 'plugins') {
-		if (!Array.isArray(objValue)) {
-			return srcValue;
-		}
-	} else if (Array.isArray(objValue)) {
-		return srcValue;
-	}
-}
-
 export default function resolveExtends(
 	config: ResolveExtendsConfig = {},
 	context: ResolveExtendsContext = {}
@@ -52,7 +34,24 @@ export default function resolveExtends(
 	const extended = loadExtends(config, context);
 	extended.push(config);
 	return extended.reduce(
-		(r, {extends: _, ...c}) => mergeWith(r, c, mergeStrategy),
+		(r, {extends: _, ...c}) =>
+			mergeWith(r, c, (objValue, srcValue, key) => {
+				if (key === 'parserPreset') {
+					if (typeof srcValue !== 'object') {
+						return objValue;
+					}
+				} else if (key === 'rules') {
+					if (typeof objValue !== 'object') {
+						return srcValue;
+					}
+				} else if (key === 'plugins') {
+					if (!Array.isArray(objValue)) {
+						return srcValue;
+					}
+				} else if (Array.isArray(objValue)) {
+					return srcValue;
+				}
+			}),
 		e ? {extends: e} : {}
 	);
 }
