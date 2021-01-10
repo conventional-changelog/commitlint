@@ -48,11 +48,7 @@ export function validateConfig<T extends Record<string, unknown>>(
 	if (config.rules && typeof config.rules !== 'object') {
 		throw new Error('Invalid configuration, `rules` must ba an object');
 	}
-	if (
-		config.defaultIgnores &&
-		typeof config.defaultIgnores !== 'boolean' &&
-		typeof config.defaultIgnores !== 'undefined'
-	) {
+	if (config.defaultIgnores && typeof config.defaultIgnores !== 'boolean') {
 		throw new Error(
 			'Invalid configuration, `defaultIgnores` must ba true/false'
 		);
