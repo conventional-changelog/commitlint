@@ -7,13 +7,13 @@ import mergeWith from 'lodash/mergeWith';
 
 const importFresh = require('import-fresh');
 
-export interface ResolveExtendsConfig {
-	extends?: string | string[];
+export interface ResolvedConfig {
+	parserPreset?: unknown;
 	[key: string]: unknown;
 }
 
-export interface ResolvedConfig {
-	parserPreset?: unknown;
+export interface ResolveExtendsConfig {
+	extends?: string | string[];
 	[key: string]: unknown;
 }
 
