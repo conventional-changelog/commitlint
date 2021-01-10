@@ -38,9 +38,6 @@ export default async function load(
 				extends: [],
 				plugins: [],
 				rules: {},
-				formatter: '@commitlint/format',
-				helpUrl:
-					'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
 			},
 			loaded ? loaded.config : null,
 			seed
@@ -66,6 +63,15 @@ export default async function load(
 	});
 
 	validateConfig(extended);
+
+	if (!extended.formatter) {
+		extended.formatter = '@commitlint/format';
+	}
+
+	if (!extended.helpUrl) {
+		extended.helpUrl =
+			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
+	}
 
 	let plugins: PluginRecords = {};
 	uniq(extended.plugins || []).forEach((plugin) => {
