@@ -1,3 +1,5 @@
+import {Plugin, RulesConfig} from '@commitlint/types';
+
 export function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 	return Boolean(obj) && typeof obj === 'object'; // typeof null === 'object'
 }
@@ -25,22 +27,33 @@ export function validateConfig(
 	formatter: string;
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
+	plugins?: (Plugin | string)[];
+	rules: Partial<RulesConfig>;
+	helpUrl: string;
 	[key: string]: unknown;
 } {
 	if (!isObjectLike(config)) {
-		throw new Error('Invalid configuration, parserPreset must be an object');
+		throw new Error('Invalid configuration, `parserPreset` must be an object');
 	}
 	if (typeof config.formatter !== 'string') {
-		throw new Error('Invalid configuration, formatter must be a string');
+		throw new Error('Invalid configuration, `formatter` must be a string');
 	}
 	if (config.ignores && !Array.isArray(config.ignores)) {
-		throw new Error('Invalid configuration, ignores must ba an array');
+		throw new Error('Invalid configuration, `ignores` must ba an array');
+	}
+	if (config.plugins && !Array.isArray(config.plugins)) {
+		throw new Error('Invalid configuration, `plugins` must ba an array');
 	}
 	if (
 		typeof config.defaultIgnores !== 'boolean' &&
 		typeof config.defaultIgnores !== 'undefined'
 	) {
-		throw new Error('Invalid configuration, defaultIgnores must ba true/false');
+		throw new Error(
+			'Invalid configuration, `defaultIgnores` must ba true/false'
+		);
+	}
+	if (typeof config.helpUrl !== 'string') {
+		throw new Error('Invalid configuration, `helpUrl` must be a string');
 	}
 }
 

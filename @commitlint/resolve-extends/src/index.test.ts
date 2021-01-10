@@ -348,3 +348,50 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 		},
 	});
 });
+
+// https://github.com/conventional-changelog/commitlint/issues/327
+test('parserPreset should resolve correctly in extended configuration', () => {
+	const input = {extends: ['extender-name'], zero: 'root'};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {
+					extends: ['recursive-extender-name'],
+					parserPreset: {
+						parserOpts: {
+							issuePrefixes: ['#', '!', '&', 'no-references'],
+							referenceActions: null,
+						},
+					},
+				};
+			case 'recursive-extender-name':
+				return {
+					parserPreset: {
+						parserOpts: {
+							issuePrefixes: ['#', '!'],
+						},
+					},
+				};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		parserPreset: {
+			parserOpts: {
+				issuePrefixes: ['#', '!', '&', 'no-references'],
+				referenceActions: null,
+			},
+		},
+		zero: 'root',
+	};
+
+	expect(actual).toEqual(expected);
+});
