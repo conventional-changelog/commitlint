@@ -56,17 +56,3 @@ export function validateConfig(
 		throw new Error('Invalid configuration, `helpUrl` must be a string');
 	}
 }
-
-export function validateParser(
-	parser: unknown
-): asserts parser is {name: string; path: string; [key: string]: unknown} {
-	if (!isObjectLike(parser)) {
-		throw new Error('Invalid configuration, parserPreset must be an object');
-	}
-	if (typeof parser.name !== 'string') {
-		throw new Error('Invalid configuration, parserPreset must have a name');
-	}
-	if (typeof parser.path !== 'string') {
-		throw new Error('Invalid configuration, parserPreset must have a name');
-	}
-}
