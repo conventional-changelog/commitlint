@@ -56,7 +56,7 @@ export default async function load(
 	}
 
 	// Resolve extends key
-	const extended = resolveExtends(config as any, {
+	const extended = resolveExtends(config, {
 		prefix: 'commitlint-config',
 		cwd: base,
 		parserPreset: config.parserPreset,
