@@ -1,4 +1,4 @@
-import {Plugin, RulesConfig} from '@commitlint/types';
+import {UserConfig} from '@commitlint/types';
 
 export function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 	return Boolean(obj) && typeof obj === 'object'; // typeof null === 'object'
@@ -21,21 +21,22 @@ export function isParserOptsFunction<T extends Record<string, unknown>>(
 	return typeof obj.parserOpts === 'function';
 }
 
-export function validateConfig(
-	config: Record<string, unknown>
-): asserts config is {
-	formatter: string;
-	ignores?: ((commit: string) => boolean)[];
-	defaultIgnores?: boolean;
-	plugins?: (Plugin | string)[];
-	rules: Partial<RulesConfig>;
-	helpUrl: string;
-	[key: string]: unknown;
-} {
+export function validateConfig<T extends Record<string, unknown>>(
+	config: T
+): asserts config is Omit<UserConfig, 'parserPreset'> & T {
 	if (!isObjectLike(config)) {
 		throw new Error('Invalid configuration, `parserPreset` must be an object');
 	}
-	if (typeof config.formatter !== 'string') {
+	if (
+		config.extends &&
+		typeof config.extends !== 'string' &&
+		!Array.isArray(config.extends)
+	) {
+		throw new Error(
+			'Invalid configuration, `extends` must be a array or string'
+		);
+	}
+	if (config.formatter && typeof config.formatter !== 'string') {
 		throw new Error('Invalid configuration, `formatter` must be a string');
 	}
 	if (config.ignores && !Array.isArray(config.ignores)) {
@@ -44,7 +45,11 @@ export function validateConfig(
 	if (config.plugins && !Array.isArray(config.plugins)) {
 		throw new Error('Invalid configuration, `plugins` must ba an array');
 	}
+	if (config.rules && typeof config.rules !== 'object') {
+		throw new Error('Invalid configuration, `rules` must ba an object');
+	}
 	if (
+		config.defaultIgnores &&
 		typeof config.defaultIgnores !== 'boolean' &&
 		typeof config.defaultIgnores !== 'undefined'
 	) {
@@ -52,7 +57,21 @@ export function validateConfig(
 			'Invalid configuration, `defaultIgnores` must ba true/false'
 		);
 	}
-	if (typeof config.helpUrl !== 'string') {
+	if (config.helpUrl && typeof config.helpUrl !== 'string') {
 		throw new Error('Invalid configuration, `helpUrl` must be a string');
+	}
+}
+
+export function validateParser(
+	parser: unknown
+): asserts parser is {name?: string; path?: string; [key: string]: unknown} {
+	if (!isObjectLike(parser)) {
+		throw new Error('Invalid configuration, `parserPreset` must be an object');
+	}
+	if (parser.name && typeof parser.name !== 'string') {
+		throw new Error('Invalid configuration, `parserPreset` must have a name');
+	}
+	if (parser.path && typeof parser.path !== 'string') {
+		throw new Error('Invalid configuration, `parserPreset` must have a name');
 	}
 }
