@@ -1,10 +1,5 @@
 import {ParserPreset} from '@commitlint/types';
-import {
-	isObjectLike,
-	isParserOptsFunction,
-	isPromiseLike,
-	validateParser,
-} from './validators';
+import {isObjectLike, isParserOptsFunction, isPromiseLike} from './validators';
 
 export async function loadParser(
 	pendingParser: unknown
@@ -15,7 +10,9 @@ export async function loadParser(
 	// Await for the module, loaded with require
 	const parser = await pendingParser;
 
-	validateParser(parser);
+	if (!isObjectLike(parser)) {
+		throw new Error('Invalid configuration, `parserPreset` must be an object');
+	}
 
 	// Await parser opts if applicable
 	if (isPromiseLike(parser.parserOpts)) {
@@ -26,6 +23,7 @@ export async function loadParser(
 	// Create parser opts from factory
 	if (
 		isParserOptsFunction(parser) &&
+		typeof parser.name === 'string' &&
 		parser.name.startsWith('conventional-changelog-')
 	) {
 		return new Promise((resolve) => {

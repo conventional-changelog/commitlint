@@ -54,7 +54,7 @@ export interface QualifiedConfig {
 }
 
 export interface ParserPreset {
-	name: string;
-	path: string;
+	name?: string;
+	path?: string;
 	parserOpts?: unknown;
 }
