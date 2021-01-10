@@ -61,9 +61,9 @@ function loadExtends(
 	context: ResolveExtendsContext = {}
 ): ResolvedConfig[] {
 	const {extends: e} = config;
-	const ext = e ? (Array.isArray(e) ? [...e] : [e]) : [];
+	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
 
-	return ext.reverse().reduce<ResolvedConfig[]>((configs, raw) => {
+	return ext.reduceRight<ResolvedConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
