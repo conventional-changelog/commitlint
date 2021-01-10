@@ -20,10 +20,10 @@ export interface LoadOptions {
 }
 
 export interface UserConfig {
-	extends?: string[];
+	extends?: string | string[];
 	formatter?: string;
 	rules?: Partial<RulesConfig>;
-	parserPreset?: string | ParserPreset;
+	parserPreset?: string | ParserPreset | Promise<ParserPreset>;
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
 	plugins?: (string | Plugin)[];
@@ -46,9 +46,9 @@ export interface QualifiedConfig {
 	extends: string[];
 	formatter: string;
 	rules: QualifiedRules;
-	parserPreset: ParserPreset;
-	ignores: ((commit: string) => boolean)[];
-	defaultIgnores: boolean;
+	parserPreset?: ParserPreset;
+	ignores?: ((commit: string) => boolean)[];
+	defaultIgnores?: boolean;
 	plugins: PluginRecords;
 	helpUrl: string;
 }

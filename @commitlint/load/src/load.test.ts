@@ -21,6 +21,7 @@ test('extends-empty should have no rules', async () => {
 	const actual = await load({}, {cwd});
 
 	expect(actual.rules).toMatchObject({});
+	expect(actual.parserPreset).not.toBeDefined();
 });
 
 test('uses seed as configured', async () => {
@@ -127,8 +128,9 @@ test('uses seed with parserPreset', async () => {
 		{cwd}
 	);
 
-	expect(actual.name).toBe('./conventional-changelog-custom');
-	expect(actual.parserOpts).toMatchObject({
+	expect(actual).toBeDefined();
+	expect(actual!.name).toBe('./conventional-changelog-custom');
+	expect(actual!.parserOpts).toMatchObject({
 		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
 	});
 });
@@ -252,8 +254,9 @@ test('parser preset overwrites completely instead of merging', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
 
-	expect(actual.parserPreset.name).toBe('./custom');
-	expect(actual.parserPreset.parserOpts).toMatchObject({
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.name).toBe('./custom');
+	expect(actual.parserPreset!.parserOpts).toMatchObject({
 		headerPattern: /.*/,
 	});
 });
@@ -262,8 +265,9 @@ test('recursive extends with parserPreset', async () => {
 	const cwd = await gitBootstrap('fixtures/recursive-parser-preset');
 	const actual = await load({}, {cwd});
 
-	expect(actual.parserPreset.name).toBe('./conventional-changelog-custom');
-	expect(actual.parserPreset.parserOpts).toMatchObject({
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.name).toBe('./conventional-changelog-custom');
+	expect(actual.parserPreset!.parserOpts).toMatchObject({
 		headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
 	});
 });
@@ -386,11 +390,12 @@ test('resolves parser preset from conventional commits', async () => {
 	const cwd = await npmBootstrap('fixtures/parser-preset-conventionalcommits');
 	const actual = await load({}, {cwd});
 
-	expect(actual.parserPreset.name).toBe(
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.name).toBe(
 		'conventional-changelog-conventionalcommits'
 	);
-	expect(typeof actual.parserPreset.parserOpts).toBe('object');
-	expect((actual.parserPreset.parserOpts as any).headerPattern).toEqual(
+	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
+	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });
@@ -399,9 +404,10 @@ test('resolves parser preset from conventional angular', async () => {
 	const cwd = await npmBootstrap('fixtures/parser-preset-angular');
 	const actual = await load({}, {cwd});
 
-	expect(actual.parserPreset.name).toBe('conventional-changelog-angular');
-	expect(typeof actual.parserPreset.parserOpts).toBe('object');
-	expect((actual.parserPreset.parserOpts as any).headerPattern).toEqual(
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.name).toBe('conventional-changelog-angular');
+	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
+	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?: (.*)$/
 	);
 });
@@ -416,9 +422,10 @@ test('recursive resolves parser preset from conventional atom', async () => {
 
 	const actual = await load({}, {cwd});
 
-	expect(actual.parserPreset.name).toBe('conventional-changelog-atom');
-	expect(typeof actual.parserPreset.parserOpts).toBe('object');
-	expect((actual.parserPreset.parserOpts as any).headerPattern).toEqual(
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.name).toBe('conventional-changelog-atom');
+	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
+	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
 		/^(:.*?:) (.*)$/
 	);
 });
@@ -429,11 +436,12 @@ test('resolves parser preset from conventional commits without factory support',
 	);
 	const actual = await load({}, {cwd});
 
-	expect(actual.parserPreset.name).toBe(
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.name).toBe(
 		'conventional-changelog-conventionalcommits'
 	);
-	expect(typeof actual.parserPreset.parserOpts).toBe('object');
-	expect((actual.parserPreset.parserOpts as any).headerPattern).toEqual(
+	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
+	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });

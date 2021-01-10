@@ -341,7 +341,7 @@ function getSeed(flags: CliFlags): Seed {
 		: {parserPreset: flags['parser-preset']};
 }
 
-function selectParserOpts(parserPreset: ParserPreset) {
+function selectParserOpts(parserPreset: ParserPreset | undefined) {
 	if (typeof parserPreset !== 'object') {
 		return undefined;
 	}

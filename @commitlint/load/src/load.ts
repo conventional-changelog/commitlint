@@ -1,8 +1,6 @@
 import Path from 'path';
 
 import merge from 'lodash/merge';
-import mergeWith from 'lodash/mergeWith';
-import pick from 'lodash/pick';
 import union from 'lodash/union';
 import resolveFrom from 'resolve-from';
 
@@ -12,18 +10,15 @@ import {
 	UserConfig,
 	LoadOptions,
 	QualifiedConfig,
-	UserPreset,
 	QualifiedRules,
-	ParserPreset,
+	PluginRecords,
 } from '@commitlint/types';
 
 import loadPlugin from './utils/load-plugin';
 import {loadConfig} from './utils/load-config';
-import {loadParserOpts} from './utils/load-parser-opts';
+import {loadParser} from './utils/load-parser-opts';
 import {pickConfig} from './utils/pick-config';
-
-const w = <T>(_: unknown, b: ArrayLike<T> | null | undefined | false) =>
-	Array.isArray(b) ? b : undefined;
+import {validateConfig} from './utils/validators';
 
 export default async function load(
 	seed: UserConfig = {},
@@ -37,11 +32,17 @@ export default async function load(
 	// Might amount to breaking changes, defer until 9.0.0
 
 	// Merge passed config with file based options
-	const config = pickConfig(merge({}, loaded ? loaded.config : null, seed));
-
-	const opts = merge(
-		{extends: [], rules: {}, formatter: '@commitlint/format'},
-		pick(config, 'extends', 'plugins', 'ignores', 'defaultIgnores')
+	const config = pickConfig(
+		merge(
+			{
+				rules: {},
+				formatter: '@commitlint/format',
+				helpUrl:
+					'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+			},
+			loaded ? loaded.config : null,
+			seed
+		)
 	);
 
 	// Resolve parserPreset key
@@ -56,75 +57,63 @@ export default async function load(
 	}
 
 	// Resolve extends key
-	const extended = resolveExtends(opts, {
+	const extended = resolveExtends(config, {
 		prefix: 'commitlint-config',
 		cwd: base,
 		parserPreset: config.parserPreset,
 	});
 
-	const preset = (pickConfig(
-		mergeWith(extended, config, w)
-	) as unknown) as UserPreset;
-	preset.plugins = {};
+	validateConfig(extended);
 
-	// TODO: check if this is still necessary with the new factory based conventional changelog parsers
-	// config.extends = Array.isArray(config.extends) ? config.extends : [];
+	let plugins: PluginRecords = {};
+	// TODO: this object merging should be done in resolveExtends
+	union(
+		// Read plugins from config
+		Array.isArray(config.plugins) ? config.plugins : [],
+		// Read plugins from extends
+		Array.isArray(extended.plugins) ? extended.plugins : []
+	).forEach((plugin) => {
+		if (typeof plugin === 'string') {
+			plugins = loadPlugin(plugins, plugin, process.env.DEBUG === 'true');
+		} else {
+			plugins.local = plugin;
+		}
+	});
 
-	// Resolve parser-opts from preset
-	if (typeof preset.parserPreset === 'object') {
-		preset.parserPreset.parserOpts = await loadParserOpts(
-			preset.parserPreset.name,
-			// TODO: fix the types for factory based conventional changelog parsers
-			preset.parserPreset as any
-		);
-	}
-
-	// Resolve config-relative formatter module
-	if (typeof config.formatter === 'string') {
-		preset.formatter =
-			resolveFrom.silent(base, config.formatter) || config.formatter;
-	}
-
-	// Read plugins from extends
-	if (Array.isArray(extended.plugins)) {
-		config.plugins = union(config.plugins, extended.plugins || []);
-	}
-
-	// resolve plugins
-	if (Array.isArray(config.plugins)) {
-		config.plugins.forEach((plugin) => {
-			if (typeof plugin === 'string') {
-				loadPlugin(preset.plugins, plugin, process.env.DEBUG === 'true');
-			} else {
-				preset.plugins.local = plugin;
-			}
-		});
-	}
-
-	const rules = preset.rules ? preset.rules : {};
-	const qualifiedRules = (
+	const rules = (
 		await Promise.all(
-			Object.entries(rules || {}).map((entry) => executeRule<any>(entry))
+			Object.entries({
+				...(typeof extended.rules === 'object' ? extended.rules || {} : {}),
+				...(typeof config.rules === 'object' ? config.rules || {} : {}),
+			}).map((entry) => executeRule(entry))
 		)
 	).reduce<QualifiedRules>((registry, item) => {
-		const [key, value] = item as any;
-		(registry as any)[key] = value;
+		// type of `item` can be null, but Object.entries always returns key pair
+		const [key, value] = item!;
+		registry[key] = value;
 		return registry;
 	}, {});
 
-	const helpUrl =
-		typeof config.helpUrl === 'string'
-			? config.helpUrl
-			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
-
 	return {
-		extends: preset.extends!,
-		formatter: preset.formatter!,
-		parserPreset: preset.parserPreset! as ParserPreset,
-		ignores: preset.ignores!,
-		defaultIgnores: preset.defaultIgnores!,
-		plugins: preset.plugins!,
-		rules: qualifiedRules,
-		helpUrl,
+		// TODO: check if this is still necessary with the new factory based conventional changelog parsers
+		// TODO: should this function return this? as those values are already resolved
+		extends: Array.isArray(extended.extends)
+			? extended.extends
+			: typeof extended.extends === 'string'
+			? [extended.extends]
+			: [],
+		// Resolve config-relative formatter module
+		formatter:
+			resolveFrom.silent(base, extended.formatter) || extended.formatter,
+		// Resolve parser-opts from preset
+		parserPreset: await loadParser(extended.parserPreset),
+		ignores: extended.ignores,
+		defaultIgnores: extended.defaultIgnores,
+		plugins: plugins,
+		rules: rules,
+		helpUrl:
+			typeof extended.helpUrl === 'string'
+				? extended.helpUrl
+				: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
 	};
 }
