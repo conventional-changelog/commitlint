@@ -37,10 +37,12 @@
     "@commitlint/test": "^11.0.0",
     "@commitlint/utils": "^11.0.0",
     "@types/fs-extra": "^9.0.1",
-    "@types/git-raw-commits": "^2.0.0"
+    "@types/git-raw-commits": "^2.0.0",
+    "execa": "^5.0.0"
   },
   "dependencies": {
     "@commitlint/top-level": "^11.0.0",
+    "@commitlint/types": "^11.0.0",
     "fs-extra": "^9.0.0",
     "git-raw-commits": "^2.0.0"
   },
