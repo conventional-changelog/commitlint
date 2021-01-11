@@ -1,10 +1,27 @@
 import loadPlugin from './load-plugin';
+import chalk from 'chalk';
 
 jest.mock('commitlint-plugin-example', () => ({example: true}), {
 	virtual: true,
 });
 
 jest.mock('@scope/commitlint-plugin-example', () => ({scope: true}), {
+	virtual: true,
+});
+
+jest.mock('./relative/posix.js', () => ({relativePosix: true}), {
+	virtual: true,
+});
+
+jest.mock('/absolute/posix.js', () => ({relativePosix: true}), {
+	virtual: true,
+});
+
+jest.mock('.\\relative\\windows.js', () => ({relativePosix: true}), {
+	virtual: true,
+});
+
+jest.mock('C:\\absolute\\windows.js', () => ({relativePosix: true}), {
 	virtual: true,
 });
 
@@ -34,9 +51,14 @@ test('should throw an error when a plugin has whitespace', () => {
 });
 
 test("should throw an error when a plugin doesn't exist", () => {
+	const spy = jest.spyOn(console, 'error').mockImplementation();
 	expect(() => loadPlugin({}, 'nonexistentplugin')).toThrow(
-		'Failed to load plugin'
+		'Failed to load plugin commitlint-plugin-nonexistentplugin.'
 	);
+	expect(spy).toBeCalledWith(
+		chalk.red(`Failed to load plugin commitlint-plugin-nonexistentplugin.`)
+	);
+	spy.mockRestore();
 });
 
 test('should load a scoped plugin when referenced by short name', () => {
@@ -62,4 +84,26 @@ test("should load a scoped plugin when referenced by short name, but should not 
 test("should load a scoped plugin when referenced by long name, but should not get the plugin if '@scope/' is omitted", () => {
 	const plugins = loadPlugin({}, '@scope/commitlint-plugin-example');
 	expect(plugins['example']).toBe(undefined);
+});
+
+test('should load a plugin when relative posix path is provided', () => {
+	const plugins = loadPlugin({}, './relative/posix.js');
+	expect(plugins['posix.js']).toBe(require('./relative/posix.js'));
+});
+
+test('should load a plugin when absolute posix path is provided', () => {
+	const plugins = loadPlugin({}, '/absolute/posix.js');
+	// eslint-disable-next-line import/no-absolute-path
+	expect(plugins['posix.js']).toBe(require('/absolute/posix.js'));
+});
+
+test('should load a plugin when relative windows path is provided', () => {
+	const plugins = loadPlugin({}, '.\\relative\\windows.js');
+	expect(plugins['windows.js']).toBe(require('.\\relative\\windows.js'));
+});
+
+test('should load a plugin when absolute windows path is provided', () => {
+	const plugins = loadPlugin({}, 'C:\\absolute\\windows.js');
+	// eslint-disable-next-line import/no-absolute-path
+	expect(plugins['windows.js']).toBe(require('C:\\absolute\\windows.js'));
 });

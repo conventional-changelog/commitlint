@@ -1,6 +1,6 @@
 import path from 'path';
 import chalk from 'chalk';
-import {normalizePackageName, getShorthandName} from './plugin-naming';
+import {normalizePackageName} from './plugin-naming';
 import {WhitespacePluginError, MissingPluginError} from './plugin-errors';
 import {PluginRecords} from '@commitlint/types';
 
@@ -9,8 +9,7 @@ export default function loadPlugin(
 	pluginName: string,
 	debug: boolean = false
 ): PluginRecords {
-	const longName = normalizePackageName(pluginName);
-	const shortName = getShorthandName(longName);
+	const {longName, shortName} = normalizePackageName(pluginName);
 	let plugin = null;
 
 	if (pluginName.match(/\s+/u)) {
