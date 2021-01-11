@@ -6,6 +6,7 @@ import stdin from 'get-stdin';
 import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
 import yargs from 'yargs';
+import util from 'util';
 
 import {CliFlags, Seed} from './types';
 import {
@@ -32,6 +33,11 @@ const cli = yargs
 			alias: 'g',
 			description: 'path to the config file',
 			type: 'string',
+		},
+		'print-config': {
+			type: 'boolean',
+			default: false,
+			description: 'print resolved config',
 		},
 		cwd: {
 			alias: 'd',
@@ -123,6 +129,16 @@ main({edit: false, ...cli.argv}).catch((err) => {
 async function main(options: CliFlags) {
 	const raw = options._;
 	const flags = normalizeFlags(options);
+
+	if (flags['print-config']) {
+		const loaded = await load(getSeed(flags), {
+			cwd: flags.cwd,
+			file: flags.config,
+		});
+		console.log(util.inspect(loaded, false, null, options.color));
+		return;
+	}
+
 	const fromStdin = checkFromStdin(raw, flags);
 
 	const input = await (fromStdin
@@ -149,8 +165,10 @@ async function main(options: CliFlags) {
 		throw err;
 	}
 
-	const loadOpts = {cwd: flags.cwd, file: flags.config};
-	const loaded = await load(getSeed(flags), loadOpts);
+	const loaded = await load(getSeed(flags), {
+		cwd: flags.cwd,
+		file: flags.config,
+	});
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts: LintOptions & {parserOpts: ParserOptions} = {
 		parserOpts: {},
