@@ -1,3 +1,4 @@
+import Path from 'path';
 import {lerna} from '@commitlint/test';
 import config from '.';
 
@@ -65,4 +66,11 @@ test('returns expected value for scoped lerna repository', async () => {
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
+});
+
+test('returns expected value for yarn workspaces', async () => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = Path.join(__dirname, 'fixtures', 'yarn');
+	const [, , value] = await fn({cwd});
+	expect(value.sort()).toEqual(['a', 'b']);
 });
