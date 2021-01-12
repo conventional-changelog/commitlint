@@ -1,4 +1,5 @@
 import loadPlugin from './load-plugin';
+import {platform} from 'os';
 import chalk from 'chalk';
 
 jest.mock('commitlint-plugin-example', () => ({example: true}), {
@@ -53,7 +54,7 @@ test('should throw an error when a plugin has whitespace', () => {
 test("should throw an error when a plugin doesn't exist", () => {
 	const spy = jest.spyOn(console, 'error').mockImplementation();
 	expect(() => loadPlugin({}, 'nonexistentplugin')).toThrow(
-		'Failed to load plugin commitlint-plugin-nonexistentplugin.'
+		'Failed to load plugin'
 	);
 	expect(spy).toBeCalledWith(
 		chalk.red(`Failed to load plugin commitlint-plugin-nonexistentplugin.`)
@@ -97,13 +98,28 @@ test('should load a plugin when absolute posix path is provided', () => {
 	expect(plugins['posix.js']).toBe(require('/absolute/posix.js'));
 });
 
-test('should load a plugin when relative windows path is provided', () => {
-	const plugins = loadPlugin({}, '.\\relative\\windows.js');
-	expect(plugins['windows.js']).toBe(require('.\\relative\\windows.js'));
-});
+if (platform() === 'win32') {
+	test('should load a plugin when relative windows path is provided', () => {
+		const plugins = loadPlugin({}, '.\\relative\\windows.js');
+		expect(plugins['windows.js']).toBe(require('.\\relative\\windows.js'));
+	});
 
-test('should load a plugin when absolute windows path is provided', () => {
-	const plugins = loadPlugin({}, 'C:\\absolute\\windows.js');
-	// eslint-disable-next-line import/no-absolute-path
-	expect(plugins['windows.js']).toBe(require('C:\\absolute\\windows.js'));
-});
+	test('should load a plugin when absolute windows path is provided', () => {
+		const plugins = loadPlugin({}, 'C:\\absolute\\windows.js');
+		// eslint-disable-next-line import/no-absolute-path
+		expect(plugins['windows.js']).toBe(require('C:\\absolute\\windows.js'));
+	});
+} else {
+	test('should not load a plugin when absolute windows path is provided', () => {
+		const spy = jest.spyOn(console, 'error').mockImplementation();
+		expect(() => loadPlugin({}, 'C:\\absolute\\windows.js')).toThrow(
+			'Failed to load plugin'
+		);
+		expect(spy).toBeCalledWith(
+			chalk.red(
+				`Failed to load plugin commitlint-plugin-C:/absolute/windows.js.`
+			)
+		);
+		spy.mockRestore();
+	});
+}
