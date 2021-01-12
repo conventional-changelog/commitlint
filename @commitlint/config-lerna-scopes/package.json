@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-lerna-scopes",
   "version": "11.0.0",
-  "description": "Shareable commitlint config enforcing lerna package names as scopes",
+  "description": "Shareable commitlint config enforcing lerna package and workspace names as scopes",
   "files": [
     "index.js"
   ],
@@ -32,6 +32,7 @@
     "node": ">=v10"
   },
   "dependencies": {
+    "globby": "^11.0.1",
     "import-from": "3.0.0",
     "resolve-pkg": "2.0.0",
     "semver": "7.3.4"

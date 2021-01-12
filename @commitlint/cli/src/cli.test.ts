@@ -446,6 +446,7 @@ test('should print help', async () => {
 		Options:
 		  -c, --color          toggle colored output           [boolean] [default: true]
 		  -g, --config         path to the config file                          [string]
+		      --print-config   print resolved config          [boolean] [default: false]
 		  -d, --cwd            directory to execute in
 		                                         [string] [default: (Working Directory)]
 		  -e, --edit           read last commit message from the specified file or
@@ -473,6 +474,27 @@ test('should print version', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--version'], {cwd})();
 	expect(actual.stdout).toMatch('@commitlint/cli@');
+});
+
+test('should print config', async () => {
+	const cwd = await gitBootstrap('fixtures/default');
+	const actual = await cli(['--print-config', '--no-color'], {cwd})();
+	const stdout = actual.stdout
+		.replace(/^{[^\n]/g, '{\n  ')
+		.replace(/[^\n]}$/g, '\n}')
+		.replace(/(helpUrl:)\n[ ]+/, '$1 ');
+	expect(stdout).toMatchInlineSnapshot(`
+		"{
+		  extends: [],
+		  formatter: '@commitlint/format',
+		  parserPreset: undefined,
+		  ignores: undefined,
+		  defaultIgnores: undefined,
+		  plugins: {},
+		  rules: { 'type-enum': [ 2, 'never', [ 'foo' ] ] },
+		  helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+		}"
+	`);
 });
 
 async function writePkg(payload: unknown, options: TestOptions) {

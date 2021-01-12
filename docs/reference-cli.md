@@ -3,31 +3,32 @@
 ```bash
 ❯ npx commitlint --help
 
-@commitlint/cli@8.3.5 - Lint your commit messages
+@commitlint/cli@11.0.0 - Lint your commit messages
 
 [input] reads from stdin if --edit, --env, --from and --to are omitted
 
 Options:
-  --color, -c          toggle colored output           [boolean] [default: true]
-  --config, -g         path to the config file                          [string]
-  --cwd, -d            directory to execute in           [string] [default: cwd]
-  --edit, -e           read last commit message from the specified file or
-                       fallbacks to ./.git/COMMIT_EDITMSG
-                                                       [string] [default: false]
-  --env, -E            check message in the file at path given by environment
+  -c, --color          toggle colored output           [boolean] [default: true]
+  -g, --config         path to the config file                          [string]
+      --print-config   print resolved config          [boolean] [default: false]
+  -d, --cwd            directory to execute in
+                                         [string] [default: (Working Directory)]
+  -e, --edit           read last commit message from the specified file or
+                       fallbacks to ./.git/COMMIT_EDITMSG               [string]
+  -E, --env            check message in the file at path given by environment
                        variable value                                   [string]
-  --extends, -x        array of shareable configurations to extend       [array]
-  --help-url, -H       helpurl in error message                         [string]
-  --from, -f           lower end of the commit range to lint; applies if
+  -x, --extends        array of shareable configurations to extend       [array]
+  -H, --help-url       help url in error message                        [string]
+  -f, --from           lower end of the commit range to lint; applies if
                        edit=false                                       [string]
-  --format, -o         output format of the results                     [string]
-  --parser-preset, -p  configuration preset to use for
+  -o, --format         output format of the results                     [string]
+  -p, --parser-preset  configuration preset to use for
                        conventional-commits-parser                      [string]
-  --quiet, -q          toggle console output          [boolean] [default: false]
-  --to, -t             upper end of the commit range to lint; applies if
+  -q, --quiet          toggle console output          [boolean] [default: false]
+  -t, --to             upper end of the commit range to lint; applies if
                        edit=false                                       [string]
-  --verbose, -V        enable verbose output for reports without problems
+  -V, --verbose        enable verbose output for reports without problems
                                                                        [boolean]
   -v, --version        display version information                     [boolean]
-  -h, --help           Show help                                       [boolean]
+  -h, --help           Show help                                       [boolean]"
 ```
