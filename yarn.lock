@@ -1398,6 +1398,18 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@commitlint/config-angular-type-enum@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/config-angular-type-enum/-/config-angular-type-enum-11.0.0.tgz#7a7f6982e45d3696d72eb343a5d1dc23b2f003e0"
+  integrity sha512-dSyxdkU36aEgDUWBSiM5lsZ/h2K7uCyKf+A5Sf3+Z5JhcLD9GzTo5W+c8KgwTBdL39dkL7sN+EVgsXNjW99pJg==
+
+"@commitlint/config-angular@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/config-angular/-/config-angular-11.0.0.tgz#c1cc1dd902a4b9d2a5c072ff38e3ace9be7138e0"
+  integrity sha512-H8QSEOmfRsPW0Iehid5fY7NZ2HXmyKC6Q83MLFf9KRnmCcbgJtH+faECtqlvPntayO3CYbA4UenIerOaQ0vOAg==
+  dependencies:
+    "@commitlint/config-angular-type-enum" "^11.0.0"
+
 "@endemolshinegroup/cosmiconfig-typescript-loader@^3.0.2":
   version "3.0.2"
   resolved "https://registry.npmjs.org/@endemolshinegroup/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-3.0.2.tgz#eea4635828dde372838b0909693ebd9aafeec22d"

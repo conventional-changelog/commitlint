@@ -37,18 +37,20 @@
     "node": ">=v12"
   },
   "devDependencies": {
-    "@commitlint/utils": "^14.0.0",
-    "commitizen": "4.2.4",
-    "@types/inquirer": "^6.5.0",
+    "@commitlint/config-angular": "^11.0.0",
     "@commitlint/types": "^11.0.0",
-    "inquirer": "^6.5.2"
+    "@commitlint/utils": "^14.0.0",
+    "@types/inquirer": "^6.5.0",
+    "inquirer": "^6.5.2",
+    "commitizen": "4.2.4"
   },
   "dependencies": {
     "@commitlint/ensure": "^14.1.0",
     "@commitlint/load": "^14.1.0",
     "@commitlint/types": "^14.0.0",
     "chalk": "^4.0.0",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.19",
+    "inquirer": "^6.5.2"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }
