@@ -61,15 +61,6 @@ export default async function load(
 		parserPreset: config.parserPreset,
 	}) as unknown) as UserConfig;
 
-	let plugins: PluginRecords = {};
-	uniq(extended.plugins || []).forEach((plugin) => {
-		if (typeof plugin === 'string') {
-			plugins = loadPlugin(plugins, plugin, process.env.DEBUG === 'true');
-		} else {
-			plugins.local = plugin;
-		}
-	});
-
 	if (!extended.formatter || typeof extended.formatter !== 'string') {
 		extended.formatter = '@commitlint/format';
 	}
@@ -78,6 +69,15 @@ export default async function load(
 		extended.helpUrl =
 			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 	}
+
+	let plugins: PluginRecords = {};
+	uniq(extended.plugins || []).forEach((plugin) => {
+		if (typeof plugin === 'string') {
+			plugins = loadPlugin(plugins, plugin, process.env.DEBUG === 'true');
+		} else {
+			plugins.local = plugin;
+		}
+	});
 
 	const rules = (
 		await Promise.all(
