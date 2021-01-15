@@ -190,6 +190,13 @@ Infinity
   ```
   []
   ```
+  or if you want to customize delimiter regex for [multiple scopes](https://commitlint.js.org/#/concepts-commit-conventions?id=multiple-scopes)
+  ```
+  {
+    values: [],
+    delimiter: /,/g
+  }
+  ```
 
 #### scope-case
 

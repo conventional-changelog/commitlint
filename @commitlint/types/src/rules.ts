@@ -83,9 +83,16 @@ export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
 	number
 >;
+export interface EnumRuleExtendableOptions {
+	values: string[];
+	[k: string]: any;
+}
+
+export type EnumRuleOptions = EnumRuleExtendableOptions | string[];
+
 export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
-	string[]
+	EnumRuleOptions
 >;
 
 export type RulesConfig<V = RuleConfigQuality.User> = {

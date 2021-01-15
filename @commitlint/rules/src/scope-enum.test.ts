@@ -6,6 +6,7 @@ const messages = {
 	superfluous: 'foo(): baz',
 	empty: 'foo: baz',
 	multiple: 'foo(bar,baz): qux',
+	scoped: 'foo(@a/b): test',
 };
 
 const parsed = {
@@ -13,10 +14,20 @@ const parsed = {
 	superfluous: parse(messages.superfluous),
 	empty: parse(messages.empty),
 	multiple: parse(messages.multiple),
+	scoped: parse(messages.scoped),
 };
 
 test('scope-enum with plain message and always should succeed empty enum', async () => {
 	const [actual] = scopeEnum(await parsed.plain, 'always', []);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('scope-enum allows custom delimiters', async () => {
+	const [actual] = scopeEnum(await parsed.scoped, 'always', {
+		values: ['@a/b'],
+		delimiter: /,/g,
+	});
 	const expected = true;
 	expect(actual).toEqual(expected);
 });

@@ -1,4 +1,9 @@
-import {QualifiedRules, RuleConfigSeverity} from '@commitlint/types';
+import {
+	QualifiedRules,
+	RuleConfigSeverity,
+	EnumRuleOptions,
+	EnumRuleExtendableOptions,
+} from '@commitlint/types';
 import {RuleEntry} from './types';
 
 /**
@@ -25,7 +30,7 @@ export function getRulePrefix(id: string): string | null {
  * Get a predicate matching rule definitions with a given name
  */
 export function getHasName(name: string) {
-	return <T extends RuleEntry>(
+	return <C = unknown, T extends RuleEntry<C> = RuleEntry<C>>(
 		rule: RuleEntry
 	): rule is Exclude<T, [string, undefined]> => getRuleName(rule[0]) === name;
 }
@@ -35,7 +40,10 @@ export function getHasName(name: string) {
  * @param rule to check
  * @return if the rule definition is active
  */
-export function ruleIsActive<T extends RuleEntry>(
+export function ruleIsActive<
+	C = unknown,
+	T extends RuleEntry<C> = RuleEntry<C>
+>(
 	rule: T
 ): rule is Exclude<T, [string, Readonly<[RuleConfigSeverity.Disabled]>]> {
 	const [, value] = rule;
@@ -50,11 +58,11 @@ export function ruleIsActive<T extends RuleEntry>(
  * @param rule to check
  * @return if the rule definition is applicable
  */
-export function ruleIsApplicable(
-	rule: RuleEntry
+export function ruleIsApplicable<C>(
+	rule: RuleEntry<C>
 ): rule is
 	| [string, Readonly<[RuleConfigSeverity, 'always']>]
-	| [string, Readonly<[RuleConfigSeverity, 'always', unknown]>] {
+	| [string, Readonly<[RuleConfigSeverity, 'always', C]>] {
 	const [, value] = rule;
 	if (value && Array.isArray(value)) {
 		return value[1] === 'always';
@@ -79,19 +87,32 @@ export function ruleIsNotApplicable(
 	return false;
 }
 
+function enumConfigIsExtendable(
+	config?: EnumRuleOptions
+): config is EnumRuleExtendableOptions {
+	return !Array.isArray(config);
+}
+
 export function enumRuleIsActive(
-	rule: RuleEntry
+	rule: RuleEntry<EnumRuleOptions>
 ): rule is [
 	string,
 	Readonly<
-		[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, 'always', string[]]
+		[
+			RuleConfigSeverity.Warning | RuleConfigSeverity.Error,
+			'always',
+			EnumRuleOptions
+		]
 	>
 ] {
+	let config: EnumRuleOptions | undefined;
 	return (
 		ruleIsActive(rule) &&
 		ruleIsApplicable(rule) &&
-		Array.isArray(rule[1][2]) &&
-		rule[1][2].length > 0
+		!!(config = rule[1][2]) &&
+		(!enumConfigIsExtendable(config)
+			? config.length > 0
+			: Array.isArray(config.values) && config.values.length > 0)
 	);
 }
 
@@ -101,9 +122,12 @@ export function enumRuleIsActive(
  * @param rules rules to search in
  * @return rules matching the prefix search
  */
-export function getRules(prefix: string, rules: QualifiedRules): RuleEntry[] {
+export function getRules<C = unknown>(
+	prefix: string,
+	rules: QualifiedRules
+): RuleEntry<C>[] {
 	return Object.entries(rules).filter(
-		(rule): rule is RuleEntry => getRulePrefix(rule[0]) === prefix
+		(rule): rule is RuleEntry<C> => getRulePrefix(rule[0]) === prefix
 	);
 }
 

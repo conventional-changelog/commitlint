@@ -1,9 +1,9 @@
 import {RuleConfigCondition, RuleConfigSeverity} from '@commitlint/types';
 
-export type RuleEntry =
+export type RuleEntry<C = unknown> =
 	| [string, Readonly<[RuleConfigSeverity.Disabled]>]
 	| [string, Readonly<[RuleConfigSeverity, RuleConfigCondition]>]
-	| [string, Readonly<[RuleConfigSeverity, RuleConfigCondition, unknown]>];
+	| [string, Readonly<[RuleConfigSeverity, RuleConfigCondition, C]>];
 
 export type InputSetting = {
 	description?: string;

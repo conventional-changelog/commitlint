@@ -14,6 +14,7 @@ import {
 	getHasName,
 	getMaxLength,
 } from './utils';
+import {EnumRuleOptions} from '@commitlint/types';
 
 /**
  * Get a cli prompt based on rule configuration
@@ -68,7 +69,9 @@ export default function getPrompt(
 		throw new TypeError('getPrompt: prompt.show is not a function');
 	}
 
-	const enumRule = rules.filter(getHasName('enum')).find(enumRuleIsActive);
+	const enumRule = (rules as Array<RuleEntry<EnumRuleOptions>>)
+		.filter(getHasName('enum'))
+		.find(enumRuleIsActive);
 
 	const emptyRule = rules.find(getHasName('empty'));
 
@@ -118,7 +121,7 @@ export default function getPrompt(
 		if (enumRule) {
 			const [, [, , enums]] = enumRule;
 
-			enums.forEach((enumerable) => {
+			(enums as string[]).forEach((enumerable) => {
 				const enumSettings = (settings.enumerables || {})[enumerable] || {};
 				prompt
 					.command(enumerable)

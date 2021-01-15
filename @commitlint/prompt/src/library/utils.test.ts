@@ -1,4 +1,5 @@
-import {RuleConfigSeverity} from '@commitlint/types';
+import {EnumRuleOptions, RuleConfigSeverity} from '@commitlint/types';
+import {RuleEntry} from './types';
 
 import {
 	enumRuleIsActive,
@@ -85,14 +86,19 @@ test('getMaxLength', () => {
 });
 
 test('check enum rule filters', () => {
-	const rules: any = {
+	const rules: Record<string, RuleEntry<EnumRuleOptions>[1]> = {
 		'enum-string': [RuleConfigSeverity.Warning, 'always', ['1', '2', '3']],
 		'type-enum': [RuleConfigSeverity.Error, 'always', ['build', 'chore', 'ci']],
 		'scope-enum': [RuleConfigSeverity.Error, 'never', ['cli', 'core', 'lint']],
 		'bar-enum': [RuleConfigSeverity.Disabled, 'always', ['foo', 'bar', 'baz']],
+		'extendable-scope-enum': [
+			RuleConfigSeverity.Disabled,
+			'always',
+			{values: ['foo', 'bar', 'baz']},
+		],
 	};
 
-	let enumRule = getRules('type', rules)
+	let enumRule = getRules<EnumRuleOptions>('type', rules)
 		.filter(getHasName('enum'))
 		.find(enumRuleIsActive);
 	expect(enumRule).toEqual([
@@ -100,22 +106,27 @@ test('check enum rule filters', () => {
 		[2, 'always', ['build', 'chore', 'ci']],
 	]);
 
-	enumRule = getRules('string', rules)
+	enumRule = getRules<EnumRuleOptions>('string', rules)
 		.filter(getHasName('enum'))
 		.find(enumRuleIsActive);
 	expect(enumRule).toEqual(undefined);
 
-	enumRule = getRules('enum', rules)
+	enumRule = getRules<EnumRuleOptions>('enum', rules)
 		.filter(getHasName('string'))
 		.find(enumRuleIsActive);
 	expect(enumRule).toEqual(['enum-string', [1, 'always', ['1', '2', '3']]]);
 
-	enumRule = getRules('bar', rules)
+	enumRule = getRules<EnumRuleOptions>('bar', rules)
 		.filter(getHasName('enum'))
 		.find(enumRuleIsActive);
 	expect(enumRule).toEqual(undefined);
 
-	enumRule = getRules('scope', rules)
+	enumRule = getRules<EnumRuleOptions>('scope', rules)
+		.filter(getHasName('enum'))
+		.find(enumRuleIsActive);
+	expect(enumRule).toEqual(undefined);
+
+	enumRule = getRules<EnumRuleOptions>('extendable-scope', rules)
 		.filter(getHasName('enum'))
 		.find(enumRuleIsActive);
 	expect(enumRule).toEqual(undefined);
