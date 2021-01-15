@@ -70,6 +70,15 @@ export default async function load(
 		}
 	});
 
+	if (!extended.formatter || typeof extended.formatter !== 'string') {
+		extended.formatter = '@commitlint/format';
+	}
+
+	if (!extended.helpUrl || typeof extended.helpUrl !== 'string') {
+		extended.helpUrl =
+			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
+	}
+
 	const rules = (
 		await Promise.all(
 			Object.entries(extended.rules || {}).map((entry) => executeRule(entry))
@@ -80,15 +89,6 @@ export default async function load(
 		registry[key] = value;
 		return registry;
 	}, {});
-
-	if (!extended.formatter) {
-		extended.formatter = '@commitlint/format';
-	}
-
-	if (!extended.helpUrl) {
-		extended.helpUrl =
-			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
-	}
 
 	return {
 		// TODO: check if this is still necessary with the new factory based conventional changelog parsers
