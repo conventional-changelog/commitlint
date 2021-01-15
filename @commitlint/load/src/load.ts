@@ -71,13 +71,15 @@ export default async function load(
 	}
 
 	let plugins: PluginRecords = {};
-	uniq(extended.plugins || []).forEach((plugin) => {
-		if (typeof plugin === 'string') {
-			plugins = loadPlugin(plugins, plugin, process.env.DEBUG === 'true');
-		} else {
-			plugins.local = plugin;
-		}
-	});
+	if (Array.isArray(extended.plugins)) {
+		uniq(extended.plugins || []).forEach((plugin) => {
+			if (typeof plugin === 'string') {
+				plugins = loadPlugin(plugins, plugin, process.env.DEBUG === 'true');
+			} else {
+				plugins.local = plugin;
+			}
+		});
+	}
 
 	const rules = (
 		await Promise.all(
