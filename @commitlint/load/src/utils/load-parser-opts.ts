@@ -1,21 +1,34 @@
 import {ParserPreset} from '@commitlint/types';
-import {
-	isObjectLike,
-	isParserOptsFunction,
-	isPromiseLike,
-	validateParser,
-} from './validators';
 
-export async function loadParser(
-	pendingParser: unknown
+function isObjectLike(obj: unknown): obj is Record<string, unknown> {
+	return Boolean(obj) && typeof obj === 'object'; // typeof null === 'object'
+}
+
+function isPromiseLike(obj: unknown): obj is Promise<unknown> {
+	return (
+		(typeof obj === 'object' || typeof obj === 'function') &&
+		typeof (obj as any).then === 'function'
+	);
+}
+
+function isParserOptsFunction<T extends ParserPreset>(
+	obj: T
+): obj is T & {
+	parserOpts: (
+		cb: (_: never, parserOpts: Record<string, unknown>) => unknown
+	) => Record<string, unknown> | undefined;
+} {
+	return typeof obj.parserOpts === 'function';
+}
+
+export async function loadParserOpts(
+	pendingParser: string | ParserPreset | Promise<ParserPreset> | undefined
 ): Promise<ParserPreset | undefined> {
-	if (!pendingParser) {
+	if (!pendingParser || typeof pendingParser === 'string') {
 		return undefined;
 	}
 	// Await for the module, loaded with require
 	const parser = await pendingParser;
-
-	validateParser(parser);
 
 	// Await parser opts if applicable
 	if (isPromiseLike(parser.parserOpts)) {
@@ -26,7 +39,7 @@ export async function loadParser(
 	// Create parser opts from factory
 	if (
 		isParserOptsFunction(parser) &&
-		parser.name &&
+		typeof parser.name === 'string' &&
 		parser.name.startsWith('conventional-changelog-')
 	) {
 		return new Promise((resolve) => {

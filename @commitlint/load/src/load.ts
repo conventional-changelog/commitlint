@@ -16,9 +16,8 @@ import {
 
 import loadPlugin from './utils/load-plugin';
 import {loadConfig} from './utils/load-config';
-import {loadParser} from './utils/load-parser-opts';
+import {loadParserOpts} from './utils/load-parser-opts';
 import {pickConfig} from './utils/pick-config';
-import {validateConfig} from './utils/validators';
 
 export default async function load(
 	seed: UserConfig = {},
@@ -56,13 +55,11 @@ export default async function load(
 	}
 
 	// Resolve extends key
-	const extended = resolveExtends(config, {
+	const extended = (resolveExtends(config, {
 		prefix: 'commitlint-config',
 		cwd: base,
 		parserPreset: config.parserPreset,
-	});
-
-	validateConfig(extended);
+	}) as unknown) as UserConfig;
 
 	let plugins: PluginRecords = {};
 	uniq(extended.plugins || []).forEach((plugin) => {
@@ -105,7 +102,7 @@ export default async function load(
 		formatter:
 			resolveFrom.silent(base, extended.formatter) || extended.formatter,
 		// Resolve parser-opts from preset
-		parserPreset: await loadParser(extended.parserPreset),
+		parserPreset: await loadParserOpts(extended.parserPreset),
 		ignores: extended.ignores,
 		defaultIgnores: extended.defaultIgnores,
 		plugins: plugins,
