@@ -45,8 +45,8 @@ export default function resolveExtends(
 						return srcValue;
 					}
 				} else if (key === 'plugins') {
-					if (!Array.isArray(objValue)) {
-						return srcValue;
+					if (Array.isArray(objValue)) {
+						return srcValue.concat(objValue);
 					}
 				} else if (Array.isArray(objValue)) {
 					return srcValue;
