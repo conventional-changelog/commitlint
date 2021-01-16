@@ -38,7 +38,7 @@ export default function resolveExtends(
 			mergeWith(r, c, (objValue, srcValue, key) => {
 				if (key === 'plugins') {
 					if (Array.isArray(objValue)) {
-						return srcValue.concat(objValue);
+						return objValue.concat(srcValue);
 					}
 				} else if (Array.isArray(objValue)) {
 					return srcValue;

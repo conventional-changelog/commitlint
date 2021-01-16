@@ -370,7 +370,7 @@ test('plugins should be merged correctly', () => {
 
 	const expected = {
 		extends: ['extender-name'],
-		plugins: ['test', 'test2', 'test3'],
+		plugins: ['test3', 'test2', 'test'],
 		zero: 'root',
 	};
 
