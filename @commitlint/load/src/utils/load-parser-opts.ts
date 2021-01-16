@@ -29,6 +29,9 @@ export async function loadParserOpts(
 	}
 	// Await for the module, loaded with require
 	const parser = await pendingParser;
+	if (typeof pendingParser !== 'object') {
+		return undefined;
+	}
 
 	// Await parser opts if applicable
 	if (isPromiseLike(parser.parserOpts)) {
