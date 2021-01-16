@@ -36,11 +36,7 @@ export default function resolveExtends(
 	return extended.reduce(
 		(r, {extends: _, ...c}) =>
 			mergeWith(r, c, (objValue, srcValue, key) => {
-				if (key === 'rules') {
-					if (typeof objValue !== 'object') {
-						return srcValue;
-					}
-				} else if (key === 'plugins') {
+				if (key === 'plugins') {
 					if (Array.isArray(objValue)) {
 						return srcValue.concat(objValue);
 					}
