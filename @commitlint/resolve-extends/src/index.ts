@@ -36,11 +36,7 @@ export default function resolveExtends(
 	return extended.reduce(
 		(r, {extends: _, ...c}) =>
 			mergeWith(r, c, (objValue, srcValue, key) => {
-				if (key === 'parserPreset') {
-					if (typeof srcValue !== 'object') {
-						return objValue;
-					}
-				} else if (key === 'rules') {
+				if (key === 'rules') {
 					if (typeof objValue !== 'object') {
 						return srcValue;
 					}
