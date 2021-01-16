@@ -321,11 +321,7 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 	const require = (id: string) => {
 		switch (id) {
 			case 'conventional-changelog-lint-config-extender-name':
-				return {
-					rules: {
-						fallback: true,
-					},
-				};
+				return {rules: {fallback: true}};
 			default:
 				return {};
 		}
@@ -435,13 +431,7 @@ test('parserPreset should resolve correctly in extended configuration', () => {
 					},
 				};
 			case 'recursive-extender-name':
-				return {
-					parserPreset: {
-						parserOpts: {
-							issuePrefixes: ['#', '!'],
-						},
-					},
-				};
+				return {parserPreset: {parserOpts: {issuePrefixes: ['#', '!']}}};
 			default:
 				return {};
 		}
@@ -456,6 +446,45 @@ test('parserPreset should resolve correctly in extended configuration', () => {
 		parserPreset: {
 			parserOpts: {
 				issuePrefixes: ['#', '!', '&', 'no-references'],
+				referenceActions: null,
+			},
+		},
+		zero: 'root',
+	};
+
+	expect(actual).toEqual(expected);
+});
+
+test('parserPreset should be merged correctly', () => {
+	const input = {extends: ['extender-name'], zero: 'root'};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {
+					extends: ['recursive-extender-name'],
+					parserPreset: {
+						parserOpts: {
+							referenceActions: null,
+						},
+					},
+				};
+			case 'recursive-extender-name':
+				return {parserPreset: {parserOpts: {issuePrefixes: ['#', '!']}}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		parserPreset: {
+			parserOpts: {
+				issuePrefixes: ['#', '!'],
 				referenceActions: null,
 			},
 		},
