@@ -349,6 +349,75 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 	});
 });
 
+test('plugins should be merged correctly', () => {
+	const input = {extends: ['extender-name'], zero: 'root'};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {extends: ['recursive-extender-name'], plugins: ['test']};
+			case 'recursive-extender-name':
+				return {
+					extends: ['second-recursive-extender-name'],
+					plugins: ['test2'],
+				};
+			case 'second-recursive-extender-name':
+				return {plugins: ['test3']};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		plugins: ['test', 'test2', 'test3'],
+		zero: 'root',
+	};
+
+	expect(actual).toEqual(expected);
+});
+
+test('rules should be merged correctly', () => {
+	const input = {extends: ['extender-name'], rules: {test1: ['base', '1']}};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {
+					extends: ['recursive-extender-name'],
+					rules: {test2: [id, '2']},
+				};
+			case 'recursive-extender-name':
+				return {
+					extends: ['second-recursive-extender-name'],
+					rules: {test1: [id, '3']},
+				};
+			case 'second-recursive-extender-name':
+				return {rules: {test2: [id, '4']}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		rules: {
+			test1: ['base', '1'],
+			test2: ['extender-name', '2'],
+		},
+	};
+
+	expect(actual).toEqual(expected);
+});
+
 // https://github.com/conventional-changelog/commitlint/issues/327
 test('parserPreset should resolve correctly in extended configuration', () => {
 	const input = {extends: ['extender-name'], zero: 'root'};
