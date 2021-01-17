@@ -5,7 +5,7 @@ function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 }
 
 function isPromiseLike(obj: unknown): obj is Promise<unknown> {
-	return typeof obj === 'object' && typeof (obj as any).then === 'function';
+	return isObjectLike(obj) && typeof (obj as any).then === 'function';
 }
 
 function isParserOptsFunction<T extends ParserPreset>(
@@ -21,14 +21,11 @@ function isParserOptsFunction<T extends ParserPreset>(
 export async function loadParserOpts(
 	pendingParser: string | ParserPreset | Promise<ParserPreset> | undefined
 ): Promise<ParserPreset | undefined> {
-	if (!pendingParser || typeof pendingParser === 'string') {
+	if (!pendingParser || typeof pendingParser !== 'object') {
 		return undefined;
 	}
 	// Await for the module, loaded with require
 	const parser = await pendingParser;
-	if (typeof pendingParser !== 'object') {
-		return undefined;
-	}
 
 	// Await parser opts if applicable
 	if (isPromiseLike(parser.parserOpts)) {
