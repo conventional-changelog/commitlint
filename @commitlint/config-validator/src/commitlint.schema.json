@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "default": {},
+  "type": "object",
+  "definitions": {
+    "rule": {
+      "oneOf": [
+        {
+          "description": "A rule",
+          "type": "array",
+          "items": [
+            {
+              "description": "Level: 0 disables the rule. For 1 it will be considered a warning, for 2 an error",
+              "type": "number",
+              "enum": [0, 1, 2]
+            },
+            {
+              "description": "Applicable: always|never: never inverts the rule",
+              "type": "string",
+              "enum": ["always", "never"]
+            },
+            {
+              "description": "Value: the value for this rule"
+            }
+          ],
+          "minItems": 1,
+          "maxItems": 3,
+          "additionalItems": false
+        }
+      ]
+    }
+  },
+  "properties": {
+    "extends": {
+      "description": "Resolveable ids to commitlint configurations to extend",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        {"type": "string"}
+      ]
+    },
+    "parserPreset": {
+      "description": "Resolveable id to conventional-changelog parser preset to import and use",
+      "oneOf": [
+        {"type": "string"},
+        {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "path": {"type": "string"},
+            "parserOpts": {}
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "helpUrl": {
+      "description": "Custom URL to show upon failure",
+      "type": "string"
+    },
+    "formatter": {
+      "description": "Resolveable id to package, from node_modules, which formats the output",
+      "type": "string"
+    },
+    "rules": {
+      "description": "Rules to check against",
+      "type": "object",
+      "propertyNames": {"type": "string"},
+      "additionalProperties": {"$ref": "#/definitions/rule"}
+    },
+    "plugins": {
+      "description": "Resolveable ids of commitlint plugins from node_modules",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {"type": "string"},
+          {
+            "required": ["rules"],
+            "rules": {}
+          }
+        ]
+      }
+    },
+    "ignores": {
+      "type": "array",
+      "items": {"typeof": "function"},
+      "description": "Additional commits to ignore, defined by ignore matchers"
+    },
+    "defaultIgnores": {
+      "description": "Whether commitlint uses the default ignore rules",
+      "type": "boolean"
+    }
+  }
+}

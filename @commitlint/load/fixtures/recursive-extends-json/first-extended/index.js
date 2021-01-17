@@ -1,6 +1,6 @@
 module.exports = {
 	extends: ['./second-extended'],
 	rules: {
-		one: 1
-	}
+		one: [1, 'always'],
+	},
 };

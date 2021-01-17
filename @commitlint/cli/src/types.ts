@@ -18,8 +18,3 @@ export interface CliFlags {
 	_: string[];
 	$0: string;
 }
-
-export interface Seed {
-	extends?: string[];
-	parserPreset?: string;
-}

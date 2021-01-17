@@ -5,12 +5,7 @@
     "rootDir": "./src",
     "outDir": "./lib"
   },
-  "include": ["./src"],
+  "include": ["./src/**/*.ts", "./src/**/*.json"],
   "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
-  "references": [
-    {"path": "../execute-rule"},
-    {"path": "../resolve-extends"},
-    {"path": "../config-validator"},
-    {"path": "../types"}
-  ]
+  "references": [{"path": "../types"}]
 }

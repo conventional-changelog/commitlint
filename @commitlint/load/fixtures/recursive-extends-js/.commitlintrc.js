@@ -1,6 +1,6 @@
 module.exports = {
 	extends: ['./first-extended'],
 	rules: {
-		zero: 0
-	}
+		zero: [0, 'never'],
+	},
 };

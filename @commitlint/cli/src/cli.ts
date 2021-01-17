@@ -8,7 +8,7 @@ import resolveGlobal from 'resolve-global';
 import yargs from 'yargs';
 import util from 'util';
 
-import {CliFlags, Seed} from './types';
+import {CliFlags} from './types';
 import {
 	LintOptions,
 	LintOutcome,
@@ -16,6 +16,7 @@ import {
 	ParserPreset,
 	QualifiedConfig,
 	Formatter,
+	UserConfig,
 } from '@commitlint/types';
 import {CliError} from './cli-error';
 
@@ -332,7 +333,7 @@ function getEditValue(flags: CliFlags) {
 	return edit;
 }
 
-function getSeed(flags: CliFlags): Seed {
+function getSeed(flags: CliFlags): UserConfig {
 	const n = (flags.extends || []).filter(
 		(i): i is string => typeof i === 'string'
 	);

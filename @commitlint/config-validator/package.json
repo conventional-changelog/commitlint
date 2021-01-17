@@ -1,0 +1,34 @@
+{
+  "name": "@commitlint/config-validator",
+  "version": "11.0.0",
+  "description": "commitizen prompt using commitlint.config.js",
+  "main": "./lib/validate.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-import"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conventional-changelog/commitlint.git"
+  },
+  "author": "Mario Nebl <hello@herebecode.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "engines": {
+    "node": ">=v10"
+  },
+  "devDependencies": {
+    "@commitlint/utils": "^11.0.0"
+  },
+  "dependencies": {
+    "@commitlint/types": "^11.0.0",
+    "ajv": "^6.12.6"
+  },
+  "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
+}

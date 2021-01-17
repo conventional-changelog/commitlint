@@ -22,16 +22,7 @@ export interface UserConfig {
 	defaultIgnores?: boolean;
 	plugins?: (string | Plugin)[];
 	helpUrl?: string;
-}
-
-export interface UserPreset {
-	extends?: string[];
-	formatter?: string;
-	rules?: Partial<RulesConfig>;
-	parserPreset?: string | ParserPreset;
-	ignores?: ((commit: string) => boolean)[];
-	defaultIgnores?: boolean;
-	plugins: PluginRecords;
+	[key: string]: unknown;
 }
 
 export type QualifiedRules = Partial<RulesConfig<RuleConfigQuality.Qualified>>;

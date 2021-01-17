@@ -1,6 +1,6 @@
 module.exports = {
 	rules: {
-		foo: 'hello',
-		bar: 'world'
-	}
+		foo: [1, 'never', 'hello'],
+		bar: [1, 'never', 'world'],
+	},
 };

@@ -6,6 +6,7 @@ import resolveFrom from 'resolve-from';
 
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
+import {validateConfig} from '@commitlint/config-validator';
 import {
 	UserConfig,
 	LoadOptions,
@@ -17,7 +18,6 @@ import {
 import loadPlugin from './utils/load-plugin';
 import {loadConfig} from './utils/load-config';
 import {loadParserOpts} from './utils/load-parser-opts';
-import {pickConfig} from './utils/pick-config';
 
 export default async function load(
 	seed: UserConfig = {},
@@ -26,21 +26,21 @@ export default async function load(
 	const cwd = typeof options.cwd === 'undefined' ? process.cwd() : options.cwd;
 	const loaded = await loadConfig(cwd, options.file);
 	const base = loaded && loaded.filepath ? Path.dirname(loaded.filepath) : cwd;
-
-	// TODO: validate loaded.config against UserConfig type
-	// Might amount to breaking changes, defer until 9.0.0
+	let config: UserConfig = {};
+	if (loaded) {
+		validateConfig(loaded.filepath || '', loaded.config);
+		config = loaded.config;
+	}
 
 	// Merge passed config with file based options
-	const config = pickConfig(
-		merge(
-			{
-				extends: [],
-				plugins: [],
-				rules: {},
-			},
-			loaded ? loaded.config : null,
-			seed
-		)
+	config = merge(
+		{
+			extends: [],
+			plugins: [],
+			rules: {},
+		},
+		config,
+		seed
 	);
 
 	// Resolve parserPreset key
@@ -55,17 +55,17 @@ export default async function load(
 	}
 
 	// Resolve extends key
-	const extended = (resolveExtends(config, {
+	const extended = resolveExtends(config, {
 		prefix: 'commitlint-config',
 		cwd: base,
 		parserPreset: config.parserPreset,
-	}) as unknown) as UserConfig;
+	});
 
-	if (!extended.formatter || typeof extended.formatter !== 'string') {
+	if (!extended.formatter) {
 		extended.formatter = '@commitlint/format';
 	}
 
-	if (!extended.helpUrl || typeof extended.helpUrl !== 'string') {
+	if (!extended.helpUrl) {
 		extended.helpUrl =
 			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 	}
