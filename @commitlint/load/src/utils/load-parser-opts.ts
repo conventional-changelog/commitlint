@@ -5,10 +5,7 @@ function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 }
 
 function isPromiseLike(obj: unknown): obj is Promise<unknown> {
-	return (
-		(typeof obj === 'object' || typeof obj === 'function') &&
-		typeof (obj as any).then === 'function'
-	);
+	return typeof obj === 'object' && typeof (obj as any).then === 'function';
 }
 
 function isParserOptsFunction<T extends ParserPreset>(
