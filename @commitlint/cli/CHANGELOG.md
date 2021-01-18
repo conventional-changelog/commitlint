@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* update dependency execa to v5 ([#2341](https://github.com/conventional-changelog/commitlint/issues/2341)) ([f349df9](https://github.com/conventional-changelog/commitlint/commit/f349df90f08096a9bcad46b5e55b411aac327a24))
+* update dependency yargs to v16 ([204f36d](https://github.com/conventional-changelog/commitlint/commit/204f36d0a522afaf3a88739b401aea15ffa0b891))
+
+
+### Features
+
+* **cli:** implement print-config cli flag ([#2391](https://github.com/conventional-changelog/commitlint/issues/2391)) ([8626883](https://github.com/conventional-changelog/commitlint/commit/86268833946dea9dcf1c15459456cd4427d17835))
+* **load:** allow specifying helpUrl via config ([#2180](https://github.com/conventional-changelog/commitlint/issues/2180)) ([d6795a3](https://github.com/conventional-changelog/commitlint/commit/d6795a3c4633ba6efd7a0fcff48339dc291cd832))
+
+
+
+
+
 # [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
 
 

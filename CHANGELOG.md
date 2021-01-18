@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* remove unnecessary react babel transforms ([#2399](https://github.com/conventional-changelog/commitlint/issues/2399)) ([78f02fd](https://github.com/conventional-changelog/commitlint/commit/78f02fdb69c811b5ac38a7d018502aeeb785be04))
+* **utils:** update code to allow it to be executed ([#982](https://github.com/conventional-changelog/commitlint/issues/982)) ([52696d0](https://github.com/conventional-changelog/commitlint/commit/52696d048317944aa0d638b8702df78f8756d44b))
+* update dependency @types/fs-extra to v9.0.2 ([#2250](https://github.com/conventional-changelog/commitlint/issues/2250)) ([a10fa0b](https://github.com/conventional-changelog/commitlint/commit/a10fa0b580bdb09fd713beac78721cc5d579c67c))
+* update dependency @types/fs-extra to v9.0.5 ([#2360](https://github.com/conventional-changelog/commitlint/issues/2360)) ([3266712](https://github.com/conventional-changelog/commitlint/commit/3266712039e7ad6a13ed2d3097c28902b73cb701))
+* update dependency conventional-changelog-angular to v5.0.12 ([#2361](https://github.com/conventional-changelog/commitlint/issues/2361)) ([5766b39](https://github.com/conventional-changelog/commitlint/commit/5766b39b4ffb22452259827f131a2e7871637205))
+* update dependency conventional-changelog-conventionalcommits to v4.4.0 ([#2115](https://github.com/conventional-changelog/commitlint/issues/2115)) ([bccc9f5](https://github.com/conventional-changelog/commitlint/commit/bccc9f53df26b98bf51e4183d54ca66c45a51857))
+* update dependency conventional-changelog-conventionalcommits to v4.5.0 ([#2362](https://github.com/conventional-changelog/commitlint/issues/2362)) ([01c78bf](https://github.com/conventional-changelog/commitlint/commit/01c78bff6451befbc52294047c665326bc4eb9b9))
+* update dependency execa to v4.1.0 ([#2251](https://github.com/conventional-changelog/commitlint/issues/2251)) ([b5743dd](https://github.com/conventional-changelog/commitlint/commit/b5743dd1e49bbe7eac03f34bc38c59df5fbaf2a0))
+* update dependency execa to v5 ([#2341](https://github.com/conventional-changelog/commitlint/issues/2341)) ([f349df9](https://github.com/conventional-changelog/commitlint/commit/f349df90f08096a9bcad46b5e55b411aac327a24))
+* update dependency git-raw-commits to v2.0.7 ([#2116](https://github.com/conventional-changelog/commitlint/issues/2116)) ([ef969f3](https://github.com/conventional-changelog/commitlint/commit/ef969f375df170d6bdaadad205333352e01bb24d))
+* update dependency git-raw-commits to v2.0.8 ([#2364](https://github.com/conventional-changelog/commitlint/issues/2364)) ([3371715](https://github.com/conventional-changelog/commitlint/commit/3371715871d0381190635bd392780b16dd55e0c7))
+* update dependency meow to v8 ([#2245](https://github.com/conventional-changelog/commitlint/issues/2245)) ([890961b](https://github.com/conventional-changelog/commitlint/commit/890961b52b1552c1bb2798db02915e28686983f0))
+* update dependency meow to v8.1.0 ([#2380](https://github.com/conventional-changelog/commitlint/issues/2380)) ([0fbadcf](https://github.com/conventional-changelog/commitlint/commit/0fbadcf1d45c2e97f1da9938b3b80c0b45eba18c))
+* update dependency pkg-dir to v5 ([#2168](https://github.com/conventional-changelog/commitlint/issues/2168)) ([b9d1c84](https://github.com/conventional-changelog/commitlint/commit/b9d1c8462950303a7695f248849dd9f6a58b5a9a))
+* update dependency semver to v7.3.4 ([#2336](https://github.com/conventional-changelog/commitlint/issues/2336)) ([790b61a](https://github.com/conventional-changelog/commitlint/commit/790b61afa668d0eab80bbe49db58d3d5d29bb16e))
+* update dependency tar-fs to v2.1.1 ([#2261](https://github.com/conventional-changelog/commitlint/issues/2261)) ([a04f24f](https://github.com/conventional-changelog/commitlint/commit/a04f24f00873209d6d96cd894450d17fdfe9ca58))
+* **is-ignored:** ignore azure devops messages ([#2230](https://github.com/conventional-changelog/commitlint/issues/2230)) ([fe29ce7](https://github.com/conventional-changelog/commitlint/commit/fe29ce76bd87d5b42048228fbf0f47cc8d5411ec))
+* update dependency yargs to v16 ([204f36d](https://github.com/conventional-changelog/commitlint/commit/204f36d0a522afaf3a88739b401aea15ffa0b891))
+* update dependency yargs to v16.1.0 ([#2252](https://github.com/conventional-changelog/commitlint/issues/2252)) ([6478d07](https://github.com/conventional-changelog/commitlint/commit/6478d07afe0fe1736cf1aef1618c7d90d60d9117))
+* **resolve-extends:** `extends` field should be resolved from left to right ([#2070](https://github.com/conventional-changelog/commitlint/issues/2070)) ([c0a86f5](https://github.com/conventional-changelog/commitlint/commit/c0a86f5b5ed6ef071acef4baf38e7fc549fbec37))
+
+
+### Features
+
+* **cli:** implement print-config cli flag ([#2391](https://github.com/conventional-changelog/commitlint/issues/2391)) ([8626883](https://github.com/conventional-changelog/commitlint/commit/86268833946dea9dcf1c15459456cd4427d17835))
+* **config-lerna-scopes:** support yarn workspaces ([#2149](https://github.com/conventional-changelog/commitlint/issues/2149)) ([b244246](https://github.com/conventional-changelog/commitlint/commit/b2442469afe3b11c20b0101be7656ced43fab366))
+* **load:** allow specifying helpUrl via config ([#2180](https://github.com/conventional-changelog/commitlint/issues/2180)) ([d6795a3](https://github.com/conventional-changelog/commitlint/commit/d6795a3c4633ba6efd7a0fcff48339dc291cd832))
+* **rules:** add body-full-stop rule ([#2144](https://github.com/conventional-changelog/commitlint/issues/2144)) ([7767ca2](https://github.com/conventional-changelog/commitlint/commit/7767ca2591d10207c4abe7f3e5e6de503ac12a25))
+
+
+### BREAKING CHANGES
+
+* **resolve-extends:** The order of the `extends` resolution is changed from right-to-left to left-to-right
+
+
+
+
+
 # [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
 
 

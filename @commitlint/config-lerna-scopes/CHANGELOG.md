@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* update dependency semver to v7.3.4 ([#2336](https://github.com/conventional-changelog/commitlint/issues/2336)) ([790b61a](https://github.com/conventional-changelog/commitlint/commit/790b61afa668d0eab80bbe49db58d3d5d29bb16e))
+
+
+### Features
+
+* **config-lerna-scopes:** support yarn workspaces ([#2149](https://github.com/conventional-changelog/commitlint/issues/2149)) ([b244246](https://github.com/conventional-changelog/commitlint/commit/b2442469afe3b11c20b0101be7656ced43fab366))
+
+
+
+
+
 # [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
 
 
