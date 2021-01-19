@@ -438,8 +438,10 @@ test('should work with relative formatter path', async () => {
 test('should print help', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--help'], {cwd})();
-	expect(actual.stdout).toMatchInlineSnapshot(`
-		"@commitlint/cli@12.0.0 - Lint your commit messages
+	const version = require('../package.json').version;
+	const stdout = actual.stdout.replace(`@${version}`, '@dev');
+	expect(stdout).toMatchInlineSnapshot(`
+		"@commitlint/cli@dev - Lint your commit messages
 
 		[input] reads from stdin if --edit, --env, --from and --to are omitted
 
