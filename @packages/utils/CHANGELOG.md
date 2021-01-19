@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
+
+
+### Bug Fixes
+
+* **utils:** update code to allow it to be executed ([#982](https://github.com/conventional-changelog/commitlint/issues/982)) ([52696d0](https://github.com/conventional-changelog/commitlint/commit/52696d048317944aa0d638b8702df78f8756d44b))
+* update dependency execa to v5 ([#2341](https://github.com/conventional-changelog/commitlint/issues/2341)) ([f349df9](https://github.com/conventional-changelog/commitlint/commit/f349df90f08096a9bcad46b5e55b411aac327a24))
+* update dependency meow to v8 ([#2245](https://github.com/conventional-changelog/commitlint/issues/2245)) ([890961b](https://github.com/conventional-changelog/commitlint/commit/890961b52b1552c1bb2798db02915e28686983f0))
+* update dependency meow to v8.1.0 ([#2380](https://github.com/conventional-changelog/commitlint/issues/2380)) ([0fbadcf](https://github.com/conventional-changelog/commitlint/commit/0fbadcf1d45c2e97f1da9938b3b80c0b45eba18c))
+* update dependency tar-fs to v2.1.1 ([#2261](https://github.com/conventional-changelog/commitlint/issues/2261)) ([a04f24f](https://github.com/conventional-changelog/commitlint/commit/a04f24f00873209d6d96cd894450d17fdfe9ca58))
+
+
+
+
+
 # [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
 
 **Note:** Version bump only for package @commitlint/utils
