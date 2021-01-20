@@ -66,7 +66,7 @@ export function formatResult(
 	const problems = [...errors, ...warnings].map((problem) => {
 		const sign = signs[problem.level] || '';
 		const color: ChalkColor = colors[problem.level] || ('white' as const);
-		const decoration = enabled ? ((chalk as any)[color] as any)(sign) : sign;
+		const decoration = enabled ? chalk[color](sign) : sign;
 		const name = enabled
 			? chalk.grey(`[${problem.name}]`)
 			: `[${problem.name}]`;
