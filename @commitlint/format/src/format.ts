@@ -76,7 +76,7 @@ export function formatResult(
 	const sign = selectSign(result);
 	const color = selectColor(result);
 
-	const deco = enabled ? (chalk[color] as any)(sign) : sign;
+	const deco = enabled ? chalk[color](sign) : sign;
 	const el = errors.length;
 	const wl = warnings.length;
 	const hasProblems = problems.length > 0;
@@ -109,7 +109,7 @@ function selectSign(result: FormattableResult): string {
 	return (result.warnings || []).length ? '⚠' : '✔';
 }
 
-function selectColor(result: FormattableResult): keyof typeof chalk {
+function selectColor(result: FormattableResult): ChalkColor {
 	if ((result.errors || []).length > 0) {
 		return 'red';
 	}
