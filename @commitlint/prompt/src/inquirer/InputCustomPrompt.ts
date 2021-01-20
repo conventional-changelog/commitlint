@@ -56,11 +56,9 @@ export default class InputCustomPrompt<
 	 * @see https://nodejs.org/api/readline.html#readline_rl_line
 	 */
 	updateLine(line: string): void {
-		/* eslint-disable @typescript-eslint/ban-ts-comment */
-		// @ts-ignore
-		this.rl.line = line;
-		// @ts-ignore
-		this.rl.write(null, {ctrl: true, name: 'e'});
+		this.rl.write(null as any, {ctrl: true, name: 'b'});
+		this.rl.write(null as any, {ctrl: true, name: 'd'});
+		this.rl.write(line.substr(this.rl.line.length));
 	}
 
 	onKeyPress2(e: KeyDescriptor): void {
