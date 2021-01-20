@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
+
+
+### Features
+
+* **rules:** add body-full-stop rule ([#2144](https://github.com/conventional-changelog/commitlint/issues/2144)) ([7767ca2](https://github.com/conventional-changelog/commitlint/commit/7767ca2591d10207c4abe7f3e5e6de503ac12a25))
+
+
+
+
+
 # [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
 
 

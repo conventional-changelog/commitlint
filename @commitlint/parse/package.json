@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/parse",
-  "version": "11.0.0",
+  "version": "12.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -34,13 +34,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^11.0.0",
-    "@commitlint/utils": "^11.0.0"
+    "@commitlint/test": "^12.0.0",
+    "@commitlint/utils": "^12.0.0"
   },
   "dependencies": {
-    "@commitlint/types": "^11.0.0",
+    "@commitlint/types": "^12.0.0",
     "conventional-changelog-angular": "^5.0.11",
     "conventional-commits-parser": "^3.0.0"
   },
-  "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
+  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
 }
