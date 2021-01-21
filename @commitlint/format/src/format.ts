@@ -66,7 +66,7 @@ export function formatResult(
 	const problems = [...errors, ...warnings].map((problem) => {
 		const sign = signs[problem.level] || '';
 		const color: ChalkColor = colors[problem.level] || ('white' as const);
-		const decoration = enabled ? ((chalk as any)[color] as any)(sign) : sign;
+		const decoration = enabled ? chalk[color](sign) : sign;
 		const name = enabled
 			? chalk.grey(`[${problem.name}]`)
 			: `[${problem.name}]`;
@@ -76,7 +76,7 @@ export function formatResult(
 	const sign = selectSign(result);
 	const color = selectColor(result);
 
-	const deco = enabled ? (chalk[color] as any)(sign) : sign;
+	const deco = enabled ? chalk[color](sign) : sign;
 	const el = errors.length;
 	const wl = warnings.length;
 	const hasProblems = problems.length > 0;
@@ -109,7 +109,7 @@ function selectSign(result: FormattableResult): string {
 	return (result.warnings || []).length ? '⚠' : '✔';
 }
 
-function selectColor(result: FormattableResult): keyof typeof chalk {
+function selectColor(result: FormattableResult): ChalkColor {
 	if ((result.errors || []).length > 0) {
 		return 'red';
 	}
