@@ -2068,10 +2068,15 @@
   resolved "https://registry.npmjs.org/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@>= 8", "@types/node@12.19.14":
-  version "12.19.14"
-  resolved "https://registry.npmjs.org/@types/node/-/node-12.19.14.tgz#59e5029a3c2aea34f68b717955381692fd47cafb"
-  integrity sha512-2U9uLN46+7dv9PiS8VQJcHhuoOjiDPZOLAt0WuA1EanEknIMae+2QbMhayF7cgGqjvRVIfNpt+6jLPczJZFiRw==
+"@types/node@*", "@types/node@>= 8":
+  version "12.12.26"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.12.26.tgz#213e153babac0ed169d44a6d919501e68f59dea9"
+  integrity sha512-UmUm94/QZvU5xLcUlNR8hA7Ac+fGpO1EG/a8bcWVz0P0LqtxFmun9Y2bbtuckwGboWJIT70DoWq1r3hb56n3DA==
+
+"@types/node@12.19.15":
+  version "12.19.15"
+  resolved "https://registry.npmjs.org/@types/node/-/node-12.19.15.tgz#0de7e978fb43db62da369db18ea088a63673c182"
+  integrity sha512-lowukE3GUI+VSYSu6VcBXl14d61Rp5hA1D+61r16qnwC0lYNSqdxcvRh0pswejorHfS+HgwBasM8jLXz0/aOsw==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -9454,6 +9459,11 @@ throat@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
   integrity sha512-fcwX4mndzpLQKBS1DVYhGAcYaYt7vsHNIvQV+WXMvnow5cgjPphq5CaayLaGsjRdSCKZFNGt7/GYAuXaNOiYCA==
+
+throat@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/throat/-/throat-6.0.0.tgz#e5d793bff24e2d329e25239978ba79b9c797b3a6"
+  integrity sha512-xFKdqx9QpWfXq471eaKQ/ao7xOFye4CKc8pyNJ9wU+oa6R4EKPTVY6V7JMqPVMZhB8TUbY5TB/mgU4AYA4Y8dA==
 
 through2@^2.0.0, through2@^2.0.2:
   version "2.0.5"
