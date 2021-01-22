@@ -1,4 +1,4 @@
-import {format, formatResult} from '.';
+import {format, formatResult} from './format';
 
 test('does nothing without arguments', () => {
 	const actual = format();

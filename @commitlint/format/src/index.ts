@@ -1,2 +1,2 @@
-export {default} from './format';
-export * from './format';
+import format from './format';
+export = format;
