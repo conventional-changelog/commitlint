@@ -11,7 +11,7 @@ npm install --save-dev @commitlint/load
 ## Example
 
 ```js
-const load = require('@commitlint/load');
+const load = require('@commitlint/load').default;
 
 load({extends: ['./package']}).then((config) => console.log(config));
 // => { extends: ['./package', './package-b'], rules: {} }
