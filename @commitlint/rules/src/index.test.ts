@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import globby from 'globby';
 import rules from '.';
 
@@ -11,6 +12,17 @@ test('exports all rules', async () => {
 test('rules export functions', () => {
 	const actual = Object.values(rules);
 	expect(actual.every((rule) => typeof rule === 'function')).toBe(true);
+});
+
+test('all rules are present in documentation', () => {
+	const file = fs.readFileSync(
+		path.join(__dirname, '../../../docs/reference-rules.md'),
+		'utf-8'
+	);
+
+	for (const ruleName of Object.keys(rules)) {
+		expect(file).toContain(`#### ${ruleName}`);
+	}
 });
 
 async function glob(pattern: string | string[]) {

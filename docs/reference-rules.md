@@ -57,6 +57,11 @@ Rule configurations are either of type `array` residing on a key with the rule's
 - **condition**: `body` begins with blank line
 - **rule**: `always`
 
+#### body-empty
+
+- **condition**: `body` is empty
+- **rule**: `never`
+
 #### body-max-length
 
 - **condition**: `body` has `value` or less characters
@@ -87,10 +92,40 @@ Infinity
 0
 ```
 
+#### body-case
+
+- **condition**: `header` is in case `value`
+- **rule**: `always`
+- **value**
+
+```
+'lower-case'
+```
+
+- **possible values**
+
+```
+[
+  'lower-case', // default
+  'upper-case', // UPPERCASE
+  'camel-case', // camelCase
+  'kebab-case', // kebab-case
+  'pascal-case', // PascalCase
+  'sentence-case', // Sentence case
+  'snake-case', // snake_case
+  'start-case' // Start Case
+]
+```
+
 #### footer-leading-blank
 
 - **condition**: `footer` begins with blank line
 - **rule**: `always`
+
+#### footer-empty
+
+- **condition**: `footer` is empty
+- **rule**: `never`
 
 #### footer-max-length
 
@@ -129,7 +164,7 @@ Infinity
 - **value**
 
 ```
-'lowerCase'
+'lower-case'
 ```
 
 - **possible values**
@@ -198,7 +233,7 @@ Infinity
 - **value**
 
 ```
-'lowerCase'
+'lower-case'
 ```
 
 - **possible values**
@@ -248,7 +283,7 @@ Infinity
 - **value**
 
 ```
-'lowerCase'
+'lower-case'
 ```
 
 - **possible values**
