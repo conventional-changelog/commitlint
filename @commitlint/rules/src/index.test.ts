@@ -19,10 +19,12 @@ test('all rules are present in documentation', () => {
 		path.join(__dirname, '../../../docs/reference-rules.md'),
 		'utf-8'
 	);
+	const results = file
+		.split(/(\n|\r)/)
+		.filter((s) => s.startsWith('####') && !s.includes('`deprecated`'))
+		.map((s) => s.replace('#### ', ''));
 
-	for (const ruleName of Object.keys(rules)) {
-		expect(file).toContain(`#### ${ruleName}`);
-	}
+	expect(Object.keys(rules)).toEqual(expect.arrayContaining(results));
 });
 
 async function glob(pattern: string | string[]) {
