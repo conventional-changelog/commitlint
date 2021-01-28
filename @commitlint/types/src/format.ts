@@ -26,7 +26,7 @@ export interface FormattableReport {
 	results?: (FormattableResult & WithInput)[];
 }
 
-export type ChalkColor = keyof typeof chalk;
+export type ChalkColor = typeof chalk.Color | typeof chalk.Modifiers;
 
 export interface FormatOptions {
 	color?: boolean;
