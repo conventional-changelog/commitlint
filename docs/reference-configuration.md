@@ -56,38 +56,9 @@ module.exports = Configuration;
 ### TypeScript
 
 ```ts
-type Config = {
-  /*
-   * Resolveable ids to commitlint configurations to extend
-   */
-  extends?: string[];
-  /*
-   * Resolveable id to conventional-changelog parser preset to import and use
-   */
-  parserPreset?: string;
-  /*
-   * Resolveable id to package, from node_modules, which formats the output.
-   */
-  formatter: string;
-  /*
-   * Rules to check against
-   */
-  rules?: {[name: string]: Rule};
-  /*
-   * Functions that return true if commitlint should ignore the given message.
-   */
-  ignores?: ((message: string) => boolean)[];
-  /*
-   * Whether commitlint uses the default ignore rules.
-   */
-  defaultIgnores?: boolean;
-  /*
-   * Custom URL to show upon failure
-   */
-  helpUrl?: string;
-};
+import type {UserConfig} from '@commitlint/types';
 
-const Configuration: Config = {
+const Configuration: UserConfig = {
   /*
    * Resolve and load @commitlint/config-conventional from node_modules.
    * Referenced packages must be installed
