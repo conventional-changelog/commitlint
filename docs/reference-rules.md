@@ -87,6 +87,11 @@ Infinity
 0
 ```
 
+#### body-empty
+
+- **condition**: `body` has at least one entry
+- **rule**: `never`
+
 #### footer-leading-blank
 
 - **condition**: `footer` begins with blank line
@@ -121,6 +126,11 @@ Infinity
 ```
 0
 ```
+
+#### footer-empty
+
+- **condition**: `footer` has at least one entry
+- **rule**: `never`
 
 #### header-case
 
