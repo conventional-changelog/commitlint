@@ -4,8 +4,7 @@ import resolvePkg from 'resolve-pkg';
 
 import * as git from './git';
 
-export async function bootstrap(fixture: string, directory?: string) {
-	const cwd = await git.bootstrap(fixture, directory);
+export async function installModules(cwd: string) {
 	const manifestPath = path.join(cwd, 'package.json');
 	const targetModulesPath = path.join(cwd, 'node_modules');
 
@@ -36,7 +35,11 @@ export async function bootstrap(fixture: string, directory?: string) {
 			})
 		);
 	}
+}
 
+export async function bootstrap(fixture: string, directory?: string) {
+	const cwd = await git.bootstrap(fixture, directory);
+	await installModules(cwd);
 	return cwd;
 }
 
