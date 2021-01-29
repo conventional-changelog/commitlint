@@ -55,7 +55,7 @@ function loadExtends(
 	const {extends: e} = config;
 	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
 
-	return ext.reduceRight<ResolvedConfig[]>((configs, raw) => {
+	return ext.reduce<ResolvedConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
@@ -81,7 +81,7 @@ function loadExtends(
 			config.parserPreset = parserPreset;
 		}
 
-		return [...loadExtends(c, ctx), c, ...configs];
+		return [...configs, ...loadExtends(c, ctx), c];
 	}, []);
 }
 

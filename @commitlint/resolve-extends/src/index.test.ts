@@ -493,3 +493,39 @@ test('parserPreset should be merged correctly', () => {
 
 	expect(actual).toEqual(expected);
 });
+
+test('should correctly merge nested configs', () => {
+	const input = {extends: ['extender-1']};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-1':
+				return {extends: ['extender-3', 'extender-2']};
+			case 'extender-2':
+				return {extends: ['extender-4']};
+			case 'extender-3':
+				return {rules: {test: 3}};
+			case 'extender-4':
+				return {extends: ['extender-5', 'extender-6'], rules: {test: 4}};
+			case 'extender-5':
+				return {rules: {test: 5}};
+			case 'extender-6':
+				return {rules: {test: 6}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-1'],
+		rules: {
+			test: 4,
+		},
+	};
+
+	expect(actual).toEqual(expected);
+});
