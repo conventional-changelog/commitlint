@@ -4,16 +4,10 @@ function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 	return Boolean(obj) && typeof obj === 'object'; // typeof null === 'object'
 }
 
-function isPromiseLike(obj: unknown): obj is Promise<unknown> {
-	return isObjectLike(obj) && typeof (obj as any).then === 'function';
-}
-
 function isParserOptsFunction<T extends ParserPreset>(
 	obj: T
 ): obj is T & {
-	parserOpts: (
-		cb: (_: never, parserOpts: Record<string, unknown>) => unknown
-	) => Record<string, unknown> | undefined;
+	parserOpts: (...args: any[]) => any;
 } {
 	return typeof obj.parserOpts === 'function';
 }
@@ -27,9 +21,21 @@ export async function loadParserOpts(
 	// Await for the module, loaded with require
 	const parser = await pendingParser;
 
-	// Await parser opts if applicable
-	if (isPromiseLike(parser.parserOpts)) {
-		parser.parserOpts = ((await parser.parserOpts) as any).parserOpts;
+	// exit early, no opts to resolve
+	if (!parser.parserOpts) {
+		return parser;
+	}
+
+	// Pull nested parserOpts, might happen if overwritten with a module in main config
+	if (typeof parser.parserOpts === 'object') {
+		// Await parser opts if applicable
+		parser.parserOpts = await parser.parserOpts;
+		if (
+			isObjectLike(parser.parserOpts) &&
+			isObjectLike(parser.parserOpts.parserOpts)
+		) {
+			parser.parserOpts = parser.parserOpts.parserOpts;
+		}
 		return parser;
 	}
 
@@ -40,10 +46,10 @@ export async function loadParserOpts(
 		parser.name.startsWith('conventional-changelog-')
 	) {
 		return new Promise((resolve) => {
-			const result = parser.parserOpts((_: never, opts) => {
+			const result = parser.parserOpts((_: never, opts: any) => {
 				resolve({
 					...parser,
-					parserOpts: opts.parserOpts,
+					parserOpts: opts?.parserOpts,
 				});
 			});
 
@@ -53,7 +59,7 @@ export async function loadParserOpts(
 				Promise.resolve(result).then((opts) => {
 					resolve({
 						...parser,
-						parserOpts: opts.parserOpts,
+						parserOpts: opts?.parserOpts,
 					});
 				});
 			}
@@ -61,12 +67,5 @@ export async function loadParserOpts(
 		});
 	}
 
-	// Pull nested parserOpts, might happen if overwritten with a module in main config
-	if (
-		isObjectLike(parser.parserOpts) &&
-		typeof parser.parserOpts.parserOpts === 'object'
-	) {
-		parser.parserOpts = parser.parserOpts.parserOpts;
-	}
 	return parser;
 }
