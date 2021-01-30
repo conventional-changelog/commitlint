@@ -264,16 +264,16 @@ async function main(options: CliFlags) {
 	}
 }
 
-function checkFromStdin(input: string[], flags: CliFlags): boolean {
+function checkFromStdin(input: (string | number)[], flags: CliFlags): boolean {
 	return input.length === 0 && !checkFromRepository(flags);
 }
 
-function checkFromRepository(flags: CliFlags) {
+function checkFromRepository(flags: CliFlags): boolean {
 	return checkFromHistory(flags) || checkFromEdit(flags);
 }
 
-function checkFromEdit(flags: CliFlags) {
-	return Boolean(flags.edit) || flags.env;
+function checkFromEdit(flags: CliFlags): boolean {
+	return Boolean(flags.edit) || Boolean(flags.env);
 }
 
 function checkFromHistory(flags: CliFlags): boolean {
