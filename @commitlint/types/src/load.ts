@@ -1,10 +1,16 @@
-import {Rule, RulesConfig, RuleConfigQuality} from './rules';
+import {
+	Rule,
+	RulesConfig,
+	RuleConfigQuality,
+	AsyncRule,
+	SyncRule,
+} from './rules';
 
 export type PluginRecords = Record<string, Plugin>;
 
 export interface Plugin {
 	rules: {
-		[ruleName: string]: Rule<unknown>;
+		[ruleName: string]: Rule | AsyncRule | SyncRule;
 	};
 }
 

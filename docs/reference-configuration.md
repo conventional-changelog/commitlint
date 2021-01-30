@@ -8,39 +8,57 @@ The file is expected
 - export a configuration object
 - adhere to the schema outlined below
 
-```ts
-type Config = {
+## Configuration object example
+
+### JavaScript
+
+```js
+const Configuration = {
   /*
-   * Resolveable ids to commitlint configurations to extend
+   * Resolve and load @commitlint/config-conventional from node_modules.
+   * Referenced packages must be installed
    */
-  extends?: string[];
+  extends: ['@commitlint/config-conventional'],
   /*
-   * Resolveable id to conventional-changelog parser preset to import and use
+   * Resolve and load conventional-changelog-atom from node_modules.
+   * Referenced packages must be installed
    */
-  parserPreset?: string;
+  parserPreset: 'conventional-changelog-atom',
   /*
-   * Resolveable id to package, from node_modules, which formats the output.
+   * Resolve and load @commitlint/format from node_modules.
+   * Referenced package must be installed
    */
-  formatter: string;
+  formatter: '@commitlint/format',
   /*
-   * Rules to check against
+   * Any rules defined here will override rules from @commitlint/config-conventional
    */
-  rules?: {[name: string]: Rule};
+  rules: {
+    'type-enum': [2, 'always', ['foo']],
+  },
   /*
    * Functions that return true if commitlint should ignore the given message.
    */
-  ignores?: ((message: string) => boolean)[];
+  ignores: [(commit) => commit === ''],
   /*
    * Whether commitlint uses the default ignore rules.
    */
-  defaultIgnores?: boolean;
+  defaultIgnores: true,
   /*
    * Custom URL to show upon failure
    */
-  helpUrl?: string;
+  helpUrl:
+    'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
 };
 
-const Configuration: Config = {
+module.exports = Configuration;
+```
+
+### TypeScript
+
+```ts
+import type {UserConfig} from '@commitlint/types';
+
+const Configuration: UserConfig = {
   /*
    * Resolve and load @commitlint/config-conventional from node_modules.
    * Referenced packages must be installed

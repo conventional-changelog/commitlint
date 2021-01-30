@@ -19,7 +19,7 @@ Additionally these rules apply:
 
 ### Problems
 
-The following rules are considered problems for `@commitlint/config-patterplate` and will yield a non-zero exit code when not met.
+The following rules are considered problems for `@commitlint/config-patternplate` and will yield a non-zero exit code when not met.
 
 #### scope-enum
 
