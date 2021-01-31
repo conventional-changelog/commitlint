@@ -13,7 +13,12 @@ commands:
     steps:
       - run:
           name: Install dependencies
-          command: yarn install --ignore-engines --frozen-lockfile
+          command: yarn install --ignore-engines --frozen-lockfile --cache-folder ~/.cache/yarn
+  install-win:
+    steps:
+      - run:
+          name: Install windows dependencies
+          command: yarn install --ignore-engines --frozen-lockfile --cache-folder %systemdrive%%homepath%/.cache/yarn
   audit:
     steps:
       - run:
@@ -47,16 +52,19 @@ commands:
   save-cache:
     steps:
       - save_cache:
-          key: v{{ .Environment.CIRCLE_CACHE_VERSION }}-{{ arch }}-npm-lock-{{ .Branch }}-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
+          key: v2.2-{{ arch }}-yarn-lock-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
+            - ~/.cache/yarn
+  restore-cache:
+    steps:
+      - restore_cache:
+          keys:
+            - v2.2-{{ arch }}-yarn-lock-{{ .Environment.CIRCLE_JOB }}-{{ checksum "yarn.lock" }}
   run-all:
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
       - update-yarn
+      - restore-cache
       - install
       - save-cache
       - build
@@ -65,13 +73,22 @@ commands:
       - deps
       - test
   run-tests:
+    parameters:
+      win:
+        type: boolean
+        default: false
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
       - update-yarn
-      - install
+      - restore-cache
+      - when:
+          condition: << parameters.win >>
+          steps:
+            - install-win
+      - unless:
+          condition: << parameters.win >>
+          steps:
+            - install
       - save-cache
       - build
       - test
@@ -94,7 +111,8 @@ jobs:
   windows-v12:
     executor: win/default
     steps:
-      - run-tests
+      - run-tests:
+          win: true
 
 workflows:
   node:
