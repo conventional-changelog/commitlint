@@ -36,6 +36,9 @@
     "email": "hello@herebecode.com"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@types/yargs": "^16.0.0"
+  },
   "dependencies": {
     "execa": "^5.0.0",
     "fs-extra": "^9.0.0",
@@ -43,7 +46,7 @@
     "require-from-string": "2.0.2",
     "tar-fs": "2.1.1",
     "tmp": "0.2.1",
-    "yargs": "^16.0.0"
+    "yargs": "^16.2.0"
   },
   "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"
 }
