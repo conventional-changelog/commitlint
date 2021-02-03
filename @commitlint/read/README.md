@@ -11,7 +11,7 @@ npm install --save @commitlint/read
 ## Example
 
 ```js
-const read = require('@commitlint/read').default;
+const {read} = require('@commitlint/read');
 
 // Read last edited commit message
 read({edit: true}).then((messages) => console.log(messages));

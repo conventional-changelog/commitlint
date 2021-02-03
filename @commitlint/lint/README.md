@@ -11,7 +11,7 @@ npm install --save @commitlint/lint
 ## Example
 
 ```js
-const lint = require('@commitlint/lint').default;
+const {lint} = require('@commitlint/lint');
 
 lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then((report) =>
   console.log(report)
