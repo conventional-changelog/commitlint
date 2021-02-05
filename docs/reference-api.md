@@ -72,7 +72,7 @@ format(report?: Report = {}, options?: formatOptions = {}) => string[];
 - **Example**
 
 ```js
-const {format} = require('@commitlint/format');
+const format = require('@commitlint/format').default;
 
 format(); // => [ '\u001b[1m\u001b[32m✔\u001b[39m   found 0 problems, 0 warnings\u001b[22m' ]
 
@@ -245,7 +245,7 @@ load(seed: Seed = {}, options?: LoadOptions = {cwd: process.cwd()}) => Promise<C
 - **Example**
 
 ```js
-const {load} = require('@commitlint/load');
+const load = require('@commitlint/load').default;
 
 load({
   rules: {
@@ -299,7 +299,7 @@ read(range: Range) => Promise<string[]>
 
 ```js
 // git commit -m "I did something"
-const {read} = require('@commitlint/read');
+const read = require('@commitlint/read').default;
 
 read({edit: true}).then((messages) => console.log(messages));
 // => ['I did something\n\n']
@@ -363,7 +363,7 @@ lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Prom
 - **Basic Example**
 
 ```js
-const {lint} = require('@commitlint/lint');
+const lint = require('@commitlint/lint').default;
 
 lint('foo: bar').then((report) => console.log(report));
 // => { valid: true, errors: [], warnings: [] }
@@ -402,8 +402,8 @@ lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then((report) =>
 - **Load configuration**
 
 ```js
-const {load} = require('@commitlint/load');
-const {lint} = require('@commitlint/lint');
+const load = require('@commitlint/load').default;
+const lint = require('@commitlint/lint').default;
 
 const CONFIG = {
   extends: ['@commitlint/config-conventional'],
@@ -432,8 +432,8 @@ load(CONFIG)
 - **Read git history**
 
 ```js
-const {lint} = require('@commitlint/lint');
-const {read} = require('@commitlint/read');
+const lint = require('@commitlint/lint').default;
+const read = require('@commitlint/read').default;
 
 const RULES = {
   'type-enum': [2, 'always', ['foo']],
@@ -449,9 +449,9 @@ read({to: 'HEAD', from: 'HEAD~2'}).then((commits) =>
 - **Simplfied last-commit checker**
 
 ```js
-const {load} = require('@commitlint/load');
-const {read} = require('@commitlint/read');
-const {lint} = require('@commitlint/lint');
+const load = require('@commitlint/load').default;
+const read = require('@commitlint/read').default;
+const lint = require('@commitlint/lint').default;
 
 Promise.all([load(), read({from: 'HEAD~1'})])
   .then((tasks) => {
