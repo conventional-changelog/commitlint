@@ -30,5 +30,5 @@ Options:
   -V, --verbose        enable verbose output for reports without problems
                                                                        [boolean]
   -v, --version        display version information                     [boolean]
-  -h, --help           Show help                                       [boolean]"
+  -h, --help           Show help                                       [boolean]
 ```
