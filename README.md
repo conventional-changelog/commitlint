@@ -93,27 +93,28 @@ npm install --save-dev @commitlint/config-conventional @commitlint/cli
 echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 ```
 
-To lint commits before they are created you can use Husky's 'commit-msg' hook.
+To lint commits before they are created you can use Husky's `commit-msg` hook:
 
-Install in your project `npm install husky --save-dev` or `yarn add -D husky`.
+```sh
+# Install Husky v5
+npm install husky --save-dev
+# or
+yarn add husky --dev
 
-After that, you can create a `.huskyrc` file or add to your `package.json` the following code for
+# Active hooks
+npx husky install
+# or
+yarn husky install
 
-Husky V4:
-
-```json
-{
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
-}
+# Add hook
+npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+# or
+yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
 ```
 
-Husky V5
+If the file `.husky/commit-msg` already exists, you can edit the file and put this:
 
-```
+```sh
 # .husky/commit-msg
 # ...
 npx --no-install commitlint --edit $1
