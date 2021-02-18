@@ -10,9 +10,6 @@ Install `commitlint` and a `commitlint-config-*` of your choice as devDependency
 configure `commitlint` to use it.
 
 ```bash
-# Create a package.json if needed
-npm init
-
 # Install and configure if needed
 npm install --save-dev @commitlint/{cli,config-conventional}
 echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
@@ -24,24 +21,32 @@ Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitli
 
 Install `husky` as devDependency, a handy git hook helper available on npm.
 
-```bash
-npm install --save-dev husky
+```sh
+# Install Husky v5
+npm install husky --save-dev
+# or
+yarn add husky --dev
+
+# Active hooks
+npx husky install
+# or
+yarn husky install
+
+# Add hook
+npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+# or
+yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
 ```
 
-This allows us to add [git hooks](https://git-scm.com/docs/githooks) directly into our `package.json` via the `husky.hooks` field.
+If the file `.husky/commit-msg` already exists, you can edit the file and put this:
 
-```json
-// package.json
-{
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
-}
+```sh
+# .husky/commit-msg
+# ...
+npx --no-install commitlint --edit $1
+# or
+yarn commitlint --edit $1
 ```
-
-Using `commit-msg` gives us exactly what we want: It is executed whenever a new commit is created. Passing husky's `HUSKY_GIT_PARAMS` to `commitlint` via the `-E|--env` flag directs it to the relevant edit file. `-e` would default to `.git/COMMIT_EDITMSG`.
 
 ## Test
 
