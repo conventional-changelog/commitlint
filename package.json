@@ -47,6 +47,11 @@
       "config:base",
       ":semanticCommitType(chore)",
       ":semanticCommitScopeDisabled"
+    ],
+    "ignoreDeps": [
+      "@commitlint/test",
+      "@commitlint/test-environment",
+      "@commitlint/utils"
     ]
   },
   "workspaces": [
