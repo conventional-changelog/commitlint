@@ -192,3 +192,11 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 #### Lerna support
 
 - lerna v2 is not supported anymore
+
+## Version 11 to 12
+
+### Breaking changes
+
+#### resolve-extends
+
+- The order of the `extends` resolution is changed from right-to-left to left-to-right
