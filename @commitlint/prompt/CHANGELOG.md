@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.0.1](https://github.com/conventional-changelog/commitlint/compare/v12.0.0...v12.0.1) (2021-02-23)
+
+
+### Bug Fixes
+
+* update dependency throat to v6 ([#2417](https://github.com/conventional-changelog/commitlint/issues/2417)) ([6f7db1b](https://github.com/conventional-changelog/commitlint/commit/6f7db1b39c48561b84a4fce9623fb045c5467fe8))
+
+
+
+
+
 # [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
 
 **Note:** Version bump only for package @commitlint/prompt

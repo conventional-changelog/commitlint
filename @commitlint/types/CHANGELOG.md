@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.0.1](https://github.com/conventional-changelog/commitlint/compare/v12.0.0...v12.0.1) (2021-02-23)
+
+
+### Bug Fixes
+
+* **load:** use `Rule | AsyncRule | SyncRule` as rule value type in `Plugin` ([#2146](https://github.com/conventional-changelog/commitlint/issues/2146)) ([75b67b8](https://github.com/conventional-changelog/commitlint/commit/75b67b8fb7fc4df21267b98f0c9daeeb1130b824))
+* **types:** correct chalkColor type ([#2420](https://github.com/conventional-changelog/commitlint/issues/2420)) ([ef8bdad](https://github.com/conventional-changelog/commitlint/commit/ef8bdad96c9ee7c3ad67f8280818c7f49c1df1fe))
+
+
+
+
+
 # [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
 
 
