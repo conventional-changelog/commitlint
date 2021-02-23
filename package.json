@@ -20,7 +20,8 @@
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
     "test": "jest",
-    "test-ci": "jest --runInBand"
+    "test-ci": "jest --runInBand",
+    "postinstall": "yarn husky install"
   },
   "commitlint": {
     "extends": [
@@ -89,7 +90,7 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^24.0.0",
-    "husky": "4.3.8",
+    "husky": "^5.1.1",
     "jest": "26.6.3",
     "lerna": "^3.22.1",
     "lerna-v3": "npm:lerna@3",
@@ -97,12 +98,6 @@
     "prettier": "^2.0.5",
     "ts-jest": "26.5.1",
     "typescript": "4.1.5"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "node @commitlint/cli/lib/cli.js -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
   },
   "resolutions": {
     "**/lodash": "^4.17.19"
