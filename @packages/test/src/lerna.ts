@@ -1,5 +1,5 @@
-import path from 'path';
 import fs from 'fs-extra';
+import path from 'path';
 import resolvePkg from 'resolve-pkg';
 import * as fix from './fix';
 
@@ -10,11 +10,7 @@ export async function bootstrap(
 	directory: string
 ): Promise<string> {
 	const cwd = await fix.bootstrap(`fixtures/${fixture}`, directory);
-	// this used to test lerna v2 and v3
-	// the v2 option is removed here, lerna version tests as well
-	// all the code to test differnt version is still in place
-	// cause i'm not sure how to remove this properly
-	const lerna = 'lerna-v3';
+	const lerna = 'lerna';
 	await fs.mkdirp(path.join(cwd, 'node_modules', '@lerna'));
 	await fs.symlink(
 		resolvePkg('@lerna/project')!,
