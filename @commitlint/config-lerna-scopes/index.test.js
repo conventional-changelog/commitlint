@@ -1,5 +1,5 @@
 import Path from 'path';
-import {lerna} from '@commitlint/test';
+import {npm} from '@commitlint/test';
 import config from '.';
 
 test('exports rules key', () => {
@@ -47,14 +47,14 @@ test('scope-enum has expected modifier', async () => {
 
 test('returns empty value for empty lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
-	const cwd = await lerna.bootstrap('empty', __dirname);
+	const cwd = await npm.bootstrap('fixtures/empty', __dirname);
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual([]);
 });
 
 test('returns expected value for basic lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
-	const cwd = await lerna.bootstrap('basic', __dirname);
+	const cwd = await npm.bootstrap('fixtures/basic', __dirname);
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
@@ -62,7 +62,7 @@ test('returns expected value for basic lerna repository', async () => {
 
 test('returns expected value for scoped lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
-	const cwd = await lerna.bootstrap('scoped', __dirname);
+	const cwd = await npm.bootstrap('fixtures/scoped', __dirname);
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
