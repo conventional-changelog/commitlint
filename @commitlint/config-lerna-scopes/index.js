@@ -43,9 +43,8 @@ function getPackages(context) {
 				});
 			}
 
-			const Project = importFrom(cwd, '@lerna/project');
-			const project = new Project(cwd);
-			return project.getPackages();
+			const {getPackages} = importFrom(cwd, '@lerna/project');
+			return getPackages(cwd);
 		})
 		.then((packages) => {
 			return packages
