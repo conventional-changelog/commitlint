@@ -30,8 +30,8 @@ Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/refer
   ```
   [
     'build',
-    'ci',
     'chore',
+    'ci',
     'docs',
     'feat',
     'fix',
