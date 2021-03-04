@@ -60,7 +60,7 @@ fix(server): send cors headers
 feat(blog): add comment section
 ```
 
-Common types according to [commitlint-config-conventional (based on the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum) can be:
+Common types according to [commitlint-config-conventional (based on the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum) can be:
 
 - build
 - ci
@@ -224,7 +224,7 @@ For more information on how to contribute please take a look at our [contributio
 ### Publishing a release
 
 Before publishing a release do a `yarn run publish --dry-run` to get the upcoming version and update the version
-in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/cli/src/cli.test.ts#L431).  
+in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/@commitlint/cli/src/cli.test.ts#L431).  
 Commit that change before creating the new version without `--dry-run`.
 
 ```sh
