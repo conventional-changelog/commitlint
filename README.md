@@ -253,13 +253,17 @@ yarn test
 npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
 ```
 
+If for some reason this stops in between, you can manually publish missing packages like this:
+
+```
+npm publish <package-name> --tag next --otp <one-time password>
+```
+
 ##### Move `next` to `latest`
 
 ```sh
 npm login
 ```
-
-Move next to latest:
 
 ```sh
 npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>'
