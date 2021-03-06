@@ -8,6 +8,10 @@ The file is expected
 - export a configuration object
 - adhere to the schema outlined below
 
+## Config option CLI
+
+Add the path to the configuration file. Example: `commitlint --config commitlint.config.js`
+
 ## Configuration object example
 
 ### JavaScript
