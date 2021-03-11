@@ -9,9 +9,10 @@ type Commit = (input: string) => void;
  * Entry point for commitizen
  * @param _ inquirer instance passed by commitizen, unused
  * @param commit callback to execute with complete commit message
- * @return generated commit message
+ * @return {void}
  */
-export async function prompter(_: unknown, commit: Commit): Promise<void> {
-	const message = await input(vorpal);
-	commit(message);
+export function prompter(_: unknown, commit: Commit): void {
+	input(vorpal).then((message) => {
+		commit(message);
+	});
 }
