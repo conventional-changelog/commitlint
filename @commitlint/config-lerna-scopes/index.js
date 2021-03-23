@@ -49,6 +49,7 @@ function getPackages(context) {
 		.then((packages) => {
 			return packages
 				.map((pkg) => pkg.name)
+				.filter(Boolean)
 				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 		});
 }
