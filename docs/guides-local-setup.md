@@ -38,16 +38,6 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
-If the file `.husky/commit-msg` already exists, you can edit the file and put this:
-
-```sh
-# .husky/commit-msg
-# ...
-npx --no-install commitlint --edit $1
-# or
-yarn commitlint --edit $1
-```
-
 ## Test
 
 ### Test simple usage
