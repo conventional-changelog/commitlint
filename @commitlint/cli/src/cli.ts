@@ -292,7 +292,7 @@ function getEditValue(flags: CliFlags) {
 	if (flags.env) {
 		if (!(flags.env in process.env)) {
 			throw new Error(
-				`Recieved '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
+				`Received '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
 			);
 		}
 		return process.env[flags.env];

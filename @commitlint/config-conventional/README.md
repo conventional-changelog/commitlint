@@ -152,11 +152,6 @@ echo "fix: some message" # passes
 - **condition**: `footer` should have a leading blank line
 - **rule**: `always`
 - level: `warning`
-- **value**
-
-```
-100
-```
 
 ```sh
 echo "fix: some message
@@ -195,11 +190,6 @@ but still no line is too long" # passes
 - **condition**: `body` should have a leading blank line
 - **rule**: `always`
 - level: `warning`
-- **value**
-
-```js
-100;
-```
 
 ```sh
 echo "fix: some message

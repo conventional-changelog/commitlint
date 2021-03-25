@@ -112,16 +112,6 @@ npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
 yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
 ```
 
-If the file `.husky/commit-msg` already exists, you can edit the file and put this:
-
-```sh
-# .husky/commit-msg
-# ...
-npx --no-install commitlint --edit $1
-# or
-yarn commitlint --edit $1
-```
-
 **Detailed Setup instructions**
 
 - [Local setup](https://conventional-changelog.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
