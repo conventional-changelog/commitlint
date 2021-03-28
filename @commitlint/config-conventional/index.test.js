@@ -5,7 +5,6 @@ const messages = {
 	invalidTypeEnum: 'foo: some message',
 	invalidTypeCase: 'FIX: some message',
 	invalidTypeEmpty: ': some message',
-	invalidScopeCase: 'fix(SCOPE): some message',
 	invalidSubjectCases: [
 		'fix(scope): Some message',
 		'fix(scope): Some Message',
@@ -50,12 +49,6 @@ const errors = {
 		level: 2,
 		message: 'type may not be empty',
 		name: 'type-empty',
-		valid: false,
-	},
-	scopeCase: {
-		level: 2,
-		message: 'scope must be lower-case',
-		name: 'scope-case',
 		valid: false,
 	},
 	subjectCase: {
@@ -132,13 +125,6 @@ test('type-empty', async () => {
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeEmpty]);
-});
-
-test('scope-case', async () => {
-	const result = await lint(messages.invalidScopeCase, rules);
-
-	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.scopeCase]);
 });
 
 test('subject-case', async () => {
