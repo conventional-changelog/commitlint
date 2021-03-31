@@ -114,7 +114,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	'signed-off-by': RuleConfig<V>;
 	'subject-case': CaseRuleConfig<V>;
 	'subject-empty': RuleConfig<V>;
-	'subject-full-stop': RuleConfig<V>;
+	'subject-full-stop': RuleConfig<V, string>;
 	'subject-max-length': LengthRuleConfig<V>;
 	'subject-min-length': LengthRuleConfig<V>;
 	'type-case': CaseRuleConfig<V>;
