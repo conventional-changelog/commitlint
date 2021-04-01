@@ -13,7 +13,7 @@ export type CaseFn = (input: string) => string;
  * @param rule to parse
  * @return transform function applying the enforced case
  */
-export default function getForcedCaseFn(rule?: Rule): CaseFn {
+export default function getCaseFn(rule?: Rule): CaseFn {
 	const noop = (input: string) => input;
 
 	if (!rule || !ruleIsActive(rule) || ruleIsNotApplicable(rule)) {

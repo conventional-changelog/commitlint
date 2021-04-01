@@ -1,87 +1,92 @@
 import {RuleConfigSeverity} from '@commitlint/types';
 import {
 	enumRuleIsActive,
-	getHasName,
-	getLength,
-	getRuleName,
-	getRulePrefix,
-	getRules,
+	getEnumList,
+	getMaxLength,
+	getMinLength,
 	ruleIsActive,
+	ruleIsApplicable,
+	ruleIsNotApplicable,
 } from './rules';
 
-test('getRulePrefix', () => {
-	expect(getRulePrefix('body-leading-blank')).toEqual('body');
-	expect(getRulePrefix('body-max-line-length')).toEqual('body');
-	expect(getRulePrefix('footer-leading-blank')).toEqual('footer');
-	expect(getRulePrefix('footer-max-line-length')).toEqual('footer');
-	expect(getRulePrefix('header-max-length')).toEqual('header');
-	expect(getRulePrefix('scope-case')).toEqual('scope');
-	expect(getRulePrefix('scope-enum')).toEqual('scope');
-	expect(getRulePrefix('subject-case')).toEqual('subject');
-	expect(getRulePrefix('subject-empty')).toEqual('subject');
-	expect(getRulePrefix('subject-full-stop')).toEqual('subject');
-	expect(getRulePrefix('type-case')).toEqual('type');
-	expect(getRulePrefix('type-empty')).toEqual('type');
-	expect(getRulePrefix('type-enum')).toEqual('type');
-});
-
-test('getRuleName', () => {
-	expect(getRuleName('body-leading-blank')).toEqual('leading-blank');
-	expect(getRuleName('body-max-line-length')).toEqual('max-line-length');
-	expect(getRuleName('footer-leading-blank')).toEqual('leading-blank');
-	expect(getRuleName('footer-max-line-length')).toEqual('max-line-length');
-	expect(getRuleName('header-max-length')).toEqual('max-length');
-	expect(getRuleName('scope-case')).toEqual('case');
-	expect(getRuleName('scope-enum')).toEqual('enum');
-	expect(getRuleName('subject-case')).toEqual('case');
-	expect(getRuleName('subject-empty')).toEqual('empty');
-	expect(getRuleName('subject-full-stop')).toEqual('full-stop');
-	expect(getRuleName('type-case')).toEqual('case');
-	expect(getRuleName('type-empty')).toEqual('empty');
-	expect(getRuleName('type-enum')).toEqual('enum');
-});
-
 test('ruleIsActive', () => {
-	expect(ruleIsActive(['', [RuleConfigSeverity.Error, 'always', 100]])).toBe(
+	expect(ruleIsActive([RuleConfigSeverity.Error, 'always'])).toBe(true);
+	expect(ruleIsActive([RuleConfigSeverity.Warning, 'never'])).toBe(true);
+	expect(ruleIsActive([RuleConfigSeverity.Disabled, 'always'])).toBe(false);
+	expect(ruleIsActive([RuleConfigSeverity.Error] as any)).toBe(true);
+});
+
+test('ruleIsApplicable', () => {
+	expect(ruleIsApplicable([RuleConfigSeverity.Error, 'always'])).toBe(true);
+	expect(ruleIsApplicable([RuleConfigSeverity.Warning, 'always'])).toBe(true);
+	expect(ruleIsApplicable([RuleConfigSeverity.Disabled, 'always'])).toBe(true);
+	expect(ruleIsApplicable(undefined as any)).toBe(false);
+	expect(ruleIsApplicable('' as any)).toBe(false);
+	expect(ruleIsApplicable([RuleConfigSeverity.Disabled])).toBe(false);
+	expect(ruleIsApplicable([RuleConfigSeverity.Disabled, 'never'])).toBe(false);
+});
+
+test('ruleIsNotApplicable', () => {
+	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, 'never'])).toBe(true);
+	expect(ruleIsNotApplicable([RuleConfigSeverity.Warning, 'never'])).toBe(true);
+	expect(ruleIsNotApplicable([RuleConfigSeverity.Disabled, 'never'])).toBe(
 		true
 	);
-	expect(ruleIsActive(['', [RuleConfigSeverity.Warning, 'never', 100]])).toBe(
-		true
-	);
-	expect(ruleIsActive(['', [RuleConfigSeverity.Disabled, 'always', 100]])).toBe(
+	expect(ruleIsNotApplicable(undefined as any)).toBe(false);
+	expect(ruleIsNotApplicable('' as any)).toBe(false);
+	expect(ruleIsNotApplicable([RuleConfigSeverity.Error] as any)).toBe(false);
+	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, 'always'])).toBe(false);
+	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, 'always', 100])).toBe(
 		false
 	);
-	expect(ruleIsActive(['', [RuleConfigSeverity.Error]] as any)).toBe(true);
 });
 
-test('getLength', () => {
-	expect(getLength(['', [RuleConfigSeverity.Error, 'always', 100]])).toBe(100);
-	expect(getLength(['', [RuleConfigSeverity.Warning, 'never', 100]])).toBe(
-		Infinity
-	);
-	expect(getLength(['', [RuleConfigSeverity.Disabled, 'always', 100]])).toBe(
-		Infinity
-	);
-	expect(getLength(['', [RuleConfigSeverity.Error, 100]] as any)).toBe(
-		Infinity
-	);
+test('getMaxLength', () => {
+	expect(getMaxLength([RuleConfigSeverity.Error, 'always', 100])).toBe(100);
+	expect(getMaxLength([RuleConfigSeverity.Warning, 'never'])).toBe(Infinity);
+	expect(getMaxLength([RuleConfigSeverity.Disabled, 'always'])).toBe(Infinity);
+	expect(getMaxLength([RuleConfigSeverity.Error] as any)).toBe(Infinity);
 
 	const rules: any = {
 		'body-max-line-length': [2, 'always', 100],
 		'header-max-length': [2, 'always', 100],
 		'test-max-length': [RuleConfigSeverity.Disabled, 'always', 100],
 	};
-	let lengthRule = getRules('header', rules).find(getHasName('max-length'));
-	expect(getLength(lengthRule)).toBe(100);
+	let lengthRule = rules['header-max-length'];
+	expect(getMaxLength(lengthRule)).toBe(100);
 
-	lengthRule = getRules('body', rules).find(getHasName('max-length'));
-	expect(getLength(lengthRule)).toBe(Infinity);
+	lengthRule = rules['body-max-line-length'];
+	expect(getMaxLength(lengthRule)).toBe(100);
 
-	lengthRule = getRules('test', rules).find(getHasName('max-length'));
-	expect(getLength(lengthRule)).toBe(Infinity);
+	lengthRule = rules['body-max-length'];
+	expect(getMaxLength(lengthRule)).toBe(Infinity);
+
+	lengthRule = rules['test-max-length'];
+	expect(getMaxLength(lengthRule)).toBe(Infinity);
 });
 
-test('check enum rule filters', () => {
+test('getMinLength', () => {
+	expect(getMinLength([RuleConfigSeverity.Error, 'always', 10])).toBe(10);
+	expect(getMinLength([RuleConfigSeverity.Warning, 'never'])).toBe(0);
+	expect(getMinLength([RuleConfigSeverity.Disabled, 'always'])).toBe(0);
+	expect(getMinLength([RuleConfigSeverity.Error] as any)).toBe(0);
+
+	const rules: any = {
+		'body-min-length': [2, 'always', 10],
+		'footer-min-length': [2, 'always', 20],
+		'test-min-length': [RuleConfigSeverity.Disabled, 'always', 100],
+	};
+	let lengthRule = rules['header-min-length'];
+	expect(getMinLength(lengthRule)).toBe(0);
+
+	lengthRule = rules['body-min-length'];
+	expect(getMinLength(lengthRule)).toBe(10);
+
+	lengthRule = rules['test-min-length'];
+	expect(getMinLength(lengthRule)).toBe(0);
+});
+
+test('enumRuleIsActive', () => {
 	const rules: any = {
 		'enum-string': [RuleConfigSeverity.Warning, 'always', ['1', '2', '3']],
 		'type-enum': [RuleConfigSeverity.Error, 'always', ['build', 'chore', 'ci']],
@@ -89,31 +94,21 @@ test('check enum rule filters', () => {
 		'bar-enum': [RuleConfigSeverity.Disabled, 'always', ['foo', 'bar', 'baz']],
 	};
 
-	let enumRule = getRules('type', rules)
-		.filter(getHasName('enum'))
-		.find(enumRuleIsActive);
-	expect(enumRule).toEqual([
-		'type-enum',
-		[2, 'always', ['build', 'chore', 'ci']],
-	]);
+	expect(enumRuleIsActive(rules['type-enum'])).toBe(true);
+	expect(enumRuleIsActive(rules['string-enum'])).toBe(false);
+	expect(enumRuleIsActive(rules['enum-string'])).toBe(true);
+	expect(enumRuleIsActive(rules['bar-enum'])).toBe(false);
+	expect(enumRuleIsActive(rules['scope-enum'])).toBe(false);
+});
 
-	enumRule = getRules('string', rules)
-		.filter(getHasName('enum'))
-		.find(enumRuleIsActive);
-	expect(enumRule).toEqual(undefined);
+test('getEnumList', () => {
+	const rules: any = {
+		'type-enum': [RuleConfigSeverity.Error, 'always', ['build', 'chore', 'ci']],
+		'scope-enum': [RuleConfigSeverity.Error, 'never', ''],
+		'bar-enum': [RuleConfigSeverity.Disabled, 'always'],
+	};
 
-	enumRule = getRules('enum', rules)
-		.filter(getHasName('string'))
-		.find(enumRuleIsActive);
-	expect(enumRule).toEqual(['enum-string', [1, 'always', ['1', '2', '3']]]);
-
-	enumRule = getRules('bar', rules)
-		.filter(getHasName('enum'))
-		.find(enumRuleIsActive);
-	expect(enumRule).toEqual(undefined);
-
-	enumRule = getRules('scope', rules)
-		.filter(getHasName('enum'))
-		.find(enumRuleIsActive);
-	expect(enumRule).toEqual(undefined);
+	expect(getEnumList(rules['type-enum'])).toEqual(['build', 'chore', 'ci']);
+	expect(getEnumList(rules['scope-enum'])).toEqual([]);
+	expect(getEnumList(rules['bar-enum'])).toEqual([]);
 });

@@ -3,7 +3,7 @@ import {Answers, DistinctQuestion, Inquirer} from 'inquirer';
 import wrap from 'word-wrap';
 import Question, {QuestionConfig} from './Question';
 import {PromptConfig, PromptName, Rule, RuleField} from './types';
-import getForcedCaseFn from './utils/case-fn';
+import getCaseFn from './utils/case-fn';
 import getFullStopFn from './utils/full-stop-fn';
 import getLeadingBlankFn from './utils/leading-blank-fn';
 import {
@@ -96,30 +96,24 @@ export default class Prompter {
 			.filter((name) => name in this.prompts.questions)
 			.map((name) => {
 				const {questions, messages} = this.prompts;
-				const instance = new Question(name, {
+
+				const questionConfigs = {
 					messages: {
-						title: questions[name]?.description,
+						title: questions[name]?.description ?? '',
 						...messages,
 					},
 					maxLength: footerMaxLength,
 					minLength: footerMinLength,
-				});
-
-				const combineFooter = this.combineFooter.bind(this);
-				instance.onBeforeAsk = function (answers) {
-					const remainLength = footerMaxLength - combineFooter(answers).length;
-					this.maxLength = Math.min(this.maxLength, remainLength);
-					this.minLength = Math.max(this.minLength, footerMinLength);
 				};
 
 				if (name === 'isBreaking') {
-					instance.setQuestionProperty({
-						default: false,
+					Object.assign(questionConfigs, {
+						defaultValue: false,
 					});
 				}
 
 				if (name === 'breaking') {
-					instance.setQuestionProperty({
+					Object.assign(questionConfigs, {
 						when: (answers: Answers) => {
 							return answers.isBreaking;
 						},
@@ -127,7 +121,7 @@ export default class Prompter {
 				}
 
 				if (name === 'breakingBody') {
-					instance.setQuestionProperty({
+					Object.assign(questionConfigs, {
 						when: (answers: Answers) => {
 							return answers.isBreaking && !answers.body;
 						},
@@ -135,13 +129,13 @@ export default class Prompter {
 				}
 
 				if (name === 'isIssueAffected') {
-					instance.setQuestionProperty({
+					Object.assign(questionConfigs, {
 						default: false,
 					});
 				}
 
 				if (name === 'issues') {
-					instance.setQuestionProperty({
+					Object.assign(questionConfigs, {
 						when: (answers: Answers) => {
 							return answers.isIssueAffected;
 						},
@@ -149,7 +143,7 @@ export default class Prompter {
 				}
 
 				if (name === 'issuesBody') {
-					instance.setQuestionProperty({
+					Object.assign(questionConfigs, {
 						when: (answers: Answers) => {
 							return (
 								answers.isIssueAffected &&
@@ -159,6 +153,13 @@ export default class Prompter {
 						},
 					});
 				}
+				const instance = new Question(name, questionConfigs);
+				const combineFooter = this.combineFooter.bind(this);
+				instance.onBeforeAsk = function (answers) {
+					const remainLength = footerMaxLength - combineFooter(answers).length;
+					this.maxLength = Math.min(this.maxLength, remainLength);
+					this.minLength = Math.max(this.minLength, footerMinLength);
+				};
 
 				return instance.getQuestion();
 			});
@@ -219,12 +220,12 @@ export default class Prompter {
 		return {
 			skip: canBeSkip,
 			enumList,
-			caseFn: getForcedCaseFn(this.getRule(rulePrefix, 'case')),
+			caseFn: getCaseFn(this.getRule(rulePrefix, 'case')),
 			fullStopFn: getFullStopFn(this.getRule(rulePrefix, 'full-stop')),
 			minLength: getMinLength(this.getRule(rulePrefix, 'min-length')),
 			maxLength: getMaxLength(this.getRule(rulePrefix, 'max-length')),
 			messages: {
-				title: questionSettings?.['description'],
+				title: questionSettings?.['description'] ?? '',
 				...messages,
 			},
 		};

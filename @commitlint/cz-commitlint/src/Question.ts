@@ -1,32 +1,32 @@
 import chalk from 'chalk';
 import inquirer, {
 	Answers,
+	AsyncDynamicQuestionProperty,
 	ChoiceCollection,
 	DistinctQuestion,
-	Question as InquirerQuestion,
 } from 'inquirer';
 import {PromptName} from './types';
 import {CaseFn} from './utils/case-fn';
 import {FullStopFn} from './utils/full-stop-fn';
 
-// TODO Require 'title'
-type Messages = Partial<
-	Record<
-		| 'skip'
-		| 'title'
-		| 'max'
-		| 'min'
-		| 'emptyWarning'
-		| 'upperLimitWarning'
-		| 'lowerLimitWarning',
-		string
-	>
->;
+type Messages = Record<'title', string> &
+	Partial<
+		Record<
+			| 'skip'
+			| 'max'
+			| 'min'
+			| 'emptyWarning'
+			| 'upperLimitWarning'
+			| 'lowerLimitWarning',
+			string
+		>
+	>;
 export type QuestionConfig = {
 	messages: Messages;
 	maxLength: number;
 	minLength: number;
-	defaultValue?: string | boolean;
+	defaultValue?: string;
+	when?: AsyncDynamicQuestionProperty<boolean, Answers>;
 	skip?: boolean;
 	enumList?: ChoiceCollection<{
 		name: string;
@@ -48,10 +48,11 @@ export default class Question {
 	constructor(
 		name: PromptName,
 		{
-			defaultValue,
 			enumList,
 			messages,
-			skip,
+			defaultValue,
+			when,
+			skip = false,
 			fullStopFn = (_: string) => _,
 			caseFn = (_: string) => _,
 			maxLength = Infinity,
@@ -80,23 +81,18 @@ export default class Question {
 							},
 					  ]
 					: enumList,
-				default: defaultValue,
 			};
 		} else {
 			this.#data = {
 				type: /^is[A-Z]/.test(name) ? 'confirm' : 'input',
 				name: name,
 				message: this.decorateMessage,
-				default: defaultValue,
 				transformer: this.transformer,
 			};
 		}
 
-		Object.assign(this.#data, {
-			filter: this.filter,
-			validate: this.validate,
-		});
-
+		this.#data.default = defaultValue;
+		this.#data.when = when;
 		this.#data.filter = this.filter;
 		this.#data.validate = this.validate;
 	}
@@ -111,10 +107,6 @@ export default class Question {
 
 	getQuestionName(): string | undefined {
 		return this.#data.name;
-	}
-
-	setQuestionProperty(property: InquirerQuestion): void {
-		Object.assign(this.#data, property);
 	}
 
 	validate: (input: string) => boolean | string = (input) => {

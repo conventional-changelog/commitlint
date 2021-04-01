@@ -15,7 +15,10 @@ export default function getLeadingBlankFn(
 
 	const remove = (input: string): string => {
 		const fragments = input.split('\n');
-		return fragments[0] === '' ? fragments.slice(1).join('\n') : input;
+		while (fragments.length > 0 && fragments[0] === '') {
+			fragments.shift();
+		}
+		return fragments.join('\n');
 	};
 	const lead = (input: string): string => {
 		const fragments = input.split('\n');
