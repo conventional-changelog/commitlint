@@ -1,0 +1,40 @@
+{
+  "name": "cz-conventional-changelog",
+  "version": "1.0.0",
+  "description": "Commitizen adapter using the commitlint.config.js",
+  "main": "./lib/index.js",
+  "scripts": {
+    "commit": "git-cz"
+  },
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conventional-changelog/commitlint.git"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 10"
+  },
+  "author": "Curly Brackets <water.curly@outlook.com>",
+  "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./@commitlint/cz-commitlint"
+    }
+  },
+  "dependencies": {
+    "@commitlint/load": "^12.0.1",
+    "@commitlint/types": "^12.0.1",
+    "chalk": "^4.1.0",
+    "inquirer-autocomplete-prompt": "^1.3.0",
+    "lodash": "^4.17.21",
+    "word-wrap": "^1.2.3"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^7.3.1"
+  },
+  "peerDependencies": {
+    "commitizen": "^4.0.3",
+    "inquirer": "^8.0.0"
+  }
+}
