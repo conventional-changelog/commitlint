@@ -111,7 +111,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	'scope-enum': EnumRuleConfig<V>;
 	'scope-max-length': LengthRuleConfig<V>;
 	'scope-min-length': LengthRuleConfig<V>;
-	'signed-off-by': RuleConfig<V>;
+	'signed-off-by': RuleConfig<V, string>;
 	'subject-case': CaseRuleConfig<V>;
 	'subject-empty': RuleConfig<V>;
 	'subject-full-stop': RuleConfig<V, string>;
