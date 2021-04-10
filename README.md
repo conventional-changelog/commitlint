@@ -101,15 +101,15 @@ npm install husky --save-dev
 # or
 yarn add husky --dev
 
-# Active hooks
+# Activate hooks
 npx husky install
 # or
 yarn husky install
 
 # Add hook
-npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 # or
-yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
+yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
 **Detailed Setup instructions**
