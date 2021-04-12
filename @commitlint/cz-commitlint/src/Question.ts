@@ -178,7 +178,7 @@ export default class Question {
 
 			const skipMessage = this.skip ? this.getMessage('skip') : '';
 
-			return this.title + skipMessage + ': ' + countLimitMessage;
+			return this.title + skipMessage + ': ' + countLimitMessage + '\n';
 		} else {
 			return this.title + ': ';
 		}

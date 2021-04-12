@@ -104,6 +104,13 @@ export function getQuestions(): Array<DistinctQuestion> {
 					},
 				});
 			}
+
+			if (name === 'footer') {
+				Object.assign(questionConfigs, {
+					...footerQuestionConfig,
+				});
+			}
+
 			const instance = new FooterQuestion(
 				name,
 				questionConfigs,

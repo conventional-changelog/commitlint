@@ -112,7 +112,7 @@ describe('message', () => {
 		}).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input(press enter to skip): '
+			'please input(press enter to skip): \n'
 		);
 	});
 
@@ -123,7 +123,7 @@ describe('message', () => {
 			skip: true,
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
-		expect((question.message as any)()).toBe('please input: ');
+		expect((question.message as any)()).toBe('please input: \n');
 	});
 
 	test('should display upper limit hint when it is input and has max length', () => {
@@ -132,7 +132,7 @@ describe('message', () => {
 			maxLength: 80,
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
-		expect((question.message as any)()).toBe('please input: upper 80 chars');
+		expect((question.message as any)()).toBe('please input: upper 80 chars\n');
 	});
 
 	test('should display lower limit hint when it is input and has min length', () => {
@@ -141,7 +141,9 @@ describe('message', () => {
 			minLength: 10,
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
-		expect((question.message as any)()).toBe('please input: 10 chars at least');
+		expect((question.message as any)()).toBe(
+			'please input: 10 chars at least\n'
+		);
 	});
 
 	test('should display hints with correct format', () => {
@@ -153,7 +155,7 @@ describe('message', () => {
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input(press enter to skip): 10 chars at least, upper 80 chars'
+			'please input(press enter to skip): 10 chars at least, upper 80 chars\n'
 		);
 	});
 
