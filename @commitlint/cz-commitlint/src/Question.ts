@@ -1,76 +1,63 @@
+import {PromptMessages, PromptName} from '@commitlint/types';
 import chalk from 'chalk';
-import inquirer, {
-	Answers,
-	AsyncDynamicQuestionProperty,
-	ChoiceCollection,
-	DistinctQuestion,
-} from 'inquirer';
-import {PromptName} from './types';
+import inquirer, {Answers, ChoiceCollection, DistinctQuestion} from 'inquirer';
 import {CaseFn} from './utils/case-fn';
 import {FullStopFn} from './utils/full-stop-fn';
 
-type Messages = Record<'title', string> &
-	Partial<
-		Record<
-			| 'skip'
-			| 'max'
-			| 'min'
-			| 'emptyWarning'
-			| 'upperLimitWarning'
-			| 'lowerLimitWarning',
-			string
-		>
-	>;
 export type QuestionConfig = {
-	messages: Messages;
-	maxLength: number;
-	minLength: number;
+	title: string;
+	messages: PromptMessages;
+	maxLength?: number;
+	minLength?: number;
 	defaultValue?: string;
-	when?: AsyncDynamicQuestionProperty<boolean, Answers>;
+	when?: DistinctQuestion['when'];
 	skip?: boolean;
 	enumList?: ChoiceCollection<{
 		name: string;
 		value: string;
-	}>;
+	}> | null;
 	fullStopFn?: FullStopFn;
 	caseFn?: CaseFn;
 };
+
 export default class Question {
-	#data: DistinctQuestion;
-	messages: Messages;
-	skip: boolean;
-	caseFn: CaseFn;
-	fullStopFn: FullStopFn;
-	maxLength: number;
-	minLength: number;
-	// hooks
-	onBeforeAsk?: (_: Answers) => void;
+	private _question: Readonly<DistinctQuestion>;
+	private messages: PromptMessages;
+	private skip: boolean;
+	private _maxLength: number;
+	private _minLength: number;
+	private title: string;
+	private caseFn: CaseFn;
+	private fullStopFn: FullStopFn;
 	constructor(
 		name: PromptName,
 		{
+			title,
 			enumList,
 			messages,
 			defaultValue,
 			when,
-			skip = false,
-			fullStopFn = (_: string) => _,
-			caseFn = (_: string) => _,
-			maxLength = Infinity,
-			minLength = 0,
+			skip,
+			fullStopFn,
+			caseFn,
+			maxLength,
+			minLength,
 		}: QuestionConfig
 	) {
-		this.messages = messages;
-		this.skip = skip ?? false;
-		this.maxLength = maxLength;
-		this.minLength = minLength;
-		this.fullStopFn = fullStopFn;
-		this.caseFn = caseFn;
+		if (!name || typeof name !== 'string')
+			throw new Error('Question: name is required');
 
-		if (enumList) {
-			this.#data = {
+		this._maxLength = maxLength ?? Infinity;
+		this._minLength = minLength ?? 0;
+		this.messages = messages;
+		this.title = title ?? '';
+		this.skip = skip ?? false;
+		this.fullStopFn = fullStopFn ?? ((_: string) => _);
+		this.caseFn = caseFn ?? ((_: string) => _);
+
+		if (enumList && Array.isArray(enumList)) {
+			this._question = {
 				type: 'list',
-				name: name,
-				message: this.decorateMessage,
 				choices: skip
 					? [
 							...enumList,
@@ -80,104 +67,120 @@ export default class Question {
 								value: '',
 							},
 					  ]
-					: enumList,
+					: [...enumList],
+			};
+		} else if (/^is[A-Z]/.test(name)) {
+			this._question = {
+				type: 'confirm',
 			};
 		} else {
-			this.#data = {
-				type: /^is[A-Z]/.test(name) ? 'confirm' : 'input',
-				name: name,
-				message: this.decorateMessage,
-				transformer: this.transformer,
+			this._question = {
+				type: 'input',
+				transformer: this.transformer.bind(this),
 			};
 		}
 
-		this.#data.default = defaultValue;
-		this.#data.when = when;
-		this.#data.filter = this.filter;
-		this.#data.validate = this.validate;
+		Object.assign(this._question, {
+			name,
+			default: defaultValue,
+			when,
+			validate: this.validate.bind(this),
+			filter: this.filter.bind(this),
+			message: this.decorateMessage.bind(this),
+		});
 	}
 
-	getQuestion(): DistinctQuestion {
-		return this.#data;
+	getMessage(key: string): string {
+		return this.messages[key] ?? '';
 	}
 
-	getQuestionType(): string | undefined {
-		return this.#data.type;
+	get question(): Readonly<DistinctQuestion> {
+		return this._question;
 	}
 
-	getQuestionName(): string | undefined {
-		return this.#data.name;
+	get maxLength(): number {
+		return this._maxLength;
 	}
 
-	validate: (input: string) => boolean | string = (input) => {
-		const filterSubject = this.filter(input);
+	set maxLength(maxLength: number) {
+		this._maxLength = maxLength;
+	}
 
-		const questionName = this.getQuestionName() ?? '';
+	get minLength(): number {
+		return this._minLength;
+	}
 
-		if (!this.skip && filterSubject.length === 0) {
-			return this.messages['emptyWarning']?.replace('%s', questionName) ?? '';
+	set minLength(minLength: number) {
+		this._minLength = minLength;
+	}
+
+	protected beforeQuestionStart(_answers: Answers): void {
+		return;
+	}
+
+	protected validate(input: string): boolean | string {
+		const output = this.filter(input);
+		const questionName = this.question.name ?? '';
+		if (!this.skip && output.length === 0) {
+			return this.getMessage('emptyWarning').replace(/%s/g, questionName);
 		}
 
-		if (filterSubject.length > this.maxLength) {
-			return (
-				this.messages['upperLimitWarning']
-					?.replace('%s', questionName)
-					.replace('%d', `${filterSubject.length - this.maxLength}`) ?? ''
-			);
+		if (output.length > this.maxLength) {
+			return this.getMessage('upperLimitWarning')
+				.replace(/%s/g, questionName)
+				.replace(/%d/g, `${output.length - this.maxLength}`);
 		}
 
-		if (filterSubject.length < this.minLength) {
-			return (
-				this.messages['lowerLimitWarning']
-					?.replace('%s', questionName)
-					.replace('%d', `${this.minLength - filterSubject.length}`) ?? ''
-			);
+		if (output.length < this.minLength) {
+			return this.getMessage('lowerLimitWarning')
+				.replace(/%s/g, questionName)
+				.replace(/%d/g, `${this.minLength - output.length}`);
 		}
 
 		return true;
-	};
+	}
 
-	filter: (input: string) => string = (input) => {
-		return this.caseFn(this.fullStopFn(input.trim()));
-	};
+	protected filter(input: string): string {
+		return this.caseFn(this.fullStopFn(input));
+	}
 
-	transformer: (input: string, answers: Answers) => string = (input) => {
+	protected transformer(input: string, _answers: Answers): string {
+		const output = this.filter(input);
+
 		if (this.maxLength === Infinity && this.minLength === 0) {
-			return input;
+			return output;
 		}
-		const filterSubject = this.filter(input);
 		const color =
-			filterSubject.length <= this.maxLength &&
-			filterSubject.length >= this.minLength
+			output.length <= this.maxLength && output.length >= this.minLength
 				? chalk.green
 				: chalk.red;
-		return color('(' + filterSubject.length + ') ' + input);
-	};
+		return color('(' + output.length + ') ' + input);
+	}
 
-	decorateMessage: (answers: Answers) => string = (answers) => {
-		this.onBeforeAsk && this.onBeforeAsk(answers);
-		if (this.getQuestionType() === 'input') {
+	protected decorateMessage(_answers: Answers): string {
+		this.beforeQuestionStart && this.beforeQuestionStart(_answers);
+		if (this.question.type === 'input') {
 			const countLimitMessage = (() => {
 				const messages = [];
-				if (this.minLength > 0 && this.messages['min']) {
+				if (this.minLength > 0 && this.getMessage('min')) {
 					messages.push(
-						this.messages['min'].replace('%d', this.minLength + '')
+						this.getMessage('min').replace(/%d/g, this.minLength + '')
 					);
 				}
-				if (this.maxLength < Infinity && this.messages['max']) {
-					return this.messages['max'].replace('%d', this.maxLength + '');
+				if (this.maxLength < Infinity && this.getMessage('max')) {
+					messages.push(
+						this.getMessage('max').replace(/%d/g, this.maxLength + '')
+					);
 				}
 
-				return messages.join('');
+				return messages.join(', ');
 			})();
 
-			const skipMessage = this.skip ? this.messages['skip'] ?? '' : '';
+			const skipMessage = this.skip ? this.getMessage('skip') : '';
 
-			return (
-				this.messages['title'] + skipMessage + ':' + countLimitMessage + '\n'
-			);
+			return this.title + skipMessage + ': ' + countLimitMessage;
 		} else {
-			return this.messages['title'] + ':';
+			return this.title + ': ';
 		}
-	};
+	}
 }

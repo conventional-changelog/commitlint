@@ -6,8 +6,19 @@ import {
 	getMinLength,
 	ruleIsActive,
 	ruleIsApplicable,
+	ruleIsDisabled,
 	ruleIsNotApplicable,
 } from './rules';
+
+test('ruleIsDisabled', () => {
+	expect(ruleIsDisabled([RuleConfigSeverity.Disabled])).toBe(true);
+	expect(ruleIsDisabled([RuleConfigSeverity.Disabled, 'never'])).toBe(true);
+	expect(ruleIsDisabled([RuleConfigSeverity.Disabled, 'always'])).toBe(true);
+	expect(ruleIsDisabled([RuleConfigSeverity.Error] as any)).toBe(false);
+	expect(ruleIsDisabled([RuleConfigSeverity.Error, 'always'] as any)).toBe(
+		false
+	);
+});
 
 test('ruleIsActive', () => {
 	expect(ruleIsActive([RuleConfigSeverity.Error, 'always'])).toBe(true);

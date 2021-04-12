@@ -1,25 +1,23 @@
-import Path from 'path';
-
+import executeRule from '@commitlint/execute-rule';
+import resolveExtends from '@commitlint/resolve-extends';
+import {
+	LoadOptions,
+	ParserPreset,
+	QualifiedConfig,
+	QualifiedRules,
+	UserConfig,
+	UserPreset,
+} from '@commitlint/types';
+import isPlainObject from 'lodash/isPlainObject';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
 import pick from 'lodash/pick';
 import union from 'lodash/union';
+import Path from 'path';
 import resolveFrom from 'resolve-from';
-
-import executeRule from '@commitlint/execute-rule';
-import resolveExtends from '@commitlint/resolve-extends';
-import {
-	UserConfig,
-	LoadOptions,
-	QualifiedConfig,
-	UserPreset,
-	QualifiedRules,
-	ParserPreset,
-} from '@commitlint/types';
-
-import loadPlugin from './utils/load-plugin';
 import {loadConfig} from './utils/load-config';
 import {loadParserOpts} from './utils/load-parser-opts';
+import loadPlugin from './utils/load-plugin';
 import {pickConfig} from './utils/pick-config';
 
 const w = <T>(_: unknown, b: ArrayLike<T> | null | undefined | false) =>
@@ -117,6 +115,9 @@ export default async function load(
 			? config.helpUrl
 			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 
+	const prompt =
+		config.prompt && isPlainObject(config.prompt) ? config.prompt : {};
+
 	return {
 		extends: preset.extends!,
 		formatter: preset.formatter!,
@@ -126,5 +127,6 @@ export default async function load(
 		plugins: preset.plugins!,
 		rules: qualifiedRules,
 		helpUrl,
+		prompt,
 	};
 }

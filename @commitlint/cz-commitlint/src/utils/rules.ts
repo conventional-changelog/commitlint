@@ -1,6 +1,15 @@
 import {RuleConfigSeverity} from '@commitlint/types';
 import {Rule} from '../types';
 
+export function ruleIsDisabled(
+	rule: Rule
+): rule is Readonly<[RuleConfigSeverity.Disabled]> {
+	if (rule && Array.isArray(rule) && rule[0] === RuleConfigSeverity.Disabled) {
+		return true;
+	}
+	return false;
+}
+
 /**
  * Check if a rule definition is active
  * @param rule to check

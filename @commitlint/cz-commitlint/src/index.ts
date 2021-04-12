@@ -1,7 +1,6 @@
 import load from '@commitlint/load';
 import {Inquirer} from 'inquirer';
-import {prompt} from './defaultSettings';
-import Prompter from './Prompter';
+import process from './Process';
 
 type Commit = (message: string) => void;
 /**
@@ -11,7 +10,7 @@ type Commit = (message: string) => void;
  * @return {void}
  */
 export function prompter(inquirer: Inquirer, commit: Commit): void {
-	load().then(({rules}) => {
-		new Prompter(rules, prompt).prompt(inquirer).then(commit);
+	load().then(({rules, prompt}) => {
+		process(rules, prompt, inquirer).then(commit);
 	});
 }
