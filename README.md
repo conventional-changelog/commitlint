@@ -101,7 +101,7 @@ npm install husky --save-dev
 # or
 yarn add husky --dev
 
-# Active hooks
+# Activate hooks
 npx husky install
 # or
 yarn husky install
