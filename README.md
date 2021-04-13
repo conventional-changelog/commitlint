@@ -107,9 +107,7 @@ npx husky install
 yarn husky install
 
 # Add hook
-npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
-# or
-yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 ```
 
 **Detailed Setup instructions**
