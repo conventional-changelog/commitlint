@@ -104,7 +104,8 @@ module.exports = {
 					'What is the scope of this change (e.g. component or file name)',
 			},
 			subject: {
-				description: 'Write a short, imperative tense description of the change',
+				description:
+					'Write a short, imperative tense description of the change',
 			},
 			body: {
 				description: 'Provide a longer description of the change',
@@ -130,5 +131,5 @@ module.exports = {
 				description: 'Add issue references (e.g. "fix #123", "re #123".)',
 			},
 		},
-	}
+	},
 };
