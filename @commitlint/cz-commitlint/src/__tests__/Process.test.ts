@@ -1,5 +1,6 @@
 import {QualifiedRules, UserPromptConfig} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
+import isFunction from 'lodash/isFunction';
 import process from '../Process';
 
 const mockShowTitle = jest.fn();
@@ -10,7 +11,7 @@ const mockPrompt = jest.fn(function (questions, answers) {
 	for (const {name, message, when, filter, validate} of questions) {
 		if (!when || when(answers)) {
 			const title =
-				message && {}.toString.call(message) === '[object Function]'
+				message && isFunction(message)
 					? message(answers)
 					: typeof message === 'string'
 					? message

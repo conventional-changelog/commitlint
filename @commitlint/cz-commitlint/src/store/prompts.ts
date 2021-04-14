@@ -1,4 +1,5 @@
 import {PromptConfig, UserPromptConfig} from '@commitlint/types';
+import isPlainObject from 'lodash/isPlainObject';
 import defaultPromptConfigs from './defaultPromptConfigs';
 
 const storeKey = Symbol('promptConfig');
@@ -21,11 +22,7 @@ export function setPromptConfig(newPromptConfig: UserPromptConfig): void {
 		});
 	}
 
-	if (
-		questions &&
-		Object.prototype.toString.call(questions).toLowerCase() ===
-			'[object object]'
-	) {
+	if (questions && isPlainObject(questions)) {
 		store[storeKey]['questions'] = questions;
 	}
 }

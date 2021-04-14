@@ -10,7 +10,7 @@ type Commit = (message: string) => void;
  * @return {void}
  */
 export function prompter(inquirer: Inquirer, commit: Commit): void {
-	load().then(({rules, prompt}) => {
+	load().then(({rules, prompt = {}}) => {
 		process(rules, prompt, inquirer).then(commit);
 	});
 }
