@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Commitizen adapter using the commitlint.config.js",
   "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "commit": "git-cz"
   },

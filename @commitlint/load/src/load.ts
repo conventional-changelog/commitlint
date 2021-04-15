@@ -116,7 +116,7 @@ export default async function load(
 			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 
 	const prompt =
-		config.prompt && isPlainObject(config.prompt) ? config.prompt : {};
+		preset.prompt && isPlainObject(preset.prompt) ? preset.prompt : {};
 
 	return {
 		extends: preset.extends!,

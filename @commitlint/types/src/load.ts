@@ -40,6 +40,7 @@ export interface UserPreset {
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
 	plugins: PluginRecords;
+	prompt?: PromptConfig;
 }
 
 export type QualifiedRules = Partial<RulesConfig<RuleConfigQuality.Qualified>>;
