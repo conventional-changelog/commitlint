@@ -22,7 +22,7 @@ Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitli
 Install `husky` as devDependency, a handy git hook helper available on npm.
 
 ```sh
-# Install Husky v5
+# Install Husky v6
 npm install husky --save-dev
 # or
 yarn add husky --dev
@@ -37,6 +37,8 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 # or
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
+
+Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 ## Test
 
