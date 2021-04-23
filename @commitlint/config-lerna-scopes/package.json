@@ -28,6 +28,11 @@
   "peerDependencies": {
     "lerna": "^3.0.0 || ^4.0.0"
   },
+  "peerDependenciesMeta": {
+    "lerna": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">=v10"
   },
