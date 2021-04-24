@@ -2,7 +2,6 @@ import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
 import isFunction from 'lodash/isFunction';
-import stdin from 'get-stdin';
 import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
 import yargs from 'yargs';
@@ -125,6 +124,22 @@ main({edit: false, ...cli.argv}).catch((err) => {
 		throw err;
 	}, 0);
 });
+
+async function stdin() {
+	let result = '';
+
+	if (process.stdin.isTTY) {
+		return result;
+	}
+
+	process.stdin.setEncoding('utf8');
+
+	for await (const chunk of process.stdin) {
+		result += chunk;
+	}
+
+	return result;
+}
 
 async function main(options: CliFlags) {
 	const raw = options._;
