@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import inquirer, {Answers, InputQuestionOptions} from 'inquirer';
-import Question from '../Question';
+import Question from './Question';
 
 const MESSAGES = {
 	skip: '(press enter to skip)',

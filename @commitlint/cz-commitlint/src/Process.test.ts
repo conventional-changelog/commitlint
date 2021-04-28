@@ -1,7 +1,7 @@
 import {QualifiedRules, UserPromptConfig} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
 import isFunction from 'lodash/isFunction';
-import process from '../Process';
+import process from './Process';
 
 const mockShowTitle = jest.fn();
 const mockShowValidation = jest.fn((message) => message);

@@ -1,7 +1,7 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import {combineCommitMessage, getQuestions} from '../SectionHeader';
-import {setPromptConfig} from '../store/prompts';
-import {setRules} from '../store/rules';
+import {combineCommitMessage, getQuestions} from './SectionHeader';
+import {setPromptConfig} from './store/prompts';
+import {setRules} from './store/rules';
 describe('getQuestions', () => {
 	test("should contain 'type','scope','subject'", () => {
 		const questions = getQuestions();
