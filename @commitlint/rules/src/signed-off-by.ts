@@ -1,3 +1,4 @@
+import execa from 'execa';
 import message from '@commitlint/message';
 import toLines from '@commitlint/to-lines';
 import {SyncRule} from '@commitlint/types';
@@ -7,18 +8,15 @@ export const signedOffBy: SyncRule<string> = (
 	when = 'always',
 	value = ''
 ) => {
-	const lines = toLines(parsed.raw).filter(
-		(ln) =>
-			// skip comments
-			!ln.startsWith('#') &&
-			// ignore empty lines
-			Boolean(ln)
-	);
+	const trailers = execa.sync('git', ['interpret-trailers', '--parse'], {
+		input: parsed.raw,
+	}).stdout;
 
-	const last = lines[lines.length - 1];
+	const signoffs = toLines(trailers).filter((ln) => ln.startsWith(value))
+		.length;
 
 	const negated = when === 'never';
-	const hasSignedOffBy = last.startsWith(value);
+	const hasSignedOffBy = signoffs > 0;
 
 	return [
 		negated ? !hasSignedOffBy : hasSignedOffBy,

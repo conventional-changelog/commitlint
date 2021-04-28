@@ -3,15 +3,17 @@ import {signedOffBy} from './signed-off-by';
 
 const messages = {
 	empty: 'test:\n',
-	with: `test: subject\nbody\nfooter\nSigned-off-by:\n\n`,
-	without: `test: subject\nbody\nfooter\n\n`,
-	inSubject: `test: subject Signed-off-by:\nbody\nfooter\n\n`,
-	inBody: `test: subject\nbody Signed-off-by:\nfooter\n\n`,
-	withSignoffAndComments: `test: subject
+	with: `test: subject\n\nbody\n\nfooter\n\nSigned-off-by:\n\n`,
+	without: `test: subject\n\nbody\n\nfooter\n\n`,
+	inSubject: `test: subject Signed-off-by:\n\nbody\n\nfooter\n\n`,
+	inBody: `test: subject\n\nbody Signed-off-by:\n\nfooter\n\n`,
+	withSignoffAndNoise: `test: subject
 
 message body
 
+Arbitrary-trailer:
 Signed-off-by:
+Another-arbitrary-trailer:
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
@@ -24,7 +26,7 @@ const parsed = {
 	without: parse(messages.without),
 	inSubject: parse(messages.inSubject),
 	inBody: parse(messages.inBody),
-	withSignoffAndComments: parse(messages.withSignoffAndComments),
+	withSignoffAndNoise: parse(messages.withSignoffAndNoise),
 };
 
 test('empty against "always signed-off-by" should fail', async () => {
@@ -67,9 +69,9 @@ test('without against "never signed-off-by" should succeed', async () => {
 	expect(actual).toEqual(expected);
 });
 
-test('trailing comments should be ignored', async () => {
+test('comments and other trailers should be ignored', async () => {
 	const [actual] = signedOffBy(
-		await parsed.withSignoffAndComments,
+		await parsed.withSignoffAndNoise,
 		'always',
 		'Signed-off-by:'
 	);
