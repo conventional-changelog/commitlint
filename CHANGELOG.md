@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
+
+
+### Bug Fixes
+
+* **rules:** fix subject-full-stop rule config value type ([#2534](https://github.com/conventional-changelog/commitlint/issues/2534)) ([2ab3c57](https://github.com/conventional-changelog/commitlint/commit/2ab3c57b709ddad3fc98d768309ac4fdac8cb68a))
+* **types:** update chalk import ([#2535](https://github.com/conventional-changelog/commitlint/issues/2535)) ([89f9a6d](https://github.com/conventional-changelog/commitlint/commit/89f9a6d759f7296438e184a93c1f766aba1443ca))
+
+
+
+
+
 ## [12.1.1](https://github.com/conventional-changelog/commitlint/compare/v12.1.0...v12.1.1) (2021-04-02)
 
 
