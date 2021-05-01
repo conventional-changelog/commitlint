@@ -12,7 +12,7 @@ configure `commitlint` to use it.
 ```bash
 # Install and configure if needed
 npm install --save-dev @commitlint/{cli,config-conventional}
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
 Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
@@ -47,7 +47,7 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
 For a first simple usage test of commlitlint you can do the following:
 
 ```bash
-npx commitlint --from HEAD~1 --to HEAD --verbose
+npx commitlint -- --from HEAD~1 --to HEAD --verbose
 ```
 
 This will check your last commit and return an error if invalid or a positive output if valid.
