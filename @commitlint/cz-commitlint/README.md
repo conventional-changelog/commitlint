@@ -10,15 +10,17 @@ The interactive process is inspired by [cz-conventional-changelog](https://githu
 
 ## Getting started
 
-### Using commitizen adapter
+### Configure commitizen adapter
 
 ```bash
 npm install --save-dev @commitlint/cz-commitlint commitizen
+# or yarn
+yarn add -D @commitlint/cz-commitlint commitizen
 ```
 
 In package.json
 
-```
+```json
 {
   "scripts": {
     "commit": "git-cz"
@@ -33,56 +35,27 @@ In package.json
 
 ### Configure commitlint
 
+**⚠️ Important: The required version of commitlint and shared configuration is above 12.1.2, update them if already existed in project**
+
 ```bash
 # Install commitlint cli and conventional config
 npm install --save-dev @commitlint/config-conventional @commitlint/cli
+# or yarn
+yarn add @commitlint/config-conventional @commitlint/cli -D
 
 # Simple: config with conventional
 echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
-
-# commitlint configuration is shareable,
-# Install lerna-scopes
-npm install --save-dev @commitlint/config-lerna-scopes
-# Scalable: config with lerna-scopes in monorepo mode
-echo "module.exports = {extends: ['@commitlint/config-conventional', '@commitlint/config-lerna-scopes']};" > commitlint.config.js
-```
-
-### Set Git Hooks by husky
-
-```base
-
-# ------- using npm ----------
-# Install Husky
-npm install husky --save-dev
-# Active hooks
-npx husky install
-# Add commitlint hook
-npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
-# Add commitizen hook
-npx husky add .husky/prepare-commit-msg 'exec < /dev/tty && node_modules/.bin/cz --hook || true'
-
-
-# ------- using yarn ----------
-# Install Husky
-yarn add husky --dev
-# Active hooks
-yarn husky install
-# Add commitlint hook
-yarn husky add .husky/commit-msg 'yarn --no-install commitlint --edit $1'
-# Add commitizen hook
-yarn husky add .husky/prepare-commit-msg 'exec < /dev/tty && node_modules/.bin/cz --hook || true'
-
 ```
 
 ### Try it out
 
 ```bash
 git add .
-npm run commit
-# or
-yarn run commit
+npm run cz
+# or yarn
+yarn cz
 ```
 
 ## Related
 
-- [Commitlint Shared Configuration](https://github.com/conventional-changelog/commitlint#shared-configuration) - You can find more shared configurations are available to install and use with commitlint
+- [Commitlint Reference Prompt](https://commitlint.js.org/#/reference-prompt) - How to customize prompt information by setting commitlint.config.js
