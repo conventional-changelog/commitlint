@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/read",
-  "version": "12.1.1",
+  "version": "12.1.2",
   "description": "Read commit messages from a specified range or last edit",
   "main": "lib/read.js",
   "types": "lib/read.d.ts",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@commitlint/top-level": "^12.1.1",
-    "@commitlint/types": "^12.1.1",
+    "@commitlint/types": "^12.1.2",
     "fs-extra": "^9.0.0",
     "git-raw-commits": "^2.0.0"
   },

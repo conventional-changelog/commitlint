@@ -1,8 +1,8 @@
-import path from 'path';
 import {fix, git} from '@commitlint/test';
 import execa from 'execa';
-import merge from 'lodash/merge';
 import fs from 'fs-extra';
+import merge from 'lodash/merge';
+import path from 'path';
 
 const bin = require.resolve('../cli.js');
 
@@ -494,7 +494,8 @@ test('should print config', async () => {
 		  defaultIgnores: undefined,
 		  plugins: {},
 		  rules: { 'type-enum': [ 2, 'never', [ 'foo' ] ] },
-		  helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+		  helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+		  prompt: {}
 		}"
 	`);
 });

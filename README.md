@@ -96,21 +96,21 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitl
 To lint commits before they are created you can use Husky's `commit-msg` hook:
 
 ```sh
-# Install Husky v5
+# Install Husky v6
 npm install husky --save-dev
 # or
 yarn add husky --dev
 
-# Active hooks
+# Activate hooks
 npx husky install
 # or
 yarn husky install
 
 # Add hook
-npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
-# or
-yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
+npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
 ```
+
+Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 **Detailed Setup instructions**
 

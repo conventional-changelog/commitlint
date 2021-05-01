@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-lerna-scopes",
-  "version": "12.1.1",
+  "version": "12.1.2",
   "description": "Shareable commitlint config enforcing lerna package and workspace names as scopes",
   "files": [
     "index.js"
@@ -27,6 +27,11 @@
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "peerDependencies": {
     "lerna": "^3.0.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "lerna": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=v10"

@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "12.1.1",
+  "version": "12.1.2",
   "description": "Lint your commit messages",
   "files": [
     "index.js",
@@ -43,12 +43,11 @@
     "fs-extra": "^9.0.0"
   },
   "dependencies": {
-    "@commitlint/format": "^12.1.1",
-    "@commitlint/lint": "^12.1.1",
-    "@commitlint/load": "^12.1.1",
-    "@commitlint/read": "^12.1.1",
-    "@commitlint/types": "^12.1.1",
-    "get-stdin": "8.0.0",
+    "@commitlint/format": "^12.1.2",
+    "@commitlint/lint": "^12.1.2",
+    "@commitlint/load": "^12.1.2",
+    "@commitlint/read": "^12.1.2",
+    "@commitlint/types": "^12.1.2",
     "lodash": "^4.17.19",
     "resolve-from": "5.0.0",
     "resolve-global": "1.0.0",

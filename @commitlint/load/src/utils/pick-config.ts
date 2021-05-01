@@ -11,5 +11,6 @@ export const pickConfig = (input: unknown): UserConfig =>
 		'formatter',
 		'ignores',
 		'defaultIgnores',
-		'helpUrl'
+		'helpUrl',
+		'prompt'
 	);
