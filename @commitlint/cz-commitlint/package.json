@@ -6,10 +6,20 @@
   "files": [
     "lib"
   ],
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "cz",
+    "commitizen",
+    "cz-commitlint"
+  ],
   "scripts": {
     "commit": "git-cz"
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git"

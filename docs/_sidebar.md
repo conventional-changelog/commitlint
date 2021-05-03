@@ -16,5 +16,6 @@
   - [Rules](reference-rules.md)
   - [API](reference-api.md)
   - [Plugins](reference-plugins.md)
+  - [Prompt](reference-prompt.md)
   - [Examples](reference-examples.md)
   - [Community projects](reference-community-projects.md)
