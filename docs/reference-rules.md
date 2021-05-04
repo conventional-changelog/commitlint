@@ -402,3 +402,13 @@ Infinity
 ```
 'Signed-off-by:'
 ```
+
+#### trailer-exists
+
+- **condition**: `message` has trailer `value`
+- **rule**: `always`
+- **value**
+
+```
+'Signed-off-by:'
+```
