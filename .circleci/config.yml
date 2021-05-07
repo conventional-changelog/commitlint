@@ -78,17 +78,17 @@ commands:
 jobs:
   v10:
     docker:
-      - image: node:10
+      - image: node:16
     steps:
       - run-tests
   v12:
     docker:
-      - image: node:12
+      - image: node:16
     steps:
       - run-all
   v14:
     docker:
-      - image: node:14
+      - image: node:16
     steps:
       - run-tests
   windows-v12:
