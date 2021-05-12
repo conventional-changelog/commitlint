@@ -26,6 +26,7 @@ import {subjectEmpty} from './subject-empty';
 import {subjectFullStop} from './subject-full-stop';
 import {subjectMaxLength} from './subject-max-length';
 import {subjectMinLength} from './subject-min-length';
+import {subjectExclamationMark} from './subject-exclamation-mark';
 import {trailerExists} from './trailer-exists';
 import {typeCase} from './type-case';
 import {typeEmpty} from './type-empty';
@@ -62,6 +63,7 @@ export default {
 	'subject-full-stop': subjectFullStop,
 	'subject-max-length': subjectMaxLength,
 	'subject-min-length': subjectMinLength,
+	'subject-exclamation-mark': subjectExclamationMark,
 	'trailer-exists': trailerExists,
 	'type-case': typeCase,
 	'type-empty': typeEmpty,
