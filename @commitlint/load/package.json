@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "12.1.2",
+  "version": "12.1.3",
   "description": "Load shared commitlint configuration",
   "main": "lib/load.js",
   "types": "lib/load.d.ts",
@@ -34,16 +34,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^12.1.0",
-    "@commitlint/utils": "^12.1.1",
+    "@commitlint/test": "^12.1.3",
+    "@commitlint/utils": "^12.1.3",
     "@types/lodash": "4.14.169",
     "conventional-changelog-atom": "^2.0.8",
     "execa": "^5.0.0"
   },
   "dependencies": {
-    "@commitlint/execute-rule": "^12.1.1",
-    "@commitlint/resolve-extends": "^12.1.1",
-    "@commitlint/types": "^12.1.2",
+    "@commitlint/execute-rule": "^12.1.3",
+    "@commitlint/resolve-extends": "^12.1.3",
+    "@commitlint/types": "^12.1.3",
     "chalk": "^4.0.0",
     "cosmiconfig": "^7.0.0",
     "lodash": "^4.17.19",
