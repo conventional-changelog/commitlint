@@ -5,7 +5,7 @@ module.exports = {
 			'@babel/preset-env',
 			{
 				debug: process.env.DEBUG === 'true',
-				targets: {node: '10'},
+				targets: {node: '12'},
 			},
 		],
 	],
