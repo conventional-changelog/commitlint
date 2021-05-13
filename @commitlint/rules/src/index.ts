@@ -26,6 +26,7 @@ import {subjectEmpty} from './subject-empty';
 import {subjectFullStop} from './subject-full-stop';
 import {subjectMaxLength} from './subject-max-length';
 import {subjectMinLength} from './subject-min-length';
+import {trailerExists} from './trailer-exists';
 import {typeCase} from './type-case';
 import {typeEmpty} from './type-empty';
 import {typeEnum} from './type-enum';
@@ -61,6 +62,7 @@ export default {
 	'subject-full-stop': subjectFullStop,
 	'subject-max-length': subjectMaxLength,
 	'subject-min-length': subjectMinLength,
+	'trailer-exists': trailerExists,
 	'type-case': typeCase,
 	'type-empty': typeEmpty,
 	'type-enum': typeEnum,
