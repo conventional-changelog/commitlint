@@ -51,9 +51,9 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 
 ```bash
 git add .
-npm run cz
+npm run commit
 # or yarn
-yarn cz
+yarn commit
 ```
 
 ## Related
