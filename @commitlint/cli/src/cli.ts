@@ -4,7 +4,7 @@ import read from '@commitlint/read';
 import isFunction from 'lodash/isFunction';
 import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
-import yargs from 'yargs';
+import yargs, {Arguments} from 'yargs';
 import util from 'util';
 
 import {CliFlags, Seed} from './types';
@@ -116,7 +116,7 @@ const cli = yargs
 	)
 	.strict();
 
-main({edit: false, ...cli.argv}).catch((err) => {
+main(cli.argv).catch((err) => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
 			process.exit(1);
@@ -141,7 +141,22 @@ async function stdin() {
 	return result;
 }
 
-async function main(options: CliFlags) {
+type MainArgsObject = {
+	[key in keyof Arguments<CliFlags>]: Arguments<CliFlags>[key];
+};
+type MainArgsPromise = Promise<MainArgsObject>;
+type MainArgs = MainArgsObject | MainArgsPromise;
+
+async function resolveArgs(args: MainArgs): Promise<MainArgsObject> {
+	return typeof args.then === 'function' ? await args : args;
+}
+
+async function main(args: MainArgs) {
+	const options = await resolveArgs(args);
+	if (typeof options.edit === 'undefined') {
+		options.edit = false;
+	}
+
 	const raw = options._;
 	const flags = normalizeFlags(options);
 
