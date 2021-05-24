@@ -1,7 +1,9 @@
 const typeEnum = require('@commitlint/config-angular-type-enum');
 
 module.exports = {
+	parserPreset: {parserOpts: {headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/}},
 	rules: {
+		'subject-exclamation-mark': [2, 'never'],
 		'body-leading-blank': [1, 'always'],
 		'footer-leading-blank': [1, 'always'],
 		'header-max-length': [2, 'always', 72],

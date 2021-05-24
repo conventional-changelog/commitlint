@@ -336,6 +336,11 @@ Infinity
 0
 ```
 
+#### subject-exclamation-mark
+
+- **condition**: `subject` has exclamation before the `:` marker
+- **rule**: `never`
+
 #### type-enum
 
 - **condition**: `type` is found in value
