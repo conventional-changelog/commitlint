@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+### Bug Fixes
+
+* update dependency chalk to v4.1.1 ([#2608](https://github.com/conventional-changelog/commitlint/issues/2608)) ([f41b123](https://github.com/conventional-changelog/commitlint/commit/f41b1237c7f7b2ff23b87643939569276d77b304))
+* update dependency yargs to v17.0.1 ([#2609](https://github.com/conventional-changelog/commitlint/issues/2609)) ([afbfd10](https://github.com/conventional-changelog/commitlint/commit/afbfd10592579c544d8e2c313f2c2baef68990f8))
+
+
+### Features
+
+* add subject-exclamation-mark rule to improve error messages ([#2593](https://github.com/conventional-changelog/commitlint/issues/2593)) ([be701bd](https://github.com/conventional-changelog/commitlint/commit/be701bdb1de4e667b7a872767244285c4fa4fda4))
+* **rules:** add `trailer-exists` rule ([#2578](https://github.com/conventional-changelog/commitlint/issues/2578)) ([cd3816d](https://github.com/conventional-changelog/commitlint/commit/cd3816d553762eae99e088689395c55afce0c6cc))
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
 ## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
 
 
