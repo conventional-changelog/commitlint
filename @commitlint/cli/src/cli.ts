@@ -220,8 +220,10 @@ async function main(args: MainArgs) {
 	}
 	const format = loadFormatter(loaded, flags);
 
-	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
-	if (flags.edit) {
+	// Strip comments if reading from `.git/COMMIT_EDIT_MSG` using the
+	// commentChar from the parser preset falling back to a `#` if that is not
+	// set
+	if (flags.edit && typeof opts.parserOpts.commentChar !== 'string') {
 		opts.parserOpts.commentChar = '#';
 	}
 
