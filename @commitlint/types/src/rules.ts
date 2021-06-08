@@ -68,10 +68,12 @@ export type QualifiedRuleConfig<T> =
 	| (() => RuleConfigTuple<Promise<T>>)
 	| RuleConfigTuple<T>;
 
-export type RuleConfig<V = RuleConfigQuality.Qualified, T = void> =
-	V extends RuleConfigQuality.Qualified
-		? RuleConfigTuple<T>
-		: QualifiedRuleConfig<T>;
+export type RuleConfig<
+	V = RuleConfigQuality.Qualified,
+	T = void
+> = V extends RuleConfigQuality.Qualified
+	? RuleConfigTuple<T>
+	: QualifiedRuleConfig<T>;
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
