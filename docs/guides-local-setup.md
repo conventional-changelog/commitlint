@@ -37,7 +37,7 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 # or
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
-
+**Please not that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 ## Test
