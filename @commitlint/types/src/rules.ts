@@ -77,7 +77,7 @@ export type RuleConfig<
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
-	TargetCaseType
+	TargetCaseType | TargetCaseType[]
 >;
 export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
