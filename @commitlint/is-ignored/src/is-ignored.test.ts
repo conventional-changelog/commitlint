@@ -83,6 +83,24 @@ test('should return true for revert commits', () => {
 	).toBe(true);
 });
 
+test('should return false for invalid revert commits', () => {
+	expect(
+		isIgnored(
+			`Revert docs: add recipe for linting of all commits in a PR (#36)\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	).toBe(false);
+	expect(
+		isIgnored(
+			`revert docs: add recipe for linting of all commits in a PR (#36)\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	).toBe(false);
+	expect(
+		isIgnored(
+			`revert 'docs: add recipe for linting of all commits in a PR (#36)'\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
+	).toBe(false);
+});
+
 test('should ignore npm semver commits', () => {
 	VERSION_MESSAGES.forEach((message) => expect(isIgnored(message)).toBe(true));
 });
