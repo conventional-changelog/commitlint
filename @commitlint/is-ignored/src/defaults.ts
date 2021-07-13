@@ -18,7 +18,7 @@ export const wildcards: Matcher[] = [
 	test(
 		/^((Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?)))(?:\r?\n)*$)/m
 	),
-	test(/^(R|r)evert (.*)/),
+	test(/^(R|r)evert "(.*)/),
 	test(/^(fixup|squash)!/),
 	isSemver,
 	test(/^(Merged (.*?)(in|into) (.*)|Merged PR (.*): (.*))/),
