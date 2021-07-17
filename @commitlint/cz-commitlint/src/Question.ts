@@ -176,11 +176,17 @@ export default class Question {
 				return messages.join(', ');
 			})();
 
-			const skipMessage = this.skip ? this.getMessage('skip') : '';
+			const skipMessage = this.skip && this.getMessage('skip');
 
-			return this.title + skipMessage + ': ' + countLimitMessage + '\n';
+			return (
+				this.title +
+				(skipMessage ? ` ${skipMessage}` : '') +
+				':' +
+				(countLimitMessage ? ` ${countLimitMessage}` : '') +
+				'\n'
+			);
 		} else {
-			return this.title + ': ';
+			return `${this.title}:`;
 		}
 	}
 }

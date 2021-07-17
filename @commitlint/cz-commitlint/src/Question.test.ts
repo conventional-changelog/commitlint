@@ -102,7 +102,7 @@ describe('message', () => {
 			enumList: ['cli', 'core'],
 		}).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
-		expect((question.message as any)()).toBe('please input: ');
+		expect((question.message as any)()).toBe('please input:');
 	});
 
 	test('should display skip hint when it is input and can skip', () => {
@@ -112,7 +112,7 @@ describe('message', () => {
 		}).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input(press enter to skip): \n'
+			'please input (press enter to skip):\n'
 		);
 	});
 
@@ -123,7 +123,7 @@ describe('message', () => {
 			skip: true,
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
-		expect((question.message as any)()).toBe('please input: \n');
+		expect((question.message as any)()).toBe('please input:\n');
 	});
 
 	test('should display upper limit hint when it is input and has max length', () => {
@@ -155,7 +155,7 @@ describe('message', () => {
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input(press enter to skip): 10 chars at least, upper 80 chars\n'
+			'please input (press enter to skip): 10 chars at least, upper 80 chars\n'
 		);
 	});
 
