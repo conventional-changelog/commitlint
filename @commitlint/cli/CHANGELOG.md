@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* **cli:** remove hard coded comment char with linting `COMMIT_EDIT_MSG` ([#2618](https://github.com/conventional-changelog/commitlint/issues/2618)) ([5badf6d](https://github.com/conventional-changelog/commitlint/commit/5badf6dc08116ed3557e6c780e55764b4f07ca67)), closes [#2351](https://github.com/conventional-changelog/commitlint/issues/2351)
+
+
+
+
+
 # [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
 
 

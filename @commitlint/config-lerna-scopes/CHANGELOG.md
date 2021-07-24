@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* update dependency import-from to v4 ([#2629](https://github.com/conventional-changelog/commitlint/issues/2629)) ([5bcb604](https://github.com/conventional-changelog/commitlint/commit/5bcb60456cd9d4c8f0f0bae21ca7c3d1c73943ca))
+
+
+
+
+
 # [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
 
 

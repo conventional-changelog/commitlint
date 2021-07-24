@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/lint",
-  "version": "13.0.0",
+  "version": "13.1.0",
   "description": "Lint a string against commitlint rules",
   "main": "lib/lint.js",
   "types": "lib/lint.d.ts",
@@ -38,10 +38,10 @@
     "@commitlint/utils": "^13.0.0"
   },
   "dependencies": {
-    "@commitlint/is-ignored": "^13.0.0",
-    "@commitlint/parse": "^13.0.0",
-    "@commitlint/rules": "^13.0.0",
-    "@commitlint/types": "^13.0.0"
+    "@commitlint/is-ignored": "^13.1.0",
+    "@commitlint/parse": "^13.1.0",
+    "@commitlint/rules": "^13.1.0",
+    "@commitlint/types": "^13.1.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

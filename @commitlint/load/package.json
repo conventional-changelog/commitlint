@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "13.0.0",
+  "version": "13.1.0",
   "description": "Load shared commitlint configuration",
   "main": "lib/load.js",
   "types": "lib/load.d.ts",
@@ -43,7 +43,7 @@
   "dependencies": {
     "@commitlint/execute-rule": "^13.0.0",
     "@commitlint/resolve-extends": "^13.0.0",
-    "@commitlint/types": "^13.0.0",
+    "@commitlint/types": "^13.1.0",
     "chalk": "^4.0.0",
     "cosmiconfig": "^7.0.0",
     "lodash": "^4.17.19",

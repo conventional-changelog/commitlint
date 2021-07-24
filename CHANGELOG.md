@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* **cz-commitlint:** fix minor formatting issues ([99d8881](https://github.com/conventional-changelog/commitlint/commit/99d8881d0d951deded6d9e31bbb279d04101549b))
+* **types:** adds TargetCaseType[] for CaseRuleConfig ([c3bef38](https://github.com/conventional-changelog/commitlint/commit/c3bef384ff1a3ec428ba7c86bc778c50a9e6eead))
+* update dependency import-from to v4 ([#2629](https://github.com/conventional-changelog/commitlint/issues/2629)) ([5bcb604](https://github.com/conventional-changelog/commitlint/commit/5bcb60456cd9d4c8f0f0bae21ca7c3d1c73943ca))
+* **cli:** remove hard coded comment char with linting `COMMIT_EDIT_MSG` ([#2618](https://github.com/conventional-changelog/commitlint/issues/2618)) ([5badf6d](https://github.com/conventional-changelog/commitlint/commit/5badf6dc08116ed3557e6c780e55764b4f07ca67)), closes [#2351](https://github.com/conventional-changelog/commitlint/issues/2351)
+
+
+### Features
+
+* **rules:** allow body-case to accept an array of cases ([5383c9e](https://github.com/conventional-changelog/commitlint/commit/5383c9edcd9a351ea1c33ed49f47afed9b1cde6b)), closes [#2631](https://github.com/conventional-changelog/commitlint/issues/2631)
+
+
+
+
+
 # [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
 
 
