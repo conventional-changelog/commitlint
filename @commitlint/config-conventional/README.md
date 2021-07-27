@@ -207,8 +207,8 @@ body" # passes
 - level: `error`
 - **value**
 
-```js
-100;
+```
+100
 ```
 
 ```sh
