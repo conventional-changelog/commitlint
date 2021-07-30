@@ -42,6 +42,7 @@ export type PromptMessages = {
 	emptyWarning?: string;
 	upperLimitWarning?: string;
 	lowerLimitWarning?: string;
+	[_key: string]: string | undefined;
 };
 
 export type UserPromptConfig = DeepPartial<PromptConfig>;
