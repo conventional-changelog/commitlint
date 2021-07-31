@@ -1,4 +1,4 @@
-import {PromptConfig, UserPromptConfig} from './prompt';
+import {UserPromptConfig} from './prompt';
 import {
 	AsyncRule,
 	Rule,
@@ -29,7 +29,7 @@ export interface UserConfig {
 	defaultIgnores?: boolean;
 	plugins?: (string | Plugin)[];
 	helpUrl?: string;
-	prompt?: PromptConfig;
+	prompt?: UserPromptConfig;
 }
 
 export interface UserPreset {
@@ -40,7 +40,7 @@ export interface UserPreset {
 	ignores?: ((commit: string) => boolean)[];
 	defaultIgnores?: boolean;
 	plugins: PluginRecords;
-	prompt?: PromptConfig;
+	prompt?: UserPromptConfig;
 }
 
 export type QualifiedRules = Partial<RulesConfig<RuleConfigQuality.Qualified>>;
