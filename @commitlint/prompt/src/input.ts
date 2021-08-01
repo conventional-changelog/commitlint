@@ -4,7 +4,7 @@ import {DistinctQuestion, PromptModule} from 'inquirer';
 import format from './library/format';
 import getPrompt from './library/get-prompt';
 import settings from './settings';
-import {InputSetting, Result} from './library/types';
+import type {InputSetting, Result} from './library/types';
 
 import {getHasName, getMaxLength, getRules} from './library/utils';
 import InputCustomPrompt from './inquirer/InputCustomPrompt';
@@ -15,7 +15,7 @@ import InputCustomPrompt from './inquirer/InputCustomPrompt';
  * @param prompter
  * @return commit message
  */
-export default async function input(prompter: PromptModule): Promise<string> {
+export async function input(prompter: PromptModule): Promise<string> {
 	const {rules} = await load();
 	const parts = ['type', 'scope', 'subject', 'body', 'footer'] as const;
 	const headerParts = ['type', 'scope', 'subject'];
@@ -30,14 +30,14 @@ export default async function input(prompter: PromptModule): Promise<string> {
 		prompter.registerPrompt('input-custom', InputCustomPrompt);
 
 		for (const input of parts) {
-			const inputSettings: InputSetting = settings[input];
+			const inputSetting: InputSetting = settings[input];
 			const inputRules = getRules(input, rules);
 			if (headerParts.includes(input) && maxLength < Infinity) {
-				inputSettings.header = {
+				inputSetting.header = {
 					length: maxLength,
 				};
 			}
-			const question = getPrompt(input, inputRules, inputSettings);
+			const question = getPrompt(input, inputRules, inputSetting);
 			if (question) {
 				questions.push(question);
 			}

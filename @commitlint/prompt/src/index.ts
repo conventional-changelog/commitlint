@@ -1,5 +1,5 @@
 import inquirer from 'inquirer';
-import input from './input';
+import {input} from './input';
 
 type Commit = (input: string) => void;
 
