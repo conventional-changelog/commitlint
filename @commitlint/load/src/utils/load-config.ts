@@ -13,7 +13,7 @@ export async function loadConfig(
 	configPath?: string
 ): Promise<LoadConfigResult | null> {
 	const moduleName = 'commitlint';
-	const explorer = cosmiconfig('commitlint', {
+	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
 			'package.json',
 			`.${moduleName}rc`,
