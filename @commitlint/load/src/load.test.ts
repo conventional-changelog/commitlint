@@ -248,6 +248,22 @@ test('recursive extends with package.json file', async () => {
 	});
 });
 
+test('recursive extends with ts file', async () => {
+	const cwd = await gitBootstrap('fixtures/recursive-extends-ts');
+	const actual = await load({}, {cwd});
+
+	expect(actual).toMatchObject({
+		formatter: '@commitlint/format',
+		extends: ['./first-extended'],
+		plugins: {},
+		rules: {
+			zero: [0, 'never', 'zero'],
+			one: [1, 'never', 'one'],
+			two: [2, 'never', 'two'],
+		},
+	});
+});
+
 test('parser preset overwrites completely instead of merging', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
