@@ -3,6 +3,7 @@
   - [Local setup](guides-local-setup.md)
   - [CI setup](guides-ci-setup.md)
   - [Use prompt](guides-use-prompt.md)
+  - [Releases](guides-releases.md)
   - [Upgrade commitlint](guides-upgrade.md)
 
 - **Concepts**
