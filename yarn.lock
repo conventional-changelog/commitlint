@@ -2558,6 +2558,11 @@
   resolved "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
+"@types/normalize-package-data@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.npmjs.org/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz#d3357479a0fdfdd5907fe67e17e0a85c906e1301"
+  integrity sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==
+
 "@types/parse-json@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@types/parse-json/-/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
@@ -8817,15 +8822,15 @@ read-pkg-up@^7.0.1:
     read-pkg "^5.2.0"
     type-fest "^0.8.1"
 
-read-pkg@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/read-pkg/-/read-pkg-6.0.0.tgz#a67a7d6a1c2b0c3cd6aa2ea521f40c458a4a504c"
-  integrity sha512-X1Fu3dPuk/8ZLsMhEj5f4wFAF0DWoK7qhGJvgaijocXxBmSToKfbFtqbxMO7bVjNA1dmE5huAzjXj/ey86iw9Q==
+read-pkg@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.npmjs.org/read-pkg/-/read-pkg-7.0.0.tgz#7009094a9cd58c7efc325d31f1f6cfce1928fa00"
+  integrity sha512-oG2cKegOo2gjy/hrAM+KFHD9IqKdQvWcpWBBxuHbaucziM9PY45EuF6YbenLF7tL9ekXgB6Lfruo9hwdHQZUrA==
   dependencies:
-    "@types/normalize-package-data" "^2.4.0"
+    "@types/normalize-package-data" "^2.4.1"
     normalize-package-data "^3.0.2"
     parse-json "^5.2.0"
-    type-fest "^1.0.1"
+    type-fest "^2.0.0"
 
 read-pkg@^1.0.0:
   version "1.1.0"
@@ -10297,10 +10302,10 @@ type-fest@^0.8.1:
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
-type-fest@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/type-fest/-/type-fest-1.0.1.tgz#2494455e65c59170ec98bdda05b7d7184f5b74ad"
-  integrity sha512-+UTPE7JT3O+sUpRroRgQAbbSfIRBwOHh+o/oruB1JJE6g6uBm3Y0D82fO3xu8VHfxJLQjeRp0PEY6mRmh/lElA==
+type-fest@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.0.0.tgz#e9daf5615e89f6d430f34117f88f4ee2cd5a2725"
+  integrity sha512-BoEUnckjP9oiudy3KxlGdudtBAdJQ74Wp7dYwVPkUzBn+cVHOsBXh2zD2jLyqgbuJ1KMNriczZCI7lTBA94dFg==
 
 typedarray-to-buffer@^3.1.5:
   version "3.1.5"
