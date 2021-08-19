@@ -48,7 +48,7 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
 For a first simple usage test of commlitlint you can do the following:
 
 ```bash
-npx commitlint -- --from HEAD~1 --to HEAD --verbose
+npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
 This will check your last commit and return an error if invalid or a positive output if valid.
