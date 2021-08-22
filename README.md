@@ -124,7 +124,7 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
 
 ## Config
 
-- Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`
+- Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc`, `.commitlintrc.json`, `.commitlintrc.yml` file or a `commitlint` field in `package.json`
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 - See [Rules](./docs/reference-rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/index.js)
