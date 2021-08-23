@@ -180,6 +180,31 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 - Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 12`
 - git `>= 2.13.2`
 
+## Integrations
+
+Here's how you can use this package with things other than husky.
+
+### pre-commit
+
+[pre-commit](https://pre-commit.com/) is a multi-language package manager for pre-commit hooks.
+
+Add this to your `.pre-commit-config.yaml`:
+
+```yaml
+- repo: local
+  hooks:
+    - id: commitlint
+      name: commitlint
+      stages: [commit-msg]
+      language: node
+      additional_dependencies:
+        - 'commitlint'
+        - '@commitlint/config-conventional'
+      entry: commitlint --edit
+```
+
+Make sure you have a `commit-msg` hook installed with `pre-commit install -t commit-msg`. If you see things running twice, that's a sign you have misconfigures stages. Be sure to check [pre-commit's docs on stages](https://pre-commit.com/#confining-hooks-to-run-at-certain-stages). If this is the first time you're thinking about stages, you're probably only missing a top-level `default_stages: [commit]`
+
 ### Releases
 
 Security patches will be applied to versions which are not yet EOL.  
