@@ -28,11 +28,12 @@ export default function loadPlugin(
 			try {
 				// Check whether the plugin exists
 				require.resolve(longName);
-			} catch (error) {
+			} catch (error: any) {
 				// If the plugin can't be resolved, display the missing plugin error (usually a config or install error)
 				console.error(chalk.red(`Failed to load plugin ${longName}.`));
 
-				throw new MissingPluginError(pluginName, error.message, {
+				const message = error?.message || 'Unknown error occurred';
+				throw new MissingPluginError(pluginName, message, {
 					pluginName: longName,
 					commitlintPath: path.resolve(__dirname, '../..'),
 				});
