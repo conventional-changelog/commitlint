@@ -10,7 +10,11 @@ Follow the [Getting Started](./?id=getting-started) for basic installation and c
 
 ```yaml
 #codemagic.yaml
-git log -1 --pretty=format:"%s" | npx commitlint
+workflows:
+  commitlint:
+    name: Lint commit message
+    scripts:
+      - npx commitlint --from=HEAD~1
 ```
 
 ## Travis
