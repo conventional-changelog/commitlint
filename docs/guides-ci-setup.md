@@ -6,6 +6,13 @@ This guide assumes you have already configured `commitlint` for local usage.
 
 Follow the [Getting Started](./?id=getting-started) for basic installation and configuration instructions.
 
+## Codemagic
+
+```yaml
+#codemagic.yaml
+git log -1 --pretty=format:"%s" | npx commitlint
+```
+
 ## Travis
 
 ```bash
