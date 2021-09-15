@@ -75,4 +75,15 @@ workflows:
     - lint_commit_message: { requires: [setup] }
 ```
 
+## [Codemagic](https://codemagic.io/)
+
+```yaml
+#codemagic.yaml
+workflows:
+  commitlint:
+    name: Lint commit message
+    scripts:
+      - npx commitlint --from=HEAD~1
+```
+
 ?> Help yourself adopting a commit convention by using an interactive commit prompt. Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](guides-use-prompt.md)
