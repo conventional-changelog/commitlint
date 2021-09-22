@@ -75,7 +75,9 @@ workflows:
     - lint_commit_message: { requires: [setup] }
 ```
 
-## [Codemagic](https://codemagic.io/)
+### 3rd party integrations
+
+#### [Codemagic](https://codemagic.io/)
 
 ```yaml
 #codemagic.yaml
