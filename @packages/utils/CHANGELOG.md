@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* update dependency read-pkg to v7 ([#2721](https://github.com/conventional-changelog/commitlint/issues/2721)) ([7d9a3b1](https://github.com/conventional-changelog/commitlint/commit/7d9a3b1f2ab41c598f4d23d96805f86a4d41ae09))
+
+
+
+
+
 # [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
 
 

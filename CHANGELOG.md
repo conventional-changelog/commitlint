@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **parse:** enforce secure version of `conventional-commits-parser` ([#2776](https://github.com/conventional-changelog/commitlint/issues/2776)) ([a351801](https://github.com/conventional-changelog/commitlint/commit/a3518012ae11bc00a43a12b8ce935f3ffd2d04ef))
+* update dependency read-pkg to v7 ([#2721](https://github.com/conventional-changelog/commitlint/issues/2721)) ([7d9a3b1](https://github.com/conventional-changelog/commitlint/commit/7d9a3b1f2ab41c598f4d23d96805f86a4d41ae09))
+* **types:** prompt messages key ([4825a52](https://github.com/conventional-changelog/commitlint/commit/4825a521e2c74d63a11920b48094fddc79001b3c))
+* **types:** prompt messages props optional ([0bd0592](https://github.com/conventional-changelog/commitlint/commit/0bd0592148ab4266fd76816b19d352e2cf947f8c))
+* **types:** user config prompt ([6d7a1c4](https://github.com/conventional-changelog/commitlint/commit/6d7a1c40e2f8a8ff22595e0e17f71f3702b0699c))
+
+
+### Features
+
+* **load:** add cosmiconfig typescript loader ([b65aced](https://github.com/conventional-changelog/commitlint/commit/b65acedc3334a859811762539ec8716de3e73f85))
+
+
+
+
+
 # [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
 
 

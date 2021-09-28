@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-conventional",
-  "version": "13.1.0",
+  "version": "13.2.0",
   "description": "Shareable commitlint config enforcing conventional commits",
   "files": [
     "index.js"
@@ -32,8 +32,8 @@
     "node": ">=v12"
   },
   "devDependencies": {
-    "@commitlint/lint": "^13.1.0",
-    "@commitlint/utils": "^13.0.0"
+    "@commitlint/lint": "^13.2.0",
+    "@commitlint/utils": "^13.2.0"
   },
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^4.3.1"

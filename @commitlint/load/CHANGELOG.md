@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **types:** user config prompt ([6d7a1c4](https://github.com/conventional-changelog/commitlint/commit/6d7a1c40e2f8a8ff22595e0e17f71f3702b0699c))
+
+
+### Features
+
+* **load:** add cosmiconfig typescript loader ([b65aced](https://github.com/conventional-changelog/commitlint/commit/b65acedc3334a859811762539ec8716de3e73f85))
+
+
+
+
+
 # [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
 
 **Note:** Version bump only for package @commitlint/load

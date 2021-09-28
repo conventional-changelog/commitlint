@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cli",
-  "version": "13.1.0",
+  "version": "13.2.0",
   "description": "Lint your commit messages",
   "files": [
     "index.js",
@@ -36,19 +36,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^13.0.0",
-    "@commitlint/utils": "^13.0.0",
+    "@commitlint/test": "^13.2.0",
+    "@commitlint/utils": "^13.2.0",
     "@types/node": "12.20.27",
     "@types/yargs": "^17.0.0",
     "execa": "^5.0.0",
     "fs-extra": "^10.0.0"
   },
   "dependencies": {
-    "@commitlint/format": "^13.1.0",
-    "@commitlint/lint": "^13.1.0",
-    "@commitlint/load": "^13.1.0",
-    "@commitlint/read": "^13.1.0",
-    "@commitlint/types": "^13.1.0",
+    "@commitlint/format": "^13.2.0",
+    "@commitlint/lint": "^13.2.0",
+    "@commitlint/load": "^13.2.0",
+    "@commitlint/read": "^13.2.0",
+    "@commitlint/types": "^13.2.0",
     "lodash": "^4.17.19",
     "resolve-from": "5.0.0",
     "resolve-global": "1.0.0",

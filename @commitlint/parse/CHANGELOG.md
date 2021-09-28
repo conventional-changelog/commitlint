@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **parse:** enforce secure version of `conventional-commits-parser` ([#2776](https://github.com/conventional-changelog/commitlint/issues/2776)) ([a351801](https://github.com/conventional-changelog/commitlint/commit/a3518012ae11bc00a43a12b8ce935f3ffd2d04ef))
+
+
+
+
+
 # [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
 
 **Note:** Version bump only for package @commitlint/parse
