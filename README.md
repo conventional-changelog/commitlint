@@ -234,26 +234,34 @@ Commit that change before creating the new version without `--dry-run`.
 
 ```sh
 npm login
+nvm use (if you have nvm installed)
 ```
 
 ```sh
 yarn clean
 yarn install
-yarn run build
+yarn build
 yarn test
 yarn run publish --otp <one-time password>
 ```
+
+#### Create Github release
+
+1. Copy changelog entry for the new version
+1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
+1. Post in the [commitlint Slack-channel][12]
 
 #### Publish a `next` release
 
 ```sh
 npm login
+nvm use (if you have nvm installed)
 ```
 
 ```sh
 yarn clean
 yarn install
-yarn run build
+yarn build
 yarn test
 npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
 ```
