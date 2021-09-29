@@ -3,16 +3,8 @@ import {input} from './input';
 
 type Commit = (input: string) => void;
 
-/**
- * Entry point for commitizen
- * @param cz inquirer instance passed by commitizen
- * @param commit callback to execute with complete commit message
- * @return {void}
- */
-export async function prompter(
-	cz: typeof inquirer,
-	commit: Commit
-): Promise<void> {
-	const message = await input(cz.prompt);
-	commit(message);
+export function prompter(cz: typeof inquirer, commit: Commit): void {
+	input(cz.prompt).then((message) => {
+		commit(message);
+	});
 }

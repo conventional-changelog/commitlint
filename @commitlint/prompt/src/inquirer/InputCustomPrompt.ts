@@ -1,10 +1,9 @@
 /// <reference path="./inquirer.d.ts" />
-import {Interface as ReadlineInterface, Key} from 'readline';
-
 import chalk from 'chalk';
 import inquirer from 'inquirer';
 import InputPrompt from 'inquirer/lib/prompts/input';
 import observe from 'inquirer/lib/utils/events';
+import {Interface as ReadlineInterface, Key} from 'readline';
 import type {Subscription} from 'rxjs/internal/Subscription';
 
 import Answers = inquirer.Answers;
@@ -86,7 +85,6 @@ export default class InputCustomPrompt<
 	render(error?: string): void {
 		const answered = this.status === 'answered';
 
-		let bottomContent = '';
 		let message = this.getQuestion();
 		const length = this.measureInput(this.rl.line);
 
@@ -95,6 +93,8 @@ export default class InputCustomPrompt<
 		} else if (this.opt.transformer) {
 			message += this.opt.transformer(this.rl.line, this.answers, {});
 		}
+
+		let bottomContent = '';
 
 		if (error) {
 			bottomContent = chalk.red('>> ') + error;
