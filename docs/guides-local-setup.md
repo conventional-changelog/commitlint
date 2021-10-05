@@ -12,10 +12,10 @@ configure `commitlint` to use it.
 ```bash
 # Install and configure if needed
 npm install --save-dev @commitlint/{cli,config-conventional}
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
-Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
+Alternatively the configuration can be defined in a `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc`, `.commitlintrc.json`, `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
 
 ## Install husky
 
@@ -38,6 +38,7 @@ npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
+**Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**  
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 ## Test

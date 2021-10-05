@@ -336,6 +336,11 @@ Infinity
 0
 ```
 
+#### subject-exclamation-mark
+
+- **condition**: `subject` has exclamation before the `:` marker
+- **rule**: `never`
+
 #### type-enum
 
 - **condition**: `type` is found in value
@@ -396,6 +401,16 @@ Infinity
 #### signed-off-by
 
 - **condition**: `message` has `value`
+- **rule**: `always`
+- **value**
+
+```
+'Signed-off-by:'
+```
+
+#### trailer-exists
+
+- **condition**: `message` has trailer `value`
 - **rule**: `always`
 - **value**
 

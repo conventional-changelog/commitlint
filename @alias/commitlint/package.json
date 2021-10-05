@@ -1,6 +1,6 @@
 {
   "name": "commitlint",
-  "version": "12.1.2",
+  "version": "13.2.0",
   "description": "Lint your commit messages",
   "files": [
     "cli.js"
@@ -13,7 +13,7 @@
     "pkg": "pkg-check --skip-main"
   },
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "repository": {
     "type": "git",
@@ -34,12 +34,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^12.1.2",
-    "@commitlint/types": "^12.1.2"
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/types": "^13.2.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^12.1.0",
-    "@commitlint/utils": "^12.1.1",
+    "@commitlint/test": "^13.2.0",
+    "@commitlint/utils": "^13.2.0",
     "execa": "^5.0.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"

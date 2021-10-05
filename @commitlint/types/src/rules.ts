@@ -77,7 +77,7 @@ export type RuleConfig<
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
-	TargetCaseType
+	TargetCaseType | TargetCaseType[]
 >;
 export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
@@ -117,6 +117,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	'subject-full-stop': RuleConfig<V, string>;
 	'subject-max-length': LengthRuleConfig<V>;
 	'subject-min-length': LengthRuleConfig<V>;
+	'trailer-exists': RuleConfig<V, string>;
 	'type-case': CaseRuleConfig<V>;
 	'type-empty': RuleConfig<V>;
 	'type-enum': EnumRuleConfig<V>;

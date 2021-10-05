@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+**Note:** Version bump only for package @commitlint/rules
+
+
+
+
+
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Features
+
+* **rules:** allow body-case to accept an array of cases ([5383c9e](https://github.com/conventional-changelog/commitlint/commit/5383c9edcd9a351ea1c33ed49f47afed9b1cde6b)), closes [#2631](https://github.com/conventional-changelog/commitlint/issues/2631)
+
+
+
+
+
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+### Features
+
+* add subject-exclamation-mark rule to improve error messages ([#2593](https://github.com/conventional-changelog/commitlint/issues/2593)) ([be701bd](https://github.com/conventional-changelog/commitlint/commit/be701bdb1de4e667b7a872767244285c4fa4fda4))
+* **rules:** add `trailer-exists` rule ([#2578](https://github.com/conventional-changelog/commitlint/issues/2578)) ([cd3816d](https://github.com/conventional-changelog/commitlint/commit/cd3816d553762eae99e088689395c55afce0c6cc))
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
+## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
+
+**Note:** Version bump only for package @commitlint/rules
+
+
+
+
+
 ## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
 
 **Note:** Version bump only for package @commitlint/rules

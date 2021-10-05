@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "12.1.2",
+  "version": "13.2.0",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -33,15 +33,15 @@
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "devDependencies": {
-    "@commitlint/utils": "^12.1.1",
-    "commitizen": "4.2.3"
+    "@commitlint/utils": "^13.2.0",
+    "commitizen": "4.2.4"
   },
   "dependencies": {
-    "@commitlint/load": "^12.1.2",
-    "@commitlint/types": "^12.1.2",
+    "@commitlint/load": "^13.2.0",
+    "@commitlint/types": "^13.2.0",
     "chalk": "^4.0.0",
     "lodash": "^4.17.19",
     "throat": "^6.0.0",

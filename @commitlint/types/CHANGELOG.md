@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **types:** prompt messages key ([4825a52](https://github.com/conventional-changelog/commitlint/commit/4825a521e2c74d63a11920b48094fddc79001b3c))
+* **types:** prompt messages props optional ([0bd0592](https://github.com/conventional-changelog/commitlint/commit/0bd0592148ab4266fd76816b19d352e2cf947f8c))
+* **types:** user config prompt ([6d7a1c4](https://github.com/conventional-changelog/commitlint/commit/6d7a1c40e2f8a8ff22595e0e17f71f3702b0699c))
+
+
+
+
+
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* **types:** adds TargetCaseType[] for CaseRuleConfig ([c3bef38](https://github.com/conventional-changelog/commitlint/commit/c3bef384ff1a3ec428ba7c86bc778c50a9e6eead))
+
+
+
+
+
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+### Features
+
+* **rules:** add `trailer-exists` rule ([#2578](https://github.com/conventional-changelog/commitlint/issues/2578)) ([cd3816d](https://github.com/conventional-changelog/commitlint/commit/cd3816d553762eae99e088689395c55afce0c6cc))
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
+## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
+
+**Note:** Version bump only for package @commitlint/types
+
+
+
+
+
 ## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
 
 

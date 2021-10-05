@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* update dependency read-pkg to v7 ([#2721](https://github.com/conventional-changelog/commitlint/issues/2721)) ([7d9a3b1](https://github.com/conventional-changelog/commitlint/commit/7d9a3b1f2ab41c598f4d23d96805f86a4d41ae09))
+
+
+
+
+
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
+## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* update dependency fs-extra to v10 ([#2575](https://github.com/conventional-changelog/commitlint/issues/2575)) ([d47d2b5](https://github.com/conventional-changelog/commitlint/commit/d47d2b595b980adadd4fb8ff198c1914caeff18f))
+* update dependency yargs to v17 ([#2574](https://github.com/conventional-changelog/commitlint/issues/2574)) ([81c38dd](https://github.com/conventional-changelog/commitlint/commit/81c38ddf15f239b525f673b26b2ee6606f2ee8f6))
+
+
+
+
+
 ## [12.1.1](https://github.com/conventional-changelog/commitlint/compare/v12.1.0...v12.1.1) (2021-04-02)
 
 

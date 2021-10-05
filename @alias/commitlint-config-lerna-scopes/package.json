@@ -1,6 +1,6 @@
 {
   "name": "commitlint-config-lerna-scopes",
-  "version": "12.1.2",
+  "version": "13.2.0",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "files": [
     "index.js"
@@ -26,13 +26,13 @@
   },
   "homepage": "https://github.com/conventional-changelog/commitlint#readme",
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "dependencies": {
-    "@commitlint/config-lerna-scopes": "^12.1.2"
+    "@commitlint/config-lerna-scopes": "^13.2.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^12.1.1"
+    "@commitlint/utils": "^13.2.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

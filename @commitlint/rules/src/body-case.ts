@@ -2,10 +2,12 @@ import {case as ensureCase} from '@commitlint/ensure';
 import message from '@commitlint/message';
 import {TargetCaseType, SyncRule} from '@commitlint/types';
 
-export const bodyCase: SyncRule<TargetCaseType> = (
+const negated = (when?: string) => when === 'never';
+
+export const bodyCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 	parsed,
 	when = 'always',
-	value = undefined
+	value = []
 ) => {
 	const {body} = parsed;
 
@@ -13,11 +15,25 @@ export const bodyCase: SyncRule<TargetCaseType> = (
 		return [true];
 	}
 
-	const negated = when === 'never';
+	const checks = (Array.isArray(value) ? value : [value]).map((check) => {
+		if (typeof check === 'string') {
+			return {
+				when: 'always',
+				case: check,
+			};
+		}
+		return check;
+	});
 
-	const result = ensureCase(body, value);
+	const result = checks.some((check) => {
+		const r = ensureCase(body, check.case);
+		return negated(check.when) ? !r : r;
+	});
+
+	const list = checks.map((c) => c.case).join(', ');
+
 	return [
-		negated ? !result : result,
-		message([`body must`, negated ? `not` : null, `be ${value}`]),
+		negated(when) ? !result : result,
+		message([`body must`, negated(when) ? `not` : null, `be ${list}`]),
 	];
 };

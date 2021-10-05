@@ -26,8 +26,7 @@
 - [Shared configuration](#shared-configuration)
 - [API](#api)
 - [Tools](#tools)
-- [Roadmap](#roadmap)
-- [Version Support](#version-support)
+- [Version Support and Releaes](#version-support-and-releaes)
 - [Related projects](#related-projects)
 - [License](#license)
 - [Development](#development)
@@ -125,7 +124,7 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
 
 ## Config
 
-- Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`
+- Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc`, `.commitlintrc.json`, `.commitlintrc.yml` file or a `commitlint` field in `package.json`
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 - See [Rules](./docs/reference-rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/index.js)
@@ -176,10 +175,26 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 - [ ] **DX**: Incorporate an extended version of [lennym/commit-template](https://github.com/lennym/commit-template) deducing a template from commitlint configuration
 - [ ] **DX**: Rewrite `@commitlint/prompt` for better usability (might involve a lot of yak-shaving)
 
-## Version Support
+## Version Support and Releaes
 
-- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 10.21.0`
+- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 12`
 - git `>= 2.13.2`
+
+### Releases
+
+Security patches will be applied to versions which are not yet EOL.  
+Features will only be applied to the current main version.
+
+| Release                                                                          | Inital release | End-of-life |
+| -------------------------------------------------------------------------------- | -------------- | ----------- |
+| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  |
+| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  |
+| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 13.09.2020     | 13.09.2020  |
+
+_Dates are subject to change._
+
+We're not a sponsored OSS project. Therefor we can't promise that we will release patch versions for older releases in a timley manner.  
+If you are stuck on an older version and need a security patch we're happy if you can provide a PR.
 
 ## Related projects
 
@@ -219,26 +234,34 @@ Commit that change before creating the new version without `--dry-run`.
 
 ```sh
 npm login
+nvm use (if you have nvm installed)
 ```
 
 ```sh
 yarn clean
 yarn install
-yarn run build
+yarn build
 yarn test
 yarn run publish --otp <one-time password>
 ```
+
+#### Create Github release
+
+1. Copy changelog entry for the new version
+1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
+1. Post in the [commitlint Slack-channel][12]
 
 #### Publish a `next` release
 
 ```sh
 npm login
+nvm use (if you have nvm installed)
 ```
 
 ```sh
 yarn clean
 yarn install
-yarn run build
+yarn build
 yarn test
 npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
 ```

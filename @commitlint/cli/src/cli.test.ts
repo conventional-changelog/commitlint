@@ -329,6 +329,16 @@ test('should handle --amend with signoff', async () => {
 	expect(commit).toBeTruthy();
 }, 10000);
 
+test('should fail with an empty message and a commentChar is set', async () => {
+	const cwd = await gitBootstrap('fixtures/comment-char');
+	await execa('git', ['config', '--local', 'core.commentChar', '$'], {cwd});
+	await fs.writeFile(path.join(cwd, '.git', 'COMMIT_EDITMSG'), '#1234');
+
+	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	expect(actual.stdout).toContain('[subject-empty]');
+	expect(actual.exitCode).toBe(1);
+});
+
 test('should handle linting with issue prefixes', async () => {
 	const cwd = await gitBootstrap('fixtures/issue-prefixes');
 	const actual = await cli([], {cwd})('foobar REF-1');

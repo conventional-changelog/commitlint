@@ -3,6 +3,83 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **parse:** enforce secure version of `conventional-commits-parser` ([#2776](https://github.com/conventional-changelog/commitlint/issues/2776)) ([a351801](https://github.com/conventional-changelog/commitlint/commit/a3518012ae11bc00a43a12b8ce935f3ffd2d04ef))
+* update dependency read-pkg to v7 ([#2721](https://github.com/conventional-changelog/commitlint/issues/2721)) ([7d9a3b1](https://github.com/conventional-changelog/commitlint/commit/7d9a3b1f2ab41c598f4d23d96805f86a4d41ae09))
+* **types:** prompt messages key ([4825a52](https://github.com/conventional-changelog/commitlint/commit/4825a521e2c74d63a11920b48094fddc79001b3c))
+* **types:** prompt messages props optional ([0bd0592](https://github.com/conventional-changelog/commitlint/commit/0bd0592148ab4266fd76816b19d352e2cf947f8c))
+* **types:** user config prompt ([6d7a1c4](https://github.com/conventional-changelog/commitlint/commit/6d7a1c40e2f8a8ff22595e0e17f71f3702b0699c))
+
+
+### Features
+
+* **load:** add cosmiconfig typescript loader ([b65aced](https://github.com/conventional-changelog/commitlint/commit/b65acedc3334a859811762539ec8716de3e73f85))
+
+
+
+
+
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* **cz-commitlint:** fix minor formatting issues ([99d8881](https://github.com/conventional-changelog/commitlint/commit/99d8881d0d951deded6d9e31bbb279d04101549b))
+* **types:** adds TargetCaseType[] for CaseRuleConfig ([c3bef38](https://github.com/conventional-changelog/commitlint/commit/c3bef384ff1a3ec428ba7c86bc778c50a9e6eead))
+* update dependency import-from to v4 ([#2629](https://github.com/conventional-changelog/commitlint/issues/2629)) ([5bcb604](https://github.com/conventional-changelog/commitlint/commit/5bcb60456cd9d4c8f0f0bae21ca7c3d1c73943ca))
+* **cli:** remove hard coded comment char with linting `COMMIT_EDIT_MSG` ([#2618](https://github.com/conventional-changelog/commitlint/issues/2618)) ([5badf6d](https://github.com/conventional-changelog/commitlint/commit/5badf6dc08116ed3557e6c780e55764b4f07ca67)), closes [#2351](https://github.com/conventional-changelog/commitlint/issues/2351)
+
+
+### Features
+
+* **rules:** allow body-case to accept an array of cases ([5383c9e](https://github.com/conventional-changelog/commitlint/commit/5383c9edcd9a351ea1c33ed49f47afed9b1cde6b)), closes [#2631](https://github.com/conventional-changelog/commitlint/issues/2631)
+
+
+
+
+
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+### Bug Fixes
+
+* update dependency chalk to v4.1.1 ([#2608](https://github.com/conventional-changelog/commitlint/issues/2608)) ([f41b123](https://github.com/conventional-changelog/commitlint/commit/f41b1237c7f7b2ff23b87643939569276d77b304))
+* update dependency yargs to v17.0.1 ([#2609](https://github.com/conventional-changelog/commitlint/issues/2609)) ([afbfd10](https://github.com/conventional-changelog/commitlint/commit/afbfd10592579c544d8e2c313f2c2baef68990f8))
+
+
+### Features
+
+* add subject-exclamation-mark rule to improve error messages ([#2593](https://github.com/conventional-changelog/commitlint/issues/2593)) ([be701bd](https://github.com/conventional-changelog/commitlint/commit/be701bdb1de4e667b7a872767244285c4fa4fda4))
+* **rules:** add `trailer-exists` rule ([#2578](https://github.com/conventional-changelog/commitlint/issues/2578)) ([cd3816d](https://github.com/conventional-changelog/commitlint/commit/cd3816d553762eae99e088689395c55afce0c6cc))
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
+## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* update dependency fs-extra to v10 ([#2575](https://github.com/conventional-changelog/commitlint/issues/2575)) ([d47d2b5](https://github.com/conventional-changelog/commitlint/commit/d47d2b595b980adadd4fb8ff198c1914caeff18f))
+* update dependency yargs to v17 ([#2574](https://github.com/conventional-changelog/commitlint/issues/2574)) ([81c38dd](https://github.com/conventional-changelog/commitlint/commit/81c38ddf15f239b525f673b26b2ee6606f2ee8f6))
+
+
+
+
+
 ## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
 
 

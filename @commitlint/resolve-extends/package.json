@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/resolve-extends",
-  "version": "12.1.1",
+  "version": "13.2.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,7 +12,7 @@
     "pkg": "pkg-check"
   },
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^12.1.1",
+    "@commitlint/utils": "^13.2.0",
     "@types/lodash": "^4.14.161"
   },
   "dependencies": {
