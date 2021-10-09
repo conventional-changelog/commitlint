@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.2.1](https://github.com/conventional-changelog/commitlint/compare/v13.2.0...v13.2.1) (2021-10-09)
+
+
+### Bug Fixes
+
+* **load:** added a direct dependency on typescript ([#2785](https://github.com/conventional-changelog/commitlint/issues/2785)) ([9c17f8d](https://github.com/conventional-changelog/commitlint/commit/9c17f8d423404b484f72df41358a18bd90014ecd)), closes [EndemolShineGroup/cosmiconfig-typescript-loader#147](https://github.com/EndemolShineGroup/cosmiconfig-typescript-loader/issues/147) [#2779](https://github.com/conventional-changelog/commitlint/issues/2779)
+
+
+
+
+
 # [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
 
 
