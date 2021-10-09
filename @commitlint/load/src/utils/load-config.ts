@@ -15,9 +15,8 @@ export async function loadConfig(
 	const moduleName = 'commitlint';
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
-			// since cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
-			// we need to manually merge default searchPlaces
-			// available at https://github.com/davidtheclark/cosmiconfig#searchplaces
+			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
+			// we need to manually merge default searchPlaces from https://github.com/davidtheclark/cosmiconfig#searchplaces
 			'package.json',
 			`.${moduleName}rc`,
 			`.${moduleName}rc.json`,
