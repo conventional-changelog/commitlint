@@ -226,6 +226,8 @@ For more information on how to contribute please take a look at our [contributio
 
 ![commitlint-dependencies](https://user-images.githubusercontent.com/4248851/58385093-34b79780-7feb-11e9-8f27-bffc4aca3eba.png)
 
+(Partly outdated)
+
 ### Publishing a release
 
 Before publishing a release do a `yarn run publish --dry-run` to get the upcoming version and update the version
