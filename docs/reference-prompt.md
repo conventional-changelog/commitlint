@@ -2,7 +2,13 @@
 
 Prompt Config is used by `@commitlint/cz-commitlint`.
 
-There are two fields: `messages` and `questions`
+There are three fields: `settings`, `messages` and `questions`
+
+## `settings`
+
+Set optional options.
+
+- scopeEnumSeparator: Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter.
 
 ## `messages`
 

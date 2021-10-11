@@ -2,10 +2,12 @@ import * as prompts from './prompts';
 
 let getPromptQuestions: typeof prompts.getPromptQuestions;
 let getPromptMessages: typeof prompts.getPromptMessages;
+let getPromptSettings: typeof prompts.getPromptSettings;
 let setPromptConfig: typeof prompts.setPromptConfig;
 
 beforeEach(() => {
 	jest.resetModules();
+	getPromptSettings = require('./prompts').getPromptSettings;
 	getPromptMessages = require('./prompts').getPromptMessages;
 	getPromptQuestions = require('./prompts').getPromptQuestions;
 	setPromptConfig = require('./prompts').setPromptConfig;
@@ -105,5 +107,27 @@ describe('setPromptConfig', () => {
 			},
 		});
 		expect(getPromptMessages()).toEqual(initialMessages);
+	});
+
+	test('should settings scopeEnumSeparator be set when value is ",\\/"', () => {
+		setPromptConfig({
+			settings: {
+				scopeEnumSeparator: '/',
+			},
+		});
+		expect(getPromptSettings()).toEqual({
+			scopeEnumSeparator: '/',
+		});
+
+		const processExit = jest
+			.spyOn(process, 'exit')
+			.mockImplementation(() => undefined as never);
+		setPromptConfig({
+			settings: {
+				scopeEnumSeparator: '-',
+			},
+		});
+		expect(processExit).toHaveBeenCalledWith(1);
+		processExit.mockClear();
 	});
 });

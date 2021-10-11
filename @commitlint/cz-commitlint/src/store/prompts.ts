@@ -11,7 +11,7 @@ const store: {
 };
 
 export function setPromptConfig(newPromptConfig: UserPromptConfig): void {
-	const {messages, questions} = newPromptConfig;
+	const {settings, messages, questions} = newPromptConfig;
 	if (messages) {
 		const requiredMessageKeys = Object.keys(defaultPromptConfigs.messages);
 		requiredMessageKeys.forEach((key: string) => {
@@ -25,6 +25,22 @@ export function setPromptConfig(newPromptConfig: UserPromptConfig): void {
 	if (questions && isPlainObject(questions)) {
 		store[storeKey]['questions'] = questions;
 	}
+
+	if (settings && isPlainObject(settings)) {
+		if (
+			settings['scopeEnumSeparator'] &&
+			!/^\/|\\|,$/.test(settings['scopeEnumSeparator'])
+		) {
+			console.log(
+				`prompt.settings.scopeEnumSeparator must be one of ',', '\\', '/'.`
+			);
+			process.exit(1);
+		}
+		store[storeKey]['settings'] = {
+			...defaultPromptConfigs.settings,
+			...settings,
+		};
+	}
 }
 
 export function getPromptMessages(): Readonly<PromptConfig['messages']> {
@@ -33,4 +49,8 @@ export function getPromptMessages(): Readonly<PromptConfig['messages']> {
 
 export function getPromptQuestions(): Readonly<PromptConfig['questions']> {
 	return (store[storeKey] && store[storeKey]['questions']) ?? {};
+}
+
+export function getPromptSettings(): Readonly<PromptConfig['settings']> {
+	return (store[storeKey] && store[storeKey]['settings']) ?? {};
 }

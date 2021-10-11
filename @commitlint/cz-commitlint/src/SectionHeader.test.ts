@@ -1,7 +1,16 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import {combineCommitMessage, getQuestions} from './SectionHeader';
+import {
+	combineCommitMessage,
+	getQuestions,
+	getQuestionConfig,
+} from './SectionHeader';
 import {setPromptConfig} from './store/prompts';
 import {setRules} from './store/rules';
+
+beforeEach(() => {
+	setRules({});
+	setPromptConfig({});
+});
 describe('getQuestions', () => {
 	test("should contain 'type','scope','subject'", () => {
 		const questions = getQuestions();
@@ -33,6 +42,31 @@ describe('getQuestions', () => {
 				name: 'subject',
 			}),
 		]);
+	});
+});
+
+describe('getQuestionConfig', () => {
+	test("should 'scope' supports multiple items separated with ',\\/'", () => {
+		const config = getQuestionConfig('scope');
+		expect(config).toEqual(
+			expect.objectContaining({
+				multipleValueDelimiters: /\/|\\|,/g,
+			})
+		);
+	});
+
+	test("should 'scope' supports multiple select separated with settings.scopeEnumSeparator", () => {
+		setPromptConfig({
+			settings: {
+				scopeEnumSeparator: '/',
+			},
+		});
+		const config = getQuestionConfig('scope');
+		expect(config).toEqual(
+			expect.objectContaining({
+				multipleSelectDefaultDelimiter: '/',
+			})
+		);
 	});
 });
 
