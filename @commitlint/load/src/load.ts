@@ -60,9 +60,9 @@ export default async function load(
 		parserPreset: config.parserPreset,
 	});
 
-	const preset = (pickConfig(
+	const preset = pickConfig(
 		mergeWith(extended, config, w)
-	) as unknown) as UserPreset;
+	) as unknown as UserPreset;
 	preset.plugins = {};
 
 	// TODO: check if this is still necessary with the new factory based conventional changelog parsers

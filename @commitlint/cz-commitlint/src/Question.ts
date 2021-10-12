@@ -153,14 +153,6 @@ export default class Question {
 
 	protected filter(input: string | string[]): string {
 		let toCased;
-
-		// array
-		// - multipleSelectDefaultDelimiter
-		// - no multipleSelectDefaultDelimiter
-		// string + multipleValueDelimiters
-		// - split
-		// - not split
-		// string
 		if (Array.isArray(input)) {
 			toCased = this.caseFn(input, this.multipleSelectDefaultDelimiter);
 		} else if (this.multipleValueDelimiters) {
