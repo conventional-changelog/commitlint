@@ -59,7 +59,10 @@ export default class Question {
 		this.title = title ?? '';
 		this.skip = skip ?? false;
 		this.fullStopFn = fullStopFn ?? ((_: string) => _);
-		this.caseFn = caseFn ?? ((_: string) => _);
+		this.caseFn =
+			caseFn ??
+			((input: string | string[], delimiter?: string) =>
+				Array.isArray(input) ? input.join(delimiter) : input);
 		this.multipleValueDelimiters = multipleValueDelimiters;
 		this.multipleSelectDefaultDelimiter = multipleSelectDefaultDelimiter;
 
@@ -149,17 +152,30 @@ export default class Question {
 	}
 
 	protected filter(input: string | string[]): string {
-		// Array
-		// String,is enable MultiSelect -> input.replace(delimeter, this.case); -> Array
+		let toCased;
 
-		const toCased = Array.isArray(input)
-			? input.map(this.caseFn).join(this.multipleSelectDefaultDelimiter)
-			: this.multipleValueDelimiters
-			? input.replace(
-					new RegExp(`[^${this.multipleValueDelimiters.source}]+`, 'g'),
-					this.caseFn
-			  )
-			: this.caseFn(input);
+		// array
+		// - multipleSelectDefaultDelimiter
+		// - no multipleSelectDefaultDelimiter
+		// string + multipleValueDelimiters
+		// - split
+		// - not split
+		// string
+		if (Array.isArray(input)) {
+			toCased = this.caseFn(input, this.multipleSelectDefaultDelimiter);
+		} else if (this.multipleValueDelimiters) {
+			const segments = input.split(this.multipleValueDelimiters);
+			const casedString = this.caseFn(segments, ',');
+			const casedSegments = casedString.split(',');
+			toCased = input.replace(
+				new RegExp(`[^${this.multipleValueDelimiters.source}]+`, 'g'),
+				(segment) => {
+					return casedSegments[segments.indexOf(segment)];
+				}
+			);
+		} else {
+			toCased = this.caseFn(input);
+		}
 
 		return this.fullStopFn(toCased);
 	}

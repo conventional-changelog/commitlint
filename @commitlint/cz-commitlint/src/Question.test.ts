@@ -15,6 +15,11 @@ const QUESTION_CONFIG = {
 	messages: MESSAGES,
 };
 
+const caseFn = (input: string | string[], delimiter?: string) =>
+	(Array.isArray(input) ? input : [input])
+		.map((segment) => segment[0].toUpperCase() + segment.slice(1))
+		.join(delimiter);
+
 describe('name', () => {
 	test('should throw error when name is not a meaningful string', () => {
 		expect(
@@ -195,40 +200,17 @@ describe('filter', () => {
 	test('should auto fix case and full-stop', () => {
 		const question = new Question('body', {
 			...QUESTION_CONFIG,
-			caseFn: (input: string) => input[0].toUpperCase() + input.slice(1),
+			caseFn,
 			fullStopFn: (input: string) => input + '!',
 		}).question;
 
 		expect(question.filter?.('xxxx', {})).toBe('Xxxx!');
 	});
 
-	test('should split the string to items when multipleValueDelimiters is defined', () => {
+	test('should transform each item with same case when input is array', () => {
 		const question = new Question('body', {
 			...QUESTION_CONFIG,
-			caseFn: (input: string) => input[0].toUpperCase() + input.slice(1),
-			fullStopFn: (input: string) => input + '!',
-			multipleValueDelimiters: /,|\|/g,
-		}).question;
-
-		expect(question.filter?.('xxxx,yyyy|zzzz', {})).toBe('Xxxx,Yyyy|Zzzz!');
-	});
-
-	test('should delimiters keep origin when multipleSelectDefaultDelimiter is defined', () => {
-		const question = new Question('body', {
-			...QUESTION_CONFIG,
-			caseFn: (input: string) => input[0].toUpperCase() + input.slice(1),
-			fullStopFn: (input: string) => input + '!',
-			multipleValueDelimiters: /,|\|/g,
-			multipleSelectDefaultDelimiter: '/',
-		}).question;
-
-		expect(question.filter?.('xxxx,yyyy|zzzz', {})).toBe('Xxxx,Yyyy|Zzzz!');
-	});
-
-	test('should fix each item when input is array', () => {
-		const question = new Question('body', {
-			...QUESTION_CONFIG,
-			caseFn: (input: string) => input[0].toUpperCase() + input.slice(1),
+			caseFn,
 			fullStopFn: (input: string) => input + '!',
 		}).question;
 
@@ -238,12 +220,24 @@ describe('filter', () => {
 	test('should concat items with multipleSelectDefaultDelimiter when input is array', () => {
 		const question = new Question('body', {
 			...QUESTION_CONFIG,
-			caseFn: (input: string) => input[0].toUpperCase() + input.slice(1),
+			caseFn,
 			fullStopFn: (input: string) => input + '!',
 			multipleSelectDefaultDelimiter: '|',
 		}).question;
 
 		expect(question.filter?.(['xxxx', 'yyyy'], {})).toBe('Xxxx|Yyyy!');
+	});
+
+	test('should split the string to items when multipleValueDelimiters is defined', () => {
+		const question = new Question('body', {
+			...QUESTION_CONFIG,
+			caseFn,
+			fullStopFn: (input: string) => input + '!',
+			multipleValueDelimiters: /,|\|/g,
+		}).question;
+
+		expect(question.filter?.('xxxx,yyyy|zzzz', {})).toBe('Xxxx,Yyyy|Zzzz!');
+		expect(question.filter?.('xxxx-yyyy-zzzz', {})).toBe('Xxxx-yyyy-zzzz!');
 	});
 
 	test('should works well when does not pass caseFn/fullStopFn', () => {
@@ -307,7 +301,7 @@ describe('transformer', () => {
 	test('should auto transform case and full-stop', () => {
 		const question = new Question('body', {
 			...QUESTION_CONFIG,
-			caseFn: (input: string) => input[0].toUpperCase() + input.slice(1),
+			caseFn,
 			fullStopFn: (input: string) => input + '!',
 		}).question;
 
