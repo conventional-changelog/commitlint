@@ -75,6 +75,15 @@ workflows:
     - lint_commit_message: { requires: [setup] }
 ```
 
+## GitLab CI
+
+```yaml
+lint:commit:
+  stage: lint
+  script:
+    - echo "${CI_COMMIT_TITLE}\n\n${CI_COMMIT_DESCRIPTION}" | npx commitlint
+```
+
 ### 3rd party integrations
 
 #### [Codemagic](https://codemagic.io/)

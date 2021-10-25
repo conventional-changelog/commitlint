@@ -16,12 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/load"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "keywords": [
     "conventional-changelog",
     "commitlint",
@@ -36,7 +37,7 @@
   "devDependencies": {
     "@commitlint/test": "^13.2.0",
     "@commitlint/utils": "^13.2.0",
-    "@types/lodash": "4.14.175",
+    "@types/lodash": "4.14.176",
     "conventional-changelog-atom": "^2.0.8",
     "execa": "^5.0.0"
   },

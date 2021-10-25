@@ -16,13 +16,14 @@
   "scripts": {
     "commit": "git-cz"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/cz-commitlint"
   },
   "engineStrict": true,
   "engines": {

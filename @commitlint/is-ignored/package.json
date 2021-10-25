@@ -16,12 +16,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/is-ignored"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "keywords": [
     "conventional-changelog",
     "commitlint",
@@ -37,7 +38,7 @@
     "@commitlint/parse": "^13.2.0",
     "@commitlint/test": "^13.2.0",
     "@commitlint/utils": "^13.2.0",
-    "@types/semver": "7.3.8"
+    "@types/semver": "7.3.9"
   },
   "dependencies": {
     "@commitlint/types": "^13.2.0",

@@ -175,7 +175,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 - [ ] **DX**: Incorporate an extended version of [lennym/commit-template](https://github.com/lennym/commit-template) deducing a template from commitlint configuration
 - [ ] **DX**: Rewrite `@commitlint/prompt` for better usability (might involve a lot of yak-shaving)
 
-## Version Support and Releaes
+## Version Support and Releases
 
 - Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 12`
 - git `>= 2.13.2`
