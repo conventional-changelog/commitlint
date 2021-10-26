@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "13.2.1",
+  "version": "14.0.0",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -37,12 +37,12 @@
     "node": ">=v12"
   },
   "devDependencies": {
-    "@commitlint/utils": "^13.2.0",
+    "@commitlint/utils": "^14.0.0",
     "commitizen": "4.2.4"
   },
   "dependencies": {
-    "@commitlint/load": "^13.2.1",
-    "@commitlint/types": "^13.2.0",
+    "@commitlint/load": "^14.0.0",
+    "@commitlint/types": "^14.0.0",
     "chalk": "^4.0.0",
     "lodash": "^4.17.19",
     "throat": "^6.0.0",

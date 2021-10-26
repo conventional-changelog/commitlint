@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
+
+**Note:** Version bump only for package @commitlint/core
+
+
+
+
+
 ## [13.2.1](https://github.com/conventional-changelog/commitlint/compare/v13.2.0...v13.2.1) (2021-10-09)
 
 **Note:** Version bump only for package @commitlint/core

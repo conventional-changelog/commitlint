@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
+
+
+* support multiple scopes and multiple cases & fix sentence-case is not consistent with commitlint/cli (#2806) ([2c71a7e](https://github.com/conventional-changelog/commitlint/commit/2c71a7e2965a2beff805982d37243b79a48c9360)), closes [#2806](https://github.com/conventional-changelog/commitlint/issues/2806) [#2782](https://github.com/conventional-changelog/commitlint/issues/2782)
+
+
+### BREAKING CHANGES
+
+* add prompt.settings configuration
+
+
+
+
+
 # [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
 
 
