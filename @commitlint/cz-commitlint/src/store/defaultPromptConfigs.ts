@@ -1,4 +1,7 @@
 export default {
+	settings: {
+		scopeEnumSeparator: ',',
+	},
 	messages: {
 		skip: '(press enter to skip)',
 		max: '(max %d chars)',

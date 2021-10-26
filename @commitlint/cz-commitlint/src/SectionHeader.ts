@@ -2,6 +2,7 @@ import {PromptName, RuleField} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
 import Question, {QuestionConfig} from './Question';
 import getRuleQuestionConfig from './services/getRuleQuestionConfig';
+import {getPromptSettings} from './store/prompts';
 
 export class HeaderQuestion extends Question {
 	headerMaxLength: number;
@@ -47,8 +48,13 @@ export function getQuestions(): Array<DistinctQuestion> {
 	}
 
 	headerRuleFields.forEach((name) => {
-		const questionConfig = getRuleQuestionConfig(name);
+		const questionConfig = getQuestionConfig(name);
 		if (questionConfig) {
+			if (name === 'scope') {
+				questionConfig.multipleSelectDefaultDelimiter =
+					getPromptSettings()['scopeEnumSeparator'];
+				questionConfig.multipleValueDelimiters = /\/|\\|,/g;
+			}
 			const instance = new HeaderQuestion(
 				name,
 				questionConfig,
@@ -59,4 +65,20 @@ export function getQuestions(): Array<DistinctQuestion> {
 		}
 	});
 	return questions;
+}
+
+export function getQuestionConfig(
+	name: RuleField
+): ReturnType<typeof getRuleQuestionConfig> {
+	const questionConfig = getRuleQuestionConfig(name);
+
+	if (questionConfig) {
+		if (name === 'scope') {
+			questionConfig.multipleSelectDefaultDelimiter =
+				getPromptSettings()['scopeEnumSeparator'];
+			questionConfig.multipleValueDelimiters = /\/|\\|,/g;
+		}
+	}
+
+	return questionConfig;
 }

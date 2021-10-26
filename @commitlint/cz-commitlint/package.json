@@ -37,6 +37,7 @@
     }
   },
   "dependencies": {
+    "@commitlint/ensure": "^13.2.0",
     "@commitlint/load": "^13.2.1",
     "@commitlint/types": "^13.2.0",
     "chalk": "^4.1.0",
@@ -48,6 +49,7 @@
     "inquirer": "^8.0.0"
   },
   "devDependencies": {
-    "@types/inquirer": "^8.0.0"
+    "@types/inquirer": "^8.0.0",
+    "commitizen": "^4.2.4"
   }
 }
