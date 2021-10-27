@@ -15,15 +15,21 @@ export async function loadConfig(
 	const moduleName = 'commitlint';
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
+			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
+			// we need to manually merge default searchPlaces from https://github.com/davidtheclark/cosmiconfig#searchplaces
 			'package.json',
 			`.${moduleName}rc`,
 			`.${moduleName}rc.json`,
 			`.${moduleName}rc.yaml`,
 			`.${moduleName}rc.yml`,
-			`.${moduleName}rc.ts`,
 			`.${moduleName}rc.js`,
-			`${moduleName}.config.ts`,
+			`.${moduleName}rc.cjs`,
 			`${moduleName}.config.js`,
+			`${moduleName}.config.cjs`,
+
+			// files supported by TypescriptLoader
+			`.${moduleName}rc.ts`,
+			`${moduleName}.config.ts`,
 		],
 		loaders: {
 			'.ts': TypeScriptLoader,
