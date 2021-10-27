@@ -1,12 +1,6 @@
-import _ from 'lodash';
-import camelCase from 'lodash/camelCase';
-import kebabCase from 'lodash/kebabCase';
-import snakeCase from 'lodash/snakeCase';
-import startCase from 'lodash/startCase';
-import upperFirst from 'lodash/upperFirst';
 import {ruleIsActive, ruleIsNotApplicable} from './rules';
 import {TargetCaseType} from '@commitlint/types';
-import {case as ensureCase} from '@commitlint/ensure';
+import {case as ensureCase, toCase} from '@commitlint/ensure';
 import {Rule} from '../types';
 
 export type CaseFn = (input: string | string[], delimiter?: string) => string;
@@ -46,31 +40,4 @@ export default function getCaseFn(rule?: Rule): CaseFn {
 			})
 			.join(delimiter);
 	};
-}
-
-function toCase(input: string, target: TargetCaseType): string {
-	switch (target) {
-		case 'camel-case':
-			return camelCase(input);
-		case 'kebab-case':
-			return kebabCase(input);
-		case 'snake-case':
-			return snakeCase(input);
-		case 'pascal-case':
-			return upperFirst(camelCase(input));
-		case 'start-case':
-			return startCase(input);
-		case 'upper-case':
-		case 'uppercase':
-			return input.toUpperCase();
-		case 'sentence-case':
-		case 'sentencecase':
-			return input.charAt(0).toUpperCase() + input.slice(1);
-		case 'lower-case':
-		case 'lowercase':
-		case 'lowerCase': // Backwards compat config-angular v4
-			return input.toLowerCase();
-		default:
-			throw new TypeError(`Unknown target case "${target}"`);
-	}
 }
