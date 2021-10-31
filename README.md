@@ -106,7 +106,7 @@ npx husky install
 yarn husky install
 
 # Add hook
-npx husky add .husky/commit-msg 'npx --no-install commitlint --edit "$1"'
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 ```
 
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
@@ -193,7 +193,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 
 ### Releases
 
-Security patches will be applied to versions which are not yet EOL.  
+Security patches will be applied to versions which are not yet EOL.
 Features will only be applied to the current main version.
 
 | Release                                                                          | Inital release | End-of-life |
@@ -204,7 +204,7 @@ Features will only be applied to the current main version.
 
 _Dates are subject to change._
 
-We're not a sponsored OSS project. Therefor we can't promise that we will release patch versions for older releases in a timley manner.  
+We're not a sponsored OSS project. Therefor we can't promise that we will release patch versions for older releases in a timley manner.
 If you are stuck on an older version and need a security patch we're happy if you can provide a PR.
 
 ## Related projects
@@ -242,7 +242,7 @@ For more information on how to contribute please take a look at our [contributio
 ### Publishing a release
 
 Before publishing a release do a `yarn run publish --dry-run` to get the upcoming version and update the version
-in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/@commitlint/cli/src/cli.test.ts#L431).  
+in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/@commitlint/cli/src/cli.test.ts#L431).
 Commit that change before creating the new version without `--dry-run`.
 
 ```sh

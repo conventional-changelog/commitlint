@@ -33,12 +33,12 @@ npx husky install
 yarn husky install
 
 # Add hook
-npx husky add .husky/commit-msg 'npx --no-install commitlint --edit $1'
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
 # or
 yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
-**Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**  
+**Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 ## Test
@@ -70,7 +70,7 @@ No staged files match any of provided globs.
 husky > commit-msg hook failed (add --no-verify to bypass)
 ```
 
-Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.  
+Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.
 (You can use the `--verbose` flag to get positive output)
 
 ```bash
