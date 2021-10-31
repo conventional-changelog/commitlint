@@ -257,3 +257,24 @@ test('format result omits help for empty problems', () => {
 		expect.arrayContaining([expect.stringContaining('Get help:')])
 	);
 });
+
+test('format result should not contain `Get help` prefix if helpUrl is not provided', () => {
+	const actual = formatResult(
+		{
+			warnings: [
+				{
+					level: 2,
+					name: 'warning-name',
+					message: 'There was a warning',
+				},
+			],
+		},
+		{
+			helpUrl: '',
+		}
+	);
+
+	expect(actual).not.toEqual(
+		expect.arrayContaining([expect.stringContaining('Get help:')])
+	);
+});
