@@ -15,6 +15,7 @@ export interface ResolvedConfig {
 export interface ResolveExtendsConfig {
 	parserPreset?: unknown;
 	extends?: string | string[];
+	helpUrl?: string;
 	[key: string]: unknown;
 }
 

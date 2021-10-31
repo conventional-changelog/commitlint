@@ -453,3 +453,21 @@ test('resolves parser preset from conventional commits without factory support',
 		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });
+
+test('helpUrl should be loaded from the shareable config', async () => {
+	const cwd = await gitBootstrap('fixtures/help-url');
+	const actual = await load({}, {cwd});
+
+	expect(actual.helpUrl).toStrictEqual(
+		'https://github.com/conventional-changelog/commitlint'
+	);
+});
+
+test('default helpUrl should be loaded if not provided in shareable configs', async () => {
+	const cwd = await gitBootstrap('fixtures/basic');
+	const actual = await load({}, {cwd});
+
+	expect(actual.helpUrl).toStrictEqual(
+		'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+	);
+});
