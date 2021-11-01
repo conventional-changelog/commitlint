@@ -281,7 +281,7 @@ npx lerna publish --conventional-commits --dist-tag next --otp <one-time passwor
 
 If for some reason this stops in between, you can manually publish missing packages like this:
 
-```
+```sh
 npm publish <package-name> --tag next --otp <one-time password>
 ```
 
