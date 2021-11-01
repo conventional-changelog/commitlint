@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.1.0](https://github.com/conventional-changelog/commitlint/compare/v14.0.0...v14.1.0) (2021-11-01)
+
+
+### Features
+
+* extend helpUrl from shareable config ([#2846](https://github.com/conventional-changelog/commitlint/issues/2846)) ([d7e2e2b](https://github.com/conventional-changelog/commitlint/commit/d7e2e2b943be383f99f4000b6b6bed0eab03bfcf))
+
+
+
+
+
 # [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
 
 **Note:** Version bump only for package @commitlint/resolve-extends
