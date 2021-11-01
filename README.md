@@ -193,7 +193,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 
 ### Releases
 
-Security patches will be applied to versions which are not yet EOL.
+Security patches will be applied to versions which are not yet EOL.\
 Features will only be applied to the current main version.
 
 | Release                                                                          | Inital release | End-of-life |
@@ -204,7 +204,7 @@ Features will only be applied to the current main version.
 
 _Dates are subject to change._
 
-We're not a sponsored OSS project. Therefor we can't promise that we will release patch versions for older releases in a timley manner.
+We're not a sponsored OSS project. Therefor we can't promise that we will release patch versions for older releases in a timley manner.\
 If you are stuck on an older version and need a security patch we're happy if you can provide a PR.
 
 ## Related projects
