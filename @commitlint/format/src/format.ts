@@ -89,14 +89,17 @@ export function formatResult(
 	const fmtSummary =
 		enabled && typeof summary === 'string' ? chalk.bold(summary) : summary;
 
-	const help = hasProblems ? `ⓘ   Get help: ${options.helpUrl}` : undefined;
+	const help =
+		hasProblems && options.helpUrl
+			? `ⓘ   Get help: ${options.helpUrl}`
+			: undefined;
 
 	return [
 		...problems,
 		hasProblems ? '' : undefined,
 		fmtSummary,
 		help,
-		help ? '' : undefined,
+		hasProblems ? '' : undefined,
 	].filter((line): line is string => typeof line === 'string');
 }
 

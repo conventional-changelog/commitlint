@@ -111,7 +111,9 @@ export default async function load(
 	}, {});
 
 	const helpUrl =
-		typeof config.helpUrl === 'string'
+		typeof extended.helpUrl === 'string'
+			? extended.helpUrl
+			: typeof config.helpUrl === 'string'
 			? config.helpUrl
 			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 
