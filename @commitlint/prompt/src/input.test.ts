@@ -92,5 +92,5 @@ function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 	};
 	prompt.restoreDefaultPrompts = () => true;
 	prompt.prompts = {};
-	return (prompt as any) as PromptModule;
+	return prompt as any as PromptModule;
 }
