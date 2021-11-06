@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.2.0](https://github.com/conventional-changelog/commitlint/compare/v14.1.0...v14.2.0) (2021-11-06)
+
+
+### Features
+
+* **prompt:** rewrite codebase to use inquirer - UPDATED with current master ([#2697](https://github.com/conventional-changelog/commitlint/issues/2697)) ([5105f43](https://github.com/conventional-changelog/commitlint/commit/5105f43ea8093bce82fe4703c4c14a8210721924))
+
+
+
+
+
 # [14.1.0](https://github.com/conventional-changelog/commitlint/compare/v14.0.0...v14.1.0) (2021-11-01)
 
 
