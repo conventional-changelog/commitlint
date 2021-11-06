@@ -19,37 +19,6 @@ export type InputSetting = {
 	};
 };
 
-export type Result = Partial<
-	Record<'type' | 'scope' | 'subject' | 'body' | 'footer', null | string>
->;
+export type ResultPart = 'type' | 'scope' | 'subject' | 'body' | 'footer';
 
-export interface PrompterCommand {
-	description(value: string): this;
-	action(
-		action: (args: {
-			[key: string]: any;
-			options: {
-				[key: string]: any;
-			};
-		}) => Promise<void> | void
-	): this;
-}
-
-export interface Prompter {
-	delimiter(value: string): this;
-	show(): this;
-	exec(command: string): Promise<any>;
-	log(text?: string): void;
-	catch(command: string, description?: string): PrompterCommand;
-	command(command: string, description?: string): PrompterCommand;
-	removeAllListeners(input?: string): void;
-	addListener(input: string, cb: (event: any) => void): void;
-	ui: {
-		log(text?: string): void;
-		input(text?: string): string;
-		redraw: {
-			(text: string, ...texts: string[]): void;
-			done(): void;
-		};
-	};
-}
+export type Result = Partial<Record<ResultPart, string | undefined>>;

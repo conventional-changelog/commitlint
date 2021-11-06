@@ -1,6 +1,7 @@
 import chalk from 'chalk';
+import {InputCustomOptions} from 'inquirer';
 
-import type {InputSetting, Prompter, Result, RuleEntry} from './types';
+import type {InputSetting, RuleEntry, Result, ResultPart} from './types';
 
 import format from './format';
 import getForcedCaseFn from './get-forced-case-fn';
@@ -8,232 +9,115 @@ import getForcedLeadingFn from './get-forced-leading-fn';
 import meta from './meta';
 import {
 	enumRuleIsActive,
-	ruleIsNotApplicable,
-	ruleIsApplicable,
-	ruleIsActive,
 	getHasName,
 	getMaxLength,
+	ruleIsActive,
+	ruleIsApplicable,
+	ruleIsNotApplicable,
 } from './utils';
+
+const EOL = '\n';
 
 /**
  * Get a cli prompt based on rule configuration
  * @param type type of the data to gather
- * @param context rules to parse
+ * @param rules
+ * @param settings
  * @return prompt instance
  */
 export default function getPrompt(
-	type: string,
-	context: {
-		rules?: RuleEntry[];
-		settings?: InputSetting;
-		results?: Result;
-		prompter?: () => Prompter;
-	} = {}
-): Promise<string | undefined> {
-	const {rules = [], settings = {}, results = {}, prompter} = context;
+	type: ResultPart,
+	rules: RuleEntry[] = [],
+	settings: InputSetting = {}
+): InputCustomOptions<Result> | null {
+	const emptyRule = rules.filter(getHasName('empty')).find(ruleIsActive);
 
-	if (typeof prompter !== 'function') {
-		throw new TypeError('Missing prompter function in getPrompt context');
-	}
-
-	const prompt = prompter();
-
-	if (typeof prompt.removeAllListeners !== 'function') {
-		throw new TypeError(
-			'getPrompt: prompt.removeAllListeners is not a function'
-		);
-	}
-
-	if (typeof prompt.command !== 'function') {
-		throw new TypeError('getPrompt: prompt.command is not a function');
-	}
-
-	if (typeof prompt.catch !== 'function') {
-		throw new TypeError('getPrompt: prompt.catch is not a function');
-	}
-
-	if (typeof prompt.addListener !== 'function') {
-		throw new TypeError('getPrompt: prompt.addListener is not a function');
-	}
-
-	if (typeof prompt.log !== 'function') {
-		throw new TypeError('getPrompt: prompt.log is not a function');
-	}
-
-	if (typeof prompt.delimiter !== 'function') {
-		throw new TypeError('getPrompt: prompt.delimiter is not a function');
-	}
-
-	if (typeof prompt.show !== 'function') {
-		throw new TypeError('getPrompt: prompt.show is not a function');
-	}
-
-	const enumRule = rules.filter(getHasName('enum')).find(enumRuleIsActive);
-
-	const emptyRule = rules.find(getHasName('empty'));
-
-	const mustBeEmpty =
-		emptyRule && ruleIsActive(emptyRule) && ruleIsApplicable(emptyRule);
-
-	const mayNotBeEmpty =
-		emptyRule && ruleIsActive(emptyRule) && ruleIsNotApplicable(emptyRule);
-
-	const mayBeEmpty = !mayNotBeEmpty;
+	const mustBeEmpty = emptyRule ? ruleIsApplicable(emptyRule) : false;
 
 	if (mustBeEmpty) {
-		prompt.removeAllListeners('keypress');
-		prompt.removeAllListeners('client_prompt_submit');
-		prompt.ui.redraw.done();
-		return Promise.resolve(undefined);
+		return null;
 	}
 
-	const caseRule = rules.find(getHasName('case'));
+	const required = emptyRule ? ruleIsNotApplicable(emptyRule) : false;
 
-	const forceCaseFn = getForcedCaseFn(caseRule);
-
-	const leadingBlankRule = rules.find(getHasName('leading-blank'));
-
-	const forceLeadingBlankFn = getForcedLeadingFn(leadingBlankRule);
+	const forceCaseFn = getForcedCaseFn(rules.find(getHasName('case')));
+	const forceLeadingBlankFn = getForcedLeadingFn(
+		rules.find(getHasName('leading-blank'))
+	);
 
 	const maxLengthRule = rules.find(getHasName('max-length'));
 	const inputMaxLength = getMaxLength(maxLengthRule);
 
-	const headerLength = settings.header ? settings.header.length : Infinity;
+	const enumRule = rules.filter(getHasName('enum')).find(enumRuleIsActive);
 
-	const remainingHeaderLength = headerLength
-		? headerLength -
-		  [
-				results.type,
-				results.scope,
-				results.scope ? '()' : '',
-				results.type && results.scope ? ':' : '',
-				results.subject,
-		  ].join('').length
-		: Infinity;
-
-	const maxLength = Math.min(inputMaxLength, remainingHeaderLength);
-
-	return new Promise((resolve) => {
-		// Add the defined enums as sub commands if applicable
-		if (enumRule) {
-			const [, [, , enums]] = enumRule;
-
-			enums.forEach((enumerable) => {
+	const tabCompletion = enumRule
+		? enumRule[1][2].map((enumerable) => {
 				const enumSettings = (settings.enumerables || {})[enumerable] || {};
-				prompt
-					.command(enumerable)
-					.description(enumSettings.description || '')
-					.action(() => {
-						prompt.removeAllListeners();
-						prompt.ui.redraw.done();
-						return resolve(forceLeadingBlankFn(forceCaseFn(enumerable)));
-					});
+				return {
+					value: forceLeadingBlankFn(forceCaseFn(enumerable)),
+					description: enumSettings.description || '',
+				};
+		  })
+		: [];
+
+	const maxLength = (res: Result) => {
+		let remainingHeaderLength = Infinity;
+		if (settings.header && settings.header.length) {
+			const header = format({
+				type: res.type,
+				scope: res.scope,
+				subject: res.subject,
 			});
-		} else {
-			prompt.catch('[text...]').action((parameters) => {
-				const {text = ''} = parameters;
-				prompt.removeAllListeners();
-				prompt.ui.redraw.done();
-				return resolve(forceLeadingBlankFn(forceCaseFn(text.join(' '))));
-			});
+			remainingHeaderLength = settings.header.length - header.length;
 		}
+		return Math.min(inputMaxLength, remainingHeaderLength);
+	};
 
-		if (mayBeEmpty) {
-			// Add an easy exit command
-			prompt
-				.command(':skip')
-				.description('Skip the input if possible.')
-				.action(() => {
-					prompt.removeAllListeners();
-					prompt.ui.redraw.done();
-					resolve('');
-				});
-		}
-
-		// Handle empty input
-		const onSubmit = (input: string) => {
-			if (input.length > 0) {
-				return;
+	return {
+		type: 'input-custom',
+		name: type,
+		message: `${type}:`,
+		validate(input, answers) {
+			if (input.length > maxLength(answers || {})) {
+				return 'Input contains too many characters!';
+			}
+			if (required && input.trim().length === 0) {
+				// Show help if enum is defined and input may not be empty
+				return `⚠ ${chalk.bold(type)} may not be empty.`;
 			}
 
-			// Show help if enum is defined and input may not be empty
-			if (mayNotBeEmpty) {
-				prompt.ui.log(chalk.yellow(`⚠ ${chalk.bold(type)} may not be empty.`));
+			const tabValues = tabCompletion.map((item) => item.value);
+			if (
+				input.length > 0 &&
+				tabValues.length > 0 &&
+				!tabValues.includes(input)
+			) {
+				return `⚠ ${chalk.bold(type)} must be one of ${tabValues.join(', ')}.`;
 			}
+			return true;
+		},
+		tabCompletion,
+		log(answers?: Result) {
+			let prefix =
+				`${chalk.white('Please enter a')} ${chalk.bold(type)}: ${meta({
+					optional: !required,
+					required: required,
+					'tab-completion': typeof enumRule !== 'undefined',
+					header: typeof settings.header !== 'undefined',
+					'multi-line': settings.multiline,
+				})}` + EOL;
 
-			if (mayBeEmpty) {
-				prompt.ui.log(
-					chalk.blue(
-						`ℹ Enter ${chalk.bold(':skip')} to omit ${chalk.bold(type)}.`
-					)
-				);
+			if (settings.description) {
+				prefix += chalk.grey(`${settings.description}`) + EOL;
 			}
-
-			if (enumRule) {
-				prompt.exec('help');
+			if (answers) {
+				prefix += EOL + `${format(answers, true)}` + EOL;
 			}
-		};
-
-		const drawRemaining = (length: number) => {
-			if (length < Infinity) {
-				const colors = [
-					{
-						threshold: 5,
-						color: chalk.red,
-					},
-					{
-						threshold: 10,
-						color: chalk.yellow,
-					},
-					{
-						threshold: Infinity,
-						color: chalk.grey,
-					},
-				];
-
-				const el = colors.find((item) => item.threshold >= length);
-				const color = el ? el.color : chalk.grey;
-				prompt.ui.redraw(color(`${length} characters left`));
-			}
-		};
-
-		const onKey = (event: {value: string}) => {
-			const sanitized = forceCaseFn(event.value);
-			const cropped = sanitized.slice(0, maxLength);
-
-			// We **could** do live editing, but there are some quirks to solve
-			/* const live = merge({}, results, {
-				[type]: cropped
-			});
-			prompt.ui.redraw(`\n\n${format(live, true)}\n\n`); */
-
-			if (maxLength) {
-				drawRemaining(maxLength - cropped.length);
-			}
-			prompt.ui.input(cropped);
-		};
-
-		prompt.addListener('keypress', onKey);
-		prompt.addListener('client_prompt_submit', onSubmit);
-
-		prompt.log(
-			`\n\nPlease enter a ${chalk.bold(type)}: ${meta({
-				optional: !mayNotBeEmpty,
-				required: mayNotBeEmpty,
-				'tab-completion': typeof enumRule !== 'undefined',
-				header: typeof settings.header !== 'undefined',
-				'multi-line': settings.multiline,
-			})}`
-		);
-
-		if (settings.description) {
-			prompt.log(chalk.grey(`${settings.description}\n`));
-		}
-
-		prompt.log(`\n\n${format(results, true)}\n\n`);
-
-		drawRemaining(maxLength);
-
-		prompt.delimiter(`❯ ${type}:`).show();
-	});
+			return prefix + EOL;
+		},
+		maxLength,
+		transformer(value: string) {
+			return forceCaseFn(value);
+		},
+	};
 }
