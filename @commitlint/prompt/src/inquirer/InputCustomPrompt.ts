@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import InputPrompt from 'inquirer/lib/prompts/input';
 import observe from 'inquirer/lib/utils/events';
-import {Interface as ReadlineInterface, Key} from 'readline';
+import type {Interface as ReadlineInterface, Key} from 'readline';
 import type {Subscription} from 'rxjs/internal/Subscription';
 
 import Answers = inquirer.Answers;

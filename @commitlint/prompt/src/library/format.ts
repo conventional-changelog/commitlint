@@ -1,5 +1,5 @@
-import chalk from 'chalk';
-import {Result, ResultPart} from './types';
+import * as chalk from 'chalk';
+import type {Result, ResultPart} from './types';
 
 /**
  * Get formatted commit message

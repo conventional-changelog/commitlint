@@ -1,5 +1,5 @@
 import load from '@commitlint/load';
-import {DistinctQuestion, PromptModule} from 'inquirer';
+import type {DistinctQuestion, PromptModule} from 'inquirer';
 
 import format from './library/format';
 import getPrompt from './library/get-prompt';

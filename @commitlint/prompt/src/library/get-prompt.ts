@@ -1,5 +1,5 @@
-import chalk from 'chalk';
-import {InputCustomOptions} from 'inquirer';
+import * as chalk from 'chalk';
+import type {InputCustomOptions} from 'inquirer';
 
 import type {InputSetting, RuleEntry, Result, ResultPart} from './types';
 

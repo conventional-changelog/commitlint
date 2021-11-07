@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 
 /**
  * Get formatted meta hints for configuration
