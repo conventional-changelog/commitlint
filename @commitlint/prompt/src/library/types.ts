@@ -1,4 +1,4 @@
-import {RuleConfigCondition, RuleConfigSeverity} from '@commitlint/types';
+import type {RuleConfigCondition, RuleConfigSeverity} from '@commitlint/types';
 
 export type RuleEntry =
 	| [string, Readonly<[RuleConfigSeverity.Disabled]>]

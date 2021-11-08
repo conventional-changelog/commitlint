@@ -1,4 +1,4 @@
-import {Result} from './types';
+import type {Result} from './types';
 import format from './format';
 
 test('should return empty string', () => {

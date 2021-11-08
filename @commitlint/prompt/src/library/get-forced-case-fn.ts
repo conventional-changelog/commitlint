@@ -1,7 +1,7 @@
 import {toCase} from '@commitlint/ensure';
-import {RuleEntry} from './types';
 import {ruleIsActive, ruleIsNotApplicable} from './utils';
-import {TargetCaseType} from '@commitlint/types';
+import type {RuleEntry} from './types';
+import type {TargetCaseType} from '@commitlint/types';
 
 /**
  * Get forced case for rule

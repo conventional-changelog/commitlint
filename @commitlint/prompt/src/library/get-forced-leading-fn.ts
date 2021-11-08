@@ -1,4 +1,4 @@
-import {RuleEntry} from './types';
+import type {RuleEntry} from './types';
 import {ruleIsActive, ruleIsNotApplicable} from './utils';
 
 /**
