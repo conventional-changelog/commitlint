@@ -1,7 +1,7 @@
 import {Answers, PromptModule, QuestionCollection} from 'inquirer';
 /// <reference path="./inquirer/inquirer.d.ts" />
 import {input} from './input';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 
 jest.mock(
 	'@commitlint/load',
