@@ -45,7 +45,7 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
 
 ### Test simple usage
 
-For a first simple usage test of commlitlint you can do the following:
+For a first simple usage test of commitlint you can do the following:
 
 ```bash
 npx commitlint --from HEAD~1 --to HEAD --verbose
