@@ -248,6 +248,22 @@ test('recursive extends with package.json file', async () => {
 	});
 });
 
+test('recursive extends with ts file', async () => {
+	const cwd = await gitBootstrap('fixtures/recursive-extends-ts');
+	const actual = await load({}, {cwd});
+
+	expect(actual).toMatchObject({
+		formatter: '@commitlint/format',
+		extends: ['./first-extended'],
+		plugins: {},
+		rules: {
+			zero: [0, 'never', 'zero'],
+			one: [1, 'never', 'one'],
+			two: [2, 'never', 'two'],
+		},
+	});
+});
+
 test('parser preset overwrites completely instead of merging', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset-override');
 	const actual = await load({}, {cwd});
@@ -435,5 +451,23 @@ test('resolves parser preset from conventional commits without factory support',
 	expect(typeof actual.parserPreset.parserOpts).toBe('object');
 	expect((actual.parserPreset.parserOpts as any).headerPattern).toEqual(
 		/^(\w*)(?:\((.*)\))?!?: (.*)$/
+	);
+});
+
+test('helpUrl should be loaded from the shareable config', async () => {
+	const cwd = await gitBootstrap('fixtures/help-url');
+	const actual = await load({}, {cwd});
+
+	expect(actual.helpUrl).toStrictEqual(
+		'https://github.com/conventional-changelog/commitlint'
+	);
+});
+
+test('default helpUrl should be loaded if not provided in shareable configs', async () => {
+	const cwd = await gitBootstrap('fixtures/basic');
+	const actual = await load({}, {cwd});
+
+	expect(actual.helpUrl).toStrictEqual(
+		'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	);
 });

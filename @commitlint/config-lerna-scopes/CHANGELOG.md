@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
+
+**Note:** Version bump only for package @commitlint/config-lerna-scopes
+
+
+
+
+
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+**Note:** Version bump only for package @commitlint/config-lerna-scopes
+
+
+
+
+
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* update dependency import-from to v4 ([#2629](https://github.com/conventional-changelog/commitlint/issues/2629)) ([5bcb604](https://github.com/conventional-changelog/commitlint/commit/5bcb60456cd9d4c8f0f0bae21ca7c3d1c73943ca))
+
+
+
+
+
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
+## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
+
+**Note:** Version bump only for package @commitlint/config-lerna-scopes
+
+
+
+
+
+## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
+
+**Note:** Version bump only for package @commitlint/config-lerna-scopes
+
+
+
+
+
+## [12.1.1](https://github.com/conventional-changelog/commitlint/compare/v12.1.0...v12.1.1) (2021-04-02)
+
+
+### Bug Fixes
+
+* **config-lerna-scopes:** ignore packages without names ([#2514](https://github.com/conventional-changelog/commitlint/issues/2514)) ([df3bf71](https://github.com/conventional-changelog/commitlint/commit/df3bf71ab36a085ef35a1491025c0d2e2b92ff77))
+* update dependency semver to v7.3.5 ([#2519](https://github.com/conventional-changelog/commitlint/issues/2519)) ([5113f22](https://github.com/conventional-changelog/commitlint/commit/5113f22c620e7b187fd558e5befa541b448ea18b))
+
+
+
+
+
+# [12.1.0](https://github.com/conventional-changelog/commitlint/compare/v12.0.1...v12.1.0) (2021-03-06)
+
+
+### Features
+
+* **config-lerna-scopes:** keep supporting lerna v3 ([51b0f4a](https://github.com/conventional-changelog/commitlint/commit/51b0f4a56f111c61419247755b1404b4e20d3a09))
+
+
+
+
+
 ## [12.0.1](https://github.com/conventional-changelog/commitlint/compare/v12.0.0...v12.0.1) (2021-02-23)
 
 **Note:** Version bump only for package @commitlint/config-lerna-scopes

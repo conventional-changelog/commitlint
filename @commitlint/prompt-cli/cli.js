@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 const execa = require('execa');
+const inquirer = require('inquirer');
 const {prompter} = require('@commitlint/prompt');
-
-const _ = undefined;
-const prompt = () => prompter(_, commit);
 
 main().catch((err) => {
 	setTimeout(() => {
@@ -21,7 +19,7 @@ function main() {
 				process.exit(1);
 			}
 		})
-		.then(() => prompt());
+		.then(() => prompter(inquirer, commit));
 }
 
 function isStageEmpty() {

@@ -77,7 +77,7 @@ export type RuleConfig<
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
-	TargetCaseType
+	TargetCaseType | TargetCaseType[]
 >;
 export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
@@ -91,7 +91,7 @@ export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 export type RulesConfig<V = RuleConfigQuality.User> = {
 	'body-case': CaseRuleConfig<V>;
 	'body-empty': RuleConfig<V>;
-	'body-full-stop': RuleConfig<V>;
+	'body-full-stop': RuleConfig<V, string>;
 	'body-leading-blank': RuleConfig<V>;
 	'body-max-length': LengthRuleConfig<V>;
 	'body-max-line-length': LengthRuleConfig<V>;
@@ -102,7 +102,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	'footer-max-line-length': LengthRuleConfig<V>;
 	'footer-min-length': LengthRuleConfig<V>;
 	'header-case': CaseRuleConfig<V>;
-	'header-full-stop': RuleConfig<V>;
+	'header-full-stop': RuleConfig<V, string>;
 	'header-max-length': LengthRuleConfig<V>;
 	'header-min-length': LengthRuleConfig<V>;
 	'references-empty': RuleConfig<V>;
@@ -111,12 +111,13 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	'scope-enum': EnumRuleConfig<V>;
 	'scope-max-length': LengthRuleConfig<V>;
 	'scope-min-length': LengthRuleConfig<V>;
-	'signed-off-by': RuleConfig<V>;
+	'signed-off-by': RuleConfig<V, string>;
 	'subject-case': CaseRuleConfig<V>;
 	'subject-empty': RuleConfig<V>;
-	'subject-full-stop': RuleConfig<V>;
+	'subject-full-stop': RuleConfig<V, string>;
 	'subject-max-length': LengthRuleConfig<V>;
 	'subject-min-length': LengthRuleConfig<V>;
+	'trailer-exists': RuleConfig<V, string>;
 	'type-case': CaseRuleConfig<V>;
 	'type-empty': RuleConfig<V>;
 	'type-enum': EnumRuleConfig<V>;

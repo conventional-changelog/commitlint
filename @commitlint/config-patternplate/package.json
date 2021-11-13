@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-patternplate",
-  "version": "12.0.1",
+  "version": "14.1.0",
   "description": "Lint your commits, patternplate-style",
   "files": [
     "index.js"
@@ -11,7 +11,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/config-patternplate"
   },
   "keywords": [
     "conventional-changelog",
@@ -24,17 +25,17 @@
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "dependencies": {
-    "@commitlint/config-angular": "^12.0.1",
+    "@commitlint/config-angular": "^14.1.0",
     "globby": "^11.0.0",
     "lodash": "^4.17.19"
   },
   "devDependencies": {
-    "@commitlint/utils": "^12.0.1"
+    "@commitlint/utils": "^14.0.0"
   },
   "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
 }

@@ -8,6 +8,10 @@ The file is expected
 - export a configuration object
 - adhere to the schema outlined below
 
+## Config option CLI
+
+Add the path to the configuration file. Example: `commitlint --config commitlint.config.js`
+
 ## Configuration object example
 
 ### JavaScript
@@ -48,6 +52,17 @@ const Configuration = {
    */
   helpUrl:
     'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+  /*
+   * Custom prompt configs
+   */
+  prompt: {
+    messages: {},
+    questions: {
+      type: {
+        description: 'please input type:',
+      },
+    },
+  },
 };
 
 module.exports = Configuration;
@@ -93,6 +108,17 @@ const Configuration: UserConfig = {
    */
   helpUrl:
     'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+  /*
+   * Custom prompt configs
+   */
+  prompt: {
+    messages: {},
+    questions: {
+      type: {
+        description: 'please input type:',
+      },
+    },
+  },
 };
 
 module.exports = Configuration;
@@ -201,3 +227,9 @@ module.exports = {
 ## Rules
 
 Refer to [Rules](reference-rules.md) for a complete list of available rules.
+
+## Prompt
+
+Config command-line submit interaction, works with `@commitlint/cz-commitlint`.
+
+Refer to [Prompt Config](reference-prompt.md) for details.

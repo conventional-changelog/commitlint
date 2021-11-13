@@ -12,17 +12,17 @@ configure `commitlint` to use it.
 ```bash
 # Install and configure if needed
 npm install --save-dev @commitlint/{cli,config-conventional}
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
-Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
+Alternatively the configuration can be defined in a `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc`, `.commitlintrc.json`, `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
 
 ## Install husky
 
 Install `husky` as devDependency, a handy git hook helper available on npm.
 
 ```sh
-# Install Husky v5
+# Install Husky v6
 npm install husky --save-dev
 # or
 yarn add husky --dev
@@ -33,26 +33,19 @@ npx husky install
 yarn husky install
 
 # Add hook
-npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
 # or
-yarn husky add .husky/commit-msg "yarn commitlint --edit $1"
+yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
-If the file `.husky/commit-msg` already exists, you can edit the file and put this:
-
-```sh
-# .husky/commit-msg
-# ...
-npx --no-install commitlint --edit $1
-# or
-yarn commitlint --edit $1
-```
+**Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**\
+Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 ## Test
 
 ### Test simple usage
 
-For a first simple usage test of commlitlint you can do the following:
+For a first simple usage test of commitlint you can do the following:
 
 ```bash
 npx commitlint --from HEAD~1 --to HEAD --verbose
@@ -77,7 +70,7 @@ No staged files match any of provided globs.
 husky > commit-msg hook failed (add --no-verify to bypass)
 ```
 
-Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.  
+Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.\
 (You can use the `--verbose` flag to get positive output)
 
 ```bash

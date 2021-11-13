@@ -11,7 +11,7 @@ npm install --save @commitlint/format
 ## Example
 
 ```js
-const format = require('@commitlint/format');
+const format = require('@commitlint/format').default;
 
 const output = format(
   {

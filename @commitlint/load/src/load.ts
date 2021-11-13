@@ -1,25 +1,23 @@
-import Path from 'path';
-
+import executeRule from '@commitlint/execute-rule';
+import resolveExtends from '@commitlint/resolve-extends';
+import {
+	LoadOptions,
+	ParserPreset,
+	QualifiedConfig,
+	QualifiedRules,
+	UserConfig,
+	UserPreset,
+} from '@commitlint/types';
+import isPlainObject from 'lodash/isPlainObject';
 import merge from 'lodash/merge';
 import mergeWith from 'lodash/mergeWith';
 import pick from 'lodash/pick';
 import union from 'lodash/union';
+import Path from 'path';
 import resolveFrom from 'resolve-from';
-
-import executeRule from '@commitlint/execute-rule';
-import resolveExtends from '@commitlint/resolve-extends';
-import {
-	UserConfig,
-	LoadOptions,
-	QualifiedConfig,
-	UserPreset,
-	QualifiedRules,
-	ParserPreset,
-} from '@commitlint/types';
-
-import loadPlugin from './utils/load-plugin';
 import {loadConfig} from './utils/load-config';
 import {loadParserOpts} from './utils/load-parser-opts';
+import loadPlugin from './utils/load-plugin';
 import {pickConfig} from './utils/pick-config';
 
 const w = <T>(_: unknown, b: ArrayLike<T> | null | undefined | false) =>
@@ -62,9 +60,9 @@ export default async function load(
 		parserPreset: config.parserPreset,
 	});
 
-	const preset = (pickConfig(
+	const preset = pickConfig(
 		mergeWith(extended, config, w)
-	) as unknown) as UserPreset;
+	) as unknown as UserPreset;
 	preset.plugins = {};
 
 	// TODO: check if this is still necessary with the new factory based conventional changelog parsers
@@ -113,9 +111,14 @@ export default async function load(
 	}, {});
 
 	const helpUrl =
-		typeof config.helpUrl === 'string'
+		typeof extended.helpUrl === 'string'
+			? extended.helpUrl
+			: typeof config.helpUrl === 'string'
 			? config.helpUrl
 			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
+
+	const prompt =
+		preset.prompt && isPlainObject(preset.prompt) ? preset.prompt : {};
 
 	return {
 		extends: preset.extends!,
@@ -126,5 +129,6 @@ export default async function load(
 		plugins: preset.plugins!,
 		rules: qualifiedRules,
 		helpUrl,
+		prompt,
 	};
 }

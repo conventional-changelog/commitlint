@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/lint",
-  "version": "12.0.1",
+  "version": "14.1.0",
   "description": "Lint a string against commitlint rules",
   "main": "lib/lint.js",
   "types": "lib/lint.d.ts",
@@ -12,16 +12,17 @@
     "pkg": "pkg-check --skip-import"
   },
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/lint"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "keywords": [
     "conventional-changelog",
     "commitlint",
@@ -34,14 +35,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^12.0.1",
-    "@commitlint/utils": "^12.0.1"
+    "@commitlint/test": "^14.0.0",
+    "@commitlint/utils": "^14.0.0"
   },
   "dependencies": {
-    "@commitlint/is-ignored": "^12.0.1",
-    "@commitlint/parse": "^12.0.1",
-    "@commitlint/rules": "^12.0.1",
-    "@commitlint/types": "^12.0.1"
+    "@commitlint/is-ignored": "^14.0.0",
+    "@commitlint/parse": "^14.0.0",
+    "@commitlint/rules": "^14.1.0",
+    "@commitlint/types": "^14.0.0"
   },
-  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
+  "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

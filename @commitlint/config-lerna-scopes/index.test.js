@@ -60,6 +60,14 @@ test('returns expected value for basic lerna repository', async () => {
 	expect(value).toEqual(['a', 'b']);
 });
 
+test('returns expected value for lerna repository containing modules', async () => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = await npm.bootstrap('modules', __dirname);
+
+	const [, , value] = await fn({cwd});
+	expect(value).toEqual(['a']);
+});
+
 test('returns expected value for scoped lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/scoped', __dirname);

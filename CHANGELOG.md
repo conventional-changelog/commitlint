@@ -3,6 +3,168 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.2.0](https://github.com/conventional-changelog/commitlint/compare/v14.1.0...v14.2.0) (2021-11-06)
+
+
+### Features
+
+* **prompt:** rewrite codebase to use inquirer - UPDATED with current master ([#2697](https://github.com/conventional-changelog/commitlint/issues/2697)) ([5105f43](https://github.com/conventional-changelog/commitlint/commit/5105f43ea8093bce82fe4703c4c14a8210721924))
+
+
+
+
+
+# [14.1.0](https://github.com/conventional-changelog/commitlint/compare/v14.0.0...v14.1.0) (2021-11-01)
+
+
+### Features
+
+* extend helpUrl from shareable config ([#2846](https://github.com/conventional-changelog/commitlint/issues/2846)) ([d7e2e2b](https://github.com/conventional-changelog/commitlint/commit/d7e2e2b943be383f99f4000b6b6bed0eab03bfcf))
+* **load:** add support for `.commitlintrc.cjs` and `commitlint.config.cjs` files ([#2797](https://github.com/conventional-changelog/commitlint/issues/2797)) ([fabb495](https://github.com/conventional-changelog/commitlint/commit/fabb49509730609276ff9ef6357536c95a1f6bb1))
+
+
+
+
+
+# [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
+
+
+* support multiple scopes and multiple cases & fix sentence-case is not consistent with commitlint/cli (#2806) ([2c71a7e](https://github.com/conventional-changelog/commitlint/commit/2c71a7e2965a2beff805982d37243b79a48c9360)), closes [#2806](https://github.com/conventional-changelog/commitlint/issues/2806) [#2782](https://github.com/conventional-changelog/commitlint/issues/2782)
+
+
+### BREAKING CHANGES
+
+* add prompt.settings configuration
+
+
+
+
+
+## [13.2.1](https://github.com/conventional-changelog/commitlint/compare/v13.2.0...v13.2.1) (2021-10-09)
+
+
+### Bug Fixes
+
+* **load:** added a direct dependency on typescript ([#2785](https://github.com/conventional-changelog/commitlint/issues/2785)) ([9c17f8d](https://github.com/conventional-changelog/commitlint/commit/9c17f8d423404b484f72df41358a18bd90014ecd)), closes [EndemolShineGroup/cosmiconfig-typescript-loader#147](https://github.com/EndemolShineGroup/cosmiconfig-typescript-loader/issues/147) [#2779](https://github.com/conventional-changelog/commitlint/issues/2779)
+
+
+
+
+
+# [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **parse:** enforce secure version of `conventional-commits-parser` ([#2776](https://github.com/conventional-changelog/commitlint/issues/2776)) ([a351801](https://github.com/conventional-changelog/commitlint/commit/a3518012ae11bc00a43a12b8ce935f3ffd2d04ef))
+* update dependency read-pkg to v7 ([#2721](https://github.com/conventional-changelog/commitlint/issues/2721)) ([7d9a3b1](https://github.com/conventional-changelog/commitlint/commit/7d9a3b1f2ab41c598f4d23d96805f86a4d41ae09))
+* **types:** prompt messages key ([4825a52](https://github.com/conventional-changelog/commitlint/commit/4825a521e2c74d63a11920b48094fddc79001b3c))
+* **types:** prompt messages props optional ([0bd0592](https://github.com/conventional-changelog/commitlint/commit/0bd0592148ab4266fd76816b19d352e2cf947f8c))
+* **types:** user config prompt ([6d7a1c4](https://github.com/conventional-changelog/commitlint/commit/6d7a1c40e2f8a8ff22595e0e17f71f3702b0699c))
+
+
+### Features
+
+* **load:** add cosmiconfig typescript loader ([b65aced](https://github.com/conventional-changelog/commitlint/commit/b65acedc3334a859811762539ec8716de3e73f85))
+
+
+
+
+
+# [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
+
+
+### Bug Fixes
+
+* **cz-commitlint:** fix minor formatting issues ([99d8881](https://github.com/conventional-changelog/commitlint/commit/99d8881d0d951deded6d9e31bbb279d04101549b))
+* **types:** adds TargetCaseType[] for CaseRuleConfig ([c3bef38](https://github.com/conventional-changelog/commitlint/commit/c3bef384ff1a3ec428ba7c86bc778c50a9e6eead))
+* update dependency import-from to v4 ([#2629](https://github.com/conventional-changelog/commitlint/issues/2629)) ([5bcb604](https://github.com/conventional-changelog/commitlint/commit/5bcb60456cd9d4c8f0f0bae21ca7c3d1c73943ca))
+* **cli:** remove hard coded comment char with linting `COMMIT_EDIT_MSG` ([#2618](https://github.com/conventional-changelog/commitlint/issues/2618)) ([5badf6d](https://github.com/conventional-changelog/commitlint/commit/5badf6dc08116ed3557e6c780e55764b4f07ca67)), closes [#2351](https://github.com/conventional-changelog/commitlint/issues/2351)
+
+
+### Features
+
+* **rules:** allow body-case to accept an array of cases ([5383c9e](https://github.com/conventional-changelog/commitlint/commit/5383c9edcd9a351ea1c33ed49f47afed9b1cde6b)), closes [#2631](https://github.com/conventional-changelog/commitlint/issues/2631)
+
+
+
+
+
+# [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
+
+
+### Bug Fixes
+
+* update dependency chalk to v4.1.1 ([#2608](https://github.com/conventional-changelog/commitlint/issues/2608)) ([f41b123](https://github.com/conventional-changelog/commitlint/commit/f41b1237c7f7b2ff23b87643939569276d77b304))
+* update dependency yargs to v17.0.1 ([#2609](https://github.com/conventional-changelog/commitlint/issues/2609)) ([afbfd10](https://github.com/conventional-changelog/commitlint/commit/afbfd10592579c544d8e2c313f2c2baef68990f8))
+
+
+### Features
+
+* add subject-exclamation-mark rule to improve error messages ([#2593](https://github.com/conventional-changelog/commitlint/issues/2593)) ([be701bd](https://github.com/conventional-changelog/commitlint/commit/be701bdb1de4e667b7a872767244285c4fa4fda4))
+* **rules:** add `trailer-exists` rule ([#2578](https://github.com/conventional-changelog/commitlint/issues/2578)) ([cd3816d](https://github.com/conventional-changelog/commitlint/commit/cd3816d553762eae99e088689395c55afce0c6cc))
+
+
+* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
+
+
+### BREAKING CHANGES
+
+* minimum node version is 12
+
+
+
+
+
+## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* update dependency fs-extra to v10 ([#2575](https://github.com/conventional-changelog/commitlint/issues/2575)) ([d47d2b5](https://github.com/conventional-changelog/commitlint/commit/d47d2b595b980adadd4fb8ff198c1914caeff18f))
+* update dependency yargs to v17 ([#2574](https://github.com/conventional-changelog/commitlint/issues/2574)) ([81c38dd](https://github.com/conventional-changelog/commitlint/commit/81c38ddf15f239b525f673b26b2ee6606f2ee8f6))
+
+
+
+
+
+## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
+
+
+### Bug Fixes
+
+* **rules:** fix subject-full-stop rule config value type ([#2534](https://github.com/conventional-changelog/commitlint/issues/2534)) ([2ab3c57](https://github.com/conventional-changelog/commitlint/commit/2ab3c57b709ddad3fc98d768309ac4fdac8cb68a))
+* **types:** update chalk import ([#2535](https://github.com/conventional-changelog/commitlint/issues/2535)) ([89f9a6d](https://github.com/conventional-changelog/commitlint/commit/89f9a6d759f7296438e184a93c1f766aba1443ca))
+
+
+
+
+
+## [12.1.1](https://github.com/conventional-changelog/commitlint/compare/v12.1.0...v12.1.1) (2021-04-02)
+
+
+### Bug Fixes
+
+* update dependency read-pkg to v6 ([#2530](https://github.com/conventional-changelog/commitlint/issues/2530)) ([d38a2ad](https://github.com/conventional-changelog/commitlint/commit/d38a2adc07f4cd6dad48aadbb73f2f1d3740e689))
+* **config-lerna-scopes:** ignore packages without names ([#2514](https://github.com/conventional-changelog/commitlint/issues/2514)) ([df3bf71](https://github.com/conventional-changelog/commitlint/commit/df3bf71ab36a085ef35a1491025c0d2e2b92ff77))
+* update dependency semver to v7.3.5 ([#2519](https://github.com/conventional-changelog/commitlint/issues/2519)) ([5113f22](https://github.com/conventional-changelog/commitlint/commit/5113f22c620e7b187fd558e5befa541b448ea18b))
+* **prompt:** modify the entry point to pass commitizen's function check ([#2501](https://github.com/conventional-changelog/commitlint/issues/2501)) ([0173fb7](https://github.com/conventional-changelog/commitlint/commit/0173fb7cc01dc8442ed88a0ab8feec20c955deee)), closes [/github.com/conventional-changelog/commitlint/issues/2486#issuecomment-791682272](https://github.com//github.com/conventional-changelog/commitlint/issues/2486/issues/issuecomment-791682272) [/github.com/conventional-changelog/commitlint/issues/2486#issuecomment-791682272](https://github.com//github.com/conventional-changelog/commitlint/issues/2486/issues/issuecomment-791682272)
+
+
+
+
+
+# [12.1.0](https://github.com/conventional-changelog/commitlint/compare/v12.0.1...v12.1.0) (2021-03-06)
+
+
+### Features
+
+* **config-lerna-scopes:** keep supporting lerna v3 ([51b0f4a](https://github.com/conventional-changelog/commitlint/commit/51b0f4a56f111c61419247755b1404b4e20d3a09))
+
+
+
+
+
 ## [12.0.1](https://github.com/conventional-changelog/commitlint/compare/v12.0.0...v12.0.1) (2021-02-23)
 
 

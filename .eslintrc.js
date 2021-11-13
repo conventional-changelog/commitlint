@@ -52,6 +52,7 @@ module.exports = {
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-inferrable-types': 'off',
 				'@typescript-eslint/no-non-null-assertion': 'off',
+				'@typescript-eslint/triple-slash-reference': 'off',
 
 				// TODO: enable those rules?
 				'no-empty': 'off',

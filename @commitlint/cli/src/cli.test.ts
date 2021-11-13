@@ -1,8 +1,8 @@
-import path from 'path';
 import {fix, git} from '@commitlint/test';
 import execa from 'execa';
-import merge from 'lodash/merge';
 import fs from 'fs-extra';
+import merge from 'lodash/merge';
+import path from 'path';
 
 const bin = require.resolve('../cli.js');
 
@@ -329,6 +329,16 @@ test('should handle --amend with signoff', async () => {
 	expect(commit).toBeTruthy();
 }, 10000);
 
+test('should fail with an empty message and a commentChar is set', async () => {
+	const cwd = await gitBootstrap('fixtures/comment-char');
+	await execa('git', ['config', '--local', 'core.commentChar', '$'], {cwd});
+	await fs.writeFile(path.join(cwd, '.git', 'COMMIT_EDITMSG'), '#1234');
+
+	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	expect(actual.stdout).toContain('[subject-empty]');
+	expect(actual.exitCode).toBe(1);
+});
+
 test('should handle linting with issue prefixes', async () => {
 	const cwd = await gitBootstrap('fixtures/issue-prefixes');
 	const actual = await cli([], {cwd})('foobar REF-1');
@@ -494,7 +504,8 @@ test('should print config', async () => {
 		  defaultIgnores: undefined,
 		  plugins: {},
 		  rules: { 'type-enum': [ 2, 'never', [ 'foo' ] ] },
-		  helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
+		  helpUrl: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+		  prompt: {}
 		}"
 	`);
 });
