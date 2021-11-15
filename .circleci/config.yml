@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.4.0
+  win: circleci/windows@2.4.1
 
 commands:
   update-yarn:
@@ -76,19 +76,19 @@ commands:
       - build
       - test
 jobs:
-  v10:
-    docker:
-      - image: node:10
-    steps:
-      - run-tests
   v12:
     docker:
-      - image: node:12
+      - image: node:12-buster
     steps:
       - run-all
   v14:
     docker:
-      - image: node:14
+      - image: node:14-buster
+    steps:
+      - run-tests
+  v16:
+    docker:
+      - image: node:16-buster
     steps:
       - run-tests
   windows-v12:
@@ -99,7 +99,7 @@ jobs:
 workflows:
   node:
     jobs:
-      - v10
       - v12
       - v14
+      - v16
       - windows-v12

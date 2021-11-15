@@ -10,5 +10,6 @@ export const pickConfig = (input: unknown): Record<string, unknown> =>
 		'formatter',
 		'ignores',
 		'defaultIgnores',
-		'helpUrl'
+		'helpUrl',
+		'prompt'
 	);

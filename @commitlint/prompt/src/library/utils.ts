@@ -1,5 +1,6 @@
-import {QualifiedRules, RuleConfigSeverity} from '@commitlint/types';
-import {RuleEntry} from './types';
+import {RuleConfigSeverity} from '@commitlint/types';
+import type {QualifiedRules} from '@commitlint/types';
+import type {RuleEntry} from './types';
 
 /**
  * Get name for a given rule id

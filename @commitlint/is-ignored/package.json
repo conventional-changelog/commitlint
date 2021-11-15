@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/is-ignored",
-  "version": "12.0.0",
+  "version": "14.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,16 +12,17 @@
     "pkg": "pkg-check"
   },
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/is-ignored"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "keywords": [
     "conventional-changelog",
     "commitlint",
@@ -34,14 +35,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^12.0.0",
-    "@commitlint/test": "^12.0.0",
-    "@commitlint/utils": "^12.0.0",
-    "@types/semver": "7.3.4"
+    "@commitlint/parse": "^14.0.0",
+    "@commitlint/test": "^14.0.0",
+    "@commitlint/utils": "^14.0.0",
+    "@types/semver": "7.3.9"
   },
   "dependencies": {
-    "@commitlint/types": "^12.0.0",
-    "semver": "7.3.4"
+    "@commitlint/types": "^14.0.0",
+    "semver": "7.3.5"
   },
-  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
+  "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

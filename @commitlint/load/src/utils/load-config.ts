@@ -1,5 +1,6 @@
 import path from 'path';
 import {cosmiconfig} from 'cosmiconfig';
+import TypeScriptLoader from '@endemolshinegroup/cosmiconfig-typescript-loader';
 
 export interface LoadConfigResult {
 	config: unknown;
@@ -11,7 +12,29 @@ export async function loadConfig(
 	cwd: string,
 	configPath?: string
 ): Promise<LoadConfigResult | null> {
-	const explorer = cosmiconfig('commitlint');
+	const moduleName = 'commitlint';
+	const explorer = cosmiconfig(moduleName, {
+		searchPlaces: [
+			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
+			// we need to manually merge default searchPlaces from https://github.com/davidtheclark/cosmiconfig#searchplaces
+			'package.json',
+			`.${moduleName}rc`,
+			`.${moduleName}rc.json`,
+			`.${moduleName}rc.yaml`,
+			`.${moduleName}rc.yml`,
+			`.${moduleName}rc.js`,
+			`.${moduleName}rc.cjs`,
+			`${moduleName}.config.js`,
+			`${moduleName}.config.cjs`,
+
+			// files supported by TypescriptLoader
+			`.${moduleName}rc.ts`,
+			`${moduleName}.config.ts`,
+		],
+		loaders: {
+			'.ts': TypeScriptLoader,
+		},
+	});
 
 	const explicitPath = configPath ? path.resolve(cwd, configPath) : undefined;
 	const explore = explicitPath ? explorer.load : explorer.search;

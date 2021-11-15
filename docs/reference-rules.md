@@ -336,6 +336,11 @@ Infinity
 0
 ```
 
+#### subject-exclamation-mark
+
+- **condition**: `subject` has exclamation before the `:` marker
+- **rule**: `never`
+
 #### type-enum
 
 - **condition**: `type` is found in value
@@ -403,77 +408,12 @@ Infinity
 'Signed-off-by:'
 ```
 
-### Deprecated rules
+#### trailer-exists
 
-#### body-tense `deprecated`
-
-- **condition**: `body` is verbalized in tense present in `value`
+- **condition**: `message` has trailer `value`
 - **rule**: `always`
 - **value**
 
 ```
-['present-imperative']
-```
-
-- **possible values**
-
-```
-[
-  'past-tense', // did
-  'present-imperative', // do
-  'present-participle', // doing
-  'present-third-person' // does
-]
-```
-
-#### footer-tense `deprecated`
-
-- **condition**: `footer` is verbalized in tense present in `value`
-- **rule**: `always`
-- **value**
-
-```
-['present-imperative']
-```
-
-- **possible values**
-
-```
-[
-  'past-tense', // did
-  'present-imperative', // do
-  'present-participle', // doing
-  'present-third-person' // does
-]
-```
-
-#### lang `deprecated`
-
-- **condition**: `subject` is of language `value`
-- **rule**: `always`
-- **value**
-
-```
-eng
-```
-
-#### subject-tense `deprecated`
-
-- **condition**: `subject` is verbalized in tense present in `value`
-- **rule**: `always`
-- **value**
-
-```
-['present-imperative']
-```
-
-- **possible values**
-
-```
-[
-  'past-tense', // did
-  'present-imperative', // do
-  'present-participle', // doing
-  'present-third-person' // does
-]
+'Signed-off-by:'
 ```

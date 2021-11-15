@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt-cli",
-  "version": "12.0.0",
+  "version": "14.2.0",
   "description": "commit prompt using commitlint.config.js",
   "files": [
     "cli.js"
@@ -15,7 +15,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/prompt-cli"
   },
   "keywords": [
     "commitlint",
@@ -26,17 +27,18 @@
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "devDependencies": {
-    "@commitlint/test": "^12.0.0",
-    "@commitlint/utils": "^12.0.0"
+    "@commitlint/test": "^14.0.0",
+    "@commitlint/utils": "^14.0.0"
   },
   "dependencies": {
-    "@commitlint/prompt": "^12.0.0",
-    "execa": "^5.0.0"
+    "@commitlint/prompt": "^14.2.0",
+    "execa": "^5.0.0",
+    "inquirer": "^6.5.2"
   },
-  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
+  "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

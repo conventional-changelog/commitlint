@@ -1,10 +1,7 @@
-import camelCase from 'lodash/camelCase';
-import kebabCase from 'lodash/kebabCase';
-import snakeCase from 'lodash/snakeCase';
-import upperFirst from 'lodash/upperFirst';
-import startCase from 'lodash/startCase';
-import {RuleEntry} from './types';
+import {toCase} from '@commitlint/ensure';
 import {ruleIsActive, ruleIsNotApplicable} from './utils';
+import type {RuleEntry} from './types';
+import type {TargetCaseType} from '@commitlint/types';
 
 /**
  * Get forced case for rule
@@ -26,29 +23,5 @@ export default function getForcedCaseFn(
 		return noop;
 	}
 
-	switch (target) {
-		case 'camel-case':
-			return (input: string) => camelCase(input);
-		case 'kebab-case':
-			return (input: string) => kebabCase(input);
-		case 'snake-case':
-			return (input: string) => snakeCase(input);
-		case 'pascal-case':
-			return (input: string) => upperFirst(camelCase(input));
-		case 'start-case':
-			return (input: string) => startCase(input);
-		case 'upper-case':
-		case 'uppercase':
-			return (input: string) => input.toUpperCase();
-		case 'sentence-case':
-		case 'sentencecase':
-			return (input: string) =>
-				`${input.charAt(0).toUpperCase()}${input.substring(1).toLowerCase()}`;
-		case 'lower-case':
-		case 'lowercase':
-		case 'lowerCase': // Backwards compat config-angular v4
-			return (input: string) => input.toLowerCase();
-		default:
-			throw new TypeError(`Unknown target case "${target}"`);
-	}
+	return (input: string) => toCase(input, target as TargetCaseType);
 }

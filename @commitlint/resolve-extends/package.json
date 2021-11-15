@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/resolve-extends",
-  "version": "12.0.0",
+  "version": "14.1.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -12,16 +12,17 @@
     "pkg": "pkg-check"
   },
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/resolve-extends"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "keywords": [
     "conventional-changelog",
     "commitlint",
@@ -34,7 +35,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^12.0.0",
+    "@commitlint/utils": "^14.0.0",
     "@types/lodash": "^4.14.161"
   },
   "dependencies": {

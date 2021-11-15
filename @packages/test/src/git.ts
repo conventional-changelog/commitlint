@@ -35,7 +35,11 @@ async function setup(cwd: string, gitCommand = 'git') {
 			cwd,
 		});
 		await execa(gitCommand, ['config', 'commit.gpgsign', 'false'], {cwd});
-	} catch (err) {
-		console.warn(`git config in ${cwd} failed`, err.message);
+	} catch (err: any) {
+		if (typeof err === 'object' && typeof err.message === 'object') {
+			console.warn(`git config in ${cwd} failed`, err.message);
+		} else {
+			console.error('An unknown error occurred setting up the git environment');
+		}
 	}
 }

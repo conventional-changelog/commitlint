@@ -43,13 +43,13 @@ function getPackages(context) {
 				});
 			}
 
-			const Project = importFrom(cwd, '@lerna/project');
-			const project = new Project(cwd);
-			return project.getPackages();
+			const {getPackages} = importFrom(cwd, '@lerna/project');
+			return getPackages(cwd);
 		})
 		.then((packages) => {
 			return packages
 				.map((pkg) => pkg.name)
+				.filter(Boolean)
 				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 		});
 }

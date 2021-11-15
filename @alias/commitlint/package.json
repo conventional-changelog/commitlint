@@ -1,6 +1,6 @@
 {
   "name": "commitlint",
-  "version": "12.0.0",
+  "version": "14.1.0",
   "description": "Lint your commit messages",
   "files": [
     "cli.js"
@@ -13,16 +13,17 @@
     "pkg": "pkg-check --skip-main"
   },
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@alias/commitlint"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "keywords": [
     "conventional-changelog",
     "commitlint",
@@ -34,13 +35,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^12.0.0",
-    "@commitlint/types": "^12.0.0"
+    "@commitlint/cli": "^14.1.0",
+    "@commitlint/types": "^14.0.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^12.0.0",
-    "@commitlint/utils": "^12.0.0",
+    "@commitlint/test": "^14.0.0",
+    "@commitlint/utils": "^14.0.0",
     "execa": "^5.0.0"
   },
-  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
+  "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

@@ -2,10 +2,9 @@ import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
 import isFunction from 'lodash/isFunction';
-import stdin from 'get-stdin';
 import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
-import yargs from 'yargs';
+import yargs, {Arguments} from 'yargs';
 import util from 'util';
 
 import {CliFlags, Seed} from './types';
@@ -117,7 +116,7 @@ const cli = yargs
 	)
 	.strict();
 
-main({edit: false, ...cli.argv}).catch((err) => {
+main(cli.argv).catch((err) => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
 			process.exit(1);
@@ -126,7 +125,38 @@ main({edit: false, ...cli.argv}).catch((err) => {
 	}, 0);
 });
 
-async function main(options: CliFlags) {
+async function stdin() {
+	let result = '';
+
+	if (process.stdin.isTTY) {
+		return result;
+	}
+
+	process.stdin.setEncoding('utf8');
+
+	for await (const chunk of process.stdin) {
+		result += chunk;
+	}
+
+	return result;
+}
+
+type MainArgsObject = {
+	[key in keyof Arguments<CliFlags>]: Arguments<CliFlags>[key];
+};
+type MainArgsPromise = Promise<MainArgsObject>;
+type MainArgs = MainArgsObject | MainArgsPromise;
+
+async function resolveArgs(args: MainArgs): Promise<MainArgsObject> {
+	return typeof args.then === 'function' ? await args : args;
+}
+
+async function main(args: MainArgs) {
+	const options = await resolveArgs(args);
+	if (typeof options.edit === 'undefined') {
+		options.edit = false;
+	}
+
 	const raw = options._;
 	const flags = normalizeFlags(options);
 
@@ -190,8 +220,10 @@ async function main(options: CliFlags) {
 	}
 	const format = loadFormatter(loaded, flags);
 
-	// Strip comments if reading from `.git/COMMIT_EDIT_MSG`
-	if (flags.edit) {
+	// Strip comments if reading from `.git/COMMIT_EDIT_MSG` using the
+	// commentChar from the parser preset falling back to a `#` if that is not
+	// set
+	if (flags.edit && typeof opts.parserOpts.commentChar !== 'string') {
 		opts.parserOpts.commentChar = '#';
 	}
 
@@ -264,16 +296,16 @@ async function main(options: CliFlags) {
 	}
 }
 
-function checkFromStdin(input: string[], flags: CliFlags): boolean {
+function checkFromStdin(input: (string | number)[], flags: CliFlags): boolean {
 	return input.length === 0 && !checkFromRepository(flags);
 }
 
-function checkFromRepository(flags: CliFlags) {
+function checkFromRepository(flags: CliFlags): boolean {
 	return checkFromHistory(flags) || checkFromEdit(flags);
 }
 
-function checkFromEdit(flags: CliFlags) {
-	return Boolean(flags.edit) || flags.env;
+function checkFromEdit(flags: CliFlags): boolean {
+	return Boolean(flags.edit) || Boolean(flags.env);
 }
 
 function checkFromHistory(flags: CliFlags): boolean {
@@ -292,7 +324,7 @@ function getEditValue(flags: CliFlags) {
 	if (flags.env) {
 		if (!(flags.env in process.env)) {
 			throw new Error(
-				`Recieved '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
+				`Received '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
 			);
 		}
 		return process.env[flags.env];

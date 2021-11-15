@@ -14,6 +14,7 @@ export interface ResolvedConfig {
 
 export interface ResolveExtendsConfig {
 	extends?: string | string[];
+	helpUrl?: string;
 	[key: string]: unknown;
 }
 

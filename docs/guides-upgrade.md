@@ -90,7 +90,7 @@ module.exports = {
 }
 ```
 
-Refer to the [Rules Referece](reference-rules.md) for a list of all avaiable configuration options.
+Refer to the [Rules Reference](reference-rules.md) for a list of all available configuration options.
 
 There is also the [#commitlint](https://node-tooling.slack.com/messages/C7M8XJ4RL/) channel on the DevTools Slack workspace. Join us there and we'll do our best to help you with your migration.
 
@@ -165,7 +165,7 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 
 ### Breaking changes
 
-#### Output on succesful commit will be ommited
+#### Output on successful commit will be omitted
 
 - You can use the `--verbose` flag to get positive output
 
@@ -192,3 +192,11 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 #### Lerna support
 
 - lerna v2 is not supported anymore
+
+## Version 11 to 12
+
+### Breaking changes
+
+#### resolve-extends
+
+- The order of the `extends` resolution is changed from right-to-left to left-to-right
