@@ -65,7 +65,7 @@ export enum RuleConfigQuality {
 
 export type QualifiedRuleConfig<T> =
 	| (() => RuleConfigTuple<T>)
-	| (() => RuleConfigTuple<Promise<T>>)
+	| (() => Promise<RuleConfigTuple<T>>)
 	| RuleConfigTuple<T>;
 
 export type RuleConfig<
