@@ -321,11 +321,7 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 	const require = (id: string) => {
 		switch (id) {
 			case 'conventional-changelog-lint-config-extender-name':
-				return {
-					rules: {
-						fallback: true,
-					},
-				};
+				return {rules: {fallback: true}};
 			default:
 				return {};
 		}
@@ -347,4 +343,189 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 			fallback: true,
 		},
 	});
+});
+
+test('plugins should be merged correctly', () => {
+	const input = {extends: ['extender-name'], zero: 'root'};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {extends: ['recursive-extender-name'], plugins: ['test']};
+			case 'recursive-extender-name':
+				return {
+					extends: ['second-recursive-extender-name'],
+					plugins: ['test2'],
+				};
+			case 'second-recursive-extender-name':
+				return {plugins: ['test3']};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		plugins: ['test3', 'test2', 'test'],
+		zero: 'root',
+	};
+
+	expect(actual).toEqual(expected);
+});
+
+test('rules should be merged correctly', () => {
+	const input = {extends: ['extender-name'], rules: {test1: ['base', '1']}};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {
+					extends: ['recursive-extender-name'],
+					rules: {test2: [id, '2']},
+				};
+			case 'recursive-extender-name':
+				return {
+					extends: ['second-recursive-extender-name'],
+					rules: {test1: [id, '3']},
+				};
+			case 'second-recursive-extender-name':
+				return {rules: {test2: [id, '4']}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		rules: {
+			test1: ['base', '1'],
+			test2: ['extender-name', '2'],
+		},
+	};
+
+	expect(actual).toEqual(expected);
+});
+
+// https://github.com/conventional-changelog/commitlint/issues/327
+test('parserPreset should resolve correctly in extended configuration', () => {
+	const input = {extends: ['extender-name'], zero: 'root'};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {
+					extends: ['recursive-extender-name'],
+					parserPreset: {
+						parserOpts: {
+							issuePrefixes: ['#', '!', '&', 'no-references'],
+							referenceActions: null,
+						},
+					},
+				};
+			case 'recursive-extender-name':
+				return {parserPreset: {parserOpts: {issuePrefixes: ['#', '!']}}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		parserPreset: {
+			parserOpts: {
+				issuePrefixes: ['#', '!', '&', 'no-references'],
+				referenceActions: null,
+			},
+		},
+		zero: 'root',
+	};
+
+	expect(actual).toEqual(expected);
+});
+
+test('parserPreset should be merged correctly', () => {
+	const input = {extends: ['extender-name'], zero: 'root'};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-name':
+				return {
+					extends: ['recursive-extender-name'],
+					parserPreset: {
+						parserOpts: {
+							referenceActions: null,
+						},
+					},
+				};
+			case 'recursive-extender-name':
+				return {parserPreset: {parserOpts: {issuePrefixes: ['#', '!']}}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-name'],
+		parserPreset: {
+			parserOpts: {
+				issuePrefixes: ['#', '!'],
+				referenceActions: null,
+			},
+		},
+		zero: 'root',
+	};
+
+	expect(actual).toEqual(expected);
+});
+
+test('should correctly merge nested configs', () => {
+	const input = {extends: ['extender-1']};
+
+	const require = (id: string) => {
+		switch (id) {
+			case 'extender-1':
+				return {extends: ['extender-3', 'extender-2']};
+			case 'extender-2':
+				return {extends: ['extender-4']};
+			case 'extender-3':
+				return {rules: {test: 3}};
+			case 'extender-4':
+				return {extends: ['extender-5', 'extender-6'], rules: {test: 4}};
+			case 'extender-5':
+				return {rules: {test: 5}};
+			case 'extender-6':
+				return {rules: {test: 6}};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+
+	const actual = resolveExtends(input, ctx);
+
+	const expected = {
+		extends: ['extender-1'],
+		rules: {
+			test: 4,
+		},
+	};
+
+	expect(actual).toEqual(expected);
 });

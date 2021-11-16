@@ -13,7 +13,6 @@ export interface ResolvedConfig {
 }
 
 export interface ResolveExtendsConfig {
-	parserPreset?: unknown;
 	extends?: string | string[];
 	helpUrl?: string;
 	[key: string]: unknown;
@@ -31,19 +30,23 @@ export interface ResolveExtendsContext {
 export default function resolveExtends(
 	config: ResolveExtendsConfig = {},
 	context: ResolveExtendsContext = {}
-) {
+): ResolvedConfig {
 	const {extends: e} = config;
-	const extended = loadExtends(config, context).reduce(
+	const extended = loadExtends(config, context);
+	extended.push(config);
+	return extended.reduce(
 		(r, {extends: _, ...c}) =>
-			mergeWith(r, c, (objValue, srcValue) => {
-				if (Array.isArray(objValue)) {
+			mergeWith(r, c, (objValue, srcValue, key) => {
+				if (key === 'plugins') {
+					if (Array.isArray(objValue)) {
+						return objValue.concat(srcValue);
+					}
+				} else if (Array.isArray(objValue)) {
 					return srcValue;
 				}
 			}),
 		e ? {extends: e} : {}
 	);
-
-	return merge({}, extended, config);
 }
 
 function loadExtends(
