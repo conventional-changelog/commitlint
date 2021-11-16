@@ -110,7 +110,7 @@ export default async function lint(
 				);
 			}
 
-			if (config.length !== 2 && config.length !== 3) {
+			if (config.length < 2 || config.length > 3) {
 				return new Error(
 					`config for rule ${name} must be 2 or 3 items long, received ${util.inspect(
 						config

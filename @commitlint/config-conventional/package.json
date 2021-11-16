@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-conventional",
-  "version": "12.0.0",
+  "version": "14.1.0",
   "description": "Shareable commitlint config enforcing conventional commits",
   "files": [
     "index.js"
@@ -14,7 +14,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/config-conventional"
   },
   "keywords": [
     "conventional-changelog",
@@ -27,16 +28,16 @@
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "homepage": "https://commitlint.js.org/",
   "engines": {
-    "node": ">=v10"
+    "node": ">=v12"
   },
   "devDependencies": {
-    "@commitlint/lint": "^12.0.0",
-    "@commitlint/utils": "^12.0.0"
+    "@commitlint/lint": "^14.1.0",
+    "@commitlint/utils": "^14.0.0"
   },
   "dependencies": {
     "conventional-changelog-conventionalcommits": "^4.3.1"
   },
-  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
+  "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

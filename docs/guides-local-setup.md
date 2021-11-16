@@ -10,44 +10,42 @@ Install `commitlint` and a `commitlint-config-*` of your choice as devDependency
 configure `commitlint` to use it.
 
 ```bash
-# Create a package.json if needed
-npm init
-
 # Install and configure if needed
 npm install --save-dev @commitlint/{cli,config-conventional}
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
-Alternatively the configuration can be defined in `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
+Alternatively the configuration can be defined in a `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc`, `.commitlintrc.json`, `.commitlintrc.yml` file or a `commitlint` field in `package.json`.
 
 ## Install husky
 
 Install `husky` as devDependency, a handy git hook helper available on npm.
 
-```bash
-npm install --save-dev husky
+```sh
+# Install Husky v6
+npm install husky --save-dev
+# or
+yarn add husky --dev
+
+# Active hooks
+npx husky install
+# or
+yarn husky install
+
+# Add hook
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
+# or
+yarn husky add .husky/commit-msg 'yarn commitlint --edit $1'
 ```
 
-This allows us to add [git hooks](https://git-scm.com/docs/githooks) directly into our `package.json` via the `husky.hooks` field.
-
-```json
-// package.json
-{
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
-}
-```
-
-Using `commit-msg` gives us exactly what we want: It is executed whenever a new commit is created. Passing husky's `HUSKY_GIT_PARAMS` to `commitlint` via the `-E|--env` flag directs it to the relevant edit file. `-e` would default to `.git/COMMIT_EDITMSG`.
+**Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**\
+Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 ## Test
 
 ### Test simple usage
 
-For a first simple usage test of commlitlint you can do the following:
+For a first simple usage test of commitlint you can do the following:
 
 ```bash
 npx commitlint --from HEAD~1 --to HEAD --verbose
@@ -72,7 +70,7 @@ No staged files match any of provided globs.
 husky > commit-msg hook failed (add --no-verify to bypass)
 ```
 
-Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.  
+Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.\
 (You can use the `--verbose` flag to get positive output)
 
 ```bash
@@ -82,4 +80,4 @@ No staged files match any of provided globs.
 husky > commit-msg (node v10.1.0)
 ```
 
-?> Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server to. Learn how to in the [CI Setup guide](guides-ci-setup.md).
+?> Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server too. Learn how to in the [CI Setup guide](guides-ci-setup.md).

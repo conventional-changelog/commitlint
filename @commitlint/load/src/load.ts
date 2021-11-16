@@ -1,23 +1,21 @@
-import Path from 'path';
-
-import merge from 'lodash/merge';
-import uniq from 'lodash/uniq';
-import resolveFrom from 'resolve-from';
-
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends from '@commitlint/resolve-extends';
 import {validateConfig} from '@commitlint/config-validator';
 import {
-	UserConfig,
 	LoadOptions,
 	QualifiedConfig,
 	QualifiedRules,
 	PluginRecords,
+	UserConfig,
 } from '@commitlint/types';
-
-import loadPlugin from './utils/load-plugin';
+import isPlainObject from 'lodash/isPlainObject';
+import merge from 'lodash/merge';
+import uniq from 'lodash/uniq';
+import Path from 'path';
+import resolveFrom from 'resolve-from';
 import {loadConfig} from './utils/load-config';
 import {loadParserOpts} from './utils/load-parser-opts';
+import loadPlugin from './utils/load-plugin';
 
 export default async function load(
 	seed: UserConfig = {},
@@ -61,13 +59,8 @@ export default async function load(
 		parserPreset: config.parserPreset,
 	});
 
-	if (!extended.formatter) {
+	if (!extended.formatter || typeof extended.formatter !== 'string') {
 		extended.formatter = '@commitlint/format';
-	}
-
-	if (!extended.helpUrl) {
-		extended.helpUrl =
-			'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 	}
 
 	let plugins: PluginRecords = {};
@@ -92,9 +85,17 @@ export default async function load(
 		return registry;
 	}, {});
 
+	const helpUrl =
+		typeof extended.helpUrl === 'string'
+			? extended.helpUrl
+			: typeof config.helpUrl === 'string'
+			? config.helpUrl
+			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
+
+	const prompt =
+		extended.prompt && isPlainObject(extended.prompt) ? extended.prompt : {};
+
 	return {
-		// TODO: check if this is still necessary with the new factory based conventional changelog parsers
-		// TODO: should this function return this? as those values are already resolved
 		extends: Array.isArray(extended.extends)
 			? extended.extends
 			: typeof extended.extends === 'string'
@@ -109,6 +110,7 @@ export default async function load(
 		defaultIgnores: extended.defaultIgnores,
 		plugins: plugins,
 		rules: rules,
-		helpUrl: extended.helpUrl,
+		helpUrl: helpUrl,
+		prompt,
 	};
 }

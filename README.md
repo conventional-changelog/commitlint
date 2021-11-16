@@ -26,8 +26,7 @@
 - [Shared configuration](#shared-configuration)
 - [API](#api)
 - [Tools](#tools)
-- [Roadmap](#roadmap)
-- [Version Support](#version-support)
+- [Version Support and Releases](#version-support-and-releases)
 - [Related projects](#related-projects)
 - [License](#license)
 - [Development](#development)
@@ -60,7 +59,7 @@ fix(server): send cors headers
 feat(blog): add comment section
 ```
 
-Common types according to [commitlint-config-conventional (based on the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum) can be:
+Common types according to [commitlint-config-conventional (based on the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum) can be:
 
 - build
 - ci
@@ -93,33 +92,24 @@ npm install --save-dev @commitlint/config-conventional @commitlint/cli
 echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
 ```
 
-To lint commits before they are created you can use Husky's 'commit-msg' hook.
+To lint commits before they are created you can use Husky's `commit-msg` hook:
 
-Install in your project `npm install husky --save-dev` or `yarn add -D husky`.
-
-After that, you can create a `.huskyrc` file or add to your `package.json` the following code for
-
-Husky V4:
-
-```json
-{
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  }
-}
-```
-
-Husky V5
-
-```
-# .husky/commit-msg
-# ...
-npx --no-install commitlint --edit $1
+```sh
+# Install Husky v6
+npm install husky --save-dev
 # or
-yarn commitlint --edit $1
+yarn add husky --dev
+
+# Activate hooks
+npx husky install
+# or
+yarn husky install
+
+# Add hook
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 ```
+
+Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 **Detailed Setup instructions**
 
@@ -134,7 +124,18 @@ yarn commitlint --edit $1
 
 ## Config
 
-- Configuration is picked up from `commitlint.config.js`, `.commitlintrc.js`, `.commitlintrc.json`, or `.commitlintrc.yml` file or a `commitlint` field in `package.json`
+- Configuration is picked up from:
+  - `.commitlintrc`
+  - `.commitlintrc.json`
+  - `.commitlintrc.yaml`
+  - `.commitlintrc.yml`
+  - `.commitlintrc.js`
+  - `.commitlintrc.cjs`
+  - `.commitlintrc.ts`
+  - `commitlint.config.js`
+  - `commitlint.config.cjs`
+  - `commitlint.config.ts`
+  - `commitlint` field in `package.json`
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 - See [Rules](./docs/reference-rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/index.js)
@@ -185,10 +186,27 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 - [ ] **DX**: Incorporate an extended version of [lennym/commit-template](https://github.com/lennym/commit-template) deducing a template from commitlint configuration
 - [ ] **DX**: Rewrite `@commitlint/prompt` for better usability (might involve a lot of yak-shaving)
 
-## Version Support
+## Version Support and Releases
 
-- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 10.21.0`
+- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 12`
 - git `>= 2.13.2`
+
+### Releases
+
+Security patches will be applied to versions which are not yet EOL.\
+Features will only be applied to the current main version.
+
+| Release                                                                          | Inital release | End-of-life |
+| -------------------------------------------------------------------------------- | -------------- | ----------- |
+| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  |
+| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  |
+| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  |
+| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 13.09.2020     | 13.09.2020  |
+
+_Dates are subject to change._
+
+We're not a sponsored OSS project. Therefor we can't promise that we will release patch versions for older releases in a timley manner.\
+If you are stuck on an older version and need a security patch we're happy if you can provide a PR.
 
 ## Related projects
 
@@ -220,36 +238,52 @@ For more information on how to contribute please take a look at our [contributio
 
 ![commitlint-dependencies](https://user-images.githubusercontent.com/4248851/58385093-34b79780-7feb-11e9-8f27-bffc4aca3eba.png)
 
+(Partly outdated)
+
 ### Publishing a release
 
 Before publishing a release do a `yarn run publish --dry-run` to get the upcoming version and update the version
-in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/cli/src/cli.test.ts#L431).  
+in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/@commitlint/cli/src/cli.test.ts#L431).\
 Commit that change before creating the new version without `--dry-run`.
 
 ```sh
 npm login
+nvm use (if you have nvm installed)
 ```
 
 ```sh
 yarn clean
 yarn install
-yarn run build
+yarn build
 yarn test
 yarn run publish --otp <one-time password>
 ```
+
+#### Create Github release
+
+1. Copy changelog entry for the new version
+1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
+1. Post in the [commitlint Slack-channel][12]
 
 #### Publish a `next` release
 
 ```sh
 npm login
+nvm use (if you have nvm installed)
 ```
 
 ```sh
 yarn clean
 yarn install
-yarn run build
+yarn build
 yarn test
 npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
+```
+
+If for some reason this stops in between, you can manually publish missing packages like this:
+
+```sh
+npm publish <package-name> --tag next --otp <one-time password>
 ```
 
 ##### Move `next` to `latest`
@@ -257,8 +291,6 @@ npx lerna publish --conventional-commits --dist-tag next --otp <one-time passwor
 ```sh
 npm login
 ```
-
-Move next to latest:
 
 ```sh
 npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>'

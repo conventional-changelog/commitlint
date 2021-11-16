@@ -46,7 +46,7 @@ function loadExtends(
 	const {extends: e} = config;
 	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
 
-	return ext.reduceRight<UserConfig[]>((configs, raw) => {
+	return ext.reduce<UserConfig[]>((configs, raw) => {
 		const load = context.require || require;
 		const resolved = resolveConfig(raw, context);
 		const c = load(resolved);
@@ -74,7 +74,7 @@ function loadExtends(
 
 		validateConfig(resolved, config);
 
-		return [...loadExtends(c, ctx), c, ...configs];
+		return [...configs, ...loadExtends(c, ctx), c];
 	}, []);
 }
 

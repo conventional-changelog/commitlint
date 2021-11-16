@@ -35,7 +35,12 @@ git add .
 npm run commit
 ```
 
-## An alternative to `@commitlint/prompt`: commitizen
+## An alternative to `@commitlint/prompt-cli`: commitizen
 
 Another way to author commit messages that adhere to the commit convention configured in `commitlint.config.js` is to use `commitizen`.
 For more information, checkout their [official website](http://commitizen.github.io/cz-cli/).
+
+commitlint provides two adapters for `commitizen`:
+
+1. `@commitlint/prompt` provides a way to interact same as `@commitlint/prompt-cli`
+2. `@commitlint/cz-commitlint` is inspired by [cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog), it provides a more modern way to interact.

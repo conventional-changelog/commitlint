@@ -1,11 +1,15 @@
 import lint from '@commitlint/lint';
-import {rules} from '.';
+import {rules, parserPreset} from '.';
+
+const commitLint = async (message) => {
+	const preset = await require(parserPreset)();
+	return lint(message, rules, {...preset});
+};
 
 const messages = {
 	invalidTypeEnum: 'foo: some message',
 	invalidTypeCase: 'FIX: some message',
 	invalidTypeEmpty: ': some message',
-	invalidScopeCase: 'fix(SCOPE): some message',
 	invalidSubjectCases: [
 		'fix(scope): Some message',
 		'fix(scope): Some Message',
@@ -29,6 +33,7 @@ const messages = {
 		'fix(scope): some Message',
 		'fix(scope): some message\n\nBREAKING CHANGE: it will be significant!',
 		'fix(scope): some message\n\nbody',
+		'fix(scope)!: some message\n\nbody',
 	],
 };
 
@@ -50,12 +55,6 @@ const errors = {
 		level: 2,
 		message: 'type may not be empty',
 		name: 'type-empty',
-		valid: false,
-	},
-	scopeCase: {
-		level: 2,
-		message: 'scope must be lower-case',
-		name: 'scope-case',
 		valid: false,
 	},
 	subjectCase: {
@@ -114,38 +113,29 @@ const warnings = {
 };
 
 test('type-enum', async () => {
-	const result = await lint(messages.invalidTypeEnum, rules);
+	const result = await commitLint(messages.invalidTypeEnum);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeEnum]);
 });
 
 test('type-case', async () => {
-	const result = await lint(messages.invalidTypeCase, rules);
+	const result = await commitLint(messages.invalidTypeCase);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeCase, errors.typeEnum]);
 });
 
 test('type-empty', async () => {
-	const result = await lint(messages.invalidTypeEmpty, rules);
+	const result = await commitLint(messages.invalidTypeEmpty);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeEmpty]);
 });
 
-test('scope-case', async () => {
-	const result = await lint(messages.invalidScopeCase, rules);
-
-	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.scopeCase]);
-});
-
 test('subject-case', async () => {
 	const invalidInputs = await Promise.all(
-		messages.invalidSubjectCases.map((invalidInput) =>
-			lint(invalidInput, rules)
-		)
+		messages.invalidSubjectCases.map((invalidInput) => commitLint(invalidInput))
 	);
 
 	invalidInputs.forEach((result) => {
@@ -155,49 +145,49 @@ test('subject-case', async () => {
 });
 
 test('subject-empty', async () => {
-	const result = await lint(messages.invalidSubjectEmpty, rules);
+	const result = await commitLint(messages.invalidSubjectEmpty);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.subjectEmpty, errors.typeEmpty]);
 });
 
 test('subject-full-stop', async () => {
-	const result = await lint(messages.invalidSubjectFullStop, rules);
+	const result = await commitLint(messages.invalidSubjectFullStop);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.subjectFullStop]);
 });
 
 test('header-max-length', async () => {
-	const result = await lint(messages.invalidHeaderMaxLength, rules);
+	const result = await commitLint(messages.invalidHeaderMaxLength);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.headerMaxLength]);
 });
 
 test('footer-leading-blank', async () => {
-	const result = await lint(messages.warningFooterLeadingBlank, rules);
+	const result = await commitLint(messages.warningFooterLeadingBlank, rules);
 
 	expect(result.valid).toBe(true);
 	expect(result.warnings).toEqual([warnings.footerLeadingBlank]);
 });
 
 test('footer-max-line-length', async () => {
-	const result = await lint(messages.invalidFooterMaxLineLength, rules);
+	const result = await commitLint(messages.invalidFooterMaxLineLength);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.footerMaxLineLength]);
 });
 
 test('body-leading-blank', async () => {
-	const result = await lint(messages.warningBodyLeadingBlank, rules);
+	const result = await commitLint(messages.warningBodyLeadingBlank);
 
 	expect(result.valid).toBe(true);
 	expect(result.warnings).toEqual([warnings.bodyLeadingBlank]);
 });
 
 test('body-max-line-length', async () => {
-	const result = await lint(messages.invalidBodyMaxLineLength, rules);
+	const result = await commitLint(messages.invalidBodyMaxLineLength);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.bodyMaxLineLength]);
@@ -205,7 +195,7 @@ test('body-max-line-length', async () => {
 
 test('valid messages', async () => {
 	const validInputs = await Promise.all(
-		messages.validMessages.map((input) => lint(input, rules))
+		messages.validMessages.map((input) => commitLint(input))
 	);
 
 	validInputs.forEach((result) => {

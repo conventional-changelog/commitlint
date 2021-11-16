@@ -1,8 +1,9 @@
+import {UserPromptConfig} from './prompt';
 import {
-	Rule,
-	RulesConfig,
-	RuleConfigQuality,
 	AsyncRule,
+	Rule,
+	RuleConfigQuality,
+	RulesConfig,
 	SyncRule,
 } from './rules';
 
@@ -28,6 +29,7 @@ export interface UserConfig {
 	defaultIgnores?: boolean;
 	plugins?: (string | Plugin)[];
 	helpUrl?: string;
+	prompt?: UserPromptConfig;
 	[key: string]: unknown;
 }
 
@@ -42,6 +44,7 @@ export interface QualifiedConfig {
 	defaultIgnores?: boolean;
 	plugins: PluginRecords;
 	helpUrl: string;
+	prompt: UserPromptConfig;
 }
 
 export interface ParserPreset {

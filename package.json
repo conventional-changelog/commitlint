@@ -20,7 +20,8 @@
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
     "test": "jest",
-    "test-ci": "jest --runInBand"
+    "test-ci": "jest --runInBand",
+    "postinstall": "yarn husky install"
   },
   "commitlint": {
     "extends": [
@@ -46,6 +47,11 @@
       "config:base",
       ":semanticCommitType(chore)",
       ":semanticCommitScopeDisabled"
+    ],
+    "ignoreDeps": [
+      "@commitlint/test",
+      "@commitlint/test-environment",
+      "@commitlint/utils"
     ]
   },
   "workspaces": [
@@ -79,30 +85,23 @@
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
-    "@lerna/project": "3.21.0",
-    "@types/jest": "26.0.20",
-    "@types/node": "12.19.15",
-    "@typescript-eslint/eslint-plugin": "^4.1.0",
-    "@typescript-eslint/parser": "^4.1.0",
-    "docsify-cli": "^4.4.0",
-    "eslint": "^7.0.0",
-    "eslint-config-prettier": "^7.0.0",
+    "@lerna/project": "^4.0.0",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^12.20.27",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "docsify-cli": "^4.4.3",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jest": "^24.0.0",
-    "husky": "4.3.8",
-    "jest": "26.6.3",
-    "lerna": "^3.22.1",
-    "lerna-v3": "npm:lerna@3",
-    "lint-staged": "10.5.3",
+    "eslint-plugin-jest": "^25.0.0",
+    "husky": "^7.0.0",
+    "jest": "27.3.1",
+    "lerna": "^4.0.0",
+    "lint-staged": "12.0.2",
     "prettier": "^2.0.5",
-    "ts-jest": "26.4.4",
-    "typescript": "4.1.3"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "node @commitlint/cli/lib/cli.js -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
+    "ts-jest": "^27.0.5",
+    "typescript": "^4.4.3"
   },
   "resolutions": {
     "**/lodash": "^4.17.19"

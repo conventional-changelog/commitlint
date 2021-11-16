@@ -21,8 +21,17 @@ const validBaseEnv = {
 const cli = async (config: execa.Options = {}, args: string[] = []) => {
 	try {
 		return await execa(bin, args, config);
-	} catch (err) {
-		throw new Error([err.stdout, err.stderr].join('\n'));
+	} catch (err: any) {
+		if (
+			typeof err.stdout !== 'undefined' &&
+			typeof err.stderr !== 'undefined'
+		) {
+			throw new Error([err.stdout, err.stderr].join('\n'));
+		} else {
+			throw new Error(
+				`An unknown error occured while running '${bin} ${args.join(' ')}'`
+			);
+		}
 	}
 };
 
