@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.3.6](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v8.3.6) (2021-11-17)
+
+**Note:** Version bump only for package @commitlint/root
+
+chore: update lodash to 4.17.21 
+SECURITY: CVE-2021-23337 in package lodash https://nvd.nist.gov/vuln/detail/CVE-2021-23337
+
+
+
+
+
 # [14.2.0](https://github.com/conventional-changelog/commitlint/compare/v14.1.0...v14.2.0) (2021-11-06)
 
 
