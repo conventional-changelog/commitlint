@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.3.6](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v8.3.6) (2021-11-17)
+
+**Note:** Version bump only for package commitlint-config-patternplate
+
+
+
+
+
 ## [8.3.4](https://github.com/conventional-changelog/commitlint/compare/v8.3.3...v8.3.4) (2020-01-03)
 
 **Note:** Version bump only for package commitlint-config-patternplate
