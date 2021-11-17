@@ -266,7 +266,7 @@ yarn run publish --otp <one-time password>
 1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
 1. Post in the [commitlint Slack-channel][12]
 
-#### Publish a `next` release
+#### Publish a `next` release (or i.e. patch release)
 
 ```sh
 npm login
@@ -278,13 +278,13 @@ yarn clean
 yarn install
 yarn build
 yarn test
-npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
+npx lerna publish --conventional-commits --dist-tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
 ```
 
 If for some reason this stops in between, you can manually publish missing packages like this:
 
 ```sh
-npm publish <package-name> --tag next --otp <one-time password>
+npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
 ```
 
 ##### Move `next` to `latest`
