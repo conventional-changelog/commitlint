@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
+
+
+### Tests
+
+* **config-lerna-scopes:** reuse npm bootstrap to simplify tests ([#2479](https://github.com/conventional-changelog/commitlint/issues/2479)) ([9a7a43a](https://github.com/conventional-changelog/commitlint/commit/9a7a43aa8a7eca18f2fe05c78d27dcb1a128930c)), closes [#2447](https://github.com/conventional-changelog/commitlint/issues/2447)
+
+
+### BREAKING CHANGES
+
+* **config-lerna-scopes:** upgrade to lerna v4
+
+Co-authored-by: Renovate Bot <bot@renovateapp.com>
+Co-authored-by: escapedcat <github@htmlcss.de>
+
+* test(config-lerna-scopes): reuse npm bootstrap to simplify tests
+
+* test(config-lerna-scopes): reuse npm bootstrap to simplify tests
+
+* test: fix issue after merge
+
+* test: one more fix after merge
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+Co-authored-by: Renovate Bot <bot@renovateapp.com>
+Co-authored-by: escapedcat <github@htmlcss.de>
+
+
+
+
+
 # [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
 
 **Note:** Version bump only for package @commitlint/config-lerna-scopes

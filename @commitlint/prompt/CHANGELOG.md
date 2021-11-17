@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* **prompt:** correct import kind in prompt package ([#2852](https://github.com/conventional-changelog/commitlint/issues/2852)) ([45bf394](https://github.com/conventional-changelog/commitlint/commit/45bf394b34cef78011c2e0a1a7d0cc0d2bab41ae))
+* **prompt:** correct version of internal dependencies in prompt package [#2697](https://github.com/conventional-changelog/commitlint/issues/2697) ([#2851](https://github.com/conventional-changelog/commitlint/issues/2851)) ([b1155ca](https://github.com/conventional-changelog/commitlint/commit/b1155cae766aba7e93bc42c69c9ea7f47c1c16d4))
+
+
+
+
+
 # [14.2.0](https://github.com/conventional-changelog/commitlint/compare/v14.1.0...v14.2.0) (2021-11-06)
 
 
