@@ -1,6 +1,9 @@
 const Path = require('path');
-const fs = require('fs/promises');
+const util = require('util');
+const fs = require('fs');
 const jsonc = require('jsonc');
+
+const readFilePromisifed = util.promisify(fs.readFile);
 
 module.exports = {
 	utils: {getPackages},
@@ -16,8 +19,7 @@ function getPackages(context) {
 			const ctx = context || {};
 			const cwd = ctx.cwd || process.cwd();
 
-			return fs
-				.readFile(Path.join(cwd, 'rush.json'), {encoding: 'utf8'})
+			return readFilePromisifed(Path.join(cwd, 'rush.json'), {encoding: 'utf8'})
 				.then((content) => jsonc.parse(content))
 				.then(({projects}) => projects)
 				.catch(() => []);
