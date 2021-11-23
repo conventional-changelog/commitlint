@@ -48,15 +48,15 @@ type(scope?): subject  #scope is optional; multiple scopes are supported (curren
 Real world examples can look like this:
 
 ```
-chore: run tests on travis ci
+chore: Run tests on travis ci
 ```
 
 ```
-fix(server): send cors headers
+fix(server): Send cors headers
 ```
 
 ```
-feat(blog): add comment section
+feat(blog): Add comment section
 ```
 
 Common types according to [commitlint-config-conventional (based on the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum) can be:
