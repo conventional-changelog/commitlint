@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* **prompt:** correct import kind in prompt package ([#2852](https://github.com/conventional-changelog/commitlint/issues/2852)) ([45bf394](https://github.com/conventional-changelog/commitlint/commit/45bf394b34cef78011c2e0a1a7d0cc0d2bab41ae))
+* **prompt:** correct version of internal dependencies in prompt package [#2697](https://github.com/conventional-changelog/commitlint/issues/2697) ([#2851](https://github.com/conventional-changelog/commitlint/issues/2851)) ([b1155ca](https://github.com/conventional-changelog/commitlint/commit/b1155cae766aba7e93bc42c69c9ea7f47c1c16d4))
+* **types:** fix signature of QualifiedRuleConfig for async configurations ([#2868](https://github.com/conventional-changelog/commitlint/issues/2868)) ([#2869](https://github.com/conventional-changelog/commitlint/issues/2869)) ([c7f355b](https://github.com/conventional-changelog/commitlint/commit/c7f355b25e5baddab0b9559892f5ce4112e4f93a))
+
+
+### Features
+
+* simplify config resolution ([#2398](https://github.com/conventional-changelog/commitlint/issues/2398)) ([8a8384f](https://github.com/conventional-changelog/commitlint/commit/8a8384f3c18954447cb633e76a573e1db71a1440)), closes [#327](https://github.com/conventional-changelog/commitlint/issues/327)
+
+
+### Tests
+
+* **config-lerna-scopes:** reuse npm bootstrap to simplify tests ([#2479](https://github.com/conventional-changelog/commitlint/issues/2479)) ([9a7a43a](https://github.com/conventional-changelog/commitlint/commit/9a7a43aa8a7eca18f2fe05c78d27dcb1a128930c)), closes [#2447](https://github.com/conventional-changelog/commitlint/issues/2447)
+
+
+### BREAKING CHANGES
+
+* **config-lerna-scopes:** upgrade to lerna v4
+
+Co-authored-by: Renovate Bot <bot@renovateapp.com>
+Co-authored-by: escapedcat <github@htmlcss.de>
+
+* test(config-lerna-scopes): reuse npm bootstrap to simplify tests
+
+* test(config-lerna-scopes): reuse npm bootstrap to simplify tests
+
+* test: fix issue after merge
+
+* test: one more fix after merge
+
+Co-authored-by: renovate[bot] <29139614+renovate[bot]@users.noreply.github.com>
+Co-authored-by: Renovate Bot <bot@renovateapp.com>
+Co-authored-by: escapedcat <github@htmlcss.de>
+
+
+
+
+
+## [8.3.6](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v8.3.6) (2021-11-17)
+
+**Note:** Version bump only for package @commitlint/root
+
+chore: update lodash to 4.17.21 
+SECURITY: CVE-2021-23337 in package lodash https://nvd.nist.gov/vuln/detail/CVE-2021-23337
+
+
+
+
+
 # [14.2.0](https://github.com/conventional-changelog/commitlint/compare/v14.1.0...v14.2.0) (2021-11-06)
 
 

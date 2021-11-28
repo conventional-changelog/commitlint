@@ -1,8 +1,9 @@
 {
   "name": "@commitlint/config-validator",
-  "version": "14.0.0",
-  "description": "commitizen prompt using commitlint.config.js",
-  "main": "./lib/validate.js",
+  "version": "15.0.0",
+  "description": "config validator for commitlint.config.js",
+  "main": "lib/validate.js",
+  "types": "lib/validate.d.ts",
   "files": [
     "lib/"
   ],
@@ -10,25 +11,35 @@
     "deps": "dep-check",
     "pkg": "pkg-check --skip-import"
   },
+  "engines": {
+    "node": ">=v12"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@commitlint/config-validator"
   },
-  "author": "Mario Nebl <hello@herebecode.com>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
-  "engines": {
-    "node": ">=v10"
+  "homepage": "https://commitlint.js.org/",
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "library",
+    "core"
+  ],
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
+  "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^14.0.0"
+    "@commitlint/utils": "^15.0.0"
   },
   "dependencies": {
-    "@commitlint/types": "^14.0.0",
+    "@commitlint/types": "^15.0.0",
     "ajv": "^6.12.6"
   },
-  "gitHead": "cb565dfcca3128380b9b3dc274aedbcae34ce5ca"
+  "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
 }

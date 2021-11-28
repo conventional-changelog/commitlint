@@ -33,6 +33,22 @@ test('uses seed as configured', async () => {
 	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
 });
 
+test('rules should be loaded from local', async () => {
+	const actual = await load({
+		rules: {
+			direct: [1, 'never', 'foo'],
+			func: () => [1, 'never', 'foo'],
+			async: async () => [1, 'never', 'foo'],
+			promise: () => Promise.resolve([1, 'never', 'foo']),
+		},
+	});
+
+	expect(actual.rules['direct']).toStrictEqual([1, 'never', 'foo']);
+	expect(actual.rules['func']).toStrictEqual([1, 'never', 'foo']);
+	expect(actual.rules['async']).toStrictEqual([1, 'never', 'foo']);
+	expect(actual.rules['promise']).toStrictEqual([1, 'never', 'foo']);
+});
+
 test('rules should be loaded from relative config file', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await gitBootstrap('fixtures/specify-config-file');

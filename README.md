@@ -62,8 +62,8 @@ feat(blog): add comment section
 Common types according to [commitlint-config-conventional (based on the Angular convention)](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum) can be:
 
 - build
-- ci
 - chore
+- ci
 - docs
 - feat
 - fix
@@ -198,6 +198,7 @@ Features will only be applied to the current main version.
 
 | Release                                                                          | Inital release | End-of-life |
 | -------------------------------------------------------------------------------- | -------------- | ----------- |
+| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 17.11.2021     | 17.11.2022  |
 | [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  |
 | [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  |
 | [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  |
@@ -265,7 +266,7 @@ yarn run publish --otp <one-time password>
 1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
 1. Post in the [commitlint Slack-channel][12]
 
-#### Publish a `next` release
+#### Publish a `next` release (or i.e. patch release)
 
 ```sh
 npm login
@@ -277,13 +278,13 @@ yarn clean
 yarn install
 yarn build
 yarn test
-npx lerna publish --conventional-commits --dist-tag next --otp <one-time password>
+npx lerna publish --conventional-commits --dist-tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
 ```
 
 If for some reason this stops in between, you can manually publish missing packages like this:
 
 ```sh
-npm publish <package-name> --tag next --otp <one-time password>
+npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
 ```
 
 ##### Move `next` to `latest`
