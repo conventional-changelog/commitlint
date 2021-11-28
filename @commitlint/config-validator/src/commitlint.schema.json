@@ -26,6 +26,10 @@
           "minItems": 1,
           "maxItems": 3,
           "additionalItems": false
+        },
+        {
+          "description": "A rule",
+          "typeof": "function"
         }
       ]
     }

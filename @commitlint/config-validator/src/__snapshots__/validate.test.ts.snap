@@ -69,6 +69,7 @@ exports[`validation should fail for pluginsNotArray 1`] = `
 exports[`validation should fail for rules1 1`] = `
 "Commitlint configuration in rules1.js is invalid:
 	- \\"rules['a'][0]\\" should be equal to one of the allowed values. Value: 3.
+	- \\"rules['a']\\" should be a function. Value: [3].
 	- \\"rules['a']\\" should match exactly one schema in oneOf. Value: [3].
 "
 `;
@@ -76,6 +77,7 @@ exports[`validation should fail for rules1 1`] = `
 exports[`validation should fail for rules2 1`] = `
 "Commitlint configuration in rules2.js is invalid:
 	- \\"rules['b']\\" should NOT have more than 3 items. Value: [1,\\"test\\",2,2].
+	- \\"rules['b']\\" should be a function. Value: [1,\\"test\\",2,2].
 	- \\"rules['b']\\" should match exactly one schema in oneOf. Value: [1,\\"test\\",2,2].
 "
 `;
@@ -83,6 +85,7 @@ exports[`validation should fail for rules2 1`] = `
 exports[`validation should fail for rules3 1`] = `
 "Commitlint configuration in rules3.js is invalid:
 	- \\"rules['c']\\" should NOT have fewer than 1 items. Value: [].
+	- \\"rules['c']\\" should be a function. Value: [].
 	- \\"rules['c']\\" should match exactly one schema in oneOf. Value: [].
 "
 `;
@@ -91,6 +94,7 @@ exports[`validation should fail for rules4 1`] = `
 "Commitlint configuration in rules4.js is invalid:
 	- Property \\"rules['d'][0]\\" has the wrong type - should be number.
 	- \\"rules['d'][0]\\" should be equal to one of the allowed values. Value: [].
+	- \\"rules['d']\\" should be a function. Value: [[],[],[]].
 	- \\"rules['d']\\" should match exactly one schema in oneOf. Value: [[],[],[]].
 "
 `;
@@ -98,6 +102,7 @@ exports[`validation should fail for rules4 1`] = `
 exports[`validation should fail for rules5 1`] = `
 "Commitlint configuration in rules5.js is invalid:
 	- Property \\"rules['e']\\" has the wrong type - should be array.
+	- \\"rules['e']\\" should be a function. Value: {}.
 	- \\"rules['e']\\" should match exactly one schema in oneOf. Value: {}.
 "
 `;
