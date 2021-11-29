@@ -7,7 +7,9 @@ function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 function isParserOptsFunction<T extends ParserPreset>(
 	obj: T
 ): obj is T & {
-	parserOpts: (...args: any[]) => any;
+	parserOpts: (
+		cb: (_: never, parserOpts: Record<string, unknown>) => unknown
+	) => Record<string, unknown> | undefined;
 } {
 	return typeof obj.parserOpts === 'function';
 }
@@ -46,7 +48,7 @@ export async function loadParserOpts(
 		parser.name.startsWith('conventional-changelog-')
 	) {
 		return new Promise((resolve) => {
-			const result = parser.parserOpts((_: never, opts: any) => {
+			const result = parser.parserOpts((_: never, opts) => {
 				resolve({
 					...parser,
 					parserOpts: opts?.parserOpts,

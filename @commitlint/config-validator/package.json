@@ -1,15 +1,15 @@
 {
-  "name": "@commitlint/resolve-extends",
+  "name": "@commitlint/config-validator",
   "version": "15.0.0",
-  "description": "Lint your commit messages",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "description": "config validator for commitlint.config.js",
+  "main": "lib/validate.js",
+  "types": "lib/validate.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
     "deps": "dep-check",
-    "pkg": "pkg-check"
+    "pkg": "pkg-check --skip-import"
   },
   "engines": {
     "node": ">=v12"
@@ -17,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
-    "directory": "@commitlint/resolve-extends"
+    "directory": "@commitlint/config-validator"
   },
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
@@ -35,16 +35,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^15.0.0",
-    "@types/lodash": "^4.14.161"
+    "@commitlint/utils": "^15.0.0"
   },
   "dependencies": {
-    "@commitlint/config-validator": "^15.0.0",
     "@commitlint/types": "^15.0.0",
-    "import-fresh": "^3.0.0",
-    "lodash": "^4.17.19",
-    "resolve-from": "^5.0.0",
-    "resolve-global": "^1.0.0"
+    "ajv": "^6.12.6"
   },
   "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
 }

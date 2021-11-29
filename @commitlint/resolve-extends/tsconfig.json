@@ -2,9 +2,11 @@
   "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
     "composite": true,
+    "isolatedModules": false,
     "rootDir": "./src",
     "outDir": "./lib"
   },
   "include": ["./src"],
-  "exclude": ["./src/**/*.test.ts", "./lib/**/*"]
+  "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
+  "references": [{"path": "../types"}, {"path": "../config-validator"}]
 }

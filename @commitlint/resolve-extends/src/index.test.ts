@@ -1,4 +1,5 @@
 import resolveExtends, {ResolveExtendsContext} from '.';
+import {UserConfig} from '@commitlint/types';
 
 const id = (id: unknown) => id;
 
@@ -213,17 +214,17 @@ test('propagates contents recursively', () => {
 });
 
 test('propagates contents recursively with overlap', () => {
-	const input = {extends: ['extender-name']};
+	const input: UserConfig = {extends: ['extender-name']};
 
-	const require = (id: string) => {
+	const require = (id: string): UserConfig => {
 		switch (id) {
 			case 'extender-name':
 				return {
 					extends: ['recursive-extender-name'],
-					rules: {rule: ['zero', 'one']},
+					rules: {rule: [1, 'always']},
 				};
 			case 'recursive-extender-name':
-				return {rules: {rule: ['two', 'three', 'four']}};
+				return {rules: {rule: [2, 'never', 'four']}};
 			default:
 				return {};
 		}
@@ -233,10 +234,10 @@ test('propagates contents recursively with overlap', () => {
 
 	const actual = resolveExtends(input, ctx);
 
-	const expected = {
+	const expected: UserConfig = {
 		extends: ['extender-name'],
 		rules: {
-			rule: ['zero', 'one'],
+			rule: [1, 'always'],
 		},
 	};
 
@@ -244,14 +245,14 @@ test('propagates contents recursively with overlap', () => {
 });
 
 test('extends rules from left to right with overlap', () => {
-	const input = {extends: ['left', 'right']};
+	const input: UserConfig = {extends: ['left', 'right']};
 
-	const require = (id: string) => {
+	const require = (id: string): UserConfig => {
 		switch (id) {
 			case 'left':
-				return {rules: {a: true}};
+				return {rules: {a: [0, 'never', true]}};
 			case 'right':
-				return {rules: {a: false, b: true}};
+				return {rules: {a: [0, 'never', false], b: [0, 'never', true]}};
 			default:
 				return {};
 		}
@@ -261,11 +262,11 @@ test('extends rules from left to right with overlap', () => {
 
 	const actual = resolveExtends(input, ctx);
 
-	const expected = {
+	const expected: UserConfig = {
 		extends: ['left', 'right'],
 		rules: {
-			a: false,
-			b: true,
+			a: [0, 'never', false],
+			b: [0, 'never', true],
 		},
 	};
 
@@ -378,22 +379,25 @@ test('plugins should be merged correctly', () => {
 });
 
 test('rules should be merged correctly', () => {
-	const input = {extends: ['extender-name'], rules: {test1: ['base', '1']}};
+	const input: UserConfig = {
+		extends: ['extender-name'],
+		rules: {test1: [1, 'never', 'base']},
+	};
 
-	const require = (id: string) => {
+	const require = (id: string): UserConfig => {
 		switch (id) {
 			case 'extender-name':
 				return {
 					extends: ['recursive-extender-name'],
-					rules: {test2: [id, '2']},
+					rules: {test2: [2, 'never', id]},
 				};
 			case 'recursive-extender-name':
 				return {
 					extends: ['second-recursive-extender-name'],
-					rules: {test1: [id, '3']},
+					rules: {test1: [0, 'never', id]},
 				};
 			case 'second-recursive-extender-name':
-				return {rules: {test2: [id, '4']}};
+				return {rules: {test2: [1, 'never', id]}};
 			default:
 				return {};
 		}
@@ -403,11 +407,11 @@ test('rules should be merged correctly', () => {
 
 	const actual = resolveExtends(input, ctx);
 
-	const expected = {
+	const expected: UserConfig = {
 		extends: ['extender-name'],
 		rules: {
-			test1: ['base', '1'],
-			test2: ['extender-name', '2'],
+			test1: [1, 'never', 'base'],
+			test2: [2, 'never', 'extender-name'],
 		},
 	};
 
@@ -504,13 +508,16 @@ test('should correctly merge nested configs', () => {
 			case 'extender-2':
 				return {extends: ['extender-4']};
 			case 'extender-3':
-				return {rules: {test: 3}};
+				return {rules: {test: [1, 'never', 3]}};
 			case 'extender-4':
-				return {extends: ['extender-5', 'extender-6'], rules: {test: 4}};
+				return {
+					extends: ['extender-5', 'extender-6'],
+					rules: {test: [1, 'never', 4]},
+				};
 			case 'extender-5':
-				return {rules: {test: 5}};
+				return {rules: {test: [1, 'never', 5]}};
 			case 'extender-6':
-				return {rules: {test: 6}};
+				return {rules: {test: [1, 'never', 6]}};
 			default:
 				return {};
 		}
@@ -523,7 +530,7 @@ test('should correctly merge nested configs', () => {
 	const expected = {
 		extends: ['extender-1'],
 		rules: {
-			test: 4,
+			test: [1, 'never', 4],
 		},
 	};
 

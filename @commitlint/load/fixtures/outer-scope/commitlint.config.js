@@ -1,7 +1,7 @@
 module.exports = {
 	rules: {
-		outer: true,
-		inner: false,
-		child: false
-	}
+		outer: [1, 'never', true],
+		inner: [1, 'never', false],
+		child: [1, 'never', false],
+	},
 };
