@@ -55,10 +55,11 @@ describe('getQuestionConfig', () => {
 		);
 	});
 
-	test("should 'scope' supports multiple select separated with settings.scopeEnumSeparator", () => {
+	test("should 'scope' supports multiple select separated with settings.scopeEnumSeparator and enableMultipleScopes", () => {
 		setPromptConfig({
 			settings: {
 				scopeEnumSeparator: '/',
+				enableMultipleScopes: true,
 			},
 		});
 		const config = getQuestionConfig('scope');
@@ -67,6 +68,11 @@ describe('getQuestionConfig', () => {
 				multipleSelectDefaultDelimiter: '/',
 			})
 		);
+	});
+
+	test("should 'scope' disable multiple select by default", () => {
+		const config = getQuestionConfig('scope');
+		expect(config).not.toContain('multipleSelectDefaultDelimiter');
 	});
 });
 

@@ -8,35 +8,36 @@ There are three fields: `settings`, `messages` and `questions`
 
 Set optional options.
 
-- scopeEnumSeparator: Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter.
+- `enableMultipleScopes`: `(boolean)` Enable multiple scopes, select scope with a radio list, disabled by default.
+- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter.It is applied when `enableMultipleScopes` set true.
 
 ## `messages`
 
 Set hint contents, you can configure it to support localization.
 
-- skip: The field can be skip by enter
-- max: Maximum number of characters
-- min: Minimum number of characters
-- emptyWarning: The field can not be empty
-- upperLimitWarning: The characters limit is exceeded
-- lowerLimitWarning: The characters is less than lower limit
+- `skip`: The field can be skip by enter
+- `max`: Maximum number of characters
+- `min`: Minimum number of characters
+- `emptyWarning`: The field can not be empty
+- `upperLimitWarning`: The characters limit is exceeded
+- `lowerLimitWarning`: The characters is less than lower limit
 
 ## `questions`
 
 Specify the interactive steps, Steps can only be configure in
 
-- header
-- type
-- scope
-- subject
-- body
-- footer
-- isBreaking
-- breaking
-- breakingBody
-- isIssueAffected
-- issues
-- issuesBody
+- `header`
+- `type`
+- `scope`
+- `subject`
+- `body`
+- `footer`
+- `isBreaking`
+- `breaking`
+- `breakingBody`
+- `isIssueAffected`
+- `issues`
+- `issuesBody`
 
 <div class="sequence">
     <img src="./assets/cz-commitlint.png"/>
@@ -49,6 +50,7 @@ module.exports = {
     ...
   },
   prompt: {
+    settings: {},
     messages: {
       skip: ':skip',
       max: 'upper %d chars',

@@ -18,6 +18,7 @@ export type PromptName =
 export type PromptConfig = {
 	settings: {
 		scopeEnumSeparator: string;
+		enableMultipleScopes: boolean;
 	};
 	messages: PromptMessages;
 	questions: Partial<
