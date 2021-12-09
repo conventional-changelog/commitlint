@@ -68,6 +68,16 @@ describe('getQuestionConfig', () => {
 			})
 		);
 	});
+
+	test("should 'scope' disable multiple select with disableMultipleScopes", () => {
+		setPromptConfig({
+			settings: {
+				disableMultipleScopes: true,
+			},
+		});
+		const config = getQuestionConfig('scope');
+		expect(config).not.toContain('multipleSelectDefaultDelimiter');
+	});
 });
 
 describe('combineCommitMessage', () => {

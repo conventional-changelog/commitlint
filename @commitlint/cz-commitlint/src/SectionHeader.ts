@@ -50,11 +50,6 @@ export function getQuestions(): Array<DistinctQuestion> {
 	headerRuleFields.forEach((name) => {
 		const questionConfig = getQuestionConfig(name);
 		if (questionConfig) {
-			if (name === 'scope') {
-				questionConfig.multipleSelectDefaultDelimiter =
-					getPromptSettings()['scopeEnumSeparator'];
-				questionConfig.multipleValueDelimiters = /\/|\\|,/g;
-			}
 			const instance = new HeaderQuestion(
 				name,
 				questionConfig,
@@ -74,8 +69,11 @@ export function getQuestionConfig(
 
 	if (questionConfig) {
 		if (name === 'scope') {
-			questionConfig.multipleSelectDefaultDelimiter =
-				getPromptSettings()['scopeEnumSeparator'];
+			if (!getPromptSettings()['disableMultipleScopes']) {
+				questionConfig.multipleSelectDefaultDelimiter =
+					getPromptSettings()['scopeEnumSeparator'];
+			}
+			// split scope string to segments, match commitlint rules
 			questionConfig.multipleValueDelimiters = /\/|\\|,/g;
 		}
 	}

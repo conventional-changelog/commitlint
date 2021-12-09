@@ -115,9 +115,7 @@ describe('setPromptConfig', () => {
 				scopeEnumSeparator: '/',
 			},
 		});
-		expect(getPromptSettings()).toEqual({
-			scopeEnumSeparator: '/',
-		});
+		expect(getPromptSettings()['scopeEnumSeparator']).toEqual('/');
 
 		const processExit = jest
 			.spyOn(process, 'exit')
@@ -129,5 +127,14 @@ describe('setPromptConfig', () => {
 		});
 		expect(processExit).toHaveBeenCalledWith(1);
 		processExit.mockClear();
+	});
+
+	test('should pass on settings', () => {
+		setPromptConfig({
+			settings: {
+				disableMultipleScopes: true,
+			},
+		});
+		expect(getPromptSettings()['disableMultipleScopes']).toEqual(true);
 	});
 });
