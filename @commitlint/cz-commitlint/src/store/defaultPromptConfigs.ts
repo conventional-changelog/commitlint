@@ -1,7 +1,7 @@
 export default {
 	settings: {
 		scopeEnumSeparator: ',',
-		disableMultipleScopes: false,
+		enableMultipleScopes: false,
 	},
 	messages: {
 		skip: '(press enter to skip)',

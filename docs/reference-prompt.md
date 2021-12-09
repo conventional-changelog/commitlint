@@ -8,8 +8,8 @@ There are three fields: `settings`, `messages` and `questions`
 
 Set optional options.
 
-- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter.
-- `disableMultipleScopes`: `(boolean)` Disable multiple scopes, select scope with a radio list.
+- `enableMultipleScopes`: `(boolean)` Enable multiple scopes, select scope with a radio list, disabled by default.
+- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter.It is applied when `enableMultipleScopes` set true.
 
 ## `messages`
 

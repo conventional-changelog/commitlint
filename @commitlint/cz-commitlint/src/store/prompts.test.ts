@@ -132,9 +132,9 @@ describe('setPromptConfig', () => {
 	test('should pass on settings', () => {
 		setPromptConfig({
 			settings: {
-				disableMultipleScopes: true,
+				enableMultipleScopes: true,
 			},
 		});
-		expect(getPromptSettings()['disableMultipleScopes']).toEqual(true);
+		expect(getPromptSettings()['enableMultipleScopes']).toEqual(true);
 	});
 });

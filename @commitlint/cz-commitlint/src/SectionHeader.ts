@@ -69,7 +69,7 @@ export function getQuestionConfig(
 
 	if (questionConfig) {
 		if (name === 'scope') {
-			if (!getPromptSettings()['disableMultipleScopes']) {
+			if (getPromptSettings()['enableMultipleScopes']) {
 				questionConfig.multipleSelectDefaultDelimiter =
 					getPromptSettings()['scopeEnumSeparator'];
 			}
