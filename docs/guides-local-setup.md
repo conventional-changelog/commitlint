@@ -12,6 +12,10 @@ configure `commitlint` to use it.
 ```bash
 # Install and configure if needed
 npm install --save-dev @commitlint/{cli,config-conventional}
+# For Windows:
+npm install --save-dev @commitlint/config-conventional @commitlint/cli
+
+# Configure commitlint to use conventional config
 echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
 ```
 
