@@ -74,4 +74,13 @@ describe('combineCommitMessage', () => {
 		});
 		expect(commitMessage).toBe('This is issue body message.');
 	});
+
+	test('should use issueBody when body message is empty string but commit has issue note', () => {
+		setRules({});
+		const commitMessage = combineCommitMessage({
+			body: '',
+			issuesBody: 'This is issue body message.',
+		});
+		expect(commitMessage).toBe('This is issue body message.');
+	});
 });
