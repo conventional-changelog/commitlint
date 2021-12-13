@@ -1,6 +1,6 @@
-import path from 'path';
 import {cosmiconfig} from 'cosmiconfig';
-import TypeScriptLoader from '@endemolshinegroup/cosmiconfig-typescript-loader';
+import TypeScriptLoader from 'cosmiconfig-typescript-loader';
+import path from 'path';
 
 export interface LoadConfigResult {
 	config: unknown;
@@ -32,7 +32,7 @@ export async function loadConfig(
 			`${moduleName}.config.ts`,
 		],
 		loaders: {
-			'.ts': TypeScriptLoader,
+			'.ts': TypeScriptLoader(),
 		},
 	});
 
