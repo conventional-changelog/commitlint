@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
+
+
+### Features
+
+* **cz-commitlint:** support select scope with radio list by setting disableMultipleScopes ([#2911](https://github.com/conventional-changelog/commitlint/issues/2911)) ([9d8d73f](https://github.com/conventional-changelog/commitlint/commit/9d8d73f36e0c62c8cd9e3e913b66a5ca46ebf622)), closes [#2782](https://github.com/conventional-changelog/commitlint/issues/2782)
+* config validation ([#2412](https://github.com/conventional-changelog/commitlint/issues/2412)) ([c717202](https://github.com/conventional-changelog/commitlint/commit/c7172022097b11f46b33617e4a94d751243c1049)), closes [#327](https://github.com/conventional-changelog/commitlint/issues/327)
+
+
+### BREAKING CHANGES
+
+* **cz-commitlint:** users who is using multiple scopes need to set enableMultipleScopes to true
+
+
+
+
+
 # [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
 
 

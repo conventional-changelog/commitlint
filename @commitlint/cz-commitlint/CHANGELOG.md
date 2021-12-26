@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
+
+
+### Bug Fixes
+
+* **cz-commitlint:** combine commit body with issuesBody/breakingBody when body has an empty string ([#2915](https://github.com/conventional-changelog/commitlint/issues/2915)) ([a038b41](https://github.com/conventional-changelog/commitlint/commit/a038b419f7f1d2073977ec1e6fe59ffcbba38931))
+
+
+### Features
+
+* **cz-commitlint:** support select scope with radio list by setting disableMultipleScopes ([#2911](https://github.com/conventional-changelog/commitlint/issues/2911)) ([9d8d73f](https://github.com/conventional-changelog/commitlint/commit/9d8d73f36e0c62c8cd9e3e913b66a5ca46ebf622)), closes [#2782](https://github.com/conventional-changelog/commitlint/issues/2782)
+
+
+### BREAKING CHANGES
+
+* **cz-commitlint:** users who is using multiple scopes need to set enableMultipleScopes to true
+
+
+
+
+
 # [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
 
 **Note:** Version bump only for package @commitlint/cz-commitlint

@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
+
+
+### Bug Fixes
+
+* **is-ignored:** ignore merge tag commit messages ([#2920](https://github.com/conventional-changelog/commitlint/issues/2920)) ([914782a](https://github.com/conventional-changelog/commitlint/commit/914782aad70d353baf4d9fbbf9824c0211241484))
+* update dependency @types/tmp to v0.2.2 ([#2903](https://github.com/conventional-changelog/commitlint/issues/2903)) ([d2f146c](https://github.com/conventional-changelog/commitlint/commit/d2f146c6d8bcafa96d13341433aebaa2712a2feb))
+* update dependency conventional-commits-parser to v3.2.3 ([#2904](https://github.com/conventional-changelog/commitlint/issues/2904)) ([3a98d3c](https://github.com/conventional-changelog/commitlint/commit/3a98d3c49eae1001ed25bcadaa209f8a4cb32e91))
+* **cz-commitlint:** combine commit body with issuesBody/breakingBody when body has an empty string ([#2915](https://github.com/conventional-changelog/commitlint/issues/2915)) ([a038b41](https://github.com/conventional-changelog/commitlint/commit/a038b419f7f1d2073977ec1e6fe59ffcbba38931))
+* **docs:** minor changes to guides ([#2913](https://github.com/conventional-changelog/commitlint/issues/2913)) ([499efd1](https://github.com/conventional-changelog/commitlint/commit/499efd17927ca26e9dcdae58e4cc0772b45bbea8))
+* update dependency conventional-changelog-conventionalcommits to v4.6.1 ([#2906](https://github.com/conventional-changelog/commitlint/issues/2906)) ([1d1ccfa](https://github.com/conventional-changelog/commitlint/commit/1d1ccfab358b7dbd6448f8d74d0ae39eaddb3189))
+* update dependency cosmiconfig to v7.0.1 ([#2905](https://github.com/conventional-changelog/commitlint/issues/2905)) ([2c33c98](https://github.com/conventional-changelog/commitlint/commit/2c33c98693627888f2246b34e00941417c6ef932))
+* update dependency jest-environment-node to v27.4.2 ([#2907](https://github.com/conventional-changelog/commitlint/issues/2907)) ([c3b29ba](https://github.com/conventional-changelog/commitlint/commit/c3b29ba15a13fa3f2510a8bb153a1f90ee8ee583))
+* update dependency yargs to v17.3.0 ([#2908](https://github.com/conventional-changelog/commitlint/issues/2908)) ([a387494](https://github.com/conventional-changelog/commitlint/commit/a38749443130400b9d289d3d50042271bff44a28))
+
+
+### Features
+
+* **config-rush-scopes:** add config for rush monorepo ([#2878](https://github.com/conventional-changelog/commitlint/issues/2878)) ([befa677](https://github.com/conventional-changelog/commitlint/commit/befa677c3c2bed38085a62da161366784d971906))
+* **cz-commitlint:** support select scope with radio list by setting disableMultipleScopes ([#2911](https://github.com/conventional-changelog/commitlint/issues/2911)) ([9d8d73f](https://github.com/conventional-changelog/commitlint/commit/9d8d73f36e0c62c8cd9e3e913b66a5ca46ebf622)), closes [#2782](https://github.com/conventional-changelog/commitlint/issues/2782)
+* config validation ([#2412](https://github.com/conventional-changelog/commitlint/issues/2412)) ([c717202](https://github.com/conventional-changelog/commitlint/commit/c7172022097b11f46b33617e4a94d751243c1049)), closes [#327](https://github.com/conventional-changelog/commitlint/issues/327)
+
+
+### BREAKING CHANGES
+
+* **cz-commitlint:** users who is using multiple scopes need to set enableMultipleScopes to true
+
+
+
+
+
 # [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
 
 

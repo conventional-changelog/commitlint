@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
+
+
+### Bug Fixes
+
+* **is-ignored:** ignore merge tag commit messages ([#2920](https://github.com/conventional-changelog/commitlint/issues/2920)) ([914782a](https://github.com/conventional-changelog/commitlint/commit/914782aad70d353baf4d9fbbf9824c0211241484))
+
+
+
+
+
 # [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
 
 **Note:** Version bump only for package @commitlint/is-ignored
