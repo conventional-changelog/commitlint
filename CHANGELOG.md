@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.0.1](https://github.com/conventional-changelog/commitlint/compare/v16.0.0...v16.0.1) (2021-12-28)
+
+
+### Bug Fixes
+
+* update dependency @types/tmp to v0.2.3 ([#2928](https://github.com/conventional-changelog/commitlint/issues/2928)) ([8eeb1f4](https://github.com/conventional-changelog/commitlint/commit/8eeb1f436a91550295f5bc671e0d75fef7eedbd7))
+* update dependency conventional-changelog-conventionalcommits to v4.6.2 ([#2934](https://github.com/conventional-changelog/commitlint/issues/2934)) ([a239b9e](https://github.com/conventional-changelog/commitlint/commit/a239b9e7c4078d335182c9568e348680ca5fc569))
+* update dependency cosmiconfig-typescript-loader to v1.0.2 ([#2929](https://github.com/conventional-changelog/commitlint/issues/2929)) ([04cc88c](https://github.com/conventional-changelog/commitlint/commit/04cc88c0d985b5f03a2d1bdc7a1a94f4ef5c7019))
+* update dependency yargs to v17.3.1 ([#2935](https://github.com/conventional-changelog/commitlint/issues/2935)) ([8e099af](https://github.com/conventional-changelog/commitlint/commit/8e099afd794c8fc44c64b4cb817f197d2e80b12e))
+
+
+
+
+
 # [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
 
 
