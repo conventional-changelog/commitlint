@@ -94,7 +94,7 @@ Infinity
 
 #### body-case
 
-- **condition**: `header` is in case `value`
+- **condition**: `body` is in case `value`
 - **rule**: `always`
 - **value**
 
