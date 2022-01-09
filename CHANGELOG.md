@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.0.2](https://github.com/conventional-changelog/commitlint/compare/v16.0.1...v16.0.2) (2022-01-09)
+
+
+### Bug Fixes
+
+* update dependency conventional-changelog-conventionalcommits to v4.6.3 ([#2938](https://github.com/conventional-changelog/commitlint/issues/2938)) ([0231f4b](https://github.com/conventional-changelog/commitlint/commit/0231f4bd74d9c5a691ba3e25e92947127359528c))
+* update dependency conventional-commits-parser to v3.2.4 ([#2939](https://github.com/conventional-changelog/commitlint/issues/2939)) ([a484a9a](https://github.com/conventional-changelog/commitlint/commit/a484a9a65259861114deb2b37ee0b30d0058be2a))
+* update dependency cosmiconfig-typescript-loader to v1.0.3 ([#2956](https://github.com/conventional-changelog/commitlint/issues/2956)) ([cc6e6cd](https://github.com/conventional-changelog/commitlint/commit/cc6e6cdd53a4b609c8e0514a2035ce4f4a46a317))
+* update dependency jest-environment-node to v27.4.6 ([#2957](https://github.com/conventional-changelog/commitlint/issues/2957)) ([62a0867](https://github.com/conventional-changelog/commitlint/commit/62a0867ddbc771bf92395ccfd0d1f75ff9ea24ec))
+
+
+
+
+
 ## [16.0.1](https://github.com/conventional-changelog/commitlint/compare/v16.0.0...v16.0.1) (2021-12-28)
 
 
