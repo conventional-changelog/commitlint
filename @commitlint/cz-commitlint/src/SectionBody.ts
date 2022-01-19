@@ -19,7 +19,7 @@ export function combineCommitMessage(answers: Answers): string {
 	const leadingBlankFn = getLeadingBlankFn(getRule('body', 'leading-blank'));
 	const {body, breakingBody, issuesBody} = answers;
 
-	const commitBody = body || breakingBody || issuesBody || '-';
+	const commitBody = body || breakingBody || issuesBody || '';
 
 	if (commitBody) {
 		return leadingBlankFn(

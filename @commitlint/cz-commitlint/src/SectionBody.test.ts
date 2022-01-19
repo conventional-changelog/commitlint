@@ -83,4 +83,12 @@ describe('combineCommitMessage', () => {
 		});
 		expect(commitMessage).toBe('This is issue body message.');
 	});
+
+	test('should return empty message when body is empty', () => {
+		setRules({});
+		const commitMessage = combineCommitMessage({
+			body: '',
+		});
+		expect(commitMessage).toBe('');
+	});
 });
