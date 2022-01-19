@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.0.3](https://github.com/conventional-changelog/commitlint/compare/v16.0.2...v16.0.3) (2022-01-19)
+
+
+### Bug Fixes
+
+* commit body should be empty by default ([#2980](https://github.com/conventional-changelog/commitlint/issues/2980)) ([e6582e0](https://github.com/conventional-changelog/commitlint/commit/e6582e03608621e46f617a097b4880750ae85021))
+
+
+
+
+
 # [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
 
 
