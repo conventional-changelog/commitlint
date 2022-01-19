@@ -1,5 +1,7 @@
 import {ParserPreset} from '@commitlint/types';
 
+type Awaitable<T> = T | PromiseLike<T>;
+
 function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 	return Boolean(obj) && typeof obj === 'object'; // typeof null === 'object'
 }
@@ -15,8 +17,16 @@ function isParserOptsFunction<T extends ParserPreset>(
 }
 
 export async function loadParserOpts(
-	pendingParser: string | ParserPreset | Promise<ParserPreset> | undefined
+	pendingParser:
+		| string
+		| Awaitable<ParserPreset>
+		| (() => Awaitable<ParserPreset>)
+		| undefined
 ): Promise<ParserPreset | undefined> {
+	if (typeof pendingParser === 'function') {
+		return loadParserOpts(pendingParser());
+	}
+
 	if (!pendingParser || typeof pendingParser !== 'object') {
 		return undefined;
 	}
