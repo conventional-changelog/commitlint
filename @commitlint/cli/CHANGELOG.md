@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.1.0](https://github.com/conventional-changelog/commitlint/compare/v16.0.3...v16.1.0) (2022-01-20)
+
+**Note:** Version bump only for package @commitlint/cli
+
+
+
+
+
 ## [16.0.3](https://github.com/conventional-changelog/commitlint/compare/v16.0.2...v16.0.3) (2022-01-19)
 
 **Note:** Version bump only for package @commitlint/cli
