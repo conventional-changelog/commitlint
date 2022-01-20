@@ -56,6 +56,7 @@ exports[`validation should fail for parserPreset 1`] = `
 "Commitlint configuration in parserPreset.js is invalid:
 	- Property \\"parserPreset\\" has the wrong type - should be string.
 	- Property \\"parserPreset\\" has the wrong type - should be object.
+	- \\"parserPreset\\" should be a function. Value: [].
 	- \\"parserPreset\\" should match exactly one schema in oneOf. Value: [].
 "
 `;
