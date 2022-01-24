@@ -1,0 +1,39 @@
+{
+  "name": "commitlint-config-nx-scopes",
+  "version": "16.0.0",
+  "description": "Shareable commitlint config enforcing nx project names as scopes",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conventional-changelog/commitlint.git",
+    "directory": "@alias/commitlint-config-nx-scopes"
+  },
+  "keywords": [
+    "conventional-changelog",
+    "commitlint",
+    "commitlint-config",
+    "nx"
+  ],
+  "author": "Florian Guitton <florian@secretarium.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
+  "homepage": "https://commitlint.js.org/",
+  "engines": {
+    "node": ">=v12"
+  },
+  "dependencies": {
+    "@commitlint/config-nx-scopes": "^16.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/utils": "^16.0.0"
+  },
+  "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
+}
