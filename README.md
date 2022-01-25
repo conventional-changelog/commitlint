@@ -254,10 +254,6 @@ For more information on how to contribute please take a look at our [contributio
 
 ### Publishing a release
 
-Before publishing a release do a `yarn run publish --dry-run` to get the upcoming version and update the version
-in the [`should print help` test](https://github.com/conventional-changelog/commitlint/blob/master/@commitlint/cli/src/cli.test.ts#L431).\
-Commit that change before creating the new version without `--dry-run`.
-
 ```sh
 npm login
 nvm use (if you have nvm installed)
