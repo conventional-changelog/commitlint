@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.2.0](https://github.com/conventional-changelog/commitlint/compare/v16.1.0...v16.2.0) (2022-01-25)
+
+
+### Bug Fixes
+
+* update dependency cosmiconfig-typescript-loader to v1.0.4 ([#2991](https://github.com/conventional-changelog/commitlint/issues/2991)) ([043a059](https://github.com/conventional-changelog/commitlint/commit/043a05922fb8139b57c78eb5034b77823b2139ba))
+
+
+### Features
+
+* add support for Nx monorepos via @commitlint/config-nx-scopes ([#2995](https://github.com/conventional-changelog/commitlint/issues/2995)) ([11879ad](https://github.com/conventional-changelog/commitlint/commit/11879adacbef3c939311b1ff597a7b894fcca0dc))
+
+
+
+
+
 # [16.1.0](https://github.com/conventional-changelog/commitlint/compare/v16.0.3...v16.1.0) (2022-01-20)
 
 
