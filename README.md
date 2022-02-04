@@ -294,6 +294,14 @@ If for some reason this stops in between, you can manually publish missing packa
 npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
 ```
 
+##### Publishing (new) packages for the first time
+
+```sh
+npm publish [PACKAGE_NAME] --access public
+```
+
+For alias packages you need to add `@alias/`. Like we already do with `@commitlint/` anyways. This is just a reminder to make sure we do not forget this.
+
 ##### Move `next` to `latest`
 
 ```sh
