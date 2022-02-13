@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-validator",
-  "version": "16.1.0",
+  "version": "16.2.1",
   "description": "config validator for commitlint.config.js",
   "main": "lib/validate.js",
   "types": "lib/validate.d.ts",
@@ -35,10 +35,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^16.0.0"
+    "@commitlint/utils": "^16.2.1"
   },
   "dependencies": {
-    "@commitlint/types": "^16.0.0",
+    "@commitlint/types": "^16.2.1",
     "ajv": "^6.12.6"
   },
   "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"

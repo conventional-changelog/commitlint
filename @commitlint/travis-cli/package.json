@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/travis-cli",
-  "version": "16.1.0",
+  "version": "16.2.1",
   "description": "Lint all relevant commits for a change or PR on Travis CI",
   "files": [
     "lib/",
@@ -37,10 +37,10 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/test": "^16.0.0",
-    "@commitlint/utils": "^16.0.0"
+    "@commitlint/utils": "^16.2.1"
   },
   "dependencies": {
-    "@commitlint/cli": "^16.1.0",
+    "@commitlint/cli": "^16.2.1",
     "execa": "^5.0.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.1](https://github.com/conventional-changelog/commitlint/compare/v16.2.0...v16.2.1) (2022-02-13)
+
+
+### Bug Fixes
+
+* update dependency read-pkg to v7.1.0 ([#3015](https://github.com/conventional-changelog/commitlint/issues/3015)) ([3b7b680](https://github.com/conventional-changelog/commitlint/commit/3b7b680ce4f5341d8816f3db036170b0cb28d33f))
+
+
+
+
+
 # [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
 
 **Note:** Version bump only for package @commitlint/utils

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.1](https://github.com/conventional-changelog/commitlint/compare/v16.2.0...v16.2.1) (2022-02-13)
+
+
+### Bug Fixes
+
+* **load:** satisfy @types/node peer dependency for cosmiconfig-loader-typescript ([#3008](https://github.com/conventional-changelog/commitlint/issues/3008)) ([338180c](https://github.com/conventional-changelog/commitlint/commit/338180c7174625cddd7a0ea2b9d2786fee375756)), closes [#3007](https://github.com/conventional-changelog/commitlint/issues/3007)
+
+
+
+
+
 # [16.1.0](https://github.com/conventional-changelog/commitlint/compare/v16.0.3...v16.1.0) (2022-01-20)
 
 

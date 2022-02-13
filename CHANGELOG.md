@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.1](https://github.com/conventional-changelog/commitlint/compare/v16.2.0...v16.2.1) (2022-02-13)
+
+
+### Bug Fixes
+
+* update dependency cosmiconfig-typescript-loader to v1.0.5 ([#3020](https://github.com/conventional-changelog/commitlint/issues/3020)) ([2d431a6](https://github.com/conventional-changelog/commitlint/commit/2d431a60942fd615b4cce8f18a237c3fb6712223))
+* update dependency jest-environment-node to v27.5.0 ([#3012](https://github.com/conventional-changelog/commitlint/issues/3012)) ([a546128](https://github.com/conventional-changelog/commitlint/commit/a5461289cff8a7927bab9153af681afa7a039977))
+* update dependency jest-environment-node to v27.5.1 ([#3018](https://github.com/conventional-changelog/commitlint/issues/3018)) ([0cbf652](https://github.com/conventional-changelog/commitlint/commit/0cbf65269c1ca70b7a27c8bdee7e397ac6dba9b7))
+* update dependency read-pkg to v7.1.0 ([#3015](https://github.com/conventional-changelog/commitlint/issues/3015)) ([3b7b680](https://github.com/conventional-changelog/commitlint/commit/3b7b680ce4f5341d8816f3db036170b0cb28d33f))
+* **load:** satisfy @types/node peer dependency for cosmiconfig-loader-typescript ([#3008](https://github.com/conventional-changelog/commitlint/issues/3008)) ([338180c](https://github.com/conventional-changelog/commitlint/commit/338180c7174625cddd7a0ea2b9d2786fee375756)), closes [#3007](https://github.com/conventional-changelog/commitlint/issues/3007)
+
+
+
+
+
 # [16.2.0](https://github.com/conventional-changelog/commitlint/compare/v16.1.0...v16.2.0) (2022-01-25)
 
 
