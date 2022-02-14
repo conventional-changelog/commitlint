@@ -82,3 +82,14 @@ test('returns expected value for yarn workspaces', async () => {
 	const [, , value] = await fn({cwd});
 	expect(value.sort()).toEqual(['a', 'b']);
 });
+
+test('returns expected value for yarn workspaces has nested packages', async () => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = await npm.bootstrap('fixtures/nested-workspaces', __dirname);
+
+	const [, , value] = await fn({cwd});
+	expect(value).toEqual(expect.arrayContaining(['nested-a', 'nested-b']));
+	expect(value).toEqual(
+		expect.not.arrayContaining(['dependency-a', 'dependency-b'])
+	);
+});
