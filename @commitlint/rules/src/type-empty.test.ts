@@ -69,20 +69,20 @@ test('with only subject should succeed for "always"', async () => {
 	expect(actual).toEqual(expected);
 });
 
-test('without type but with a separator should succeed for empty keyword', async () => {
-	const [actual] = typeEmpty(await parsed.subjectOnly);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
-
-test('without type but with a separator should fail for "never"', async () => {
-	const [actual] = typeEmpty(await parsed.subjectOnly, 'never');
+test('without type but with a separator should fail for empty keyword', async () => {
+	const [actual] = typeEmpty(await parsed.separator);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
-test('without type but with a separator should succeed for "always"', async () => {
-	const [actual] = typeEmpty(await parsed.subjectOnly, 'always');
+test('without type but with a separator should succeed for "never"', async () => {
+	const [actual] = typeEmpty(await parsed.separator, 'never');
 	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('without type but with a separator should fail for "always"', async () => {
+	const [actual] = typeEmpty(await parsed.separator, 'always');
+	const expected = false;
 	expect(actual).toEqual(expected);
 });
