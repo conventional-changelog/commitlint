@@ -3773,10 +3773,12 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
 cosmiconfig-typescript-loader@^1.0.0:
-  version: "1.0.6"
+  version "1.0.6"
+  resolved "https://registry.npmjs.org/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-1.0.6.tgz#6d879cece8063b15ec8a3258f55a8e94893c7cca"
+  integrity sha512-2nEotziYJWtNtoTjKbchj9QrdTT6DBxCvqjNKoDKARw+e2yZmTQCa07uRrykLIZuvSgp69YXLH89UHc0WhdMfQ==
   dependencies:
     cosmiconfig "^7"
-    ts-node "^10.5.0"
+    ts-node "^10.6.0"
 
 cosmiconfig@^7:
   version "7.0.1"
@@ -4321,9 +4323,9 @@ escodegen@^2.0.0:
     source-map "~0.6.1"
 
 eslint-config-prettier@^8.0.0:
-  version "8.4.0"
-  resolved "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.4.0.tgz#8e6d17c7436649e98c4c2189868562921ef563de"
-  integrity sha512-CFotdUcMY18nGRo5KGsnNxpznzhkopOcOo0InID+sgQssPrzjvsyKZPvOgymTFeHrFuC3Tzdf2YndhXtULK9Iw==
+  version "8.5.0"
+  resolved "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
+  integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
 
 eslint-import-resolver-node@^0.3.6:
   version "0.3.6"
@@ -9055,10 +9057,10 @@ ts-jest@^27.0.5:
     semver "7.x"
     yargs-parser "20.x"
 
-ts-node@^10.5.0:
-  version "10.5.0"
-  resolved "https://registry.npmjs.org/ts-node/-/ts-node-10.5.0.tgz#618bef5854c1fbbedf5e31465cbb224a1d524ef9"
-  integrity sha512-6kEJKwVxAJ35W4akuiysfKwKmjkbYxwQMTBaAxo9KKAx/Yd26mPUyhGz3ji+EsJoAgrLqVsYHNuuYwQe22lbtw==
+ts-node@^10.6.0:
+  version "10.6.0"
+  resolved "https://registry.npmjs.org/ts-node/-/ts-node-10.6.0.tgz#c3f4195d5173ce3affdc8f2fd2e9a7ac8de5376a"
+  integrity sha512-CJen6+dfOXolxudBQXnVjRVvYTmTWbyz7cn+xq2XTsvnaXbHqr4gXSCNbS2Jj8yTZMuGwUoBESLaOkLascVVvg==
   dependencies:
     "@cspotcode/source-map-support" "0.7.0"
     "@tsconfig/node10" "^1.0.7"
