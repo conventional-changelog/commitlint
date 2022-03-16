@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.3](https://github.com/conventional-changelog/commitlint/compare/v16.2.2...v16.2.3) (2022-03-16)
+
+
+### Bug Fixes
+
+* update dependency @types/fs-extra to v9.0.13 ([#3054](https://github.com/conventional-changelog/commitlint/issues/3054)) ([4c7dd7c](https://github.com/conventional-changelog/commitlint/commit/4c7dd7c32f89f3187f9f655c8170d35b6be8f90a))
+* update dependency cosmiconfig-typescript-loader to v1.0.6 ([#3059](https://github.com/conventional-changelog/commitlint/issues/3059)) ([256e194](https://github.com/conventional-changelog/commitlint/commit/256e194cbe8ed773ed9d966fa06f9531a6bc4d37))
+* update dependency fs-extra to v10.0.1 ([#3041](https://github.com/conventional-changelog/commitlint/issues/3041)) ([1236c83](https://github.com/conventional-changelog/commitlint/commit/1236c8388bb9b684cdfe41577b90cc5eaa852a47))
+* update dependency git-raw-commits to v2.0.11 ([#3055](https://github.com/conventional-changelog/commitlint/issues/3055)) ([d5089f1](https://github.com/conventional-changelog/commitlint/commit/d5089f1ce211592bc9315c03ad79183f142b7f1b))
+
+
+
+
+
 ## [16.2.2](https://github.com/conventional-changelog/commitlint/compare/v16.2.1...v16.2.2) (2022-02-14)
 
 **Note:** Version bump only for package @commitlint/root
