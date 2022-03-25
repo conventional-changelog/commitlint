@@ -121,7 +121,7 @@ module.exports = {
 				description: 'Describe the breaking changes',
 			},
 			isIssueAffected: {
-				description: 'Does this change affect any open issues?',
+				description: '#123s?',
 			},
 			issuesBody: {
 				description:
