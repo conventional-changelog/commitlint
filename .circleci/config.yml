@@ -93,7 +93,7 @@ jobs:
       - run-tests
   windows-v12:
     executor:
-      name: win/windows
+      name: win/default
     steps:
       - run-tests
 
