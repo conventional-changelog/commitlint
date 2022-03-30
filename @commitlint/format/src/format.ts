@@ -83,7 +83,7 @@ export function formatResult(
 
 	const summary =
 		options.verbose || hasProblems
-			? `${deco}   found ${el} problems, ${wl} warnings`
+			? `${deco}   commitlint found ${el} problems, ${wl} warnings`
 			: undefined;
 
 	const fmtSummary =
