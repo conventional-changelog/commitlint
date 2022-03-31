@@ -58,7 +58,7 @@ process.stdout.write(output);
   '✖   This will show up red as it has level 2 [some-error]',
   '    This will not show up as it has level 0 [some-hint]',
   '⚠   This will show up yellow as it has level 1 [some-warning]',
-  '✖   found 1 problems, 2 warnings'
+  '✖   commitlint found 1 problems, 2 warnings'
 ] */
 ```
 

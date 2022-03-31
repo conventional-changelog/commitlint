@@ -34,7 +34,7 @@ echo 'foo: bar' | commitlint
 ⧗   input: foo: bar
 ✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
 
-✖   found 1 problems, 0 warnings
+✖   commitlint found 1 problems, 0 warnings
 ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
 ```
 

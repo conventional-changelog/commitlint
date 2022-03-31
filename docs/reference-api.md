@@ -74,7 +74,7 @@ format(report?: Report = {}, options?: formatOptions = {}) => string[];
 ```js
 const format = require('@commitlint/format').default;
 
-format(); // => [ '\u001b[1m\u001b[32m✔\u001b[39m   found 0 problems, 0 warnings\u001b[22m' ]
+format(); // => [ '\u001b[1m\u001b[32m✔\u001b[39m   commitlint found 0 problems, 0 warnings\u001b[22m' ]
 
 format(
   {
@@ -110,7 +110,7 @@ format(
   '✖   This will show up red as it has level 2 [some-error]',
   '    This will not show up as it has level 0 [some-hint]',
   '⚠   This will show up yellow as it has level 1 [some-warning]',
-  '✖   found 1 problems, 2 warnings'
+  '✖   commitlint found 1 problems, 2 warnings'
 ] */
 ```
 

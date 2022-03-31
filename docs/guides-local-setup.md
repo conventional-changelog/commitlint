@@ -68,7 +68,7 @@ No staged files match any of provided globs.
 ⧗   input: foo: this will fail
 ✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
 
-✖   found 1 problems, 0 warnings
+✖   commitlint found 1 problems, 0 warnings
 ⓘ   Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
 
 husky > commit-msg hook failed (add --no-verify to bypass)
