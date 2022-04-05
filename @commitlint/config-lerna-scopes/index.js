@@ -25,7 +25,7 @@ function getPackages(context) {
 					workspaces.map((ws) => {
 						return Path.posix.join(ws, 'package.json');
 					}),
-					{cwd}
+					{cwd, ignore: ['**/node_modules/**']}
 				).then((pJsons = []) => {
 					return pJsons.map((pJson) => require(Path.join(cwd, pJson)));
 				});

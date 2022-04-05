@@ -177,7 +177,7 @@ module.exports = {
 ## Parser presets
 
 The parser preset used to parse commit messages can be configured.
-Use ids resolveable by the node resolve algorithm.
+Use ids resolvable by the node resolve algorithm.
 
 This means installed npm packages and local files can be used.
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.3](https://github.com/conventional-changelog/commitlint/compare/v16.2.2...v16.2.3) (2022-03-16)
+
+**Note:** Version bump only for package commitlint-config-patternplate
+
+
+
+
+
 ## [16.2.1](https://github.com/conventional-changelog/commitlint/compare/v16.2.0...v16.2.1) (2022-02-13)
 
 **Note:** Version bump only for package commitlint-config-patternplate

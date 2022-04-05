@@ -6,7 +6,7 @@ an object containing `.rules` as default. To use shared configuration you specif
 ```js
 // commitlint.config.js
 module.exports = {
-  extends: ['example'], // => @commitlint-config-example
+  extends: ['example'], // => commitlint-config-example
 };
 ```
 
@@ -42,7 +42,7 @@ You can provide the full path of the package like:
 ```js
 // commitlint.config.js
 module.exports = {
-  extends: ['@commitlint/config-conventional'], // => commitlint/config-conventional
+  extends: ['@commitlint/config-conventional'], // => @commitlint/config-conventional
 };
 ```
 
@@ -53,7 +53,7 @@ Or just the scope/owner of the package.
 ```js
 // commitlint.config.js
 module.exports = {
-  extends: ['@coolcompany'], // => coolcompany/commitlint-config
+  extends: ['@coolcompany'], // => @coolcompany/commitlint-config
 };
 ```
 

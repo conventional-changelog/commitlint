@@ -81,7 +81,7 @@ workflows:
 lint:commit:
   stage: lint
   script:
-    - echo "${CI_COMMIT_TITLE}\n\n${CI_COMMIT_DESCRIPTION}" | npx commitlint
+    - echo "${CI_COMMIT_MESSAGE}" | npx commitlint
 ```
 
 ### 3rd party integrations

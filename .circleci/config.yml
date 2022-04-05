@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  win: circleci/windows@2.4.1
+  win: circleci/windows@4.1.1
 
 commands:
   update-yarn:
@@ -92,7 +92,8 @@ jobs:
     steps:
       - run-tests
   windows-v12:
-    executor: win/default
+    executor:
+      name: win/default
     steps:
       - run-tests
 

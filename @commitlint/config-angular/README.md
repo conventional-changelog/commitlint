@@ -129,7 +129,7 @@ echo "fix: some message" # passes
 
 The [angular commit
 convention](hhttps://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
-dose not use a `!` to define a breaking change in the commit subject. If you
+does not use a `!` to define a breaking change in the commit subject. If you
 want to use this feature please consider using the [conventional commit
 config](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#commitlintconfig-conventional).
 
