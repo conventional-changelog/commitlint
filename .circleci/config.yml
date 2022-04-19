@@ -94,7 +94,7 @@ jobs:
       - image: node:18-buster
     steps:
       - run-tests
-  windows-v14:
+  windows:
     executor:
       name: win/default
     steps:
@@ -106,4 +106,4 @@ workflows:
       - v14
       - v16
       - v18
-      - windows-v14
+      - windows
