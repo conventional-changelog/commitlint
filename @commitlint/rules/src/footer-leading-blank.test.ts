@@ -8,6 +8,8 @@ const messages = {
 	without: 'test: subject\nbody\nBREAKING CHANGE: something important',
 	withoutBody:
 		'feat(new-parser): introduces a new parsing library\n\nBREAKING CHANGE: new library does not support foo-construct',
+	withBodyWithComment:
+		'feat(new-parser): introduces a new parsing library\n\nBody Line 1\n# comment\nBody Line 2\n\nBREAKING CHANGE: new library does not support foo-construct',
 	with: 'test: subject\nbody\n\nBREAKING CHANGE: something important',
 	withMulitLine:
 		'test: subject\nmulti\nline\nbody\n\nBREAKING CHANGE: something important',
@@ -20,6 +22,9 @@ const parsed = {
 	trailing: parse(messages.trailing),
 	without: parse(messages.without),
 	withoutBody: parse(messages.withoutBody),
+	withBodyWithComment: parse(messages.withBodyWithComment, undefined, {
+		commentChar: '#',
+	}),
 	with: parse(messages.with),
 	withMulitLine: parse(messages.withMulitLine),
 	withDoubleNewLine: parse(messages.withDoubleNewLine),
@@ -153,6 +158,15 @@ test('with double blank line before footer and double line in body should fail f
 
 test('with double blank line before footer and double line in body should succeed for "always"', async () => {
 	const [actual] = footerLeadingBlank(await parsed.withDoubleNewLine, 'always');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with body containing comments should succeed for "always"', async () => {
+	const [actual] = footerLeadingBlank(
+		await parsed.withBodyWithComment,
+		'always'
+	);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
