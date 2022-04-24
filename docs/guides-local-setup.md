@@ -43,6 +43,7 @@ cat <<EEE > .husky/commit-msg
 
 npx --no -- commitlint --edit "\${1}"
 EEE
+chmod a+x .husky/commit-msg
 
 ```
 
