@@ -248,8 +248,8 @@ async function main(args: MainArgs) {
 					name: 'empty-rules',
 					message: [
 						'Please add rules to your `commitlint.config.js`',
-						'    - Getting started guide: https://git.io/fhHij',
-						'    - Example config: https://git.io/fhHip',
+						'    - Getting started guide: https://commitlint.js.org/#/?id=getting-started',
+						'    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/index.js',
 					].join('\n'),
 				},
 			],

@@ -222,9 +222,9 @@ If you are stuck on an older version and need a security patch we're happy if yo
 
 ## Related projects
 
-- [conventional-changelog](https://git.io/v18sw) – Generate a changelog from conventional commit history
-- [commitizen](https://git.io/vwTym) – Simple commit conventions for internet citizens
-- [create-semantic-module](https://git.io/vFjFg) – CLI for quickly integrating commitizen and commitlint in new or existing projects
+- [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) – Generate a changelog from conventional commit history
+- [commitizen](https://github.com/commitizen/cz-cli) – Simple commit conventions for internet citizens
+- [create-semantic-module](https://github.com/jlegrone/create-semantic-module) – CLI for quickly integrating commitizen and commitlint in new or existing projects
 
 ## License
 
