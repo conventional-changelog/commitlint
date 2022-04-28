@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.4](https://github.com/conventional-changelog/commitlint/compare/v16.2.3...v16.2.4) (2022-04-28)
+
+
+### Bug Fixes
+
+* **rules:** footer-leading-blank should work with body comments ([#3139](https://github.com/conventional-changelog/commitlint/issues/3139)) ([7dd88c9](https://github.com/conventional-changelog/commitlint/commit/7dd88c913cba9f444acc587c77210cb718c928c9))
+* update dependency cosmiconfig to v7.0.1 ([#3138](https://github.com/conventional-changelog/commitlint/issues/3138)) ([407837d](https://github.com/conventional-changelog/commitlint/commit/407837df9e5cfe3af06158a4684f95ff590000cb))
+* update dependency cosmiconfig-typescript-loader to v1.0.7 ([#3102](https://github.com/conventional-changelog/commitlint/issues/3102)) ([d0f2b3f](https://github.com/conventional-changelog/commitlint/commit/d0f2b3fe0f4b3bd2658efdde6d728bdacbc79557))
+* update dependency cosmiconfig-typescript-loader to v1.0.9 ([#3106](https://github.com/conventional-changelog/commitlint/issues/3106)) ([d91e70d](https://github.com/conventional-changelog/commitlint/commit/d91e70db61554e906851c66de1b4cb867eccb916))
+* update dependency fs-extra to v10.1.0 ([#3124](https://github.com/conventional-changelog/commitlint/issues/3124)) ([482613f](https://github.com/conventional-changelog/commitlint/commit/482613f4bf0de1d81a5ecda4ea9965165cd78120))
+* update dependency semver to v7.3.6 ([#3112](https://github.com/conventional-changelog/commitlint/issues/3112)) ([ad886fd](https://github.com/conventional-changelog/commitlint/commit/ad886fd7ea46bc2df346099f9d4f10defd51fe75))
+* update dependency semver to v7.3.7 ([#3119](https://github.com/conventional-changelog/commitlint/issues/3119)) ([c9c49b2](https://github.com/conventional-changelog/commitlint/commit/c9c49b2de935528d84a817de750cd65b8f765c48))
+* update dependency yargs to v17.4.0 ([#3080](https://github.com/conventional-changelog/commitlint/issues/3080)) ([1477d7c](https://github.com/conventional-changelog/commitlint/commit/1477d7c0de15000f0881329f177476082fee2067))
+* update dependency yargs to v17.4.1 ([#3116](https://github.com/conventional-changelog/commitlint/issues/3116)) ([69bf135](https://github.com/conventional-changelog/commitlint/commit/69bf135d69abb0e871ae7d1b6c76a5f343899edc))
+
+
+
+
+
 ## [16.2.3](https://github.com/conventional-changelog/commitlint/compare/v16.2.2...v16.2.3) (2022-03-16)
 
 

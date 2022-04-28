@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [16.2.4](https://github.com/conventional-changelog/commitlint/compare/v16.2.3...v16.2.4) (2022-04-28)
+
+
+### Bug Fixes
+
+* **rules:** footer-leading-blank should work with body comments ([#3139](https://github.com/conventional-changelog/commitlint/issues/3139)) ([7dd88c9](https://github.com/conventional-changelog/commitlint/commit/7dd88c913cba9f444acc587c77210cb718c928c9))
+
+
+
+
+
 ## [16.2.1](https://github.com/conventional-changelog/commitlint/compare/v16.2.0...v16.2.1) (2022-02-13)
 
 **Note:** Version bump only for package @commitlint/rules
