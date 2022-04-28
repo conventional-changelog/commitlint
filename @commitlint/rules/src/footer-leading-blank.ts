@@ -10,9 +10,9 @@ export const footerLeadingBlank: SyncRule = (parsed, when = 'always') => {
 
 	const negated = when === 'never';
 	const rawLines = toLines(parsed.raw);
-	const bodyLines = parsed.body ? toLines(parsed.body) : [];
-	const bodyOffset = bodyLines.length > 0 ? rawLines.indexOf(bodyLines[0]) : 1;
-	const [leading] = rawLines.slice(bodyLines.length + bodyOffset);
+	const footerLines = toLines(parsed.footer);
+	const footerOffset = rawLines.indexOf(footerLines[0]);
+	const [leading] = rawLines.slice(footerOffset - 1);
 
 	// Check if the first line of footer is empty
 	const succeeds = leading === '';
