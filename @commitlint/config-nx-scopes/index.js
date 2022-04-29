@@ -8,7 +8,7 @@ module.exports = {
 	},
 };
 
-function getProjects(context) {
+function getProjects(context, filterFunc) {
 	return Promise.resolve()
 		.then(() => {
 			const ctx = context || {};
@@ -24,6 +24,15 @@ function getProjects(context) {
 		})
 		.then((projects) => {
 			return projects
+				.filter((project) =>
+					filterFunc
+						? filterFunc({
+								name: project.name,
+								type: project.projectType,
+								tags: project.tags,
+						  })
+						: true
+				)
 				.filter((project) => project.targets)
 				.map((project) => project.name)
 				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));

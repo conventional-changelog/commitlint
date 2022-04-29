@@ -12,6 +12,28 @@ npm install --save-dev @commitlint/config-nx-scopes @commitlint/cli
 echo "module.exports = {extends: ['@commitlint/config-nx-scopes']};" > commitlint.config.js
 ```
 
+## Filtering projects by type
+
+You can filter projects by type by specifying the project type parameter.
+
+In your .commitlintrc.js file:
+
+```javascript
+const {
+  utils: {getProjects},
+} = require('@commitlint/config-nx-scopes');
+
+module.exports = {
+  rules: {
+    'scope-enum': async (ctx) => [
+      2,
+      'always',
+      [...(await getProjects(ctx, 'application'))], // ⬅ or 'library'
+    ],
+  },
+};
+```
+
 ## Examples
 
 ```
