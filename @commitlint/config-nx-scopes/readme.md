@@ -12,9 +12,11 @@ npm install --save-dev @commitlint/config-nx-scopes @commitlint/cli
 echo "module.exports = {extends: ['@commitlint/config-nx-scopes']};" > commitlint.config.js
 ```
 
-## Filtering projects by type
+## Filtering projects
 
-You can filter projects by type by specifying the project type parameter.
+You can filter projects by providing a filter function as the second parameter to `getProjects()`. The function will be called with each projects' `name`, `type`, and `tags`. Simply return a boolean to indicate whether the project should be included or not.
+
+As an example, the following code demonstrates how to select only applications that are not end-to-end tests.
 
 In your .commitlintrc.js file:
 
@@ -28,9 +30,41 @@ module.exports = {
     'scope-enum': async (ctx) => [
       2,
       'always',
-      [...(await getProjects(ctx, 'application'))], // ⬅ or 'library'
+      [
+        ...(await getProjects(
+          ctx,
+          ({name, type}) => !name.includes('e2e') && type == 'application'
+        )),
+      ],
     ],
   },
+  // . . .
+};
+```
+
+Here is another example where projects tagged with 'stage:end-of-life' are not allowed to be used as the scope for a commit.
+
+In your .commitlintrc.js file:
+
+```javascript
+const {
+  utils: {getProjects},
+} = require('@commitlint/config-nx-scopes');
+
+module.exports = {
+  rules: {
+    'scope-enum': async (ctx) => [
+      2,
+      'always',
+      [
+        ...(await getProjects(
+          ctx,
+          ({tags}) => !tags.includes('stage:end-of-life')
+        )),
+      ],
+    ],
+  },
+  // . . .
 };
 ```
 
