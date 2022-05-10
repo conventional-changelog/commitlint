@@ -33,7 +33,8 @@ module.exports = {
       [
         ...(await getProjects(
           ctx,
-          ({name, type}) => !name.includes('e2e') && type == 'application'
+          ({name, projectType}) =>
+            !name.includes('e2e') && projectType == 'application'
         )),
       ],
     ],
