@@ -8,7 +8,10 @@ module.exports = {
 	},
 };
 
-function getProjects(context, filterFunc) {
+/**
+ * @param {(params: Pick<Nx.ProjectConfiguration, 'name' | 'projectType' | 'tags'>) => boolean} selector
+ */
+function getProjects(context, selector = () => true) {
 	return Promise.resolve()
 		.then(() => {
 			const ctx = context || {};
@@ -25,13 +28,11 @@ function getProjects(context, filterFunc) {
 		.then((projects) => {
 			return projects
 				.filter((project) =>
-					filterFunc
-						? filterFunc({
-								name: project.name,
-								type: project.projectType,
-								tags: project.tags,
-						  })
-						: true
+					selector({
+						name: project.name,
+						projectType: project.projectType,
+						tags: project.tags,
+					})
 				)
 				.filter((project) => project.targets)
 				.map((project) => project.name)
