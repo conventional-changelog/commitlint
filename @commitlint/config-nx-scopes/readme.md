@@ -14,7 +14,7 @@ echo "module.exports = {extends: ['@commitlint/config-nx-scopes']};" > commitlin
 
 ## Filtering projects
 
-You can filter projects by providing a filter function as the second parameter to `getProjects()`. The function will be called with an object containing each projects' `name`, `type`, and `tags`. Simply return a boolean to indicate whether the project should be included or not.
+You can filter projects by providing a filter function as the second parameter to `getProjects()`. The function will be called with an object containing each projects' `name`, `projectType`, and `tags`. Simply return a boolean to indicate whether the project should be included or not.
 
 As an example, the following code demonstrates how to select only applications that are not end-to-end tests.
 
