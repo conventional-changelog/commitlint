@@ -8,7 +8,7 @@ See [@commitlint/config-angular](../config-angular) for full angular conventions
 ## Getting started
 
 ```sh
-npm install --save-dev @commitlint/config-angular-types @commitlint/cli
+npm install --save-dev @commitlint/config-angular-type-enum @commitlint/cli
 echo "module.exports = {extends: ['@commitlint/config-angular-type-enum']};" > commitlint.config.js
 ```
 
