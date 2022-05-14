@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.3.0](https://github.com/conventional-changelog/commitlint/compare/v16.2.4...v16.3.0) (2022-05-14)
+
+
+### Bug Fixes
+
+* update dependency cosmiconfig-typescript-loader to v2 ([#3154](https://github.com/conventional-changelog/commitlint/issues/3154)) ([20122e8](https://github.com/conventional-changelog/commitlint/commit/20122e8d6e999b74eab3bab08a6d52cda3f13e37))
+
+
+
+
+
 ## [16.2.4](https://github.com/conventional-changelog/commitlint/compare/v16.2.3...v16.2.4) (2022-04-28)
 
 **Note:** Version bump only for package @commitlint/load

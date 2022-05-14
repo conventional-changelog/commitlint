@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.3.0](https://github.com/conventional-changelog/commitlint/compare/v16.2.4...v16.3.0) (2022-05-14)
+
+
+### Bug Fixes
+
+* update dependency cosmiconfig-typescript-loader to v2 ([#3154](https://github.com/conventional-changelog/commitlint/issues/3154)) ([20122e8](https://github.com/conventional-changelog/commitlint/commit/20122e8d6e999b74eab3bab08a6d52cda3f13e37))
+* update dependency yargs to v17.5.0 ([#3171](https://github.com/conventional-changelog/commitlint/issues/3171)) ([0e6542b](https://github.com/conventional-changelog/commitlint/commit/0e6542bd0a0d193d0080809fc23031ad83b8e2d9))
+
+
+### Features
+
+* add ability to filter Nx projects in @commitlint/config-nx-scopes ([#3155](https://github.com/conventional-changelog/commitlint/issues/3155)) ([e595693](https://github.com/conventional-changelog/commitlint/commit/e595693eb9be51a874cff01580b883982083ba0e)), closes [#3152](https://github.com/conventional-changelog/commitlint/issues/3152)
+
+
+
+
+
 ## [16.2.4](https://github.com/conventional-changelog/commitlint/compare/v16.2.3...v16.2.4) (2022-04-28)
 
 
