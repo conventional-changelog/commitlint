@@ -278,12 +278,12 @@ Infinity
 
 #### subject-case
 
-- **condition**: `subject` is in case `value`
+- **condition**: `subject` is in one of the cases `['sentence-case', 'start-case', 'pascal-case', 'upper-case']`
 - **rule**: `always`
 - **value**
 
 ```
-'lower-case'
+['sentence-case', 'start-case', 'pascal-case', 'upper-case']
 ```
 
 - **possible values**
