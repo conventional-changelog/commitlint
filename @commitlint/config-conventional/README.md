@@ -74,21 +74,6 @@ echo ": some message" # fails
 echo "fix: some message" # passes
 ```
 
-#### scope-case
-
-- **condition**: `scope` is in case `value`
-- **rule**: `always`
-- **level**: `error`
-
-```
-'lowerCase'
-```
-
-```sh
-echo "fix(SCOPE): some message" # fails
-echo "fix(scope): some message" # passes
-```
-
 #### subject-case
 
 - **condition**: `subject` is in one of the cases `['sentence-case', 'start-case', 'pascal-case', 'upper-case']`
