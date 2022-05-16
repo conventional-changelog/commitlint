@@ -1,4 +1,4 @@
-const {Workspaces} = require('@nrwl/tao/src/shared/workspace');
+const {Workspaces} = require('nx/src/config/workspaces');
 
 module.exports = {
 	utils: {getProjects},
