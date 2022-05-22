@@ -329,13 +329,51 @@ test('should handle --amend with signoff', async () => {
 	expect(commit).toBeTruthy();
 }, 10000);
 
-test('should fail with an empty message and a commentChar is set', async () => {
+test('it uses parserOpts.commentChar when not using edit mode', async () => {
 	const cwd = await gitBootstrap('fixtures/comment-char');
-	await execa('git', ['config', '--local', 'core.commentChar', '$'], {cwd});
-	await fs.writeFile(path.join(cwd, '.git', 'COMMIT_EDITMSG'), '#1234');
+	const input = 'header: foo\n$body\n';
+
+	const actual = await cli([], {cwd})(input);
+	expect(actual.stdout).toContain('[body-empty]');
+	expect(actual.exitCode).toBe(1);
+});
+
+test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
+	const cwd = await gitBootstrap('fixtures/comment-char');
+	await fs.writeFile(
+		path.join(cwd, '.git', 'COMMIT_EDITMSG'),
+		'header: foo\n\n$body\n'
+	);
 
 	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
-	expect(actual.stdout).toContain('[subject-empty]');
+	expect(actual.stdout).not.toContain('[body-empty]');
+	expect(actual.exitCode).toBe(0);
+});
+
+test('it uses core.commentChar git config when using edit mode', async () => {
+	const cwd = await gitBootstrap('fixtures/comment-char');
+	await execa('git', ['config', 'core.commentChar', '$'], {cwd});
+	await fs.writeFile(
+		path.join(cwd, '.git', 'COMMIT_EDITMSG'),
+		'header: foo\n\n$body\n'
+	);
+
+	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	expect(actual.stdout).toContain('[body-empty]');
+	expect(actual.exitCode).toBe(1);
+});
+
+test('it falls back to # for core.commentChar when using edit mode', async () => {
+	const cwd = await gitBootstrap('fixtures/comment-char');
+	await execa('git', ['config', '--unset', 'core.commentChar'], {cwd});
+	await fs.writeFile(
+		path.join(cwd, '.git', 'COMMIT_EDITMSG'),
+		'header: foo\n\n#body\n'
+	);
+
+	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	expect(actual.stdout).toContain('[body-empty]');
+	expect(actual.stderr).toEqual('');
 	expect(actual.exitCode).toBe(1);
 });
 
