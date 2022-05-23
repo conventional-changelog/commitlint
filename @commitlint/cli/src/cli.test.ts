@@ -352,7 +352,7 @@ test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
 
 test('it uses core.commentChar git config when using edit mode', async () => {
 	const cwd = await gitBootstrap('fixtures/comment-char');
-	await execa('git', ['config', 'core.commentChar', '$'], {cwd});
+	await execa('git', ['config', '--local', 'core.commentChar', '$'], {cwd});
 	await fs.writeFile(
 		path.join(cwd, '.git', 'COMMIT_EDITMSG'),
 		'header: foo\n\n$body\n'
@@ -365,7 +365,6 @@ test('it uses core.commentChar git config when using edit mode', async () => {
 
 test('it falls back to # for core.commentChar when using edit mode', async () => {
 	const cwd = await gitBootstrap('fixtures/comment-char');
-	await execa('git', ['config', '--unset', 'core.commentChar'], {cwd});
 	await fs.writeFile(
 		path.join(cwd, '.git', 'COMMIT_EDITMSG'),
 		'header: foo\n\n#body\n'
