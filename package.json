@@ -19,8 +19,8 @@
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
-    "test": "HOME=$PWD jest",
-    "test-ci": "HOME=$PWD jest --runInBand",
+    "test": "env HOME=$PWD jest",
+    "test-ci": "env HOME=$PWD jest --runInBand",
     "postinstall": "yarn husky install"
   },
   "commitlint": {
