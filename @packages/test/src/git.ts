@@ -35,7 +35,6 @@ async function setup(cwd: string, gitCommand = 'git') {
 			cwd,
 		});
 		await execa(gitCommand, ['config', 'commit.gpgsign', 'false'], {cwd});
-		await execa(gitCommand, ['config', 'core.commentChar', '#'], {cwd});
 	} catch (err: any) {
 		if (typeof err === 'object' && typeof err.message === 'object') {
 			console.warn(`git config in ${cwd} failed`, err.message);

@@ -232,6 +232,8 @@ async function main(args: MainArgs) {
 			opts.parserOpts.commentChar = stdout.trim() || gitDefaultCommentChar;
 		} catch (e) {
 			const execaError = e as ExecaError;
+			// git config returns exit code 1 when the setting is unset,
+			// don't warn in this case.
 			if (!execaError.failed || execaError.exitCode !== 1) {
 				console.warn(
 					'Could not determine core.commentChar git configuration',
