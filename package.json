@@ -19,8 +19,8 @@
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
-    "test": "jest",
-    "test-ci": "jest --runInBand",
+    "test": "cross-env HOME=$PWD jest",
+    "test-ci": "cross-env HOME=$PWD jest --runInBand",
     "postinstall": "yarn husky install"
   },
   "commitlint": {
@@ -90,6 +90,7 @@
     "@types/node": "^12.20.27",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "cross-env": "^7.0.3",
     "docsify-cli": "^4.4.3",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.0.0",

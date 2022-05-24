@@ -1,3 +1,4 @@
+import execa, {ExecaError} from 'execa';
 import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
@@ -20,6 +21,8 @@ import {
 import {CliError} from './cli-error';
 
 const pkg = require('../package');
+
+const gitDefaultCommentChar = '#';
 
 const cli = yargs
 	.options({
@@ -221,11 +224,24 @@ async function main(args: MainArgs) {
 	}
 	const format = loadFormatter(loaded, flags);
 
-	// Strip comments if reading from `.git/COMMIT_EDIT_MSG` using the
-	// commentChar from the parser preset falling back to a `#` if that is not
-	// set
-	if (flags.edit && typeof opts.parserOpts.commentChar !== 'string') {
-		opts.parserOpts.commentChar = '#';
+	// If reading from `.git/COMMIT_EDIT_MSG`, strip comments using
+	// core.commentChar from git configuration, falling back to '#'.
+	if (flags.edit) {
+		try {
+			const {stdout} = await execa('git', ['config', 'core.commentChar']);
+			opts.parserOpts.commentChar = stdout.trim() || gitDefaultCommentChar;
+		} catch (e) {
+			const execaError = e as ExecaError;
+			// git config returns exit code 1 when the setting is unset,
+			// don't warn in this case.
+			if (!execaError.failed || execaError.exitCode !== 1) {
+				console.warn(
+					'Could not determine core.commentChar git configuration',
+					e
+				);
+			}
+			opts.parserOpts.commentChar = gitDefaultCommentChar;
+		}
 	}
 
 	const results = await Promise.all(
