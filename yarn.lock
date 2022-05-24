@@ -1886,6 +1886,15 @@
     npm-package-arg "^8.1.0"
     write-pkg "^4.0.0"
 
+"@lerna/package@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/@lerna/package/-/package-5.0.0.tgz#4beeb3a1e8eed6e7ae9cebca283c7684278cdd28"
+  integrity sha512-/JiUU88bhbYEUTzPqoGLGwrrdWWTIVMlBb1OPxCGNGDEqYYNySX+OTTSs3zGMcmJnRNI0UyQALiEd0sh3JFN5w==
+  dependencies:
+    load-json-file "^6.2.0"
+    npm-package-arg "^8.1.0"
+    write-pkg "^4.0.0"
+
 "@lerna/prerelease-id-from-version@4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@lerna/prerelease-id-from-version/-/prerelease-id-from-version-4.0.0.tgz#c7e0676fcee1950d85630e108eddecdd5b48c916"
@@ -1902,13 +1911,31 @@
     npmlog "^4.1.2"
     upath "^2.0.1"
 
-"@lerna/project@4.0.0", "@lerna/project@^4.0.0":
+"@lerna/project@4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@lerna/project/-/project-4.0.0.tgz#ff84893935833533a74deff30c0e64ddb7f0ba6b"
   integrity sha512-o0MlVbDkD5qRPkFKlBZsXZjoNTWPyuL58564nSfZJ6JYNmgAptnWPB2dQlAc7HWRZkmnC2fCkEdoU+jioPavbg==
   dependencies:
     "@lerna/package" "4.0.0"
     "@lerna/validation-error" "4.0.0"
+    cosmiconfig "^7.0.0"
+    dedent "^0.7.0"
+    dot-prop "^6.0.1"
+    glob-parent "^5.1.1"
+    globby "^11.0.2"
+    load-json-file "^6.2.0"
+    npmlog "^4.1.2"
+    p-map "^4.0.0"
+    resolve-from "^5.0.0"
+    write-json-file "^4.3.0"
+
+"@lerna/project@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/@lerna/project/-/project-5.0.0.tgz#31672891236696b2a70226388de0300c6086d75f"
+  integrity sha512-+izHk7D/Di2b0s69AzKzAa/qBz32H9s67oN9aKntrjNylpY7iN5opU157l60Kh4TprYHU5bLisqzFLZsHHADGw==
+  dependencies:
+    "@lerna/package" "5.0.0"
+    "@lerna/validation-error" "5.0.0"
     cosmiconfig "^7.0.0"
     dedent "^0.7.0"
     dot-prop "^6.0.1"
@@ -2058,6 +2085,13 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@lerna/validation-error/-/validation-error-4.0.0.tgz#af9d62fe8304eaa2eb9a6ba1394f9aa807026d35"
   integrity sha512-1rBOM5/koiVWlRi3V6dB863E1YzJS8v41UtsHgMr6gB2ncJ2LsQtMKlJpi3voqcgh41H8UsPXR58RrrpPpufyw==
+  dependencies:
+    npmlog "^4.1.2"
+
+"@lerna/validation-error@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/@lerna/validation-error/-/validation-error-5.0.0.tgz#3d3557023e3eb2fd3d8fc9c89f7352a1b6e5bd3e"
+  integrity sha512-fu/MhqRXiRQM2cirP/HoSkfwc5XtJ21G60WHv74RnanKBqWEZAUALWa3MQN2sYhVV/FpDW3GLkO008IW5NWzdg==
   dependencies:
     npmlog "^4.1.2"
 
