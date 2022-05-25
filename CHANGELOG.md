@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.0.1](https://github.com/conventional-changelog/commitlint/compare/v17.0.0...v17.0.1) (2022-05-25)
+
+
+### Bug Fixes
+
+* **cli:** use `core.commentChar` from git config with `--edit` flag ([#3191](https://github.com/conventional-changelog/commitlint/issues/3191)) ([e5fee05](https://github.com/conventional-changelog/commitlint/commit/e5fee05301ab7441b6091e4ee6fc095d26bbd589)), closes [#3190](https://github.com/conventional-changelog/commitlint/issues/3190) [#3190](https://github.com/conventional-changelog/commitlint/issues/3190) [#3190](https://github.com/conventional-changelog/commitlint/issues/3190)
+
+
+
+
+
 # [17.0.0](https://github.com/conventional-changelog/commitlint/compare/v16.3.0...v17.0.0) (2022-05-16)
 
 
