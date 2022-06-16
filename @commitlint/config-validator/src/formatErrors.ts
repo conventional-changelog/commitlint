@@ -13,23 +13,23 @@ export function formatErrors(errors: ErrorObject[]): string {
 				error.keyword === 'additionalProperties' &&
 				'additionalProperty' in error.params
 			) {
-				const formattedPropertyPath = error.dataPath.length
-					? `${error.dataPath.slice(1)}.${error.params.additionalProperty}`
+				const formattedPropertyPath = error.instancePath.length
+					? `${error.instancePath.slice(1)}.${error.params.additionalProperty}`
 					: error.params.additionalProperty;
 
 				return `Unexpected top-level property "${formattedPropertyPath}"`;
 			}
 			if (error.keyword === 'type') {
-				const formattedField = error.dataPath.slice(1);
+				const formattedField = error.instancePath.slice(1);
 				if (!formattedField) {
 					return `Config has the wrong type - ${error.message}`;
 				}
 				return `Property "${formattedField}" has the wrong type - ${error.message}`;
 			}
 			const field =
-				(error.dataPath[0] === '.'
-					? error.dataPath.slice(1)
-					: error.dataPath) || 'Config';
+				(error.instancePath[0] === '.'
+					? error.instancePath.slice(1)
+					: error.instancePath) || 'Config';
 			if (error.keyword === 'typeof') {
 				return `"${field}" should be a ${error.schema}. Value: ${JSON.stringify(
 					error.data
