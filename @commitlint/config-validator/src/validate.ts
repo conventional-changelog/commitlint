@@ -19,14 +19,14 @@ export function validateConfig(
 ): asserts config is UserConfig {
 	const ajv = new Ajv({
 		meta: false,
+		strict: false,
 		useDefaults: true,
 		validateSchema: false,
-		missingRefs: 'ignore',
 		verbose: true,
-		schemaId: 'auto',
 	});
 
-	ajv.addKeyword('typeof', {
+	ajv.addKeyword({
+		keyword: 'typeof',
 		validate: function typeOfFunc(schema: any, data: any) {
 			return typeof data === schema;
 		},
