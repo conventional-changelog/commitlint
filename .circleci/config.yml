@@ -81,12 +81,12 @@ commands:
 jobs:
   v14:
     docker:
-      - image: node:14-buster
+      - image: node:18-buster
     steps:
       - run-tests
   v16:
     docker:
-      - image: node:16-buster
+      - image: node:18-buster
     steps:
       - run-tests
   v18:
