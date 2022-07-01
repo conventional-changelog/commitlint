@@ -34,12 +34,16 @@
     "email": "hello@herebecode.com"
   },
   "license": "MIT",
+  "peerDependencies": {
+    "ts-node": "@>=10"
+  },
   "devDependencies": {
     "@commitlint/test": "^17.0.0",
     "@commitlint/utils": "^17.0.0",
     "@types/lodash": "4.14.182",
     "conventional-changelog-atom": "^2.0.8",
-    "execa": "^5.0.0"
+    "execa": "^5.0.0",
+    "ts-node": "^10.8.1"
   },
   "dependencies": {
     "@commitlint/config-validator": "^17.0.3",
