@@ -19,4 +19,4 @@ test('should print warning if stage is empty', async () => {
 	const actual = await cli([], {cwd})('foo: bar');
 	expect(actual.stdout).toContain('Nothing to commit.');
 	expect(actual.stderr).toBe('');
-});
+}, 10000);
