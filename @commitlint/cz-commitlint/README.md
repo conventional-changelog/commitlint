@@ -13,9 +13,9 @@ The interactive process is inspired by [cz-conventional-changelog](https://githu
 ### Configure commitizen adapter
 
 ```bash
-npm install --save-dev @commitlint/cz-commitlint commitizen
+npm install --save-dev @commitlint/cz-commitlint commitizen inquirer@8  # inquirer is required as peer dependency
 # or yarn
-yarn add -D @commitlint/cz-commitlint commitizen
+yarn add -D @commitlint/cz-commitlint commitizen inquirer@8             # inquirer is required as peer dependency
 ```
 
 In package.json
