@@ -94,6 +94,11 @@ jobs:
       - image: node:18-buster
     steps:
       - run-tests
+  v20:
+    docker:
+      - image: node:20-buster
+    steps:
+      - run-tests
   windows:
     executor:
       name: win/default
@@ -106,4 +111,5 @@ workflows:
       - v14
       - v16
       - v18
+      - v20
       - windows
