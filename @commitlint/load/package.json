@@ -34,12 +34,16 @@
     "email": "hello@herebecode.com"
   },
   "license": "MIT",
+  "peerDependencies": {
+    "ts-node": "@>=10"
+  },
   "devDependencies": {
     "@commitlint/test": "^17.0.0",
     "@commitlint/utils": "^17.0.0",
     "@types/lodash": "4.14.182",
     "conventional-changelog-atom": "^2.0.8",
-    "execa": "^5.0.0"
+    "execa": "^5.0.0",
+    "ts-node": "^10.8.1"
   },
   "dependencies": {
     "@commitlint/config-validator": "^17.0.3",
@@ -49,7 +53,7 @@
     "@types/node": "^14.0.0",
     "chalk": "^4.1.0",
     "cosmiconfig": "^7.0.0",
-    "cosmiconfig-typescript-loader": "^2.0.0",
+    "cosmiconfig-typescript-loader": "^3.0.0",
     "lodash": "^4.17.19",
     "resolve-from": "^5.0.0",
     "typescript": "^4.6.4"
