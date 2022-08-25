@@ -8,6 +8,7 @@ export interface CliFlags {
 	help?: boolean;
 	'help-url'?: string;
 	from?: string;
+	'git-log-args'?: string;
 	format?: string;
 	'parser-preset'?: string;
 	quiet: boolean;

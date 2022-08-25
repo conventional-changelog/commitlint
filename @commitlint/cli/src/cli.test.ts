@@ -506,6 +506,8 @@ test('should print help', async () => {
 		  -H, --help-url       help url in error message                        [string]
 		  -f, --from           lower end of the commit range to lint; applies if
 		                       edit=false                                       [string]
+		      --git-log-args   addditional git log arguments as space separated string,
+		                       example \'--first-parent --cherry-pick\'           [string]
 		  -o, --format         output format of the results                     [string]
 		  -p, --parser-preset  configuration preset to use for
 		                       conventional-commits-parser                      [string]

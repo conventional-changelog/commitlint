@@ -77,6 +77,11 @@ const cli = yargs
 				'lower end of the commit range to lint; applies if edit=false',
 			type: 'string',
 		},
+		'git-log-args': {
+			description:
+				"addditional git log arguments as space separated string, example '--first-parent --cherry-pick'",
+			type: 'string',
+		},
 		format: {
 			alias: 'o',
 			description: 'output format of the results',
@@ -182,6 +187,7 @@ async function main(args: MainArgs) {
 				from: flags.from,
 				edit: flags.edit,
 				cwd: flags.cwd,
+				gitLogArgs: flags['git-log-args'],
 		  }));
 
 	const messages = (Array.isArray(input) ? input : [input])
