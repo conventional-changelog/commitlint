@@ -77,7 +77,7 @@ echo "fix: some message" # passes
 #### subject-case
 
 - **condition**: `subject` is in one of the cases `['sentence-case', 'start-case', 'pascal-case', 'upper-case']`
-- **rule**: `always`
+- **rule**: `never`
 - **level**: `error`
 
 ```sh
