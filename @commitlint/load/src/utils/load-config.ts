@@ -1,5 +1,5 @@
 import {cosmiconfig} from 'cosmiconfig';
-import TypeScriptLoader from 'cosmiconfig-typescript-loader';
+import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
 import path from 'path';
 
 export interface LoadConfigResult {
