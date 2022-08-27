@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.1.1](https://github.com/conventional-changelog/commitlint/compare/v17.1.0...v17.1.1) (2022-08-27)
+
+
+### Bug Fixes
+
+* **load:** peer-dep version [#3345](https://github.com/conventional-changelog/commitlint/issues/3345) ([2dd7b50](https://github.com/conventional-changelog/commitlint/commit/2dd7b50c983e2720ad25c368e5a0f13b80ab7927))
+
+
+
+
+
 # [17.1.0](https://github.com/conventional-changelog/commitlint/compare/v17.0.3...v17.1.0) (2022-08-27)
 
 
