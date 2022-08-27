@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0](https://github.com/conventional-changelog/commitlint/compare/v17.0.3...v17.1.0) (2022-08-27)
+
+
+### Features
+
+* **commitlint:** add additional git log args ([#3334](https://github.com/conventional-changelog/commitlint/issues/3334)) ([229c65b](https://github.com/conventional-changelog/commitlint/commit/229c65b60f15c15da5f5b11deb555d1f557c673a))
+
+
+
+
+
 ## [17.0.3](https://github.com/conventional-changelog/commitlint/compare/v17.0.2...v17.0.3) (2022-06-25)
 
 **Note:** Version bump only for package @commitlint/cli
