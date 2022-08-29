@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.1.2](https://github.com/conventional-changelog/commitlint/compare/v17.1.1...v17.1.2) (2022-08-29)
+
+
+### Bug Fixes
+
+* **load:** add ts-node as direct dependency ([#3351](https://github.com/conventional-changelog/commitlint/issues/3351)) ([3b66891](https://github.com/conventional-changelog/commitlint/commit/3b668911d8f9fd93e0f613842d5c0b7c3f24360a))
+* update dependency cosmiconfig-typescript-loader to v4 ([#3346](https://github.com/conventional-changelog/commitlint/issues/3346)) ([5a9d80f](https://github.com/conventional-changelog/commitlint/commit/5a9d80fba352deae1c2855792be4f8458a973431))
+
+
+
+
+
 ## [17.1.1](https://github.com/conventional-changelog/commitlint/compare/v17.1.0...v17.1.1) (2022-08-27)
 
 
