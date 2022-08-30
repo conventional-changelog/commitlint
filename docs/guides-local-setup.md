@@ -40,12 +40,12 @@ yarn husky install
 ### Add hook
 
 ```sh
-cat <<EEE > .husky/commit-msg
+echo '
 #!/bin/sh
 . "\$(dirname "\$0")/_/husky.sh"
 
-npx --no -- commitlint --edit "\${1}"
-EEE
+npx --no -- commitlint --edit ${1}
+' > .husky/commit-msg
 ```
 
 Make hook executable
