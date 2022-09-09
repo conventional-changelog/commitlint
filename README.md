@@ -108,19 +108,8 @@ yarn husky install
 
 ### Add hook
 
-```sh
-echo '
-#!/bin/sh
-. "\$(dirname "\$0")/_/husky.sh"
-
-npx --no -- commitlint --edit ${1}
-' > .husky/commit-msg
 ```
-
-Make hook executable
-
-```sh
-chmod a+x .husky/commit-msg
+npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
 ```
 
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
