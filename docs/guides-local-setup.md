@@ -39,19 +39,8 @@ yarn husky install
 
 ### Add hook
 
-```sh
-echo '
-#!/bin/sh
-. "\$(dirname "\$0")/_/husky.sh"
-
-npx --no -- commitlint --edit ${1}
-' > .husky/commit-msg
 ```
-
-Make hook executable
-
-```sh
-chmod a+x .husky/commit-msg
+npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
 ```
 
 **Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**\
