@@ -10,7 +10,7 @@
 
 [![npm latest][2]][3] [![CircleCI][4]][5] <!-- [![AppVeyor][6]][7] -->
 
-`commitlint` helps your team adhering to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
+`commitlint` helps your team adhere to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
 
 # Getting started
 
