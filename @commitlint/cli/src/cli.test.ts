@@ -482,6 +482,24 @@ test('should work with relative formatter path', async () => {
 	expect(actual.exitCode).toBe(0);
 });
 
+test('strict: should exit with 3 on error', async () => {
+	const cwd = await gitBootstrap('fixtures/warning');
+	const actual = await cli(['--strict'], {cwd})('foo: abcdef');
+	expect(actual.exitCode).toBe(3);
+});
+
+test('strict: should exit with 2 on warning', async () => {
+	const cwd = await gitBootstrap('fixtures/warning');
+	const actual = await cli(['--strict'], {cwd})('feat: abcdef');
+	expect(actual.exitCode).toBe(2);
+});
+
+test('strict: should exit with 0 on success', async () => {
+	const cwd = await gitBootstrap('fixtures/warning');
+	const actual = await cli(['--strict'], {cwd})('feat: abc');
+	expect(actual.exitCode).toBe(0);
+});
+
 test('should print help', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--help'], {cwd})();
@@ -507,7 +525,7 @@ test('should print help', async () => {
 		  -f, --from           lower end of the commit range to lint; applies if
 		                       edit=false                                       [string]
 		      --git-log-args   addditional git log arguments as space separated string,
-		                       example \'--first-parent --cherry-pick\'           [string]
+		                       example '--first-parent --cherry-pick'           [string]
 		  -o, --format         output format of the results                     [string]
 		  -p, --parser-preset  configuration preset to use for
 		                       conventional-commits-parser                      [string]
@@ -516,6 +534,8 @@ test('should print help', async () => {
 		                       edit=false                                       [string]
 		  -V, --verbose        enable verbose output for reports without problems
 		                                                                       [boolean]
+		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for
+		                       errors                                          [boolean]
 		  -v, --version        display version information                     [boolean]
 		  -h, --help           Show help                                       [boolean]"
 	`);

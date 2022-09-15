@@ -110,6 +110,12 @@ const cli = yargs
 			type: 'boolean',
 			description: 'enable verbose output for reports without problems',
 		},
+		strict: {
+			alias: 's',
+			type: 'boolean',
+			description:
+				'enable strict mode; result code 2 for warnings, 3 for errors',
+		},
 	})
 	.version(
 		'version',
@@ -128,7 +134,7 @@ const cli = yargs
 main(cli.argv).catch((err) => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
-			process.exit(1);
+			process.exit(err.error_code);
 		}
 		throw err;
 	}, 0);
@@ -160,7 +166,7 @@ async function resolveArgs(args: MainArgs): Promise<MainArgsObject> {
 	return typeof args.then === 'function' ? await args : args;
 }
 
-async function main(args: MainArgs) {
+async function main(args: MainArgs): Promise<void> {
 	const options = await resolveArgs(args);
 	if (typeof options.edit === 'undefined') {
 		options.edit = false;
@@ -314,6 +320,14 @@ async function main(args: MainArgs) {
 		console.log(output);
 	}
 
+	if (flags.strict) {
+		if (report.errorCount > 0) {
+			throw new CliError(output, pkg.name, 3);
+		}
+		if (report.warningCount > 0) {
+			throw new CliError(output, pkg.name, 2);
+		}
+	}
 	if (!report.valid) {
 		throw new CliError(output, pkg.name);
 	}
