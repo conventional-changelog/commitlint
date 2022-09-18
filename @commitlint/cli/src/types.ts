@@ -16,6 +16,7 @@ export interface CliFlags {
 	version?: boolean;
 	verbose?: boolean;
 	'print-config'?: boolean;
+	strict?: boolean;
 	_: (string | number)[];
 	$0: string;
 }
