@@ -1,0 +1,81 @@
+name: '🐛 Bug Report'
+description: Create a new ticket for a bug.
+title: 'fix: <title>'
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide a general summary of the issue in the Title above
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 'Expected Behavior'
+      description: Tell us what should happen
+      placeholder: Short and explicit description of your incident...
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: 'Current Behavior'
+      description: Tell us what happens instead of the expected behavior
+    validations:
+      required: false
+  - type: checkboxes
+    id: affected-packages
+    attributes:
+      label: 'Affected packages'
+      options:
+        - label: cli
+        - label: core
+        - label: prompt
+        - label: config-angular
+  - type: textarea
+    id: possible-solution
+    attributes:
+      label: 'Possible Solution'
+      description: Not obligatory, but suggest a fix/reason for the bug, or ideas how to implement the addition or change
+    validations:
+      required: false
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 'Steps to Reproduce'
+      description: Provide a link to a live example, or an unambiguous set of steps to reproduce this bug. Include code to reproduce, if relevant
+      value: |
+        1. First step
+        2. Second step
+      render: bash
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 'Context'
+      description: |
+        How has this issue affected you? What are you trying to accomplish?
+        Providing context helps us come up with a solution that is most useful in the real world
+    validations:
+      required: false
+  - type: input
+    id: commitlint-version
+    attributes:
+      label: 'commitlint --version'
+      placeholder: '@commitlint/cli@x.x.x'
+    validations:
+      required: true
+  - type: input
+    id: git-version
+    attributes:
+      label: 'git --version'
+      placeholder: vx.x.x
+    validations:
+      required: true
+  - type: input
+    id: node-version
+    attributes:
+      label: 'node --version'
+      placeholder: vx.x.x
+    validations:
+      required: true
