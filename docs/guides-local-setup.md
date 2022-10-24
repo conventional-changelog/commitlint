@@ -40,7 +40,7 @@ yarn husky install
 ### Add hook
 
 ```
-npx husky add .husky/commit-msg  "npx --no -- commitlint --edit ${1}"
+npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
 
 **Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)**\
