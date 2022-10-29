@@ -377,7 +377,6 @@ Infinity
 
 - **condition**: `type` is empty
 - **rule**: `never`
-- **note**: Actually separator between `type` and `subject` is considered as type.
 
 #### type-max-length
 
