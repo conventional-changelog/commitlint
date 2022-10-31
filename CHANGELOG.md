@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.2.0](https://github.com/conventional-changelog/commitlint/compare/v17.1.2...v17.2.0) (2022-10-31)
+
+
+### Bug Fixes
+
+* update dependency cosmiconfig-typescript-loader to v4.1.0 ([#3386](https://github.com/conventional-changelog/commitlint/issues/3386)) ([9abd75f](https://github.com/conventional-changelog/commitlint/commit/9abd75f83df6e5187b75a63200c5b68100a1cd6e))
+
+
+### Features
+
+* **cli:** add strict mode ([#3384](https://github.com/conventional-changelog/commitlint/issues/3384)) ([#3385](https://github.com/conventional-changelog/commitlint/issues/3385)) ([fdff2be](https://github.com/conventional-changelog/commitlint/commit/fdff2bee2d688698555de1cab904d0f5038075b1))
+* **config-nx-scopes:** add nx version ^15.0.0 as peerDependency ([#3416](https://github.com/conventional-changelog/commitlint/issues/3416)) ([f529a3f](https://github.com/conventional-changelog/commitlint/commit/f529a3f58e03d633bbd3949d397a38d9c993579b))
+
+
+
+
+
 ## [17.1.2](https://github.com/conventional-changelog/commitlint/compare/v17.1.1...v17.1.2) (2022-08-29)
 
 

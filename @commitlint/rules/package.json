@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/rules",
-  "version": "17.0.0",
+  "version": "17.2.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -35,15 +35,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^17.0.0",
-    "@commitlint/test": "^17.0.0",
+    "@commitlint/parse": "^17.2.0",
+    "@commitlint/test": "^17.2.0",
     "@commitlint/utils": "^17.0.0",
     "conventional-changelog-angular": "5.0.13",
     "globby": "^11.0.0"
   },
   "dependencies": {
     "@commitlint/ensure": "^17.0.0",
-    "@commitlint/message": "^17.0.0",
+    "@commitlint/message": "^17.2.0",
     "@commitlint/to-lines": "^17.0.0",
     "@commitlint/types": "^17.0.0",
     "execa": "^5.0.0"

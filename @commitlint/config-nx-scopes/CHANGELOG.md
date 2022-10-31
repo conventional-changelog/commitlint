@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.2.0](https://github.com/conventional-changelog/commitlint/compare/v17.1.2...v17.2.0) (2022-10-31)
+
+
+### Features
+
+* **config-nx-scopes:** add nx version ^15.0.0 as peerDependency ([#3416](https://github.com/conventional-changelog/commitlint/issues/3416)) ([f529a3f](https://github.com/conventional-changelog/commitlint/commit/f529a3f58e03d633bbd3949d397a38d9c993579b))
+
+
+
+
+
 # [17.0.0](https://github.com/conventional-changelog/commitlint/compare/v16.3.0...v17.0.0) (2022-05-16)
 
 
