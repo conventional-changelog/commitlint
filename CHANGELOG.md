@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.2.1](https://github.com/conventional-changelog/commitlint/compare/v17.2.0...v17.2.1) (2022-11-01)
+
+**Note:** Version bump only for package @commitlint/root
+
+
+
+
+
 # [17.2.0](https://github.com/conventional-changelog/commitlint/compare/v17.1.2...v17.2.0) (2022-10-31)
 
 
