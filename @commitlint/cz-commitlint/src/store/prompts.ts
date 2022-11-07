@@ -1,5 +1,5 @@
 import {PromptConfig, UserPromptConfig} from '@commitlint/types';
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash.isplainobject';
 import defaultPromptConfigs from './defaultPromptConfigs';
 
 const storeKey = Symbol('promptConfig');

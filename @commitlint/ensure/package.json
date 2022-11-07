@@ -36,12 +36,20 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/utils": "^17.0.0",
-    "@types/lodash": "^4.14.161",
+    "@types/lodash.camelcase": "^4.3.7",
+    "@types/lodash.kebabcase": "^4.1.7",
+    "@types/lodash.snakecase": "^4.1.7",
+    "@types/lodash.startcase": "^4.4.7",
+    "@types/lodash.upperfirst": "^4.3.7",
     "globby": "^11.0.0"
   },
   "dependencies": {
     "@commitlint/types": "^17.0.0",
-    "lodash": "^4.17.19"
+    "lodash.camelcase": "^4.3.0",
+    "lodash.kebabcase": "^4.1.1",
+    "lodash.snakecase": "^4.1.1",
+    "lodash.startcase": "^4.4.0",
+    "lodash.upperfirst": "^4.3.1"
   },
   "gitHead": "d829bf6260304ca8d6811f329fcdd1b6c50e9749"
 }

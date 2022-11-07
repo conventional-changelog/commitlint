@@ -2,7 +2,7 @@ import execa, {ExecaError} from 'execa';
 import load from '@commitlint/load';
 import lint from '@commitlint/lint';
 import read from '@commitlint/read';
-import isFunction from 'lodash/isFunction';
+import isFunction from 'lodash.isfunction';
 import resolveFrom from 'resolve-from';
 import resolveGlobal from 'resolve-global';
 import yargs, {Arguments} from 'yargs';
