@@ -2,7 +2,7 @@ import path from 'path';
 
 import 'resolve-global';
 import resolveFrom from 'resolve-from';
-import mergeWith from 'lodash/mergeWith';
+import mergeWith from 'lodash.mergewith';
 import {validateConfig} from '@commitlint/config-validator';
 import {UserConfig} from '@commitlint/types';
 

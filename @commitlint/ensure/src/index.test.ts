@@ -1,6 +1,6 @@
 import path from 'path';
 import globby from 'globby';
-import camelCase from 'lodash/camelCase';
+import camelCase from 'lodash.camelcase';
 import * as ensure from '.';
 
 test('exports all checkers', async () => {

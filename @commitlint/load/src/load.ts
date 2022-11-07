@@ -8,9 +8,9 @@ import {
 	PluginRecords,
 	UserConfig,
 } from '@commitlint/types';
-import isPlainObject from 'lodash/isPlainObject';
-import merge from 'lodash/merge';
-import uniq from 'lodash/uniq';
+import isPlainObject from 'lodash.isplainobject';
+import merge from 'lodash.merge';
+import uniq from 'lodash.uniq';
 import Path from 'path';
 import resolveFrom from 'resolve-from';
 import {loadConfig} from './utils/load-config';
