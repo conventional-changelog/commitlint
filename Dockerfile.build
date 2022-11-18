@@ -1,0 +1,23 @@
+# FROM docker.io/library/node:18-alpine AS builder
+
+# WORKDIR /root/repo
+
+# ADD . ./
+# RUN yarn
+# RUN yarn build
+
+FROM docker.io/library/node:18-alpine AS runtime
+
+# COPY --from=builder /path/to/release/files /path/to/output (possibly `/usr/local/lib/node_modules`?)
+
+RUN apk add --no-cache \
+        git
+
+# this is stupid workaround, it should be built
+ARG RELEASE
+RUN npm install \
+    --no-update-notifier --save-dev --global \
+    @commitlint/config-conventional@${RELEASE} \
+    @commitlint/cli@${RELEASE}
+
+ENTRYPOINT [ "npx", "--no-update-notifier", "@commitlint/cli" ]
