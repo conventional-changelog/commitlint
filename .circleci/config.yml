@@ -81,16 +81,18 @@ commands:
   buildah-login:
     steps:
       - run:
-          command: buildah login --username {{ .Environment.USERNAME }} --password {{ .Environment.PASSWORD }}
+          command: buildah login --username {{ .Environment.USERNAME }} --password {{ .Environment.PASSWORD }} ghcr.io
   buildah-manifest-create:
     steps:
       - run:
-          command: buildah manifest create ghcr.io/conventional-changelog/commitlint
+          command: buildah manifest create \
+              --storage-driver=vfs \
+              ghcr.io/conventional-changelog/commitlint
   buildah-bud-amd64:
     steps:
       - run:
-          command: |
-            buildah build-using-dockerfile \
+          command: buildah build-using-dockerfile \
+              --storage-driver=vfs \
               --tag ghcr.io/conventional-changelog/commitlint:{{ .Environment.CIRCLE_TAG }} \
               --tag ghcr.io/conventional-changelog/commitlint:latest \
               --build-arg RELEASE={{ .Environment.CIRCLE_TAG }} \
@@ -101,8 +103,8 @@ commands:
   buildah-bud-arm64:
     steps:
       - run:
-          command: |
-            buildah build-using-dockerfile \
+          command: buildah build-using-dockerfile \
+              --storage-driver=vfs \
               --tag ghcr.io/conventional-changelog/commitlint:{{ .Environment.CIRCLE_TAG }} \
               --tag ghcr.io/conventional-changelog/commitlint:latest \
               --build-arg RELEASE={{ .Environment.CIRCLE_TAG }} \
@@ -113,23 +115,21 @@ commands:
   buildah-push:
     steps:
       - run:
-          command: |
-            buildah manifest push \
+          command: buildah manifest push \
                 --all \
                 ghcr.io/conventional-changelog/commitlint \
                 docker://ghcr.io/conventional-changelog/commitlint:{{ .Environment.CIRCLE_TAG }}
       - run:
-          command: |
-            buildah manifest push \
+          command: buildah manifest push \
                 --all \
                 ghcr.io/conventional-changelog/commitlint \
                 docker://ghcr.io/conventional-changelog/commitlint:latest
   build-image:
     steps:
-      - buildah-login
       - buildah-manifest-create
       - buildah-bud-amd64
       - buildah-bud-arm64
+      - buildah-login
       - buildah-push
 
 jobs:
