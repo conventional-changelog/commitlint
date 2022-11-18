@@ -1,16 +1,5 @@
 version: 2.1
 
-parameters:
-  registry:
-    type: string
-    default: docker.io # something like: docker.io, quay.io, ghcr.io, etc...
-  username:
-    type: string
-    default: $REGISTRY_USERNAME # should be secret
-  password:
-    type: string
-    default: $REGISTRY_PASSWORD # should be secret
-
 orbs:
   win: circleci/windows@4.1.1
 
@@ -92,20 +81,20 @@ commands:
   buildah-login:
     steps:
       - run:
-          command: buildah login --username << parameters.username >> --password << parameters.password >>
+          command: buildah login --username {{ .Environment.USERNAME }} --password {{ .Environment.PASSWORD }}
   buildah-manifest-create:
     steps:
       - run:
-          command: buildah manifest create << parameters.registry >>/conventional-changelog/commitlint
+          command: buildah manifest create ghcr.io/conventional-changelog/commitlint
   buildah-bud-amd64:
     steps:
       - run:
           command: |
             buildah build-using-dockerfile \
-              --tag << parameters.registry >>/conventional-changelog/commitlint:<< pipeline.git.tag >> \
-              --tag << parameters.registry >>/conventional-changelog/commitlint:latest \
-              --build-arg RELEASE=<< pipeline.git.tag >> \
-              --manifest << parameters.registry >>/conventional-changelog/commitlint \
+              --tag ghcr.io/conventional-changelog/commitlint:{{ .Environment.CIRCLE_TAG }} \
+              --tag ghcr.io/conventional-changelog/commitlint:latest \
+              --build-arg RELEASE={{ .Environment.CIRCLE_TAG }} \
+              --manifest ghcr.io/conventional-changelog/commitlint \
               --arch amd64 \
               --file Dockerfile.build \
               .
@@ -114,10 +103,10 @@ commands:
       - run:
           command: |
             buildah build-using-dockerfile \
-              --tag << parameters.registry >>/conventional-changelog/commitlint:<< pipeline.git.tag >> \
-              --tag << parameters.registry >>/conventional-changelog/commitlint:latest \
-              --build-arg RELEASE=<< pipeline.git.tag >> \
-              --manifest << parameters.registry >>/conventional-changelog/commitlint \
+              --tag ghcr.io/conventional-changelog/commitlint:{{ .Environment.CIRCLE_TAG }} \
+              --tag ghcr.io/conventional-changelog/commitlint:latest \
+              --build-arg RELEASE={{ .Environment.CIRCLE_TAG }} \
+              --manifest ghcr.io/conventional-changelog/commitlint \
               --arch arm64 \
               --file Dockerfile.build \
               .
@@ -127,14 +116,14 @@ commands:
           command: |
             buildah manifest push \
                 --all \
-                << parameters.registry >>/conventional-changelog/commitlint \
-                docker://<< parameters.registry >>/conventional-changelog/commitlint:<< pipeline.git.tag >>
+                ghcr.io/conventional-changelog/commitlint \
+                docker://ghcr.io/conventional-changelog/commitlint:{{ .Environment.CIRCLE_TAG }}
       - run:
           command: |
             buildah manifest push \
                 --all \
-                << parameters.registry >>/conventional-changelog/commitlint \
-                docker://<< parameters.registry >>/conventional-changelog/commitlint:latest
+                ghcr.io/conventional-changelog/commitlint \
+                docker://ghcr.io/conventional-changelog/commitlint:latest
   build-image:
     steps:
       - buildah-login
@@ -142,6 +131,7 @@ commands:
       - buildah-bud-amd64
       - buildah-bud-arm64
       - buildah-push
+
 jobs:
   v14:
     docker:
@@ -158,16 +148,9 @@ jobs:
       - image: node:18-buster
     steps:
       - run-tests
-  publish:
+  buildah:
     docker:
       - image: quay.io/buildah/stable:v1.28
-    requires:
-      - v14
-      - v16
-      - v18
-    filters:
-      tags:
-        only: /.*/
     steps:
       - build-image
   windows:
@@ -183,3 +166,6 @@ workflows:
       - v16
       - v18
       - windows
+  publish:
+    jobs:
+      - buildah
