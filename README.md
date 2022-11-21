@@ -262,6 +262,10 @@ yarn test
 yarn run publish --otp <one-time password>
 ```
 
+If something in between fails (like a new packages was added and needs to be published for the
+first time but you forgot) you can use `lerna publish from-package` to publish anythign that
+has not been published yet.
+
 #### Create Github release
 
 1. Copy changelog entry for the new version
@@ -295,7 +299,7 @@ npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one
 npm publish [PACKAGE_NAME] --access public
 ```
 
-For alias packages you need to add `@alias/`. Like we already do with `@commitlint/` anyways. This is just a reminder to make sure we do not forget this.
+From within the folder first i.e. `cd @commitlint/new-packages`.
 
 ##### Move `next` to `latest`
 
