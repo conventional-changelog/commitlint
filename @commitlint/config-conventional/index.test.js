@@ -166,7 +166,7 @@ test('header-max-length', async () => {
 });
 
 test('footer-leading-blank', async () => {
-	const result = await commitLint(messages.warningFooterLeadingBlank, rules);
+	const result = await commitLint(messages.warningFooterLeadingBlank);
 
 	expect(result.valid).toBe(true);
 	expect(result.warnings).toEqual([warnings.footerLeadingBlank]);
