@@ -1,11 +1,11 @@
 import path from 'path';
-import globby from 'globby';
+import glob from 'glob';
 import camelCase from 'lodash.camelcase';
 import * as ensure from '.';
 
 test('exports all checkers', async () => {
 	const ignore = ['types'];
-	const expected = (await glob('*.ts'))
+	const expected = _glob('*.ts')
 		.map((f) => camelCase(f))
 		.sort()
 		.filter((item) => !ignore.includes(item));
@@ -18,8 +18,8 @@ test('rules export functions', () => {
 	expect(actual.every((rule) => typeof rule === 'function')).toBe(true);
 });
 
-async function glob(pattern: string): Promise<string[]> {
-	const files = await globby(pattern, {
+function _glob(pattern: string): string[] {
+	const files = glob.sync(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname,
 	});
