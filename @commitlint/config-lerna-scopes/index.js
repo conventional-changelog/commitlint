@@ -1,7 +1,7 @@
+const glob = require('glob');
 const Path = require('path');
 const importFrom = require('import-from');
 const resolvePkg = require('resolve-pkg');
-const Globby = require('globby');
 const semver = require('semver');
 
 module.exports = {
@@ -21,14 +21,13 @@ function getPackages(context) {
 			const {workspaces} = require(Path.join(cwd, 'package.json'));
 			if (Array.isArray(workspaces) && workspaces.length) {
 				// use yarn workspaces
-				return Globby(
-					workspaces.map((ws) => {
-						return Path.posix.join(ws, 'package.json');
-					}),
-					{cwd, ignore: ['**/node_modules/**']}
-				).then((pJsons = []) => {
-					return pJsons.map((pJson) => require(Path.join(cwd, pJson)));
+
+				const wsGlobs = workspaces.flatMap((ws) => {
+					const path = Path.posix.join(ws, 'package.json');
+					return glob.sync(path, {cwd, ignore: ['**/node_modules/**']});
 				});
+
+				return wsGlobs.map((pJson) => require(Path.join(cwd, pJson)));
 			}
 
 			const lernaVersion = getLernaVersion(cwd);

@@ -1,10 +1,10 @@
 import path from 'path';
 import fs from 'fs';
-import globby from 'globby';
+import glob from 'glob';
 import rules from '.';
 
-test('exports all rules', async () => {
-	const expected = (await glob('*.ts')).sort();
+test('exports all rules', () => {
+	const expected = _glob('*.ts').sort();
 	const actual = Object.keys(rules).sort();
 	expect(actual).toEqual(expected);
 });
@@ -27,8 +27,8 @@ test('all rules are present in documentation', () => {
 	expect(Object.keys(rules)).toEqual(expect.arrayContaining(results));
 });
 
-async function glob(pattern: string | string[]) {
-	const files = await globby(pattern, {
+function _glob(pattern: string) {
+	const files = glob.sync(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname,
 	});

@@ -1,5 +1,5 @@
+const glob = require('glob');
 const path = require('path');
-const globby = require('globby');
 const merge = require('lodash.merge');
 
 function pathToId(root, filePath) {
@@ -9,10 +9,8 @@ function pathToId(root, filePath) {
 
 function getPatternIDs() {
 	const root = path.resolve(process.cwd(), './patterns');
-	const glob = path.resolve(root, '**/pattern.json');
-	return globby(glob).then((results) =>
-		results.map((result) => pathToId(root, result))
-	);
+	const pattern = path.resolve(root, '**/pattern.json');
+	return glob.sync(pattern).map((result) => pathToId(root, result));
 }
 
 module.exports = merge(require('@commitlint/config-angular'), {
