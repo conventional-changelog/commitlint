@@ -1,4 +1,5 @@
-import execa from 'execa';
+import {execa} from 'execa';
+import type {Options as ExecaOptions} from 'execa';
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';
@@ -53,7 +54,7 @@ async function main() {
 	}
 }
 
-async function git(args: string[], options: execa.Options = {}) {
+async function git(args: string[], options: ExecaOptions = {}) {
 	return execa(GIT, args, {
 		stdio: 'inherit',
 		...options,
@@ -72,7 +73,7 @@ async function isClean() {
 	return !(result.stdout && result.stdout.trim());
 }
 
-async function lint(args: string[], options: execa.Options = {}) {
+async function lint(args: string[], options: ExecaOptions = {}) {
 	return execa(COMMITLINT, args, {
 		stdio: ['pipe', 'inherit', 'inherit'],
 		...options,
