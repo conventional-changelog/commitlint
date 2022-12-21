@@ -29,10 +29,13 @@ export async function loadConfig(
 
 			// files supported by TypescriptLoader
 			`.${moduleName}rc.ts`,
+			`.${moduleName}rc.cts`,
 			`${moduleName}.config.ts`,
+			`${moduleName}.config.cts`,
 		],
 		loaders: {
 			'.ts': TypeScriptLoader(),
+			'.cts': TypeScriptLoader(),
 		},
 	});
 

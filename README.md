@@ -135,9 +135,11 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
   - `.commitlintrc.js`
   - `.commitlintrc.cjs`
   - `.commitlintrc.ts`
+  - `.commitlintrc.cts`
   - `commitlint.config.js`
   - `commitlint.config.cjs`
   - `commitlint.config.ts`
+  - `commitlint.config.cts`
   - `commitlint` field in `package.json`
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 - See [Rules](./docs/reference-rules.md) for a complete list of possible rules
