@@ -10,7 +10,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Plain array**
 
-```
+```js
   "rules": {
     "header-max-length": [0, "always", 72],
   }
@@ -18,7 +18,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Function returning array**
 
-```
+```js
   "rules": {
     "header-max-length": () => [0, "always", 72],
   }
@@ -26,7 +26,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Async function returning array**
 
-```
+```js
   "rules": {
     "header-max-length": async () => [0, "always", 72],
   }
@@ -34,7 +34,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 
 **Function returning a promise resolving to array**
 
-```
+```js
   "rules": {
     "header-max-length": () => Promise.resolve([0, "always", 72]),
   }
@@ -104,16 +104,16 @@ Infinity
 
 - **possible values**
 
-```
+```js
 [
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
+  'lower-case',    // default
+  'upper-case',    // UPPERCASE
+  'camel-case',    // camelCase
+  'kebab-case',    // kebab-case
+  'pascal-case',   // PascalCase
   'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case' // Start Case
+  'snake-case',    // snake_case
+  'start-case'     // Start Case
 ]
 ```
 
@@ -169,16 +169,16 @@ Infinity
 
 - **possible values**
 
-```
+```js
 [
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
+  'lower-case',    // default
+  'upper-case',    // UPPERCASE
+  'camel-case',    // camelCase
+  'kebab-case',    // kebab-case
+  'pascal-case',   // PascalCase
   'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case' // Start Case
+  'snake-case',    // snake_case
+  'start-case'     // Start Case
 ]
 ```
 
@@ -238,16 +238,16 @@ Infinity
 
 - **possible values**
 
-```
+```js
 [
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
+  'lower-case',    // default
+  'upper-case',    // UPPERCASE
+  'camel-case',    // camelCase
+  'kebab-case',    // kebab-case
+  'pascal-case',   // PascalCase
   'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case' // Start Case
+  'snake-case',    // snake_case
+  'start-case'     // Start Case
 ]
 ```
 
@@ -282,22 +282,22 @@ Infinity
 - **rule**: `always`
 - **value**
 
-```
+```js
 ['sentence-case', 'start-case', 'pascal-case', 'upper-case']
 ```
 
 - **possible values**
 
-```
+```js
 [
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
+  'lower-case',    // default
+  'upper-case',    // UPPERCASE
+  'camel-case',    // camelCase
+  'kebab-case',    // kebab-case
+  'pascal-case',   // PascalCase
   'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case' // Start Case
+  'snake-case',    // snake_case
+  'start-case'.    // Start Case
 ]
 ```
 
@@ -346,7 +346,7 @@ Infinity
 - **condition**: `type` is found in value
 - **rule**: `always`
 - **value**
-  ```
+  ```js
   ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert']
   ```
 
@@ -360,16 +360,16 @@ Infinity
   ```
 - **possible values**
 
-```
+```js
 [
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
+  'lower-case',    // default
+  'upper-case',    // UPPERCASE
+  'camel-case',    // camelCase
+  'kebab-case',    // kebab-case
+  'pascal-case',   // PascalCase
   'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case' // Start Case
+  'snake-case',    // snake_case
+  'start-case'     // Start Case
 ];
 ```
 
