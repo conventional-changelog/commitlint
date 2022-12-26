@@ -1749,14 +1749,14 @@
     "@pnpm/types" "8.10.0"
     load-json-file "^6.2.0"
 
-"@pnpm/cli-utils@1.0.17":
-  version "1.0.17"
-  resolved "https://registry.npmjs.org/@pnpm/cli-utils/-/cli-utils-1.0.17.tgz#7265eb498bfa871c26627f56a470c3d9acbea830"
-  integrity sha512-2Srdcx7A7FwFlyHA+jdmm+htWZJ0ObC2skp1FRJwuFyhQGT3UC6p4QPU5LTkrHG5Gm6MJBDyjBw1WBE8ToqxwQ==
+"@pnpm/cli-utils@1.0.18":
+  version "1.0.18"
+  resolved "https://registry.npmjs.org/@pnpm/cli-utils/-/cli-utils-1.0.18.tgz#0fdf9376899b0ba75870228155e1ab1ba24da030"
+  integrity sha512-oF+m4twMKQy/V98jSm5KJ3vAtbo5yVJO/WUiZpXzGlv/CssPUCJnyoxFC6wnCaD50E5l836rywC79N9+hUpqGg==
   dependencies:
     "@pnpm/cli-meta" "4.0.3"
-    "@pnpm/config" "16.1.11"
-    "@pnpm/default-reporter" "11.0.17"
+    "@pnpm/config" "16.2.0"
+    "@pnpm/default-reporter" "11.0.18"
     "@pnpm/error" "4.0.0"
     "@pnpm/manifest-utils" "4.1.3"
     "@pnpm/package-is-installable" "7.0.3"
@@ -1770,10 +1770,10 @@
   resolved "https://registry.npmjs.org/@pnpm/config.env-replace/-/config.env-replace-1.0.0.tgz#c76fa65847c9554e88d910f264c2ba9a1575e833"
   integrity sha512-ZVPVDi1E8oeXlYqkGRtX0CkzLTwE2zt62bjWaWKaAvI8NZqHzlMvGeSNDpW+JB3+aKanYb4UETJOF1/CxGPemA==
 
-"@pnpm/config@16.1.11":
-  version "16.1.11"
-  resolved "https://registry.npmjs.org/@pnpm/config/-/config-16.1.11.tgz#b05b336697ae752c6e090b095af9cd4035c8bf25"
-  integrity sha512-y/MEnQa6tyRGQqNe87tjRjlHKfjDQ3wVDqqbioa2FyELvuNZQkwTTwOnCxATdRIyFpkFkTHrseF3CIStl+k/hw==
+"@pnpm/config@16.2.0":
+  version "16.2.0"
+  resolved "https://registry.npmjs.org/@pnpm/config/-/config-16.2.0.tgz#07b64570be85a9046d4fe2ca75e44dd55cc45a17"
+  integrity sha512-cgfD5hqg0PNWXC0kDNirOsIYMaQVfYbRR8Wrjtton7Ux3y0EGbCjIuGHajO9gqhpH7M9lLp3qLJ9jXwRBDIL3w==
   dependencies:
     "@pnpm/config.env-replace" "1.0.0"
     "@pnpm/constants" "6.1.0"
@@ -1793,7 +1793,7 @@
     path-absolute "^1.0.1"
     path-name "^1.0.0"
     ramda "npm:@pnpm/ramda@0.28.1"
-    read-ini-file "^3.1.0"
+    read-ini-file "4.0.0"
     realpath-missing "^1.1.0"
     which "^3.0.0"
 
@@ -1874,12 +1874,12 @@
   dependencies:
     rfc4648 "^1.5.1"
 
-"@pnpm/default-reporter@11.0.17":
-  version "11.0.17"
-  resolved "https://registry.npmjs.org/@pnpm/default-reporter/-/default-reporter-11.0.17.tgz#41a6f9e1ea2db8c4d5f2212d0d29696be2e86782"
-  integrity sha512-6nnPbzxG7Pj/mkF3xW+z2LMSRZ5gtvvbgReazdxfTnxjpKA7tvHKIU2oMtiBE6KvH2m9HweX/rPgXONCEQoS0Q==
+"@pnpm/default-reporter@11.0.18":
+  version "11.0.18"
+  resolved "https://registry.npmjs.org/@pnpm/default-reporter/-/default-reporter-11.0.18.tgz#9b813802c2cafbc347aa627c25300f2df45a6a0d"
+  integrity sha512-MFC914bBa5WHWUi8R6tvZ5l9QwqYN+nnLMzEjlJAdjdEi4XzZ73l1rzLES9z10VswlzZo5yT5T3HuK0U0lZBCw==
   dependencies:
-    "@pnpm/config" "16.1.11"
+    "@pnpm/config" "16.2.0"
     "@pnpm/core-loggers" "8.0.3"
     "@pnpm/error" "4.0.0"
     "@pnpm/render-peer-issues" "3.0.3"
@@ -1958,11 +1958,11 @@
     ramda "npm:@pnpm/ramda@0.28.1"
 
 "@pnpm/find-workspace-packages@^5.0.0":
-  version "5.0.17"
-  resolved "https://registry.npmjs.org/@pnpm/find-workspace-packages/-/find-workspace-packages-5.0.17.tgz#54003702352be03362c4ade2616b3bcc23b26e41"
-  integrity sha512-tDzaO7ORM3/DAxb0gJee7k7KFx2I34DuFSNW1LS1Pw/Y13APYC7e6gPGOqX/5yP1Qnm5w36470VGSW+fK2eg6w==
+  version "5.0.18"
+  resolved "https://registry.npmjs.org/@pnpm/find-workspace-packages/-/find-workspace-packages-5.0.18.tgz#7b83ebc64f4e82a3fc6b7158db9b68d78f6372c8"
+  integrity sha512-FSZLegk5s5kx0g06vTPUll+YVrYE9OpgpQV9j/iUq+NINsVT69MsVewOZr9k/Vs69U090NWxmEeSaBmD3pWX7g==
   dependencies:
-    "@pnpm/cli-utils" "1.0.17"
+    "@pnpm/cli-utils" "1.0.18"
     "@pnpm/constants" "6.1.0"
     "@pnpm/fs.find-packages" "1.0.1"
     "@pnpm/types" "8.10.0"
@@ -6527,10 +6527,10 @@ ini@^1.3.2, ini@^1.3.4, ini@~1.3.0:
   resolved "https://registry.npmjs.org/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-ini@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/ini/-/ini-2.0.0.tgz#e5fd556ecdd5726be978fa1001862eacb0a94bc5"
-  integrity sha512-7PnF4oN3CvZF23ADhA5wRaYEQpJ8qygSkbtTXWBeXWXmEVRXK+1ITciHWwHhsjv1TmW0MgacIv6hEi5pX5NQdA==
+ini@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/ini/-/ini-3.0.1.tgz#c76ec81007875bc44d544ff7a11a55d12294102d"
+  integrity sha512-it4HyVAUTKBc6m8e1iXWvXSTdndF7HbdN713+kvLrymxTaU4AUBWrJ4vEooP+V7fexnVD3LKcBshjGGPefSMUQ==
 
 init-package-json@^3.0.2:
   version "3.0.2"
@@ -9396,12 +9396,12 @@ read-cmd-shim@^4.0.0:
   resolved "https://registry.npmjs.org/read-cmd-shim/-/read-cmd-shim-4.0.0.tgz#640a08b473a49043e394ae0c7a34dd822c73b9bb"
   integrity sha512-yILWifhaSEEytfXI76kB9xEEiG1AiozaCJZ83A87ytjRiN+jVibXjedjCRNjoZviinhG+4UkalO3mWTd8u5O0Q==
 
-read-ini-file@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npmjs.org/read-ini-file/-/read-ini-file-3.1.0.tgz#b9cd2197e995f1d982d258ec87719641c7fb8af9"
-  integrity sha512-yfpbqijWt63cx6FWJyOxwUPm7v24Xchr6oROjhYhB0Ca0lbDLHSXDm6k5yMGJU/q1xfzcV4XbgQ98kk65ilNkQ==
+read-ini-file@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/read-ini-file/-/read-ini-file-4.0.0.tgz#af2e8209760ba318d2f58466e4a46701db8be8c1"
+  integrity sha512-zz4qv/sKETv7nAkATqSJ9YMbKD8NXRPuA8d17VdYCuNYrVstB1S6UAMU6aytf5vRa9MESbZN7jLZdcmrOxz4gg==
   dependencies:
-    ini "^2.0.0"
+    ini "^3.0.1"
     strip-bom "^4.0.0"
 
 read-package-json-fast@^2.0.2, read-package-json-fast@^2.0.3:
