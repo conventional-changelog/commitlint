@@ -3,437 +3,271 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.4.0](https://github.com/conventional-changelog/commitlint/compare/v17.3.0...v17.4.0) (2023-01-04)
+
+### Bug Fixes
+
+- update dependency semver to v7.3.8 ([#3441](https://github.com/conventional-changelog/commitlint/issues/3441)) ([7599ad6](https://github.com/conventional-changelog/commitlint/commit/7599ad6ab622ecbb6efa9ddba7acc3bbf66db5b5))
+
 # [17.2.0](https://github.com/conventional-changelog/commitlint/compare/v17.1.2...v17.2.0) (2022-10-31)
 
 **Note:** Version bump only for package @commitlint/is-ignored
-
-
-
-
 
 # [17.1.0](https://github.com/conventional-changelog/commitlint/compare/v17.0.3...v17.1.0) (2022-08-27)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 ## [17.0.3](https://github.com/conventional-changelog/commitlint/compare/v17.0.2...v17.0.3) (2022-06-25)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [17.0.0](https://github.com/conventional-changelog/commitlint/compare/v16.3.0...v17.0.0) (2022-05-16)
 
-
-* chore!: minimum node version v14 (#3128) ([ac5f9b4](https://github.com/conventional-changelog/commitlint/commit/ac5f9b47a9e3cd5c9d58b14da0feb426f06b1ef9)), closes [#3128](https://github.com/conventional-changelog/commitlint/issues/3128)
-
+- chore!: minimum node version v14 (#3128) ([ac5f9b4](https://github.com/conventional-changelog/commitlint/commit/ac5f9b47a9e3cd5c9d58b14da0feb426f06b1ef9)), closes [#3128](https://github.com/conventional-changelog/commitlint/issues/3128)
 
 ### BREAKING CHANGES
 
-* drop node v12 support
+- drop node v12 support
 
-* chore: rename circleci windows job
+- chore: rename circleci windows job
 
 node version is not defned by the name anyways (i think)
 
-
-
-
-
 ## [16.2.4](https://github.com/conventional-changelog/commitlint/compare/v16.2.3...v16.2.4) (2022-04-28)
-
 
 ### Bug Fixes
 
-* update dependency semver to v7.3.6 ([#3112](https://github.com/conventional-changelog/commitlint/issues/3112)) ([ad886fd](https://github.com/conventional-changelog/commitlint/commit/ad886fd7ea46bc2df346099f9d4f10defd51fe75))
-* update dependency semver to v7.3.7 ([#3119](https://github.com/conventional-changelog/commitlint/issues/3119)) ([c9c49b2](https://github.com/conventional-changelog/commitlint/commit/c9c49b2de935528d84a817de750cd65b8f765c48))
-
-
-
-
+- update dependency semver to v7.3.6 ([#3112](https://github.com/conventional-changelog/commitlint/issues/3112)) ([ad886fd](https://github.com/conventional-changelog/commitlint/commit/ad886fd7ea46bc2df346099f9d4f10defd51fe75))
+- update dependency semver to v7.3.7 ([#3119](https://github.com/conventional-changelog/commitlint/issues/3119)) ([c9c49b2](https://github.com/conventional-changelog/commitlint/commit/c9c49b2de935528d84a817de750cd65b8f765c48))
 
 ## [16.2.1](https://github.com/conventional-changelog/commitlint/compare/v16.2.0...v16.2.1) (2022-02-13)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [16.0.0](https://github.com/conventional-changelog/commitlint/compare/v15.0.0...v16.0.0) (2021-12-26)
-
 
 ### Bug Fixes
 
-* **is-ignored:** ignore merge tag commit messages ([#2920](https://github.com/conventional-changelog/commitlint/issues/2920)) ([914782a](https://github.com/conventional-changelog/commitlint/commit/914782aad70d353baf4d9fbbf9824c0211241484))
-
-
-
-
+- **is-ignored:** ignore merge tag commit messages ([#2920](https://github.com/conventional-changelog/commitlint/issues/2920)) ([914782a](https://github.com/conventional-changelog/commitlint/commit/914782aad70d353baf4d9fbbf9824c0211241484))
 
 # [15.0.0](https://github.com/conventional-changelog/commitlint/compare/v14.2.0...v15.0.0) (2021-11-17)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [14.0.0](https://github.com/conventional-changelog/commitlint/compare/v13.2.1...v14.0.0) (2021-10-26)
 
 **Note:** Version bump only for package @commitlint/is-ignored
-
-
-
-
 
 # [13.2.0](https://github.com/conventional-changelog/commitlint/compare/v13.1.0...v13.2.0) (2021-09-28)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [13.1.0](https://github.com/conventional-changelog/commitlint/compare/v13.0.0...v13.1.0) (2021-07-24)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [13.0.0](https://github.com/conventional-changelog/commitlint/compare/v12.1.4...v13.0.0) (2021-05-24)
 
-
-* chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
-
+- chore!: remove node 10 support (#2596) ([4db4ba1](https://github.com/conventional-changelog/commitlint/commit/4db4ba1b0b312410a0f62100a93a80c246a6c410)), closes [#2596](https://github.com/conventional-changelog/commitlint/issues/2596)
 
 ### BREAKING CHANGES
 
-* minimum node version is 12
-
-
-
-
+- minimum node version is 12
 
 ## [12.1.3](https://github.com/conventional-changelog/commitlint/compare/v12.1.2...v12.1.3) (2021-05-12)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 ## [12.1.2](https://github.com/conventional-changelog/commitlint/compare/v12.1.1...v12.1.2) (2021-04-29)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 ## [12.1.1](https://github.com/conventional-changelog/commitlint/compare/v12.1.0...v12.1.1) (2021-04-02)
-
 
 ### Bug Fixes
 
-* update dependency semver to v7.3.5 ([#2519](https://github.com/conventional-changelog/commitlint/issues/2519)) ([5113f22](https://github.com/conventional-changelog/commitlint/commit/5113f22c620e7b187fd558e5befa541b448ea18b))
-
-
-
-
+- update dependency semver to v7.3.5 ([#2519](https://github.com/conventional-changelog/commitlint/issues/2519)) ([5113f22](https://github.com/conventional-changelog/commitlint/commit/5113f22c620e7b187fd558e5befa541b448ea18b))
 
 # [12.1.0](https://github.com/conventional-changelog/commitlint/compare/v12.0.1...v12.1.0) (2021-03-06)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 ## [12.0.1](https://github.com/conventional-changelog/commitlint/compare/v12.0.0...v12.0.1) (2021-02-23)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [12.0.0](https://github.com/conventional-changelog/commitlint/compare/v11.0.0...v12.0.0) (2021-01-18)
-
 
 ### Bug Fixes
 
-* update dependency semver to v7.3.4 ([#2336](https://github.com/conventional-changelog/commitlint/issues/2336)) ([790b61a](https://github.com/conventional-changelog/commitlint/commit/790b61afa668d0eab80bbe49db58d3d5d29bb16e))
-* **is-ignored:** ignore azure devops messages ([#2230](https://github.com/conventional-changelog/commitlint/issues/2230)) ([fe29ce7](https://github.com/conventional-changelog/commitlint/commit/fe29ce76bd87d5b42048228fbf0f47cc8d5411ec))
-
-
-
-
+- update dependency semver to v7.3.4 ([#2336](https://github.com/conventional-changelog/commitlint/issues/2336)) ([790b61a](https://github.com/conventional-changelog/commitlint/commit/790b61afa668d0eab80bbe49db58d3d5d29bb16e))
+- **is-ignored:** ignore azure devops messages ([#2230](https://github.com/conventional-changelog/commitlint/issues/2230)) ([fe29ce7](https://github.com/conventional-changelog/commitlint/commit/fe29ce76bd87d5b42048228fbf0f47cc8d5411ec))
 
 # [11.0.0](https://github.com/conventional-changelog/commitlint/compare/v10.0.0...v11.0.0) (2020-09-05)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [10.0.0](https://github.com/conventional-changelog/commitlint/compare/v9.1.2...v10.0.0) (2020-08-16)
 
-
-* refactor!: drop support for node 8 (#1999) ([751f39f](https://github.com/conventional-changelog/commitlint/commit/751f39f284ef232574a176c3c11b1982ee544166)), closes [#1999](https://github.com/conventional-changelog/commitlint/issues/1999)
-
+- refactor!: drop support for node 8 (#1999) ([751f39f](https://github.com/conventional-changelog/commitlint/commit/751f39f284ef232574a176c3c11b1982ee544166)), closes [#1999](https://github.com/conventional-changelog/commitlint/issues/1999)
 
 ### BREAKING CHANGES
 
-* remove node 8 from circle-ci checks
+- remove node 8 from circle-ci checks
 
 also remove node 13 because we do not support experimental versions
 
-* docs: update node v10 to latest LTS 10 version
+- docs: update node v10 to latest LTS 10 version
 
 Co-authored-by: Cedric van Putten <me@bycedric.com>
 
 Co-authored-by: Cedric van Putten <me@bycedric.com>
-
-
-
-
 
 ## [9.1.2](https://github.com/conventional-changelog/commitlint/compare/v9.1.1...v9.1.2) (2020-07-13)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 ## [9.1.1](https://github.com/conventional-changelog/commitlint/compare/v9.1.0...v9.1.1) (2020-06-30)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [9.1.0](https://github.com/conventional-changelog/commitlint/compare/v9.0.1...v9.1.0) (2020-06-21)
-
 
 ### Bug Fixes
 
-* update dependency semver to v7.3.2 ([#1369](https://github.com/conventional-changelog/commitlint/issues/1369)) ([3c09722](https://github.com/conventional-changelog/commitlint/commit/3c09722d2db85a94cd1f4bf25c6b4251b2c41bbb))
-
-
-
-
+- update dependency semver to v7.3.2 ([#1369](https://github.com/conventional-changelog/commitlint/issues/1369)) ([3c09722](https://github.com/conventional-changelog/commitlint/commit/3c09722d2db85a94cd1f4bf25c6b4251b2c41bbb))
 
 ## [9.0.1](https://github.com/conventional-changelog/commitlint/compare/v9.0.0...v9.0.1) (2020-05-26)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [9.0.0](https://github.com/conventional-changelog/commitlint/compare/v8.3.5...v9.0.0) (2020-05-21)
-
 
 ### Bug Fixes
 
-* update dependency semver to v7.1.3 ([#995](https://github.com/conventional-changelog/commitlint/issues/995)) ([4ee307a](https://github.com/conventional-changelog/commitlint/commit/4ee307a1f8c861ae5d8a038560d166c5d00ea8ba))
-
-
-
-
+- update dependency semver to v7.1.3 ([#995](https://github.com/conventional-changelog/commitlint/issues/995)) ([4ee307a](https://github.com/conventional-changelog/commitlint/commit/4ee307a1f8c861ae5d8a038560d166c5d00ea8ba))
 
 ## [8.3.5](https://github.com/conventional-changelog/commitlint/compare/v8.3.4...v8.3.5) (2020-01-15)
 
-
 ### Bug Fixes
 
-* **is-ignored:** move types to dev dependencies ([#897](https://github.com/conventional-changelog/commitlint/issues/897)) ([aabc549](https://github.com/conventional-changelog/commitlint/commit/aabc549))
-
-
-
-
+- **is-ignored:** move types to dev dependencies ([#897](https://github.com/conventional-changelog/commitlint/issues/897)) ([aabc549](https://github.com/conventional-changelog/commitlint/commit/aabc549))
 
 ## [8.3.4](https://github.com/conventional-changelog/commitlint/compare/v8.3.3...v8.3.4) (2020-01-03)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [8.3.0](https://github.com/conventional-changelog/commitlint/compare/v8.2.0...v8.3.0) (2019-10-16)
 
 **Note:** Version bump only for package @commitlint/is-ignored
-
-
-
-
 
 # [8.2.0](https://github.com/conventional-changelog/commitlint/compare/v8.1.0...v8.2.0) (2019-09-16)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [8.1.0](https://github.com/conventional-changelog/commitlint/compare/v8.0.0...v8.1.0) (2019-07-15)
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
-
-
-
-
 # [7.6.0](https://github.com/conventional-changelog/commitlint/compare/v7.5.2...v7.6.0) (2019-05-06)
-
 
 ### Features
 
-* config based is-ignored overrides ([#595](https://github.com/conventional-changelog/commitlint/issues/595)) ([2434d71](https://github.com/conventional-changelog/commitlint/commit/2434d71))
-
-
-
-
+- config based is-ignored overrides ([#595](https://github.com/conventional-changelog/commitlint/issues/595)) ([2434d71](https://github.com/conventional-changelog/commitlint/commit/2434d71))
 
 ## [7.5.1](https://github.com/conventional-changelog/commitlint/compare/v7.5.0...v7.5.1) (2019-02-09)
 
-
 ### Bug Fixes
 
-* **is-ignored:** ignore bitbuckets automatic merge ([#573](https://github.com/conventional-changelog/commitlint/issues/573)) ([e5bdc5c](https://github.com/conventional-changelog/commitlint/commit/e5bdc5c))
-
-
-
-
+- **is-ignored:** ignore bitbuckets automatic merge ([#573](https://github.com/conventional-changelog/commitlint/issues/573)) ([e5bdc5c](https://github.com/conventional-changelog/commitlint/commit/e5bdc5c))
 
 <a name="7.5.0"></a>
-# [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 
+# [7.5.0](https://github.com/conventional-changelog/commitlint/compare/v7.4.0...v7.5.0) (2019-01-31)
 
 ### Bug Fixes
 
-* replace all repository references with conventional changelog ([#561](https://github.com/conventional-changelog/commitlint/issues/561)) ([6c3afcd](https://github.com/conventional-changelog/commitlint/commit/6c3afcd))
-
-
-
+- replace all repository references with conventional changelog ([#561](https://github.com/conventional-changelog/commitlint/issues/561)) ([6c3afcd](https://github.com/conventional-changelog/commitlint/commit/6c3afcd))
 
 <a name="7.3.1"></a>
+
 ## [7.3.1](https://github.com/conventional-changelog/commitlint/compare/v7.3.0...v7.3.1) (2019-01-11)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="7.3.0"></a>
+
 # [7.3.0](https://github.com/conventional-changelog/commitlint/compare/v7.2.1...v7.3.0) (2019-01-11)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="7.2.1"></a>
+
 ## [7.2.1](https://github.com/conventional-changelog/commitlint/compare/v7.2.0...v7.2.1) (2018-10-11)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="7.2.0"></a>
-# [7.2.0](https://github.com/conventional-changelog/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
 
+# [7.2.0](https://github.com/conventional-changelog/commitlint/compare/v7.1.2...v7.2.0) (2018-10-05)
 
 ### Bug Fixes
 
-* ignore merge messages with text after newline ([b32bc93](https://github.com/conventional-changelog/commitlint/commit/b32bc93))
-* use grouped regex to ignore merge commits ([#439](https://github.com/conventional-changelog/commitlint/issues/439)) ([905e9d5](https://github.com/conventional-changelog/commitlint/commit/905e9d5))
-
-
-
+- ignore merge messages with text after newline ([b32bc93](https://github.com/conventional-changelog/commitlint/commit/b32bc93))
+- use grouped regex to ignore merge commits ([#439](https://github.com/conventional-changelog/commitlint/issues/439)) ([905e9d5](https://github.com/conventional-changelog/commitlint/commit/905e9d5))
 
 <a name="7.1.2"></a>
+
 ## [7.1.2](https://github.com/conventional-changelog/commitlint/compare/v7.1.1...v7.1.2) (2018-09-04)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="7.1.0"></a>
-# [7.1.0](https://github.com/conventional-changelog/commitlint/compare/v7.0.1...v7.1.0) (2018-08-29)
 
+# [7.1.0](https://github.com/conventional-changelog/commitlint/compare/v7.0.1...v7.1.0) (2018-08-29)
 
 ### Features
 
-* **wildcards:** add new wildcard patterns [#315](https://github.com/conventional-changelog/commitlint/issues/315) ([e9ea17f](https://github.com/conventional-changelog/commitlint/commit/e9ea17f))
-
-
-
+- **wildcards:** add new wildcard patterns [#315](https://github.com/conventional-changelog/commitlint/issues/315) ([e9ea17f](https://github.com/conventional-changelog/commitlint/commit/e9ea17f))
 
 <a name="6.1.1"></a>
+
 ## [6.1.1](https://github.com/conventional-changelog/commitlint/compare/v6.1.0...v6.1.1) (2018-02-22)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="6.1.0"></a>
+
 # [6.1.0](https://github.com/conventional-changelog/commitlint/compare/v6.0.5...v6.1.0) (2018-02-03)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="6.0.4"></a>
+
 ## [6.0.4](https://github.com/conventional-changelog/commitlint/compare/v6.0.3...v6.0.4) (2018-01-31)
-
-
-
 
 **Note:** Version bump only for package @commitlint/is-ignored
 
 <a name="6.0.3"></a>
+
 ## [6.0.3](https://github.com/conventional-changelog/commitlint/compare/v6.0.2...v6.0.3) (2018-01-31)
 
-
 ### Bug Fixes
 
-* update dependency semver to v5.5.0 ([#236](https://github.com/conventional-changelog/commitlint/issues/236)) ([6c52bd9](https://github.com/conventional-changelog/commitlint/commit/6c52bd9))
-
-
-
+- update dependency semver to v5.5.0 ([#236](https://github.com/conventional-changelog/commitlint/issues/236)) ([6c52bd9](https://github.com/conventional-changelog/commitlint/commit/6c52bd9))
 
 <a name="6.0.2"></a>
+
 ## [6.0.2](https://github.com/conventional-changelog/commitlint/compare/v6.0.0...v6.0.2) (2018-01-12)
 
-
 ### Bug Fixes
 
-* ignore branch merges with multiple newlines ([#227](https://github.com/conventional-changelog/commitlint/issues/227)) ([1f0c5ca](https://github.com/conventional-changelog/commitlint/commit/1f0c5ca))
-
-
-
+- ignore branch merges with multiple newlines ([#227](https://github.com/conventional-changelog/commitlint/issues/227)) ([1f0c5ca](https://github.com/conventional-changelog/commitlint/commit/1f0c5ca))
 
 <a name="6.0.0"></a>
-# [6.0.0](https://github.com/conventional-changelog/commitlint/compare/v5.2.6...v6.0.0) (2018-01-09)
 
+# [6.0.0](https://github.com/conventional-changelog/commitlint/compare/v5.2.6...v6.0.0) (2018-01-09)
 
 ### Bug Fixes
 
-* ignore branch merges with newlines ([#214](https://github.com/conventional-changelog/commitlint/issues/214)) ([c94c4dc](https://github.com/conventional-changelog/commitlint/commit/c94c4dc))
+- ignore branch merges with newlines ([#214](https://github.com/conventional-changelog/commitlint/issues/214)) ([c94c4dc](https://github.com/conventional-changelog/commitlint/commit/c94c4dc))

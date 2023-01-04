@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/load",
-  "version": "17.3.0",
+  "version": "17.4.0",
   "description": "Load shared commitlint configuration",
   "main": "lib/load.js",
   "types": "lib/load.d.ts",
@@ -35,8 +35,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^17.2.0",
-    "@commitlint/utils": "^17.0.0",
+    "@commitlint/test": "^17.4.0",
+    "@commitlint/utils": "^17.4.0",
     "@types/lodash.isplainobject": "^4.0.7",
     "@types/lodash.merge": "^4.6.7",
     "@types/lodash.uniq": "^4.5.7",
@@ -45,10 +45,10 @@
     "execa": "^5.0.0"
   },
   "dependencies": {
-    "@commitlint/config-validator": "^17.1.0",
-    "@commitlint/execute-rule": "^17.0.0",
-    "@commitlint/resolve-extends": "^17.3.0",
-    "@commitlint/types": "^17.0.0",
+    "@commitlint/config-validator": "^17.4.0",
+    "@commitlint/execute-rule": "^17.4.0",
+    "@commitlint/resolve-extends": "^17.4.0",
+    "@commitlint/types": "^17.4.0",
     "chalk": "^4.1.0",
     "cosmiconfig": "^8.0.0",
     "cosmiconfig-typescript-loader": "^4.0.0",
