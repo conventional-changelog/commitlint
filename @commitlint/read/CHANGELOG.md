@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.4.2](https://github.com/conventional-changelog/commitlint/compare/v17.4.1...v17.4.2) (2023-01-12)
+
+
+### Bug Fixes
+
+* update dependency @types/fs-extra to v11 ([#3494](https://github.com/conventional-changelog/commitlint/issues/3494)) ([8f553c7](https://github.com/conventional-changelog/commitlint/commit/8f553c7603e3ee0f435d878e396eec899a213de8))
+
+
+
+
+
 # [17.4.0](https://github.com/conventional-changelog/commitlint/compare/v17.3.0...v17.4.0) (2023-01-04)
 
 ### Bug Fixes

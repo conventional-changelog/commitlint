@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.4.2](https://github.com/conventional-changelog/commitlint/compare/v17.4.1...v17.4.2) (2023-01-12)
+
+
+### Bug Fixes
+
+* **load:** fixes a bug when a ts commitlint config is compiled twice ([#3499](https://github.com/conventional-changelog/commitlint/issues/3499)) ([dc2c899](https://github.com/conventional-changelog/commitlint/commit/dc2c899b5d7e4e7a7be79901b28e46da9f519211))
+* update dependency @types/fs-extra to v11 ([#3494](https://github.com/conventional-changelog/commitlint/issues/3494)) ([8f553c7](https://github.com/conventional-changelog/commitlint/commit/8f553c7603e3ee0f435d878e396eec899a213de8))
+* update dependency @types/fs-extra to v11.0.1 ([#3496](https://github.com/conventional-changelog/commitlint/issues/3496)) ([f9a013c](https://github.com/conventional-changelog/commitlint/commit/f9a013c89f5644d4917fb3ce94755a2600073ca4))
+
+
+
+
+
 ## [17.4.1](https://github.com/conventional-changelog/commitlint/compare/v17.4.0...v17.4.1) (2023-01-09)
 
 **Note:** Version bump only for package @commitlint/root
