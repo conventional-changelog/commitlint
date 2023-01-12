@@ -13,6 +13,7 @@ export async function loadConfig(
 	configPath?: string
 ): Promise<LoadConfigResult | null> {
 	const moduleName = 'commitlint';
+	const tsLoader = TypeScriptLoader();
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
 			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
@@ -34,8 +35,8 @@ export async function loadConfig(
 			`${moduleName}.config.cts`,
 		],
 		loaders: {
-			'.ts': TypeScriptLoader(),
-			'.cts': TypeScriptLoader(),
+			'.ts': tsLoader,
+			'.cts': tsLoader,
 		},
 	});
 
