@@ -6,11 +6,13 @@ export const subjectFullStop: SyncRule<string> = (
 	when = 'always',
 	value = '.'
 ) => {
-	const input = parsed.subject;
 
-	if (!input) {
+	let colonIndex = parsed.header.indexOf(':');
+	if (colonIndex > 0 && colonIndex === parsed.header.length - 1) {
 		return [true];
 	}
+
+	const input = parsed.header;
 
 	const negated = when === 'never';
 	const hasStop = input[input.length - 1] === value;
