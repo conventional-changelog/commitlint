@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.4.3](https://github.com/conventional-changelog/commitlint/compare/v17.4.2...v17.4.3) (2023-02-13)
+
+**Note:** Version bump only for package commitlint-config-angular
+
+
+
+
+
 ## [17.4.2](https://github.com/conventional-changelog/commitlint/compare/v17.4.1...v17.4.2) (2023-01-12)
 
 **Note:** Version bump only for package commitlint-config-angular

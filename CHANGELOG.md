@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.4.3](https://github.com/conventional-changelog/commitlint/compare/v17.4.2...v17.4.3) (2023-02-13)
+
+
+### Bug Fixes
+
+* subject-full-stop rule bugfix ([#3531](https://github.com/conventional-changelog/commitlint/issues/3531)) ([5d3d529](https://github.com/conventional-changelog/commitlint/commit/5d3d529a6a57baee1bfdaaf3f0c503dee009e152))
+* update dependency minimist to v1.2.8 ([#3532](https://github.com/conventional-changelog/commitlint/issues/3532)) ([1f57f98](https://github.com/conventional-changelog/commitlint/commit/1f57f98dfc5005c6e0f7c2bc3d44e387d26eba57))
+
+
+
+
+
 ## [17.4.2](https://github.com/conventional-changelog/commitlint/compare/v17.4.1...v17.4.2) (2023-01-12)
 
 
