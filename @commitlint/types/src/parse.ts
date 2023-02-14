@@ -34,6 +34,7 @@ export type Parser = (
 
 export interface ParserOptions {
 	commentChar?: string;
+	fieldPattern?: RegExp;
 	headerCorrespondence?: string[];
 	headerPattern?: RegExp;
 	issuePrefixes?: string[];

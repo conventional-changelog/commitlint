@@ -187,6 +187,20 @@ test('keep -side notes- in the body section', async () => {
 	expect(actual.body).toBe(body);
 });
 
+test('allows separating -side nodes- by setting parserOpts.fieldPattern', async () => {
+	const message =
+		'type(scope): subject\n\nbody text\n-authorName-\nrenovate[bot]';
+	const changelogOpts = {
+		parserOpts: {
+			fieldPattern: /^-(.*)-$/,
+		},
+	};
+	const actual = await parse(message, undefined, changelogOpts.parserOpts);
+
+	expect(actual.body).toBe('body text');
+	expect(actual).toHaveProperty('authorName', 'renovate[bot]');
+});
+
 test('parses references leading subject', async () => {
 	const message = '#1 some subject';
 	const opts = await require('conventional-changelog-angular');
