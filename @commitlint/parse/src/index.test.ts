@@ -169,18 +169,18 @@ test('registers inline #', async () => {
 });
 
 test('keep -side notes- in the body section', async () => {
-	const header = "type(some/scope): subject"
-	const body = 
-		"CI on master branch caught this:\n\n" +
-		"```\n" +
-		"Unhandled Exception:\n" +
+	const header = 'type(some/scope): subject';
+	const body =
+		'CI on master branch caught this:\n\n' +
+		'```\n' +
+		'Unhandled Exception:\n' +
 		"System.AggregateException: One or more errors occurred. (Some problem when connecting to 'api.mycryptoapi.com/eth')\n\n" +
-		"--- End of stack trace from previous location where exception was thrown ---\n\n" +
-		"at GWallet.Backend.FSharpUtil.ReRaise (System.Exception ex) [0x00000] in /Users/runner/work/geewallet/geewallet/src/GWallet.Backend/FSharpUtil.fs:206\n" +
-		"...\n" +
-		"```";
+		'--- End of stack trace from previous location where exception was thrown ---\n\n' +
+		'at GWallet.Backend.FSharpUtil.ReRaise (System.Exception ex) [0x00000] in /Users/runner/work/geewallet/geewallet/src/GWallet.Backend/FSharpUtil.fs:206\n' +
+		'...\n' +
+		'```';
 
-	const message = header + "\n\n" + body
+	const message = header + '\n\n' + body;
 
 	const actual = await parse(message);
 
