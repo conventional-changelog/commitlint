@@ -11,8 +11,8 @@ export default async function parse(
 	const defaultOpts = (await defaultChangelogOpts).parserOpts;
 	const opts = {
 		...defaultOpts,
+		fieldPattern: null,
 		...(parserOpts || {}),
-		fieldPattern: null
 	};
 	const parsed = parser(message, opts) as Commit;
 	parsed.raw = message;
