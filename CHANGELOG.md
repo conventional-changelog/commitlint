@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.4.4](https://github.com/conventional-changelog/commitlint/compare/v17.4.3...v17.4.4) (2023-02-17)
+
+
+### Bug Fixes
+
+* **parse:** allow setting fieldPattern in parserOpts ([#3538](https://github.com/conventional-changelog/commitlint/issues/3538)) ([ea23c65](https://github.com/conventional-changelog/commitlint/commit/ea23c65702d619b92e338e9f589a147d62e48ffc))
+
+
+
+
+
 ## [17.4.3](https://github.com/conventional-changelog/commitlint/compare/v17.4.2...v17.4.3) (2023-02-13)
 
 
