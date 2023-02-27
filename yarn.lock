@@ -1741,14 +1741,14 @@
     "@pnpm/types" "8.10.0"
     load-json-file "^6.2.0"
 
-"@pnpm/cli-utils@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.npmjs.org/@pnpm/cli-utils/-/cli-utils-1.1.0.tgz#48011dbd536b608c4734a1d44d12183afdbe476d"
-  integrity sha512-aqR3zmGwta7ACuNLdPgOHDmZGDjrSBUPlj/5Lt0rfBJdehMQ9jsgZ39xQKOf89L6+WKGfoG/GSuFMMhcPhA7mg==
+"@pnpm/cli-utils@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/@pnpm/cli-utils/-/cli-utils-1.1.1.tgz#3d7b9359bff83888b61fe98b9f8a1cce7d3cf5e9"
+  integrity sha512-wDhqzbzHD+vB6f9kEGweZbvgunyM465o/Ytut13wF7Xk4uzPspaHN/KOYEqsLZRTvSEGtOfqmvvE5A/E677e0Q==
   dependencies:
     "@pnpm/cli-meta" "4.0.3"
-    "@pnpm/config" "16.6.3"
-    "@pnpm/default-reporter" "11.0.35"
+    "@pnpm/config" "16.6.4"
+    "@pnpm/default-reporter" "11.0.36"
     "@pnpm/error" "4.0.1"
     "@pnpm/manifest-utils" "4.1.4"
     "@pnpm/package-is-installable" "7.0.4"
@@ -1762,10 +1762,10 @@
   resolved "https://registry.npmjs.org/@pnpm/config.env-replace/-/config.env-replace-1.0.0.tgz#c76fa65847c9554e88d910f264c2ba9a1575e833"
   integrity sha512-ZVPVDi1E8oeXlYqkGRtX0CkzLTwE2zt62bjWaWKaAvI8NZqHzlMvGeSNDpW+JB3+aKanYb4UETJOF1/CxGPemA==
 
-"@pnpm/config@16.6.3":
-  version "16.6.3"
-  resolved "https://registry.npmjs.org/@pnpm/config/-/config-16.6.3.tgz#9548327229af7726021bf017c4af0d3f95cd7ed5"
-  integrity sha512-ktvaTVAiQvJtgOeI1IpfzRxwRYnyt938gpKGS4q6dNd/h8iEhoSCPQOEZ3s1POiBUOLlOEt5PTdMyFkWZV/+vQ==
+"@pnpm/config@16.6.4":
+  version "16.6.4"
+  resolved "https://registry.npmjs.org/@pnpm/config/-/config-16.6.4.tgz#4d174f9d0526f5e97db4cc10fac9ea119c228768"
+  integrity sha512-qodspBtvnFvBABRi9ihDYqhtS+yZyF/DbKB2Gq3n2nk+feLbO1vYxKyEHw1wBfDyGSNncv3fhcrItXN2HnSRmg==
   dependencies:
     "@pnpm/config.env-replace" "1.0.0"
     "@pnpm/constants" "6.2.0"
@@ -1773,7 +1773,7 @@
     "@pnpm/git-utils" "0.1.0"
     "@pnpm/matcher" "4.0.1"
     "@pnpm/npm-conf" "2.0.4"
-    "@pnpm/pnpmfile" "4.0.33"
+    "@pnpm/pnpmfile" "4.0.34"
     "@pnpm/read-project-manifest" "4.1.3"
     "@pnpm/types" "8.10.0"
     camelcase "^6.3.0"
@@ -1806,10 +1806,10 @@
   dependencies:
     "@pnpm/types" "8.10.0"
 
-"@pnpm/core@7.8.3":
-  version "7.8.3"
-  resolved "https://registry.npmjs.org/@pnpm/core/-/core-7.8.3.tgz#72ddfb8827f878367f9725572e60663214b7a999"
-  integrity sha512-amhnvpA+hO6SXP0khOgtRxwK+AxuiRlob6E/QZboprOcUhW54Rv2fz6Sgn57/D3h3tP7ia3QFi9ppxyF4OPspg==
+"@pnpm/core@7.8.4":
+  version "7.8.4"
+  resolved "https://registry.npmjs.org/@pnpm/core/-/core-7.8.4.tgz#2ea36dfd5696303719f72f1ed8a48c870b8c0c37"
+  integrity sha512-w0xPeA0aZlN9o8QbU5qMWNMOjazBulWeUQDanYt4yowquK9jmlHY4A4NNi7m9/bPwXwLxcvjKeteID7Jj5nl+A==
   dependencies:
     "@pnpm/build-modules" "10.1.6"
     "@pnpm/calc-dep-state" "3.0.2"
@@ -1819,15 +1819,15 @@
     "@pnpm/dependency-path" "1.1.3"
     "@pnpm/error" "4.0.1"
     "@pnpm/filter-lockfile" "7.0.10"
-    "@pnpm/get-context" "8.2.2"
+    "@pnpm/get-context" "8.2.3"
     "@pnpm/graph-sequencer" "1.0.0"
-    "@pnpm/headless" "19.5.0"
+    "@pnpm/headless" "19.5.1"
     "@pnpm/hoist" "7.0.15"
-    "@pnpm/hooks.read-package-hook" "2.0.12"
+    "@pnpm/hooks.read-package-hook" "2.1.0"
     "@pnpm/lifecycle" "14.1.6"
     "@pnpm/link-bins" "8.0.8"
-    "@pnpm/lockfile-file" "7.0.4"
-    "@pnpm/lockfile-to-pnp" "2.0.12"
+    "@pnpm/lockfile-file" "7.0.5"
+    "@pnpm/lockfile-to-pnp" "2.0.13"
     "@pnpm/lockfile-utils" "5.0.7"
     "@pnpm/lockfile-walker" "6.0.8"
     "@pnpm/manifest-utils" "4.1.4"
@@ -1871,12 +1871,12 @@
   dependencies:
     rfc4648 "^1.5.1"
 
-"@pnpm/default-reporter@11.0.35":
-  version "11.0.35"
-  resolved "https://registry.npmjs.org/@pnpm/default-reporter/-/default-reporter-11.0.35.tgz#08355eb53d8bc31d2acbdd1caeae9ce27134f5f6"
-  integrity sha512-VzRppPv3/3ETyxjh+SUqsJQS/EW5tOg1zKt9bFQr5tKw+D8s+mhR77C8RZy4KC0KeruaG8VL9QhSNXiVje9GSA==
+"@pnpm/default-reporter@11.0.36":
+  version "11.0.36"
+  resolved "https://registry.npmjs.org/@pnpm/default-reporter/-/default-reporter-11.0.36.tgz#3f385ce0b7bf0b52998837c1f1d10b5e036475a5"
+  integrity sha512-7q+U5Dbcw22lkj014TgMR6q5Xxev7nTU22e/tGYzmq0DL1ZxnCpde+pm6JHo1kTAV9ZbphHvsPg4Me3ioi/+/w==
   dependencies:
-    "@pnpm/config" "16.6.3"
+    "@pnpm/config" "16.6.4"
     "@pnpm/core-loggers" "8.0.3"
     "@pnpm/error" "4.0.1"
     "@pnpm/render-peer-issues" "3.0.3"
@@ -1962,11 +1962,11 @@
     ramda "npm:@pnpm/ramda@0.28.1"
 
 "@pnpm/find-workspace-packages@^5.0.0":
-  version "5.0.35"
-  resolved "https://registry.npmjs.org/@pnpm/find-workspace-packages/-/find-workspace-packages-5.0.35.tgz#23bb1e81713d2cd0ba63b0e7daa3adb09d422bae"
-  integrity sha512-CDGSyuOWQghKpjGwIWbgVEHaOsPjyT/PVYv5cMvtXswsGsSK2rSy2XZNyuV3ffWv8I8d8avgbfNb7XzUkS2fog==
+  version "5.0.36"
+  resolved "https://registry.npmjs.org/@pnpm/find-workspace-packages/-/find-workspace-packages-5.0.36.tgz#335494a19bc8b89fff504c84936801f3f0068b61"
+  integrity sha512-azhKg7AvUKMOZ5glYIMT4WtJvlYGOQaaOL2vMK8NS9sQHAUEoZZNrPeOgBOYaUhJTechBM5vxjP9puKI5yGHrQ==
   dependencies:
-    "@pnpm/cli-utils" "1.1.0"
+    "@pnpm/cli-utils" "1.1.1"
     "@pnpm/constants" "6.2.0"
     "@pnpm/fs.find-packages" "1.0.2"
     "@pnpm/types" "8.10.0"
@@ -1989,17 +1989,17 @@
   resolved "https://registry.npmjs.org/@pnpm/fs.hard-link-dir/-/fs.hard-link-dir-1.0.3.tgz#99356b9c6a06cb4d304c9749f8c3afd26822d89a"
   integrity sha512-zJIVUAhwYjfDCu+h4TfrEKSLUZXoE20iWAQ7lA5GrMImmt6qEimpLb9SfZblpsza3KsCVQGiG6SAUdNwN8BUbA==
 
-"@pnpm/get-context@8.2.2":
-  version "8.2.2"
-  resolved "https://registry.npmjs.org/@pnpm/get-context/-/get-context-8.2.2.tgz#1efe4cde274d9047db74f13954b017a70d0703f8"
-  integrity sha512-NgzWqnvT2x/kZOHggHe1ty8luyPgAxf897KcEUs0adBNaY43aDU3gyzVWJPWlQaiF7Ki5eRdH7dnkZlibLAJ8g==
+"@pnpm/get-context@8.2.3":
+  version "8.2.3"
+  resolved "https://registry.npmjs.org/@pnpm/get-context/-/get-context-8.2.3.tgz#c6560e2adabe5d7889dffd83cd192e308ea61858"
+  integrity sha512-CIaNGVygJU9kZSaQoMZIEzCrgXHzErchQE2xOrvfqJZ5Pry3MWVRi8Jcz0ioGa/KP9LslkuzHIKSg+EqriT6DA==
   dependencies:
     "@pnpm/constants" "6.2.0"
     "@pnpm/core-loggers" "8.0.3"
     "@pnpm/error" "4.0.1"
-    "@pnpm/lockfile-file" "7.0.4"
+    "@pnpm/lockfile-file" "7.0.5"
     "@pnpm/modules-yaml" "11.1.0"
-    "@pnpm/read-projects-context" "7.0.10"
+    "@pnpm/read-projects-context" "7.0.11"
     "@pnpm/types" "8.10.0"
     "@zkochan/rimraf" "^2.1.2"
     ci-info "^3.7.1"
@@ -2025,10 +2025,10 @@
   resolved "https://registry.npmjs.org/@pnpm/graph-sequencer/-/graph-sequencer-1.0.0.tgz#8f837db662d24d47d8ae6dbc1f513bbf8c997f3e"
   integrity sha512-iIJhmi7QjmafhijaEkh34Yxhjq3S/eiZnxww9K/SRXuDB5/30QnCyihR4R7vep8ONsGIR29hNPAtaNGd1rC/VA==
 
-"@pnpm/headless@19.5.0":
-  version "19.5.0"
-  resolved "https://registry.npmjs.org/@pnpm/headless/-/headless-19.5.0.tgz#b32132902ec5068766ca2d705b14aea0b5a125fd"
-  integrity sha512-UbLfI1ztyTdtFoXwb/hpY0kALGpVha1lXsjYMlwoRGlUfSth94+hjElxnFdWACYm4BFN2WXZoIZ+O7qjRknqww==
+"@pnpm/headless@19.5.1":
+  version "19.5.1"
+  resolved "https://registry.npmjs.org/@pnpm/headless/-/headless-19.5.1.tgz#9edb9537818d107f4dda6a9d966b7a2bbee95ba5"
+  integrity sha512-3nzGKX7Zlp3yqNshwp8OsgC+biGjwKb3Zl50+f3yRpK/OX8e35gPXBfgdsa/T6lbfzpsNUKKeFyG/YTI+7hJaw==
   dependencies:
     "@pnpm/build-modules" "10.1.6"
     "@pnpm/calc-dep-state" "3.0.2"
@@ -2040,8 +2040,8 @@
     "@pnpm/hoist" "7.0.15"
     "@pnpm/lifecycle" "14.1.6"
     "@pnpm/link-bins" "8.0.8"
-    "@pnpm/lockfile-file" "7.0.4"
-    "@pnpm/lockfile-to-pnp" "2.0.12"
+    "@pnpm/lockfile-file" "7.0.5"
+    "@pnpm/lockfile-to-pnp" "2.0.13"
     "@pnpm/lockfile-utils" "5.0.7"
     "@pnpm/modules-cleaner" "13.0.12"
     "@pnpm/modules-yaml" "11.1.0"
@@ -2081,11 +2081,12 @@
     resolve-link-target "^2.0.0"
     symlink-dir "^5.1.1"
 
-"@pnpm/hooks.read-package-hook@2.0.12":
-  version "2.0.12"
-  resolved "https://registry.npmjs.org/@pnpm/hooks.read-package-hook/-/hooks.read-package-hook-2.0.12.tgz#49647fa51d7e1aeb33ef1ee0bc6fce94fc351e6b"
-  integrity sha512-9GT4U3GDpaGGVN1YcG+5mKaykXRDo1bDru0PIQ7+XA2IDO3ys5geNtsZHT6CyJv+6MLalEnQsmNvN+gjJ1xcBw==
+"@pnpm/hooks.read-package-hook@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.npmjs.org/@pnpm/hooks.read-package-hook/-/hooks.read-package-hook-2.1.0.tgz#690858f2d1c5095598f0373cb903d74ce9c6ba05"
+  integrity sha512-OJcF9S32JJeUT98dii7txyjaNPjnSZFsv1ZI0MWIshKQ+0hyIHGw0/n7R++O710RJODrIYHRdxj2k50axKfwXA==
   dependencies:
+    "@pnpm/error" "4.0.1"
     "@pnpm/matcher" "4.0.1"
     "@pnpm/parse-overrides" "3.0.3"
     "@pnpm/parse-wanted-dependency" "4.1.0"
@@ -2132,10 +2133,10 @@
     ramda "npm:@pnpm/ramda@0.28.1"
     symlink-dir "^5.1.0"
 
-"@pnpm/lockfile-file@7.0.4":
-  version "7.0.4"
-  resolved "https://registry.npmjs.org/@pnpm/lockfile-file/-/lockfile-file-7.0.4.tgz#1bdf0b4b6f5aa1059ca450122f1a09e6ff4583aa"
-  integrity sha512-6B0Zf+XQkVwSgCHbdvv5XihhjArpVZjmptug3q3arkO0X4UOD1fSFK//oWomPsQ5ySMEV1qQVfb/uhjfaVWJAg==
+"@pnpm/lockfile-file@7.0.5":
+  version "7.0.5"
+  resolved "https://registry.npmjs.org/@pnpm/lockfile-file/-/lockfile-file-7.0.5.tgz#497f062fce0d860fc4bb528817de64a45148e4fc"
+  integrity sha512-KjgoJ9VQTkstwzCVqGOX7UVHzVOal1YGfnb1LSVriqdCxYAtA5iTGji1Vr5sGmyfbwGFjTFWdqx6QGRGP0rggw==
   dependencies:
     "@pnpm/constants" "6.2.0"
     "@pnpm/dependency-path" "1.1.3"
@@ -2155,13 +2156,13 @@
     strip-bom "^4.0.0"
     write-file-atomic "^5.0.0"
 
-"@pnpm/lockfile-to-pnp@2.0.12":
-  version "2.0.12"
-  resolved "https://registry.npmjs.org/@pnpm/lockfile-to-pnp/-/lockfile-to-pnp-2.0.12.tgz#09a8931ec359dc361489591967befb54f2d485e3"
-  integrity sha512-U+XTHt+s0fzo8tfqkaybvC7oq+vRCMi+Qj2Rt+jFmRE1XZ9etKAF8j+g3WmteDvh2wLfWGaTC/mxjqI20zsylg==
+"@pnpm/lockfile-to-pnp@2.0.13":
+  version "2.0.13"
+  resolved "https://registry.npmjs.org/@pnpm/lockfile-to-pnp/-/lockfile-to-pnp-2.0.13.tgz#b2a52b84de1e6edda3451400d8d6c6014015a28d"
+  integrity sha512-IdyVYrQObhcRY0/gADumZoyVnmDqzmNhLoTxbx+ZJTUPsPqKV2eCQRSodG8vQrgyWaGnoBfSxzLH6oVybediaA==
   dependencies:
     "@pnpm/dependency-path" "1.1.3"
-    "@pnpm/lockfile-file" "7.0.4"
+    "@pnpm/lockfile-file" "7.0.5"
     "@pnpm/lockfile-utils" "5.0.7"
     "@pnpm/types" "8.10.0"
     "@yarnpkg/pnp" "^2.3.2"
@@ -2434,12 +2435,12 @@
     ramda "npm:@pnpm/ramda@0.28.1"
     resolve-link-target "^2.0.0"
 
-"@pnpm/pnpmfile@4.0.33":
-  version "4.0.33"
-  resolved "https://registry.npmjs.org/@pnpm/pnpmfile/-/pnpmfile-4.0.33.tgz#bd7fe670e362166ec984ed2acab96993987f7e71"
-  integrity sha512-nUsMG66bVg0faU4l9mxEltqI91BRRd8VAHNwQzyUDjpeNrIfLaZPvy9TgATo0jay8MI44c2RcZp0ZPEW52Y+7g==
+"@pnpm/pnpmfile@4.0.34":
+  version "4.0.34"
+  resolved "https://registry.npmjs.org/@pnpm/pnpmfile/-/pnpmfile-4.0.34.tgz#d26388a10f96a8cd5cb2a857bdb9d188f5937ca6"
+  integrity sha512-N3wtB0FNNr/JQnxI173FjtQ0a40Hjo1UwOm09k2u1XxsU7sFZISDn5djRU0aYHfRkvgU3ysFLwKeXvpn0bleWQ==
   dependencies:
-    "@pnpm/core" "7.8.3"
+    "@pnpm/core" "7.8.4"
     "@pnpm/core-loggers" "8.0.3"
     "@pnpm/error" "4.0.1"
     "@pnpm/lockfile-types" "4.3.6"
@@ -2495,12 +2496,12 @@
     sort-keys "^4.2.0"
     strip-bom "^4.0.0"
 
-"@pnpm/read-projects-context@7.0.10":
-  version "7.0.10"
-  resolved "https://registry.npmjs.org/@pnpm/read-projects-context/-/read-projects-context-7.0.10.tgz#7bd8bf46cbcb4bb07912903a5ebfd8f5298e419c"
-  integrity sha512-2mqFIW9/RfjkpKdfiI3XopBa25QQ2W2FBSToTY3EtPBBtfhXcrCoKZr62nWuSbCB3cknRkL46f9kXWDhqzsg1A==
+"@pnpm/read-projects-context@7.0.11":
+  version "7.0.11"
+  resolved "https://registry.npmjs.org/@pnpm/read-projects-context/-/read-projects-context-7.0.11.tgz#c0e0d40f1c27b93e5f7e006c8b259066fc810a34"
+  integrity sha512-RG/LnzoPCf5WvDElGHm1v2ZI3z/ArIW+EfoiZMrBBxOFFdReURvpeo7Sw8n044nnx0f+Bz9NPlT7Q6xwJtLVew==
   dependencies:
-    "@pnpm/lockfile-file" "7.0.4"
+    "@pnpm/lockfile-file" "7.0.5"
     "@pnpm/modules-yaml" "11.1.0"
     "@pnpm/normalize-registries" "4.0.3"
     "@pnpm/types" "8.10.0"
