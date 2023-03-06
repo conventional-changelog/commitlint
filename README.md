@@ -160,6 +160,10 @@ A number of shared configurations are available to install and use with `commitl
 
 > ⚠️ If you want to publish your own shareable config then make sure it has a name aligning with the pattern `commitlint-config-emoji-log` or `commitlint-config-your-config-name` — then in extend all you have to write is `emoji-log` or `your-config-name`.
 
+## Documentation
+
+Check the [main website](https://commitlint.js.org/).
+
 ## API
 
 - Alternative, programmatic way to interact with `commitlint`
