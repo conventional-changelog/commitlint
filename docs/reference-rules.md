@@ -303,8 +303,12 @@ Infinity
 
 #### subject-empty
 
-- **condition**: `subject` is empty
+- **condition**: `subject` is empty (optional: specify for which types the rule should apply)
 - **rule**: `never`
+- **types**
+  ```js
+  ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert'];
+  ```
 
 #### subject-full-stop
 
