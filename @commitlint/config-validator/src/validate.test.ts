@@ -54,7 +54,7 @@ const invalidSchemas: Record<string, any> = {
 
 describe('validation should pass for', () => {
 	test.each(Object.entries(validSchemas))('%s', (file, config) => {
-		expect(() => validateConfig(`${file}.js`, config)).not.toThrowError();
+		expect(() => validateConfig(`${file}.js`, config)).not.toThrow();
 	});
 });
 
