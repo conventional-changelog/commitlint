@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.5.0](https://github.com/conventional-changelog/commitlint/compare/v17.4.4...v17.5.0) (2023-03-22)
+
+
+### Bug Fixes
+
+* **config-pnpm-scopes:** refactor to remove peer dependencies ([#3564](https://github.com/conventional-changelog/commitlint/issues/3564)) ([f1f3bd5](https://github.com/conventional-changelog/commitlint/commit/f1f3bd5b7f33f7198719ed4aead3417e894a10ec)), closes [#3556](https://github.com/conventional-changelog/commitlint/issues/3556)
+* update dependency cosmiconfig to v8.1.0 ([#3548](https://github.com/conventional-changelog/commitlint/issues/3548)) ([7d01b2e](https://github.com/conventional-changelog/commitlint/commit/7d01b2e1801e1e409ce0c98c3388521804cc9b3d))
+* update dependency yargs to v17.7.0 ([#3542](https://github.com/conventional-changelog/commitlint/issues/3542)) ([f14990f](https://github.com/conventional-changelog/commitlint/commit/f14990f626f5a2713ac4aa508133cf1072993449))
+* update dependency yargs to v17.7.1 ([#3546](https://github.com/conventional-changelog/commitlint/issues/3546)) ([9f37c11](https://github.com/conventional-changelog/commitlint/commit/9f37c119ffb3d93d9cd3c473c4da8f23731be4d5))
+
+
+### Features
+
+* **GitHubCI:** add ([#3549](https://github.com/conventional-changelog/commitlint/issues/3549)) ([d973611](https://github.com/conventional-changelog/commitlint/commit/d9736110ac2558ca22719093cb0282899a2c1254))
+* support typescript 5.0 ([#3566](https://github.com/conventional-changelog/commitlint/issues/3566)) ([c0a27ff](https://github.com/conventional-changelog/commitlint/commit/c0a27ffa3dcaef296ef58ce37bd8ca0a9d315d6e))
+
+
+
+
+
 ## [17.4.4](https://github.com/conventional-changelog/commitlint/compare/v17.4.3...v17.4.4) (2023-02-17)
 
 

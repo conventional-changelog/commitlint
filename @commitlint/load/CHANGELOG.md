@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.5.0](https://github.com/conventional-changelog/commitlint/compare/v17.4.4...v17.5.0) (2023-03-22)
+
+
+### Features
+
+* support typescript 5.0 ([#3566](https://github.com/conventional-changelog/commitlint/issues/3566)) ([c0a27ff](https://github.com/conventional-changelog/commitlint/commit/c0a27ffa3dcaef296ef58ce37bd8ca0a9d315d6e))
+
+
+
+
+
 ## [17.4.4](https://github.com/conventional-changelog/commitlint/compare/v17.4.3...v17.4.4) (2023-02-17)
 
 **Note:** Version bump only for package @commitlint/load

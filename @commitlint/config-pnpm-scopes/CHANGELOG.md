@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.5.0](https://github.com/conventional-changelog/commitlint/compare/v17.4.4...v17.5.0) (2023-03-22)
+
+
+### Bug Fixes
+
+* **config-pnpm-scopes:** refactor to remove peer dependencies ([#3564](https://github.com/conventional-changelog/commitlint/issues/3564)) ([f1f3bd5](https://github.com/conventional-changelog/commitlint/commit/f1f3bd5b7f33f7198719ed4aead3417e894a10ec)), closes [#3556](https://github.com/conventional-changelog/commitlint/issues/3556)
+
+
+
+
+
 ## [17.4.2](https://github.com/conventional-changelog/commitlint/compare/v17.4.1...v17.4.2) (2023-01-12)
 
 **Note:** Version bump only for package @commitlint/config-pnpm-scopes
