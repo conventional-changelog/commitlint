@@ -1,7 +1,9 @@
 version: '3'
 services:
   commitlint:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     image: marionebl/commitlint-cubicle
     ports:
       - '8443:8443'

@@ -1,0 +1,45 @@
+name: container build
+on:
+  push:
+    tags:
+      - '**'
+    branches:
+      - '**'
+      - '!master'
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  container-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Log into registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: commitlint/commitlint
+          tags: |
+            type=semver,pattern={{version}}
+            type=edge,branch=master
+            type=ref,event=branch
+            type=sha,prefix=,format=short
+      - name: Build and push container image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Dockerfile.ci
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # disable arm build for now, because of https://github.com/nodejs/docker-node/issues/1335
+          platforms: linux/amd64 #,linux/arm64

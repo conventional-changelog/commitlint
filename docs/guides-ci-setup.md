@@ -121,10 +121,28 @@ workflows:
 ## GitLab CI
 
 ```yaml
+stages: ["lint","build","test"]
 lint:commit:
+  image: registry.hub.docker.com/library/node:alpine
   stage: lint
+  before_script:
+    - apk add --no-cache git
+    - npm install --save-dev @commitlint/config-conventional @commitlint/cli
   script:
     - echo "${CI_COMMIT_MESSAGE}" | npx commitlint
+```
+
+## GitLab CI with pre-build container
+
+```yaml
+stages: ["lint","build","test"]
+lint:commit:
+  image:
+    name: registry.hub.docker.com/commitlint/commitlint:latest
+    entrypoint: [""]
+  stage: lint
+  script:
+    - echo "${CI_COMMIT_MESSAGE}" | commitlint
 ```
 
 ### 3rd party integrations
