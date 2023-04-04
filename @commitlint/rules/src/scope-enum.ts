@@ -13,7 +13,7 @@ export const scopeEnum: SyncRule<string[]> = (
 
 	// Scopes may contain slash or comma delimiters to separate them and mark them as individual segments.
 	// This means that each of these segments should be tested separately with `ensure`.
-	const delimiters = /\/|\\|,/g;
+	const delimiters = /\/|\\|, ?/g;
 	const scopeSegments = parsed.scope.split(delimiters);
 
 	const negated = when === 'never';
