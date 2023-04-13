@@ -5,26 +5,44 @@ const messages = {
 	empty: 'test:\n',
 	numeric: 'test: 1.0.0',
 	lowercase: 'test: subject',
+	lowercase_unicode: 'test: тема', // Bulgarian for `subject`
 	mixedcase: 'test: sUbJeCt',
 	uppercase: 'test: SUBJECT',
+	uppercase_unicode: 'test: ÛNDERWERP', // Frisian for `SUBJECT`
 	camelcase: 'test: subJect',
+	camelcase_unicode: 'test: θέΜα', // Greek for `subJect`
 	kebabcase: 'test: sub-ject',
+	kebabcase_unicode: 'test: áb-har', // Irish for `sub-ject`
 	pascalcase: 'test: SubJect',
+	pascalcase_unicode: 'test: ТақыРып', // Kazakh for `SubJect`
 	snakecase: 'test: sub_ject',
+	snakecase_unicode: 'test: сэ_дэв', // Mongolian for `sub_ject`
 	startcase: 'test: Sub Ject',
+	startcase_unicode: 'test: Äm Ne', // Swedish for `Sub Ject`
+	sentencecase: 'test: Sub ject',
+	sentencecase_unicode: 'test: Мав зуъ', // Tajik for `Sub ject`
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	numeric: parse(messages.numeric),
 	lowercase: parse(messages.lowercase),
+	lowercase_unicode: parse(messages.lowercase_unicode),
 	mixedcase: parse(messages.mixedcase),
 	uppercase: parse(messages.uppercase),
+	uppercase_unicode: parse(messages.uppercase_unicode),
 	camelcase: parse(messages.camelcase),
+	camelcase_unicode: parse(messages.camelcase_unicode),
 	kebabcase: parse(messages.kebabcase),
+	kebabcase_unicode: parse(messages.kebabcase_unicode),
 	pascalcase: parse(messages.pascalcase),
+	pascalcase_unicode: parse(messages.pascalcase_unicode),
 	snakecase: parse(messages.snakecase),
+	snakecase_unicode: parse(messages.snakecase_unicode),
 	startcase: parse(messages.startcase),
+	startcase_unicode: parse(messages.startcase_unicode),
+	sentencecase: parse(messages.sentencecase),
+	sentencecase_unicode: parse(messages.sentencecase_unicode),
 };
 
 test('with empty subject should succeed for "never lowercase"', async () => {
@@ -63,6 +81,16 @@ test('with lowercase subject should succeed for "always lowercase"', async () =>
 	expect(actual).toEqual(expected);
 });
 
+test('with lowercase unicode subject should fail for "always uppercase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.lowercase_unicode,
+		'always',
+		'upper-case'
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
 test('with mixedcase subject should succeed for "never lowercase"', async () => {
 	const [actual] = subjectCase(await parsed.mixedcase, 'never', 'lowercase');
 	const expected = true;
@@ -93,9 +121,19 @@ test('with uppercase subject should fail for "never uppercase"', async () => {
 	expect(actual).toEqual(expected);
 });
 
-test('with lowercase subject should succeed for "always uppercase"', async () => {
+test('with uppercase subject should succeed for "always uppercase"', async () => {
 	const [actual] = subjectCase(await parsed.uppercase, 'always', 'uppercase');
 	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with uppercase unicode subject should fail for "always lowercase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.uppercase_unicode,
+		'always',
+		'lower-case'
+	);
+	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
@@ -132,6 +170,26 @@ test('with camelcase subject should fail for "always snakecase"', async () => {
 test('with camelcase subject should succeed for "always camelcase"', async () => {
 	const [actual] = subjectCase(await parsed.camelcase, 'always', 'camel-case');
 	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with camelcase unicode subject should fail for "always sentencecase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.camelcase_unicode,
+		'always',
+		'sentence-case'
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with kebabcase unicode subject should fail for "always camelcase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.kebabcase_unicode,
+		'always',
+		'camel-case'
+	);
+	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
@@ -175,6 +233,16 @@ test('with pascalcase subject should fail for "always camelcase"', async () => {
 	expect(actual).toEqual(expected);
 });
 
+test('with pascalcase unicode subject should fail for "always uppercase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.pascalcase_unicode,
+		'always',
+		'upper-case'
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
 test('with snakecase subject should fail for "always uppercase"', async () => {
 	const [actual] = subjectCase(await parsed.snakecase, 'always', 'uppercase');
 	const expected = false;
@@ -207,6 +275,16 @@ test('with snakecase subject should succeed for "always snakecase"', async () =>
 
 test('with snakecase subject should fail for "always camelcase"', async () => {
 	const [actual] = subjectCase(await parsed.snakecase, 'always', 'camel-case');
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with snakecase unicode subject should fail for "never lowercase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.snakecase_unicode,
+		'never',
+		'lower-case'
+	);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
@@ -250,6 +328,66 @@ test('with startcase subject should fail for "always camelcase"', async () => {
 test('with startcase subject should succeed for "always startcase"', async () => {
 	const [actual] = subjectCase(await parsed.startcase, 'always', 'start-case');
 	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with startcase unicode subject should fail for "always pascalcase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.startcase_unicode,
+		'always',
+		'pascal-case'
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with sentencecase subject should succeed for "always sentence-case"', async () => {
+	const [actual] = subjectCase(
+		await parsed.sentencecase,
+		'always',
+		'sentence-case'
+	);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with sentencecase subject should fail for "never sentencecase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.sentencecase,
+		'never',
+		'sentence-case'
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with sentencecase subject should fail for "always pascalcase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.sentencecase,
+		'always',
+		'pascal-case'
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with sentencecase subject should succeed for "never camelcase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.sentencecase,
+		'never',
+		'camel-case'
+	);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with sentencecase unicode subject should fail for "always camelcase"', async () => {
+	const [actual] = subjectCase(
+		await parsed.sentencecase_unicode,
+		'always',
+		'camel-case'
+	);
+	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
