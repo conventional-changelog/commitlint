@@ -4,12 +4,12 @@ import {TargetCaseType, SyncRule} from '@commitlint/types';
 
 /**
  * Since the rule requires first symbol of a subject to be a letter, use
- * combination of Unicode `Cased_Letter` and `Other_Letter` categories now to
- * allow non-Latin alphabets as well.
+ * Unicode `Cased_Letter` category now to allow non-Latin alphabets as well.
  *
  * Do not use `Letter` category directly to avoid capturing `Modifier_Letter`
- * (which just modifiers letters, so we probably shouldn't anyway) and to stay
- * close to previous implementation.
+ * (which just modifiers letters, so we probably shouldn't anyway) and
+ * `Other_Letter` (they actually are case-less, so they can't be validated)
+ * categories, and to stay close to previous implementation.
  *
  * Also, typescript does not seem to support almost any longhand category name
  * (and even short for `Cased_Letter` too) so list all required letter
@@ -17,7 +17,7 @@ import {TargetCaseType, SyncRule} from '@commitlint/types';
  *
  * @see [Unicode Categories]{@link https://www.regular-expressions.info/unicode.html}
  */
-const startsWithLetterRegex = /^[\p{Ll}\p{Lu}\p{Lt}\p{Lo}]/iu;
+const startsWithLetterRegex = /^[\p{Ll}\p{Lu}\p{Lt}]/iu;
 
 const negated = (when?: string) => when === 'never';
 
