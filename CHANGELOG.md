@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.1](https://github.com/conventional-changelog/commitlint/compare/v17.6.0...v17.6.1) (2023-04-14)
+
+
+### Bug Fixes
+
+* **rules:** avoid processing strings with case-less Letter category symbols in `subject-case` ([#3586](https://github.com/conventional-changelog/commitlint/issues/3586)) ([70a4450](https://github.com/conventional-changelog/commitlint/commit/70a44501ac8459f0c1d2b200608b024585964637)), closes [#3585](https://github.com/conventional-changelog/commitlint/issues/3585)
+
+
+
+
+
 # [17.6.0](https://github.com/conventional-changelog/commitlint/compare/v17.5.1...v17.6.0) (2023-04-13)
 
 
