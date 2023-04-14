@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.6.0](https://github.com/conventional-changelog/commitlint/compare/v17.5.1...v17.6.0) (2023-04-13)
+
+
+### Features
+
+* **rules:** expand Latin-only characters limitation for `subject-case` with Unicode support ([#3575](https://github.com/conventional-changelog/commitlint/issues/3575)) ([5f83423](https://github.com/conventional-changelog/commitlint/commit/5f8342355a856e5be7b8a7b851e1519d62678465))
+
+
+
+
+
 ## [17.5.1](https://github.com/conventional-changelog/commitlint/compare/v17.5.0...v17.5.1) (2023-03-28)
 
 **Note:** Version bump only for package @commitlint/root
