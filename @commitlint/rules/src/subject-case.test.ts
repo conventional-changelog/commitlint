@@ -7,6 +7,7 @@ const messages = {
 	lowercase: 'test: subject',
 	lowercase_unicode: 'test: тема', // Bulgarian for `subject`
 	mixedcase: 'test: sUbJeCt',
+	caseless: 'test: 这是一次提交', // Chinese for `this is a commit`
 	uppercase: 'test: SUBJECT',
 	uppercase_unicode: 'test: ÛNDERWERP', // Frisian for `SUBJECT`
 	camelcase: 'test: subJect',
@@ -29,6 +30,7 @@ const parsed = {
 	lowercase: parse(messages.lowercase),
 	lowercase_unicode: parse(messages.lowercase_unicode),
 	mixedcase: parse(messages.mixedcase),
+	caseless: parse(messages.caseless),
 	uppercase: parse(messages.uppercase),
 	uppercase_unicode: parse(messages.uppercase_unicode),
 	camelcase: parse(messages.camelcase),
@@ -112,6 +114,24 @@ test('with mixedcase subject should succeed for "never uppercase"', async () => 
 test('with mixedcase subject should fail for "always uppercase"', async () => {
 	const [actual] = subjectCase(await parsed.mixedcase, 'always', 'uppercase');
 	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with caseless subject should succeed for "never sentensecase"', async () => {
+	const [actual] = subjectCase(await parsed.caseless, 'never', 'sentense-case');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with caseless subject should succeed for "never uppercase"', async () => {
+	const [actual] = subjectCase(await parsed.caseless, 'never', 'upper-case');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with caseless subject should succeed for "always uppercase"', async () => {
+	const [actual] = subjectCase(await parsed.caseless, 'always', 'upper-case');
+	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
