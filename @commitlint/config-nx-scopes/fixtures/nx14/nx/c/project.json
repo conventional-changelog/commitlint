@@ -1,26 +1,26 @@
 {
-  "root": "nx/b",
-  "sourceRoot": "nx/b/src",
+  "root": "nx/c",
+  "sourceRoot": "nx/c/src",
   "projectType": "library",
   "targets": {
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nrwl/linter:eslint",
       "outputs": [
         "{options.outputFile}"
       ],
       "options": {
         "lintFilePatterns": [
-          "nx/b/**/*.ts"
+          "nx/c/**/*.ts"
         ]
       }
     },
     "test": {
-      "executor": "@nx/jest:jest",
+      "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/nx/b"
+        "coverage/nx/c"
       ],
       "options": {
-        "jestConfig": "nx/b/jest.config.js",
+        "jestConfig": "nx/c/jest.config.js",
         "passWithNoTests": true
       }
     }

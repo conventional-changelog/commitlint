@@ -58,3 +58,19 @@ test('returns expected value for basic nx repository', async () => {
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
 });
+
+test('expect correct result from Nx 14', async () => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = await npm.bootstrap('fixtures/nx14', __dirname);
+
+	const [, , value] = await fn({cwd});
+	expect(value).toEqual(['c', 'd']);
+});
+
+test('expect correct result from Nx 15', async () => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = await npm.bootstrap('fixtures/nx15', __dirname);
+
+	const [, , value] = await fn({cwd});
+	expect(value).toEqual(['e', 'f']);
+});

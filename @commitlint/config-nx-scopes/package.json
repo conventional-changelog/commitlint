@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-nx-scopes",
   "version": "17.4.3",
-  "description": "Shareable commitlint config enforcing nx project and workspace names as scopes",
+  "description": "Shareable commitlint config enforcing nx project names as scopes",
   "files": [
     "index.js"
   ],
@@ -27,7 +27,7 @@
   },
   "homepage": "https://commitlint.js.org/",
   "peerDependencies": {
-    "nx": "^14.0.0 || ^15.0.0"
+    "nx": "^14.0.0 || ^15.0.0 || ^16.0.0"
   },
   "peerDependenciesMeta": {
     "nx": {
@@ -39,8 +39,7 @@
   },
   "devDependencies": {
     "@commitlint/test": "^17.4.2",
-    "@commitlint/utils": "^17.4.0",
-    "nx": "^15.0.0"
+    "@commitlint/utils": "^17.4.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }
