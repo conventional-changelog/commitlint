@@ -1,7 +1,6 @@
 const glob = require('glob');
 const Path = require('path');
 const importFrom = require('import-from');
-const resolvePkg = require('resolve-pkg');
 const semver = require('semver');
 
 module.exports = {
@@ -54,5 +53,15 @@ function getPackages(context) {
 }
 
 function getLernaVersion(cwd) {
-	return require(Path.join(resolvePkg('lerna', {cwd}), 'package.json')).version;
+	const moduleEntrypoint = require.resolve('lerna', {
+		paths: [cwd],
+	});
+	const moduleDir = Path.join(
+		moduleEntrypoint.slice(0, moduleEntrypoint.lastIndexOf('node_modules')),
+		'node_modules',
+		'lerna'
+	);
+	const modulePackageJson = Path.join(moduleDir, 'package.json');
+
+	return require(modulePackageJson).version;
 }
