@@ -16,7 +16,7 @@ jobs:
           sudo apt install --yes curl
           curl --location https://deb.nodesource.com/setup_14.x | sudo --preserve-env bash -
           sudo DEBIAN_FRONTEND=noninteractive apt install --yes nodejs
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # workaround for https://github.com/actions/runner/issues/2033
       - name: ownership workaround
         run: git config --global --add safe.directory '*'
@@ -45,7 +45,7 @@ jobs:
           sudo apt install --yes curl
           curl --location https://deb.nodesource.com/setup_16.x | sudo --preserve-env bash -
           sudo DEBIAN_FRONTEND=noninteractive apt install --yes nodejs
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # workaround for https://github.com/actions/runner/issues/2033
       - name: ownership workaround
         run: git config --global --add safe.directory '*'
@@ -74,7 +74,7 @@ jobs:
           sudo apt install --yes curl
           curl --location https://deb.nodesource.com/setup_18.x | sudo --preserve-env bash -
           sudo DEBIAN_FRONTEND=noninteractive apt install --yes nodejs
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       # workaround for https://github.com/actions/runner/issues/2033
       - name: ownership workaround
         run: git config --global --add safe.directory '*'
@@ -93,7 +93,7 @@ jobs:
   windows:
     runs-on: windows-2022
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Update yarn
         run: |
           node --version
