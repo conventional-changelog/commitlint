@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.2](https://github.com/conventional-changelog/commitlint/compare/v17.6.1...v17.6.2) (2023-05-03)
+
+
+### Bug Fixes
+
+* lerna package.json resolution ([#3600](https://github.com/conventional-changelog/commitlint/issues/3600)) ([6c5cd53](https://github.com/conventional-changelog/commitlint/commit/6c5cd535679ac9448a127a57e309276e699cebb9))
+* update dependency cosmiconfig to v8.1.3 ([#3591](https://github.com/conventional-changelog/commitlint/issues/3591)) ([44b57a5](https://github.com/conventional-changelog/commitlint/commit/44b57a5022ede545a4d27146fd1a41110767c963))
+* update dependency fs-extra to v11.1.1 ([#3592](https://github.com/conventional-changelog/commitlint/issues/3592)) ([d6ec0d9](https://github.com/conventional-changelog/commitlint/commit/d6ec0d9295c66b51786e210e63dda2a5fa6b9d91))
+
+
+
+
+
 ## [17.6.1](https://github.com/conventional-changelog/commitlint/compare/v17.6.0...v17.6.1) (2023-04-14)
 
 

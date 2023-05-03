@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.2](https://github.com/conventional-changelog/commitlint/compare/v17.6.1...v17.6.2) (2023-05-03)
+
+
+### Bug Fixes
+
+* lerna package.json resolution ([#3600](https://github.com/conventional-changelog/commitlint/issues/3600)) ([6c5cd53](https://github.com/conventional-changelog/commitlint/commit/6c5cd535679ac9448a127a57e309276e699cebb9))
+
+
+
+
+
 ## [17.4.2](https://github.com/conventional-changelog/commitlint/compare/v17.4.1...v17.4.2) (2023-01-12)
 
 **Note:** Version bump only for package @commitlint/config-lerna-scopes

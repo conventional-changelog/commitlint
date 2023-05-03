@@ -1,6 +1,6 @@
 {
   "name": "commitlint-config-lerna-scopes",
-  "version": "17.4.2",
+  "version": "17.6.2",
   "description": "Shareable commitlint config enforcing lerna package names as scopes",
   "files": [
     "index.js"
@@ -30,7 +30,7 @@
     "node": ">=v14"
   },
   "dependencies": {
-    "@commitlint/config-lerna-scopes": "^17.4.2"
+    "@commitlint/config-lerna-scopes": "^17.6.2"
   },
   "devDependencies": {
     "@commitlint/utils": "^17.4.0"
