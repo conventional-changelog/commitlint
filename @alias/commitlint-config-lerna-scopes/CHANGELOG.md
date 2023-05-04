@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.3](https://github.com/conventional-changelog/commitlint/compare/v17.6.2...v17.6.3) (2023-05-04)
+
+**Note:** Version bump only for package commitlint-config-lerna-scopes
+
+
+
+
+
 ## [17.6.2](https://github.com/conventional-changelog/commitlint/compare/v17.6.1...v17.6.2) (2023-05-03)
 
 **Note:** Version bump only for package commitlint-config-lerna-scopes

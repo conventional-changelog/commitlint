@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/lint",
-  "version": "17.6.1",
+  "version": "17.6.3",
   "description": "Lint a string against commitlint rules",
   "main": "lib/lint.js",
   "types": "lib/lint.d.ts",
@@ -39,7 +39,7 @@
     "@commitlint/utils": "^17.4.0"
   },
   "dependencies": {
-    "@commitlint/is-ignored": "^17.4.4",
+    "@commitlint/is-ignored": "^17.6.3",
     "@commitlint/parse": "^17.4.4",
     "@commitlint/rules": "^17.6.1",
     "@commitlint/types": "^17.4.4"

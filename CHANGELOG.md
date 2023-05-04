@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.3](https://github.com/conventional-changelog/commitlint/compare/v17.6.2...v17.6.3) (2023-05-04)
+
+
+### Bug Fixes
+
+* **config-lerna-scopes:** add missing dependency ([#3607](https://github.com/conventional-changelog/commitlint/issues/3607)) ([2fff094](https://github.com/conventional-changelog/commitlint/commit/2fff0943899161b2159a4acddc9237c6ab60c7a5))
+* update dependency semver to v7.5.0 ([#3604](https://github.com/conventional-changelog/commitlint/issues/3604)) ([01e35e0](https://github.com/conventional-changelog/commitlint/commit/01e35e06cf9123a0c367e0d0ac79988ec4334e6a))
+* update dependency yargs to v17.7.2 ([#3602](https://github.com/conventional-changelog/commitlint/issues/3602)) ([c1c7338](https://github.com/conventional-changelog/commitlint/commit/c1c73380710908f6e095f045c78c50928d56acdd))
+
+
+
+
+
 ## [17.6.2](https://github.com/conventional-changelog/commitlint/compare/v17.6.1...v17.6.2) (2023-05-03)
 
 

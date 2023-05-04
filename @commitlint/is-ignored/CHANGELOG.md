@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.3](https://github.com/conventional-changelog/commitlint/compare/v17.6.2...v17.6.3) (2023-05-04)
+
+
+### Bug Fixes
+
+* update dependency semver to v7.5.0 ([#3604](https://github.com/conventional-changelog/commitlint/issues/3604)) ([01e35e0](https://github.com/conventional-changelog/commitlint/commit/01e35e06cf9123a0c367e0d0ac79988ec4334e6a))
+
+
+
+
+
 ## [17.4.4](https://github.com/conventional-changelog/commitlint/compare/v17.4.3...v17.4.4) (2023-02-17)
 
 **Note:** Version bump only for package @commitlint/is-ignored
