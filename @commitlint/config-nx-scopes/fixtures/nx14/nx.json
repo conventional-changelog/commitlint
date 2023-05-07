@@ -4,11 +4,11 @@
     "defaultBase": "main"
   },
   "cli": {
-    "defaultCollection": "@nx/react"
+    "defaultCollection": "@nrwl/react"
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx-cloud",
+      "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": [
           "build",
@@ -20,7 +20,7 @@
     }
   },
   "generators": {
-    "@nx/react": {
+    "@nrwl/react": {
       "application": {
         "style": "css",
         "linter": "eslint",
@@ -35,5 +35,5 @@
       }
     }
   },
-  "defaultProject": "a"
+  "defaultProject": "c"
 }

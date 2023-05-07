@@ -1495,13 +1495,6 @@
   dependencies:
     nx "15.4.8"
 
-"@nrwl/cli@15.5.0":
-  version "15.5.0"
-  resolved "https://registry.npmjs.org/@nrwl/cli/-/cli-15.5.0.tgz#c6aead1f0e6bb61264029766feb0452414a938bc"
-  integrity sha512-bHO0kn3pTARDCSDkNtRtGge2a08yWTW/Kjg1vBXqUUv5+Bwu7XndHi/Mfy87ZCxW78hedtQYSnNc84p5d7kYAg==
-  dependencies:
-    nx "15.5.0"
-
 "@nrwl/devkit@>=15.4.2 < 16":
   version "15.4.8"
   resolved "https://registry.npmjs.org/@nrwl/devkit/-/devkit-15.4.8.tgz#e812285059b1ce39acd8e3b705159db280b33982"
@@ -1519,13 +1512,6 @@
   integrity sha512-XajgVKDWHW4NcMxpBg7hC9nMkyujnmVNLZvBfURFPNY2wetFWz8xpyvflq3oLm+veGm7M/TbnPLOLuHI2223nA==
   dependencies:
     nx "15.4.8"
-
-"@nrwl/tao@15.5.0":
-  version "15.5.0"
-  resolved "https://registry.npmjs.org/@nrwl/tao/-/tao-15.5.0.tgz#efa930157ae0d53e3c262f027c9dcb74a9d01d07"
-  integrity sha512-50blIKmbjkd8JvUNkAe9nPYX1bTrPS1n5vUh5rLJAvShGSKfulORPmght5I6M8JhBtRgYOsqyqsB0s0LZll85A==
-  dependencies:
-    nx "15.5.0"
 
 "@octokit/auth-token@^3.0.0":
   version "3.0.2"
@@ -6698,47 +6684,6 @@ nx@15.4.8, "nx@>=15.4.2 < 16":
   dependencies:
     "@nrwl/cli" "15.4.8"
     "@nrwl/tao" "15.4.8"
-    "@parcel/watcher" "2.0.4"
-    "@yarnpkg/lockfile" "^1.1.0"
-    "@yarnpkg/parsers" "^3.0.0-rc.18"
-    "@zkochan/js-yaml" "0.0.6"
-    axios "^1.0.0"
-    chalk "4.1.0"
-    cli-cursor "3.1.0"
-    cli-spinners "2.6.1"
-    cliui "^7.0.2"
-    dotenv "~10.0.0"
-    enquirer "~2.3.6"
-    fast-glob "3.2.7"
-    figures "3.2.0"
-    flat "^5.0.2"
-    fs-extra "^11.1.0"
-    glob "7.1.4"
-    ignore "^5.0.4"
-    js-yaml "4.1.0"
-    jsonc-parser "3.2.0"
-    lines-and-columns "~2.0.3"
-    minimatch "3.0.5"
-    npm-run-path "^4.0.1"
-    open "^8.4.0"
-    semver "7.3.4"
-    string-width "^4.2.3"
-    strong-log-transformer "^2.1.0"
-    tar-stream "~2.2.0"
-    tmp "~0.2.1"
-    tsconfig-paths "^4.1.2"
-    tslib "^2.3.0"
-    v8-compile-cache "2.3.0"
-    yargs "^17.6.2"
-    yargs-parser "21.1.1"
-
-nx@15.5.0, nx@^15.0.0:
-  version "15.5.0"
-  resolved "https://registry.npmjs.org/nx/-/nx-15.5.0.tgz#6c5da686f78472d2b56177ea24219093bd788527"
-  integrity sha512-N6gp339SS6YaDClY1Vpxad9OsdGyVmkXWEUpUbdm+YZw1GVCAD7MQd5jy9xU/byccTlv32eZ0/tTAfvTf+HQzA==
-  dependencies:
-    "@nrwl/cli" "15.5.0"
-    "@nrwl/tao" "15.5.0"
     "@parcel/watcher" "2.0.4"
     "@yarnpkg/lockfile" "^1.1.0"
     "@yarnpkg/parsers" "^3.0.0-rc.18"
