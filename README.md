@@ -260,6 +260,9 @@ npm login
 nvm use (if you have nvm installed)
 ```
 
+- [nvm](https://github.com/nvm-sh/nvm)
+- [asdf](https://asdf-vm.com/) is supported as well
+
 ```sh
 yarn clean
 yarn install
