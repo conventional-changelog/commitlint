@@ -3,7 +3,7 @@ import {Commit, Parser, ParserOptions} from '@commitlint/types';
 const {sync} = require('conventional-commits-parser');
 const defaultChangelogOpts = require('conventional-changelog-angular');
 
-export default async function parse(
+export async function parse(
 	message: string,
 	parser: Parser = sync,
 	parserOpts?: ParserOptions
@@ -18,3 +18,5 @@ export default async function parse(
 	parsed.raw = message;
 	return parsed;
 }
+
+export default parse;
