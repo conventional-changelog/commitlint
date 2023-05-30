@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.5](https://github.com/conventional-changelog/commitlint/compare/v17.6.4...v17.6.5) (2023-05-30)
+
+**Note:** Version bump only for package @commitlint/prompt-cli
+
+
+
+
+
 ## [17.6.3](https://github.com/conventional-changelog/commitlint/compare/v17.6.2...v17.6.3) (2023-05-04)
 
 **Note:** Version bump only for package @commitlint/prompt-cli

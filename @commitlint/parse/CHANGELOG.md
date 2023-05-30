@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.6.5](https://github.com/conventional-changelog/commitlint/compare/v17.6.4...v17.6.5) (2023-05-30)
+
+
+### Bug Fixes
+
+* add named export to @commitlint/parse ([#3614](https://github.com/conventional-changelog/commitlint/issues/3614)) ([2cd236b](https://github.com/conventional-changelog/commitlint/commit/2cd236b3065c69303c56833d120eb04c6fefc2c3))
+
+
+
+
+
 ## [17.4.4](https://github.com/conventional-changelog/commitlint/compare/v17.4.3...v17.4.4) (2023-02-17)
 
 
