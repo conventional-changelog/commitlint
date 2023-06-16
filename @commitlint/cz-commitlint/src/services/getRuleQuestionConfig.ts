@@ -41,14 +41,15 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 			const longest = Math.max(
 				...enumRuleList.map((enumName) => enumName.length)
 			);
-			// TODO emoji + title
 			enumList = enumRuleList
 				.sort((a, b) => enumNames.indexOf(a) - enumNames.indexOf(b))
 				.map((enumName) => {
 					const enumDescription = enumDescriptions[enumName]?.description;
 					if (enumDescription) {
+						const emoji = enumDescriptions[enumName]?.emoji;
+						const prefix = emoji ? emoji + '  ' : '';
 						return {
-							name: `${enumName}:`.padEnd(longest + 4) + enumDescription,
+							name: `${prefix}${enumName}:`.padEnd(longest + 4) + enumDescription,
 							value: enumName,
 							short: enumName,
 						};
