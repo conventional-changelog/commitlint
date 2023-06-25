@@ -21,7 +21,7 @@ test('falls back to global install', async () => {
 	const ctx = {resolveGlobal, require} as ResolveExtendsContext;
 
 	resolveExtends({extends: ['@commitlint/foo-bar']}, ctx);
-	expect(ctx.resolveGlobal).toBeCalledWith('@commitlint/foo-bar');
+	expect(ctx.resolveGlobal).toHaveBeenCalledWith('@commitlint/foo-bar');
 });
 
 test('fails for missing extends', async () => {
