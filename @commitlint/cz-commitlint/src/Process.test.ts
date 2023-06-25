@@ -233,8 +233,10 @@ describe('conventional-changlog', () => {
 		};
 		return process(rules as any, prompts, InquirerFactory(answers) as any).then(
 			() => {
-				expect(mockShowValidation).toBeCalledWith('subject can not be empty');
-				expect(mockShowTitle).toBeCalledTimes(3);
+				expect(mockShowValidation).toHaveBeenCalledWith(
+					'subject can not be empty'
+				);
+				expect(mockShowTitle).toHaveBeenCalledTimes(3);
 			}
 		);
 	});
