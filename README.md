@@ -206,15 +206,15 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 Security patches will be applied to versions which are not yet EOL.\
 Features will only be applied to the current main version.
 
-| Release                                                                          | Inital release | End-of-life |
-| -------------------------------------------------------------------------------- | -------------- | ----------- |
-| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 16.05.2022     | 16.05.2023  |
-| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 26.12.2021     | 26.12.2022  |
-| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 17.11.2021     | 17.11.2022  |
-| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  |
-| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  |
-| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  |
-| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 13.09.2020     | 13.09.2020  |
+| Release                                                                          | Inital release | End-of-life | |
+| -------------------------------------------------------------------------------- | -------------- | ----------- |-----|
+| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 16.05.2022     | 16.05.2023  |(till next main version)|
+| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 26.12.2021     | 26.12.2022  ||
+| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 17.11.2021     | 17.11.2022  ||
+| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  ||
+| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  ||
+| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  ||
+| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 13.09.2020     | 13.09.2020  ||
 
 _Dates are subject to change._
 
