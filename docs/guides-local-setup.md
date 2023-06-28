@@ -75,7 +75,7 @@ No staged files match any of provided globs.
 husky > commit-msg hook failed (add --no-verify to bypass)
 ```
 
-Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there is not problem with your commit.\
+Since [v8.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v8.0.0) `commitlint` won't output anything if there are no problems with your commit.\
 (You can use the `--verbose` flag to get positive output)
 
 ```bash
