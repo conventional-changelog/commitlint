@@ -112,6 +112,13 @@ yarn husky install
 npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
 
+**Or use installed package instead** 
+```
+npm pkg set scripts.commitlint="commitlint --edit"
+npx husky add .husky/commit-msg 'npm run commitlint ${1}'
+```
+
+
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
 **Detailed Setup instructions**
