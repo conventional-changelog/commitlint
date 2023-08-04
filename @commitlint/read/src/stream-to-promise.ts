@@ -6,6 +6,6 @@ export function streamToPromise(stream: Readable): Promise<string[]> {
 		stream
 			.on('data', (chunk) => data.push(chunk.toString('utf-8')))
 			.on('error', reject)
-			.on('end', () => resolve(data))
+			.on('end', () => resolve(data)),
 	);
 }

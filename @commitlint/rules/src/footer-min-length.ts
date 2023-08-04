@@ -4,7 +4,7 @@ import {SyncRule} from '@commitlint/types';
 export const footerMinLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
-	value = 0
+	value = 0,
 ) => {
 	if (!parsed.footer) {
 		return [true];

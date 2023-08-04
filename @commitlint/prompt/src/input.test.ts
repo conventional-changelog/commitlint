@@ -10,7 +10,7 @@ jest.mock(
 	},
 	{
 		virtual: true,
-	}
+	},
 );
 
 test('should work with all fields filled', async () => {
@@ -56,7 +56,7 @@ test('should fail without type', async () => {
 	expect(message).toEqual('');
 	expect(console.error).toHaveBeenCalledTimes(1);
 	expect(console.error).toHaveBeenLastCalledWith(
-		new Error(`⚠ ${chalk.bold('type')} may not be empty.`)
+		new Error(`⚠ ${chalk.bold('type')} may not be empty.`),
 	);
 	spy.mockRestore();
 });

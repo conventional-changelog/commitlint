@@ -27,7 +27,7 @@ test('returns empty summary if verbose', () => {
 		},
 		{
 			verbose: true,
-		}
+		},
 	);
 
 	expect(actual).toContain('0 problems, 0 warnings');
@@ -117,7 +117,7 @@ test('uses signs as configured', () => {
 				},
 			],
 		},
-		options
+		options,
 	);
 
 	const actualWarning = format(
@@ -134,7 +134,7 @@ test('uses signs as configured', () => {
 				},
 			],
 		},
-		options
+		options,
 	);
 
 	expect(actualError).toContain('ERR');
@@ -196,11 +196,11 @@ test('format result prints help for errors', () => {
 		},
 		{
 			helpUrl: 'https://example.com',
-		}
+		},
 	);
 
 	expect(actual).toEqual(
-		expect.arrayContaining([expect.stringContaining('Get help:')])
+		expect.arrayContaining([expect.stringContaining('Get help:')]),
 	);
 });
 
@@ -217,11 +217,11 @@ test('format result prints help for warnings', () => {
 		},
 		{
 			helpUrl: 'https://example.com',
-		}
+		},
 	);
 
 	expect(actual).toEqual(
-		expect.arrayContaining([expect.stringContaining('Get help:')])
+		expect.arrayContaining([expect.stringContaining('Get help:')]),
 	);
 });
 
@@ -240,11 +240,11 @@ test('format result help cotains options.helpUrl', () => {
 		},
 		{
 			helpUrl,
-		}
+		},
 	);
 
 	expect(actual).toEqual(
-		expect.arrayContaining([expect.stringContaining(helpUrl)])
+		expect.arrayContaining([expect.stringContaining(helpUrl)]),
 	);
 });
 
@@ -254,7 +254,7 @@ test('format result omits help for empty problems', () => {
 	});
 
 	expect(actual).not.toEqual(
-		expect.arrayContaining([expect.stringContaining('Get help:')])
+		expect.arrayContaining([expect.stringContaining('Get help:')]),
 	);
 });
 
@@ -271,10 +271,10 @@ test('format result should not contain `Get help` prefix if helpUrl is not provi
 		},
 		{
 			helpUrl: '',
-		}
+		},
 	);
 
 	expect(actual).not.toEqual(
-		expect.arrayContaining([expect.stringContaining('Get help:')])
+		expect.arrayContaining([expect.stringContaining('Get help:')]),
 	);
 });

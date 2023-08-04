@@ -215,9 +215,9 @@ describe('conventional-changlog', () => {
 		return process(rules as any, prompts, InquirerFactory(answers) as any).then(
 			(commitMessage) => {
 				expect(commitMessage).toBe(
-					'refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94'
+					'refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94',
 				);
-			}
+			},
 		);
 	});
 
@@ -234,10 +234,10 @@ describe('conventional-changlog', () => {
 		return process(rules as any, prompts, InquirerFactory(answers) as any).then(
 			() => {
 				expect(mockShowValidation).toHaveBeenCalledWith(
-					'subject can not be empty'
+					'subject can not be empty',
 				);
 				expect(mockShowTitle).toHaveBeenCalledTimes(3);
-			}
+			},
 		);
 	});
 });

@@ -10,7 +10,7 @@ export interface LoadConfigResult {
 
 export async function loadConfig(
 	cwd: string,
-	configPath?: string
+	configPath?: string,
 ): Promise<LoadConfigResult | null> {
 	const moduleName = 'commitlint';
 	const tsLoader = TypeScriptLoader();

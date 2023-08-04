@@ -7,7 +7,7 @@ import {PluginRecords} from '@commitlint/types';
 export default function loadPlugin(
 	plugins: PluginRecords,
 	pluginName: string,
-	debug: boolean = false
+	debug: boolean = false,
 ): PluginRecords {
 	const longName = normalizePackageName(pluginName);
 	const shortName = getShorthandName(longName);
@@ -61,8 +61,8 @@ export default function loadPlugin(
 
 			console.log(
 				chalk.blue(
-					`Loaded plugin ${pluginName} (${loadedPluginAndVersion}) (from ${resolvedPath})`
-				)
+					`Loaded plugin ${pluginName} (${loadedPluginAndVersion}) (from ${resolvedPath})`,
+				),
 			);
 		}
 
