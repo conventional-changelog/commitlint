@@ -104,7 +104,7 @@ format(
   },
   {
     color: false,
-  }
+  },
 );
 /* => [
   '✖   This will show up red as it has level 2 [some-error]',
@@ -258,12 +258,12 @@ load({extends: ['./package']}).then((config) => console.log(config));
 // => { extends: ['./package', './package-b'], rules: {} }
 
 load({parserPreset: './parser-preset.js'}).then((config) =>
-  console.log(config)
+  console.log(config),
 );
 // => { extends: [], rules: {}, parserPreset: {name: './parser-preset.js', path: './parser-preset.js', opts: {}}}
 
 load({}, {file: '.commitlintrc.yml', cwd: process.cwd()}).then((config) =>
-  console.log(config)
+  console.log(config),
 );
 // => { extends: [], rules: { 'body-leading-blank': [ 1, 'always' ] }, formatter: '@commitlint/format', plugins: {} }
 ```
@@ -305,7 +305,7 @@ read({edit: true}).then((messages) => console.log(messages));
 // => ['I did something\n\n']
 
 read({edit: './git/GITGUI_EDITMESSAGE'}).then((messages) =>
-  console.log(messages)
+  console.log(messages),
 );
 // => ['I did something via git gui\n\n']
 
@@ -369,12 +369,12 @@ lint('foo: bar').then((report) => console.log(report));
 // => { valid: true, errors: [], warnings: [] }
 
 lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then((report) =>
-  console.log(report)
+  console.log(report),
 );
 // => { valid: true, errors: [], warnings: [] }
 
 lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then((report) =>
-  console.log(report)
+  console.log(report),
 );
 /* =>
     { valid: true,
@@ -394,7 +394,7 @@ const opts = {
 };
 
 lint('foo-bar', {'type-enum': [2, 'always', ['foo']]}, opts).then((report) =>
-  console.log(report)
+  console.log(report),
 );
 // => { valid: true, errors: [], warnings: [] }
 ```
@@ -414,8 +414,8 @@ load(CONFIG)
     lint(
       'foo: bar',
       opts.rules,
-      opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {}
-    )
+      opts.parserPreset ? {parserOpts: opts.parserPreset.parserOpts} : {},
+    ),
   )
   .then((report) => console.log(report));
 /* =>
@@ -442,7 +442,7 @@ const RULES = {
 const check = (commit) => lint(commit, RULES);
 
 read({to: 'HEAD', from: 'HEAD~2'}).then((commits) =>
-  Promise.all(commits.map(check))
+  Promise.all(commits.map(check)),
 );
 ```
 
@@ -459,7 +459,7 @@ Promise.all([load(), read({from: 'HEAD~1'})])
     return lint(
       commit,
       rules,
-      parserPreset ? {parserOpts: parserPreset.parserOpts} : {}
+      parserPreset ? {parserOpts: parserPreset.parserOpts} : {},
     );
   })
   .then((report) => console.log(JSON.stringify(result.valid)));

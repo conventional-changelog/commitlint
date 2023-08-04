@@ -48,7 +48,7 @@ test('negative on ignored message, disabled ignored messages and broken rule', a
 		},
 		{
 			defaultIgnores: false,
-		}
+		},
 	);
 	expect(actual.valid).toBe(false);
 });
@@ -62,7 +62,7 @@ test('positive on custom ignored message and broken rule', async () => {
 		},
 		{
 			ignores: [(c) => c === ignoredMessage],
-		}
+		},
 	);
 	expect(actual.valid).toBe(true);
 	expect(actual.input).toBe(ignoredMessage);
@@ -79,7 +79,7 @@ test('positive on stub message and opts', async () => {
 			parserOpts: {
 				headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
 			},
-		}
+		},
 	);
 	expect(actual.valid).toBe(true);
 });
@@ -134,7 +134,7 @@ test('throws for rule with out of range level', async () => {
 
 	await expect(error).rejects.toThrow('rule type-enum must be between 0 and 2');
 	await expect(error).rejects.toThrow(
-		'rule header-max-length must be between 0 and 2'
+		'rule header-max-length must be between 0 and 2',
 	);
 });
 
@@ -156,7 +156,7 @@ test('throws for rule with out of range condition', async () => {
 
 	await expect(error).rejects.toThrow('type-enum must be "always" or "never"');
 	await expect(error).rejects.toThrow(
-		'header-max-length must be "always" or "never"'
+		'header-max-length must be "always" or "never"',
 	);
 });
 
@@ -186,7 +186,7 @@ test('succeds for custom issue prefix', async () => {
 			parserOpts: {
 				issuePrefixes: ['REF-'],
 			},
-		}
+		},
 	);
 
 	expect(report.valid).toBe(true);
@@ -202,7 +202,7 @@ test('fails for custom issue prefix', async () => {
 			parserOpts: {
 				issuePrefixes: ['REF-'],
 			},
-		}
+		},
 	);
 
 	expect(report.valid).toBe(false);
@@ -222,7 +222,7 @@ test('fails for custom plugin rule', async () => {
 					},
 				},
 			},
-		}
+		},
 	);
 
 	expect(report.valid).toBe(false);
@@ -242,7 +242,7 @@ test('passes for custom plugin rule', async () => {
 					},
 				},
 			},
-		}
+		},
 	);
 
 	expect(report.valid).toBe(true);
@@ -281,7 +281,7 @@ test('returns original message with commit header, body and footer, parsing comm
 			parserOpts: {
 				commentChar: '#',
 			},
-		}
+		},
 	);
 
 	expect(report.input).toBe(expected);
@@ -301,7 +301,7 @@ test('passes for async rule', async () => {
 					},
 				},
 			},
-		}
+		},
 	);
 
 	expect(report.valid).toBe(true);

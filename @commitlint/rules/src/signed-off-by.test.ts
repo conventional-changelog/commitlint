@@ -55,7 +55,7 @@ test('without against "always signed-off-by" should fail', async () => {
 	const [actual] = signedOffBy(
 		await parsed.without,
 		'always',
-		'Signed-off-by:'
+		'Signed-off-by:',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -71,7 +71,7 @@ test('trailing comments should be ignored', async () => {
 	const [actual] = signedOffBy(
 		await parsed.withSignoffAndComments,
 		'always',
-		'Signed-off-by:'
+		'Signed-off-by:',
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -81,7 +81,7 @@ test('inSubject against "always signed-off-by" should fail', async () => {
 	const [actual] = signedOffBy(
 		await parsed.inSubject,
 		'always',
-		'Signed-off-by:'
+		'Signed-off-by:',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -91,7 +91,7 @@ test('inSubject against "never signed-off-by" should succeed', async () => {
 	const [actual] = signedOffBy(
 		await parsed.inSubject,
 		'never',
-		'Signed-off-by:'
+		'Signed-off-by:',
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);

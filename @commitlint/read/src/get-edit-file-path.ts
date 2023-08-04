@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 // Get path to recently edited commit message file
 export async function getEditFilePath(
 	top: string,
-	edit?: boolean | string
+	edit?: boolean | string,
 ): Promise<string> {
 	if (typeof edit === 'string') {
 		return path.resolve(top, edit);

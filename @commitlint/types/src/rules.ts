@@ -17,7 +17,7 @@ export type RuleType = 'async' | 'sync' | 'either';
 export type BaseRule<Value = never, Type extends RuleType = 'either'> = (
 	parsed: Commit,
 	when?: RuleConfigCondition,
-	value?: Value
+	value?: Value,
 ) => Type extends 'either'
 	? RuleOutcome | Promise<RuleOutcome>
 	: Type extends 'async'
@@ -70,7 +70,7 @@ export type QualifiedRuleConfig<T> =
 
 export type RuleConfig<
 	V = RuleConfigQuality.Qualified,
-	T = void
+	T = void,
 > = V extends RuleConfigQuality.Qualified
 	? RuleConfigTuple<T>
 	: QualifiedRuleConfig<T>;

@@ -7,7 +7,7 @@ const negated = (when?: string) => when === 'never';
 export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 	parsed,
 	when = 'always',
-	value = []
+	value = [],
 ) => {
 	const {scope} = parsed;
 
@@ -32,7 +32,7 @@ export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 
 	const result = checks.some((check) => {
 		const r = scopeSegments.every(
-			(segment) => delimiters.test(segment) || ensureCase(segment, check.case)
+			(segment) => delimiters.test(segment) || ensureCase(segment, check.case),
 		);
 
 		return negated(check.when) ? !r : r;

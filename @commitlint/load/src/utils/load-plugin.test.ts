@@ -17,7 +17,7 @@ jest.mock(
 		};
 		return {rules: {rule}};
 	},
-	{virtual: true}
+	{virtual: true},
 );
 
 jest.mock(
@@ -28,7 +28,7 @@ jest.mock(
 		};
 		return {rules: {syncRule}};
 	},
-	{virtual: true}
+	{virtual: true},
 );
 
 jest.mock(
@@ -39,7 +39,7 @@ jest.mock(
 		};
 		return {rules: {asyncRule}};
 	},
-	{virtual: true}
+	{virtual: true},
 );
 
 test('should load a plugin when referenced by short name', () => {
@@ -69,36 +69,36 @@ test('should load a plugin with an async rule', () => {
 
 test('should throw an error when a plugin has whitespace', () => {
 	expect(() => loadPlugin({}, 'whitespace ')).toThrow(
-		"Whitespace found in plugin name 'whitespace '"
+		"Whitespace found in plugin name 'whitespace '",
 	);
 	expect(() => loadPlugin({}, 'whitespace\t')).toThrow(
-		'Whitespace found in plugin name'
+		'Whitespace found in plugin name',
 	);
 	expect(() => loadPlugin({}, 'whitespace\n')).toThrow(
-		'Whitespace found in plugin name'
+		'Whitespace found in plugin name',
 	);
 	expect(() => loadPlugin({}, 'whitespace\r')).toThrow(
-		'Whitespace found in plugin name'
+		'Whitespace found in plugin name',
 	);
 });
 
 test("should throw an error when a plugin doesn't exist", () => {
 	expect(() => loadPlugin({}, 'nonexistentplugin')).toThrow(
-		'Failed to load plugin'
+		'Failed to load plugin',
 	);
 });
 
 test('should load a scoped plugin when referenced by short name', () => {
 	const plugins = loadPlugin({}, '@scope/example');
 	expect(plugins['@scope/example']).toBe(
-		require('@scope/commitlint-plugin-example')
+		require('@scope/commitlint-plugin-example'),
 	);
 });
 
 test('should load a scoped plugin when referenced by long name', () => {
 	const plugins = loadPlugin({}, '@scope/commitlint-plugin-example');
 	expect(plugins['@scope/example']).toBe(
-		require('@scope/commitlint-plugin-example')
+		require('@scope/commitlint-plugin-example'),
 	);
 });
 

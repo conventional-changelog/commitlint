@@ -12,7 +12,7 @@ const DEFAULT_COLORS = ['white', 'yellow', 'red'] as const;
 
 export function format(
 	report: FormattableReport = {},
-	options: FormatOptions = {}
+	options: FormatOptions = {},
 ): string {
 	const {results = []} = report;
 	const fi = (result: FormattableResult & WithInput) =>
@@ -24,14 +24,14 @@ export function format(
 		.map((result) => [...fi(result), ...fr(result)])
 		.reduce(
 			(acc, item) => (Array.isArray(item) ? [...acc, ...item] : [...acc, item]),
-			[]
+			[],
 		)
 		.join('\n');
 }
 
 function formatInput(
 	result: FormattableResult & WithInput,
-	options: FormatOptions = {}
+	options: FormatOptions = {},
 ): string[] {
 	const {color: enabled = true} = options;
 	const {errors = [], warnings = [], input = ''} = result;
@@ -54,7 +54,7 @@ function formatInput(
 
 export function formatResult(
 	result: FormattableResult = {},
-	options: FormatOptions = {}
+	options: FormatOptions = {},
 ): string[] {
 	const {
 		signs = DEFAULT_SIGNS,

@@ -13,7 +13,7 @@ export async function clone(
 	source: string,
 	args: string[],
 	directory?: string,
-	gitCommand = 'git'
+	gitCommand = 'git',
 ) {
 	const cwd = await fix.bootstrap(undefined, directory);
 

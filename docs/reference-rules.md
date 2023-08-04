@@ -106,15 +106,15 @@ Infinity
 
 ```js
 [
-  'lower-case',    // default
-  'upper-case',    // UPPERCASE
-  'camel-case',    // camelCase
-  'kebab-case',    // kebab-case
-  'pascal-case',   // PascalCase
+  'lower-case', // default
+  'upper-case', // UPPERCASE
+  'camel-case', // camelCase
+  'kebab-case', // kebab-case
+  'pascal-case', // PascalCase
   'sentence-case', // Sentence case
-  'snake-case',    // snake_case
-  'start-case'     // Start Case
-]
+  'snake-case', // snake_case
+  'start-case', // Start Case
+];
 ```
 
 #### footer-leading-blank
@@ -171,15 +171,15 @@ Infinity
 
 ```js
 [
-  'lower-case',    // default
-  'upper-case',    // UPPERCASE
-  'camel-case',    // camelCase
-  'kebab-case',    // kebab-case
-  'pascal-case',   // PascalCase
+  'lower-case', // default
+  'upper-case', // UPPERCASE
+  'camel-case', // camelCase
+  'kebab-case', // kebab-case
+  'pascal-case', // PascalCase
   'sentence-case', // Sentence case
-  'snake-case',    // snake_case
-  'start-case'     // Start Case
-]
+  'snake-case', // snake_case
+  'start-case', // Start Case
+];
 ```
 
 #### header-full-stop
@@ -240,15 +240,15 @@ Infinity
 
 ```js
 [
-  'lower-case',    // default
-  'upper-case',    // UPPERCASE
-  'camel-case',    // camelCase
-  'kebab-case',    // kebab-case
-  'pascal-case',   // PascalCase
+  'lower-case', // default
+  'upper-case', // UPPERCASE
+  'camel-case', // camelCase
+  'kebab-case', // kebab-case
+  'pascal-case', // PascalCase
   'sentence-case', // Sentence case
-  'snake-case',    // snake_case
-  'start-case'     // Start Case
-]
+  'snake-case', // snake_case
+  'start-case', // Start Case
+];
 ```
 
 #### scope-empty
@@ -283,7 +283,7 @@ Infinity
 - **value**
 
 ```js
-['sentence-case', 'start-case', 'pascal-case', 'upper-case']
+['sentence-case', 'start-case', 'pascal-case', 'upper-case'];
 ```
 
 - **possible values**
@@ -347,7 +347,7 @@ Infinity
 - **rule**: `always`
 - **value**
   ```js
-  ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert']
+  ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert'];
   ```
 
 #### type-case
@@ -362,14 +362,14 @@ Infinity
 
 ```js
 [
-  'lower-case',    // default
-  'upper-case',    // UPPERCASE
-  'camel-case',    // camelCase
-  'kebab-case',    // kebab-case
-  'pascal-case',   // PascalCase
+  'lower-case', // default
+  'upper-case', // UPPERCASE
+  'camel-case', // camelCase
+  'kebab-case', // kebab-case
+  'pascal-case', // PascalCase
   'sentence-case', // Sentence case
-  'snake-case',    // snake_case
-  'start-case'     // Start Case
+  'snake-case', // snake_case
+  'start-case', // Start Case
 ];
 ```
 

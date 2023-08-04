@@ -9,7 +9,7 @@ import type {TargetCaseType} from '@commitlint/types';
  * @return transform function applying the enforced case
  */
 export default function getForcedCaseFn(
-	rule?: RuleEntry
+	rule?: RuleEntry,
 ): (input: string) => string {
 	const noop = (input: string) => input;
 

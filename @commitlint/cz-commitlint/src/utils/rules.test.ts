@@ -16,7 +16,7 @@ test('ruleIsDisabled', () => {
 	expect(ruleIsDisabled([RuleConfigSeverity.Disabled, 'always'])).toBe(true);
 	expect(ruleIsDisabled([RuleConfigSeverity.Error] as any)).toBe(false);
 	expect(ruleIsDisabled([RuleConfigSeverity.Error, 'always'] as any)).toBe(
-		false
+		false,
 	);
 });
 
@@ -41,14 +41,14 @@ test('ruleIsNotApplicable', () => {
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, 'never'])).toBe(true);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Warning, 'never'])).toBe(true);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Disabled, 'never'])).toBe(
-		true
+		true,
 	);
 	expect(ruleIsNotApplicable(undefined as any)).toBe(false);
 	expect(ruleIsNotApplicable('' as any)).toBe(false);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error] as any)).toBe(false);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, 'always'])).toBe(false);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, 'always', 100])).toBe(
-		false
+		false,
 	);
 });
 

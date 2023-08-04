@@ -29,7 +29,7 @@ export function combineCommitMessage(answers: Answers): string {
 						trim: true,
 						indent: '',
 				  })
-				: commitBody.trim()
+				: commitBody.trim(),
 		);
 	} else {
 		return '';

@@ -19,7 +19,7 @@ describe('getRule', () => {
 
 		expect(getRule('body', 'max-length')).toBe(rules['body-max-length']);
 		expect(getRule('footer', 'max-line-length')).toBe(
-			rules['footer-max-line-length']
+			rules['footer-max-line-length'],
 		);
 		expect(getRule('subject', 'empty')).toBe(rules['subject-empty']);
 	});
