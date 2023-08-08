@@ -36,28 +36,25 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/test": "^17.4.2",
-    "@commitlint/utils": "^17.4.0",
     "@types/lodash.isplainobject": "^4.0.7",
     "@types/lodash.merge": "^4.6.7",
     "@types/lodash.uniq": "^4.5.7",
+    "@types/node": "^20.4.8",
     "conventional-changelog-atom": "^3.0.0",
-    "execa": "^5.0.0"
+    "typescript": "^5.1.6"
   },
   "dependencies": {
     "@commitlint/config-validator": "^17.6.7",
     "@commitlint/execute-rule": "^17.4.0",
     "@commitlint/resolve-extends": "^17.6.7",
     "@commitlint/types": "^17.4.4",
-    "@types/node": "20.4.7",
     "chalk": "^4.1.0",
     "cosmiconfig": "^8.0.0",
-    "cosmiconfig-typescript-loader": "^4.0.0",
+    "cosmiconfig-typescript-loader": "^5.0.0",
     "lodash.isplainobject": "^4.0.6",
     "lodash.merge": "^4.6.2",
     "lodash.uniq": "^4.5.0",
-    "resolve-from": "^5.0.0",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.6.4 || ^5.0.0"
+    "resolve-from": "^5.0.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }
