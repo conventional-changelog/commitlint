@@ -136,7 +136,7 @@ echo "fix: some message" # passes
 
 - **condition**: `footer` should have a leading blank line
 - **rule**: `always`
-- level: `warning`
+- **level**: `warning`
 
 ```sh
 echo "fix: some message
@@ -151,7 +151,7 @@ BREAKING CHANGE: It will be significant" # passes
 
 - **condition**: `footer` each line has `value` or less characters
 - **rule**: `always`
-- level: `error`
+- **level**: `error`
 - **value**
 
 ```
@@ -174,7 +174,7 @@ but still no line is too long" # passes
 
 - **condition**: `body` should have a leading blank line
 - **rule**: `always`
-- level: `warning`
+- **level**: `warning`
 
 ```sh
 echo "fix: some message
@@ -189,7 +189,7 @@ body" # passes
 
 - **condition**: `body` each line has `value` or less characters
 - **rule**: `always`
-- level: `error`
+- **level**: `error`
 - **value**
 
 ```
