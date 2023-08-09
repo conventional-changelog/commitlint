@@ -290,7 +290,7 @@ Infinity
 
 ```js
 [
-  'lower-case',    // default
+  'lower-case',    // lower case
   'upper-case',    // UPPERCASE
   'camel-case',    // camelCase
   'kebab-case',    // kebab-case
