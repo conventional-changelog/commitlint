@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.7.0](https://github.com/conventional-changelog/commitlint/compare/v17.6.7...v17.7.0) (2023-08-09)
+
+
+### Features
+
+* **load:** use cosmiconfig-typescript-loader v5 to remove ts-node dependency for @commitlint/load ([#3633](https://github.com/conventional-changelog/commitlint/issues/3633)) ([4aa46d7](https://github.com/conventional-changelog/commitlint/commit/4aa46d796ad74958f5569d3346b60a1f92c33892))
+
+
+### Reverts
+
+* eslint-config-prettier to v8 ([f279ff7](https://github.com/conventional-changelog/commitlint/commit/f279ff787bd908372813a04b756629467506f51e))
+* prettier to v2 to not break lerna v6 publish ([cd854cb](https://github.com/conventional-changelog/commitlint/commit/cd854cb73d93396c166bdfef442bc92b1833cc72))
+
+
+
+
+
 ## [17.6.7](https://github.com/conventional-changelog/commitlint/compare/v17.6.6...v17.6.7) (2023-07-19)
 
 **Note:** Version bump only for package @commitlint/root
