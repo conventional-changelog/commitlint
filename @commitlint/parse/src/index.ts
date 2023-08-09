@@ -6,7 +6,7 @@ const defaultChangelogOpts = require('conventional-changelog-angular');
 export async function parse(
 	message: string,
 	parser: Parser = sync,
-	parserOpts?: ParserOptions,
+	parserOpts?: ParserOptions
 ): Promise<Commit> {
 	const defaultOpts = (await defaultChangelogOpts).parserOpts;
 	const opts = {

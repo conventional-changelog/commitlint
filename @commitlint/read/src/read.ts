@@ -13,7 +13,7 @@ interface GetCommitMessageOptions {
 
 // Get commit messages
 export default async function getCommitMessages(
-	settings: GetCommitMessageOptions,
+	settings: GetCommitMessageOptions
 ): Promise<string[]> {
 	const {cwd, from, to, edit, gitLogArgs} = settings;
 

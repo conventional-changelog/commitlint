@@ -165,7 +165,7 @@ test('with double blank line before footer and double line in body should succee
 test('with body containing comments should succeed for "always"', async () => {
 	const [actual] = footerLeadingBlank(
 		await parsed.withBodyWithComment,
-		'always',
+		'always'
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);

@@ -120,14 +120,14 @@ const cli = yargs
 	.version(
 		'version',
 		'display version information',
-		`${pkg.name}@${pkg.version}`,
+		`${pkg.name}@${pkg.version}`
 	)
 	.alias('v', 'version')
 	.help('help')
 	.alias('h', 'help')
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
 	.usage(
-		`[input] reads from stdin if --edit, --env, --from and --to are omitted`,
+		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
 	)
 	.strict();
 
@@ -204,7 +204,7 @@ async function main(args: MainArgs): Promise<void> {
 	if (messages.length === 0 && !checkFromRepository(flags)) {
 		const err = new CliError(
 			'[input] is required: supply via stdin, or --env or --edit or --from and --to',
-			pkg.name,
+			pkg.name
 		);
 		yargs.showHelp('log');
 		console.log(err.message);
@@ -249,7 +249,7 @@ async function main(args: MainArgs): Promise<void> {
 			if (!execaError.failed || execaError.exitCode !== 1) {
 				console.warn(
 					'Could not determine core.commentChar git configuration',
-					e,
+					e
 				);
 			}
 			opts.parserOpts.commentChar = gitDefaultCommentChar;
@@ -257,7 +257,7 @@ async function main(args: MainArgs): Promise<void> {
 	}
 
 	const results = await Promise.all(
-		messages.map((message) => lint(message, loaded.rules, opts)),
+		messages.map((message) => lint(message, loaded.rules, opts))
 	);
 
 	if (Object.keys(loaded.rules).length === 0) {
@@ -305,7 +305,7 @@ async function main(args: MainArgs): Promise<void> {
 			errorCount: 0,
 			warningCount: 0,
 			results: [],
-		},
+		}
 	);
 
 	const helpUrl = flags['help-url']?.trim() || loaded.helpUrl;
@@ -361,7 +361,7 @@ function getEditValue(flags: CliFlags) {
 	if (flags.env) {
 		if (!(flags.env in process.env)) {
 			throw new Error(
-				`Received '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`,
+				`Received '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
 			);
 		}
 		return process.env[flags.env];
@@ -395,7 +395,7 @@ function getEditValue(flags: CliFlags) {
 			return process.env.HUSKY_GIT_PARAMS;
 		}
 		throw new Error(
-			`Received ${edit} as value for -e | --edit, but GIT_PARAMS or HUSKY_GIT_PARAMS are not available globally.`,
+			`Received ${edit} as value for -e | --edit, but GIT_PARAMS or HUSKY_GIT_PARAMS are not available globally.`
 		);
 	}
 	return edit;
@@ -403,7 +403,7 @@ function getEditValue(flags: CliFlags) {
 
 function getSeed(flags: CliFlags): UserConfig {
 	const n = (flags.extends || []).filter(
-		(i): i is string => typeof i === 'string',
+		(i): i is string => typeof i === 'string'
 	);
 	return n.length > 0
 		? {extends: n, parserPreset: flags['parser-preset']}

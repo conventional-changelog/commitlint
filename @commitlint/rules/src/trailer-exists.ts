@@ -6,7 +6,7 @@ import {SyncRule} from '@commitlint/types';
 export const trailerExists: SyncRule<string> = (
 	parsed,
 	when = 'always',
-	value = '',
+	value = ''
 ) => {
 	const trailers = execa.sync('git', ['interpret-trailers', '--parse'], {
 		input: parsed.raw,

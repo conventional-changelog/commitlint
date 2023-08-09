@@ -4,7 +4,7 @@ import {SyncRule} from '@commitlint/types';
 export const subjectFullStop: SyncRule<string> = (
 	parsed,
 	when = 'always',
-	value = '.',
+	value = '.'
 ) => {
 	const colonIndex = parsed.header.indexOf(':');
 	if (colonIndex > 0 && colonIndex === parsed.header.length - 1) {

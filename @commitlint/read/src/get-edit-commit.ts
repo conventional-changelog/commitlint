@@ -5,7 +5,7 @@ import {getEditFilePath} from './get-edit-file-path';
 // Get recently edited commit message
 export async function getEditCommit(
 	cwd?: string,
-	edit?: boolean | string,
+	edit?: boolean | string
 ): Promise<string[]> {
 	const top = await toplevel(cwd);
 

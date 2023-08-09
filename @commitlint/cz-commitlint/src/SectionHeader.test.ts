@@ -51,7 +51,7 @@ describe('getQuestionConfig', () => {
 		expect(config).toEqual(
 			expect.objectContaining({
 				multipleValueDelimiters: /\/|\\|,/g,
-			}),
+			})
 		);
 	});
 
@@ -66,7 +66,7 @@ describe('getQuestionConfig', () => {
 		expect(config).toEqual(
 			expect.objectContaining({
 				multipleSelectDefaultDelimiter: '/',
-			}),
+			})
 		);
 	});
 
@@ -148,7 +148,7 @@ describe('HeaderQuestion', () => {
 		const lastQuestion = questions[2];
 		(lastQuestion.message as any)(answers);
 		expect(lastQuestion?.validate?.(''.padEnd(10, 'z'), answers)).toBe(
-			'subject: subject over limit 6',
+			'subject: subject over limit 6'
 		);
 	});
 });

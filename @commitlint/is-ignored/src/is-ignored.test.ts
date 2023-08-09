@@ -30,7 +30,7 @@ const AMENDED_VERSION_MESSAGES = VERSION_MESSAGES.reduce<string[]>(
 			...AMENDMENTS.map((amendment) => `${message}\n\n${amendment}`),
 		];
 	},
-	[],
+	[]
 );
 
 test('should return false when called without arguments', () => {
@@ -66,7 +66,7 @@ test('should return true for merged PRs', () => {
 test('should return true for branch merges with newline characters and more characters after it', () => {
 	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\n ")).toBe(true);
 	expect(isIgnored("Merge branch 'ctrom-YarnBuild'\r\n # some comment")).toBe(
-		true,
+		true
 	);
 });
 
@@ -93,13 +93,13 @@ test('should return true for tag merges with newline characters and more charact
 test('should return true for revert commits', () => {
 	expect(
 		isIgnored(
-			`Revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`,
-		),
+			`Revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
 	).toBe(true);
 	expect(
 		isIgnored(
-			`revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`,
-		),
+			`revert "docs: add recipe for linting of all commits in a PR (#36)"\n\nThis reverts commit 1e69d542c16c2a32acfd139e32efa07a45f19111.`
+		)
 	).toBe(true);
 });
 
@@ -109,16 +109,16 @@ test('should ignore npm semver commits', () => {
 
 test('should ignore npm semver commits with chore', () => {
 	VERSION_MESSAGES.forEach((message) =>
-		expect(isIgnored(`chore: ${message}`)).toBe(true),
+		expect(isIgnored(`chore: ${message}`)).toBe(true)
 	);
 	VERSION_MESSAGES.forEach((message) =>
-		expect(isIgnored(`chore(release): ${message}`)).toBe(true),
+		expect(isIgnored(`chore(release): ${message}`)).toBe(true)
 	);
 });
 
 test('should ignore npm semver commits with footers', () => {
 	AMENDED_VERSION_MESSAGES.forEach((message) =>
-		expect(isIgnored(message)).toBe(true),
+		expect(isIgnored(message)).toBe(true)
 	);
 });
 
@@ -132,10 +132,10 @@ test('should return true squash commits', () => {
 
 test('should return true for bitbucket merge commits', () => {
 	expect(
-		isIgnored('Merged in feature/facebook-friends-sync (pull request #8)'),
+		isIgnored('Merged in feature/facebook-friends-sync (pull request #8)')
 	).toBe(true);
 	expect(
-		isIgnored('Merged develop into feature/component-form-select-card'),
+		isIgnored('Merged develop into feature/component-form-select-card')
 	).toBe(true);
 	expect(isIgnored('Automatic merge')).toBe(true);
 });
@@ -161,7 +161,7 @@ test('should return false for ignored message if defaults is false', () => {
 	expect(
 		isIgnored('Auto-merged develop into master', {
 			defaults: false,
-		}),
+		})
 	).toBe(false);
 });
 
@@ -169,7 +169,7 @@ test('should return false for ignored message if custom ignores and defaults is 
 	expect(
 		isIgnored('Auto-merged develop into master', {
 			defaults: false,
-		}),
+		})
 	).toBe(false);
 });
 
@@ -187,7 +187,7 @@ test('should return true for custom ignores as function', () => {
 	expect(
 		isIgnored(ignoredString, {
 			ignores: [(c) => c === ignoredString],
-		}),
+		})
 	).toBe(true);
 });
 

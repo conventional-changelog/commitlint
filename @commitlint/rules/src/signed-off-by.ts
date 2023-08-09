@@ -5,14 +5,14 @@ import {SyncRule} from '@commitlint/types';
 export const signedOffBy: SyncRule<string> = (
 	parsed,
 	when = 'always',
-	value = '',
+	value = ''
 ) => {
 	const lines = toLines(parsed.raw).filter(
 		(ln) =>
 			// skip comments
 			!ln.startsWith('#') &&
 			// ignore empty lines
-			Boolean(ln),
+			Boolean(ln)
 	);
 
 	const last = lines[lines.length - 1];

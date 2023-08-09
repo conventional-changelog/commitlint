@@ -7,7 +7,7 @@ import {ruleIsActive, ruleIsNotApplicable} from './utils';
  * @return transform function applying the leading
  */
 export default function getForcedLeadingFn(
-	rule?: RuleEntry,
+	rule?: RuleEntry
 ): (input: string) => string {
 	if (!rule || !ruleIsActive(rule)) {
 		return (input: string): string => input;

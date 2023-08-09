@@ -32,12 +32,12 @@ export function formatErrors(errors: ErrorObject[]): string {
 					: error.instancePath) || 'Config';
 			if (error.keyword === 'typeof') {
 				return `"${field}" should be a ${error.schema}. Value: ${JSON.stringify(
-					error.data,
+					error.data
 				)}`;
 			}
 
 			return `"${field}" ${error.message}. Value: ${JSON.stringify(
-				error.data,
+				error.data
 			)}`;
 		})
 		.map((message) => `\t- ${message}.\n`)

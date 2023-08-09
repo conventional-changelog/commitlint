@@ -29,7 +29,7 @@ export interface CommitReference {
 
 export type Parser = (
 	message: string,
-	options: ParserOptions,
+	options: ParserOptions
 ) => Omit<Commit, 'raw'>;
 
 export interface ParserOptions {

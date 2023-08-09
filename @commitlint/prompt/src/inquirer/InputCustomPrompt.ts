@@ -16,7 +16,7 @@ interface KeyDescriptor {
 }
 
 export default class InputCustomPrompt<
-	TQuestion extends InputCustomOptions = InputCustomOptions,
+	TQuestion extends InputCustomOptions = InputCustomOptions
 > extends InputPrompt<TQuestion> {
 	private lineSubscription: Subscription;
 	private readonly tabCompletion: string[];
@@ -24,7 +24,7 @@ export default class InputCustomPrompt<
 	constructor(
 		question: TQuestion,
 		readLine: ReadlineInterface,
-		answers: Answers,
+		answers: Answers
 	) {
 		super(question, readLine, answers);
 
@@ -38,7 +38,7 @@ export default class InputCustomPrompt<
 
 		const events = observe(this.rl);
 		this.lineSubscription = events.keypress.subscribe(
-			this.onKeyPress2.bind(this),
+			this.onKeyPress2.bind(this)
 		);
 		this.tabCompletion = (this.opt.tabCompletion || [])
 			.map((item) => item.value)

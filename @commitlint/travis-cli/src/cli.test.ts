@@ -29,7 +29,7 @@ const cli = async (config: execa.Options = {}, args: string[] = []) => {
 			throw new Error([err.stdout, err.stderr].join('\n'));
 		} else {
 			throw new Error(
-				`An unknown error occured while running '${bin} ${args.join(' ')}'`,
+				`An unknown error occured while running '${bin} ${args.join(' ')}'`
 			);
 		}
 	}
@@ -42,7 +42,7 @@ test('should throw when not on travis ci', async () => {
 	};
 
 	await expect(cli({env})).rejects.toThrow(
-		'@commitlint/travis-cli is intended to be used on Travis CI',
+		'@commitlint/travis-cli is intended to be used on Travis CI'
 	);
 });
 
@@ -53,7 +53,7 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 	};
 
 	await expect(cli({env})).rejects.toThrow(
-		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG',
+		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG'
 	);
 });
 
@@ -62,7 +62,7 @@ test('should call git with expected args', async () => {
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
 		__dirname,
-		TRAVIS_COMMITLINT_GIT_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN
 	);
 
 	const result = await cli({
@@ -84,7 +84,7 @@ test('should call git with expected args on pull_request', async () => {
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
 		__dirname,
-		TRAVIS_COMMITLINT_GIT_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN
 	);
 
 	const result = await cli({
@@ -112,7 +112,7 @@ test('should call git with extra expected args on pull_request', async () => {
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
 		__dirname,
-		TRAVIS_COMMITLINT_GIT_BIN,
+		TRAVIS_COMMITLINT_GIT_BIN
 	);
 
 	const result = await cli(
@@ -120,7 +120,7 @@ test('should call git with extra expected args on pull_request', async () => {
 			cwd,
 			env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'},
 		},
-		['--config', './config/commitlint.config.js'],
+		['--config', './config/commitlint.config.js']
 	);
 	const invocations = await getInvocations(result.stdout);
 	expect(invocations.length).toBe(3);
@@ -151,6 +151,6 @@ function getInvocations(stdout: string): string[][] {
 				.split(',')
 				.map((fragment) => fragment.trim())
 				.map((fragment) => fragment.substring(1, fragment.length - 1))
-				.filter(Boolean),
+				.filter(Boolean)
 		);
 }

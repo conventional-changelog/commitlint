@@ -4,7 +4,7 @@ import {SyncRule} from '@commitlint/types';
 export const headerFullStop: SyncRule<string> = (
 	parsed,
 	when = 'always',
-	value = '.',
+	value = '.'
 ) => {
 	const {header} = parsed;
 	const negated = when === 'never';

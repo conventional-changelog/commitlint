@@ -4,7 +4,7 @@ import {SyncRule} from '@commitlint/types';
 export const bodyFullStop: SyncRule<string> = (
 	parsed,
 	when = 'always',
-	value = '.',
+	value = '.'
 ) => {
 	const input = parsed.body;
 

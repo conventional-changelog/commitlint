@@ -2,7 +2,7 @@ import {RuleConfigSeverity} from '@commitlint/types';
 import {Rule} from '../types';
 
 export function ruleIsDisabled(
-	rule: Rule,
+	rule: Rule
 ): rule is Readonly<[RuleConfigSeverity.Disabled]> {
 	if (rule && Array.isArray(rule) && rule[0] === RuleConfigSeverity.Disabled) {
 		return true;
@@ -16,7 +16,7 @@ export function ruleIsDisabled(
  * @return if the rule definition is active
  */
 export function ruleIsActive<T extends Rule>(
-	rule: T,
+	rule: T
 ): rule is Exclude<T, Readonly<[RuleConfigSeverity.Disabled]>> {
 	if (rule && Array.isArray(rule)) {
 		return rule[0] > RuleConfigSeverity.Disabled;
@@ -30,7 +30,7 @@ export function ruleIsActive<T extends Rule>(
  * @return if the rule definition is applicable
  */
 export function ruleIsApplicable(
-	rule: Rule,
+	rule: Rule
 ): rule is
 	| Readonly<[RuleConfigSeverity, 'always']>
 	| Readonly<[RuleConfigSeverity, 'always', unknown]> {
@@ -46,7 +46,7 @@ export function ruleIsApplicable(
  * @return if the rule definition is applicable
  */
 export function ruleIsNotApplicable(
-	rule: Rule,
+	rule: Rule
 ): rule is
 	| Readonly<[RuleConfigSeverity, 'never']>
 	| Readonly<[RuleConfigSeverity, 'never', unknown]> {
@@ -57,7 +57,7 @@ export function ruleIsNotApplicable(
 }
 
 export function enumRuleIsActive(
-	rule: Rule,
+	rule: Rule
 ): rule is Readonly<
 	[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, 'always', string[]]
 > {

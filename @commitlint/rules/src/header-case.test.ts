@@ -227,7 +227,7 @@ test('should use expected message with "always"', async () => {
 	const [, message] = headerCase(
 		await parsed.uppercase,
 		'always',
-		'lower-case',
+		'lower-case'
 	);
 	expect(message).toContain('must be lower-case');
 });

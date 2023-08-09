@@ -19,7 +19,7 @@ import loadPlugin from './utils/load-plugin';
 
 export default async function load(
 	seed: UserConfig = {},
-	options: LoadOptions = {},
+	options: LoadOptions = {}
 ): Promise<QualifiedConfig> {
 	const cwd = typeof options.cwd === 'undefined' ? process.cwd() : options.cwd;
 	const loaded = await loadConfig(cwd, options.file);
@@ -38,7 +38,7 @@ export default async function load(
 			rules: {},
 		},
 		config,
-		seed,
+		seed
 	);
 
 	// Resolve parserPreset key
@@ -76,7 +76,7 @@ export default async function load(
 
 	const rules = (
 		await Promise.all(
-			Object.entries(extended.rules || {}).map((entry) => executeRule(entry)),
+			Object.entries(extended.rules || {}).map((entry) => executeRule(entry))
 		)
 	).reduce<QualifiedRules>((registry, item) => {
 		// type of `item` can be null, but Object.entries always returns key pair

@@ -53,10 +53,10 @@ describe('setPromptConfig', () => {
 		setPromptConfig(promptConfig);
 
 		expect(getPromptMessages()['emptyWarning']).toBe(
-			promptConfig.messages.emptyWarning,
+			promptConfig.messages.emptyWarning
 		);
 		expect(getPromptMessages()['lowerLimitWarning']).toBe(
-			initialMessages['lowerLimitWarning'],
+			initialMessages['lowerLimitWarning']
 		);
 	});
 
@@ -73,7 +73,7 @@ describe('setPromptConfig', () => {
 		setPromptConfig(promptConfig as any);
 
 		expect(getPromptMessages()['emptyWarning']).toBe(
-			promptConfig.messages.emptyWarning,
+			promptConfig.messages.emptyWarning
 		);
 		expect(getPromptMessages()['min']).toBe(initialMessages['min']);
 	});

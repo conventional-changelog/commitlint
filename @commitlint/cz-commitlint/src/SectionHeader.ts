@@ -11,7 +11,7 @@ export class HeaderQuestion extends Question {
 		name: PromptName,
 		questionConfig: QuestionConfig,
 		headerMaxLength?: number,
-		headerMinLength?: number,
+		headerMinLength?: number
 	) {
 		super(name, questionConfig);
 		this.headerMaxLength = headerMaxLength ?? Infinity;
@@ -54,7 +54,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 				name,
 				questionConfig,
 				headerRuleQuestionConfig.maxLength,
-				headerRuleQuestionConfig.minLength,
+				headerRuleQuestionConfig.minLength
 			);
 			questions.push(instance.question);
 		}
@@ -63,7 +63,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 }
 
 export function getQuestionConfig(
-	name: RuleField,
+	name: RuleField
 ): ReturnType<typeof getRuleQuestionConfig> {
 	const questionConfig = getRuleQuestionConfig(name);
 

@@ -57,7 +57,7 @@ test('commit message title with standard scope and full-stop against "never ." s
 	const [actual] = subjectFullStop(
 		await parsed.standardScopeWith,
 		'never',
-		'.',
+		'.'
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -67,7 +67,7 @@ test('commit message title with non standard scope and full-stop against "never 
 	const [actual] = subjectFullStop(
 		await parsed.nonStandardScopeWith,
 		'never',
-		'.',
+		'.'
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);

@@ -97,7 +97,7 @@ async function stash() {
 function validate() {
 	if (process.env.CI !== 'true' || process.env.TRAVIS !== 'true') {
 		throw new Error(
-			`@commitlint/travis-cli is intended to be used on Travis CI`,
+			`@commitlint/travis-cli is intended to be used on Travis CI`
 		);
 	}
 
@@ -106,7 +106,7 @@ function validate() {
 	if (missing.length > 0) {
 		const stanza = missing.length > 1 ? 'they were not' : 'it was not';
 		throw new Error(
-			`Expected ${missing.join(', ')} to be defined globally, ${stanza}.`,
+			`Expected ${missing.join(', ')} to be defined globally, ${stanza}.`
 		);
 	}
 }

@@ -26,7 +26,7 @@ test('falls back to global install', async () => {
 
 test('fails for missing extends', async () => {
 	expect(() => resolveExtends({extends: ['@commitlint/foo-bar']})).toThrow(
-		/Cannot find module "@commitlint\/foo-bar" from/,
+		/Cannot find module "@commitlint\/foo-bar" from/
 	);
 });
 

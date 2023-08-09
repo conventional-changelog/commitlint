@@ -44,29 +44,29 @@ test('getRuleName', () => {
 
 test('ruleIsActive', () => {
 	expect(ruleIsActive(['', [RuleConfigSeverity.Error, 'always', 100]])).toBe(
-		true,
+		true
 	);
 	expect(ruleIsActive(['', [RuleConfigSeverity.Warning, 'never', 100]])).toBe(
-		true,
+		true
 	);
 	expect(ruleIsActive(['', [RuleConfigSeverity.Disabled, 'always', 100]])).toBe(
-		false,
+		false
 	);
 	expect(ruleIsActive(['', [RuleConfigSeverity.Error]] as any)).toBe(true);
 });
 
 test('getMaxLength', () => {
 	expect(getMaxLength(['', [RuleConfigSeverity.Error, 'always', 100]])).toBe(
-		100,
+		100
 	);
 	expect(getMaxLength(['', [RuleConfigSeverity.Warning, 'never', 100]])).toBe(
-		Infinity,
+		Infinity
 	);
 	expect(getMaxLength(['', [RuleConfigSeverity.Disabled, 'always', 100]])).toBe(
-		Infinity,
+		Infinity
 	);
 	expect(getMaxLength(['', [RuleConfigSeverity.Error, 100]] as any)).toBe(
-		Infinity,
+		Infinity
 	);
 
 	const rules: any = {

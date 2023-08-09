@@ -17,7 +17,7 @@ test('rules export functions', () => {
 test('all rules are present in documentation', () => {
 	const file = fs.readFileSync(
 		path.join(__dirname, '../../../docs/reference-rules.md'),
-		'utf-8',
+		'utf-8'
 	);
 	const results = file
 		.split(/(\n|\r)/)

@@ -28,7 +28,7 @@ const EOL = '\n';
 export default function getPrompt(
 	type: ResultPart,
 	rules: RuleEntry[] = [],
-	settings: InputSetting = {},
+	settings: InputSetting = {}
 ): InputCustomOptions<Result> | null {
 	const emptyRule = rules.filter(getHasName('empty')).find(ruleIsActive);
 
@@ -42,7 +42,7 @@ export default function getPrompt(
 
 	const forceCaseFn = getForcedCaseFn(rules.find(getHasName('case')));
 	const forceLeadingBlankFn = getForcedLeadingFn(
-		rules.find(getHasName('leading-blank')),
+		rules.find(getHasName('leading-blank'))
 	);
 
 	const maxLengthRule = rules.find(getHasName('max-length'));

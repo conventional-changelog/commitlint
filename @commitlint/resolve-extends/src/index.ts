@@ -19,7 +19,7 @@ export interface ResolveExtendsContext {
 
 export default function resolveExtends(
 	config: UserConfig = {},
-	context: ResolveExtendsContext = {},
+	context: ResolveExtendsContext = {}
 ): UserConfig {
 	const {extends: e} = config;
 	const extended = loadExtends(config, context);
@@ -35,13 +35,13 @@ export default function resolveExtends(
 					return srcValue;
 				}
 			}),
-		e ? {extends: e} : {},
+		e ? {extends: e} : {}
 	);
 }
 
 function loadExtends(
 	config: UserConfig = {},
-	context: ResolveExtendsContext = {},
+	context: ResolveExtendsContext = {}
 ): UserConfig[] {
 	const {extends: e} = config;
 	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
@@ -93,7 +93,7 @@ function getId(raw: string = '', prefix: string = ''): string {
 
 function resolveConfig(
 	raw: string,
-	context: ResolveExtendsContext = {},
+	context: ResolveExtendsContext = {}
 ): string {
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
@@ -104,7 +104,7 @@ function resolveConfig(
 		const legacy = getId(raw, 'conventional-changelog-lint-config');
 		const resolved = resolve(legacy, context);
 		console.warn(
-			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`,
+			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
 		);
 		return resolved;
 	}
@@ -112,7 +112,7 @@ function resolveConfig(
 
 function resolveId(
 	id: string,
-	context: {cwd?: string; resolveGlobal?: (id: string) => string | void} = {},
+	context: {cwd?: string; resolveGlobal?: (id: string) => string | void} = {}
 ): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(cwd, id);

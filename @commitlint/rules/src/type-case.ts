@@ -7,7 +7,7 @@ const negated = (when?: string) => when === 'never';
 export const typeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 	parsed,
 	when = 'always',
-	value = [],
+	value = []
 ) => {
 	const {type} = parsed;
 

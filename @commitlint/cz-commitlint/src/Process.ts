@@ -18,7 +18,7 @@ import {setRules} from './store/rules';
 export default async function (
 	rules: QualifiedRules,
 	prompts: UserPromptConfig,
-	inquirer: Inquirer,
+	inquirer: Inquirer
 ): Promise<string> {
 	setRules(rules);
 	setPromptConfig(prompts);

@@ -38,14 +38,14 @@ export function normalizePackageName(name: string) {
 		 */
 		const scopedPackageShortcutRegex = new RegExp(
 				`^(@[^/]+)(?:/(?:${prefix})?)?$`,
-				'u',
+				'u'
 			),
 			scopedPackageNameRegex = new RegExp(`^${prefix}(-|$)`, 'u');
 
 		if (scopedPackageShortcutRegex.test(normalizedName)) {
 			normalizedName = normalizedName.replace(
 				scopedPackageShortcutRegex,
-				`$1/${prefix}`,
+				`$1/${prefix}`
 			);
 		} else if (!scopedPackageNameRegex.test(normalizedName.split('/')[1])) {
 			/**
@@ -54,7 +54,7 @@ export function normalizePackageName(name: string) {
 			 */
 			normalizedName = normalizedName.replace(
 				/^@([^/]+)\/(.*)$/u,
-				`@$1/${prefix}-$2`,
+				`@$1/${prefix}-$2`
 			);
 		}
 	} else if (normalizedName.indexOf(`${prefix}-`) !== 0) {

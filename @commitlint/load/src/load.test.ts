@@ -97,7 +97,7 @@ test('plugins should be loaded from local', async () => {
 					test: expect.any(Function),
 				},
 			},
-		}),
+		})
 	);
 });
 
@@ -133,7 +133,7 @@ test('local plugins should be loaded from shareable configs', async () => {
 					'is-positive': expect.any(Function),
 				},
 			},
-		}),
+		})
 	);
 });
 
@@ -141,7 +141,7 @@ test('uses seed with parserPreset', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset');
 	const {parserPreset: actual} = await load(
 		{parserPreset: './conventional-changelog-custom'},
-		{cwd},
+		{cwd}
 	);
 
 	expect(actual).toBeDefined();
@@ -426,11 +426,11 @@ test('resolves parser preset from conventional commits', async () => {
 
 	expect(actual.parserPreset).toBeDefined();
 	expect(actual.parserPreset!.name).toBe(
-		'conventional-changelog-conventionalcommits',
+		'conventional-changelog-conventionalcommits'
 	);
 	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
 	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
-		/^(\w*)(?:\((.*)\))?!?: (.*)$/,
+		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });
 
@@ -442,16 +442,16 @@ test('resolves parser preset from conventional angular', async () => {
 	expect(actual.parserPreset!.name).toBe('conventional-changelog-angular');
 	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
 	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
-		/^(\w*)(?:\((.*)\))?: (.*)$/,
+		/^(\w*)(?:\((.*)\))?: (.*)$/
 	);
 });
 
 test('recursive resolves parser preset from conventional atom', async () => {
 	const cwd = await gitBootstrap(
-		'fixtures/recursive-parser-preset-conventional-atom',
+		'fixtures/recursive-parser-preset-conventional-atom'
 	);
 	await npm.installModules(
-		path.resolve(cwd, 'first-extended', 'second-extended'),
+		path.resolve(cwd, 'first-extended', 'second-extended')
 	);
 
 	const actual = await load({}, {cwd});
@@ -460,23 +460,23 @@ test('recursive resolves parser preset from conventional atom', async () => {
 	expect(actual.parserPreset!.name).toBe('conventional-changelog-atom');
 	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
 	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
-		/^(:.*?:) (.*)$/,
+		/^(:.*?:) (.*)$/
 	);
 });
 
 test('resolves parser preset from conventional commits without factory support', async () => {
 	const cwd = await npmBootstrap(
-		'fixtures/parser-preset-conventional-without-factory',
+		'fixtures/parser-preset-conventional-without-factory'
 	);
 	const actual = await load({}, {cwd});
 
 	expect(actual.parserPreset).toBeDefined();
 	expect(actual.parserPreset!.name).toBe(
-		'conventional-changelog-conventionalcommits',
+		'conventional-changelog-conventionalcommits'
 	);
 	expect(typeof actual.parserPreset!.parserOpts).toBe('object');
 	expect((actual.parserPreset!.parserOpts as any).headerPattern).toEqual(
-		/^(\w*)(?:\((.*)\))?!?: (.*)$/,
+		/^(\w*)(?:\((.*)\))?!?: (.*)$/
 	);
 });
 
@@ -485,7 +485,7 @@ test('helpUrl should be loaded from the shareable config', async () => {
 	const actual = await load({}, {cwd});
 
 	expect(actual.helpUrl).toStrictEqual(
-		'https://github.com/conventional-changelog/commitlint',
+		'https://github.com/conventional-changelog/commitlint'
 	);
 });
 
@@ -494,6 +494,6 @@ test('default helpUrl should be loaded if not provided in shareable configs', as
 	const actual = await load({}, {cwd});
 
 	expect(actual.helpUrl).toStrictEqual(
-		'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+		'https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	);
 });
