@@ -36,7 +36,7 @@ echo "your commit message here" | commitlint # fails/passes
 
 ## Checklist:
 
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
+<!--- Go over all the following points, and put an `x` in all the boxes that apply. See the README for information on testing. -->
 <!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
 
 - [ ] My change requires a change to the documentation.

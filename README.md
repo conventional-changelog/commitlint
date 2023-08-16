@@ -31,6 +31,7 @@
 - [License](#license)
 - [Development](#development)
   - [Install and run](#install-and-run)
+  - [Testing](#testing)
   - [Publishing a release](#publishing-a-release)
 
 ---
@@ -253,6 +254,17 @@ yarn start # run tests, again on change
 ```
 
 For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).
+
+### Testing
+
+From the project root directory, use the following commands to run the test suite
+
+```sh
+yarn clean
+yarn install
+yarn build
+yarn test
+```
 
 ### Package dependency overview
 
