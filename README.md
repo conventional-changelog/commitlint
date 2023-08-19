@@ -10,7 +10,7 @@
 >
 > `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
 
-[![npm latest][2]][3] [![CircleCI][4]][5] <!-- [![TravisCI][6]][7] -->
+[![npm latest][2]][3] [![Github Actions][4]][5]
 
 - 🚓 Be a good `commitizen`
 - 📦 Share configuration via `npm`
@@ -113,12 +113,12 @@ yarn husky install
 npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
 
-**Or use installed package instead** 
+**Or use installed package instead**
+
 ```
 npm pkg set scripts.commitlint="commitlint --edit"
 npx husky add .husky/commit-msg 'npm run commitlint ${1}'
 ```
-
 
 Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
 
@@ -214,15 +214,15 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 Security patches will be applied to versions which are not yet EOL.\
 Features will only be applied to the current main version.
 
-| Release                                                                          | Inital release | End-of-life | |
-| -------------------------------------------------------------------------------- | -------------- | ----------- |-----|
-| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 16.05.2022     | 16.05.2023  |(till next main version)|
-| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 26.12.2021     | 26.12.2022  ||
-| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 17.11.2021     | 17.11.2022  ||
-| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  ||
-| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  ||
-| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  ||
-| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 13.09.2020     | 13.09.2020  ||
+| Release                                                                          | Inital release | End-of-life |                          |
+| -------------------------------------------------------------------------------- | -------------- | ----------- | ------------------------ |
+| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 16.05.2022     | 16.05.2023  | (till next main version) |
+| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 26.12.2021     | 26.12.2022  |                          |
+| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 17.11.2021     | 17.11.2022  |                          |
+| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  |                          |
+| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 24.05.2021     | 24.05.2022  |                          |
+| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 23.02.2021     | 23.02.2022  |                          |
+| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 13.09.2020     | 13.09.2020  |                          |
 
 _Dates are subject to change._
 
@@ -349,12 +349,8 @@ npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dis
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
 [3]: https://npmjs.org/package/@commitlint/cli
-[4]: https://img.shields.io/circleci/project/github/conventional-changelog/commitlint/master.svg?style=flat-square
-[5]: https://circleci.com/gh/conventional-changelog/commitlint
-
-<!-- [6]: https://img.shields.io/appveyor/ci/conventional-changelog/commitlint/master.svg?style=flat-square
-[7]: https://ci.appveyor.com/project/conventional-changelog/commitlint -->
-
+[4]: https://github.com/conventional-changelog/commitlint/actions/workflows/CI.yml/badge.svg
+[5]: https://github.com/conventional-changelog/commitlint/actions/workflows/CI.yml
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square

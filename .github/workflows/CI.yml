@@ -1,6 +1,11 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
   v14:
@@ -123,6 +128,8 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v3
+        with:
+          max_attempts: 3
       - name: Update yarn
         run: |
           node --version
