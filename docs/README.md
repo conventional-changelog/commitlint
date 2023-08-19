@@ -8,7 +8,7 @@
 
 # commitlint &nbsp; [![slack][11]][12]
 
-[![npm latest][2]][3] [![Github Acrions][4]]
+[![npm latest][2]][3] [![Github Actions][4]][5]
 
 `commitlint` helps your team adhere to a commit convention. By supporting npm-installed configurations it makes sharing of commit conventions easy.
 
@@ -62,6 +62,7 @@ commitlint --from=HEAD~1
 [2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
 [3]: https://npmjs.org/package/@commitlint/cli
 [4]: https://github.com/conventional-changelog/commitlint/actions/workflows/CI.yml/badge.svg
+[5]: https://github.com/conventional-changelog/commitlint/actions/workflows/CI.yml
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square

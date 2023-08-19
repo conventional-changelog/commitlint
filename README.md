@@ -10,7 +10,7 @@
 >
 > `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
 
-[![npm latest][2]][3] [![Github Acrions][4]]
+[![npm latest][2]][3] [![Github Actions][4]][5]
 
 - 🚓 Be a good `commitizen`
 - 📦 Share configuration via `npm`
@@ -350,6 +350,7 @@ npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dis
 [2]: https://img.shields.io/npm/v/@commitlint/cli.svg?style=flat-square
 [3]: https://npmjs.org/package/@commitlint/cli
 [4]: https://github.com/conventional-changelog/commitlint/actions/workflows/CI.yml/badge.svg
+[5]: https://github.com/conventional-changelog/commitlint/actions/workflows/CI.yml
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square
