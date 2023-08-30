@@ -347,7 +347,7 @@ Infinity
 - **rule**: `always`
 - **value**
   ```js
-  ['feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert'];
+  ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'];
   ```
 
 #### type-case
