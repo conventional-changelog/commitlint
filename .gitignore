@@ -1,4 +1,4 @@
-.idea/
+.idea
 .DS_Store
 *.log
 node_modules
@@ -7,11 +7,11 @@ package-lock.json
 .nyc_output
 .dockerignore
 .*.dockerfile
-lib/
+lib
 package.json.lerna_backup
 /*.iml
 tsconfig.tsbuildinfo
 coverage
 
-# For testing nested workspaces does not have the package's dependencies name in the scope
-!**/config-lerna-scopes/fixtures/nested-workspaces/**/node_modules
+For testing nested workspaces does not have the package's dependencies name in the scope
+config-lerna-scopes/fixtures/nested-workspaces/**/node_modules
