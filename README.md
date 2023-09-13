@@ -206,7 +206,7 @@ is room and need for improvement. The items on the roadmap should enhance `commi
 
 ## Version Support and Releases
 
-- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 14`
+- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 18`
 - git `>= 2.13.2`
 
 ### Releases
@@ -216,7 +216,8 @@ Features will only be applied to the current main version.
 
 | Release                                                                          | Inital release | End-of-life |                          |
 | -------------------------------------------------------------------------------- | -------------- | ----------- | ------------------------ |
-| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 16.05.2022     | 16.05.2023  | (till next main version) |
+| [v18](https://github.com/conventional-changelog/commitlint/releases/tag/v18.0.0) | 99.99.2023     | 99.99.2024  | (till next main version) |
+| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 16.05.2022     | 16.05.2023  |
 | [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 26.12.2021     | 26.12.2022  |                          |
 | [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 17.11.2021     | 17.11.2022  |                          |
 | [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 26.10.2021     | 26.10.2022  |                          |
