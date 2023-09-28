@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.7.2](https://github.com/conventional-changelog/commitlint/compare/v17.7.1...v17.7.2) (2023-09-28)
+
+**Note:** Version bump only for package @commitlint/travis-cli
+
+
+
+
+
 ## [17.7.1](https://github.com/conventional-changelog/commitlint/compare/v17.7.0...v17.7.1) (2023-08-10)
 
 **Note:** Version bump only for package @commitlint/travis-cli

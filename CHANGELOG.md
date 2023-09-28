@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.7.2](https://github.com/conventional-changelog/commitlint/compare/v17.7.1...v17.7.2) (2023-09-28)
+
+
+### Bug Fixes
+
+* update dependency @types/node to v20.5.1 ([#3653](https://github.com/conventional-changelog/commitlint/issues/3653)) ([cd8b775](https://github.com/conventional-changelog/commitlint/commit/cd8b7750d3a15fbfd96e20196d53df064df6e138))
+
+
+
+
+
 ## [17.7.1](https://github.com/conventional-changelog/commitlint/compare/v17.7.0...v17.7.1) (2023-08-10)
 
 
