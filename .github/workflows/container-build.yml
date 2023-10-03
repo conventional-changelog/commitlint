@@ -3,9 +3,6 @@ on:
   push:
     tags:
       - '**'
-    branches:
-      - '**'
-      - '!master'
   schedule:
     - cron: '0 0 * * *'
 jobs:
