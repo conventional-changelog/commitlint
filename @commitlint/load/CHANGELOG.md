@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.8.0](https://github.com/conventional-changelog/commitlint/compare/v17.7.2...v17.8.0) (2023-10-14)
+
+
+### Features
+
+* lazy load cosmiconfig-typescript-loader ([#3694](https://github.com/conventional-changelog/commitlint/issues/3694)) ([b058c7c](https://github.com/conventional-changelog/commitlint/commit/b058c7cc49333e7898402fa55467ec097801ce25))
+
+
+
+
+
 ## [17.7.2](https://github.com/conventional-changelog/commitlint/compare/v17.7.1...v17.7.2) (2023-09-28)
 
 

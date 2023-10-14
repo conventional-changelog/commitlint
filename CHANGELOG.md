@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.8.0](https://github.com/conventional-changelog/commitlint/compare/v17.7.2...v17.8.0) (2023-10-14)
+
+
+### Bug Fixes
+
+* chore(container): add pullrequest event to container build workflow trigger ([8e30bec](https://github.com/conventional-changelog/commitlint/commit/8e30bec280d1c4ed8c1c5a69a36ea72aa4bc46ec))
+* update dependency @types/fs-extra to v11.0.2 ([#3681](https://github.com/conventional-changelog/commitlint/issues/3681)) ([5c6f087](https://github.com/conventional-changelog/commitlint/commit/5c6f0873554546fcfff070dcd83f3f7b5080be3f))
+* update dependency @types/tmp to v0.2.4 ([#3682](https://github.com/conventional-changelog/commitlint/issues/3682)) ([f9d7029](https://github.com/conventional-changelog/commitlint/commit/f9d702907c45e262c169bb85b6102604a96b95e9))
+* update dependency cosmiconfig-typescript-loader to v4.4.0 ([#3688](https://github.com/conventional-changelog/commitlint/issues/3688)) ([4bcb0c6](https://github.com/conventional-changelog/commitlint/commit/4bcb0c665243ffae65aa6616b4b0ee2d65d91aec))
+
+
+### Features
+
+* lazy load cosmiconfig-typescript-loader ([#3694](https://github.com/conventional-changelog/commitlint/issues/3694)) ([b058c7c](https://github.com/conventional-changelog/commitlint/commit/b058c7cc49333e7898402fa55467ec097801ce25))
+
+
+
+
+
 ## [17.7.2](https://github.com/conventional-changelog/commitlint/compare/v17.7.1...v17.7.2) (2023-09-28)
 
 
