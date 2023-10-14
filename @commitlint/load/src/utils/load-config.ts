@@ -1,4 +1,4 @@
-import {cosmiconfig} from 'cosmiconfig';
+import {cosmiconfig, type Loader} from 'cosmiconfig';
 import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
 import path from 'path';
 
@@ -13,7 +13,15 @@ export async function loadConfig(
 	configPath?: string
 ): Promise<LoadConfigResult | null> {
 	const moduleName = 'commitlint';
-	const tsLoader = TypeScriptLoader();
+
+	let tsLoaderInstance: Loader | undefined;
+	const tsLoader: Loader = (...args) => {
+		if (!tsLoaderInstance) {
+			tsLoaderInstance = TypeScriptLoader();
+		}
+		return tsLoaderInstance(...args);
+	};
+
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
 			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
