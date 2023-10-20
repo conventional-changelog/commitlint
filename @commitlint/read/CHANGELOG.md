@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [17.8.1](https://github.com/conventional-changelog/commitlint/compare/v17.8.0...v17.8.1) (2023-10-20)
+
+**Note:** Version bump only for package @commitlint/read
+
+
+
+
+
 ## [17.5.1](https://github.com/conventional-changelog/commitlint/compare/v17.5.0...v17.5.1) (2023-03-28)
 
 **Note:** Version bump only for package @commitlint/read

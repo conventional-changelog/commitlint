@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/prompt",
-  "version": "17.8.0",
+  "version": "17.8.1",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -37,17 +37,17 @@
     "node": ">=v14"
   },
   "devDependencies": {
-    "@commitlint/config-angular": "^17.8.0",
+    "@commitlint/config-angular": "^17.8.1",
     "@commitlint/types": "^14.0.0",
-    "@commitlint/utils": "^17.4.0",
+    "@commitlint/utils": "^17.8.1",
     "@types/inquirer": "^6.5.0",
     "commitizen": "^4.2.4",
     "inquirer": "^6.5.2"
   },
   "dependencies": {
-    "@commitlint/ensure": "^17.6.7",
-    "@commitlint/load": "^17.8.0",
-    "@commitlint/types": "^17.4.4",
+    "@commitlint/ensure": "^17.8.1",
+    "@commitlint/load": "^17.8.1",
+    "@commitlint/types": "^17.8.1",
     "chalk": "^4.1.0",
     "inquirer": "^6.5.2"
   },
