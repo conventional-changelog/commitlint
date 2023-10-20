@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/cz-commitlint",
-  "version": "17.8.1",
+  "version": "18.0.0",
   "description": "Commitizen adapter using the commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -37,9 +37,9 @@
     }
   },
   "dependencies": {
-    "@commitlint/ensure": "^17.8.1",
-    "@commitlint/load": "^17.8.1",
-    "@commitlint/types": "^17.8.1",
+    "@commitlint/ensure": "^18.0.0",
+    "@commitlint/load": "^18.0.0",
+    "@commitlint/types": "^18.0.0",
     "chalk": "^4.1.0",
     "lodash.isplainobject": "^4.0.6",
     "word-wrap": "^1.2.5"

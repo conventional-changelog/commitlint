@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0](https://github.com/conventional-changelog/commitlint/compare/v17.8.1...v18.0.0) (2023-10-20)
+
+
+* chore!: minimum node version v18 (#3644) ([5b4aeaf](https://github.com/conventional-changelog/commitlint/commit/5b4aeaf4f01c2726a7bc8631a23bb34c849baad2)), closes [#3644](https://github.com/conventional-changelog/commitlint/issues/3644)
+
+
+### BREAKING CHANGES
+
+* drop node v14 and v16 support
+
+* chore: remove unused types
+
+* docs: prepare node update and new release
+
+* chore!: minimum TS version v5
+* drop TS v4 support
+
+* ci: remove node v14/16 checks
+
+* chore: adjust node types to minimal supported version
+
+* chore!: further major versions of other deps
+* upgrade conventional-changelog-conventionalcommits, conventional-commits-parser, conventional-changelog-atom, 
+
+* docs: simplify releases and remove roadmap
+
+
+
+
+
 ## [17.8.1](https://github.com/conventional-changelog/commitlint/compare/v17.8.0...v17.8.1) (2023-10-20)
 
 **Note:** Version bump only for package @commitlint/config-nx-scopes

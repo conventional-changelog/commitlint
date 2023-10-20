@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/core",
-  "version": "17.8.1",
+  "version": "18.0.0",
   "description": "Lint your commit messages",
   "main": "lib/core.js",
   "types": "lib/core.d.ts",
@@ -35,13 +35,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/format": "^17.8.1",
-    "@commitlint/lint": "^17.8.1",
-    "@commitlint/load": "^17.8.1",
-    "@commitlint/read": "^17.8.1"
+    "@commitlint/format": "^18.0.0",
+    "@commitlint/lint": "^18.0.0",
+    "@commitlint/load": "^18.0.0",
+    "@commitlint/read": "^18.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^17.8.1"
+    "@commitlint/utils": "^18.0.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }
