@@ -57,7 +57,7 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 	);
 });
 
-test('should call git with expected args', async () => {
+test('should call git with expected args (test might fail locally)', async () => {
 	const cwd = await git.clone(
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
@@ -79,7 +79,7 @@ test('should call git with expected args', async () => {
 	expect(commilint).toEqual(['commitlint']);
 });
 
-test('should call git with expected args on pull_request', async () => {
+test('should call git with expected args on pull_request (test might fail locally)', async () => {
 	const cwd = await git.clone(
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
@@ -107,7 +107,7 @@ test('should call git with expected args on pull_request', async () => {
 	]);
 });
 
-test('should call git with extra expected args on pull_request', async () => {
+test('should call git with extra expected args on pull_request (test might fail locally)', async () => {
 	const cwd = await git.clone(
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
