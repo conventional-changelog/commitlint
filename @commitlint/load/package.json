@@ -12,7 +12,7 @@
     "pkg": "pkg-check --skip-import"
   },
   "engines": {
-    "node": ">=v14"
+    "node": ">=v18"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "@types/lodash.isplainobject": "^4.0.8",
     "@types/lodash.merge": "^4.6.8",
     "@types/lodash.uniq": "^4.5.8",
-    "conventional-changelog-atom": "^3.0.0",
+    "conventional-changelog-atom": "^4.0.0",
     "execa": "^5.0.0"
   },
   "dependencies": {
@@ -48,7 +48,7 @@
     "@commitlint/execute-rule": "^17.8.1",
     "@commitlint/resolve-extends": "^17.8.1",
     "@commitlint/types": "^17.8.1",
-    "@types/node": "20.5.1",
+    "@types/node": "^18.11.9",
     "chalk": "^4.1.0",
     "cosmiconfig": "^8.0.0",
     "cosmiconfig-typescript-loader": "^4.0.0",
@@ -57,7 +57,7 @@
     "lodash.uniq": "^4.5.0",
     "resolve-from": "^5.0.0",
     "ts-node": "^10.8.1",
-    "typescript": "^4.6.4 || ^5.2.2"
+    "typescript": "^5.2.2"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

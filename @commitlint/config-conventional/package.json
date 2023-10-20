@@ -30,14 +30,14 @@
   },
   "homepage": "https://commitlint.js.org/",
   "engines": {
-    "node": ">=v14"
+    "node": ">=v18"
   },
   "devDependencies": {
     "@commitlint/lint": "^17.8.1",
     "@commitlint/utils": "^17.8.1"
   },
   "dependencies": {
-    "conventional-changelog-conventionalcommits": "^6.1.0"
+    "conventional-changelog-conventionalcommits": "^7.0.2"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }
