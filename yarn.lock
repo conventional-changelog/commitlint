@@ -3362,10 +3362,12 @@ core-util-is@~1.0.0:
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
   integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
 
-cosmiconfig-typescript-loader@^4.0.0:
-  version "4.4.0"
-  resolved "https://registry.npmjs.org/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-4.4.0.tgz#f3feae459ea090f131df5474ce4b1222912319f9"
-  integrity sha512-BabizFdC3wBHhbI4kJh0VkQP9GkBfoHPydD0COMce1nJ1kJAB3F2TmJ/I7diULBKtmEWSwEbuN/KDtgnmUUVmw==
+cosmiconfig-typescript-loader@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/cosmiconfig-typescript-loader/-/cosmiconfig-typescript-loader-5.0.0.tgz#0d3becfe022a871f7275ceb2397d692e06045dc8"
+  integrity sha512-+8cK7jRAReYkMwMiG+bxhcNKiHJDM6bR9FD/nGBXOWdMLuYawjF5cGrtLilJ+LGd3ZjCXnJjR5DkfWPoIVlqJA==
+  dependencies:
+    jiti "^1.19.1"
 
 cosmiconfig@^7.0.0:
   version "7.1.0"
@@ -5775,6 +5777,11 @@ jest@^29.6.2:
     "@jest/types" "^29.6.3"
     import-local "^3.0.2"
     jest-cli "^29.7.0"
+
+jiti@^1.19.1:
+  version "1.20.0"
+  resolved "https://registry.npmjs.org/jiti/-/jiti-1.20.0.tgz#2d823b5852ee8963585c8dd8b7992ffc1ae83b42"
+  integrity sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==
 
 js-tokens@^4.0.0:
   version "4.0.0"
