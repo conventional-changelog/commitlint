@@ -4,7 +4,7 @@ import {subjectExclamationMark} from './subject-exclamation-mark';
 const preset = require('conventional-changelog-angular');
 
 const parseMessage = async (str: string) => {
-	const {parserOpts} = await preset;
+	const {parserOpts} = await preset();
 	return parse(str, undefined, parserOpts);
 };
 
