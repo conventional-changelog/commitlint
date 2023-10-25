@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.1.0](https://github.com/conventional-changelog/commitlint/compare/v18.0.0...v18.1.0) (2023-10-25)
+
+
+### Features
+
+* [scope-enum] [scope-case] allow space after comma as scope delimiter ([#3577](https://github.com/conventional-changelog/commitlint/issues/3577)) ([13c4bfc](https://github.com/conventional-changelog/commitlint/commit/13c4bfc637dd6c66477fa1c8da821ed46af28c44)), closes [#3576](https://github.com/conventional-changelog/commitlint/issues/3576)
+
+
+
+
+
 # [18.0.0](https://github.com/conventional-changelog/commitlint/compare/v17.8.1...v18.0.0) (2023-10-20)
 
 
