@@ -80,5 +80,5 @@ test('expect correct result from Nx 17', async () => {
 	const cwd = await npm.bootstrap('fixtures/nx17', __dirname);
 
 	const [, , value] = await fn({cwd});
-	expect(value).toEqual(['a', 'b']);
+	expect(value).toEqual(['g', 'h']);
 });

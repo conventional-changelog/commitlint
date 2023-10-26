@@ -1,6 +1,6 @@
 {
-  "root": "nx/o",
-  "sourceRoot": "nx/o/src",
+  "root": "nx/h",
+  "sourceRoot": "nx/h/src",
   "projectType": "library",
   "targets": {
     "lint": {
@@ -10,17 +10,17 @@
       ],
       "options": {
         "lintFilePatterns": [
-          "nx/o/**/*.ts"
+          "nx/h/**/*.ts"
         ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": [
-        "coverage/nx/o"
+        "coverage/nx/h"
       ],
       "options": {
-        "jestConfig": "nx/o/jest.config.js",
+        "jestConfig": "nx/h/jest.config.js",
         "passWithNoTests": true
       }
     }
