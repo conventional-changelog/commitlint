@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.3.0](https://github.com/conventional-changelog/commitlint/compare/v18.2.0...v18.3.0) (2023-10-26)
+
+
+### Bug Fixes
+
+* update dependency @types/node to v18.18.7 ([#3726](https://github.com/conventional-changelog/commitlint/issues/3726)) ([dcc0424](https://github.com/conventional-changelog/commitlint/commit/dcc0424259d32874e4f97de768ec1b50028a90a6))
+
+
+### Features
+
+* **config-nx-scopes:** support latest nx version ([#3728](https://github.com/conventional-changelog/commitlint/issues/3728)) ([22e6f74](https://github.com/conventional-changelog/commitlint/commit/22e6f74e3cae74497162c8ae8f5d3888e3b19f6e))
+
+
+
+
+
 # [18.2.0](https://github.com/conventional-changelog/commitlint/compare/v18.1.0...v18.2.0) (2023-10-26)
 
 
