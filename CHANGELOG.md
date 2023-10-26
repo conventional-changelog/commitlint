@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.2.0](https://github.com/conventional-changelog/commitlint/compare/v18.1.0...v18.2.0) (2023-10-26)
+
+
+### Features
+
+* **load:** use cosmiconfig-typescript-loader v5 to remove ts-node dependency for @commitlint/load ([#3722](https://github.com/conventional-changelog/commitlint/issues/3722)) ([1ff49ea](https://github.com/conventional-changelog/commitlint/commit/1ff49ea14adb180eb54ec3d7479990b66ba26720))
+
+
+
+
+
 # [18.1.0](https://github.com/conventional-changelog/commitlint/compare/v18.0.0...v18.1.0) (2023-10-25)
 
 
