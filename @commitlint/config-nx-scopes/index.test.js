@@ -74,3 +74,11 @@ test('expect correct result from Nx 15', async () => {
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['e', 'f']);
 });
+
+test('expect correct result from Nx 17', async () => {
+	const {'scope-enum': fn} = config.rules;
+	const cwd = await npm.bootstrap('fixtures/nx17', __dirname);
+
+	const [, , value] = await fn({cwd});
+	expect(value).toEqual(['g', 'h']);
+});
