@@ -1,6 +1,6 @@
 {
   "name": "@commitlint/config-nx-scopes",
-  "version": "18.1.0",
+  "version": "18.3.0",
   "description": "Shareable commitlint config enforcing nx project names as scopes",
   "files": [
     "index.js"
@@ -27,7 +27,7 @@
   },
   "homepage": "https://commitlint.js.org/",
   "peerDependencies": {
-    "nx": "^14.0.0 || ^15.0.0 || ^16.0.0"
+    "nx": "^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
   },
   "peerDependenciesMeta": {
     "nx": {
