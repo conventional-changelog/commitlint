@@ -1,6 +1,8 @@
-import * as chalk from 'chalk';
 import {QualifiedRules} from './load';
 import {RuleConfigSeverity} from './rules';
+import pc from 'picocolors';
+
+export type PcColor = keyof typeof pc;
 
 export type Formatter = (
 	report: FormattableReport,
@@ -26,12 +28,10 @@ export interface FormattableReport {
 	results?: (FormattableResult & WithInput)[];
 }
 
-export type ChalkColor = typeof chalk.Color | typeof chalk.Modifiers;
-
 export interface FormatOptions {
 	color?: boolean;
 	signs?: readonly [string, string, string];
-	colors?: readonly [ChalkColor, ChalkColor, ChalkColor];
+	colors?: readonly [PcColor, PcColor, PcColor];
 	verbose?: boolean;
 	helpUrl?: string;
 }

@@ -1,14 +1,15 @@
-import chalk from 'chalk';
 import {
-	ChalkColor,
 	FormattableReport,
 	FormatOptions,
 	FormattableResult,
 	WithInput,
+	PcColor,
 } from '@commitlint/types';
+import pc from 'picocolors';
 
 const DEFAULT_SIGNS = [' ', '⚠', '✖'] as const;
-const DEFAULT_COLORS = ['white', 'yellow', 'red'] as const;
+
+const DEFAULT_COLORS: [PcColor, PcColor, PcColor] = ['white', 'yellow', 'red'];
 
 export function format(
 	report: FormattableReport = {},
@@ -41,10 +42,10 @@ function formatInput(
 	}
 
 	const sign = '⧗';
-	const decoration = enabled ? chalk.gray(sign) : sign;
+	const decoration = enabled ? pc.gray(sign) : sign;
 	const commitText = errors.length > 0 ? input : input.split('\n')[0];
 
-	const decoratedInput = enabled ? chalk.bold(commitText) : commitText;
+	const decoratedInput = enabled ? pc.bold(commitText) : commitText;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
 	return options.verbose || hasProblems
@@ -65,18 +66,16 @@ export function formatResult(
 
 	const problems = [...errors, ...warnings].map((problem) => {
 		const sign = signs[problem.level] || '';
-		const color: ChalkColor = colors[problem.level] || ('white' as const);
-		const decoration = enabled ? chalk[color](sign) : sign;
-		const name = enabled
-			? chalk.grey(`[${problem.name}]`)
-			: `[${problem.name}]`;
+		const color = pc[colors[problem.level]] || pc[DEFAULT_COLORS[0]];
+		const decoration = enabled ? color(sign) : sign;
+		const name = enabled ? pc.gray(`[${problem.name}]`) : `[${problem.name}]`;
 		return `${decoration}   ${problem.message} ${name}`;
 	});
 
 	const sign = selectSign(result);
 	const color = selectColor(result);
 
-	const deco = enabled ? chalk[color](sign) : sign;
+	const deco = enabled ? color(sign) : sign;
 	const el = errors.length;
 	const wl = warnings.length;
 	const hasProblems = problems.length > 0;
@@ -87,7 +86,7 @@ export function formatResult(
 			: undefined;
 
 	const fmtSummary =
-		enabled && typeof summary === 'string' ? chalk.bold(summary) : summary;
+		enabled && typeof summary === 'string' ? pc.bold(summary) : summary;
 
 	const help =
 		hasProblems && options.helpUrl
@@ -112,7 +111,7 @@ function selectSign(result: FormattableResult): string {
 	return (result.warnings || []).length ? '⚠' : '✔';
 }
 
-function selectColor(result: FormattableResult): ChalkColor {
+function selectColor(result: FormattableResult) {
 	if ((result.errors || []).length > 0) {
 		return 'red';
 	}
