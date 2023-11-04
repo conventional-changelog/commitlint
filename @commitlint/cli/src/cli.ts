@@ -79,7 +79,7 @@ const cli = yargs
 		},
 		'git-log-args': {
 			description:
-				"addditional git log arguments as space separated string, example '--first-parent --cherry-pick'",
+				"additional git log arguments as space separated string, example '--first-parent --cherry-pick'",
 			type: 'string',
 		},
 		format: {
