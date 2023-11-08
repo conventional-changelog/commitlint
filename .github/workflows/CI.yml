@@ -8,77 +8,28 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  v18:
-    runs-on: ubuntu-22.04
-    container:
-      image: 'ubuntu:22.04'
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, windows-2022]
+        node: [18, 20]
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Install required dependencies
-        run: |
-          apt update
-          apt install --yes sudo
-          sudo apt install --yes git
-          sudo apt install --yes curl
-          curl --location https://deb.nodesource.com/setup_18.x | sudo --preserve-env bash -
-          sudo DEBIAN_FRONTEND=noninteractive apt install --yes nodejs
-      - uses: actions/checkout@v4
-      # workaround for https://github.com/actions/runner/issues/2033
-      - name: ownership workaround
-        run: git config --global --add safe.directory '*'
-      - name: Install yarn
-        run: |
-          npm install --global yarn
-          node --version
-          yarn global add yarn@latest
-      - name: Install dependencies
-        run: yarn install --ignore-engines --frozen-lockfile
-      - name: Build packages
-        run: yarn build
-      - name: Test
-        run: yarn test-ci
-
-  v20:
-    runs-on: ubuntu-22.04
-    container:
-      image: 'ubuntu:22.04'
-    steps:
-      - name: Install required dependencies
-        run: |
-          apt update
-          apt install --yes sudo
-          sudo apt install --yes git
-          sudo apt install --yes curl
-          curl --location https://deb.nodesource.com/setup_20.x | sudo --preserve-env bash -
-          sudo DEBIAN_FRONTEND=noninteractive apt install --yes nodejs
-      - uses: actions/checkout@v4
-      # workaround for https://github.com/actions/runner/issues/2033
-      - name: ownership workaround
-        run: git config --global --add safe.directory '*'
-      - name: Install yarn
-        run: |
-          npm install --global yarn
-          node --version
-          yarn global add yarn@latest
-      - name: Install dependencies
-        run: yarn install --ignore-engines --frozen-lockfile
-      - name: Build packages
-        run: yarn build
-      - name: Test
-        run: yarn test-ci
-
-  windows:
-    runs-on: windows-2022
-    steps:
-      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
-          max_attempts: 3
-      - name: Update yarn
-        run: |
-          node --version
-          yarn global add yarn@latest
+          node-version: ${{ matrix.node }}
+
+      - uses: actions/checkout@v4
+
+      # workaround for https://github.com/actions/runner/issues/2033
+      - name: ownership workaround
+        run: git config --global --add safe.directory '*'
+
       - name: Install dependencies
         run: yarn install --ignore-engines --frozen-lockfile
+
       - name: Build packages
         run: yarn build
+
       - name: Test
         run: yarn test-ci

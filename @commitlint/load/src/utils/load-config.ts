@@ -1,4 +1,9 @@
-import {cosmiconfig, type Loader} from 'cosmiconfig';
+import {
+	cosmiconfig,
+	defaultLoadersSync,
+	Options,
+	type Loader,
+} from 'cosmiconfig';
 import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
 import path from 'path';
 
@@ -8,12 +13,12 @@ export interface LoadConfigResult {
 	isEmpty?: boolean;
 }
 
+const moduleName = 'commitlint';
+
 export async function loadConfig(
 	cwd: string,
 	configPath?: string
 ): Promise<LoadConfigResult | null> {
-	const moduleName = 'commitlint';
-
 	let tsLoaderInstance: Loader | undefined;
 	const tsLoader: Loader = (...args) => {
 		if (!tsLoaderInstance) {
@@ -21,6 +26,8 @@ export async function loadConfig(
 		}
 		return tsLoaderInstance(...args);
 	};
+
+	const {searchPlaces, loaders} = getDynamicAwaitConfig();
 
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
@@ -41,10 +48,14 @@ export async function loadConfig(
 			`.${moduleName}rc.cts`,
 			`${moduleName}.config.ts`,
 			`${moduleName}.config.cts`,
+
+			...(searchPlaces || []),
 		],
 		loaders: {
 			'.ts': tsLoader,
 			'.cts': tsLoader,
+
+			...(loaders || {}),
 		},
 	});
 
@@ -59,3 +70,31 @@ export async function loadConfig(
 
 	return null;
 }
+
+// See the following issues for more context:
+//  - Issue: https://github.com/nodejs/node/issues/40058
+//  - Resolution: https://github.com/nodejs/node/pull/48510 (Node v20.8.0)
+export const isDynamicAwaitSupported = () => {
+	const [major, minor] = process.version
+		.replace('v', '')
+		.split('.')
+		.map((val) => parseInt(val));
+
+	return major >= 20 && minor >= 8;
+};
+
+// If dynamic await is supported (Node >= v20.8.0), support mjs config.
+// Otherwise, don't support mjs and use synchronous js/cjs loaders.
+export const getDynamicAwaitConfig = (): Partial<Options> =>
+	isDynamicAwaitSupported()
+		? {
+				searchPlaces: [`.${moduleName}rc.mjs`, `${moduleName}.config.mjs`],
+				loaders: {},
+		  }
+		: {
+				searchPlaces: [],
+				loaders: {
+					'.cjs': defaultLoadersSync['.cjs'],
+					'.js': defaultLoadersSync['.js'],
+				},
+		  };

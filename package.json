@@ -19,7 +19,7 @@
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
-    "test": "cross-env HOME=$PWD jest",
+    "test": "cross-env HOME=$PWD NODE_OPTIONS=--experimental-vm-modules jest",
     "test-ci": "cross-env HOME=$PWD jest --runInBand",
     "postinstall": "yarn husky install"
   },
