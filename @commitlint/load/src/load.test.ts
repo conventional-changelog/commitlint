@@ -197,12 +197,12 @@ test.each(
 		'commitlint.config.cjs',
 		'commitlint.config.js',
 		'package.json',
+		'.commitlintrc',
 		'.commitlintrc.cjs',
 		'.commitlintrc.js',
 		'.commitlintrc.json',
 		'.commitlintrc.yml',
 		'.commitlintrc.yaml',
-		'.commitlintrc',
 		...mjsConfigFiles,
 	].map((configFile) => [configFile])
 )('recursive extends with %s', async (configFile) => {
@@ -221,86 +221,6 @@ test.each(
 		rules: {
 			zero: [0, 'never'],
 			one: [1, 'always'],
-			two: [2, 'never'],
-		},
-	});
-});
-
-test('recursive extends', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'always'],
-			two: [2, 'never'],
-		},
-	});
-});
-
-test('recursive extends with json file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-json');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'always'],
-			two: [2, 'never'],
-		},
-	});
-});
-
-test('recursive extends with yaml file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-yaml');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'never'],
-			two: [2, 'always'],
-		},
-	});
-});
-
-test('recursive extends with js file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-js');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'never'],
-			two: [2, 'always'],
-		},
-	});
-});
-
-test('recursive extends with package.json file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-package');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'never'],
 			two: [2, 'never'],
 		},
 	});
