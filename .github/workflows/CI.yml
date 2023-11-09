@@ -15,15 +15,12 @@ jobs:
         node: [18, 20]
     runs-on: ${{ matrix.os }}
     steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-
-      - uses: actions/checkout@v4
-
-      # workaround for https://github.com/actions/runner/issues/2033
-      - name: ownership workaround
-        run: git config --global --add safe.directory '*'
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --ignore-engines --frozen-lockfile
