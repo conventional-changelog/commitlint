@@ -7,10 +7,12 @@ jest.mock('@scope/commitlint-plugin-example', () => scopedPlugin, {
 });
 
 import path from 'path';
+import {readFileSync, writeFileSync} from 'fs';
 import resolveFrom from 'resolve-from';
 import {fix, git, npm} from '@commitlint/test';
 
 import load from './load';
+import {isDynamicAwaitSupported} from './utils/load-config';
 
 const fixBootstrap = (name: string) => fix.bootstrap(name, __dirname);
 const gitBootstrap = (name: string) => git.bootstrap(name, __dirname);
@@ -186,8 +188,30 @@ test('respects cwd option', async () => {
 	});
 });
 
-test('recursive extends', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends');
+const mjsConfigFiles = isDynamicAwaitSupported()
+	? ['commitlint.config.mjs', '.commitlintrc.mjs']
+	: [];
+
+test.each(
+	[
+		'commitlint.config.cjs',
+		'commitlint.config.js',
+		'package.json',
+		'.commitlintrc',
+		'.commitlintrc.cjs',
+		'.commitlintrc.js',
+		'.commitlintrc.json',
+		'.commitlintrc.yml',
+		'.commitlintrc.yaml',
+		...mjsConfigFiles,
+	].map((configFile) => [configFile])
+)('recursive extends with %s', async (configFile) => {
+	const cwd = await gitBootstrap(`fixtures/recursive-extends-js-template`);
+	const configPath = path.join(__dirname, `../fixtures/config/${configFile}`);
+	const config = readFileSync(configPath);
+
+	writeFileSync(path.join(cwd, configFile), config);
+
 	const actual = await load({}, {cwd});
 
 	expect(actual).toMatchObject({
@@ -202,79 +226,13 @@ test('recursive extends', async () => {
 	});
 });
 
-test('recursive extends with json file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-json');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'always'],
-			two: [2, 'never'],
-		},
-	});
-});
-
-test('recursive extends with yaml file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-yaml');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'never'],
-			two: [2, 'always'],
-		},
-	});
-});
-
-test('recursive extends with js file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-js');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'never'],
-			two: [2, 'always'],
-		},
-	});
-});
-
-test('recursive extends with package.json file', async () => {
-	const cwd = await gitBootstrap('fixtures/recursive-extends-package');
-	const actual = await load({}, {cwd});
-
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'never'],
-			two: [2, 'never'],
-		},
-	});
-});
-
-// fails since a jest update: https://github.com/conventional-changelog/commitlint/pull/3362
-// eslint-disable-next-line jest/no-disabled-tests
-test.skip('recursive extends with ts file', async () => {
+test('recursive extends with ts file', async () => {
 	const cwd = await gitBootstrap('fixtures/recursive-extends-ts');
 	const actual = await load({}, {cwd});
 
 	expect(actual).toMatchObject({
 		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
+		extends: ['./first-extended/index.ts'],
 		plugins: {},
 		rules: {
 			zero: [0, 'never', 'zero'],
