@@ -142,10 +142,12 @@ Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) o
   - `.commitlintrc.yml`
   - `.commitlintrc.js`
   - `.commitlintrc.cjs`
+  - `.commitlintrc.mjs` (Node >= v20.8.0)
   - `.commitlintrc.ts`
   - `.commitlintrc.cts`
   - `commitlint.config.js`
   - `commitlint.config.cjs`
+  - `commitlint.config.mjs` (Node >= v20.8.0)
   - `commitlint.config.ts`
   - `commitlint.config.cts`
   - `commitlint` field in `package.json`
