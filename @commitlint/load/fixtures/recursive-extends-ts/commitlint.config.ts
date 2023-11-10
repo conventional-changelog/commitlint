@@ -1,7 +1,7 @@
 import type {UserConfig} from './types';
 
 const Configuration: UserConfig = {
-	extends: ['./first-extended'],
+	extends: ['./first-extended/index.ts'],
 	rules: {
 		zero: [0, 'never', 'zero']
 	}
