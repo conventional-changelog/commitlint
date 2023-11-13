@@ -27,7 +27,7 @@ export async function loadConfig(
 		return tsLoaderInstance(...args);
 	};
 
-	const {searchPlaces, loaders} = getDynamicAwaitConfig();
+	const {searchPlaces, loaders} = getDynamicAwaitConfig(cwd);
 
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
@@ -85,16 +85,38 @@ export const isDynamicAwaitSupported = () => {
 
 // If dynamic await is supported (Node >= v20.8.0), support mjs config.
 // Otherwise, don't support mjs and use synchronous js/cjs loaders.
-export const getDynamicAwaitConfig = (): Partial<Options> =>
-	isDynamicAwaitSupported()
-		? {
-				searchPlaces: [`.${moduleName}rc.mjs`, `${moduleName}.config.mjs`],
-				loaders: {},
-		  }
-		: {
+export const getDynamicAwaitConfig = (cwd?: string): Partial<Options> => {
+	const dynamic = isDynamicAwaitSupported();
+	if (dynamic) {
+		return {
+			searchPlaces: [`.${moduleName}rc.mjs`, `${moduleName}.config.mjs`],
+			loaders: {},
+		};
+	}
+
+	if (cwd) {
+		let type = null;
+		try {
+			const manifestPath = path.join(cwd, 'package.json');
+			type = require(manifestPath).type;
+		} catch (e) {
+			// Do nothing
+		}
+		if (type === 'module') {
+			return {
 				searchPlaces: [],
 				loaders: {
 					'.cjs': defaultLoadersSync['.cjs'],
-					'.js': defaultLoadersSync['.js'],
 				},
-		  };
+			};
+		}
+	}
+
+	return {
+		searchPlaces: [],
+		loaders: {
+			'.cjs': defaultLoadersSync['.cjs'],
+			'.js': defaultLoadersSync['.js'],
+		},
+	};
+};
