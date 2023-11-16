@@ -102,7 +102,7 @@ jobs:
     - attach_workspace:
         at: ~/project
     - run:
-        name: Define environment variable with lastest commit's message
+        name: Define environment variable with latest commit's message
         command: |
           echo 'export COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
           source $BASH_ENV

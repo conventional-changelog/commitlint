@@ -446,7 +446,7 @@ read({to: 'HEAD', from: 'HEAD~2'}).then((commits) =>
 );
 ```
 
-- **Simplfied last-commit checker**
+- **Simplified last-commit checker**
 
 ```js
 const load = require('@commitlint/load').default;
