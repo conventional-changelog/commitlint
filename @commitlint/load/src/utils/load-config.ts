@@ -1,8 +1,8 @@
 import {
 	cosmiconfig,
 	defaultLoadersSync,
-	type Options,
 	type Loader,
+	defaultLoaders,
 } from 'cosmiconfig';
 import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
 import {existsSync, readFileSync} from 'fs';
@@ -28,7 +28,12 @@ export async function loadConfig(
 		return tsLoaderInstance(...args);
 	};
 
-	const {searchPlaces, loaders} = getDynamicAwaitConfig(cwd);
+	// If dynamic await is supported (Node >= v20.8.0) or directory uses ESM, support
+	// async js/cjs loaders (dynamic import). Otherwise, use synchronous js/cjs loaders.
+	const loaders =
+		isDynamicAwaitSupported() || isEsmModule(cwd)
+			? defaultLoaders
+			: defaultLoadersSync;
 
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
@@ -41,22 +46,22 @@ export async function loadConfig(
 			`.${moduleName}rc.yml`,
 			`.${moduleName}rc.js`,
 			`.${moduleName}rc.cjs`,
+			`.${moduleName}rc.mjs`,
 			`${moduleName}.config.js`,
 			`${moduleName}.config.cjs`,
+			`${moduleName}.config.mjs`,
 
 			// files supported by TypescriptLoader
 			`.${moduleName}rc.ts`,
 			`.${moduleName}rc.cts`,
 			`${moduleName}.config.ts`,
 			`${moduleName}.config.cts`,
-
-			...(searchPlaces || []),
 		],
 		loaders: {
 			'.ts': tsLoader,
 			'.cts': tsLoader,
-
-			...(loaders || {}),
+			'.cjs': loaders['.cjs'],
+			'.js': loaders['.js'],
 		},
 	});
 
@@ -84,7 +89,7 @@ export const isDynamicAwaitSupported = () => {
 	return major >= 20 && minor >= 8;
 };
 
-// Is the given directory is set up to use ESM (ECMAScript Modules)?
+// Is the given directory set up to use ESM (ECMAScript Modules)?
 export const isEsmModule = (cwd: string) => {
 	const packagePath = path.join(cwd, 'package.json');
 
@@ -95,18 +100,3 @@ export const isEsmModule = (cwd: string) => {
 	const packageJSON = readFileSync(packagePath, {encoding: 'utf-8'});
 	return JSON.parse(packageJSON)?.type === 'module';
 };
-
-// If dynamic await is supported (Node >= v20.8.0) or directory uses ESM,
-// support mjs config and async js/cjs loaders (dynamic import).
-// Otherwise, don't support mjs and use synchronous js/cjs loaders.
-const getDynamicAwaitConfig = (cwd: string): Partial<Options> =>
-	isDynamicAwaitSupported() || isEsmModule(cwd)
-		? {
-				searchPlaces: [`.${moduleName}rc.mjs`, `${moduleName}.config.mjs`],
-		  }
-		: {
-				loaders: {
-					'.cjs': defaultLoadersSync['.cjs'],
-					'.js': defaultLoadersSync['.js'],
-				},
-		  };
