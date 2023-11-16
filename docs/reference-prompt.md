@@ -9,22 +9,22 @@ There are three fields: `settings`, `messages` and `questions`
 Set optional options.
 
 - `enableMultipleScopes`: `(boolean)` Enable multiple scopes, select scope with a radio list, disabled by default.
-- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter.It is applied when `enableMultipleScopes` set true.
+- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter. It is applied when `enableMultipleScopes` set true.
 
 ## `messages`
 
 Set hint contents, you can configure it to support localization.
 
-- `skip`: The field can be skip by enter
+- `skip`: The field can be skipped by pressing enter
 - `max`: Maximum number of characters
 - `min`: Minimum number of characters
-- `emptyWarning`: The field can not be empty
-- `upperLimitWarning`: The characters limit is exceeded
-- `lowerLimitWarning`: The characters is less than lower limit
+- `emptyWarning`: The field cannot be empty
+- `upperLimitWarning`: The character limit is exceeded
+- `lowerLimitWarning`: The characters are less than lower limit
 
 ## `questions`
 
-Specify the interactive steps, Steps can only be configure in
+Specify the interactive steps, Steps can only be configured in
 
 - `header`
 - `type`
