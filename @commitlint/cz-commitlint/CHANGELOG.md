@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.2](https://github.com/conventional-changelog/commitlint/compare/v18.4.1...v18.4.2) (2023-11-16)
+
+**Note:** Version bump only for package @commitlint/cz-commitlint
+
+
+
+
+
 ## [18.4.1](https://github.com/conventional-changelog/commitlint/compare/v18.4.0...v18.4.1) (2023-11-12)
 
 **Note:** Version bump only for package @commitlint/cz-commitlint

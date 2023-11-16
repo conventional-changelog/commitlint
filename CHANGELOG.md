@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.2](https://github.com/conventional-changelog/commitlint/compare/v18.4.1...v18.4.2) (2023-11-16)
+
+
+### Bug Fixes
+
+* update dependency @types/fs-extra to v11.0.4 ([#3767](https://github.com/conventional-changelog/commitlint/issues/3767)) ([f6c4696](https://github.com/conventional-changelog/commitlint/commit/f6c46962a7c77f86953f3a2285427caeeedc2472))
+* update dependency @types/tmp to v0.2.6 ([#3769](https://github.com/conventional-changelog/commitlint/issues/3769)) ([bc849bc](https://github.com/conventional-changelog/commitlint/commit/bc849bc0b123ec4a70e08449b7d010fdc6bcfdd7))
+
+
+
+
+
 ## [18.4.1](https://github.com/conventional-changelog/commitlint/compare/v18.4.0...v18.4.1) (2023-11-12)
 
 
