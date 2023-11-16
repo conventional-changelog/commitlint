@@ -188,41 +188,108 @@ test('respects cwd option', async () => {
 	});
 });
 
-const mjsConfigFiles = isDynamicAwaitSupported()
-	? ['commitlint.config.mjs', '.commitlintrc.mjs']
-	: [];
+describe.each([['basic'], ['extends']])('%s config', (template) => {
+	const isExtendsTemplate = template === 'extends';
 
-test.each(
-	[
+	const configFiles = [
 		'commitlint.config.cjs',
 		'commitlint.config.js',
+		'commitlint.config.mjs',
 		'package.json',
 		'.commitlintrc',
 		'.commitlintrc.cjs',
 		'.commitlintrc.js',
 		'.commitlintrc.json',
+		'.commitlintrc.mjs',
 		'.commitlintrc.yml',
 		'.commitlintrc.yaml',
-		...mjsConfigFiles,
-	].map((configFile) => [configFile])
-)('recursive extends with %s', async (configFile) => {
-	const cwd = await gitBootstrap(`fixtures/recursive-extends-js-template`);
-	const configPath = path.join(__dirname, `../fixtures/config/${configFile}`);
-	const config = readFileSync(configPath);
+	];
 
-	writeFileSync(path.join(cwd, configFile), config);
+	const configTestCases = [
+		...configFiles
+			.filter((filename) => !filename.endsWith('.mjs'))
+			.map((filename) => ({filename, isEsm: false})),
+		...configFiles
+			.filter((filename) =>
+				['.mjs', '.js'].some((ext) => filename.endsWith(ext))
+			)
+			.map((filename) => ({filename, isEsm: true})),
+	];
 
-	const actual = await load({}, {cwd});
+	const getConfigContents = ({
+		filename,
+		isEsm,
+	}): string | NodeJS.ArrayBufferView => {
+		if (filename === 'package.json') {
+			const configPath = path.join(
+				__dirname,
+				`../fixtures/${template}-config/.commitlintrc.json`
+			);
+			const commitlint = JSON.parse(
+				readFileSync(configPath, {encoding: 'utf-8'})
+			);
+			return JSON.stringify({commitlint});
+		} else {
+			const filePath = ['..', 'fixtures', `${template}-config`, filename];
 
-	expect(actual).toMatchObject({
-		formatter: '@commitlint/format',
-		extends: ['./first-extended'],
-		plugins: {},
-		rules: {
-			zero: [0, 'never'],
-			one: [1, 'always'],
-			two: [2, 'never'],
-		},
+			if (isEsm) {
+				filePath.splice(3, 0, 'esm');
+			}
+
+			const configPath = path.join(__dirname, filePath.join('/'));
+			return readFileSync(configPath);
+		}
+	};
+
+	const esmBootstrap = (cwd: string) => {
+		const packageJsonPath = path.join(cwd, 'package.json');
+		const packageJSON = JSON.parse(
+			readFileSync(packageJsonPath, {encoding: 'utf-8'})
+		);
+
+		writeFileSync(
+			packageJsonPath,
+			JSON.stringify({
+				...packageJSON,
+				type: 'module',
+			})
+		);
+	};
+
+	const templateFolder = [template, isExtendsTemplate ? 'js' : '', 'template']
+		.filter((elem) => elem)
+		.join('-');
+
+	it.each(
+		configTestCases
+			// Skip ESM tests for the extends suite until resolve-extends supports ESM
+			.filter(({isEsm}) => template !== 'extends' || !isEsm)
+			// Skip ESM tests if dynamic await is not supported; Jest will crash with a seg fault error
+			.filter(({isEsm}) => isDynamicAwaitSupported() || !isEsm)
+	)('$filename, ESM: $isEsm', async ({filename, isEsm}) => {
+		const cwd = await gitBootstrap(`fixtures/${templateFolder}`);
+
+		if (isEsm) {
+			esmBootstrap(cwd);
+		}
+
+		writeFileSync(
+			path.join(cwd, filename),
+			getConfigContents({filename, isEsm})
+		);
+
+		const actual = await load({}, {cwd});
+
+		expect(actual).toMatchObject({
+			formatter: '@commitlint/format',
+			extends: isExtendsTemplate ? ['./first-extended'] : [],
+			plugins: {},
+			rules: {
+				zero: [0, 'never'],
+				one: [1, 'always'],
+				two: [2, 'never'],
+			},
+		});
 	});
 });
 

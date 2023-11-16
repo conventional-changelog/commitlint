@@ -1,10 +1,11 @@
 import {
 	cosmiconfig,
 	defaultLoadersSync,
-	Options,
+	type Options,
 	type Loader,
 } from 'cosmiconfig';
 import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
+import {existsSync, readFileSync} from 'fs';
 import path from 'path';
 
 export interface LoadConfigResult {
@@ -27,7 +28,7 @@ export async function loadConfig(
 		return tsLoaderInstance(...args);
 	};
 
-	const {searchPlaces, loaders} = getDynamicAwaitConfig();
+	const {searchPlaces, loaders} = getDynamicAwaitConfig(cwd);
 
 	const explorer = cosmiconfig(moduleName, {
 		searchPlaces: [
@@ -71,7 +72,7 @@ export async function loadConfig(
 	return null;
 }
 
-// See the following issues for more context:
+// See the following issues for more context, contributing to failing Jest tests:
 //  - Issue: https://github.com/nodejs/node/issues/40058
 //  - Resolution: https://github.com/nodejs/node/pull/48510 (Node v20.8.0)
 export const isDynamicAwaitSupported = () => {
@@ -83,16 +84,27 @@ export const isDynamicAwaitSupported = () => {
 	return major >= 20 && minor >= 8;
 };
 
-// If dynamic await is supported (Node >= v20.8.0), support mjs config.
+// Is the given directory is set up to use ESM (ECMAScript Modules)?
+export const isEsmModule = (cwd: string) => {
+	const packagePath = path.join(cwd, 'package.json');
+
+	if (!existsSync(packagePath)) {
+		return false;
+	}
+
+	const packageJSON = readFileSync(packagePath, {encoding: 'utf-8'});
+	return JSON.parse(packageJSON)?.type === 'module';
+};
+
+// If dynamic await is supported (Node >= v20.8.0) or directory uses ESM,
+// support mjs config and async js/cjs loaders (dynamic import).
 // Otherwise, don't support mjs and use synchronous js/cjs loaders.
-export const getDynamicAwaitConfig = (): Partial<Options> =>
-	isDynamicAwaitSupported()
+const getDynamicAwaitConfig = (cwd: string): Partial<Options> =>
+	isDynamicAwaitSupported() || isEsmModule(cwd)
 		? {
 				searchPlaces: [`.${moduleName}rc.mjs`, `${moduleName}.config.mjs`],
-				loaders: {},
 		  }
 		: {
-				searchPlaces: [],
 				loaders: {
 					'.cjs': defaultLoadersSync['.cjs'],
 					'.js': defaultLoadersSync['.js'],
