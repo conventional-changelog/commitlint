@@ -8,7 +8,8 @@ export async function parse(
 	parser: Parser = sync,
 	parserOpts?: ParserOptions
 ): Promise<Commit> {
-	const defaultOpts = (await defaultChangelogOpts).parserOpts;
+	const preset = await defaultChangelogOpts();
+	const defaultOpts = preset.parserOpts;
 	const opts = {
 		...defaultOpts,
 		fieldPattern: null,
