@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.4.0](https://github.com/conventional-changelog/commitlint/compare/v18.3.0...v18.4.0) (2023-11-10)
+
+
+### Bug Fixes
+
+* update dependency read-pkg to v9 ([#3734](https://github.com/conventional-changelog/commitlint/issues/3734)) ([722f518](https://github.com/conventional-changelog/commitlint/commit/722f5183e91186aa7e3912e8f3d0d7069f05ce8f))
+* update dependency tar-fs to v3 ([#3718](https://github.com/conventional-changelog/commitlint/issues/3718)) ([afb04dd](https://github.com/conventional-changelog/commitlint/commit/afb04dd0dc4d42094ae01f0733600c2f9d3abdfd))
+
+
+
+
+
 # [18.1.0](https://github.com/conventional-changelog/commitlint/compare/v18.0.0...v18.1.0) (2023-10-25)
 
 

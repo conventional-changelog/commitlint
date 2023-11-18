@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.4.0](https://github.com/conventional-changelog/commitlint/compare/v18.3.0...v18.4.0) (2023-11-10)
+
+
+### Features
+
+* bump cosmiconfig version and conditionally support mjs config ([#3747](https://github.com/conventional-changelog/commitlint/issues/3747)) ([a2b65fc](https://github.com/conventional-changelog/commitlint/commit/a2b65fc0cfee2259e197c291ea40ef2d076ab837))
+
+
+
+
+
 # [18.2.0](https://github.com/conventional-changelog/commitlint/compare/v18.1.0...v18.2.0) (2023-10-26)
 
 
