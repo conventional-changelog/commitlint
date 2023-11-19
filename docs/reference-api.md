@@ -288,7 +288,7 @@ type Range = {
   from: string;
   /* Upper end of the commit range to read */
   to: string;
-  /* Wether (boolean) to read from ./.git/COMMIT_EDITMSG or where to read from (string) */
+  /* Whether (boolean) to read from ./.git/COMMIT_EDITMSG or where to read from (string) */
   edit?: boolean | string;
 };
 
