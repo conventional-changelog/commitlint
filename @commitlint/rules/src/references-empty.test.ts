@@ -12,7 +12,7 @@ const messages = {
 };
 
 const opts = (async () => {
-	const o = await preset;
+	const o = await preset();
 	o.parserOpts.commentChar = '#';
 	return o;
 })();
