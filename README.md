@@ -19,7 +19,7 @@
 ## Contents
 
 - [What is commitlint](#what-is-commitlint)
-  - [Benefits using commitlint](#benefits-using-commitlint)
+  - [Benefits of using commitlint](#benefits-using-commitlint)
 - [Getting started](#getting-started)
 - [CLI](#cli)
 - [Config](#config)
@@ -76,7 +76,7 @@ Common types according to [commitlint-config-conventional (based on the Angular 
 
 These can be modified by [your own configuration](#config).
 
-### Benefits using commitlint
+### Benefits of using commitlint
 
 - [Why Use Conventional Commits?](https://www.conventionalcommits.org/en/v1.0.0-beta.2/#why-use-conventional-commits)
 - ["The perks of committing with conventions" (Talk slides)](https://slides.com/marionebl/the-perks-of-committing-with-conventions#/)
@@ -191,7 +191,7 @@ Check the [main website](https://commitlint.js.org/).
 
 ## Roadmap
 
-`commitlint` is considered stable and is used in various projects as development tool.
+`commitlint` is considered stable and is used in various projects as a development tool.
 
 > **Ideas**: [conventional-changelog/commitlint#94](https://github.com/conventional-changelog/commitlint/issues/94)
 
@@ -205,16 +205,16 @@ Check the [main website](https://commitlint.js.org/).
 Security patches will be applied to versions which are not yet EOL.\
 Features will only be applied to the current main version.
 
-| Release                                                                          | Inital release |
-| -------------------------------------------------------------------------------- | -------------- |
-| [v18](https://github.com/conventional-changelog/commitlint/releases/tag/v18.0.0) | 10/2023        |
-| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 05/2022        |
-| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 12/2021        |
-| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 11/2021        |
-| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 10/2021        |
-| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 05/2021        |
-| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 02/2021        |
-| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 09/2020        |
+| Release                                                                          | Initial release |
+| -------------------------------------------------------------------------------- | --------------- |
+| [v18](https://github.com/conventional-changelog/commitlint/releases/tag/v18.0.0) | 10/2023         |
+| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 05/2022         |
+| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 12/2021         |
+| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 11/2021         |
+| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 10/2021         |
+| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 05/2021         |
+| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 02/2021         |
+| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 09/2020         |
 
 EOL is usually after around a year.
 
@@ -285,11 +285,11 @@ yarn test
 yarn run publish --otp <one-time password>
 ```
 
-If something in between fails (like a new packages was added and needs to be published for the
-first time but you forgot) you can use `lerna publish from-package` to publish anythign that
+If something in between fails (like a new package was added and needs to be published for the
+first time but you forgot) you can use `lerna publish from-package` to publish anything that
 has not been published yet.
 
-#### Create Github release
+#### Create GitHub release
 
 1. Copy changelog entry for the new version
 1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases

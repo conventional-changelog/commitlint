@@ -288,7 +288,7 @@ type Range = {
   from: string;
   /* Upper end of the commit range to read */
   to: string;
-  /* Wether (boolean) to read from ./.git/COMMIT_EDITMSG or where to read from (string) */
+  /* Whether (boolean) to read from ./.git/COMMIT_EDITMSG or where to read from (string) */
   edit?: boolean | string;
 };
 
@@ -446,7 +446,7 @@ read({to: 'HEAD', from: 'HEAD~2'}).then((commits) =>
 );
 ```
 
-- **Simplfied last-commit checker**
+- **Simplified last-commit checker**
 
 ```js
 const load = require('@commitlint/load').default;

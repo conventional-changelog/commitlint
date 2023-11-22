@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.3](https://github.com/conventional-changelog/commitlint/compare/v18.4.2...v18.4.3) (2023-11-21)
+
+
+### Bug Fixes
+
+* update dependency read-pkg to v9.0.1 ([#3777](https://github.com/conventional-changelog/commitlint/issues/3777)) ([88c4b8a](https://github.com/conventional-changelog/commitlint/commit/88c4b8a33dc2ebb63715018b3a0945d94cdfceeb))
+
+
+
+
+
 ## [18.4.2](https://github.com/conventional-changelog/commitlint/compare/v18.4.1...v18.4.2) (2023-11-16)
 
 
