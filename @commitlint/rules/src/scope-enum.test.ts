@@ -1,139 +1,183 @@
 import parse from '@commitlint/parse';
 import {scopeEnum} from './scope-enum';
+import {RuleConfigCondition} from '@commitlint/types';
 
-const messages = {
-	plain: 'foo(bar): baz',
-	superfluous: 'foo(): baz',
-	empty: 'foo: baz',
-	multiple: 'foo(bar,baz): qux',
-	multipleCommaSpace: 'foo(bar, baz): qux',
+const messagesByScope = {
+	single: {
+		plain: 'foo(bar): baz',
+	},
+	multiple: {
+		multiple: 'foo(bar,baz): qux',
+		multipleCommaSpace: 'foo(bar, baz): qux',
+	},
+	none: {
+		empty: 'foo: baz',
+		superfluous: 'foo(): baz',
+	},
 };
 
-const parsed = {
-	plain: parse(messages.plain),
-	superfluous: parse(messages.superfluous),
-	empty: parse(messages.empty),
-	multiple: parse(messages.multiple),
-	multipleCommaSpace: parse(messages.multipleCommaSpace),
-};
+const {single, multiple, none} = messagesByScope;
 
-test('scope-enum with plain message and always should succeed empty enum', async () => {
-	const [actual] = scopeEnum(await parsed.plain, 'always', []);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+const messages = Object.values(messagesByScope).reduce(
+	(acc, curr) => ({...acc, ...curr}),
+	{}
+);
 
-test('scope-enum with plain message and never should error empty enum', async () => {
-	const [actual, message] = scopeEnum(await parsed.plain, 'never', []);
-	const expected = false;
-	expect(actual).toEqual(expected);
-	expect(message).toEqual('scope must not be one of []');
-});
+const conditions: RuleConfigCondition[] = ['always', 'never'];
 
-test('with plain message should succeed correct enum', async () => {
-	const [actual] = scopeEnum(await parsed.plain, 'always', ['bar']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+describe('Scope Enum Validation', () => {
+	conditions.forEach((condition) => {
+		describe('Enum without Scopes', () => {
+			Object.keys(messages).forEach((messageType) => {
+				test(`Succeeds with a '${messageType}' message and '${condition}'`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(messages[messageType]),
+						condition,
+						[]
+					);
+					const expected = true;
+					expect(actual).toEqual(expected);
+					expect(message).toEqual('');
+				});
+			});
+		});
 
-test('scope-enum with plain message should error false enum', async () => {
-	const [actual, message] = scopeEnum(await parsed.plain, 'always', ['foo']);
-	const expected = false;
-	expect(actual).toEqual(expected);
-	expect(message).toEqual('scope must be one of [foo]');
-});
+		describe('Messages without Scopes', () => {
+			Object.keys(none).forEach((messageType) => {
+				const fakeMessage = messages[messageType];
 
-test('scope-enum with plain message should error forbidden enum', async () => {
-	const [actual, message] = scopeEnum(await parsed.plain, 'never', ['bar']);
-	const expected = false;
-	expect(actual).toEqual(expected);
-	expect(message).toEqual('scope must not be one of [bar]');
-});
+				it(`Succeeds with a '${messageType}' message and '${condition}' with single-scope enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						condition,
+						['bar']
+					);
+					expect(actual).toBeTruthy();
+					expect(message).toBeFalsy();
+				});
 
-test('scope-enum with plain message should succeed forbidden enum', async () => {
-	const [actual] = scopeEnum(await parsed.plain, 'never', ['foo']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				it(`Succeeds with a '${messageType}' message  and '${condition}' with multi-scope enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						condition,
+						['bar', 'baz']
+					);
+					expect(actual).toBeTruthy();
+					expect(message).toBeFalsy();
+				});
+			});
+		});
+	});
 
-test('scope-enum with superfluous scope should succeed enum', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'always', ['bar']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+	describe('Always', () => {
+		describe('Single-Scope Messages', () => {
+			Object.keys(single).forEach((messageType) => {
+				const fakeMessage = messages[messageType];
 
-test('scope-enum with superfluous scope and "never" should succeed', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'never', ['bar']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				it(`Succeeds with a '${messageType}' message when all message scopes are included in single-scope enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'always',
+						['bar']
+					);
+					expect(actual).toBeTruthy();
+					expect(message).toEqual('scope must be one of [bar]');
+				});
 
-test('scope-enum with superfluous scope and always should succeed empty enum', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'always', []);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				test(`Succeeds with a '${messageType}' message when all message scopes are included in multi-scope enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'always',
+						['bar', 'baz']
+					);
+					expect(actual).toBeTruthy();
+					expect(message).toEqual('scope must be one of [bar, baz]');
+				});
 
-test('scope-enum with superfluous scope and never should succeed empty enum', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'never', []);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				test(`Fails with a '${messageType}' message when any message scope is not included in enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'always',
+						['foo']
+					);
+					expect(actual).toBeFalsy();
+					expect(message).toEqual('scope must be one of [foo]');
+				});
+			});
+		});
 
-test('scope-enum with empty scope and always should succeed empty enum', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'always', []);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+		describe('Multi-Scope Messages', () => {
+			Object.keys(multiple).forEach((messageType) => {
+				const fakeMessage = messages[messageType];
 
-test('scope-enum with empty scope and always should succeed filled enum', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'always', ['foo']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				test(`Succeeds with a '${messageType}' message when all message scopes are included in enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'always',
+						['bar', 'baz']
+					);
+					expect(actual).toBeTruthy();
+					expect(message).toEqual('scope must be one of [bar, baz]');
+				});
 
-test('scope-enum with empty scope and never should succeed empty enum', async () => {
-	const [actual] = scopeEnum(await parsed.superfluous, 'never', []);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				test(`Fails with a '${messageType}' message when no message scopes are included in enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'always',
+						['foo']
+					);
+					expect(actual).toBeFalsy();
+					expect(message).toEqual('scope must be one of [foo]');
+				});
 
-test('scope-enum with multiple scopes should error on message with multiple scopes', async () => {
-	const [actual, message] = scopeEnum(await parsed.multiple, 'never', [
-		'bar',
-		'baz',
-	]);
-	const expected = false;
-	expect(actual).toEqual(expected);
-	expect(message).toEqual('scope must not be one of [bar, baz]');
-});
+				it(`Fails with a '${messageType}' message when only some message scopes are included in enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'always',
+						['bar']
+					);
+					expect(actual).toBeFalsy();
+					expect(message).toEqual('scope must be one of [bar]');
+				});
+			});
+		});
+	});
 
-test('scope-enum with multiple scopes should error on message with forbidden enum', async () => {
-	const [actual, message] = scopeEnum(await parsed.multiple, 'never', [
-		'bar',
-		'qux',
-	]);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+	describe('Never', () => {
+		describe('Messages with Scopes', () => {
+			Object.keys({...single, ...multiple}).forEach((messageType) => {
+				const fakeMessage = messages[messageType];
 
-test('scope-enum with multiple scopes should error on message with superfluous scope', async () => {
-	const [actual] = scopeEnum(await parsed.multiple, 'never', ['bar']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				test(`Succeeds with a '${messageType}' message when no message scopes are included in enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'never',
+						['foo']
+					);
+					expect(actual).toBeTruthy();
+					expect(message).toEqual('scope must not be one of [foo]');
+				});
 
-test('scope-enum with multiple scope should succeed on message with multiple scopes', async () => {
-	const [actual] = scopeEnum(await parsed.multiple, 'always', ['bar', 'baz']);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
+				it(`Fails with a '${messageType}' message when any message scope is included in single-scope enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'never',
+						['bar']
+					);
+					expect(actual).toBeFalsy();
+					expect(message).toEqual('scope must not be one of [bar]');
+				});
 
-test('scope-enum with multiple scope with comma+space should succeed on message with multiple scopes', async () => {
-	const [actual] = scopeEnum(await parsed.multipleCommaSpace, 'always', [
-		'bar',
-		'baz',
-	]);
-	const expected = true;
-	expect(actual).toEqual(expected);
+				test(`Fails with a '${messageType}' message when any message scope is included in multi-scope enum`, async () => {
+					const [actual, message] = scopeEnum(
+						await parse(fakeMessage),
+						'never',
+						['bar', 'baz']
+					);
+					expect(actual).toBeFalsy();
+					expect(message).toEqual('scope must not be one of [bar, baz]');
+				});
+			});
+		});
+	});
 });
