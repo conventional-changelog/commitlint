@@ -1,7 +1,7 @@
 import path from 'path';
 import {git} from '@commitlint/test';
 import execa from 'execa';
-import fs from 'fs-extra';
+import fs from 'fs/promises';
 
 import read from './read';
 
