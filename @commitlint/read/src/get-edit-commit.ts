@@ -1,5 +1,5 @@
 import toplevel from '@commitlint/top-level';
-import fs from 'fs-extra';
+import fs from 'fs/promises';
 import {getEditFilePath} from './get-edit-file-path';
 
 // Get recently edited commit message

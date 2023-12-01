@@ -1,6 +1,6 @@
 import path from 'path';
 import {Stats} from 'fs';
-import fs from 'fs-extra';
+import fs from 'fs/promises';
 
 // Get path to recently edited commit message file
 export async function getEditFilePath(
