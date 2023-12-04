@@ -145,6 +145,29 @@ lint:commit:
     - echo "${CI_COMMIT_MESSAGE}" | commitlint
 ```
 
+## Jenkins X
+
+```
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: pullrequest
+spec:
+  pipelineSpec:
+    tasks:
+    - name: conventional-commits
+      taskSpec:
+        steps:
+        - name: lint-commit-messages
+          image: commitlint/commitlint
+          script: |
+            #!/usr/bin/env sh
+            . .jx/variables.sh
+            commitlint --extends '@commitlint/config-conventional' --from $PR_BASE_SHA --to $PR_HEAD_SHA
+  serviceAccountName: tekton-bot
+  timeout: 15m
+```
+
 ### 3rd party integrations
 
 #### [Codemagic](https://codemagic.io/)
