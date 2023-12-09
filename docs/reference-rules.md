@@ -225,6 +225,10 @@ Infinity
   ```
   []
   ```
+- Notes:
+  - This rule always passes if no scopes are provided in the message or the value is an empty array.
+  - When set to `always`, all message scopes must be found in the value.
+  - When set to `never`, none of the message scopes can be found in the value.
 
 #### scope-case
 
@@ -347,7 +351,19 @@ Infinity
 - **rule**: `always`
 - **value**
   ```js
-  ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'];
+  [
+    'build',
+    'chore',
+    'ci',
+    'docs',
+    'feat',
+    'fix',
+    'perf',
+    'refactor',
+    'revert',
+    'style',
+    'test',
+  ];
   ```
 
 #### type-case
