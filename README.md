@@ -108,7 +108,9 @@ yarn husky install
 ```
 
 ### Add hook
-
+> [!WARNING]  
+> It's necessary that you use **commit-msg** as the name for hook file.
+> Read Git hooks [documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) for more info.
 ```
 npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
