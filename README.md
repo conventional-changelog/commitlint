@@ -248,6 +248,7 @@ cd commitlint
 yarn
 yarn run build # run build tasks
 yarn start # run tests, again on change
+yarn run commitlint # run CLI
 ```
 
 For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).
