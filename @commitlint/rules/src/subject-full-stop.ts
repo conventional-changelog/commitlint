@@ -14,7 +14,10 @@ export const subjectFullStop: SyncRule<string> = (
 	const input = parsed.header;
 
 	const negated = when === 'never';
-	const hasStop = input[input.length - 1] === value;
+	let hasStop = input[input.length - 1] === value;
+	if (input.slice(-3) === '...') {
+		hasStop = false;
+	}
 
 	return [
 		negated ? !hasStop : hasStop,
