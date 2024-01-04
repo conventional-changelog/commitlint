@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
+
+
+### Bug Fixes
+
+* **utils:** remove fs-extra usage ([#3804](https://github.com/conventional-changelog/commitlint/issues/3804)) ([92f2237](https://github.com/conventional-changelog/commitlint/commit/92f2237d66950d9cb92430bc082a86a5dbc86d3f))
+
+
+
+
+
 ## [18.4.3](https://github.com/conventional-changelog/commitlint/compare/v18.4.2...v18.4.3) (2023-11-21)
 
 

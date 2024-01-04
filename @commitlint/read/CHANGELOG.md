@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
+
+
+### Bug Fixes
+
+* **read:** remove fs-extra usage and use fs/promises ([#3803](https://github.com/conventional-changelog/commitlint/issues/3803)) ([714be66](https://github.com/conventional-changelog/commitlint/commit/714be668c104c554c66e866e53addd04944544f6))
+
+
+
+
+
 ## [18.4.3](https://github.com/conventional-changelog/commitlint/compare/v18.4.2...v18.4.3) (2023-11-21)
 
 **Note:** Version bump only for package @commitlint/read

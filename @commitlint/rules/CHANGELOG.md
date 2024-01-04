@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
+
+
+### Bug Fixes
+
+* subject-full-stop false positive when using ellipsis ([#3839](https://github.com/conventional-changelog/commitlint/issues/3839)) ([b4246d6](https://github.com/conventional-changelog/commitlint/commit/b4246d6428399177d43296dc8bec6714e664d037))
+
+
+
+
+
 ## [18.4.3](https://github.com/conventional-changelog/commitlint/compare/v18.4.2...v18.4.3) (2023-11-21)
 
 **Note:** Version bump only for package @commitlint/rules

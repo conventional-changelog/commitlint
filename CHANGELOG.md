@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
+
+
+### Bug Fixes
+
+* **@commitlint/load:** Remove unused `@types/node` dependency ([#3801](https://github.com/conventional-changelog/commitlint/issues/3801)) ([7b3f8b3](https://github.com/conventional-changelog/commitlint/commit/7b3f8b3fe106311682a2e8ad281dd9a4e42443c6))
+* **read:** remove fs-extra usage and use fs/promises ([#3803](https://github.com/conventional-changelog/commitlint/issues/3803)) ([714be66](https://github.com/conventional-changelog/commitlint/commit/714be668c104c554c66e866e53addd04944544f6))
+* subject-full-stop false positive when using ellipsis ([#3839](https://github.com/conventional-changelog/commitlint/issues/3839)) ([b4246d6](https://github.com/conventional-changelog/commitlint/commit/b4246d6428399177d43296dc8bec6714e664d037))
+* update dependency fs-extra to v11.2.0 ([#3799](https://github.com/conventional-changelog/commitlint/issues/3799)) ([abb4da2](https://github.com/conventional-changelog/commitlint/commit/abb4da2a389ad00800562194db1b6ba588623df4))
+* **utils:** remove fs-extra usage ([#3804](https://github.com/conventional-changelog/commitlint/issues/3804)) ([92f2237](https://github.com/conventional-changelog/commitlint/commit/92f2237d66950d9cb92430bc082a86a5dbc86d3f))
+
+
+
+
+
 ## [18.4.3](https://github.com/conventional-changelog/commitlint/compare/v18.4.2...v18.4.3) (2023-11-21)
 
 

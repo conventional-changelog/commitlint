@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
+
+
+### Bug Fixes
+
+* **@commitlint/load:** Remove unused `@types/node` dependency ([#3801](https://github.com/conventional-changelog/commitlint/issues/3801)) ([7b3f8b3](https://github.com/conventional-changelog/commitlint/commit/7b3f8b3fe106311682a2e8ad281dd9a4e42443c6))
+
+
+
+
+
 ## [18.4.3](https://github.com/conventional-changelog/commitlint/compare/v18.4.2...v18.4.3) (2023-11-21)
 
 **Note:** Version bump only for package @commitlint/load
