@@ -10,7 +10,7 @@
 >
 > `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
 
-[![npm latest][2]][3] [![Github Actions][4]][5]
+[![npm latest][2]][3] [![node compatibility][13]][14] [![Github Actions][4]][5]
 
 - 🚓 Be a good `commitizen`
 - 📦 Share configuration via `npm`
@@ -108,9 +108,11 @@ yarn husky install
 ```
 
 ### Add hook
+
 > [!WARNING]  
 > It's necessary that you use **commit-msg** as the name for hook file.
 > Read Git hooks [documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) for more info.
+
 ```
 npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
 ```
@@ -354,3 +356,5 @@ npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dis
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square
 [11]: https://devtoolscommunity.herokuapp.com/badge.svg?style=flat-square
 [12]: https://devtoolscommunity.herokuapp.com
+[13]: https://img.shields.io/node/v/@commitlint/cli.svg
+[14]: https://nodejs.org/en/about/previous-releases
