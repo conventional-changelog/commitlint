@@ -21,7 +21,7 @@ import {scopeEnum} from './scope-enum';
 import {scopeMaxLength} from './scope-max-length';
 import {scopeMinLength} from './scope-min-length';
 import {signedOffBy} from './signed-off-by';
-import {subjectBreaking} from './subject-breaking';
+import {headerBreaking} from './header-breaking';
 import {subjectCase} from './subject-case';
 import {subjectEmpty} from './subject-empty';
 import {subjectFullStop} from './subject-full-stop';
@@ -48,6 +48,7 @@ export default {
 	'footer-max-length': footerMaxLength,
 	'footer-max-line-length': footerMaxLineLength,
 	'footer-min-length': footerMinLength,
+	'header-breaking': headerBreaking,
 	'header-case': headerCase,
 	'header-full-stop': headerFullStop,
 	'header-max-length': headerMaxLength,
@@ -59,7 +60,6 @@ export default {
 	'scope-max-length': scopeMaxLength,
 	'scope-min-length': scopeMinLength,
 	'signed-off-by': signedOffBy,
-	'subject-breaking': subjectBreaking,
 	'subject-case': subjectCase,
 	'subject-empty': subjectEmpty,
 	'subject-full-stop': subjectFullStop,
