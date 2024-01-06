@@ -1,4 +1,4 @@
-# [Get Started](https://conventional-changelog.github.io/commitlint/#/?id=getting-started) | [Let's chat][12] ![slack][11] | [Website](https://conventional-changelog.github.io/commitlint)
+# [Get Started](https://conventional-changelog.github.io/commitlint/#/?id=getting-started) | [Website](https://conventional-changelog.github.io/commitlint)
 
 > Lint commit messages
 
@@ -354,7 +354,5 @@ npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dis
 [8]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [9]: https://nodejs.org/api/documentation.html#documentation_stability_index
 [10]: https://img.shields.io/npm/v/@commitlint/cli/next.svg?style=flat-square
-[11]: https://devtoolscommunity.herokuapp.com/badge.svg?style=flat-square
-[12]: https://devtoolscommunity.herokuapp.com
 [13]: https://img.shields.io/node/v/@commitlint/cli.svg
 [14]: https://nodejs.org/en/about/previous-releases
