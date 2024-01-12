@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {subjectFullStop} from './subject-full-stop';
+import {subjectFullStop} from './subject-full-stop.js';
 
 const messages = {
 	empty: 'test:\n',

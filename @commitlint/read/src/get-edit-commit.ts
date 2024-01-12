@@ -1,6 +1,7 @@
 import toplevel from '@commitlint/top-level';
 import fs from 'fs/promises';
-import {getEditFilePath} from './get-edit-file-path';
+
+import {getEditFilePath} from './get-edit-file-path.js';
 
 // Get recently edited commit message
 export async function getEditCommit(

@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {bodyLeadingBlank} from './body-leading-blank';
+import {bodyLeadingBlank} from './body-leading-blank.js';
 
 const messages = {
 	simple: 'test: subject',

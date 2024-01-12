@@ -1,4 +1,5 @@
 import path from 'path';
+import {pathToFileURL} from 'url';
 
 import 'resolve-global';
 import resolveFrom from 'resolve-from';
@@ -6,7 +7,7 @@ import mergeWith from 'lodash.mergewith';
 import {validateConfig} from '@commitlint/config-validator';
 import {UserConfig} from '@commitlint/types';
 
-const importFresh = require('import-fresh');
+import importFresh from 'import-fresh';
 
 export interface ResolveExtendsContext {
 	cwd?: string;
@@ -14,15 +15,15 @@ export interface ResolveExtendsContext {
 	prefix?: string;
 	resolve?(id: string, ctx?: {prefix?: string; cwd?: string}): string;
 	resolveGlobal?: (id: string) => string;
-	require?<T>(id: string): T;
+	dynamicImport?<T>(id: string): T | Promise<T>;
 }
 
-export default function resolveExtends(
+export default async function resolveExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {}
-): UserConfig {
+): Promise<UserConfig> {
 	const {extends: e} = config;
-	const extended = loadExtends(config, context);
+	const extended = await loadExtends(config, context);
 	extended.push(config);
 	return extended.reduce(
 		(r, {extends: _, ...c}) =>
@@ -39,17 +40,25 @@ export default function resolveExtends(
 	);
 }
 
-function loadExtends(
+const dynamicImport = async <T>(id: string): Promise<T> => {
+	const imported = await import(
+		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
+	);
+	return ('default' in imported && imported.default) || imported;
+};
+
+async function loadExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {}
-): UserConfig[] {
+): Promise<UserConfig[]> {
 	const {extends: e} = config;
 	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
 
-	return ext.reduce<UserConfig[]>((configs, raw) => {
-		const load = context.require || require;
+	return await ext.reduce(async (configs, raw) => {
 		const resolved = resolveConfig(raw, context);
-		const c = load(resolved);
+		const c = await (context.dynamicImport || dynamicImport)<{
+			parserPreset?: string;
+		}>(resolved);
 		const cwd = path.dirname(resolved);
 		const ctx = {...context, cwd};
 
@@ -65,7 +74,7 @@ function loadExtends(
 				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
 					.split(path.sep)
 					.join('/'),
-				parserOpts: require(resolvedParserPreset),
+				parserOpts: await dynamicImport(resolvedParserPreset),
 			};
 
 			ctx.parserPreset = parserPreset;
@@ -74,8 +83,8 @@ function loadExtends(
 
 		validateConfig(resolved, config);
 
-		return [...configs, ...loadExtends(c, ctx), c];
-	}, []);
+		return [...(await configs), ...(await loadExtends(c, ctx)), c];
+	}, Promise.resolve<UserConfig[]>([]));
 }
 
 function getId(raw: string = '', prefix: string = ''): string {
@@ -98,16 +107,19 @@ function resolveConfig(
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
 
+	let resolved: string;
 	try {
-		return resolve(id, context);
+		resolved = resolve(id, context);
 	} catch (err) {
 		const legacy = getId(raw, 'conventional-changelog-lint-config');
-		const resolved = resolve(legacy, context);
+		resolved = resolve(legacy, context);
 		console.warn(
 			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
 		);
-		return resolved;
 	}
+	return path.isAbsolute(resolved)
+		? pathToFileURL(resolved).toString()
+		: resolved;
 }
 
 function resolveId(
@@ -141,7 +153,7 @@ function resolveFromSilent(cwd: string, id: string): string | void {
 
 function resolveGlobalSilent(id: string): string | void {
 	try {
-		const resolveGlobal = importFresh('resolve-global');
+		const resolveGlobal = importFresh<(id: string) => string>('resolve-global');
 		return resolveGlobal(id);
 	} catch (err) {}
 }

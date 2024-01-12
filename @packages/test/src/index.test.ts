@@ -1,7 +1,8 @@
-import * as u from '.';
 import os from 'os';
 import path from 'path';
 import fs from 'fs-extra';
+
+import * as u from './index.js';
 
 test('exports a git namespace', () => {
 	expect(typeof u.git).toBe('object');

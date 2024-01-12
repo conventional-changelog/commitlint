@@ -1,9 +1,14 @@
-const glob = require('glob');
-const Path = require('path');
-const importFrom = require('import-from');
-const semver = require('semver');
+import {createRequire} from 'module';
+import Path from 'path';
+import {pathToFileURL} from 'url';
 
-module.exports = {
+import glob from 'glob';
+import importFrom from 'import-from';
+import semver from 'semver';
+
+const require = createRequire(import.meta.url);
+
+export default {
 	utils: {getPackages},
 	rules: {
 		'scope-enum': (ctx) =>
@@ -62,6 +67,5 @@ function getLernaVersion(cwd) {
 		'lerna'
 	);
 	const modulePackageJson = Path.join(moduleDir, 'package.json');
-
 	return require(modulePackageJson).version;
 }

@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {bodyMinLength} from './body-min-length';
+import {bodyMinLength} from './body-min-length.js';
 
 const short = 'a';
 const long = 'ab';

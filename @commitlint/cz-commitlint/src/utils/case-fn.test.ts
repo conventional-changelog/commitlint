@@ -1,5 +1,6 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import getCaseFn from './case-fn';
+
+import getCaseFn from './case-fn.js';
 
 test('should not transform when rule is disabled', () => {
 	let rule = getCaseFn([RuleConfigSeverity.Disabled]);

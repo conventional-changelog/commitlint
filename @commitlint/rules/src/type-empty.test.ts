@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {typeEmpty} from './type-empty';
+import {typeEmpty} from './type-empty.js';
 
 const messages = {
 	empty: '(scope):',

@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {footerMaxLength} from './footer-max-length';
+import {footerMaxLength} from './footer-max-length.js';
 
 const short = 'BREAKING CHANGE: a';
 const long = 'BREAKING CHANGE: ab';

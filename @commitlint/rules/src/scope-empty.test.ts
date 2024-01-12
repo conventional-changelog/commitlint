@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {scopeEmpty} from './scope-empty';
+import {scopeEmpty} from './scope-empty.js';
 
 const messages = {
 	plain: 'foo(bar): baz',

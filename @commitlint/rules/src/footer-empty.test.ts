@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {footerEmpty} from './footer-empty';
+import {footerEmpty} from './footer-empty.js';
 
 const messages = {
 	simple: 'test: subject',

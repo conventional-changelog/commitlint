@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {subjectCase} from './subject-case';
+import {subjectCase} from './subject-case.js';
 
 const messages = {
 	empty: 'test:\n',
@@ -117,8 +117,8 @@ test('with mixedcase subject should fail for "always uppercase"', async () => {
 	expect(actual).toEqual(expected);
 });
 
-test('with caseless subject should succeed for "never sentensecase"', async () => {
-	const [actual] = subjectCase(await parsed.caseless, 'never', 'sentense-case');
+test('with caseless subject should succeed for "never sentencecase"', async () => {
+	const [actual] = subjectCase(await parsed.caseless, 'never', 'sentence-case');
 	const expected = true;
 	expect(actual).toEqual(expected);
 });

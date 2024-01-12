@@ -8,7 +8,7 @@ import {
 	ruleIsApplicable,
 	ruleIsDisabled,
 	ruleIsNotApplicable,
-} from './rules';
+} from './rules.js';
 
 test('ruleIsDisabled', () => {
 	expect(ruleIsDisabled([RuleConfigSeverity.Disabled])).toBe(true);

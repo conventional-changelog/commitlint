@@ -3,11 +3,12 @@ import {GetRuleMethod, SetRulesMethod} from './rules';
 
 let getRule: GetRuleMethod;
 let setRules: SetRulesMethod;
-beforeEach(() => {
+
+beforeEach(async () => {
 	jest.resetModules();
-	getRule = require('./rules').getRule;
-	setRules = require('./rules').setRules;
+	({getRule, setRules} = await import('./rules.js'));
 });
+
 describe('getRule', () => {
 	test('should get rule when prefix and property strict match', () => {
 		const rules: QualifiedRules = {

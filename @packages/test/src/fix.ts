@@ -1,5 +1,6 @@
-import fs from 'fs-extra';
 import path from 'path';
+
+import fs from 'fs-extra';
 import pkgDir from 'pkg-dir';
 
 declare global {

@@ -1,5 +1,5 @@
 // https://github.com/raszi/node-tmp/issues/229
-import NodeEnvironment from 'jest-environment-node';
+import {TestEnvironment as NodeEnvironment} from 'jest-environment-node';
 import tmp from 'tmp';
 
 class TestEnvironment extends NodeEnvironment {

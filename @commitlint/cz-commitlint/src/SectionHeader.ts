@@ -1,8 +1,9 @@
 import {PromptName, RuleField} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
-import Question, {QuestionConfig} from './Question';
-import getRuleQuestionConfig from './services/getRuleQuestionConfig';
-import {getPromptSettings} from './store/prompts';
+
+import Question, {QuestionConfig} from './Question.js';
+import getRuleQuestionConfig from './services/getRuleQuestionConfig.js';
+import {getPromptSettings} from './store/prompts.js';
 
 export class HeaderQuestion extends Question {
 	headerMaxLength: number;

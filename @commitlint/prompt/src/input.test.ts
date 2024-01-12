@@ -1,7 +1,16 @@
-import {Answers, PromptModule, QuestionCollection} from 'inquirer';
 /// <reference path="./inquirer/inquirer.d.ts" />
-import {input} from './input';
+
 import chalk from 'chalk';
+import {
+	Answers,
+	DistinctQuestion,
+	PromptModule,
+	QuestionCollection,
+} from 'inquirer';
+
+import {input} from './input';
+
+import {jest} from '@jest/globals';
 
 jest.mock(
 	'@commitlint/load',
@@ -42,7 +51,7 @@ test('should work without scope', async () => {
 });
 
 test('should fail without type', async () => {
-	const spy = jest.spyOn(console, 'error').mockImplementation();
+	const spy = jest.spyOn(console, 'error');
 	const prompt = stub({
 		'input-custom': {
 			type: '',
@@ -62,7 +71,9 @@ test('should fail without type', async () => {
 });
 
 function stub(config: Record<string, Record<string, unknown>>): PromptModule {
-	const prompt = async (questions: QuestionCollection): Promise<any> => {
+	const prompt = async (
+		questions: DistinctQuestion | DistinctQuestion[]
+	): Promise<any> => {
 		const result: Answers = {};
 		const resolvedConfig = Array.isArray(questions) ? questions : [questions];
 		for (const promptConfig of resolvedConfig) {
@@ -77,7 +88,7 @@ function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 			}
 			const validate = promptConfig.validate;
 			if (validate) {
-				const validationResult = validate(answer, result);
+				const validationResult = await validate(answer, result);
 				if (validationResult !== true) {
 					throw new Error(validationResult || undefined);
 				}

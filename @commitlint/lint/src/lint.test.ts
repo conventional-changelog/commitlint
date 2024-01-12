@@ -1,5 +1,6 @@
-import lint from './lint';
 import {RuleConfigSeverity} from '@commitlint/types';
+
+import lint from './lint.js';
 
 test('throws without params', async () => {
 	const error = (lint as any)();

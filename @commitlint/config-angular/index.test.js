@@ -1,5 +1,8 @@
 import lint from '@commitlint/lint';
-import {rules, parserPreset} from '.';
+
+import config from './index.js';
+
+const {rules, parserPreset} = config;
 
 const lintMessage = async (message) => {
 	const parserOpts = parserPreset.parserOpts;

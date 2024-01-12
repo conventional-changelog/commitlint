@@ -1,33 +1,38 @@
 import {QualifiedRules, RuleConfigSeverity, UserPromptConfig} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
 import isFunction from 'lodash.isfunction';
+
+import {jest} from '@jest/globals';
+
 import process from './Process';
 
 const mockShowTitle = jest.fn();
 const mockShowValidation = jest.fn((message) => message);
 
 // mock inquirer
-const mockPrompt = jest.fn(function (questions, answers) {
+const mockPrompt = jest.fn(async function (
+	questions: DistinctQuestion[],
+	answers: Answers
+) {
 	for (const {name, message, when, filter, validate} of questions) {
-		if (!when || when(answers)) {
+		if (typeof when !== 'function' || (await when(answers))) {
 			const title =
 				message && isFunction(message)
-					? message(answers)
+					? await message(answers)
 					: typeof message === 'string'
 					? message
 					: '';
 			mockShowTitle(title);
 
-			const validation: boolean | string =
-				!validate || validate(answers[name] ?? '', answers);
+			const validation =
+				typeof validate !== 'function' ||
+				(await validate((name && answers[name]) ?? '', answers));
 
 			if (typeof validation === 'string') {
 				mockShowValidation(validation);
 				break;
-			} else {
-				if (filter && answers[name]) {
-					answers[name] = filter(answers[name]);
-				}
+			} else if (filter && name && answers[name]) {
+				answers[name] = filter(answers[name], answers);
 			}
 		}
 	}
@@ -35,13 +40,9 @@ const mockPrompt = jest.fn(function (questions, answers) {
 
 function InquirerFactory(answers: Answers) {
 	const inquirer = {
-		prompt: function (questions: DistinctQuestion) {
-			return {
-				then: function (callback: (answers: Answers) => void) {
-					mockPrompt(questions, answers);
-					callback(answers);
-				},
-			};
+		async prompt(questions: DistinctQuestion[]) {
+			await mockPrompt(questions, answers);
+			return answers;
 		},
 	};
 
@@ -99,7 +100,7 @@ describe('conventional-changlog', () => {
 					'test',
 				],
 			],
-		} as any;
+		};
 		prompts = {
 			messages: MESSAGES,
 			questions: {
@@ -212,7 +213,7 @@ describe('conventional-changlog', () => {
 			isIssueAffected: true,
 			issues: 'https://github.com/conventional-changelog/commitlint/issues/94',
 		};
-		return process(rules as any, prompts, InquirerFactory(answers) as any).then(
+		return process(rules, prompts, InquirerFactory(answers)).then(
 			(commitMessage) => {
 				expect(commitMessage).toBe(
 					'refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94'
@@ -231,13 +232,11 @@ describe('conventional-changlog', () => {
 			isIssueAffected: true,
 			issues: 'https://github.com/conventional-changelog/commitlint/issues/94',
 		};
-		return process(rules as any, prompts, InquirerFactory(answers) as any).then(
-			() => {
-				expect(mockShowValidation).toHaveBeenCalledWith(
-					'subject can not be empty'
-				);
-				expect(mockShowTitle).toHaveBeenCalledTimes(3);
-			}
-		);
+		return process(rules, prompts, InquirerFactory(answers)).then(() => {
+			expect(mockShowValidation).toHaveBeenCalledWith(
+				'subject can not be empty'
+			);
+			expect(mockShowTitle).toHaveBeenCalledTimes(3);
+		});
 	});
 });

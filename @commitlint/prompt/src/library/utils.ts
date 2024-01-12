@@ -1,6 +1,7 @@
 import {RuleConfigSeverity} from '@commitlint/types';
 import type {QualifiedRules} from '@commitlint/types';
-import type {RuleEntry} from './types';
+
+import type {RuleEntry} from './types.js';
 
 /**
  * Get name for a given rule id

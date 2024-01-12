@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {typeMinLength} from './type-min-length';
+import {typeMinLength} from './type-min-length.js';
 
 const short = 'a';
 const long = 'ab';

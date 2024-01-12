@@ -1,4 +1,17 @@
+import {readFileSync, writeFileSync} from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
 import {RuleConfigSeverity} from '@commitlint/types';
+import {fix, git, npm} from '@commitlint/test';
+import resolveFrom from 'resolve-from';
+
+import {jest} from '@jest/globals';
+
+import load from './load.js';
+import {isDynamicAwaitSupported} from './utils/load-config.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 const plugin = jest.fn();
 const scopedPlugin = jest.fn();
@@ -7,14 +20,6 @@ jest.mock('commitlint-plugin-example', () => plugin, {virtual: true});
 jest.mock('@scope/commitlint-plugin-example', () => scopedPlugin, {
 	virtual: true,
 });
-
-import path from 'path';
-import {readFileSync, writeFileSync} from 'fs';
-import resolveFrom from 'resolve-from';
-import {fix, git, npm} from '@commitlint/test';
-
-import load from './load';
-import {isDynamicAwaitSupported} from './utils/load-config';
 
 const fixBootstrap = (name: string) => fix.bootstrap(name, __dirname);
 const gitBootstrap = (name: string) => git.bootstrap(name, __dirname);

@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {subjectMaxLength} from './subject-max-length';
+import {subjectMaxLength} from './subject-max-length.js';
 
 const short = 'a';
 const long = 'ab';

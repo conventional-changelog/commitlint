@@ -1,5 +1,12 @@
-import loadPlugin from './load-plugin';
+import {createRequire} from 'module';
+
 import {AsyncRule, Plugin, Rule, SyncRule} from '@commitlint/types';
+
+import {jest} from '@jest/globals';
+
+import loadPlugin from './load-plugin.js';
+
+const require = createRequire(import.meta.url);
 
 jest.mock('commitlint-plugin-example', () => ({example: true}), {
 	virtual: true,

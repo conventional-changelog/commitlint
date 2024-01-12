@@ -1,5 +1,5 @@
-import type {Result} from './types';
-import format from './format';
+import type {Result} from './types.js';
+import format from './format.js';
 
 test('should return empty string', () => {
 	const result: Result = {};

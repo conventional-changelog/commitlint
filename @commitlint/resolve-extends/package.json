@@ -1,5 +1,6 @@
 {
   "name": "@commitlint/resolve-extends",
+  "type": "module",
   "version": "18.6.1",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
@@ -36,6 +37,7 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/utils": "^18.6.1",
+    "@jest/globals": "^29.7.0",
     "@types/lodash.mergewith": "^4.6.8"
   },
   "dependencies": {

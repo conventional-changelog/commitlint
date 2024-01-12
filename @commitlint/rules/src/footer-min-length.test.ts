@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {footerMinLength} from './footer-min-length';
+import {footerMinLength} from './footer-min-length.js';
 
 const short = 'BREAKING CHANGE: a';
 const long = 'BREAKING CHANGE: ab';

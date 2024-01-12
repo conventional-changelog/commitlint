@@ -1,4 +1,4 @@
-import parse from '.';
+import parse from './index.js';
 
 test('throws when called without params', async () => {
 	await expect((parse as any)()).rejects.toThrow('Expected a raw commit');
@@ -142,7 +142,7 @@ test('supports scopes with / and empty parserOpts', async () => {
 
 test('ignores comments', async () => {
 	const message = 'type(some/scope): subject\n# some comment';
-	const changelogOpts = await require('conventional-changelog-angular');
+	const changelogOpts = await import('conventional-changelog-angular');
 	const opts = {
 		...changelogOpts.parserOpts,
 		commentChar: '#',
@@ -157,7 +157,7 @@ test('ignores comments', async () => {
 test('registers inline #', async () => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
-	const changelogOpts = await require('conventional-changelog-angular');
+	const changelogOpts = await import('conventional-changelog-angular');
 	const opts = {
 		...changelogOpts.parserOpts,
 		commentChar: '#',
@@ -203,7 +203,7 @@ test('allows separating -side nodes- by setting parserOpts.fieldPattern', async 
 
 test('parses references leading subject', async () => {
 	const message = '#1 some subject';
-	const opts = await require('conventional-changelog-angular');
+	const opts = await import('conventional-changelog-angular');
 	const {
 		references: [actual],
 	} = await parse(message, undefined, opts);

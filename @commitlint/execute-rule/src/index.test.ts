@@ -1,4 +1,4 @@
-import execute from '.';
+import execute from './index.js';
 
 test('does nothing without params', async () => {
 	const exec = execute as any;

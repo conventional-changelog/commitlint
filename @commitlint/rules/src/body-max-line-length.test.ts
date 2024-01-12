@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {bodyMaxLineLength} from './body-max-line-length';
+import {bodyMaxLineLength} from './body-max-line-length.js';
 
 const short = 'a';
 const long = 'ab';

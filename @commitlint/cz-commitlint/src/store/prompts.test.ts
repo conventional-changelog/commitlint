@@ -1,17 +1,18 @@
-import * as prompts from './prompts';
+import {jest} from '@jest/globals';
+
+import * as prompts from './prompts.js';
 
 let getPromptQuestions: typeof prompts.getPromptQuestions;
 let getPromptMessages: typeof prompts.getPromptMessages;
 let getPromptSettings: typeof prompts.getPromptSettings;
 let setPromptConfig: typeof prompts.setPromptConfig;
 
-beforeEach(() => {
+beforeEach(async () => {
 	jest.resetModules();
-	getPromptSettings = require('./prompts').getPromptSettings;
-	getPromptMessages = require('./prompts').getPromptMessages;
-	getPromptQuestions = require('./prompts').getPromptQuestions;
-	setPromptConfig = require('./prompts').setPromptConfig;
+	({getPromptQuestions, getPromptMessages, getPromptSettings, setPromptConfig} =
+		await import('./prompts.js'));
 });
+
 describe('setPromptConfig', () => {
 	test('should cover questions when prompt config questions is plain object', () => {
 		const promptConfig = {

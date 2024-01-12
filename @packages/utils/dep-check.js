@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const path = require('path');
-const execa = require('execa');
+import path from 'path';
+import execa from 'execa';
 
 const cwd = process.cwd();
 

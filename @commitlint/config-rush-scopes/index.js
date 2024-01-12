@@ -1,11 +1,9 @@
-const Path = require('path');
-const util = require('util');
-const fs = require('fs');
-const jsonc = require('jsonc');
+import Path from 'path';
+import fs from 'fs/promises';
 
-const readFilePromisifed = util.promisify(fs.readFile);
+import jsonc from 'jsonc';
 
-module.exports = {
+export default {
 	utils: {getPackages},
 	rules: {
 		'scope-enum': (ctx) =>
@@ -19,7 +17,8 @@ function getPackages(context) {
 			const ctx = context || {};
 			const cwd = ctx.cwd || process.cwd();
 
-			return readFilePromisifed(Path.join(cwd, 'rush.json'), {encoding: 'utf8'})
+			return fs
+				.readFile(Path.join(cwd, 'rush.json'), {encoding: 'utf8'})
 				.then((content) => jsonc.parse(content))
 				.then(({projects}) => projects)
 				.catch(() => []);

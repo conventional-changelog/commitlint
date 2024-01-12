@@ -8,7 +8,7 @@ import {
 	getRulePrefix,
 	getRules,
 	ruleIsActive,
-} from './utils';
+} from './utils.js';
 
 test('getRulePrefix', () => {
 	expect(getRulePrefix('body-leading-blank')).toEqual('body');

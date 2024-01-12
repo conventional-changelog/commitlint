@@ -1,5 +1,8 @@
 import chalk from 'chalk';
 import inquirer, {Answers, InputQuestionOptions} from 'inquirer';
+
+import {jest} from '@jest/globals';
+
 import Question from './Question';
 
 const MESSAGES = {

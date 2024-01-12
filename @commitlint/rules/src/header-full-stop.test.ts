@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {headerFullStop} from './header-full-stop';
+import {headerFullStop} from './header-full-stop.js';
 
 const messages = {
 	with: `header.\n`,

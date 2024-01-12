@@ -1,5 +1,6 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import getFullStopFn from './full-stop-fn';
+
+import getFullStopFn from './full-stop-fn.js';
 
 test('should not apply', () => {
 	let rule = getFullStopFn([RuleConfigSeverity.Disabled]);

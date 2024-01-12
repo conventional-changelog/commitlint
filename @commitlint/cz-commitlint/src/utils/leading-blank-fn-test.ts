@@ -1,5 +1,6 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import getLeadingBlankFn from './leading-blank-fn';
+
+import getLeadingBlankFn from './leading-blank-fn.js';
 
 test('should not apply', () => {
 	let rule = getLeadingBlankFn([RuleConfigSeverity.Disabled]);

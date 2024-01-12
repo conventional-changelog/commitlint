@@ -1,4 +1,4 @@
-import toLines from '.';
+import toLines from './index.js';
 
 test('should return an array for empty input', () => {
 	expect((toLines as () => string[])()).toStrictEqual([]);

@@ -1,149 +1,159 @@
-import resolveExtends, {ResolveExtendsContext} from '.';
+import {createRequire} from 'module';
+import {pathToFileURL} from 'url';
+
 import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
+
+import {jest} from '@jest/globals';
+
+import resolveExtends, {ResolveExtendsContext} from './index.js';
+
+const require = createRequire(import.meta.url);
 
 const id = (id: unknown) => id;
 
-test('returns empty object when called without params', () => {
-	const actual = resolveExtends();
+test('returns empty object when called without params', async () => {
+	const actual = await resolveExtends();
 	expect(actual).toEqual({});
 });
 
-test('returns an equivalent object as passed in', () => {
+test('returns an equivalent object as passed in', async () => {
 	const expected = {foo: 'bar'};
-	const actual = resolveExtends(expected);
+	const actual = await resolveExtends(expected);
 	expect(actual).toEqual(expected);
 });
 
 test('falls back to global install', async () => {
 	const resolveGlobal = jest.fn(() => '@commitlint/foo-bar');
-	const require = jest.fn(() => ({}));
+	const dynamicImport = jest.fn(() => ({}));
 
-	const ctx = {resolveGlobal, require} as ResolveExtendsContext;
+	const ctx = {resolveGlobal, dynamicImport} as ResolveExtendsContext;
 
 	resolveExtends({extends: ['@commitlint/foo-bar']}, ctx);
 	expect(ctx.resolveGlobal).toHaveBeenCalledWith('@commitlint/foo-bar');
 });
 
 test('fails for missing extends', async () => {
-	expect(() => resolveExtends({extends: ['@commitlint/foo-bar']})).toThrow(
-		/Cannot find module "@commitlint\/foo-bar" from/
-	);
+	await expect(() =>
+		resolveExtends({extends: ['@commitlint/foo-bar']})
+	).rejects.toThrow(/Cannot find module "@commitlint\/foo-bar" from/);
 });
 
-test('resolves extends for single config', () => {
+test('resolves extends for single config', async () => {
 	const input = {extends: 'extender-name'};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
-	resolveExtends(input, ctx);
+	await resolveExtends(input, ctx);
 
-	expect(ctx.require).toHaveBeenCalledWith('extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('extender-name');
 });
 
-test('uses empty prefix by default', () => {
+test('uses empty prefix by default', async () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
-	resolveExtends(input, ctx);
+	await resolveExtends(input, ctx);
 
-	expect(ctx.require).toHaveBeenCalledWith('extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('extender-name');
 });
 
-test('uses prefix as configured', () => {
+test('uses prefix as configured', async () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
-	resolveExtends(input, {
+	await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
 
-	expect(ctx.require).toHaveBeenCalledWith('prefix-extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('prefix-extender-name');
 });
 
-test('ignores prefix for scoped extends', () => {
+test('ignores prefix for scoped extends', async () => {
 	const input = {extends: ['@scope/extender-name']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
-	resolveExtends(input, {
+	await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
 
-	expect(ctx.require).toHaveBeenCalledWith('@scope/extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('@scope/extender-name');
 });
 
-test('adds prefix as suffix for scopes only', () => {
+test('adds prefix as suffix for scopes only', async () => {
 	const input = {extends: ['@scope']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
-	resolveExtends(input, {
+	await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
 
-	expect(ctx.require).toHaveBeenCalledWith('@scope/prefix');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('@scope/prefix');
 });
 
-test('ignores prefix for relative extends', () => {
+test('ignores prefix for relative extends', async () => {
 	const input = {extends: ['./extender']};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
-	resolveExtends(input, {
+	await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
 
-	expect(ctx.require).toHaveBeenCalledWith('./extender');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('./extender');
 });
 
-test('ignores prefix for absolute extends', () => {
+test('ignores prefix for absolute extends', async () => {
 	const absolutePath = require.resolve('@commitlint/config-angular');
 	const input = {extends: [absolutePath]};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => ({})),
+		dynamicImport: jest.fn(() => ({})),
 	} as ResolveExtendsContext;
 
-	resolveExtends(input, {
+	await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
 
-	expect(ctx.require).toHaveBeenCalledWith(absolutePath);
+	expect(ctx.dynamicImport).toHaveBeenCalledWith(
+		pathToFileURL(absolutePath).toString()
+	);
 });
 
-test('propagates return value of require function', () => {
+test('propagates return value of require function', async () => {
 	const input = {extends: ['extender-name']};
 	const propagated = {foo: 'bar'};
 	const ctx = {
 		resolve: id,
-		require: jest.fn(() => propagated),
+		dynamicImport: jest.fn(() => propagated),
 	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 	expect(actual).toEqual(expect.objectContaining(propagated));
 });
 
-test('resolves extends recursively', () => {
+test('resolves extends recursively', async () => {
 	const input = {extends: ['extender-name']};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-name':
 				return {extends: ['recursive-extender-name']};
@@ -154,17 +164,20 @@ test('resolves extends recursively', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
-	resolveExtends(input, ctx);
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
+	await resolveExtends(input, ctx);
 
-	expect(ctx.require).toHaveBeenCalledWith('extender-name');
-	expect(ctx.require).toHaveBeenCalledWith('recursive-extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('recursive-extender-name');
 });
 
-test('uses prefix key recursively', () => {
+test('uses prefix key recursively', async () => {
 	const input = {extends: ['extender-name']};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'prefix-extender-name':
 				return {extends: ['recursive-extender-name']};
@@ -175,21 +188,26 @@ test('uses prefix key recursively', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	resolveExtends(input, {
+	await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
 
-	expect(ctx.require).toHaveBeenCalledWith('prefix-extender-name');
-	expect(ctx.require).toHaveBeenCalledWith('prefix-recursive-extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith('prefix-extender-name');
+	expect(ctx.dynamicImport).toHaveBeenCalledWith(
+		'prefix-recursive-extender-name'
+	);
 });
 
-test('propagates contents recursively', () => {
+test('propagates contents recursively', async () => {
 	const input = {extends: ['extender-name']};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-name':
 				return {extends: ['recursive-extender-name'], foo: 'bar'};
@@ -200,9 +218,12 @@ test('propagates contents recursively', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected = {
 		extends: ['extender-name'],
@@ -213,10 +234,10 @@ test('propagates contents recursively', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('propagates contents recursively with overlap', () => {
+test('propagates contents recursively with overlap', async () => {
 	const input: UserConfig = {extends: ['extender-name']};
 
-	const require = (id: string): UserConfig => {
+	const dynamicImport = (id: string): UserConfig => {
 		switch (id) {
 			case 'extender-name':
 				return {
@@ -230,9 +251,12 @@ test('propagates contents recursively with overlap', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected: UserConfig = {
 		extends: ['extender-name'],
@@ -244,10 +268,10 @@ test('propagates contents recursively with overlap', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('extends rules from left to right with overlap', () => {
+test('extends rules from left to right with overlap', async () => {
 	const input: UserConfig = {extends: ['left', 'right']};
 
-	const require = (id: string): UserConfig => {
+	const dynamicImport = (id: string): UserConfig => {
 		switch (id) {
 			case 'left':
 				return {rules: {a: [RuleConfigSeverity.Disabled, 'never', true]}};
@@ -258,9 +282,12 @@ test('extends rules from left to right with overlap', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected: UserConfig = {
 		extends: ['left', 'right'],
@@ -273,10 +300,10 @@ test('extends rules from left to right with overlap', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('extending contents should take precedence', () => {
+test('extending contents should take precedence', async () => {
 	const input = {extends: ['extender-name'], zero: 'root'};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-name':
 				return {extends: ['recursive-extender-name'], zero: id, one: id};
@@ -294,9 +321,12 @@ test('extending contents should take precedence', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected = {
 		extends: ['extender-name'],
@@ -309,7 +339,7 @@ test('extending contents should take precedence', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('should fall back to conventional-changelog-lint-config prefix', () => {
+test('should fall back to conventional-changelog-lint-config prefix', async () => {
 	const input = {extends: ['extender-name']};
 
 	const resolve = (id: string) => {
@@ -319,7 +349,7 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 		throw new Error(`Could not find module "*${id}"`);
 	};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'conventional-changelog-lint-config-extender-name':
 				return {rules: {fallback: true}};
@@ -330,10 +360,10 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 
 	const ctx = {
 		resolve: jest.fn(resolve),
-		require: jest.fn(require),
+		dynamicImport: jest.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, {
+	const actual = await resolveExtends(input, {
 		...ctx,
 		prefix: 'prefix',
 	});
@@ -346,10 +376,10 @@ test('should fall back to conventional-changelog-lint-config prefix', () => {
 	});
 });
 
-test('plugins should be merged correctly', () => {
+test('plugins should be merged correctly', async () => {
 	const input = {extends: ['extender-name'], zero: 'root'};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-name':
 				return {extends: ['recursive-extender-name'], plugins: ['test']};
@@ -365,9 +395,12 @@ test('plugins should be merged correctly', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected = {
 		extends: ['extender-name'],
@@ -378,13 +411,13 @@ test('plugins should be merged correctly', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('rules should be merged correctly', () => {
+test('rules should be merged correctly', async () => {
 	const input: UserConfig = {
 		extends: ['extender-name'],
 		rules: {test1: [RuleConfigSeverity.Warning, 'never', 'base']},
 	};
 
-	const require = (id: string): UserConfig => {
+	const dynamicImport = (id: string): UserConfig => {
 		switch (id) {
 			case 'extender-name':
 				return {
@@ -403,9 +436,12 @@ test('rules should be merged correctly', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected: UserConfig = {
 		extends: ['extender-name'],
@@ -419,10 +455,10 @@ test('rules should be merged correctly', () => {
 });
 
 // https://github.com/conventional-changelog/commitlint/issues/327
-test('parserPreset should resolve correctly in extended configuration', () => {
+test('parserPreset should resolve correctly in extended configuration', async () => {
 	const input = {extends: ['extender-name'], zero: 'root'};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-name':
 				return {
@@ -441,9 +477,12 @@ test('parserPreset should resolve correctly in extended configuration', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected = {
 		extends: ['extender-name'],
@@ -459,10 +498,10 @@ test('parserPreset should resolve correctly in extended configuration', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('parserPreset should be merged correctly', () => {
+test('parserPreset should be merged correctly', async () => {
 	const input = {extends: ['extender-name'], zero: 'root'};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-name':
 				return {
@@ -480,9 +519,12 @@ test('parserPreset should be merged correctly', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected = {
 		extends: ['extender-name'],
@@ -498,10 +540,10 @@ test('parserPreset should be merged correctly', () => {
 	expect(actual).toEqual(expected);
 });
 
-test('should correctly merge nested configs', () => {
+test('should correctly merge nested configs', async () => {
 	const input = {extends: ['extender-1']};
 
-	const require = (id: string) => {
+	const dynamicImport = (id: string) => {
 		switch (id) {
 			case 'extender-1':
 				return {extends: ['extender-3', 'extender-2']};
@@ -523,9 +565,12 @@ test('should correctly merge nested configs', () => {
 		}
 	};
 
-	const ctx = {resolve: id, require: jest.fn(require)} as ResolveExtendsContext;
+	const ctx = {
+		resolve: id,
+		dynamicImport: jest.fn(dynamicImport),
+	} as ResolveExtendsContext;
 
-	const actual = resolveExtends(input, ctx);
+	const actual = await resolveExtends(input, ctx);
 
 	const expected = {
 		extends: ['extender-1'],

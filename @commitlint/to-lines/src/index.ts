@@ -1,4 +1,4 @@
-export default function toLines(input: string): string[] {
+export default function toLines(input?: string | null): string[] {
 	if (typeof input !== 'string') {
 		return [];
 	}

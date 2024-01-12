@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {signedOffBy} from './signed-off-by';
+import {signedOffBy} from './signed-off-by.js';
 
 const messages = {
 	empty: 'test:\n',

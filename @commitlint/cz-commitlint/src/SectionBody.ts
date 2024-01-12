@@ -1,10 +1,11 @@
 import {Answers, DistinctQuestion} from 'inquirer';
 import wrap from 'word-wrap';
-import Question from './Question';
-import getRuleQuestionConfig from './services/getRuleQuestionConfig';
-import {getRule} from './store/rules';
-import getLeadingBlankFn from './utils/leading-blank-fn';
-import {getMaxLength} from './utils/rules';
+
+import Question from './Question.js';
+import getRuleQuestionConfig from './services/getRuleQuestionConfig.js';
+import {getRule} from './store/rules.js';
+import getLeadingBlankFn from './utils/leading-blank-fn.js';
+import {getMaxLength} from './utils/rules.js';
 
 export function getQuestions(): Array<DistinctQuestion> {
 	// body

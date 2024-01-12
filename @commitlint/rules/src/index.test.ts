@@ -1,7 +1,12 @@
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
 import glob from 'glob';
-import rules from '.';
+
+import rules from './index.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 test('exports all rules', () => {
 	const expected = _glob('*.ts').sort();

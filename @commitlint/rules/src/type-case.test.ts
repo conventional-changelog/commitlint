@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {typeCase} from './type-case';
+import {typeCase} from './type-case.js';
 
 const messages = {
 	empty: '(scope): subject',

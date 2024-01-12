@@ -1,7 +1,7 @@
 import parse from '@commitlint/parse';
-import {subjectExclamationMark} from './subject-exclamation-mark';
+import preset from 'conventional-changelog-angular';
 
-const preset = require('conventional-changelog-angular');
+import {subjectExclamationMark} from './subject-exclamation-mark.js';
 
 const parseMessage = async (str: string) => {
 	const {parserOpts} = await preset();

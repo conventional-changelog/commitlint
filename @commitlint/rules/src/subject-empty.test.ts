@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {subjectEmpty} from './subject-empty';
+import {subjectEmpty} from './subject-empty.js';
 
 const messages = {
 	empty: 'test: \nbody',

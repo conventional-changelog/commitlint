@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {bodyMaxLength} from './body-max-length';
+import {bodyMaxLength} from './body-max-length.js';
 
 const short = 'a';
 const long = 'ab';

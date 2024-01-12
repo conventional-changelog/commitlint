@@ -1,6 +1,7 @@
 import parse from '@commitlint/parse';
-import {scopeEnum} from './scope-enum';
 import {RuleConfigCondition} from '@commitlint/types';
+
+import {scopeEnum} from './scope-enum.js';
 
 const messagesByScope = {
 	single: {

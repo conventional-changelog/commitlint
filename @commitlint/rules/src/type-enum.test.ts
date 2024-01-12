@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {typeEnum} from './type-enum';
+import {typeEnum} from './type-enum.js';
 
 const messages = {
 	empty: '(): \n',

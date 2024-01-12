@@ -1,4 +1,4 @@
-import {loadParserOpts} from './load-parser-opts';
+import {loadParserOpts} from './load-parser-opts.js';
 
 test('handles a plain preset', async () => {
 	const preset = {

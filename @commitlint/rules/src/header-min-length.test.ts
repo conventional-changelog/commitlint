@@ -1,5 +1,5 @@
 import parse from '@commitlint/parse';
-import {headerMinLength} from './header-min-length';
+import {headerMinLength} from './header-min-length.js';
 
 const short = 'BREAKING CHANGE: a';
 const long = 'BREAKING CHANGE: ab';
