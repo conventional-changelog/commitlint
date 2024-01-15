@@ -15,7 +15,7 @@ const dynamicImport = async (id) => {
 };
 
 const commitLint = async (message) => {
-	const preset = (await dynamicImport(parserPreset))();
+	const preset = await (await dynamicImport(parserPreset))();
 	return lint(message, rules, {...preset});
 };
 

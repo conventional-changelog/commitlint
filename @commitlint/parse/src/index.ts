@@ -1,4 +1,4 @@
-import {Parser} from '@commitlint/types';
+import type {Parser} from '@commitlint/types';
 
 import {type Commit, type Options, sync} from 'conventional-commits-parser';
 // @ts-expect-error -- no typings
