@@ -524,26 +524,26 @@ test('should print help', async () => {
 		                                          [string] [choices: "", "text", "json"]
 		  -d, --cwd            directory to execute in
 		                                         [string] [default: (Working Directory)]
-		  -e, --edit           read last commit message from the specified file or
-		                       fallbacks to ./.git/COMMIT_EDITMSG               [string]
-		  -E, --env            check message in the file at path given by environment
-		                       variable value                                   [string]
+		  -e, --edit           read last commit message from the specified file or fallb
+		                       acks to ./.git/COMMIT_EDITMSG                    [string]
+		  -E, --env            check message in the file at path given by environment va
+		                       riable value                                     [string]
 		  -x, --extends        array of shareable configurations to extend       [array]
 		  -H, --help-url       help url in error message                        [string]
-		  -f, --from           lower end of the commit range to lint; applies if
-		                       edit=false                                       [string]
-		      --git-log-args   additional git log arguments as space separated string,
-		                       example '--first-parent --cherry-pick'           [string]
+		  -f, --from           lower end of the commit range to lint; applies if edit=fa
+		                       lse                                              [string]
+		      --git-log-args   additional git log arguments as space separated string, e
+		                       xample '--first-parent --cherry-pick'            [string]
 		  -o, --format         output format of the results                     [string]
-		  -p, --parser-preset  configuration preset to use for
-		                       conventional-commits-parser                      [string]
+		  -p, --parser-preset  configuration preset to use for conventional-commits-pars
+		                       er                                               [string]
 		  -q, --quiet          toggle console output          [boolean] [default: false]
-		  -t, --to             upper end of the commit range to lint; applies if
-		                       edit=false                                       [string]
+		  -t, --to             upper end of the commit range to lint; applies if edit=fa
+		                       lse                                              [string]
 		  -V, --verbose        enable verbose output for reports without problems
 		                                                                       [boolean]
-		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for
-		                       errors                                          [boolean]
+		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for err
+		                       ors                                             [boolean]
 		  -v, --version        display version information                     [boolean]
 		  -h, --help           Show help                                       [boolean]"
 	`);
