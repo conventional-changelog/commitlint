@@ -1,10 +1,12 @@
-const {Workspaces} = require('nx/src/config/workspaces');
+const {
+	getProjects: getNXProjects,
+} = require('nx/src/generators/utils/project-configuration');
+const {FsTree} = require('nx/src/generators/tree');
 
 module.exports = {
 	utils: {getProjects},
 	rules: {
-		'scope-enum': (ctx) =>
-			getProjects(ctx).then((packages) => [2, 'always', packages]),
+		'scope-enum': (ctx) => Promise.resolve([2, 'always', getProjects(ctx)]),
 	},
 };
 
@@ -12,30 +14,23 @@ module.exports = {
  * @param {(params: Pick<Nx.ProjectConfiguration, 'name' | 'projectType' | 'tags'>) => boolean} selector
  */
 function getProjects(context, selector = () => true) {
-	return Promise.resolve()
-		.then(() => {
-			const ctx = context || {};
-			const cwd = ctx.cwd || process.cwd();
-			const ws = new Workspaces(cwd);
-			const workspace = ws.readWorkspaceConfiguration();
-			return Object.entries(workspace.projects || {}).map(
-				([name, project]) => ({
-					name,
-					...project,
-				})
-			);
-		})
-		.then((projects) => {
-			return projects
-				.filter((project) =>
-					selector({
-						name: project.name,
-						projectType: project.projectType,
-						tags: project.tags,
-					})
-				)
-				.filter((project) => project.targets)
-				.map((project) => project.name)
-				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
-		});
+	const ctx = context || {};
+	const cwd = ctx.cwd || process.cwd();
+
+	const projects = getNXProjects(new FsTree(cwd, false));
+	return Array.from(projects.entries())
+		.map(([name, project]) => ({
+			name,
+			...project,
+		}))
+		.filter((project) =>
+			selector({
+				name: project.name,
+				projectType: project.projectType,
+				tags: project.tags,
+			})
+		)
+		.filter((project) => project.targets)
+		.map((project) => project.name)
+		.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 }
