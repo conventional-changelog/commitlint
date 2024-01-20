@@ -1,4 +1,5 @@
 import lint from './lint';
+import {RuleConfigSeverity} from '@commitlint/types';
 
 test('throws without params', async () => {
 	const error = (lint as any)();
@@ -20,21 +21,21 @@ test('positive on stub message and no rule', async () => {
 
 test('positive on stub message and adhered rule', async () => {
 	const actual = await lint('foo: bar', {
-		'type-enum': [2, 'always', ['foo']],
+		'type-enum': [RuleConfigSeverity.Error, 'always', ['foo']],
 	});
 	expect(actual.valid).toBe(true);
 });
 
 test('negative on stub message and broken rule', async () => {
 	const actual = await lint('foo: bar', {
-		'type-enum': [2, 'never', ['foo']],
+		'type-enum': [RuleConfigSeverity.Error, 'never', ['foo']],
 	});
 	expect(actual.valid).toBe(false);
 });
 
 test('positive on ignored message and broken rule', async () => {
 	const actual = await lint('Revert "some bogus commit"', {
-		'type-empty': [2, 'never'],
+		'type-empty': [RuleConfigSeverity.Error, 'never'],
 	});
 	expect(actual.valid).toBe(true);
 	expect(actual.input).toBe('Revert "some bogus commit"');
@@ -44,7 +45,7 @@ test('negative on ignored message, disabled ignored messages and broken rule', a
 	const actual = await lint(
 		'Revert "some bogus commit"',
 		{
-			'type-empty': [2, 'never'],
+			'type-empty': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			defaultIgnores: false,
@@ -58,7 +59,7 @@ test('positive on custom ignored message and broken rule', async () => {
 	const actual = await lint(
 		ignoredMessage,
 		{
-			'type-empty': [2, 'never'],
+			'type-empty': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			ignores: [(c) => c === ignoredMessage],
@@ -72,8 +73,8 @@ test('positive on stub message and opts', async () => {
 	const actual = await lint(
 		'foo-bar',
 		{
-			'type-enum': [2, 'always', ['foo']],
-			'type-empty': [2, 'never'],
+			'type-enum': [RuleConfigSeverity.Error, 'always', ['foo']],
+			'type-empty': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			parserOpts: {
@@ -85,7 +86,7 @@ test('positive on stub message and opts', async () => {
 });
 
 test('throws for invalid rule names', async () => {
-	const error = lint('foo', {foo: [2, 'always'], bar: [1, 'never']});
+	const error = lint('foo', {foo: [RuleConfigSeverity.Error, 'always'], bar: [RuleConfigSeverity.Warning, 'never']});
 
 	await expect(error).rejects.toThrow(/^Found invalid rule names: foo, bar/);
 });
@@ -150,8 +151,8 @@ test('throws for rule with invalid condition', async () => {
 
 test('throws for rule with out of range condition', async () => {
 	const error = lint('type(scope): foo', {
-		'type-enum': [1, 'foo'] as any,
-		'header-max-length': [1, 'bar'] as any,
+		'type-enum': [RuleConfigSeverity.Warning, 'foo'] as any,
+		'header-max-length': [RuleConfigSeverity.Warning, 'bar'] as any,
 	});
 
 	await expect(error).rejects.toThrow('type-enum must be "always" or "never"');
@@ -162,7 +163,7 @@ test('throws for rule with out of range condition', async () => {
 
 test('succeds for issue', async () => {
 	const report = await lint('somehting #1', {
-		'references-empty': [2, 'never'],
+		'references-empty': [RuleConfigSeverity.Error, 'never'],
 	});
 
 	expect(report.valid).toBe(true);
@@ -170,7 +171,7 @@ test('succeds for issue', async () => {
 
 test('fails for issue', async () => {
 	const report = await lint('somehting #1', {
-		'references-empty': [2, 'always'],
+		'references-empty': [RuleConfigSeverity.Error, 'always'],
 	});
 
 	expect(report.valid).toBe(false);
@@ -180,7 +181,7 @@ test('succeds for custom issue prefix', async () => {
 	const report = await lint(
 		'somehting REF-1',
 		{
-			'references-empty': [2, 'never'],
+			'references-empty': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			parserOpts: {
@@ -196,7 +197,7 @@ test('fails for custom issue prefix', async () => {
 	const report = await lint(
 		'somehting #1',
 		{
-			'references-empty': [2, 'never'],
+			'references-empty': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			parserOpts: {
@@ -212,7 +213,7 @@ test('fails for custom plugin rule', async () => {
 	const report = await lint(
 		'somehting #1',
 		{
-			'plugin-rule': [2, 'never'],
+			'plugin-rule': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			plugins: {
@@ -232,7 +233,7 @@ test('passes for custom plugin rule', async () => {
 	const report = await lint(
 		'somehting #1',
 		{
-			'plugin-rule': [2, 'never'],
+			'plugin-rule': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			plugins: {
@@ -275,7 +276,7 @@ test('returns original message with commit header, body and footer, parsing comm
 	const report = await lint(
 		message,
 		{
-			'references-empty': [2, 'never'],
+			'references-empty': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			parserOpts: {
@@ -291,7 +292,7 @@ test('passes for async rule', async () => {
 	const report = await lint(
 		'somehting #1',
 		{
-			'async-rule': [2, 'never'],
+			'async-rule': [RuleConfigSeverity.Error, 'never'],
 		},
 		{
 			plugins: {

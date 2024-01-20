@@ -59,8 +59,8 @@ test('getMaxLength', () => {
 	expect(getMaxLength([RuleConfigSeverity.Error] as any)).toBe(Infinity);
 
 	const rules: any = {
-		'body-max-line-length': [2, 'always', 100],
-		'header-max-length': [2, 'always', 100],
+		'body-max-line-length': [RuleConfigSeverity.Error, 'always', 100],
+		'header-max-length': [RuleConfigSeverity.Error, 'always', 100],
 		'test-max-length': [RuleConfigSeverity.Disabled, 'always', 100],
 	};
 	let lengthRule = rules['header-max-length'];
@@ -83,8 +83,8 @@ test('getMinLength', () => {
 	expect(getMinLength([RuleConfigSeverity.Error] as any)).toBe(0);
 
 	const rules: any = {
-		'body-min-length': [2, 'always', 10],
-		'footer-min-length': [2, 'always', 20],
+		'body-min-length': [RuleConfigSeverity.Error, 'always', 10],
+		'footer-min-length': [RuleConfigSeverity.Error, 'always', 20],
 		'test-min-length': [RuleConfigSeverity.Disabled, 'always', 100],
 	};
 	let lengthRule = rules['header-min-length'];

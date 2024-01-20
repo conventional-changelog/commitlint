@@ -1,4 +1,4 @@
-import {QualifiedRules, UserPromptConfig} from '@commitlint/types';
+import {QualifiedRules, RuleConfigSeverity, UserPromptConfig} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
 import isFunction from 'lodash.isfunction';
 import process from './Process';
@@ -68,22 +68,22 @@ afterEach(() => {
 describe('conventional-changlog', () => {
 	beforeEach(() => {
 		rules = {
-			'body-leading-blank': [1, 'always'],
-			'body-max-line-length': [2, 'always', 100],
-			'footer-leading-blank': [1, 'always'],
-			'footer-max-line-length': [2, 'always', 100],
-			'header-max-length': [2, 'always', 100],
+			'body-leading-blank': [RuleConfigSeverity.Warning, 'always'],
+			'body-max-line-length': [RuleConfigSeverity.Error, 'always', 100],
+			'footer-leading-blank': [RuleConfigSeverity.Warning, 'always'],
+			'footer-max-line-length': [RuleConfigSeverity.Error, 'always', 100],
+			'header-max-length': [RuleConfigSeverity.Error, 'always', 100],
 			'subject-case': [
-				2,
+				RuleConfigSeverity.Error,
 				'never',
 				['sentence-case', 'start-case', 'pascal-case', 'upper-case'],
 			],
-			'subject-empty': [2, 'never'],
-			'subject-full-stop': [2, 'never', '.'],
-			'type-case': [2, 'always', 'lower-case'],
-			'type-empty': [2, 'never'],
+			'subject-empty': [RuleConfigSeverity.Error, 'never'],
+			'subject-full-stop': [RuleConfigSeverity.Error, 'never', '.'],
+			'type-case': [RuleConfigSeverity.Error, 'always', 'lower-case'],
+			'type-empty': [RuleConfigSeverity.Error, 'never'],
 			'type-enum': [
-				2,
+				RuleConfigSeverity.Error,
 				'always',
 				[
 					'build',
