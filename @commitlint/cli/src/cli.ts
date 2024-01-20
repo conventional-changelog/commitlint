@@ -38,9 +38,9 @@ const cli = yargs
 			type: 'string',
 		},
 		'print-config': {
-			type: 'boolean',
-			default: false,
+			choices: ['', 'text', 'json'],
 			description: 'print resolved config',
+			type: 'string',
 		},
 		cwd: {
 			alias: 'd',
@@ -175,13 +175,22 @@ async function main(args: MainArgs): Promise<void> {
 	const raw = options._;
 	const flags = normalizeFlags(options);
 
-	if (flags['print-config']) {
+	if (typeof options['print-config'] === 'string') {
 		const loaded = await load(getSeed(flags), {
 			cwd: flags.cwd,
 			file: flags.config,
 		});
-		console.log(util.inspect(loaded, false, null, options.color));
-		return;
+
+		switch (options['print-config']) {
+			case 'json':
+				console.log(JSON.stringify(loaded));
+				return;
+
+			case 'text':
+			default:
+				console.log(util.inspect(loaded, false, null, options.color));
+				return;
+		}
 	}
 
 	const fromStdin = checkFromStdin(raw, flags);
