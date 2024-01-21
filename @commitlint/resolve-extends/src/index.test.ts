@@ -1,5 +1,5 @@
 import resolveExtends, {ResolveExtendsContext} from '.';
-import {UserConfig} from '@commitlint/types';
+import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
 
 const id = (id: unknown) => id;
 
@@ -221,10 +221,10 @@ test('propagates contents recursively with overlap', () => {
 			case 'extender-name':
 				return {
 					extends: ['recursive-extender-name'],
-					rules: {rule: [1, 'always']},
+					rules: {rule: [RuleConfigSeverity.Warning, 'always']},
 				};
 			case 'recursive-extender-name':
-				return {rules: {rule: [2, 'never', 'four']}};
+				return {rules: {rule: [RuleConfigSeverity.Error, 'never', 'four']}};
 			default:
 				return {};
 		}
@@ -237,7 +237,7 @@ test('propagates contents recursively with overlap', () => {
 	const expected: UserConfig = {
 		extends: ['extender-name'],
 		rules: {
-			rule: [1, 'always'],
+			rule: [RuleConfigSeverity.Warning, 'always'],
 		},
 	};
 
@@ -250,9 +250,9 @@ test('extends rules from left to right with overlap', () => {
 	const require = (id: string): UserConfig => {
 		switch (id) {
 			case 'left':
-				return {rules: {a: [0, 'never', true]}};
+				return {rules: {a: [RuleConfigSeverity.Disabled, 'never', true]}};
 			case 'right':
-				return {rules: {a: [0, 'never', false], b: [0, 'never', true]}};
+				return {rules: {a: [RuleConfigSeverity.Disabled, 'never', false], b: [RuleConfigSeverity.Disabled, 'never', true]}};
 			default:
 				return {};
 		}
@@ -265,8 +265,8 @@ test('extends rules from left to right with overlap', () => {
 	const expected: UserConfig = {
 		extends: ['left', 'right'],
 		rules: {
-			a: [0, 'never', false],
-			b: [0, 'never', true],
+			a: [RuleConfigSeverity.Disabled, 'never', false],
+			b: [RuleConfigSeverity.Disabled, 'never', true],
 		},
 	};
 
@@ -381,7 +381,7 @@ test('plugins should be merged correctly', () => {
 test('rules should be merged correctly', () => {
 	const input: UserConfig = {
 		extends: ['extender-name'],
-		rules: {test1: [1, 'never', 'base']},
+		rules: {test1: [RuleConfigSeverity.Warning, 'never', 'base']},
 	};
 
 	const require = (id: string): UserConfig => {
@@ -389,15 +389,15 @@ test('rules should be merged correctly', () => {
 			case 'extender-name':
 				return {
 					extends: ['recursive-extender-name'],
-					rules: {test2: [2, 'never', id]},
+					rules: {test2: [RuleConfigSeverity.Error, 'never', id]},
 				};
 			case 'recursive-extender-name':
 				return {
 					extends: ['second-recursive-extender-name'],
-					rules: {test1: [0, 'never', id]},
+					rules: {test1: [RuleConfigSeverity.Disabled, 'never', id]},
 				};
 			case 'second-recursive-extender-name':
-				return {rules: {test2: [1, 'never', id]}};
+				return {rules: {test2: [RuleConfigSeverity.Warning, 'never', id]}};
 			default:
 				return {};
 		}
@@ -410,8 +410,8 @@ test('rules should be merged correctly', () => {
 	const expected: UserConfig = {
 		extends: ['extender-name'],
 		rules: {
-			test1: [1, 'never', 'base'],
-			test2: [2, 'never', 'extender-name'],
+			test1: [RuleConfigSeverity.Warning, 'never', 'base'],
+			test2: [RuleConfigSeverity.Error, 'never', 'extender-name'],
 		},
 	};
 
@@ -508,16 +508,16 @@ test('should correctly merge nested configs', () => {
 			case 'extender-2':
 				return {extends: ['extender-4']};
 			case 'extender-3':
-				return {rules: {test: [1, 'never', 3]}};
+				return {rules: {test: [RuleConfigSeverity.Warning, 'never', 3]}};
 			case 'extender-4':
 				return {
 					extends: ['extender-5', 'extender-6'],
-					rules: {test: [1, 'never', 4]},
+					rules: {test: [RuleConfigSeverity.Warning, 'never', 4]},
 				};
 			case 'extender-5':
-				return {rules: {test: [1, 'never', 5]}};
+				return {rules: {test: [RuleConfigSeverity.Warning, 'never', 5]}};
 			case 'extender-6':
-				return {rules: {test: [1, 'never', 6]}};
+				return {rules: {test: [RuleConfigSeverity.Warning, 'never', 6]}};
 			default:
 				return {};
 		}
@@ -530,7 +530,7 @@ test('should correctly merge nested configs', () => {
 	const expected = {
 		extends: ['extender-1'],
 		rules: {
-			test: [1, 'never', 4],
+			test: [RuleConfigSeverity.Warning, 'never', 4],
 		},
 	};
 

@@ -1,3 +1,5 @@
+import {RuleConfigSeverity} from '@commitlint/types';
+
 const plugin = jest.fn();
 const scopedPlugin = jest.fn();
 
@@ -28,47 +30,47 @@ test('extends-empty should have no rules', async () => {
 
 test('uses seed as configured', async () => {
 	const cwd = await gitBootstrap('fixtures/extends-empty');
-	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
+	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
 
 	const actual = await load({rules}, {cwd});
 
-	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
+	expect(actual.rules['body-case']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'camel-case']);
 });
 
 test('rules should be loaded from local', async () => {
 	const actual = await load({
 		rules: {
-			direct: [1, 'never', 'foo'],
-			func: () => [1, 'never', 'foo'],
-			async: async () => [1, 'never', 'foo'],
-			promise: () => Promise.resolve([1, 'never', 'foo']),
+			direct: [RuleConfigSeverity.Warning, 'never', 'foo'],
+			func: () => [RuleConfigSeverity.Warning, 'never', 'foo'],
+			async: async () => [RuleConfigSeverity.Warning, 'never', 'foo'],
+			promise: () => Promise.resolve([RuleConfigSeverity.Warning, 'never', 'foo']),
 		},
 	});
 
-	expect(actual.rules['direct']).toStrictEqual([1, 'never', 'foo']);
-	expect(actual.rules['func']).toStrictEqual([1, 'never', 'foo']);
-	expect(actual.rules['async']).toStrictEqual([1, 'never', 'foo']);
-	expect(actual.rules['promise']).toStrictEqual([1, 'never', 'foo']);
+	expect(actual.rules['direct']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
+	expect(actual.rules['func']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
+	expect(actual.rules['async']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
+	expect(actual.rules['promise']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
 });
 
 test('rules should be loaded from relative config file', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
-	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
+	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
 
 	const actual = await load({rules}, {cwd, file});
 
-	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
+	expect(actual.rules['body-case']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'camel-case']);
 });
 
 test('rules should be loaded from absolute config file', async () => {
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
 	const file = path.resolve(cwd, 'config/commitlint.config.js');
-	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
+	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
 
 	const actual = await load({rules}, {cwd: process.cwd(), file});
 
-	expect(actual.rules['body-case']).toStrictEqual([1, 'never', 'camel-case']);
+	expect(actual.rules['body-case']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'camel-case']);
 });
 
 test('plugins should be loaded from seed', async () => {
@@ -182,8 +184,8 @@ test('respects cwd option', async () => {
 		extends: ['./second-extended'],
 		plugins: {},
 		rules: {
-			one: [1, 'always'],
-			two: [2, 'never'],
+			one: [RuleConfigSeverity.Warning, 'always'],
+			two: [RuleConfigSeverity.Error, 'never'],
 		},
 	});
 });
@@ -285,9 +287,9 @@ describe.each([['basic'], ['extends']])('%s config', (template) => {
 			extends: isExtendsTemplate ? ['./first-extended'] : [],
 			plugins: {},
 			rules: {
-				zero: [0, 'never'],
-				one: [1, 'always'],
-				two: [2, 'never'],
+				zero: [RuleConfigSeverity.Disabled, 'never'],
+				one: [RuleConfigSeverity.Warning, 'always'],
+				two: [RuleConfigSeverity.Error, 'never'],
 			},
 		});
 	});
@@ -302,9 +304,9 @@ test('recursive extends with ts file', async () => {
 		extends: ['./first-extended/index.ts'],
 		plugins: {},
 		rules: {
-			zero: [0, 'never', 'zero'],
-			one: [1, 'never', 'one'],
-			two: [2, 'never', 'two'],
+			zero: [RuleConfigSeverity.Disabled, 'never', 'zero'],
+			one: [RuleConfigSeverity.Warning, 'never', 'one'],
+			two: [RuleConfigSeverity.Error, 'never', 'two'],
 		},
 	});
 });
@@ -340,8 +342,8 @@ test('ignores unknown keys', async () => {
 		extends: [],
 		plugins: {},
 		rules: {
-			foo: [1, 'always', 'bar'],
-			baz: [1, 'always', 'bar'],
+			foo: [RuleConfigSeverity.Warning, 'always', 'bar'],
+			baz: [RuleConfigSeverity.Warning, 'always', 'bar'],
 		},
 	});
 });
@@ -355,8 +357,8 @@ test('ignores unknown keys recursively', async () => {
 		extends: ['./one'],
 		plugins: {},
 		rules: {
-			zero: [0, 'always', 'zero'],
-			one: [1, 'always', 'one'],
+			zero: [RuleConfigSeverity.Disabled, 'always', 'zero'],
+			one: [RuleConfigSeverity.Warning, 'always', 'one'],
 		},
 	});
 });
@@ -372,9 +374,9 @@ test('find up from given cwd', async () => {
 		extends: [],
 		plugins: {},
 		rules: {
-			child: [2, 'always', true],
-			inner: [2, 'always', false],
-			outer: [2, 'always', false],
+			child: [RuleConfigSeverity.Error, 'always', true],
+			inner: [RuleConfigSeverity.Error, 'always', false],
+			outer: [RuleConfigSeverity.Error, 'always', false],
 		},
 	});
 });
@@ -389,9 +391,9 @@ test('find up config from outside current git repo', async () => {
 		extends: [],
 		plugins: {},
 		rules: {
-			child: [1, 'never', false],
-			inner: [1, 'never', false],
-			outer: [1, 'never', true],
+			child: [RuleConfigSeverity.Warning, 'never', false],
+			inner: [RuleConfigSeverity.Warning, 'never', false],
+			outer: [RuleConfigSeverity.Warning, 'never', true],
 		},
 	});
 });
@@ -435,7 +437,7 @@ test('returns formatter name when unable to resolve from config directory', asyn
 test('does not mutate config module reference', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
-	const rules = {'body-case': [1, 'never', 'camel-case'] as any};
+	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
 
 	const configPath = path.join(cwd, file);
 	const before = JSON.stringify(require(configPath));

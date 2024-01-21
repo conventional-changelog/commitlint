@@ -1,4 +1,4 @@
-import {QualifiedRules} from '@commitlint/types';
+import {QualifiedRules, RuleConfigSeverity} from '@commitlint/types';
 import {GetRuleMethod, SetRulesMethod} from './rules';
 
 let getRule: GetRuleMethod;
@@ -11,9 +11,9 @@ beforeEach(() => {
 describe('getRule', () => {
 	test('should get rule when prefix and property strict match', () => {
 		const rules: QualifiedRules = {
-			'body-max-length': [2, 'always', 100],
-			'footer-max-line-length': [2, 'always', 100],
-			'subject-empty': [2, 'never'],
+			'body-max-length': [RuleConfigSeverity.Error, 'always', 100],
+			'footer-max-line-length': [RuleConfigSeverity.Error, 'always', 100],
+			'subject-empty': [RuleConfigSeverity.Error, 'never'],
 		};
 		setRules(rules);
 
@@ -26,7 +26,7 @@ describe('getRule', () => {
 
 	test('should not get rule when prefix is invalid', () => {
 		const rules: QualifiedRules = {
-			'body-max-length': [2, 'always', 100],
+			'body-max-length': [RuleConfigSeverity.Error, 'always', 100],
 		};
 		setRules(rules);
 
@@ -37,8 +37,8 @@ describe('getRule', () => {
 
 	test('should not get rule when property is partial match', () => {
 		const rules: QualifiedRules = {
-			'body-max-length': [2, 'always', 100],
-			'body-leading-blank': [1, 'always'],
+			'body-max-length': [RuleConfigSeverity.Error, 'always', 100],
+			'body-leading-blank': [RuleConfigSeverity.Warning, 'always'],
 		};
 		setRules(rules);
 
@@ -52,13 +52,13 @@ describe('setRule', () => {
 		expect(getRule('body', 'max-length')).toBeUndefined();
 
 		let rules: QualifiedRules = {
-			'body-max-length': [2, 'always', 100],
+			'body-max-length': [RuleConfigSeverity.Error, 'always', 100],
 		};
 		setRules(rules);
 		expect(getRule('body', 'max-length')).toBe(rules['body-max-length']);
 
 		rules = {
-			'footer-max-length': [2, 'always', 100],
+			'footer-max-length': [RuleConfigSeverity.Error, 'always', 100],
 		};
 		setRules(rules);
 		expect(getRule('body', 'max-length')).toBeUndefined();

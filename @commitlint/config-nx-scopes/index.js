@@ -1,3 +1,4 @@
+import {RuleConfigSeverity} from '@commitlint/types';
 const {
 	getProjects: getNXProjects,
 } = require('nx/src/generators/utils/project-configuration');
@@ -6,7 +7,7 @@ const {FsTree} = require('nx/src/generators/tree');
 module.exports = {
 	utils: {getProjects},
 	rules: {
-		'scope-enum': (ctx) => Promise.resolve([2, 'always', getProjects(ctx)]),
+		'scope-enum': (ctx) => Promise.resolve([RuleConfigSeverity.Error, 'always', getProjects(ctx)]),
 	},
 };
 

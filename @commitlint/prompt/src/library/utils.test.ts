@@ -70,8 +70,8 @@ test('getMaxLength', () => {
 	);
 
 	const rules: any = {
-		'body-max-line-length': [2, 'always', 100],
-		'header-max-length': [2, 'always', 100],
+		'body-max-line-length': [RuleConfigSeverity.Error, 'always', 100],
+		'header-max-length': [RuleConfigSeverity.Error, 'always', 100],
 		'test-max-length': [RuleConfigSeverity.Disabled, 'always', 100],
 	};
 	let lengthRule = getRules('header', rules).find(getHasName('max-length'));
@@ -97,7 +97,7 @@ test('check enum rule filters', () => {
 		.find(enumRuleIsActive);
 	expect(enumRule).toEqual([
 		'type-enum',
-		[2, 'always', ['build', 'chore', 'ci']],
+		[RuleConfigSeverity.Error, 'always', ['build', 'chore', 'ci']],
 	]);
 
 	enumRule = getRules('string', rules)
@@ -108,7 +108,7 @@ test('check enum rule filters', () => {
 	enumRule = getRules('enum', rules)
 		.filter(getHasName('string'))
 		.find(enumRuleIsActive);
-	expect(enumRule).toEqual(['enum-string', [1, 'always', ['1', '2', '3']]]);
+	expect(enumRule).toEqual(['enum-string', [RuleConfigSeverity.Warning, 'always', ['1', '2', '3']]]);
 
 	enumRule = getRules('bar', rules)
 		.filter(getHasName('enum'))
