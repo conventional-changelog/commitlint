@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.5.0](https://github.com/conventional-changelog/commitlint/compare/v18.4.4...v18.5.0) (2024-01-22)
+
+
+### Bug Fixes
+
+* **config-nx-scopes:** restore compatibility with nx 17.2.0 and higher ([#3855](https://github.com/conventional-changelog/commitlint/issues/3855)) ([1e08a17](https://github.com/conventional-changelog/commitlint/commit/1e08a17eb354b40776be814e8d787eee44d5df2c)), closes [#3820](https://github.com/conventional-changelog/commitlint/issues/3820)
+
+
+### Features
+
+* **cli:** print-config now can be configured to print a json in stdout ([#3863](https://github.com/conventional-changelog/commitlint/issues/3863)) ([6381a2d](https://github.com/conventional-changelog/commitlint/commit/6381a2daa0d5d89ab2195998d63a9690a533d3f2)), closes [#3819](https://github.com/conventional-changelog/commitlint/issues/3819)
+
+
+
+
+
 ## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
 
 

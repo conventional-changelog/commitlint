@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.5.0](https://github.com/conventional-changelog/commitlint/compare/v18.4.4...v18.5.0) (2024-01-22)
+
+
+### Bug Fixes
+
+* **config-nx-scopes:** restore compatibility with nx 17.2.0 and higher ([#3855](https://github.com/conventional-changelog/commitlint/issues/3855)) ([1e08a17](https://github.com/conventional-changelog/commitlint/commit/1e08a17eb354b40776be814e8d787eee44d5df2c)), closes [#3820](https://github.com/conventional-changelog/commitlint/issues/3820)
+
+
+
+
+
 ## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
 
 **Note:** Version bump only for package @commitlint/config-nx-scopes
