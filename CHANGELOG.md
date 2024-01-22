@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.5.1](https://github.com/conventional-changelog/commitlint/compare/v18.5.0...v18.5.1) (2024-01-22)
+
+
+### Bug Fixes
+
+* **config-nx-scopes:** replace import with require ([#3865](https://github.com/conventional-changelog/commitlint/issues/3865)) ([#3867](https://github.com/conventional-changelog/commitlint/issues/3867)) ([3ede3e0](https://github.com/conventional-changelog/commitlint/commit/3ede3e0e9d5af1302fff896aba049b487b90c0bf))
+
+
+
+
+
 # [18.5.0](https://github.com/conventional-changelog/commitlint/compare/v18.4.4...v18.5.0) (2024-01-22)
 
 

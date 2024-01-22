@@ -1,6 +1,6 @@
 {
   "name": "commitlint-config-nx-scopes",
-  "version": "18.5.0",
+  "version": "18.5.1",
   "description": "Shareable commitlint config enforcing nx project names as scopes",
   "files": [
     "index.js"
@@ -30,7 +30,7 @@
     "node": ">=v18"
   },
   "dependencies": {
-    "@commitlint/config-nx-scopes": "^18.5.0"
+    "@commitlint/config-nx-scopes": "^18.5.1"
   },
   "devDependencies": {
     "@commitlint/utils": "^18.4.4"
