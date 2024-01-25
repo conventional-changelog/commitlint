@@ -212,6 +212,11 @@ Infinity
 0
 ```
 
+#### header-trim
+
+- **condition**: `header` must not have initial and / or trailing whitespaces
+- **rule**: `always`
+
 #### references-empty
 
 - **condition**: `references` has at least one entry
