@@ -12,6 +12,7 @@ import {footerMaxLineLength} from './footer-max-line-length';
 import {footerMinLength} from './footer-min-length';
 import {headerCase} from './header-case';
 import {headerFullStop} from './header-full-stop';
+import {headerTrim} from './header-trim';
 import {headerMaxLength} from './header-max-length';
 import {headerMinLength} from './header-min-length';
 import {referencesEmpty} from './references-empty';
@@ -51,6 +52,7 @@ export default {
 	'header-full-stop': headerFullStop,
 	'header-max-length': headerMaxLength,
 	'header-min-length': headerMinLength,
+	'header-trim': headerTrim,
 	'references-empty': referencesEmpty,
 	'scope-case': scopeCase,
 	'scope-empty': scopeEmpty,

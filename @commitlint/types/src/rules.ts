@@ -105,6 +105,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	'header-full-stop': RuleConfig<V, string>;
 	'header-max-length': LengthRuleConfig<V>;
 	'header-min-length': LengthRuleConfig<V>;
+	'header-trim': RuleConfig<V>;
 	'references-empty': RuleConfig<V>;
 	'scope-case': CaseRuleConfig<V>;
 	'scope-empty': RuleConfig<V>;
