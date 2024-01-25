@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.6.0](https://github.com/conventional-changelog/commitlint/compare/v18.5.1...v18.6.0) (2024-01-25)
+
+
+### Features
+
+* **rules:** add header-trim rule ([#3199](https://github.com/conventional-changelog/commitlint/issues/3199)) ([#3871](https://github.com/conventional-changelog/commitlint/issues/3871)) ([331579a](https://github.com/conventional-changelog/commitlint/commit/331579a8796af901b5e5103c44fedf1cb3a2f661))
+
+
+
+
+
 ## [18.5.1](https://github.com/conventional-changelog/commitlint/compare/v18.5.0...v18.5.1) (2024-01-22)
 
 
