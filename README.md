@@ -18,21 +18,24 @@
 
 ## Contents
 
-- [What is commitlint](#what-is-commitlint)
-  - [Benefits of using commitlint](#benefits-using-commitlint)
-- [Getting started](#getting-started)
-- [CLI](#cli)
-- [Config](#config)
-- [Shared configuration](#shared-configuration)
-- [API](#api)
-- [Tools](#tools)
-- [Version Support and Releases](#version-support-and-releases)
-- [Related projects](#related-projects)
-- [License](#license)
-- [Development](#development)
-  - [Install and run](#install-and-run)
-  - [Testing](#testing)
-  - [Publishing a release](#publishing-a-release)
+- [Get Started | Website](#get-started--website)
+  - [Contents](#contents)
+  - [What is commitlint](#what-is-commitlint)
+    - [Benefits of using commitlint](#benefits-of-using-commitlint)
+  - [Getting started](#getting-started)
+  - [CLI](#cli)
+  - [Config](#config)
+  - [Shared configuration](#shared-configuration)
+  - [Documentation](#documentation)
+  - [API](#api)
+  - [Tools](#tools)
+  - [Roadmap](#roadmap)
+  - [Version Support and Releases](#version-support-and-releases)
+    - [Releases](#releases)
+  - [Related projects](#related-projects)
+  - [License](#license)
+  - [Development](#development)
+    - [Install and run](#install-and-run)
 
 ---
 
@@ -48,15 +51,15 @@ type(scope?): subject  #scope is optional; multiple scopes are supported (curren
 
 Real world examples can look like this:
 
-```
+```text
 chore: run tests on travis ci
 ```
 
-```
+```text
 fix(server): send cors headers
 ```
 
-```
+```text
 feat(blog): add comment section
 ```
 
@@ -82,51 +85,6 @@ These can be modified by [your own configuration](#config).
 - ["The perks of committing with conventions" (Talk slides)](https://slides.com/marionebl/the-perks-of-committing-with-conventions#/)
 
 ## Getting started
-
-```sh
-# Install commitlint cli and conventional config
-npm install --save-dev @commitlint/{config-conventional,cli}
-# For Windows:
-npm install --save-dev @commitlint/config-conventional @commitlint/cli
-
-# Configure commitlint to use conventional config
-echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js
-```
-
-To lint commits before they are created you can use Husky's `commit-msg` hook:
-
-```sh
-# Install Husky v6
-npm install husky --save-dev
-# or
-yarn add husky --dev
-
-# Activate hooks
-npx husky install
-# or
-yarn husky install
-```
-
-### Add hook
-
-> [!WARNING]  
-> It's necessary that you use **commit-msg** as the name for hook file.
-> Read Git hooks [documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) for more info.
-
-```
-npx husky add .husky/commit-msg  'npx --no -- commitlint --edit ${1}'
-```
-
-**Or use installed package instead**
-
-```
-npm pkg set scripts.commitlint="commitlint --edit"
-npx husky add .husky/commit-msg 'npm run commitlint ${1}'
-```
-
-Check the [husky documentation](https://typicode.github.io/husky/#/?id=manual) on how you can automatically have Git hooks enabled after install for different `yarn` versions.
-
-**Detailed Setup instructions**
 
 - [Local setup](https://conventional-changelog.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
 - [CI setup](https://conventional-changelog.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
@@ -254,96 +212,6 @@ yarn run commitlint # run CLI
 ```
 
 For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).
-
-### Testing
-
-From the project root directory, use the following commands to run the test suite
-
-```sh
-yarn clean
-yarn install
-yarn build
-yarn test
-```
-
-### Package dependency overview
-
-![commitlint-dependencies](https://user-images.githubusercontent.com/4248851/58385093-34b79780-7feb-11e9-8f27-bffc4aca3eba.png)
-
-(Partly outdated)
-
-### Publishing a release
-
-```sh
-npm login
-nvm use (if you have nvm installed)
-```
-
-- [nvm](https://github.com/nvm-sh/nvm)
-- [asdf](https://asdf-vm.com/) is supported as well
-
-```sh
-yarn clean
-yarn install
-yarn build
-yarn test
-yarn run publish --otp <one-time password>
-```
-
-If something in between fails (like a new package was added and needs to be published for the
-first time but you forgot) you can use `lerna publish from-package` to publish anything that
-has not been published yet.
-
-#### Create GitHub release
-
-1. Copy changelog entry for the new version
-1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
-1. Post in the [commitlint Slack-channel][12]
-
-#### Publish a `next` release (or i.e. patch release)
-
-```sh
-npm login
-nvm use (if you have nvm installed)
-```
-
-```sh
-yarn clean
-yarn install
-yarn build
-yarn test
-npx lerna publish --conventional-commits --dist-tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
-```
-
-If for some reason this stops in between, you can manually publish missing packages like this:
-
-```sh
-npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
-```
-
-##### Publishing (new) packages for the first time
-
-```sh
-npm publish [PACKAGE_NAME] --access public
-```
-
-From within the folder first i.e. `cd @commitlint/new-packages`.
-
-##### Move `next` to `latest`
-
-```sh
-npm login
-```
-
-```sh
-npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>'
-```
-
-Remove next:
-
-```sh
-npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag rm ${LERNA_PACKAGE_NAME} next --otp <one-time password>'
-```
 
 [0]: https://img.shields.io/badge/stability-stable-green.svg?style=flat-square
 [1]: https://nodejs.org/api/documentation.html#documentation_stability_index

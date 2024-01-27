@@ -60,3 +60,93 @@ To make your life easier commitlint is commitizen-friendly and provides the npm 
 - present tense
 - maximum of 100 characters
 - message format of `$type($scope): $message`
+
+## Testing
+
+From the project root directory, use the following commands to run the test suite
+
+```sh
+yarn clean
+yarn install
+yarn build
+yarn test
+```
+
+## Package dependency overview
+
+![commitlint-dependencies](https://user-images.githubusercontent.com/4248851/58385093-34b79780-7feb-11e9-8f27-bffc4aca3eba.png)
+
+(Partly outdated)
+
+## Publishing a release
+
+```sh
+npm login
+nvm use (if you have nvm installed)
+```
+
+- [nvm](https://github.com/nvm-sh/nvm)
+- [asdf](https://asdf-vm.com/) is supported as well
+
+```sh
+yarn clean
+yarn install
+yarn build
+yarn test
+yarn run publish --otp <one-time password>
+```
+
+If something in between fails (like a new package was added and needs to be published for the
+first time but you forgot) you can use `lerna publish from-package` to publish anything that
+has not been published yet.
+
+### Create GitHub release
+
+1. Copy changelog entry for the new version
+1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
+1. Post in the [commitlint Slack-channel][12]
+
+### Publish a `next` release (or i.e. patch release)
+
+```sh
+npm login
+nvm use (if you have nvm installed)
+```
+
+```sh
+yarn clean
+yarn install
+yarn build
+yarn test
+npx lerna publish --conventional-commits --dist-tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
+```
+
+If for some reason this stops in between, you can manually publish missing packages like this:
+
+```sh
+npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
+```
+
+#### Publishing (new) packages for the first time
+
+```sh
+npm publish [PACKAGE_NAME] --access public
+```
+
+From within the folder first i.e. `cd @commitlint/new-packages`.
+
+#### Move `next` to `latest`
+
+```sh
+npm login
+```
+
+```sh
+npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest --otp <one-time password>'
+```
+
+Remove next:
+
+```sh
+npx lerna exec --no-bail --no-private --no-sort --stream -- '[ -n "$(npm v . dist-tags.next)" ] && npm dist-tag rm ${LERNA_PACKAGE_NAME} next --otp <one-time password>'
+```
