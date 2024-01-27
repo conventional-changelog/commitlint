@@ -31,7 +31,7 @@ module.exports = {
 		'import/no-extraneous-dependencies': [
 			'error',
 			{
-				devDependencies: ['**/*.test.js', '**/*.test.ts'],
+				devDependencies: ['**/*.test.js', '**/*.test.ts', 'vitest.config.ts'],
 			},
 		],
 	},

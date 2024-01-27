@@ -1,15 +1,24 @@
 // https://github.com/raszi/node-tmp/issues/229
-import {TestEnvironment as NodeEnvironment} from 'jest-environment-node';
+
+import type {Environment} from 'vitest';
+import {builtinEnvironments} from 'vitest/environments';
 import tmp from 'tmp';
 
-class TestEnvironment extends NodeEnvironment {
-	async setup() {
-		await super.setup();
+const nodeEnv = builtinEnvironments.node;
 
-		tmp.setGracefulCleanup();
+const env: Environment = {
+	...nodeEnv,
+	name: 'commitlint',
+	async setup(global: object, options: Record<string, unknown>) {
+		const setupEnv = await nodeEnv.setup(global, options);
+		return {
+			...setupEnv,
+			teardown(global: unknown) {
+				tmp.setGracefulCleanup();
+				return setupEnv.teardown(global);
+			},
+		};
+	},
+};
 
-		this.global.tmp = tmp;
-	}
-}
-
-export default TestEnvironment;
+export default env;

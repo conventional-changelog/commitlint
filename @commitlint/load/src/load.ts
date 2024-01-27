@@ -1,5 +1,5 @@
 import path from 'path';
-import {pathToFileURL} from 'url';
+import {fileURLToPath, pathToFileURL} from 'url';
 
 import {validateConfig} from '@commitlint/config-validator';
 import executeRule from '@commitlint/execute-rule';
@@ -11,10 +11,10 @@ import {
 	QualifiedRules,
 	UserConfig,
 } from '@commitlint/types';
+import {resolve} from 'import-meta-resolve';
 import isPlainObject from 'lodash.isplainobject';
 import merge from 'lodash.merge';
 import uniq from 'lodash.uniq';
-import resolveFrom from 'resolve-from';
 
 import {loadConfig} from './utils/load-config.js';
 import {loadParserOpts} from './utils/load-parser-opts.js';
@@ -25,6 +25,68 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
 	return ('default' in imported && imported.default) || imported;
+};
+
+const resolveFrom = (parent: string, id: string) => {
+	let resolved: string | undefined;
+	let error: Error | undefined;
+
+	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+		try {
+			resolved = resolve(
+				id + suffix,
+				pathToFileURL(path.resolve(parent, '__test__.js')).toString()
+			);
+			if (/^file:/.test(resolved)) {
+				resolved = fileURLToPath(resolved);
+			}
+			break;
+		} catch (err) {
+			if (!error) {
+				error = err as Error;
+			}
+		}
+	}
+
+	if (resolved) {
+		return resolved;
+	}
+
+	throw (
+		error ||
+		Object.assign(new Error(`Cannot find module "${id}" from "${parent}"`), {
+			code: 'MODULE_NOT_FOUND',
+		})
+	);
+};
+
+const resolveParserPreset = async (resolvedParserPreset: string) => {
+	let finalParserPreset = resolvedParserPreset;
+	let finalParserOpts: unknown;
+	let finalError: Error | undefined;
+
+	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+		try {
+			finalParserOpts = await dynamicImport(resolvedParserPreset + suffix);
+			finalParserPreset = resolvedParserPreset + suffix;
+			break;
+		} catch (err) {
+			if (!finalError) {
+				finalError = err as Error;
+			}
+		}
+	}
+
+	if (finalError) {
+		throw finalError;
+	}
+
+	return {
+		path: `./${path.relative(process.cwd(), finalParserPreset)}`
+			.split(path.sep)
+			.join('/'),
+		parserOpts: finalParserOpts,
+	};
 };
 
 export default async function load(
@@ -57,8 +119,7 @@ export default async function load(
 
 		config.parserPreset = {
 			name: config.parserPreset,
-			path: resolvedParserPreset,
-			parserOpts: await dynamicImport(resolvedParserPreset),
+			...resolveParserPreset(resolvedParserPreset),
 		};
 	}
 
@@ -116,8 +177,7 @@ export default async function load(
 			? [extended.extends]
 			: [],
 		// Resolve config-relative formatter module
-		formatter:
-			resolveFrom.silent(base, extended.formatter) || extended.formatter,
+		formatter: resolveFrom(base, extended.formatter) || extended.formatter,
 		// Resolve parser-opts from preset
 		parserPreset: await loadParserOpts(extended.parserPreset),
 		ignores: extended.ignores,

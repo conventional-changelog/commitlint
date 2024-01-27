@@ -1,7 +1,8 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import {combineCommitMessage, getQuestions} from './SectionFooter';
-import {setPromptConfig} from './store/prompts';
-import {setRules} from './store/rules';
+
+import {combineCommitMessage, getQuestions} from './SectionFooter.js';
+import {setPromptConfig} from './store/prompts.js';
+import {setRules} from './store/rules.js';
 
 beforeEach(() => {
 	setRules({});

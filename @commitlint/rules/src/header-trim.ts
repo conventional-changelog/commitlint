@@ -4,8 +4,8 @@ import {SyncRule} from '@commitlint/types';
 export const headerTrim: SyncRule = (parsed) => {
 	const {header} = parsed;
 
-	const startsWithWhiteSpace = header !== header.trimStart();
-	const endsWithWhiteSpace = header !== header.trimEnd();
+	const startsWithWhiteSpace = header !== header?.trimStart();
+	const endsWithWhiteSpace = header !== header?.trimEnd();
 
 	switch (true) {
 		case startsWithWhiteSpace && endsWithWhiteSpace:

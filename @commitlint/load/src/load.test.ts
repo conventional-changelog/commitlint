@@ -6,20 +6,20 @@ import {RuleConfigSeverity} from '@commitlint/types';
 import {fix, git, npm} from '@commitlint/test';
 import resolveFrom from 'resolve-from';
 
-import {jest} from '@jest/globals';
-
 import load from './load.js';
 import {isDynamicAwaitSupported} from './utils/load-config.js';
 
 const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
-const plugin = jest.fn();
-const scopedPlugin = jest.fn();
+const plugin = vi.fn();
+const scopedPlugin = vi.fn();
 
-jest.mock('commitlint-plugin-example', () => plugin, {virtual: true});
-jest.mock('@scope/commitlint-plugin-example', () => scopedPlugin, {
-	virtual: true,
-});
+vi.mock('commitlint-plugin-example', () => ({
+	default: plugin,
+}));
+vi.mock('@scope/commitlint-plugin-example', () => ({
+	default: scopedPlugin,
+}));
 
 const fixBootstrap = (name: string) => fix.bootstrap(name, __dirname);
 const gitBootstrap = (name: string) => git.bootstrap(name, __dirname);
@@ -226,6 +226,9 @@ describe.each([['basic'], ['extends']])('%s config', (template) => {
 	const getConfigContents = ({
 		filename,
 		isEsm,
+	}: {
+		filename: string;
+		isEsm: boolean;
 	}): string | NodeJS.ArrayBufferView => {
 		if (filename === 'package.json') {
 			const configPath = path.join(

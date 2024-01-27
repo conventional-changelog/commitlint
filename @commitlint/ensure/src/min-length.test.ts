@@ -1,4 +1,4 @@
-import ensure from './min-length';
+import ensure from './min-length.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

@@ -1,7 +1,11 @@
 {
-  "files": [],
-  "include": [],
   "extends": "./tsconfig.shared.json",
+  "files": [],
+  "include": ["./auto-imports.d.ts", "./**/*.test.ts", "./**/*-test.ts"],
+  "exclude": ["./**/lib/*.ts"],
+  "compilerOptions": {
+    "noEmit": true
+  },
   "references": [
     {"path": "@packages/test-environment"},
     {"path": "@packages/test"},

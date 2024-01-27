@@ -1,6 +1,7 @@
 import parse from '@commitlint/parse';
-import {Commit} from '@commitlint/types';
-import {headerTrim} from './header-trim';
+import type {Commit} from 'conventional-commits-parser';
+
+import {headerTrim} from './header-trim.js';
 
 const messages = {
 	correct: 'test: subject',
@@ -18,10 +19,13 @@ const messages = {
 	mixSurround: '\t \ttest: subject \t  \t',
 };
 
-const parsed = Object.entries(messages).reduce((_parsed, [key, message]) => {
-	_parsed[key] = parse(message);
-	return _parsed;
-}, {}) as Record<keyof typeof messages, Promise<Commit>>;
+const parsed = Object.entries(messages).reduce(
+	(_parsed, [key, message]) =>
+		Object.assign(_parsed, {
+			[key]: parse(message),
+		}),
+	{} as Record<keyof typeof messages, Promise<Commit>>
+);
 
 test('should succeed when header is not surrounded by whitespace', async () => {
 	const result = headerTrim(await parsed.correct);

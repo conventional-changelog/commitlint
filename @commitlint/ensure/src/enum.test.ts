@@ -1,4 +1,4 @@
-import ensure from './enum';
+import ensure from './enum.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

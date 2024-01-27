@@ -1,4 +1,4 @@
-import ensure from './not-empty';
+import ensure from './not-empty.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

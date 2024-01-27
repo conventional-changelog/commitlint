@@ -1,4 +1,4 @@
-import isIgnored from './is-ignored';
+import isIgnored from './is-ignored.js';
 
 const VERSION_MESSAGES = [
 	'0.0.1',

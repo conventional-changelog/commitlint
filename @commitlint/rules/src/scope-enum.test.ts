@@ -19,7 +19,7 @@ const messagesByScope = {
 
 const {single, multiple, none} = messagesByScope;
 
-const messages = Object.values(messagesByScope).reduce(
+const messages = Object.values(messagesByScope).reduce<Record<string, string>>(
 	(acc, curr) => ({...acc, ...curr}),
 	{}
 );

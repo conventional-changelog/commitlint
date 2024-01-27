@@ -1,17 +1,18 @@
 import path from 'path';
-import {pathToFileURL} from 'url';
+import {fileURLToPath, pathToFileURL} from 'url';
 
 import 'resolve-global';
-import resolveFrom from 'resolve-from';
+
+import {resolve} from 'import-meta-resolve';
 import mergeWith from 'lodash.mergewith';
 import {validateConfig} from '@commitlint/config-validator';
-import {UserConfig} from '@commitlint/types';
+import type {ParserPreset, UserConfig} from '@commitlint/types';
 
 import importFresh from 'import-fresh';
 
 export interface ResolveExtendsContext {
 	cwd?: string;
-	parserPreset?: unknown;
+	parserPreset?: string | ParserPreset;
 	prefix?: string;
 	resolve?(id: string, ctx?: {prefix?: string; cwd?: string}): string;
 	resolveGlobal?: (id: string) => string;
@@ -47,6 +48,62 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 	return ('default' in imported && imported.default) || imported;
 };
 
+const resolveParserPreset = async (resolvedParserPreset: string) => {
+	let finalParserPreset = resolvedParserPreset;
+	let finalParserOpts: ParserPreset | undefined;
+	let finalError: Error | undefined;
+
+	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+		try {
+			finalParserOpts = await dynamicImport(resolvedParserPreset + suffix);
+			finalParserPreset = resolvedParserPreset + suffix;
+			break;
+		} catch (err) {
+			if (!finalError) {
+				finalError = err as Error;
+			}
+		}
+	}
+
+	if (finalError) {
+		throw finalError;
+	}
+
+	return {
+		path: `./${path.relative(process.cwd(), finalParserPreset)}`
+			.split(path.sep)
+			.join('/'),
+		parserOpts: finalParserOpts,
+	};
+};
+
+const resolveFrom = (parent: string, id: string) => {
+	let resolved: string | undefined;
+	let error: Error | undefined;
+
+	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+		try {
+			resolved = resolve(id + suffix, parent);
+			break;
+		} catch (err) {
+			if (!error) {
+				error = err as Error;
+			}
+		}
+	}
+
+	if (resolved) {
+		return resolved;
+	}
+
+	throw (
+		error ||
+		Object.assign(new Error(`Cannot find module "${id}" from "${parent}"`), {
+			code: 'MODULE_NOT_FOUND',
+		})
+	);
+};
+
 async function loadExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {}
@@ -71,10 +128,7 @@ async function loadExtends(
 			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
 			const parserPreset = {
 				name: c.parserPreset,
-				path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
-					.split(path.sep)
-					.join('/'),
-				parserOpts: await dynamicImport(resolvedParserPreset),
+				...resolveParserPreset(resolvedParserPreset),
 			};
 
 			ctx.parserPreset = parserPreset;
@@ -104,7 +158,7 @@ function resolveConfig(
 	raw: string,
 	context: ResolveExtendsContext = {}
 ): string {
-	const resolve = context.resolve || resolveId;
+	const resolve = context.resolve || tryResolveId;
 	const id = getId(raw, context.prefix);
 
 	let resolved: string;
@@ -122,10 +176,32 @@ function resolveConfig(
 		: resolved;
 }
 
-function resolveId(
-	id: string,
-	context: {cwd?: string; resolveGlobal?: (id: string) => string | void} = {}
-): string {
+function tryResolveId(id: string, context: ResolveExtendsContext) {
+	const cwd = context.cwd || process.cwd();
+
+	let resolved: string | undefined;
+
+	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+		try {
+			resolved = resolve(
+				id + suffix,
+				pathToFileURL(path.resolve(cwd, '__test__.js')).toString()
+			);
+			if (/^file:/.test(resolved)) {
+				resolved = fileURLToPath(resolved);
+			}
+			break;
+		} catch {}
+	}
+
+	if (resolved) {
+		return resolved;
+	}
+
+	return resolveId(id, context);
+}
+
+function resolveId(id: string, context: ResolveExtendsContext = {}): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(cwd, id);
 
@@ -141,8 +217,7 @@ function resolveId(
 	}
 
 	const err = new Error(`Cannot find module "${id}" from "${cwd}"`);
-	(err as any).code = 'MODULE_NOT_FOUND';
-	throw err;
+	throw Object.assign(err, {code: 'MODULE_NOT_FOUND'});
 }
 
 function resolveFromSilent(cwd: string, id: string): string | void {

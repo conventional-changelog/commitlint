@@ -1,4 +1,5 @@
 import parse from '@commitlint/parse';
+// @ts-expect-error -- no typings
 import preset from 'conventional-changelog-angular';
 
 import {subjectExclamationMark} from './subject-exclamation-mark.js';

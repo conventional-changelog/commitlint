@@ -142,6 +142,7 @@ test('supports scopes with / and empty parserOpts', async () => {
 
 test('ignores comments', async () => {
 	const message = 'type(some/scope): subject\n# some comment';
+	// @ts-expect-error -- no typings
 	const changelogOpts = await import('conventional-changelog-angular');
 	const opts = {
 		...changelogOpts.parserOpts,
@@ -157,6 +158,7 @@ test('ignores comments', async () => {
 test('registers inline #', async () => {
 	const message =
 		'type(some/scope): subject #reference\n# some comment\nthings #reference';
+	// @ts-expect-error -- no typings
 	const changelogOpts = await import('conventional-changelog-angular');
 	const opts = {
 		...changelogOpts.parserOpts,
@@ -203,6 +205,7 @@ test('allows separating -side nodes- by setting parserOpts.fieldPattern', async 
 
 test('parses references leading subject', async () => {
 	const message = '#1 some subject';
+	// @ts-expect-error -- no typings
 	const opts = await import('conventional-changelog-angular');
 	const {
 		references: [actual],

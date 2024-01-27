@@ -1,4 +1,4 @@
-import ensure from './case';
+import ensure from './case.js';
 
 test('true for no params', () => {
 	const actual = ensure();

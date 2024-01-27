@@ -2,15 +2,13 @@ import {QualifiedRules, RuleConfigSeverity, UserPromptConfig} from '@commitlint/
 import {Answers, DistinctQuestion} from 'inquirer';
 import isFunction from 'lodash.isfunction';
 
-import {jest} from '@jest/globals';
+import process from './Process.js';
 
-import process from './Process';
-
-const mockShowTitle = jest.fn();
-const mockShowValidation = jest.fn((message) => message);
+const mockShowTitle = vi.fn();
+const mockShowValidation = vi.fn((message) => message);
 
 // mock inquirer
-const mockPrompt = jest.fn(async function (
+const mockPrompt = vi.fn(async function (
 	questions: DistinctQuestion[],
 	answers: Answers
 ) {

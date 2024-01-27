@@ -1,4 +1,4 @@
-import ensure from './max-length';
+import ensure from './max-length.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

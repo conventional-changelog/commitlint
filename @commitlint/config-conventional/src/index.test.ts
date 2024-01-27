@@ -7,14 +7,14 @@ import {config} from './index.js';
 
 const {rules, parserPreset} = config;
 
-const dynamicImport = async (id) => {
+const dynamicImport = async (id: string) => {
 	const imported = await import(
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
 	return ('default' in imported && imported.default) || imported;
 };
 
-const commitLint = async (message) => {
+const commitLint = async (message: string) => {
 	const preset = await (await dynamicImport(parserPreset))();
 	return lint(message, rules, {...preset});
 };

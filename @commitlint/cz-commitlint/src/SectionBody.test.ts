@@ -1,6 +1,7 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import {combineCommitMessage, getQuestions} from './SectionBody';
-import {setRules} from './store/rules';
+
+import {combineCommitMessage, getQuestions} from './SectionBody.js';
+import {setRules} from './store/rules.js';
 
 describe('getQuestions', () => {
 	test('should exclude question when body must be empty', () => {

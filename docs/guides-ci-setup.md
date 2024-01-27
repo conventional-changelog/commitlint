@@ -121,7 +121,7 @@ workflows:
 ## GitLab CI
 
 ```yaml
-stages: ["lint","build","test"]
+stages: ['lint', 'build', 'test']
 lint:commit:
   image: registry.hub.docker.com/library/node:alpine
   stage: lint
@@ -135,11 +135,11 @@ lint:commit:
 ## GitLab CI with pre-build container
 
 ```yaml
-stages: ["lint","build","test"]
+stages: ['lint', 'build', 'test']
 lint:commit:
   image:
     name: registry.hub.docker.com/commitlint/commitlint:latest
-    entrypoint: [""]
+    entrypoint: ['']
   stage: lint
   script:
     - echo "${CI_COMMIT_MESSAGE}" | commitlint

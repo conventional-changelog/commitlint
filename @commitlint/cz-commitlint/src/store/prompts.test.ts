@@ -1,5 +1,3 @@
-import {jest} from '@jest/globals';
-
 import * as prompts from './prompts.js';
 
 let getPromptQuestions: typeof prompts.getPromptQuestions;
@@ -8,7 +6,7 @@ let getPromptSettings: typeof prompts.getPromptSettings;
 let setPromptConfig: typeof prompts.setPromptConfig;
 
 beforeEach(async () => {
-	jest.resetModules();
+	vi.resetModules();
 	({getPromptQuestions, getPromptMessages, getPromptSettings, setPromptConfig} =
 		await import('./prompts.js'));
 });
@@ -118,7 +116,7 @@ describe('setPromptConfig', () => {
 		});
 		expect(getPromptSettings()['scopeEnumSeparator']).toEqual('/');
 
-		const processExit = jest
+		const processExit = vi
 			.spyOn(process, 'exit')
 			.mockImplementation(() => undefined as never);
 		setPromptConfig({

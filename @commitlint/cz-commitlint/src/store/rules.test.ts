@@ -1,11 +1,12 @@
 import {QualifiedRules, RuleConfigSeverity} from '@commitlint/types';
-import {GetRuleMethod, SetRulesMethod} from './rules';
+
+import {GetRuleMethod, SetRulesMethod} from './rules.js';
 
 let getRule: GetRuleMethod;
 let setRules: SetRulesMethod;
 
 beforeEach(async () => {
-	jest.resetModules();
+	vi.resetModules();
 	({getRule, setRules} = await import('./rules.js'));
 });
 

@@ -3,8 +3,6 @@ import {pathToFileURL} from 'url';
 
 import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
 
-import {jest} from '@jest/globals';
-
 import resolveExtends, {ResolveExtendsContext} from './index.js';
 
 const require = createRequire(import.meta.url);
@@ -23,8 +21,8 @@ test('returns an equivalent object as passed in', async () => {
 });
 
 test('falls back to global install', async () => {
-	const resolveGlobal = jest.fn(() => '@commitlint/foo-bar');
-	const dynamicImport = jest.fn(() => ({}));
+	const resolveGlobal = vi.fn(() => '@commitlint/foo-bar');
+	const dynamicImport = vi.fn(() => ({}));
 
 	const ctx = {resolveGlobal, dynamicImport} as ResolveExtendsContext;
 
@@ -42,7 +40,7 @@ test('resolves extends for single config', async () => {
 	const input = {extends: 'extender-name'};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 	await resolveExtends(input, ctx);
 
@@ -53,7 +51,7 @@ test('uses empty prefix by default', async () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 	await resolveExtends(input, ctx);
 
@@ -64,7 +62,7 @@ test('uses prefix as configured', async () => {
 	const input = {extends: ['extender-name']};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	await resolveExtends(input, {
@@ -79,7 +77,7 @@ test('ignores prefix for scoped extends', async () => {
 	const input = {extends: ['@scope/extender-name']};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	await resolveExtends(input, {
@@ -94,7 +92,7 @@ test('adds prefix as suffix for scopes only', async () => {
 	const input = {extends: ['@scope']};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	await resolveExtends(input, {
@@ -109,7 +107,7 @@ test('ignores prefix for relative extends', async () => {
 	const input = {extends: ['./extender']};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	await resolveExtends(input, {
@@ -125,7 +123,7 @@ test('ignores prefix for absolute extends', async () => {
 	const input = {extends: [absolutePath]};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => ({})),
+		dynamicImport: vi.fn(() => ({})),
 	} as ResolveExtendsContext;
 
 	await resolveExtends(input, {
@@ -143,7 +141,7 @@ test('propagates return value of require function', async () => {
 	const propagated = {foo: 'bar'};
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(() => propagated),
+		dynamicImport: vi.fn(() => propagated),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -166,7 +164,7 @@ test('resolves extends recursively', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 	await resolveExtends(input, ctx);
 
@@ -190,7 +188,7 @@ test('uses prefix key recursively', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	await resolveExtends(input, {
@@ -220,7 +218,7 @@ test('propagates contents recursively', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -253,7 +251,7 @@ test('propagates contents recursively with overlap', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -284,7 +282,7 @@ test('extends rules from left to right with overlap', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -323,7 +321,7 @@ test('extending contents should take precedence', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -359,8 +357,8 @@ test('should fall back to conventional-changelog-lint-config prefix', async () =
 	};
 
 	const ctx = {
-		resolve: jest.fn(resolve),
-		dynamicImport: jest.fn(dynamicImport),
+		resolve: vi.fn(resolve),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, {
@@ -397,7 +395,7 @@ test('plugins should be merged correctly', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -438,7 +436,7 @@ test('rules should be merged correctly', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -479,7 +477,7 @@ test('parserPreset should resolve correctly in extended configuration', async ()
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -521,7 +519,7 @@ test('parserPreset should be merged correctly', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);
@@ -567,7 +565,7 @@ test('should correctly merge nested configs', async () => {
 
 	const ctx = {
 		resolve: id,
-		dynamicImport: jest.fn(dynamicImport),
+		dynamicImport: vi.fn(dynamicImport),
 	} as ResolveExtendsContext;
 
 	const actual = await resolveExtends(input, ctx);

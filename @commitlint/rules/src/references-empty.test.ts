@@ -1,6 +1,7 @@
 import parse from '@commitlint/parse';
 import {referencesEmpty} from './references-empty.js';
 
+// @ts-expect-error -- no typings
 import preset from 'conventional-changelog-angular';
 
 const messages = {
