@@ -30,3 +30,30 @@ jobs:
 
       - name: Test
         run: yarn test-ci
+
+  nodeJsBaselineAptCompatibility:
+    name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
+    runs-on: ubuntu-22.04
+    container:
+      image: "ubuntu:24.04"
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt update --yes
+          apt upgrade --yes
+
+          # NOTE: do not change the below with an `actions/setup-node` step! or it
+          # would make this CI job entirely pointless
+          apt install --yes npm
+
+          npm install --global yarn
+          yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Run Tests
+        run: yarn test-ci
+
