@@ -35,7 +35,7 @@ jobs:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
     runs-on: ubuntu-22.04
     container:
-      image: "ubuntu:24.04"
+      image: 'ubuntu:24.04'
     steps:
       - uses: actions/checkout@v4
 
@@ -55,5 +55,4 @@ jobs:
         run: yarn build
 
       - name: Run Tests
-        run: yarn test-ci
-
+        run: yarn test
