@@ -21,7 +21,6 @@
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
     "test": "yarn build && cross-env HOME=$PWD LANG=en_US.UTF-8 NO_COLOR=1 vitest run --coverage",
-    "test-ci": "yarn test --runInBand",
     "prepare": "husky"
   },
   "commitlint": {
