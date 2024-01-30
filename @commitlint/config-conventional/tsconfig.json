@@ -5,6 +5,6 @@
     "rootDir": "./src",
     "outDir": "./lib"
   },
-  "include": ["./**/*.ts"],
-  "exclude": ["./**/*.test.ts"]
+  "include": ["./src"],
+  "exclude": ["./src/**/*.test.ts", "./lib/**/*"]
 }

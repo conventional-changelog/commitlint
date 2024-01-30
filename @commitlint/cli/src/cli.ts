@@ -286,7 +286,7 @@ async function main(args: MainArgs): Promise<void> {
 					message: [
 						'Please add rules to your `commitlint.config.js`',
 						'    - Getting started guide: https://commitlint.js.org/#/?id=getting-started',
-						'    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/index.js',
+						'    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/src/index.ts',
 					].join('\n'),
 				},
 			],

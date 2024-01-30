@@ -1,23 +1,33 @@
-module.exports = {
+import {
+	RuleConfigCondition,
+	RuleConfigSeverity,
+	TargetCaseType,
+} from '@commitlint/types';
+
+export const config = {
 	parserPreset: 'conventional-changelog-conventionalcommits',
 	rules: {
-		'body-leading-blank': [1, 'always'],
-		'body-max-line-length': [2, 'always', 100],
-		'footer-leading-blank': [1, 'always'],
-		'footer-max-line-length': [2, 'always', 100],
-		'header-max-length': [2, 'always', 100],
-		'header-trim': [2, 'always'],
+		'body-leading-blank': [RuleConfigSeverity.Warning, 'always'] as const,
+		'body-max-line-length': [RuleConfigSeverity.Error, 'always', 100] as const,
+		'footer-leading-blank': [RuleConfigSeverity.Warning, 'always'] as const,
+		'footer-max-line-length': [
+			RuleConfigSeverity.Error,
+			'always',
+			100,
+		] as const,
+		'header-max-length': [RuleConfigSeverity.Error, 'always', 100] as const,
+		'header-trim': [RuleConfigSeverity.Error, 'always'] as const,
 		'subject-case': [
-			2,
+			RuleConfigSeverity.Error,
 			'never',
 			['sentence-case', 'start-case', 'pascal-case', 'upper-case'],
-		],
-		'subject-empty': [2, 'never'],
-		'subject-full-stop': [2, 'never', '.'],
-		'type-case': [2, 'always', 'lower-case'],
-		'type-empty': [2, 'never'],
+		] as [RuleConfigSeverity, RuleConfigCondition, TargetCaseType[]],
+		'subject-empty': [RuleConfigSeverity.Error, 'never'] as const,
+		'subject-full-stop': [RuleConfigSeverity.Error, 'never', '.'] as const,
+		'type-case': [RuleConfigSeverity.Error, 'always', 'lower-case'] as const,
+		'type-empty': [RuleConfigSeverity.Error, 'never'] as const,
 		'type-enum': [
-			2,
+			RuleConfigSeverity.Error,
 			'always',
 			[
 				'build',
@@ -32,7 +42,7 @@ module.exports = {
 				'style',
 				'test',
 			],
-		],
+		] as [RuleConfigSeverity, RuleConfigCondition, string[]],
 	},
 	prompt: {
 		questions: {

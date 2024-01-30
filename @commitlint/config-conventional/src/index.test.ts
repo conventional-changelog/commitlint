@@ -1,9 +1,9 @@
 import lint from '@commitlint/lint';
-import {rules, parserPreset} from '.';
+import {config} from '.';
 
 const commitLint = async (message) => {
-	const preset = await require(parserPreset)();
-	return lint(message, rules, {...preset});
+	const preset = await require(config.parserPreset)();
+	return lint(message, config.rules, {...preset});
 };
 
 const messages = {
