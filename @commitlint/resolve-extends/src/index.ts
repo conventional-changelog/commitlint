@@ -1,14 +1,55 @@
 import path from 'path';
-import {fileURLToPath, pathToFileURL} from 'url';
+import {pathToFileURL} from 'url';
 
 import 'resolve-global';
 
-import {resolve} from 'import-meta-resolve';
+import {moduleResolve} from 'import-meta-resolve';
 import mergeWith from 'lodash.mergewith';
 import {validateConfig} from '@commitlint/config-validator';
 import type {ParserPreset, UserConfig} from '@commitlint/types';
-
 import importFresh from 'import-fresh';
+
+/**
+ * @see moduleResolve
+ */
+export const resolveFrom = (specifier: string, parent?: string): string => {
+	let resolved: URL;
+	let resolveError: Error | undefined;
+
+	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+		try {
+			resolved = moduleResolve(
+				specifier + suffix,
+				pathToFileURL(parent ? parent : import.meta.url)
+			);
+			return resolved.pathname;
+		} catch (err) {
+			if (!resolveError) {
+				resolveError = err as Error;
+			}
+		}
+	}
+
+	throw resolveError;
+};
+
+/**
+ *
+ * @param resolvedParserPreset path resolved by {@link resolveFrom}
+ * @returns path and parserOpts function retrieved from `resolvedParserPreset`
+ */
+export const loadParserPreset = async (
+	resolvedParserPreset: string
+): Promise<Pick<ParserPreset, 'path' | 'parserOpts'>> => {
+	const finalParserOpts = await import(resolvedParserPreset);
+
+	const relativeParserPath = path.relative(process.cwd(), resolvedParserPreset);
+
+	return {
+		path: `./${relativeParserPath}`.split(path.sep).join('/'),
+		parserOpts: finalParserOpts.default,
+	};
+};
 
 export interface ResolveExtendsContext {
 	cwd?: string;
@@ -48,61 +89,10 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 	return ('default' in imported && imported.default) || imported;
 };
 
-const resolveParserPreset = async (resolvedParserPreset: string) => {
-	let finalParserPreset = resolvedParserPreset;
-	let finalParserOpts: ParserPreset | undefined;
-	let finalError: Error | undefined;
-
-	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
-		try {
-			finalParserOpts = await dynamicImport(resolvedParserPreset + suffix);
-			finalParserPreset = resolvedParserPreset + suffix;
-			break;
-		} catch (err) {
-			if (!finalError) {
-				finalError = err as Error;
-			}
-		}
-	}
-
-	if (finalError) {
-		throw finalError;
-	}
-
-	return {
-		path: `./${path.relative(process.cwd(), finalParserPreset)}`
-			.split(path.sep)
-			.join('/'),
-		parserOpts: finalParserOpts,
-	};
-};
-
-const resolveFrom = (parent: string, id: string) => {
-	let resolved: string | undefined;
-	let error: Error | undefined;
-
-	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
-		try {
-			resolved = resolve(id + suffix, parent);
-			break;
-		} catch (err) {
-			if (!error) {
-				error = err as Error;
-			}
-		}
-	}
-
-	if (resolved) {
-		return resolved;
-	}
-
-	throw (
-		error ||
-		Object.assign(new Error(`Cannot find module "${id}" from "${parent}"`), {
-			code: 'MODULE_NOT_FOUND',
-		})
-	);
-};
+/**
+ * Fake file name to provide {@link moduleResolve} a filename to resolve from the configuration cwd
+ */
+const FAKE_FILE_NAME_FOR_RESOLVER = '__';
 
 async function loadExtends(
 	config: UserConfig = {},
@@ -113,6 +103,7 @@ async function loadExtends(
 
 	return await ext.reduce(async (configs, raw) => {
 		const resolved = resolveConfig(raw, context);
+
 		const c = await (context.dynamicImport || dynamicImport)<{
 			parserPreset?: string;
 		}>(resolved);
@@ -125,10 +116,14 @@ async function loadExtends(
 			typeof c === 'object' &&
 			typeof c.parserPreset === 'string'
 		) {
-			const resolvedParserPreset = resolveFrom(cwd, c.parserPreset);
-			const parserPreset = {
+			const resolvedParserPreset = resolveFrom(
+				c.parserPreset,
+				path.join(cwd, FAKE_FILE_NAME_FOR_RESOLVER)
+			);
+
+			const parserPreset: ParserPreset = {
 				name: c.parserPreset,
-				...resolveParserPreset(resolvedParserPreset),
+				...(await loadParserPreset(resolvedParserPreset)),
 			};
 
 			ctx.parserPreset = parserPreset;
@@ -171,9 +166,8 @@ function resolveConfig(
 			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
 		);
 	}
-	return path.isAbsolute(resolved)
-		? pathToFileURL(resolved).toString()
-		: resolved;
+
+	return resolved;
 }
 
 function tryResolveId(id: string, context: ResolveExtendsContext) {
@@ -183,52 +177,52 @@ function tryResolveId(id: string, context: ResolveExtendsContext) {
 
 	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
 		try {
-			resolved = resolve(
+			resolved = moduleResolve(
 				id + suffix,
-				pathToFileURL(path.resolve(cwd, '__test__.js')).toString()
-			);
-			if (/^file:/.test(resolved)) {
-				resolved = fileURLToPath(resolved);
-			}
-			break;
-		} catch {}
-	}
+				pathToFileURL(path.join(cwd, id))
+			).pathname;
 
-	if (resolved) {
-		return resolved;
+			return resolved;
+		} catch {}
 	}
 
 	return resolveId(id, context);
 }
 
-function resolveId(id: string, context: ResolveExtendsContext = {}): string {
+function resolveId(
+	specifier: string,
+	context: ResolveExtendsContext = {}
+): string {
 	const cwd = context.cwd || process.cwd();
-	const localPath = resolveFromSilent(cwd, id);
+	const localPath = resolveFromSilent(specifier, cwd);
 
 	if (typeof localPath === 'string') {
 		return localPath;
 	}
 
 	const resolveGlobal = context.resolveGlobal || resolveGlobalSilent;
-	const globalPath = resolveGlobal(id);
+	const globalPath = resolveGlobal(specifier);
 
 	if (typeof globalPath === 'string') {
 		return globalPath;
 	}
 
-	const err = new Error(`Cannot find module "${id}" from "${cwd}"`);
+	const err = new Error(`Cannot find module "${specifier}" from "${cwd}"`);
 	throw Object.assign(err, {code: 'MODULE_NOT_FOUND'});
 }
 
-function resolveFromSilent(cwd: string, id: string): string | void {
+function resolveFromSilent(specifier: string, parent: string): string | void {
 	try {
-		return resolveFrom(cwd, id);
+		return resolveFrom(
+			specifier,
+			path.join(parent, FAKE_FILE_NAME_FOR_RESOLVER)
+		);
 	} catch (err) {}
 }
 
-function resolveGlobalSilent(id: string): string | void {
+function resolveGlobalSilent(specifier: string): string | void {
 	try {
 		const resolveGlobal = importFresh<(id: string) => string>('resolve-global');
-		return resolveGlobal(id);
+		return resolveGlobal(specifier);
 	} catch (err) {}
 }

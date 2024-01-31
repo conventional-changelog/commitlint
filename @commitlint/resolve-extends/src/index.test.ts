@@ -1,5 +1,4 @@
 import {createRequire} from 'module';
-import {pathToFileURL} from 'url';
 
 import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
 
@@ -131,9 +130,7 @@ test('ignores prefix for absolute extends', async () => {
 		prefix: 'prefix',
 	});
 
-	expect(ctx.dynamicImport).toHaveBeenCalledWith(
-		pathToFileURL(absolutePath).toString()
-	);
+	expect(ctx.dynamicImport).toHaveBeenCalledWith(absolutePath);
 });
 
 test('propagates return value of require function', async () => {
@@ -274,7 +271,12 @@ test('extends rules from left to right with overlap', async () => {
 			case 'left':
 				return {rules: {a: [RuleConfigSeverity.Disabled, 'never', true]}};
 			case 'right':
-				return {rules: {a: [RuleConfigSeverity.Disabled, 'never', false], b: [RuleConfigSeverity.Disabled, 'never', true]}};
+				return {
+					rules: {
+						a: [RuleConfigSeverity.Disabled, 'never', false],
+						b: [RuleConfigSeverity.Disabled, 'never', true],
+					},
+				};
 			default:
 				return {};
 		}
