@@ -1,5 +1,5 @@
 import path from 'path';
-import {fileURLToPath, pathToFileURL} from 'url';
+import {pathToFileURL} from 'url';
 
 import {validateConfig} from '@commitlint/config-validator';
 import executeRule from '@commitlint/execute-rule';
@@ -11,7 +11,7 @@ import {
 	QualifiedRules,
 	UserConfig,
 } from '@commitlint/types';
-import {resolve} from 'import-meta-resolve';
+import {moduleResolve} from 'import-meta-resolve';
 import isPlainObject from 'lodash.isplainobject';
 import merge from 'lodash.merge';
 import uniq from 'lodash.uniq';
@@ -20,73 +20,50 @@ import {loadConfig} from './utils/load-config.js';
 import {loadParserOpts} from './utils/load-parser-opts.js';
 import loadPlugin from './utils/load-plugin.js';
 
-const dynamicImport = async <T>(id: string): Promise<T> => {
-	const imported = await import(
-		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
-	);
-	return ('default' in imported && imported.default) || imported;
-};
-
-const resolveFrom = (parent: string, id: string) => {
-	let resolved: string | undefined;
-	let error: Error | undefined;
+const resolveFrom = (specifier: string, parent?: string): string => {
+	let resolved: URL;
+	let resolveError: Error | undefined;
+	// console.info('resolveFrom parent', { specifier, parent })
 
 	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
 		try {
-			resolved = resolve(
-				id + suffix,
-				pathToFileURL(path.resolve(parent, '__test__.js')).toString()
+			resolved = moduleResolve(
+				specifier + suffix,
+				pathToFileURL(parent ?? import.meta.url)
 			);
-			if (/^file:/.test(resolved)) {
-				resolved = fileURLToPath(resolved);
-			}
-			break;
+			return resolved.pathname;
 		} catch (err) {
-			if (!error) {
-				error = err as Error;
-			}
+			resolveError = err as Error;
 		}
 	}
 
-	if (resolved) {
-		return resolved;
-	}
-
-	throw (
-		error ||
-		Object.assign(new Error(`Cannot find module "${id}" from "${parent}"`), {
-			code: 'MODULE_NOT_FOUND',
-		})
-	);
+	throw resolveError;
 };
 
 const resolveParserPreset = async (resolvedParserPreset: string) => {
-	let finalParserPreset = resolvedParserPreset;
-	let finalParserOpts: unknown;
-	let finalError: Error | undefined;
+	// console.info('resolveParserPreset', resolvedParserPreset)
 
-	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
-		try {
-			finalParserOpts = await dynamicImport(resolvedParserPreset + suffix);
-			finalParserPreset = resolvedParserPreset + suffix;
-			break;
-		} catch (err) {
-			if (!finalError) {
-				finalError = err as Error;
-			}
-		}
-	}
+	const finalParserOpts = await import(resolvedParserPreset);
 
-	if (finalError) {
-		throw finalError;
-	}
+	// console.info('resolveParserPreset finalParserOpts', finalParserOpts)
 
 	return {
-		path: `./${path.relative(process.cwd(), finalParserPreset)}`
+		path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
 			.split(path.sep)
 			.join('/'),
-		parserOpts: finalParserOpts,
+		parserOpts: finalParserOpts.default,
 	};
+};
+
+/**
+ * formatter should be kept as is when unable to resolve it from config directory
+ */
+const resolveFormatter = (formatter: string, parent?: string): string => {
+	try {
+		return resolveFrom(formatter, parent);
+	} catch (error) {
+		return formatter;
+	}
 };
 
 export default async function load(
@@ -95,7 +72,9 @@ export default async function load(
 ): Promise<QualifiedConfig> {
 	const cwd = typeof options.cwd === 'undefined' ? process.cwd() : options.cwd;
 	const loaded = await loadConfig(cwd, options.file);
-	const base = loaded && loaded.filepath ? path.dirname(loaded.filepath) : cwd;
+	const baseDirectory =
+		loaded && loaded.filepath ? path.dirname(loaded.filepath) : cwd;
+	const configFilePath = loaded?.filepath;
 	let config: UserConfig = {};
 	if (loaded) {
 		validateConfig(loaded.filepath || '', loaded.config);
@@ -115,18 +94,21 @@ export default async function load(
 
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === 'string') {
-		const resolvedParserPreset = resolveFrom(base, config.parserPreset);
+		const resolvedParserPreset = resolveFrom(
+			config.parserPreset,
+			configFilePath
+		);
 
 		config.parserPreset = {
 			name: config.parserPreset,
-			...resolveParserPreset(resolvedParserPreset),
+			...(await resolveParserPreset(resolvedParserPreset)),
 		};
 	}
 
 	// Resolve extends key
 	const extended = await resolveExtends(config, {
 		prefix: 'commitlint-config',
-		cwd: base,
+		cwd: baseDirectory,
 		parserPreset: await config.parserPreset,
 	});
 
@@ -177,7 +159,7 @@ export default async function load(
 			? [extended.extends]
 			: [],
 		// Resolve config-relative formatter module
-		formatter: resolveFrom(base, extended.formatter) || extended.formatter,
+		formatter: resolveFormatter(extended.formatter, configFilePath),
 		// Resolve parser-opts from preset
 		parserPreset: await loadParserOpts(extended.parserPreset),
 		ignores: extended.ignores,
