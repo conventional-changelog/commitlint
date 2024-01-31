@@ -1,9 +1,11 @@
 import path from 'path';
-import {pathToFileURL} from 'url';
 
 import {validateConfig} from '@commitlint/config-validator';
 import executeRule from '@commitlint/execute-rule';
-import resolveExtends from '@commitlint/resolve-extends';
+import resolveExtends, {
+	resolveFrom,
+	loadParserPreset,
+} from '@commitlint/resolve-extends';
 import {
 	LoadOptions,
 	PluginRecords,
@@ -11,7 +13,6 @@ import {
 	QualifiedRules,
 	UserConfig,
 } from '@commitlint/types';
-import {moduleResolve} from 'import-meta-resolve';
 import isPlainObject from 'lodash.isplainobject';
 import merge from 'lodash.merge';
 import uniq from 'lodash.uniq';
@@ -19,41 +20,6 @@ import uniq from 'lodash.uniq';
 import {loadConfig} from './utils/load-config.js';
 import {loadParserOpts} from './utils/load-parser-opts.js';
 import loadPlugin from './utils/load-plugin.js';
-
-const resolveFrom = (specifier: string, parent?: string): string => {
-	let resolved: URL;
-	let resolveError: Error | undefined;
-	// console.info('resolveFrom parent', { specifier, parent })
-
-	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
-		try {
-			resolved = moduleResolve(
-				specifier + suffix,
-				pathToFileURL(parent ?? import.meta.url)
-			);
-			return resolved.pathname;
-		} catch (err) {
-			resolveError = err as Error;
-		}
-	}
-
-	throw resolveError;
-};
-
-const resolveParserPreset = async (resolvedParserPreset: string) => {
-	// console.info('resolveParserPreset', resolvedParserPreset)
-
-	const finalParserOpts = await import(resolvedParserPreset);
-
-	// console.info('resolveParserPreset finalParserOpts', finalParserOpts)
-
-	return {
-		path: `./${path.relative(process.cwd(), resolvedParserPreset)}`
-			.split(path.sep)
-			.join('/'),
-		parserOpts: finalParserOpts.default,
-	};
-};
 
 /**
  * formatter should be kept as is when unable to resolve it from config directory
@@ -101,7 +67,7 @@ export default async function load(
 
 		config.parserPreset = {
 			name: config.parserPreset,
-			...(await resolveParserPreset(resolvedParserPreset)),
+			...(await loadParserPreset(resolvedParserPreset)),
 		};
 	}
 

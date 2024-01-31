@@ -20,7 +20,7 @@
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
-    "test": "yarn build && cross-env HOME=$PWD LANG=en_US.UTF-8 NO_COLOR=1 vitest run --coverage",
+    "test": "yarn build && cross-env HOME=$PWD LANG=en_US.UTF-8 vitest run --coverage",
     "prepare": "husky"
   },
   "commitlint": {
