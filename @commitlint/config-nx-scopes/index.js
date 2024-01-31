@@ -1,8 +1,6 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import {
-	getProjects as getNXProjects,
-} from 'nx/src/generators/utils/project-configuration';
-import {FsTree} from 'nx/src/generators/tree');
+import {getProjects as getNXProjects} from 'nx/src/generators/utils/project-configuration';
+import {FsTree} from 'nx/src/generators/tree';
 
 export default {
 	utils: {getProjects},
