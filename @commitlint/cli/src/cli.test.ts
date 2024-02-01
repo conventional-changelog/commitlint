@@ -608,7 +608,7 @@ describe('should print config', () => {
 		const actual = await cli(['--print-config=json', '--no-color'], {cwd})();
 
 		expect(actual.stdout).toMatchInlineSnapshot(
-			`"{"extends":[],"formatter":"@commitlint/format","plugins":{},"rules":{"type-enum":[2,"never",["foo"]]},"helpUrl":"https://github.com/conventional-changelog/commitlint/#what-is-commitlint\","prompt":{}}"`
+			`"{"extends":[],"formatter":"@commitlint/format","plugins":{},"rules":{"type-enum":[2,"never",["foo"]]},"helpUrl":"https://github.com/conventional-changelog/commitlint/#what-is-commitlint","prompt":{}}"`
 		);
 	});
 });
