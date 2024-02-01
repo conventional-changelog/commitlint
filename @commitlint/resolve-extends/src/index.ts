@@ -1,5 +1,5 @@
 import path from 'path';
-import {pathToFileURL} from 'url';
+import {pathToFileURL, fileURLToPath} from 'url';
 
 import 'resolve-global';
 
@@ -22,7 +22,8 @@ export const resolveFrom = (specifier: string, parent?: string): string => {
 				specifier + suffix,
 				pathToFileURL(parent ? parent : import.meta.url)
 			);
-			return resolved.pathname;
+
+			return fileURLToPath(resolved);
 		} catch (err) {
 			if (!resolveError) {
 				resolveError = err as Error;
