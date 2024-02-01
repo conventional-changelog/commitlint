@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import {createRequire} from 'module';
 import {git} from '@commitlint/test';
 import execa from 'execa';

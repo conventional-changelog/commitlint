@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import ensure from './max-length.js';
 
 test('false for no params', () => {

@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
 import {signedOffBy} from './signed-off-by.js';
 

@@ -1,4 +1,9 @@
-import {QualifiedRules, RuleConfigSeverity, UserPromptConfig} from '@commitlint/types';
+import {describe, test, expect, vi, beforeEach, afterEach} from 'vitest';
+import {
+	QualifiedRules,
+	RuleConfigSeverity,
+	UserPromptConfig,
+} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
 import isFunction from 'lodash.isfunction';
 

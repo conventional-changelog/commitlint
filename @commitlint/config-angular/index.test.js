@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import lint from '@commitlint/lint';
 
 import config from './index.js';

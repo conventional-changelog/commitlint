@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
 import getForcedCaseFn from './get-forced-case-fn.js';

@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
 import {headerFullStop} from './header-full-stop.js';
 

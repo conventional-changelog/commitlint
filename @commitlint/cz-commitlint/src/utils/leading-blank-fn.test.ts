@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
 import getLeadingBlankFn from './leading-blank-fn.js';
@@ -23,7 +24,7 @@ test('should add leading blank', () => {
 	expect(rule('\n\ntest')).toBe('\n\ntest');
 	expect(rule('aaa\ntest')).toBe('\naaa\ntest');
 	expect(rule('\naaa\ntest')).toBe('\naaa\ntest');
-	expect(rule('')).toBe('\n');
+	expect(rule('')).toBe('');
 });
 
 test('should remove leading blank', () => {

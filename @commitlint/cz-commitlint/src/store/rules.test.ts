@@ -1,3 +1,4 @@
+import {describe, test, expect, vi, beforeEach} from 'vitest';
 import {QualifiedRules, RuleConfigSeverity} from '@commitlint/types';
 
 import {GetRuleMethod, SetRulesMethod} from './rules.js';

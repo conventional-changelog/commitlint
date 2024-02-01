@@ -1,3 +1,4 @@
+import {describe, test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
 import {setPromptConfig} from '../store/prompts.js';

@@ -1,4 +1,6 @@
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
+
 import {
 	enumRuleIsActive,
 	getEnumList,

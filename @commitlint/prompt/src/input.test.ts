@@ -1,5 +1,6 @@
 /// <reference path="./inquirer/inquirer.d.ts" />
 
+import {test, expect, vi} from 'vitest';
 // @ts-expect-error -- no typings
 import config from '@commitlint/config-angular';
 import chalk from 'chalk';

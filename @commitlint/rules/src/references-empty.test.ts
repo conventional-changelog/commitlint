@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
 import {referencesEmpty} from './references-empty.js';
 

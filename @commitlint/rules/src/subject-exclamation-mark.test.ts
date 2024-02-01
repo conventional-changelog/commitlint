@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
 // @ts-expect-error -- no typings
 import preset from 'conventional-changelog-angular';

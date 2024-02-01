@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
 import type {Commit} from 'conventional-commits-parser';
 
@@ -32,44 +33,35 @@ test('should succeed when header is not surrounded by whitespace', async () => {
 	expect(result).toEqual(expect.arrayContaining([true]));
 });
 
-(
-	[
-		['mixed whitespace', parsed.mixStart],
-		['whitespace', parsed.whitespaceStart],
-		['tab', parsed.tabStart],
-	] as const
-).forEach(([desc, commit]) => {
-	test(`should fail with ${desc}`, async () => {
-		const result = headerTrim(await commit);
-		expect(result).toEqual(
-			expect.arrayContaining([false, 'header must not start with whitespace'])
-		);
-	});
+test.each([
+	{scenario: 'mixed whitespace ', commit: parsed.mixStart},
+	{scenario: 'whitespace', commit: parsed.whitespaceStart},
+	{scenario: 'tab', commit: parsed.tabStart},
+] as const)('should fail when starts with $scenario', async ({commit}) => {
+	const result = headerTrim(await commit);
+	expect(result).toEqual(
+		expect.arrayContaining([false, 'header must not start with whitespace'])
+	);
 });
 
-(
-	[
-		['mixed whitespace', parsed.mixEnd],
-		['whitespace', parsed.whitespaceEnd],
-		['tab', parsed.tabEnd],
-	] as const
-).forEach(([desc, commit]) => {
-	test(`should fail when ends with ${desc}`, async () => {
-		const result = headerTrim(await commit);
-		expect(result).toEqual(
-			expect.arrayContaining([false, 'header must not end with whitespace'])
-		);
-	});
+test.each([
+	{scenario: 'mixed whitespace', commit: parsed.mixEnd},
+	{scenario: 'whitespace', commit: parsed.whitespaceEnd},
+	{scenario: 'tab', commit: parsed.tabEnd},
+] as const)('should fail when ends with $scenario', async ({commit}) => {
+	const result = headerTrim(await commit);
+	expect(result).toEqual(
+		expect.arrayContaining([false, 'header must not end with whitespace'])
+	);
 });
 
-(
-	[
-		['mixed whitespace', parsed.mixSurround],
-		['whitespace', parsed.whitespaceSurround],
-		['tab', parsed.tabSurround],
-	] as const
-).forEach(([desc, commit]) => {
-	test(`should fail when surrounded by ${desc}`, async () => {
+test.each([
+	{scenario: 'mixed whitespace', commit: parsed.mixSurround},
+	{scenario: 'whitespace', commit: parsed.whitespaceSurround},
+	{scenario: 'tab', commit: parsed.tabSurround},
+] as const)(
+	'should fail when surrounded by with $scenario',
+	async ({commit}) => {
 		const result = headerTrim(await commit);
 		expect(result).toEqual(
 			expect.arrayContaining([
@@ -77,5 +69,5 @@ test('should succeed when header is not surrounded by whitespace', async () => {
 				'header must not be surrounded by whitespace',
 			])
 		);
-	});
-});
+	}
+);

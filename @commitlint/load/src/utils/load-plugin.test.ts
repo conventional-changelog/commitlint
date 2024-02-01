@@ -1,3 +1,4 @@
+import {test, expect, vi} from 'vitest';
 import {AsyncRule, Plugin, Rule, SyncRule} from '@commitlint/types';
 
 import loadPlugin from './load-plugin.js';

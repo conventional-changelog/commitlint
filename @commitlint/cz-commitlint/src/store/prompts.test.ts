@@ -1,3 +1,4 @@
+import {describe, test, expect, vi, beforeEach} from 'vitest';
 import * as prompts from './prompts.js';
 
 let getPromptQuestions: typeof prompts.getPromptQuestions;

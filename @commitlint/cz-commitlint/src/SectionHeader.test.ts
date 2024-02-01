@@ -1,3 +1,4 @@
+import {describe, test, expect, beforeEach} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
 import {

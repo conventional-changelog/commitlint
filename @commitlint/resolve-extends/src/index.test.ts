@@ -1,5 +1,5 @@
+import {test, expect, vi} from 'vitest';
 import {createRequire} from 'module';
-
 import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
 
 import resolveExtends, {ResolveExtendsContext} from './index.js';

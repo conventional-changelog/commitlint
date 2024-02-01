@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import ensure from './case.js';
 
 test('true for no params', () => {

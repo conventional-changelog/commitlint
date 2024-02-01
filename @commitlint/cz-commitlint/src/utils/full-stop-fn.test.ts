@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
 import getFullStopFn from './full-stop-fn.js';

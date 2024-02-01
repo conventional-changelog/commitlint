@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import {createRequire} from 'module';
 import path from 'path';
 import {fileURLToPath} from 'url';

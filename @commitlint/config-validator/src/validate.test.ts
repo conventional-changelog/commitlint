@@ -1,3 +1,4 @@
+import {describe, test, expect} from 'vitest';
 import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
 
 import {validateConfig} from './validate.js';

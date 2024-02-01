@@ -1,6 +1,5 @@
 import {createRequire} from 'module';
 import Path from 'path';
-import {pathToFileURL} from 'url';
 
 import glob from 'glob';
 import importFrom from 'import-from';

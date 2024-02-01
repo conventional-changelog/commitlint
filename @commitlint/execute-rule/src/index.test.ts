@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import execute from './index.js';
 
 test('does nothing without params', async () => {

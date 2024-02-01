@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import ensure from './not-empty.js';
 
 test('false for no params', () => {

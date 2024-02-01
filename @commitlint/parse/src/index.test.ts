@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import parse from './index.js';
 
 test('throws when called without params', async () => {

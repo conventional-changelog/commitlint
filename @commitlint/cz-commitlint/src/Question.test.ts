@@ -1,3 +1,4 @@
+import {describe, test, expect, vi} from 'vitest';
 import chalk from 'chalk';
 import inquirer, {Answers, InputQuestionOptions} from 'inquirer';
 

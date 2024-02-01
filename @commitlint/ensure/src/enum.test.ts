@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import ensure from './enum.js';
 
 test('false for no params', () => {

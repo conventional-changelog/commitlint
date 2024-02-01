@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import ensure from './min-length.js';
 
 test('false for no params', () => {

@@ -1,4 +1,9 @@
-import {RuleConfigSeverity} from '@commitlint/types';
+import {test, expect} from 'vitest';
+import {
+	RuleConfigQuality,
+	RuleConfigSeverity,
+	RulesConfig,
+} from '@commitlint/types';
 
 import {
 	enumRuleIsActive,
@@ -85,7 +90,7 @@ test('getMaxLength', () => {
 });
 
 test('check enum rule filters', () => {
-	const rules: any = {
+	const rules: Partial<RulesConfig<RuleConfigQuality.Qualified>> = {
 		'enum-string': [RuleConfigSeverity.Warning, 'always', ['1', '2', '3']],
 		'type-enum': [RuleConfigSeverity.Error, 'always', ['build', 'chore', 'ci']],
 		'scope-enum': [RuleConfigSeverity.Error, 'never', ['cli', 'core', 'lint']],
@@ -108,7 +113,10 @@ test('check enum rule filters', () => {
 	enumRule = getRules('enum', rules)
 		.filter(getHasName('string'))
 		.find(enumRuleIsActive);
-	expect(enumRule).toEqual(['enum-string', [RuleConfigSeverity.Warning, 'always', ['1', '2', '3']]]);
+	expect(enumRule).toEqual([
+		'enum-string',
+		[RuleConfigSeverity.Warning, 'always', ['1', '2', '3']],
+	]);
 
 	enumRule = getRules('bar', rules)
 		.filter(getHasName('enum'))

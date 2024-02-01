@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import os from 'os';
 import path from 'path';
 import fs from 'fs-extra';

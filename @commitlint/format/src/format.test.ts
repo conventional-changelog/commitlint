@@ -1,3 +1,5 @@
+import {test, expect} from 'vitest';
+
 import {format, formatResult} from './index.js';
 
 test('does nothing without arguments', () => {

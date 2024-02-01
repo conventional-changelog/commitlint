@@ -1,3 +1,4 @@
+import {describe, test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
 import {combineCommitMessage, getQuestions} from './SectionBody.js';

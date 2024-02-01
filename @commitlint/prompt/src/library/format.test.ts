@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest';
 import type {Result} from './types.js';
 import format from './format.js';
 
