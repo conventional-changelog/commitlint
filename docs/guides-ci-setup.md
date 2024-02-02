@@ -17,18 +17,23 @@ on: [push, pull_request]
 
 jobs:
   commitlint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+
+      - name: Install required dependencies
+        run: |
+          apt update
+          apt install -y sudo
+          sudo apt install -y git curl
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          sudo DEBIAN_FRONTEND=noninteractive apt install -y nodejs
 
       - name: Install commitlint
-        run: npm i -g @commitlint/{cli,config-conventional}
+        run: npm install --global @commitlint/{cli,config-conventional}
 
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
