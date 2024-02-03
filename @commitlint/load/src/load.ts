@@ -38,8 +38,7 @@ export default async function load(
 ): Promise<QualifiedConfig> {
 	const cwd = typeof options.cwd === 'undefined' ? process.cwd() : options.cwd;
 	const loaded = await loadConfig(cwd, options.file);
-	const baseDirectory =
-		loaded && loaded.filepath ? path.dirname(loaded.filepath) : cwd;
+	const baseDirectory = loaded?.filepath ? path.dirname(loaded.filepath) : cwd;
 	const configFilePath = loaded?.filepath;
 	let config: UserConfig = {};
 	if (loaded) {

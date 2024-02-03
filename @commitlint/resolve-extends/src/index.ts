@@ -9,6 +9,13 @@ import {validateConfig} from '@commitlint/config-validator';
 import type {ParserPreset, UserConfig} from '@commitlint/types';
 import importFresh from 'import-fresh';
 
+const dynamicImport = async <T>(id: string): Promise<T> => {
+	const imported = await import(
+		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
+	);
+	return ('default' in imported && imported.default) || imported;
+};
+
 /**
  * @see moduleResolve
  */
@@ -42,13 +49,13 @@ export const resolveFrom = (specifier: string, parent?: string): string => {
 export const loadParserPreset = async (
 	resolvedParserPreset: string
 ): Promise<Pick<ParserPreset, 'path' | 'parserOpts'>> => {
-	const finalParserOpts = await import(resolvedParserPreset);
+	const finalParserOpts = await dynamicImport(resolvedParserPreset);
 
 	const relativeParserPath = path.relative(process.cwd(), resolvedParserPreset);
 
 	return {
 		path: `./${relativeParserPath}`.split(path.sep).join('/'),
-		parserOpts: finalParserOpts.default,
+		parserOpts: finalParserOpts,
 	};
 };
 
@@ -82,13 +89,6 @@ export default async function resolveExtends(
 		e ? {extends: e} : {}
 	);
 }
-
-const dynamicImport = async <T>(id: string): Promise<T> => {
-	const imported = await import(
-		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
-	);
-	return ('default' in imported && imported.default) || imported;
-};
 
 /**
  * Fake file name to provide {@link moduleResolve} a filename to resolve from the configuration cwd
@@ -174,16 +174,11 @@ function resolveConfig(
 function tryResolveId(id: string, context: ResolveExtendsContext) {
 	const cwd = context.cwd || process.cwd();
 
-	let resolved: string | undefined;
-
 	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
 		try {
-			resolved = moduleResolve(
-				id + suffix,
-				pathToFileURL(path.join(cwd, id))
-			).pathname;
-
-			return resolved;
+			return fileURLToPath(
+				moduleResolve(id + suffix, pathToFileURL(path.join(cwd, id)))
+			);
 		} catch {}
 	}
 
