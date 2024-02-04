@@ -1774,13 +1774,12 @@
   integrity sha512-9F4ys4C74eSTEUNndnER3VJ15oru2NumfQxS8geE+f3eB5xvfxpWyqE5XlVnxb/R14uoXi6SLbBwwiDSkv+XEw==
 
 "@swc/jest@^0.2.28":
-  version "0.2.33"
-  resolved "https://registry.npmjs.org/@swc/jest/-/jest-0.2.33.tgz#d8df9aaf6b4b2c40d0b8ed942fc31f353d2a90cd"
-  integrity sha512-D3S/nVrZYgHR9TnssxSM/L2YhWSaxXfsgPVYZ3vjHfH2Xf2loRUdduWtw1Nj+pOWqs9ZoAYkxeDYcZ0B/1GIvA==
+  version "0.2.34"
+  resolved "https://registry.npmjs.org/@swc/jest/-/jest-0.2.34.tgz#1d459171887b11855ec01d73c647f2e9ecaffd7b"
+  integrity sha512-MrS4m3yHFfnkYjxr3eqxshWi6fVhPViHQsb6XfiTO81niwEqYXeR58YhGJee6R0bfQHC69cv5OJ9+dYTYaYKRg==
   dependencies:
     "@jest/create-cache-key-function" "^29.7.0"
     jsonc-parser "^3.2.0"
-    packages "link:.."
 
 "@swc/types@^0.1.5":
   version "0.1.5"
@@ -7114,9 +7113,6 @@ package-json@^6.3.0:
     registry-auth-token "^4.0.0"
     registry-url "^5.0.0"
     semver "^6.2.0"
-
-"packages@link:..":
-  version "0.0.0"
 
 pacote@^13.0.3, pacote@^13.6.1:
   version "13.6.2"
