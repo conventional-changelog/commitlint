@@ -230,7 +230,7 @@ async function main(args: MainArgs): Promise<void> {
 			'[input] is required: supply via stdin, or --env or --edit or --from and --to',
 			pkg.name
 		);
-		yargs().showHelp('log');
+		cli.showHelp('log');
 		console.log(err.message);
 		throw err;
 	}
