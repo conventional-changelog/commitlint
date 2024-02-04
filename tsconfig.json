@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.shared.json",
   "files": [],
-  "include": ["./auto-imports.d.ts", "./**/*.test.ts", "./**/*-test.ts"],
+  "include": ["./**/*.test.ts", "./**/*-test.ts"],
   "exclude": ["./**/lib/*.ts"],
   "compilerOptions": {
     "noEmit": true

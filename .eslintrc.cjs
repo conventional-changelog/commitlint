@@ -63,14 +63,12 @@ module.exports = {
 			files: ['*.test.ts', '*.test.js'],
 			extends: ['plugin:jest/recommended'],
 			rules: {
-
 				'@typescript-eslint/no-explicit-any': 'off',
 				'@typescript-eslint/no-var-requires': 'off',
 
 				// disallow non-import statements appearing before import statements
 				'import/first': 'off',
 				'import/no-extraneous-dependencies': 'off',
-
 				'jest/no-deprecated-functions': 'off'
 			},
 		},
