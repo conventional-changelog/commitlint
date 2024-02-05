@@ -146,6 +146,12 @@ const cli = yargs(process.argv.slice(2))
 	)
 	.strict();
 
+/**
+ * avoid description words to be divided in new lines when there is enough space
+ * @see https://github.com/conventional-changelog/commitlint/pull/3850#discussion_r1472251234
+ */
+cli.wrap(cli.terminalWidth());
+
 main(cli.argv).catch((err) => {
 	setTimeout(() => {
 		if (err.type === pkg.name) {
