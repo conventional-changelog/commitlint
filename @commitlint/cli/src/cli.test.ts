@@ -1,7 +1,7 @@
 import {fix, git} from '@commitlint/test';
 import execa from 'execa';
 import fs from 'fs-extra';
-import merge from 'lodash.merge';
+import merge from 'lodash/merge';
 import path from 'path';
 
 const bin = require.resolve('../cli.js');

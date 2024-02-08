@@ -41,7 +41,7 @@
     "@commitlint/load": "^18.6.0",
     "@commitlint/types": "^18.6.0",
     "chalk": "^4.1.0",
-    "lodash.isplainobject": "^4.0.6",
+    "lodash": "^4.17.21",
     "word-wrap": "^1.2.5"
   },
   "peerDependencies": {
@@ -50,9 +50,7 @@
   },
   "devDependencies": {
     "@types/inquirer": "^8.0.0",
-    "@types/lodash.isfunction": "^3.0.8",
-    "@types/lodash.isplainobject": "^4.0.8",
-    "commitizen": "^4.2.4",
-    "lodash.isfunction": "^3.0.9"
+    "@types/lodash": "^4.14.202",
+    "commitizen": "^4.2.4"
   }
 }
