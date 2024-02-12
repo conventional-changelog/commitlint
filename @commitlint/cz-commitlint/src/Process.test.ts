@@ -1,6 +1,10 @@
-import {QualifiedRules, RuleConfigSeverity, UserPromptConfig} from '@commitlint/types';
+import {
+	QualifiedRules,
+	RuleConfigSeverity,
+	UserPromptConfig,
+} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
-import isFunction from 'lodash.isfunction';
+import isFunction from 'lodash/isfunction';
 import process from './Process';
 
 const mockShowTitle = jest.fn();
