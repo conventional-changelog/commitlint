@@ -1,5 +1,5 @@
 import lint from '@commitlint/lint';
-import {config} from '.';
+import config from '.';
 
 const commitLint = async (message) => {
 	const preset = await require(config.parserPreset)();
