@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.6.1](https://github.com/conventional-changelog/commitlint/compare/v18.6.0...v18.6.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* update dependency tar-fs to v3.0.5 ([#3903](https://github.com/conventional-changelog/commitlint/issues/3903)) ([79d77c9](https://github.com/conventional-changelog/commitlint/commit/79d77c9ef8de5046106027fc7d80dfd77faeb3e5))
+
+
+
+
+
 ## [18.4.4](https://github.com/conventional-changelog/commitlint/compare/v18.4.3...v18.4.4) (2024-01-04)
 
 
