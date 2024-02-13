@@ -6,8 +6,8 @@
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "require": "./lib/index.js",
-      "import": "./lib/index.js"
+      "import": "./wrapper.mjs",
+      "require": "./lib/index.js"
     }
   },
   "files": [
