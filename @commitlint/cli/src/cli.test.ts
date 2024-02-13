@@ -52,6 +52,16 @@ test('should produce success output with --verbose flag', async () => {
 	expect(actual.stderr).toEqual('');
 });
 
+test('should produce last commit and success output with --verbose flag', async () => {
+	const cwd = await gitBootstrap('fixtures/simple');
+	await execa('git', ['add', 'commitlint.config.js'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	const actual = await cli(['--last', '--verbose'], {cwd})();
+	expect(actual.stdout).toContain('0 problems, 0 warnings');
+	expect(actual.stdout).toContain('test: this should work');
+	expect(actual.stderr).toEqual('');
+});
+
 test('should produce no output with --quiet flag', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');
