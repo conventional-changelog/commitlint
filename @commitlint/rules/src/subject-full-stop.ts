@@ -15,7 +15,8 @@ export const subjectFullStop: SyncRule<string> = (
 
 	const negated = when === 'never';
 	let hasStop = input[input.length - 1] === value;
-	if (input.slice(-3) === '...') {
+	let ellipsis = '...';
+	if (input.length > ellipsis.length && input.slice(-ellipsis.length) === ellipsis) {
 		hasStop = false;
 	}
 
