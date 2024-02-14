@@ -2,29 +2,30 @@ FROM docker.io/library/node:18-buster AS builder
 WORKDIR /src
 COPY . ./
 RUN yarn install && \
-    yarn run build && \
-    # Commit lint CLI packages
-    npm pack @commitlint/cli && \
-    npm pack @commitlint/config-validator && \
-    npm pack @commitlint/ensure && \
-    npm pack @commitlint/execute-rule && \
-    npm pack @commitlint/format && \
-    npm pack @commitlint/is-ignored && \
-    npm pack @commitlint/lint && \
-    npm pack @commitlint/load && \
-    npm pack @commitlint/message && \
-    npm pack @commitlint/parse && \
-    npm pack @commitlint/read && \
-    npm pack @commitlint/resolve-extends && \
-    npm pack @commitlint/rules && \
-    npm pack @commitlint/to-lines && \
-    npm pack @commitlint/top-level && \
-    npm pack @commitlint/types && \
-    # Default commitlint config
-    npm pack @commitlint/config-conventional
+	yarn run build && \
+	# Commit lint CLI packages
+	npm pack @commitlint/cli && \
+	npm pack @commitlint/config-validator && \
+	npm pack @commitlint/config-nx-scopes && \
+	npm pack @commitlint/ensure && \
+	npm pack @commitlint/execute-rule && \
+	npm pack @commitlint/format && \
+	npm pack @commitlint/is-ignored && \
+	npm pack @commitlint/lint && \
+	npm pack @commitlint/load && \
+	npm pack @commitlint/message && \
+	npm pack @commitlint/parse && \
+	npm pack @commitlint/read && \
+	npm pack @commitlint/resolve-extends && \
+	npm pack @commitlint/rules && \
+	npm pack @commitlint/to-lines && \
+	npm pack @commitlint/top-level && \
+	npm pack @commitlint/types && \
+	# Default commitlint config
+	npm pack @commitlint/config-conventional
 
 FROM docker.io/library/node:18-buster
 COPY --from=builder /src/*.tgz ./
 RUN npm install -g *.tgz && \
-    rm -rf *.tgz
+	rm -rf *.tgz
 ENTRYPOINT ["commitlint"]
