@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.6.2](https://github.com/conventional-changelog/commitlint/compare/v18.6.1...v18.6.2) (2024-02-14)
+
+
+### Bug Fixes
+
+* **config-conventional:** use default export ([#3911](https://github.com/conventional-changelog/commitlint/issues/3911)) ([bc48408](https://github.com/conventional-changelog/commitlint/commit/bc4840832f9484186d3281d13ab5e0b4f9f63113))
+
+
+
+
+
 ## [18.6.1](https://github.com/conventional-changelog/commitlint/compare/v18.6.0...v18.6.1) (2024-02-13)
 
 **Note:** Version bump only for package @commitlint/config-conventional
