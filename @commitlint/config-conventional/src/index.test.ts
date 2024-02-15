@@ -4,7 +4,7 @@ import {pathToFileURL} from 'url';
 
 import lint from '@commitlint/lint';
 
-import {config} from './index.js';
+import config from './index.js';
 
 const {rules, parserPreset} = config;
 
