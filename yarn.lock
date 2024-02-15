@@ -1451,66 +1451,67 @@
   dependencies:
     esquery "^1.0.1"
 
-"@pnpm/constants@6.2.0":
-  version "6.2.0"
-  resolved "https://registry.npmjs.org/@pnpm/constants/-/constants-6.2.0.tgz"
-  integrity sha512-GlDVUkeTR2WK0oZAM+wtDY6RBMLw6b0Z/5qKgBbDszx4e+R7CHyfG7JofyypogRCfeWXeAXp2C2FkFTh+sNgIg==
+"@pnpm/constants@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.npmjs.org/@pnpm/constants/-/constants-7.1.1.tgz#3db261425fe15425aa213a2b003f4f60c9378b43"
+  integrity sha512-31pZqMtjwV+Vaq7MaPrT1EoDFSYwye3dp6BiHIGRJmVThCQwySRKM7hCvqqI94epNkqFAAYoWrNynWoRYosGdw==
 
-"@pnpm/error@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/@pnpm/error/-/error-4.0.1.tgz"
-  integrity sha512-6UFakGqUDhnZVzYCfN+QaG1epxtBVS1M9mb9RzoBuvWxcimBYTT04fdYuyk1Nay8y/TvAVl3AVB/lCziWG0+2w==
+"@pnpm/error@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/@pnpm/error/-/error-5.0.2.tgz#153d18fe9eeaeb02e48e9dc45b042f4c962b3822"
+  integrity sha512-0TEm+tWNYm+9uh6DSKyRbv8pv/6b4NL0PastLvMxIoqZbBZ5Zj1cYi332R9xsSUi31ZOsu2wpgn/bC7DA9hrjg==
   dependencies:
-    "@pnpm/constants" "6.2.0"
+    "@pnpm/constants" "7.1.1"
 
-"@pnpm/graceful-fs@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/@pnpm/graceful-fs/-/graceful-fs-2.1.0.tgz"
-  integrity sha512-cCUDP2jSm+Y44tVtZncrue0jXb6NrJWETQS/CQKguj/nnOqwX4Uk+9mXuhf0e/V/3ZIKe4TyDGFP1FjvWgKp1A==
+"@pnpm/graceful-fs@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.npmjs.org/@pnpm/graceful-fs/-/graceful-fs-3.2.0.tgz#241846c42c23feff7421b8bd97d4039891003f12"
+  integrity sha512-vRoXJxscDpHak7YE9SqCkzfrayn+Lw+YueOeHIPEqkgokrHeYgYeONoc2kGh0ObHaRtNSsonozVfJ456kxLNvA==
   dependencies:
-    graceful-fs "^4.2.10"
+    graceful-fs "^4.2.11"
 
-"@pnpm/read-project-manifest@^4.1.4":
-  version "4.1.4"
-  resolved "https://registry.npmjs.org/@pnpm/read-project-manifest/-/read-project-manifest-4.1.4.tgz"
-  integrity sha512-4z3q4gHjpIxa/yVQFdhCIEqHjaP+cecyahsLIleVjV92nevzjw6MnV8+uBNvEKS0Ssp7Uac0mvjym4uppiX7Nw==
+"@pnpm/read-project-manifest@^5.0.0":
+  version "5.0.10"
+  resolved "https://registry.npmjs.org/@pnpm/read-project-manifest/-/read-project-manifest-5.0.10.tgz#b6c99b5612a598dfebb133779a8e6456d360c30f"
+  integrity sha512-LgZ4QVrfITJP4kmcpKJOb5y7lZmTYu/CyeH1lHRxVSN76wfbRClInq/WglxAFQMGORopV44ESjhiaokjtqW9yA==
   dependencies:
     "@gwhitney/detect-indent" "7.0.1"
-    "@pnpm/error" "4.0.1"
-    "@pnpm/graceful-fs" "2.1.0"
-    "@pnpm/text.comments-parser" "1.0.0"
-    "@pnpm/types" "8.10.0"
-    "@pnpm/write-project-manifest" "4.1.2"
+    "@pnpm/error" "5.0.2"
+    "@pnpm/graceful-fs" "3.2.0"
+    "@pnpm/text.comments-parser" "2.0.0"
+    "@pnpm/types" "9.4.2"
+    "@pnpm/write-project-manifest" "5.0.6"
     fast-deep-equal "^3.1.3"
     is-windows "^1.0.2"
     json5 "^2.2.3"
+    lodash.clonedeep "^4.5.0"
     parse-json "^5.2.0"
     read-yaml-file "^2.1.0"
     sort-keys "^4.2.0"
     strip-bom "^4.0.0"
 
-"@pnpm/text.comments-parser@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@pnpm/text.comments-parser/-/text.comments-parser-1.0.0.tgz"
-  integrity sha512-iG0qrFcObze3uK+HligvzaTocZKukqqIj1dC3NOH58NeMACUW1NUitSKBgeWuNIE4LJT3SPxnyLEBARMMcqVKA==
+"@pnpm/text.comments-parser@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@pnpm/text.comments-parser/-/text.comments-parser-2.0.0.tgz#902d53ced2a0ae6a6d99b12ec6eb85dbc79e517a"
+  integrity sha512-DRWtTmmxQQtuWHf1xPt9bqzCSq8d0MQF5x1kdpCDMLd7xk3nP4To2/OGkPrb8MKbrWsgCNDwXyKCFlEKrAg7fg==
   dependencies:
     strip-comments-strings "1.2.0"
 
-"@pnpm/types@8.10.0":
-  version "8.10.0"
-  resolved "https://registry.npmjs.org/@pnpm/types/-/types-8.10.0.tgz"
-  integrity sha512-A4pcNNvFJdkMXArEjTCOIYNL2VxD4uBynWZ6cBIELXb5qJ0tUzwKsaSz4J953I0rQFqnsFpUYqaWIquI10W1sw==
+"@pnpm/types@9.4.2":
+  version "9.4.2"
+  resolved "https://registry.npmjs.org/@pnpm/types/-/types-9.4.2.tgz#0a34c3c41d5452461d8d8958374a727f9c46cfb2"
+  integrity sha512-g1hcF8Nv4gd76POilz9gD4LITAPXOe5nX4ijgr8ixCbLQZfcpYiMfJ+C1RlMNRUDo8vhlNB4O3bUlxmT6EAQXA==
 
-"@pnpm/write-project-manifest@4.1.2":
-  version "4.1.2"
-  resolved "https://registry.npmjs.org/@pnpm/write-project-manifest/-/write-project-manifest-4.1.2.tgz"
-  integrity sha512-/C0j7SsE9tGoj++f0dwePIV7zNZHcX8TcYL6pXNvZZCq4HsOMCBsIlcU9oMI/AGe+KMDfHFQSayWPO9QUuGE5w==
+"@pnpm/write-project-manifest@5.0.6":
+  version "5.0.6"
+  resolved "https://registry.npmjs.org/@pnpm/write-project-manifest/-/write-project-manifest-5.0.6.tgz#a074f5d833ffbc7bb1b1d34cb23e274fb6780761"
+  integrity sha512-3qkKCftRE/HXzoWedyDuaMMUQzheDwx8AQXR0DnA9ylsBnZQYNut19Ado/gzi5+IvznaMcqrBszw57j3y1/ILw==
   dependencies:
-    "@pnpm/text.comments-parser" "1.0.0"
-    "@pnpm/types" "8.10.0"
-    json5 "^2.2.1"
-    write-file-atomic "^5.0.0"
-    write-yaml-file "^4.2.0"
+    "@pnpm/text.comments-parser" "2.0.0"
+    "@pnpm/types" "9.4.2"
+    json5 "^2.2.3"
+    write-file-atomic "^5.0.1"
+    write-yaml-file "^5.0.0"
 
 "@rollup/rollup-android-arm-eabi@4.9.6":
   version "4.9.6"
@@ -4490,7 +4491,7 @@ got@^9.6.0:
     to-readable-stream "^1.0.0"
     url-parse-lax "^3.0.0"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.10, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
+graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.11, graceful-fs@^4.2.6, graceful-fs@^4.2.9:
   version "4.2.11"
   resolved "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.11.tgz"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
@@ -5340,7 +5341,7 @@ json5@^1.0.2:
   dependencies:
     minimist "^1.2.0"
 
-json5@^2.2.1, json5@^2.2.2, json5@^2.2.3:
+json5@^2.2.2, json5@^2.2.3:
   version "2.2.3"
   resolved "https://registry.npmjs.org/json5/-/json5-2.2.3.tgz"
   integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
@@ -5591,6 +5592,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz"
   integrity sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==
+
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
 
 lodash.isfunction@^3.0.9:
   version "3.0.9"
@@ -7434,7 +7440,7 @@ signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.7:
   resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.7.tgz"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
-signal-exit@^4.1.0:
+signal-exit@^4.0.1, signal-exit@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-4.1.0.tgz"
   integrity sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==
@@ -8429,7 +8435,7 @@ write-file-atomic@^2.4.2:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.2"
 
-write-file-atomic@^3.0.0, write-file-atomic@^3.0.3:
+write-file-atomic@^3.0.0:
   version "3.0.3"
   resolved "https://registry.npmjs.org/write-file-atomic/-/write-file-atomic-3.0.3.tgz"
   integrity sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==
@@ -8447,13 +8453,13 @@ write-file-atomic@^4.0.0, write-file-atomic@^4.0.1:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.7"
 
-write-file-atomic@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.npmjs.org/write-file-atomic/-/write-file-atomic-5.0.0.tgz"
-  integrity sha512-R7NYMnHSlV42K54lwY9lvW6MnSm1HSJqZL3xiSgi9E7//FYaI74r2G0rd+/X6VAMkHEdzxQaU5HUOXWUz5kA/w==
+write-file-atomic@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/write-file-atomic/-/write-file-atomic-5.0.1.tgz#68df4717c55c6fa4281a7860b4c2ba0a6d2b11e7"
+  integrity sha512-+QU2zd6OTD8XWIJCbffaiQeH9U73qIqafo1x6V1snCWYGJf6cVE0cDR4D8xRzcEnfI21IFrUPzPGtcPf8AC+Rw==
   dependencies:
     imurmurhash "^0.1.4"
-    signal-exit "^3.0.7"
+    signal-exit "^4.0.1"
 
 write-json-file@^3.2.0:
   version "3.2.0"
@@ -8488,13 +8494,13 @@ write-pkg@^4.0.0:
     type-fest "^0.4.1"
     write-json-file "^3.2.0"
 
-write-yaml-file@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.npmjs.org/write-yaml-file/-/write-yaml-file-4.2.0.tgz"
-  integrity sha512-LwyucHy0uhWqbrOkh9cBluZBeNVxzHjDaE9mwepZG3n3ZlbM4v3ndrFw51zW/NXYFFqP+QWZ72ihtLWTh05e4Q==
+write-yaml-file@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/write-yaml-file/-/write-yaml-file-5.0.0.tgz#3764885331139f4dfed415c652eabb97942b91cc"
+  integrity sha512-FdNA4RyH1L43TlvGG8qOMIfcEczwA5ij+zLXUy3Z83CjxhLvcV7/Q/8pk22wnCgYw7PJhtK+7lhO+qqyT4NdvQ==
   dependencies:
-    js-yaml "^4.0.0"
-    write-file-atomic "^3.0.3"
+    js-yaml "^4.1.0"
+    write-file-atomic "^5.0.1"
 
 ws@^7.4.3:
   version "7.5.7"
