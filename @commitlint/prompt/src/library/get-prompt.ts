@@ -1,12 +1,12 @@
 import chalk from 'chalk';
 import type {InputCustomOptions} from 'inquirer';
 
-import type {InputSetting, RuleEntry, Result, ResultPart} from './types';
+import type {InputSetting, RuleEntry, Result, ResultPart} from './types.js';
 
-import format from './format';
-import getForcedCaseFn from './get-forced-case-fn';
-import getForcedLeadingFn from './get-forced-leading-fn';
-import meta from './meta';
+import format from './format.js';
+import getForcedCaseFn from './get-forced-case-fn.js';
+import getForcedLeadingFn from './get-forced-leading-fn.js';
+import meta from './meta.js';
 import {
 	enumRuleIsActive,
 	getHasName,
@@ -14,7 +14,7 @@ import {
 	ruleIsActive,
 	ruleIsApplicable,
 	ruleIsNotApplicable,
-} from './utils';
+} from './utils.js';
 
 const EOL = '\n';
 

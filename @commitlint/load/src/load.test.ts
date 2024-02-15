@@ -1,20 +1,26 @@
-import {RuleConfigSeverity} from '@commitlint/types';
-
-const plugin = jest.fn();
-const scopedPlugin = jest.fn();
-
-jest.mock('commitlint-plugin-example', () => plugin, {virtual: true});
-jest.mock('@scope/commitlint-plugin-example', () => scopedPlugin, {
-	virtual: true,
-});
-
-import path from 'path';
+import {describe, test, expect, vi} from 'vitest';
 import {readFileSync, writeFileSync} from 'fs';
-import resolveFrom from 'resolve-from';
-import {fix, git, npm} from '@commitlint/test';
+import path from 'path';
+import {fileURLToPath} from 'url';
 
-import load from './load';
-import {isDynamicAwaitSupported} from './utils/load-config';
+import {RuleConfigSeverity} from '@commitlint/types';
+import {fix, git, npm} from '@commitlint/test';
+import resolveFrom from 'resolve-from';
+
+import load from './load.js';
+import {isDynamicAwaitSupported} from './utils/load-config.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
+
+const plugin = vi.fn();
+const scopedPlugin = vi.fn();
+
+vi.mock('commitlint-plugin-example', () => ({
+	default: plugin,
+}));
+vi.mock('@scope/commitlint-plugin-example', () => ({
+	default: scopedPlugin,
+}));
 
 const fixBootstrap = (name: string) => fix.bootstrap(name, __dirname);
 const gitBootstrap = (name: string) => git.bootstrap(name, __dirname);
@@ -30,11 +36,17 @@ test('extends-empty should have no rules', async () => {
 
 test('uses seed as configured', async () => {
 	const cwd = await gitBootstrap('fixtures/extends-empty');
-	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
+	const rules = {
+		'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any,
+	};
 
 	const actual = await load({rules}, {cwd});
 
-	expect(actual.rules['body-case']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'camel-case']);
+	expect(actual.rules['body-case']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'camel-case',
+	]);
 });
 
 test('rules should be loaded from local', async () => {
@@ -43,34 +55,63 @@ test('rules should be loaded from local', async () => {
 			direct: [RuleConfigSeverity.Warning, 'never', 'foo'],
 			func: () => [RuleConfigSeverity.Warning, 'never', 'foo'],
 			async: async () => [RuleConfigSeverity.Warning, 'never', 'foo'],
-			promise: () => Promise.resolve([RuleConfigSeverity.Warning, 'never', 'foo']),
+			promise: () =>
+				Promise.resolve([RuleConfigSeverity.Warning, 'never', 'foo']),
 		},
 	});
 
-	expect(actual.rules['direct']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
-	expect(actual.rules['func']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
-	expect(actual.rules['async']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
-	expect(actual.rules['promise']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'foo']);
+	expect(actual.rules['direct']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'foo',
+	]);
+	expect(actual.rules['func']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'foo',
+	]);
+	expect(actual.rules['async']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'foo',
+	]);
+	expect(actual.rules['promise']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'foo',
+	]);
 });
 
 test('rules should be loaded from relative config file', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
-	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
+	const rules = {
+		'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any,
+	};
 
 	const actual = await load({rules}, {cwd, file});
 
-	expect(actual.rules['body-case']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'camel-case']);
+	expect(actual.rules['body-case']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'camel-case',
+	]);
 });
 
 test('rules should be loaded from absolute config file', async () => {
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
 	const file = path.resolve(cwd, 'config/commitlint.config.js');
-	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
+	const rules = {
+		'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any,
+	};
 
 	const actual = await load({rules}, {cwd: process.cwd(), file});
 
-	expect(actual.rules['body-case']).toStrictEqual([RuleConfigSeverity.Warning, 'never', 'camel-case']);
+	expect(actual.rules['body-case']).toStrictEqual([
+		RuleConfigSeverity.Warning,
+		'never',
+		'camel-case',
+	]);
 });
 
 test('plugins should be loaded from seed', async () => {
@@ -221,6 +262,9 @@ describe.each([['basic'], ['extends']])('%s config', (template) => {
 	const getConfigContents = ({
 		filename,
 		isEsm,
+	}: {
+		filename: string;
+		isEsm: boolean;
 	}): string | NodeJS.ArrayBufferView => {
 		if (filename === 'package.json') {
 			const configPath = path.join(
@@ -262,7 +306,7 @@ describe.each([['basic'], ['extends']])('%s config', (template) => {
 		.filter((elem) => elem)
 		.join('-');
 
-	it.each(
+	test.each(
 		configTestCases
 			// Skip ESM tests for the extends suite until resolve-extends supports ESM
 			.filter(({isEsm}) => template !== 'extends' || !isEsm)
@@ -437,7 +481,9 @@ test('returns formatter name when unable to resolve from config directory', asyn
 test('does not mutate config module reference', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
-	const rules = {'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any};
+	const rules = {
+		'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'] as any,
+	};
 
 	const configPath = path.join(cwd, file);
 	const before = JSON.stringify(require(configPath));

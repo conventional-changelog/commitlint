@@ -8,6 +8,6 @@ export const headerMaxLength: SyncRule<number> = (
 ) => {
 	return [
 		maxLength(parsed.header, value),
-		`header must not be longer than ${value} characters, current length is ${parsed.header.length}`,
+		`header must not be longer than ${value} characters, current length is ${parsed.header?.length}`,
 	];
 };

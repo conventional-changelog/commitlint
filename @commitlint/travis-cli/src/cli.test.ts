@@ -1,5 +1,14 @@
-import execa from 'execa';
+import {test, expect} from 'vitest';
+import {createRequire} from 'module';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
 import {git} from '@commitlint/test';
+import execa from 'execa';
+
+const require = createRequire(import.meta.url);
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 const bin = require.resolve('../cli.js');
 
@@ -69,14 +78,16 @@ test('should call git with expected args (test might fail locally)', async () =>
 		cwd,
 		env: validBaseEnv,
 	});
-	const invocations = await getInvocations(result.stdout);
+
+	const invocations = getInvocations(result.stdout);
+
 	expect(invocations.length).toBe(3);
 
-	const [stash, branches, commilint] = invocations;
+	const [stash, branches, commitlint] = invocations;
 
 	expect(stash).toEqual(['git', 'stash', '-k', '-u', '--quiet']);
 	expect(branches).toEqual(['git', 'stash', 'pop', '--quiet']);
-	expect(commilint).toEqual(['commitlint']);
+	expect(commitlint).toEqual(['commitlint']);
 });
 
 test('should call git with expected args on pull_request (test might fail locally)', async () => {
@@ -91,14 +102,14 @@ test('should call git with expected args on pull_request (test might fail locall
 		cwd,
 		env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'},
 	});
-	const invocations = await getInvocations(result.stdout);
+	const invocations = getInvocations(result.stdout);
 	expect(invocations.length).toBe(3);
 
-	const [stash, branches, commilint] = invocations;
+	const [stash, branches, commitlint] = invocations;
 
 	expect(stash).toEqual(['git', 'stash', '-k', '-u', '--quiet']);
 	expect(branches).toEqual(['git', 'stash', 'pop', '--quiet']);
-	expect(commilint).toEqual([
+	expect(commitlint).toEqual([
 		'commitlint',
 		'--from',
 		'TRAVIS_COMMIT_A',
@@ -122,14 +133,14 @@ test('should call git with extra expected args on pull_request (test might fail 
 		},
 		['--config', './config/commitlint.config.js']
 	);
-	const invocations = await getInvocations(result.stdout);
+	const invocations = getInvocations(result.stdout);
 	expect(invocations.length).toBe(3);
 
-	const [stash, branches, commilint] = invocations;
+	const [stash, branches, commitlint] = invocations;
 
 	expect(stash).toEqual(['git', 'stash', '-k', '-u', '--quiet']);
 	expect(branches).toEqual(['git', 'stash', 'pop', '--quiet']);
-	expect(commilint).toEqual([
+	expect(commitlint).toEqual([
 		'commitlint',
 		'--from',
 		'TRAVIS_COMMIT_A',

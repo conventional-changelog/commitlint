@@ -1,7 +1,8 @@
 import minimist from 'minimist';
 import type {GitOptions} from 'git-raw-commits';
-import {getHistoryCommits} from './get-history-commits';
-import {getEditCommit} from './get-edit-commit';
+
+import {getHistoryCommits} from './get-history-commits.js';
+import {getEditCommit} from './get-edit-commit.js';
 
 interface GetCommitMessageOptions {
 	cwd?: string;

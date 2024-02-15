@@ -1,10 +1,8 @@
-import fs from 'fs-extra';
 import path from 'path';
-import pkgDir from 'pkg-dir';
 
-declare global {
-	var tmp: typeof import('tmp');
-}
+import fs from 'fs-extra';
+import pkgDir from 'pkg-dir';
+import tmp from 'tmp';
 
 export async function bootstrap(fixture?: string, directory?: string) {
 	const tmpDir = tmp.dirSync({

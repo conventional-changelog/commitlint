@@ -1,9 +1,10 @@
+import {test, expect} from 'vitest';
+import fs from 'fs/promises';
 import path from 'path';
 import {git} from '@commitlint/test';
 import execa from 'execa';
-import fs from 'fs/promises';
 
-import read from './read';
+import read from './read.js';
 
 test('get edit commit message specified by the `edit` flag', async () => {
 	const cwd: string = await git.bootstrap();

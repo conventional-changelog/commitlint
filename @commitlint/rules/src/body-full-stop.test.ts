@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {bodyFullStop} from './body-full-stop';
+import {bodyFullStop} from './body-full-stop.js';
 
 const messages = {
 	empty: 'test:\n',

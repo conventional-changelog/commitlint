@@ -1,13 +1,12 @@
 import load from '@commitlint/load';
 import type {DistinctQuestion, PromptModule} from 'inquirer';
 
-import format from './library/format';
-import getPrompt from './library/get-prompt';
-import settings from './settings';
-import type {InputSetting, Result} from './library/types';
-
-import {getHasName, getMaxLength, getRules} from './library/utils';
-import InputCustomPrompt from './inquirer/InputCustomPrompt';
+import format from './library/format.js';
+import getPrompt from './library/get-prompt.js';
+import settings from './settings.js';
+import type {InputSetting, Result} from './library/types.js';
+import {getHasName, getMaxLength, getRules} from './library/utils.js';
+import InputCustomPrompt from './inquirer/InputCustomPrompt.js';
 
 /**
  * Get user input by interactive prompt based on

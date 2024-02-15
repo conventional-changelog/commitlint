@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {headerCase} from './header-case';
+import {headerCase} from './header-case.js';
 
 const messages = {
 	numeric: '1.0.0\n',

@@ -1,4 +1,4 @@
-import ensure from './max-length';
+import ensure from './max-length.js';
 
 export default (value: string, max: number): boolean =>
 	typeof value === 'string' &&

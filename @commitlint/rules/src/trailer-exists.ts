@@ -9,7 +9,7 @@ export const trailerExists: SyncRule<string> = (
 	value = ''
 ) => {
 	const trailers = execa.sync('git', ['interpret-trailers', '--parse'], {
-		input: parsed.raw,
+		input: parsed.raw || '',
 	}).stdout;
 
 	const matches = toLines(trailers).filter((ln) => ln.startsWith(value)).length;

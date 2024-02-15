@@ -1,4 +1,4 @@
-import {wildcards} from './defaults';
+import {wildcards} from './defaults.js';
 import {IsIgnoredOptions} from '@commitlint/types';
 
 export default function isIgnored(

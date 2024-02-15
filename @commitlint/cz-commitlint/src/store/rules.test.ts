@@ -1,13 +1,16 @@
+import {describe, test, expect, vi, beforeEach} from 'vitest';
 import {QualifiedRules, RuleConfigSeverity} from '@commitlint/types';
-import {GetRuleMethod, SetRulesMethod} from './rules';
+
+import {GetRuleMethod, SetRulesMethod} from './rules.js';
 
 let getRule: GetRuleMethod;
 let setRules: SetRulesMethod;
-beforeEach(() => {
-	jest.resetModules();
-	getRule = require('./rules').getRule;
-	setRules = require('./rules').setRules;
+
+beforeEach(async () => {
+	vi.resetModules();
+	({getRule, setRules} = await import('./rules.js'));
 });
+
 describe('getRule', () => {
 	test('should get rule when prefix and property strict match', () => {
 		const rules: QualifiedRules = {

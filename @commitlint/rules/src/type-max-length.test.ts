@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {typeMaxLength} from './type-max-length';
+import {typeMaxLength} from './type-max-length.js';
 
 const short = 'a';
 const long = 'ab';

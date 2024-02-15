@@ -1,1 +1,1 @@
-module.exports = require('@commitlint/config-angular');
+export {default} from '@commitlint/config-angular';

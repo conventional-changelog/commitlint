@@ -1,2 +1,2 @@
-export * from './is-ignored';
-export {default} from './is-ignored';
+export * from './is-ignored.js';
+export {default} from './is-ignored.js';

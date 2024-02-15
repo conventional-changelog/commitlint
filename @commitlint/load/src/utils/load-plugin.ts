@@ -1,17 +1,32 @@
+import {createRequire} from 'module';
 import path from 'path';
-import chalk from 'chalk';
-import {normalizePackageName, getShorthandName} from './plugin-naming';
-import {WhitespacePluginError, MissingPluginError} from './plugin-errors';
-import {PluginRecords} from '@commitlint/types';
+import {fileURLToPath, pathToFileURL} from 'url';
 
-export default function loadPlugin(
+import {Plugin, PluginRecords} from '@commitlint/types';
+import chalk from 'chalk';
+
+import {normalizePackageName, getShorthandName} from './plugin-naming.js';
+import {WhitespacePluginError, MissingPluginError} from './plugin-errors.js';
+
+const require = createRequire(import.meta.url);
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
+
+const dynamicImport = async <T>(id: string): Promise<T> => {
+	const imported = await import(
+		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
+	);
+	return ('default' in imported && imported.default) || imported;
+};
+
+export default async function loadPlugin(
 	plugins: PluginRecords,
 	pluginName: string,
 	debug: boolean = false
-): PluginRecords {
+): Promise<PluginRecords> {
 	const longName = normalizePackageName(pluginName);
 	const shortName = getShorthandName(longName);
-	let plugin = null;
+	let plugin: Plugin;
 
 	if (pluginName.match(/\s+/u)) {
 		throw new WhitespacePluginError(pluginName, {
@@ -23,7 +38,7 @@ export default function loadPlugin(
 
 	if (!plugins[pluginKey]) {
 		try {
-			plugin = require(longName);
+			plugin = await dynamicImport<Plugin>(longName);
 		} catch (pluginLoadErr) {
 			try {
 				// Check whether the plugin exists

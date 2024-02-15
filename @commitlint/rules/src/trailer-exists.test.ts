@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {trailerExists} from './trailer-exists';
+import {trailerExists} from './trailer-exists.js';
 
 const messages = {
 	empty: 'test:\n',

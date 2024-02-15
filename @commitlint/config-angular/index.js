@@ -1,6 +1,6 @@
-const typeEnum = require('@commitlint/config-angular-type-enum');
+import typeEnum from '@commitlint/config-angular-type-enum';
 
-module.exports = {
+export default {
 	parserPreset: {parserOpts: {headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/}},
 	rules: {
 		'subject-exclamation-mark': [2, 'never'],

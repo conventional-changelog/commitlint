@@ -1,12 +1,13 @@
 import {PromptName} from '@commitlint/types';
 import {Answers, DistinctQuestion} from 'inquirer';
 import wrap from 'word-wrap';
-import Question, {QuestionConfig} from './Question';
-import getRuleQuestionConfig from './services/getRuleQuestionConfig';
-import {getPromptMessages, getPromptQuestions} from './store/prompts';
-import {getRule} from './store/rules';
-import getLeadingBlankFn from './utils/leading-blank-fn';
-import {getMaxLength} from './utils/rules';
+
+import Question, {QuestionConfig} from './Question.js';
+import getRuleQuestionConfig from './services/getRuleQuestionConfig.js';
+import {getPromptMessages, getPromptQuestions} from './store/prompts.js';
+import {getRule} from './store/rules.js';
+import getLeadingBlankFn from './utils/leading-blank-fn.js';
+import {getMaxLength} from './utils/rules.js';
 
 export class FooterQuestion extends Question {
 	footerMaxLength: number;

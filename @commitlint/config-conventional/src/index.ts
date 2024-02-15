@@ -4,7 +4,7 @@ import {
 	TargetCaseType,
 } from '@commitlint/types';
 
-export = {
+export default {
 	parserPreset: 'conventional-changelog-conventionalcommits',
 	rules: {
 		'body-leading-blank': [RuleConfigSeverity.Warning, 'always'] as const,

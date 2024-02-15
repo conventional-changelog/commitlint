@@ -1,8 +1,9 @@
 import path from 'path';
+
 import fs from 'fs-extra';
 import resolvePkg from 'resolve-pkg';
 
-import * as git from './git';
+import * as git from './git.js';
 
 export async function installModules(cwd: string) {
 	const manifestPath = path.join(cwd, 'package.json');

@@ -1,5 +1,6 @@
 import {QualifiedRules} from '@commitlint/types';
-import {Rule} from '../types';
+
+import type {Rule} from '../types.js';
 
 const storeKey = Symbol('rules');
 

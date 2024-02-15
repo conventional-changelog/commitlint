@@ -1,4 +1,6 @@
-import toLines from '.';
+import {test, expect} from 'vitest';
+
+import toLines from './index.js';
 
 test('should return an array for empty input', () => {
 	expect((toLines as () => string[])()).toStrictEqual([]);

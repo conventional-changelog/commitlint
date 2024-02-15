@@ -1,15 +1,9 @@
 {
   "name": "@commitlint/config-conventional",
+  "type": "module",
   "version": "18.6.2",
   "description": "Shareable commitlint config enforcing conventional commits",
   "main": "lib/index.js",
-  "exports": {
-    ".": {
-      "types": "./lib/index.d.ts",
-      "import": "./wrapper.mjs",
-      "require": "./lib/index.js"
-    }
-  },
   "files": [
     "lib/"
   ],

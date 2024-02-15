@@ -1,5 +1,6 @@
-import toCase from './to-case';
-import {TargetCaseType} from '@commitlint/types';
+import type {TargetCaseType} from '@commitlint/types';
+
+import toCase from './to-case.js';
 
 export default ensureCase;
 

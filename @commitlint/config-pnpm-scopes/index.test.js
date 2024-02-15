@@ -1,5 +1,12 @@
+import {test, expect} from 'vitest';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
 import {npm} from '@commitlint/test';
-import config from '.';
+
+import config from './index.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 test('exports rules key', () => {
 	expect(config).toHaveProperty('rules');

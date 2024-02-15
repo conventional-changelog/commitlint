@@ -1,4 +1,4 @@
-import {ErrorObject} from 'ajv';
+import type {ErrorObject} from 'ajv';
 
 /**
  * Formats an array of schema validation errors.

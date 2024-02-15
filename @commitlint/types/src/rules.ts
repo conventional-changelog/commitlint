@@ -1,5 +1,6 @@
-import {TargetCaseType} from './ensure';
-import {Commit} from './parse';
+import type {Commit} from 'conventional-commits-parser';
+
+import {TargetCaseType} from './ensure.js';
 
 /**
  * Rules match the input either as successful or failed.

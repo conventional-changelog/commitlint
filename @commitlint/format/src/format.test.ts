@@ -1,4 +1,6 @@
-import {format, formatResult} from '.';
+import {test, expect} from 'vitest';
+
+import {format, formatResult} from './index.js';
 
 test('does nothing without arguments', () => {
 	const actual = format();

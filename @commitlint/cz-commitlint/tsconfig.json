@@ -6,6 +6,6 @@
     "outDir": "./lib"
   },
   "include": ["./src"],
-  "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
+  "exclude": ["./src/**/*.test.ts", "./src/**/*-test.ts", "./lib/**/*"],
   "references": [{"path": "../cli"}]
 }

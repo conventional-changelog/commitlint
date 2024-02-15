@@ -8,7 +8,7 @@ export const headerFullStop: SyncRule<string> = (
 ) => {
 	const {header} = parsed;
 	const negated = when === 'never';
-	const hasStop = header[header.length - 1] === value;
+	const hasStop = header?.[header.length - 1] === value;
 
 	return [
 		negated ? !hasStop : hasStop,

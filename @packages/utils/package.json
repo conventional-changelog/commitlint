@@ -1,5 +1,6 @@
 {
   "name": "@commitlint/utils",
+  "type": "module",
   "version": "18.6.1",
   "description": "Development utilities for @commitlint",
   "private": true,
@@ -38,6 +39,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/require-from-string": "^1.2.3",
+    "@types/tar-fs": "^2.0.4",
     "@types/yargs": "^17.0.29"
   },
   "dependencies": {
