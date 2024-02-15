@@ -1,7 +1,13 @@
+import {test, expect} from 'vitest';
 import path from 'path';
+import {fileURLToPath} from 'url';
+
 import glob from 'glob';
 import camelCase from 'lodash.camelcase';
-import * as ensure from '.';
+
+import * as ensure from './index.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 test('exports all checkers', async () => {
 	const ignore = ['types'];

@@ -1,4 +1,6 @@
-import ensure from './max-length';
+import {test, expect} from 'vitest';
+
+import ensure from './max-length.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

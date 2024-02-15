@@ -1,7 +1,13 @@
-import Ajv from 'ajv';
+import {createRequire} from 'module';
+
 import {UserConfig} from '@commitlint/types';
-import schema from './commitlint.schema.json';
-import {formatErrors} from './formatErrors';
+import _Ajv from 'ajv';
+
+import {formatErrors} from './formatErrors.js';
+
+const require = createRequire(import.meta.url);
+
+const schema: typeof import('./commitlint.schema.json') = require('./commitlint.schema.json');
 
 const TYPE_OF = [
 	'undefined',
@@ -12,6 +18,9 @@ const TYPE_OF = [
 	'boolean',
 	'symbol',
 ];
+
+// FIXME: https://github.com/ajv-validator/ajv/issues/2132
+const Ajv = _Ajv as unknown as typeof _Ajv.default;
 
 export function validateConfig(
 	source: string,

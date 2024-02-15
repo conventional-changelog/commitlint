@@ -1,4 +1,8 @@
+import {createRequire} from 'module';
+
 import execa from 'execa';
+
+const require = createRequire(import.meta.url);
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || 'git';

@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {headerMaxLength} from './header-max-length';
+import {headerMaxLength} from './header-max-length.js';
 
 const short = 'test: a';
 const long = 'test: ab';

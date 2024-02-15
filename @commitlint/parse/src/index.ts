@@ -1,12 +1,13 @@
-import {Commit, Parser, ParserOptions} from '@commitlint/types';
+import type {Parser} from '@commitlint/types';
 
-const {sync} = require('conventional-commits-parser');
-const defaultChangelogOpts = require('conventional-changelog-angular');
+import {type Commit, type Options, sync} from 'conventional-commits-parser';
+// @ts-expect-error -- no typings
+import defaultChangelogOpts from 'conventional-changelog-angular';
 
 export async function parse(
 	message: string,
 	parser: Parser = sync,
-	parserOpts?: ParserOptions
+	parserOpts?: Options
 ): Promise<Commit> {
 	const preset = await defaultChangelogOpts();
 	const defaultOpts = preset.parserOpts;

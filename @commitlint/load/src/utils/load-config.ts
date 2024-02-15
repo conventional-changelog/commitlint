@@ -1,3 +1,6 @@
+import {existsSync, readFileSync} from 'fs';
+import path from 'path';
+
 import {
 	cosmiconfig,
 	defaultLoadersSync,
@@ -5,8 +8,6 @@ import {
 	defaultLoaders,
 } from 'cosmiconfig';
 import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
-import {existsSync, readFileSync} from 'fs';
-import path from 'path';
 
 export interface LoadConfigResult {
 	config: unknown;

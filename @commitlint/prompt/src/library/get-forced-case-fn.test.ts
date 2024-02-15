@@ -1,6 +1,7 @@
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
 
-import getForcedCaseFn from './get-forced-case-fn';
+import getForcedCaseFn from './get-forced-case-fn.js';
 
 test('should not apply', () => {
 	let rule = getForcedCaseFn(['name', [RuleConfigSeverity.Disabled]]);

@@ -2,17 +2,18 @@ import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
-import {buildCommitMesage} from './commit-message';
-import {
+import type {
 	LintOptions,
 	LintOutcome,
 	LintRuleOutcome,
 	Rule,
-	RuleConfigSeverity,
 	BaseRule,
 	RuleType,
 	QualifiedRules,
 } from '@commitlint/types';
+import {RuleConfigSeverity} from '@commitlint/types';
+
+import {buildCommitMessage} from './commit-message.js';
 
 export default async function lint(
 	message: string,
@@ -192,6 +193,6 @@ export default async function lint(
 		valid,
 		errors,
 		warnings,
-		input: buildCommitMesage(parsed),
+		input: buildCommitMessage(parsed),
 	};
 }

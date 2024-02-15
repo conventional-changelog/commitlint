@@ -1,4 +1,6 @@
-import execute from '.';
+import {test, expect} from 'vitest';
+
+import execute from './index.js';
 
 test('does nothing without params', async () => {
 	const exec = execute as any;

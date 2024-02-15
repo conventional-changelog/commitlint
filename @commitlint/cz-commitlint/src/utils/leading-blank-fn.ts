@@ -1,5 +1,5 @@
-import {Rule} from '../types';
-import {ruleIsActive, ruleIsNotApplicable} from './rules';
+import type {Rule} from '../types.js';
+import {ruleIsActive, ruleIsNotApplicable} from './rules.js';
 
 /**
  * Get forced leading for rule

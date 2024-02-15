@@ -1,9 +1,10 @@
-const path = require('path');
-const readYamlFile = require('read-yaml-file');
-const fg = require('fast-glob');
-const {readExactProjectManifest} = require('@pnpm/read-project-manifest');
+import path from 'path';
 
-module.exports = {
+import fg from 'fast-glob';
+import readYamlFile from 'read-yaml-file';
+import {readExactProjectManifest} from '@pnpm/read-project-manifest';
+
+export default {
 	utils: {getProjects},
 	rules: {
 		'scope-enum': (ctx) =>

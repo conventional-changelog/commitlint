@@ -1,5 +1,7 @@
-import lint from './lint';
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
+
+import lint from './lint.js';
 
 test('throws without params', async () => {
 	const error = (lint as any)();
@@ -86,7 +88,10 @@ test('positive on stub message and opts', async () => {
 });
 
 test('throws for invalid rule names', async () => {
-	const error = lint('foo', {foo: [RuleConfigSeverity.Error, 'always'], bar: [RuleConfigSeverity.Warning, 'never']});
+	const error = lint('foo', {
+		foo: [RuleConfigSeverity.Error, 'always'],
+		bar: [RuleConfigSeverity.Warning, 'never'],
+	});
 
 	await expect(error).rejects.toThrow(/^Found invalid rule names: foo, bar/);
 });

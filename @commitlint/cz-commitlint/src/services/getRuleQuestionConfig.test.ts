@@ -1,7 +1,9 @@
+import {describe, test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
-import {setPromptConfig} from '../store/prompts';
-import {setRules} from '../store/rules';
-import getRuleQuestionConfig from './getRuleQuestionConfig';
+
+import {setPromptConfig} from '../store/prompts.js';
+import {setRules} from '../store/rules.js';
+import getRuleQuestionConfig from './getRuleQuestionConfig.js';
 
 // let rules = {};
 
