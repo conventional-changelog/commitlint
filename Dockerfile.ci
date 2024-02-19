@@ -1,4 +1,4 @@
-FROM docker.io/library/node:18-buster AS builder
+FROM docker.io/library/node:20-buster AS builder
 WORKDIR /src
 COPY . ./
 RUN yarn install && \
@@ -23,7 +23,7 @@ RUN yarn install && \
     # Default commitlint config
     npm pack @commitlint/config-conventional
 
-FROM docker.io/library/node:18-buster
+FROM docker.io/library/node:20-buster
 COPY --from=builder /src/*.tgz ./
 RUN npm install -g *.tgz && \
     rm -rf *.tgz
