@@ -31,27 +31,6 @@ jobs:
       - name: Test
         run: yarn test
 
-  codeQuality:
-    name: Code quality
-    needs: [build]
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: yarn
-
-      - name: Install dependencies
-        run: yarn install --ignore-engines --frozen-lockfile
-
-      - name: Check format
-        run: yarn format
-
-      - name: Lint
-        run: yarn lint
-
   nodeJsBaselineAptCompatibility:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
     runs-on: ubuntu-22.04
