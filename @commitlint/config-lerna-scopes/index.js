@@ -1,7 +1,7 @@
 import {createRequire} from 'module';
 import Path from 'path';
 
-import glob from 'glob';
+import {globSync} from 'glob';
 import importFrom from 'import-from';
 import semver from 'semver';
 
@@ -27,7 +27,7 @@ function getPackages(context) {
 
 				const wsGlobs = workspaces.flatMap((ws) => {
 					const path = Path.posix.join(ws, 'package.json');
-					return glob.sync(path, {cwd, ignore: ['**/node_modules/**']});
+					return globSync(path, {cwd, ignore: ['**/node_modules/**']});
 				});
 
 				return wsGlobs.map((pJson) => require(Path.join(cwd, pJson)));
