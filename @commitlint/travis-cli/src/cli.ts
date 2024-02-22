@@ -1,6 +1,6 @@
 import {createRequire} from 'module';
 
-import execa from 'execa';
+import {Options, execa} from 'execa';
 
 const require = createRequire(import.meta.url);
 
@@ -57,7 +57,7 @@ async function main() {
 	}
 }
 
-async function git(args: string[], options: execa.Options = {}) {
+async function git(args: string[], options: Options = {}) {
 	return execa(GIT, args, {
 		stdio: 'inherit',
 		...options,
@@ -76,7 +76,7 @@ async function isClean() {
 	return !(result.stdout && result.stdout.trim());
 }
 
-async function lint(args: string[], options: execa.Options = {}) {
+async function lint(args: string[], options: Options = {}) {
 	return execa(COMMITLINT, args, {
 		stdio: ['pipe', 'inherit', 'inherit'],
 		...options,
