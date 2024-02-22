@@ -4,7 +4,7 @@ Enforce commit conventions with confidence by linting on your CI servers with `c
 
 This guide assumes you have already configured `commitlint` for local usage.
 
-Follow the [Getting Started](./?id=getting-started) for basic installation and configuration instructions.
+Follow the [Getting Started](/guides/getting-started) for basic installation and configuration instructions.
 
 ## GitHub Actions
 
@@ -147,7 +147,7 @@ lint:commit:
 
 ## Jenkins X
 
-```
+```yml
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
@@ -155,15 +155,15 @@ metadata:
 spec:
   pipelineSpec:
     tasks:
-    - name: conventional-commits
-      taskSpec:
-        steps:
-        - name: lint-commit-messages
-          image: commitlint/commitlint
-          script: |
-            #!/usr/bin/env sh
-            . .jx/variables.sh
-            commitlint --extends '@commitlint/config-conventional' --from $PR_BASE_SHA --to $PR_HEAD_SHA
+      - name: conventional-commits
+        taskSpec:
+          steps:
+            - name: lint-commit-messages
+              image: commitlint/commitlint
+              script: |
+                #!/usr/bin/env sh
+                . .jx/variables.sh
+                commitlint --extends '@commitlint/config-conventional' --from $PR_BASE_SHA --to $PR_HEAD_SHA
   serviceAccountName: tekton-bot
   timeout: 15m
 ```
@@ -181,4 +181,6 @@ workflows:
       - npx commitlint --from=HEAD~1
 ```
 
-?> Help yourself adopting a commit convention by using an interactive commit prompt. Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](guides-use-prompt.md)
+> [!TIP]
+> Help yourself adopting a commit convention by using an interactive commit prompt.
+> Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](/> guides/use-prompt)

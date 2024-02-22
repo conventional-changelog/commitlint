@@ -9,7 +9,7 @@ There are three fields: `settings`, `messages` and `questions`
 Set optional options.
 
 - `enableMultipleScopes`: `(boolean)` Enable multiple scopes, select scope with a radio list, disabled by default.
-- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](./concepts-commit-conventions.md?id=multiple-scopes), you can specify the delimiter. It is applied when `enableMultipleScopes` set true.
+- `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](/concepts/commit-conventions#multiple-scopes), you can specify the delimiter. It is applied when `enableMultipleScopes` set true.
 
 ## `messages`
 
@@ -39,12 +39,10 @@ Specify the interactive steps, Steps can only be configured in
 - `issues`
 - `issuesBody`
 
-<div class="sequence">
-    <img src="./assets/cz-commitlint.png"/>
-</div>
+![cz-commitlint questions](/assets/cz-commitlint.png)
 
 ```js
-module.exports = {
+export default {
   parserPreset: 'conventional-changelog-conventionalcommits',
   rules: {
     ...

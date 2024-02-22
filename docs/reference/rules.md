@@ -1,249 +1,210 @@
 # Rules
 
-Rules are made up by a name and a configuration array. The configuration array contains:
-
-- **Level** `[0..2]`: `0` disables the rule. For `1` it will be considered a warning for `2` an error.
-- **Applicable** `always|never`: `never` inverts the rule.
-- **Value**: value to use for this rule.
-
-Rule configurations are either of type `array` residing on a key with the rule's name as key on the rules `object` or of type function returning type `array` or `Promise<array>`. This means all of the following notations are supported.
-
-**Plain array**
-
-```js
-  "rules": {
-    "header-max-length": [0, "always", 72],
-  }
-```
-
-**Function returning array**
-
-```js
-  "rules": {
-    "header-max-length": () => [0, "always", 72],
-  }
-```
-
-**Async function returning array**
-
-```js
-  "rules": {
-    "header-max-length": async () => [0, "always", 72],
-  }
-```
-
-**Function returning a promise resolving to array**
-
-```js
-  "rules": {
-    "header-max-length": () => Promise.resolve([0, "always", 72]),
-  }
-```
-
-### Available rules
-
-#### body-full-stop
+## body-full-stop
 
 - **condition**: `body` ends with `value`
 - **rule**: `never`
 - **value**
 
-```
-'.'
-```
+  ```text
+  '.'
+  ```
 
-#### body-leading-blank
+## body-leading-blank
 
 - **condition**: `body` begins with blank line
 - **rule**: `always`
 
-#### body-empty
+## body-empty
 
 - **condition**: `body` is empty
 - **rule**: `never`
 
-#### body-max-length
+## body-max-length
 
 - **condition**: `body` has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
-Infinity
-```
+  ```text
+  Infinity
+  ```
 
-#### body-max-line-length
+## body-max-line-length
 
 - **condition**: `body` lines has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
-Infinity
-```
+  ```text
+  Infinity
+  ```
 
-#### body-min-length
+## body-min-length
 
 - **condition**: `body` has `value` or more characters
 - **rule**: `always`
 - **value**
 
-```
-0
-```
+  ```text
+  0
+  ```
 
-#### body-case
+## body-case
 
 - **condition**: `body` is in case `value`
 - **rule**: `always`
 - **value**
 
-```
-'lower-case'
-```
+  ```text
+  'lower-case'
+  ```
 
 - **possible values**
 
-```js
-[
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
-  'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case', // Start Case
-];
-```
+  ```js
+  [
+    'lower-case', // default
+    'upper-case', // UPPERCASE
+    'camel-case', // camelCase
+    'kebab-case', // kebab-case
+    'pascal-case', // PascalCase
+    'sentence-case', // Sentence case
+    'snake-case', // snake_case
+    'start-case', // Start Case
+  ];
+  ```
 
-#### footer-leading-blank
+## footer-leading-blank
 
 - **condition**: `footer` begins with blank line
 - **rule**: `always`
 
-#### footer-empty
+## footer-empty
 
 - **condition**: `footer` is empty
 - **rule**: `never`
 
-#### footer-max-length
+## footer-max-length
 
 - **condition**: `footer` has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
-Infinity
-```
+  ```text
+  Infinity
+  ```
 
-#### footer-max-line-length
+## footer-max-line-length
 
 - **condition**: `footer` lines has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
-Infinity
-```
+  ```text
+  Infinity
+  ```
 
-#### footer-min-length
+## footer-min-length
 
 - **condition**: `footer` has `value` or more characters
 - **rule**: `always`
 - **value**
 
-```
-0
-```
+  ```text
+  0
+  ```
 
-#### header-case
+## header-case
 
 - **condition**: `header` is in case `value`
 - **rule**: `always`
 - **value**
 
-```
-'lower-case'
-```
+  ```text
+  'lower-case'
+  ```
 
 - **possible values**
 
-```js
-[
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
-  'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case', // Start Case
-];
-```
+  ```js
+  [
+    'lower-case', // default
+    'upper-case', // UPPERCASE
+    'camel-case', // camelCase
+    'kebab-case', // kebab-case
+    'pascal-case', // PascalCase
+    'sentence-case', // Sentence case
+    'snake-case', // snake_case
+    'start-case', // Start Case
+  ];
+  ```
 
-#### header-full-stop
+## header-full-stop
 
 - **condition**: `header` ends with `value`
 - **rule**: `never`
 - **value**
 
-```
-'.'
-```
+  ```text
+  '.'
+  ```
 
-#### header-max-length
+## header-max-length
 
 - **condition**: `header` has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
-72
-```
+  ```text
+  72
+  ```
 
-#### header-min-length
+## header-min-length
 
 - **condition**: `header` has `value` or more characters
 - **rule**: `always`
 - **value**
 
-```
-0
-```
+  ```text
+  0
+  ```
 
-#### header-trim
+## header-trim
 
 - **condition**: `header` must not have initial and / or trailing whitespaces
 - **rule**: `always`
 
-#### references-empty
+## references-empty
 
 - **condition**: `references` has at least one entry
 - **rule**: `never`
 
-#### scope-enum
+## scope-enum
 
 - **condition**: `scope` is found in value
 - **rule**: `always`
 - **value**
-  ```
+
+  ```text
   []
   ```
-- Notes:
-  - This rule always passes if no scopes are provided in the message or the value is an empty array.
-  - When set to `always`, all message scopes must be found in the value.
-  - When set to `never`, none of the message scopes can be found in the value.
 
-#### scope-case
+> [!NOTE]
+>
+> - This rule always passes if no scopes are provided in the message or the value > is an empty array.
+> - When set to `always`, all message scopes must be found in the value.
+> - When set to `never`, none of the message scopes can be found in the value.
+
+## scope-case
 
 - **condition**: `scope` is in case `value`
 - **rule**: `always`
 - **value**
 
-```
-'lower-case'
-```
+  ```text
+  'lower-case'
+  ```
 
 - **possible values**
 
@@ -260,32 +221,32 @@ Infinity
 ];
 ```
 
-#### scope-empty
+## scope-empty
 
 - **condition**: `scope` is empty
 - **rule**: `never`
 
-#### scope-max-length
+## scope-max-length
 
 - **condition**: `scope` has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
+```text
 Infinity
 ```
 
-#### scope-min-length
+## scope-min-length
 
 - **condition**: `scope` has `value` or more characters
 - **rule**: `always`
 - **value**
 
-```
+```text
 0
 ```
 
-#### subject-case
+## subject-case
 
 - **condition**: `subject` is in case `value`
 - **rule**: `always`
@@ -310,51 +271,52 @@ Infinity
 ]
 ```
 
-#### subject-empty
+## subject-empty
 
 - **condition**: `subject` is empty
 - **rule**: `never`
 
-#### subject-full-stop
+## subject-full-stop
 
 - **condition**: `subject` ends with `value`
 - **rule**: `never`
 - **value**
 
-```
+```text
 '.'
 ```
 
-#### subject-max-length
+## subject-max-length
 
 - **condition**: `subject` has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
+```text
 Infinity
 ```
 
-#### subject-min-length
+## subject-min-length
 
 - **condition**: `subject` has `value` or more characters
 - **rule**: `always`
 - **value**
 
-```
+```text
 0
 ```
 
-#### subject-exclamation-mark
+## subject-exclamation-mark
 
 - **condition**: `subject` has exclamation before the `:` marker
 - **rule**: `never`
 
-#### type-enum
+## type-enum
 
 - **condition**: `type` is found in value
 - **rule**: `always`
 - **value**
+
   ```js
   [
     'build',
@@ -371,70 +333,72 @@ Infinity
   ];
   ```
 
-#### type-case
+## type-case
 
 - **description**: `type` is in case `value`
 - **rule**: `always`
 - **value**
-  ```
+
+  ```text
   'lower-case'
   ```
+
 - **possible values**
 
-```js
-[
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
-  'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case', // Start Case
-];
-```
+  ```js
+  [
+    'lower-case', // default
+    'upper-case', // UPPERCASE
+    'camel-case', // camelCase
+    'kebab-case', // kebab-case
+    'pascal-case', // PascalCase
+    'sentence-case', // Sentence case
+    'snake-case', // snake_case
+    'start-case', // Start Case
+  ];
+  ```
 
-#### type-empty
+## type-empty
 
 - **condition**: `type` is empty
 - **rule**: `never`
 
-#### type-max-length
+## type-max-length
 
 - **condition**: `type` has `value` or less characters
 - **rule**: `always`
 - **value**
 
-```
-Infinity
-```
+  ```text
+  Infinity
+  ```
 
-#### type-min-length
+## type-min-length
 
 - **condition**: `type` has `value` or more characters
 - **rule**: `always`
 - **value**
 
-```
-0
-```
+  ```text
+  0
+  ```
 
-#### signed-off-by
+## signed-off-by
 
 - **condition**: `message` has `value`
 - **rule**: `always`
 - **value**
 
-```
-'Signed-off-by:'
-```
+  ```text
+  'Signed-off-by:'
+  ```
 
-#### trailer-exists
+## trailer-exists
 
 - **condition**: `message` has trailer `value`
 - **rule**: `always`
 - **value**
 
-```
-'Signed-off-by:'
-```
+  ```text
+  'Signed-off-by:'
+  ```

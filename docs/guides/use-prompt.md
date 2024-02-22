@@ -4,23 +4,31 @@
 
 ## Install
 
-```bash
-# Create a git repository if needed
-git init
+1. Create a git repository if needed
 
-# Create a package.json if needed
-npm init
+   ```sh
+   git init
+   ```
 
-# Install and configure if needed
-npm install --save-dev @commitlint/{cli,config-conventional,prompt-cli}
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
-```
+2. Create a package.json if needed
+
+   ```sh
+   npm init
+   ```
+
+3. Install and configure if needed
+
+   ```sh
+   npm install --save-dev @commitlint/{cli,config-conventional,prompt-cli}
+
+   echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+   ```
 
 ## Provide a shortcut
 
 To make prompt-cli easy to use, add a npm run-script to your `package.json`
 
-```json
+```json:line-numbers {3}
 {
   "scripts": {
     "commit": "commit"
