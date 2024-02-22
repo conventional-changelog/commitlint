@@ -2,7 +2,7 @@ import {test, expect} from 'vitest';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-import glob from 'glob';
+import {globSync} from 'glob';
 import camelCase from 'lodash.camelcase';
 
 import * as ensure from './index.js';
@@ -25,7 +25,7 @@ test('rules export functions', () => {
 });
 
 function _glob(pattern: string): string[] {
-	const files = glob.sync(pattern, {
+	const files = globSync(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname,
 	});

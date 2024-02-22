@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-import glob from 'glob';
+import {globSync} from 'glob';
 
 import rules from './index.js';
 
@@ -34,7 +34,7 @@ test('all rules are present in documentation', () => {
 });
 
 function _glob(pattern: string) {
-	const files = glob.sync(pattern, {
+	const files = globSync(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname,
 	});
