@@ -4,7 +4,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 
 import {git} from '@commitlint/test';
-import execa from 'execa';
+import {Options, execa} from 'execa';
 
 const require = createRequire(import.meta.url);
 
@@ -27,7 +27,7 @@ const validBaseEnv = {
 	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG',
 };
 
-const cli = async (config: execa.Options = {}, args: string[] = []) => {
+const cli = async (config: Options = {}, args: string[] = []) => {
 	try {
 		return await execa(bin, args, config);
 	} catch (err: any) {

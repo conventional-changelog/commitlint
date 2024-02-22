@@ -1,7 +1,7 @@
 import path from 'path';
 
 import fs from 'fs-extra';
-import pkgDir from 'pkg-dir';
+import {packageDirectory as pkgDir} from 'pkg-dir';
 import tmp from 'tmp';
 
 export async function bootstrap(fixture?: string, directory?: string) {
@@ -11,7 +11,7 @@ export async function bootstrap(fixture?: string, directory?: string) {
 	});
 
 	if (typeof fixture !== 'undefined') {
-		const packageDir = await pkgDir(directory);
+		const packageDir = await pkgDir({cwd: directory});
 		if (!packageDir) {
 			throw new Error(`ENOENT, no such file or directory '${packageDir}'`);
 		}

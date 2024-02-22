@@ -3,7 +3,7 @@ import {createRequire} from 'module';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-import execa from 'execa';
+import {execa} from 'execa';
 import {fix} from '@commitlint/test';
 
 const require = createRequire(import.meta.url);

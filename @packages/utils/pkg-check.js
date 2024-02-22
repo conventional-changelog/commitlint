@@ -2,7 +2,7 @@
 import path from 'path';
 import fs from 'fs';
 
-import execa from 'execa';
+import {execa} from 'execa';
 import readPkg from 'read-pkg';
 import requireFromString from 'require-from-string';
 import tar from 'tar-fs';
