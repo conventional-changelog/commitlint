@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import {prompter} from '@commitlint/prompt';
-import execa from 'execa';
+import {execa} from 'execa';
 import inquirer from 'inquirer';
 
 main().catch((err) => {

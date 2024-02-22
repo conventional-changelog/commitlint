@@ -4,7 +4,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 
 import {fix, git} from '@commitlint/test';
-import execa from 'execa';
+import {execa} from 'execa';
 import fs from 'fs-extra';
 import merge from 'lodash.merge';
 

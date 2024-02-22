@@ -15,9 +15,9 @@ import type {
 	UserConfig,
 } from '@commitlint/types';
 import type {Options} from 'conventional-commits-parser';
-import execa, {ExecaError} from 'execa';
+import {execa, type ExecaError} from 'execa';
 import resolveFrom from 'resolve-from';
-import resolveGlobal from 'resolve-global';
+import {resolveGlobalSilent} from 'resolve-global';
 import yargs, {type Arguments} from 'yargs';
 
 import {CliFlags} from './types.js';
@@ -460,7 +460,7 @@ function loadFormatter(
 	const modulePath =
 		resolveFrom.silent(__dirname, moduleName) ||
 		resolveFrom.silent(flags.cwd, moduleName) ||
-		resolveGlobal.silent(moduleName);
+		resolveGlobalSilent(moduleName);
 
 	if (modulePath) {
 		return dynamicImport<Formatter>(modulePath);
