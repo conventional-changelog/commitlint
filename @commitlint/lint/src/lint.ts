@@ -79,9 +79,10 @@ export default async function lint(
 	if (missing.length > 0) {
 		const names = [...allRules.keys()];
 		throw new RangeError(
-			`Found invalid rule names: ${missing.join(
-				', '
-			)}. Supported rule names are: ${names.join(', ')}`
+			[
+				`Found rules without implementation: ${missing.join(', ')}.`,
+				`Supported rules are: ${names.join(', ')}.`,
+			].join('\n')
 		);
 	}
 
