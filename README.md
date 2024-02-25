@@ -3,12 +3,12 @@
 > Lint commit messages
 
 <p align="center">
-  <img width="600" src="docs/assets/commitlint.svg">
+  <img width="600" src="docs/public/assets/commitlint.svg">
 </p>
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli)
 >
-> `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
+> `cat docs/assets/commitlint.json | svg-term --out docs/public/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
 
 [![npm latest][2]][3] [![node compatibility][13]][14] [![Github Actions][4]][5]
 
