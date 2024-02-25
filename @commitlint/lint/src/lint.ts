@@ -181,10 +181,10 @@ export default async function lint(
 	);
 
 	const errors = results.filter(
-		(result) => result.level === 2 && !result.valid
+		(result) => result.level === RuleConfigSeverity.Error && !result.valid
 	);
 	const warnings = results.filter(
-		(result) => result.level === 1 && !result.valid
+		(result) => result.level === RuleConfigSeverity.Warning && !result.valid
 	);
 
 	const valid = errors.length === 0;
