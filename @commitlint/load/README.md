@@ -1,6 +1,6 @@
-> Load shared commitlint configuration
-
 # @commitlint/load
+
+Load shared commitlint configuration
 
 ## Getting started
 
@@ -8,13 +8,8 @@
 npm install --save-dev @commitlint/load
 ```
 
-## Example
+## Documentation
 
-```js
-const load = require('@commitlint/load').default;
+Consult [API docs](https://commitlint.js.org/api/load) for comprehensive documentation.
 
-load({extends: ['./package']}).then((config) => console.log(config));
-// => { extends: ['./package', './package-b'], rules: {} }
-```
-
-Consult [docs/api](https://conventional-changelog.github.io/commitlint/#/reference-api) for comprehensive documentation.
+Documentation generated from [`docs` folder](../../docs/api/format.md).

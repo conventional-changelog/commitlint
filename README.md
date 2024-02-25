@@ -1,4 +1,4 @@
-# [Get Started](https://conventional-changelog.github.io/commitlint/#/?id=getting-started) | [Website](https://conventional-changelog.github.io/commitlint)
+# [Get Started](https://commitlint.js.org/guides/getting-started) | [Website](https://commitlint.js.org)
 
 > Lint commit messages
 
@@ -86,8 +86,8 @@ These can be modified by [your own configuration](#config).
 
 ## Getting started
 
-- [Local setup](https://conventional-changelog.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
-- [CI setup](https://conventional-changelog.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
+- [Local setup](https://commitlint.js.org/guides/local-setup) - Lint messages on commit with husky
+- [CI setup](https://commitlint.js.org/guides/ci-setup) - Lint messages during CI builds
 
 ## CLI
 
@@ -114,7 +114,7 @@ These can be modified by [your own configuration](#config).
   - `commitlint.config.cts`
   - `commitlint` field in `package.json`
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
-- See [Rules](./docs/reference-rules.md) for a complete list of possible rules
+- See [Rules](./docs/reference/rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/src/index.ts)
 
 ## Shared configuration
@@ -144,7 +144,7 @@ Check the [main website](https://commitlint.js.org/).
   - [lint](./@commitlint/lint) - Lint a string against commitlint rules
   - [load](./@commitlint/load) - Load shared commitlint configuration
   - [read](./@commitlint/read) - Read commit messages from a specified range or last edit
-- See [API](./docs/reference-api.md) for a complete list of methods and examples
+- See [API](./docs/api) for a complete list of methods and examples
 
 ## Tools
 
