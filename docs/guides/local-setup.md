@@ -4,64 +4,7 @@ Get high commit message quality and short feedback cycles by linting commit mess
 
 This guide demonstrates how to achieve this via git hooks.
 
-## Install commitlint
-
-Install `commitlint` and a `commitlint-config-*` of your choice as devDependency and
-configure `commitlint` to use it.
-
----
-
-<details open>
-<summary>NPM</summary>
-
-```sh
-# Install and configure if needed
-npm install --save-dev @commitlint/{cli,config-conventional}
-# For Windows:
-npm install --save-dev @commitlint/config-conventional @commitlint/cli
-```
-
-</details>
-
----
-
-<details>
-<summary>YARN</summary>
-
-```sh
-# Install and configure if needed
-yarn add --dev @commitlint/{cli,config-conventional}
-```
-
-</details>
-
-## Configuration
-
-```sh
-# Configure commitlint to use conventional config
-echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
-```
-
-Configuration can be defined in the following files:
-
-- `.commitlintrc`
-- `.commitlintrc.json`
-- `.commitlintrc.yaml`
-- `.commitlintrc.yml`
-- `.commitlintrc.js`
-- `.commitlintrc.cjs`
-- `.commitlintrc.mjs`
-- `.commitlintrc.ts`
-- `.commitlintrc.cts`
-- `commitlint.config.js`
-- `commitlint.config.cjs`
-- `commitlint.config.mjs`
-- `commitlint.config.ts`
-- `commitlint.config.cts`
-
-Alternatively you can add `commitlint` field in `package.json`
-
-Refer to [configuration documentation](reference-configuration.md) for more information.
+Follow the [Getting Started](/guides/getting-started) for basic installation and configuration instructions.
 
 ## Add hook
 
@@ -73,13 +16,14 @@ To lint commits before they are created you can use [Husky](https://typicode.git
 
 You can find complete setup instructions on the [official documentation](https://typicode.github.io/husky/get-started.html).
 
+> [!NOTE]
 > The following instructions are meant to `husky@v9` if you are using a different version
 > consult the official documentation of your version.
 
 ---
 
-<details open>
-<summary>NPM</summary>
+:::tabs
+== npm
 
 ```sh
 npm install --save-dev husky
@@ -97,12 +41,7 @@ npm pkg set scripts.commitlint="commitlint --edit"
 echo "npm run commitlint \${1}" > .husky/commit-msg
 ```
 
-</details>
-
----
-
-<details>
-<summary>YARN</summary>
+== yarn
 
 ```sh
 yarn add --dev husky
@@ -120,9 +59,10 @@ npm pkg set scripts.commitlint="commitlint --edit"
 echo "yarn commitlint \${1}" > .husky/commit-msg
 ```
 
-Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)
+> [!WARNING]
+> Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn > v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)
 
-</details>
+:::
 
 ---
 
@@ -130,6 +70,7 @@ Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (
 
 Info about git hooks can be found on [Git documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
 
+> [!WARNING]
 > It's necessary that you use **commit-msg** as the name for hook file.
 
 ## Test
@@ -171,4 +112,4 @@ No staged files match any of provided globs.
 # husky > commit-msg
 ```
 
-?> Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server too. Learn how to in the [CI Setup guide](guides-ci-setup.md).
+?> Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server too. Learn how to in the [CI Setup guide](/guides/ci-setup).

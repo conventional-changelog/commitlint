@@ -1,16 +1,11 @@
-> Lint commit messages
-
-<p align="center">
-  <img width="750" src="https://conventional-changelog.github.io/commitlint/assets/commitlint.svg">
-</p>
-
 # @commitlint/cli
 
-## Getting started
+<p align="center">
+  <img width="750" src="https://commitlint.js.org/assets/commitlint.svg">
+</p>
 
-```
-npm install --save-dev @commitlint/cli @commitlint/config-angular
-echo "module.exports = {extends: ['@commitlint/config-angular']};" > commitlint.config.js
-```
+Lint commit messages
 
-Consult [docs/cli](https://conventional-changelog.github.io/commitlint/#/reference-cli) for comprehensive documentation.
+## Documentation
+
+Consult [CLI reference](https://commitlint.js.org/reference/cli) for comprehensive documentation.

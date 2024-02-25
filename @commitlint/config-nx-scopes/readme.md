@@ -1,6 +1,6 @@
-> Lint your nx project commits
-
 # @commitlint/config-nx-scopes
+
+Lint your nx project commits
 
 Shareable `commitlint` config enforcing nx project and workspace names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
@@ -98,4 +98,4 @@ packages
 ✔   found 0 problems, 0 warnings
 ```
 
-Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.

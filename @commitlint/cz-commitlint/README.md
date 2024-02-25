@@ -58,4 +58,4 @@ yarn commit
 
 ## Related
 
-- [Commitlint Reference Prompt](https://commitlint.js.org/#/reference-prompt) - How to customize prompt information by setting commitlint.config.js
+- [Commitlint Reference Prompt](https://commitlint.js.org/reference/prompt) - How to customize prompt information by setting commitlint.config.js

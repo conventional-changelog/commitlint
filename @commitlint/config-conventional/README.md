@@ -1,6 +1,6 @@
-> Lint your conventional commits
-
 # @commitlint/config-conventional
+
+Lint your conventional commits
 
 Shareable `commitlint` config enforcing [conventional commits](https://conventionalcommits.org/).
 Use with [@commitlint/cli](https://npm.im/@commitlint/cli) and [@commitlint/prompt-cli](https://npm.im/@commitlint/prompt-cli).
@@ -9,7 +9,7 @@ Use with [@commitlint/cli](https://npm.im/@commitlint/cli) and [@commitlint/prom
 
 ```sh
 npm install --save-dev @commitlint/config-conventional @commitlint/cli
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+echo "export default {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 ```
 
 ## Rules
@@ -18,7 +18,7 @@ echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commit
 
 The following rules are considered problems for `@commitlint/config-conventional` and will yield a non-zero exit code when not met.
 
-Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.
 
 #### type-enum
 

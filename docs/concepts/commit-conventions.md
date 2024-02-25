@@ -10,7 +10,7 @@ With this additional information tools can derive useful human-readable informat
 
 The most common commit conventions follow this pattern:
 
-```
+```text
 type(scope?): subject
 body?
 footer?

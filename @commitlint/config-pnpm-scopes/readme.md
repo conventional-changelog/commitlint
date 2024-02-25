@@ -1,6 +1,6 @@
-> Lint your pnpm workspaces project commits
-
 # @commitlint/config-pnpm-scopes
+
+Lint your pnpm workspaces project commits
 
 Shareable `commitlint` config enforcing pnpm workspaces names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
@@ -41,4 +41,4 @@ packages
 ✔   found 0 problems, 0 warnings
 ```
 
-Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.
