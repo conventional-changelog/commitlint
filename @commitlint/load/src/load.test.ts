@@ -5,9 +5,8 @@ import {fileURLToPath} from 'url';
 
 import {RuleConfigSeverity} from '@commitlint/types';
 import {fix, git, npm} from '@commitlint/test';
-import resolveFrom from 'resolve-from';
 
-import load from './load.js';
+import load, {resolveFrom} from './load.js';
 import {isDynamicAwaitSupported} from './utils/load-config.js';
 
 const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
@@ -459,7 +458,7 @@ test('resolves formatter relative from config directory', async () => {
 	const actual = await load({}, {cwd});
 
 	expect(actual).toMatchObject({
-		formatter: resolveFrom(cwd, './formatters/custom.js'),
+		formatter: resolveFrom('./formatters/custom.js', cwd),
 		extends: [],
 		plugins: {},
 		rules: {},

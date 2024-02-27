@@ -1,13 +1,12 @@
+import fs from 'fs';
 import path from 'path';
 import {pathToFileURL, fileURLToPath} from 'url';
 
-import 'resolve-global';
-
+import globalDirectory from 'global-directory';
 import {moduleResolve} from 'import-meta-resolve';
 import mergeWith from 'lodash.mergewith';
 import {validateConfig} from '@commitlint/config-validator';
 import type {ParserPreset, UserConfig} from '@commitlint/types';
-import importFresh from 'import-fresh';
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
 	const imported = await import(
@@ -17,19 +16,28 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 };
 
 /**
+ * Fake file name to provide {@link moduleResolve} a filename to resolve from the configuration cwd
+ */
+const FAKE_FILE_NAME_FOR_RESOLVER = '__';
+
+/**
  * @see moduleResolve
  */
 export const resolveFrom = (specifier: string, parent?: string): string => {
 	let resolved: URL;
 	let resolveError: Error | undefined;
 
+	const base = pathToFileURL(
+		parent
+			? fs.statSync(parent).isDirectory()
+				? path.join(parent, FAKE_FILE_NAME_FOR_RESOLVER)
+				: parent
+			: import.meta.url
+	);
+
 	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
 		try {
-			resolved = moduleResolve(
-				specifier + suffix,
-				pathToFileURL(parent ? parent : import.meta.url)
-			);
-
+			resolved = moduleResolve(specifier + suffix, base);
 			return fileURLToPath(resolved);
 		} catch (err) {
 			if (!resolveError) {
@@ -90,11 +98,6 @@ export default async function resolveExtends(
 	);
 }
 
-/**
- * Fake file name to provide {@link moduleResolve} a filename to resolve from the configuration cwd
- */
-const FAKE_FILE_NAME_FOR_RESOLVER = '__';
-
 async function loadExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {}
@@ -117,10 +120,7 @@ async function loadExtends(
 			typeof c === 'object' &&
 			typeof c.parserPreset === 'string'
 		) {
-			const resolvedParserPreset = resolveFrom(
-				c.parserPreset,
-				path.join(cwd, FAKE_FILE_NAME_FOR_RESOLVER)
-			);
+			const resolvedParserPreset = resolveFrom(c.parserPreset, cwd);
 
 			const parserPreset: ParserPreset = {
 				name: c.parserPreset,
@@ -207,18 +207,25 @@ function resolveId(
 	throw Object.assign(err, {code: 'MODULE_NOT_FOUND'});
 }
 
-function resolveFromSilent(specifier: string, parent: string): string | void {
+export function resolveFromSilent(
+	specifier: string,
+	parent: string
+): string | void {
 	try {
-		return resolveFrom(
-			specifier,
-			path.join(parent, FAKE_FILE_NAME_FOR_RESOLVER)
-		);
-	} catch (err) {}
+		return resolveFrom(specifier, parent);
+	} catch {}
 }
 
-function resolveGlobalSilent(specifier: string): string | void {
-	try {
-		const resolveGlobal = importFresh<(id: string) => string>('resolve-global');
-		return resolveGlobal(specifier);
-	} catch (err) {}
+/**
+ * @see also https://github.com/sindresorhus/resolve-global/blob/682a6bb0bd8192b74a6294219bb4c536b3708b65/index.js#L7
+ */
+export function resolveGlobalSilent(specifier: string): string | void {
+	for (const globalPackages of [
+		globalDirectory.npm.packages,
+		globalDirectory.yarn.packages,
+	]) {
+		try {
+			return resolveFrom(specifier, globalPackages);
+		} catch {}
+	}
 }

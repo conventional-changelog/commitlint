@@ -4,6 +4,8 @@ import {validateConfig} from '@commitlint/config-validator';
 import executeRule from '@commitlint/execute-rule';
 import resolveExtends, {
 	resolveFrom,
+	resolveFromSilent,
+	resolveGlobalSilent,
 	loadParserPreset,
 } from '@commitlint/resolve-extends';
 import {
@@ -135,3 +137,5 @@ export default async function load(
 		prompt,
 	};
 }
+
+export {resolveFrom, resolveFromSilent, resolveGlobalSilent};
