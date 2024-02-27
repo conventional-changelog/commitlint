@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/prompt",
   "type": "module",
-  "version": "19.0.0",
+  "version": "19.0.1",
   "description": "commitizen prompt using commitlint.config.js",
   "main": "./lib/index.js",
   "files": [
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@commitlint/ensure": "^19.0.0",
-    "@commitlint/load": "^19.0.0",
+    "@commitlint/load": "^19.0.1",
     "@commitlint/types": "^19.0.0",
     "chalk": "^5.3.0",
     "inquirer": "^9.2.15"
