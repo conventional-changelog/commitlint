@@ -15,30 +15,42 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 	return ('default' in imported && imported.default) || imported;
 };
 
-/**
- * Fake file name to provide {@link moduleResolve} a filename to resolve from the configuration cwd
- */
-const FAKE_FILE_NAME_FOR_RESOLVER = '__';
+const pathSuffixes = [
+	'',
+	'.js',
+	'.json',
+	`${path.sep}index.js`,
+	`${path.sep}index.json`,
+];
+
+const specifierSuffixes = ['', '.js', '.json', '/index.js', '/index.json'];
 
 /**
  * @see moduleResolve
  */
-export const resolveFrom = (specifier: string, parent?: string): string => {
-	let resolved: URL;
+export const resolveFrom = (lookup: string, parent?: string): string => {
+	if (path.isAbsolute(lookup)) {
+		for (const suffix of pathSuffixes) {
+			const filename = lookup + suffix;
+			if (fs.existsSync(filename)) {
+				return filename;
+			}
+		}
+	}
+
 	let resolveError: Error | undefined;
 
 	const base = pathToFileURL(
 		parent
 			? fs.statSync(parent).isDirectory()
-				? path.join(parent, FAKE_FILE_NAME_FOR_RESOLVER)
+				? path.join(parent, 'noop.js')
 				: parent
 			: import.meta.url
 	);
 
-	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
+	for (const suffix of specifierSuffixes) {
 		try {
-			resolved = moduleResolve(specifier + suffix, base);
-			return fileURLToPath(resolved);
+			return fileURLToPath(moduleResolve(lookup + suffix, base));
 		} catch (err) {
 			if (!resolveError) {
 				resolveError = err as Error;
@@ -217,7 +229,7 @@ export function resolveFromSilent(
 }
 
 /**
- * @see also https://github.com/sindresorhus/resolve-global/blob/682a6bb0bd8192b74a6294219bb4c536b3708b65/index.js#L7
+ * @see https://github.com/sindresorhus/resolve-global/blob/682a6bb0bd8192b74a6294219bb4c536b3708b65/index.js#L7
  */
 export function resolveGlobalSilent(specifier: string): string | void {
 	for (const globalPackages of [
