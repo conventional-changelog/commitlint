@@ -4,7 +4,7 @@ import {fileURLToPath, pathToFileURL} from 'url';
 import util from 'util';
 
 import lint from '@commitlint/lint';
-import load from '@commitlint/load';
+import load, {resolveFromSilent, resolveGlobalSilent} from '@commitlint/load';
 import read from '@commitlint/read';
 import type {
 	Formatter,
@@ -16,8 +16,6 @@ import type {
 } from '@commitlint/types';
 import type {Options} from 'conventional-commits-parser';
 import {execa, type ExecaError} from 'execa';
-import resolveFrom from 'resolve-from';
-import {resolveGlobalSilent} from 'resolve-global';
 import yargs, {type Arguments} from 'yargs';
 
 import {CliFlags} from './types.js';
@@ -458,8 +456,8 @@ function loadFormatter(
 ): Promise<Formatter> {
 	const moduleName = flags.format || config.formatter || '@commitlint/format';
 	const modulePath =
-		resolveFrom.silent(__dirname, moduleName) ||
-		resolveFrom.silent(flags.cwd, moduleName) ||
+		resolveFromSilent(moduleName, __dirname) ||
+		resolveFromSilent(moduleName, flags.cwd) ||
 		resolveGlobalSilent(moduleName);
 
 	if (modulePath) {
