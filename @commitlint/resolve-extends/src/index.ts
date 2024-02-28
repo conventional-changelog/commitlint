@@ -5,6 +5,7 @@ import {pathToFileURL, fileURLToPath} from 'url';
 import globalDirectory from 'global-directory';
 import {moduleResolve} from 'import-meta-resolve';
 import mergeWith from 'lodash.mergewith';
+import resolveFrom_ from 'resolve-from';
 import {validateConfig} from '@commitlint/config-validator';
 import type {ParserPreset, UserConfig} from '@commitlint/types';
 
@@ -58,7 +59,15 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 		}
 	}
 
-	throw resolveError;
+	try {
+		/**
+		 * Yarn P'n'P does not support pure ESM well, this is only a workaround for
+		 * @see https://github.com/conventional-changelog/commitlint/issues/3936
+		 */
+		return resolveFrom_(path.dirname(fileURLToPath(base)), lookup);
+	} catch {
+		throw resolveError;
+	}
 };
 
 /**
