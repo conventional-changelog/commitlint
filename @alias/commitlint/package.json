@@ -1,7 +1,7 @@
 {
   "name": "commitlint",
   "type": "module",
-  "version": "19.0.2",
+  "version": "19.0.3",
   "description": "Lint your commit messages",
   "files": [
     "cli.js"
@@ -36,8 +36,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^19.0.2",
-    "@commitlint/types": "^19.0.0"
+    "@commitlint/cli": "^19.0.3",
+    "@commitlint/types": "^19.0.3"
   },
   "devDependencies": {
     "@commitlint/test": "^19.0.0",

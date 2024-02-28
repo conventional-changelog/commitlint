@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/load",
   "type": "module",
-  "version": "19.0.2",
+  "version": "19.0.3",
   "description": "Load shared commitlint configuration",
   "main": "lib/load.js",
   "types": "lib/load.d.ts",
@@ -45,10 +45,10 @@
     "typescript": "^5.2.2"
   },
   "dependencies": {
-    "@commitlint/config-validator": "^19.0.0",
+    "@commitlint/config-validator": "^19.0.3",
     "@commitlint/execute-rule": "^19.0.0",
-    "@commitlint/resolve-extends": "^19.0.2",
-    "@commitlint/types": "^19.0.0",
+    "@commitlint/resolve-extends": "^19.0.3",
+    "@commitlint/types": "^19.0.3",
     "chalk": "^5.3.0",
     "cosmiconfig": "^8.3.6",
     "cosmiconfig-typescript-loader": "^5.0.0",

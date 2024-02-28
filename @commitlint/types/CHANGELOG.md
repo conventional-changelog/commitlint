@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
+
+
+### Bug Fixes
+
+* mark `@types/conventional-commits-parser` as dep for `@commitlint/types` ([#3944](https://github.com/conventional-changelog/commitlint/issues/3944)) ([5a01f59](https://github.com/conventional-changelog/commitlint/commit/5a01f59661f0b908802728389631965eb8b49d47)), closes [#3929](https://github.com/conventional-changelog/commitlint/issues/3929) [#3942](https://github.com/conventional-changelog/commitlint/issues/3942)
+
+
+
+
+
 # [19.0.0](https://github.com/conventional-changelog/commitlint/compare/v18.6.2...v19.0.0) (2024-02-27)
 
 
