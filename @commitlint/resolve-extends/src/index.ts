@@ -1,4 +1,5 @@
 import fs from 'fs';
+import {createRequire} from 'module';
 import path from 'path';
 import {pathToFileURL, fileURLToPath} from 'url';
 
@@ -7,6 +8,8 @@ import {moduleResolve} from 'import-meta-resolve';
 import mergeWith from 'lodash.mergewith';
 import {validateConfig} from '@commitlint/config-validator';
 import type {ParserPreset, UserConfig} from '@commitlint/types';
+
+const require = createRequire(import.meta.url);
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
 	const imported = await import(
@@ -38,14 +41,14 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 		}
 	}
 
+	const parentDir =
+		parent &&
+		(fs.statSync(parent).isDirectory() ? parent : path.dirname(parent));
+
 	let resolveError: Error | undefined;
 
 	const base = pathToFileURL(
-		parent
-			? fs.statSync(parent).isDirectory()
-				? path.join(parent, 'noop.js')
-				: parent
-			: import.meta.url
+		parentDir ? path.join(parentDir, 'noop.js') : import.meta.url
 	);
 
 	for (const suffix of specifierSuffixes) {
@@ -58,7 +61,17 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 		}
 	}
 
-	throw resolveError;
+	try {
+		/**
+		 * Yarn P'n'P does not support pure ESM well, this is only a workaround for
+		 * @see https://github.com/conventional-changelog/commitlint/issues/3936
+		 */
+		return require.resolve(lookup, {
+			paths: parentDir ? [parentDir] : undefined,
+		});
+	} catch {
+		throw resolveError;
+	}
 };
 
 /**
