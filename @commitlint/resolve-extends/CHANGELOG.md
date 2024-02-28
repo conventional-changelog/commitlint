@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.0.2](https://github.com/conventional-changelog/commitlint/compare/v19.0.1...v19.0.2) (2024-02-28)
+
+
+### Bug Fixes
+
+* fallback to `resolve-from` for Yarn P'n'P ([#3941](https://github.com/conventional-changelog/commitlint/issues/3941)) ([1eb9b5f](https://github.com/conventional-changelog/commitlint/commit/1eb9b5f29979d35f5840141523850a7402633378)), closes [#3936](https://github.com/conventional-changelog/commitlint/issues/3936)
+
+
+
+
+
 ## [19.0.1](https://github.com/conventional-changelog/commitlint/compare/v19.0.0...v19.0.1) (2024-02-27)
 
 
