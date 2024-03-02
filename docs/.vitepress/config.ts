@@ -68,6 +68,7 @@ export default defineConfig({
 				base: '/support',
 				collapsed: true,
 				items: [
+					{text: 'Troubleshooting', link: '/troubleshooting'},
 					{text: 'Releases', link: '/releases'},
 					{text: 'Upgrade commitlint', link: '/upgrade'},
 				],

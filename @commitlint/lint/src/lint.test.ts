@@ -93,7 +93,9 @@ test('throws for invalid rule names', async () => {
 		bar: [RuleConfigSeverity.Warning, 'never'],
 	});
 
-	await expect(error).rejects.toThrow(/^Found invalid rule names: foo, bar/);
+	await expect(error).rejects.toThrow(
+		/^Found rules without implementation: foo, bar/
+	);
 });
 
 test('throws for invalid rule config', async () => {
