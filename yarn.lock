@@ -1627,10 +1627,10 @@
   resolved "https://registry.npmjs.org/@pnpm/constants/-/constants-7.1.1.tgz#3db261425fe15425aa213a2b003f4f60c9378b43"
   integrity sha512-31pZqMtjwV+Vaq7MaPrT1EoDFSYwye3dp6BiHIGRJmVThCQwySRKM7hCvqqI94epNkqFAAYoWrNynWoRYosGdw==
 
-"@pnpm/error@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@pnpm/error/-/error-5.0.2.tgz#153d18fe9eeaeb02e48e9dc45b042f4c962b3822"
-  integrity sha512-0TEm+tWNYm+9uh6DSKyRbv8pv/6b4NL0PastLvMxIoqZbBZ5Zj1cYi332R9xsSUi31ZOsu2wpgn/bC7DA9hrjg==
+"@pnpm/error@5.0.3":
+  version "5.0.3"
+  resolved "https://registry.npmjs.org/@pnpm/error/-/error-5.0.3.tgz#4dbb9f4acb0b30c373b3ca5024cdf495f03f4380"
+  integrity sha512-ONJU5cUeoeJSy50qOYsMZQHTA/9QKmGgh1ATfEpCLgtbdwqUiwD9MxHNeXUYYI/pocBCz6r1ZCFqiQvO+8SUKA==
   dependencies:
     "@pnpm/constants" "7.1.1"
 
@@ -1642,12 +1642,12 @@
     graceful-fs "^4.2.11"
 
 "@pnpm/read-project-manifest@^5.0.10":
-  version "5.0.10"
-  resolved "https://registry.npmjs.org/@pnpm/read-project-manifest/-/read-project-manifest-5.0.10.tgz#b6c99b5612a598dfebb133779a8e6456d360c30f"
-  integrity sha512-LgZ4QVrfITJP4kmcpKJOb5y7lZmTYu/CyeH1lHRxVSN76wfbRClInq/WglxAFQMGORopV44ESjhiaokjtqW9yA==
+  version "5.0.11"
+  resolved "https://registry.npmjs.org/@pnpm/read-project-manifest/-/read-project-manifest-5.0.11.tgz#50bc7bc7183bc49ae85925edb93836db63d5bb6a"
+  integrity sha512-themRLiDt9Ud6Somlu0PJbeprBBQEhlI1xNG5bZIv26yfLsc1vYLd1TfgGViD1b8fP0jxAqsUrDM+WMaMKI+gw==
   dependencies:
     "@gwhitney/detect-indent" "7.0.1"
-    "@pnpm/error" "5.0.2"
+    "@pnpm/error" "5.0.3"
     "@pnpm/graceful-fs" "3.2.0"
     "@pnpm/text.comments-parser" "2.0.0"
     "@pnpm/types" "9.4.2"
