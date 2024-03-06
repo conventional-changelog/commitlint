@@ -56,7 +56,7 @@ jobs:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
     runs-on: ubuntu-22.04
     container:
-      image: 'ubuntu:24.04'
+      image: 'ubuntu:noble-20240225'
     steps:
       - uses: actions/checkout@v4
 
