@@ -3,6 +3,8 @@
   "type": "module",
   "version": "19.0.3",
   "description": "Lint all relevant commits for a change or PR on Travis CI",
+  "main": "lib/cli.js",
+  "types": "lib/cli.d.ts",
   "files": [
     "lib/",
     "cli.js"
