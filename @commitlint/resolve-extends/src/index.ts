@@ -26,6 +26,8 @@ const pathSuffixes = [
 
 const specifierSuffixes = ['', '.js', '.json', '/index.js', '/index.json'];
 
+const conditions = new Set(['import', 'node']);
+
 /**
  * @see moduleResolve
  */
@@ -51,7 +53,7 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 
 	for (const suffix of specifierSuffixes) {
 		try {
-			return fileURLToPath(moduleResolve(lookup + suffix, base));
+			return fileURLToPath(moduleResolve(lookup + suffix, base, conditions));
 		} catch (err) {
 			if (!resolveError) {
 				resolveError = err as Error;
