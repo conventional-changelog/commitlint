@@ -26,6 +26,8 @@ const pathSuffixes = [
 
 const specifierSuffixes = ['', '.js', '.json', '/index.js', '/index.json'];
 
+const conditions = new Set(['import', 'node']);
+
 /**
  * @see moduleResolve
  */
@@ -51,7 +53,7 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 
 	for (const suffix of specifierSuffixes) {
 		try {
-			return fileURLToPath(moduleResolve(lookup + suffix, base));
+			return fileURLToPath(moduleResolve(lookup + suffix, base, conditions));
 		} catch (err) {
 			if (!resolveError) {
 				resolveError = err as Error;
@@ -175,7 +177,7 @@ function resolveConfig(
 	raw: string,
 	context: ResolveExtendsContext = {}
 ): string {
-	const resolve = context.resolve || tryResolveId;
+	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
 
 	let resolved: string;
@@ -190,20 +192,6 @@ function resolveConfig(
 	}
 
 	return resolved;
-}
-
-function tryResolveId(id: string, context: ResolveExtendsContext) {
-	const cwd = context.cwd || process.cwd();
-
-	for (const suffix of ['', '.js', '.json', '/index.js', '/index.json']) {
-		try {
-			return fileURLToPath(
-				moduleResolve(id + suffix, pathToFileURL(path.join(cwd, id)))
-			);
-		} catch {}
-	}
-
-	return resolveId(id, context);
 }
 
 function resolveId(
