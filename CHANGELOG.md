@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.6.3](https://github.com/conventional-changelog/commitlint/compare/v18.6.2...v18.6.3) (2024-03-11)
+
+
+### Bug Fixes
+
+* add missing entry `wrapper.mjs` ([#3966](https://github.com/conventional-changelog/commitlint/issues/3966)) ([c2c3c7c](https://github.com/conventional-changelog/commitlint/commit/c2c3c7cdc05c07c185cc2c2635a06835352c4504)), closes [#3958](https://github.com/conventional-changelog/commitlint/issues/3958)
+
+
+
+
+
 ## [18.6.2](https://github.com/conventional-changelog/commitlint/compare/v18.6.1...v18.6.2) (2024-02-14)
 
 
