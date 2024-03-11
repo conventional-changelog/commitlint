@@ -5,7 +5,8 @@
   "description": "Shareable commitlint config enforcing conventional commits",
   "main": "lib/index.js",
   "files": [
-    "lib/"
+    "lib/",
+    "wrapper.mjs"
   ],
   "scripts": {
     "deps": "dep-check",
