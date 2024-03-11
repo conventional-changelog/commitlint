@@ -37,7 +37,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: ['*.ts'],
+			files: ['*.cts', '*.ts'],
 			parser: '@typescript-eslint/parser',
 			extends: [
 				'plugin:@typescript-eslint/eslint-recommended',

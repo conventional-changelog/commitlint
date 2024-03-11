@@ -4,6 +4,10 @@
   "version": "19.0.3",
   "description": "Commitizen adapter using the commitlint.config.js",
   "main": "./lib/index.js",
+  "exports": {
+    "import": "./lib/index.js",
+    "require": "./lib/index.cjs"
+  },
   "files": [
     "lib"
   ],
