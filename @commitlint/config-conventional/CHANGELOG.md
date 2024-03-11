@@ -69,6 +69,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * Update .eslintrc.cjs
 
 * feat: migrate @commitlint/config-conventional to pure ESM
+
+
+
+
+
 ## [18.6.3](https://github.com/conventional-changelog/commitlint/compare/v18.6.2...v18.6.3) (2024-03-11)
 
 
