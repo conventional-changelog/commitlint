@@ -16,7 +16,7 @@
     "lint-fix": "eslint . --ext .js,.ts --fix",
     "format": "prettier **/*.{ts,js,json,yml,md} -l",
     "format-fix": "prettier **/*.{ts,js,json,yml,md} --write",
-    "publish": "lerna publish --conventional-commits",
+    "publish": "lerna publish --conventional-commits --dist-tag release-v18",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
     "test": "cross-env HOME=$PWD NODE_OPTIONS=--experimental-vm-modules jest",
