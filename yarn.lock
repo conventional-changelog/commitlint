@@ -2064,9 +2064,9 @@
     undici-types "~5.26.4"
 
 "@types/node@^18.19.17":
-  version "18.19.21"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.19.21.tgz#f4ca1ac8ffb05ee4b89163c2d6fac9a1a59ee149"
-  integrity sha512-2Q2NeB6BmiTFQi4DHBzncSoq/cJMLDdhPaAoJFnFCyD9a8VPZRf7a1GAwp1Edb7ROaZc5Jz/tnZyL6EsWMRaqw==
+  version "18.19.23"
+  resolved "https://registry.npmjs.org/@types/node/-/node-18.19.23.tgz#e02c759218bc9957423a3f7d585d511b17be2351"
+  integrity sha512-wtE3d0OUfNKtZYAqZb8HAWGxxXsImJcPUAgZNw+dWFxO6s5tIwIjyKnY76tsTatsNCLJPkVYwUpq15D38ng9Aw==
   dependencies:
     undici-types "~5.26.4"
 
@@ -7565,7 +7565,14 @@ string_decoder@^1.1.1, string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
