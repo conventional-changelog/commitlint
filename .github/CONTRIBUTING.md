@@ -144,13 +144,13 @@ yarn clean
 yarn install
 yarn build
 yarn test
-npx lerna publish --conventional-commits --dist-tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
+npx lerna publish --conventional-commits --dist-tag [`next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
 ```
 
 If for some reason this stops in between, you can manually publish missing packages like this:
 
 ```sh
-npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
+npm publish <package-name> --tag [`next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
 ```
 
 #### Publishing (new) packages for the first time
