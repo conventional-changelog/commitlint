@@ -6,9 +6,10 @@
   "main": "./lib/index.js",
   "exports": {
     "import": "./lib/index.js",
-    "require": "./lib/index.cjs"
+    "require": "./index.cjs"
   },
   "files": [
+    "index.cjs",
     "lib"
   ],
   "keywords": [
