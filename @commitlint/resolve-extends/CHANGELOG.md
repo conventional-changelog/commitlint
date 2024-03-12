@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.1.0](https://github.com/conventional-changelog/commitlint/compare/v19.0.3...v19.1.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* add missing `conditions` param for `moduleResolve` ([#3962](https://github.com/conventional-changelog/commitlint/issues/3962)) ([67baff9](https://github.com/conventional-changelog/commitlint/commit/67baff9182854bbe184b6cf71f977920a05c27a3))
+
+
+
+
+
 ## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
 
 **Note:** Version bump only for package @commitlint/resolve-extends

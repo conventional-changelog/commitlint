@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.1.0](https://github.com/conventional-changelog/commitlint/compare/v19.0.3...v19.1.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* add `main` and `types` keys in package.json ([#3953](https://github.com/conventional-changelog/commitlint/issues/3953)) ([7ddaad4](https://github.com/conventional-changelog/commitlint/commit/7ddaad4bc4e71afe89f25cc02d3e19beba1ce6cd))
+* add missing `conditions` param for `moduleResolve` ([#3962](https://github.com/conventional-changelog/commitlint/issues/3962)) ([67baff9](https://github.com/conventional-changelog/commitlint/commit/67baff9182854bbe184b6cf71f977920a05c27a3))
+* add missing cjs entry in package ([#3967](https://github.com/conventional-changelog/commitlint/issues/3967)) ([9cea6fd](https://github.com/conventional-changelog/commitlint/commit/9cea6fdb7b1bf7cfc9a86e882e2742379b4b6aec))
+* update dependency @pnpm/read-project-manifest to v5.0.11 ([#3932](https://github.com/conventional-changelog/commitlint/issues/3932)) ([2525d14](https://github.com/conventional-changelog/commitlint/commit/2525d14b8c0bad0ed155863059fa3549e76dd7d3))
+* update dependency tmp to v0.2.3 ([#3945](https://github.com/conventional-changelog/commitlint/issues/3945)) ([25bab59](https://github.com/conventional-changelog/commitlint/commit/25bab594ed04dbe2cc3cc5020b70d98d1d4e0f53))
+
+
+### Features
+
+* add CJS export for cz-commitlint ([#3963](https://github.com/conventional-changelog/commitlint/issues/3963)) ([6ae3c6a](https://github.com/conventional-changelog/commitlint/commit/6ae3c6a827de8622d827146ffb0984a9e62fe505)), closes [/github.com/conventional-changelog/commitlint/pull/3850#issuecomment-1984932236](https://github.com//github.com/conventional-changelog/commitlint/pull/3850/issues/issuecomment-1984932236) [#3949](https://github.com/conventional-changelog/commitlint/issues/3949)
+
+
+
+
+
 ## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
 
 

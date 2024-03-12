@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.1.0](https://github.com/conventional-changelog/commitlint/compare/v19.0.3...v19.1.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* add missing cjs entry in package ([#3967](https://github.com/conventional-changelog/commitlint/issues/3967)) ([9cea6fd](https://github.com/conventional-changelog/commitlint/commit/9cea6fdb7b1bf7cfc9a86e882e2742379b4b6aec))
+
+
+### Features
+
+* add CJS export for cz-commitlint ([#3963](https://github.com/conventional-changelog/commitlint/issues/3963)) ([6ae3c6a](https://github.com/conventional-changelog/commitlint/commit/6ae3c6a827de8622d827146ffb0984a9e62fe505)), closes [/github.com/conventional-changelog/commitlint/pull/3850#issuecomment-1984932236](https://github.com//github.com/conventional-changelog/commitlint/pull/3850/issues/issuecomment-1984932236) [#3949](https://github.com/conventional-changelog/commitlint/issues/3949)
+
+
+
+
+
 ## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
 
 **Note:** Version bump only for package @commitlint/cz-commitlint
