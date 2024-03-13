@@ -26,7 +26,11 @@ export default async function getCommitMessages(
 	}
 
 	if (last) {
-		const executeGitCommand = await execa('git', ['log', '-1', '--pretty=%B']);
+		const executeGitCommand = await execa('git', [
+			'log',
+			'-1',
+			'--pretty=format:"%B"',
+		]);
 		return [executeGitCommand.stdout];
 	}
 
