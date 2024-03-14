@@ -113,6 +113,7 @@ These can be modified by [your own configuration](#config).
   - `commitlint.config.ts`
   - `commitlint.config.cts`
   - `commitlint` field in `package.json`
+  - `commitlint` field in [`package.yaml`](https://github.com/pnpm/pnpm/pull/1799)
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
 - See [Rules](./docs/reference/rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/src/index.ts)

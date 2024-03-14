@@ -16,6 +16,7 @@ export interface LoadConfigResult {
 }
 
 const moduleName = 'commitlint';
+const searchStrategy = 'global';
 
 export async function loadConfig(
 	cwd: string,
@@ -37,10 +38,12 @@ export async function loadConfig(
 			: defaultLoadersSync;
 
 	const explorer = cosmiconfig(moduleName, {
+		searchStrategy,
 		searchPlaces: [
 			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
 			// we need to manually merge default searchPlaces from https://github.com/davidtheclark/cosmiconfig#searchplaces
 			'package.json',
+			'package.yaml',
 			`.${moduleName}rc`,
 			`.${moduleName}rc.json`,
 			`.${moduleName}rc.yaml`,
