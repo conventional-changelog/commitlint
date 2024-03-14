@@ -52,6 +52,16 @@ test('should produce success output with --verbose flag', async () => {
 	expect(actual.stderr).toEqual('');
 });
 
+test('should produce last commit and success output with --verbose flag', async () => {
+	const cwd = await gitBootstrap('fixtures/simple');
+	await execa('git', ['add', 'commitlint.config.js'], {cwd});
+	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
+	const actual = await cli(['--last', '--verbose'], {cwd})();
+	expect(actual.stdout).toContain('0 problems, 0 warnings');
+	expect(actual.stdout).toContain('test: this should work');
+	expect(actual.stderr).toEqual('');
+});
+
 test('should produce no output with --quiet flag', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const actual = await cli(['--quiet'], {cwd})('foo: bar');
@@ -529,6 +539,7 @@ test('should print help', async () => {
 		  -H, --help-url       help url in error message  [string]
 		  -f, --from           lower end of the commit range to lint; applies if edit=false  [string]
 		      --git-log-args   additional git log arguments as space separated string, example '--first-parent --cherry-pick'  [string]
+		  -l, --last           just analyze the last commit; applies if edit=false  [boolean]
 		  -o, --format         output format of the results  [string]
 		  -p, --parser-preset  configuration preset to use for conventional-commits-parser  [string]
 		  -q, --quiet          toggle console output  [boolean] [default: false]
