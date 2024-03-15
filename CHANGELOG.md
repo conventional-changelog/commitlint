@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.2.0](https://github.com/conventional-changelog/commitlint/compare/v19.1.0...v19.2.0) (2024-03-15)
+
+
+### Bug Fixes
+
+* update dependency inquirer to v9.2.16 ([#3972](https://github.com/conventional-changelog/commitlint/issues/3972)) ([ea1ab9c](https://github.com/conventional-changelog/commitlint/commit/ea1ab9cc8048a2b715473c878641d1e189daaf1c))
+
+
+### Features
+
+* **cli:** introduce new --last flag, to stop recommending HEAD~1 ([#3916](https://github.com/conventional-changelog/commitlint/issues/3916)) ([99f4f3f](https://github.com/conventional-changelog/commitlint/commit/99f4f3f4839190a2758083df7ba20b988e7b68a6))
+* **load:** update cosmiconfig to v9 to add support for `package.yaml` config ([#3976](https://github.com/conventional-changelog/commitlint/issues/3976)) ([94eab40](https://github.com/conventional-changelog/commitlint/commit/94eab40798e0c8d3945aa2b1e629669b231d8468))
+
+
+
+
+
 # [19.1.0](https://github.com/conventional-changelog/commitlint/compare/v19.0.3...v19.1.0) (2024-03-12)
 
 
