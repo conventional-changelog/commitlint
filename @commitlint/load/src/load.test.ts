@@ -238,6 +238,7 @@ describe.each([['basic'], ['extends']])('%s config', (template) => {
 		'commitlint.config.js',
 		'commitlint.config.mjs',
 		'package.json',
+		'package.yaml',
 		'.commitlintrc',
 		'.commitlintrc.cjs',
 		'.commitlintrc.js',
@@ -274,6 +275,13 @@ describe.each([['basic'], ['extends']])('%s config', (template) => {
 				readFileSync(configPath, {encoding: 'utf-8'})
 			);
 			return JSON.stringify({commitlint});
+		} else if (filename === 'package.yaml') {
+			const configPath = path.join(
+				__dirname,
+				`../fixtures/${template}-config/.commitlintrc.yaml`
+			);
+			const yaml = readFileSync(configPath, {encoding: 'utf-8'});
+			return `commitlint:\n${yaml.replace(/^/gm, '  ')}`;
 		} else {
 			const filePath = ['..', 'fixtures', `${template}-config`, filename];
 
