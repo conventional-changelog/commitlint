@@ -26,12 +26,16 @@ export default async function getCommitMessages(
 	}
 
 	if (last) {
-		const executeGitCommand = await execa('git', [
+		const gitCommandResult = await execa('git', [
 			'log',
 			'-1',
-			'--pretty=format:"%B"',
+			'--pretty=format:%B',
 		]);
-		return [executeGitCommand.stdout];
+		let output = gitCommandResult.stdout;
+		// strip output of extra quotation marks ("")
+		if (output[0] == '"' && output[output.length - 1] == '"')
+			output = output.slice(1, -1);
+		return [output];
 	}
 
 	let gitOptions: GitOptions = {from, to};
