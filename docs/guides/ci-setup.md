@@ -70,52 +70,56 @@ script:
 It's just a simple example of how CircleCI configuration file could look like to validate last commit message
 
 ```yml
-version: 2
-defaults:
-  working_directory: ~/project
-  docker:
-  - image: circleci/node:latest
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: cimg/node:current
+    working_directory: ~/project
 
 jobs:
   setup:
-    <<: *defaults
+    executor: my-executor
     steps:
-    - checkout
-    - restore_cache:
-        key: lock-{{ checksum "package-lock.json" }}
-    - run:
-        name: Install dependencies
-        command: npm install
-    - save_cache:
-        key: lock-{{ checksum "package-lock.json" }}
-        paths:
-        - node_modules
-    - persist_to_workspace:
-        root: ~/project
-        paths:
-        - node_modules
+      - checkout
+      - restore_cache:
+          key: lock-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: lock-{{ checksum "package-lock.json" }}
+          paths:
+          - node_modules
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+          - node_modules
 
   lint_commit_message:
-    <<: *defaults
+    executor: my-executor
     steps:
-    - checkout
-    - attach_workspace:
-        at: ~/project
-    - run:
-        name: Define environment variable with latest commit's message
-        command: |
-          echo 'export COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
-          source $BASH_ENV
-    - run:
-        name: Lint commit message
-        command: echo "$COMMIT_MESSAGE" | npx commitlint
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Define environment variable with latest commit's message
+          command: |
+            echo 'export COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Lint commit message
+          command: echo "$COMMIT_MESSAGE" | npx commitlint
 
 workflows:
-  version: 2
+  version: 2.1
   commit:
     jobs:
     - setup
-    - lint_commit_message: { requires: [setup] }
+    - lint_commit_message:  
+        requires: 
+          - setup
 ```
 
 ## GitLab CI
