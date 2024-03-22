@@ -1869,12 +1869,12 @@
   resolved "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.13.0.tgz#6abd79db7ff8d01a58865ba20a63cfd23d9e2a10"
   integrity sha512-UKXUQNbO3DOhzLRwHSpa0HnhhCgNODvfoPWv2FCXme8N/ANFfhIPMGuOT+QuKd16+B5yxZ0HdpNlqPvTMS1qfw==
 
-"@shikijs/core@1.2.0", "@shikijs/core@^1.1.7":
+"@shikijs/core@1.2.0", "@shikijs/core@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@shikijs/core/-/core-1.2.0.tgz#c19d1a4d4807d31aa02e9d822aa13da873e6f2e7"
   integrity sha512-OlFvx+nyr5C8zpcMBnSGir0YPD6K11uYhouqhNmm1qLiis4GA7SsGtu07r9gKS9omks8RtQqHrJL4S+lqWK01A==
 
-"@shikijs/transformers@^1.1.7":
+"@shikijs/transformers@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmjs.org/@shikijs/transformers/-/transformers-1.2.0.tgz#954cbb20324be55340701f56b5815aa454fbdd05"
   integrity sha512-xKn7DtA65DQV4FOfYsrvqM80xOy2xuXnxWWKsZmHv1VII/IOuDUDsWDu3KnpeLH6wqNJWp1GRoNUsHR1aw/VhQ==
@@ -7498,7 +7498,7 @@ shebang-regex@^3.0.0:
   resolved "https://registry.npmjs.org/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-shiki@1.2.0, shiki@^1.1.7:
+shiki@1.2.0, shiki@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/shiki/-/shiki-1.2.0.tgz#7f1b6917cbb10daa1ac3ae62fa29b40c494e2812"
   integrity sha512-xLhiTMOIUXCv5DqJ4I70GgQCtdlzsTqFLZWcMHHG3TAieBUbvEGthdrlPDlX4mL/Wszx9C6rEcxU6kMlg4YlxA==
@@ -8308,14 +8308,14 @@ vitepress-plugin-tabs@^0.5.0:
   integrity sha512-SIhFWwGsUkTByfc2b279ray/E0Jt8vDTsM1LiHxmCOBAEMmvzIBZSuYYT1DpdDTiS3SuJieBheJkYnwCq/yD9A==
 
 vitepress@^1.0.0-rc.44:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/vitepress/-/vitepress-1.0.0.tgz#221a10142321ce087afb86d65171fce5c1153137"
-  integrity sha512-4YXbHzuyhymuVTKPexnnOgJOgf1Uzmak4B6g3L3SQf9KRgtnVKHoPV4/WorWhaGnLBaIS/g8KspxRJAIOsOdJQ==
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/vitepress/-/vitepress-1.0.1.tgz#828fe140d5f4975154845b31e97437f035a36c69"
+  integrity sha512-eNr5pOBppYUUjEhv8S0S2t9Tv95LQ6mMeHj6ivaGwfHxpov70Vduuwl/QQMDRznKDSaP0WKV7a82Pb4JVOaqEw==
   dependencies:
     "@docsearch/css" "^3.6.0"
     "@docsearch/js" "^3.6.0"
-    "@shikijs/core" "^1.1.7"
-    "@shikijs/transformers" "^1.1.7"
+    "@shikijs/core" "^1.2.0"
+    "@shikijs/transformers" "^1.2.0"
     "@types/markdown-it" "^13.0.7"
     "@vitejs/plugin-vue" "^5.0.4"
     "@vue/devtools-api" "^7.0.16"
@@ -8324,7 +8324,7 @@ vitepress@^1.0.0-rc.44:
     focus-trap "^7.5.4"
     mark.js "8.11.1"
     minisearch "^6.3.0"
-    shiki "^1.1.7"
+    shiki "^1.2.0"
     vite "^5.2.2"
     vue "^3.4.21"
 
