@@ -1,5 +1,7 @@
-import {validateConfig} from './validate';
+import {describe, test, expect} from 'vitest';
 import {RuleConfigSeverity, UserConfig} from '@commitlint/types';
+
+import {validateConfig} from './validate.js';
 
 const validSchemas: Record<string, UserConfig> = {
 	empty: {},
@@ -9,7 +11,13 @@ const validSchemas: Record<string, UserConfig> = {
 	withMultipleExtends: {extends: ['test', 'test2']},
 	withFormatter: {formatter: ''},
 	withHelpUrl: {helpUrl: ''},
-	withRules: {rules: {a: [RuleConfigSeverity.Disabled], b: [RuleConfigSeverity.Warning, 'never'], c: [RuleConfigSeverity.Error, 'never', true]}},
+	withRules: {
+		rules: {
+			a: [RuleConfigSeverity.Disabled],
+			b: [RuleConfigSeverity.Warning, 'never'],
+			c: [RuleConfigSeverity.Error, 'never', true],
+		},
+	},
 	withParserPresetString: {parserPreset: 'test'},
 	withParserPresetObject: {parserPreset: {}},
 	withParserPresetObject2: {parserPreset: {name: 'string', path: 'string'}},

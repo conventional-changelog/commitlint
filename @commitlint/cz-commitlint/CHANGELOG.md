@@ -3,6 +3,125 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.2.0](https://github.com/conventional-changelog/commitlint/compare/v19.1.0...v19.2.0) (2024-03-15)
+
+**Note:** Version bump only for package @commitlint/cz-commitlint
+
+
+
+
+
+# [19.1.0](https://github.com/conventional-changelog/commitlint/compare/v19.0.3...v19.1.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* add missing cjs entry in package ([#3967](https://github.com/conventional-changelog/commitlint/issues/3967)) ([9cea6fd](https://github.com/conventional-changelog/commitlint/commit/9cea6fdb7b1bf7cfc9a86e882e2742379b4b6aec))
+
+
+### Features
+
+* add CJS export for cz-commitlint ([#3963](https://github.com/conventional-changelog/commitlint/issues/3963)) ([6ae3c6a](https://github.com/conventional-changelog/commitlint/commit/6ae3c6a827de8622d827146ffb0984a9e62fe505)), closes [/github.com/conventional-changelog/commitlint/pull/3850#issuecomment-1984932236](https://github.com//github.com/conventional-changelog/commitlint/pull/3850/issues/issuecomment-1984932236) [#3949](https://github.com/conventional-changelog/commitlint/issues/3949)
+
+
+
+
+
+## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
+
+**Note:** Version bump only for package @commitlint/cz-commitlint
+
+
+
+
+
+## [19.0.2](https://github.com/conventional-changelog/commitlint/compare/v19.0.1...v19.0.2) (2024-02-28)
+
+**Note:** Version bump only for package @commitlint/cz-commitlint
+
+
+
+
+
+## [19.0.1](https://github.com/conventional-changelog/commitlint/compare/v19.0.0...v19.0.1) (2024-02-27)
+
+**Note:** Version bump only for package @commitlint/cz-commitlint
+
+
+
+
+
+# [19.0.0](https://github.com/conventional-changelog/commitlint/compare/v18.6.2...v19.0.0) (2024-02-27)
+
+
+* feat!: migrate to pure ESM (#3850) ([3423735](https://github.com/conventional-changelog/commitlint/commit/342373559bdf7c783c4ef37ff05dc38a5f681159)), closes [#3850](https://github.com/conventional-changelog/commitlint/issues/3850)
+
+
+### Reverts
+
+* Revert "chore!: minimum node version v20" ([2816783](https://github.com/conventional-changelog/commitlint/commit/2816783d00e7eb967de3ac9347c2fc43dc8b94fa))
+
+
+### BREAKING CHANGES
+
+* migrate to pure ESM
+
+* feat: migrate to pure ESM
+
+* chore: update snapshot
+
+* fix: load `parserPreset` with another `await`
+
+* test: migrate to vitest
+
+* test: remove no replacement `--runInBand` test-ci script
+
+* chore: fix code reviews
+
+* refactor(load): rewrite resolve logic
+
+* fix(config-nx-scopes): fix syntax error
+
+* feat(resolve-extends): add resolveFrom and loadParserPreset
+
+* feat(load): use resolveFrom and loadParserPreset from resolve-extends
+
+* test: include only @commitlint/* packages src in coverage
+
+* test: explicit import vitest utilities
+
+* test: remove @jest/globals from dependencies
+
+* fix(resolve-extends): `resolveFrom` output should be platform aware
+
+* test: restore NO_COLOR to test script
+
+* chore: fix linting issues
+
+* fix: should use fileURLToPath instead of pathname for Windows compatibility
+
+* Apply suggestions from code review
+
+* fix: should reuse `cli` instead call `yargs()`
+
+* feat(cli): set terminalWidth as wrap to avoid work break on help
+
+* Update .eslintrc.cjs
+
+* feat: migrate @commitlint/config-conventional to pure ESM
+
+
+
+
+
+## [18.6.1](https://github.com/conventional-changelog/commitlint/compare/v18.6.0...v18.6.1) (2024-02-13)
+
+**Note:** Version bump only for package @commitlint/cz-commitlint
+
+
+
+
+
 # [18.6.0](https://github.com/conventional-changelog/commitlint/compare/v18.5.1...v18.6.0) (2024-01-25)
 
 **Note:** Version bump only for package @commitlint/cz-commitlint

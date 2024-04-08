@@ -1,135 +1,135 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`validation should fail for defaultIgnoresNotBoolean 1`] = `
-"Commitlint configuration in defaultIgnoresNotBoolean.js is invalid:
+exports[`validation should fail for > defaultIgnoresNotBoolean 1`] = `
+[Error: Commitlint configuration in defaultIgnoresNotBoolean.js is invalid:
 	- Property "defaultIgnores" has the wrong type - must be boolean.
-"
+]
 `;
 
-exports[`validation should fail for extendsAsObject 1`] = `
-"Commitlint configuration in extendsAsObject.js is invalid:
+exports[`validation should fail for > extendsAsObject 1`] = `
+[Error: Commitlint configuration in extendsAsObject.js is invalid:
 	- Property "extends" has the wrong type - must be array.
 	- Property "extends" has the wrong type - must be string.
 	- "/extends" must match exactly one schema in oneOf. Value: {"test":1}.
-"
+]
 `;
 
-exports[`validation should fail for extendsWithFunction 1`] = `
-"Commitlint configuration in extendsWithFunction.js is invalid:
+exports[`validation should fail for > extendsWithFunction 1`] = `
+[Error: Commitlint configuration in extendsWithFunction.js is invalid:
 	- Property "extends/0" has the wrong type - must be string.
 	- Property "extends" has the wrong type - must be string.
 	- "/extends" must match exactly one schema in oneOf. Value: [null].
-"
+]
 `;
 
-exports[`validation should fail for formatterAsObject 1`] = `
-"Commitlint configuration in formatterAsObject.js is invalid:
+exports[`validation should fail for > formatterAsObject 1`] = `
+[Error: Commitlint configuration in formatterAsObject.js is invalid:
 	- Property "formatter" has the wrong type - must be string.
-"
+]
 `;
 
-exports[`validation should fail for helpUrlAsArray 1`] = `
-"Commitlint configuration in helpUrlAsArray.js is invalid:
+exports[`validation should fail for > helpUrlAsArray 1`] = `
+[Error: Commitlint configuration in helpUrlAsArray.js is invalid:
 	- Property "helpUrl" has the wrong type - must be string.
-"
+]
 `;
 
-exports[`validation should fail for helpUrlNotString 1`] = `
-"Commitlint configuration in helpUrlNotString.js is invalid:
+exports[`validation should fail for > helpUrlNotString 1`] = `
+[Error: Commitlint configuration in helpUrlNotString.js is invalid:
 	- Property "helpUrl" has the wrong type - must be string.
-"
+]
 `;
 
-exports[`validation should fail for ignoresFunction 1`] = `
-"Commitlint configuration in ignoresFunction.js is invalid:
+exports[`validation should fail for > ignoresFunction 1`] = `
+[Error: Commitlint configuration in ignoresFunction.js is invalid:
 	- Property "ignores" has the wrong type - must be array.
-"
+]
 `;
 
-exports[`validation should fail for ignoresNotFunction 1`] = `
-"Commitlint configuration in ignoresNotFunction.js is invalid:
+exports[`validation should fail for > ignoresNotFunction 1`] = `
+[Error: Commitlint configuration in ignoresNotFunction.js is invalid:
 	- "/ignores/0" should be a function. Value: 1.
-"
+]
 `;
 
-exports[`validation should fail for parserPreset 1`] = `
-"Commitlint configuration in parserPreset.js is invalid:
+exports[`validation should fail for > parserPreset 1`] = `
+[Error: Commitlint configuration in parserPreset.js is invalid:
 	- Property "parserPreset" has the wrong type - must be string.
 	- Property "parserPreset" has the wrong type - must be object.
 	- "/parserPreset" should be a function. Value: [].
 	- "/parserPreset" must match exactly one schema in oneOf. Value: [].
-"
+]
 `;
 
-exports[`validation should fail for pluginsNotArray 1`] = `
-"Commitlint configuration in pluginsNotArray.js is invalid:
+exports[`validation should fail for > pluginsNotArray 1`] = `
+[Error: Commitlint configuration in pluginsNotArray.js is invalid:
 	- Property "plugins" has the wrong type - must be array.
-"
+]
 `;
 
-exports[`validation should fail for rules1 1`] = `
-"Commitlint configuration in rules1.js is invalid:
+exports[`validation should fail for > rules1 1`] = `
+[Error: Commitlint configuration in rules1.js is invalid:
 	- "/rules/a/0" must be equal to one of the allowed values. Value: 3.
 	- "/rules/a" should be a function. Value: [3].
 	- "/rules/a" must match exactly one schema in oneOf. Value: [3].
-"
+]
 `;
 
-exports[`validation should fail for rules2 1`] = `
-"Commitlint configuration in rules2.js is invalid:
+exports[`validation should fail for > rules2 1`] = `
+[Error: Commitlint configuration in rules2.js is invalid:
 	- "/rules/b" must NOT have more than 3 items. Value: [1,"test",2,2].
 	- "/rules/b" should be a function. Value: [1,"test",2,2].
 	- "/rules/b" must match exactly one schema in oneOf. Value: [1,"test",2,2].
-"
+]
 `;
 
-exports[`validation should fail for rules3 1`] = `
-"Commitlint configuration in rules3.js is invalid:
+exports[`validation should fail for > rules3 1`] = `
+[Error: Commitlint configuration in rules3.js is invalid:
 	- "/rules/c" must NOT have fewer than 1 items. Value: [].
 	- "/rules/c" should be a function. Value: [].
 	- "/rules/c" must match exactly one schema in oneOf. Value: [].
-"
+]
 `;
 
-exports[`validation should fail for rules4 1`] = `
-"Commitlint configuration in rules4.js is invalid:
+exports[`validation should fail for > rules4 1`] = `
+[Error: Commitlint configuration in rules4.js is invalid:
 	- Property "rules/d/0" has the wrong type - must be number.
 	- "/rules/d/0" must be equal to one of the allowed values. Value: [].
 	- "/rules/d" should be a function. Value: [[],[],[]].
 	- "/rules/d" must match exactly one schema in oneOf. Value: [[],[],[]].
-"
+]
 `;
 
-exports[`validation should fail for rules5 1`] = `
-"Commitlint configuration in rules5.js is invalid:
+exports[`validation should fail for > rules5 1`] = `
+[Error: Commitlint configuration in rules5.js is invalid:
 	- Property "rules/e" has the wrong type - must be array.
 	- "/rules/e" should be a function. Value: {}.
 	- "/rules/e" must match exactly one schema in oneOf. Value: {}.
-"
+]
 `;
 
-exports[`validation should fail for rulesAsArray 1`] = `
-"Commitlint configuration in rulesAsArray.js is invalid:
+exports[`validation should fail for > rulesAsArray 1`] = `
+[Error: Commitlint configuration in rulesAsArray.js is invalid:
 	- Property "rules" has the wrong type - must be object.
-"
+]
 `;
 
-exports[`validation should fail for whenConfigIsNotObject 1`] = `
-"Commitlint configuration in whenConfigIsNotObject.js is invalid:
+exports[`validation should fail for > whenConfigIsNotObject 1`] = `
+[Error: Commitlint configuration in whenConfigIsNotObject.js is invalid:
 	- Config has the wrong type - must be object.
-"
+]
 `;
 
-exports[`validation should fail for whenConfigIsNotObject2 1`] = `
-"Commitlint configuration in whenConfigIsNotObject2.js is invalid:
+exports[`validation should fail for > whenConfigIsNotObject2 1`] = `
+[Error: Commitlint configuration in whenConfigIsNotObject2.js is invalid:
 	- Config has the wrong type - must be object.
-"
+]
 `;
 
-exports[`validation should fail for withPluginsAsObject 1`] = `
-"Commitlint configuration in withPluginsAsObject.js is invalid:
+exports[`validation should fail for > withPluginsAsObject 1`] = `
+[Error: Commitlint configuration in withPluginsAsObject.js is invalid:
 	- Property "plugins/0" has the wrong type - must be string.
 	- "/plugins/0" must have required property 'rules'. Value: {}.
 	- "/plugins/0" must match a schema in anyOf. Value: {}.
-"
+]
 `;

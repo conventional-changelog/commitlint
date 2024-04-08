@@ -1,6 +1,6 @@
-> Lint a string against commitlint rules
-
 # @commitlint/lint
+
+Lint a string against commitlint rules
 
 ## Getting started
 
@@ -8,28 +8,8 @@
 npm install --save @commitlint/lint
 ```
 
-## Example
+## Documentation
 
-```js
-const lint = require('@commitlint/lint').default;
+Consult [API docs](https://commitlint.js.org/api/lint) for comprehensive documentation.
 
-lint('foo: bar', {'type-enum': [1, 'always', ['foo']]}).then((report) =>
-  console.log(report)
-);
-// => { valid: true, errors: [], warnings: [] }
-
-lint('foo: bar', {'type-enum': [1, 'always', ['bar']]}).then((report) =>
-  console.log(report)
-);
-/* =>
-    { valid: true,
-      errors: [],
-      warnings:
-      [ { level: 1,
-          valid: false,
-          name: 'type-enum',
-          message: 'type must be one of [bar]' } ] }
-  */
-```
-
-Consult [docs/api](https://conventional-changelog.github.io/commitlint/#/reference-api) for comprehensive documentation.
+Documentation generated from [`docs` folder](../../docs/api/format.md).

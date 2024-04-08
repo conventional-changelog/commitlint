@@ -1,6 +1,7 @@
 {
   "name": "@commitlint/test",
-  "version": "18.0.0",
+  "type": "module",
+  "version": "19.0.0",
   "description": "test utilities for @commitlint",
   "private": true,
   "main": "lib/index.js",
@@ -33,11 +34,11 @@
   "dependencies": {
     "@types/fs-extra": "^11.0.3",
     "@types/tmp": "^0.2.5",
-    "execa": "^5.0.0",
+    "execa": "^8.0.1",
     "fs-extra": "^11.0.0",
-    "pkg-dir": "5.0.0",
-    "resolve-pkg": "2.0.0",
-    "tmp": "0.2.1"
+    "pkg-dir": "^8.0.0",
+    "resolve-pkg": "^2.0.0",
+    "tmp": "^0.2.1"
   },
   "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"
 }

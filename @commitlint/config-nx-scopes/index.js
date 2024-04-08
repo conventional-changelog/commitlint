@@ -1,10 +1,8 @@
-const {RuleConfigSeverity} = require('@commitlint/types');
-const {
-	getProjects: getNXProjects,
-} = require('nx/src/generators/utils/project-configuration');
-const {FsTree} = require('nx/src/generators/tree');
+import {RuleConfigSeverity} from '@commitlint/types';
+import {getProjects as getNXProjects} from 'nx/src/generators/utils/project-configuration.js';
+import {FsTree} from 'nx/src/generators/tree.js';
 
-module.exports = {
+export default {
 	utils: {getProjects},
 	rules: {
 		'scope-enum': (ctx) =>

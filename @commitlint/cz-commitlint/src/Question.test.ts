@@ -1,6 +1,8 @@
+import {describe, test, expect, vi} from 'vitest';
 import chalk from 'chalk';
 import inquirer, {Answers, InputQuestionOptions} from 'inquirer';
-import Question from './Question';
+
+import Question from './Question.js';
 
 const MESSAGES = {
 	skip: '(press enter to skip)',
@@ -176,7 +178,7 @@ describe('message', () => {
 	});
 
 	test('should execute function beforeQuestionStart when init message', () => {
-		const mockFn = jest.fn();
+		const mockFn = vi.fn();
 		class CustomQuestion extends Question {
 			beforeQuestionStart(answers: Answers): void {
 				mockFn(answers);

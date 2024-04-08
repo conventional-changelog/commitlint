@@ -1,1 +1,1 @@
-module.exports = require('@commitlint/config-lerna-scopes');
+export {default} from '@commitlint/config-lerna-scopes';

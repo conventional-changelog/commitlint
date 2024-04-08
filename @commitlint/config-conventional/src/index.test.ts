@@ -1,9 +1,23 @@
-import lint from '@commitlint/lint';
-import {config} from '.';
+import {test, expect} from 'vitest';
+import path from 'path';
+import {pathToFileURL} from 'url';
 
-const commitLint = async (message) => {
-	const preset = await require(config.parserPreset)();
-	return lint(message, config.rules, {...preset});
+import lint from '@commitlint/lint';
+
+import config from './index.js';
+
+const {rules, parserPreset} = config;
+
+const dynamicImport = async (id: string) => {
+	const imported = await import(
+		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
+	);
+	return ('default' in imported && imported.default) || imported;
+};
+
+const commitLint = async (message: string) => {
+	const preset = await (await dynamicImport(parserPreset))();
+	return lint(message, rules, {...preset});
 };
 
 const messages = {

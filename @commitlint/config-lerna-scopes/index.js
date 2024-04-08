@@ -1,9 +1,13 @@
-const glob = require('glob');
-const Path = require('path');
-const importFrom = require('import-from');
-const semver = require('semver');
+import {createRequire} from 'module';
+import Path from 'path';
 
-module.exports = {
+import {globSync} from 'glob';
+import importFrom from 'import-from';
+import semver from 'semver';
+
+const require = createRequire(import.meta.url);
+
+export default {
 	utils: {getPackages},
 	rules: {
 		'scope-enum': (ctx) =>
@@ -23,7 +27,7 @@ function getPackages(context) {
 
 				const wsGlobs = workspaces.flatMap((ws) => {
 					const path = Path.posix.join(ws, 'package.json');
-					return glob.sync(path, {cwd, ignore: ['**/node_modules/**']});
+					return globSync(path, {cwd, ignore: ['**/node_modules/**']});
 				});
 
 				return wsGlobs.map((pJson) => require(Path.join(cwd, pJson)));
@@ -62,6 +66,5 @@ function getLernaVersion(cwd) {
 		'lerna'
 	);
 	const modulePackageJson = Path.join(moduleDir, 'package.json');
-
 	return require(modulePackageJson).version;
 }

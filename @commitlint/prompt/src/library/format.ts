@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import type {Result, ResultPart} from './types';
+
+import type {Result, ResultPart} from './types.js';
 
 /**
  * Get formatted commit message

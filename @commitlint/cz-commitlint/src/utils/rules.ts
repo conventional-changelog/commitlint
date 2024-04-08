@@ -1,5 +1,5 @@
 import {RuleConfigSeverity} from '@commitlint/types';
-import {Rule} from '../types';
+import type {Rule} from '../types.js';
 
 export function ruleIsDisabled(
 	rule: Rule

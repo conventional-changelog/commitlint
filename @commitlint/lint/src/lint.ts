@@ -2,17 +2,18 @@ import util from 'util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
-import {buildCommitMesage} from './commit-message';
-import {
+import type {
 	LintOptions,
 	LintOutcome,
 	LintRuleOutcome,
 	Rule,
-	RuleConfigSeverity,
 	BaseRule,
 	RuleType,
 	QualifiedRules,
 } from '@commitlint/types';
+import {RuleConfigSeverity} from '@commitlint/types';
+
+import {buildCommitMessage} from './commit-message.js';
 
 export default async function lint(
 	message: string,
@@ -78,9 +79,10 @@ export default async function lint(
 	if (missing.length > 0) {
 		const names = [...allRules.keys()];
 		throw new RangeError(
-			`Found invalid rule names: ${missing.join(
-				', '
-			)}. Supported rule names are: ${names.join(', ')}`
+			[
+				`Found rules without implementation: ${missing.join(', ')}.`,
+				`Supported rules are: ${names.join(', ')}.`,
+			].join('\n')
 		);
 	}
 
@@ -180,10 +182,10 @@ export default async function lint(
 	);
 
 	const errors = results.filter(
-		(result) => result.level === 2 && !result.valid
+		(result) => result.level === RuleConfigSeverity.Error && !result.valid
 	);
 	const warnings = results.filter(
-		(result) => result.level === 1 && !result.valid
+		(result) => result.level === RuleConfigSeverity.Warning && !result.valid
 	);
 
 	const valid = errors.length === 0;
@@ -192,6 +194,6 @@ export default async function lint(
 		valid,
 		errors,
 		warnings,
-		input: buildCommitMesage(parsed),
+		input: buildCommitMessage(parsed),
 	};
 }

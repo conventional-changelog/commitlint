@@ -1,7 +1,13 @@
+import {test, expect} from 'vitest';
 import path from 'path';
-import glob from 'glob';
-import camelCase from 'lodash/camelcase';
-import * as ensure from '.';
+import {fileURLToPath} from 'url';
+
+import {globSync} from 'glob';
+import {camelCase} from 'lodash';
+
+import * as ensure from './index.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 test('exports all checkers', async () => {
 	const ignore = ['types'];
@@ -19,7 +25,7 @@ test('rules export functions', () => {
 });
 
 function _glob(pattern: string): string[] {
-	const files = glob.sync(pattern, {
+	const files = globSync(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname,
 	});

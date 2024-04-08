@@ -1,30 +1,43 @@
-import execa, {ExecaError} from 'execa';
-import load from '@commitlint/load';
-import lint from '@commitlint/lint';
-import read from '@commitlint/read';
-import isFunction from 'lodash/isFunction';
-import resolveFrom from 'resolve-from';
-import resolveGlobal from 'resolve-global';
-import yargs, {Arguments} from 'yargs';
+import {createRequire} from 'module';
+import path from 'path';
+import {fileURLToPath, pathToFileURL} from 'url';
 import util from 'util';
 
-import {CliFlags} from './types';
-import {
+import lint from '@commitlint/lint';
+import load, {resolveFromSilent, resolveGlobalSilent} from '@commitlint/load';
+import read from '@commitlint/read';
+import type {
+	Formatter,
 	LintOptions,
 	LintOutcome,
-	ParserOptions,
 	ParserPreset,
 	QualifiedConfig,
-	Formatter,
 	UserConfig,
 } from '@commitlint/types';
-import {CliError} from './cli-error';
+import type {Options} from 'conventional-commits-parser';
+import {execa, type ExecaError} from 'execa';
+import yargs, {type Arguments} from 'yargs';
 
-const pkg = require('../package');
+import {CliFlags} from './types.js';
+
+import {CliError} from './cli-error.js';
+
+const require = createRequire(import.meta.url);
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
+
+const dynamicImport = async <T>(id: string): Promise<T> => {
+	const imported = await import(
+		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
+	);
+	return ('default' in imported && imported.default) || imported;
+};
+
+const pkg: typeof import('../package.json') = require('../package.json');
 
 const gitDefaultCommentChar = '#';
 
-const cli = yargs
+const cli = yargs(process.argv.slice(2))
 	.options({
 		color: {
 			alias: 'c',
@@ -82,6 +95,11 @@ const cli = yargs
 				"additional git log arguments as space separated string, example '--first-parent --cherry-pick'",
 			type: 'string',
 		},
+		last: {
+			alias: 'l',
+			description: 'just analyze the last commit; applies if edit=false',
+			type: 'boolean',
+		},
 		format: {
 			alias: 'o',
 			description: 'output format of the results',
@@ -130,6 +148,12 @@ const cli = yargs
 		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
 	)
 	.strict();
+
+/**
+ * avoid description words to be divided in new lines when there is enough space
+ * @see https://github.com/conventional-changelog/commitlint/pull/3850#discussion_r1472251234
+ */
+cli.wrap(cli.terminalWidth());
 
 main(cli.argv).catch((err) => {
 	setTimeout(() => {
@@ -195,11 +219,25 @@ async function main(args: MainArgs): Promise<void> {
 
 	const fromStdin = checkFromStdin(raw, flags);
 
+	if (
+		Object.hasOwn(flags, 'last') &&
+		(Object.hasOwn(flags, 'from') || Object.hasOwn(flags, 'to') || flags.edit)
+	) {
+		const err = new CliError(
+			'Please use the --last flag alone. The --last flag should not be used with --to or --from or --edit.',
+			pkg.name
+		);
+		cli.showHelp('log');
+		console.log(err.message);
+		throw err;
+	}
+
 	const input = await (fromStdin
 		? stdin()
 		: read({
 				to: flags.to,
 				from: flags.from,
+				last: flags.last,
 				edit: flags.edit,
 				cwd: flags.cwd,
 				gitLogArgs: flags['git-log-args'],
@@ -212,10 +250,10 @@ async function main(args: MainArgs): Promise<void> {
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
 		const err = new CliError(
-			'[input] is required: supply via stdin, or --env or --edit or --from and --to',
+			'[input] is required: supply via stdin, or --env or --edit or --last or --from and --to',
 			pkg.name
 		);
-		yargs.showHelp('log');
+		cli.showHelp('log');
 		console.log(err.message);
 		throw err;
 	}
@@ -225,7 +263,7 @@ async function main(args: MainArgs): Promise<void> {
 		file: flags.config,
 	});
 	const parserOpts = selectParserOpts(loaded.parserPreset);
-	const opts: LintOptions & {parserOpts: ParserOptions} = {
+	const opts: LintOptions & {parserOpts: Options} = {
 		parserOpts: {},
 		plugins: {},
 		ignores: [],
@@ -243,7 +281,7 @@ async function main(args: MainArgs): Promise<void> {
 	if (loaded.defaultIgnores === false) {
 		opts.defaultIgnores = false;
 	}
-	const format = loadFormatter(loaded, flags);
+	const format = await loadFormatter(loaded, flags);
 
 	// If reading from `.git/COMMIT_EDIT_MSG`, strip comments using
 	// core.commentChar from git configuration, falling back to '#'.
@@ -285,7 +323,7 @@ async function main(args: MainArgs): Promise<void> {
 					name: 'empty-rules',
 					message: [
 						'Please add rules to your `commitlint.config.js`',
-						'    - Getting started guide: https://commitlint.js.org/#/?id=getting-started',
+						'    - Getting started guide: https://commitlint.js.org/guides/getting-started',
 						'    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/src/index.ts',
 					].join('\n'),
 				},
@@ -355,7 +393,11 @@ function checkFromEdit(flags: CliFlags): boolean {
 }
 
 function checkFromHistory(flags: CliFlags): boolean {
-	return typeof flags.from === 'string' || typeof flags.to === 'string';
+	return (
+		typeof flags.from === 'string' ||
+		typeof flags.to === 'string' ||
+		typeof flags.last === 'boolean'
+	);
 }
 
 function normalizeFlags(flags: CliFlags): CliFlags {
@@ -431,21 +473,18 @@ function selectParserOpts(parserPreset: ParserPreset | undefined) {
 	return parserPreset.parserOpts;
 }
 
-function loadFormatter(config: QualifiedConfig, flags: CliFlags): Formatter {
+function loadFormatter(
+	config: QualifiedConfig,
+	flags: CliFlags
+): Promise<Formatter> {
 	const moduleName = flags.format || config.formatter || '@commitlint/format';
 	const modulePath =
-		resolveFrom.silent(__dirname, moduleName) ||
-		resolveFrom.silent(flags.cwd, moduleName) ||
-		resolveGlobal.silent(moduleName);
+		resolveFromSilent(moduleName, __dirname) ||
+		resolveFromSilent(moduleName, flags.cwd) ||
+		resolveGlobalSilent(moduleName);
 
 	if (modulePath) {
-		const moduleInstance = require(modulePath);
-
-		if (isFunction(moduleInstance.default)) {
-			return moduleInstance.default;
-		}
-
-		return moduleInstance;
+		return dynamicImport<Formatter>(modulePath);
 	}
 
 	throw new Error(`Using format ${moduleName}, but cannot find the module.`);

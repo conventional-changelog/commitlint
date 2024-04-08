@@ -1,4 +1,4 @@
-import execa from 'execa';
+import {execaSync} from 'execa';
 import message from '@commitlint/message';
 import toLines from '@commitlint/to-lines';
 import {SyncRule} from '@commitlint/types';
@@ -8,8 +8,8 @@ export const trailerExists: SyncRule<string> = (
 	when = 'always',
 	value = ''
 ) => {
-	const trailers = execa.sync('git', ['interpret-trailers', '--parse'], {
-		input: parsed.raw,
+	const trailers = execaSync('git', ['interpret-trailers', '--parse'], {
+		input: parsed.raw || '',
 	}).stdout;
 
 	const matches = toLines(trailers).filter((ln) => ln.startsWith(value)).length;

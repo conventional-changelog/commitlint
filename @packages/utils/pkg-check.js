@@ -1,14 +1,14 @@
 #!/usr/bin/env node
-const path = require('path');
-const fs = require('fs');
-const zlib = require('zlib');
+import path from 'path';
+import fs from 'fs';
 
-const execa = require('execa');
-const yargs = require('yargs');
-const readPkg = require('read-pkg');
-const requireFromString = require('require-from-string');
-const tar = require('tar-fs');
-const tmp = require('tmp');
+import {execa} from 'execa';
+import readPkg from 'read-pkg';
+import requireFromString from 'require-from-string';
+import tar from 'tar-fs';
+import tmp from 'tmp';
+import yargs from 'yargs';
+import zlib from 'zlib';
 
 tmp.setGracefulCleanup();
 

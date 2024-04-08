@@ -1,9 +1,9 @@
 import {RuleField} from '@commitlint/types';
-import {QuestionConfig} from '../Question';
-import {getPromptMessages, getPromptQuestions} from '../store/prompts';
-import {getRule} from '../store/rules';
-import getCaseFn from '../utils/case-fn';
-import getFullStopFn from '../utils/full-stop-fn';
+import {QuestionConfig} from '../Question.js';
+import {getPromptMessages, getPromptQuestions} from '../store/prompts.js';
+import {getRule} from '../store/rules.js';
+import getCaseFn from '../utils/case-fn.js';
+import getFullStopFn from '../utils/full-stop-fn.js';
 import {
 	enumRuleIsActive,
 	getEnumList,
@@ -12,7 +12,7 @@ import {
 	ruleIsActive,
 	ruleIsApplicable,
 	ruleIsDisabled,
-} from '../utils/rules';
+} from '../utils/rules.js';
 
 export default function (rulePrefix: RuleField): QuestionConfig | null {
 	const questions = getPromptQuestions();

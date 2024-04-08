@@ -1,4 +1,6 @@
+import {test, expect} from 'vitest';
 import {RuleConfigSeverity} from '@commitlint/types';
+
 import {
 	enumRuleIsActive,
 	getEnumList,
@@ -8,7 +10,7 @@ import {
 	ruleIsApplicable,
 	ruleIsDisabled,
 	ruleIsNotApplicable,
-} from './rules';
+} from './rules.js';
 
 test('ruleIsDisabled', () => {
 	expect(ruleIsDisabled([RuleConfigSeverity.Disabled])).toBe(true);

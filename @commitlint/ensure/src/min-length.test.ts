@@ -1,4 +1,6 @@
-import ensure from './min-length';
+import {test, expect} from 'vitest';
+
+import ensure from './min-length.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

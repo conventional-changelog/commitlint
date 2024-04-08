@@ -1,9 +1,5 @@
 import {TargetCaseType} from '@commitlint/types';
-import camelCase from 'lodash/camelcase';
-import kebabCase from 'lodash/kebabcase';
-import snakeCase from 'lodash/snakecase';
-import upperFirst from 'lodash/upperfirst';
-import startCase from 'lodash/startcase';
+import {camelCase, kebabCase, snakeCase, upperFirst, startCase} from 'lodash';
 
 export default function toCase(input: string, target: TargetCaseType): string {
 	switch (target) {

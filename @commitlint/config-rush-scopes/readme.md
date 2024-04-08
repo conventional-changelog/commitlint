@@ -1,20 +1,20 @@
-> Lint your rush project commits
-
 # @commitlint/config-rush-scopes
+
+Lint your rush project commits
 
 Shareable `commitlint` config enforcing rush package and workspace names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
 
-```
+```sh
 npm install --save-dev @commitlint/config-rush-scopes @commitlint/cli
-echo "module.exports = {extends: ['@commitlint/config-rush-scopes']};" > commitlint.config.js
+echo "export default {extends: ['@commitlint/config-rush-scopes']};" > commitlint.config.js
 ```
 
 ## Examples
 
-```
+```text
 ❯ cat commitlint.config.js
 {
   extends: ['@commitlint/config-rush-scopes']
@@ -41,4 +41,4 @@ packages
 ✔   found 0 problems, 0 warnings
 ```
 
-Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.

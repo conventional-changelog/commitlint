@@ -1,1 +1,1 @@
-module.exports = require('@commitlint/config-nx-scopes');
+export {default} from '@commitlint/config-nx-scopes';

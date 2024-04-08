@@ -1,6 +1,6 @@
 # CLI
 
-```bash
+```sh
 ❯ npx commitlint --help
 
 @commitlint/cli@11.0.0 - Lint your commit messages

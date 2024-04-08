@@ -1,6 +1,6 @@
-import execa from 'execa';
+import {execa} from 'execa';
 
-import * as fix from './fix';
+import * as fix from './fix.js';
 
 export async function bootstrap(fixture?: string, directory?: string) {
 	const cwd = await fix.bootstrap(fixture, directory);

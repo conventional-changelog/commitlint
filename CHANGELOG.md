@@ -3,6 +3,187 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.2.1](https://github.com/conventional-changelog/commitlint/compare/v19.2.0...v19.2.1) (2024-03-19)
+
+
+### Bug Fixes
+
+* **config-nx-scopes:** include file extension in nx imports ([#3979](https://github.com/conventional-changelog/commitlint/issues/3979)) ([583250b](https://github.com/conventional-changelog/commitlint/commit/583250b919cf1eb338de3e3f5c848fff611a6212))
+
+
+
+
+
+# [19.2.0](https://github.com/conventional-changelog/commitlint/compare/v19.1.0...v19.2.0) (2024-03-15)
+
+
+### Bug Fixes
+
+* update dependency inquirer to v9.2.16 ([#3972](https://github.com/conventional-changelog/commitlint/issues/3972)) ([ea1ab9c](https://github.com/conventional-changelog/commitlint/commit/ea1ab9cc8048a2b715473c878641d1e189daaf1c))
+
+
+### Features
+
+* **cli:** introduce new --last flag, to stop recommending HEAD~1 ([#3916](https://github.com/conventional-changelog/commitlint/issues/3916)) ([99f4f3f](https://github.com/conventional-changelog/commitlint/commit/99f4f3f4839190a2758083df7ba20b988e7b68a6))
+* **load:** update cosmiconfig to v9 to add support for `package.yaml` config ([#3976](https://github.com/conventional-changelog/commitlint/issues/3976)) ([94eab40](https://github.com/conventional-changelog/commitlint/commit/94eab40798e0c8d3945aa2b1e629669b231d8468))
+
+
+
+
+
+# [19.1.0](https://github.com/conventional-changelog/commitlint/compare/v19.0.3...v19.1.0) (2024-03-12)
+
+
+### Bug Fixes
+
+* add `main` and `types` keys in package.json ([#3953](https://github.com/conventional-changelog/commitlint/issues/3953)) ([7ddaad4](https://github.com/conventional-changelog/commitlint/commit/7ddaad4bc4e71afe89f25cc02d3e19beba1ce6cd))
+* add missing `conditions` param for `moduleResolve` ([#3962](https://github.com/conventional-changelog/commitlint/issues/3962)) ([67baff9](https://github.com/conventional-changelog/commitlint/commit/67baff9182854bbe184b6cf71f977920a05c27a3))
+* add missing cjs entry in package ([#3967](https://github.com/conventional-changelog/commitlint/issues/3967)) ([9cea6fd](https://github.com/conventional-changelog/commitlint/commit/9cea6fdb7b1bf7cfc9a86e882e2742379b4b6aec))
+* update dependency @pnpm/read-project-manifest to v5.0.11 ([#3932](https://github.com/conventional-changelog/commitlint/issues/3932)) ([2525d14](https://github.com/conventional-changelog/commitlint/commit/2525d14b8c0bad0ed155863059fa3549e76dd7d3))
+* update dependency tmp to v0.2.3 ([#3945](https://github.com/conventional-changelog/commitlint/issues/3945)) ([25bab59](https://github.com/conventional-changelog/commitlint/commit/25bab594ed04dbe2cc3cc5020b70d98d1d4e0f53))
+
+
+### Features
+
+* add CJS export for cz-commitlint ([#3963](https://github.com/conventional-changelog/commitlint/issues/3963)) ([6ae3c6a](https://github.com/conventional-changelog/commitlint/commit/6ae3c6a827de8622d827146ffb0984a9e62fe505)), closes [/github.com/conventional-changelog/commitlint/pull/3850#issuecomment-1984932236](https://github.com//github.com/conventional-changelog/commitlint/pull/3850/issues/issuecomment-1984932236) [#3949](https://github.com/conventional-changelog/commitlint/issues/3949)
+
+
+
+
+
+## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
+
+
+### Bug Fixes
+
+* mark `@types/conventional-commits-parser` as dep for `@commitlint/types` ([#3944](https://github.com/conventional-changelog/commitlint/issues/3944)) ([5a01f59](https://github.com/conventional-changelog/commitlint/commit/5a01f59661f0b908802728389631965eb8b49d47)), closes [#3929](https://github.com/conventional-changelog/commitlint/issues/3929) [#3942](https://github.com/conventional-changelog/commitlint/issues/3942)
+
+
+
+
+
+## [19.0.2](https://github.com/conventional-changelog/commitlint/compare/v19.0.1...v19.0.2) (2024-02-28)
+
+
+### Bug Fixes
+
+* fallback to `resolve-from` for Yarn P'n'P ([#3941](https://github.com/conventional-changelog/commitlint/issues/3941)) ([1eb9b5f](https://github.com/conventional-changelog/commitlint/commit/1eb9b5f29979d35f5840141523850a7402633378)), closes [#3936](https://github.com/conventional-changelog/commitlint/issues/3936)
+
+
+
+
+
+## [19.0.1](https://github.com/conventional-changelog/commitlint/compare/v19.0.0...v19.0.1) (2024-02-27)
+
+
+### Bug Fixes
+
+* drop `resolve-from`, `resolve-global` and `import-fresh`, resolve global packages correctly ([#3939](https://github.com/conventional-changelog/commitlint/issues/3939)) ([8793c63](https://github.com/conventional-changelog/commitlint/commit/8793c639c083c33714da0a29429b338776813d0c)), closes [#3938](https://github.com/conventional-changelog/commitlint/issues/3938)
+
+
+
+
+
+# [19.0.0](https://github.com/conventional-changelog/commitlint/compare/v18.6.2...v19.0.0) (2024-02-27)
+
+
+* feat!: migrate to pure ESM (#3850) ([3423735](https://github.com/conventional-changelog/commitlint/commit/342373559bdf7c783c4ef37ff05dc38a5f681159)), closes [#3850](https://github.com/conventional-changelog/commitlint/issues/3850)
+
+
+### Reverts
+
+* Revert "chore: update tools version to v20" ([53fc619](https://github.com/conventional-changelog/commitlint/commit/53fc6196b8d23b347a342a23c6757d757f547878))
+* Revert "chore!: minimum node version v20" ([2816783](https://github.com/conventional-changelog/commitlint/commit/2816783d00e7eb967de3ac9347c2fc43dc8b94fa))
+* Revert "ci: add codeQuality job to run lint and format tasks (#3922)" ([8bb94ca](https://github.com/conventional-changelog/commitlint/commit/8bb94ca7552b70a3c6d185a1ee8e87d745799e75)), closes [#3922](https://github.com/conventional-changelog/commitlint/issues/3922)
+* Revert "ci: update node version to v20" ([8a24546](https://github.com/conventional-changelog/commitlint/commit/8a2454661569890ee1dbe918fca3da758722fd38))
+
+
+### BREAKING CHANGES
+
+* migrate to pure ESM
+
+* feat: migrate to pure ESM
+
+* chore: update snapshot
+
+* fix: load `parserPreset` with another `await`
+
+* test: migrate to vitest
+
+* test: remove no replacement `--runInBand` test-ci script
+
+* chore: fix code reviews
+
+* refactor(load): rewrite resolve logic
+
+* fix(config-nx-scopes): fix syntax error
+
+* feat(resolve-extends): add resolveFrom and loadParserPreset
+
+* feat(load): use resolveFrom and loadParserPreset from resolve-extends
+
+* test: include only @commitlint/* packages src in coverage
+
+* test: explicit import vitest utilities
+
+* test: remove @jest/globals from dependencies
+
+* fix(resolve-extends): `resolveFrom` output should be platform aware
+
+* test: restore NO_COLOR to test script
+
+* chore: fix linting issues
+
+* fix: should use fileURLToPath instead of pathname for Windows compatibility
+
+* Apply suggestions from code review
+
+* fix: should reuse `cli` instead call `yargs()`
+
+* feat(cli): set terminalWidth as wrap to avoid work break on help
+
+* Update .eslintrc.cjs
+
+* feat: migrate @commitlint/config-conventional to pure ESM
+
+
+
+
+
+## [18.6.3](https://github.com/conventional-changelog/commitlint/compare/v18.6.2...v18.6.3) (2024-03-11)
+
+
+### Bug Fixes
+
+* add missing entry `wrapper.mjs` ([#3966](https://github.com/conventional-changelog/commitlint/issues/3966)) ([c2c3c7c](https://github.com/conventional-changelog/commitlint/commit/c2c3c7cdc05c07c185cc2c2635a06835352c4504)), closes [#3958](https://github.com/conventional-changelog/commitlint/issues/3958)
+
+
+
+
+
+## [18.6.2](https://github.com/conventional-changelog/commitlint/compare/v18.6.1...v18.6.2) (2024-02-14)
+
+
+### Bug Fixes
+
+* **config-conventional:** use default export ([#3911](https://github.com/conventional-changelog/commitlint/issues/3911)) ([bc48408](https://github.com/conventional-changelog/commitlint/commit/bc4840832f9484186d3281d13ab5e0b4f9f63113))
+
+
+
+
+
+## [18.6.1](https://github.com/conventional-changelog/commitlint/compare/v18.6.0...v18.6.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* update dependency semver to v7.6.0 ([#3900](https://github.com/conventional-changelog/commitlint/issues/3900)) ([df33003](https://github.com/conventional-changelog/commitlint/commit/df33003dce77bc5ff48678cddf9401dffedaeb57))
+* update dependency tar-fs to v3.0.5 ([#3903](https://github.com/conventional-changelog/commitlint/issues/3903)) ([79d77c9](https://github.com/conventional-changelog/commitlint/commit/79d77c9ef8de5046106027fc7d80dfd77faeb3e5))
+
+
+
+
+
 # [18.6.0](https://github.com/conventional-changelog/commitlint/compare/v18.5.1...v18.6.0) (2024-01-25)
 
 

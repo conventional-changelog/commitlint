@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {scopeMinLength} from './scope-min-length';
+import {scopeMinLength} from './scope-min-length.js';
 
 const short = 'a';
 const long = 'ab';

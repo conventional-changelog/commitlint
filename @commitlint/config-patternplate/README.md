@@ -1,6 +1,6 @@
-> Lint your commits, patternplate-style
-
 # @commitlint/config-patternplate
+
+Lint your commits, patternplate-style
 
 Shareable `commitlint` config enforcing the patternplate commit convention.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
@@ -27,4 +27,4 @@ The following rules are considered problems for `@commitlint/config-patternplate
 - **rule**: `always`
 - **value**: determined based on pattern tree. `system` and all pattern ids present in `patterns` are allowed
 
-Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.

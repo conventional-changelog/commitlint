@@ -1,10 +1,10 @@
 export interface CommitMessageData {
-	header: string;
+	header: string | null;
 	body?: string | null;
 	footer?: string | null;
 }
 
-export const buildCommitMesage = ({
+export const buildCommitMessage = ({
 	header,
 	body,
 	footer,
@@ -14,5 +14,5 @@ export const buildCommitMesage = ({
 	message = body ? `${message}\n\n${body}` : message;
 	message = footer ? `${message}\n\n${footer}` : message;
 
-	return message;
+	return message || '';
 };

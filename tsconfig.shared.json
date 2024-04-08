@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["es2017"],
+    "target": "ES2022",
+    "lib": ["es2022"],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "module": "commonjs",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,

@@ -1,6 +1,8 @@
+import {describe, test, it, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {scopeEnum} from './scope-enum';
 import {RuleConfigCondition} from '@commitlint/types';
+
+import {scopeEnum} from './scope-enum.js';
 
 const messagesByScope = {
 	single: {
@@ -18,7 +20,7 @@ const messagesByScope = {
 
 const {single, multiple, none} = messagesByScope;
 
-const messages = Object.values(messagesByScope).reduce(
+const messages = Object.values(messagesByScope).reduce<Record<string, string>>(
 	(acc, curr) => ({...acc, ...curr}),
 	{}
 );
@@ -26,10 +28,11 @@ const messages = Object.values(messagesByScope).reduce(
 const conditions: RuleConfigCondition[] = ['always', 'never'];
 
 describe('Scope Enum Validation', () => {
-	conditions.forEach((condition) => {
+	describe.each(conditions)('condition: %s', (condition) => {
 		describe('Enum without Scopes', () => {
-			Object.keys(messages).forEach((messageType) => {
-				test(`Succeeds with a '${messageType}' message and '${condition}'`, async () => {
+			test.each(Object.keys(messages))(
+				`Succeeds with a %s message and '${condition}'`,
+				async (messageType) => {
 					const [actual, message] = scopeEnum(
 						await parse(messages[messageType]),
 						condition,
@@ -38,8 +41,8 @@ describe('Scope Enum Validation', () => {
 					const expected = true;
 					expect(actual).toEqual(expected);
 					expect(message).toEqual('');
-				});
-			});
+				}
+			);
 		});
 
 		describe('Messages without Scopes', () => {

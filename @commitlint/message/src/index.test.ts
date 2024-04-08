@@ -1,4 +1,6 @@
-import message from '.';
+import {test, expect} from 'vitest';
+
+import message from './index.js';
 
 test('should return an empty string for empty input', () => {
 	expect(message()).toBe('');

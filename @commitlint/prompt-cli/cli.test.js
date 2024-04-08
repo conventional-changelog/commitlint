@@ -1,5 +1,9 @@
+import {test, expect} from 'vitest';
+import {createRequire} from 'module';
 import {git} from '@commitlint/test';
-import execa from 'execa';
+import {execa} from 'execa';
+
+const require = createRequire(import.meta.url);
 
 const bin = require.resolve('./cli.js');
 

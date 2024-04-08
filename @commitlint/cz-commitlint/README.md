@@ -13,9 +13,9 @@ The interactive process is inspired by [cz-conventional-changelog](https://githu
 ### Configure commitizen adapter
 
 ```bash
-npm install --save-dev @commitlint/cz-commitlint commitizen inquirer@8  # inquirer is required as peer dependency
+npm install --save-dev @commitlint/cz-commitlint commitizen inquirer@9  # inquirer is required as peer dependency
 # or yarn
-yarn add -D @commitlint/cz-commitlint commitizen inquirer@8             # inquirer is required as peer dependency
+yarn add -D @commitlint/cz-commitlint commitizen inquirer@9             # inquirer is required as peer dependency
 ```
 
 In package.json
@@ -58,4 +58,4 @@ yarn commit
 
 ## Related
 
-- [Commitlint Reference Prompt](https://commitlint.js.org/#/reference-prompt) - How to customize prompt information by setting commitlint.config.js
+- [Commitlint Reference Prompt](https://commitlint.js.org/reference/prompt) - How to customize prompt information by setting commitlint.config.js

@@ -1,4 +1,5 @@
-import {loadParserOpts} from './load-parser-opts';
+import {test, expect} from 'vitest';
+import {loadParserOpts} from './load-parser-opts.js';
 
 test('handles a plain preset', async () => {
 	const preset = {

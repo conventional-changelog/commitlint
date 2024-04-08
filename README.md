@@ -1,14 +1,14 @@
-# [Get Started](https://conventional-changelog.github.io/commitlint/#/?id=getting-started) | [Website](https://conventional-changelog.github.io/commitlint)
+# [Get Started](https://commitlint.js.org/guides/getting-started) | [Website](https://commitlint.js.org)
 
 > Lint commit messages
 
 <p align="center">
-  <img width="600" src="docs/assets/commitlint.svg">
+  <img width="600" src="docs/public/assets/commitlint.svg">
 </p>
 
 > Demo generated with [svg-term-cli](https://github.com/marionebl/svg-term-cli)
 >
-> `cat docs/assets/commitlint.json | svg-term --out docs/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
+> `cat docs/assets/commitlint.json | svg-term --out docs/public/assets/commitlint.svg --frame --profile=Seti --height=20 --width=80`
 
 [![npm latest][2]][3] [![node compatibility][13]][14] [![Github Actions][4]][5]
 
@@ -86,8 +86,8 @@ These can be modified by [your own configuration](#config).
 
 ## Getting started
 
-- [Local setup](https://conventional-changelog.github.io/commitlint/#/guides-local-setup) - Lint messages on commit with husky
-- [CI setup](https://conventional-changelog.github.io/commitlint/#/guides-ci-setup) - Lint messages during CI builds
+- [Local setup](https://commitlint.js.org/guides/local-setup) - Lint messages on commit with husky
+- [CI setup](https://commitlint.js.org/guides/ci-setup) - Lint messages during CI builds
 
 ## CLI
 
@@ -113,8 +113,9 @@ These can be modified by [your own configuration](#config).
   - `commitlint.config.ts`
   - `commitlint.config.cts`
   - `commitlint` field in `package.json`
+  - `commitlint` field in [`package.yaml`](https://github.com/pnpm/pnpm/pull/1799)
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
-- See [Rules](./docs/reference-rules.md) for a complete list of possible rules
+- See [Rules](./docs/reference/rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/src/index.ts)
 
 ## Shared configuration
@@ -144,7 +145,7 @@ Check the [main website](https://commitlint.js.org/).
   - [lint](./@commitlint/lint) - Lint a string against commitlint rules
   - [load](./@commitlint/load) - Load shared commitlint configuration
   - [read](./@commitlint/read) - Read commit messages from a specified range or last edit
-- See [API](./docs/reference-api.md) for a complete list of methods and examples
+- See [API](./docs/api) for a complete list of methods and examples
 
 ## Tools
 

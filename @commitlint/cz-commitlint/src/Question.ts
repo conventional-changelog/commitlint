@@ -1,8 +1,9 @@
 import {PromptMessages, PromptName} from '@commitlint/types';
 import chalk from 'chalk';
 import inquirer, {Answers, ChoiceCollection, DistinctQuestion} from 'inquirer';
-import {CaseFn} from './utils/case-fn';
-import {FullStopFn} from './utils/full-stop-fn';
+
+import {CaseFn} from './utils/case-fn.js';
+import {FullStopFn} from './utils/full-stop-fn.js';
 
 export type QuestionConfig = {
 	title: string;

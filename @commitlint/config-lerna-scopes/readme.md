@@ -1,20 +1,20 @@
-> Lint your lerna project commits
-
 # @commitlint/config-lerna-scopes
+
+Lint your lerna project commits
 
 Shareable `commitlint` config enforcing lerna package and workspace names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
 
-```
+```sh
 npm install --save-dev @commitlint/config-lerna-scopes @commitlint/cli
-echo "module.exports = {extends: ['@commitlint/config-lerna-scopes']};" > commitlint.config.js
+echo "export default {extends: ['@commitlint/config-lerna-scopes']};" > commitlint.config.js
 ```
 
 ## Examples
 
-```
+```text
 ❯ cat commitlint.config.js
 {
   extends: ['@commitlint/config-lerna-scopes']
@@ -41,4 +41,4 @@ packages
 ✔   found 0 problems, 0 warnings
 ```
 
-Consult [docs/rules](https://conventional-changelog.github.io/commitlint/#/reference-rules) for a list of available rules.
+Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.

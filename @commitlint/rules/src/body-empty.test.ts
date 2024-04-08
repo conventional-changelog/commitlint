@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest';
 import parse from '@commitlint/parse';
-import {bodyEmpty} from './body-empty';
+import {bodyEmpty} from './body-empty.js';
 
 const messages = {
 	empty: 'test: subject',

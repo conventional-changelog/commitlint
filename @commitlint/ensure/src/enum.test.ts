@@ -1,4 +1,6 @@
-import ensure from './enum';
+import {test, expect} from 'vitest';
+
+import ensure from './enum.js';
 
 test('false for no params', () => {
 	const actual = (ensure as () => boolean)();

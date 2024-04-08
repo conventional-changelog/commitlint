@@ -90,7 +90,7 @@ module.exports = {
 }
 ```
 
-Refer to the [Rules Reference](reference-rules.md) for a list of all available configuration options.
+Refer to the [Rules Reference](/reference/rules) for a list of all available configuration options.
 
 There is also the [#commitlint](https://node-tooling.slack.com/messages/C7M8XJ4RL/) channel on the DevTools Slack workspace. Join us there and we'll do our best to help you with your migration.
 
@@ -158,7 +158,7 @@ echo 'module.exports = {extends: ["@commitlint/config-conventional"]};';
 
 #### Config
 
-- `config-angular` dropped support for the `chore` type, breaking compat with conventional-changelog,
+- `config-angular` dropped support for the `chore` type, breaking compatibility with conventional-changelog,
   use `config-conventional` instead.
 
 ## Version 7 to 8

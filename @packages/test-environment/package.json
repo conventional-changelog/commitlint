@@ -1,6 +1,7 @@
 {
-  "name": "@commitlint/test-environment",
-  "version": "18.0.0",
+  "name": "vitest-environment-commitlint",
+  "type": "module",
+  "version": "19.0.0",
   "description": "test environment for @commitlint",
   "private": true,
   "main": "lib/test-environment.js",
@@ -30,7 +31,7 @@
   "dependencies": {
     "@types/tmp": "^0.2.5",
     "jest-environment-node": "^29.6.2",
-    "tmp": "0.2.1"
+    "tmp": "^0.2.1"
   },
   "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"
 }

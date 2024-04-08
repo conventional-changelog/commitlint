@@ -4,7 +4,7 @@ Enforce commit conventions with confidence by linting on your CI servers with `c
 
 This guide assumes you have already configured `commitlint` for local usage.
 
-Follow the [Getting Started](./?id=getting-started) for basic installation and configuration instructions.
+Follow the [Getting Started](/guides/getting-started) for basic installation and configuration instructions.
 
 ## GitHub Actions
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push'
-        run: npx commitlint --from HEAD~1 --to HEAD --verbose
+        run: npx commitlint --last --verbose
 
       - name: Validate PR commits with commitlint
         if: github.event_name == 'pull_request'
@@ -70,58 +70,62 @@ script:
 It's just a simple example of how CircleCI configuration file could look like to validate last commit message
 
 ```yml
-version: 2
-defaults:
-  working_directory: ~/project
-  docker:
-  - image: circleci/node:latest
+version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: cimg/node:current
+    working_directory: ~/project
 
 jobs:
   setup:
-    <<: *defaults
+    executor: my-executor
     steps:
-    - checkout
-    - restore_cache:
-        key: lock-{{ checksum "package-lock.json" }}
-    - run:
-        name: Install dependencies
-        command: npm install
-    - save_cache:
-        key: lock-{{ checksum "package-lock.json" }}
-        paths:
-        - node_modules
-    - persist_to_workspace:
-        root: ~/project
-        paths:
-        - node_modules
+      - checkout
+      - restore_cache:
+          key: lock-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          key: lock-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - node_modules
 
   lint_commit_message:
-    <<: *defaults
+    executor: my-executor
     steps:
-    - checkout
-    - attach_workspace:
-        at: ~/project
-    - run:
-        name: Define environment variable with latest commit's message
-        command: |
-          echo 'export COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
-          source $BASH_ENV
-    - run:
-        name: Lint commit message
-        command: echo "$COMMIT_MESSAGE" | npx commitlint
+      - checkout
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Define environment variable with latest commit's message
+          command: |
+            echo 'export COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Lint commit message
+          command: echo "$COMMIT_MESSAGE" | npx commitlint
 
 workflows:
-  version: 2
+  version: 2.1
   commit:
     jobs:
-    - setup
-    - lint_commit_message: { requires: [setup] }
+      - setup
+      - lint_commit_message:
+          requires:
+            - setup
 ```
 
 ## GitLab CI
 
 ```yaml
-stages: ["lint","build","test"]
+stages: ['lint', 'build', 'test']
 lint:commit:
   image: registry.hub.docker.com/library/node:alpine
   stage: lint
@@ -135,11 +139,11 @@ lint:commit:
 ## GitLab CI with pre-build container
 
 ```yaml
-stages: ["lint","build","test"]
+stages: ['lint', 'build', 'test']
 lint:commit:
   image:
     name: registry.hub.docker.com/commitlint/commitlint:latest
-    entrypoint: [""]
+    entrypoint: ['']
   stage: lint
   script:
     - echo "${CI_COMMIT_MESSAGE}" | commitlint
@@ -147,7 +151,7 @@ lint:commit:
 
 ## Jenkins X
 
-```
+```yml
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
@@ -155,15 +159,15 @@ metadata:
 spec:
   pipelineSpec:
     tasks:
-    - name: conventional-commits
-      taskSpec:
-        steps:
-        - name: lint-commit-messages
-          image: commitlint/commitlint
-          script: |
-            #!/usr/bin/env sh
-            . .jx/variables.sh
-            commitlint --extends '@commitlint/config-conventional' --from $PR_BASE_SHA --to $PR_HEAD_SHA
+      - name: conventional-commits
+        taskSpec:
+          steps:
+            - name: lint-commit-messages
+              image: commitlint/commitlint
+              script: |
+                #!/usr/bin/env sh
+                . .jx/variables.sh
+                commitlint --extends '@commitlint/config-conventional' --from $PR_BASE_SHA --to $PR_HEAD_SHA
   serviceAccountName: tekton-bot
   timeout: 15m
 ```
@@ -181,4 +185,6 @@ workflows:
       - npx commitlint --from=HEAD~1
 ```
 
-?> Help yourself adopting a commit convention by using an interactive commit prompt. Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](guides-use-prompt.md)
+> [!TIP]
+> Help yourself adopting a commit convention by using an interactive commit prompt.
+> Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](/> guides/use-prompt)

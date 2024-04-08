@@ -1,7 +1,13 @@
-import path from 'path';
+import {test, expect} from 'vitest';
 import fs from 'fs';
-import glob from 'glob';
-import rules from '.';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+import {globSync} from 'glob';
+
+import rules from './index.js';
+
+const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 
 test('exports all rules', () => {
 	const expected = _glob('*.ts').sort();
@@ -16,19 +22,19 @@ test('rules export functions', () => {
 
 test('all rules are present in documentation', () => {
 	const file = fs.readFileSync(
-		path.join(__dirname, '../../../docs/reference-rules.md'),
+		path.join(__dirname, '../../../docs/reference/rules.md'),
 		'utf-8'
 	);
 	const results = file
 		.split(/(\n|\r)/)
-		.filter((s) => s.startsWith('####') && !s.includes('`deprecated`'))
-		.map((s) => s.replace('#### ', ''));
+		.filter((s) => s.startsWith('##') && !s.includes('`deprecated`'))
+		.map((s) => s.replace('## ', ''));
 
 	expect(Object.keys(rules)).toEqual(expect.arrayContaining(results));
 });
 
 function _glob(pattern: string) {
-	const files = glob.sync(pattern, {
+	const files = globSync(pattern, {
 		ignore: ['**/index.ts', '**/*.test.ts'],
 		cwd: __dirname,
 	});

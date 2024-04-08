@@ -1,6 +1,7 @@
 {
   "name": "@commitlint/message",
-  "version": "18.4.4",
+  "type": "module",
+  "version": "19.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -35,8 +36,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^18.0.0",
-    "@commitlint/utils": "^18.4.4"
+    "@commitlint/test": "^19.0.0",
+    "@commitlint/utils": "^19.0.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }

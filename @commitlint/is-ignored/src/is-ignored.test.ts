@@ -1,4 +1,6 @@
-import isIgnored from './is-ignored';
+import {test, expect} from 'vitest';
+
+import isIgnored from './is-ignored.js';
 
 const VERSION_MESSAGES = [
 	'0.0.1',

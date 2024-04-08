@@ -1,5 +1,5 @@
-import {Rule} from '../types';
-import {ruleIsActive, ruleIsNotApplicable} from './rules';
+import {Rule} from '../types.js';
+import {ruleIsActive, ruleIsNotApplicable} from './rules.js';
 
 export type FullStopFn = (input: string) => string;
 

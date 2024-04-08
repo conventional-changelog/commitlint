@@ -38,7 +38,7 @@ Please consider these guidelines when filing a pull request:
   _ What you added
   _ What you removed
 
-## Coding Rules
+### Coding Rules
 
 To keep the code base of commitlint neat and tidy the following rules apply to every change
 
@@ -48,7 +48,7 @@ To keep the code base of commitlint neat and tidy the following rules apply to e
 - Favor micro library over swiss army knives (rimraf, ncp vs. fs-extra)
 - Be awesome
 
-## Commit Rules
+### Commit Rules
 
 To help everyone with understanding the commit history of commitlint the following commit rules are enforced.
 To make your life easier commitlint is commitizen-friendly and provides the npm run-script `commit`.
@@ -61,16 +61,42 @@ To make your life easier commitlint is commitizen-friendly and provides the npm 
 - maximum of 100 characters
 - message format of `$type($scope): $message`
 
-## Testing
+### Environment setup
+
+This project uses `yarn`, so be sure that it is available in your shell environment.
+
+After cloning the repo run
+
+```sh
+yarn install
+```
+
+### Testing
 
 From the project root directory, use the following commands to run the test suite
 
 ```sh
-yarn clean
-yarn install
 yarn build
 yarn test
 ```
+
+### Documentation updates
+
+Documentation uses `vitepress`.
+To run and edit the documentation locally run:
+
+```sh
+yarn docs-dev
+```
+
+To have a preview of the deployed doc run:
+
+```sh
+yarn docs-build
+yarn docs-serve
+```
+
+For more information refer to [vitepress documentation](https://vitepress.dev).
 
 ## Package dependency overview
 
@@ -118,13 +144,13 @@ yarn clean
 yarn install
 yarn build
 yarn test
-npx lerna publish --conventional-commits --dist-tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
+npx lerna publish --conventional-commits --dist-tag [`next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
 ```
 
 If for some reason this stops in between, you can manually publish missing packages like this:
 
 ```sh
-npm publish <package-name> --tag [`next` | `[PATCH_RELEASE_VERSION]`] --otp <one-time password>
+npm publish <package-name> --tag [`next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
 ```
 
 #### Publishing (new) packages for the first time

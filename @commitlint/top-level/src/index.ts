@@ -1,5 +1,5 @@
 import path from 'path';
-import up from 'find-up';
+import {findUp} from 'find-up';
 
 export default toplevel;
 
@@ -20,8 +20,8 @@ async function toplevel(cwd?: string) {
  * Search .git, the '.git' can be a file(submodule), also can be a directory(normal)
  */
 async function searchDotGit(cwd?: string) {
-	const foundFile = await up('.git', {cwd, type: 'file'});
-	const foundDir = await up('.git', {cwd, type: 'directory'});
+	const foundFile = await findUp('.git', {cwd, type: 'file'});
+	const foundDir = await findUp('.git', {cwd, type: 'directory'});
 
 	return foundFile || foundDir;
 }

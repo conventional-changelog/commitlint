@@ -1,4 +1,4 @@
-import * as semver from 'semver';
+import semver from 'semver';
 import {Matcher} from '@commitlint/types';
 
 const isSemver = (c: string): boolean => {

@@ -1,6 +1,7 @@
 {
   "name": "@commitlint/utils",
-  "version": "18.4.4",
+  "type": "module",
+  "version": "19.0.0",
   "description": "Development utilities for @commitlint",
   "private": true,
   "files": [
@@ -38,14 +39,16 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/require-from-string": "^1.2.3",
+    "@types/tar-fs": "^2.0.4",
     "@types/yargs": "^17.0.29"
   },
   "dependencies": {
-    "execa": "^5.0.0",
-    "read-pkg": "9.0.1",
-    "require-from-string": "2.0.2",
-    "tar-fs": "3.0.4",
-    "tmp": "0.2.1",
+    "execa": "^8.0.1",
+    "read-pkg": "^9.0.1",
+    "require-from-string": "^2.0.2",
+    "tar-fs": "^3.0.5",
+    "tmp": "^0.2.1",
     "yargs": "^17.0.0"
   },
   "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"

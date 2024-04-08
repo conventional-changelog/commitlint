@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const execa = require('execa');
-const inquirer = require('inquirer');
-const {prompter} = require('@commitlint/prompt');
+import {prompter} from '@commitlint/prompt';
+import {execa} from 'execa';
+import inquirer from 'inquirer';
 
 main().catch((err) => {
 	setTimeout(() => {
