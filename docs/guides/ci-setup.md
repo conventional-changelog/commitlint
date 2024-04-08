@@ -91,11 +91,11 @@ jobs:
       - save_cache:
           key: lock-{{ checksum "package-lock.json" }}
           paths:
-          - node_modules
+            - node_modules
       - persist_to_workspace:
           root: ~/project
           paths:
-          - node_modules
+            - node_modules
 
   lint_commit_message:
     executor: my-executor
@@ -116,10 +116,10 @@ workflows:
   version: 2.1
   commit:
     jobs:
-    - setup
-    - lint_commit_message:  
-        requires: 
-          - setup
+      - setup
+      - lint_commit_message:
+          requires:
+            - setup
 ```
 
 ## GitLab CI
