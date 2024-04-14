@@ -124,6 +124,10 @@ test('should ignore npm semver commits with footers', () => {
 	);
 });
 
+test('should return true amend commits', () => {
+	expect(isIgnored('amend! initial commit')).toBe(true);
+});
+
 test('should return true fixup commits', () => {
 	expect(isIgnored('fixup! initial commit')).toBe(true);
 });
