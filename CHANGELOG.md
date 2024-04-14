@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.2.2](https://github.com/conventional-changelog/commitlint/compare/v19.2.1...v19.2.2) (2024-04-14)
+
+
+### Bug Fixes
+
+* **is-ignored:** ignore "amend!" commits ([#4024](https://github.com/conventional-changelog/commitlint/issues/4024)) ([90078f6](https://github.com/conventional-changelog/commitlint/commit/90078f6a58523e0bde386b9b6aa3c05e8b916653))
+* update dependency inquirer to v9.2.17 ([#3996](https://github.com/conventional-changelog/commitlint/issues/3996)) ([44d0fcc](https://github.com/conventional-changelog/commitlint/commit/44d0fccf0e40962e6dceaee92b23333d9746904b))
+* update dependency inquirer to v9.2.18 ([#4025](https://github.com/conventional-changelog/commitlint/issues/4025)) ([52d7edc](https://github.com/conventional-changelog/commitlint/commit/52d7edcbbb68e99542777067b2cc5fa33a848762))
+
+
+
+
+
 ## [19.2.1](https://github.com/conventional-changelog/commitlint/compare/v19.2.0...v19.2.1) (2024-03-19)
 
 
