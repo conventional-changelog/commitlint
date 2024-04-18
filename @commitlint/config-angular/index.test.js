@@ -64,7 +64,7 @@ test('a leading blank line after header', async () => {
 });
 
 test('an invalid scope', async () => {
-	const result = await lintMessage(`no: no is not not an invalid commit type`);
+	const result = await lintMessage(`no: no is not an invalid commit type`);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors[0].message).toBe(
