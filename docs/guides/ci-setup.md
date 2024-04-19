@@ -146,6 +146,8 @@ lint:commit:
     entrypoint: ['']
   stage: lint
   script:
+    # Uncomment the next line if you are extending the @commitlint/config-nx-scopes in your commitlint configuration
+    #- npm i -g nx@$(node -pe "require('./package.json').devDependencies.nx")
     - echo "${CI_COMMIT_MESSAGE}" | commitlint
 ```
 
