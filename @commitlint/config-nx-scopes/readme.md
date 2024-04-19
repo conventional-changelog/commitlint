@@ -21,26 +21,32 @@ As an example, the following code demonstrates how to select only applications t
 In your .commitlintrc.js file:
 
 ```javascript
-const {
-  utils: {getProjects},
-} = require('@commitlint/config-nx-scopes');
+async function getConfig() {
+  const {
+    default: {
+      utils: {getProjects},
+    },
+  } = await import('@commitlint/config-nx-scopes');
 
-module.exports = {
-  rules: {
-    'scope-enum': async (ctx) => [
-      2,
-      'always',
-      [
-        ...(await getProjects(
-          ctx,
-          ({name, projectType}) =>
-            !name.includes('e2e') && projectType == 'application'
-        )),
+  return {
+    rules: {
+      'scope-enum': async (ctx) => [
+        2,
+        'always',
+        [
+          ...(await getProjects(
+            ctx,
+            ({name, projectType}) =>
+              !name.includes('e2e') && projectType == 'application'
+          )),
+        ],
       ],
-    ],
-  },
-  // . . .
-};
+    },
+    // . . .
+  };
+}
+
+module.exports = getConfig();
 ```
 
 Here is another example where projects tagged with 'stage:end-of-life' are not allowed to be used as the scope for a commit.
@@ -48,25 +54,31 @@ Here is another example where projects tagged with 'stage:end-of-life' are not a
 In your .commitlintrc.js file:
 
 ```javascript
-const {
-  utils: {getProjects},
-} = require('@commitlint/config-nx-scopes');
+async function getConfig() {
+  const {
+    default: {
+      utils: {getProjects},
+    },
+  } = await import('@commitlint/config-nx-scopes');
 
-module.exports = {
-  rules: {
-    'scope-enum': async (ctx) => [
-      2,
-      'always',
-      [
-        ...(await getProjects(
-          ctx,
-          ({tags}) => !tags.includes('stage:end-of-life')
-        )),
+  return {
+    rules: {
+      'scope-enum': async (ctx) => [
+        2,
+        'always',
+        [
+          ...(await getProjects(
+            ctx,
+            ({tags}) => !tags.includes('stage:end-of-life')
+          )),
+        ],
       ],
-    ],
-  },
-  // . . .
-};
+    },
+    // . . .
+  };
+}
+
+module.exports = getConfig();
 ```
 
 ## Examples
