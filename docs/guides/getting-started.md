@@ -18,6 +18,10 @@ yarn add --dev @commitlint/{cli,config-conventional}
 npm install --save-dev @commitlint/config-conventional @commitlint/cli
 ```
 
+```sh [pnpm]
+pnpm add --save-dev @commitlint/{cli,config-conventional}
+```
+
 :::
 
 ## Configuration
