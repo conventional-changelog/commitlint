@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.3.0](https://github.com/conventional-changelog/commitlint/compare/v19.2.2...v19.3.0) (2024-04-23)
+
+
+### Features
+
+* **format:** print full commit message for valid commits if -V ([#4026](https://github.com/conventional-changelog/commitlint/issues/4026)) ([a7bbc49](https://github.com/conventional-changelog/commitlint/commit/a7bbc494e34885aba3f4b0c03b37d18ef2b8fbff))
+
+
+
+
+
 ## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
 
 **Note:** Version bump only for package @commitlint/format

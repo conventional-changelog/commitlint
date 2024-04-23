@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.3.0](https://github.com/conventional-changelog/commitlint/compare/v19.2.2...v19.3.0) (2024-04-23)
+
+
+### Bug Fixes
+
+* update dependency inquirer to v9.2.19 ([#4031](https://github.com/conventional-changelog/commitlint/issues/4031)) ([84126c1](https://github.com/conventional-changelog/commitlint/commit/84126c131a119b0704e0da5ae1707404fc6947b5))
+
+
+### Features
+
+* **container:** added @commitlint/config-nx-scopes for nx monorepos ([#3913](https://github.com/conventional-changelog/commitlint/issues/3913)) ([aa4df36](https://github.com/conventional-changelog/commitlint/commit/aa4df36b1d07e56230ff569aec5af727f1144aae))
+* **format:** print full commit message for valid commits if -V ([#4026](https://github.com/conventional-changelog/commitlint/issues/4026)) ([a7bbc49](https://github.com/conventional-changelog/commitlint/commit/a7bbc494e34885aba3f4b0c03b37d18ef2b8fbff))
+
+
+
+
+
 ## [19.2.2](https://github.com/conventional-changelog/commitlint/compare/v19.2.1...v19.2.2) (2024-04-14)
 
 

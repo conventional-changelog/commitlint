@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/travis-cli",
   "type": "module",
-  "version": "19.2.2",
+  "version": "19.3.0",
   "description": "Lint all relevant commits for a change or PR on Travis CI",
   "main": "lib/cli.js",
   "types": "lib/cli.d.ts",
@@ -43,7 +43,7 @@
     "@commitlint/utils": "^19.0.0"
   },
   "dependencies": {
-    "@commitlint/cli": "^19.2.2",
+    "@commitlint/cli": "^19.3.0",
     "execa": "^8.0.1"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"

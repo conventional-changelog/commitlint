@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.3.0](https://github.com/conventional-changelog/commitlint/compare/v19.2.2...v19.3.0) (2024-04-23)
+
+**Note:** Version bump only for package commitlint-config-nx-scopes
+
+
+
+
+
 ## [19.2.1](https://github.com/conventional-changelog/commitlint/compare/v19.2.0...v19.2.1) (2024-03-19)
 
 **Note:** Version bump only for package commitlint-config-nx-scopes
