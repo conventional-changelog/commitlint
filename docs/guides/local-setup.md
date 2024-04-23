@@ -62,6 +62,24 @@ echo "yarn commitlint \${1}" > .husky/commit-msg
 > [!WARNING]
 > Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn > v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)
 
+== pnpm
+
+```sh
+pnpm add --save-dev husky
+
+pnpm husky init
+
+# Add commit message linting to commit-msg hook
+echo "pnpm dlx commitlint --edit \$1" > .husky/commit-msg
+```
+
+As an alternative you can create a script inside `package.json`
+
+```sh
+npm pkg set scripts.commitlint="commitlint --edit"
+echo "pnpm commitlint \${1}" > .husky/commit-msg
+```
+
 :::
 
 ---
