@@ -1,7 +1,7 @@
 FROM docker.io/library/node:18-buster AS builder
 WORKDIR /src
 COPY . ./
-RUN yarn install && \
+RUN yarn install --frozen-lockfile --network-timeout 100000 && \
     yarn run build && \
     # Commit lint CLI packages
     npm pack @commitlint/cli && \
@@ -26,6 +26,8 @@ RUN yarn install && \
 
 FROM docker.io/library/node:18-buster
 COPY --from=builder /src/*.tgz ./
-RUN npm install -g *.tgz && \
+RUN npm config set fetch-retry-mintimeout 20000 && \
+    npm config set fetch-retry-maxtimeout 120000 && \
+    npm install --no-audit -g *.tgz && \
     rm -rf *.tgz
 ENTRYPOINT ["commitlint"]
