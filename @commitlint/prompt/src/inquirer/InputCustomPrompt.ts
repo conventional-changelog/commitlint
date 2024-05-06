@@ -46,6 +46,8 @@ export default class InputCustomPrompt<
 
 	onEnd(state: SuccessfulPromptStateData): void {
 		this.lineSubscription.unsubscribe();
+		// Add or remove leading blank if rule is active.
+		state.value = this.opt.forceLeadingBlankFn(state.value);
 		super.onEnd(state);
 	}
 
