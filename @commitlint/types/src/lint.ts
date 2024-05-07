@@ -1,4 +1,4 @@
-import type {Options} from 'conventional-commits-parser';
+import type {ParserOptions} from 'conventional-commits-parser';
 import {IsIgnoredOptions} from './is-ignored.js';
 import {PluginRecords} from './load.js';
 import {RuleConfigSeverity, RuleConfigTuple} from './rules.js';
@@ -16,7 +16,7 @@ export interface LintOptions {
 	/** Additional commits to ignore, defined by ignore matchers  */
 	ignores?: IsIgnoredOptions['ignores'];
 	/** The parser configuration to use when linting the commit */
-	parserOpts?: Options;
+	parserOpts?: ParserOptions;
 
 	plugins?: PluginRecords;
 	helpUrl?: string;
