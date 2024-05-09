@@ -119,5 +119,6 @@ export default function getPrompt(
 		transformer(value: string) {
 			return forceCaseFn(value);
 		},
+		forceLeadingBlankFn,
 	};
 }

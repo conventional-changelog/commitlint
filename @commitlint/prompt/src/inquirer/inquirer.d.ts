@@ -15,6 +15,7 @@ declare module 'inquirer' {
 		log?(answers?: T): string;
 		tabCompletion?: InputCustomCompletionOption[];
 		maxLength(answers?: T): number;
+		forceLeadingBlankFn(input: string): string;
 	}
 
 	interface QuestionMap<T extends Answers = Answers> {
