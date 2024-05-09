@@ -63,7 +63,6 @@ jobs:
       - name: Install dependencies
         run: |
           apt update --yes
-          apt upgrade --yes
 
           # NOTE: do not change the below with an `actions/setup-node` step! or it
           # would make this CI job entirely pointless
