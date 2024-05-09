@@ -72,6 +72,9 @@ jobs:
           npm install --global yarn
           yarn install
 
+      - name: Print versions
+        run: node --version && npm --version && yarn --version
+
       - name: Build
         run: yarn build
 
