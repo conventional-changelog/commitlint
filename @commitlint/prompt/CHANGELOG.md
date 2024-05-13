@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.3.1](https://github.com/conventional-changelog/commitlint/compare/v19.3.0...v19.3.1) (2024-05-13)
+
+
+### Bug Fixes
+
+* **prompt:** prompt does not respect [body-leading-blank] setting ([#4066](https://github.com/conventional-changelog/commitlint/issues/4066)) ([3f1f44d](https://github.com/conventional-changelog/commitlint/commit/3f1f44d9cbb93438d01cfd79f9b71659411e126d))
+
+
+
+
+
 # [19.3.0](https://github.com/conventional-changelog/commitlint/compare/v19.2.2...v19.3.0) (2024-04-23)
 
 **Note:** Version bump only for package @commitlint/prompt

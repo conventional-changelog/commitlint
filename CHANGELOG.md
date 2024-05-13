@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.3.1](https://github.com/conventional-changelog/commitlint/compare/v19.3.0...v19.3.1) (2024-05-13)
+
+
+### Bug Fixes
+
+* **prompt:** prompt does not respect [body-leading-blank] setting ([#4066](https://github.com/conventional-changelog/commitlint/issues/4066)) ([3f1f44d](https://github.com/conventional-changelog/commitlint/commit/3f1f44d9cbb93438d01cfd79f9b71659411e126d))
+* update dependency ajv to v8.13.0 ([#4057](https://github.com/conventional-changelog/commitlint/issues/4057)) ([4e5957f](https://github.com/conventional-changelog/commitlint/commit/4e5957fcb120fbf31c2bdc5c5affe35eb556d3dc))
+* update dependency import-meta-resolve to v4.1.0 ([#4055](https://github.com/conventional-changelog/commitlint/issues/4055)) ([6cd9d76](https://github.com/conventional-changelog/commitlint/commit/6cd9d76b4f7d867c6085a5f99eab9b6ad15ab789))
+* update dependency inquirer to v9.2.20 ([#4047](https://github.com/conventional-changelog/commitlint/issues/4047)) ([b2a75c8](https://github.com/conventional-changelog/commitlint/commit/b2a75c881b8fa69501d93c4d29118aeaf0c989cd))
+* update dependency semver to v7.6.2 ([#4080](https://github.com/conventional-changelog/commitlint/issues/4080)) ([de28f20](https://github.com/conventional-changelog/commitlint/commit/de28f209db4d8aba4eb6e57e9f1fc0517143398d))
+* update dependency tar-fs to v3.0.6 ([#4048](https://github.com/conventional-changelog/commitlint/issues/4048)) ([4003205](https://github.com/conventional-changelog/commitlint/commit/40032050570e4f5a8c8ab4f390cee7611a92935e))
+
+
+### Features
+
+* **container:** add arm64 build ([#4049](https://github.com/conventional-changelog/commitlint/issues/4049)) ([28bed3f](https://github.com/conventional-changelog/commitlint/commit/28bed3f8453bf12062b938aa0247e24d56f183d6)), closes [#3926](https://github.com/conventional-changelog/commitlint/issues/3926)
+
+
+
+
+
 # [19.3.0](https://github.com/conventional-changelog/commitlint/compare/v19.2.2...v19.3.0) (2024-04-23)
 
 

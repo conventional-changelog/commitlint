@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/prompt-cli",
   "type": "module",
-  "version": "19.3.0",
+  "version": "19.3.1",
   "description": "commit prompt using commitlint.config.js",
   "main": "cli.js",
   "files": [
@@ -38,7 +38,7 @@
     "@commitlint/utils": "^19.0.0"
   },
   "dependencies": {
-    "@commitlint/prompt": "^19.3.0",
+    "@commitlint/prompt": "^19.3.1",
     "execa": "^8.0.1",
     "inquirer": "^9.2.15"
   },
