@@ -45,7 +45,7 @@ lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Prom
 ### Import
 
 ```js
-import lint '@commitlint/lint';
+import lint from '@commitlint/lint';
 ```
 
 ### Usage without config
