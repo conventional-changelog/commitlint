@@ -20,6 +20,9 @@ You can find complete setup instructions on the [official documentation](https:/
 > The following instructions are meant to `husky@v9` if you are using a different version
 > consult the official documentation of your version.
 
+> [!WARNING]
+> For Windows users: ensure all `husky` files are `UTF-8` enconded. If any other format is used an error may be thrown at runtime such as [cannot execute binary file](https://github.com/typicode/husky/issues/1426).
+
 ---
 
 :::tabs
