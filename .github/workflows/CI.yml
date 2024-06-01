@@ -7,6 +7,12 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+  workflow_dispatch:
+
+  # to execute once a day (more info see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule )
+  schedule:
+    - cron: "0 0 * * *"
+
 jobs:
   build:
     strategy:
