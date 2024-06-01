@@ -17,7 +17,7 @@
     "docs-preview": "vitepress preview docs",
     "lint": "eslint . --ext .js,.ts",
     "lint-fix": "eslint . --ext .js,.ts --fix",
-    "format": "prettier **/*.{ts,js,json,yml,md} -l",
+    "format": "prettier **/*.{ts,js,json,yml,md} --check",
     "format-fix": "prettier **/*.{ts,js,json,yml,md} --write",
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
