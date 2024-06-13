@@ -170,14 +170,8 @@ Features will only be applied to the current main version.
 
 | Release                                                                          | Initial release |
 | -------------------------------------------------------------------------------- | --------------- |
+| [v19](https://github.com/conventional-changelog/commitlint/releases/tag/v19.0.0) | 02/2024         |
 | [v18](https://github.com/conventional-changelog/commitlint/releases/tag/v18.0.0) | 10/2023         |
-| [v17](https://github.com/conventional-changelog/commitlint/releases/tag/v17.0.0) | 05/2022         |
-| [v16](https://github.com/conventional-changelog/commitlint/releases/tag/v16.0.0) | 12/2021         |
-| [v15](https://github.com/conventional-changelog/commitlint/releases/tag/v15.0.0) | 11/2021         |
-| [v14](https://github.com/conventional-changelog/commitlint/releases/tag/v14.0.0) | 10/2021         |
-| [v13](https://github.com/conventional-changelog/commitlint/releases/tag/v13.0.0) | 05/2021         |
-| [v12](https://github.com/conventional-changelog/commitlint/releases/tag/v12.0.0) | 02/2021         |
-| [v11](https://github.com/conventional-changelog/commitlint/releases/tag/v11.0.0) | 09/2020         |
 
 EOL is usually after around a year.
 
