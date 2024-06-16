@@ -14,7 +14,7 @@ import type {
 	QualifiedConfig,
 	UserConfig,
 } from '@commitlint/types';
-import type {Options} from 'conventional-commits-parser';
+import type {ParserOptions} from 'conventional-commits-parser';
 import {execa, type ExecaError} from 'execa';
 import yargs, {type Arguments} from 'yargs';
 
@@ -263,7 +263,7 @@ async function main(args: MainArgs): Promise<void> {
 		file: flags.config,
 	});
 	const parserOpts = selectParserOpts(loaded.parserPreset);
-	const opts: LintOptions & {parserOpts: Options} = {
+	const opts: LintOptions & {parserOpts: ParserOptions} = {
 		parserOpts: {},
 		plugins: {},
 		ignores: [],
