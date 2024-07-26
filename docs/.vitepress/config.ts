@@ -10,6 +10,11 @@ export default defineConfig({
 
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
+		editLink: {
+			pattern:
+				'https://github.com/conventional-changelog/commitlint/edit/master/docs/:path',
+		},
+
 		logo: '/assets/icon.png',
 
 		nav: [
