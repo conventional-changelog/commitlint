@@ -125,16 +125,21 @@ workflows:
 ## GitLab CI
 
 ```yaml
-stages: ['lint', 'build', 'test']
 lint:commit:
   image: registry.hub.docker.com/library/node:alpine
   stage: lint
+  variables:
+    GIT_DEPTH: 0
   before_script:
     - apk add --no-cache git
     - npm install --save-dev @commitlint/config-conventional @commitlint/cli
   script:
     - echo "${CI_COMMIT_MESSAGE}" | npx commitlint
 ```
+
+GitLab limits `git clone` depth to
+[20 commits by default](https://docs.gitlab.com/ee/ci/pipelines/settings.html#limit-the-number-of-changes-fetched-during-clone).
+Setting `GIT_DEPTH: 0` removes this limitation, so `commitlint` can check larger MRs.
 
 ## GitLab CI with pre-build container
 
@@ -189,4 +194,4 @@ workflows:
 
 > [!TIP]
 > Help yourself adopting a commit convention by using an interactive commit prompt.
-> Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](/> guides/use-prompt)
+> Learn how to use `@commitlint/prompt-cli` in the [Use prompt guide](/guides/use-prompt).
