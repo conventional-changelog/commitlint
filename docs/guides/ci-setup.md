@@ -127,7 +127,6 @@ workflows:
 ```yaml
 lint:commit:
   image: registry.hub.docker.com/library/node:alpine
-  stage: lint
   variables:
     GIT_DEPTH: 0
   before_script:
