@@ -36,6 +36,8 @@ Options:
                                                                        [boolean]
   -s, --strict         enable strict mode; result code 2 for warnings, 3 for
                        errors                                          [boolean]
+      --options        path to a JSON file or Common.js module containing CLI
+                       options
   -v, --version        display version information                     [boolean]
   -h, --help           Show help                                       [boolean]
 ```

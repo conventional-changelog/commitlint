@@ -556,6 +556,7 @@ test('should print help', async () => {
 		  -t, --to             upper end of the commit range to lint; applies if edit=false  [string]
 		  -V, --verbose        enable verbose output for reports without problems  [boolean]
 		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for errors  [boolean]
+		      --options        path to a JSON file or Common.js module containing CLI options
 		  -v, --version        display version information  [boolean]
 		  -h, --help           Show help  [boolean]"
 	`);
