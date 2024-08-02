@@ -9,6 +9,7 @@ import {execa} from 'execa';
 interface GetCommitMessageOptions {
 	cwd?: string;
 	from?: string;
+	fromLastTag?: boolean;
 	to?: string;
 	last?: boolean;
 	edit?: boolean | string;
@@ -19,7 +20,8 @@ interface GetCommitMessageOptions {
 export default async function getCommitMessages(
 	settings: GetCommitMessageOptions
 ): Promise<string[]> {
-	const {cwd, from, to, last, edit, gitLogArgs} = settings;
+	const {cwd, fromLastTag, to, last, edit, gitLogArgs} = settings;
+	let from = settings.from;
 
 	if (edit) {
 		return getEditCommit(cwd, edit);
@@ -36,6 +38,34 @@ export default async function getCommitMessages(
 		if (output[0] == '"' && output[output.length - 1] == '"')
 			output = output.slice(1, -1);
 		return [output];
+	}
+
+	if (!from && fromLastTag) {
+		const {stdout} = await execa(
+			'git',
+			[
+				'describe',
+				'--abbrev=40',
+				'--always',
+				'--first-parent',
+				'--long',
+				'--tags',
+			],
+			{cwd}
+		);
+
+		if (stdout.length === 40) {
+			// Hash only means no last tag. Use that as the from ref which
+			// results in a no-op.
+			from = stdout;
+		} else {
+			// Description will be in the format: <tag>-<count>-g<hash>
+			// Example: v3.2.0-11-g9057371a52adaae5180d93fe4d0bb808d874b9fb
+			// Minus zero based (1), dash (1), "g" prefix (1), hash (40) = -43
+			const tagSlice = stdout.lastIndexOf('-', stdout.length - 43);
+
+			from = stdout.slice(0, tagSlice);
+		}
 	}
 
 	let gitOptions: GitOptions = {from, to};

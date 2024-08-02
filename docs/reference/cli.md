@@ -22,6 +22,8 @@ Options:
   -H, --help-url       help url in error message                        [string]
   -f, --from           lower end of the commit range to lint; applies if
                        edit=false                                       [string]
+      --from-last-tag  uses the last tag as the lower end of the commit range to
+                       lint; applies if edit=false and from is not set [boolean]
       --git-log-args   additional git log arguments as space separated string,
                        example '--first-parent --cherry-pick'           [string]
   -l, --last           just analyze the last commit; applies if edit=false

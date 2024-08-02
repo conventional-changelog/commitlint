@@ -84,3 +84,49 @@ test('should only read the last commit', async () => {
 
 	expect(result).toEqual(['commit X']);
 });
+
+test('should read commits from the last annotated tag', async () => {
+	const cwd: string = await git.bootstrap();
+
+	await execa(
+		'git',
+		['commit', '--allow-empty', '-m', 'chore: release v1.0.0'],
+		{cwd}
+	);
+	await execa('git', ['tag', 'v1.0.0', '--annotate', '-m', 'v1.0.0'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit 1'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit 2'], {cwd});
+
+	const result = await read({cwd, fromLastTag: true});
+
+	expect(result).toEqual(['commit 2\n\n', 'commit 1\n\n']);
+});
+
+test('should read commits from the last lightweight tag', async () => {
+	const cwd: string = await git.bootstrap();
+
+	await execa(
+		'git',
+		['commit', '--allow-empty', '-m', 'chore: release v9.9.9-alpha.1'],
+		{cwd}
+	);
+	await execa('git', ['tag', 'v9.9.9-alpha.1'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit A'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit B'], {cwd});
+
+	const result = await read({cwd, fromLastTag: true});
+
+	expect(result).toEqual(['commit B\n\n', 'commit A\n\n']);
+});
+
+test('should not read any commits when there are no tags', async () => {
+	const cwd: string = await git.bootstrap();
+
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit 7'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit 8'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit 9'], {cwd});
+
+	const result = await read({cwd, fromLastTag: true});
+
+	expect(result).toHaveLength(0);
+});

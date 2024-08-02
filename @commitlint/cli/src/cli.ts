@@ -90,6 +90,11 @@ const cli = yargs(process.argv.slice(2))
 				'lower end of the commit range to lint; applies if edit=false',
 			type: 'string',
 		},
+		'from-last-tag': {
+			description:
+				'uses the last tag as the lower end of the commit range to lint; applies if edit=false and from is not set',
+			type: 'boolean',
+		},
 		'git-log-args': {
 			description:
 				"additional git log arguments as space separated string, example '--first-parent --cherry-pick'",
@@ -242,6 +247,7 @@ async function main(args: MainArgs): Promise<void> {
 		: read({
 				to: flags.to,
 				from: flags.from,
+				fromLastTag: flags['from-last-tag'],
 				last: flags.last,
 				edit: flags.edit,
 				cwd: flags.cwd,
@@ -400,6 +406,7 @@ function checkFromEdit(flags: CliFlags): boolean {
 function checkFromHistory(flags: CliFlags): boolean {
 	return (
 		typeof flags.from === 'string' ||
+		typeof flags['from-last-tag'] === 'boolean' ||
 		typeof flags.to === 'string' ||
 		typeof flags.last === 'boolean'
 	);
