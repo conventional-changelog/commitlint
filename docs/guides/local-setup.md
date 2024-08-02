@@ -8,7 +8,7 @@ Follow the [Getting Started](/guides/getting-started) for basic installation and
 
 ## Add hook
 
-To use commitlint you need to setup `commit-msg` hook
+To use commitlint you need to setup `commit-msg` hook (currently `pre-commit` hook is not supported)
 
 ### Using a git hooks manager
 
