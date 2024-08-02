@@ -72,3 +72,15 @@ test('get edit commit message while skipping first commit', async () => {
 	const actual = await read({from: 'HEAD~2', cwd, gitLogArgs: '--skip 1'});
 	expect(actual).toEqual(expected);
 });
+
+test('should only read the last commit', async () => {
+	const cwd: string = await git.bootstrap();
+
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit Z'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit Y'], {cwd});
+	await execa('git', ['commit', '--allow-empty', '-m', 'commit X'], {cwd});
+
+	const result = await read({cwd, last: true});
+
+	expect(result).toEqual(['commit X']);
+});

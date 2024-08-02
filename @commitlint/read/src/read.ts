@@ -26,11 +26,11 @@ export default async function getCommitMessages(
 	}
 
 	if (last) {
-		const gitCommandResult = await execa('git', [
-			'log',
-			'-1',
-			'--pretty=format:%B',
-		]);
+		const gitCommandResult = await execa(
+			'git',
+			['log', '-1', '--pretty=format:%B'],
+			{cwd}
+		);
 		let output = gitCommandResult.stdout;
 		// strip output of extra quotation marks ("")
 		if (output[0] == '"' && output[output.length - 1] == '"')
