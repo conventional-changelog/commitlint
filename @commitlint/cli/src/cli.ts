@@ -143,6 +143,11 @@ const cli = yargs(process.argv.slice(2))
 	.alias('v', 'version')
 	.help('help')
 	.alias('h', 'help')
+	.config(
+		'options',
+		'path to a JSON file or Common.js module containing CLI options',
+		require
+	)
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
 	.usage(
 		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
