@@ -1,7 +1,7 @@
 import path from 'path';
 
 // largely adapted from eslint's plugin system
-const NAMESPACE_REGEX = /^@.*\//iu;
+const NAMESPACE_REGEX = /^@.*\//u;
 // In eslint this is a parameter - we don't need to support the extra options
 const prefix = 'commitlint-plugin';
 
@@ -40,7 +40,7 @@ export function normalizePackageName(name: string) {
 				`^(@[^/]+)(?:/(?:${prefix})?)?$`,
 				'u'
 			),
-			scopedPackageNameRegex = new RegExp(`^${prefix}(-|$)`, 'u');
+			scopedPackageNameRegex = new RegExp(`^${prefix}(?:-|$)`, 'u');
 
 		if (scopedPackageShortcutRegex.test(normalizedName)) {
 			normalizedName = normalizedName.replace(
@@ -94,7 +94,7 @@ export function getShorthandName(fullname: string) {
  * @returns {string} The namepace of the term if it has one.
  */
 export function getNamespaceFromTerm(term: string) {
-	const match = term.match(NAMESPACE_REGEX);
+	const match = NAMESPACE_REGEX.exec(term);
 
 	return match ? match[0] : '';
 }
