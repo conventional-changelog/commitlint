@@ -23,7 +23,7 @@ hero:
       link: /concepts/commit-conventions
 
 features:
-  - title: Sharable configs
+  - title: Shareable configs
     details: By supporting npm-installed configurations it makes sharing of commit conventions easy.
     icon: 🌏
     link: /concepts/shareable-config

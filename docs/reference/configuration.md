@@ -186,7 +186,7 @@ export default {
 
 :::
 
-More information can be found in the [Concepts – sharable config section](/concepts/shareable-config).
+More information can be found in the [Concepts – shareable config section](/concepts/shareable-config).
 
 ## Parser presets
 
