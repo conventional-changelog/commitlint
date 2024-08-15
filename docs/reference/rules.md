@@ -32,7 +32,7 @@
 
 ## body-max-line-length
 
-- **condition**: `body` lines has `value` or less characters
+- **condition**: `body` lines have `value` or less characters, or contain a URL
 - **rule**: `always`
 - **value**
 
@@ -97,7 +97,7 @@
 
 ## footer-max-line-length
 
-- **condition**: `footer` lines has `value` or less characters
+- **condition**: `footer` lines have `value` or less characters
 - **rule**: `always`
 - **value**
 
