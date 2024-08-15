@@ -19,6 +19,8 @@ const parsed = {
 	empty: parse(messages.empty),
 	short: parse(messages.short),
 	long: parse(messages.long),
+	shortMultipleLines: parse(messages.shortMultipleLines),
+	longMultipleLines: parse(messages.longMultipleLines),
 };
 
 test("with empty should succeed", async () => {
@@ -40,13 +42,21 @@ test("with long should fail", async () => {
 });
 
 test("with short with multiple lines should succeed", async () => {
-	const [actual] = bodyMaxLineLength(await parsed.short, undefined, value);
+	const [actual] = bodyMaxLineLength(
+		await parsed.shortMultipleLines,
+		undefined,
+		value
+	);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test("with long with multiple lines should fail", async () => {
-	const [actual] = bodyMaxLineLength(await parsed.long, undefined, value);
+	const [actual] = bodyMaxLineLength(
+		await parsed.longMultipleLines,
+		undefined,
+		value
+	);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
