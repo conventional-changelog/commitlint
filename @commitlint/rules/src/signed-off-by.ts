@@ -18,7 +18,9 @@ export const signedOffBy: SyncRule<string> = (
 	const last = lines[lines.length - 1];
 
 	const negated = when === 'never';
-	const hasSignedOffBy = last.startsWith(value);
+	const hasSignedOffBy =
+		// empty commit message
+		last ? last.startsWith(value) : false;
 
 	return [
 		negated ? !hasSignedOffBy : hasSignedOffBy,
