@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-conventional",
   "type": "module",
-  "version": "19.2.2",
+  "version": "19.4.1",
   "description": "Shareable commitlint config enforcing conventional commits",
   "main": "lib/index.js",
   "files": [
@@ -35,7 +35,7 @@
     "node": ">=v18"
   },
   "devDependencies": {
-    "@commitlint/lint": "^19.2.2",
+    "@commitlint/lint": "^19.4.1",
     "@commitlint/utils": "^19.0.0"
   },
   "dependencies": {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.4.1](https://github.com/conventional-changelog/commitlint/compare/v19.4.0...v19.4.1) (2024-08-28)
+
+
+### Bug Fixes
+
+* **rules:** handle blank commit message in signed-off-by check ([#4124](https://github.com/conventional-changelog/commitlint/issues/4124)) ([7ab4bab](https://github.com/conventional-changelog/commitlint/commit/7ab4bab31f4b19ddedd850e435398037437007b6))
+
+
+
+
+
 ## [19.0.3](https://github.com/conventional-changelog/commitlint/compare/v19.0.2...v19.0.3) (2024-02-28)
 
 **Note:** Version bump only for package @commitlint/rules
