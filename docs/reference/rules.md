@@ -1,4 +1,4 @@
-# Rules
+enable-require-unicode-regexp # Rules
 
 ## body-full-stop
 
