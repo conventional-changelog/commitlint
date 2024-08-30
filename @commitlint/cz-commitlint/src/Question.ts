@@ -187,7 +187,9 @@ export default class Question {
 	}
 
 	protected decorateMessage(_answers: Answers): string {
-		this.beforeQuestionStart && this.beforeQuestionStart(_answers);
+		if (this.beforeQuestionStart) {
+			this.beforeQuestionStart(_answers);
+		}
 		if (this.question.type === 'input') {
 			const countLimitMessage = (() => {
 				const messages = [];

@@ -493,9 +493,10 @@ test('does not mutate config module reference', async () => {
 	};
 
 	const configPath = path.join(cwd, file);
-	const before = JSON.stringify(require(configPath));
+
+	const before = readFileSync(configPath, {encoding: 'utf-8'});
 	await load({rules}, {cwd, file});
-	const after = JSON.stringify(require(configPath));
+	const after = readFileSync(configPath, {encoding: 'utf-8'});
 
 	expect(after).toBe(before);
 });
