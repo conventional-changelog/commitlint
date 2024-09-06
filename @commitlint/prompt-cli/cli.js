@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {prompter} from '@commitlint/prompt';
-import {execa} from 'execa';
 import inquirer from 'inquirer';
+import {x} from 'tinyexec';
 
 main().catch((err) => {
 	setTimeout(() => {
@@ -23,11 +23,11 @@ function main() {
 }
 
 function isStageEmpty() {
-	return execa('git', ['diff', '--cached']).then((r) => r.stdout === '');
+	return x('git', ['diff', '--cached']).then((r) => r.stdout === '');
 }
 
 function commit(message) {
-	const c = execa('git', ['commit', '-m', message]);
-	c.stdout.pipe(process.stdout);
-	c.stderr.pipe(process.stderr);
+	const result = x('git', ['commit', '-m', message]);
+	result.process.stdout.pipe(process.stdout);
+	result.process.stderr.pipe(process.stderr);
 }
