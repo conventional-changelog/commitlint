@@ -14,7 +14,6 @@ const cli = (args, options) => {
 				cwd: options.cwd,
 				env: options.env,
 			},
-			throwOnError: true,
 		});
 
 		if (input.length > 0) {
