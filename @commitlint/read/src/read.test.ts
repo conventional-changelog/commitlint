@@ -2,7 +2,7 @@ import {test, expect} from 'vitest';
 import fs from 'fs/promises';
 import path from 'path';
 import {git} from '@commitlint/test';
-import {execa} from 'execa';
+import {x} from 'tinyexec';
 
 import read from './read.js';
 
@@ -20,8 +20,8 @@ test('get edit commit message from git root', async () => {
 	const cwd: string = await git.bootstrap();
 
 	await fs.writeFile(path.join(cwd, 'alpha.txt'), 'alpha');
-	await execa('git', ['add', '.'], {cwd});
-	await execa('git', ['commit', '-m', 'alpha'], {cwd});
+	await x('git', ['add', '.'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'alpha'], {nodeOptions: {cwd}});
 	const expected = ['alpha\n\n'];
 	const actual = await read({edit: true, cwd});
 	expect(actual).toEqual(expected);
@@ -30,10 +30,10 @@ test('get edit commit message from git root', async () => {
 test('get history commit messages', async () => {
 	const cwd: string = await git.bootstrap();
 	await fs.writeFile(path.join(cwd, 'alpha.txt'), 'alpha');
-	await execa('git', ['add', 'alpha.txt'], {cwd});
-	await execa('git', ['commit', '-m', 'alpha'], {cwd});
-	await execa('git', ['rm', 'alpha.txt'], {cwd});
-	await execa('git', ['commit', '-m', 'remove alpha'], {cwd});
+	await x('git', ['add', 'alpha.txt'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'alpha'], {nodeOptions: {cwd}});
+	await x('git', ['rm', 'alpha.txt'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'remove alpha'], {nodeOptions: {cwd}});
 
 	const expected = ['remove alpha\n\n', 'alpha\n\n'];
 	const actual = await read({cwd});
@@ -45,8 +45,8 @@ test('get edit commit message from git subdirectory', async () => {
 	await fs.mkdir(path.join(cwd, 'beta'));
 	await fs.writeFile(path.join(cwd, 'beta/beta.txt'), 'beta');
 
-	await execa('git', ['add', '.'], {cwd});
-	await execa('git', ['commit', '-m', 'beta'], {cwd});
+	await x('git', ['add', '.'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'beta'], {nodeOptions: {cwd}});
 
 	const expected = ['beta\n\n'];
 	const actual = await read({edit: true, cwd});
@@ -59,14 +59,14 @@ test('get edit commit message while skipping first commit', async () => {
 	await fs.writeFile(path.join(cwd, 'beta/beta.txt'), 'beta');
 
 	await fs.writeFile(path.join(cwd, 'alpha.txt'), 'alpha');
-	await execa('git', ['add', 'alpha.txt'], {cwd});
-	await execa('git', ['commit', '-m', 'alpha'], {cwd});
+	await x('git', ['add', 'alpha.txt'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'alpha'], {nodeOptions: {cwd}});
 	await fs.writeFile(path.join(cwd, 'beta.txt'), 'beta');
-	await execa('git', ['add', 'beta.txt'], {cwd});
-	await execa('git', ['commit', '-m', 'beta'], {cwd});
+	await x('git', ['add', 'beta.txt'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'beta'], {nodeOptions: {cwd}});
 	await fs.writeFile(path.join(cwd, 'gamma.txt'), 'gamma');
-	await execa('git', ['add', 'gamma.txt'], {cwd});
-	await execa('git', ['commit', '-m', 'gamma'], {cwd});
+	await x('git', ['add', 'gamma.txt'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', 'gamma'], {nodeOptions: {cwd}});
 
 	const expected = ['beta\n\n'];
 	const actual = await read({from: 'HEAD~2', cwd, gitLogArgs: '--skip 1'});
@@ -76,9 +76,15 @@ test('get edit commit message while skipping first commit', async () => {
 test('should only read the last commit', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit Z'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit Y'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit X'], {cwd});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit Z'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit Y'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit X'], {
+		nodeOptions: {cwd},
+	});
 
 	const result = await read({cwd, last: true});
 
@@ -88,14 +94,18 @@ test('should only read the last commit', async () => {
 test('should read commits from the last annotated tag', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await execa(
-		'git',
-		['commit', '--allow-empty', '-m', 'chore: release v1.0.0'],
-		{cwd}
-	);
-	await execa('git', ['tag', 'v1.0.0', '--annotate', '-m', 'v1.0.0'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit 1'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit 2'], {cwd});
+	await x('git', ['commit', '--allow-empty', '-m', 'chore: release v1.0.0'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['tag', 'v1.0.0', '--annotate', '-m', 'v1.0.0'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit 1'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit 2'], {
+		nodeOptions: {cwd},
+	});
 
 	const result = await read({cwd, fromLastTag: true});
 
@@ -105,14 +115,18 @@ test('should read commits from the last annotated tag', async () => {
 test('should read commits from the last lightweight tag', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await execa(
+	await x(
 		'git',
 		['commit', '--allow-empty', '-m', 'chore: release v9.9.9-alpha.1'],
-		{cwd}
+		{nodeOptions: {cwd}}
 	);
-	await execa('git', ['tag', 'v9.9.9-alpha.1'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit A'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit B'], {cwd});
+	await x('git', ['tag', 'v9.9.9-alpha.1'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit A'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit B'], {
+		nodeOptions: {cwd},
+	});
 
 	const result = await read({cwd, fromLastTag: true});
 
@@ -122,9 +136,15 @@ test('should read commits from the last lightweight tag', async () => {
 test('should not read any commits when there are no tags', async () => {
 	const cwd: string = await git.bootstrap();
 
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit 7'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit 8'], {cwd});
-	await execa('git', ['commit', '--allow-empty', '-m', 'commit 9'], {cwd});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit 7'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit 8'], {
+		nodeOptions: {cwd},
+	});
+	await x('git', ['commit', '--allow-empty', '-m', 'commit 9'], {
+		nodeOptions: {cwd},
+	});
 
 	const result = await read({cwd, fromLastTag: true});
 
