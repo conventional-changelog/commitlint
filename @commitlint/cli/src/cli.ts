@@ -15,7 +15,7 @@ import type {
 	UserConfig,
 } from '@commitlint/types';
 import type {Options} from 'conventional-commits-parser';
-import {execa, type ExecaError} from 'execa';
+import {x} from 'tinyexec';
 import yargs, {type Arguments} from 'yargs';
 
 import {CliFlags} from './types.js';
@@ -297,20 +297,18 @@ async function main(args: MainArgs): Promise<void> {
 	// If reading from `.git/COMMIT_EDIT_MSG`, strip comments using
 	// core.commentChar from git configuration, falling back to '#'.
 	if (flags.edit) {
-		try {
-			const {stdout} = await execa('git', ['config', 'core.commentChar']);
-			opts.parserOpts.commentChar = stdout.trim() || gitDefaultCommentChar;
-		} catch (e) {
-			const execaError = e as ExecaError;
-			// git config returns exit code 1 when the setting is unset,
-			// don't warn in this case.
-			if (!execaError.failed || execaError.exitCode !== 1) {
-				console.warn(
-					'Could not determine core.commentChar git configuration',
-					e
-				);
-			}
+		const result = x('git', ['config', 'core.commentChar']);
+		const output = await result;
+
+		if (result.exitCode && result.exitCode > 1) {
+			console.warn(
+				'Could not determine core.commentChar git configuration',
+				output.stderr
+			);
 			opts.parserOpts.commentChar = gitDefaultCommentChar;
+		} else {
+			opts.parserOpts.commentChar =
+				output.stdout.trim() || gitDefaultCommentChar;
 		}
 	}
 

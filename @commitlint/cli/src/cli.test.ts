@@ -4,9 +4,9 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 
 import {fix, git} from '@commitlint/test';
-import {execa} from 'execa';
 import fs from 'fs-extra';
 import merge from 'lodash.merge';
+import {x} from 'tinyexec';
 
 const require = createRequire(import.meta.url);
 
@@ -21,12 +21,19 @@ interface TestOptions {
 
 const cli = (args: string[], options: TestOptions) => {
 	return (input = '') => {
-		return execa(bin, args, {
-			cwd: options.cwd,
-			env: options.env,
-			input: input,
-			reject: false,
+		const result = x(bin, args, {
+			nodeOptions: {
+				cwd: options.cwd,
+				env: options.env,
+			},
 		});
+
+		if (input.length > 0) {
+			result.process?.stdin?.write(input);
+			result.process?.stdin?.end();
+		}
+
+		return result;
 	};
 };
 
@@ -35,153 +42,175 @@ const fixBootstrap = (fixture: string) => fix.bootstrap(fixture, __dirname);
 
 test('should throw when called without [input]', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli([], {cwd})();
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})();
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should reprint input from stdin', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli([], {cwd})('foo: bar');
-	expect(actual.stdout).toContain('foo: bar');
+	const result = cli([], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('foo: bar');
 });
 
 test('should produce success output with --verbose flag', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli(['--verbose'], {cwd})('type: bar');
-	expect(actual.stdout).toContain('0 problems, 0 warnings');
-	expect(actual.stderr).toEqual('');
+	const result = cli(['--verbose'], {cwd})('type: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('0 problems, 0 warnings');
+	expect(output.stderr).toEqual('');
 });
 
 test('should produce last commit and success output with --verbose flag', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
-	await execa('git', ['add', 'commitlint.config.js'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
-	const actual = await cli(['--last', '--verbose'], {cwd})();
-	expect(actual.stdout).toContain('0 problems, 0 warnings');
-	expect(actual.stdout).toContain('test: this should work');
-	expect(actual.stderr).toEqual('');
+	await x('git', ['add', 'commitlint.config.js'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
+	const result = cli(['--last', '--verbose'], {cwd})();
+	const output = await result;
+	expect(output.stdout.trim()).toContain('0 problems, 0 warnings');
+	expect(output.stdout.trim()).toContain('test: this should work');
+	expect(output.stderr).toEqual('');
 });
 
 test('regression test for running with --last flag', async () => {
 	const cwd = await gitBootstrap('fixtures/last-flag-regression');
-	await execa('git', ['add', 'commitlint.config.js'], {cwd});
-	await execa('git', ['commit', '-m', '"test: this should work"'], {cwd});
-	const actual = await cli(['--last', '--verbose'], {cwd})();
-	expect(actual.stdout).toContain('0 problems, 0 warnings');
-	expect(actual.stdout).toContain('test: this should work');
-	expect(actual.stderr).toEqual('');
+	await x('git', ['add', 'commitlint.config.js'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
+	const result = cli(['--last', '--verbose'], {cwd})();
+	const output = await result;
+	expect(output.stdout.trim()).toContain('0 problems, 0 warnings');
+	expect(output.stdout.trim()).toContain('test: this should work');
+	expect(output.stderr).toEqual('');
 });
 
 test('should produce no output with --quiet flag', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli(['--quiet'], {cwd})('foo: bar');
-	expect(actual.stdout).toEqual('');
-	expect(actual.stderr).toEqual('');
+	const result = cli(['--quiet'], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toEqual('');
+	expect(output.stderr).toEqual('');
 });
 
 test('should produce no output with -q flag', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli(['-q'], {cwd})('foo: bar');
-	expect(actual.stdout).toEqual('');
-	expect(actual.stderr).toEqual('');
+	const result = cli(['-q'], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toEqual('');
+	expect(output.stderr).toEqual('');
 });
 
 test('should produce help for empty config', async () => {
 	const cwd = await gitBootstrap('fixtures/empty');
-	const actual = await cli([], {cwd})('foo: bar');
-	expect(actual.stdout).toContain('Please add rules');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('Please add rules');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should produce help for problems', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli([], {cwd})('foo: bar');
-	expect(actual.stdout).toContain(
+	const result = cli([], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain(
 		'Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	);
-	expect(actual.exitCode).toBe(1);
+	expect(result.exitCode).toBe(1);
 });
 
 test('should produce help for problems with correct helpurl', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli(
+	const result = cli(
 		['-H https://github.com/conventional-changelog/commitlint/#testhelpurl'],
 		{cwd}
 	)('foo: bar');
-	expect(actual.stdout).toContain(
+	const output = await result;
+	expect(output.stdout.trim()).toContain(
 		'Get help: https://github.com/conventional-changelog/commitlint/#testhelpurl'
 	);
-	expect(actual.exitCode).toBe(1);
+	expect(result.exitCode).toBe(1);
 });
 
 test('should fail for input from stdin without rules', async () => {
 	const cwd = await gitBootstrap('fixtures/empty');
-	const actual = await cli([], {cwd})('foo: bar');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('foo: bar');
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should succeed for input from stdin with rules', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli([], {cwd})('type: bar');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('type: bar');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should fail for input from stdin with rule from rc', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
-	const actual = await cli([], {cwd})('foo: bar');
-	expect(actual.stdout).toContain('type must not be one of [foo]');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('type must not be one of [foo]');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should work with --config option', async () => {
 	const file = 'config/commitlint.config.js';
 	const cwd = await gitBootstrap('fixtures/specify-config-file');
-	const actual = await cli(['--config', file], {cwd})('foo: bar');
-	expect(actual.stdout).toContain('type must not be one of [foo]');
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['--config', file], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('type must not be one of [foo]');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should fail for input from stdin with rule from js', async () => {
 	const cwd = await gitBootstrap('fixtures/extends-root');
-	const actual = await cli(['--extends', './extended'], {cwd})('foo: bar');
-	expect(actual.stdout).toContain('type must not be one of [foo]');
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['--extends', './extended'], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('type must not be one of [foo]');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should output help URL defined in config file', async () => {
 	const cwd = await gitBootstrap('fixtures/help-url');
-	const actual = await cli([], {cwd})('foo: bar');
-	expect(actual.stdout).toContain('Get help: https://www.example.com/foo');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toContain(
+		'Get help: https://www.example.com/foo'
+	);
+	expect(result.exitCode).toBe(1);
 });
 
 test('should produce no error output with --quiet flag', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
-	const actual = await cli(['--quiet'], {cwd})('foo: bar');
-	expect(actual.stdout).toEqual('');
-	expect(actual.stderr).toEqual('');
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['--quiet'], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toEqual('');
+	expect(output.stderr).toEqual('');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should produce no error output with -q flag', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
-	const actual = await cli(['-q'], {cwd})('foo: bar');
-	expect(actual.stdout).toEqual('');
-	expect(actual.stderr).toEqual('');
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['-q'], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stdout.trim()).toEqual('');
+	expect(output.stderr).toEqual('');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should work with husky commitmsg hook and git commit', async () => {
 	const cwd = await gitBootstrap('fixtures/husky/integration');
 	await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd});
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	const commit = await execa(
-		'git',
-		['commit', '-m', '"test: this should work"'],
-		{cwd}
-	);
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	const commit = await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
 
 	expect(commit).toBeTruthy();
 });
@@ -191,13 +220,11 @@ test('should work with husky commitmsg hook in sub packages', async () => {
 	const cwd = path.join(upper, 'integration');
 	await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd: upper});
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	const commit = await execa(
-		'git',
-		['commit', '-m', '"test: this should work"'],
-		{cwd}
-	);
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	const commit = await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
 	expect(commit).toBeTruthy();
 });
 
@@ -208,13 +235,11 @@ test('should work with husky via commitlint -e $GIT_PARAMS', async () => {
 		{cwd}
 	);
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	const commit = await execa(
-		'git',
-		['commit', '-m', '"test: this should work"'],
-		{cwd}
-	);
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	const commit = await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
 	expect(commit).toBeTruthy();
 });
 
@@ -225,13 +250,11 @@ test('should work with husky via commitlint -e %GIT_PARAMS%', async () => {
 		{cwd}
 	);
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	const commit = await execa(
-		'git',
-		['commit', '-m', '"test: this should work"'],
-		{cwd}
-	);
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	const commit = await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
 	expect(commit).toBeTruthy();
 });
 
@@ -242,13 +265,11 @@ test('should work with husky via commitlint -e $HUSKY_GIT_PARAMS', async () => {
 		{cwd}
 	);
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	const commit = await execa(
-		'git',
-		['commit', '-m', '"test: this should work"'],
-		{cwd}
-	);
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	const commit = await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
 	expect(commit).toBeTruthy();
 });
 
@@ -259,24 +280,23 @@ test('should work with husky via commitlint -e %HUSKY_GIT_PARAMS%', async () => 
 		{cwd}
 	);
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	const commit = await execa(
-		'git',
-		['commit', '-m', '"test: this should work"'],
-		{cwd}
-	);
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	const commit = await x('git', ['commit', '-m', '"test: this should work"'], {
+		nodeOptions: {cwd},
+	});
 	expect(commit).toBeTruthy();
 });
 
 test('should allow reading of environment variables for edit file, succeeding if valid', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
 	await fs.writeFile(path.join(cwd, 'commit-msg-file'), 'foo');
-	const actual = await cli(['--env', 'variable'], {
+	const result = cli(['--env', 'variable'], {
 		cwd,
 		env: {variable: 'commit-msg-file'},
 	})();
-	expect(actual.exitCode).toBe(0);
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should allow reading of environment variables for edit file, failing if invalid', async () => {
@@ -285,74 +305,81 @@ test('should allow reading of environment variables for edit file, failing if in
 		path.join(cwd, 'commit-msg-file'),
 		'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.'
 	);
-	const actual = await cli(['--env', 'variable'], {
+	const result = cli(['--env', 'variable'], {
 		cwd,
 		env: {variable: 'commit-msg-file'},
 	})();
-	expect(actual.exitCode).toBe(1);
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should pick up parser preset and fail accordingly', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset');
-	const actual = await cli(['--parser-preset', './parser-preset'], {cwd})(
+	const result = cli(['--parser-preset', './parser-preset'], {cwd})(
 		'type(scope): subject'
 	);
-	expect(actual.exitCode).toBe(1);
-	expect(actual.stdout).toContain('may not be empty');
+	const output = await result;
+	expect(output.stdout.trim()).toContain('may not be empty');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should pick up parser preset and succeed accordingly', async () => {
 	const cwd = await gitBootstrap('fixtures/parser-preset');
-	const actual = await cli(['--parser-preset', './parser-preset'], {cwd})(
+	const result = cli(['--parser-preset', './parser-preset'], {cwd})(
 		'----type(scope): subject'
 	);
-	expect(actual.exitCode).toBe(0);
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should pick up config from outside git repo and fail accordingly', async () => {
 	const outer = await fixBootstrap('fixtures/outer-scope');
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 
-	const actual = await cli([], {cwd})('inner: bar');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('inner: bar');
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should pick up config from outside git repo and succeed accordingly', async () => {
 	const outer = await fixBootstrap('fixtures/outer-scope');
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 
-	const actual = await cli([], {cwd})('outer: bar');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('outer: bar');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should pick up config from inside git repo with precedence and succeed accordingly', async () => {
 	const outer = await fixBootstrap('fixtures/inner-scope');
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 
-	const actual = await cli([], {cwd})('inner: bar');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('inner: bar');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should pick up config from inside git repo with precedence and fail accordingly', async () => {
 	const outer = await fixBootstrap('fixtures/inner-scope');
 	const cwd = await git.init(path.join(outer, 'inner-scope'));
 
-	const actual = await cli([], {cwd})('outer: bar');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('outer: bar');
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should handle --amend with signoff', async () => {
 	const cwd = await gitBootstrap('fixtures/signoff');
 	await writePkg({husky: {hooks: {'commit-msg': `'${bin}' -e`}}}, {cwd});
 
-	// await execa('npm', ['install'], {cwd}); // npm install is failing on windows machines
-	await execa('git', ['add', 'package.json'], {cwd});
-	await execa(
-		'git',
-		['commit', '-m', '"test: this should work"', '--signoff'],
-		{cwd}
-	);
-	const commit = await execa('git', ['commit', '--amend', '--no-edit'], {cwd});
+	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
+	await x('git', ['add', 'package.json'], {nodeOptions: {cwd}});
+	await x('git', ['commit', '-m', '"test: this should work"', '--signoff'], {
+		nodeOptions: {cwd},
+	});
+	const commit = await x('git', ['commit', '--amend', '--no-edit'], {
+		nodeOptions: {cwd},
+	});
 
 	expect(commit).toBeTruthy();
 }, 10000);
@@ -361,9 +388,10 @@ test('it uses parserOpts.commentChar when not using edit mode', async () => {
 	const cwd = await gitBootstrap('fixtures/comment-char');
 	const input = 'header: foo\n$body\n';
 
-	const actual = await cli([], {cwd})(input);
-	expect(actual.stdout).toContain('[body-empty]');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})(input);
+	const output = await result;
+	expect(output.stdout.trim()).toContain('[body-empty]');
+	expect(result.exitCode).toBe(1);
 });
 
 test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
@@ -373,22 +401,26 @@ test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
 		'header: foo\n\n$body\n'
 	);
 
-	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
-	expect(actual.stdout).not.toContain('[body-empty]');
-	expect(actual.exitCode).toBe(0);
+	const result = cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	const output = await result;
+	expect(output.stdout.trim()).not.toContain('[body-empty]');
+	expect(result.exitCode).toBe(0);
 });
 
 test('it uses core.commentChar git config when using edit mode', async () => {
 	const cwd = await gitBootstrap('fixtures/comment-char');
-	await execa('git', ['config', '--local', 'core.commentChar', '$'], {cwd});
+	await x('git', ['config', '--local', 'core.commentChar', '$'], {
+		nodeOptions: {cwd},
+	});
 	await fs.writeFile(
 		path.join(cwd, '.git', 'COMMIT_EDITMSG'),
 		'header: foo\n\n$body\n'
 	);
 
-	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
-	expect(actual.stdout).toContain('[body-empty]');
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	const output = await result;
+	expect(output.stdout.trim()).toContain('[body-empty]');
+	expect(result.exitCode).toBe(1);
 });
 
 test('it falls back to # for core.commentChar when using edit mode', async () => {
@@ -398,89 +430,96 @@ test('it falls back to # for core.commentChar when using edit mode', async () =>
 		'header: foo\n\n#body\n'
 	);
 
-	const actual = await cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
-	expect(actual.stdout).toContain('[body-empty]');
-	expect(actual.stderr).toEqual('');
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
+	const output = await result;
+	expect(output.stdout.trim()).toContain('[body-empty]');
+	expect(output.stderr).toEqual('');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should handle linting with issue prefixes', async () => {
 	const cwd = await gitBootstrap('fixtures/issue-prefixes');
-	const actual = await cli([], {cwd})('foobar REF-1');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('foobar REF-1');
+	await result;
+	expect(result.exitCode).toBe(0);
 }, 10000);
 
 test('should print full commit message when input from stdin fails', async () => {
 	const cwd = await gitBootstrap('fixtures/simple');
 	const input = 'foo: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
 	// output text in plain text so we can compare it
-	const actual = await cli(['--color=false'], {cwd})(input);
-
-	expect(actual.stdout).toContain(input);
-	expect(actual.exitCode).toBe(1);
+	const result = cli(['--color=false'], {cwd})(input);
+	const output = await result;
+	expect(output.stdout.trim()).toContain(input);
+	expect(result.exitCode).toBe(1);
 });
 
 test('should not print commit message fully or partially when input succeeds', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const message = 'type: bar\n\nFoo bar bizz buzz.\n\nCloses #123.';
 	// output text in plain text so we can compare it
-	const actual = await cli(['--color=false'], {cwd})(message);
-
-	expect(actual.stdout).not.toContain(message);
-	expect(actual.stdout).not.toContain(message.split('\n')[0]);
-	expect(actual.exitCode).toBe(0);
+	const result = cli(['--color=false'], {cwd})(message);
+	const output = await result;
+	expect(output.stdout.trim()).not.toContain(message);
+	expect(output.stdout.trim()).not.toContain(message.split('\n')[0]);
+	expect(result.exitCode).toBe(0);
 });
 
 test('should fail for invalid formatters from configuration', async () => {
 	const cwd = await gitBootstrap('fixtures/custom-formatter');
-	const actual = await cli([], {cwd})('foo: bar');
-
-	expect(actual.stderr).toContain(
+	const result = cli([], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stderr).toContain(
 		'Using format custom-formatter, but cannot find the module'
 	);
-	expect(actual.stdout).toEqual('');
-	expect(actual.exitCode).toBe(1);
+	expect(output.stdout.trim()).toEqual('');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should skip linting if message matches ignores config', async () => {
 	const cwd = await gitBootstrap('fixtures/ignores');
-	const actual = await cli([], {cwd})('WIP');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('WIP');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should not skip linting if message does not match ignores config', async () => {
 	const cwd = await gitBootstrap('fixtures/ignores');
-	const actual = await cli([], {cwd})('foo');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('foo');
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should not skip linting if defaultIgnores is false', async () => {
 	const cwd = await gitBootstrap('fixtures/default-ignores-false');
-	const actual = await cli([], {cwd})('fixup! foo: bar');
-	expect(actual.exitCode).toBe(1);
+	const result = cli([], {cwd})('fixup! foo: bar');
+	await result;
+	expect(result.exitCode).toBe(1);
 });
 
 test('should skip linting if defaultIgnores is true', async () => {
 	const cwd = await gitBootstrap('fixtures/default-ignores-true');
-	const actual = await cli([], {cwd})('fixup! foo: bar');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('fixup! foo: bar');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should skip linting if defaultIgnores is unset', async () => {
 	const cwd = await gitBootstrap('fixtures/default-ignores-unset');
-	const actual = await cli([], {cwd})('fixup! foo: bar');
-	expect(actual.exitCode).toBe(0);
+	const result = cli([], {cwd})('fixup! foo: bar');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should fail for invalid formatters from flags', async () => {
 	const cwd = await gitBootstrap('fixtures/custom-formatter');
-	const actual = await cli(['--format', 'through-flag'], {cwd})('foo: bar');
-
-	expect(actual.stderr).toContain(
+	const result = cli(['--format', 'through-flag'], {cwd})('foo: bar');
+	const output = await result;
+	expect(output.stderr).toContain(
 		'Using format through-flag, but cannot find the module'
 	);
-	expect(actual.stdout).toEqual('');
-	expect(actual.exitCode).toBe(1);
+	expect(output.stdout.trim()).toEqual('');
+	expect(result.exitCode).toBe(1);
 });
 
 test('should work with absolute formatter path', async () => {
@@ -489,12 +528,12 @@ test('should work with absolute formatter path', async () => {
 		'../fixtures/custom-formatter/formatters/custom.js'
 	);
 	const cwd = await gitBootstrap('fixtures/custom-formatter');
-	const actual = await cli(['--format', formatterPath], {cwd})(
+	const result = cli(['--format', formatterPath], {cwd})(
 		'test: this should work'
 	);
-
-	expect(actual.stdout).toContain('custom-formatter-ok');
-	expect(actual.exitCode).toBe(0);
+	const output = await result;
+	expect(output.stdout.trim()).toContain('custom-formatter-ok');
+	expect(result.exitCode).toBe(0);
 });
 
 test('should work with relative formatter path', async () => {
@@ -502,37 +541,41 @@ test('should work with relative formatter path', async () => {
 		await gitBootstrap('fixtures/custom-formatter'),
 		'./formatters'
 	);
-	const actual = await cli(['--format', './custom.js'], {cwd})(
+	const result = cli(['--format', './custom.js'], {cwd})(
 		'test: this should work'
 	);
-
-	expect(actual.stdout).toContain('custom-formatter-ok');
-	expect(actual.exitCode).toBe(0);
+	const output = await result;
+	expect(output.stdout.trim()).toContain('custom-formatter-ok');
+	expect(result.exitCode).toBe(0);
 });
 
 test('strict: should exit with 3 on error', async () => {
 	const cwd = await gitBootstrap('fixtures/warning');
-	const actual = await cli(['--strict'], {cwd})('foo: abcdef');
-	expect(actual.exitCode).toBe(3);
+	const result = cli(['--strict'], {cwd})('foo: abcdef');
+	await result;
+	expect(result.exitCode).toBe(3);
 });
 
 test('strict: should exit with 2 on warning', async () => {
 	const cwd = await gitBootstrap('fixtures/warning');
-	const actual = await cli(['--strict'], {cwd})('feat: abcdef');
-	expect(actual.exitCode).toBe(2);
+	const result = cli(['--strict'], {cwd})('feat: abcdef');
+	await result;
+	expect(result.exitCode).toBe(2);
 });
 
 test('strict: should exit with 0 on success', async () => {
 	const cwd = await gitBootstrap('fixtures/warning');
-	const actual = await cli(['--strict'], {cwd})('feat: abc');
-	expect(actual.exitCode).toBe(0);
+	const result = cli(['--strict'], {cwd})('feat: abc');
+	await result;
+	expect(result.exitCode).toBe(0);
 });
 
 test('should print help', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli(['--help'], {cwd})();
+	const result = cli(['--help'], {cwd})();
+	const output = await result;
 	const version = require('../package.json').version;
-	const stdout = actual.stdout.replace(`@${version}`, '@dev');
+	const stdout = output.stdout.trim().replace(`@${version}`, '@dev');
 	expect(stdout).toMatchInlineSnapshot(`
 		"@commitlint/cli@dev - Lint your commit messages
 
@@ -565,16 +608,18 @@ test('should print help', async () => {
 
 test('should print version', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
-	const actual = await cli(['--version'], {cwd})();
-	expect(actual.stdout).toMatch('@commitlint/cli@');
+	const result = cli(['--version'], {cwd})();
+	const output = await result;
+	expect(output.stdout.trim()).toMatch('@commitlint/cli@');
 });
 
 describe('should print config', () => {
 	test('should print config when flag is present but without value', async () => {
 		const cwd = await gitBootstrap('fixtures/default');
-		const actual = await cli(['--print-config', 'text', '--no-color'], {cwd})();
-
-		const stdout = actual.stdout
+		const result = cli(['--print-config', 'text', '--no-color'], {cwd})();
+		const output = await result;
+		const stdout = output.stdout
+			.trim()
 			.replace(/^{[^\n]/g, '{\n  ')
 			.replace(/[^\n]}$/g, '\n}')
 			.replace(/(helpUrl:)\n[ ]+/, '$1 ');
@@ -595,9 +640,10 @@ describe('should print config', () => {
 
 	test('should print config when flag has `text` value', async () => {
 		const cwd = await gitBootstrap('fixtures/default');
-		const actual = await cli(['--print-config=text', '--no-color'], {cwd})();
-
-		const stdout = actual.stdout
+		const result = cli(['--print-config=text', '--no-color'], {cwd})();
+		const output = await result;
+		const stdout = output.stdout
+			.trim()
 			.replace(/^{[^\n]/g, '{\n  ')
 			.replace(/[^\n]}$/g, '\n}')
 			.replace(/(helpUrl:)\n[ ]+/, '$1 ');
@@ -618,9 +664,9 @@ describe('should print config', () => {
 
 	test('should print config when flag has `json` value', async () => {
 		const cwd = await gitBootstrap('fixtures/default');
-		const actual = await cli(['--print-config=json', '--no-color'], {cwd})();
-
-		expect(actual.stdout).toMatchInlineSnapshot(
+		const result = cli(['--print-config=json', '--no-color'], {cwd})();
+		const output = await result;
+		expect(output.stdout.trim()).toMatchInlineSnapshot(
 			`"{"extends":[],"formatter":"@commitlint/format","plugins":{},"rules":{"type-enum":[2,"never",["foo"]]},"helpUrl":"https://github.com/conventional-changelog/commitlint/#what-is-commitlint","prompt":{}}"`
 		);
 	});
