@@ -2,10 +2,10 @@
 import path from 'path';
 import fs from 'fs';
 
-import {execa} from 'execa';
 import readPkg from 'read-pkg';
 import requireFromString from 'require-from-string';
 import tar from 'tar-fs';
+import {x} from 'tinyexec';
 import tmp from 'tmp';
 import yargs from 'yargs';
 import zlib from 'zlib';
@@ -146,7 +146,9 @@ async function getTarballFiles(source, options) {
 	});
 	const cwd = tmpDir.name;
 	const tarball = path.join(cwd, 'test-archive.tgz');
-	await execa('yarn', ['pack', '--filename', tarball], {cwd: source});
+	await x('yarn', ['pack', '--filename', tarball], {
+		nodeOptions: {cwd: source},
+	});
 
 	return getArchiveFiles(tarball, options);
 }

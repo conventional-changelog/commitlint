@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import path from 'path';
-import {execa} from 'execa';
+import {x} from 'tinyexec';
 
 const cwd = process.cwd();
 
@@ -14,7 +14,7 @@ function main() {
 }
 
 function check(args) {
-	return execa('dependency-check', args, {cwd});
+	return x('dependency-check', args, {nodeOptions: {cwd}});
 }
 
 main().then((args) => {

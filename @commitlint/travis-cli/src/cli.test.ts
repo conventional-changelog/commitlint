@@ -1,10 +1,12 @@
+import {SpawnOptions} from 'node:child_process';
+
 import {test, expect} from 'vitest';
 import {createRequire} from 'module';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
 import {git} from '@commitlint/test';
-import {Options, execa} from 'execa';
+import {x} from 'tinyexec';
 
 const require = createRequire(import.meta.url);
 
@@ -27,22 +29,8 @@ const validBaseEnv = {
 	TRAVIS_PULL_REQUEST_SLUG: 'TRAVIS_PULL_REQUEST_SLUG',
 };
 
-const cli = async (config: Options = {}, args: string[] = []) => {
-	try {
-		return await execa(bin, args, config);
-	} catch (err: any) {
-		if (
-			typeof err.stdout !== 'undefined' &&
-			typeof err.stderr !== 'undefined'
-		) {
-			throw new Error([err.stdout, err.stderr].join('\n'));
-		} else {
-			throw new Error(
-				`An unknown error occured while running '${bin} ${args.join(' ')}'`
-			);
-		}
-	}
-};
+const cli = async (nodeOptions: SpawnOptions = {}, args: string[] = []) =>
+	x(bin, args, {nodeOptions});
 
 test('should throw when not on travis ci', async () => {
 	const env = {
@@ -50,7 +38,8 @@ test('should throw when not on travis ci', async () => {
 		TRAVIS: 'false',
 	};
 
-	await expect(cli({env})).rejects.toThrow(
+	const output = await cli({env});
+	expect(output.stderr).toContain(
 		'@commitlint/travis-cli is intended to be used on Travis CI'
 	);
 });
@@ -61,7 +50,8 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 		CI: 'true',
 	};
 
-	await expect(cli({env})).rejects.toThrow(
+	const output = await cli({env});
+	expect(output.stderr).toContain(
 		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG'
 	);
 });

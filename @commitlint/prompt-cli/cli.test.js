@@ -1,7 +1,7 @@
 import {test, expect} from 'vitest';
 import {createRequire} from 'module';
 import {git} from '@commitlint/test';
-import {execa} from 'execa';
+import {x} from 'tinyexec';
 
 const require = createRequire(import.meta.url);
 
@@ -9,12 +9,17 @@ const bin = require.resolve('./cli.js');
 
 const cli = (args, options) => {
 	return (input = '') => {
-		return execa(bin, args, {
-			cwd: options.cwd,
-			env: options.env,
-			input: input,
-			reject: false,
+		const result = x(bin, args, {
+			nodeOptions: {
+				cwd: options.cwd,
+				env: options.env,
+			},
 		});
+
+		result.process.stdin.write(input);
+		result.process.stdin.end();
+
+		return result;
 	};
 };
 

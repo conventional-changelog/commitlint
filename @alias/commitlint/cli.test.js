@@ -3,7 +3,7 @@ import {createRequire} from 'module';
 import path from 'path';
 import {fileURLToPath} from 'url';
 
-import {execa} from 'execa';
+import {x} from 'tinyexec';
 import {fix} from '@commitlint/test';
 
 const require = createRequire(import.meta.url);
@@ -13,12 +13,17 @@ const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
 const bin = require.resolve('./cli.js');
 
 function cli(args, options, input) {
-	const c = execa(bin, args, {
-		cwd: options.cwd,
-		env: options.env,
-		input: input,
+	const result = x(bin, args, {
+		nodeOptions: {
+			cwd: options.cwd,
+			env: options.env,
+		},
 	});
-	return c.catch((err) => err);
+
+	result.process.stdin.write(input);
+	result.process.stdin.end();
+
+	return result;
 }
 
 const fixBootstrap = (fixture) => fix.bootstrap(fixture, __dirname);

@@ -4,7 +4,7 @@ import type {GitOptions} from 'git-raw-commits';
 import {getHistoryCommits} from './get-history-commits.js';
 import {getEditCommit} from './get-edit-commit.js';
 
-import {execa} from 'execa';
+import {x} from 'tinyexec';
 
 interface GetCommitMessageOptions {
 	cwd?: string;
@@ -28,12 +28,12 @@ export default async function getCommitMessages(
 	}
 
 	if (last) {
-		const gitCommandResult = await execa(
+		const gitCommandResult = await x(
 			'git',
 			['log', '-1', '--pretty=format:%B'],
-			{cwd}
+			{nodeOptions: {cwd}}
 		);
-		let output = gitCommandResult.stdout;
+		let output = gitCommandResult.stdout.trim();
 		// strip output of extra quotation marks ("")
 		if (output[0] == '"' && output[output.length - 1] == '"')
 			output = output.slice(1, -1);
@@ -41,7 +41,7 @@ export default async function getCommitMessages(
 	}
 
 	if (!from && fromLastTag) {
-		const {stdout} = await execa(
+		const output = await x(
 			'git',
 			[
 				'describe',
@@ -51,8 +51,9 @@ export default async function getCommitMessages(
 				'--long',
 				'--tags',
 			],
-			{cwd}
+			{nodeOptions: {cwd}}
 		);
+		const stdout = output.stdout.trim();
 
 		if (stdout.length === 40) {
 			// Hash only means no last tag. Use that as the from ref which
