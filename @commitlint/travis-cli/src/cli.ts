@@ -83,7 +83,7 @@ async function isClean() {
 async function lint(
 	args: string[],
 	nodeOptions: SpawnOptions = {},
-	input?: string
+	input: string = ''
 ) {
 	const result = x(COMMITLINT, args, {
 		nodeOptions: {
@@ -92,10 +92,8 @@ async function lint(
 		},
 	});
 
-	if (input && input.length > 0) {
-		result.process?.stdin?.write(input);
-		result.process?.stdin?.end();
-	}
+	result.process?.stdin?.write(input);
+	result.process?.stdin?.end();
 
 	return result;
 }
