@@ -107,7 +107,7 @@ test('should produce help for empty config', async () => {
 	const result = cli([], {cwd})('foo: bar');
 	const output = await result;
 	expect(output.stdout.trim()).toContain('Please add rules');
-	expect(result.exitCode).toBe(6);
+	expect(result.exitCode).toBe(9);
 });
 
 test('should produce help for problems', async () => {
@@ -137,7 +137,7 @@ test('should fail for input from stdin without rules', async () => {
 	const cwd = await gitBootstrap('fixtures/empty');
 	const result = cli([], {cwd})('foo: bar');
 	await result;
-	expect(result.exitCode).toBe(6);
+	expect(result.exitCode).toBe(9);
 });
 
 test('should succeed for input from stdin with rules', async () => {
