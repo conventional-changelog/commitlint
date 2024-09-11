@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.5.0](https://github.com/conventional-changelog/commitlint/compare/v19.4.1...v19.5.0) (2024-09-11)
+
+
+### Features
+
+* **cli:** use special errorCode for missing rules/config [#4142](https://github.com/conventional-changelog/commitlint/issues/4142) ([#4143](https://github.com/conventional-changelog/commitlint/issues/4143)) ([d7070d8](https://github.com/conventional-changelog/commitlint/commit/d7070d8a4905da7834a018825b37d52c2dd29f62))
+
+
+
+
+
 ## [19.4.1](https://github.com/conventional-changelog/commitlint/compare/v19.4.0...v19.4.1) (2024-08-28)
 
 

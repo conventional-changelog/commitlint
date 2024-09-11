@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/cli",
   "type": "module",
-  "version": "19.4.1",
+  "version": "19.5.0",
   "description": "Lint your commit messages",
   "files": [
     "index.cjs",
@@ -39,8 +39,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^19.0.0",
-    "@commitlint/utils": "^19.0.0",
+    "@commitlint/test": "^19.5.0",
+    "@commitlint/utils": "^19.5.0",
     "@types/lodash.merge": "^4.6.8",
     "@types/node": "^18.19.17",
     "@types/yargs": "^17.0.29",
@@ -48,11 +48,11 @@
     "lodash.merge": "^4.6.2"
   },
   "dependencies": {
-    "@commitlint/format": "^19.3.0",
-    "@commitlint/lint": "^19.4.1",
-    "@commitlint/load": "^19.4.0",
-    "@commitlint/read": "^19.4.0",
-    "@commitlint/types": "^19.0.3",
+    "@commitlint/format": "^19.5.0",
+    "@commitlint/lint": "^19.5.0",
+    "@commitlint/load": "^19.5.0",
+    "@commitlint/read": "^19.5.0",
+    "@commitlint/types": "^19.5.0",
     "tinyexec": "^0.3.0",
     "yargs": "^17.0.0"
   },
