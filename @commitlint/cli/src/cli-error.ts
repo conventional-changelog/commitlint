@@ -1,12 +1,9 @@
 export enum ExitCode {
-	Normal = 0,
-	UncaughtFatalException = 1,
-	ReservedByBash = 2,
-	InternalJavaScriptParseError = 3,
-	InternalJavaScriptEvaluationFailure = 4,
-	FatalError = 5,
-	NonFunctionInternalExceptionHandler = 6,
-	InvalidArgument = 9,
+	CommitlintDefault = 0,
+	CommitlintErrorDefault = 1,
+	CommitLintWarning = 2,
+	CommitLintError = 3,
+	CommitlintInvalidArgument = 9,
 }
 
 export class CliError extends Error {
@@ -18,7 +15,7 @@ export class CliError extends Error {
 	constructor(
 		message: string,
 		type: string,
-		error_code = ExitCode.UncaughtFatalException
+		error_code = ExitCode.CommitlintErrorDefault
 	) {
 		super(message);
 

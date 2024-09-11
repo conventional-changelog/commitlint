@@ -381,18 +381,14 @@ async function main(args: MainArgs): Promise<void> {
 
 	if (flags.strict) {
 		if (report.errorCount > 0) {
-			throw new CliError(
-				output,
-				pkg.name,
-				ExitCode.InternalJavaScriptParseError
-			);
+			throw new CliError(output, pkg.name, ExitCode.CommitLintError);
 		}
 		if (report.warningCount > 0) {
-			throw new CliError(output, pkg.name, ExitCode.ReservedByBash);
+			throw new CliError(output, pkg.name, ExitCode.CommitLintWarning);
 		}
 	}
 	if (isRulesEmpty) {
-		throw new CliError(output, pkg.name, ExitCode.InvalidArgument);
+		throw new CliError(output, pkg.name, ExitCode.CommitlintInvalidArgument);
 	}
 	if (!report.valid) {
 		throw new CliError(output, pkg.name);

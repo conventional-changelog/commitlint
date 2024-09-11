@@ -2,11 +2,11 @@ import {describe, test, expect} from 'vitest';
 import {createRequire} from 'module';
 import path from 'path';
 import {fileURLToPath} from 'url';
-
 import {fix, git} from '@commitlint/test';
 import fs from 'fs-extra';
 import merge from 'lodash.merge';
 import {x} from 'tinyexec';
+import {ExitCode} from './cli-error.js';
 
 const require = createRequire(import.meta.url);
 
@@ -42,7 +42,7 @@ test('should throw when called without [input]', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const result = cli([], {cwd})();
 	await result;
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should reprint input from stdin', async () => {
@@ -107,7 +107,7 @@ test('should produce help for empty config', async () => {
 	const result = cli([], {cwd})('foo: bar');
 	const output = await result;
 	expect(output.stdout.trim()).toContain('Please add rules');
-	expect(result.exitCode).toBe(9);
+	expect(result.exitCode).toBe(ExitCode.CommitlintInvalidArgument);
 });
 
 test('should produce help for problems', async () => {
@@ -117,7 +117,7 @@ test('should produce help for problems', async () => {
 	expect(output.stdout.trim()).toContain(
 		'Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint'
 	);
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should produce help for problems with correct helpurl', async () => {
@@ -130,21 +130,21 @@ test('should produce help for problems with correct helpurl', async () => {
 	expect(output.stdout.trim()).toContain(
 		'Get help: https://github.com/conventional-changelog/commitlint/#testhelpurl'
 	);
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should fail for input from stdin without rules', async () => {
 	const cwd = await gitBootstrap('fixtures/empty');
 	const result = cli([], {cwd})('foo: bar');
 	await result;
-	expect(result.exitCode).toBe(9);
+	expect(result.exitCode).toBe(ExitCode.CommitlintInvalidArgument);
 });
 
 test('should succeed for input from stdin with rules', async () => {
 	const cwd = await gitBootstrap('fixtures/default');
 	const result = cli([], {cwd})('type: bar');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should fail for input from stdin with rule from rc', async () => {
@@ -152,7 +152,7 @@ test('should fail for input from stdin with rule from rc', async () => {
 	const result = cli([], {cwd})('foo: bar');
 	const output = await result;
 	expect(output.stdout.trim()).toContain('type must not be one of [foo]');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should work with --config option', async () => {
@@ -161,7 +161,7 @@ test('should work with --config option', async () => {
 	const result = cli(['--config', file], {cwd})('foo: bar');
 	const output = await result;
 	expect(output.stdout.trim()).toContain('type must not be one of [foo]');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should fail for input from stdin with rule from js', async () => {
@@ -169,7 +169,7 @@ test('should fail for input from stdin with rule from js', async () => {
 	const result = cli(['--extends', './extended'], {cwd})('foo: bar');
 	const output = await result;
 	expect(output.stdout.trim()).toContain('type must not be one of [foo]');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should output help URL defined in config file', async () => {
@@ -179,7 +179,7 @@ test('should output help URL defined in config file', async () => {
 	expect(output.stdout.trim()).toContain(
 		'Get help: https://www.example.com/foo'
 	);
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should produce no error output with --quiet flag', async () => {
@@ -188,7 +188,7 @@ test('should produce no error output with --quiet flag', async () => {
 	const output = await result;
 	expect(output.stdout.trim()).toEqual('');
 	expect(output.stderr).toEqual('');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should produce no error output with -q flag', async () => {
@@ -197,7 +197,7 @@ test('should produce no error output with -q flag', async () => {
 	const output = await result;
 	expect(output.stdout.trim()).toEqual('');
 	expect(output.stderr).toEqual('');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should work with husky commitmsg hook and git commit', async () => {
@@ -294,7 +294,7 @@ test('should allow reading of environment variables for edit file, succeeding if
 		env: {variable: 'commit-msg-file'},
 	})();
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should allow reading of environment variables for edit file, failing if invalid', async () => {
@@ -308,7 +308,7 @@ test('should allow reading of environment variables for edit file, failing if in
 		env: {variable: 'commit-msg-file'},
 	})();
 	await result;
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should pick up parser preset and fail accordingly', async () => {
@@ -318,7 +318,7 @@ test('should pick up parser preset and fail accordingly', async () => {
 	);
 	const output = await result;
 	expect(output.stdout.trim()).toContain('may not be empty');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should pick up parser preset and succeed accordingly', async () => {
@@ -327,7 +327,7 @@ test('should pick up parser preset and succeed accordingly', async () => {
 		'----type(scope): subject'
 	);
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should pick up config from outside git repo and fail accordingly', async () => {
@@ -336,7 +336,7 @@ test('should pick up config from outside git repo and fail accordingly', async (
 
 	const result = cli([], {cwd})('inner: bar');
 	await result;
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should pick up config from outside git repo and succeed accordingly', async () => {
@@ -345,7 +345,7 @@ test('should pick up config from outside git repo and succeed accordingly', asyn
 
 	const result = cli([], {cwd})('outer: bar');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should pick up config from inside git repo with precedence and succeed accordingly', async () => {
@@ -354,7 +354,7 @@ test('should pick up config from inside git repo with precedence and succeed acc
 
 	const result = cli([], {cwd})('inner: bar');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should pick up config from inside git repo with precedence and fail accordingly', async () => {
@@ -363,7 +363,7 @@ test('should pick up config from inside git repo with precedence and fail accord
 
 	const result = cli([], {cwd})('outer: bar');
 	await result;
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should handle --amend with signoff', async () => {
@@ -389,7 +389,7 @@ test('it uses parserOpts.commentChar when not using edit mode', async () => {
 	const result = cli([], {cwd})(input);
 	const output = await result;
 	expect(output.stdout.trim()).toContain('[body-empty]');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
@@ -402,7 +402,7 @@ test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
 	const result = cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
 	const output = await result;
 	expect(output.stdout.trim()).not.toContain('[body-empty]');
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('it uses core.commentChar git config when using edit mode', async () => {
@@ -418,7 +418,7 @@ test('it uses core.commentChar git config when using edit mode', async () => {
 	const result = cli(['--edit', '.git/COMMIT_EDITMSG'], {cwd})();
 	const output = await result;
 	expect(output.stdout.trim()).toContain('[body-empty]');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('it falls back to # for core.commentChar when using edit mode', async () => {
@@ -432,14 +432,14 @@ test('it falls back to # for core.commentChar when using edit mode', async () =>
 	const output = await result;
 	expect(output.stdout.trim()).toContain('[body-empty]');
 	expect(output.stderr).toEqual('');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should handle linting with issue prefixes', async () => {
 	const cwd = await gitBootstrap('fixtures/issue-prefixes');
 	const result = cli([], {cwd})('foobar REF-1');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 }, 10000);
 
 test('should print full commit message when input from stdin fails', async () => {
@@ -449,7 +449,7 @@ test('should print full commit message when input from stdin fails', async () =>
 	const result = cli(['--color=false'], {cwd})(input);
 	const output = await result;
 	expect(output.stdout.trim()).toContain(input);
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should not print commit message fully or partially when input succeeds', async () => {
@@ -460,7 +460,7 @@ test('should not print commit message fully or partially when input succeeds', a
 	const output = await result;
 	expect(output.stdout.trim()).not.toContain(message);
 	expect(output.stdout.trim()).not.toContain(message.split('\n')[0]);
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should fail for invalid formatters from configuration', async () => {
@@ -471,42 +471,42 @@ test('should fail for invalid formatters from configuration', async () => {
 		'Using format custom-formatter, but cannot find the module'
 	);
 	expect(output.stdout.trim()).toEqual('');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should skip linting if message matches ignores config', async () => {
 	const cwd = await gitBootstrap('fixtures/ignores');
 	const result = cli([], {cwd})('WIP');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should not skip linting if message does not match ignores config', async () => {
 	const cwd = await gitBootstrap('fixtures/ignores');
 	const result = cli([], {cwd})('foo');
 	await result;
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should not skip linting if defaultIgnores is false', async () => {
 	const cwd = await gitBootstrap('fixtures/default-ignores-false');
 	const result = cli([], {cwd})('fixup! foo: bar');
 	await result;
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should skip linting if defaultIgnores is true', async () => {
 	const cwd = await gitBootstrap('fixtures/default-ignores-true');
 	const result = cli([], {cwd})('fixup! foo: bar');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should skip linting if defaultIgnores is unset', async () => {
 	const cwd = await gitBootstrap('fixtures/default-ignores-unset');
 	const result = cli([], {cwd})('fixup! foo: bar');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should fail for invalid formatters from flags', async () => {
@@ -517,7 +517,7 @@ test('should fail for invalid formatters from flags', async () => {
 		'Using format through-flag, but cannot find the module'
 	);
 	expect(output.stdout.trim()).toEqual('');
-	expect(result.exitCode).toBe(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
 test('should work with absolute formatter path', async () => {
@@ -531,7 +531,7 @@ test('should work with absolute formatter path', async () => {
 	);
 	const output = await result;
 	expect(output.stdout.trim()).toContain('custom-formatter-ok');
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should work with relative formatter path', async () => {
@@ -544,28 +544,28 @@ test('should work with relative formatter path', async () => {
 	);
 	const output = await result;
 	expect(output.stdout.trim()).toContain('custom-formatter-ok');
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('strict: should exit with 3 on error', async () => {
 	const cwd = await gitBootstrap('fixtures/warning');
 	const result = cli(['--strict'], {cwd})('foo: abcdef');
 	await result;
-	expect(result.exitCode).toBe(3);
+	expect(result.exitCode).toBe(ExitCode.CommitLintError);
 });
 
 test('strict: should exit with 2 on warning', async () => {
 	const cwd = await gitBootstrap('fixtures/warning');
 	const result = cli(['--strict'], {cwd})('feat: abcdef');
 	await result;
-	expect(result.exitCode).toBe(2);
+	expect(result.exitCode).toBe(ExitCode.CommitLintWarning);
 });
 
 test('strict: should exit with 0 on success', async () => {
 	const cwd = await gitBootstrap('fixtures/warning');
 	const result = cli(['--strict'], {cwd})('feat: abc');
 	await result;
-	expect(result.exitCode).toBe(0);
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test('should print help', async () => {
