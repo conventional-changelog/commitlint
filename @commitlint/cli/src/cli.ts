@@ -387,7 +387,7 @@ async function main(args: MainArgs): Promise<void> {
 			throw new CliError(output, pkg.name, 2);
 		}
 	}
-	if (!report.valid && isRulesEmpty) {
+	if (isRulesEmpty) {
 		throw new CliError(output, pkg.name, 9);
 	}
 	if (!report.valid) {
