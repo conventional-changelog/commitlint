@@ -1,10 +1,22 @@
+export enum ExitCode {
+	CommitlintDefault = 0,
+	CommitlintErrorDefault = 1,
+	CommitLintWarning = 2,
+	CommitLintError = 3,
+	CommitlintInvalidArgument = 9,
+}
+
 export class CliError extends Error {
 	__proto__ = Error;
 
 	public type: string;
-	public error_code: number;
+	public error_code: ExitCode;
 
-	constructor(message: string, type: string, error_code = 1) {
+	constructor(
+		message: string,
+		type: string,
+		error_code = ExitCode.CommitlintErrorDefault
+	) {
 		super(message);
 
 		this.type = type;

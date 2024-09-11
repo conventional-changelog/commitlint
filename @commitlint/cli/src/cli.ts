@@ -20,7 +20,7 @@ import yargs, {type Arguments} from 'yargs';
 
 import {CliFlags} from './types.js';
 
-import {CliError} from './cli-error.js';
+import {CliError, ExitCode} from './cli-error.js';
 
 const require = createRequire(import.meta.url);
 
@@ -316,6 +316,7 @@ async function main(args: MainArgs): Promise<void> {
 		messages.map((message) => lint(message, loaded.rules, opts))
 	);
 
+	let isRulesEmpty = false;
 	if (Object.keys(loaded.rules).length === 0) {
 		let input = '';
 
@@ -340,6 +341,8 @@ async function main(args: MainArgs): Promise<void> {
 			warnings: [],
 			input,
 		});
+
+		isRulesEmpty = true;
 	}
 
 	const report = results.reduce<{
@@ -378,11 +381,14 @@ async function main(args: MainArgs): Promise<void> {
 
 	if (flags.strict) {
 		if (report.errorCount > 0) {
-			throw new CliError(output, pkg.name, 3);
+			throw new CliError(output, pkg.name, ExitCode.CommitLintError);
 		}
 		if (report.warningCount > 0) {
-			throw new CliError(output, pkg.name, 2);
+			throw new CliError(output, pkg.name, ExitCode.CommitLintWarning);
 		}
+	}
+	if (isRulesEmpty) {
+		throw new CliError(output, pkg.name, ExitCode.CommitlintInvalidArgument);
 	}
 	if (!report.valid) {
 		throw new CliError(output, pkg.name);
