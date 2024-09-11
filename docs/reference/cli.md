@@ -3,13 +3,14 @@
 ```sh
 ❯ npx commitlint --help
 
-@commitlint/cli@19.3.0 - Lint your commit messages
+@commitlint/cli@19.5.0 - Lint your commit messages
 
 [input] reads from stdin if --edit, --env, --from and --to are omitted
 
 Options:
   -c, --color          toggle colored output           [boolean] [default: true]
-  -g, --config         path to the config file                          [string]
+  -g, --config         path to the config file; result code 9 if config is
+                       missing                                          [string]
       --print-config   print resolved config
                                           [string] [choices: "", "text", "json"]
   -d, --cwd            directory to execute in
