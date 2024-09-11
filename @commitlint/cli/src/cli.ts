@@ -20,7 +20,7 @@ import yargs, {type Arguments} from 'yargs';
 
 import {CliFlags} from './types.js';
 
-import {CliError} from './cli-error.js';
+import {CliError, ExitCode} from './cli-error.js';
 
 const require = createRequire(import.meta.url);
 
@@ -381,14 +381,18 @@ async function main(args: MainArgs): Promise<void> {
 
 	if (flags.strict) {
 		if (report.errorCount > 0) {
-			throw new CliError(output, pkg.name, 3);
+			throw new CliError(
+				output,
+				pkg.name,
+				ExitCode.InternalJavaScriptParseError
+			);
 		}
 		if (report.warningCount > 0) {
-			throw new CliError(output, pkg.name, 2);
+			throw new CliError(output, pkg.name, ExitCode.ReservedByBash);
 		}
 	}
 	if (isRulesEmpty) {
-		throw new CliError(output, pkg.name, 9);
+		throw new CliError(output, pkg.name, ExitCode.InvalidArgument);
 	}
 	if (!report.valid) {
 		throw new CliError(output, pkg.name);
