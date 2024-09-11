@@ -316,6 +316,7 @@ async function main(args: MainArgs): Promise<void> {
 		messages.map((message) => lint(message, loaded.rules, opts))
 	);
 
+	let isRulesEmpty = false;
 	if (Object.keys(loaded.rules).length === 0) {
 		let input = '';
 
@@ -340,6 +341,8 @@ async function main(args: MainArgs): Promise<void> {
 			warnings: [],
 			input,
 		});
+
+		isRulesEmpty = true;
 	}
 
 	const report = results.reduce<{
@@ -386,6 +389,9 @@ async function main(args: MainArgs): Promise<void> {
 	}
 	if (!report.valid) {
 		throw new CliError(output, pkg.name);
+	}
+	if (!report.valid && isRulesEmpty) {
+		throw new CliError(output, pkg.name, 6);
 	}
 }
 
