@@ -47,7 +47,8 @@ const cli = yargs(process.argv.slice(2))
 		},
 		config: {
 			alias: 'g',
-			description: 'path to the config file',
+			description:
+				'path to the config file; result code 9 if config is missing',
 			type: 'string',
 		},
 		'print-config': {

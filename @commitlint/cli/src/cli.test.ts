@@ -581,7 +581,7 @@ test('should print help', async () => {
 
 		Options:
 		  -c, --color          toggle colored output  [boolean] [default: true]
-		  -g, --config         path to the config file  [string]
+		  -g, --config         path to the config file; result code 9 if config is missing  [string]
 		      --print-config   print resolved config  [string] [choices: "", "text", "json"]
 		  -d, --cwd            directory to execute in  [string] [default: (Working Directory)]
 		  -e, --edit           read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG  [string]
