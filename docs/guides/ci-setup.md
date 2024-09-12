@@ -178,6 +178,25 @@ spec:
   timeout: 15m
 ```
 
+## BitBucket
+
+Validate commits within a PR by leveraging [BitBucket`s default variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
+
+```yml
+image: node:18
+
+pipelines:
+  pull-requests:
+    default:
+      - step:
+        name: Lint commit messages
+        script:
+          - npm install --save-dev @commitlint/config-conventional @commitlint/cli
+          - npx commitlint --from $BITBUCKET_COMMIT~$(git rev-list --count $BITBUCKET_BRANCH ^origin/$BITBUCKET_PR_DESTINATION_BRANCH) --to $BITBUCKET_COMMIT --verbose
+```
+
+BitBucket limits git clone depth to 20 commits by default. You can change this behaviour by [changing the `clone` option](https://support.atlassian.com/bitbucket-cloud/docs/git-clone-behavior/).
+
 ### 3rd party integrations
 
 #### [Codemagic](https://codemagic.io/)
