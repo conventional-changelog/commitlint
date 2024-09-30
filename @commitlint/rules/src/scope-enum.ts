@@ -20,10 +20,10 @@ export const scopeEnum: SyncRule<string[]> = (
 	let isValid;
 
 	if (when === 'never') {
-		isValid = !messageScopes.some(isScopeInEnum);
+		isValid = !messageScopes.some(isScopeInEnum) && !isScopeInEnum(scope);
 		errorMessage.splice(1, 0, 'not');
 	} else {
-		isValid = messageScopes.every(isScopeInEnum);
+		isValid = messageScopes.every(isScopeInEnum) || isScopeInEnum(scope);
 	}
 
 	return [isValid, message(errorMessage)];

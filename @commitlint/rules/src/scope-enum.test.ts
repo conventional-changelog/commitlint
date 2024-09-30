@@ -11,6 +11,7 @@ const messagesByScope = {
 	multiple: {
 		multiple: 'foo(bar,baz): qux',
 		multipleCommaSpace: 'foo(bar, baz): qux',
+		multipleSlash: 'foo(bar/baz): qux',
 	},
 	none: {
 		empty: 'foo: baz',
@@ -143,6 +144,16 @@ describe('Scope Enum Validation', () => {
 					expect(message).toEqual('scope must be one of [bar]');
 				});
 			});
+
+			test(`Succeeds with a 'multipleSlash' message when the scopes are included in enum`, async () => {
+				const [actual, message] = scopeEnum(
+					await parse(messages['multipleSlash']),
+					'always',
+					['bar/baz']
+				);
+				expect(actual).toBeTruthy();
+				expect(message).toEqual('scope must be one of [bar/baz]');
+			});
 		});
 	});
 
@@ -180,6 +191,16 @@ describe('Scope Enum Validation', () => {
 					expect(actual).toBeFalsy();
 					expect(message).toEqual('scope must not be one of [bar, baz]');
 				});
+			});
+
+			test(`Fails with a 'multipleSlash' message when the scopes are included in enum`, async () => {
+				const [actual, message] = scopeEnum(
+					await parse(messages['multipleSlash']),
+					'never',
+					['bar/baz']
+				);
+				expect(actual).toBeFalsy();
+				expect(message).toEqual('scope must not be one of [bar/baz]');
 			});
 		});
 	});
