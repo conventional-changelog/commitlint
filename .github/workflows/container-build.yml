@@ -10,6 +10,7 @@ on:
       - 'Dockerfile.ci'
 jobs:
   container-build:
+    if: github.repository == 'conventional-changelog/commitlint'
     runs-on: ubuntu-latest
     steps:
       - name: checkout
