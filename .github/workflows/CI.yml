@@ -40,7 +40,7 @@ jobs:
   codeQuality:
     name: Code quality
     needs: [build]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
@@ -60,7 +60,7 @@ jobs:
 
   nodeJsBaselineAptCompatibility:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     container:
       image: 'ubuntu:24.04'
     steps:
