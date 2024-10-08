@@ -155,6 +155,19 @@ lint:commit:
     - echo "${CI_COMMIT_MESSAGE}" | commitlint
 ```
 
+## GitLab CI check all commits submitted in merge request
+
+This is useful when your merge request contains multiple commits and you'd like to lint them all.
+
+```yml
+lint:commit:
+  image: node:18
+  before_script:
+    - npm install --no-save @commitlint/config-conventional @commitlint/cli
+  script:
+    - npx commitlint --from $CI_MERGE_REQUEST_DIFF_BASE_SHA --to $CI_COMMIT_SHA
+```
+
 ## Jenkins X
 
 ```yml
