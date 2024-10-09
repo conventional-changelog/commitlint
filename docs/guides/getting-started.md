@@ -29,7 +29,7 @@ pnpm add --save-dev @commitlint/{cli,config-conventional}
 Configure commitlint to use conventional config
 
 ```sh
-echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.mjs
 ```
 
 Refer to [configuration documentation](/reference/configuration) for more information.
