@@ -47,7 +47,7 @@ function formatInput(
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
 	return options.verbose || hasProblems
-		? [`${decoration}   input: ${decoratedInput}`]
+		? [`${decoration}   --- input ---\n${decoratedInput}`]
 		: [];
 }
 
