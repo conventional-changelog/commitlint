@@ -197,6 +197,48 @@ pipelines:
 
 BitBucket limits git clone depth to 20 commits by default. You can change this behaviour by [changing the `clone` option](https://support.atlassian.com/bitbucket-cloud/docs/git-clone-behavior/).
 
+## Azure Pipelines
+
+```yml
+steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "20.x"
+      checkLatest: true
+
+  - script: |
+      git --version
+      node --version
+      npm --version
+      npx commitlint --version
+    displayName: Print versions
+
+  - script: |
+      npm install conventional-changelog-conventionalcommits
+      npm install commitlint@latest
+    displayName: Install commitlint
+
+  - script: npx commitlint --last --verbose
+    condition: ne(variables['Build.Reason'], 'PullRequest')
+    displayName: Validate current commit (last commit) with commitlint
+
+  - script: |
+      echo "Accessing Azure DevOps API..."
+      response=$(curl -s -X GET -H "Authorization: Bearer $(System.AccessToken)" $(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis/git/repositories/$(Build.Repository.Name)/pullRequests/$(System.PullRequest.PullRequestId)/commits?api-version=6.0)
+
+      numberOfCommits=$(echo "$response" | jq -r '.count')
+      echo "$numberOfCommits commits to check"
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    displayName: Retrieve the number of commits on this PR
+
+  - script: npx commitlint --from $(System.PullRequest.SourceCommitId)~$(numberOfCommits) --to $(System.PullRequest.SourceCommitId) --verbose
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    displayName: Validate PR commits with commitlint
+```
+
 ### 3rd party integrations
 
 #### [Codemagic](https://codemagic.io/)
