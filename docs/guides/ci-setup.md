@@ -227,14 +227,13 @@ steps:
 
   - script: |
       echo "Accessing Azure DevOps API..."
-      response=$(curl -s -X GET -H "Authorization: Bearer $(System.AccessToken)" $(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis/git/repositories/$(Build.Repository.Name)/pullRequests/$(System.PullRequest.PullRequestId)/commits?api-version=6.0)
 
+      response=$(curl -s -X GET -H "Cache-Control: no-cache" -H "Authorization: Bearer $(System.AccessToken)" $(System.TeamFoundationCollectionUri)$(System.TeamProject)/_apis/git/repositories/$(Build.Repository.Name)/pullRequests/$(System.PullRequest.PullRequestId)/commits?api-version=6.0)
       numberOfCommits=$(echo "$response" | jq -r '.count')
-      echo "$numberOfCommits commits to check"
-    condition: eq(variables['Build.Reason'], 'PullRequest')
-    displayName: Retrieve the number of commits on this PR
 
-  - script: npx commitlint --from $(System.PullRequest.SourceCommitId)~$(numberOfCommits) --to $(System.PullRequest.SourceCommitId) --verbose
+      echo "$numberOfCommits commits to check"
+
+      npx commitlint --from $(System.PullRequest.SourceCommitId)~${numberOfCommits} --to $(System.PullRequest.SourceCommitId) --verbose
     condition: eq(variables['Build.Reason'], 'PullRequest')
     displayName: Validate PR commits with commitlint
 ```
