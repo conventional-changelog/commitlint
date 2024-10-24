@@ -20,6 +20,7 @@ export const wildcards: Matcher[] = [
 	),
 	test(/^(Merge tag (.*?))(?:\r?\n)*$/m),
 	test(/^(R|r)evert (.*)/),
+	test(/^(R|r)eapply (.*)/),
 	test(/^(amend|fixup|squash)!/),
 	isSemver,
 	test(/^(Merged (.*?)(in|into) (.*)|Merged PR (.*): (.*))/),
