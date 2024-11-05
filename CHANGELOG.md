@@ -765,7 +765,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - chore: rename circleci windows job
 
-node version is not defned by the name anyways (i think)
+node version is not defined by the name anyways (i think)
 
 # [16.3.0](https://github.com/conventional-changelog/commitlint/compare/v16.2.4...v16.3.0) (2022-05-14)
 
@@ -1514,7 +1514,7 @@ This release is versioned as minor change because some of the core components ar
 
 ### Features
 
-- **babel-preset-commitlint:** add jsx tranform ([#163](https://github.com/conventional-changelog/commitlint/issues/163)) ([5190241](https://github.com/conventional-changelog/commitlint/commit/5190241))
+- **babel-preset-commitlint:** add jsx transform ([#163](https://github.com/conventional-changelog/commitlint/issues/163)) ([5190241](https://github.com/conventional-changelog/commitlint/commit/5190241))
 
 <a name="5.1.3"></a>
 
