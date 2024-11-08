@@ -1,6 +1,7 @@
-FROM docker.io/library/node:18-buster AS builder
+FROM docker.io/library/node:18-alpine AS builder
 WORKDIR /src
 COPY . ./
+RUN apk add --no-cache python3 py3-setuptools make g++ git
 RUN yarn install --frozen-lockfile --network-timeout 100000 && \
     yarn run build && \
     # Commit lint CLI packages
@@ -24,7 +25,7 @@ RUN yarn install --frozen-lockfile --network-timeout 100000 && \
     # Default commitlint config
     npm pack @commitlint/config-conventional
 
-FROM docker.io/library/node:18-buster
+FROM docker.io/library/node:18-alpine
 COPY --from=builder /src/*.tgz ./
 RUN npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
