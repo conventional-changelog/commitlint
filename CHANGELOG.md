@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.6.0](https://github.com/conventional-changelog/commitlint/compare/v19.5.0...v19.6.0) (2024-11-19)
+
+
+### Bug Fixes
+
+* update dependency inquirer to v9.3.7 ([#4167](https://github.com/conventional-changelog/commitlint/issues/4167)) ([610a8f2](https://github.com/conventional-changelog/commitlint/commit/610a8f212af3329d48663f20324b14140028dccc))
+
+
+### Features
+
+* **is-ignored:** ignore reapply commits ([#4186](https://github.com/conventional-changelog/commitlint/issues/4186)) ([49ba56d](https://github.com/conventional-changelog/commitlint/commit/49ba56d9dd4c72e918005e6ca62f110a393b8f07))
+* support using delimiter in `scope-enum` ([#4161](https://github.com/conventional-changelog/commitlint/issues/4161)) ([f55521d](https://github.com/conventional-changelog/commitlint/commit/f55521dbb8ce0530ecb9557122689bba740fb2a5))
+
+
+
+
+
 # [19.5.0](https://github.com/conventional-changelog/commitlint/compare/v19.4.1...v19.5.0) (2024-09-11)
 
 
