@@ -26,6 +26,7 @@ RUN yarn install --frozen-lockfile --network-timeout 100000 && \
     npm pack @commitlint/config-conventional
 
 FROM docker.io/library/node:18-alpine
+RUN apk add --no-cache git
 COPY --from=builder /src/*.tgz ./
 RUN npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
