@@ -83,6 +83,17 @@ npm pkg set scripts.commitlint="commitlint --edit"
 echo "pnpm commitlint \${1}" > .husky/commit-msg
 ```
 
+== deno
+
+```sh
+deno add --dev husky
+
+deno task --eval husky init
+
+# Add commit message linting to commit-msg hook
+echo "deno task --eval commitlint --edit \$1" > .husky/commit-msg
+```
+
 :::
 
 ---

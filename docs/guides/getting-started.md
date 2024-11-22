@@ -22,6 +22,10 @@ npm install --save-dev @commitlint/config-conventional @commitlint/cli
 pnpm add --save-dev @commitlint/{cli,config-conventional}
 ```
 
+```sh [deno]
+deno add --dev npm:@commitlint/cli npm:@commitlint/config-conventional
+```
+
 :::
 
 ## Configuration
