@@ -31,7 +31,7 @@ To make prompt-cli easy to use, add a npm run-script to your `package.json`
 ```json:line-numbers {3}
 {
   "scripts": {
-    "commit": "commit"
+    "commit": "git-cz commit"
   }
 }
 ```
