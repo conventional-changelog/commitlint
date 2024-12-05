@@ -54,7 +54,7 @@ test('returns empty summary with full commit message if verbose', () => {
 	);
 
 	expect(actual).toStrictEqual(
-		'⧗   input: feat(cli): this is a valid header\n\nThis is a valid body\n\nSigned-off-by: tester\n✔   found 0 problems, 0 warnings'
+		'⧗   --- input ---\nfeat(cli): this is a valid header\n\nThis is a valid body\n\nSigned-off-by: tester\n✔   found 0 problems, 0 warnings'
 	);
 });
 
