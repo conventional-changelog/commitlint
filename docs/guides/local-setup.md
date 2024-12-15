@@ -35,6 +35,8 @@ npx husky init
 
 # Add commit message linting to commit-msg hook
 echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
+# Windows users should use ` to escape dollar signs
+echo "npx --no commitlint --edit `$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
@@ -53,6 +55,8 @@ yarn husky init
 
 # Add commit message linting to commit-msg hook
 echo "yarn commitlint --edit \$1" > .husky/commit-msg
+# Windows users should use ` to escape dollar signs
+echo "yarn commitlint --edit `$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
@@ -74,6 +78,8 @@ pnpm husky init
 
 # Add commit message linting to commit-msg hook
 echo "pnpm dlx commitlint --edit \$1" > .husky/commit-msg
+# Windows users should use ` to escape dollar signs
+echo "pnpm dlx commitlint --edit `$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
@@ -92,6 +98,8 @@ deno task --eval husky init
 
 # Add commit message linting to commit-msg hook
 echo "deno task --eval commitlint --edit \$1" > .husky/commit-msg
+# Windows users should use ` to escape dollar signs
+echo "deno task --eval commitlint --edit `$1" > .husky/commit-msg
 ```
 
 :::
