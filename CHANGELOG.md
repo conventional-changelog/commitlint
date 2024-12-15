@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.6.1](https://github.com/conventional-changelog/commitlint/compare/v19.6.0...v19.6.1) (2024-12-15)
+
+
+### Bug Fixes
+
+* force bump for container usage ([#4200](https://github.com/conventional-changelog/commitlint/issues/4200)) ([21858df](https://github.com/conventional-changelog/commitlint/commit/21858dfa25acb5a1f244cdcba7ff20735fa5903f))
+
+
+
+
+
 # [19.6.0](https://github.com/conventional-changelog/commitlint/compare/v19.5.0...v19.6.0) (2024-11-19)
 
 
