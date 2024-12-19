@@ -5,11 +5,17 @@ import {typeEmpty} from './type-empty.js';
 const messages = {
 	empty: '(scope):',
 	filled: 'type: subject',
+	fullyFilled: 'type(scope): subject',
+	subjectOnly: 'subject',
+	separator: ': subject',
 };
 
 const parsed = {
 	empty: parse(messages.empty),
 	filled: parse(messages.filled),
+	fullyFilled: parse(messages.fullyFilled),
+	subjectOnly: parse(messages.subjectOnly),
+	separator: parse(messages.separator),
 };
 
 test('without type should succeed for empty keyword', async () => {
@@ -44,6 +50,60 @@ test('with type succeed for "never"', async () => {
 
 test('with type fail for "always"', async () => {
 	const [actual] = typeEmpty(await parsed.filled, 'always');
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with title, scope and subject should fail for empty keyword', async () => {
+	const [actual] = typeEmpty(await parsed.fullyFilled);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with  title, scope and subject should succeed for "never"', async () => {
+	const [actual] = typeEmpty(await parsed.fullyFilled, 'never');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with  title, scope and subject should fail for "always"', async () => {
+	const [actual] = typeEmpty(await parsed.fullyFilled, 'always');
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with only subject should succeed for empty keyword', async () => {
+	const [actual] = typeEmpty(await parsed.subjectOnly);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with only subject should fail for "never"', async () => {
+	const [actual] = typeEmpty(await parsed.subjectOnly, 'never');
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with only subject should succeed for "always"', async () => {
+	const [actual] = typeEmpty(await parsed.subjectOnly, 'always');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('without type but with a separator should fail for empty keyword', async () => {
+	const [actual] = typeEmpty(await parsed.separator);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('without type but with a separator should succeed for "never"', async () => {
+	const [actual] = typeEmpty(await parsed.separator, 'never');
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('without type but with a separator should fail for "always"', async () => {
+	const [actual] = typeEmpty(await parsed.separator, 'always');
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
