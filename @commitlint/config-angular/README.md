@@ -2,7 +2,7 @@
 
 Lint your commits, angular-style
 
-Shareable `commitlint` config enforcing the [Angular commit convention](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit).
+Shareable `commitlint` config enforcing the [Angular commit convention](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit).
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
 ## Getting started
@@ -128,7 +128,7 @@ echo "fix: some message" # passes
 - **rule**: `never`
 
 The [angular commit
-convention](hhttps://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
+convention](hhttps://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit)
 does not use a `!` to define a breaking change in the commit subject. If you
 want to use this feature please consider using the [conventional commit
 config](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#commitlintconfig-conventional).
