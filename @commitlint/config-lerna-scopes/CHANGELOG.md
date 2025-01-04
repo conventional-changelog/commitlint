@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.7.0](https://github.com/conventional-changelog/commitlint/compare/v19.6.1...v19.7.0) (2025-01-04)
+
+
+### Features
+
+* support lerna 7 and 8 ([#4221](https://github.com/conventional-changelog/commitlint/issues/4221)) ([3b8da63](https://github.com/conventional-changelog/commitlint/commit/3b8da63f50f868555a3f026a76e96cd8d20638de))
+
+
+
+
+
 # [19.5.0](https://github.com/conventional-changelog/commitlint/compare/v19.4.1...v19.5.0) (2024-09-11)
 
 **Note:** Version bump only for package @commitlint/config-lerna-scopes

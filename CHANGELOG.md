@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.7.0](https://github.com/conventional-changelog/commitlint/compare/v19.6.1...v19.7.0) (2025-01-04)
+
+
+### Bug Fixes
+
+* update dependency chalk to v5.4.1 ([#4228](https://github.com/conventional-changelog/commitlint/issues/4228)) ([0b11176](https://github.com/conventional-changelog/commitlint/commit/0b111767fa6700eab82c7a4804273c0f6275a3d3))
+* update dependency tinyexec to v0.3.2 ([#4229](https://github.com/conventional-changelog/commitlint/issues/4229)) ([dca0d97](https://github.com/conventional-changelog/commitlint/commit/dca0d97261977681b0366d9733dbbf227bb9a9b1))
+
+
+### Features
+
+* support lerna 7 and 8 ([#4221](https://github.com/conventional-changelog/commitlint/issues/4221)) ([3b8da63](https://github.com/conventional-changelog/commitlint/commit/3b8da63f50f868555a3f026a76e96cd8d20638de))
+
+
+
+
+
 ## [19.6.1](https://github.com/conventional-changelog/commitlint/compare/v19.6.0...v19.6.1) (2024-12-15)
 
 
