@@ -30,7 +30,6 @@ function getProjects(context, selector = () => true) {
 				tags: project.tags,
 			})
 		)
-		.filter((project) => project.targets)
 		.map((project) => project.name)
 		.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
 }
