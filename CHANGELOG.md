@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.7.1](https://github.com/conventional-changelog/commitlint/compare/v19.7.0...v19.7.1) (2025-02-02)
+
+
+### Bug Fixes
+
+* **config-nx-scopes:** fix for projects without explicit targets ([#4261](https://github.com/conventional-changelog/commitlint/issues/4261)) ([25bb2cd](https://github.com/conventional-changelog/commitlint/commit/25bb2cd8c70353637f77d471e39f4e4b17fa4cae))
+* improve security validation regex in is-ignored function ([#4258](https://github.com/conventional-changelog/commitlint/issues/4258)) ([7403d63](https://github.com/conventional-changelog/commitlint/commit/7403d6382cc2fb1f066a47d7229593eefe528561))
+* update dependency fast-glob to v3.3.3 ([#4235](https://github.com/conventional-changelog/commitlint/issues/4235)) ([c286237](https://github.com/conventional-changelog/commitlint/commit/c28623733351f2920d32e27169a27e127f900985))
+* update dependency fs-extra to v11.3.0 ([#4249](https://github.com/conventional-changelog/commitlint/issues/4249)) ([39acfe4](https://github.com/conventional-changelog/commitlint/commit/39acfe4a3d88863d126a6a9661a80246a7df9428))
+* update dependency tar-fs to v3.0.7 ([#4243](https://github.com/conventional-changelog/commitlint/issues/4243)) ([708320f](https://github.com/conventional-changelog/commitlint/commit/708320f0403684d2f76a20eb8a83deb84c0c808e))
+* update dependency tar-fs to v3.0.8 ([#4247](https://github.com/conventional-changelog/commitlint/issues/4247)) ([ecb5d3a](https://github.com/conventional-changelog/commitlint/commit/ecb5d3a1c5be5713ccdbb4f4e863390a80d8d917))
+
+
+
+
+
 # [19.7.0](https://github.com/conventional-changelog/commitlint/compare/v19.6.1...v19.7.0) (2025-01-04)
 
 

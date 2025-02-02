@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.7.1](https://github.com/conventional-changelog/commitlint/compare/v19.7.0...v19.7.1) (2025-02-02)
+
+
+### Bug Fixes
+
+* improve security validation regex in is-ignored function ([#4258](https://github.com/conventional-changelog/commitlint/issues/4258)) ([7403d63](https://github.com/conventional-changelog/commitlint/commit/7403d6382cc2fb1f066a47d7229593eefe528561))
+
+
+
+
+
 # [19.6.0](https://github.com/conventional-changelog/commitlint/compare/v19.5.0...v19.6.0) (2024-11-19)
 
 
