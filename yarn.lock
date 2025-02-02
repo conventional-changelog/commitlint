@@ -636,10 +636,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@eslint/js@9.18.0", "@eslint/js@^9.16.0":
-  version "9.18.0"
-  resolved "https://registry.npmjs.org/@eslint/js/-/js-9.18.0.tgz#3356f85d18ed3627ab107790b53caf7e1e3d1e84"
-  integrity sha512-fK6L7rxcq6/z+AaQMtiFTkvbHkBLNlwyRxHpKawP0x3u9+NC6MQTnFW+AdpwC6gfHTW0051cokQgtTN2FqlxQA==
+"@eslint/js@9.19.0", "@eslint/js@^9.16.0":
+  version "9.19.0"
+  resolved "https://registry.npmjs.org/@eslint/js/-/js-9.19.0.tgz#51dbb140ed6b49d05adc0b171c41e1a8713b7789"
+  integrity sha512-rbq9/g38qjfqFLOVPvwjIvFFdNziEC5S65jmjPw5r6A//QH+W91akh9irMwjDN8zKUTak6W9EsAv4m/7Wnw0UQ==
 
 "@eslint/object-schema@^2.1.6":
   version "2.1.6"
@@ -2340,9 +2340,9 @@
     undici-types "~6.20.0"
 
 "@types/node@^18.19.17":
-  version "18.19.71"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.19.71.tgz#96d4f0a0be735ead6c8998c62a4b2c0012a5d09a"
-  integrity sha512-evXpcgtZm8FY4jqBSN8+DmOTcVkkvTmAayeo4Wf3m1xAruyVGzGuDh/Fb/WWX2yLItUiho42ozyJjB0dw//Tkw==
+  version "18.19.74"
+  resolved "https://registry.npmjs.org/@types/node/-/node-18.19.74.tgz#4d093acd2a558ebbc5f0efa4e20ce63791b0cc58"
+  integrity sha512-HMwEkkifei3L605gFdV+/UwtpxP6JSzM+xFk2Ia6DNFSwSVBRh9qp5Tgf4lNFOMfPVuU0WnkcWpXZpgn5ufO4A==
   dependencies:
     undici-types "~5.26.4"
 
@@ -4373,16 +4373,16 @@ eslint-visitor-keys@^4.2.0:
   integrity sha512-UyLnSehNt62FFhSwjZlHmeokpRK59rcz29j+F1/aDgbkbRTk7wIc9XzdoasMUbRNKDM0qQt/+BJ4BrpFeABemw==
 
 eslint@^9.16.0:
-  version "9.18.0"
-  resolved "https://registry.npmjs.org/eslint/-/eslint-9.18.0.tgz#c95b24de1183e865de19f607fda6518b54827850"
-  integrity sha512-+waTfRWQlSbpt3KWE+CjrPPYnbq9kfZIYUqapc0uBXyjTp8aYXZDsUH16m39Ryq3NjAVP4tjuF7KaukeqoCoaA==
+  version "9.19.0"
+  resolved "https://registry.npmjs.org/eslint/-/eslint-9.19.0.tgz#ffa1d265fc4205e0f8464330d35f09e1d548b1bf"
+  integrity sha512-ug92j0LepKlbbEv6hD911THhoRHmbdXt2gX+VDABAW/Ir7D3nqKdv5Pf5vtlyY6HQMTEP2skXY43ueqTCWssEA==
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
     "@eslint-community/regexpp" "^4.12.1"
     "@eslint/config-array" "^0.19.0"
     "@eslint/core" "^0.10.0"
     "@eslint/eslintrc" "^3.2.0"
-    "@eslint/js" "9.18.0"
+    "@eslint/js" "9.19.0"
     "@eslint/plugin-kit" "^0.2.5"
     "@humanfs/node" "^0.16.6"
     "@humanwhocodes/module-importer" "^1.0.1"
@@ -5291,7 +5291,15 @@ ignore@^5.2.0, ignore@^5.3.1:
   resolved "https://registry.npmjs.org/ignore/-/ignore-5.3.2.tgz#3cd40e729f3643fd87cb04e50bf0eb722bc596f5"
   integrity sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==
 
-import-fresh@^3.2.1, import-fresh@^3.3.0:
+import-fresh@^3.2.1:
+  version "3.3.1"
+  resolved "https://registry.npmjs.org/import-fresh/-/import-fresh-3.3.1.tgz#9cecb56503c0ada1f2741dbbd6546e4b13b57ccf"
+  integrity sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==
+  dependencies:
+    parent-module "^1.0.0"
+    resolve-from "^4.0.0"
+
+import-fresh@^3.3.0:
   version "3.3.0"
   resolved "https://registry.npmjs.org/import-fresh/-/import-fresh-3.3.0.tgz#37162c25fcb9ebaa2e6e53d5b4d88ce17d9e0c2b"
   integrity sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==
