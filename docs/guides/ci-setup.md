@@ -133,7 +133,7 @@ lint:commit:
     - apk add --no-cache git
     - npm install --save-dev @commitlint/config-conventional @commitlint/cli
   script:
-    - echo "${CI_COMMIT_MESSAGE}" | npx commitlint
+    - npx commitlint --from ${CI_MERGE_REQUEST_DIFF_BASE_SHA} --to ${CI_COMMIT_SHA}
 ```
 
 GitLab limits `git clone` depth to
@@ -152,7 +152,7 @@ lint:commit:
   script:
     # Uncomment the next line if you are extending the @commitlint/config-nx-scopes in your commitlint configuration
     #- npm i -g nx@$(node -pe "require('./package.json').devDependencies.nx")
-    - echo "${CI_COMMIT_MESSAGE}" | commitlint
+    - commitlint --from ${CI_MERGE_REQUEST_DIFF_BASE_SHA} --to ${CI_COMMIT_SHA}
 ```
 
 ## Jenkins X
