@@ -127,6 +127,7 @@ A number of shared configurations are available to install and use with `commitl
 - [@commitlint/config-lerna-scopes](./@commitlint/config-lerna-scopes)
 - [@commitlint/config-nx-scopes](./@commitlint/config-nx-scopes)
 - [@commitlint/config-patternplate](./@commitlint/config-patternplate)
+- [@commitlint/config-workspace-scopes](./@commitlint/config-workspace-scopes)
 - [conventional-changelog-lint-config-atom](https://github.com/erikmueller/conventional-changelog-lint-config-atom)
 - [conventional-changelog-lint-config-canonical](https://github.com/gajus/conventional-changelog-lint-config-canonical)
 

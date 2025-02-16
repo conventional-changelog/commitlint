@@ -22,14 +22,14 @@
     "commitlint-config",
     "lerna"
   ],
-  "author": "Mario Nebl <hello@herebecode.com>",
+  "author": "Jan Biasi (https://github.com/janbiasi)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
   "homepage": "https://commitlint.js.org/",
   "peerDependencies": {
-    "lerna": ">=5 <9"
+    "lerna": "*"
   },
   "peerDependenciesMeta": {
     "lerna": {
@@ -40,15 +40,12 @@
     "node": ">=v18"
   },
   "dependencies": {
-    "@lerna/project": "^6.0.0",
-    "glob": "^10.3.10",
-    "import-from": "^4.0.0",
-    "semver": "^7.6.0"
+    "@commitlint/config-workspace-scopes": "^19.7.0",
+    "fast-glob": "^3.3.3"
   },
   "devDependencies": {
     "@commitlint/test": "^19.5.0",
-    "@commitlint/utils": "^19.5.0",
-    "@types/glob": "^8.1.0"
+    "@commitlint/utils": "^19.5.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"
 }
