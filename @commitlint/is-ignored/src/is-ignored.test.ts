@@ -256,6 +256,7 @@ test('should not throw error for custom ignore functions without security risks'
 		'function(commit) { return commit.length < 10 && commit.includes("some"); }',
 		'function(commit) { return commit.length < 10 || commit.includes("fetch"); }',
 		'function(commit) { return commit.includes("exec"); }',
+		'function(commit) { return !process.env.CI && /^wip\b/.test(commit); }',
 	];
 
 	safePatterns.forEach((fnString) => {
