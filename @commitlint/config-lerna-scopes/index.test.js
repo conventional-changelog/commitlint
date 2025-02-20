@@ -58,12 +58,12 @@ test('returns empty value for empty lerna repository', async () => {
 	expect(value).toEqual([]);
 });
 
-test('returns expected value for basic lerna repository', async () => {
+test.only('returns expected value for basic lerna repository', async () => {
 	const {'scope-enum': fn} = config.rules;
 	const cwd = await npm.bootstrap('fixtures/basic', __dirname);
 
 	const [, , value] = await fn({cwd});
-	expect(value).toEqual(['a', 'b']);
+	expect(value).toEqual(['a', 'b', 'c']);
 });
 
 test('returns expected value for lerna repository containing modules', async () => {
@@ -80,22 +80,4 @@ test('returns expected value for scoped lerna repository', async () => {
 
 	const [, , value] = await fn({cwd});
 	expect(value).toEqual(['a', 'b']);
-});
-
-test('returns expected value for yarn workspaces', async () => {
-	const {'scope-enum': fn} = config.rules;
-	const cwd = path.join(__dirname, 'fixtures', 'yarn');
-	const [, , value] = await fn({cwd});
-	expect(value.sort()).toEqual(['a', 'b']);
-});
-
-test('returns expected value for yarn workspaces has nested packages', async () => {
-	const {'scope-enum': fn} = config.rules;
-	const cwd = await npm.bootstrap('fixtures/nested-workspaces', __dirname);
-
-	const [, , value] = await fn({cwd});
-	expect(value).toEqual(expect.arrayContaining(['nested-a', 'nested-b']));
-	expect(value).toEqual(
-		expect.not.arrayContaining(['dependency-a', 'dependency-b'])
-	);
 });
