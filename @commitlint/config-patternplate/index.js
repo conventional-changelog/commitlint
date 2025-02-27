@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import configAngular from '@commitlint/config-angular';
 import {glob} from 'glob';

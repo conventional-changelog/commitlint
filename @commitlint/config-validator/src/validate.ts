@@ -1,4 +1,4 @@
-import {createRequire} from 'module';
+import {createRequire} from 'node:module';
 
 import {UserConfig} from '@commitlint/types';
 import _Ajv from 'ajv';

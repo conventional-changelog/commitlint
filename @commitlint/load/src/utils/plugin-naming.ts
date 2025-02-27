@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 // largely adapted from eslint's plugin system
 const NAMESPACE_REGEX = /^@.*\//u;

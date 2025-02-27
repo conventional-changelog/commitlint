@@ -1,5 +1,5 @@
-import path from 'path';
-import {Stats} from 'fs';
+import path from 'node:path';
+import {Stats} from 'node:fs';
 import fs from 'fs/promises';
 
 // Get path to recently edited commit message file

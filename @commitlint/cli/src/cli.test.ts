@@ -1,7 +1,7 @@
 import {describe, test, expect} from 'vitest';
-import {createRequire} from 'module';
-import path from 'path';
-import {fileURLToPath} from 'url';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {fix, git} from '@commitlint/test';
 import fs from 'fs-extra';
 import merge from 'lodash.merge';

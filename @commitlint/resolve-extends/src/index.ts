@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import {pathToFileURL, fileURLToPath} from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL, fileURLToPath} from 'node:url';
 
 import globalDirectory from 'global-directory';
 import {moduleResolve} from 'import-meta-resolve';

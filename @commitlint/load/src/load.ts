@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import {validateConfig} from '@commitlint/config-validator';
 import executeRule from '@commitlint/execute-rule';

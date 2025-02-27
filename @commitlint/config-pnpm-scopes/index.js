@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import fg from 'fast-glob';
 import readYamlFile from 'read-yaml-file';

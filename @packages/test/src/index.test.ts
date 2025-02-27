@@ -1,6 +1,6 @@
 import {test, expect} from 'vitest';
-import os from 'os';
-import path from 'path';
+import os from 'node:os';
+import path from 'node:path';
 import fs from 'fs-extra';
 
 import * as u from './index.js';

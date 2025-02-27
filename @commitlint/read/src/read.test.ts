@@ -1,6 +1,6 @@
 import {test, expect} from 'vitest';
 import fs from 'fs/promises';
-import path from 'path';
+import path from 'node:path';
 import {git} from '@commitlint/test';
 import {x} from 'tinyexec';
 

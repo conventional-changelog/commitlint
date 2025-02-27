@@ -1,5 +1,5 @@
 import {test, expect} from 'vitest';
-import {createRequire} from 'module';
+import {createRequire} from 'node:module';
 import {git} from '@commitlint/test';
 import {x} from 'tinyexec';
 

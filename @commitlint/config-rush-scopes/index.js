@@ -1,4 +1,4 @@
-import Path from 'path';
+import Path from 'node:path';
 import fs from 'fs/promises';
 
 import jsonc from 'jsonc';

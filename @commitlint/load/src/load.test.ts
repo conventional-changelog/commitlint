@@ -1,7 +1,7 @@
 import {describe, test, expect, vi} from 'vitest';
-import {readFileSync, writeFileSync} from 'fs';
-import path from 'path';
-import {fileURLToPath} from 'url';
+import {readFileSync, writeFileSync} from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 import {RuleConfigSeverity} from '@commitlint/types';
 import {fix, git, npm} from '@commitlint/test';
