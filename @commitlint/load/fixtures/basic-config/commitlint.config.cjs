@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
 	formatter: '@commitlint/format',
 	rules: {
