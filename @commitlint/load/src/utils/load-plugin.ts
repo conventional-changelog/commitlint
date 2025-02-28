@@ -1,6 +1,6 @@
-import {createRequire} from 'module';
-import path from 'path';
-import {fileURLToPath, pathToFileURL} from 'url';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+import {fileURLToPath, pathToFileURL} from 'node:url';
 
 import {Plugin, PluginRecords} from '@commitlint/types';
 import chalk from 'chalk';

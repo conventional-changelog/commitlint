@@ -1,6 +1,6 @@
 import {SpawnOptions} from 'node:child_process';
 
-import {createRequire} from 'module';
+import {createRequire} from 'node:module';
 
 import {x} from 'tinyexec';
 

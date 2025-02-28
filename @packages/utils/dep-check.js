@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import path from 'path';
+import path from 'node:path';
 import {x} from 'tinyexec';
 
 const cwd = process.cwd();

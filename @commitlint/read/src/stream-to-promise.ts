@@ -1,4 +1,4 @@
-import {Readable} from 'stream';
+import {Readable} from 'node:stream';
 
 export function streamToPromise(stream: Readable): Promise<string[]> {
 	const data: string[] = [];

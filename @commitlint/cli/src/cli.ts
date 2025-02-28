@@ -1,7 +1,7 @@
-import {createRequire} from 'module';
-import path from 'path';
-import {fileURLToPath, pathToFileURL} from 'url';
-import util from 'util';
+import {createRequire} from 'node:module';
+import path from 'node:path';
+import {fileURLToPath, pathToFileURL} from 'node:url';
+import util from 'node:util';
 
 import lint from '@commitlint/lint';
 import load, {resolveFromSilent, resolveGlobalSilent} from '@commitlint/load';

@@ -4,7 +4,7 @@ import chalk from 'chalk';
 import inquirer, {type Answers, type InputCustomOptions} from 'inquirer';
 import InputPrompt from 'inquirer/lib/prompts/input.js';
 import observe from 'inquirer/lib/utils/events.js';
-import type {Interface as ReadlineInterface, Key} from 'readline';
+import type {Interface as ReadlineInterface, Key} from 'node:readline';
 import type {Subscription} from 'rxjs';
 
 import SuccessfulPromptStateData = inquirer.prompts.SuccessfulPromptStateData;

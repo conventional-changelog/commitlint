@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
 
 import readPkg from 'read-pkg';
 import requireFromString from 'require-from-string';
@@ -8,12 +8,12 @@ import tar from 'tar-fs';
 import {x} from 'tinyexec';
 import tmp from 'tmp';
 import yargs from 'yargs';
-import zlib from 'zlib';
+import zlib from 'node:zlib';
 
 tmp.setGracefulCleanup();
 
 const PRELUDE = `
-var Module = require('module');
+var Module = require('node:module');
 var originalLoader = Module._load
 
 Module._load = function(path, parent) {

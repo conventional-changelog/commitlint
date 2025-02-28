@@ -1,5 +1,5 @@
-import {createRequire} from 'module';
-import Path from 'path';
+import {createRequire} from 'node:module';
+import Path from 'node:path';
 
 import {globSync} from 'glob';
 

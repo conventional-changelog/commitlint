@@ -1,4 +1,4 @@
-import util from 'util';
+import util from 'node:util';
 import isIgnored from '@commitlint/is-ignored';
 import parse from '@commitlint/parse';
 import defaultRules from '@commitlint/rules';
