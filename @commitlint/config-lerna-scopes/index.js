@@ -1,70 +1,89 @@
-import {createRequire} from 'node:module';
-import Path from 'node:path';
-
-import {globSync} from 'glob';
-import importFrom from 'import-from';
-import semver from 'semver';
-
-const require = createRequire(import.meta.url);
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import fg from 'fast-glob';
+import configWorkspaceScopes from '@commitlint/config-workspace-scopes';
 
 export default {
-	utils: {getPackages},
+	utils: {getProjects},
 	rules: {
 		'scope-enum': (ctx) =>
-			getPackages(ctx).then((packages) => [2, 'always', packages]),
+			getProjects(ctx).then((packages) => [2, 'always', packages]),
 	},
 };
 
-function getPackages(context) {
-	return Promise.resolve()
-		.then(() => {
-			const ctx = context || {};
-			const cwd = ctx.cwd || process.cwd();
-
-			const {workspaces} = require(Path.join(cwd, 'package.json'));
-			if (Array.isArray(workspaces) && workspaces.length) {
-				// use yarn workspaces
-
-				const wsGlobs = workspaces.flatMap((ws) => {
-					const path = Path.posix.join(ws, 'package.json');
-					return globSync(path, {cwd, ignore: ['**/node_modules/**']});
-				});
-
-				return wsGlobs.map((pJson) => require(Path.join(cwd, pJson)));
-			}
-
-			const lernaVersion = getLernaVersion(cwd);
-			if (semver.lt(lernaVersion, '3.0.0')) {
-				const Repository = importFrom(cwd, 'lerna/lib/Repository');
-				const PackageUtilities = importFrom(cwd, 'lerna/lib/PackageUtilities');
-
-				const repository = new Repository(cwd);
-				return PackageUtilities.getPackages({
-					packageConfigs: repository.packageConfigs,
-					rootPath: cwd,
-				});
-			}
-
-			const {getPackages} = importFrom(cwd, '@lerna/project');
-			return getPackages(cwd);
-		})
-		.then((packages) => {
-			return packages
-				.map((pkg) => pkg.name)
-				.filter(Boolean)
-				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
-		});
+/**
+ * Turn glob paths with potential 'package.json' ending always into paths
+ * with a package.json ending to find monorepo packages
+ * @param {string[]} patterns
+ * @returns A list of glob paths to resolve package.json files
+ */
+function normalizePatterns(patterns) {
+	const normalizedPatterns = [];
+	for (const pattern of patterns) {
+		normalizedPatterns.push(pattern.replace(/\/?$/, '/package.json'));
+	}
+	return normalizedPatterns;
 }
 
-function getLernaVersion(cwd) {
-	const moduleEntrypoint = require.resolve('lerna', {
-		paths: [cwd],
+/**
+ * Find all package.json contents in the defined cwd
+ * @param {string} cwd
+ * @returns A list of parsed package.json files as objects
+ */
+async function findPackages(cwd) {
+	const json = await fs.readFile(path.join(cwd, 'lerna.json'), {
+		encoding: 'utf-8',
 	});
-	const moduleDir = Path.join(
-		moduleEntrypoint.slice(0, moduleEntrypoint.lastIndexOf('node_modules')),
-		'node_modules',
-		'lerna'
+
+	const packages = JSON.parse(json)?.packages || [];
+	if (packages.length === 0) {
+		return [];
+	}
+
+	const patterns = normalizePatterns(packages);
+	const entries = await fg(patterns, {
+		cwd,
+		ignore: ['**/node_modules/**', '**/bower_components/**'],
+	});
+
+	const pkgJsons = await Promise.all(
+		Array.from(new Set(entries.map((entry) => path.join(cwd, entry)))).map(
+			(pkgPath) => fs.readFile(pkgPath, {encoding: 'utf-8'})
+		)
 	);
-	const modulePackageJson = Path.join(moduleDir, 'package.json');
-	return require(modulePackageJson).version;
+
+	return pkgJsons.map((pkgJson) => JSON.parse(pkgJson) || {});
+}
+
+async function getProjects(context) {
+	const ctx = context || {};
+	const cwd = ctx.cwd || process.cwd();
+
+	// try to read workspaces for backwards compatibility
+	const workspacePackages = await configWorkspaceScopes.utils.getPackages({
+		cwd,
+	});
+	// native npm/yarn workspaces detected, inform user to use new package instead
+	if (workspacePackages.length > 0) {
+		console.warn(
+			[
+				`It seems that you are using npm/yarn workspaces instead of lernas "packages" declaration.`,
+				`Support for workspaces will be removed in a future major version of this package.`,
+				`Please make sure to transition to "@commitlint/config-workspace-scopes" in the near future.`,
+			].join('\n')
+		);
+		return workspacePackages;
+	}
+
+	const packages = await findPackages(cwd);
+
+	return packages
+		.reduce((pkgNames, pkg) => {
+			const name = pkg.name;
+			if (name) {
+				pkgNames.push(name.charAt(0) === '@' ? name.split('/')[1] : name);
+			}
+			return pkgNames;
+		}, [])
+		.sort();
 }
