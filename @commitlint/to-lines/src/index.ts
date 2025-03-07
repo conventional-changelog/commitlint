@@ -1,5 +1,5 @@
 export default function toLines(input?: string | null): string[] {
-	if (typeof input !== 'string') {
+	if (typeof input !== "string") {
 		return [];
 	}
 

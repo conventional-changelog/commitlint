@@ -1,17 +1,17 @@
 /// <reference path="./inquirer/inquirer.d.ts" />
 
-import {expect, test, vi} from 'vitest';
+import { expect, test, vi } from "vitest";
 // @ts-expect-error -- no typings
-import config from '@commitlint/config-angular';
-import chalk from 'chalk';
+import config from "@commitlint/config-angular";
+import chalk from "chalk";
 import {
 	Answers,
 	DistinctQuestion,
 	InputCustomOptions,
 	PromptModule,
-} from 'inquirer';
+} from "inquirer";
 
-import {input} from './input.js';
+import { input } from "./input.js";
 
 const testConfig = {
 	parserPreset: config.parserPreset,
@@ -20,74 +20,74 @@ const testConfig = {
 	},
 };
 
-vi.mock('@commitlint/load', () => ({
+vi.mock("@commitlint/load", () => ({
 	default: () => testConfig,
 }));
 
-test('should work with all fields filled', async () => {
+test("should work with all fields filled", async () => {
 	const prompt = stub({
-		'input-custom': {
-			type: 'fix',
-			scope: 'test',
-			subject: 'subject',
-			body: 'body',
-			footer: 'footer',
+		"input-custom": {
+			type: "fix",
+			scope: "test",
+			subject: "subject",
+			body: "body",
+			footer: "footer",
 		},
 	});
 	const message = await input(prompt);
-	expect(message).toEqual('fix(test): subject\n' + '\nbody\n' + '\nfooter');
+	expect(message).toEqual("fix(test): subject\n" + "\nbody\n" + "\nfooter");
 });
 
-test('should not add leading blank line to body and footer if rules are disabled', async () => {
-	testConfig.rules['body-leading-blank'] = ['1', 'never'];
-	testConfig.rules['footer-leading-blank'] = ['1', 'never'];
+test("should not add leading blank line to body and footer if rules are disabled", async () => {
+	testConfig.rules["body-leading-blank"] = ["1", "never"];
+	testConfig.rules["footer-leading-blank"] = ["1", "never"];
 	const prompt = stub({
-		'input-custom': {
-			type: 'fix',
-			scope: 'test',
-			subject: 'subject',
-			body: 'body',
-			footer: 'footer',
+		"input-custom": {
+			type: "fix",
+			scope: "test",
+			subject: "subject",
+			body: "body",
+			footer: "footer",
 		},
 	});
 	const message = await input(prompt);
-	expect(message).toEqual('fix(test): subject\n' + 'body\n' + 'footer');
+	expect(message).toEqual("fix(test): subject\n" + "body\n" + "footer");
 	// reset config mock
-	testConfig.rules['body-leading-blank'] = config.rules['body-leading-blank'];
-	testConfig.rules['footer-leading-blank'] =
-		config.rules['footer-leading-blank'];
+	testConfig.rules["body-leading-blank"] = config.rules["body-leading-blank"];
+	testConfig.rules["footer-leading-blank"] =
+		config.rules["footer-leading-blank"];
 });
 
-test('should work without scope', async () => {
+test("should work without scope", async () => {
 	const prompt = stub({
-		'input-custom': {
-			type: 'fix',
-			scope: '',
-			subject: 'subject',
-			body: 'body',
-			footer: 'footer',
+		"input-custom": {
+			type: "fix",
+			scope: "",
+			subject: "subject",
+			body: "body",
+			footer: "footer",
 		},
 	});
 	const message = await input(prompt);
-	expect(message).toEqual('fix: subject\n' + '\nbody\n' + '\nfooter');
+	expect(message).toEqual("fix: subject\n" + "\nbody\n" + "\nfooter");
 });
 
-test('should fail without type', async () => {
-	const spy = vi.spyOn(console, 'error');
+test("should fail without type", async () => {
+	const spy = vi.spyOn(console, "error");
 	const prompt = stub({
-		'input-custom': {
-			type: '',
-			scope: '',
-			subject: '',
-			body: '',
-			footer: '',
+		"input-custom": {
+			type: "",
+			scope: "",
+			subject: "",
+			body: "",
+			footer: "",
 		},
 	});
 	const message = await input(prompt);
-	expect(message).toEqual('');
+	expect(message).toEqual("");
 	expect(console.error).toHaveBeenCalledTimes(1);
 	expect(console.error).toHaveBeenLastCalledWith(
-		new Error(`⚠ ${chalk.bold('type')} may not be empty.`),
+		new Error(`⚠ ${chalk.bold("type")} may not be empty.`),
 	);
 	spy.mockRestore();
 });
@@ -99,7 +99,7 @@ function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 		const result: Answers = {};
 		const resolvedConfig = Array.isArray(questions) ? questions : [questions];
 		for (const promptConfig of resolvedConfig) {
-			const configType = promptConfig.type || 'input';
+			const configType = promptConfig.type || "input";
 			const questions = config[configType];
 			if (!questions) {
 				throw new Error(`Unexpected config type: ${configType}`);

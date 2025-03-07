@@ -1,7 +1,7 @@
-name: '✨ Feature Request'
+name: "✨ Feature Request"
 description: Create a new ticket for a new feature request
-title: 'feat: <title>'
-labels: ['feature']
+title: "feat: <title>"
+labels: ["feature"]
 body:
   - type: markdown
     attributes:
@@ -10,7 +10,7 @@ body:
   - type: textarea
     id: expected-behavior
     attributes:
-      label: 'Expected Behavior'
+      label: "Expected Behavior"
       description: Tell us how it should work
       placeholder: Short and explicit description of your request...
     validations:
@@ -18,14 +18,14 @@ body:
   - type: textarea
     id: current-behavior
     attributes:
-      label: 'Current Behavior'
+      label: "Current Behavior"
       description: Explain the difference from current behavior
     validations:
       required: false
   - type: checkboxes
     id: affected-packages
     attributes:
-      label: 'Affected packages'
+      label: "Affected packages"
       options:
         - label: cli
         - label: core
@@ -34,14 +34,14 @@ body:
   - type: textarea
     id: possible-solution
     attributes:
-      label: 'Possible Solution'
+      label: "Possible Solution"
       description: Ideas how to implement the addition or change
     validations:
       required: false
   - type: textarea
     id: context
     attributes:
-      label: 'Context'
+      label: "Context"
       description: |
         How has this issue affected you? What are you trying to accomplish?
         Providing context helps us come up with a solution that is most useful in the real world

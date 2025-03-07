@@ -1,6 +1,6 @@
-import chalk from 'chalk';
+import chalk from "chalk";
 
-import type {Result, ResultPart} from './types.js';
+import type { Result, ResultPart } from "./types.js";
 
 /**
  * Get formatted commit message
@@ -26,14 +26,14 @@ export default function format(input: Result, debug = false): string {
 		: defaultInput;
 
 	// Return formatted string
-	const {type, scope, subject, body, footer} = results;
+	const { type, scope, subject, body, footer } = results;
 	return [
-		`${type || ''}${scope ? `(${scope})` : ''}${type || scope ? ':' : ''} ${
-			subject || ''
+		`${type || ""}${scope ? `(${scope})` : ""}${type || scope ? ":" : ""} ${
+			subject || ""
 		}`,
 		body,
 		footer,
 	]
 		.filter(Boolean)
-		.join('\n');
+		.join("\n");
 }
