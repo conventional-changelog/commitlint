@@ -1,19 +1,19 @@
-import * as ensure from "@commitlint/ensure";
-import message from "@commitlint/message";
-import { SyncRule } from "@commitlint/types";
+import * as ensure from '@commitlint/ensure';
+import message from '@commitlint/message';
+import {SyncRule} from '@commitlint/types';
 
 export const typeEnum: SyncRule<string[]> = (
 	parsed,
-	when = "always",
+	when = 'always',
 	value = [],
 ) => {
-	const { type: input } = parsed;
+	const {type: input} = parsed;
 
 	if (!input) {
 		return [true];
 	}
 
-	const negated = when === "never";
+	const negated = when === 'never';
 	const result = ensure.enum(input, value);
 
 	return [
@@ -21,7 +21,7 @@ export const typeEnum: SyncRule<string[]> = (
 		message([
 			`type must`,
 			negated ? `not` : null,
-			`be one of [${value.join(", ")}]`,
+			`be one of [${value.join(', ')}]`,
 		]),
 	];
 };

@@ -1,7 +1,7 @@
-import { RuleConfigSeverity } from "@commitlint/types";
-import type { QualifiedRules } from "@commitlint/types";
+import {RuleConfigSeverity} from '@commitlint/types';
+import type {QualifiedRules} from '@commitlint/types';
 
-import type { RuleEntry } from "./types.js";
+import type {RuleEntry} from './types.js';
 
 /**
  * Get name for a given rule id
@@ -9,8 +9,8 @@ import type { RuleEntry } from "./types.js";
  * @return name of the rule
  */
 export function getRuleName(id: string): string {
-	const fragments = id.split("-");
-	return fragments.length > 1 ? fragments.slice(1).join("-") : fragments[0];
+	const fragments = id.split('-');
+	return fragments.length > 1 ? fragments.slice(1).join('-') : fragments[0];
 }
 
 /**
@@ -19,7 +19,7 @@ export function getRuleName(id: string): string {
  * @return prefix of the rule
  */
 export function getRulePrefix(id: string): string | null {
-	const fragments = id.split("-");
+	const fragments = id.split('-');
 	return fragments.length > 1 ? fragments[0] : null;
 }
 
@@ -55,11 +55,11 @@ export function ruleIsActive<T extends RuleEntry>(
 export function ruleIsApplicable(
 	rule: RuleEntry,
 ): rule is
-	| [string, Readonly<[RuleConfigSeverity, "always"]>]
-	| [string, Readonly<[RuleConfigSeverity, "always", unknown]>] {
+	| [string, Readonly<[RuleConfigSeverity, 'always']>]
+	| [string, Readonly<[RuleConfigSeverity, 'always', unknown]>] {
 	const [, value] = rule;
 	if (value && Array.isArray(value)) {
-		return value[1] === "always";
+		return value[1] === 'always';
 	}
 	return false;
 }
@@ -72,11 +72,11 @@ export function ruleIsApplicable(
 export function ruleIsNotApplicable(
 	rule: RuleEntry,
 ): rule is
-	| [string, Readonly<[RuleConfigSeverity, "never"]>]
-	| [string, Readonly<[RuleConfigSeverity, "never", unknown]>] {
+	| [string, Readonly<[RuleConfigSeverity, 'never']>]
+	| [string, Readonly<[RuleConfigSeverity, 'never', unknown]>] {
 	const [, value] = rule;
 	if (value && Array.isArray(value)) {
-		return value[1] === "never";
+		return value[1] === 'never';
 	}
 	return false;
 }
@@ -86,7 +86,7 @@ export function enumRuleIsActive(
 ): rule is [
 	string,
 	Readonly<
-		[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, "always", string[]]
+		[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, 'always', string[]]
 	>,
 ] {
 	return (
@@ -114,7 +114,7 @@ export function getMaxLength(rule?: RuleEntry): number {
 		rule &&
 		ruleIsActive(rule) &&
 		ruleIsApplicable(rule) &&
-		typeof rule[1][2] === "number"
+		typeof rule[1][2] === 'number'
 	) {
 		return rule[1][2];
 	}

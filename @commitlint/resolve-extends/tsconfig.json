@@ -8,5 +8,5 @@
   },
   "include": ["./src"],
   "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
-  "references": [{ "path": "../types" }, { "path": "../config-validator" }]
+  "references": [{"path": "../types"}, {"path": "../config-validator"}]
 }

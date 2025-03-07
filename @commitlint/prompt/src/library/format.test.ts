@@ -1,56 +1,56 @@
-import { test, expect } from "vitest";
-import type { Result } from "./types.js";
-import format from "./format.js";
+import {test, expect} from 'vitest';
+import type {Result} from './types.js';
+import format from './format.js';
 
-test("should return empty string", () => {
+test('should return empty string', () => {
 	const result: Result = {};
-	expect(format(result)).toBe(" ");
+	expect(format(result)).toBe(' ');
 });
 
-test("should omit scope", () => {
+test('should omit scope', () => {
 	const result: Result = {
-		type: "fix",
-		subject: "test",
+		type: 'fix',
+		subject: 'test',
 	};
-	expect(format(result)).toBe("fix: test");
+	expect(format(result)).toBe('fix: test');
 });
 
-test("should include scope", () => {
+test('should include scope', () => {
 	const result: Result = {
-		type: "fix",
-		scope: "prompt",
-		subject: "test",
+		type: 'fix',
+		scope: 'prompt',
+		subject: 'test',
 	};
-	expect(format(result)).toBe("fix(prompt): test");
+	expect(format(result)).toBe('fix(prompt): test');
 });
 
-test("should include body", () => {
+test('should include body', () => {
 	const result: Result = {
-		type: "fix",
-		scope: "prompt",
-		subject: "test",
-		body: "some body",
+		type: 'fix',
+		scope: 'prompt',
+		subject: 'test',
+		body: 'some body',
 	};
-	expect(format(result)).toBe("fix(prompt): test\nsome body");
+	expect(format(result)).toBe('fix(prompt): test\nsome body');
 });
 
-test("should include footer", () => {
+test('should include footer', () => {
 	const result: Result = {
-		type: "fix",
-		scope: "prompt",
-		subject: "test",
-		footer: "some footer",
+		type: 'fix',
+		scope: 'prompt',
+		subject: 'test',
+		footer: 'some footer',
 	};
-	expect(format(result)).toBe("fix(prompt): test\nsome footer");
+	expect(format(result)).toBe('fix(prompt): test\nsome footer');
 });
 
-test("should include body and footer", () => {
+test('should include body and footer', () => {
 	const result: Result = {
-		type: "fix",
-		scope: "prompt",
-		subject: "test",
-		body: "some body",
-		footer: "some footer",
+		type: 'fix',
+		scope: 'prompt',
+		subject: 'test',
+		body: 'some body',
+		footer: 'some footer',
 	};
-	expect(format(result)).toBe("fix(prompt): test\nsome body\nsome footer");
+	expect(format(result)).toBe('fix(prompt): test\nsome body\nsome footer');
 });

@@ -1,18 +1,18 @@
-import path from "node:path";
+import path from 'node:path';
 
-import fs from "fs-extra";
-import resolvePkg from "resolve-pkg";
+import fs from 'fs-extra';
+import resolvePkg from 'resolve-pkg';
 
-import * as git from "./git.js";
+import * as git from './git.js';
 
 export async function installModules(cwd: string) {
-	const manifestPath = path.join(cwd, "package.json");
-	const targetModulesPath = path.join(cwd, "node_modules");
+	const manifestPath = path.join(cwd, 'package.json');
+	const targetModulesPath = path.join(cwd, 'node_modules');
 
 	if (await fs.pathExists(manifestPath)) {
-		const { dependencies = {}, devDependencies = {} } =
+		const {dependencies = {}, devDependencies = {}} =
 			await fs.readJson(manifestPath);
-		const deps = Object.keys({ ...dependencies, ...devDependencies });
+		const deps = Object.keys({...dependencies, ...devDependencies});
 		await Promise.all(
 			deps.map(async (dependency: any) => {
 				const sourcePath = resolvePkg(dependency);
@@ -21,7 +21,7 @@ export async function installModules(cwd: string) {
 					throw new Error(`Could not resolve dependency ${dependency}`);
 				}
 
-				const sourceModulesPath = findParentPath(sourcePath, "node_modules");
+				const sourceModulesPath = findParentPath(sourcePath, 'node_modules');
 
 				if (!sourceModulesPath) {
 					throw new Error(`Could not determine node_modules for ${sourcePath}`);
@@ -30,7 +30,7 @@ export async function installModules(cwd: string) {
 				const relativePath = path.relative(sourceModulesPath, sourcePath);
 				const targetPath = path.join(targetModulesPath, relativePath);
 
-				await fs.mkdirp(path.join(targetPath, ".."));
+				await fs.mkdirp(path.join(targetPath, '..'));
 				await fs.symlink(sourcePath, targetPath);
 			}),
 		);
@@ -49,19 +49,19 @@ function findParentPath(
 ): string | undefined {
 	const rawFragments = parentPath.split(path.sep);
 
-	const { matched, fragments } = rawFragments.reduceRight(
-		({ fragments, matched }, item) => {
+	const {matched, fragments} = rawFragments.reduceRight(
+		({fragments, matched}, item) => {
 			if (item === dirname && !matched) {
-				return { fragments, matched: true };
+				return {fragments, matched: true};
 			}
 
 			if (!matched && fragments.length > 0) {
 				fragments.pop();
 			}
 
-			return { fragments, matched };
+			return {fragments, matched};
 		},
-		{ fragments: rawFragments, matched: false },
+		{fragments: rawFragments, matched: false},
 	);
 
 	return matched ? fragments.join(path.sep) : undefined;

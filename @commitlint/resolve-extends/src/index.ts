@@ -1,32 +1,32 @@
-import fs from "node:fs";
-import path from "node:path";
-import { pathToFileURL, fileURLToPath } from "node:url";
+import fs from 'node:fs';
+import path from 'node:path';
+import {pathToFileURL, fileURLToPath} from 'node:url';
 
-import globalDirectory from "global-directory";
-import { moduleResolve } from "import-meta-resolve";
-import mergeWith from "lodash.mergewith";
-import resolveFrom_ from "resolve-from";
-import { validateConfig } from "@commitlint/config-validator";
-import type { ParserPreset, UserConfig } from "@commitlint/types";
+import globalDirectory from 'global-directory';
+import {moduleResolve} from 'import-meta-resolve';
+import mergeWith from 'lodash.mergewith';
+import resolveFrom_ from 'resolve-from';
+import {validateConfig} from '@commitlint/config-validator';
+import type {ParserPreset, UserConfig} from '@commitlint/types';
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
 	const imported = await import(
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
-	return ("default" in imported && imported.default) || imported;
+	return ('default' in imported && imported.default) || imported;
 };
 
 const pathSuffixes = [
-	"",
-	".js",
-	".json",
+	'',
+	'.js',
+	'.json',
 	`${path.sep}index.js`,
 	`${path.sep}index.json`,
 ];
 
-const specifierSuffixes = ["", ".js", ".json", "/index.js", "/index.json"];
+const specifierSuffixes = ['', '.js', '.json', '/index.js', '/index.json'];
 
-const conditions = new Set(["import", "node"]);
+const conditions = new Set(['import', 'node']);
 
 /**
  * @see moduleResolve
@@ -46,7 +46,7 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 	const base = pathToFileURL(
 		parent
 			? fs.statSync(parent).isDirectory()
-				? path.join(parent, "noop.js")
+				? path.join(parent, 'noop.js')
 				: parent
 			: import.meta.url,
 	);
@@ -79,13 +79,13 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
  */
 export const loadParserPreset = async (
 	resolvedParserPreset: string,
-): Promise<Pick<ParserPreset, "path" | "parserOpts">> => {
+): Promise<Pick<ParserPreset, 'path' | 'parserOpts'>> => {
 	const finalParserOpts = await dynamicImport(resolvedParserPreset);
 
 	const relativeParserPath = path.relative(process.cwd(), resolvedParserPreset);
 
 	return {
-		path: `./${relativeParserPath}`.split(path.sep).join("/"),
+		path: `./${relativeParserPath}`.split(path.sep).join('/'),
 		parserOpts: finalParserOpts,
 	};
 };
@@ -94,7 +94,7 @@ export interface ResolveExtendsContext {
 	cwd?: string;
 	parserPreset?: string | ParserPreset;
 	prefix?: string;
-	resolve?(id: string, ctx?: { prefix?: string; cwd?: string }): string;
+	resolve?(id: string, ctx?: {prefix?: string; cwd?: string}): string;
 	resolveGlobal?: (id: string) => string;
 	dynamicImport?<T>(id: string): T | Promise<T>;
 }
@@ -103,13 +103,13 @@ export default async function resolveExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {},
 ): Promise<UserConfig> {
-	const { extends: e } = config;
+	const {extends: e} = config;
 	const extended = await loadExtends(config, context);
 	extended.push(config);
 	return extended.reduce(
-		(r, { extends: _, ...c }) =>
+		(r, {extends: _, ...c}) =>
 			mergeWith(r, c, (objValue, srcValue, key) => {
-				if (key === "plugins") {
+				if (key === 'plugins') {
 					if (Array.isArray(objValue)) {
 						return objValue.concat(srcValue);
 					}
@@ -117,7 +117,7 @@ export default async function resolveExtends(
 					return srcValue;
 				}
 			}),
-		e ? { extends: e } : {},
+		e ? {extends: e} : {},
 	);
 }
 
@@ -125,7 +125,7 @@ async function loadExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {},
 ): Promise<UserConfig[]> {
-	const { extends: e } = config;
+	const {extends: e} = config;
 	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
 
 	return await ext.reduce(async (configs, raw) => {
@@ -135,13 +135,13 @@ async function loadExtends(
 			parserPreset?: string;
 		}>(resolved);
 		const cwd = path.dirname(resolved);
-		const ctx = { ...context, cwd };
+		const ctx = {...context, cwd};
 
 		// Resolve parser preset if none was present before
 		if (
 			!context.parserPreset &&
-			typeof c === "object" &&
-			typeof c.parserPreset === "string"
+			typeof c === 'object' &&
+			typeof c.parserPreset === 'string'
 		) {
 			const resolvedParserPreset = resolveFrom(c.parserPreset, cwd);
 
@@ -160,17 +160,17 @@ async function loadExtends(
 	}, Promise.resolve<UserConfig[]>([]));
 }
 
-function getId(raw: string = "", prefix: string = ""): string {
+function getId(raw: string = '', prefix: string = ''): string {
 	const first = raw.charAt(0);
-	const scoped = first === "@";
-	const relative = first === ".";
+	const scoped = first === '@';
+	const relative = first === '.';
 	const absolute = path.isAbsolute(raw);
 
 	if (scoped) {
-		return raw.includes("/") ? raw : [raw, prefix].filter(String).join("/");
+		return raw.includes('/') ? raw : [raw, prefix].filter(String).join('/');
 	}
 
-	return relative || absolute ? raw : [prefix, raw].filter(String).join("-");
+	return relative || absolute ? raw : [prefix, raw].filter(String).join('-');
 }
 
 function resolveConfig(
@@ -184,7 +184,7 @@ function resolveConfig(
 	try {
 		resolved = resolve(id, context);
 	} catch (err) {
-		const legacy = getId(raw, "conventional-changelog-lint-config");
+		const legacy = getId(raw, 'conventional-changelog-lint-config');
 		resolved = resolve(legacy, context);
 		console.warn(
 			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`,
@@ -201,19 +201,19 @@ function resolveId(
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(specifier, cwd);
 
-	if (typeof localPath === "string") {
+	if (typeof localPath === 'string') {
 		return localPath;
 	}
 
 	const resolveGlobal = context.resolveGlobal || resolveGlobalSilent;
 	const globalPath = resolveGlobal(specifier);
 
-	if (typeof globalPath === "string") {
+	if (typeof globalPath === 'string') {
 		return globalPath;
 	}
 
 	const err = new Error(`Cannot find module "${specifier}" from "${cwd}"`);
-	throw Object.assign(err, { code: "MODULE_NOT_FOUND" });
+	throw Object.assign(err, {code: 'MODULE_NOT_FOUND'});
 }
 
 export function resolveFromSilent(

@@ -1,5 +1,5 @@
-import { minLength } from "@commitlint/ensure";
-import { SyncRule } from "@commitlint/types";
+import {minLength} from '@commitlint/ensure';
+import {SyncRule} from '@commitlint/types';
 
 export const bodyMinLength: SyncRule<number> = (
 	parsed,

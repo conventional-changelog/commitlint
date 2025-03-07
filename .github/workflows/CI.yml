@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - "**"
+      - '**'
   pull_request:
     types: [opened, synchronize]
 
@@ -11,7 +11,7 @@ on:
 
   # to execute once a day (more info see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule )
   schedule:
-    - cron: "0 0 * * *"
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -62,7 +62,7 @@ jobs:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
     runs-on: ubuntu-24.04
     container:
-      image: "ubuntu:24.04"
+      image: 'ubuntu:24.04'
     steps:
       - uses: actions/checkout@v4
 

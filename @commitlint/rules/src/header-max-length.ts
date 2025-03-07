@@ -1,5 +1,5 @@
-import { maxLength } from "@commitlint/ensure";
-import { SyncRule } from "@commitlint/types";
+import {maxLength} from '@commitlint/ensure';
+import {SyncRule} from '@commitlint/types';
 
 export const headerMaxLength: SyncRule<number> = (
 	parsed,

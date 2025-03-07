@@ -1,11 +1,11 @@
-import gitRawCommits from "git-raw-commits";
+import gitRawCommits from 'git-raw-commits';
 
-import { streamToPromise } from "./stream-to-promise.js";
+import {streamToPromise} from './stream-to-promise.js';
 
 // Get commit messages from history
 export async function getHistoryCommits(
 	options: gitRawCommits.GitOptions,
-	opts: { cwd?: string } = {},
+	opts: {cwd?: string} = {},
 ): Promise<string[]> {
-	return streamToPromise(gitRawCommits(options, { cwd: opts.cwd }));
+	return streamToPromise(gitRawCommits(options, {cwd: opts.cwd}));
 }

@@ -1,4 +1,4 @@
-import type { ErrorObject } from "ajv";
+import type {ErrorObject} from 'ajv';
 
 /**
  * Formats an array of schema validation errors.
@@ -10,8 +10,8 @@ export function formatErrors(errors: ErrorObject[]): string {
 	return errors
 		.map((error) => {
 			if (
-				error.keyword === "additionalProperties" &&
-				"additionalProperty" in error.params
+				error.keyword === 'additionalProperties' &&
+				'additionalProperty' in error.params
 			) {
 				const formattedPropertyPath = error.instancePath.length
 					? `${error.instancePath.slice(1)}.${error.params.additionalProperty}`
@@ -19,7 +19,7 @@ export function formatErrors(errors: ErrorObject[]): string {
 
 				return `Unexpected top-level property "${formattedPropertyPath}"`;
 			}
-			if (error.keyword === "type") {
+			if (error.keyword === 'type') {
 				const formattedField = error.instancePath.slice(1);
 				if (!formattedField) {
 					return `Config has the wrong type - ${error.message}`;
@@ -27,10 +27,10 @@ export function formatErrors(errors: ErrorObject[]): string {
 				return `Property "${formattedField}" has the wrong type - ${error.message}`;
 			}
 			const field =
-				(error.instancePath[0] === "."
+				(error.instancePath[0] === '.'
 					? error.instancePath.slice(1)
-					: error.instancePath) || "Config";
-			if (error.keyword === "typeof") {
+					: error.instancePath) || 'Config';
+			if (error.keyword === 'typeof') {
 				return `"${field}" should be a ${error.schema}. Value: ${JSON.stringify(
 					error.data,
 				)}`;
@@ -41,5 +41,5 @@ export function formatErrors(errors: ErrorObject[]): string {
 			)}`;
 		})
 		.map((message) => `\t- ${message}.\n`)
-		.join("");
+		.join('');
 }

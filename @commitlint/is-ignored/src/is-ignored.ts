@@ -1,11 +1,11 @@
-import { wildcards } from "./defaults.js";
-import { IsIgnoredOptions } from "@commitlint/types";
+import {wildcards} from './defaults.js';
+import {IsIgnoredOptions} from '@commitlint/types';
 
 export default function isIgnored(
-	commit: string = "",
+	commit: string = '',
 	opts: IsIgnoredOptions = {},
 ): boolean {
-	const ignores = typeof opts.ignores === "undefined" ? [] : opts.ignores;
+	const ignores = typeof opts.ignores === 'undefined' ? [] : opts.ignores;
 
 	if (!Array.isArray(ignores)) {
 		throw new Error(
@@ -13,13 +13,13 @@ export default function isIgnored(
 		);
 	}
 
-	const invalids = ignores.filter((c) => typeof c !== "function");
+	const invalids = ignores.filter((c) => typeof c !== 'function');
 
 	if (invalids.length > 0) {
 		throw new Error(
 			`ignores must be array of type function, received items of type: ${invalids
 				.map((i) => typeof i)
-				.join(", ")}`,
+				.join(', ')}`,
 		);
 	}
 

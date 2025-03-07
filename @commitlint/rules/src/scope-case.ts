@@ -1,24 +1,24 @@
-import { case as ensureCase } from "@commitlint/ensure";
-import message from "@commitlint/message";
-import { TargetCaseType, SyncRule } from "@commitlint/types";
+import {case as ensureCase} from '@commitlint/ensure';
+import message from '@commitlint/message';
+import {TargetCaseType, SyncRule} from '@commitlint/types';
 
-const negated = (when?: string) => when === "never";
+const negated = (when?: string) => when === 'never';
 
 export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 	parsed,
-	when = "always",
+	when = 'always',
 	value = [],
 ) => {
-	const { scope } = parsed;
+	const {scope} = parsed;
 
 	if (!scope) {
 		return [true];
 	}
 
 	const checks = (Array.isArray(value) ? value : [value]).map((check) => {
-		if (typeof check === "string") {
+		if (typeof check === 'string') {
 			return {
-				when: "always",
+				when: 'always',
 				case: check,
 			};
 		}
@@ -38,7 +38,7 @@ export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 		return negated(check.when) ? !r : r;
 	});
 
-	const list = checks.map((c) => c.case).join(", ");
+	const list = checks.map((c) => c.case).join(', ');
 
 	return [
 		negated(when) ? !result : result,

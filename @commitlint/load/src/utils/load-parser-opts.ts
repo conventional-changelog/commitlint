@@ -1,9 +1,9 @@
-import { ParserPreset } from "@commitlint/types";
+import {ParserPreset} from '@commitlint/types';
 
 type Awaitable<T> = T | PromiseLike<T>;
 
 function isObjectLike(obj: unknown): obj is Record<string, unknown> {
-	return Boolean(obj) && typeof obj === "object"; // typeof null === 'object'
+	return Boolean(obj) && typeof obj === 'object'; // typeof null === 'object'
 }
 
 function isParserOptsFunction<T extends ParserPreset>(
@@ -13,7 +13,7 @@ function isParserOptsFunction<T extends ParserPreset>(
 		cb: (_: never, parserOpts: Record<string, unknown>) => unknown,
 	) => Record<string, unknown> | undefined;
 } {
-	return typeof obj.parserOpts === "function";
+	return typeof obj.parserOpts === 'function';
 }
 
 export async function loadParserOpts(
@@ -23,11 +23,11 @@ export async function loadParserOpts(
 		| (() => Awaitable<ParserPreset>)
 		| undefined,
 ): Promise<ParserPreset | undefined> {
-	if (typeof pendingParser === "function") {
+	if (typeof pendingParser === 'function') {
 		return loadParserOpts(pendingParser());
 	}
 
-	if (!pendingParser || typeof pendingParser !== "object") {
+	if (!pendingParser || typeof pendingParser !== 'object') {
 		return undefined;
 	}
 	// Await for the module, loaded with require
@@ -39,7 +39,7 @@ export async function loadParserOpts(
 	}
 
 	// Pull nested parserOpts, might happen if overwritten with a module in main config
-	if (typeof parser.parserOpts === "object") {
+	if (typeof parser.parserOpts === 'object') {
 		// Await parser opts if applicable
 		parser.parserOpts = await parser.parserOpts;
 		if (
@@ -54,8 +54,8 @@ export async function loadParserOpts(
 	// Create parser opts from factory
 	if (
 		isParserOptsFunction(parser) &&
-		typeof parser.name === "string" &&
-		parser.name.startsWith("conventional-changelog-")
+		typeof parser.name === 'string' &&
+		parser.name.startsWith('conventional-changelog-')
 	) {
 		return new Promise((resolve) => {
 			const result = parser.parserOpts((_: never, opts) => {

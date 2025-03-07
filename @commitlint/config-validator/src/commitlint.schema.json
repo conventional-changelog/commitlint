@@ -39,25 +39,25 @@
       "oneOf": [
         {
           "type": "array",
-          "items": { "type": "string" }
+          "items": {"type": "string"}
         },
-        { "type": "string" }
+        {"type": "string"}
       ]
     },
     "parserPreset": {
       "description": "Resolveable id to conventional-changelog parser preset to import and use",
       "oneOf": [
-        { "type": "string" },
+        {"type": "string"},
         {
           "type": "object",
           "properties": {
-            "name": { "type": "string" },
-            "path": { "type": "string" },
+            "name": {"type": "string"},
+            "path": {"type": "string"},
             "parserOpts": {}
           },
           "additionalProperties": true
         },
-        { "typeof": "function" }
+        {"typeof": "function"}
       ]
     },
     "helpUrl": {
@@ -71,15 +71,15 @@
     "rules": {
       "description": "Rules to check against",
       "type": "object",
-      "propertyNames": { "type": "string" },
-      "additionalProperties": { "$ref": "#/definitions/rule" }
+      "propertyNames": {"type": "string"},
+      "additionalProperties": {"$ref": "#/definitions/rule"}
     },
     "plugins": {
       "description": "Resolveable ids of commitlint plugins from node_modules",
       "type": "array",
       "items": {
         "anyOf": [
-          { "type": "string" },
+          {"type": "string"},
           {
             "type": "object",
             "required": ["rules"],
@@ -94,7 +94,7 @@
     },
     "ignores": {
       "type": "array",
-      "items": { "typeof": "function" },
+      "items": {"typeof": "function"},
       "description": "Additional commits to ignore, defined by ignore matchers"
     },
     "defaultIgnores": {

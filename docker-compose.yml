@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   commitlint:
     build:
@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.dev
     image: marionebl/commitlint-cubicle
     ports:
-      - "8443:8443"
+      - '8443:8443'
     environment:
       - SSH_AUTH_SOCK=/.ssh-agent/socket
       - SSH_AUTH_PROXY_SOCK=/.ssh-agent/proxy-socket

@@ -1,11 +1,11 @@
-import { UserPromptConfig } from "./prompt.js";
+import {UserPromptConfig} from './prompt.js';
 import {
 	AsyncRule,
 	Rule,
 	RuleConfigQuality,
 	RulesConfig,
 	SyncRule,
-} from "./rules.js";
+} from './rules.js';
 
 export type PluginRecords = Record<string, Plugin>;
 

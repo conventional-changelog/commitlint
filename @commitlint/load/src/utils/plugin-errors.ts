@@ -1,7 +1,7 @@
 export class WhitespacePluginError extends Error {
 	__proto__ = Error;
 
-	public messageTemplate: string = "whitespace-found";
+	public messageTemplate: string = 'whitespace-found';
 	public messageData: any = {};
 
 	constructor(pluginName?: string, data: any = {}) {
@@ -16,10 +16,10 @@ export class WhitespacePluginError extends Error {
 export class MissingPluginError extends Error {
 	__proto__ = Error;
 
-	public messageTemplate: string = "plugin-missing";
+	public messageTemplate: string = 'plugin-missing';
 	public messageData: any;
 
-	constructor(pluginName?: string, errorMessage: string = "", data: any = {}) {
+	constructor(pluginName?: string, errorMessage: string = '', data: any = {}) {
 		super(`Failed to load plugin ${pluginName}: ${errorMessage}`);
 
 		this.messageData = data;

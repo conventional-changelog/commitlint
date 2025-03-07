@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import chalk from 'chalk';
 
 /**
  * Get formatted meta hints for configuration
@@ -11,8 +11,8 @@ export default function meta(settings: Record<string, unknown>): string {
 			.filter((item) => item[1])
 			.map((item) => {
 				const [name, value] = item;
-				return typeof value === "boolean" ? `[${name}]` : `[${name}=${value}]`;
+				return typeof value === 'boolean' ? `[${name}]` : `[${name}=${value}]`;
 			})
-			.join(" "),
+			.join(' '),
 	);
 }

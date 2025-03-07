@@ -1,7 +1,7 @@
-name: "🐛 Bug Report"
+name: '🐛 Bug Report'
 description: Create a new ticket for a bug.
-title: "fix: <title>"
-labels: ["bug"]
+title: 'fix: <title>'
+labels: ['bug']
 body:
   - type: markdown
     attributes:
@@ -10,7 +10,7 @@ body:
   - type: textarea
     id: steps-to-reproduce
     attributes:
-      label: "Steps to Reproduce"
+      label: 'Steps to Reproduce'
       description: Provide a link to a live example, or an unambiguous set of steps to reproduce this bug. Include code to reproduce, if relevant
       value: |
         1. First step
@@ -21,14 +21,14 @@ body:
   - type: textarea
     id: current-behavior
     attributes:
-      label: "Current Behavior"
+      label: 'Current Behavior'
       description: Tell us what happens instead of the expected behavior
     validations:
       required: false
   - type: textarea
     id: expected-behavior
     attributes:
-      label: "Expected Behavior"
+      label: 'Expected Behavior'
       description: Tell us what should happen
       placeholder: Short and explicit description of your incident...
     validations:
@@ -36,7 +36,7 @@ body:
   - type: checkboxes
     id: affected-packages
     attributes:
-      label: "Affected packages"
+      label: 'Affected packages'
       options:
         - label: cli
         - label: core
@@ -45,14 +45,14 @@ body:
   - type: textarea
     id: possible-solution
     attributes:
-      label: "Possible Solution"
+      label: 'Possible Solution'
       description: Not obligatory, but suggest a fix/reason for the bug, or ideas how to implement the addition or change
     validations:
       required: false
   - type: textarea
     id: context
     attributes:
-      label: "Context"
+      label: 'Context'
       description: |
         How has this issue affected you? What are you trying to accomplish?
         Providing context helps us come up with a solution that is most useful in the real world
@@ -61,21 +61,21 @@ body:
   - type: input
     id: commitlint-version
     attributes:
-      label: "commitlint --version"
-      placeholder: "@commitlint/cli@x.x.x"
+      label: 'commitlint --version'
+      placeholder: '@commitlint/cli@x.x.x'
     validations:
       required: true
   - type: input
     id: git-version
     attributes:
-      label: "git --version"
+      label: 'git --version'
       placeholder: vx.x.x
     validations:
       required: true
   - type: input
     id: node-version
     attributes:
-      label: "node --version"
+      label: 'node --version'
       placeholder: vx.x.x
     validations:
       required: true

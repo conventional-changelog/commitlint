@@ -1,7 +1,4 @@
-import type {
-	RuleConfigCondition,
-	RuleConfigSeverity,
-} from "@commitlint/types";
+import type {RuleConfigCondition, RuleConfigSeverity} from '@commitlint/types';
 
 export type RuleEntry =
 	| [string, Readonly<[RuleConfigSeverity.Disabled]>]
@@ -22,6 +19,6 @@ export type InputSetting = {
 	};
 };
 
-export type ResultPart = "type" | "scope" | "subject" | "body" | "footer";
+export type ResultPart = 'type' | 'scope' | 'subject' | 'body' | 'footer';
 
 export type Result = Partial<Record<ResultPart, string | undefined>>;
