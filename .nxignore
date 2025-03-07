@@ -1,0 +1,3 @@
+# Having fixtures with a package.json and project.json leads to a duplicate package resolution issue.
+# see https://github.com/nrwl/nx/issues/20959
+@commitlint/*/fixtures/**
