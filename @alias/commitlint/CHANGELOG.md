@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
+
+
+### Performance Improvements
+
+* use `node:` prefix to bypass require.cache call for builtins ([#4302](https://github.com/conventional-changelog/commitlint/issues/4302)) ([0cd8f41](https://github.com/conventional-changelog/commitlint/commit/0cd8f410573fe11383f788b1ceb7e0946143591d))
+
+
+
+
+
 ## [19.7.1](https://github.com/conventional-changelog/commitlint/compare/v19.7.0...v19.7.1) (2025-02-02)
 
 **Note:** Version bump only for package commitlint

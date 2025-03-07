@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
+
+
+### Bug Fixes
+
+* **config-lerna-scopes:** remove deprecated @lerna/project dependency ([#4284](https://github.com/conventional-changelog/commitlint/issues/4284)) ([f2f78f1](https://github.com/conventional-changelog/commitlint/commit/f2f78f105a32d040d8eb7e340f59a1d50fad9ac0))
+* update dependency semver to v7.7.1 ([#4272](https://github.com/conventional-changelog/commitlint/issues/4272)) ([6148587](https://github.com/conventional-changelog/commitlint/commit/6148587400b7f4c041183e3b2e5f1cfadbe2d6b0))
+
+
+### Features
+
+* **config-workspace-scopes:** add config preset for npm and yarn workspaces ([#4269](https://github.com/conventional-changelog/commitlint/issues/4269)) ([67ff9e8](https://github.com/conventional-changelog/commitlint/commit/67ff9e82c10898757052df1d4233566b0b2cb433))
+
+
+### Performance Improvements
+
+* use `node:` prefix to bypass require.cache call for builtins ([#4302](https://github.com/conventional-changelog/commitlint/issues/4302)) ([0cd8f41](https://github.com/conventional-changelog/commitlint/commit/0cd8f410573fe11383f788b1ceb7e0946143591d))
+
+
+### Reverts
+
+* Revert "fix: improve security validation regex in is-ignored function (#4258)" (#4314) ([b27024a](https://github.com/conventional-changelog/commitlint/commit/b27024a5ae509d1df9373ed712f2279d0bc39170)), closes [#4258](https://github.com/conventional-changelog/commitlint/issues/4258) [#4314](https://github.com/conventional-changelog/commitlint/issues/4314)
+
+
+
+
+
 ## [19.7.1](https://github.com/conventional-changelog/commitlint/compare/v19.7.0...v19.7.1) (2025-02-02)
 
 

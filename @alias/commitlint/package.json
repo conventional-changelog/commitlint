@@ -1,7 +1,7 @@
 {
   "name": "commitlint",
   "type": "module",
-  "version": "19.7.1",
+  "version": "19.8.0",
   "description": "Lint your commit messages",
   "files": [
     "cli.js"
@@ -36,12 +36,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^19.7.1",
-    "@commitlint/types": "^19.5.0"
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/types": "^19.8.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^19.5.0",
-    "@commitlint/utils": "^19.5.0",
+    "@commitlint/test": "^19.8.0",
+    "@commitlint/utils": "^19.8.0",
     "tinyexec": "^0.3.0"
   },
   "gitHead": "70f7f4688b51774e7ac5e40e896cdaa3f132b2bc"

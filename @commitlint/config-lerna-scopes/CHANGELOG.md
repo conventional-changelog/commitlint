@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
+
+
+### Bug Fixes
+
+* **config-lerna-scopes:** remove deprecated @lerna/project dependency ([#4284](https://github.com/conventional-changelog/commitlint/issues/4284)) ([f2f78f1](https://github.com/conventional-changelog/commitlint/commit/f2f78f105a32d040d8eb7e340f59a1d50fad9ac0))
+
+
+### Performance Improvements
+
+* use `node:` prefix to bypass require.cache call for builtins ([#4302](https://github.com/conventional-changelog/commitlint/issues/4302)) ([0cd8f41](https://github.com/conventional-changelog/commitlint/commit/0cd8f410573fe11383f788b1ceb7e0946143591d))
+
+
+
+
+
 # [19.7.0](https://github.com/conventional-changelog/commitlint/compare/v19.6.1...v19.7.0) (2025-01-04)
 
 

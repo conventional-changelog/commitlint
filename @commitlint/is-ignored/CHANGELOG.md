@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
+
+
+### Reverts
+
+* Revert "fix: improve security validation regex in is-ignored function (#4258)" (#4314) ([b27024a](https://github.com/conventional-changelog/commitlint/commit/b27024a5ae509d1df9373ed712f2279d0bc39170)), closes [#4258](https://github.com/conventional-changelog/commitlint/issues/4258) [#4314](https://github.com/conventional-changelog/commitlint/issues/4314)
+
+
+
+
+
 ## [19.7.1](https://github.com/conventional-changelog/commitlint/compare/v19.7.0...v19.7.1) (2025-02-02)
 
 
