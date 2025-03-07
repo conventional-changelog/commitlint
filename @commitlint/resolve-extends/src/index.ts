@@ -48,7 +48,7 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 			? fs.statSync(parent).isDirectory()
 				? path.join(parent, 'noop.js')
 				: parent
-			: import.meta.url
+			: import.meta.url,
 	);
 
 	for (const suffix of specifierSuffixes) {
@@ -78,7 +78,7 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
  * @returns path and parserOpts function retrieved from `resolvedParserPreset`
  */
 export const loadParserPreset = async (
-	resolvedParserPreset: string
+	resolvedParserPreset: string,
 ): Promise<Pick<ParserPreset, 'path' | 'parserOpts'>> => {
 	const finalParserOpts = await dynamicImport(resolvedParserPreset);
 
@@ -101,7 +101,7 @@ export interface ResolveExtendsContext {
 
 export default async function resolveExtends(
 	config: UserConfig = {},
-	context: ResolveExtendsContext = {}
+	context: ResolveExtendsContext = {},
 ): Promise<UserConfig> {
 	const {extends: e} = config;
 	const extended = await loadExtends(config, context);
@@ -117,13 +117,13 @@ export default async function resolveExtends(
 					return srcValue;
 				}
 			}),
-		e ? {extends: e} : {}
+		e ? {extends: e} : {},
 	);
 }
 
 async function loadExtends(
 	config: UserConfig = {},
-	context: ResolveExtendsContext = {}
+	context: ResolveExtendsContext = {},
 ): Promise<UserConfig[]> {
 	const {extends: e} = config;
 	const ext = e ? (Array.isArray(e) ? e : [e]) : [];
@@ -175,7 +175,7 @@ function getId(raw: string = '', prefix: string = ''): string {
 
 function resolveConfig(
 	raw: string,
-	context: ResolveExtendsContext = {}
+	context: ResolveExtendsContext = {},
 ): string {
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
@@ -187,7 +187,7 @@ function resolveConfig(
 		const legacy = getId(raw, 'conventional-changelog-lint-config');
 		resolved = resolve(legacy, context);
 		console.warn(
-			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`
+			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`,
 		);
 	}
 
@@ -196,7 +196,7 @@ function resolveConfig(
 
 function resolveId(
 	specifier: string,
-	context: ResolveExtendsContext = {}
+	context: ResolveExtendsContext = {},
 ): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(specifier, cwd);
@@ -218,7 +218,7 @@ function resolveId(
 
 export function resolveFromSilent(
 	specifier: string,
-	parent: string
+	parent: string,
 ): string | void {
 	try {
 		return resolveFrom(specifier, parent);

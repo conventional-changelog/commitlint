@@ -15,7 +15,7 @@ const mockShowValidation = vi.fn((message) => message);
 // mock inquirer
 const mockPrompt = vi.fn(async function (
 	questions: DistinctQuestion[],
-	answers: Answers
+	answers: Answers,
 ) {
 	for (const {name, message, when, filter, validate} of questions) {
 		if (typeof when !== 'function' || (await when(answers))) {
@@ -23,8 +23,8 @@ const mockPrompt = vi.fn(async function (
 				message && isFunction(message)
 					? await message(answers)
 					: typeof message === 'string'
-					? message
-					: '';
+						? message
+						: '';
 			mockShowTitle(title);
 
 			const validation =
@@ -219,9 +219,9 @@ describe('conventional-changlog', () => {
 		return process(rules, prompts, InquirerFactory(answers)).then(
 			(commitMessage) => {
 				expect(commitMessage).toBe(
-					'refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94'
+					'refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94',
 				);
-			}
+			},
 		);
 	});
 
@@ -237,7 +237,7 @@ describe('conventional-changlog', () => {
 		};
 		return process(rules, prompts, InquirerFactory(answers)).then(() => {
 			expect(mockShowValidation).toHaveBeenCalledWith(
-				'subject can not be empty'
+				'subject can not be empty',
 			);
 			expect(mockShowTitle).toHaveBeenCalledTimes(3);
 		});

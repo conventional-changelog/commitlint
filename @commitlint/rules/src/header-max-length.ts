@@ -4,7 +4,7 @@ import {SyncRule} from '@commitlint/types';
 export const headerMaxLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
-	value = 0
+	value = 0,
 ) => {
 	return [
 		maxLength(parsed.header, value),

@@ -39,7 +39,7 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 		if (enumDescriptions) {
 			const enumNames = Object.keys(enumDescriptions);
 			const longest = Math.max(
-				...enumRuleList.map((enumName) => enumName.length)
+				...enumRuleList.map((enumName) => enumName.length),
 			);
 			// TODO emoji + title
 			enumList = enumRuleList

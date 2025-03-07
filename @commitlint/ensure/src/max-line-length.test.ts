@@ -32,7 +32,7 @@ test('false for ab/\nab/\nab 1', () => {
 		`ab
 ab
 ab`,
-		2
+		2,
 	);
 
 	expect(actual).toBe(true);
@@ -43,7 +43,7 @@ test('true for ab/\nab/\nab 2', () => {
 		`ab
 ab
 ab`,
-		2
+		2,
 	);
 
 	expect(actual).toBe(true);

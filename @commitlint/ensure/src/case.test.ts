@@ -165,7 +165,7 @@ test('true for `Any_CASE_iN_back-quotes` on start-case', () => {
 test('true for lowercase `Any_CASE_iN_back-quotes` lowercase on lowercase', () => {
 	const actual = ensure(
 		'lowercase `Any_CASE_iN_back-quotes` lowercase',
-		'lowercase'
+		'lowercase',
 	);
 	expect(actual).toBe(true);
 });
@@ -173,7 +173,7 @@ test('true for lowercase `Any_CASE_iN_back-quotes` lowercase on lowercase', () =
 test('false for UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE on lowercase', () => {
 	const actual = ensure(
 		'UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE',
-		'lowercase'
+		'lowercase',
 	);
 	expect(actual).toBe(false);
 });
@@ -181,7 +181,7 @@ test('false for UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE on lowercase', () 
 test('true for UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE on uppercase', () => {
 	const actual = ensure(
 		'UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE',
-		'uppercase'
+		'uppercase',
 	);
 	expect(actual).toBe(true);
 });
@@ -189,7 +189,7 @@ test('true for UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE on uppercase', () =
 test('false for lowercase `Any_CASE_iN_back-quotes` lowercase on uppercase', () => {
 	const actual = ensure(
 		'lowercase `Any_CASE_iN_back-quotes` lowercase',
-		'uppercase'
+		'uppercase',
 	);
 	expect(actual).toBe(false);
 });
@@ -202,7 +202,7 @@ test('true for fooBar`Any_CASE_iN_back-quotes`fooBar on camel-case', () => {
 test('false for Foo Bar`Any_CASE_iN_back-quotes` Foo Bar on camel-case', () => {
 	const actual = ensure(
 		'Foo Bar`Any_CASE_iN_back-quotes` Foo Bar',
-		'camel-case'
+		'camel-case',
 	);
 	expect(actual).toBe(false);
 });
@@ -210,7 +210,7 @@ test('false for Foo Bar`Any_CASE_iN_back-quotes` Foo Bar on camel-case', () => {
 test('true for foo-bar`Any_CASE_iN_back-quotes`foo-bar on kebab-case', () => {
 	const actual = ensure(
 		'foo-bar`Any_CASE_iN_back-quotes`foo-bar',
-		'kebab-case'
+		'kebab-case',
 	);
 	expect(actual).toBe(true);
 });
@@ -218,7 +218,7 @@ test('true for foo-bar`Any_CASE_iN_back-quotes`foo-bar on kebab-case', () => {
 test('false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on kebab-case', () => {
 	const actual = ensure(
 		'Foo Bar `Any_CASE_iN_back-quotes` Foo Bar',
-		'kebab-case'
+		'kebab-case',
 	);
 	expect(actual).toBe(false);
 });
@@ -226,7 +226,7 @@ test('false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on kebab-case', () => 
 test('true for foo_bar`Any_CASE_iN_back-quotes`foo_bar on snake-case', () => {
 	const actual = ensure(
 		'foo_bar`Any_CASE_iN_back-quotes`foo_bar',
-		'snake-case'
+		'snake-case',
 	);
 	expect(actual).toBe(true);
 });
@@ -234,7 +234,7 @@ test('true for foo_bar`Any_CASE_iN_back-quotes`foo_bar on snake-case', () => {
 test('false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on snake-case', () => {
 	const actual = ensure(
 		'Foo Bar `Any_CASE_iN_back-quotes` Foo Bar',
-		'snake-case'
+		'snake-case',
 	);
 	expect(actual).toBe(false);
 });
@@ -242,7 +242,7 @@ test('false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on snake-case', () => 
 test('true for PascalCase`Any_CASE_iN_back-quotes`PascalCase on pascal-case', () => {
 	const actual = ensure(
 		'PascalCase`Any_CASE_iN_back-quotes`PascalCase',
-		'pascal-case'
+		'pascal-case',
 	);
 	expect(actual).toBe(true);
 });
@@ -250,7 +250,7 @@ test('true for PascalCase`Any_CASE_iN_back-quotes`PascalCase on pascal-case', ()
 test('false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on pascal-case', () => {
 	const actual = ensure(
 		'Foo Bar `Any_CASE_iN_back-quotes` Foo Bar',
-		'pascal-case'
+		'pascal-case',
 	);
 	expect(actual).toBe(false);
 });
@@ -258,7 +258,7 @@ test('false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on pascal-case', () =>
 test('true for Foo Bar`Any_CASE_iN_back-quotes` Foo Bar on start-case', () => {
 	const actual = ensure(
 		'Foo Bar `Any_CASE_iN_back-quotes`Foo Bar',
-		'start-case'
+		'start-case',
 	);
 	expect(actual).toBe(true);
 });
@@ -266,7 +266,7 @@ test('true for Foo Bar`Any_CASE_iN_back-quotes` Foo Bar on start-case', () => {
 test('false for foo_bar`Any_CASE_iN_back-quotes`foo_bar on start-case', () => {
 	const actual = ensure(
 		'foo_bar`Any_CASE_iN_back-quotes`foo_bar',
-		'start-case'
+		'start-case',
 	);
 	expect(actual).toBe(false);
 });
@@ -274,7 +274,7 @@ test('false for foo_bar`Any_CASE_iN_back-quotes`foo_bar on start-case', () => {
 test('true for lowercase `Any_CASE_iN_back-quotes` `Any_CASE_iN_back-quotes` lowercase on lowercase', () => {
 	const actual = ensure(
 		'lowercase `Any_CASE_iN_back-quotes` `Any_CASE_iN_back-quotes` lowercase',
-		'lowercase'
+		'lowercase',
 	);
 	expect(actual).toBe(true);
 });

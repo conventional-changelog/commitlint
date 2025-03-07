@@ -7,7 +7,7 @@ import {ruleIsActive, ruleIsNotApplicable} from './rules.js';
  * @return transform function applying the leading
  */
 export default function getLeadingBlankFn(
-	rule?: Rule
+	rule?: Rule,
 ): (input: string) => string {
 	if (!rule || !ruleIsActive(rule)) {
 		return (input: string): string => input;

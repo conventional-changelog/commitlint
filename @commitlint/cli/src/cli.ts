@@ -144,7 +144,7 @@ const cli = yargs(process.argv.slice(2))
 	.version(
 		'version',
 		'display version information',
-		`${pkg.name}@${pkg.version}`
+		`${pkg.name}@${pkg.version}`,
 	)
 	.alias('v', 'version')
 	.help('help')
@@ -152,11 +152,11 @@ const cli = yargs(process.argv.slice(2))
 	.config(
 		'options',
 		'path to a JSON file or Common.js module containing CLI options',
-		require
+		require,
 	)
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
 	.usage(
-		`[input] reads from stdin if --edit, --env, --from and --to are omitted`
+		`[input] reads from stdin if --edit, --env, --from and --to are omitted`,
 	)
 	.strict();
 
@@ -236,7 +236,7 @@ async function main(args: MainArgs): Promise<void> {
 	) {
 		const err = new CliError(
 			'Please use the --last flag alone. The --last flag should not be used with --to or --from or --edit.',
-			pkg.name
+			pkg.name,
 		);
 		cli.showHelp('log');
 		console.log(err.message);
@@ -253,7 +253,7 @@ async function main(args: MainArgs): Promise<void> {
 				edit: flags.edit,
 				cwd: flags.cwd,
 				gitLogArgs: flags['git-log-args'],
-		  }));
+			}));
 
 	const messages = (Array.isArray(input) ? input : [input])
 		.filter((message) => typeof message === 'string')
@@ -263,7 +263,7 @@ async function main(args: MainArgs): Promise<void> {
 	if (messages.length === 0 && !checkFromRepository(flags)) {
 		const err = new CliError(
 			'[input] is required: supply via stdin, or --env or --edit or --last or --from and --to',
-			pkg.name
+			pkg.name,
 		);
 		cli.showHelp('log');
 		console.log(err.message);
@@ -304,7 +304,7 @@ async function main(args: MainArgs): Promise<void> {
 		if (result.exitCode && result.exitCode > 1) {
 			console.warn(
 				'Could not determine core.commentChar git configuration',
-				output.stderr
+				output.stderr,
 			);
 			opts.parserOpts.commentChar = gitDefaultCommentChar;
 		} else {
@@ -314,7 +314,7 @@ async function main(args: MainArgs): Promise<void> {
 	}
 
 	const results = await Promise.all(
-		messages.map((message) => lint(message, loaded.rules, opts))
+		messages.map((message) => lint(message, loaded.rules, opts)),
 	);
 
 	let isRulesEmpty = false;
@@ -365,7 +365,7 @@ async function main(args: MainArgs): Promise<void> {
 			errorCount: 0,
 			warningCount: 0,
 			results: [],
-		}
+		},
 	);
 
 	const helpUrl = flags['help-url']?.trim() || loaded.helpUrl;
@@ -429,7 +429,7 @@ function getEditValue(flags: CliFlags) {
 	if (flags.env) {
 		if (!(flags.env in process.env)) {
 			throw new Error(
-				`Received '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`
+				`Received '${flags.env}' as value for -E | --env, but environment variable '${flags.env}' is not available globally`,
 			);
 		}
 		return process.env[flags.env];
@@ -463,7 +463,7 @@ function getEditValue(flags: CliFlags) {
 			return process.env.HUSKY_GIT_PARAMS;
 		}
 		throw new Error(
-			`Received ${edit} as value for -e | --edit, but GIT_PARAMS or HUSKY_GIT_PARAMS are not available globally.`
+			`Received ${edit} as value for -e | --edit, but GIT_PARAMS or HUSKY_GIT_PARAMS are not available globally.`,
 		);
 	}
 	return edit;
@@ -471,7 +471,7 @@ function getEditValue(flags: CliFlags) {
 
 function getSeed(flags: CliFlags): UserConfig {
 	const n = (flags.extends || []).filter(
-		(i): i is string => typeof i === 'string'
+		(i): i is string => typeof i === 'string',
 	);
 	return n.length > 0
 		? {extends: n, parserPreset: flags['parser-preset']}
@@ -492,7 +492,7 @@ function selectParserOpts(parserPreset: ParserPreset | undefined) {
 
 function loadFormatter(
 	config: QualifiedConfig,
-	flags: CliFlags
+	flags: CliFlags,
 ): Promise<Formatter> {
 	const moduleName = flags.format || config.formatter || '@commitlint/format';
 	const modulePath =

@@ -69,7 +69,7 @@ describe('validation should pass for', () => {
 describe('validation should fail for', () => {
 	test.each(Object.entries(invalidSchemas))('%s', (file, config) => {
 		expect(() =>
-			validateConfig(`${file}.js`, config)
+			validateConfig(`${file}.js`, config),
 		).toThrowErrorMatchingSnapshot();
 	});
 });

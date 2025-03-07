@@ -25,7 +25,7 @@ const parsed = Object.entries(messages).reduce(
 		Object.assign(_parsed, {
 			[key]: parse(message),
 		}),
-	{} as Record<keyof typeof messages, Promise<Commit>>
+	{} as Record<keyof typeof messages, Promise<Commit>>,
 );
 
 test('should succeed when header is not surrounded by whitespace', async () => {
@@ -40,7 +40,7 @@ test.each([
 ] as const)('should fail when starts with $scenario', async ({commit}) => {
 	const result = headerTrim(await commit);
 	expect(result).toEqual(
-		expect.arrayContaining([false, 'header must not start with whitespace'])
+		expect.arrayContaining([false, 'header must not start with whitespace']),
 	);
 });
 
@@ -51,7 +51,7 @@ test.each([
 ] as const)('should fail when ends with $scenario', async ({commit}) => {
 	const result = headerTrim(await commit);
 	expect(result).toEqual(
-		expect.arrayContaining([false, 'header must not end with whitespace'])
+		expect.arrayContaining([false, 'header must not end with whitespace']),
 	);
 });
 
@@ -67,7 +67,7 @@ test.each([
 			expect.arrayContaining([
 				false,
 				'header must not be surrounded by whitespace',
-			])
+			]),
 		);
-	}
+	},
 );

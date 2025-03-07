@@ -14,7 +14,7 @@ export function prompter(
 	inquirerIns: {
 		prompt(questions: DistinctQuestion[]): Promise<Answers>;
 	},
-	commit: Commit
+	commit: Commit,
 ): void {
 	load().then(({rules, prompt = {}}) => {
 		process(rules, prompt, inquirerIns).then(commit);

@@ -28,7 +28,7 @@ describe('name', () => {
 			() =>
 				new Question('' as any, {
 					...QUESTION_CONFIG,
-				})
+				}),
 		).toThrow();
 
 		expect(
@@ -39,8 +39,8 @@ describe('name', () => {
 					} as any,
 					{
 						...QUESTION_CONFIG,
-					}
-				)
+					},
+				),
 		).toThrow();
 	});
 
@@ -48,7 +48,7 @@ describe('name', () => {
 		expect(
 			new Question('test' as any, {
 				...QUESTION_CONFIG,
-			}).question
+			}).question,
 		).toHaveProperty('name', 'test');
 	});
 });
@@ -130,7 +130,7 @@ describe('message', () => {
 		}).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input (press enter to skip):\n'
+			'please input (press enter to skip):\n',
 		);
 	});
 
@@ -160,7 +160,7 @@ describe('message', () => {
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input: 10 chars at least\n'
+			'please input: 10 chars at least\n',
 		);
 	});
 
@@ -173,7 +173,7 @@ describe('message', () => {
 		} as any).question;
 		expect(question).toHaveProperty('message', expect.any(Function));
 		expect((question.message as any)()).toBe(
-			'please input (press enter to skip): 10 chars at least, upper 80 chars\n'
+			'please input (press enter to skip): 10 chars at least, upper 80 chars\n',
 		);
 	});
 
@@ -308,7 +308,7 @@ describe('transformer', () => {
 		}).question;
 
 		expect(
-			(question as InputQuestionOptions)?.transformer?.('xxxx', {}, {})
+			(question as InputQuestionOptions)?.transformer?.('xxxx', {}, {}),
 		).toBe('Xxxx!');
 	});
 
@@ -319,7 +319,7 @@ describe('transformer', () => {
 		}).question;
 
 		expect(
-			(question as InputQuestionOptions)?.transformer?.('xxx', {}, {})
+			(question as InputQuestionOptions)?.transformer?.('xxx', {}, {}),
 		).toEqual(chalk.green(`(3) xxx`));
 
 		question = new Question('body', {
@@ -328,7 +328,7 @@ describe('transformer', () => {
 		}).question;
 
 		expect(
-			(question as InputQuestionOptions)?.transformer?.('xxx', {}, {})
+			(question as InputQuestionOptions)?.transformer?.('xxx', {}, {}),
 		).toEqual(chalk.green(`(3) xxx`));
 	});
 
@@ -339,7 +339,7 @@ describe('transformer', () => {
 		}).question;
 
 		expect(
-			(question as InputQuestionOptions)?.transformer?.('xxxxxx', {}, {})
+			(question as InputQuestionOptions)?.transformer?.('xxxxxx', {}, {}),
 		).toEqual(chalk.red(`(6) xxxxxx`));
 
 		question = new Question('body', {
@@ -348,7 +348,7 @@ describe('transformer', () => {
 		}).question;
 
 		expect(
-			(question as InputQuestionOptions)?.transformer?.('x', {}, {})
+			(question as InputQuestionOptions)?.transformer?.('x', {}, {}),
 		).toEqual(chalk.red(`(1) x`));
 	});
 });

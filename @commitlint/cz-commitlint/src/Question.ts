@@ -49,7 +49,7 @@ export default class Question {
 			minLength,
 			multipleValueDelimiters,
 			multipleSelectDefaultDelimiter,
-		}: QuestionConfig
+		}: QuestionConfig,
 	) {
 		if (!name || typeof name !== 'string')
 			throw new Error('Question: name is required');
@@ -78,7 +78,7 @@ export default class Question {
 								name: 'empty',
 								value: '',
 							},
-					  ]
+						]
 					: [...enumList],
 			};
 		} else if (/^is[A-Z]/.test(name)) {
@@ -164,7 +164,7 @@ export default class Question {
 				new RegExp(`[^${this.multipleValueDelimiters.source}]+`, 'g'),
 				(segment) => {
 					return casedSegments[segments.indexOf(segment)];
-				}
+				},
 			);
 		} else {
 			toCased = this.caseFn(input);
@@ -195,12 +195,12 @@ export default class Question {
 				const messages = [];
 				if (this.minLength > 0 && this.getMessage('min')) {
 					messages.push(
-						this.getMessage('min').replace(/%d/g, this.minLength + '')
+						this.getMessage('min').replace(/%d/g, this.minLength + ''),
 					);
 				}
 				if (this.maxLength < Infinity && this.getMessage('max')) {
 					messages.push(
-						this.getMessage('max').replace(/%d/g, this.maxLength + '')
+						this.getMessage('max').replace(/%d/g, this.maxLength + ''),
 					);
 				}
 

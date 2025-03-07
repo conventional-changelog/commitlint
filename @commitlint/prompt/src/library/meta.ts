@@ -13,6 +13,6 @@ export default function meta(settings: Record<string, unknown>): string {
 				const [name, value] = item;
 				return typeof value === 'boolean' ? `[${name}]` : `[${name}=${value}]`;
 			})
-			.join(' ')
+			.join(' '),
 	);
 }

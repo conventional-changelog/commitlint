@@ -15,7 +15,7 @@ interface KeyDescriptor {
 }
 
 export default class InputCustomPrompt<
-	TQuestion extends InputCustomOptions = InputCustomOptions
+	TQuestion extends InputCustomOptions = InputCustomOptions,
 > extends InputPrompt<TQuestion> {
 	private lineSubscription: Subscription;
 	private readonly tabCompletion: string[];
@@ -23,7 +23,7 @@ export default class InputCustomPrompt<
 	constructor(
 		question: TQuestion,
 		readLine: ReadlineInterface,
-		answers: Answers
+		answers: Answers,
 	) {
 		super(question, readLine, answers);
 
@@ -37,7 +37,7 @@ export default class InputCustomPrompt<
 
 		const events = observe(this.rl);
 		this.lineSubscription = events.keypress.subscribe(
-			this.onKeyPress2.bind(this)
+			this.onKeyPress2.bind(this),
 		);
 		this.tabCompletion = (this.opt.tabCompletion || [])
 			.map((item) => item.value)
@@ -107,8 +107,8 @@ export default class InputCustomPrompt<
 					lengthRemaining <= 5
 						? chalk.red
 						: lengthRemaining <= 10
-						? chalk.yellow
-						: chalk.grey;
+							? chalk.yellow
+							: chalk.grey;
 				bottomContent = color(`${lengthRemaining} characters left`);
 			}
 		}

@@ -18,7 +18,7 @@ interface GetCommitMessageOptions {
 
 // Get commit messages
 export default async function getCommitMessages(
-	settings: GetCommitMessageOptions
+	settings: GetCommitMessageOptions,
 ): Promise<string[]> {
 	const {cwd, fromLastTag, to, last, edit, gitLogArgs} = settings;
 	let from = settings.from;
@@ -31,7 +31,7 @@ export default async function getCommitMessages(
 		const gitCommandResult = await x(
 			'git',
 			['log', '-1', '--pretty=format:%B'],
-			{nodeOptions: {cwd}}
+			{nodeOptions: {cwd}},
 		);
 		let output = gitCommandResult.stdout.trim();
 		// strip output of extra quotation marks ("")
@@ -51,7 +51,7 @@ export default async function getCommitMessages(
 				'--long',
 				'--tags',
 			],
-			{nodeOptions: {cwd}}
+			{nodeOptions: {cwd}},
 		);
 		const stdout = output.stdout.trim();
 

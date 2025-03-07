@@ -28,7 +28,7 @@ export function getRulePrefix(id: string): string | null {
  */
 export function getHasName(name: string) {
 	return <T extends RuleEntry>(
-		rule: RuleEntry
+		rule: RuleEntry,
 	): rule is Exclude<T, [string, undefined]> => getRuleName(rule[0]) === name;
 }
 
@@ -38,7 +38,7 @@ export function getHasName(name: string) {
  * @return if the rule definition is active
  */
 export function ruleIsActive<T extends RuleEntry>(
-	rule: T
+	rule: T,
 ): rule is Exclude<T, [string, Readonly<[RuleConfigSeverity.Disabled]>]> {
 	const [, value] = rule;
 	if (value && Array.isArray(value)) {
@@ -53,7 +53,7 @@ export function ruleIsActive<T extends RuleEntry>(
  * @return if the rule definition is applicable
  */
 export function ruleIsApplicable(
-	rule: RuleEntry
+	rule: RuleEntry,
 ): rule is
 	| [string, Readonly<[RuleConfigSeverity, 'always']>]
 	| [string, Readonly<[RuleConfigSeverity, 'always', unknown]>] {
@@ -70,7 +70,7 @@ export function ruleIsApplicable(
  * @return if the rule definition is applicable
  */
 export function ruleIsNotApplicable(
-	rule: RuleEntry
+	rule: RuleEntry,
 ): rule is
 	| [string, Readonly<[RuleConfigSeverity, 'never']>]
 	| [string, Readonly<[RuleConfigSeverity, 'never', unknown]>] {
@@ -82,12 +82,12 @@ export function ruleIsNotApplicable(
 }
 
 export function enumRuleIsActive(
-	rule: RuleEntry
+	rule: RuleEntry,
 ): rule is [
 	string,
 	Readonly<
 		[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, 'always', string[]]
-	>
+	>,
 ] {
 	return (
 		ruleIsActive(rule) &&
@@ -105,7 +105,7 @@ export function enumRuleIsActive(
  */
 export function getRules(prefix: string, rules: QualifiedRules): RuleEntry[] {
 	return Object.entries(rules).filter(
-		(rule): rule is RuleEntry => getRulePrefix(rule[0]) === prefix
+		(rule): rule is RuleEntry => getRulePrefix(rule[0]) === prefix,
 	);
 }
 

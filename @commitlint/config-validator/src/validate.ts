@@ -24,7 +24,7 @@ const Ajv = _Ajv as unknown as typeof _Ajv.default;
 
 export function validateConfig(
 	source: string,
-	config: unknown
+	config: unknown,
 ): asserts config is UserConfig {
 	const ajv = new Ajv({
 		meta: false,
@@ -49,8 +49,8 @@ export function validateConfig(
 	if (!isValid && validate.errors && validate.errors.length) {
 		throw new Error(
 			`Commitlint configuration in ${source} is invalid:\n${formatErrors(
-				validate.errors
-			)}`
+				validate.errors,
+			)}`,
 		);
 	}
 }

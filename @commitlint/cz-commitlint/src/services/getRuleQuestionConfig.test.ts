@@ -206,21 +206,21 @@ describe('enum list', () => {
 		expect(enumList).toEqual([
 			{
 				name: expect.stringMatching(
-					new RegExp(`^cli:[\\s]{${LONGEST - 4 + 4}}Test CLI$`)
+					new RegExp(`^cli:[\\s]{${LONGEST - 4 + 4}}Test CLI$`),
 				),
 				value: 'cli',
 				short: 'cli',
 			},
 			{
 				name: expect.stringMatching(
-					new RegExp(`^core:[\\s]{${LONGEST - 5 + 4}}Test CORE$`)
+					new RegExp(`^core:[\\s]{${LONGEST - 5 + 4}}Test CORE$`),
 				),
 				value: 'core',
 				short: 'core',
 			},
 			{
 				name: expect.stringMatching(
-					new RegExp(`^${longestItem}:[\\s]{${-1 + 4}}Test$`)
+					new RegExp(`^${longestItem}:[\\s]{${-1 + 4}}Test$`),
 				),
 				value: longestItem,
 				short: longestItem,

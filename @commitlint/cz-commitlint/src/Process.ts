@@ -21,7 +21,7 @@ export default async function (
 	prompts: UserPromptConfig,
 	inquirer: {
 		prompt(questions: DistinctQuestion[]): Promise<Answers>;
-	}
+	},
 ): Promise<string> {
 	setRules(rules);
 	setPromptConfig(prompts);

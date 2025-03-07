@@ -10,7 +10,7 @@ import {ruleIsActive, ruleIsNotApplicable} from './utils.js';
  * @return transform function applying the enforced case
  */
 export default function getForcedCaseFn(
-	rule?: RuleEntry
+	rule?: RuleEntry,
 ): (input: string) => string {
 	const noop = (input: string) => input;
 
