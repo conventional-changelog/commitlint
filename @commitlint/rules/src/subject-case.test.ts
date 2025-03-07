@@ -88,7 +88,7 @@ test('with lowercase unicode subject should fail for "always uppercase"', async 
 	const [actual] = subjectCase(
 		await parsed.lowercase_unicode,
 		'always',
-		'upper-case'
+		'upper-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -152,7 +152,7 @@ test('with uppercase unicode subject should fail for "always lowercase"', async 
 	const [actual] = subjectCase(
 		await parsed.uppercase_unicode,
 		'always',
-		'lower-case'
+		'lower-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -198,7 +198,7 @@ test('with camelcase unicode subject should fail for "always sentencecase"', asy
 	const [actual] = subjectCase(
 		await parsed.camelcase_unicode,
 		'always',
-		'sentence-case'
+		'sentence-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -208,7 +208,7 @@ test('with kebabcase unicode subject should fail for "always camelcase"', async 
 	const [actual] = subjectCase(
 		await parsed.kebabcase_unicode,
 		'always',
-		'camel-case'
+		'camel-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -230,7 +230,7 @@ test('with pascalcase subject should succeed for "always pascalcase"', async () 
 	const [actual] = subjectCase(
 		await parsed.pascalcase,
 		'always',
-		'pascal-case'
+		'pascal-case',
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -258,7 +258,7 @@ test('with pascalcase unicode subject should fail for "always uppercase"', async
 	const [actual] = subjectCase(
 		await parsed.pascalcase_unicode,
 		'always',
-		'upper-case'
+		'upper-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -304,7 +304,7 @@ test('with snakecase unicode subject should fail for "never lowercase"', async (
 	const [actual] = subjectCase(
 		await parsed.snakecase_unicode,
 		'never',
-		'lower-case'
+		'lower-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -356,7 +356,7 @@ test('with startcase unicode subject should fail for "always pascalcase"', async
 	const [actual] = subjectCase(
 		await parsed.startcase_unicode,
 		'always',
-		'pascal-case'
+		'pascal-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -366,7 +366,7 @@ test('with sentencecase subject should succeed for "always sentence-case"', asyn
 	const [actual] = subjectCase(
 		await parsed.sentencecase,
 		'always',
-		'sentence-case'
+		'sentence-case',
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -376,7 +376,7 @@ test('with sentencecase subject should fail for "never sentencecase"', async () 
 	const [actual] = subjectCase(
 		await parsed.sentencecase,
 		'never',
-		'sentence-case'
+		'sentence-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -386,7 +386,7 @@ test('with sentencecase subject should fail for "always pascalcase"', async () =
 	const [actual] = subjectCase(
 		await parsed.sentencecase,
 		'always',
-		'pascal-case'
+		'pascal-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -396,7 +396,7 @@ test('with sentencecase subject should succeed for "never camelcase"', async () 
 	const [actual] = subjectCase(
 		await parsed.sentencecase,
 		'never',
-		'camel-case'
+		'camel-case',
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -406,7 +406,7 @@ test('with sentencecase unicode subject should fail for "always camelcase"', asy
 	const [actual] = subjectCase(
 		await parsed.sentencecase_unicode,
 		'always',
-		'camel-case'
+		'camel-case',
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -416,7 +416,7 @@ test('should use expected message with "always"', async () => {
 	const [, message] = subjectCase(
 		await parsed.uppercase,
 		'always',
-		'lower-case'
+		'lower-case',
 	);
 	expect(message).toContain('must be lower-case');
 });
@@ -425,7 +425,7 @@ test('should use expected message with "never"', async () => {
 	const [, message] = subjectCase(
 		await parsed.uppercase,
 		'never',
-		'upper-case'
+		'upper-case',
 	);
 	expect(message).toContain('must not be upper-case');
 });

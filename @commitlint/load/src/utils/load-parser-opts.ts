@@ -7,10 +7,10 @@ function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 }
 
 function isParserOptsFunction<T extends ParserPreset>(
-	obj: T
+	obj: T,
 ): obj is T & {
 	parserOpts: (
-		cb: (_: never, parserOpts: Record<string, unknown>) => unknown
+		cb: (_: never, parserOpts: Record<string, unknown>) => unknown,
 	) => Record<string, unknown> | undefined;
 } {
 	return typeof obj.parserOpts === 'function';
@@ -21,7 +21,7 @@ export async function loadParserOpts(
 		| string
 		| Awaitable<ParserPreset>
 		| (() => Awaitable<ParserPreset>)
-		| undefined
+		| undefined,
 ): Promise<ParserPreset | undefined> {
 	if (typeof pendingParser === 'function') {
 		return loadParserOpts(pendingParser());

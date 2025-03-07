@@ -118,7 +118,7 @@ test('should read commits from the last lightweight tag', async () => {
 	await x(
 		'git',
 		['commit', '--allow-empty', '-m', 'chore: release v9.9.9-alpha.1'],
-		{nodeOptions: {cwd}}
+		{nodeOptions: {cwd}},
 	);
 	await x('git', ['tag', 'v9.9.9-alpha.1'], {nodeOptions: {cwd}});
 	await x('git', ['commit', '--allow-empty', '-m', 'commit A'], {

@@ -70,12 +70,12 @@ describe('getQuestions', () => {
 		expect(
 			(questions[1].when as any)({
 				isBreaking: false,
-			})
+			}),
 		).toBe(false);
 		expect(
 			(questions[1].when as any)({
 				isBreaking: true,
-			})
+			}),
 		).toBe(true);
 	});
 
@@ -97,20 +97,20 @@ describe('getQuestions', () => {
 		expect(
 			(questions[1].when as any)({
 				isBreaking: true,
-			})
+			}),
 		).toBe(true);
 
 		expect(
 			(questions[1].when as any)({
 				isBreaking: true,
 				body: 'xxx',
-			})
+			}),
 		).toBe(false);
 
 		expect(
 			(questions[1].when as any)({
 				isBreaking: false,
-			})
+			}),
 		).toBe(false);
 	});
 
@@ -148,12 +148,12 @@ describe('getQuestions', () => {
 		expect(
 			(questions[1].when as any)({
 				isIssueAffected: false,
-			})
+			}),
 		).toBe(false);
 		expect(
 			(questions[1].when as any)({
 				isIssueAffected: true,
-			})
+			}),
 		).toBe(true);
 	});
 
@@ -178,21 +178,21 @@ describe('getQuestions', () => {
 		expect(
 			(questions[1].when as any)({
 				isIssueAffected: true,
-			})
+			}),
 		).toBe(true);
 
 		expect(
 			(questions[1].when as any)({
 				isIssueAffected: true,
 				body: 'xxx',
-			})
+			}),
 		).toBe(false);
 
 		expect(
 			(questions[1].when as any)({
 				isIssueAffected: false,
 				breaking: 'xxxxx',
-			})
+			}),
 		).toBe(false);
 	});
 });
@@ -217,7 +217,7 @@ describe('combineCommitMessage', () => {
 			footer: 'Other footer information.',
 		});
 		expect(commitMessage).toBe(
-			'BREAKING CHANGE: xxxxxx\nhttps://github.com/conventional-changelog/commitlint/issues/2507\nOther footer information.'
+			'BREAKING CHANGE: xxxxxx\nhttps://github.com/conventional-changelog/commitlint/issues/2507\nOther footer information.',
 		);
 	});
 
@@ -232,7 +232,7 @@ describe('combineCommitMessage', () => {
 			footer: 'Other footer information.',
 		});
 		expect(commitMessage).toBe(
-			'BREAKING\nCHANGE:\nxxxxxx\nhttps://github.com/conventional-changelog/commitlint/issues/2507\nOther\nfooter\ninformation.'
+			'BREAKING\nCHANGE:\nxxxxxx\nhttps://github.com/conventional-changelog/commitlint/issues/2507\nOther\nfooter\ninformation.',
 		);
 	});
 
@@ -248,7 +248,7 @@ describe('combineCommitMessage', () => {
 			footer: 'Other footer information.',
 		});
 		expect(commitMessage).toBe(
-			'\nBREAKING\nCHANGE:\nxxxxxx\nhttps://github.com/conventional-changelog/commitlint/issues/2507\nOther\nfooter\ninformation.'
+			'\nBREAKING\nCHANGE:\nxxxxxx\nhttps://github.com/conventional-changelog/commitlint/issues/2507\nOther\nfooter\ninformation.',
 		);
 	});
 
@@ -259,7 +259,7 @@ describe('combineCommitMessage', () => {
 			footer: 'Other footer information.',
 		});
 		expect(commitMessage).toBe(
-			'https://github.com/conventional-changelog/commitlint/issues/2507\nOther footer information.'
+			'https://github.com/conventional-changelog/commitlint/issues/2507\nOther footer information.',
 		);
 	});
 
@@ -310,7 +310,7 @@ describe('FooterQuestion', () => {
 
 		(lastQuestion.message as any)(answers);
 		expect(lastQuestion?.validate?.(''.padEnd(10, 'z'), answers)).toBe(
-			'footer: footer over limit 11'
+			'footer: footer over limit 11',
 		);
 	});
 });

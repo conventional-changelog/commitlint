@@ -31,7 +31,7 @@ test('falls back to global install', async () => {
 
 test('fails for missing extends', async () => {
 	await expect(() =>
-		resolveExtends({extends: ['@commitlint/foo-bar']})
+		resolveExtends({extends: ['@commitlint/foo-bar']}),
 	).rejects.toThrow(/Cannot find module "@commitlint\/foo-bar" from/);
 });
 
@@ -195,7 +195,7 @@ test('uses prefix key recursively', async () => {
 
 	expect(ctx.dynamicImport).toHaveBeenCalledWith('prefix-extender-name');
 	expect(ctx.dynamicImport).toHaveBeenCalledWith(
-		'prefix-recursive-extender-name'
+		'prefix-recursive-extender-name',
 	);
 });
 

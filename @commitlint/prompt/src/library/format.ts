@@ -22,7 +22,7 @@ export default function format(input: Result, debug = false): string {
 				registry[name as ResultPart] =
 					value === undefined ? chalk.grey(`<${name}>`) : chalk.bold(value);
 				return registry;
-		  }, {})
+			}, {})
 		: defaultInput;
 
 	// Return formatted string

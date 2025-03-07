@@ -36,7 +36,7 @@ const resolveFormatter = (formatter: string, parent?: string): string => {
 
 export default async function load(
 	seed: UserConfig = {},
-	options: LoadOptions = {}
+	options: LoadOptions = {},
 ): Promise<QualifiedConfig> {
 	const cwd = typeof options.cwd === 'undefined' ? process.cwd() : options.cwd;
 	const loaded = await loadConfig(cwd, options.file);
@@ -56,14 +56,14 @@ export default async function load(
 			rules: {},
 		},
 		config,
-		seed
+		seed,
 	);
 
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === 'string') {
 		const resolvedParserPreset = resolveFrom(
 			config.parserPreset,
-			configFilePath
+			configFilePath,
 		);
 
 		config.parserPreset = {
@@ -90,7 +90,7 @@ export default async function load(
 				plugins = await loadPlugin(
 					plugins,
 					plugin,
-					process.env.DEBUG === 'true'
+					process.env.DEBUG === 'true',
 				);
 			} else {
 				plugins.local = plugin;
@@ -100,7 +100,7 @@ export default async function load(
 
 	const rules = (
 		await Promise.all(
-			Object.entries(extended.rules || {}).map((entry) => executeRule(entry))
+			Object.entries(extended.rules || {}).map((entry) => executeRule(entry)),
 		)
 	).reduce<QualifiedRules>((registry, item) => {
 		// type of `item` can be null, but Object.entries always returns key pair
@@ -113,8 +113,8 @@ export default async function load(
 		typeof extended.helpUrl === 'string'
 			? extended.helpUrl
 			: typeof config.helpUrl === 'string'
-			? config.helpUrl
-			: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
+				? config.helpUrl
+				: 'https://github.com/conventional-changelog/commitlint/#what-is-commitlint';
 
 	const prompt =
 		extended.prompt && isPlainObject(extended.prompt) ? extended.prompt : {};
@@ -123,8 +123,8 @@ export default async function load(
 		extends: Array.isArray(extended.extends)
 			? extended.extends
 			: typeof extended.extends === 'string'
-			? [extended.extends]
-			: [],
+				? [extended.extends]
+				: [],
 		// Resolve config-relative formatter module
 		formatter: resolveFormatter(extended.formatter, configFilePath),
 		// Resolve parser-opts from preset

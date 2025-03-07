@@ -5,7 +5,7 @@ import {RuleConfigSeverity} from './rules.js';
 
 export type Formatter = (
 	report: FormattableReport,
-	options: FormatOptions
+	options: FormatOptions,
 ) => string;
 
 export interface FormattableProblem {

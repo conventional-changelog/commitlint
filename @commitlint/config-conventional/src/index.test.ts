@@ -149,7 +149,9 @@ test('type-empty', async () => {
 
 test('subject-case', async () => {
 	const invalidInputs = await Promise.all(
-		messages.invalidSubjectCases.map((invalidInput) => commitLint(invalidInput))
+		messages.invalidSubjectCases.map((invalidInput) =>
+			commitLint(invalidInput),
+		),
 	);
 
 	invalidInputs.forEach((result) => {
@@ -209,7 +211,7 @@ test('body-max-line-length', async () => {
 
 test('valid messages', async () => {
 	const validInputs = await Promise.all(
-		messages.validMessages.map((input) => commitLint(input))
+		messages.validMessages.map((input) => commitLint(input)),
 	);
 
 	validInputs.forEach((result) => {

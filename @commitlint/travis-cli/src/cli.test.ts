@@ -40,7 +40,7 @@ test('should throw when not on travis ci', async () => {
 
 	const output = await cli({env});
 	expect(output.stderr).toContain(
-		'@commitlint/travis-cli is intended to be used on Travis CI'
+		'@commitlint/travis-cli is intended to be used on Travis CI',
 	);
 });
 
@@ -52,7 +52,7 @@ test('should throw when on travis ci, but env vars are missing', async () => {
 
 	const output = await cli({env});
 	expect(output.stderr).toContain(
-		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG'
+		'TRAVIS_COMMIT, TRAVIS_COMMIT_RANGE, TRAVIS_EVENT_TYPE, TRAVIS_REPO_SLUG, TRAVIS_PULL_REQUEST_SLUG',
 	);
 });
 
@@ -61,7 +61,7 @@ test('should call git with expected args (test might fail locally)', async () =>
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
 		__dirname,
-		TRAVIS_COMMITLINT_GIT_BIN
+		TRAVIS_COMMITLINT_GIT_BIN,
 	);
 
 	const result = await cli({
@@ -85,7 +85,7 @@ test('should call git with expected args on pull_request (test might fail locall
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
 		__dirname,
-		TRAVIS_COMMITLINT_GIT_BIN
+		TRAVIS_COMMITLINT_GIT_BIN,
 	);
 
 	const result = await cli({
@@ -113,7 +113,7 @@ test('should call git with extra expected args on pull_request (test might fail 
 		'https://github.com/conventional-changelog/commitlint.git',
 		['--depth=10'],
 		__dirname,
-		TRAVIS_COMMITLINT_GIT_BIN
+		TRAVIS_COMMITLINT_GIT_BIN,
 	);
 
 	const result = await cli(
@@ -121,7 +121,7 @@ test('should call git with extra expected args on pull_request (test might fail 
 			cwd,
 			env: {...validBaseEnv, TRAVIS_EVENT_TYPE: 'pull_request'},
 		},
-		['--config', './config/commitlint.config.js']
+		['--config', './config/commitlint.config.js'],
 	);
 	const invocations = getInvocations(result.stdout);
 	expect(invocations.length).toBe(3);
@@ -152,6 +152,6 @@ function getInvocations(stdout: string): string[][] {
 				.split(',')
 				.map((fragment) => fragment.trim())
 				.map((fragment) => fragment.substring(1, fragment.length - 1))
-				.filter(Boolean)
+				.filter(Boolean),
 		);
 }

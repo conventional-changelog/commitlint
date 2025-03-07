@@ -4,7 +4,7 @@ import {SyncRule} from '@commitlint/types';
 export const typeMinLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
-	value = 0
+	value = 0,
 ) => {
 	const input = parsed.type;
 	if (!input) {
