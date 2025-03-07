@@ -1,8 +1,8 @@
-import {QualifiedRules} from '@commitlint/types';
+import { QualifiedRules } from "@commitlint/types";
 
-import type {Rule} from '../types.js';
+import type { Rule } from "../types.js";
 
-const storeKey = Symbol('rules');
+const storeKey = Symbol("rules");
 
 const store: {
 	[storeKey]: QualifiedRules;
@@ -11,7 +11,7 @@ const store: {
 };
 
 export function getRule(key: string, property: string): Rule | undefined {
-	if (key.split('-').length > 1) {
+	if (key.split("-").length > 1) {
 		return;
 	}
 	return store[storeKey][`${key}-${property}`];

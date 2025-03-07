@@ -1,6 +1,6 @@
-import {Answers, InputQuestionOptions} from 'inquirer';
+import { Answers, InputQuestionOptions } from "inquirer";
 
-declare module 'inquirer' {
+declare module "inquirer" {
 	interface InputCustomCompletionOption {
 		value: string;
 		description?: string;
@@ -11,7 +11,7 @@ declare module 'inquirer' {
 		/**
 		 * @inheritdoc
 		 */
-		type?: 'input-custom';
+		type?: "input-custom";
 		log?(answers?: T): string;
 		tabCompletion?: InputCustomCompletionOption[];
 		maxLength(answers?: T): number;
@@ -19,6 +19,6 @@ declare module 'inquirer' {
 	}
 
 	interface QuestionMap<T extends Answers = Answers> {
-		'input-custom': InputCustomOptions<T>;
+		"input-custom": InputCustomOptions<T>;
 	}
 }

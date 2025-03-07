@@ -1,14 +1,14 @@
 // https://github.com/raszi/node-tmp/issues/229
 
-import type {Environment} from 'vitest';
-import {builtinEnvironments} from 'vitest/environments';
-import tmp from 'tmp';
+import type { Environment } from "vitest";
+import { builtinEnvironments } from "vitest/environments";
+import tmp from "tmp";
 
 const nodeEnv = builtinEnvironments.node;
 
 const env: Environment = {
 	...nodeEnv,
-	name: 'commitlint',
+	name: "commitlint",
 	async setup(global: object, options: Record<string, unknown>) {
 		const setupEnv = await nodeEnv.setup(global, options);
 		return {

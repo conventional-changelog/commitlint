@@ -21,5 +21,5 @@ export async function execute<T = unknown>(
 }
 
 function executable<T>(config: Config<T>): config is ExectableConfig<T> {
-	return typeof config === 'function';
+	return typeof config === "function";
 }

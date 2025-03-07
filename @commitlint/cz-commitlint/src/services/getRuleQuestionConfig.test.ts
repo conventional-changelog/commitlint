@@ -1,60 +1,60 @@
-import {describe, test, expect} from 'vitest';
-import {RuleConfigSeverity} from '@commitlint/types';
+import { describe, test, expect } from "vitest";
+import { RuleConfigSeverity } from "@commitlint/types";
 
-import {setPromptConfig} from '../store/prompts.js';
-import {setRules} from '../store/rules.js';
-import getRuleQuestionConfig from './getRuleQuestionConfig.js';
+import { setPromptConfig } from "../store/prompts.js";
+import { setRules } from "../store/rules.js";
+import getRuleQuestionConfig from "./getRuleQuestionConfig.js";
 
 // let rules = {};
 
 // let rules: QualifiedRules = {};
 // const getRules = jest.fn().mockReturnValue(rules);
 
-describe('empty rule', () => {
-	test('should return null when must be empty', () => {
+describe("empty rule", () => {
+	test("should return null when must be empty", () => {
 		setRules({
-			'body-empty': [RuleConfigSeverity.Error, 'always'],
+			"body-empty": [RuleConfigSeverity.Error, "always"],
 		});
-		expect(getRuleQuestionConfig('body')).toBe(null);
+		expect(getRuleQuestionConfig("body")).toBe(null);
 	});
 
 	test("should field 'skip' be false when can not be empty", () => {
 		setRules({
-			'body-empty': [RuleConfigSeverity.Error, 'never'],
+			"body-empty": [RuleConfigSeverity.Error, "never"],
 		});
-		expect(getRuleQuestionConfig('body')?.skip).toBe(false);
+		expect(getRuleQuestionConfig("body")?.skip).toBe(false);
 	});
 
 	test('should field "skip" be true when not set empty rule', () => {
 		setRules({
-			'body-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'],
-			'body-max-length': [RuleConfigSeverity.Error, 'always', 100],
+			"body-case": [RuleConfigSeverity.Warning, "never", "camel-case"],
+			"body-max-length": [RuleConfigSeverity.Error, "always", 100],
 		});
-		expect(getRuleQuestionConfig('body')?.skip).toBe(true);
+		expect(getRuleQuestionConfig("body")?.skip).toBe(true);
 	});
 
 	test('should field "skip" be true when disable empty rule', () => {
 		setRules({
-			'body-empty': [RuleConfigSeverity.Disabled],
+			"body-empty": [RuleConfigSeverity.Disabled],
 		});
 
-		expect(getRuleQuestionConfig('body')?.skip).toBe(true);
-
-		setRules({
-			'body-empty': [RuleConfigSeverity.Disabled, 'always'],
-		});
-		expect(getRuleQuestionConfig('body')?.skip).toBe(true);
+		expect(getRuleQuestionConfig("body")?.skip).toBe(true);
 
 		setRules({
-			'body-empty': [RuleConfigSeverity.Disabled, 'never'],
+			"body-empty": [RuleConfigSeverity.Disabled, "always"],
 		});
-		expect(getRuleQuestionConfig('body')?.skip).toBe(true);
+		expect(getRuleQuestionConfig("body")?.skip).toBe(true);
+
+		setRules({
+			"body-empty": [RuleConfigSeverity.Disabled, "never"],
+		});
+		expect(getRuleQuestionConfig("body")?.skip).toBe(true);
 	});
 });
 
-describe('title', () => {
+describe("title", () => {
 	test("should field 'title' set by 'description config'", () => {
-		const TEST_DESC = 'test the description';
+		const TEST_DESC = "test the description";
 		setPromptConfig({
 			questions: {
 				body: {
@@ -63,7 +63,7 @@ describe('title', () => {
 			},
 		});
 
-		expect(getRuleQuestionConfig('body')?.title).toBe(TEST_DESC);
+		expect(getRuleQuestionConfig("body")?.title).toBe(TEST_DESC);
 	});
 
 	test("should field 'title' be default string when without 'description' config", () => {
@@ -73,83 +73,83 @@ describe('title', () => {
 			},
 		});
 
-		expect(getRuleQuestionConfig('body')?.title).toBe('body:');
+		expect(getRuleQuestionConfig("body")?.title).toBe("body:");
 	});
 });
 
-describe('enum list', () => {
-	test('should enumList be undefined when without enum rule', () => {
+describe("enum list", () => {
+	test("should enumList be undefined when without enum rule", () => {
 		setRules({
-			'scope-case': [RuleConfigSeverity.Warning, 'never', 'camel-case'],
+			"scope-case": [RuleConfigSeverity.Warning, "never", "camel-case"],
 		});
 
-		expect(getRuleQuestionConfig('scope')?.enumList).toBeUndefined();
+		expect(getRuleQuestionConfig("scope")?.enumList).toBeUndefined();
 	});
 
-	test('should enumList be undefined when enum rule is not active', () => {
+	test("should enumList be undefined when enum rule is not active", () => {
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Disabled],
+			"scope-enum": [RuleConfigSeverity.Disabled],
 		});
-		expect(getRuleQuestionConfig('scope')?.enumList).toBeUndefined();
+		expect(getRuleQuestionConfig("scope")?.enumList).toBeUndefined();
 
 		setRules({
-			'scope-enum': [
+			"scope-enum": [
 				RuleConfigSeverity.Error,
-				'never',
-				['cli', 'core', 'lint'],
+				"never",
+				["cli", "core", "lint"],
 			],
 		});
-		expect(getRuleQuestionConfig('scope')?.enumList).toBeUndefined();
+		expect(getRuleQuestionConfig("scope")?.enumList).toBeUndefined();
 
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Error, 'always'],
+			"scope-enum": [RuleConfigSeverity.Error, "always"],
 		} as any);
-		expect(getRuleQuestionConfig('scope')?.enumList).toBeUndefined();
+		expect(getRuleQuestionConfig("scope")?.enumList).toBeUndefined();
 	});
 
-	test('should enumList be undefined when enum rule is not a array', () => {
+	test("should enumList be undefined when enum rule is not a array", () => {
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Error, 'always', {}],
+			"scope-enum": [RuleConfigSeverity.Error, "always", {}],
 		} as any);
 
-		expect(getRuleQuestionConfig('scope')?.enumList).toBeUndefined();
+		expect(getRuleQuestionConfig("scope")?.enumList).toBeUndefined();
 	});
 
 	test("should enumList same with enum rule when without 'enum' config", () => {
-		const ENUM_RULE_LIST = ['cli', 'core', 'lint'];
+		const ENUM_RULE_LIST = ["cli", "core", "lint"];
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Error, 'always', ENUM_RULE_LIST],
+			"scope-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
 		} as any);
 
 		setPromptConfig({
 			questions: {
 				scope: {
-					description: 'test scope',
+					description: "test scope",
 				},
 			},
 		});
 
-		const enumList = getRuleQuestionConfig('scope')?.enumList;
+		const enumList = getRuleQuestionConfig("scope")?.enumList;
 		expect(enumList).not.toBe(ENUM_RULE_LIST);
 		expect(enumList).toEqual(ENUM_RULE_LIST);
 	});
 
-	test('should enumList item concat description', () => {
-		const ENUM_RULE_LIST = ['cli', 'core', 'lint'];
+	test("should enumList item concat description", () => {
+		const ENUM_RULE_LIST = ["cli", "core", "lint"];
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Error, 'always', ENUM_RULE_LIST],
+			"scope-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
 		} as any);
 
 		setPromptConfig({
 			questions: {
 				scope: {
-					description: 'test scope',
+					description: "test scope",
 					enum: {
 						cli: {
-							description: 'CLI',
+							description: "CLI",
 						},
 						core: {
-							description: 'CORE',
+							description: "CORE",
 						},
 						lint: {},
 					},
@@ -157,66 +157,66 @@ describe('enum list', () => {
 			},
 		});
 
-		const enumList = getRuleQuestionConfig('scope')?.enumList;
+		const enumList = getRuleQuestionConfig("scope")?.enumList;
 		expect(enumList).toHaveLength(3);
 		expect(enumList).toEqual([
 			{
 				name: expect.stringMatching(/cli:[\s]*CLI/),
-				value: 'cli',
-				short: 'cli',
+				value: "cli",
+				short: "cli",
 			},
 			{
 				name: expect.stringMatching(/core:[\s]*CORE/),
-				value: 'core',
-				short: 'core',
+				value: "core",
+				short: "core",
 			},
-			'lint',
+			"lint",
 		]);
 	});
 
-	test('should enumList item padding format with 4 blank', () => {
+	test("should enumList item padding format with 4 blank", () => {
 		const LONGEST = 12;
-		const longestItem = ''.padEnd(LONGEST, 'x');
-		const enumRuleList = ['cli', 'core', longestItem];
+		const longestItem = "".padEnd(LONGEST, "x");
+		const enumRuleList = ["cli", "core", longestItem];
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Error, 'always', enumRuleList],
+			"scope-enum": [RuleConfigSeverity.Error, "always", enumRuleList],
 		} as any);
 
 		setPromptConfig({
 			questions: {
 				scope: {
-					description: 'test scope',
+					description: "test scope",
 					enum: {
 						cli: {
-							description: 'Test CLI',
+							description: "Test CLI",
 						},
 						core: {
-							description: 'Test CORE',
+							description: "Test CORE",
 						},
 						[longestItem]: {
-							description: 'Test',
+							description: "Test",
 						},
 					},
 				},
 			},
 		});
 
-		const enumList = getRuleQuestionConfig('scope')?.enumList;
+		const enumList = getRuleQuestionConfig("scope")?.enumList;
 		expect(enumList).toHaveLength(3);
 		expect(enumList).toEqual([
 			{
 				name: expect.stringMatching(
 					new RegExp(`^cli:[\\s]{${LONGEST - 4 + 4}}Test CLI$`),
 				),
-				value: 'cli',
-				short: 'cli',
+				value: "cli",
+				short: "cli",
 			},
 			{
 				name: expect.stringMatching(
 					new RegExp(`^core:[\\s]{${LONGEST - 5 + 4}}Test CORE$`),
 				),
-				value: 'core',
-				short: 'core',
+				value: "core",
+				short: "core",
 			},
 			{
 				name: expect.stringMatching(
@@ -229,15 +229,15 @@ describe('enum list', () => {
 	});
 
 	test("should enumList item sorted by 'enum' config order", () => {
-		const ENUM_RULE_LIST = ['cli', 'core', 'lint'];
+		const ENUM_RULE_LIST = ["cli", "core", "lint"];
 		setRules({
-			'scope-enum': [RuleConfigSeverity.Error, 'always', ENUM_RULE_LIST],
+			"scope-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
 		} as any);
 
 		setPromptConfig({
 			questions: {
 				scope: {
-					description: 'test scope',
+					description: "test scope",
 					enum: {
 						core: {},
 						lint: {},
@@ -247,89 +247,89 @@ describe('enum list', () => {
 			},
 		});
 
-		const enumList = getRuleQuestionConfig('scope')?.enumList;
+		const enumList = getRuleQuestionConfig("scope")?.enumList;
 		expect(enumList).toHaveLength(3);
-		expect(enumList?.[0]).toBe('core');
-		expect(enumList?.[1]).toBe('lint');
-		expect(enumList?.[2]).toBe('cli');
+		expect(enumList?.[0]).toBe("core");
+		expect(enumList?.[1]).toBe("lint");
+		expect(enumList?.[2]).toBe("cli");
 	});
 });
 
-test('should return correct question config', () => {
+test("should return correct question config", () => {
 	setRules({
-		'body-empty': [RuleConfigSeverity.Error, 'never'],
-		'body-case': [RuleConfigSeverity.Error, 'always', 'sentence-case'],
-		'body-full-stop': [RuleConfigSeverity.Error, 'always', '!'],
-		'body-min-length': [RuleConfigSeverity.Error, 'always', 10],
-		'body-max-length': [RuleConfigSeverity.Error, 'always', 100],
-		'scope-enum': [RuleConfigSeverity.Error, 'always', ['cli', 'core', 'lint']],
+		"body-empty": [RuleConfigSeverity.Error, "never"],
+		"body-case": [RuleConfigSeverity.Error, "always", "sentence-case"],
+		"body-full-stop": [RuleConfigSeverity.Error, "always", "!"],
+		"body-min-length": [RuleConfigSeverity.Error, "always", 10],
+		"body-max-length": [RuleConfigSeverity.Error, "always", 100],
+		"scope-enum": [RuleConfigSeverity.Error, "always", ["cli", "core", "lint"]],
 	} as any);
 
 	const MESSAGES = {
-		skip: ':skip',
-		max: 'upper %d chars',
-		min: '%d chars at least',
-		emptyWarning: 'can not be empty',
-		upperLimitWarning: 'over limit',
-		lowerLimitWarning: 'below limit',
+		skip: ":skip",
+		max: "upper %d chars",
+		min: "%d chars at least",
+		emptyWarning: "can not be empty",
+		upperLimitWarning: "over limit",
+		lowerLimitWarning: "below limit",
 	};
 	setPromptConfig({
 		messages: MESSAGES,
 		questions: {
 			body: {
-				description: 'please input body: (Test)',
+				description: "please input body: (Test)",
 			},
 			scope: {
-				description: 'please choose the scope: (Test)',
+				description: "please choose the scope: (Test)",
 				enum: {
 					core: {
-						description: 'CORE',
+						description: "CORE",
 					},
 					lint: {
-						description: 'LINT',
+						description: "LINT",
 					},
 					cli: {
-						description: 'CLI',
+						description: "CLI",
 					},
 				},
 			},
 		},
 	});
 
-	const scopeQuestionConfig = getRuleQuestionConfig('scope');
+	const scopeQuestionConfig = getRuleQuestionConfig("scope");
 	expect(scopeQuestionConfig).toEqual({
 		skip: true,
-		title: 'please choose the scope: (Test)',
+		title: "please choose the scope: (Test)",
 		messages: MESSAGES,
 		minLength: 0,
 		maxLength: Infinity,
 		enumList: [
 			{
-				name: 'core:   CORE',
-				value: 'core',
-				short: 'core',
+				name: "core:   CORE",
+				value: "core",
+				short: "core",
 			},
 			{
-				name: 'lint:   LINT',
-				value: 'lint',
-				short: 'lint',
+				name: "lint:   LINT",
+				value: "lint",
+				short: "lint",
 			},
 			{
-				name: 'cli:    CLI',
-				value: 'cli',
-				short: 'cli',
+				name: "cli:    CLI",
+				value: "cli",
+				short: "cli",
 			},
 		],
 		caseFn: expect.any(Function),
 		fullStopFn: expect.any(Function),
 	});
-	expect(scopeQuestionConfig?.caseFn?.('xxxx')).toBe('xxxx');
-	expect(scopeQuestionConfig?.fullStopFn?.('xxxx')).toBe('xxxx');
+	expect(scopeQuestionConfig?.caseFn?.("xxxx")).toBe("xxxx");
+	expect(scopeQuestionConfig?.fullStopFn?.("xxxx")).toBe("xxxx");
 
-	const bodyQuestionConfig = getRuleQuestionConfig('body');
+	const bodyQuestionConfig = getRuleQuestionConfig("body");
 	expect(bodyQuestionConfig).toEqual({
 		skip: false,
-		title: 'please input body: (Test)',
+		title: "please input body: (Test)",
 		messages: MESSAGES,
 		minLength: 10,
 		maxLength: 100,
@@ -337,6 +337,6 @@ test('should return correct question config', () => {
 		caseFn: expect.any(Function),
 		fullStopFn: expect.any(Function),
 	});
-	expect(bodyQuestionConfig?.caseFn?.('xxxx')).toBe('Xxxx');
-	expect(bodyQuestionConfig?.fullStopFn?.('xxxx')).toBe('xxxx!');
+	expect(bodyQuestionConfig?.caseFn?.("xxxx")).toBe("Xxxx");
+	expect(bodyQuestionConfig?.fullStopFn?.("xxxx")).toBe("xxxx!");
 });

@@ -1,5 +1,5 @@
-import {RuleConfigSeverity} from '@commitlint/types';
-import type {Rule} from '../types.js';
+import { RuleConfigSeverity } from "@commitlint/types";
+import type { Rule } from "../types.js";
 
 export function ruleIsDisabled(
 	rule: Rule,
@@ -32,10 +32,10 @@ export function ruleIsActive<T extends Rule>(
 export function ruleIsApplicable(
 	rule: Rule,
 ): rule is
-	| Readonly<[RuleConfigSeverity, 'always']>
-	| Readonly<[RuleConfigSeverity, 'always', unknown]> {
+	| Readonly<[RuleConfigSeverity, "always"]>
+	| Readonly<[RuleConfigSeverity, "always", unknown]> {
 	if (rule && Array.isArray(rule)) {
-		return rule[1] === 'always';
+		return rule[1] === "always";
 	}
 	return false;
 }
@@ -48,10 +48,10 @@ export function ruleIsApplicable(
 export function ruleIsNotApplicable(
 	rule: Rule,
 ): rule is
-	| Readonly<[RuleConfigSeverity, 'never']>
-	| Readonly<[RuleConfigSeverity, 'never', unknown]> {
+	| Readonly<[RuleConfigSeverity, "never"]>
+	| Readonly<[RuleConfigSeverity, "never", unknown]> {
 	if (rule && Array.isArray(rule)) {
-		return rule[1] === 'never';
+		return rule[1] === "never";
 	}
 	return false;
 }
@@ -59,7 +59,7 @@ export function ruleIsNotApplicable(
 export function enumRuleIsActive(
 	rule: Rule,
 ): rule is Readonly<
-	[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, 'always', string[]]
+	[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, "always", string[]]
 > {
 	return (
 		ruleIsActive(rule) &&
@@ -78,7 +78,7 @@ export function getMaxLength(rule?: Rule): number {
 		rule &&
 		ruleIsActive(rule) &&
 		ruleIsApplicable(rule) &&
-		typeof rule[2] === 'number'
+		typeof rule[2] === "number"
 	) {
 		return rule[2];
 	}
@@ -90,7 +90,7 @@ export function getMinLength(rule?: Rule): number {
 		rule &&
 		ruleIsActive(rule) &&
 		ruleIsApplicable(rule) &&
-		typeof rule[2] === 'number'
+		typeof rule[2] === "number"
 	) {
 		return rule[2];
 	}

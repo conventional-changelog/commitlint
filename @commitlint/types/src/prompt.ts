@@ -1,19 +1,19 @@
 export type RuleField =
-	| 'header'
-	| 'type'
-	| 'scope'
-	| 'subject'
-	| 'body'
-	| 'footer';
+	| "header"
+	| "type"
+	| "scope"
+	| "subject"
+	| "body"
+	| "footer";
 
 export type PromptName =
 	| RuleField
-	| 'isBreaking'
-	| 'breakingBody'
-	| 'breaking'
-	| 'isIssueAffected'
-	| 'issuesBody'
-	| 'issues';
+	| "isBreaking"
+	| "breakingBody"
+	| "breaking"
+	| "isIssueAffected"
+	| "issuesBody"
+	| "issues";
 
 export type PromptConfig = {
 	settings: {
@@ -26,7 +26,7 @@ export type PromptConfig = {
 			PromptName,
 			{
 				description?: string;
-				messages?: {[K: string]: string};
+				messages?: { [K: string]: string };
 				enum?: {
 					[enumName: string]: {
 						description?: string;
