@@ -1,11 +1,11 @@
-import {createRequire} from 'node:module';
-import path from 'node:path';
-import {fileURLToPath, pathToFileURL} from 'node:url';
-import util from 'node:util';
+import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import util from "node:util";
 
-import lint from '@commitlint/lint';
-import load, {resolveFromSilent, resolveGlobalSilent} from '@commitlint/load';
-import read from '@commitlint/read';
+import lint from "@commitlint/lint";
+import load, { resolveFromSilent, resolveGlobalSilent } from "@commitlint/load";
+import read from "@commitlint/read";
 import type {
 	Formatter,
 	LintOptions,
@@ -13,145 +13,145 @@ import type {
 	ParserPreset,
 	QualifiedConfig,
 	UserConfig,
-} from '@commitlint/types';
-import type {Options} from 'conventional-commits-parser';
-import {x} from 'tinyexec';
-import yargs, {type Arguments} from 'yargs';
+} from "@commitlint/types";
+import type { Options } from "conventional-commits-parser";
+import { x } from "tinyexec";
+import yargs, { type Arguments } from "yargs";
 
-import {CliFlags} from './types.js';
+import { CliFlags } from "./types.js";
 
-import {CliError, ExitCode} from './cli-error.js';
+import { CliError, ExitCode } from "./cli-error.js";
 
 const require = createRequire(import.meta.url);
 
-const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
+const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
 	const imported = await import(
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
-	return ('default' in imported && imported.default) || imported;
+	return ("default" in imported && imported.default) || imported;
 };
 
-const pkg: typeof import('../package.json') = require('../package.json');
+const pkg: typeof import("../package.json") = require("../package.json");
 
-const gitDefaultCommentChar = '#';
+const gitDefaultCommentChar = "#";
 
 const cli = yargs(process.argv.slice(2))
 	.options({
 		color: {
-			alias: 'c',
+			alias: "c",
 			default: true,
-			description: 'toggle colored output',
-			type: 'boolean',
+			description: "toggle colored output",
+			type: "boolean",
 		},
 		config: {
-			alias: 'g',
+			alias: "g",
 			description:
-				'path to the config file; result code 9 if config is missing',
-			type: 'string',
+				"path to the config file; result code 9 if config is missing",
+			type: "string",
 		},
-		'print-config': {
-			choices: ['', 'text', 'json'],
-			description: 'print resolved config',
-			type: 'string',
+		"print-config": {
+			choices: ["", "text", "json"],
+			description: "print resolved config",
+			type: "string",
 		},
 		cwd: {
-			alias: 'd',
+			alias: "d",
 			default: process.cwd(),
-			defaultDescription: '(Working Directory)',
-			description: 'directory to execute in',
-			type: 'string',
+			defaultDescription: "(Working Directory)",
+			description: "directory to execute in",
+			type: "string",
 		},
 		edit: {
-			alias: 'e',
+			alias: "e",
 			description:
-				'read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG',
-			type: 'string',
+				"read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG",
+			type: "string",
 		},
 		env: {
-			alias: 'E',
+			alias: "E",
 			description:
-				'check message in the file at path given by environment variable value',
-			type: 'string',
+				"check message in the file at path given by environment variable value",
+			type: "string",
 		},
 		extends: {
-			alias: 'x',
-			description: 'array of shareable configurations to extend',
-			type: 'array',
+			alias: "x",
+			description: "array of shareable configurations to extend",
+			type: "array",
 		},
-		'help-url': {
-			alias: 'H',
-			type: 'string',
-			description: 'help url in error message',
+		"help-url": {
+			alias: "H",
+			type: "string",
+			description: "help url in error message",
 		},
 		from: {
-			alias: 'f',
+			alias: "f",
 			description:
-				'lower end of the commit range to lint; applies if edit=false',
-			type: 'string',
+				"lower end of the commit range to lint; applies if edit=false",
+			type: "string",
 		},
-		'from-last-tag': {
+		"from-last-tag": {
 			description:
-				'uses the last tag as the lower end of the commit range to lint; applies if edit=false and from is not set',
-			type: 'boolean',
+				"uses the last tag as the lower end of the commit range to lint; applies if edit=false and from is not set",
+			type: "boolean",
 		},
-		'git-log-args': {
+		"git-log-args": {
 			description:
 				"additional git log arguments as space separated string, example '--first-parent --cherry-pick'",
-			type: 'string',
+			type: "string",
 		},
 		last: {
-			alias: 'l',
-			description: 'just analyze the last commit; applies if edit=false',
-			type: 'boolean',
+			alias: "l",
+			description: "just analyze the last commit; applies if edit=false",
+			type: "boolean",
 		},
 		format: {
-			alias: 'o',
-			description: 'output format of the results',
-			type: 'string',
+			alias: "o",
+			description: "output format of the results",
+			type: "string",
 		},
-		'parser-preset': {
-			alias: 'p',
+		"parser-preset": {
+			alias: "p",
 			description:
-				'configuration preset to use for conventional-commits-parser',
-			type: 'string',
+				"configuration preset to use for conventional-commits-parser",
+			type: "string",
 		},
 		quiet: {
-			alias: 'q',
+			alias: "q",
 			default: false,
-			description: 'toggle console output',
-			type: 'boolean',
+			description: "toggle console output",
+			type: "boolean",
 		},
 		to: {
-			alias: 't',
+			alias: "t",
 			description:
-				'upper end of the commit range to lint; applies if edit=false',
-			type: 'string',
+				"upper end of the commit range to lint; applies if edit=false",
+			type: "string",
 		},
 		verbose: {
-			alias: 'V',
-			type: 'boolean',
-			description: 'enable verbose output for reports without problems',
+			alias: "V",
+			type: "boolean",
+			description: "enable verbose output for reports without problems",
 		},
 		strict: {
-			alias: 's',
-			type: 'boolean',
+			alias: "s",
+			type: "boolean",
 			description:
-				'enable strict mode; result code 2 for warnings, 3 for errors',
+				"enable strict mode; result code 2 for warnings, 3 for errors",
 		},
 	})
 	.version(
-		'version',
-		'display version information',
+		"version",
+		"display version information",
 		`${pkg.name}@${pkg.version}`,
 	)
-	.alias('v', 'version')
-	.help('help')
-	.alias('h', 'help')
+	.alias("v", "version")
+	.help("help")
+	.alias("h", "help")
 	.config(
-		'options',
-		'path to a JSON file or Common.js module containing CLI options',
+		"options",
+		"path to a JSON file or Common.js module containing CLI options",
 		require,
 	)
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
@@ -176,13 +176,13 @@ main(cli.argv).catch((err) => {
 });
 
 async function stdin() {
-	let result = '';
+	let result = "";
 
 	if (process.stdin.isTTY) {
 		return result;
 	}
 
-	process.stdin.setEncoding('utf8');
+	process.stdin.setEncoding("utf8");
 
 	for await (const chunk of process.stdin) {
 		result += chunk;
@@ -198,30 +198,30 @@ type MainArgsPromise = Promise<MainArgsObject>;
 type MainArgs = MainArgsObject | MainArgsPromise;
 
 async function resolveArgs(args: MainArgs): Promise<MainArgsObject> {
-	return typeof args.then === 'function' ? await args : args;
+	return typeof args.then === "function" ? await args : args;
 }
 
 async function main(args: MainArgs): Promise<void> {
 	const options = await resolveArgs(args);
-	if (typeof options.edit === 'undefined') {
+	if (typeof options.edit === "undefined") {
 		options.edit = false;
 	}
 
 	const raw = options._;
 	const flags = normalizeFlags(options);
 
-	if (typeof options['print-config'] === 'string') {
+	if (typeof options["print-config"] === "string") {
 		const loaded = await load(getSeed(flags), {
 			cwd: flags.cwd,
 			file: flags.config,
 		});
 
-		switch (options['print-config']) {
-			case 'json':
+		switch (options["print-config"]) {
+			case "json":
 				console.log(JSON.stringify(loaded));
 				return;
 
-			case 'text':
+			case "text":
 			default:
 				console.log(util.inspect(loaded, false, null, options.color));
 				return;
@@ -231,14 +231,14 @@ async function main(args: MainArgs): Promise<void> {
 	const fromStdin = checkFromStdin(raw, flags);
 
 	if (
-		Object.hasOwn(flags, 'last') &&
-		(Object.hasOwn(flags, 'from') || Object.hasOwn(flags, 'to') || flags.edit)
+		Object.hasOwn(flags, "last") &&
+		(Object.hasOwn(flags, "from") || Object.hasOwn(flags, "to") || flags.edit)
 	) {
 		const err = new CliError(
-			'Please use the --last flag alone. The --last flag should not be used with --to or --from or --edit.',
+			"Please use the --last flag alone. The --last flag should not be used with --to or --from or --edit.",
 			pkg.name,
 		);
-		cli.showHelp('log');
+		cli.showHelp("log");
 		console.log(err.message);
 		throw err;
 	}
@@ -248,24 +248,24 @@ async function main(args: MainArgs): Promise<void> {
 		: read({
 				to: flags.to,
 				from: flags.from,
-				fromLastTag: flags['from-last-tag'],
+				fromLastTag: flags["from-last-tag"],
 				last: flags.last,
 				edit: flags.edit,
 				cwd: flags.cwd,
-				gitLogArgs: flags['git-log-args'],
+				gitLogArgs: flags["git-log-args"],
 			}));
 
 	const messages = (Array.isArray(input) ? input : [input])
-		.filter((message) => typeof message === 'string')
-		.filter((message) => message.trim() !== '')
+		.filter((message) => typeof message === "string")
+		.filter((message) => message.trim() !== "")
 		.filter(Boolean);
 
 	if (messages.length === 0 && !checkFromRepository(flags)) {
 		const err = new CliError(
-			'[input] is required: supply via stdin, or --env or --edit or --last or --from and --to',
+			"[input] is required: supply via stdin, or --env or --edit or --last or --from and --to",
 			pkg.name,
 		);
-		cli.showHelp('log');
+		cli.showHelp("log");
 		console.log(err.message);
 		throw err;
 	}
@@ -275,7 +275,7 @@ async function main(args: MainArgs): Promise<void> {
 		file: flags.config,
 	});
 	const parserOpts = selectParserOpts(loaded.parserPreset);
-	const opts: LintOptions & {parserOpts: Options} = {
+	const opts: LintOptions & { parserOpts: Options } = {
 		parserOpts: {},
 		plugins: {},
 		ignores: [],
@@ -298,12 +298,12 @@ async function main(args: MainArgs): Promise<void> {
 	// If reading from `.git/COMMIT_EDIT_MSG`, strip comments using
 	// core.commentChar from git configuration, falling back to '#'.
 	if (flags.edit) {
-		const result = x('git', ['config', 'core.commentChar']);
+		const result = x("git", ["config", "core.commentChar"]);
 		const output = await result;
 
 		if (result.exitCode && result.exitCode > 1) {
 			console.warn(
-				'Could not determine core.commentChar git configuration',
+				"Could not determine core.commentChar git configuration",
 				output.stderr,
 			);
 			opts.parserOpts.commentChar = gitDefaultCommentChar;
@@ -319,7 +319,7 @@ async function main(args: MainArgs): Promise<void> {
 
 	let isRulesEmpty = false;
 	if (Object.keys(loaded.rules).length === 0) {
-		let input = '';
+		let input = "";
 
 		if (results.length !== 0) {
 			input = results[0].input;
@@ -331,12 +331,12 @@ async function main(args: MainArgs): Promise<void> {
 				{
 					level: 2,
 					valid: false,
-					name: 'empty-rules',
+					name: "empty-rules",
 					message: [
-						'Please add rules to your `commitlint.config.js`',
-						'    - Getting started guide: https://commitlint.js.org/guides/getting-started',
-						'    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/src/index.ts',
-					].join('\n'),
+						"Please add rules to your `commitlint.config.js`",
+						"    - Getting started guide: https://commitlint.js.org/guides/getting-started",
+						"    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/src/index.ts",
+					].join("\n"),
 				},
 			],
 			warnings: [],
@@ -368,7 +368,7 @@ async function main(args: MainArgs): Promise<void> {
 		},
 	);
 
-	const helpUrl = flags['help-url']?.trim() || loaded.helpUrl;
+	const helpUrl = flags["help-url"]?.trim() || loaded.helpUrl;
 
 	const output = format(report, {
 		color: flags.color,
@@ -376,7 +376,7 @@ async function main(args: MainArgs): Promise<void> {
 		helpUrl,
 	});
 
-	if (!flags.quiet && output !== '') {
+	if (!flags.quiet && output !== "") {
 		console.log(output);
 	}
 
@@ -410,10 +410,10 @@ function checkFromEdit(flags: CliFlags): boolean {
 
 function checkFromHistory(flags: CliFlags): boolean {
 	return (
-		typeof flags.from === 'string' ||
-		typeof flags['from-last-tag'] === 'boolean' ||
-		typeof flags.to === 'string' ||
-		typeof flags.last === 'boolean'
+		typeof flags.from === "string" ||
+		typeof flags["from-last-tag"] === "boolean" ||
+		typeof flags.to === "string" ||
+		typeof flags.last === "boolean"
 	);
 }
 
@@ -434,13 +434,13 @@ function getEditValue(flags: CliFlags) {
 		}
 		return process.env[flags.env];
 	}
-	const {edit} = flags;
+	const { edit } = flags;
 	// If the edit flag is set but empty (i.e '-e') we default
 	// to .git/COMMIT_EDITMSG
-	if (edit === '') {
+	if (edit === "") {
 		return true;
 	}
-	if (typeof edit === 'boolean') {
+	if (typeof edit === "boolean") {
 		return edit;
 	}
 	// The recommended method to specify -e with husky was `commitlint -e $HUSKY_GIT_PARAMS`
@@ -448,18 +448,18 @@ function getEditValue(flags: CliFlags) {
 	// use a different syntax
 	// See https://github.com/conventional-changelog/commitlint/issues/103 for details
 	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
-	const isGitParams = edit === '$GIT_PARAMS' || edit === '%GIT_PARAMS%';
+	const isGitParams = edit === "$GIT_PARAMS" || edit === "%GIT_PARAMS%";
 	const isHuskyParams =
-		edit === '$HUSKY_GIT_PARAMS' || edit === '%HUSKY_GIT_PARAMS%';
+		edit === "$HUSKY_GIT_PARAMS" || edit === "%HUSKY_GIT_PARAMS%";
 
 	if (isGitParams || isHuskyParams) {
 		console.warn(`Using environment variable syntax (${edit}) in -e |\
 --edit is deprecated. Use '{-E|--env} HUSKY_GIT_PARAMS instead'`);
 
-		if (isGitParams && 'GIT_PARAMS' in process.env) {
+		if (isGitParams && "GIT_PARAMS" in process.env) {
 			return process.env.GIT_PARAMS;
 		}
-		if ('HUSKY_GIT_PARAMS' in process.env) {
+		if ("HUSKY_GIT_PARAMS" in process.env) {
 			return process.env.HUSKY_GIT_PARAMS;
 		}
 		throw new Error(
@@ -471,19 +471,19 @@ function getEditValue(flags: CliFlags) {
 
 function getSeed(flags: CliFlags): UserConfig {
 	const n = (flags.extends || []).filter(
-		(i): i is string => typeof i === 'string',
+		(i): i is string => typeof i === "string",
 	);
 	return n.length > 0
-		? {extends: n, parserPreset: flags['parser-preset']}
-		: {parserPreset: flags['parser-preset']};
+		? { extends: n, parserPreset: flags["parser-preset"] }
+		: { parserPreset: flags["parser-preset"] };
 }
 
 function selectParserOpts(parserPreset: ParserPreset | undefined) {
-	if (typeof parserPreset !== 'object') {
+	if (typeof parserPreset !== "object") {
 		return undefined;
 	}
 
-	if (typeof parserPreset.parserOpts !== 'object') {
+	if (typeof parserPreset.parserOpts !== "object") {
 		return undefined;
 	}
 
@@ -494,7 +494,7 @@ function loadFormatter(
 	config: QualifiedConfig,
 	flags: CliFlags,
 ): Promise<Formatter> {
-	const moduleName = flags.format || config.formatter || '@commitlint/format';
+	const moduleName = flags.format || config.formatter || "@commitlint/format";
 	const modulePath =
 		resolveFromSilent(moduleName, __dirname) ||
 		resolveFromSilent(moduleName, flags.cwd) ||
@@ -508,7 +508,7 @@ function loadFormatter(
 }
 
 // Catch unhandled rejections globally
-process.on('unhandledRejection', (reason, promise) => {
-	console.log('Unhandled Rejection at: Promise ', promise, ' reason: ', reason);
+process.on("unhandledRejection", (reason, promise) => {
+	console.log("Unhandled Rejection at: Promise ", promise, " reason: ", reason);
 	throw reason;
 });

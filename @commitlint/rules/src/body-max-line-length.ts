@@ -1,5 +1,5 @@
-import {maxLineLength} from '@commitlint/ensure';
-import {SyncRule} from '@commitlint/types';
+import { maxLineLength } from "@commitlint/ensure";
+import { SyncRule } from "@commitlint/types";
 
 export const bodyMaxLineLength: SyncRule<number> = (
 	parsed,

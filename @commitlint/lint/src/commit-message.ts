@@ -14,5 +14,5 @@ export const buildCommitMessage = ({
 	message = body ? `${message}\n\n${body}` : message;
 	message = footer ? `${message}\n\n${footer}` : message;
 
-	return message || '';
+	return message || "";
 };

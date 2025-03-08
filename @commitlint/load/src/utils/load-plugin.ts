@@ -1,22 +1,22 @@
-import {createRequire} from 'node:module';
-import path from 'node:path';
-import {fileURLToPath, pathToFileURL} from 'node:url';
+import { createRequire } from "node:module";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-import {Plugin, PluginRecords} from '@commitlint/types';
-import chalk from 'chalk';
+import { Plugin, PluginRecords } from "@commitlint/types";
+import chalk from "chalk";
 
-import {normalizePackageName, getShorthandName} from './plugin-naming.js';
-import {WhitespacePluginError, MissingPluginError} from './plugin-errors.js';
+import { normalizePackageName, getShorthandName } from "./plugin-naming.js";
+import { WhitespacePluginError, MissingPluginError } from "./plugin-errors.js";
 
 const require = createRequire(import.meta.url);
 
-const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
+const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
 	const imported = await import(
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
-	return ('default' in imported && imported.default) || imported;
+	return ("default" in imported && imported.default) || imported;
 };
 
 export default async function loadPlugin(
@@ -47,10 +47,10 @@ export default async function loadPlugin(
 				// If the plugin can't be resolved, display the missing plugin error (usually a config or install error)
 				console.error(chalk.red(`Failed to load plugin ${longName}.`));
 
-				const message = error?.message || 'Unknown error occurred';
+				const message = error?.message || "Unknown error occurred";
 				throw new MissingPluginError(pluginName, message, {
 					pluginName: longName,
-					commitlintPath: path.resolve(__dirname, '../..'),
+					commitlintPath: path.resolve(__dirname, "../.."),
 				});
 			}
 

@@ -1,5 +1,5 @@
-import {Rule} from '../types.js';
-import {ruleIsActive, ruleIsNotApplicable} from './rules.js';
+import { Rule } from "../types.js";
+import { ruleIsActive, ruleIsNotApplicable } from "./rules.js";
 
 export type FullStopFn = (input: string) => string;
 
@@ -15,7 +15,7 @@ export default function getFullStopFn(rule?: Rule): FullStopFn {
 		return noop;
 	}
 
-	if (typeof rule[2] !== 'string') return noop;
+	if (typeof rule[2] !== "string") return noop;
 
 	const symbol: string = rule[2];
 

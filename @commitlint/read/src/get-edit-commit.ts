@@ -1,7 +1,7 @@
-import toplevel from '@commitlint/top-level';
-import fs from 'fs/promises';
+import toplevel from "@commitlint/top-level";
+import fs from "fs/promises";
 
-import {getEditFilePath} from './get-edit-file-path.js';
+import { getEditFilePath } from "./get-edit-file-path.js";
 
 // Get recently edited commit message
 export async function getEditCommit(
@@ -10,12 +10,12 @@ export async function getEditCommit(
 ): Promise<string[]> {
 	const top = await toplevel(cwd);
 
-	if (typeof top !== 'string') {
+	if (typeof top !== "string") {
 		throw new TypeError(`Could not find git root from ${cwd}`);
 	}
 
 	const editFilePath = await getEditFilePath(top, edit);
 	const editFile: Buffer = await fs.readFile(editFilePath);
 
-	return [`${editFile.toString('utf-8')}\n`];
+	return [`${editFile.toString("utf-8")}\n`];
 }

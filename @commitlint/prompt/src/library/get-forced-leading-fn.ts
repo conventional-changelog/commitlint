@@ -1,5 +1,5 @@
-import type {RuleEntry} from './types.js';
-import {ruleIsActive, ruleIsNotApplicable} from './utils.js';
+import type { RuleEntry } from "./types.js";
+import { ruleIsActive, ruleIsNotApplicable } from "./utils.js";
 
 /**
  * Get forced leading for rule
@@ -14,12 +14,12 @@ export default function getForcedLeadingFn(
 	}
 
 	const remove = (input: string): string => {
-		const fragments = input.split('\n');
-		return fragments[0] === '' ? fragments.slice(1).join('\n') : input;
+		const fragments = input.split("\n");
+		return fragments[0] === "" ? fragments.slice(1).join("\n") : input;
 	};
 	const lead = (input: string): string => {
-		const fragments = input.split('\n');
-		return fragments[0] === '' ? input : ['', ...fragments].join('\n');
+		const fragments = input.split("\n");
+		return fragments[0] === "" ? input : ["", ...fragments].join("\n");
 	};
 
 	return !ruleIsNotApplicable(rule) ? lead : remove;

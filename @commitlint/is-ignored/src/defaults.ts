@@ -1,14 +1,14 @@
-import semver from 'semver';
-import {Matcher} from '@commitlint/types';
+import semver from "semver";
+import { Matcher } from "@commitlint/types";
 
 const isSemver = (c: string): boolean => {
-	const firstLine = c.split('\n').shift();
+	const firstLine = c.split("\n").shift();
 
-	if (typeof firstLine !== 'string') {
+	if (typeof firstLine !== "string") {
 		return false;
 	}
 
-	const stripped = firstLine.replace(/^chore(\([^)]+\))?:/, '').trim();
+	const stripped = firstLine.replace(/^chore(\([^)]+\))?:/, "").trim();
 	return semver.valid(stripped) !== null;
 };
 

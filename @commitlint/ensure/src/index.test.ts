@@ -1,17 +1,17 @@
-import {test, expect} from 'vitest';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { test, expect } from "vitest";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-import {globSync} from 'glob';
-import camelCase from 'lodash.camelcase';
+import { globSync } from "glob";
+import camelCase from "lodash.camelcase";
 
-import * as ensure from './index.js';
+import * as ensure from "./index.js";
 
-const __dirname = path.resolve(fileURLToPath(import.meta.url), '..');
+const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 
-test('exports all checkers', async () => {
-	const ignore = ['types'];
-	const expected = _glob('*.ts')
+test("exports all checkers", async () => {
+	const ignore = ["types"];
+	const expected = _glob("*.ts")
 		.map((f) => camelCase(f))
 		.sort()
 		.filter((item) => !ignore.includes(item));
@@ -19,14 +19,14 @@ test('exports all checkers', async () => {
 	expect(actual).toEqual(expected);
 });
 
-test('rules export functions', () => {
+test("rules export functions", () => {
 	const actual = Object.values(ensure);
-	expect(actual.every((rule) => typeof rule === 'function')).toBe(true);
+	expect(actual.every((rule) => typeof rule === "function")).toBe(true);
 });
 
 function _glob(pattern: string): string[] {
 	const files = globSync(pattern, {
-		ignore: ['**/index.ts', '**/*.test.ts'],
+		ignore: ["**/index.ts", "**/*.test.ts"],
 		cwd: __dirname,
 	});
 	return files.map(relative).map(toExport);
