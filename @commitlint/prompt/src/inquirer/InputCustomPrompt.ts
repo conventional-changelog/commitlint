@@ -1,11 +1,11 @@
 /// <reference path="./inquirer.d.ts" />
-import chalk from 'chalk';
+import chalk from "chalk";
 
-import inquirer, {type Answers, type InputCustomOptions} from 'inquirer';
-import InputPrompt from 'inquirer/lib/prompts/input.js';
-import observe from 'inquirer/lib/utils/events.js';
-import type {Interface as ReadlineInterface, Key} from 'node:readline';
-import type {Subscription} from 'rxjs';
+import inquirer, { type Answers, type InputCustomOptions } from "inquirer";
+import InputPrompt from "inquirer/lib/prompts/input.js";
+import observe from "inquirer/lib/utils/events.js";
+import type { Interface as ReadlineInterface, Key } from "node:readline";
+import type { Subscription } from "rxjs";
 
 import SuccessfulPromptStateData = inquirer.prompts.SuccessfulPromptStateData;
 
@@ -15,7 +15,7 @@ interface KeyDescriptor {
 }
 
 export default class InputCustomPrompt<
-	TQuestion extends InputCustomOptions = InputCustomOptions
+	TQuestion extends InputCustomOptions = InputCustomOptions,
 > extends InputPrompt<TQuestion> {
 	private lineSubscription: Subscription;
 	private readonly tabCompletion: string[];
@@ -23,7 +23,7 @@ export default class InputCustomPrompt<
 	constructor(
 		question: TQuestion,
 		readLine: ReadlineInterface,
-		answers: Answers
+		answers: Answers,
 	) {
 		super(question, readLine, answers);
 
@@ -32,12 +32,12 @@ export default class InputCustomPrompt<
 		}
 
 		if (!this.opt.maxLength) {
-			this.throwParamError('maxLength');
+			this.throwParamError("maxLength");
 		}
 
 		const events = observe(this.rl);
 		this.lineSubscription = events.keypress.subscribe(
-			this.onKeyPress2.bind(this)
+			this.onKeyPress2.bind(this),
 		);
 		this.tabCompletion = (this.opt.tabCompletion || [])
 			.map((item) => item.value)
@@ -56,13 +56,13 @@ export default class InputCustomPrompt<
 	 * @see https://nodejs.org/api/readline.html#readline_rl_line
 	 */
 	updateLine(line: string): void {
-		this.rl.write(null as any, {ctrl: true, name: 'b'});
-		this.rl.write(null as any, {ctrl: true, name: 'd'});
+		this.rl.write(null as any, { ctrl: true, name: "b" });
+		this.rl.write(null as any, { ctrl: true, name: "d" });
 		this.rl.write(line.substr(this.rl.line.length));
 	}
 
 	onKeyPress2(e: KeyDescriptor): void {
-		if (e.key.name === 'tab' && this.tabCompletion.length > 0) {
+		if (e.key.name === "tab" && this.tabCompletion.length > 0) {
 			let line = this.rl.line.trim();
 			if (line.length > 0) {
 				for (const item of this.tabCompletion) {
@@ -84,7 +84,7 @@ export default class InputCustomPrompt<
 	}
 
 	render(error?: string): void {
-		const answered = this.status === 'answered';
+		const answered = this.status === "answered";
 
 		let message = this.getQuestion();
 		const length = this.measureInput(this.rl.line);
@@ -95,10 +95,10 @@ export default class InputCustomPrompt<
 			message += this.opt.transformer(this.rl.line, this.answers, {});
 		}
 
-		let bottomContent = '';
+		let bottomContent = "";
 
 		if (error) {
-			bottomContent = chalk.red('>> ') + error;
+			bottomContent = chalk.red(">> ") + error;
 		} else if (!answered) {
 			const maxLength = this.opt.maxLength(this.answers);
 			if (maxLength < Infinity) {
@@ -107,8 +107,8 @@ export default class InputCustomPrompt<
 					lengthRemaining <= 5
 						? chalk.red
 						: lengthRemaining <= 10
-						? chalk.yellow
-						: chalk.grey;
+							? chalk.yellow
+							: chalk.grey;
 				bottomContent = color(`${lengthRemaining} characters left`);
 			}
 		}

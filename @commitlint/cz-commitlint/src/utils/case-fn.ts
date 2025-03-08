@@ -1,8 +1,8 @@
-import {case as ensureCase, toCase} from '@commitlint/ensure';
-import {TargetCaseType} from '@commitlint/types';
+import { case as ensureCase, toCase } from "@commitlint/ensure";
+import { TargetCaseType } from "@commitlint/types";
 
-import {Rule} from '../types.js';
-import {ruleIsActive, ruleIsNotApplicable} from './rules.js';
+import { Rule } from "../types.js";
+import { ruleIsActive, ruleIsNotApplicable } from "./rules.js";
 
 export type CaseFn = (input: string | string[], delimiter?: string) => string;
 

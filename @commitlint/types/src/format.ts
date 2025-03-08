@@ -1,11 +1,11 @@
-import type {ColorName, ModifierName} from 'chalk';
+import type { ColorName, ModifierName } from "chalk";
 
-import {QualifiedRules} from './load.js';
-import {RuleConfigSeverity} from './rules.js';
+import { QualifiedRules } from "./load.js";
+import { RuleConfigSeverity } from "./rules.js";
 
 export type Formatter = (
 	report: FormattableReport,
-	options: FormatOptions
+	options: FormatOptions,
 ) => string;
 
 export interface FormattableProblem {

@@ -1,20 +1,20 @@
-import chalk from 'chalk';
+import chalk from "chalk";
 import {
 	ChalkColor,
 	FormattableReport,
 	FormatOptions,
 	FormattableResult,
 	WithInput,
-} from '@commitlint/types';
+} from "@commitlint/types";
 
-const DEFAULT_SIGNS = [' ', '⚠', '✖'] as const;
-const DEFAULT_COLORS = ['white', 'yellow', 'red'] as const;
+const DEFAULT_SIGNS = [" ", "⚠", "✖"] as const;
+const DEFAULT_COLORS = ["white", "yellow", "red"] as const;
 
 export function format(
 	report: FormattableReport = {},
-	options: FormatOptions = {}
+	options: FormatOptions = {},
 ): string {
-	const {results = []} = report;
+	const { results = [] } = report;
 	const fi = (result: FormattableResult & WithInput) =>
 		formatInput(result, options);
 	const fr = (result: FormattableResult) => formatResult(result, options);
@@ -24,23 +24,23 @@ export function format(
 		.map((result) => [...fi(result), ...fr(result)])
 		.reduce(
 			(acc, item) => (Array.isArray(item) ? [...acc, ...item] : [...acc, item]),
-			[]
+			[],
 		)
-		.join('\n');
+		.join("\n");
 }
 
 function formatInput(
 	result: FormattableResult & WithInput,
-	options: FormatOptions = {}
+	options: FormatOptions = {},
 ): string[] {
-	const {color: enabled = true} = options;
-	const {errors = [], warnings = [], input = ''} = result;
+	const { color: enabled = true } = options;
+	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
-		return [''];
+		return [""];
 	}
 
-	const sign = '⧗';
+	const sign = "⧗";
 	const decoration = enabled ? chalk.gray(sign) : sign;
 
 	const decoratedInput = enabled ? chalk.bold(input) : input;
@@ -53,18 +53,18 @@ function formatInput(
 
 export function formatResult(
 	result: FormattableResult = {},
-	options: FormatOptions = {}
+	options: FormatOptions = {},
 ): string[] {
 	const {
 		signs = DEFAULT_SIGNS,
 		colors = DEFAULT_COLORS,
 		color: enabled = true,
 	} = options;
-	const {errors = [], warnings = []} = result;
+	const { errors = [], warnings = [] } = result;
 
 	const problems = [...errors, ...warnings].map((problem) => {
-		const sign = signs[problem.level] || '';
-		const color: ChalkColor = colors[problem.level] || ('white' as const);
+		const sign = signs[problem.level] || "";
+		const color: ChalkColor = colors[problem.level] || ("white" as const);
 		const decoration = enabled ? chalk[color](sign) : sign;
 		const name = enabled
 			? chalk.grey(`[${problem.name}]`)
@@ -86,7 +86,7 @@ export function formatResult(
 			: undefined;
 
 	const fmtSummary =
-		enabled && typeof summary === 'string' ? chalk.bold(summary) : summary;
+		enabled && typeof summary === "string" ? chalk.bold(summary) : summary;
 
 	const help =
 		hasProblems && options.helpUrl
@@ -95,25 +95,25 @@ export function formatResult(
 
 	return [
 		...problems,
-		hasProblems ? '' : undefined,
+		hasProblems ? "" : undefined,
 		fmtSummary,
 		help,
-		hasProblems ? '' : undefined,
-	].filter((line): line is string => typeof line === 'string');
+		hasProblems ? "" : undefined,
+	].filter((line): line is string => typeof line === "string");
 }
 
 export default format;
 
 function selectSign(result: FormattableResult): string {
 	if ((result.errors || []).length > 0) {
-		return '✖';
+		return "✖";
 	}
-	return (result.warnings || []).length ? '⚠' : '✔';
+	return (result.warnings || []).length ? "⚠" : "✔";
 }
 
 function selectColor(result: FormattableResult): ChalkColor {
 	if ((result.errors || []).length > 0) {
-		return 'red';
+		return "red";
 	}
-	return (result.warnings || []).length ? 'yellow' : 'green';
+	return (result.warnings || []).length ? "yellow" : "green";
 }

@@ -1,13 +1,13 @@
-import {existsSync, readFileSync} from 'node:fs';
-import path from 'node:path';
+import { existsSync, readFileSync } from "node:fs";
+import path from "node:path";
 
 import {
 	cosmiconfig,
 	defaultLoadersSync,
 	type Loader,
 	defaultLoaders,
-} from 'cosmiconfig';
-import {TypeScriptLoader} from 'cosmiconfig-typescript-loader';
+} from "cosmiconfig";
+import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
 
 export interface LoadConfigResult {
 	config: unknown;
@@ -15,12 +15,12 @@ export interface LoadConfigResult {
 	isEmpty?: boolean;
 }
 
-const moduleName = 'commitlint';
-const searchStrategy = 'global';
+const moduleName = "commitlint";
+const searchStrategy = "global";
 
 export async function loadConfig(
 	cwd: string,
-	configPath?: string
+	configPath?: string,
 ): Promise<LoadConfigResult | null> {
 	let tsLoaderInstance: Loader | undefined;
 	const tsLoader: Loader = (...args) => {
@@ -42,8 +42,8 @@ export async function loadConfig(
 		searchPlaces: [
 			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
 			// we need to manually merge default searchPlaces from https://github.com/davidtheclark/cosmiconfig#searchplaces
-			'package.json',
-			'package.yaml',
+			"package.json",
+			"package.yaml",
 			`.${moduleName}rc`,
 			`.${moduleName}rc.json`,
 			`.${moduleName}rc.yaml`,
@@ -62,10 +62,10 @@ export async function loadConfig(
 			`${moduleName}.config.cts`,
 		],
 		loaders: {
-			'.ts': tsLoader,
-			'.cts': tsLoader,
-			'.cjs': loaders['.cjs'],
-			'.js': loaders['.js'],
+			".ts": tsLoader,
+			".cts": tsLoader,
+			".cjs": loaders[".cjs"],
+			".js": loaders[".js"],
 		},
 	});
 
@@ -86,8 +86,8 @@ export async function loadConfig(
 //  - Resolution: https://github.com/nodejs/node/pull/48510 (Node v20.8.0)
 export const isDynamicAwaitSupported = () => {
 	const [major, minor] = process.version
-		.replace('v', '')
-		.split('.')
+		.replace("v", "")
+		.split(".")
 		.map((val) => parseInt(val));
 
 	return major >= 20 && minor >= 8;
@@ -95,12 +95,12 @@ export const isDynamicAwaitSupported = () => {
 
 // Is the given directory set up to use ESM (ECMAScript Modules)?
 export const isEsmModule = (cwd: string) => {
-	const packagePath = path.join(cwd, 'package.json');
+	const packagePath = path.join(cwd, "package.json");
 
 	if (!existsSync(packagePath)) {
 		return false;
 	}
 
-	const packageJSON = readFileSync(packagePath, {encoding: 'utf-8'});
-	return JSON.parse(packageJSON)?.type === 'module';
+	const packageJSON = readFileSync(packagePath, { encoding: "utf-8" });
+	return JSON.parse(packageJSON)?.type === "module";
 };

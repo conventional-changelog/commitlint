@@ -1,7 +1,7 @@
-import util from 'node:util';
-import isIgnored from '@commitlint/is-ignored';
-import parse from '@commitlint/parse';
-import defaultRules from '@commitlint/rules';
+import util from "node:util";
+import isIgnored from "@commitlint/is-ignored";
+import parse from "@commitlint/parse";
+import defaultRules from "@commitlint/rules";
 import type {
 	LintOptions,
 	LintOutcome,
@@ -10,24 +10,24 @@ import type {
 	BaseRule,
 	RuleType,
 	QualifiedRules,
-} from '@commitlint/types';
-import {RuleConfigSeverity} from '@commitlint/types';
+} from "@commitlint/types";
+import { RuleConfigSeverity } from "@commitlint/types";
 
-import {buildCommitMessage} from './commit-message.js';
+import { buildCommitMessage } from "./commit-message.js";
 
 export default async function lint(
 	message: string,
 	rawRulesConfig?: QualifiedRules,
-	rawOpts?: LintOptions
+	rawOpts?: LintOptions,
 ): Promise<LintOutcome> {
 	const opts = rawOpts
 		? rawOpts
-		: {defaultIgnores: undefined, ignores: undefined};
+		: { defaultIgnores: undefined, ignores: undefined };
 	const rulesConfig = rawRulesConfig || {};
 
 	// Found a wildcard match, skip
 	if (
-		isIgnored(message, {defaults: opts.defaultIgnores, ignores: opts.ignores})
+		isIgnored(message, { defaults: opts.defaultIgnores, ignores: opts.ignores })
 	) {
 		return {
 			valid: true,
@@ -39,8 +39,8 @@ export default async function lint(
 
 	// Parse the commit message
 	const parsed =
-		message === ''
-			? {header: null, body: null, footer: null}
+		message === ""
+			? { header: null, body: null, footer: null }
 			: await parse(message, undefined, opts.parserOpts);
 
 	if (
@@ -58,14 +58,14 @@ export default async function lint(
 	}
 
 	const allRules: Map<string, BaseRule<never, RuleType>> = new Map(
-		Object.entries(defaultRules)
+		Object.entries(defaultRules),
 	);
 
 	if (opts.plugins) {
 		Object.values(opts.plugins).forEach((plugin) => {
 			if (plugin.rules) {
 				Object.keys(plugin.rules).forEach((ruleKey) =>
-					allRules.set(ruleKey, plugin.rules[ruleKey])
+					allRules.set(ruleKey, plugin.rules[ruleKey]),
 				);
 			}
 		});
@@ -73,16 +73,16 @@ export default async function lint(
 
 	// Find invalid rules configs
 	const missing = Object.keys(rulesConfig).filter(
-		(name) => typeof allRules.get(name) !== 'function'
+		(name) => typeof allRules.get(name) !== "function",
 	);
 
 	if (missing.length > 0) {
 		const names = [...allRules.keys()];
 		throw new RangeError(
 			[
-				`Found rules without implementation: ${missing.join(', ')}.`,
-				`Supported rules are: ${names.join(', ')}.`,
-			].join('\n')
+				`Found rules without implementation: ${missing.join(", ")}.`,
+				`Supported rules are: ${names.join(", ")}.`,
+			].join("\n"),
 		);
 	}
 
@@ -91,8 +91,8 @@ export default async function lint(
 			if (!Array.isArray(config)) {
 				return new Error(
 					`config for rule ${name} must be array, received ${util.inspect(
-						config
-					)} of type ${typeof config}`
+						config,
+					)} of type ${typeof config}`,
 				);
 			}
 
@@ -104,43 +104,43 @@ export default async function lint(
 
 			const [, when] = config;
 
-			if (typeof level !== 'number' || isNaN(level)) {
+			if (typeof level !== "number" || isNaN(level)) {
 				return new Error(
 					`level for rule ${name} must be number, received ${util.inspect(
-						level
-					)} of type ${typeof level}`
+						level,
+					)} of type ${typeof level}`,
 				);
 			}
 
 			if (config.length < 2 || config.length > 3) {
 				return new Error(
 					`config for rule ${name} must be 2 or 3 items long, received ${util.inspect(
-						config
-					)} of length ${config.length}`
+						config,
+					)} of length ${config.length}`,
 				);
 			}
 
 			if (level < 0 || level > 2) {
 				return new RangeError(
 					`level for rule ${name} must be between 0 and 2, received ${util.inspect(
-						level
-					)}`
+						level,
+					)}`,
 				);
 			}
 
-			if (typeof when !== 'string') {
+			if (typeof when !== "string") {
 				return new Error(
 					`condition for rule ${name} must be string, received ${util.inspect(
-						when
-					)} of type ${typeof when}`
+						when,
+					)} of type ${typeof when}`,
 				);
 			}
 
-			if (when !== 'never' && when !== 'always') {
+			if (when !== "never" && when !== "always") {
 				return new Error(
 					`condition for rule ${name} must be "always" or "never", received ${util.inspect(
-						when
-					)}`
+						when,
+					)}`,
 				);
 			}
 
@@ -149,7 +149,7 @@ export default async function lint(
 		.filter((item): item is Error => item instanceof Error);
 
 	if (invalid.length > 0) {
-		throw new Error(invalid.map((i) => i.message).join('\n'));
+		throw new Error(invalid.map((i) => i.message).join("\n"));
 	}
 
 	// Validate against all rules
@@ -178,14 +178,14 @@ export default async function lint(
 		});
 
 	const results = (await Promise.all(pendingResults)).filter(
-		(result): result is LintRuleOutcome => result !== null
+		(result): result is LintRuleOutcome => result !== null,
 	);
 
 	const errors = results.filter(
-		(result) => result.level === RuleConfigSeverity.Error && !result.valid
+		(result) => result.level === RuleConfigSeverity.Error && !result.valid,
 	);
 	const warnings = results.filter(
-		(result) => result.level === RuleConfigSeverity.Warning && !result.valid
+		(result) => result.level === RuleConfigSeverity.Warning && !result.valid,
 	);
 
 	const valid = errors.length === 0;

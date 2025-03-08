@@ -64,14 +64,14 @@
 
   ```js
   [
-    'lower-case', // default
-    'upper-case', // UPPERCASE
-    'camel-case', // camelCase
-    'kebab-case', // kebab-case
-    'pascal-case', // PascalCase
-    'sentence-case', // Sentence case
-    'snake-case', // snake_case
-    'start-case', // Start Case
+    "lower-case", // default
+    "upper-case", // UPPERCASE
+    "camel-case", // camelCase
+    "kebab-case", // kebab-case
+    "pascal-case", // PascalCase
+    "sentence-case", // Sentence case
+    "snake-case", // snake_case
+    "start-case", // Start Case
   ];
   ```
 
@@ -129,14 +129,14 @@
 
   ```js
   [
-    'lower-case', // default
-    'upper-case', // UPPERCASE
-    'camel-case', // camelCase
-    'kebab-case', // kebab-case
-    'pascal-case', // PascalCase
-    'sentence-case', // Sentence case
-    'snake-case', // snake_case
-    'start-case', // Start Case
+    "lower-case", // default
+    "upper-case", // UPPERCASE
+    "camel-case", // camelCase
+    "kebab-case", // kebab-case
+    "pascal-case", // PascalCase
+    "sentence-case", // Sentence case
+    "snake-case", // snake_case
+    "start-case", // Start Case
   ];
   ```
 
@@ -210,14 +210,14 @@
 
 ```js
 [
-  'lower-case', // default
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
-  'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case', // Start Case
+  "lower-case", // default
+  "upper-case", // UPPERCASE
+  "camel-case", // camelCase
+  "kebab-case", // kebab-case
+  "pascal-case", // PascalCase
+  "sentence-case", // Sentence case
+  "snake-case", // snake_case
+  "start-case", // Start Case
 ];
 ```
 
@@ -253,21 +253,21 @@ Infinity
 - **value**
 
 ```js
-['sentence-case', 'start-case', 'pascal-case', 'upper-case'];
+["sentence-case", "start-case", "pascal-case", "upper-case"];
 ```
 
 - **possible values**
 
 ```js
 [
-  'lower-case', // lower case
-  'upper-case', // UPPERCASE
-  'camel-case', // camelCase
-  'kebab-case', // kebab-case
-  'pascal-case', // PascalCase
-  'sentence-case', // Sentence case
-  'snake-case', // snake_case
-  'start-case', // Start Case
+  "lower-case", // lower case
+  "upper-case", // UPPERCASE
+  "camel-case", // camelCase
+  "kebab-case", // kebab-case
+  "pascal-case", // PascalCase
+  "sentence-case", // Sentence case
+  "snake-case", // snake_case
+  "start-case", // Start Case
 ];
 ```
 
@@ -319,17 +319,17 @@ Infinity
 
   ```js
   [
-    'build',
-    'chore',
-    'ci',
-    'docs',
-    'feat',
-    'fix',
-    'perf',
-    'refactor',
-    'revert',
-    'style',
-    'test',
+    "build",
+    "chore",
+    "ci",
+    "docs",
+    "feat",
+    "fix",
+    "perf",
+    "refactor",
+    "revert",
+    "style",
+    "test",
   ];
   ```
 
@@ -347,14 +347,14 @@ Infinity
 
   ```js
   [
-    'lower-case', // default
-    'upper-case', // UPPERCASE
-    'camel-case', // camelCase
-    'kebab-case', // kebab-case
-    'pascal-case', // PascalCase
-    'sentence-case', // Sentence case
-    'snake-case', // snake_case
-    'start-case', // Start Case
+    "lower-case", // default
+    "upper-case", // UPPERCASE
+    "camel-case", // camelCase
+    "kebab-case", // kebab-case
+    "pascal-case", // PascalCase
+    "sentence-case", // Sentence case
+    "snake-case", // snake_case
+    "start-case", // Start Case
   ];
   ```
 

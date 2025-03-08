@@ -1,2 +1,2 @@
-export {default} from './format.js';
-export * from './format.js';
+export { default } from "./format.js";
+export * from "./format.js";

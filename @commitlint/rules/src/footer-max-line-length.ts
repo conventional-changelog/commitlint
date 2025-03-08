@@ -1,10 +1,10 @@
-import {maxLineLength} from '@commitlint/ensure';
-import {SyncRule} from '@commitlint/types';
+import { maxLineLength } from "@commitlint/ensure";
+import { SyncRule } from "@commitlint/types";
 
 export const footerMaxLineLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
-	value = 0
+	value = 0,
 ) => {
 	const input = parsed.footer;
 

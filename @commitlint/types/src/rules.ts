@@ -1,6 +1,6 @@
-import type {Commit} from 'conventional-commits-parser';
+import type { Commit } from "conventional-commits-parser";
 
-import {TargetCaseType} from './ensure.js';
+import { TargetCaseType } from "./ensure.js";
 
 /**
  * Rules match the input either as successful or failed.
@@ -13,23 +13,23 @@ export type RuleOutcome = Readonly<[boolean, string?]>;
  * Rules receive a parsed commit, condition, and possible additional settings through value.
  * All rules should provide the most sensible rule condition and value.
  */
-export type RuleType = 'async' | 'sync' | 'either';
+export type RuleType = "async" | "sync" | "either";
 
-export type BaseRule<Value = never, Type extends RuleType = 'either'> = (
+export type BaseRule<Value = never, Type extends RuleType = "either"> = (
 	parsed: Commit,
 	when?: RuleConfigCondition,
-	value?: Value
-) => Type extends 'either'
+	value?: Value,
+) => Type extends "either"
 	? RuleOutcome | Promise<RuleOutcome>
-	: Type extends 'async'
-	? Promise<RuleOutcome>
-	: Type extends 'sync'
-	? RuleOutcome
-	: never;
+	: Type extends "async"
+		? Promise<RuleOutcome>
+		: Type extends "sync"
+			? RuleOutcome
+			: never;
 
-export type Rule<Value = never> = BaseRule<Value, 'either'>;
-export type AsyncRule<Value = never> = BaseRule<Value, 'async'>;
-export type SyncRule<Value = never> = BaseRule<Value, 'sync'>;
+export type Rule<Value = never> = BaseRule<Value, "either">;
+export type AsyncRule<Value = never> = BaseRule<Value, "async">;
+export type SyncRule<Value = never> = BaseRule<Value, "sync">;
 
 /**
  * Rules always have a severity.
@@ -49,7 +49,7 @@ export enum RuleConfigSeverity {
  * It can be either "always" (as tested), or "never" (as tested).
  * For example, `header-full-stop` can be enforced as "always" or "never".
  */
-export type RuleConfigCondition = 'always' | 'never';
+export type RuleConfigCondition = "always" | "never";
 
 export type RuleConfigTuple<T> = T extends void
 	?
@@ -71,7 +71,7 @@ export type QualifiedRuleConfig<T> =
 
 export type RuleConfig<
 	V = RuleConfigQuality.Qualified,
-	T = void
+	T = void,
 > = V extends RuleConfigQuality.Qualified
 	? RuleConfigTuple<T>
 	: QualifiedRuleConfig<T>;
@@ -90,41 +90,41 @@ export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 >;
 
 export type RulesConfig<V = RuleConfigQuality.User> = {
-	'body-case': CaseRuleConfig<V>;
-	'body-empty': RuleConfig<V>;
-	'body-full-stop': RuleConfig<V, string>;
-	'body-leading-blank': RuleConfig<V>;
-	'body-max-length': LengthRuleConfig<V>;
-	'body-max-line-length': LengthRuleConfig<V>;
-	'body-min-length': LengthRuleConfig<V>;
-	'footer-empty': RuleConfig<V>;
-	'footer-leading-blank': RuleConfig<V>;
-	'footer-max-length': LengthRuleConfig<V>;
-	'footer-max-line-length': LengthRuleConfig<V>;
-	'footer-min-length': LengthRuleConfig<V>;
-	'header-case': CaseRuleConfig<V>;
-	'header-full-stop': RuleConfig<V, string>;
-	'header-max-length': LengthRuleConfig<V>;
-	'header-min-length': LengthRuleConfig<V>;
-	'header-trim': RuleConfig<V>;
-	'references-empty': RuleConfig<V>;
-	'scope-case': CaseRuleConfig<V>;
-	'scope-empty': RuleConfig<V>;
-	'scope-enum': EnumRuleConfig<V>;
-	'scope-max-length': LengthRuleConfig<V>;
-	'scope-min-length': LengthRuleConfig<V>;
-	'signed-off-by': RuleConfig<V, string>;
-	'subject-case': CaseRuleConfig<V>;
-	'subject-empty': RuleConfig<V>;
-	'subject-full-stop': RuleConfig<V, string>;
-	'subject-max-length': LengthRuleConfig<V>;
-	'subject-min-length': LengthRuleConfig<V>;
-	'trailer-exists': RuleConfig<V, string>;
-	'type-case': CaseRuleConfig<V>;
-	'type-empty': RuleConfig<V>;
-	'type-enum': EnumRuleConfig<V>;
-	'type-max-length': LengthRuleConfig<V>;
-	'type-min-length': LengthRuleConfig<V>;
+	"body-case": CaseRuleConfig<V>;
+	"body-empty": RuleConfig<V>;
+	"body-full-stop": RuleConfig<V, string>;
+	"body-leading-blank": RuleConfig<V>;
+	"body-max-length": LengthRuleConfig<V>;
+	"body-max-line-length": LengthRuleConfig<V>;
+	"body-min-length": LengthRuleConfig<V>;
+	"footer-empty": RuleConfig<V>;
+	"footer-leading-blank": RuleConfig<V>;
+	"footer-max-length": LengthRuleConfig<V>;
+	"footer-max-line-length": LengthRuleConfig<V>;
+	"footer-min-length": LengthRuleConfig<V>;
+	"header-case": CaseRuleConfig<V>;
+	"header-full-stop": RuleConfig<V, string>;
+	"header-max-length": LengthRuleConfig<V>;
+	"header-min-length": LengthRuleConfig<V>;
+	"header-trim": RuleConfig<V>;
+	"references-empty": RuleConfig<V>;
+	"scope-case": CaseRuleConfig<V>;
+	"scope-empty": RuleConfig<V>;
+	"scope-enum": EnumRuleConfig<V>;
+	"scope-max-length": LengthRuleConfig<V>;
+	"scope-min-length": LengthRuleConfig<V>;
+	"signed-off-by": RuleConfig<V, string>;
+	"subject-case": CaseRuleConfig<V>;
+	"subject-empty": RuleConfig<V>;
+	"subject-full-stop": RuleConfig<V, string>;
+	"subject-max-length": LengthRuleConfig<V>;
+	"subject-min-length": LengthRuleConfig<V>;
+	"trailer-exists": RuleConfig<V, string>;
+	"type-case": CaseRuleConfig<V>;
+	"type-empty": RuleConfig<V>;
+	"type-enum": EnumRuleConfig<V>;
+	"type-max-length": LengthRuleConfig<V>;
+	"type-min-length": LengthRuleConfig<V>;
 	// Plugins may add their custom rules
 	[key: string]: AnyRuleConfig<V>;
 };

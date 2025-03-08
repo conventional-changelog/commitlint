@@ -1,22 +1,22 @@
-import {createRequire} from 'node:module';
+import { createRequire } from "node:module";
 
-import {UserConfig} from '@commitlint/types';
-import _Ajv from 'ajv';
+import { UserConfig } from "@commitlint/types";
+import _Ajv from "ajv";
 
-import {formatErrors} from './formatErrors.js';
+import { formatErrors } from "./formatErrors.js";
 
 const require = createRequire(import.meta.url);
 
-const schema: typeof import('./commitlint.schema.json') = require('./commitlint.schema.json');
+const schema: typeof import("./commitlint.schema.json") = require("./commitlint.schema.json");
 
 const TYPE_OF = [
-	'undefined',
-	'string',
-	'number',
-	'object',
-	'function',
-	'boolean',
-	'symbol',
+	"undefined",
+	"string",
+	"number",
+	"object",
+	"function",
+	"boolean",
+	"symbol",
 ];
 
 // FIXME: https://github.com/ajv-validator/ajv/issues/2132
@@ -24,7 +24,7 @@ const Ajv = _Ajv as unknown as typeof _Ajv.default;
 
 export function validateConfig(
 	source: string,
-	config: unknown
+	config: unknown,
 ): asserts config is UserConfig {
 	const ajv = new Ajv({
 		meta: false,
@@ -35,11 +35,11 @@ export function validateConfig(
 	});
 
 	ajv.addKeyword({
-		keyword: 'typeof',
+		keyword: "typeof",
 		validate: function typeOfFunc(schema: any, data: any) {
 			return typeof data === schema;
 		},
-		metaSchema: {type: 'string', enum: TYPE_OF},
+		metaSchema: { type: "string", enum: TYPE_OF },
 		schema: true,
 	});
 
@@ -49,8 +49,8 @@ export function validateConfig(
 	if (!isValid && validate.errors && validate.errors.length) {
 		throw new Error(
 			`Commitlint configuration in ${source} is invalid:\n${formatErrors(
-				validate.errors
-			)}`
+				validate.errors,
+			)}`,
 		);
 	}
 }

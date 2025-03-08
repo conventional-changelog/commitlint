@@ -8,9 +8,9 @@
   "include": ["./src"],
   "exclude": ["./src/**/*.test.ts", "./lib/**/*"],
   "references": [
-    {"path": "../ensure"},
-    {"path": "../message"},
-    {"path": "../to-lines"},
-    {"path": "../types"}
+    { "path": "../ensure" },
+    { "path": "../message" },
+    { "path": "../to-lines" },
+    { "path": "../types" }
   ]
 }

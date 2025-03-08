@@ -1,53 +1,53 @@
-import {test, expect} from 'vitest';
-import path from 'node:path';
-import {pathToFileURL} from 'node:url';
+import { test, expect } from "vitest";
+import path from "node:path";
+import { pathToFileURL } from "node:url";
 
-import lint from '@commitlint/lint';
+import lint from "@commitlint/lint";
 
-import config from './index.js';
+import config from "./index.js";
 
-const {rules, parserPreset} = config;
+const { rules, parserPreset } = config;
 
 const dynamicImport = async (id: string) => {
 	const imported = await import(
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
-	return ('default' in imported && imported.default) || imported;
+	return ("default" in imported && imported.default) || imported;
 };
 
 const commitLint = async (message: string) => {
 	const preset = await (await dynamicImport(parserPreset))();
-	return lint(message, rules, {...preset});
+	return lint(message, rules, { ...preset });
 };
 
 const messages = {
-	invalidTypeEnum: 'foo: some message',
-	invalidTypeCase: 'FIX: some message',
-	invalidTypeEmpty: ': some message',
+	invalidTypeEnum: "foo: some message",
+	invalidTypeCase: "FIX: some message",
+	invalidTypeEmpty: ": some message",
 	invalidSubjectCases: [
-		'fix(scope): Some message',
-		'fix(scope): Some Message',
-		'fix(scope): SomeMessage',
-		'fix(scope): SOMEMESSAGE',
+		"fix(scope): Some message",
+		"fix(scope): Some Message",
+		"fix(scope): SomeMessage",
+		"fix(scope): SOMEMESSAGE",
 	],
-	invalidSubjectEmpty: 'fix:',
-	invalidSubjectFullStop: 'fix: some message.',
+	invalidSubjectEmpty: "fix:",
+	invalidSubjectFullStop: "fix: some message.",
 	invalidHeaderMaxLength:
-		'fix: some message that is way too long and breaks the line max-length by several characters since the max is 100',
+		"fix: some message that is way too long and breaks the line max-length by several characters since the max is 100",
 	warningFooterLeadingBlank:
-		'fix: some message\n\nbody\nBREAKING CHANGE: It will be significant',
+		"fix: some message\n\nbody\nBREAKING CHANGE: It will be significant",
 	invalidFooterMaxLineLength:
 		'fix: some message\n\nbody\n\nBREAKING CHANGE: footer with multiple lines\nhas a message that is way too long and will break the line rule "line-max-length" by several characters',
-	warningBodyLeadingBlank: 'fix: some message\nbody',
+	warningBodyLeadingBlank: "fix: some message\nbody",
 	invalidBodyMaxLineLength:
 		'fix: some message\n\nbody with multiple lines\nhas a message that is way too long and will break the line rule "line-max-length" by several characters',
 	validMessages: [
-		'fix: some message',
-		'fix(scope): some message',
-		'fix(scope): some Message',
-		'fix(scope): some message\n\nBREAKING CHANGE: it will be significant!',
-		'fix(scope): some message\n\nbody',
-		'fix(scope)!: some message\n\nbody',
+		"fix: some message",
+		"fix(scope): some message",
+		"fix(scope): some Message",
+		"fix(scope): some message\n\nBREAKING CHANGE: it will be significant!",
+		"fix(scope): some message\n\nbody",
+		"fix(scope)!: some message\n\nbody",
 	],
 };
 
@@ -55,58 +55,58 @@ const errors = {
 	typeEnum: {
 		level: 2,
 		message:
-			'type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]',
-		name: 'type-enum',
+			"type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]",
+		name: "type-enum",
 		valid: false,
 	},
 	typeCase: {
 		level: 2,
-		message: 'type must be lower-case',
-		name: 'type-case',
+		message: "type must be lower-case",
+		name: "type-case",
 		valid: false,
 	},
 	typeEmpty: {
 		level: 2,
-		message: 'type may not be empty',
-		name: 'type-empty',
+		message: "type may not be empty",
+		name: "type-empty",
 		valid: false,
 	},
 	subjectCase: {
 		level: 2,
 		message:
-			'subject must not be sentence-case, start-case, pascal-case, upper-case',
-		name: 'subject-case',
+			"subject must not be sentence-case, start-case, pascal-case, upper-case",
+		name: "subject-case",
 		valid: false,
 	},
 	subjectEmpty: {
 		level: 2,
-		message: 'subject may not be empty',
-		name: 'subject-empty',
+		message: "subject may not be empty",
+		name: "subject-empty",
 		valid: false,
 	},
 	subjectFullStop: {
 		level: 2,
-		message: 'subject may not end with full stop',
-		name: 'subject-full-stop',
+		message: "subject may not end with full stop",
+		name: "subject-full-stop",
 		valid: false,
 	},
 	headerMaxLength: {
 		level: 2,
 		message:
-			'header must not be longer than 100 characters, current length is 112',
-		name: 'header-max-length',
+			"header must not be longer than 100 characters, current length is 112",
+		name: "header-max-length",
 		valid: false,
 	},
 	footerMaxLineLength: {
 		level: 2,
 		message: "footer's lines must not be longer than 100 characters",
-		name: 'footer-max-line-length',
+		name: "footer-max-line-length",
 		valid: false,
 	},
 	bodyMaxLineLength: {
 		level: 2,
 		message: "body's lines must not be longer than 100 characters",
-		name: 'body-max-line-length',
+		name: "body-max-line-length",
 		valid: false,
 	},
 };
@@ -114,42 +114,44 @@ const errors = {
 const warnings = {
 	footerLeadingBlank: {
 		level: 1,
-		message: 'footer must have leading blank line',
-		name: 'footer-leading-blank',
+		message: "footer must have leading blank line",
+		name: "footer-leading-blank",
 		valid: false,
 	},
 	bodyLeadingBlank: {
 		level: 1,
-		message: 'body must have leading blank line',
-		name: 'body-leading-blank',
+		message: "body must have leading blank line",
+		name: "body-leading-blank",
 		valid: false,
 	},
 };
 
-test('type-enum', async () => {
+test("type-enum", async () => {
 	const result = await commitLint(messages.invalidTypeEnum);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeEnum]);
 });
 
-test('type-case', async () => {
+test("type-case", async () => {
 	const result = await commitLint(messages.invalidTypeCase);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeCase, errors.typeEnum]);
 });
 
-test('type-empty', async () => {
+test("type-empty", async () => {
 	const result = await commitLint(messages.invalidTypeEmpty);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.typeEmpty]);
 });
 
-test('subject-case', async () => {
+test("subject-case", async () => {
 	const invalidInputs = await Promise.all(
-		messages.invalidSubjectCases.map((invalidInput) => commitLint(invalidInput))
+		messages.invalidSubjectCases.map((invalidInput) =>
+			commitLint(invalidInput),
+		),
 	);
 
 	invalidInputs.forEach((result) => {
@@ -158,58 +160,58 @@ test('subject-case', async () => {
 	});
 });
 
-test('subject-empty', async () => {
+test("subject-empty", async () => {
 	const result = await commitLint(messages.invalidSubjectEmpty);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.subjectEmpty, errors.typeEmpty]);
 });
 
-test('subject-full-stop', async () => {
+test("subject-full-stop", async () => {
 	const result = await commitLint(messages.invalidSubjectFullStop);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.subjectFullStop]);
 });
 
-test('header-max-length', async () => {
+test("header-max-length", async () => {
 	const result = await commitLint(messages.invalidHeaderMaxLength);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.headerMaxLength]);
 });
 
-test('footer-leading-blank', async () => {
+test("footer-leading-blank", async () => {
 	const result = await commitLint(messages.warningFooterLeadingBlank);
 
 	expect(result.valid).toBe(true);
 	expect(result.warnings).toEqual([warnings.footerLeadingBlank]);
 });
 
-test('footer-max-line-length', async () => {
+test("footer-max-line-length", async () => {
 	const result = await commitLint(messages.invalidFooterMaxLineLength);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.footerMaxLineLength]);
 });
 
-test('body-leading-blank', async () => {
+test("body-leading-blank", async () => {
 	const result = await commitLint(messages.warningBodyLeadingBlank);
 
 	expect(result.valid).toBe(true);
 	expect(result.warnings).toEqual([warnings.bodyLeadingBlank]);
 });
 
-test('body-max-line-length', async () => {
+test("body-max-line-length", async () => {
 	const result = await commitLint(messages.invalidBodyMaxLineLength);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.bodyMaxLineLength]);
 });
 
-test('valid messages', async () => {
+test("valid messages", async () => {
 	const validInputs = await Promise.all(
-		messages.validMessages.map((input) => commitLint(input))
+		messages.validMessages.map((input) => commitLint(input)),
 	);
 
 	validInputs.forEach((result) => {

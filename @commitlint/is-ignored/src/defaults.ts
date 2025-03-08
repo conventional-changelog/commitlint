@@ -1,14 +1,14 @@
-import semver from 'semver';
-import {Matcher} from '@commitlint/types';
+import semver from "semver";
+import { Matcher } from "@commitlint/types";
 
 const isSemver = (c: string): boolean => {
-	const firstLine = c.split('\n').shift();
+	const firstLine = c.split("\n").shift();
 
-	if (typeof firstLine !== 'string') {
+	if (typeof firstLine !== "string") {
 		return false;
 	}
 
-	const stripped = firstLine.replace(/^chore(\([^)]+\))?:/, '').trim();
+	const stripped = firstLine.replace(/^chore(\([^)]+\))?:/, "").trim();
 	return semver.valid(stripped) !== null;
 };
 
@@ -16,7 +16,7 @@ const test = (r: RegExp): ((c: string) => boolean) => r.test.bind(r);
 
 export const wildcards: Matcher[] = [
 	test(
-		/^((Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?)))(?:\r?\n)*$)/m
+		/^((Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?)))(?:\r?\n)*$)/m,
 	),
 	test(/^(Merge tag (.*?))(?:\r?\n)*$/m),
 	test(/^(R|r)evert (.*)/),

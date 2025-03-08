@@ -26,7 +26,7 @@ read(range: Range) => Promise<string[]>
 ## Import
 
 ```js
-import read from '@commitlint/read';
+import read from "@commitlint/read";
 ```
 
 ## Examples
@@ -39,7 +39,7 @@ Consider to have a repository with two commits:
 ### Using `edit: true`
 
 ```js
-const result = await read({edit: true});
+const result = await read({ edit: true });
 console.info(result);
 // => ['I did something\n\n']
 ```
@@ -47,7 +47,7 @@ console.info(result);
 ### Read last two commits
 
 ```js
-const result = await read({from: 'HEAD~2'});
+const result = await read({ from: "HEAD~2" });
 console.info(result);
 // => ['I did something\n\n', 'Initial commit\n\n']
 ```
@@ -55,7 +55,7 @@ console.info(result);
 ### Read commits within a range
 
 ```js
-const result = await read({from: 'HEAD~2', to: 'HEAD~1'});
+const result = await read({ from: "HEAD~2", to: "HEAD~1" });
 console.info(result);
 // => ['Initial commit\n\n']
 ```
@@ -63,7 +63,7 @@ console.info(result);
 ### Read commit message from git gui file
 
 ```js
-const result = await read({edit: './git/GITGUI_EDITMESSAGE'});
+const result = await read({ edit: "./git/GITGUI_EDITMESSAGE" });
 console.info(result);
 // => ['I did something via git gui\n\n']
 ```

@@ -1,6 +1,6 @@
-import inquirer from 'inquirer';
+import inquirer from "inquirer";
 
-import {input} from './input.js';
+import { input } from "./input.js";
 
 type Commit = (input: string) => void;
 

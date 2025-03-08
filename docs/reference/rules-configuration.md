@@ -16,7 +16,7 @@ Rule configurations are either of type `array` residing on a key with the rule's
 export default {
   // ...
   rules: {
-    'header-max-length': [0, 'always', 72], // [!code focus]
+    "header-max-length": [0, "always", 72], // [!code focus]
   },
   // ...
 };
@@ -32,7 +32,7 @@ export default {
 export default {
   // ...
   rules: {
-    'header-max-length': () => [0, 'always', 72], // [!code focus]
+    "header-max-length": () => [0, "always", 72], // [!code focus]
   },
   // ...
 };
@@ -48,7 +48,7 @@ export default {
 export default {
   // ...
   rules: {
-    'header-max-length': async () => [0, 'always', 72], // [!code focus]
+    "header-max-length": async () => [0, "always", 72], // [!code focus]
   },
   // ...
 };

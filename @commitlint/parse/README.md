@@ -11,7 +11,7 @@ npm install --save @commitlint/parse
 ## Use
 
 ```js
-const parse = require('@commitlint/parse');
+const parse = require("@commitlint/parse");
 ```
 
 ## API

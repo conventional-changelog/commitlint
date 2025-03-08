@@ -1,8 +1,8 @@
-import {RuleConfigSeverity} from '@commitlint/types';
-import type {Rule} from '../types.js';
+import { RuleConfigSeverity } from "@commitlint/types";
+import type { Rule } from "../types.js";
 
 export function ruleIsDisabled(
-	rule: Rule
+	rule: Rule,
 ): rule is Readonly<[RuleConfigSeverity.Disabled]> {
 	if (rule && Array.isArray(rule) && rule[0] === RuleConfigSeverity.Disabled) {
 		return true;
@@ -16,7 +16,7 @@ export function ruleIsDisabled(
  * @return if the rule definition is active
  */
 export function ruleIsActive<T extends Rule>(
-	rule: T
+	rule: T,
 ): rule is Exclude<T, Readonly<[RuleConfigSeverity.Disabled]>> {
 	if (rule && Array.isArray(rule)) {
 		return rule[0] > RuleConfigSeverity.Disabled;
@@ -30,12 +30,12 @@ export function ruleIsActive<T extends Rule>(
  * @return if the rule definition is applicable
  */
 export function ruleIsApplicable(
-	rule: Rule
+	rule: Rule,
 ): rule is
-	| Readonly<[RuleConfigSeverity, 'always']>
-	| Readonly<[RuleConfigSeverity, 'always', unknown]> {
+	| Readonly<[RuleConfigSeverity, "always"]>
+	| Readonly<[RuleConfigSeverity, "always", unknown]> {
 	if (rule && Array.isArray(rule)) {
-		return rule[1] === 'always';
+		return rule[1] === "always";
 	}
 	return false;
 }
@@ -46,20 +46,20 @@ export function ruleIsApplicable(
  * @return if the rule definition is applicable
  */
 export function ruleIsNotApplicable(
-	rule: Rule
+	rule: Rule,
 ): rule is
-	| Readonly<[RuleConfigSeverity, 'never']>
-	| Readonly<[RuleConfigSeverity, 'never', unknown]> {
+	| Readonly<[RuleConfigSeverity, "never"]>
+	| Readonly<[RuleConfigSeverity, "never", unknown]> {
 	if (rule && Array.isArray(rule)) {
-		return rule[1] === 'never';
+		return rule[1] === "never";
 	}
 	return false;
 }
 
 export function enumRuleIsActive(
-	rule: Rule
+	rule: Rule,
 ): rule is Readonly<
-	[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, 'always', string[]]
+	[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, "always", string[]]
 > {
 	return (
 		ruleIsActive(rule) &&
@@ -78,7 +78,7 @@ export function getMaxLength(rule?: Rule): number {
 		rule &&
 		ruleIsActive(rule) &&
 		ruleIsApplicable(rule) &&
-		typeof rule[2] === 'number'
+		typeof rule[2] === "number"
 	) {
 		return rule[2];
 	}
@@ -90,7 +90,7 @@ export function getMinLength(rule?: Rule): number {
 		rule &&
 		ruleIsActive(rule) &&
 		ruleIsApplicable(rule) &&
-		typeof rule[2] === 'number'
+		typeof rule[2] === "number"
 	) {
 		return rule[2];
 	}

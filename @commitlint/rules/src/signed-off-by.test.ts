@@ -1,9 +1,9 @@
-import {test, expect} from 'vitest';
-import parse from '@commitlint/parse';
-import {signedOffBy} from './signed-off-by.js';
+import { test, expect } from "vitest";
+import parse from "@commitlint/parse";
+import { signedOffBy } from "./signed-off-by.js";
 
 const messages = {
-	empty: 'test:\n',
+	empty: "test:\n",
 	with: `test: subject\nbody\nfooter\nSigned-off-by:\n\n`,
 	without: `test: subject\nbody\nfooter\n\n`,
 	inSubject: `test: subject Signed-off-by:\nbody\nfooter\n\n`,
@@ -29,25 +29,25 @@ const parsed = {
 };
 
 test('empty against "always signed-off-by" should fail', async () => {
-	const [actual] = signedOffBy(await parsed.empty, 'always', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.empty, "always", "Signed-off-by:");
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test('empty against "never signed-off-by" should succeed', async () => {
-	const [actual] = signedOffBy(await parsed.empty, 'never', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.empty, "never", "Signed-off-by:");
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test('with against "always signed-off-by" should succeed', async () => {
-	const [actual] = signedOffBy(await parsed.with, 'always', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.with, "always", "Signed-off-by:");
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test('with against "never signed-off-by" should fail', async () => {
-	const [actual] = signedOffBy(await parsed.with, 'never', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.with, "never", "Signed-off-by:");
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
@@ -55,24 +55,24 @@ test('with against "never signed-off-by" should fail', async () => {
 test('without against "always signed-off-by" should fail', async () => {
 	const [actual] = signedOffBy(
 		await parsed.without,
-		'always',
-		'Signed-off-by:'
+		"always",
+		"Signed-off-by:",
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test('without against "never signed-off-by" should succeed', async () => {
-	const [actual] = signedOffBy(await parsed.without, 'never', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.without, "never", "Signed-off-by:");
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
-test('trailing comments should be ignored', async () => {
+test("trailing comments should be ignored", async () => {
 	const [actual] = signedOffBy(
 		await parsed.withSignoffAndComments,
-		'always',
-		'Signed-off-by:'
+		"always",
+		"Signed-off-by:",
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);
@@ -81,8 +81,8 @@ test('trailing comments should be ignored', async () => {
 test('inSubject against "always signed-off-by" should fail', async () => {
 	const [actual] = signedOffBy(
 		await parsed.inSubject,
-		'always',
-		'Signed-off-by:'
+		"always",
+		"Signed-off-by:",
 	);
 	const expected = false;
 	expect(actual).toEqual(expected);
@@ -91,21 +91,21 @@ test('inSubject against "always signed-off-by" should fail', async () => {
 test('inSubject against "never signed-off-by" should succeed', async () => {
 	const [actual] = signedOffBy(
 		await parsed.inSubject,
-		'never',
-		'Signed-off-by:'
+		"never",
+		"Signed-off-by:",
 	);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test('inBody against "always signed-off-by" should fail', async () => {
-	const [actual] = signedOffBy(await parsed.inBody, 'always', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.inBody, "always", "Signed-off-by:");
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test('inBody against "never signed-off-by" should succeed', async () => {
-	const [actual] = signedOffBy(await parsed.inBody, 'never', 'Signed-off-by:');
+	const [actual] = signedOffBy(await parsed.inBody, "never", "Signed-off-by:");
 	const expected = true;
 	expect(actual).toEqual(expected);
 });

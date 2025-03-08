@@ -1,8 +1,8 @@
-import {toCase} from '@commitlint/ensure';
-import type {TargetCaseType} from '@commitlint/types';
+import { toCase } from "@commitlint/ensure";
+import type { TargetCaseType } from "@commitlint/types";
 
-import type {RuleEntry} from './types.js';
-import {ruleIsActive, ruleIsNotApplicable} from './utils.js';
+import type { RuleEntry } from "./types.js";
+import { ruleIsActive, ruleIsNotApplicable } from "./utils.js";
 
 /**
  * Get forced case for rule
@@ -10,7 +10,7 @@ import {ruleIsActive, ruleIsNotApplicable} from './utils.js';
  * @return transform function applying the enforced case
  */
 export default function getForcedCaseFn(
-	rule?: RuleEntry
+	rule?: RuleEntry,
 ): (input: string) => string {
 	const noop = (input: string) => input;
 

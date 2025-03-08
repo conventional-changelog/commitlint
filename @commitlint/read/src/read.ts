@@ -1,10 +1,10 @@
-import minimist from 'minimist';
-import type {GitOptions} from 'git-raw-commits';
+import minimist from "minimist";
+import type { GitOptions } from "git-raw-commits";
 
-import {getHistoryCommits} from './get-history-commits.js';
-import {getEditCommit} from './get-edit-commit.js';
+import { getHistoryCommits } from "./get-history-commits.js";
+import { getEditCommit } from "./get-edit-commit.js";
 
-import {x} from 'tinyexec';
+import { x } from "tinyexec";
 
 interface GetCommitMessageOptions {
 	cwd?: string;
@@ -18,9 +18,9 @@ interface GetCommitMessageOptions {
 
 // Get commit messages
 export default async function getCommitMessages(
-	settings: GetCommitMessageOptions
+	settings: GetCommitMessageOptions,
 ): Promise<string[]> {
-	const {cwd, fromLastTag, to, last, edit, gitLogArgs} = settings;
+	const { cwd, fromLastTag, to, last, edit, gitLogArgs } = settings;
 	let from = settings.from;
 
 	if (edit) {
@@ -29,9 +29,9 @@ export default async function getCommitMessages(
 
 	if (last) {
 		const gitCommandResult = await x(
-			'git',
-			['log', '-1', '--pretty=format:%B'],
-			{nodeOptions: {cwd}}
+			"git",
+			["log", "-1", "--pretty=format:%B"],
+			{ nodeOptions: { cwd } },
 		);
 		let output = gitCommandResult.stdout.trim();
 		// strip output of extra quotation marks ("")
@@ -42,16 +42,16 @@ export default async function getCommitMessages(
 
 	if (!from && fromLastTag) {
 		const output = await x(
-			'git',
+			"git",
 			[
-				'describe',
-				'--abbrev=40',
-				'--always',
-				'--first-parent',
-				'--long',
-				'--tags',
+				"describe",
+				"--abbrev=40",
+				"--always",
+				"--first-parent",
+				"--long",
+				"--tags",
 			],
-			{nodeOptions: {cwd}}
+			{ nodeOptions: { cwd } },
 		);
 		const stdout = output.stdout.trim();
 
@@ -63,20 +63,20 @@ export default async function getCommitMessages(
 			// Description will be in the format: <tag>-<count>-g<hash>
 			// Example: v3.2.0-11-g9057371a52adaae5180d93fe4d0bb808d874b9fb
 			// Minus zero based (1), dash (1), "g" prefix (1), hash (40) = -43
-			const tagSlice = stdout.lastIndexOf('-', stdout.length - 43);
+			const tagSlice = stdout.lastIndexOf("-", stdout.length - 43);
 
 			from = stdout.slice(0, tagSlice);
 		}
 	}
 
-	let gitOptions: GitOptions = {from, to};
+	let gitOptions: GitOptions = { from, to };
 	if (gitLogArgs) {
 		gitOptions = {
-			...minimist(gitLogArgs.split(' ')),
+			...minimist(gitLogArgs.split(" ")),
 			from,
 			to,
 		};
 	}
 
-	return getHistoryCommits(gitOptions, {cwd});
+	return getHistoryCommits(gitOptions, { cwd });
 }

@@ -1,15 +1,15 @@
-import {createRequire} from 'node:module';
-import Path from 'node:path';
+import { createRequire } from "node:module";
+import Path from "node:path";
 
-import {globSync} from 'glob';
+import { globSync } from "glob";
 
 const require = createRequire(import.meta.url);
 
 export default {
-	utils: {getPackages},
+	utils: { getPackages },
 	rules: {
-		'scope-enum': (ctx) =>
-			getPackages(ctx).then((packages) => [2, 'always', packages]),
+		"scope-enum": (ctx) =>
+			getPackages(ctx).then((packages) => [2, "always", packages]),
 	},
 };
 
@@ -19,15 +19,15 @@ function getPackages(context) {
 			const ctx = context || {};
 			const cwd = ctx.cwd || process.cwd();
 
-			const {workspaces} = require(Path.join(cwd, 'package.json'));
+			const { workspaces } = require(Path.join(cwd, "package.json"));
 			if (!Array.isArray(workspaces)) {
 				// no workspaces configured, skipping
 				return [];
 			}
 
 			const wsGlobs = workspaces.flatMap((ws) => {
-				const path = Path.posix.join(ws, 'package.json');
-				return globSync(path, {cwd, ignore: ['**/node_modules/**']});
+				const path = Path.posix.join(ws, "package.json");
+				return globSync(path, { cwd, ignore: ["**/node_modules/**"] });
 			});
 
 			return wsGlobs.sort().map((pJson) => require(Path.join(cwd, pJson)));
@@ -36,6 +36,6 @@ function getPackages(context) {
 			return packages
 				.map((pkg) => pkg.name)
 				.filter(Boolean)
-				.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
+				.map((name) => (name.charAt(0) === "@" ? name.split("/")[1] : name));
 		});
 }

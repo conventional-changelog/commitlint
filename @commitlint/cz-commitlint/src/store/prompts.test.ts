@@ -1,5 +1,5 @@
-import {describe, test, expect, vi, beforeEach} from 'vitest';
-import * as prompts from './prompts.js';
+import { describe, test, expect, vi, beforeEach } from "vitest";
+import * as prompts from "./prompts.js";
 
 let getPromptQuestions: typeof prompts.getPromptQuestions;
 let getPromptMessages: typeof prompts.getPromptMessages;
@@ -8,16 +8,20 @@ let setPromptConfig: typeof prompts.setPromptConfig;
 
 beforeEach(async () => {
 	vi.resetModules();
-	({getPromptQuestions, getPromptMessages, getPromptSettings, setPromptConfig} =
-		await import('./prompts.js'));
+	({
+		getPromptQuestions,
+		getPromptMessages,
+		getPromptSettings,
+		setPromptConfig,
+	} = await import("./prompts.js"));
 });
 
-describe('setPromptConfig', () => {
-	test('should cover questions when prompt config questions is plain object', () => {
+describe("setPromptConfig", () => {
+	test("should cover questions when prompt config questions is plain object", () => {
 		const promptConfig = {
 			questions: {
 				type: {
-					description: 'input type',
+					description: "input type",
 				},
 			},
 		};
@@ -25,15 +29,15 @@ describe('setPromptConfig', () => {
 		expect(getPromptQuestions()).toBe(promptConfig.questions);
 	});
 
-	test('should not set questions when prompt config questions is not a plain object', () => {
-		const initialQuestions = {...getPromptQuestions()};
+	test("should not set questions when prompt config questions is not a plain object", () => {
+		const initialQuestions = { ...getPromptQuestions() };
 		setPromptConfig({
 			questions: null,
 		} as any);
 		expect(getPromptQuestions()).toEqual(initialQuestions);
 
 		setPromptConfig({
-			questions: 'questions',
+			questions: "questions",
 		} as any);
 		expect(getPromptQuestions()).toEqual(initialQuestions);
 
@@ -43,66 +47,66 @@ describe('setPromptConfig', () => {
 		expect(getPromptQuestions()).toEqual(initialQuestions);
 	});
 
-	test('should merge message when prompt config message is string', () => {
-		const initialMessages = {...getPromptMessages()};
+	test("should merge message when prompt config message is string", () => {
+		const initialMessages = { ...getPromptMessages() };
 		const promptConfig = {
 			messages: {
-				emptyWarning: '(%s can not be empty)',
+				emptyWarning: "(%s can not be empty)",
 			},
 		};
 		setPromptConfig(promptConfig);
 
-		expect(getPromptMessages()['emptyWarning']).toBe(
-			promptConfig.messages.emptyWarning
+		expect(getPromptMessages()["emptyWarning"]).toBe(
+			promptConfig.messages.emptyWarning,
 		);
-		expect(getPromptMessages()['lowerLimitWarning']).toBe(
-			initialMessages['lowerLimitWarning']
+		expect(getPromptMessages()["lowerLimitWarning"]).toBe(
+			initialMessages["lowerLimitWarning"],
 		);
 	});
 
-	test('should not merge message when prompt config message is not a string', () => {
-		const initialMessages = {...getPromptMessages()};
+	test("should not merge message when prompt config message is not a string", () => {
+		const initialMessages = { ...getPromptMessages() };
 		const promptConfig = {
 			messages: {
-				emptyWarning: '(%s can not be empty)',
+				emptyWarning: "(%s can not be empty)",
 				min: function () {
-					return 'min:';
+					return "min:";
 				},
 			},
 		};
 		setPromptConfig(promptConfig as any);
 
-		expect(getPromptMessages()['emptyWarning']).toBe(
-			promptConfig.messages.emptyWarning
+		expect(getPromptMessages()["emptyWarning"]).toBe(
+			promptConfig.messages.emptyWarning,
 		);
-		expect(getPromptMessages()['min']).toBe(initialMessages['min']);
+		expect(getPromptMessages()["min"]).toBe(initialMessages["min"]);
 	});
 
-	test('should ignore non-essential message', () => {
-		const initialMessages = {...getPromptMessages()};
+	test("should ignore non-essential message", () => {
+		const initialMessages = { ...getPromptMessages() };
 		const promptConfig = {
 			messages: {
-				more: 'learn more',
+				more: "learn more",
 			},
 		};
 		setPromptConfig(promptConfig);
 		expect(getPromptMessages()).toEqual(initialMessages);
 	});
 
-	test('should fields be independent', () => {
-		const initialQuestions = {...getPromptQuestions()};
+	test("should fields be independent", () => {
+		const initialQuestions = { ...getPromptQuestions() };
 		setPromptConfig({
 			messages: {
-				emptyWarning: '(%s can not be empty)',
+				emptyWarning: "(%s can not be empty)",
 			},
 		});
 		expect(getPromptQuestions()).toEqual(initialQuestions);
 
-		const initialMessages = {...getPromptMessages()};
+		const initialMessages = { ...getPromptMessages() };
 		setPromptConfig({
 			questions: {
 				type: {
-					description: 'input type',
+					description: "input type",
 				},
 			},
 		});
@@ -112,29 +116,29 @@ describe('setPromptConfig', () => {
 	test('should settings scopeEnumSeparator be set when value is ",\\/"', () => {
 		setPromptConfig({
 			settings: {
-				scopeEnumSeparator: '/',
+				scopeEnumSeparator: "/",
 			},
 		});
-		expect(getPromptSettings()['scopeEnumSeparator']).toEqual('/');
+		expect(getPromptSettings()["scopeEnumSeparator"]).toEqual("/");
 
 		const processExit = vi
-			.spyOn(process, 'exit')
+			.spyOn(process, "exit")
 			.mockImplementation(() => undefined as never);
 		setPromptConfig({
 			settings: {
-				scopeEnumSeparator: '-',
+				scopeEnumSeparator: "-",
 			},
 		});
 		expect(processExit).toHaveBeenCalledWith(1);
 		processExit.mockClear();
 	});
 
-	test('should pass on settings', () => {
+	test("should pass on settings", () => {
 		setPromptConfig({
 			settings: {
 				enableMultipleScopes: true,
 			},
 		});
-		expect(getPromptSettings()['enableMultipleScopes']).toEqual(true);
+		expect(getPromptSettings()["enableMultipleScopes"]).toEqual(true);
 	});
 });

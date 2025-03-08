@@ -1,10 +1,10 @@
-import {minLength} from '@commitlint/ensure';
-import {SyncRule} from '@commitlint/types';
+import { minLength } from "@commitlint/ensure";
+import { SyncRule } from "@commitlint/types";
 
 export const scopeMinLength: SyncRule<number> = (
 	parsed,
 	_when = undefined,
-	value = 0
+	value = 0,
 ) => {
 	const input = parsed.scope;
 	if (!input) {
