@@ -1,13 +1,13 @@
-import path from 'node:path';
-import fs from 'node:fs/promises';
-import fg from 'fast-glob';
-import configWorkspaceScopes from '@commitlint/config-workspace-scopes';
+import path from "node:path";
+import fs from "node:fs/promises";
+import fg from "fast-glob";
+import configWorkspaceScopes from "@commitlint/config-workspace-scopes";
 
 export default {
-	utils: {getProjects},
+	utils: { getProjects },
 	rules: {
-		'scope-enum': (ctx) =>
-			getProjects(ctx).then((packages) => [2, 'always', packages]),
+		"scope-enum": (ctx) =>
+			getProjects(ctx).then((packages) => [2, "always", packages]),
 	},
 };
 
@@ -20,7 +20,7 @@ export default {
 function normalizePatterns(patterns) {
 	const normalizedPatterns = [];
 	for (const pattern of patterns) {
-		normalizedPatterns.push(pattern.replace(/\/?$/, '/package.json'));
+		normalizedPatterns.push(pattern.replace(/\/?$/, "/package.json"));
 	}
 	return normalizedPatterns;
 }
@@ -31,8 +31,8 @@ function normalizePatterns(patterns) {
  * @returns A list of parsed package.json files as objects
  */
 async function findPackages(cwd) {
-	const json = await fs.readFile(path.join(cwd, 'lerna.json'), {
-		encoding: 'utf-8',
+	const json = await fs.readFile(path.join(cwd, "lerna.json"), {
+		encoding: "utf-8",
 	});
 
 	const packages = JSON.parse(json)?.packages || [];
@@ -43,13 +43,13 @@ async function findPackages(cwd) {
 	const patterns = normalizePatterns(packages);
 	const entries = await fg(patterns, {
 		cwd,
-		ignore: ['**/node_modules/**', '**/bower_components/**'],
+		ignore: ["**/node_modules/**", "**/bower_components/**"],
 	});
 
 	const pkgJsons = await Promise.all(
 		Array.from(new Set(entries.map((entry) => path.join(cwd, entry)))).map(
-			(pkgPath) => fs.readFile(pkgPath, {encoding: 'utf-8'})
-		)
+			(pkgPath) => fs.readFile(pkgPath, { encoding: "utf-8" }),
+		),
 	);
 
 	return pkgJsons.map((pkgJson) => JSON.parse(pkgJson) || {});
@@ -70,7 +70,7 @@ async function getProjects(context) {
 				`It seems that you are using npm/yarn workspaces instead of lernas "packages" declaration.`,
 				`Support for workspaces will be removed in a future major version of this package.`,
 				`Please make sure to transition to "@commitlint/config-workspace-scopes" in the near future.`,
-			].join('\n')
+			].join("\n"),
 		);
 		return workspacePackages;
 	}
@@ -81,7 +81,7 @@ async function getProjects(context) {
 		.reduce((pkgNames, pkg) => {
 			const name = pkg.name;
 			if (name) {
-				pkgNames.push(name.charAt(0) === '@' ? name.split('/')[1] : name);
+				pkgNames.push(name.charAt(0) === "@" ? name.split("/")[1] : name);
 			}
 			return pkgNames;
 		}, [])

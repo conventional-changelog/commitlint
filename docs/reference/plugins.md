@@ -10,7 +10,7 @@ Plugins can expose additional rules for use in commitlint. To do so, the plugin 
 ```js
 export default {
   rules: {
-    'dollar-sign': function (parsed, when, value) {
+    "dollar-sign": function (parsed, when, value) {
       // rule implementation ...
     },
   },
@@ -54,13 +54,13 @@ In case you want to develop your plugins locally without the need to publish to 
 ```js [commitlint.config.js]
 export default {
   rules: {
-    'hello-world-rule': [2, 'always'],
+    "hello-world-rule": [2, "always"],
   },
   plugins: [
     {
       rules: {
-        'hello-world-rule': ({subject}) => {
-          const HELLO_WORLD = 'Hello World';
+        "hello-world-rule": ({ subject }) => {
+          const HELLO_WORLD = "Hello World";
           return [
             subject.includes(HELLO_WORLD),
             `Your subject should contain ${HELLO_WORLD} message`,

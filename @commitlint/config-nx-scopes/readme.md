@@ -24,20 +24,20 @@ In your .commitlintrc.js file:
 async function getConfig() {
   const {
     default: {
-      utils: {getProjects},
+      utils: { getProjects },
     },
-  } = await import('@commitlint/config-nx-scopes');
+  } = await import("@commitlint/config-nx-scopes");
 
   return {
     rules: {
-      'scope-enum': async (ctx) => [
+      "scope-enum": async (ctx) => [
         2,
-        'always',
+        "always",
         [
           ...(await getProjects(
             ctx,
-            ({name, projectType}) =>
-              !name.includes('e2e') && projectType == 'application'
+            ({ name, projectType }) =>
+              !name.includes("e2e") && projectType == "application",
           )),
         ],
       ],
@@ -57,19 +57,19 @@ In your .commitlintrc.js file:
 async function getConfig() {
   const {
     default: {
-      utils: {getProjects},
+      utils: { getProjects },
     },
-  } = await import('@commitlint/config-nx-scopes');
+  } = await import("@commitlint/config-nx-scopes");
 
   return {
     rules: {
-      'scope-enum': async (ctx) => [
+      "scope-enum": async (ctx) => [
         2,
-        'always',
+        "always",
         [
           ...(await getProjects(
             ctx,
-            ({tags}) => !tags.includes('stage:end-of-life')
+            ({ tags }) => !tags.includes("stage:end-of-life"),
           )),
         ],
       ],

@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import '@commitlint/cli/cli.js';
+import "@commitlint/cli/cli.js";

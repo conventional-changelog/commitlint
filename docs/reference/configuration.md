@@ -43,22 +43,22 @@ const Configuration = {
    * Resolve and load @commitlint/config-conventional from node_modules.
    * Referenced packages must be installed
    */
-  extends: ['@commitlint/config-conventional'],
+  extends: ["@commitlint/config-conventional"],
   /*
    * Resolve and load conventional-changelog-atom from node_modules.
    * Referenced packages must be installed
    */
-  parserPreset: 'conventional-changelog-atom',
+  parserPreset: "conventional-changelog-atom",
   /*
    * Resolve and load @commitlint/format from node_modules.
    * Referenced package must be installed
    */
-  formatter: '@commitlint/format',
+  formatter: "@commitlint/format",
   /*
    * Any rules defined here will override rules from @commitlint/config-conventional
    */
   rules: {
-    'type-enum': [2, 'always', ['foo']],
+    "type-enum": [2, "always", ["foo"]],
   },
   /*
    * Array of functions that return true if commitlint should ignore the given message.
@@ -72,7 +72,7 @@ const Configuration = {
    * To see full list, check https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/is-ignored/src/defaults.ts.
    * To disable those ignores and run rules always, set `defaultIgnores: false` as shown below.
    */
-  ignores: [(commit) => commit === ''],
+  ignores: [(commit) => commit === ""],
   /*
    * Whether commitlint uses the default ignore rules, see the description above.
    */
@@ -81,7 +81,7 @@ const Configuration = {
    * Custom URL to show upon failure
    */
   helpUrl:
-    'https://github.com/conventional-changelog/commitlint/#what-is-commitlint',
+    "https://github.com/conventional-changelog/commitlint/#what-is-commitlint",
   /*
    * Custom prompt configs
    */
@@ -89,7 +89,7 @@ const Configuration = {
     messages: {},
     questions: {
       type: {
-        description: 'please input type:',
+        description: "please input type:",
       },
     },
   },
@@ -114,16 +114,16 @@ Relevant types and enums can be imported from `@commitlint/types`.
 Below you can see main changes from a standard js file:
 
 ```ts
-import type {UserConfig} from '@commitlint/types'; // [!code focus]
-import {RuleConfigSeverity} from '@commitlint/types'; // [!code focus]
+import type { UserConfig } from "@commitlint/types"; // [!code focus]
+import { RuleConfigSeverity } from "@commitlint/types"; // [!code focus]
 
 const Configuration: UserConfig = {
   // [!code focus]
-  extends: ['@commitlint/config-conventional'],
-  parserPreset: 'conventional-changelog-atom',
-  formatter: '@commitlint/format',
+  extends: ["@commitlint/config-conventional"],
+  parserPreset: "conventional-changelog-atom",
+  formatter: "@commitlint/format",
   rules: {
-    'type-enum': [RuleConfigSeverity.Error, 'always', ['foo']], // [!code focus]
+    "type-enum": [RuleConfigSeverity.Error, "always", ["foo"]], // [!code focus]
   },
   // ...
 };
@@ -163,7 +163,7 @@ export default {
 
 ```js [commitlint.config.js]
 export default {
-  extends: ['./commitlint.base.js', './commitlint.types.js'],
+  extends: ["./commitlint.base.js", "./commitlint.types.js"],
 };
 ```
 
@@ -171,7 +171,7 @@ export default {
 // will be picked up by commitlint.config.js
 export default {
   rules: {
-    'type-enum': [2, 'always', ['foo']],
+    "type-enum": [2, "always", ["foo"]],
   },
 };
 ```
@@ -179,8 +179,8 @@ export default {
 ```js [commitlint.base.js]
 // will be picked up by commitlint.config.js
 export default {
-  extends: ['@commitlint/config-conventional'], // extends can be nested
-  parserPreset: 'conventional-changelog-atom',
+  extends: ["@commitlint/config-conventional"], // extends can be nested
+  parserPreset: "conventional-changelog-atom",
 };
 ```
 
@@ -206,7 +206,7 @@ npm install --save-dev conventional-changelog-atom
 
 ```js [commitlint.config.js]
 export default {
-  parserPreset: 'conventional-changelog-atom',
+  parserPreset: "conventional-changelog-atom",
 };
 ```
 
@@ -216,7 +216,7 @@ export default {
 
 ```js [commitlint.config.js]
 export default {
-  parserPreset: './parser-preset',
+  parserPreset: "./parser-preset",
 };
 ```
 
@@ -224,7 +224,7 @@ export default {
 export default {
   parserOpts: {
     headerPattern: /^(\w*)\((\w*)\)-(\w*)\s(.*)$/,
-    headerCorrespondence: ['type', 'scope', 'ticket', 'subject'],
+    headerCorrespondence: ["type", "scope", "ticket", "subject"],
   },
 };
 ```
@@ -238,7 +238,7 @@ Use ids resolvable by the node resolve algorithm.
 
 ```js
 export default {
-  formatter: '@commitlint/format',
+  formatter: "@commitlint/format",
 };
 ```
 

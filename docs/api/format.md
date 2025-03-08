@@ -68,7 +68,7 @@ format(report?: Report = {}, options?: formatOptions = {}) => string[];
 ## Import
 
 ```js
-import format from '@commitlint/format';
+import format from "@commitlint/format";
 ```
 
 ## Examples
@@ -94,20 +94,20 @@ format(
         warnings: [
           {
             level: 0,
-            name: 'some-hint',
-            message: 'This will not show up as it has level 0',
+            name: "some-hint",
+            message: "This will not show up as it has level 0",
           },
           {
             level: 1,
-            name: 'some-warning',
-            message: 'This will show up yellow as it has level 1',
+            name: "some-warning",
+            message: "This will show up yellow as it has level 1",
           },
         ],
         errors: [
           {
             level: 2,
-            name: 'some-error',
-            message: 'This will show up red as it has level 2',
+            name: "some-error",
+            message: "This will show up red as it has level 2",
           },
         ],
       },
@@ -115,7 +115,7 @@ format(
   },
   {
     color: false,
-  }
+  },
 );
 /* => 
 [

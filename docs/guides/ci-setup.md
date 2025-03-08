@@ -143,11 +143,11 @@ Setting `GIT_DEPTH: 0` removes this limitation, so `commitlint` can check larger
 ## GitLab CI with pre-build container
 
 ```yaml
-stages: ['lint', 'build', 'test']
+stages: ["lint", "build", "test"]
 lint:commit:
   image:
     name: registry.hub.docker.com/commitlint/commitlint:latest
-    entrypoint: ['']
+    entrypoint: [""]
   stage: lint
   script:
     # Uncomment the next line if you are extending the @commitlint/config-nx-scopes in your commitlint configuration
@@ -206,7 +206,7 @@ steps:
 
   - task: NodeTool@0
     inputs:
-      versionSpec: '20.x'
+      versionSpec: "20.x"
       checkLatest: true
 
   - script: |

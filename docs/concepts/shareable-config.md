@@ -10,7 +10,7 @@ an object containing `.rules` as default. To use shared configuration you specif
  * @type {import('@commitlint/types').UserConfig}
  */
 export default {
-  extends: ['example'], // => commitlint-config-example
+  extends: ["example"], // => commitlint-config-example
 };
 ```
 
@@ -39,7 +39,7 @@ This must always start with a `.` (dot).
 
 ```js [commitlint.config.js]
 export default {
-  extends: ['./example'], // => ./example.js
+  extends: ["./example"], // => ./example.js
 };
 ```
 
@@ -55,7 +55,7 @@ You can provide the full path of the package like:
 
 ```js [commitlint.config.js]
 export default {
-  extends: ['@commitlint/config-conventional'], // => @commitlint/config-conventional
+  extends: ["@commitlint/config-conventional"], // => @commitlint/config-conventional
 };
 ```
 
@@ -70,7 +70,7 @@ Or just the scope/owner of the package.
 
 ```js [commitlint.config.js]
 export default {
-  extends: ['@coolcompany'], // => @coolcompany/commitlint-config
+  extends: ["@coolcompany"], // => @coolcompany/commitlint-config
 };
 ```
 

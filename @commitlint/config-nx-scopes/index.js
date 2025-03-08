@@ -1,12 +1,12 @@
-import {RuleConfigSeverity} from '@commitlint/types';
-import {getProjects as getNXProjects} from 'nx/src/generators/utils/project-configuration.js';
-import {FsTree} from 'nx/src/generators/tree.js';
+import { RuleConfigSeverity } from "@commitlint/types";
+import { getProjects as getNXProjects } from "nx/src/generators/utils/project-configuration.js";
+import { FsTree } from "nx/src/generators/tree.js";
 
 export default {
-	utils: {getProjects},
+	utils: { getProjects },
 	rules: {
-		'scope-enum': (ctx) =>
-			Promise.resolve([RuleConfigSeverity.Error, 'always', getProjects(ctx)]),
+		"scope-enum": (ctx) =>
+			Promise.resolve([RuleConfigSeverity.Error, "always", getProjects(ctx)]),
 	},
 };
 
@@ -28,8 +28,8 @@ function getProjects(context, selector = () => true) {
 				name: project.name,
 				projectType: project.projectType,
 				tags: project.tags,
-			})
+			}),
 		)
 		.map((project) => project.name)
-		.map((name) => (name.charAt(0) === '@' ? name.split('/')[1] : name));
+		.map((name) => (name.charAt(0) === "@" ? name.split("/")[1] : name));
 }

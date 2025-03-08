@@ -1,1 +1,1 @@
-export {default} from '@commitlint/config-patternplate';
+export { default } from "@commitlint/config-patternplate";

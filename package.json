@@ -18,7 +18,7 @@
     "lint": "eslint",
     "lint-fix": "eslint --fix",
     "format": "prettier **/*.{ts,js,json,yml,md} --check",
-    "format-fix": "prettier **/*.{ts,js,json,yml,md} --write",
+    "format-fix": "prettier \"**/*.{ts,js,json,yml,md}\" --write",
     "publish": "lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",

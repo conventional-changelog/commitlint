@@ -127,7 +127,7 @@ load(seed: Seed = {}, options?: LoadOptions = {cwd: process.cwd()}) => Promise<C
 ## Import
 
 ```js
-import load from '@commitlint/load';
+import load from "@commitlint/load";
 ```
 
 ## Examples
@@ -137,7 +137,7 @@ import load from '@commitlint/load';
 ```js
 const config = await load({
   rules: {
-    'body-leading-blank': [2, 'always'],
+    "body-leading-blank": [2, "always"],
   },
 });
 console.log(config);
@@ -147,7 +147,7 @@ console.log(config);
 ### Reference a file
 
 ```js
-const config = await load({extends: ['./package']});
+const config = await load({ extends: ["./package"] });
 console.log(config);
 // => { extends: ['./package', './package-b'], rules: {} }
 ```
@@ -155,7 +155,7 @@ console.log(config);
 ### Inline `parserPreset`
 
 ```js
-const config = await load({parserPreset: './parser-preset.js'});
+const config = await load({ parserPreset: "./parser-preset.js" });
 console.log(config);
 /* => 
 { 
@@ -173,7 +173,10 @@ console.log(config);
 ### Config file with with current working directory
 
 ```js
-const config = await load({}, {file: '.commitlintrc.yml', cwd: process.cwd()});
+const config = await load(
+  {},
+  { file: ".commitlintrc.yml", cwd: process.cwd() },
+);
 console.log(config);
 /* => 
 { 
