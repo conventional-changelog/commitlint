@@ -20,7 +20,7 @@ const searchStrategy = 'global';
 
 export async function loadConfig(
 	cwd: string,
-	configPath?: string
+	configPath?: string,
 ): Promise<LoadConfigResult | null> {
 	let tsLoaderInstance: Loader | undefined;
 	const tsLoader: Loader = (...args) => {

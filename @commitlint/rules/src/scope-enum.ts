@@ -5,7 +5,7 @@ import {SyncRule} from '@commitlint/types';
 export const scopeEnum: SyncRule<string[]> = (
 	{scope},
 	when = 'always',
-	value = []
+	value = [],
 ) => {
 	if (!scope || !value.length) {
 		return [true, ''];

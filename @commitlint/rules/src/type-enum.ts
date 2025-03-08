@@ -5,7 +5,7 @@ import {SyncRule} from '@commitlint/types';
 export const typeEnum: SyncRule<string[]> = (
 	parsed,
 	when = 'always',
-	value = []
+	value = [],
 ) => {
 	const {type: input} = parsed;
 

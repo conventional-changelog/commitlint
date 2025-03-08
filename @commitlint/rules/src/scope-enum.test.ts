@@ -23,7 +23,7 @@ const {single, multiple, none} = messagesByScope;
 
 const messages = Object.values(messagesByScope).reduce<Record<string, string>>(
 	(acc, curr) => ({...acc, ...curr}),
-	{}
+	{},
 );
 
 const conditions: RuleConfigCondition[] = ['always', 'never'];
@@ -37,12 +37,12 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(messages[messageType]),
 						condition,
-						[]
+						[],
 					);
 					const expected = true;
 					expect(actual).toEqual(expected);
 					expect(message).toEqual('');
-				}
+				},
 			);
 		});
 
@@ -54,7 +54,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						condition,
-						['bar']
+						['bar'],
 					);
 					expect(actual).toBeTruthy();
 					expect(message).toBeFalsy();
@@ -64,7 +64,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						condition,
-						['bar', 'baz']
+						['bar', 'baz'],
 					);
 					expect(actual).toBeTruthy();
 					expect(message).toBeFalsy();
@@ -82,7 +82,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'always',
-						['bar']
+						['bar'],
 					);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual('scope must be one of [bar]');
@@ -92,7 +92,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'always',
-						['bar', 'baz']
+						['bar', 'baz'],
 					);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual('scope must be one of [bar, baz]');
@@ -102,7 +102,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'always',
-						['foo']
+						['foo'],
 					);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual('scope must be one of [foo]');
@@ -118,7 +118,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'always',
-						['bar', 'baz']
+						['bar', 'baz'],
 					);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual('scope must be one of [bar, baz]');
@@ -128,7 +128,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'always',
-						['foo']
+						['foo'],
 					);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual('scope must be one of [foo]');
@@ -138,7 +138,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'always',
-						['bar']
+						['bar'],
 					);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual('scope must be one of [bar]');
@@ -149,7 +149,7 @@ describe('Scope Enum Validation', () => {
 				const [actual, message] = scopeEnum(
 					await parse(messages['multipleSlash']),
 					'always',
-					['bar/baz']
+					['bar/baz'],
 				);
 				expect(actual).toBeTruthy();
 				expect(message).toEqual('scope must be one of [bar/baz]');
@@ -166,7 +166,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'never',
-						['foo']
+						['foo'],
 					);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual('scope must not be one of [foo]');
@@ -176,7 +176,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'never',
-						['bar']
+						['bar'],
 					);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual('scope must not be one of [bar]');
@@ -186,7 +186,7 @@ describe('Scope Enum Validation', () => {
 					const [actual, message] = scopeEnum(
 						await parse(fakeMessage),
 						'never',
-						['bar', 'baz']
+						['bar', 'baz'],
 					);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual('scope must not be one of [bar, baz]');
@@ -197,7 +197,7 @@ describe('Scope Enum Validation', () => {
 				const [actual, message] = scopeEnum(
 					await parse(messages['multipleSlash']),
 					'never',
-					['bar/baz']
+					['bar/baz'],
 				);
 				expect(actual).toBeFalsy();
 				expect(message).toEqual('scope must not be one of [bar/baz]');

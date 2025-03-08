@@ -15,7 +15,7 @@ export class CliError extends Error {
 	constructor(
 		message: string,
 		type: string,
-		error_code = ExitCode.CommitlintErrorDefault
+		error_code = ExitCode.CommitlintErrorDefault,
 	) {
 		super(message);
 

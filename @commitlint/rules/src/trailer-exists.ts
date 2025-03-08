@@ -6,14 +6,14 @@ import {SyncRule} from '@commitlint/types';
 export const trailerExists: SyncRule<string> = (
 	parsed,
 	when = 'always',
-	value = ''
+	value = '',
 ) => {
 	const trailers = spawnSync('git', ['interpret-trailers', '--parse'], {
 		input: parsed.raw || '',
 	}).stdout;
 
 	const matches = toLines(trailers.toString()).filter((ln) =>
-		ln.startsWith(value)
+		ln.startsWith(value),
 	).length;
 
 	const negated = when === 'never';

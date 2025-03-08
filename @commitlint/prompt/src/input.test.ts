@@ -87,14 +87,14 @@ test('should fail without type', async () => {
 	expect(message).toEqual('');
 	expect(console.error).toHaveBeenCalledTimes(1);
 	expect(console.error).toHaveBeenLastCalledWith(
-		new Error(`⚠ ${chalk.bold('type')} may not be empty.`)
+		new Error(`⚠ ${chalk.bold('type')} may not be empty.`),
 	);
 	spy.mockRestore();
 });
 
 function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 	const prompt = async (
-		questions: DistinctQuestion | DistinctQuestion[]
+		questions: DistinctQuestion | DistinctQuestion[],
 	): Promise<any> => {
 		const result: Answers = {};
 		const resolvedConfig = Array.isArray(questions) ? questions : [questions];

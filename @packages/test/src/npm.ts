@@ -10,9 +10,8 @@ export async function installModules(cwd: string) {
 	const targetModulesPath = path.join(cwd, 'node_modules');
 
 	if (await fs.pathExists(manifestPath)) {
-		const {dependencies = {}, devDependencies = {}} = await fs.readJson(
-			manifestPath
-		);
+		const {dependencies = {}, devDependencies = {}} =
+			await fs.readJson(manifestPath);
 		const deps = Object.keys({...dependencies, ...devDependencies});
 		await Promise.all(
 			deps.map(async (dependency: any) => {
@@ -33,7 +32,7 @@ export async function installModules(cwd: string) {
 
 				await fs.mkdirp(path.join(targetPath, '..'));
 				await fs.symlink(sourcePath, targetPath);
-			})
+			}),
 		);
 	}
 }
@@ -46,7 +45,7 @@ export async function bootstrap(fixture: string, directory?: string) {
 
 function findParentPath(
 	parentPath: string,
-	dirname: string
+	dirname: string,
 ): string | undefined {
 	const rawFragments = parentPath.split(path.sep);
 
@@ -62,7 +61,7 @@ function findParentPath(
 
 			return {fragments, matched};
 		},
-		{fragments: rawFragments, matched: false}
+		{fragments: rawFragments, matched: false},
 	);
 
 	return matched ? fragments.join(path.sep) : undefined;

@@ -16,7 +16,7 @@ export class FooterQuestion extends Question {
 		name: PromptName,
 		questionConfig: QuestionConfig,
 		footerMaxLength?: number,
-		footerMinLength?: number
+		footerMinLength?: number,
 	) {
 		super(name, questionConfig);
 		this.footerMaxLength = footerMaxLength ?? Infinity;
@@ -116,7 +116,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 				name,
 				questionConfigs,
 				footerMaxLength,
-				footerMinLength
+				footerMinLength,
 			);
 
 			return instance.question;
@@ -142,8 +142,8 @@ export function combineCommitMessage(answers: Answers): string {
 						width: maxLineLength,
 						trim: true,
 						indent: '',
-				  })
-				: message.trim()
+					})
+				: message.trim(),
 		);
 	}
 
@@ -154,8 +154,8 @@ export function combineCommitMessage(answers: Answers): string {
 						width: maxLineLength,
 						trim: true,
 						indent: '',
-				  })
-				: issues.trim()
+					})
+				: issues.trim(),
 		);
 	}
 
@@ -166,8 +166,8 @@ export function combineCommitMessage(answers: Answers): string {
 						width: maxLineLength,
 						trim: true,
 						indent: '',
-				  })
-				: footer
+					})
+				: footer,
 		);
 	}
 

@@ -33,7 +33,7 @@ export function setPromptConfig(newPromptConfig: UserPromptConfig): void {
 			!/^\/|\\|,$/.test(settings['scopeEnumSeparator'])
 		) {
 			console.log(
-				`prompt.settings.scopeEnumSeparator must be one of ',', '\\', '/'.`
+				`prompt.settings.scopeEnumSeparator must be one of ',', '\\', '/'.`,
 			);
 			process.exit(1);
 		}

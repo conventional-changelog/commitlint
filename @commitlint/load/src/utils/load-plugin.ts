@@ -22,7 +22,7 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 export default async function loadPlugin(
 	plugins: PluginRecords,
 	pluginName: string,
-	debug: boolean = false
+	debug: boolean = false,
 ): Promise<PluginRecords> {
 	const longName = normalizePackageName(pluginName);
 	const shortName = getShorthandName(longName);
@@ -76,8 +76,8 @@ export default async function loadPlugin(
 
 			console.log(
 				chalk.blue(
-					`Loaded plugin ${pluginName} (${loadedPluginAndVersion}) (from ${resolvedPath})`
-				)
+					`Loaded plugin ${pluginName} (${loadedPluginAndVersion}) (from ${resolvedPath})`,
+				),
 			);
 		}
 

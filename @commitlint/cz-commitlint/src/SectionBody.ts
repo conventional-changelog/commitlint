@@ -29,8 +29,8 @@ export function combineCommitMessage(answers: Answers): string {
 						width: maxLineLength,
 						trim: true,
 						indent: '',
-				  })
-				: commitBody.trim()
+					})
+				: commitBody.trim(),
 		);
 	} else {
 		return '';
