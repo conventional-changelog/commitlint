@@ -31,10 +31,6 @@
       "@commitlint/config-workspace-scopes"
     ]
   },
-  "prettier": {
-    "singleQuote": true,
-    "bracketSpacing": false
-  },
   "lint-staged": {
     "*.{ts,js,json,yml,md}": [
       "prettier --write"
