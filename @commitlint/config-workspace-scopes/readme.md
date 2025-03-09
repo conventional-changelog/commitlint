@@ -1,4 +1,4 @@
-# @commitlint/config-workspaces-scopes
+# @commitlint/config-workspace-scopes
 
 Shareable `commitlint` config enforcing workspace names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
