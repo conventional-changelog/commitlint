@@ -29,7 +29,7 @@ Configuration files are resolved using [cosmiconfig](https://github.com/cosmicon
 
 ## Config via `package.json`
 
-You can add a `commitlint` field in `package.json` (or [`package.yaml`](https://github.com/pnpm/pnpm/pull/1799)) with an object that follows the below structure.
+You can add a `commitlint` field in `package.json`, [`package.yaml`](https://github.com/pnpm/pnpm/pull/1799)) or `deno.json` with an object that follows the below structure.
 
 ## Config option CLI
 
