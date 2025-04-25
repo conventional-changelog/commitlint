@@ -7,8 +7,9 @@ These examples show common usages of how commitlint can be configured.
 ::: code-group
 
 ```jsonc [package.json]
+{
   // ...
-  commitlint: {
+  "commitlint": {
     "rules": {
       "references-empty": [2, "never"]
     },
@@ -19,4 +20,5 @@ These examples show common usages of how commitlint can be configured.
     }
   }
   // ...
+}
 ```
