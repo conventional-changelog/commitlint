@@ -7,23 +7,19 @@ Install `@commitlint/cli` and a `@commitlint/config-*` / `commitlint-config-*` o
 ::: code-group
 
 ```sh [npm]
-npm install --save-dev @commitlint/{cli,config-conventional}
+npm install -D @commitlint/cli @commitlint/config-conventional
 ```
 
 ```sh [yarn]
-yarn add --dev @commitlint/{cli,config-conventional}
-```
-
-```sh [npm (Windows)]
-npm install --save-dev @commitlint/config-conventional @commitlint/cli
+yarn add -D @commitlint/cli @commitlint/config-conventional
 ```
 
 ```sh [pnpm]
-pnpm add --save-dev @commitlint/{cli,config-conventional}
+pnpm add -D @commitlint/cli @commitlint/config-conventional
 ```
 
 ```sh [deno]
-deno add --dev npm:@commitlint/cli npm:@commitlint/config-conventional
+deno add -D npm:@commitlint/cli npm:@commitlint/config-conventional
 ```
 
 :::
