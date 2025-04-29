@@ -18,6 +18,10 @@ yarn add -D @commitlint/cli @commitlint/config-conventional
 pnpm add -D @commitlint/cli @commitlint/config-conventional
 ```
 
+```sh [bun]
+bun add -d @commitlint/cli @commitlint/config-conventional
+```
+
 ```sh [deno]
 deno add -D npm:@commitlint/cli npm:@commitlint/config-conventional
 ```
