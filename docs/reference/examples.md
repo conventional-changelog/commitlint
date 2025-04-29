@@ -11,14 +11,14 @@ These examples show common usages of how commitlint can be configured.
   // ...
   "commitlint": {
     "rules": {
-      "references-empty": [2, "never"]
+      "references-empty": [2, "never"],
     },
     "parserPreset": {
       "parserOpts": {
-        "issuePrefixes": ["PROJ-"]
-      }
-    }
-  }
+        "issuePrefixes": ["PROJ-"],
+      },
+    },
+  },
   // ...
 }
 ```
