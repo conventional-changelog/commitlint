@@ -7,16 +7,18 @@ These examples show common usages of how commitlint can be configured.
 ::: code-group
 
 ```jsonc [package.json]
+{
   // ...
-  commitlint: {
+  "commitlint": {
     "rules": {
-      "references-empty": [2, "never"]
+      "references-empty": [2, "never"],
     },
     "parserPreset": {
       "parserOpts": {
-        "issuePrefixes": ["PROJ-"]
-      }
-    }
-  }
+        "issuePrefixes": ["PROJ-"],
+      },
+    },
+  },
   // ...
+}
 ```

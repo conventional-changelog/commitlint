@@ -19,7 +19,7 @@
 3. Install and configure if needed
 
    ```sh
-   npm install --save-dev @commitlint/{cli,config-conventional,prompt-cli}
+   npm install --save-dev @commitlint/cli @commitlint/config-conventional @commitlint/prompt-cli
 
    echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
    ```
