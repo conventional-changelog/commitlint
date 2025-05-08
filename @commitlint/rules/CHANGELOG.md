@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.8.1](https://github.com/conventional-changelog/commitlint/compare/v19.8.0...v19.8.1) (2025-05-08)
+
+
+### Performance Improvements
+
+* **rules:** optimize header-trim ([#4363](https://github.com/conventional-changelog/commitlint/issues/4363)) ([b7e404b](https://github.com/conventional-changelog/commitlint/commit/b7e404bc036dbd3cbdffa38e85c833d10e52d68b))
+
+
+
+
+
 # [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
 
 

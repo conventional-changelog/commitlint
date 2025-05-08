@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/read",
   "type": "module",
-  "version": "19.8.0",
+  "version": "19.8.1",
   "description": "Read commit messages from a specified range or last edit",
   "main": "lib/read.js",
   "types": "lib/read.d.ts",
@@ -36,14 +36,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^19.8.0",
-    "@commitlint/utils": "^19.8.0",
+    "@commitlint/test": "^19.8.1",
+    "@commitlint/utils": "^19.8.1",
     "@types/git-raw-commits": "^2.0.3",
     "@types/minimist": "^1.2.4"
   },
   "dependencies": {
-    "@commitlint/top-level": "^19.8.0",
-    "@commitlint/types": "^19.8.0",
+    "@commitlint/top-level": "^19.8.1",
+    "@commitlint/types": "^19.8.1",
     "git-raw-commits": "^4.0.0",
     "minimist": "^1.2.8",
     "tinyexec": "^1.0.0"

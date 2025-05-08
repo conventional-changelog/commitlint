@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.8.1](https://github.com/conventional-changelog/commitlint/compare/v19.8.0...v19.8.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* update dependency tinyexec to v1 ([#4332](https://github.com/conventional-changelog/commitlint/issues/4332)) ([e49449f](https://github.com/conventional-changelog/commitlint/commit/e49449fa9452069cdbf194f94d536194d362a299))
+* update dependency tinyexec to v1.0.1 ([#4347](https://github.com/conventional-changelog/commitlint/issues/4347)) ([c1b26d1](https://github.com/conventional-changelog/commitlint/commit/c1b26d1579a5bc310a750f2c75143027129d2321))
+
+
+### Performance Improvements
+
+* **rules:** optimize header-trim ([#4363](https://github.com/conventional-changelog/commitlint/issues/4363)) ([b7e404b](https://github.com/conventional-changelog/commitlint/commit/b7e404bc036dbd3cbdffa38e85c833d10e52d68b))
+
+
+
+
+
 # [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
 
 

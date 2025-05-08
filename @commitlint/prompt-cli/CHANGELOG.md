@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.8.1](https://github.com/conventional-changelog/commitlint/compare/v19.8.0...v19.8.1) (2025-05-08)
+
+
+### Bug Fixes
+
+* update dependency tinyexec to v1 ([#4332](https://github.com/conventional-changelog/commitlint/issues/4332)) ([e49449f](https://github.com/conventional-changelog/commitlint/commit/e49449fa9452069cdbf194f94d536194d362a299))
+
+
+
+
+
 # [19.8.0](https://github.com/conventional-changelog/commitlint/compare/v19.7.1...v19.8.0) (2025-03-07)
 
 
