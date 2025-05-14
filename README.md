@@ -118,6 +118,13 @@ These can be modified by [your own configuration](#config).
 - See [Rules](./docs/reference/rules.md) for a complete list of possible rules
 - An example configuration can be found at [@commitlint/config-conventional](./@commitlint/config-conventional/src/index.ts)
 
+### Important note about Node 24+
+
+Node v24 changes the way that modules are loaded, and this includes the commitlint config file. If your project does not contain a `package.json`, commitlint may fail to load the config, resulting in a `Please add rules to your commitlint.config.js` error message. This can be fixed by doing either of the following:
+
+- Add a `package.json` file, declaring your project as an ES6 module. This can be done easily by running `npm init es6`.
+- Rename the config file from `commitlint.config.js` to `commitlint.config.mjs`.
+
 ## Shared configuration
 
 A number of shared configurations are available to install and use with `commitlint`:
