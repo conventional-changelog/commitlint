@@ -152,4 +152,4 @@ No staged files match any of provided globs.
 # husky > commit-msg
 ```
 
-?> Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server too. Learn how to in the [CI Setup guide](/guides/ci-setup).
+Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server too. Learn how to in the [CI Setup guide](/guides/ci-setup).
