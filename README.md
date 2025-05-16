@@ -112,6 +112,7 @@ These can be modified by [your own configuration](#config).
   - `commitlint.config.mjs`
   - `commitlint.config.ts`
   - `commitlint.config.cts`
+  - `commitlint` field in `deno.json`
   - `commitlint` field in `package.json`
   - `commitlint` field in [`package.yaml`](https://github.com/pnpm/pnpm/pull/1799)
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
