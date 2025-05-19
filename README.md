@@ -177,6 +177,7 @@ Features will only be applied to the current main version.
 
 | Release                                                                          | Initial release |
 | -------------------------------------------------------------------------------- | --------------- |
+| [v20](https://github.com/conventional-changelog/commitlint/releases/tag/v20.0.0) | 05/2025         |
 | [v19](https://github.com/conventional-changelog/commitlint/releases/tag/v19.0.0) | 02/2024         |
 | [v18](https://github.com/conventional-changelog/commitlint/releases/tag/v18.0.0) | 10/2023         |
 
