@@ -33,7 +33,7 @@ deno add -D npm:@commitlint/cli npm:@commitlint/config-conventional
 Configure commitlint to use conventional config
 
 ```sh
-echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.mjs
 ```
 
 > [!WARNING]
