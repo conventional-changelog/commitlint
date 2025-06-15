@@ -20,7 +20,7 @@ const searchStrategy = "global";
 
 export async function loadConfig(
 	cwd: string,
-	configPath?: string,
+	configPath?: string
 ): Promise<LoadConfigResult | null> {
 	let tsLoaderInstance: Loader | undefined;
 	const tsLoader: Loader = (...args) => {
@@ -42,6 +42,7 @@ export async function loadConfig(
 		searchPlaces: [
 			// cosmiconfig overrides default searchPlaces if any new search place is added (For e.g. `*.ts` files),
 			// we need to manually merge default searchPlaces from https://github.com/davidtheclark/cosmiconfig#searchplaces
+			"deno.json",
 			"package.json",
 			"package.yaml",
 			`.${moduleName}rc`,
@@ -102,5 +103,8 @@ export const isEsmModule = (cwd: string) => {
 	}
 
 	const packageJSON = readFileSync(packagePath, { encoding: "utf-8" });
-	return JSON.parse(packageJSON)?.type === "module";
+	return (
+		JSON.parse(packageJSON)?.type === "module" ||
+		existsSync(path.join(cwd, "deno.json"))
+	);
 };
