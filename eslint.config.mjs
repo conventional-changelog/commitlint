@@ -1,7 +1,7 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
+import {createTypeScriptImportResolver} from 'eslint-import-resolver-typescript';
 import jest from 'eslint-plugin-jest';
-import _import from 'eslint-plugin-import';
-import {fixupPluginRules} from '@eslint/compat';
+import {importX} from 'eslint-plugin-import-x';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
@@ -21,12 +21,16 @@ export default [
 	{
 		ignores: ['**/lib/', '**/coverage/', '**/node_modules/', '**/fixtures/'],
 	},
+	importX.flatConfigs.typescript,
 	...compat.extends('eslint:recommended', 'prettier'),
 	{
 		plugins: {
 			'@typescript-eslint': typescriptEslint,
 			jest,
-			import: fixupPluginRules(_import),
+		},
+
+		settings: {
+			'import-x/resolver-next': createTypeScriptImportResolver(),
 		},
 
 		languageOptions: {
@@ -45,14 +49,14 @@ export default [
 		},
 
 		rules: {
-			'import/first': 'error',
-			'import/no-absolute-path': 'error',
-			'import/no-amd': 'error',
-			'import/no-mutable-exports': 'error',
-			'import/no-named-default': 'error',
-			'import/no-self-import': 'error',
+			'import-x/first': 'error',
+			'import-x/no-absolute-path': 'error',
+			'import-x/no-amd': 'error',
+			'import-x/no-mutable-exports': 'error',
+			'import-x/no-named-default': 'error',
+			'import-x/no-self-import': 'error',
 
-			'import/no-extraneous-dependencies': [
+			'import-x/no-extraneous-dependencies': [
 				'error',
 				{
 					devDependencies: true,
@@ -100,8 +104,8 @@ export default [
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-var-requires': 'off',
-			'import/first': 'off',
-			'import/no-extraneous-dependencies': 'off',
+			'import-x/first': 'off',
+			'import-x/no-extraneous-dependencies': 'off',
 			'jest/no-deprecated-functions': 'off',
 		},
 	},
