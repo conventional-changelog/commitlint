@@ -103,6 +103,9 @@ echo "pnpm commitlint \${1}" > .husky/commit-msg
 ```sh
 bun add --dev husky
 
+# husky@v9
+bunx husky init
+# husky@v8 or lower
 bunx husky install
 
 # Add commit message linting to commit-msg hook
