@@ -4,10 +4,14 @@
   "service": "commitlint",
   "workspaceFolder": "/root/repo",
   "shutdownAction": "stopCompose",
-  "extensions": [
-    "editorconfig.editorconfig",
-    "ms-vsliveshare.vsliveshare-pack",
-    "ms-azuretools.vscode-docker",
-    "esbenp.prettier-vscode"
-  ]
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "editorconfig.editorconfig",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "ms-vsliveshare.vsliveshare-pack"
+      ]
+    }
+  }
 }
