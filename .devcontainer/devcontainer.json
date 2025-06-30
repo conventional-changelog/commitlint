@@ -1,6 +1,6 @@
 {
   "name": "commitlint-dev",
-  "dockerComposeFile": ["../docker-compose.yml"],
+  "dockerComposeFile": ["../compose.yaml"],
   "service": "commitlint",
   "workspaceFolder": "/root/repo",
   "shutdownAction": "stopCompose",
