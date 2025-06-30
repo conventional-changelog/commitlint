@@ -39,7 +39,7 @@ npx husky install
 # Add commit message linting to commit-msg hook
 echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 # Windows users should use ` to escape dollar signs
-echo "npx --no commitlint --edit `$1" > .husky/commit-msg
+echo "npx --no -- commitlint --edit `$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
