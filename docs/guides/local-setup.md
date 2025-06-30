@@ -89,6 +89,19 @@ npm pkg set scripts.commitlint="commitlint --edit"
 echo "pnpm commitlint \${1}" > .husky/commit-msg
 ```
 
+== bun
+
+```sh
+bun add --dev husky
+
+bunx husky install
+
+# Add commit message linting to commit-msg hook
+echo "bunx commitlint --edit \$1" > .husky/commit-msg
+# Windows users should use ` to escape dollar signs
+echo "bunx commitlint --edit `$1" > .husky/commit-msg
+```
+
 == deno
 
 ```sh
