@@ -31,6 +31,9 @@ You can find complete setup instructions on the [official documentation](https:/
 ```sh
 npm install --save-dev husky
 
+# husky@v9
+npx husky init
+# husky@v8 or lower
 npx husky install
 
 # Add commit message linting to commit-msg hook
@@ -51,6 +54,9 @@ echo "npm run commitlint \${1}" > .husky/commit-msg
 ```sh
 yarn add --dev husky
 
+# husky@v9
+yarn husky init
+# husky@v8 or lower
 yarn husky install
 
 # Add commit message linting to commit-msg hook
@@ -74,6 +80,9 @@ echo "yarn commitlint \${1}" > .husky/commit-msg
 ```sh
 pnpm add --save-dev husky
 
+# husky@v9
+pnpm husky init
+# husky@v8 or lower
 pnpm husky install
 
 # Add commit message linting to commit-msg hook
@@ -94,6 +103,9 @@ echo "pnpm commitlint \${1}" > .husky/commit-msg
 ```sh
 deno add --dev husky
 
+# husky@v9
+deno task --eval husky init
+# husky@v8 or lower
 deno task --eval husky install
 
 # Add commit message linting to commit-msg hook
