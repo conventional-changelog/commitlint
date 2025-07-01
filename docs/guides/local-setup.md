@@ -147,9 +147,29 @@ Info about git hooks can be found on [Git documentation](https://git-scm.com/boo
 
 For a first simple usage test of commitlint you can do the following:
 
-```bash
+::: code-group
+
+```sh [npm]
 npx commitlint --from HEAD~1 --to HEAD --verbose
 ```
+
+```sh [yarn]
+yarn commitlint --from HEAD~1 --to HEAD --verbose
+```
+
+```sh [pnpm]
+pnpm dlx commitlint --from HEAD~1 --to HEAD --verbose
+```
+
+```sh [bun]
+bunx commitlint --from HEAD~1 --to HEAD --verbose
+```
+
+```sh [deno]
+deno task --eval commitlint --from HEAD~1 --to HEAD --verbose
+```
+
+:::
 
 This will check your last commit and return an error if invalid or a positive output if valid.
 
