@@ -1,9 +1,14 @@
+<script setup>
+  import packageJson from "../../@commitlint/cli/package.json"
+  const commitlintVersion = packageJson.version
+</script>
+
 # CLI
 
-```sh
+```sh-vue
 ❯ npx commitlint --help
 
-@commitlint/cli@19.5.0 - Lint your commit messages
+@commitlint/cli@{{ commitlintVersion }} - Lint your commit messages
 
 [input] reads from stdin if --edit, --env, --from and --to are omitted
 
