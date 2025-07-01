@@ -12,17 +12,61 @@
 
 2. Create a package.json if needed
 
-   ```sh
+   ::: code-group
+
+   ```sh [npm]
    npm init
    ```
 
+   ```sh [yarn]
+   yarn init
+   ```
+
+   ```sh [pnpm]
+   pnpm init
+   ```
+
+   ```sh [bun]
+   bun init
+   ```
+
+   :::
+
 3. Install and configure if needed
 
-   ```sh
+   ::: code-group
+
+   ```sh [npm]
    npm install --save-dev @commitlint/cli @commitlint/config-conventional @commitlint/prompt-cli
 
    echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
    ```
+
+   ```sh [yarn]
+   yarn add --dev @commitlint/cli @commitlint/config-conventional @commitlint/prompt-cli
+
+   echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+   ```
+
+   ```sh [pnpm]
+   pnpm add --save-dev @commitlint/cli @commitlint/config-conventional @commitlint/prompt-cli
+
+   echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+   ```
+
+   ```sh [bun]
+   bun add --dev @commitlint/cli @commitlint/config-conventional @commitlint/prompt-cli
+
+   echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+   ```
+
+   ```sh [deno]
+   deno add --dev npm:@commitlint/cli npm:@commitlint/config-conventional npm:@commitlint/prompt-cli
+
+   echo "export default { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+   ```
+
+   :::
 
 ## Provide a shortcut
 
@@ -38,10 +82,34 @@ To make prompt-cli easy to use, add a npm run-script to your `package.json`
 
 Test the prompt by executing
 
-```bash
+::: code-group
+
+```sh [npm]
 git add .
 npm run commit
 ```
+
+```sh [yarn]
+git add .
+yarn commit
+```
+
+```sh [pnpm]
+git add .
+pnpm commit
+```
+
+```sh [bun]
+git add .
+bun commit
+```
+
+```sh [deno]
+git add .
+deno task commit
+```
+
+:::
 
 ## An alternative to `@commitlint/prompt-cli`: commitizen
 
