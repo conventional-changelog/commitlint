@@ -158,11 +158,11 @@ yarn commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
 ```sh [pnpm]
-pnpm dlx commitlint --from HEAD~1 --to HEAD --verbose
+pnpm commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
 ```sh [bun]
-bunx commitlint --from HEAD~1 --to HEAD --verbose
+bun commitlint --from HEAD~1 --to HEAD --verbose
 ```
 
 ```sh [deno]
