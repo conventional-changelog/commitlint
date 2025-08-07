@@ -39,14 +39,105 @@ In package.json
 
 ```bash
 # Install commitlint cli and conventional config
-npm install --save-dev @commitlint/config-conventional @commitlint/cli
+npm install --save-dev @commitlint/config-conventional @commitlint/cli commitlint-config-gitmoji
 # or yarn
-yarn add @commitlint/config-conventional @commitlint/cli -D
+yarn add @commitlint/config-conventional @commitlint/cli commitlint-config-gitmoji -D
 
 # Simple: config with conventional
-echo "module.exports = {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
+import { UserConfig } from "@commitlint/types";
+import gitmoji from 'commitlint-config-gitmoji'
+
+/**
+ * @type {import('@commitlint/types').UserConfig}
+ */ for .js file
+module.exports = {
+  extends: ['@commitlint/config-conventional'],
+  prompt: {
+    questions: {
+      type: {
+        description: "Select the type of change that you're committing",
+        enum: {
+          feat: {
+            description: "A new feature",
+            title: "Features",
+            emoji: "✨",
+          },
+          fix: {
+            description: "A bug fix",
+            title: "Bug Fixes",
+            emoji: "🐛",
+          },
+          docs: {
+            description: "Documentation only changes",
+            title: "Documentation",
+            emoji: "📚",
+          },
+          style: {
+            description:
+              "Changes that do not affect the meaning of the code (linters)",
+            title: "Styles",
+            emoji: "🎨",
+          },
+          refactor: {
+            description:
+              "A code change that neither fixes a bug nor adds a feature",
+            title: "Code Refactoring",
+            emoji: "📦",
+          },
+          perf: {
+            description: "A code change that improves performance",
+            title: "Performance Improvements",
+            emoji: "🚀",
+          },
+          test: {
+            description: "Adding missing tests or correcting existing tests",
+            title: "Tests",
+            emoji: "🚨",
+          },
+          build: {
+            description:
+              "Changes that affect the build system or external dependencies (yarn)",
+            title: "Builds",
+            emoji: "🏗️ ",
+          },
+          ci: {
+            description:
+              "Changes to our CI configuration files and scripts (GitActions)",
+            title: "Continuous Integrations",
+            emoji: "⚙️ ",
+          },
+          chore: {
+            description: "Other changes that don't modify src or test files",
+            title: "Chores",
+            emoji: "♻️ ",
+          },
+          revert: {
+            description: "Reverts a previous commit",
+            title: "Reverts",
+            emoji: "⏪",
+          },
+        },
+      },
+    },
+  },
+  parserPreset: {
+    parserOpts: gitmoji.parserPreset.parserOpts,
+    plugins: [gitmoji.parserPreset.plugins],
+  },
+  ...gitmoji.rules,
+  ...gitmoji.plugins
+} as UserConfig
 ```
 
+```json
+.czrc
+
+{
+  "path": "@commitlint/cz-commitlint",
+  "useGitmojis": true
+}
+
+```
 ### Try it out
 
 ```bash
