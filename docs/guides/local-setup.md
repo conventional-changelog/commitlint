@@ -81,9 +81,9 @@ echo "yarn commitlint \${1}" > .husky/commit-msg
 pnpm add --save-dev husky
 
 # husky@v9
-pnpm husky init
+pnpm dlx husky init
 # husky@v8 or lower
-pnpm husky install
+pnpm dlx husky install
 
 # Add commit message linting to commit-msg hook
 echo "pnpm dlx commitlint --edit \$1" > .husky/commit-msg
