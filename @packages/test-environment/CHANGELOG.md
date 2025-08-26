@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.9.0](https://github.com/conventional-changelog/commitlint/compare/v19.8.1...v19.9.0) (2025-08-26)
+
+
+### Bug Fixes
+
+* update dependency jest-environment-node to v30 ([#4448](https://github.com/conventional-changelog/commitlint/issues/4448)) ([42ca849](https://github.com/conventional-changelog/commitlint/commit/42ca849db3581bb5b7f1bbbcd0dfeda912566e5d))
+
+
+
+
+
 ## [19.8.1](https://github.com/conventional-changelog/commitlint/compare/v19.8.0...v19.8.1) (2025-05-08)
 
 **Note:** Version bump only for package vitest-environment-commitlint

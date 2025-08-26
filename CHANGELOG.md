@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.9.0](https://github.com/conventional-changelog/commitlint/compare/v19.8.1...v19.9.0) (2025-08-26)
+
+
+### Bug Fixes
+
+* update dependency jest-environment-node to v30 ([#4448](https://github.com/conventional-changelog/commitlint/issues/4448)) ([42ca849](https://github.com/conventional-changelog/commitlint/commit/42ca849db3581bb5b7f1bbbcd0dfeda912566e5d))
+* update dependency jest-environment-node to v30.0.2 ([#4469](https://github.com/conventional-changelog/commitlint/issues/4469)) ([4da7e43](https://github.com/conventional-changelog/commitlint/commit/4da7e43be4134cbc01f847f82ef438fdfcc6dda9))
+* update dependency tar-fs to v3.0.10 ([#4461](https://github.com/conventional-changelog/commitlint/issues/4461)) ([f02c47c](https://github.com/conventional-changelog/commitlint/commit/f02c47c669055f3ce6f0f4ba553d4a5ed4e1ee57))
+* update dependency tar-fs to v3.0.9 ([#4421](https://github.com/conventional-changelog/commitlint/issues/4421)) ([0650e03](https://github.com/conventional-changelog/commitlint/commit/0650e03d960eb904c40a3faf4c8d24415807bbdd))
+* update dependency tar-fs to v3.1.0 ([#4496](https://github.com/conventional-changelog/commitlint/issues/4496)) ([31b4f72](https://github.com/conventional-changelog/commitlint/commit/31b4f72d2fdca5094b1325bdac7bcd5c5693c423))
+
+
+### Features
+
+* **config-pnpm-scopes:** migrate package to TypeScript ([#4541](https://github.com/conventional-changelog/commitlint/issues/4541)) ([6ae36ea](https://github.com/conventional-changelog/commitlint/commit/6ae36ea5a55d7736024461ec6af94a14b821acc4))
+
+
+### Reverts
+
+* Revert "chore: update dependency cross-env to v10 (#4528)" (#4529) ([b5bfd12](https://github.com/conventional-changelog/commitlint/commit/b5bfd125140c5a7a6bcdefb9c3d22b7c13e3ea17)), closes [#4528](https://github.com/conventional-changelog/commitlint/issues/4528) [#4529](https://github.com/conventional-changelog/commitlint/issues/4529)
+
+
+
+
+
 ## [19.8.1](https://github.com/conventional-changelog/commitlint/compare/v19.8.0...v19.8.1) (2025-05-08)
 
 
