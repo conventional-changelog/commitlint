@@ -1,28 +1,31 @@
 import path from "node:path";
 
 import fg from "fast-glob";
-import readYamlFile from "read-yaml-file";
+import readYamlFileModule from "read-yaml-file";
 import { readExactProjectManifest } from "@pnpm/read-project-manifest";
+const readYamlFile = readYamlFileModule.default;
 
 export default {
 	utils: { getProjects },
 	rules: {
-		"scope-enum": (ctx) =>
-			getProjects(ctx).then((packages) => [2, "always", packages]),
+		"scope-enum": (ctx = {}) =>
+			getProjects(ctx).then((packages: any) => [2, "always", packages]),
 	},
 };
 
-function requirePackagesManifest(dir) {
-	return readYamlFile(path.join(dir, "pnpm-workspace.yaml")).catch((err) => {
-		if (err.code === "ENOENT") {
-			return null;
-		}
+function requirePackagesManifest(dir: any) {
+	return readYamlFile(path.join(dir, "pnpm-workspace.yaml")).catch(
+		(err: any) => {
+			if (err.code === "ENOENT") {
+				return null;
+			}
 
-		throw err;
-	});
+			throw err;
+		},
+	);
 }
 
-function normalizePatterns(patterns) {
+function normalizePatterns(patterns: any) {
 	const normalizedPatterns = [];
 	for (const pattern of patterns) {
 		normalizedPatterns.push(pattern.replace(/\/?$/, "/package.json"));
@@ -32,9 +35,9 @@ function normalizePatterns(patterns) {
 	return normalizedPatterns;
 }
 
-function findWorkspacePackages(cwd) {
+function findWorkspacePackages(cwd: any) {
 	return requirePackagesManifest(cwd)
-		.then((manifest) => {
+		.then((manifest: any) => {
 			const patterns = normalizePatterns(
 				(manifest && manifest.packages) || ["**"],
 			);
@@ -45,27 +48,29 @@ function findWorkspacePackages(cwd) {
 
 			return fg(patterns, opts);
 		})
-		.then((entries) => {
+		.then((entries: any) => {
 			const paths = Array.from(
-				new Set(entries.map((entry) => path.join(cwd, entry))),
+				new Set(entries.map((entry: any) => path.join(cwd, entry))),
 			);
 
 			return Promise.all(
-				paths.map((manifestPath) => readExactProjectManifest(manifestPath)),
+				paths.map((manifestPath: any) =>
+					readExactProjectManifest(manifestPath),
+				),
 			);
 		})
-		.then((manifests) => {
-			return manifests.map((manifest) => manifest.manifest);
+		.then((manifests: any) => {
+			return manifests.map((manifest: any) => manifest.manifest);
 		});
 }
 
-function getProjects(context) {
+function getProjects(context: any) {
 	const ctx = context || {};
 	const cwd = ctx.cwd || process.cwd();
 
-	return findWorkspacePackages(cwd).then((projects) => {
+	return findWorkspacePackages(cwd).then((projects: any) => {
 		return projects
-			.reduce((projects, project) => {
+			.reduce((projects: any, project: any) => {
 				const name = project.name;
 
 				if (name) {
