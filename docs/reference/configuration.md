@@ -21,7 +21,7 @@
 
 The file is expected
 
-- to contain valid JavaScript / Typescript
+- to contain valid JavaScript / TypeScript
 - export a configuration object
 - adhere to the schema outlined below
 
@@ -105,9 +105,9 @@ export default Configuration;
 > module.exports = Configuration;
 > ```
 
-### Typescript configuration
+### TypeScript configuration
 
-Configuration can also be a typescript file.
+Configuration can also be a TypeScript file.
 
 Relevant types and enums can be imported from `@commitlint/types`.
 
