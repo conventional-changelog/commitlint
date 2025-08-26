@@ -3,11 +3,14 @@
   "type": "module",
   "version": "19.8.1",
   "description": "Shareable commitlint config enforcing pnpm workspaces names as scopes",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "index.js"
+    "dist"
   ],
   "scripts": {
+    "build": "tsc",
+    "test": "jest",
     "deps": "dep-check",
     "pkg": "pkg-check"
   },
@@ -38,7 +41,9 @@
   },
   "devDependencies": {
     "@commitlint/test": "^19.8.1",
-    "@commitlint/utils": "^19.8.1"
+    "@commitlint/utils": "^19.8.1",
+    "typescript": "^5.2.2",
+    "@types/node": "^18.19.17"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }
