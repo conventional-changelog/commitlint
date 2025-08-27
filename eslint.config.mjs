@@ -1,13 +1,14 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import {createTypeScriptImportResolver} from 'eslint-import-resolver-typescript';
-import jest from 'eslint-plugin-jest';
-import {importX} from 'eslint-plugin-import-x';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import vitest from '@vitest/eslint-plugin';
+import { importX } from 'eslint-plugin-import-x';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
-import {FlatCompat} from '@eslint/eslintrc';
+import { FlatCompat } from '@eslint/eslintrc';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,18 +27,15 @@ export default [
 	{
 		plugins: {
 			'@typescript-eslint': typescriptEslint,
-			jest,
 		},
-
 		settings: {
 			'import-x/resolver-next': createTypeScriptImportResolver(),
 		},
-
 		languageOptions: {
 			globals: {
 				...globals.node,
+				...vitest.environments.env.globals
 			},
-
 			ecmaVersion: 11,
 			sourceType: 'module',
 
@@ -47,7 +45,6 @@ export default [
 				},
 			},
 		},
-
 		rules: {
 			'import-x/first': 'error',
 			'import-x/no-absolute-path': 'error',
@@ -55,7 +52,6 @@ export default [
 			'import-x/no-mutable-exports': 'error',
 			'import-x/no-named-default': 'error',
 			'import-x/no-self-import': 'error',
-
 			'import-x/no-extraneous-dependencies': [
 				'error',
 				{
@@ -76,11 +72,9 @@ export default [
 		})),
 	{
 		files: ['**/*.cts', '**/*.ts'],
-
 		languageOptions: {
 			parser: tsParser,
 		},
-
 		rules: {
 			'@typescript-eslint/no-unused-vars': 'off',
 			'@typescript-eslint/no-use-before-define': 'off',
@@ -94,19 +88,18 @@ export default [
 			'no-var': 'off',
 		},
 	},
-	...compat.extends('plugin:jest/recommended').map((config) => ({
-		...config,
-		files: ['**/*.test.ts', '**/*.test.js'],
-	})),
 	{
 		files: ['**/*.test.ts', '**/*.test.js'],
-
+		plugins: {
+			vitest,
+		},
 		rules: {
+			...vitest.configs.recommended.rules,
+			'vitest/max-nested-describe': ['error', { max: 3 }],
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-var-requires': 'off',
 			'import-x/first': 'off',
 			'import-x/no-extraneous-dependencies': 'off',
-			'jest/no-deprecated-functions': 'off',
 		},
 	},
 ];
