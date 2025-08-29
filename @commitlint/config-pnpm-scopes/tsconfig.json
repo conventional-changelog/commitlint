@@ -1,13 +1,11 @@
 {
+  "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "node16",
-    "declaration": true,
-    "outDir": "dist",
-    "rootDir": ".",
-    "strict": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node16"
+    "composite": true,
+    "rootDir": "./",
+    "outDir": "./dist"
   },
-  "include": ["*.ts"]
+  "include": ["*.ts"],
+  "exclude": ["./dist/**/*"],
+  "references": [{ "path": "../types" }]
 }
