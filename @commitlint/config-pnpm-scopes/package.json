@@ -45,5 +45,12 @@
     "@types/node": "^18.19.17",
     "typescript": "^5.2.2"
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }

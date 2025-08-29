@@ -1,13 +1,13 @@
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import {createTypeScriptImportResolver} from 'eslint-import-resolver-typescript';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import jest from 'eslint-plugin-jest';
-import {importX} from 'eslint-plugin-import-x';
+import { importX } from 'eslint-plugin-import-x';
 import globals from 'globals';
 import tsParser from '@typescript-eslint/parser';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+import { fileURLToPath } from 'node:url';
 import js from '@eslint/js';
-import {FlatCompat} from '@eslint/eslintrc';
+import { FlatCompat } from '@eslint/eslintrc';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +19,7 @@ const compat = new FlatCompat({
 
 export default [
 	{
-		ignores: ['**/lib/', '**/coverage/', '**/node_modules/', '**/fixtures/'],
+		ignores: ['**/lib/', '**/coverage/', '**/node_modules/', '**/fixtures/', '**/dist/'],
 	},
 	importX.flatConfigs.typescript,
 	...compat.extends('eslint:recommended', 'prettier'),
