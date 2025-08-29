@@ -8,6 +8,7 @@ RUN yarn install --frozen-lockfile --network-timeout 100000 && \
     # Commit lint CLI packages
     npm pack @commitlint/cli && \
     npm pack @commitlint/config-validator && \
+    npm pack @commitlint/config-pnpm-scopes && \
     npm pack @commitlint/config-nx-scopes && \
     npm pack @commitlint/ensure && \
     npm pack @commitlint/execute-rule && \

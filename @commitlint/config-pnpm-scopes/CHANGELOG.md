@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [19.9.1](https://github.com/conventional-changelog/commitlint/compare/v19.9.0...v19.9.1) (2025-08-29)
+
+
+### Bug Fixes
+
+* add TypeScript support and configuration for pnpm scopes ([#4544](https://github.com/conventional-changelog/commitlint/issues/4544)) ([ea75778](https://github.com/conventional-changelog/commitlint/commit/ea75778e8d32c932d85062902456cd821e471fdd))
+
+
+
+
+
 # [19.9.0](https://github.com/conventional-changelog/commitlint/compare/v19.8.1...v19.9.0) (2025-08-26)
 
 

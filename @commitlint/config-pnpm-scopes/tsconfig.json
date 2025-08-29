@@ -1,12 +1,11 @@
 {
+  "extends": "../../tsconfig.shared.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "CommonJS",
-    "declaration": true,
-    "outDir": "dist",
-    "rootDir": "/",
-    "strict": true,
-    "esModuleInterop": true
+    "composite": true,
+    "rootDir": "./",
+    "outDir": "./dist"
   },
-  "include": ["/"]
+  "include": ["*.ts"],
+  "exclude": ["./dist/**/*"],
+  "references": [{ "path": "../types" }]
 }
