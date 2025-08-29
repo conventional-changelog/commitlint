@@ -1,5 +1,5 @@
-import { describe, test, expect } from "vitest";
 import { RuleConfigSeverity } from "@commitlint/types";
+import { describe, expect, test } from "vitest";
 
 import { setPromptConfig } from "../store/prompts.js";
 import { setRules } from "../store/rules.js";
@@ -252,6 +252,276 @@ describe("enum list", () => {
 		expect(enumList?.[0]).toBe("core");
 		expect(enumList?.[1]).toBe("lint");
 		expect(enumList?.[2]).toBe("cli");
+	});
+
+	test("should format enum items with emojis and descriptions, ensuring consistent spacing", () => {
+		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					enum: {
+						feat: {
+							description: "Features",
+							emoji: "✨",
+						},
+						fix: {
+							description: "Bug fixes",
+							emoji: "🐛",
+						},
+						chore: {
+							description: "Chore",
+							emoji: "♻️",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "✨  feat:    Features",
+				value: "feat",
+				short: "feat",
+			},
+			{
+				name: "🐛  fix:     Bug fixes",
+				value: "fix",
+				short: "fix",
+			},
+			{
+				name: "♻️  chore:   Chore",
+				value: "chore",
+				short: "chore",
+			},
+		]);
+	});
+
+	test("should handle custom alignment for emoji and description with extra space", () => {
+		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					enum: {
+						feat: {
+							description: "Features",
+							emoji: "✨ ",
+						},
+						fix: {
+							description: "Bug fixes",
+							emoji: "🐛  ",
+						},
+						chore: {
+							description: "Chore",
+							emoji: "♻️   ",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "✨   feat:    Features",
+				value: "feat",
+				short: "feat",
+			},
+			{
+				name: "🐛    fix:     Bug fixes",
+				value: "fix",
+				short: "fix",
+			},
+			{
+				name: "♻️     chore:   Chore",
+				value: "chore",
+				short: "chore",
+			},
+		]);
+	});
+
+	test("should handle inconsistent emoji usage by using 4 blank spaces as a prefix", () => {
+		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					enum: {
+						feat: {
+							description: "Features",
+							emoji: "✨",
+						},
+						fix: {
+							description: "Bug fixes",
+						},
+						chore: {
+							description: "Chore",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "✨  feat:    Features",
+				value: "feat",
+				short: "feat",
+			},
+			{
+				name: "    fix:     Bug fixes",
+				value: "fix",
+				short: "fix",
+			},
+			{
+				name: "    chore:   Chore",
+				value: "chore",
+				short: "chore",
+			},
+		]);
+	});
+
+	test("should handle no enums having emojis correctly", () => {
+		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					enum: {
+						feat: {
+							description: "Features",
+						},
+						fix: {
+							description: "Bug fixes",
+						},
+						chore: {
+							description: "Chore",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "feat:    Features",
+				value: "feat",
+				short: "feat",
+			},
+			{
+				name: "fix:     Bug fixes",
+				value: "fix",
+				short: "fix",
+			},
+			{
+				name: "chore:   Chore",
+				value: "chore",
+				short: "chore",
+			},
+		]);
+	});
+
+	test("should include the emoji in the value when `emojiInHeader` is true", () => {
+		const ENUM_RULE_LIST = ["feat", "fix"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					emojiInHeader: true,
+					enum: {
+						feat: {
+							description: "Features",
+							emoji: "✨",
+						},
+						fix: {
+							description: "Bug fixes",
+							emoji: "🐛",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "✨  feat:   Features",
+				value: "✨ feat",
+				short: "feat",
+			},
+			{
+				name: "🐛  fix:    Bug fixes",
+				value: "🐛 fix",
+				short: "fix",
+			},
+		]);
+	});
+
+	test("should trim empty spaces from emoji in the answer", () => {
+		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					emojiInHeader: true,
+					enum: {
+						feat: {
+							description: "Features",
+							emoji: "✨ ",
+						},
+						fix: {
+							description: "Bug fixes",
+							emoji: "🐛  ",
+						},
+						chore: {
+							description: "Chore",
+							emoji: "♻️   ",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "✨   feat:    Features",
+				value: "✨ feat",
+				short: "feat",
+			},
+			{
+				name: "🐛    fix:     Bug fixes",
+				value: "🐛 fix",
+				short: "fix",
+			},
+			{
+				name: "♻️     chore:   Chore",
+				value: "♻️ chore",
+				short: "chore",
+			},
+		]);
 	});
 });
 
