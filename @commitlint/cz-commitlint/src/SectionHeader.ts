@@ -27,14 +27,21 @@ export class HeaderQuestion extends Question {
 }
 
 export function combineCommitMessage(answers: Answers): string {
-	const { type = "", scope = "", subject = "" } = answers;
-	const prefix = `${type}${scope ? `(${scope})` : ""}`;
+    const { type = "", scope = "", subject = "" } = answers;
 
-	if (subject) {
-		return ((prefix ? prefix + ": " : "") + subject).trim();
-	} else {
-		return prefix.trim();
-	}
+    const questions = getQuestions();
+
+    const emoji = questions
+        .find(item => item.type === 'list' && item.name === 'type')?.choices
+        ?.find(choice => choice.value === type)?.emoji;
+
+    const prefix = `${emoji?.trim()} ${type}${scope ? `(${scope})` : ""}`;
+    if (subject) {
+        return ((prefix ? prefix + ": " : "") + subject).trim();
+    }
+    else {
+        return prefix.trim();
+    }
 }
 
 export function getQuestions(): Array<DistinctQuestion> {
@@ -80,4 +87,22 @@ export function getQuestionConfig(
 	}
 
 	return questionConfig;
+}
+
+export function getEmojis() {
+    const headerRuleQuestionConfig = getRuleQuestionConfig("header");
+
+    if (!headerRuleQuestionConfig) {
+        return [];
+    }
+
+    const emojis = headerRuleQuestionConfig?.enumList?.map(item => {
+        if (typeof item === 'object') {
+            return { value: item.value, emoji: item.emoji || '' };
+        }
+
+        return { value: item, emoji: null };
+    })
+
+   return emojis || [];
 }

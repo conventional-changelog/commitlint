@@ -43,19 +43,24 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 			);
 			// TODO emoji + title
 			enumList = enumRuleList
-				.sort((a, b) => enumNames.indexOf(a) - enumNames.indexOf(b))
-				.map((enumName) => {
-					const enumDescription = enumDescriptions[enumName]?.description;
-					if (enumDescription) {
-						return {
-							name: `${enumName}:`.padEnd(longest + 4) + enumDescription,
-							value: enumName,
-							short: enumName,
-						};
-					} else {
-						return enumName;
-					}
-				});
+                .sort((a, b) => enumNames.indexOf(a) - enumNames.indexOf(b))
+                .map((enumName) => {
+                    const enumDescription = enumDescriptions[enumName]?.description;
+                    const emoji = enumDescriptions[enumName]?.emoji ? enumDescriptions[enumName].emoji : '';
+
+                    if (enumDescription) {
+                        return {
+                            name: `${emoji} ${enumName}:`.padEnd(longest + 8) + enumDescription,
+                            value: enumName,
+                            short: enumName,
+                            emoji: emoji || null
+                        };
+                    }
+                    else {
+                        return enumName;
+                    }
+                }
+            );
 		} else {
 			enumList = [...enumRuleList];
 		}
