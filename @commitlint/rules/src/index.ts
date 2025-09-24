@@ -1,3 +1,4 @@
+import { breakingChangeExclamationMark } from "./breaking-change-exclamation-mark.js";
 import { bodyCase } from "./body-case.js";
 import { bodyEmpty } from "./body-empty.js";
 import { bodyFullStop } from "./body-full-stop.js";
@@ -36,6 +37,7 @@ import { typeMaxLength } from "./type-max-length.js";
 import { typeMinLength } from "./type-min-length.js";
 
 export default {
+	"breaking-change-exclamation-mark": breakingChangeExclamationMark,
 	"body-case": bodyCase,
 	"body-empty": bodyEmpty,
 	"body-full-stop": bodyFullStop,

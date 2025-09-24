@@ -1,5 +1,19 @@
 # Rules
 
+## breaking-change-exclamation-mark
+
+- **condition**: Either both or neither `header` has an exclamation mark before the `:` marker
+  and `footer` matches the regular expression `BREAKING[ -]CHANGE:`
+- **rule**: `always`
+
+> [!NOTE]
+>
+> This rule enforces that breaking changes are marked by both a `!` in the header
+> and `BREAKING CHANGE` in the footer. The behavior is that of an XNOR operation:
+>
+> - It passes when either both are present or both are not.
+> - It fails when one is present and the other is not.
+
 ## body-full-stop
 
 - **condition**: `body` ends with `value`
