@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/rules",
   "type": "module",
-  "version": "19.8.1",
+  "version": "20.0.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,17 +36,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^19.8.1",
-    "@commitlint/test": "^19.8.1",
-    "@commitlint/utils": "^19.8.1",
+    "@commitlint/parse": "^20.0.0",
+    "@commitlint/test": "^20.0.0",
+    "@commitlint/utils": "^20.0.0",
     "conventional-changelog-angular": "^7.0.0",
     "glob": "^10.3.10"
   },
   "dependencies": {
-    "@commitlint/ensure": "^19.8.1",
-    "@commitlint/message": "^19.8.1",
-    "@commitlint/to-lines": "^19.8.1",
-    "@commitlint/types": "^19.8.1"
+    "@commitlint/ensure": "^20.0.0",
+    "@commitlint/message": "^20.0.0",
+    "@commitlint/to-lines": "^20.0.0",
+    "@commitlint/types": "^20.0.0"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }

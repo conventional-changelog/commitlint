@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-pnpm-scopes",
   "type": "module",
-  "version": "19.9.1",
+  "version": "20.0.0",
   "description": "Shareable commitlint config enforcing pnpm workspaces names as scopes",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -40,8 +40,8 @@
     "read-yaml-file": "^2.1.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^19.8.1",
-    "@commitlint/utils": "^19.8.1",
+    "@commitlint/test": "^20.0.0",
+    "@commitlint/utils": "^20.0.0",
     "@types/node": "^18.19.17",
     "typescript": "^5.2.2"
   },

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.0.0](https://github.com/conventional-changelog/commitlint/compare/v19.9.1...v20.0.0) (2025-09-25)
+
+
+### Bug Fixes
+
+* update dependency tar-fs to v3.1.1 [security] ([#4550](https://github.com/conventional-changelog/commitlint/issues/4550)) ([273a43e](https://github.com/conventional-changelog/commitlint/commit/273a43e359fc04b7b8f4b4949ec7ecc07718b786))
+
+
+* feat(rules)!: make body-max-line-length ignore lines with URLs (#4486) ([2f37a88](https://github.com/conventional-changelog/commitlint/commit/2f37a886be4b07bcd8e1126cc6a13256e7b6cc37)), closes [#4486](https://github.com/conventional-changelog/commitlint/issues/4486)
+
+
+### BREAKING CHANGES
+
+* when lines contain URLs exceeding the maximum
+line length `body-max-line-length` will be ignored
+
+
+
+
+
 ## [19.9.1](https://github.com/conventional-changelog/commitlint/compare/v19.9.0...v19.9.1) (2025-08-29)
 
 
