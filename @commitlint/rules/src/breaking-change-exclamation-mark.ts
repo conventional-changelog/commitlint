@@ -16,8 +16,9 @@ export const breakingChangeExclamationMark: SyncRule = (
 		return [true];
 	}
 
-	const hasExclamationMark = !!header && /!:/.test(header);
-	const hasBreakingChange = !!footer && /BREAKING[ -]CHANGE:/.test(footer);
+	const hasExclamationMark =
+		!!header && /^(\w*)(?:\((.*)\))?!: (.*)$/.test(header);
+	const hasBreakingChange = !!footer && /^BREAKING[ -]CHANGE:/m.test(footer);
 
 	const negated = when === "never";
 	const check = hasExclamationMark === hasBreakingChange;
