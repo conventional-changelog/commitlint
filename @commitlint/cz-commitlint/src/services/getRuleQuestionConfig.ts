@@ -35,23 +35,41 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 
 	if (enumRuleList) {
 		const enumDescriptions = questionSettings?.["enum"];
+		const emojiInHeader = questionSettings?.emojiInHeader;
 
 		if (enumDescriptions) {
 			const enumNames = Object.keys(enumDescriptions);
 			const longest = Math.max(
 				...enumRuleList.map((enumName) => enumName.length),
 			);
-			// TODO emoji + title
+			const firstHasEmoji =
+				(enumDescriptions[enumNames[0]]?.emoji?.length ?? 0) > 0;
+			const hasConsistentEmojiUsage = !enumRuleList.some(
+				(enumName) =>
+					(enumDescriptions[enumName]?.emoji?.length ?? 0) > 0 !==
+					firstHasEmoji,
+			);
 			enumList = enumRuleList
 				.sort((a, b) => enumNames.indexOf(a) - enumNames.indexOf(b))
 				.map((enumName) => {
 					const enumDescription = enumDescriptions[enumName]?.description;
 					if (enumDescription) {
-						return {
-							name: `${enumName}:`.padEnd(longest + 4) + enumDescription,
-							value: enumName,
-							short: enumName,
-						};
+						const emoji = enumDescriptions[enumName]?.emoji;
+
+						const emojiPrefix = emoji
+							? `${emoji}  `
+							: hasConsistentEmojiUsage
+								? ""
+								: "    ";
+
+						const paddedName = `${enumName}:`.padEnd(longest + 4);
+
+						const name = `${emojiPrefix}${paddedName}${enumDescription}`;
+
+						const value =
+							emojiInHeader && emoji ? `${emoji.trim()} ${enumName}` : enumName;
+
+						return { name, value, short: enumName };
 					} else {
 						return enumName;
 					}

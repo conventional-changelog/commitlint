@@ -34,6 +34,7 @@ export type PromptConfig = {
 						emoji?: string;
 					};
 				};
+				emojiInHeader?: boolean;
 			}
 		>
 	>;
