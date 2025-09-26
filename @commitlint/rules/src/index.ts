@@ -1,3 +1,4 @@
+import { breakingChangeExclamationMark } from "./breaking-change-exclamation-mark.js";
 import { bodyCase } from "./body-case.js";
 import { bodyEmpty } from "./body-empty.js";
 import { bodyFullStop } from "./body-full-stop.js";
@@ -43,6 +44,7 @@ export default {
 	"body-max-length": bodyMaxLength,
 	"body-max-line-length": bodyMaxLineLength,
 	"body-min-length": bodyMinLength,
+	"breaking-change-exclamation-mark": breakingChangeExclamationMark,
 	"footer-empty": footerEmpty,
 	"footer-leading-blank": footerLeadingBlank,
 	"footer-max-length": footerMaxLength,
@@ -62,10 +64,10 @@ export default {
 	"signed-off-by": signedOffBy,
 	"subject-case": subjectCase,
 	"subject-empty": subjectEmpty,
+	"subject-exclamation-mark": subjectExclamationMark,
 	"subject-full-stop": subjectFullStop,
 	"subject-max-length": subjectMaxLength,
 	"subject-min-length": subjectMinLength,
-	"subject-exclamation-mark": subjectExclamationMark,
 	"trailer-exists": trailerExists,
 	"type-case": typeCase,
 	"type-empty": typeEmpty,
