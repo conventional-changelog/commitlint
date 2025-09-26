@@ -37,7 +37,6 @@ import { typeMaxLength } from "./type-max-length.js";
 import { typeMinLength } from "./type-min-length.js";
 
 export default {
-	"breaking-change-exclamation-mark": breakingChangeExclamationMark,
 	"body-case": bodyCase,
 	"body-empty": bodyEmpty,
 	"body-full-stop": bodyFullStop,
@@ -45,6 +44,7 @@ export default {
 	"body-max-length": bodyMaxLength,
 	"body-max-line-length": bodyMaxLineLength,
 	"body-min-length": bodyMinLength,
+	"breaking-change-exclamation-mark": breakingChangeExclamationMark,
 	"footer-empty": footerEmpty,
 	"footer-leading-blank": footerLeadingBlank,
 	"footer-max-length": footerMaxLength,
@@ -64,10 +64,10 @@ export default {
 	"signed-off-by": signedOffBy,
 	"subject-case": subjectCase,
 	"subject-empty": subjectEmpty,
+	"subject-exclamation-mark": subjectExclamationMark,
 	"subject-full-stop": subjectFullStop,
 	"subject-max-length": subjectMaxLength,
 	"subject-min-length": subjectMinLength,
-	"subject-exclamation-mark": subjectExclamationMark,
 	"trailer-exists": trailerExists,
 	"type-case": typeCase,
 	"type-empty": typeEmpty,
