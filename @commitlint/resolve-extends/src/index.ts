@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
@@ -9,24 +10,15 @@ import resolveFrom_ from "resolve-from";
 import { validateConfig } from "@commitlint/config-validator";
 import type { ParserPreset, UserConfig } from "@commitlint/types";
 
-// Check if Node.js version supports 'with' syntax (22+)
-// Node.js < 22 supports 'assert'
-// Node.js >= 22 uses 'with' (assert was removed in 22)
-const supportsWithSyntax = () => {
-	const [major] = process.version.replace("v", "").split(".").map(Number);
-	return major >= 22;
-};
-
 const dynamicImport = async <T>(id: string): Promise<T> => {
-	const fileUrl = path.isAbsolute(id) ? pathToFileURL(id).toString() : id;
-	const isJsonFile = fileUrl.endsWith(".json");
+	if (id.endsWith(".json")) {
+		const require = createRequire(import.meta.url);
+		return require(id);
+	}
 
-	const imported = isJsonFile
-		? supportsWithSyntax()
-			? await import(fileUrl, { with: { type: "json" } })
-			: await import(fileUrl, { assert: { type: "json" } })
-		: await import(fileUrl);
-
+	const imported = await import(
+		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
+	);
 	return ("default" in imported && imported.default) || imported;
 };
 
