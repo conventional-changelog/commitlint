@@ -51,11 +51,11 @@ test("scope-enum has expected modifier", async () => {
 	expect(modifier).toBe("always");
 });
 
-test("returns empty value for empty pnpm repository", async () => {
+test("returns global scope for empty pnpm repository", async () => {
 	const { "scope-enum": fn } = config.rules;
 	const cwd = await npm.bootstrap("fixtures/empty", __dirname);
 	const [, , value] = await fn({ cwd });
-	expect(value).toEqual([]);
+	expect(value).toEqual(["global"]);
 });
 
 test("returns expected value for basic pnpm repository", async () => {
@@ -63,7 +63,7 @@ test("returns expected value for basic pnpm repository", async () => {
 	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
 
 	const [, , value] = await fn({ cwd });
-	expect(value).toEqual(["a", "b"]);
+	expect(value).toEqual(["a", "b", "global"]);
 });
 
 test("returns expected value for scoped pnpm repository", async () => {
@@ -72,5 +72,5 @@ test("returns expected value for scoped pnpm repository", async () => {
 
 	const [, , value] = await fn({ cwd });
 
-	expect(value).toEqual(["a", "b"]);
+	expect(value).toEqual(["a", "b", "global"]);
 });

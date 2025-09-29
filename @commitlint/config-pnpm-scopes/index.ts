@@ -69,16 +69,17 @@ function getProjects(context: any) {
 	const cwd = ctx.cwd || process.cwd();
 
 	return findWorkspacePackages(cwd).then((projects: any) => {
-		return projects
-			.reduce((projects: any, project: any) => {
-				const name = project.name;
+		const scopes = projects.reduce((acc: any, project: any) => {
+			const name = project.name;
 
-				if (name) {
-					projects.push(name.charAt(0) === "@" ? name.split("/")[1] : name);
-				}
+			if (name) {
+				acc.add(name.charAt(0) === "@" ? name.split("/")[1] : name);
+			}
 
-				return projects;
-			}, [])
-			.sort();
+			return acc;
+		}, new Set());
+		scopes.add("global");
+
+		return Array.from(scopes).sort();
 	});
 }
