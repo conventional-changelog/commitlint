@@ -1,3 +1,4 @@
+import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
@@ -10,6 +11,11 @@ import { validateConfig } from "@commitlint/config-validator";
 import type { ParserPreset, UserConfig } from "@commitlint/types";
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
+	if (id.endsWith(".json")) {
+		const require = createRequire(import.meta.url);
+		return require(id);
+	}
+
 	const imported = await import(
 		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
 	);
