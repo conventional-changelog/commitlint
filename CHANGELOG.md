@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.1.0](https://github.com/conventional-changelog/commitlint/compare/v20.0.0...v20.1.0) (2025-09-30)
+
+
+### Bug Fixes
+
+* **resolve-extends:** add import attribute for JSON config files ([#4551](https://github.com/conventional-changelog/commitlint/issues/4551)) ([82936c9](https://github.com/conventional-changelog/commitlint/commit/82936c90a2845b4f5721eef3c71d6183416d5b78))
+
+
+### Features
+
+* **config-pnpm-scopes:** allow global scope ([#4553](https://github.com/conventional-changelog/commitlint/issues/4553)) ([e571970](https://github.com/conventional-changelog/commitlint/commit/e57197061447eb9ea74b8d81ab003ad3b4652be6))
+
+
+
+
+
 # [20.0.0](https://github.com/conventional-changelog/commitlint/compare/v19.9.1...v20.0.0) (2025-09-25)
 
 

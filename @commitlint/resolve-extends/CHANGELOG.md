@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.1.0](https://github.com/conventional-changelog/commitlint/compare/v20.0.0...v20.1.0) (2025-09-30)
+
+
+### Bug Fixes
+
+* **resolve-extends:** add import attribute for JSON config files ([#4551](https://github.com/conventional-changelog/commitlint/issues/4551)) ([82936c9](https://github.com/conventional-changelog/commitlint/commit/82936c90a2845b4f5721eef3c71d6183416d5b78))
+
+
+
+
+
 # [20.0.0](https://github.com/conventional-changelog/commitlint/compare/v19.9.1...v20.0.0) (2025-09-25)
 
 **Note:** Version bump only for package @commitlint/resolve-extends

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.1.0](https://github.com/conventional-changelog/commitlint/compare/v20.0.0...v20.1.0) (2025-09-30)
+
+
+### Features
+
+* **config-pnpm-scopes:** allow global scope ([#4553](https://github.com/conventional-changelog/commitlint/issues/4553)) ([e571970](https://github.com/conventional-changelog/commitlint/commit/e57197061447eb9ea74b8d81ab003ad3b4652be6))
+
+
+
+
+
 # [20.0.0](https://github.com/conventional-changelog/commitlint/compare/v19.9.1...v20.0.0) (2025-09-25)
 
 **Note:** Version bump only for package @commitlint/config-pnpm-scopes
