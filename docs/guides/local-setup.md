@@ -42,7 +42,7 @@ echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 echo "npx --no -- commitlint --edit `$1" > .husky/commit-msg
 ```
 
-As an alternative you can create a script inside `package.json`
+As an alternative you can create a script inside `package.json` or `deno.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
@@ -65,7 +65,7 @@ echo "yarn commitlint --edit \$1" > .husky/commit-msg
 echo "yarn commitlint --edit `$1" > .husky/commit-msg
 ```
 
-As an alternative you can create a script inside `package.json`
+As an alternative you can create a script inside `package.json` or `deno.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
@@ -91,7 +91,7 @@ echo "pnpm dlx commitlint --edit \$1" > .husky/commit-msg
 echo "pnpm dlx commitlint --edit `$1" > .husky/commit-msg
 ```
 
-As an alternative you can create a script inside `package.json`
+As an alternative you can create a script inside `package.json` or `deno.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
