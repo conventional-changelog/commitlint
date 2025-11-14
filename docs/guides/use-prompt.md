@@ -1,5 +1,9 @@
 # Guide: Use prompt
 
+> [!WARNING]
+> Prompt is currently unmaintained  
+> Some things might not work as expected
+
 `@commitlint/prompt-cli` helps with fast authoring of commit messages and ensures they adhere to the commit convention configured in `commitlint.config.js`.
 
 ## Install
@@ -111,7 +115,7 @@ deno task commit
 
 :::
 
-## An alternative to `@commitlint/prompt-cli`: commitizen
+# An alternative to `@commitlint/prompt-cli`: commitizen
 
 Another way to author commit messages that adhere to the commit convention configured in `commitlint.config.js` is to use `commitizen`.
 For more information, checkout their [official website](http://commitizen.github.io/cz-cli/).
