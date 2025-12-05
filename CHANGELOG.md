@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.2.0](https://github.com/conventional-changelog/commitlint/compare/v20.1.0...v20.2.0) (2025-12-05)
+
+
+### Bug Fixes
+
+* update dependency glob to v11 [security] ([#4561](https://github.com/conventional-changelog/commitlint/issues/4561)) ([a89a08b](https://github.com/conventional-changelog/commitlint/commit/a89a08b2fd3c72a6cd09e00508fc2e972f27c64c))
+
+
+### Features
+
+* **cz-commitlint:** support customizable commit prompt with emojis ([#4540](https://github.com/conventional-changelog/commitlint/issues/4540)) ([803c05b](https://github.com/conventional-changelog/commitlint/commit/803c05b6d722676ed499585ed713d185d1670462))
+* **lint:** update ESLint configuration to use Vitest and remove Jest plugin ([#4542](https://github.com/conventional-changelog/commitlint/issues/4542)) ([63e7ad4](https://github.com/conventional-changelog/commitlint/commit/63e7ad4e47d36ce7c58e793e7c587378f3d01082))
+* **rules:** add breaking-change-exclamation-mark ([#4548](https://github.com/conventional-changelog/commitlint/issues/4548)) ([c4d419b](https://github.com/conventional-changelog/commitlint/commit/c4d419bc76aab72092f1ebd7c0922729a576b7a5)), closes [#4547](https://github.com/conventional-changelog/commitlint/issues/4547)
+
+
+
+
+
 # [20.1.0](https://github.com/conventional-changelog/commitlint/compare/v20.0.0...v20.1.0) (2025-09-30)
 
 

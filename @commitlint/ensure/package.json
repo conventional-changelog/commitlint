@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/ensure",
   "type": "module",
-  "version": "20.0.0",
+  "version": "20.2.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -45,7 +45,7 @@
     "glob": "^11.0.0"
   },
   "dependencies": {
-    "@commitlint/types": "^20.0.0",
+    "@commitlint/types": "^20.2.0",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.snakecase": "^4.1.1",

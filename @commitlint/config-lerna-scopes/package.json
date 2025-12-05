@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-lerna-scopes",
   "type": "module",
-  "version": "20.0.0",
+  "version": "20.2.0",
   "description": "Shareable commitlint config enforcing lerna package and workspace names as scopes",
   "main": "index.js",
   "files": [
@@ -40,7 +40,7 @@
     "node": ">=v18"
   },
   "dependencies": {
-    "@commitlint/config-workspace-scopes": "^20.0.0",
+    "@commitlint/config-workspace-scopes": "^20.2.0",
     "fast-glob": "^3.3.3"
   },
   "devDependencies": {

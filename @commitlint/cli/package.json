@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/cli",
   "type": "module",
-  "version": "20.1.0",
+  "version": "20.2.0",
   "description": "Lint your commit messages",
   "files": [
     "index.cjs",
@@ -48,11 +48,11 @@
     "lodash.merge": "^4.6.2"
   },
   "dependencies": {
-    "@commitlint/format": "^20.0.0",
-    "@commitlint/lint": "^20.0.0",
-    "@commitlint/load": "^20.1.0",
-    "@commitlint/read": "^20.0.0",
-    "@commitlint/types": "^20.0.0",
+    "@commitlint/format": "^20.2.0",
+    "@commitlint/lint": "^20.2.0",
+    "@commitlint/load": "^20.2.0",
+    "@commitlint/read": "^20.2.0",
+    "@commitlint/types": "^20.2.0",
     "tinyexec": "^1.0.0",
     "yargs": "^17.0.0"
   },

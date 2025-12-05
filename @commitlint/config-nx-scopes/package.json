@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-nx-scopes",
   "type": "module",
-  "version": "20.0.0",
+  "version": "20.2.0",
   "description": "Shareable commitlint config enforcing nx project names as scopes",
   "main": "index.js",
   "files": [
@@ -40,7 +40,7 @@
     "node": ">=v18"
   },
   "dependencies": {
-    "@commitlint/types": "^20.0.0"
+    "@commitlint/types": "^20.2.0"
   },
   "devDependencies": {
     "@commitlint/test": "^20.0.0",
