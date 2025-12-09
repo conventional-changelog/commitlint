@@ -4,18 +4,29 @@ import { TargetCaseType, SyncRule } from "@commitlint/types";
 
 const negated = (when?: string) => when === "never";
 
-export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
-	parsed,
-	when = "always",
-	value = [],
-) => {
+export const scopeCase: SyncRule<
+	| TargetCaseType
+	| TargetCaseType[]
+	| {
+			cases: TargetCaseType[];
+			delimiters?: string[];
+	  }
+> = (parsed, when = "always", value = []) => {
 	const { scope } = parsed;
 
 	if (!scope) {
 		return [true];
 	}
+	const isObjectBasedConfiguration =
+		!Array.isArray(value) && !(typeof value === "string");
 
-	const checks = (Array.isArray(value) ? value : [value]).map((check) => {
+	const checks = (
+		isObjectBasedConfiguration
+			? value.cases
+			: Array.isArray(value)
+				? value
+				: [value]
+	).map((check) => {
 		if (typeof check === "string") {
 			return {
 				when: "always",
@@ -25,14 +36,22 @@ export const scopeCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 		return check;
 	});
 
-	// Scopes may contain slash or comma delimiters to separate them and mark them as individual segments.
-	// This means that each of these segments should be tested separately with `ensure`.
-	const delimiters = /\/|\\|, ?/g;
-	const scopeSegments = scope.split(delimiters);
+	const delimiters =
+		isObjectBasedConfiguration && value.delimiters?.length
+			? value.delimiters
+			: ["/", "\\", ","];
+	const delimiterPatterns = delimiters.map((delimiter) => {
+		return delimiter === ","
+			? ", ?"
+			: delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	});
+	const delimiterRegex = new RegExp(delimiterPatterns.join("|"));
+	const scopeSegments = scope.split(delimiterRegex);
 
 	const result = checks.some((check) => {
 		const r = scopeSegments.every(
-			(segment) => delimiters.test(segment) || ensureCase(segment, check.case),
+			(segment) =>
+				delimiterRegex.test(segment) || ensureCase(segment, check.case),
 		);
 
 		return negated(check.when) ? !r : r;

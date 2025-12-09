@@ -18,6 +18,7 @@ import { headerMinLength } from "./header-min-length.js";
 import { headerTrim } from "./header-trim.js";
 import { referencesEmpty } from "./references-empty.js";
 import { scopeCase } from "./scope-case.js";
+import { scopeDelimiterStyle } from "./scope-delimiter-style.js";
 import { scopeEmpty } from "./scope-empty.js";
 import { scopeEnum } from "./scope-enum.js";
 import { scopeMaxLength } from "./scope-max-length.js";
@@ -57,6 +58,7 @@ export default {
 	"header-trim": headerTrim,
 	"references-empty": referencesEmpty,
 	"scope-case": scopeCase,
+	"scope-delimiter-style": scopeDelimiterStyle,
 	"scope-empty": scopeEmpty,
 	"scope-enum": scopeEnum,
 	"scope-max-length": scopeMaxLength,

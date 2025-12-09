@@ -17,6 +17,11 @@ const messagesByScope = {
 		empty: "foo: baz",
 		superfluous: "foo(): baz",
 	},
+	objectBaseConfiguration: {
+		pipeDelimiter: "foo(bar|baz): qux",
+		asteriskDelimiter: "foo(bar*baz): qux",
+		multipleCustomDelimiters: "foo(bar|baz/qux*xyz): qux",
+	},
 };
 
 const { single, multiple, none } = messagesByScope;
@@ -202,6 +207,98 @@ describe("Scope Enum Validation", () => {
 				expect(actual).toBeFalsy();
 				expect(message).toEqual("scope must not be one of [bar/baz]");
 			});
+		});
+	});
+
+	describe("Object-based configuration", () => {
+		test("Supports object value with default delimiters (/, \\ or ,)", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["multipleCommaSpace"]),
+				"always",
+				{
+					scopes: ["bar", "baz"],
+				},
+			);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must be one of [bar, baz]");
+		});
+
+		test("Supports custom single delimiter", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["pipeDelimiter"]),
+				"always",
+				{
+					scopes: ["bar", "baz"],
+					delimiters: ["|"],
+				},
+			);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must be one of [bar, baz]");
+		});
+
+		test("Supports multiple custom delimiters", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["multipleCustomDelimiters"]),
+				"always",
+				{
+					scopes: ["bar", "baz", "qux", "xyz"],
+					delimiters: ["|", "/", "*"],
+				},
+			);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must be one of [bar, baz, qux, xyz]");
+		});
+
+		test("Fails when any scope segment is not in enum with custom delimiter", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["pipeDelimiter"]),
+				"always",
+				{
+					scopes: ["bar", "qux"],
+					delimiters: ["|"],
+				},
+			);
+			expect(actual).toBe(false);
+			expect(error).toEqual("scope must be one of [bar, qux]");
+		});
+
+		test("Falls back to default delimiters when delimiters is an empty array", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["multipleSlash"]),
+				"always",
+				{
+					scopes: ["bar", "baz"],
+					delimiters: [],
+				},
+			);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must be one of [bar, baz]");
+		});
+
+		test("Uses object value for 'never' with custom delimiter", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["pipeDelimiter"]),
+				"never",
+				{
+					scopes: ["bar", "baz"],
+					delimiters: ["|"],
+				},
+			);
+			expect(actual).toBe(false);
+			expect(error).toEqual("scope must not be one of [bar, baz]");
+		});
+
+		test("Handles special characters in delimiters", async () => {
+			const [actual, error] = scopeEnum(
+				await parse(messages["asteriskDelimiter"]),
+				"always",
+				{
+					scopes: ["bar", "baz"],
+					delimiters: ["*"],
+				},
+			);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must be one of [bar, baz]");
 		});
 	});
 });

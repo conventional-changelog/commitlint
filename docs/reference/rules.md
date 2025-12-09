@@ -219,6 +219,32 @@
   ];
   ```
 
+- extended value (object based)
+
+  ```js
+  {
+    cases: ["kebab-case"],
+    delimiters: ["/"]
+  }
+  ```
+
+  - `cases` — list of allowed case formats
+  - `delimiters` — optional list of delimiter strings used to split multi-segment scopes (default: `["/", "\", ","]`)
+
+## scope-delimiter-style
+
+- **condition**: all delimiters found in `scope` must match `value`
+- **rule**: `always`
+- **value**
+
+  ```text
+    ["/", "\", ","]
+  ```
+
+> [!NOTE]
+>
+> - When using this rule together with [scope-enum](#scope-enum) or [scope-case](#scope-case), make sure to provide the same `delimiters` configuration in those rules as well. Otherwise scope parsing may become inconsistent.
+
 ## scope-empty
 
 - **condition**: `scope` is empty
@@ -233,6 +259,18 @@
   ```text
   []
   ```
+
+- extended value (object based)
+
+  ```js
+  {
+    scopes: ["foo", "bar"],
+    delimiters: ["/"]
+  }
+  ```
+
+  - `scopes` — list of allowed scope values
+  - `delimiters` — optional list of delimiter strings used to split multi-segment scopes (default: `["/", "\", ","]`)
 
 > [!NOTE]
 >
