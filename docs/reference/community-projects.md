@@ -15,3 +15,4 @@ If you want to add a project to this list [open a pull request](https://github.c
 - [commitlint plugin function rules](https://github.com/vidavidorra/commitlint-plugin-function-rules) - use functions as rule value to create rules based on commit messages, with regular expressions and more
 - [commitlint-plugin-selective-scope](https://github.com/ridvanaltun/commitlint-plugin-selective-scope) - limit scopes per type with regular expressions and plain text
 - [commitlint-gitlab-ci](https://gitlab.com/dmoonfire/commitlint-gitlab-ci/) - a small wrapper around `commitlint` for working with the quirks of Gitlab's CI without failing jobs
+- [committier](https://github.com/iamyoki/committier) - fix and format commit messages
