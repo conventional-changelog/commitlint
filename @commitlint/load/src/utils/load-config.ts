@@ -58,12 +58,15 @@ export async function loadConfig(
 			// files supported by TypescriptLoader
 			`.${moduleName}rc.ts`,
 			`.${moduleName}rc.cts`,
+			`.${moduleName}rc.mts`,
 			`${moduleName}.config.ts`,
 			`${moduleName}.config.cts`,
+			`${moduleName}.config.mts`,
 		],
 		loaders: {
 			".ts": tsLoader,
 			".cts": tsLoader,
+			".mts": tsLoader,
 			".cjs": loaders[".cjs"],
 			".js": loaders[".js"],
 		},

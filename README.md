@@ -107,11 +107,13 @@ These can be modified by [your own configuration](#config).
   - `.commitlintrc.mjs`
   - `.commitlintrc.ts`
   - `.commitlintrc.cts`
+  - `.commitlintrc.mts`
   - `commitlint.config.js`
   - `commitlint.config.cjs`
   - `commitlint.config.mjs`
   - `commitlint.config.ts`
   - `commitlint.config.cts`
+  - `commitlint.config.mts`
   - `commitlint` field in `package.json`
   - `commitlint` field in [`package.yaml`](https://github.com/pnpm/pnpm/pull/1799)
 - Packages: [cli](./@commitlint/cli), [core](./@commitlint/core)
