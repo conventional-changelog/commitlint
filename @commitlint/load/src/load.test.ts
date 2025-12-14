@@ -240,6 +240,8 @@ describe.each([["basic"], ["extends"]])("%s config", (template) => {
 		"commitlint.config.cjs",
 		"commitlint.config.js",
 		"commitlint.config.mjs",
+		"commitlint.config.mts",
+		"commitlint.config.cts",
 		"package.json",
 		"package.yaml",
 		".commitlintrc",
@@ -247,17 +249,21 @@ describe.each([["basic"], ["extends"]])("%s config", (template) => {
 		".commitlintrc.js",
 		".commitlintrc.json",
 		".commitlintrc.mjs",
+		".commitlintrc.mts",
+		".commitlintrc.cts",
 		".commitlintrc.yml",
 		".commitlintrc.yaml",
 	];
 
 	const configTestCases = [
 		...configFiles
-			.filter((filename) => !filename.endsWith(".mjs"))
+			.filter(
+				(filename) => !filename.endsWith(".mjs") && !filename.endsWith(".mts"),
+			)
 			.map((filename) => ({ filename, isEsm: false })),
 		...configFiles
 			.filter((filename) =>
-				[".mjs", ".js"].some((ext) => filename.endsWith(ext)),
+				[".mjs", ".js", ".mts"].some((ext) => filename.endsWith(ext)),
 			)
 			.map((filename) => ({ filename, isEsm: true })),
 	];

@@ -13,11 +13,13 @@
 - `.commitlintrc.mjs`
 - `.commitlintrc.ts`
 - `.commitlintrc.cts`
+- `.commitlintrc.mts`
 - `commitlint.config.js`
 - `commitlint.config.cjs`
 - `commitlint.config.mjs`
 - `commitlint.config.ts`
 - `commitlint.config.cts`
+- `commitlint.config.mts`
 
 The file is expected
 
