@@ -23,5 +23,10 @@ async function searchDotGit(cwd?: string) {
 	const foundFile = await findUp(".git", { cwd, type: "file" });
 	const foundDir = await findUp(".git", { cwd, type: "directory" });
 
+	if (foundFile && foundDir) {
+		// Return whichever is deeper (closer to cwd) by comparing path lengths
+		return foundFile.length > foundDir.length ? foundFile : foundDir;
+	}
+
 	return foundFile || foundDir;
 }
