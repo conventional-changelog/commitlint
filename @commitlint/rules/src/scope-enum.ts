@@ -2,21 +2,31 @@ import * as ensure from "@commitlint/ensure";
 import message from "@commitlint/message";
 import { SyncRule } from "@commitlint/types";
 
-export const scopeEnum: SyncRule<string[]> = (
-	{ scope },
-	when = "always",
-	value = [],
-) => {
-	if (!scope || !value.length) {
+export const scopeEnum: SyncRule<
+	| string[]
+	| {
+			scopes: string[];
+			delimiters?: string[];
+	  }
+> = ({ scope }, when = "always", value = []) => {
+	const scopes = Array.isArray(value) ? value : value.scopes;
+
+	if (!scope || !scopes.length) {
 		return [true, ""];
 	}
 
-	// Scopes may contain slash or comma delimiters to separate them and mark them as individual segments.
-	// This means that each of these segments should be tested separately with `ensure`.
-	const delimiters = /\/|\\|, ?/g;
-	const messageScopes = scope.split(delimiters);
-	const errorMessage = ["scope must", `be one of [${value.join(", ")}]`];
-	const isScopeInEnum = (scope: string) => ensure.enum(scope, value);
+	const delimiters =
+		Array.isArray(value) || !value.delimiters?.length
+			? ["/", "\\", ","]
+			: value.delimiters;
+	const delimiterPatterns = delimiters.map((delimiter) => {
+		return delimiter === ","
+			? ", ?"
+			: delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+	});
+	const messageScopes = scope.split(new RegExp(delimiterPatterns.join("|")));
+	const errorMessage = ["scope must", `be one of [${scopes.join(", ")}]`];
+	const isScopeInEnum = (scope: string) => ensure.enum(scope, scopes);
 	let isValid;
 
 	if (when === "never") {

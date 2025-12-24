@@ -322,3 +322,64 @@ test('with slash in subject should succeed for "always sentence case"', async ()
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
+
+test("with object-based configuration should use default delimiters", async () => {
+	const commit = await parse("feat(scope/my-scope, shared-scope): subject");
+	const [actual] = scopeCase(commit, "always", {
+		cases: ["kebab-case"],
+	});
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with object-based configuration should support custom single delimiter", async () => {
+	const commit = await parse("feat(scope|my-scope): subject");
+	const [actual] = scopeCase(commit, "always", {
+		cases: ["kebab-case"],
+		delimiters: ["|"],
+	});
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with object-based configuration should support multiple custom delimiters", async () => {
+	const commit = await parse(
+		"feat(scope|my-scope/shared-scope,common-scope): subject",
+	);
+	const [actual] = scopeCase(commit, "always", {
+		cases: ["kebab-case"],
+		delimiters: ["|", "/", ","],
+	});
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with object-based configuration should fall back to default delimiters when empty array provided", async () => {
+	const commit = await parse("feat(scope/my-scope): subject");
+	const [actual] = scopeCase(commit, "always", {
+		cases: ["kebab-case"],
+		delimiters: [],
+	});
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with object-based configuration should handle special delimiters", async () => {
+	const commit = await parse("feat(scope*my-scope): subject");
+	const [actual] = scopeCase(commit, "always", {
+		cases: ["kebab-case"],
+		delimiters: ["*"],
+	});
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with object-based configuration should respect "never" when custom delimiter is used', async () => {
+	const commit = await parse("feat(scope|my-scope): subject");
+	const [actual] = scopeCase(commit, "never", {
+		cases: ["kebab-case"],
+		delimiters: ["|"],
+	});
+	const expected = false;
+	expect(actual).toEqual(expected);
+});

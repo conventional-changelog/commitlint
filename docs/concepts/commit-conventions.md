@@ -18,9 +18,6 @@ footer?
 
 ## Multiple scopes
 
-Commitlint supports multiple scopes.  
-Current delimiter options are:
+Commitlint supports multiple scopes. Segments may be separated using delimiters (default: `/`, `\`, `,`).
 
-- "/"
-- "\\"
-- ","
+The set of allowed delimiters can be customized via the [scope-delimiter-style](/reference/rules.html#scope-delimiter-style) rule.
