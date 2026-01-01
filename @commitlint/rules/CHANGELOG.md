@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.3.0](https://github.com/conventional-changelog/commitlint/compare/v20.2.0...v20.3.0) (2026-01-01)
+
+
+### Features
+
+* **rules:** add scope-delimiter-style ([#4580](https://github.com/conventional-changelog/commitlint/issues/4580)) ([fc4849a](https://github.com/conventional-changelog/commitlint/commit/fc4849a4b91f52821d23ad58ed0363369df56aa5))
+
+
+
+
+
 # [20.2.0](https://github.com/conventional-changelog/commitlint/compare/v20.1.0...v20.2.0) (2025-12-05)
 
 

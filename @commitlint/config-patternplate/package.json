@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-patternplate",
   "type": "module",
-  "version": "20.2.0",
+  "version": "20.3.0",
   "description": "Lint your commits, patternplate-style",
   "main": "index.js",
   "files": [
@@ -32,7 +32,7 @@
     "node": ">=v18"
   },
   "dependencies": {
-    "@commitlint/config-angular": "^20.2.0",
+    "@commitlint/config-angular": "^20.3.0",
     "glob": "^11.0.0",
     "lodash.merge": "^4.6.2"
   },

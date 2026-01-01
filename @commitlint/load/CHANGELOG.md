@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.3.0](https://github.com/conventional-changelog/commitlint/compare/v20.2.0...v20.3.0) (2026-01-01)
+
+
+### Features
+
+* add support for .mts config file ([#4581](https://github.com/conventional-changelog/commitlint/issues/4581)) ([66e05ab](https://github.com/conventional-changelog/commitlint/commit/66e05abc34dd33bed7b5d1830328bc8740b71eaa))
+
+
+
+
+
 # [20.2.0](https://github.com/conventional-changelog/commitlint/compare/v20.1.0...v20.2.0) (2025-12-05)
 
 **Note:** Version bump only for package @commitlint/load
