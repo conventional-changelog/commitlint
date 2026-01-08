@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/config-conventional",
   "type": "module",
-  "version": "20.3.0",
+  "version": "20.3.1",
   "description": "Shareable commitlint config enforcing conventional commits",
   "main": "lib/index.js",
   "files": [
@@ -35,11 +35,11 @@
     "node": ">=v18"
   },
   "devDependencies": {
-    "@commitlint/lint": "^20.3.0",
+    "@commitlint/lint": "^20.3.1",
     "@commitlint/utils": "^20.0.0"
   },
   "dependencies": {
-    "@commitlint/types": "^20.2.0",
+    "@commitlint/types": "^20.3.1",
     "conventional-changelog-conventionalcommits": "^7.0.2"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
