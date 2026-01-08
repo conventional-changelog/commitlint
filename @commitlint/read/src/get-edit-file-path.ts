@@ -1,6 +1,8 @@
 import path from "node:path";
-import { Stats } from "node:fs";
-import fs from "fs/promises";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 
 // Get path to recently edited commit message file
 export async function getEditFilePath(
@@ -11,16 +13,12 @@ export async function getEditFilePath(
 		return path.resolve(top, edit);
 	}
 
-	const dotgitPath = path.join(top, ".git");
-	const dotgitStats: Stats = await fs.lstat(dotgitPath);
-
-	if (dotgitStats.isDirectory()) {
-		return path.join(top, ".git/COMMIT_EDITMSG");
-	}
-
-	const gitFile: string = await fs.readFile(dotgitPath, {
-		encoding: "utf-8",
+	// Use git rev-parse --git-dir to get the correct git directory
+	// This handles worktrees, submodules, and regular repositories correctly
+	const { stdout } = await execFileAsync("git", ["rev-parse", "--git-dir"], {
+		cwd: top,
 	});
-	const relativeGitPath = gitFile.replace("gitdir: ", "").replace("\n", "");
-	return path.resolve(top, relativeGitPath, "COMMIT_EDITMSG");
+
+	const gitDir = stdout.trim();
+	return path.resolve(top, gitDir, "COMMIT_EDITMSG");
 }
