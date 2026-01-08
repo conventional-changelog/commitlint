@@ -1,8 +1,10 @@
 import { test, expect } from "vitest";
 import fs from "fs/promises";
+import fsExtra from "fs-extra";
 import path from "node:path";
 import { git } from "@commitlint/test";
 import { x } from "tinyexec";
+import tmp from "tmp";
 
 import read from "./read.js";
 
@@ -149,4 +151,50 @@ test("should not read any commits when there are no tags", async () => {
 	const result = await read({ cwd, fromLastTag: true });
 
 	expect(result).toHaveLength(0);
+});
+
+test("get edit commit message from git worktree", async () => {
+	const tmpDir = tmp.dirSync({ keep: false, unsafeCleanup: true });
+	const mainRepoDir = path.join(tmpDir.name, "main");
+	const worktreeDir = path.join(tmpDir.name, "worktree");
+
+	// Initialize main repo
+	await fsExtra.mkdirp(mainRepoDir);
+	await x("git", ["init"], { nodeOptions: { cwd: mainRepoDir } });
+	await x("git", ["config", "user.email", "test@example.com"], {
+		nodeOptions: { cwd: mainRepoDir },
+	});
+	await x("git", ["config", "user.name", "test"], {
+		nodeOptions: { cwd: mainRepoDir },
+	});
+	await x("git", ["config", "commit.gpgsign", "false"], {
+		nodeOptions: { cwd: mainRepoDir },
+	});
+
+	// Create initial commit in main repo
+	await fs.writeFile(path.join(mainRepoDir, "file.txt"), "content");
+	await x("git", ["add", "."], { nodeOptions: { cwd: mainRepoDir } });
+	await x("git", ["commit", "-m", "initial"], {
+		nodeOptions: { cwd: mainRepoDir },
+	});
+
+	// Create a branch and worktree
+	await x("git", ["branch", "worktree-branch"], {
+		nodeOptions: { cwd: mainRepoDir },
+	});
+	await x("git", ["worktree", "add", worktreeDir, "worktree-branch"], {
+		nodeOptions: { cwd: mainRepoDir },
+	});
+
+	// Make a commit in the worktree
+	await fs.writeFile(path.join(worktreeDir, "worktree-file.txt"), "worktree");
+	await x("git", ["add", "."], { nodeOptions: { cwd: worktreeDir } });
+	await x("git", ["commit", "-m", "worktree commit"], {
+		nodeOptions: { cwd: worktreeDir },
+	});
+
+	// Read the edit commit message from the worktree
+	const expected = ["worktree commit\n\n"];
+	const actual = await read({ edit: true, cwd: worktreeDir });
+	expect(actual).toEqual(expected);
 });

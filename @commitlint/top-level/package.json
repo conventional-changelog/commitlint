@@ -36,7 +36,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^20.0.0"
+    "@commitlint/utils": "^20.0.0",
+    "@types/fs-extra": "^11.0.3",
+    "@types/tmp": "^0.2.5",
+    "fs-extra": "^11.0.0",
+    "tmp": "^0.2.1"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }
