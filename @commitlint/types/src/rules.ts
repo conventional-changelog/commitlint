@@ -88,6 +88,10 @@ export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
 	string[]
 >;
+export type ObjectRuleConfig<
+	V = RuleConfigQuality.User,
+	T = Record<string, unknown>,
+> = RuleConfig<V, T>;
 
 export type RulesConfig<V = RuleConfigQuality.User> = {
 	"body-case": CaseRuleConfig<V>;
@@ -109,9 +113,14 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	"header-min-length": LengthRuleConfig<V>;
 	"header-trim": RuleConfig<V>;
 	"references-empty": RuleConfig<V>;
-	"scope-case": CaseRuleConfig<V>;
+	"scope-case":
+		| CaseRuleConfig<V>
+		| ObjectRuleConfig<V, { cases: TargetCaseType[]; delimiters?: string[] }>;
+	"scope-delimiter-style": EnumRuleConfig<V>;
 	"scope-empty": RuleConfig<V>;
-	"scope-enum": EnumRuleConfig<V>;
+	"scope-enum":
+		| EnumRuleConfig<V>
+		| ObjectRuleConfig<V, { scopes: string[]; delimiters?: string[] }>;
 	"scope-max-length": LengthRuleConfig<V>;
 	"scope-min-length": LengthRuleConfig<V>;
 	"signed-off-by": RuleConfig<V, string>;
