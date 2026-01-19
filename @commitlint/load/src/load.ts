@@ -15,7 +15,7 @@ import {
 	QualifiedRules,
 	UserConfig,
 } from "@commitlint/types";
-import isPlainObject from "lodash.isplainobject";
+import isPlainObject from "is-plain-obj";
 import merge from "lodash.merge";
 import uniq from "lodash.uniq";
 
