@@ -4,10 +4,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fix, git } from "@commitlint/test";
 import fs from "fs-extra";
-import merge from "lodash.merge";
+import deepmerge from "@fastify/deepmerge";
 import { x } from "tinyexec";
 import { ExitCode } from "./cli-error.js";
 
+const merge = deepmerge();
 const require = createRequire(import.meta.url);
 
 const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");

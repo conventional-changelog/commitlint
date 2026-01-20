@@ -41,11 +41,10 @@
   "devDependencies": {
     "@commitlint/test": "^20.0.0",
     "@commitlint/utils": "^20.0.0",
-    "@types/lodash.merge": "^4.6.8",
+    "@fastify/deepmerge": "^3.1.0",
     "@types/node": "^18.19.17",
     "@types/yargs": "^17.0.29",
-    "fs-extra": "^11.0.0",
-    "lodash.merge": "^4.6.2"
+    "fs-extra": "^11.0.0"
   },
   "dependencies": {
     "@commitlint/format": "^20.3.1",

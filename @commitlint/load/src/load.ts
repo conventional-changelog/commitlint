@@ -16,11 +16,13 @@ import {
 	UserConfig,
 } from "@commitlint/types";
 import isPlainObject from "is-plain-obj";
-import merge from "lodash.merge";
+import deepmerge from "@fastify/deepmerge";
 
 import { loadConfig } from "./utils/load-config.js";
 import { loadParserOpts } from "./utils/load-parser-opts.js";
 import loadPlugin from "./utils/load-plugin.js";
+
+const merge = deepmerge({ all: true });
 
 /**
  * formatter should be kept as is when unable to resolve it from config directory

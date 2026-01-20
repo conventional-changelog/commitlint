@@ -2,7 +2,9 @@ import path from "node:path";
 
 import configAngular from "@commitlint/config-angular";
 import { glob } from "glob";
-import merge from "lodash.merge";
+import deepmerge from "@fastify/deepmerge";
+
+const merge = deepmerge();
 
 function pathToId(root, filePath) {
 	const relativePath = path.relative(root, filePath);
