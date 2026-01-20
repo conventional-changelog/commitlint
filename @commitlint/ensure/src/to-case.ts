@@ -1,11 +1,6 @@
 import { TargetCaseType } from "@commitlint/types";
-import {
-	toCamelCase,
-	toKebabCase,
-	toSnakeCase,
-	toPascalCase,
-	toTitleCase,
-} from "kasi";
+import { toKebabCase, toSnakeCase, toPascalCase, toTitleCase } from "kasi";
+import toCamelCase from "camelcase";
 
 export default function toCase(input: string, target: TargetCaseType): string {
 	switch (target) {
