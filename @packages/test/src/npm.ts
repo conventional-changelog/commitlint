@@ -37,8 +37,22 @@ export async function installModules(cwd: string) {
 								sourcePath = path.join(sourceModulesPath, segments[0]);
 							}
 						}
-					} catch (e) {
-						// Ignore
+					} catch (e: unknown) {
+						// Only silently ignore expected MODULE_NOT_FOUND errors
+						if (
+							e &&
+							typeof e === "object" &&
+							"code" in e &&
+							(e as any).code === "MODULE_NOT_FOUND"
+						) {
+							// Expected: package not found via require.resolve
+						} else {
+							console.warn(
+								"Unexpected error while resolving dependency:",
+								dependency,
+								e,
+							);
+						}
 					}
 				}
 

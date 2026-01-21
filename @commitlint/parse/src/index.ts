@@ -14,9 +14,9 @@ const defaultParser: Parser = (message, options) => {
 	}
 	const parser = new CommitParser(options);
 	const result = parser.parse(message);
-	result.scope = result.scope || null;
-	result.subject = result.subject || null;
-	result.type = result.type || null;
+	result.scope = result.scope ?? null;
+	result.subject = result.subject ?? null;
+	result.type = result.type ?? null;
 	return result;
 };
 
@@ -27,7 +27,7 @@ export async function parse(
 ): Promise<Commit> {
 	const preset = await defaultChangelogOpts();
 	const defaultOpts = preset.parser || preset.parserOpts;
-	// Handle both v7 (flat options) and v8 (nested under 'parser' key) preset structures
+	// Support user-provided parser options passed either flat or nested under a 'parser' key
 	const userOpts = (parserOpts as any)?.parser || parserOpts || {};
 	const opts = {
 		...defaultOpts,
