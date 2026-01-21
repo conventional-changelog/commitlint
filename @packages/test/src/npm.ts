@@ -43,7 +43,6 @@ export async function installModules(cwd: string) {
 				}
 
 				if (!sourcePath) {
-					console.error(`Debug: Failed to resolve ${dependency}`);
 					throw new Error(`Could not resolve dependency ${dependency}`);
 				}
 

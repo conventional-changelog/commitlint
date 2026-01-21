@@ -27,10 +27,12 @@ export async function parse(
 ): Promise<Commit> {
 	const preset = await defaultChangelogOpts();
 	const defaultOpts = preset.parser || preset.parserOpts;
+	// Handle both v7 (flat options) and v8 (nested under 'parser' key) preset structures
+	const userOpts = (parserOpts as any)?.parser || parserOpts || {};
 	const opts = {
 		...defaultOpts,
 		fieldPattern: null,
-		...(parserOpts || {}),
+		...userOpts,
 	};
 	const parsed = parser(message, opts) as Commit;
 	parsed.raw = message;
