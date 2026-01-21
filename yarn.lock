@@ -3280,6 +3280,13 @@ conventional-commits-parser@^5.0.0:
     meow "^12.0.1"
     split2 "^4.0.0"
 
+conventional-commits-parser@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.npmjs.org/conventional-commits-parser/-/conventional-commits-parser-6.2.1.tgz#855e53c4792b1feaf93649eff5d75e0dbc2c63ad"
+  integrity sha512-20pyHgnO40rvfI0NGF/xiEoFMkXDtkF8FwHvk5BokoFoCuTQRI8vrNCNFWUOfuolKJMm1tPCHc8GgYEtr1XRNA==
+  dependencies:
+    meow "^13.0.0"
+
 conventional-recommended-bump@7.0.1:
   version "7.0.1"
   resolved "https://registry.npmjs.org/conventional-recommended-bump/-/conventional-recommended-bump-7.0.1.tgz#ec01f6c7f5d0e2491c2d89488b0d757393392424"
@@ -5533,6 +5540,11 @@ meow@^12.0.1:
   version "12.1.1"
   resolved "https://registry.npmjs.org/meow/-/meow-12.1.1.tgz#e558dddbab12477b69b2e9a2728c327f191bace6"
   integrity sha512-BhXM0Au22RwUneMPwSCnyhTOizdWoIEPU9sp0Aqa1PnDMR5Wv2FGXYDjuzJEIX+Eo2Rb8xuYe5jrnm5QowQFkw==
+
+meow@^13.0.0:
+  version "13.2.0"
+  resolved "https://registry.npmjs.org/meow/-/meow-13.2.0.tgz#6b7d63f913f984063b3cc261b6e8800c4cd3474f"
+  integrity sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==
 
 meow@^8.1.2:
   version "8.1.2"
