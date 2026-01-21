@@ -86,22 +86,10 @@ function findParentPath(
 	parentPath: string,
 	dirname: string,
 ): string | undefined {
-	const rawFragments = parentPath.split(path.sep);
-
-	const { matched, fragments } = rawFragments.reduceRight(
-		({ fragments, matched }, item) => {
-			if (item === dirname && !matched) {
-				return { fragments, matched: true };
-			}
-
-			if (!matched && fragments.length > 0) {
-				fragments.pop();
-			}
-
-			return { fragments, matched };
-		},
-		{ fragments: rawFragments, matched: false },
-	);
-
-	return matched ? fragments.join(path.sep) : undefined;
+	const parts = parentPath.split(path.sep);
+	const idx = parts.lastIndexOf(dirname);
+	if (idx >= 0) {
+		return parts.slice(0, idx + 1).join(path.sep);
+	}
+	return undefined;
 }
