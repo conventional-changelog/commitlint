@@ -26,7 +26,7 @@ export async function parse(
 	parserOpts?: ParserOptions,
 ): Promise<Commit> {
 	const preset = await defaultChangelogOpts();
-	const defaultOpts = preset.parserOpts;
+	const defaultOpts = preset.parser || preset.parserOpts;
 	const opts = {
 		...defaultOpts,
 		fieldPattern: null,

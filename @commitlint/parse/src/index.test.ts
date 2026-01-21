@@ -146,7 +146,7 @@ test("ignores comments", async () => {
 	// @ts-expect-error -- no typings
 	const changelogOpts = await import("conventional-changelog-angular");
 	const opts = {
-		...changelogOpts.parserOpts,
+		...changelogOpts.parser,
 		commentChar: "#",
 	};
 	const actual = await parse(message, undefined, opts);
@@ -162,7 +162,7 @@ test("registers inline #", async () => {
 	// @ts-expect-error -- no typings
 	const changelogOpts = await import("conventional-changelog-angular");
 	const opts = {
-		...changelogOpts.parserOpts,
+		...changelogOpts.parser,
 		commentChar: "#",
 	};
 	const actual = await parse(message, undefined, opts);

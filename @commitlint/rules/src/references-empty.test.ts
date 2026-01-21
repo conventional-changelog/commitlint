@@ -15,19 +15,18 @@ const messages = {
 
 const opts = (async () => {
 	const o = await preset();
-	o.parserOpts.commentChar = "#";
+	o.parser.commentChar = "#";
 	return o;
 })();
 
 const parsed = {
-	plain: (async () =>
-		parse(messages.plain, undefined, (await opts).parserOpts))(),
+	plain: (async () => parse(messages.plain, undefined, (await opts).parser))(),
 	comment: (async () =>
-		parse(messages.comment, undefined, (await opts).parserOpts))(),
+		parse(messages.comment, undefined, (await opts).parser))(),
 	reference: (async () =>
-		parse(messages.reference, undefined, (await opts).parserOpts))(),
+		parse(messages.reference, undefined, (await opts).parser))(),
 	references: (async () =>
-		parse(messages.references, undefined, (await opts).parserOpts))(),
+		parse(messages.references, undefined, (await opts).parser))(),
 	prefix: parse(messages.prefix, undefined, {
 		issuePrefixes: ["REF-"],
 	}),
