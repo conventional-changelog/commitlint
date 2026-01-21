@@ -236,14 +236,14 @@ test("uses permissive default regex without parser opts", async () => {
 	const message = "chore(component,demo): bump";
 	const actual = await parse(message);
 
-	expect(actual.scope).toBe(null);
+	expect(actual.scope).toBe("component,demo");
 });
 
 test("uses permissive default regex with other parser opts", async () => {
 	const message = "chore(component,demo): bump";
 	const actual = await parse(message, undefined, { commentChar: "#" });
 
-	expect(actual.scope).toBe(null);
+	expect(actual.scope).toBe("component,demo");
 });
 
 test("uses restrictive default regex in passed parser opts", async () => {
@@ -260,8 +260,8 @@ test("works with chinese scope by default", async () => {
 	const message = "fix(面试评价): 测试";
 	const actual = await parse(message, undefined, { commentChar: "#" });
 
-	expect(actual.subject).toBe(null);
-	expect(actual.scope).toBe(null);
+	expect(actual.subject).not.toBe(null);
+	expect(actual.scope).not.toBe(null);
 });
 
 test("does not work with chinese scopes with incompatible pattern", async () => {

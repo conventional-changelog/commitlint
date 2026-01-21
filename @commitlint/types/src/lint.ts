@@ -1,4 +1,4 @@
-import type { Options } from "conventional-commits-parser";
+import type { ParserOptions as Options } from "conventional-commits-parser";
 import { IsIgnoredOptions } from "./is-ignored.js";
 import { PluginRecords } from "./load.js";
 import { RuleConfigSeverity, RuleConfigTuple } from "./rules.js";
