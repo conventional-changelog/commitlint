@@ -22,7 +22,26 @@ import { loadConfig } from "./utils/load-config.js";
 import { loadParserOpts } from "./utils/load-parser-opts.js";
 import loadPlugin from "./utils/load-plugin.js";
 
-const merge = deepmerge({ all: true });
+const merge = deepmerge({
+	all: true,
+	mergeArray:
+		({ clone, deepmerge: defaultMerge }) =>
+		(target, source) => {
+			const newArray = clone(source);
+
+			for (let i = 0; i < target.length; i++) {
+				const targetKey = target[i];
+				const sourceKey = source[i];
+
+				newArray[i] =
+					sourceKey === undefined
+						? clone(targetKey)
+						: defaultMerge(targetKey, sourceKey);
+			}
+
+			return newArray;
+		},
+});
 
 /**
  * formatter should be kept as is when unable to resolve it from config directory
