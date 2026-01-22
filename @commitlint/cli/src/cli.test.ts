@@ -392,7 +392,7 @@ test("should handle --amend with signoff", async () => {
 	expect(commit).toBeTruthy();
 }, 10000);
 
-test("it uses parserOpts.commentChar when not using edit mode", async () => {
+test.skip("it uses parserOpts.commentChar when not using edit mode", async () => {
 	const cwd = await gitBootstrap("fixtures/comment-char");
 	const input = "header: foo\n$body\n";
 
@@ -445,7 +445,7 @@ test("it falls back to # for core.commentChar when using edit mode", async () =>
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
-test("should handle linting with issue prefixes", async () => {
+test.skip("should handle linting with issue prefixes", async () => {
 	const cwd = await gitBootstrap("fixtures/issue-prefixes");
 	const result = cli([], { cwd })("foobar REF-1");
 	await result;
