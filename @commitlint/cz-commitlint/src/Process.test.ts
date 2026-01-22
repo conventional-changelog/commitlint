@@ -19,7 +19,7 @@ const mockPrompt = vi.fn(async function (
 	for (const { name, message, when, filter, validate } of questions) {
 		if (typeof when !== "function" || (await when(answers))) {
 			const title =
-				message && typeof message === "function"
+				typeof message === "function"
 					? await message(answers)
 					: typeof message === "string"
 						? message
