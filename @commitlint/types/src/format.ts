@@ -1,3 +1,4 @@
+import type pc from "picocolors";
 import { QualifiedRules } from "./load.js";
 import { RuleConfigSeverity } from "./rules.js";
 
@@ -25,33 +26,11 @@ export interface FormattableReport {
 	results?: (FormattableResult & WithInput)[];
 }
 
-// Picocolors color names - subset of what's available
-export type PicocolorsColor =
-	| "reset"
-	| "bold"
-	| "dim"
-	| "italic"
-	| "underline"
-	| "inverse"
-	| "hidden"
-	| "strikethrough"
-	| "black"
-	| "red"
-	| "green"
-	| "yellow"
-	| "blue"
-	| "magenta"
-	| "cyan"
-	| "white"
-	| "gray"
-	| "bgBlack"
-	| "bgRed"
-	| "bgGreen"
-	| "bgYellow"
-	| "bgBlue"
-	| "bgMagenta"
-	| "bgCyan"
-	| "bgWhite";
+// Extract color function names from picocolors, excluding non-color properties
+export type PicocolorsColor = Exclude<
+	keyof typeof pc,
+	"isColorSupported" | "createColors"
+>;
 
 // Keep ChalkColor as an alias for backwards compatibility
 export type ChalkColor = PicocolorsColor;
