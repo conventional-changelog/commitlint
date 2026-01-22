@@ -1,6 +1,6 @@
-import chalk from "chalk";
+import pc from "picocolors";
 import {
-	ChalkColor,
+	PicocolorsColor,
 	FormattableReport,
 	FormatOptions,
 	FormattableResult,
@@ -8,7 +8,11 @@ import {
 } from "@commitlint/types";
 
 const DEFAULT_SIGNS = [" ", "⚠", "✖"] as const;
-const DEFAULT_COLORS = ["white", "yellow", "red"] as const;
+const DEFAULT_COLORS: readonly [
+	PicocolorsColor,
+	PicocolorsColor,
+	PicocolorsColor,
+] = ["white", "yellow", "red"] as const;
 
 export function format(
 	report: FormattableReport = {},
@@ -41,9 +45,9 @@ function formatInput(
 	}
 
 	const sign = "⧗";
-	const decoration = enabled ? chalk.gray(sign) : sign;
+	const decoration = enabled ? pc.gray(sign) : sign;
 
-	const decoratedInput = enabled ? chalk.bold(input) : input;
+	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
 	return options.verbose || hasProblems
@@ -64,18 +68,18 @@ export function formatResult(
 
 	const problems = [...errors, ...warnings].map((problem) => {
 		const sign = signs[problem.level] || "";
-		const color: ChalkColor = colors[problem.level] || ("white" as const);
-		const decoration = enabled ? chalk[color](sign) : sign;
-		const name = enabled
-			? chalk.grey(`[${problem.name}]`)
-			: `[${problem.name}]`;
+		const colorName: PicocolorsColor =
+			colors[problem.level] || ("white" as const);
+		const colorFn = pc[colorName];
+		const decoration = enabled ? colorFn(sign) : sign;
+		const name = enabled ? pc.gray(`[${problem.name}]`) : `[${problem.name}]`;
 		return `${decoration}   ${problem.message} ${name}`;
 	});
 
 	const sign = selectSign(result);
-	const color = selectColor(result);
+	const colorName = selectColor(result);
 
-	const deco = enabled ? chalk[color](sign) : sign;
+	const deco = enabled ? pc[colorName](sign) : sign;
 	const el = errors.length;
 	const wl = warnings.length;
 	const hasProblems = problems.length > 0;
@@ -86,7 +90,7 @@ export function formatResult(
 			: undefined;
 
 	const fmtSummary =
-		enabled && typeof summary === "string" ? chalk.bold(summary) : summary;
+		enabled && typeof summary === "string" ? pc.bold(summary) : summary;
 
 	const help =
 		hasProblems && options.helpUrl
@@ -111,7 +115,7 @@ function selectSign(result: FormattableResult): string {
 	return (result.warnings || []).length ? "⚠" : "✔";
 }
 
-function selectColor(result: FormattableResult): ChalkColor {
+function selectColor(result: FormattableResult): PicocolorsColor {
 	if ((result.errors || []).length > 0) {
 		return "red";
 	}

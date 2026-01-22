@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import pc from "picocolors";
 import type { InputCustomOptions } from "inquirer";
 
 import type { InputSetting, RuleEntry, Result, ResultPart } from "./types.js";
@@ -83,7 +83,7 @@ export default function getPrompt(
 			}
 			if (required && input.trim().length === 0) {
 				// Show help if enum is defined and input may not be empty
-				return `⚠ ${chalk.bold(type)} may not be empty.`;
+				return `⚠ ${pc.bold(type)} may not be empty.`;
 			}
 
 			const tabValues = tabCompletion.map((item) => item.value);
@@ -92,14 +92,14 @@ export default function getPrompt(
 				tabValues.length > 0 &&
 				!tabValues.includes(input)
 			) {
-				return `⚠ ${chalk.bold(type)} must be one of ${tabValues.join(", ")}.`;
+				return `⚠ ${pc.bold(type)} must be one of ${tabValues.join(", ")}.`;
 			}
 			return true;
 		},
 		tabCompletion,
 		log(answers?: Result) {
 			let prefix =
-				`${chalk.white("Please enter a")} ${chalk.bold(type)}: ${meta({
+				`${pc.white("Please enter a")} ${pc.bold(type)}: ${meta({
 					optional: !required,
 					required: required,
 					"tab-completion": typeof enumRule !== "undefined",
@@ -108,7 +108,7 @@ export default function getPrompt(
 				})}` + EOL;
 
 			if (settings.description) {
-				prefix += chalk.grey(`${settings.description}`) + EOL;
+				prefix += pc.gray(`${settings.description}`) + EOL;
 			}
 			if (answers) {
 				prefix += EOL + `${format(answers, true)}` + EOL;

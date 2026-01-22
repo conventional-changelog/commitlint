@@ -1,5 +1,5 @@
 import { PromptMessages, PromptName } from "@commitlint/types";
-import chalk from "chalk";
+import pc from "picocolors";
 import inquirer, {
 	Answers,
 	ChoiceCollection,
@@ -185,8 +185,8 @@ export default class Question {
 		}
 		const color =
 			output.length <= this.maxLength && output.length >= this.minLength
-				? chalk.green
-				: chalk.red;
+				? pc.green
+				: pc.red;
 		return color("(" + output.length + ") " + output);
 	}
 

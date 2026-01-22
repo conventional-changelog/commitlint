@@ -3,7 +3,7 @@
 import { expect, test, vi } from "vitest";
 // @ts-expect-error -- no typings
 import config from "@commitlint/config-angular";
-import chalk from "chalk";
+import pc from "picocolors";
 import {
 	Answers,
 	DistinctQuestion,
@@ -87,7 +87,7 @@ test("should fail without type", async () => {
 	expect(message).toEqual("");
 	expect(console.error).toHaveBeenCalledTimes(1);
 	expect(console.error).toHaveBeenLastCalledWith(
-		new Error(`⚠ ${chalk.bold("type")} may not be empty.`),
+		new Error(`⚠ ${pc.bold("type")} may not be empty.`),
 	);
 	spy.mockRestore();
 });

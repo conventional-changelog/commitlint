@@ -1,5 +1,3 @@
-import type { ColorName, ModifierName } from "chalk";
-
 import { QualifiedRules } from "./load.js";
 import { RuleConfigSeverity } from "./rules.js";
 
@@ -27,12 +25,41 @@ export interface FormattableReport {
 	results?: (FormattableResult & WithInput)[];
 }
 
-export type ChalkColor = ColorName | ModifierName;
+// Picocolors color names - subset of what's available
+export type PicocolorsColor =
+	| "reset"
+	| "bold"
+	| "dim"
+	| "italic"
+	| "underline"
+	| "inverse"
+	| "hidden"
+	| "strikethrough"
+	| "black"
+	| "red"
+	| "green"
+	| "yellow"
+	| "blue"
+	| "magenta"
+	| "cyan"
+	| "white"
+	| "gray"
+	| "bgBlack"
+	| "bgRed"
+	| "bgGreen"
+	| "bgYellow"
+	| "bgBlue"
+	| "bgMagenta"
+	| "bgCyan"
+	| "bgWhite";
+
+// Keep ChalkColor as an alias for backwards compatibility
+export type ChalkColor = PicocolorsColor;
 
 export interface FormatOptions {
 	color?: boolean;
 	signs?: readonly [string, string, string];
-	colors?: readonly [ChalkColor, ChalkColor, ChalkColor];
+	colors?: readonly [PicocolorsColor, PicocolorsColor, PicocolorsColor];
 	verbose?: boolean;
 	helpUrl?: string;
 }

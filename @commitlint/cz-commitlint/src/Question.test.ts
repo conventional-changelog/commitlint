@@ -1,5 +1,5 @@
 import { describe, test, expect, vi } from "vitest";
-import chalk from "chalk";
+import pc from "picocolors";
 import inquirer, { Answers, InputQuestionOptions } from "inquirer";
 
 import Question from "./Question.js";
@@ -320,7 +320,7 @@ describe("transformer", () => {
 
 		expect(
 			(question as InputQuestionOptions)?.transformer?.("xxx", {}, {}),
-		).toEqual(chalk.green(`(3) xxx`));
+		).toEqual(pc.green(`(3) xxx`));
 
 		question = new Question("body", {
 			...QUESTION_CONFIG,
@@ -329,7 +329,7 @@ describe("transformer", () => {
 
 		expect(
 			(question as InputQuestionOptions)?.transformer?.("xxx", {}, {}),
-		).toEqual(chalk.green(`(3) xxx`));
+		).toEqual(pc.green(`(3) xxx`));
 	});
 
 	test("should char count with red color when over the limit range", () => {
@@ -340,7 +340,7 @@ describe("transformer", () => {
 
 		expect(
 			(question as InputQuestionOptions)?.transformer?.("xxxxxx", {}, {}),
-		).toEqual(chalk.red(`(6) xxxxxx`));
+		).toEqual(pc.red(`(6) xxxxxx`));
 
 		question = new Question("body", {
 			...QUESTION_CONFIG,
@@ -349,7 +349,7 @@ describe("transformer", () => {
 
 		expect(
 			(question as InputQuestionOptions)?.transformer?.("x", {}, {}),
-		).toEqual(chalk.red(`(1) x`));
+		).toEqual(pc.red(`(1) x`));
 	});
 });
 

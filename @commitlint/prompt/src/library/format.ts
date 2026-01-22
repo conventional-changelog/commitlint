@@ -1,4 +1,4 @@
-import chalk from "chalk";
+import pc from "picocolors";
 
 import type { Result, ResultPart } from "./types.js";
 
@@ -20,7 +20,7 @@ export default function format(input: Result, debug = false): string {
 	const results = debug
 		? Object.entries(defaultInput).reduce<Result>((registry, [name, value]) => {
 				registry[name as ResultPart] =
-					value === undefined ? chalk.grey(`<${name}>`) : chalk.bold(value);
+					value === undefined ? pc.gray(`<${name}>`) : pc.bold(value);
 				return registry;
 			}, {})
 		: defaultInput;
