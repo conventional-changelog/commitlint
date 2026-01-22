@@ -84,8 +84,8 @@ export default async function load(
 
 	let plugins: PluginRecords = {};
 	if (Array.isArray(extended.plugins)) {
-		const uniq = [...new Set(extended.plugins)];
-		for (const plugin of uniq) {
+		const deduplicatedPlugins = [...new Set(extended.plugins)];
+		for (const plugin of deduplicatedPlugins) {
 			if (typeof plugin === "string") {
 				plugins = await loadPlugin(
 					plugins,
