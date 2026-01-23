@@ -1,5 +1,5 @@
 import type { PromptConfig, UserPromptConfig } from "@commitlint/types";
-import isPlainObject from "lodash.isplainobject";
+import isPlainObject from "is-plain-obj";
 
 import defaultPromptConfigs from "./defaultPromptConfigs.js";
 
