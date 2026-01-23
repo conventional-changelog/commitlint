@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { globSync } from "glob";
-import camelCase from "lodash.camelcase";
+import { toCamelCase } from "lodash.camelcase";
 
 import * as ensure from "./index.js";
 
@@ -12,7 +12,7 @@ const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 test("exports all checkers", async () => {
 	const ignore = ["types"];
 	const expected = _glob("*.ts")
-		.map((f) => camelCase(f))
+		.map((f) => toCamelCase(f))
 		.sort()
 		.filter((item) => !ignore.includes(item));
 	const actual = Object.keys(ensure).sort();
