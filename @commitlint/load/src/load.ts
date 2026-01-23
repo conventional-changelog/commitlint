@@ -17,7 +17,6 @@ import {
 } from "@commitlint/types";
 import isPlainObject from "lodash.isplainobject";
 import merge from "lodash.merge";
-import uniq from "lodash.uniq";
 
 import { loadConfig } from "./utils/load-config.js";
 import { loadParserOpts } from "./utils/load-parser-opts.js";
@@ -85,7 +84,8 @@ export default async function load(
 
 	let plugins: PluginRecords = {};
 	if (Array.isArray(extended.plugins)) {
-		for (const plugin of uniq(extended.plugins)) {
+		const deduplicatedPlugins = [...new Set(extended.plugins)];
+		for (const plugin of deduplicatedPlugins) {
 			if (typeof plugin === "string") {
 				plugins = await loadPlugin(
 					plugins,
