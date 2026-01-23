@@ -3247,10 +3247,17 @@ console-control-strings@^1.1.0:
   resolved "https://registry.npmjs.org/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
   integrity sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==
 
-conventional-changelog-angular@7.0.0, conventional-changelog-angular@^7.0.0:
+conventional-changelog-angular@7.0.0:
   version "7.0.0"
   resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-7.0.0.tgz#5eec8edbff15aa9b1680a8dcfbd53e2d7eb2ba7a"
   integrity sha512-ROjNchA9LgfNMTTFSIWPzebCwOGFdgkEq45EnvvrmSLvCtAw0HSmrCs7/ty+wAeYUZyNay0YMUNYFTRL72PkBQ==
+  dependencies:
+    compare-func "^2.0.0"
+
+conventional-changelog-angular@^8.0.0:
+  version "8.1.0"
+  resolved "https://registry.npmjs.org/conventional-changelog-angular/-/conventional-changelog-angular-8.1.0.tgz#06223a40f818c5618982fdb92d2b2aac5e24d33e"
+  integrity sha512-GGf2Nipn1RUCAktxuVauVr1e3r8QrLP/B0lEUsFktmGqc3ddbQkhoJZHJctVU829U1c6mTSWftrVOCHaL85Q3w==
   dependencies:
     compare-func "^2.0.0"
 
