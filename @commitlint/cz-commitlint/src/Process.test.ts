@@ -5,7 +5,6 @@ import {
 	UserPromptConfig,
 } from "@commitlint/types";
 import { Answers, DistinctQuestion } from "inquirer";
-import isFunction from "lodash.isfunction";
 
 import process from "./Process.js";
 
@@ -20,7 +19,7 @@ const mockPrompt = vi.fn(async function (
 	for (const { name, message, when, filter, validate } of questions) {
 		if (typeof when !== "function" || (await when(answers))) {
 			const title =
-				message && isFunction(message)
+				message && typeof message === "function"
 					? await message(answers)
 					: typeof message === "string"
 						? message
