@@ -35,3 +35,13 @@ test("not found in non-git folder", async () => {
 	const top = (await topLevel(cwd)) as undefined;
 	expect(top).toEqual(undefined);
 });
+
+test("very deep directory from the root", async () => {
+	const temp = await git.bootstrap();
+	const cwd = path.join(temp, ...new Array(10).fill("dir"));
+	await fs.mkdir(cwd, { recursive: true });
+
+	const top = (await topLevel(cwd)) as string;
+	expect(top).toEqual(temp);
+	expect((await fs.stat(path.join(top, ".git"))).isDirectory()).toEqual(true);
+});
