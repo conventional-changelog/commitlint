@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { Plugin, PluginRecords } from "@commitlint/types";
-import chalk from "chalk";
+import pc from "picocolors";
 
 import { normalizePackageName, getShorthandName } from "./plugin-naming.js";
 import { WhitespacePluginError, MissingPluginError } from "./plugin-errors.js";
@@ -45,7 +45,7 @@ export default async function loadPlugin(
 				require.resolve(longName);
 			} catch (error: any) {
 				// If the plugin can't be resolved, display the missing plugin error (usually a config or install error)
-				console.error(chalk.red(`Failed to load plugin ${longName}.`));
+				console.error(pc.red(`Failed to load plugin ${longName}.`));
 
 				const message = error?.message || "Unknown error occurred";
 				throw new MissingPluginError(pluginName, message, {
@@ -75,7 +75,7 @@ export default async function loadPlugin(
 				: `${longName}, version unknown`;
 
 			console.log(
-				chalk.blue(
+				pc.blue(
 					`Loaded plugin ${pluginName} (${loadedPluginAndVersion}) (from ${resolvedPath})`,
 				),
 			);

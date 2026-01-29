@@ -1,5 +1,5 @@
 /// <reference path="./inquirer.d.ts" />
-import chalk from "chalk";
+import pc from "picocolors";
 
 import inquirer, { type Answers, type InputCustomOptions } from "inquirer";
 import InputPrompt from "inquirer/lib/prompts/input.js";
@@ -90,7 +90,7 @@ export default class InputCustomPrompt<
 		const length = this.measureInput(this.rl.line);
 
 		if (answered) {
-			message += chalk.cyan(this.answer);
+			message += pc.cyan(this.answer);
 		} else if (this.opt.transformer) {
 			message += this.opt.transformer(this.rl.line, this.answers, {});
 		}
@@ -98,17 +98,17 @@ export default class InputCustomPrompt<
 		let bottomContent = "";
 
 		if (error) {
-			bottomContent = chalk.red(">> ") + error;
+			bottomContent = pc.red(">> ") + error;
 		} else if (!answered) {
 			const maxLength = this.opt.maxLength(this.answers);
 			if (maxLength < Infinity) {
 				const lengthRemaining = maxLength - length;
 				const color =
 					lengthRemaining <= 5
-						? chalk.red
+						? pc.red
 						: lengthRemaining <= 10
-							? chalk.yellow
-							: chalk.grey;
+							? pc.yellow
+							: pc.gray;
 				bottomContent = color(`${lengthRemaining} characters left`);
 			}
 		}
