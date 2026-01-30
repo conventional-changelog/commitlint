@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.4.0](https://github.com/conventional-changelog/commitlint/compare/v20.3.1...v20.4.0) (2026-01-30)
+
+**Note:** Version bump only for package @commitlint/top-level
+
+
+
+
+
 # [20.0.0](https://github.com/conventional-changelog/commitlint/compare/v19.9.1...v20.0.0) (2025-09-25)
 
 **Note:** Version bump only for package @commitlint/top-level

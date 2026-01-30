@@ -1,7 +1,7 @@
 {
   "name": "@commitlint/resolve-extends",
   "type": "module",
-  "version": "20.3.1",
+  "version": "20.4.0",
   "description": "Lint your commit messages",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -40,8 +40,8 @@
     "@types/lodash.mergewith": "^4.6.8"
   },
   "dependencies": {
-    "@commitlint/config-validator": "^20.3.1",
-    "@commitlint/types": "^20.3.1",
+    "@commitlint/config-validator": "^20.4.0",
+    "@commitlint/types": "^20.4.0",
     "global-directory": "^4.0.1",
     "import-meta-resolve": "^4.0.0",
     "lodash.mergewith": "^4.6.2",
