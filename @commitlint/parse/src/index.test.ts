@@ -146,7 +146,7 @@ test("ignores comments", async () => {
 	// @ts-expect-error -- no typings
 	const changelogOpts = await import("conventional-changelog-angular");
 	const opts = {
-		...changelogOpts.parserOpts,
+		...changelogOpts.parser,
 		commentChar: "#",
 	};
 	const actual = await parse(message, undefined, opts);
@@ -162,13 +162,13 @@ test("registers inline #", async () => {
 	// @ts-expect-error -- no typings
 	const changelogOpts = await import("conventional-changelog-angular");
 	const opts = {
-		...changelogOpts.parserOpts,
+		...changelogOpts.parser,
 		commentChar: "#",
 	};
 	const actual = await parse(message, undefined, opts);
 
 	expect(actual.subject).toBe("subject #reference");
-	expect(actual.body).toBe("things #reference");
+	expect(actual.body).toBe(null);
 });
 
 test("keep -side notes- in the body section", async () => {

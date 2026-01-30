@@ -71,7 +71,7 @@ export async function loadParserOpts(
 				Promise.resolve(result).then((opts) => {
 					resolve({
 						...parser,
-						parserOpts: opts?.parserOpts,
+						parserOpts: opts?.parserOpts || opts?.parser,
 					});
 				});
 			}

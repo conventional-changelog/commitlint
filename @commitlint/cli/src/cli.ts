@@ -14,7 +14,7 @@ import type {
 	QualifiedConfig,
 	UserConfig,
 } from "@commitlint/types";
-import type { Options } from "conventional-commits-parser";
+import type { ParserOptions as Options } from "conventional-commits-parser";
 import { x } from "tinyexec";
 import yargs, { type Arguments } from "yargs";
 

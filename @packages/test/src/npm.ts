@@ -1,9 +1,12 @@
 import path from "node:path";
+import { createRequire } from "node:module";
 
 import fs from "fs-extra";
 import resolvePkg from "resolve-pkg";
 
 import * as git from "./git.js";
+
+const require = createRequire(import.meta.url);
 
 export async function installModules(cwd: string) {
 	const manifestPath = path.join(cwd, "package.json");
@@ -15,7 +18,43 @@ export async function installModules(cwd: string) {
 		const deps = Object.keys({ ...dependencies, ...devDependencies });
 		await Promise.all(
 			deps.map(async (dependency: any) => {
-				const sourcePath = resolvePkg(dependency);
+				let sourcePath = resolvePkg(dependency);
+
+				if (!sourcePath) {
+					try {
+						const entry = require.resolve(dependency);
+						const sourceModulesPath = findParentPath(entry, "node_modules");
+						if (sourceModulesPath) {
+							const rel = path.relative(sourceModulesPath, entry);
+							const segments = rel.split(path.sep);
+							if (segments[0].startsWith("@")) {
+								sourcePath = path.join(
+									sourceModulesPath,
+									segments[0],
+									segments[1],
+								);
+							} else {
+								sourcePath = path.join(sourceModulesPath, segments[0]);
+							}
+						}
+					} catch (e: unknown) {
+						// Only silently ignore expected MODULE_NOT_FOUND errors
+						if (
+							e &&
+							typeof e === "object" &&
+							"code" in e &&
+							(e as any).code === "MODULE_NOT_FOUND"
+						) {
+							// Expected: package not found via require.resolve
+						} else {
+							console.warn(
+								"Unexpected error while resolving dependency:",
+								dependency,
+								e,
+							);
+						}
+					}
+				}
 
 				if (!sourcePath) {
 					throw new Error(`Could not resolve dependency ${dependency}`);
@@ -47,22 +86,10 @@ function findParentPath(
 	parentPath: string,
 	dirname: string,
 ): string | undefined {
-	const rawFragments = parentPath.split(path.sep);
-
-	const { matched, fragments } = rawFragments.reduceRight(
-		({ fragments, matched }, item) => {
-			if (item === dirname && !matched) {
-				return { fragments, matched: true };
-			}
-
-			if (!matched && fragments.length > 0) {
-				fragments.pop();
-			}
-
-			return { fragments, matched };
-		},
-		{ fragments: rawFragments, matched: false },
-	);
-
-	return matched ? fragments.join(path.sep) : undefined;
+	const parts = parentPath.split(path.sep);
+	const idx = parts.lastIndexOf(dirname);
+	if (idx >= 0) {
+		return parts.slice(0, idx + 1).join(path.sep);
+	}
+	return undefined;
 }
