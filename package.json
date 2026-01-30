@@ -19,7 +19,7 @@
     "lint-fix": "eslint --fix",
     "format": "prettier **/*.{ts,js,json,yml,md} --check",
     "format-fix": "prettier \"**/*.{ts,js,json,yml,md}\" --write",
-    "publish": "lerna publish --conventional-commits",
+    "publish": "npm whoami && lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
     "test": "cross-env HOME=$PWD LANG=en_US.UTF-8 NO_COLOR=1 vitest run --coverage",
