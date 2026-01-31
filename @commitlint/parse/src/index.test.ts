@@ -169,10 +169,19 @@ test("registers inline #", async () => {
 
 	expect(actual.subject).toBe("subject #reference");
 	expect(actual.body).toBe(null);
-	// v6 behavior: inline references are captured in references array
+	// v6 behavior: body content with references moves to footer
+	expect(actual.footer).toBe("things #reference");
+	// v6 behavior: both reference instances are captured
+	expect(actual.references).toHaveLength(2);
 	expect(actual.references).toEqual(
 		expect.arrayContaining([
 			expect.objectContaining({
+				raw: "type(some/scope): subject #reference",
+				issue: "reference",
+				prefix: "#",
+			}),
+			expect.objectContaining({
+				raw: "things #reference",
 				issue: "reference",
 				prefix: "#",
 			}),
