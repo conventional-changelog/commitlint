@@ -156,19 +156,14 @@ test("ignores comments", async () => {
 	expect(actual.subject).toBe("subject");
 });
 
-test("registers inline #", async () => {
-	const message =
-		"type(some/scope): subject #reference\n# some comment\nthings #reference";
+test("parses inline references in subject and body", async () => {
+	const message = "type(some/scope): subject #reference\n\nthings #reference";
 	// @ts-expect-error -- no typings
 	const changelogOpts = await import("conventional-changelog-angular");
-	const opts = {
-		...changelogOpts.parser,
-		commentChar: "#",
-	};
-	const actual = await parse(message, undefined, opts);
+	const actual = await parse(message, undefined, changelogOpts.parser);
 
 	expect(actual.subject).toBe("subject #reference");
-	expect(actual.body).toBe(null);
+	expect(actual.body).toBe("");
 	// v6 behavior: body content with references moves to footer
 	expect(actual.footer).toBe("things #reference");
 	// v6 behavior: both reference instances are captured
@@ -187,6 +182,23 @@ test("registers inline #", async () => {
 			}),
 		]),
 	);
+});
+
+test("filters comment lines when commentChar is set", async () => {
+	const message = "type(scope): subject\n# this is a comment\nbody content";
+	// @ts-expect-error -- no typings
+	const changelogOpts = await import("conventional-changelog-angular");
+	const opts = {
+		...changelogOpts.parser,
+		commentChar: "#",
+	};
+	const actual = await parse(message, undefined, opts);
+
+	expect(actual.subject).toBe("subject");
+	expect(actual.body).toBe("body content");
+	// Lines starting with commentChar are completely filtered out (not in body/footer)
+	expect(actual.body).not.toContain("# this is a comment");
+	expect(actual.footer).toBe(null);
 });
 
 test("keep -side notes- in the body section", async () => {
