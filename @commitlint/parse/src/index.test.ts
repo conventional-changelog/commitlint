@@ -169,6 +169,15 @@ test("registers inline #", async () => {
 
 	expect(actual.subject).toBe("subject #reference");
 	expect(actual.body).toBe(null);
+	// v6 behavior: inline references are captured in references array
+	expect(actual.references).toEqual(
+		expect.arrayContaining([
+			expect.objectContaining({
+				issue: "reference",
+				prefix: "#",
+			}),
+		]),
+	);
 });
 
 test("keep -side notes- in the body section", async () => {
