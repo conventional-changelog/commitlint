@@ -508,3 +508,81 @@ test('with numeric subject should succeed for "always uppercase"', async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
+
+test("accepts lowercase Cyrillic subjects", async () => {
+	const message = "chore(deps): обновлены все зависимости";
+	const parsed = await parse(message);
+	const [actual] = subjectCase(parsed, "never", [
+		"sentence-case",
+		"start-case",
+		"pascal-case",
+		"upper-case",
+	]);
+
+	expect(actual).toBe(true);
+});
+
+test("rejects uppercase Cyrillic subjects", async () => {
+	const message = "chore(deps): ОБНОВЛЕНЫ ВСЕ ЗАВИСИМОСТИ";
+	const parsed = await parse(message);
+	const [actual] = subjectCase(parsed, "never", [
+		"sentence-case",
+		"start-case",
+		"pascal-case",
+		"upper-case",
+	]);
+
+	expect(actual).toBe(false);
+});
+
+test("accepts lowercase Chinese subjects", async () => {
+	const message = "fix(面试): 修复评价功能";
+	const parsed = await parse(message);
+	const [actual] = subjectCase(parsed, "never", [
+		"sentence-case",
+		"start-case",
+		"pascal-case",
+		"upper-case",
+	]);
+
+	expect(actual).toBe(true);
+});
+
+test("accepts lowercase Arabic subjects", async () => {
+	const message = "feat(مميزات): إضافة وظيفة جديدة";
+	const parsed = await parse(message);
+	const [actual] = subjectCase(parsed, "never", [
+		"sentence-case",
+		"start-case",
+		"pascal-case",
+		"upper-case",
+	]);
+
+	expect(actual).toBe(true);
+});
+
+test("accepts lowercase Hebrew subjects", async () => {
+	const message = "fix(תיקון): תיקון בעיה";
+	const parsed = await parse(message);
+	const [actual] = subjectCase(parsed, "never", [
+		"sentence-case",
+		"start-case",
+		"pascal-case",
+		"upper-case",
+	]);
+
+	expect(actual).toBe(true);
+});
+
+test("accepts mixed Latin and Cyrillic lowercase subjects", async () => {
+	const message = "chore(deps): update зависимости";
+	const parsed = await parse(message);
+	const [actual] = subjectCase(parsed, "never", [
+		"sentence-case",
+		"start-case",
+		"pascal-case",
+		"upper-case",
+	]);
+
+	expect(actual).toBe(true);
+});
