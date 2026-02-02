@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.4.1](https://github.com/conventional-changelog/commitlint/compare/v20.4.0...v20.4.1) (2026-02-02)
+
+
+### Reverts
+
+* replace all lodash string methods with kasi [#4602](https://github.com/conventional-changelog/commitlint/issues/4602) ([#4621](https://github.com/conventional-changelog/commitlint/issues/4621)) ([5326ab9](https://github.com/conventional-changelog/commitlint/commit/5326ab98a7c68f2f67c46c253f10c087d4570ddd)), closes [#4620](https://github.com/conventional-changelog/commitlint/issues/4620) [#4620](https://github.com/conventional-changelog/commitlint/issues/4620)
+
+
+
+
+
 # [20.4.0](https://github.com/conventional-changelog/commitlint/compare/v20.3.1...v20.4.0) (2026-01-30)
 
 **Note:** Version bump only for package @commitlint/ensure
