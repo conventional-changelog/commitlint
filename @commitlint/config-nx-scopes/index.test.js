@@ -63,7 +63,7 @@ test("returns expected value for basic nx repository", async () => {
 	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
 
 	const [, , value] = await fn({ cwd });
-	expect(value).toEqual(["a", "b"]);
+	expect(value).toEqual(["fixture-basic-a", "fixture-basic-b"]);
 });
 
 test("expect correct result from Nx 14", async () => {
@@ -71,7 +71,7 @@ test("expect correct result from Nx 14", async () => {
 	const cwd = await npm.bootstrap("fixtures/nx14", __dirname);
 
 	const [, , value] = await fn({ cwd });
-	expect(value).toEqual(["c", "d"]);
+	expect(value).toEqual(["fixture-nx14-c", "fixture-nx14-d"]);
 });
 
 test("expect correct result from Nx 15", async () => {
@@ -79,7 +79,7 @@ test("expect correct result from Nx 15", async () => {
 	const cwd = await npm.bootstrap("fixtures/nx15", __dirname);
 
 	const [, , value] = await fn({ cwd });
-	expect(value).toEqual(["e", "f"]);
+	expect(value).toEqual(["fixture-nx15-e", "fixture-nx15-f"]);
 });
 
 test("expect correct result from Nx 17", async () => {
@@ -87,5 +87,5 @@ test("expect correct result from Nx 17", async () => {
 	const cwd = await npm.bootstrap("fixtures/nx17", __dirname);
 
 	const [, , value] = await fn({ cwd });
-	expect(value).toEqual(["g", "h"]);
+	expect(value).toEqual(["fixture-nx17-g", "fixture-nx17-h"]);
 });
