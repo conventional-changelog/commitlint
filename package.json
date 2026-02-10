@@ -42,10 +42,10 @@
       "**/fixtures/**/package.json"
     ],
     "extends": [
-      "config:base",
-      ":semanticCommitType(chore)",
-      ":semanticCommitScopeDisabled"
+      "config:base"
     ],
+    "semanticCommitType": "chore",
+    "semanticCommitScope": null,
     "ignoreDeps": [
       "@commitlint/test",
       "@commitlint/test-environment",
