@@ -1288,36 +1288,36 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@pnpm/constants@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.npmjs.org/@pnpm/constants/-/constants-7.1.1.tgz#3db261425fe15425aa213a2b003f4f60c9378b43"
-  integrity sha512-31pZqMtjwV+Vaq7MaPrT1EoDFSYwye3dp6BiHIGRJmVThCQwySRKM7hCvqqI94epNkqFAAYoWrNynWoRYosGdw==
+"@pnpm/constants@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@pnpm/constants/-/constants-10.0.0.tgz#a7b42d96965d6a995af80aa3b07997636e4a3999"
+  integrity sha512-dxIXcW1F1dxIGfye2JXE7Q8WVwYB0axVzdBOkvE1WKIVR4xjB8e6k/Dkjo7DpbyfW5Vu2k21p6dyM32YLSAWoQ==
 
-"@pnpm/error@5.0.3":
-  version "5.0.3"
-  resolved "https://registry.npmjs.org/@pnpm/error/-/error-5.0.3.tgz#4dbb9f4acb0b30c373b3ca5024cdf495f03f4380"
-  integrity sha512-ONJU5cUeoeJSy50qOYsMZQHTA/9QKmGgh1ATfEpCLgtbdwqUiwD9MxHNeXUYYI/pocBCz6r1ZCFqiQvO+8SUKA==
+"@pnpm/error@6.0.3":
+  version "6.0.3"
+  resolved "https://registry.npmjs.org/@pnpm/error/-/error-6.0.3.tgz#318282ce77d097864370bca6f9b987dff5a5fb84"
+  integrity sha512-OIYhG7HQh4zUFh2s8/6bp7glVRjNxms7bpzXVOLV7pyRa+rSYFmqJ8zDsBC64k58nuaxS85Ip+SCDjFxsFGeOg==
   dependencies:
-    "@pnpm/constants" "7.1.1"
+    "@pnpm/constants" "10.0.0"
 
-"@pnpm/graceful-fs@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.npmjs.org/@pnpm/graceful-fs/-/graceful-fs-3.2.0.tgz#241846c42c23feff7421b8bd97d4039891003f12"
-  integrity sha512-vRoXJxscDpHak7YE9SqCkzfrayn+Lw+YueOeHIPEqkgokrHeYgYeONoc2kGh0ObHaRtNSsonozVfJ456kxLNvA==
+"@pnpm/graceful-fs@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/@pnpm/graceful-fs/-/graceful-fs-4.0.0.tgz#bc528bc5ae3cd00ea4563a2c67bfb10e9b3eda16"
+  integrity sha512-933nhV2Prp51522poxX6Chvb7kEW3U3kzVWoqDU1+icB+QE7z/2qQ8wYHsBt4jm0Uil/sF67t77ugOr8bR63kg==
   dependencies:
     graceful-fs "^4.2.11"
 
-"@pnpm/read-project-manifest@^5.0.10":
-  version "5.0.11"
-  resolved "https://registry.npmjs.org/@pnpm/read-project-manifest/-/read-project-manifest-5.0.11.tgz#50bc7bc7183bc49ae85925edb93836db63d5bb6a"
-  integrity sha512-themRLiDt9Ud6Somlu0PJbeprBBQEhlI1xNG5bZIv26yfLsc1vYLd1TfgGViD1b8fP0jxAqsUrDM+WMaMKI+gw==
+"@pnpm/read-project-manifest@^6.0.0":
+  version "6.0.10"
+  resolved "https://registry.npmjs.org/@pnpm/read-project-manifest/-/read-project-manifest-6.0.10.tgz#f01c2c1c8c4881a973c3cb8604bc57f52ee3341d"
+  integrity sha512-A5f2wbx+Y5RjG687umaeDFUq67zKg50RuFssKwOaitjwdFA1BEzF3CRMgpqQ2VAgenGRm6d5QaP9u2iQZ+NWEg==
   dependencies:
     "@gwhitney/detect-indent" "7.0.1"
-    "@pnpm/error" "5.0.3"
-    "@pnpm/graceful-fs" "3.2.0"
-    "@pnpm/text.comments-parser" "2.0.0"
-    "@pnpm/types" "9.4.2"
-    "@pnpm/write-project-manifest" "5.0.6"
+    "@pnpm/error" "6.0.3"
+    "@pnpm/graceful-fs" "4.0.0"
+    "@pnpm/text.comments-parser" "3.0.0"
+    "@pnpm/types" "12.2.0"
+    "@pnpm/write-project-manifest" "6.0.7"
     fast-deep-equal "^3.1.3"
     is-windows "^1.0.2"
     json5 "^2.2.3"
@@ -1327,25 +1327,25 @@
     sort-keys "^4.2.0"
     strip-bom "^4.0.0"
 
-"@pnpm/text.comments-parser@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/@pnpm/text.comments-parser/-/text.comments-parser-2.0.0.tgz#902d53ced2a0ae6a6d99b12ec6eb85dbc79e517a"
-  integrity sha512-DRWtTmmxQQtuWHf1xPt9bqzCSq8d0MQF5x1kdpCDMLd7xk3nP4To2/OGkPrb8MKbrWsgCNDwXyKCFlEKrAg7fg==
+"@pnpm/text.comments-parser@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@pnpm/text.comments-parser/-/text.comments-parser-3.0.0.tgz#d5f6df2dd7c469f9df6364657a1e2492063bdba4"
+  integrity sha512-BSGvYd59kPKVTUk1InekEp+TiPnJ8650/bQyiOUFSvqHi61YipcR+E4H2i3xTnk2e+GHdGbXvEtAZbQmyxb0/g==
   dependencies:
     strip-comments-strings "1.2.0"
 
-"@pnpm/types@9.4.2":
-  version "9.4.2"
-  resolved "https://registry.npmjs.org/@pnpm/types/-/types-9.4.2.tgz#0a34c3c41d5452461d8d8958374a727f9c46cfb2"
-  integrity sha512-g1hcF8Nv4gd76POilz9gD4LITAPXOe5nX4ijgr8ixCbLQZfcpYiMfJ+C1RlMNRUDo8vhlNB4O3bUlxmT6EAQXA==
+"@pnpm/types@12.2.0":
+  version "12.2.0"
+  resolved "https://registry.npmjs.org/@pnpm/types/-/types-12.2.0.tgz#944fb18ed0d117d570ed86358ecc9d6f3dd3e6c2"
+  integrity sha512-5RtwWhX39j89/Tmyv2QSlpiNjErA357T/8r1Dkg+2lD3P7RuS7Xi2tChvmOC3VlezEFNcWnEGCOeKoGRkDuqFA==
 
-"@pnpm/write-project-manifest@5.0.6":
-  version "5.0.6"
-  resolved "https://registry.npmjs.org/@pnpm/write-project-manifest/-/write-project-manifest-5.0.6.tgz#a074f5d833ffbc7bb1b1d34cb23e274fb6780761"
-  integrity sha512-3qkKCftRE/HXzoWedyDuaMMUQzheDwx8AQXR0DnA9ylsBnZQYNut19Ado/gzi5+IvznaMcqrBszw57j3y1/ILw==
+"@pnpm/write-project-manifest@6.0.7":
+  version "6.0.7"
+  resolved "https://registry.npmjs.org/@pnpm/write-project-manifest/-/write-project-manifest-6.0.7.tgz#6b02e2e6fed591d018f44e4a4defa746ca01f6ee"
+  integrity sha512-UbY9aXp39wVffFX4FZ35NwF9pnl+ccq5i1yaBKamNB1kC8dU7oB/FgFrCva5cC6ox1y5ynze2SB8fj7uF7+kCw==
   dependencies:
-    "@pnpm/text.comments-parser" "2.0.0"
-    "@pnpm/types" "9.4.2"
+    "@pnpm/text.comments-parser" "3.0.0"
+    "@pnpm/types" "12.2.0"
     json5 "^2.2.3"
     write-file-atomic "^5.0.1"
     write-yaml-file "^5.0.0"
