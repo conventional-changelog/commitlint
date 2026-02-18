@@ -17,6 +17,15 @@ Signed-off-by:
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
 `,
+
+	withSignoffAndCherryPick: `test: subject
+
+message body
+
+Signed-off-by:
+
+(cherry picked from commit 1234567aB)
+`,
 };
 
 const parsed = {
@@ -26,6 +35,7 @@ const parsed = {
 	inSubject: parse(messages.inSubject),
 	inBody: parse(messages.inBody),
 	withSignoffAndComments: parse(messages.withSignoffAndComments),
+	withSignoffAndCherryPick: parse(messages.withSignoffAndCherryPick),
 };
 
 test('empty against "always signed-off-by" should fail', async () => {
@@ -107,5 +117,25 @@ test('inBody against "always signed-off-by" should fail', async () => {
 test('inBody against "never signed-off-by" should succeed', async () => {
 	const [actual] = signedOffBy(await parsed.inBody, "never", "Signed-off-by:");
 	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("cherry pick marker should be ignored", async () => {
+	const [actual] = signedOffBy(
+		await parsed.withSignoffAndCherryPick,
+		"always",
+		"Signed-off-by:",
+	);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('cherry pick marker with "never signed-off-by" should fail', async () => {
+	const [actual] = signedOffBy(
+		await parsed.withSignoffAndCherryPick,
+		"never",
+		"Signed-off-by:",
+	);
+	const expected = false;
 	expect(actual).toEqual(expected);
 });
