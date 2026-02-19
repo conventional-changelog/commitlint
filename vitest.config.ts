@@ -9,4 +9,7 @@ export default defineConfig({
 			include: ["**/@commitlint/*/src/**"],
 		},
 	},
+	environments: {
+		node: {},
+	},
 });
