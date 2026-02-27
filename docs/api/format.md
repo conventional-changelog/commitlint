@@ -64,7 +64,7 @@ type formatOptions = {
   /**
    * Show position indicator (~~~) for errors in the input line
    **/
-  showPosition: boolean = false;
+  showPosition?: boolean;
 }
 
 format(report?: Report = {}, options?: formatOptions = {}) => string[];
