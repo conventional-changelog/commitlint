@@ -44,7 +44,16 @@ function getRulePosition(
 		case "type-case":
 		case "type-min-length":
 		case "type-max-length": {
-			if (!parsed.type) return undefined;
+			if (!parsed.type) {
+				if (ruleName === "type-empty") {
+					const offset = 0;
+					return {
+						start: { line: 1, column: offset + 1, offset },
+						end: { line: 1, column: offset + 1, offset },
+					};
+				}
+				return undefined;
+			}
 			if (!raw.startsWith(parsed.type)) return undefined;
 			const offset = 0;
 			return {
@@ -62,7 +71,17 @@ function getRulePosition(
 		case "scope-min-length":
 		case "scope-max-length":
 		case "scope-delimiter-style": {
-			if (!parsed.scope) return undefined;
+			if (!parsed.scope) {
+				if (ruleName === "scope-empty") {
+					const typeEnd = parsed.type ? parsed.type.length : 0;
+					const offset = typeEnd + 1;
+					return {
+						start: { line: 1, column: offset + 1, offset },
+						end: { line: 1, column: offset + 2, offset: offset + 1 },
+					};
+				}
+				return undefined;
+			}
 			const scopeStart = raw.indexOf(`(${parsed.scope})`);
 			if (scopeStart === -1) return undefined;
 			return {
@@ -80,7 +99,19 @@ function getRulePosition(
 		case "subject-max-length":
 		case "subject-full-stop":
 		case "subject-exclamation-mark": {
-			if (!parsed.subject) return undefined;
+			if (!parsed.subject) {
+				if (ruleName === "subject-empty") {
+					const typeEnd = parsed.type ? parsed.type.length : 0;
+					const hasScope = parsed.scope ? parsed.scope.length + 3 : 0;
+					const separator = ": ".length;
+					const offset = typeEnd + hasScope + separator;
+					return {
+						start: { line: 1, column: offset + 1, offset },
+						end: { line: 1, column: offset + 1, offset },
+					};
+				}
+				return undefined;
+			}
 			const subjectStart = raw.indexOf(parsed.subject);
 			if (subjectStart === -1) return undefined;
 			return {
@@ -110,7 +141,17 @@ function getRulePosition(
 		case "body-full-stop":
 		case "body-leading-blank":
 		case "body-max-line-length": {
-			if (!parsed.body) return undefined;
+			if (!parsed.body) {
+				if (ruleName === "body-empty") {
+					const bodyOffset = raw.indexOf("\n\n");
+					if (bodyOffset === -1) return undefined;
+					return {
+						start: { line: 2, column: 1, offset: bodyOffset + 2 },
+						end: { line: 2, column: 1, offset: bodyOffset + 2 },
+					};
+				}
+				return undefined;
+			}
 			const bodyOffset = raw.indexOf("\n\n");
 			if (bodyOffset === -1) return undefined;
 			const bodyStartOffset = bodyOffset + 2;
@@ -128,7 +169,17 @@ function getRulePosition(
 		case "footer-max-length":
 		case "footer-leading-blank":
 		case "footer-max-line-length": {
-			if (!parsed.footer) return undefined;
+			if (!parsed.footer) {
+				if (ruleName === "footer-empty") {
+					const footerOffset = raw.lastIndexOf("\n\n");
+					if (footerOffset === -1) return undefined;
+					return {
+						start: { line: 3, column: 1, offset: footerOffset + 2 },
+						end: { line: 3, column: 1, offset: footerOffset + 2 },
+					};
+				}
+				return undefined;
+			}
 			const footerOffset = raw.lastIndexOf("\n\n");
 			if (footerOffset === -1) return undefined;
 			const footerStartOffset = footerOffset + 2;

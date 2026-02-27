@@ -72,12 +72,14 @@ function getPositionIndicator(
 	problems: FormattableProblem[],
 	input: string,
 ): string | undefined {
-	const firstError = problems[0];
-	if (!firstError?.start || !firstError?.end) {
+	const problemWithPosition = problems.find(
+		(problem) => problem?.start !== undefined && problem?.end !== undefined,
+	);
+	if (!problemWithPosition?.start || !problemWithPosition?.end) {
 		return undefined;
 	}
 
-	const { start, end } = firstError;
+	const { start, end } = problemWithPosition;
 	const padding = "           ";
 
 	const tilde = "~";
