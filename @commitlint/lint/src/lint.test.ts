@@ -169,7 +169,7 @@ test("throws for rule with out of range condition", async () => {
 });
 
 test("succeds for issue", async () => {
-	const report = await lint("somehting #1", {
+	const report = await lint("something #1", {
 		"references-empty": [RuleConfigSeverity.Error, "never"],
 	});
 
@@ -177,7 +177,7 @@ test("succeds for issue", async () => {
 });
 
 test("fails for issue", async () => {
-	const report = await lint("somehting #1", {
+	const report = await lint("something #1", {
 		"references-empty": [RuleConfigSeverity.Error, "always"],
 	});
 
@@ -186,7 +186,7 @@ test("fails for issue", async () => {
 
 test("succeds for custom issue prefix", async () => {
 	const report = await lint(
-		"somehting REF-1",
+		"something REF-1",
 		{
 			"references-empty": [RuleConfigSeverity.Error, "never"],
 		},
@@ -202,7 +202,7 @@ test("succeds for custom issue prefix", async () => {
 
 test("fails for custom issue prefix", async () => {
 	const report = await lint(
-		"somehting #1",
+		"something #1",
 		{
 			"references-empty": [RuleConfigSeverity.Error, "never"],
 		},
@@ -218,7 +218,7 @@ test("fails for custom issue prefix", async () => {
 
 test("fails for custom plugin rule", async () => {
 	const report = await lint(
-		"somehting #1",
+		"something #1",
 		{
 			"plugin-rule": [RuleConfigSeverity.Error, "never"],
 		},
@@ -238,7 +238,7 @@ test("fails for custom plugin rule", async () => {
 
 test("passes for custom plugin rule", async () => {
 	const report = await lint(
-		"somehting #1",
+		"something #1",
 		{
 			"plugin-rule": [RuleConfigSeverity.Error, "never"],
 		},
@@ -297,7 +297,7 @@ test("returns original message with commit header, body and footer, parsing comm
 
 test("passes for async rule", async () => {
 	const report = await lint(
-		"somehting #1",
+		"something #1",
 		{
 			"async-rule": [RuleConfigSeverity.Error, "never"],
 		},
@@ -422,7 +422,7 @@ test("returns position for body-max-line-length error", async () => {
 });
 
 test("returns no position for rules without position support", async () => {
-	const result = await lint("somehting #1", {
+	const result = await lint("something #1", {
 		"references-empty": [RuleConfigSeverity.Error, "always"],
 	});
 	expect(result.valid).toBe(false);
