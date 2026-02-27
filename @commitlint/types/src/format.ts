@@ -7,12 +7,18 @@ export type Formatter = (
 	options: FormatOptions,
 ) => string;
 
+export interface Position {
+	line: number;
+	column: number;
+	offset: number;
+}
+
 export interface FormattableProblem {
 	level: RuleConfigSeverity;
 	name: keyof QualifiedRules;
 	message: string;
-	start?: { line: number; column: number; offset: number };
-	end?: { line: number; column: number; offset: number };
+	start?: Position;
+	end?: Position;
 }
 
 export interface FormattableResult {
