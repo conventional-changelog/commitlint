@@ -5,6 +5,7 @@ import {
 	FormatOptions,
 	FormattableResult,
 	WithInput,
+	FormattableProblem,
 } from "@commitlint/types";
 
 const DEFAULT_SIGNS = [" ", "⚠", "✖"] as const;
@@ -37,7 +38,7 @@ function formatInput(
 	result: FormattableResult & WithInput,
 	options: FormatOptions = {},
 ): string[] {
-	const { color: enabled = true } = options;
+	const { color: enabled = true, showPosition = false } = options;
 	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
@@ -50,9 +51,76 @@ function formatInput(
 	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
-	return options.verbose || hasProblems
-		? [`${decoration}   input: ${decoratedInput}`]
-		: [];
+	if (!hasProblems) {
+		return options.verbose ? [`${decoration}   input: ${decoratedInput}`] : [];
+	}
+
+	const positionIndicator = showPosition
+		? getPositionIndicator(errors, input)
+		: undefined;
+
+	const lines: string[] = [`${decoration}   input: ${decoratedInput}`];
+
+	if (positionIndicator) {
+		lines.push(positionIndicator);
+	}
+
+	return lines;
+}
+
+function getPositionIndicator(
+	problems: FormattableProblem[],
+	input: string,
+): string | undefined {
+	const firstError = problems[0];
+	if (!firstError?.start || !firstError?.end) {
+		return undefined;
+	}
+
+	const { start, end } = firstError;
+	const padding = "           ";
+
+	const tilde = "~";
+	let indicator = "";
+
+	if (start.line === 1) {
+		const spacesBefore = Math.max(0, start.column - 1);
+		const tildeLength = Math.max(1, end.column - start.column);
+		indicator = padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
+	} else if (start.line === 2) {
+		const headerEndIndex = input.indexOf("\n\n");
+		if (headerEndIndex === -1) return undefined;
+
+		const bodyLineStart = headerEndIndex + 2;
+		const charsOnLine = input.slice(bodyLineStart).indexOf("\n");
+		const lineLength =
+			charsOnLine === -1 ? input.length - bodyLineStart : charsOnLine;
+
+		if (start.column <= lineLength) {
+			const spacesBefore = Math.max(0, start.column - 1);
+			const tildeLength = Math.max(
+				1,
+				Math.min(end.column, lineLength) - start.column,
+			);
+			indicator =
+				padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
+		}
+	} else if (start.line === 3) {
+		const footerStartIndex = input.lastIndexOf("\n\n");
+		if (footerStartIndex === -1) return undefined;
+
+		const footerLineStart = footerStartIndex + 2;
+		const lineLength = input.length - footerLineStart;
+
+		if (start.column <= lineLength) {
+			const spacesBefore = Math.max(0, start.column - 1);
+			const tildeLength = Math.max(1, end.column - start.column);
+			indicator =
+				padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
+		}
+	}
+
+	return indicator || undefined;
 }
 
 export function formatResult(

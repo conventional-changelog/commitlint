@@ -135,6 +135,10 @@ const cli = yargs(process.argv.slice(2))
 			type: "boolean",
 			description: "enable verbose output for reports without problems",
 		},
+		"show-position": {
+			type: "boolean",
+			description: "show position of error in output",
+		},
 		strict: {
 			alias: "s",
 			type: "boolean",
@@ -398,6 +402,7 @@ async function main(args: MainArgs): Promise<void> {
 		color: flags.color,
 		verbose: flags.verbose,
 		helpUrl,
+		showPosition: flags["show-position"],
 	});
 
 	if (!flags.quiet && output !== "") {
