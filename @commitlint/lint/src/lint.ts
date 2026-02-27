@@ -10,16 +10,11 @@ import type {
 	BaseRule,
 	RuleType,
 	QualifiedRules,
+	Position,
 } from "@commitlint/types";
 import { RuleConfigSeverity } from "@commitlint/types";
 
 import { buildCommitMessage } from "./commit-message.js";
-
-interface Position {
-	line: number;
-	column: number;
-	offset: number;
-}
 
 function getRulePosition(
 	ruleName: string,
