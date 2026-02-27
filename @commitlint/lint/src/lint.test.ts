@@ -314,3 +314,282 @@ test("passes for async rule", async () => {
 
 	expect(report.valid).toBe(true);
 });
+
+test("returns position for type-enum error", async () => {
+	const result = await lint("foo: some message", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors).toHaveLength(1);
+	expect(result.errors[0].name).toBe("type-enum");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 1, offset: 0 });
+	expect(result.errors[0].end).toEqual({ line: 1, column: 4, offset: 3 });
+});
+
+test("returns position for type-case error", async () => {
+	const result = await lint("FIX: some message", {
+		"type-case": [RuleConfigSeverity.Error, "always", "lower-case"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("type-case");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 1, offset: 0 });
+	expect(result.errors[0].end).toEqual({ line: 1, column: 4, offset: 3 });
+});
+
+test("returns position for type-max-length error", async () => {
+	const longType = "toolongtype";
+	const result = await lint(`${longType}: some message`, {
+		"type-max-length": [RuleConfigSeverity.Error, "always", 5],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("type-max-length");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 1, offset: 0 });
+	expect(result.errors[0].end).toEqual({
+		line: 1,
+		column: longType.length + 1,
+		offset: longType.length,
+	});
+});
+
+test("returns position for scope-enum error", async () => {
+	const result = await lint("feat(badscope): some message", {
+		"scope-enum": [RuleConfigSeverity.Error, "always", ["cli", "core"]],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("scope-enum");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 6, offset: 5 });
+	expect(result.errors[0].end).toEqual({ line: 1, column: 14, offset: 13 });
+});
+
+test("returns position for scope-case error", async () => {
+	const result = await lint("feat(SCOPE): some message", {
+		"scope-case": [RuleConfigSeverity.Error, "always", "lower-case"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("scope-case");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 6, offset: 5 });
+	expect(result.errors[0].end).toEqual({ line: 1, column: 11, offset: 10 });
+});
+
+test("returns position for subject-max-length error", async () => {
+	const longSubject =
+		"this is a very long subject that exceeds the maximum allowed characters";
+	const result = await lint(`feat: ${longSubject}`, {
+		"subject-max-length": [RuleConfigSeverity.Error, "always", 20],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("subject-max-length");
+	expect(result.errors[0].start?.line).toBe(1);
+	expect(result.errors[0].start?.column).toBeGreaterThan(5);
+	expect(result.errors[0].end?.line).toBe(1);
+});
+
+test("returns position for subject-full-stop error", async () => {
+	const result = await lint("feat: some message.", {
+		"subject-full-stop": [RuleConfigSeverity.Error, "never", "."],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("subject-full-stop");
+	expect(result.errors[0].start?.line).toBe(1);
+	expect(result.errors[0].start?.column).toBeGreaterThan(5);
+});
+
+test("returns position for header-max-length error", async () => {
+	const longHeader =
+		"feat: this is a very long header that definitely exceeds the maximum allowed character limit for commit messages";
+	const result = await lint(longHeader, {
+		"header-max-length": [RuleConfigSeverity.Error, "always", 50],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("header-max-length");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 1, offset: 0 });
+	expect(result.errors[0].end).toEqual({
+		line: 1,
+		column: longHeader.length + 1,
+		offset: longHeader.length,
+	});
+});
+
+test("returns position for body-max-line-length error", async () => {
+	const longBodyLine =
+		"this is a body line that is way too long and exceeds the maximum allowed character limit of one hundred characters for each line in the body";
+	const result = await lint(`feat: some message\n\n${longBodyLine}`, {
+		"body-max-line-length": [RuleConfigSeverity.Error, "always", 80],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-max-line-length");
+	expect(result.errors[0].start?.line).toBe(2);
+});
+
+test("returns no position for rules without position support", async () => {
+	const result = await lint("somehting #1", {
+		"references-empty": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("references-empty");
+	expect(result.errors[0].start).toBeUndefined();
+	expect(result.errors[0].end).toBeUndefined();
+});
+
+test("returns correct position for valid commit (no position needed)", async () => {
+	const result = await lint("feat: add new feature", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+	expect(result.valid).toBe(true);
+	expect(result.errors).toHaveLength(0);
+});
+
+test("returns position for subject-full-stop error", async () => {
+	const result = await lint("feat: some message.", {
+		"subject-full-stop": [RuleConfigSeverity.Error, "never", "."],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("subject-full-stop");
+	expect(result.errors[0].start).toBeDefined();
+	expect(result.errors[0].start?.line).toBe(1);
+	expect(result.errors[0].end).toBeDefined();
+});
+
+test("returns position for header-max-length error", async () => {
+	const longHeader =
+		"feat: this is a very long header that definitely exceeds the maximum allowed character limit for commit messages";
+	const result = await lint(longHeader, {
+		"header-max-length": [RuleConfigSeverity.Error, "always", 50],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("header-max-length");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 1, offset: 0 });
+	expect(result.errors[0].end).toEqual({
+		line: 1,
+		column: longHeader.length + 1,
+		offset: longHeader.length,
+	});
+});
+
+test("returns position for body-max-line-length error", async () => {
+	const longBodyLine =
+		"this is a body line that is way too long and exceeds the maximum allowed character limit";
+	const result = await lint(`feat: some message\n\n${longBodyLine}`, {
+		"body-max-line-length": [RuleConfigSeverity.Error, "always", 50],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-max-line-length");
+	expect(result.errors[0].start).toBeDefined();
+	expect(result.errors[0].start?.line).toBe(2);
+});
+
+test("returns position for header-max-length error", async () => {
+	const longHeader =
+		"feat: this is a very long header that definitely exceeds the maximum allowed character limit for commit messages";
+	const result = await lint(longHeader, {
+		"header-max-length": [RuleConfigSeverity.Error, "always", 50],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("header-max-length");
+	expect(result.errors[0].start).toEqual({ line: 1, column: 1, offset: 0 });
+	expect(result.errors[0].end).toEqual({
+		line: 1,
+		column: longHeader.length + 1,
+		offset: longHeader.length,
+	});
+});
+
+test("returns position for body-max-line-length error", async () => {
+	const longBodyLine =
+		"this is a body line that is way too long and exceeds the maximum allowed character limit";
+	const result = await lint(`feat: some message\n\n${longBodyLine}`, {
+		"body-max-line-length": [RuleConfigSeverity.Error, "always", 50],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-max-line-length");
+	expect(result.errors[0].start).toBeDefined();
+	expect(result.errors[0].start?.line).toBe(2);
+});
+
+test("returns no position for rules without position support", async () => {
+	const result = await lint("somehting #1", {
+		"references-empty": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("references-empty");
+	expect(result.errors[0].start).toBeUndefined();
+	expect(result.errors[0].end).toBeUndefined();
+});
+
+test("returns position when type is provided", async () => {
+	const result = await lint("feat: some message", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["bar"]],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("type-enum");
+	expect(result.errors[0].start).toBeDefined();
+});
+
+test("returns position when scope is provided", async () => {
+	const result = await lint("feat(myscope): some message", {
+		"scope-enum": [RuleConfigSeverity.Error, "always", ["other"]],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("scope-enum");
+	expect(result.errors[0].start).toBeDefined();
+});
+
+test("handles duplicate text in message - uses first occurrence", async () => {
+	const result = await lint("fix: test test", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+	expect(result.valid).toBe(true);
+	expect(result.errors).toHaveLength(0);
+});
+
+test("returns correct position for valid commit (no position needed)", async () => {
+	const result = await lint("feat: add new feature", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+	expect(result.valid).toBe(true);
+	expect(result.errors).toHaveLength(0);
+});
+
+test("returns no position for rules without position support", async () => {
+	const result = await lint("somehting #1", {
+		"references-empty": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("references-empty");
+	expect(result.errors[0].start).toBeUndefined();
+	expect(result.errors[0].end).toBeUndefined();
+});
+
+test("returns position when type is provided", async () => {
+	const result = await lint("feat: some message", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["bar"]],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("type-enum");
+	expect(result.errors[0].start).toBeDefined();
+});
+
+test("returns position when scope is provided", async () => {
+	const result = await lint("feat(myscope): some message", {
+		"scope-enum": [RuleConfigSeverity.Error, "always", ["other"]],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("scope-enum");
+	expect(result.errors[0].start).toBeDefined();
+});
+
+test("handles duplicate text in message - uses first occurrence", async () => {
+	const result = await lint("fix: test test", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+	expect(result.valid).toBe(true);
+	expect(result.errors).toHaveLength(0);
+});
+
+test("returns correct position for valid commit (no position needed)", async () => {
+	const result = await lint("feat: add new feature", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+	expect(result.valid).toBe(true);
+	expect(result.errors).toHaveLength(0);
+});
