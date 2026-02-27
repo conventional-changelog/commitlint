@@ -11,6 +11,8 @@ export interface FormattableProblem {
 	level: RuleConfigSeverity;
 	name: keyof QualifiedRules;
 	message: string;
+	start?: { line: number; column: number; offset: number };
+	end?: { line: number; column: number; offset: number };
 }
 
 export interface FormattableResult {
@@ -41,4 +43,5 @@ export interface FormatOptions {
 	colors?: readonly [PicocolorsColor, PicocolorsColor, PicocolorsColor];
 	verbose?: boolean;
 	helpUrl?: string;
+	showPosition?: boolean;
 }
