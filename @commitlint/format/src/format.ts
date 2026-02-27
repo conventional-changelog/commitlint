@@ -83,49 +83,26 @@ function getPositionIndicator(
 	const padding = "           ";
 
 	const tilde = "~";
-	let indicator = "";
 
-	if (start.line === 1) {
-		const spacesBefore = Math.max(0, start.column - 1);
-		const tildeLength = Math.max(1, end.column - start.column);
-		indicator = padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
-	} else if (start.line === 2) {
-		const headerEndIndex = input.indexOf("\n\n");
-		if (headerEndIndex === -1) return undefined;
+	const normalizedInput = input.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+	const lines = normalizedInput.split("\n");
+	const targetLine = lines[start.line - 1];
 
-		const bodyText = input.slice(headerEndIndex + 2);
-		const firstBodyLine = bodyText.split("\n")[0];
-		const lineLength = firstBodyLine.length;
-
-		if (start.column <= lineLength + 1) {
-			const spacesBefore = Math.max(0, start.column - 1);
-			const tildeLength = Math.max(
-				1,
-				Math.min(end.column - start.column, lineLength - (start.column - 1)),
-			);
-			indicator =
-				padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
-		}
-	} else if (start.line === 3) {
-		const footerStartIndex = input.lastIndexOf("\n\n");
-		if (footerStartIndex === -1) return undefined;
-
-		const footerText = input.slice(footerStartIndex + 2);
-		const firstFooterLine = footerText.split("\n")[0];
-		const lineLength = firstFooterLine.length;
-
-		if (start.column <= lineLength + 1) {
-			const spacesBefore = Math.max(0, start.column - 1);
-			const tildeLength = Math.max(
-				1,
-				Math.min(end.column - start.column, lineLength - (start.column - 1)),
-			);
-			indicator =
-				padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
-		}
+	if (!targetLine) {
+		return undefined;
 	}
 
-	return indicator || undefined;
+	const lineLength = targetLine.length;
+	const spacesBefore = Math.max(0, start.column - 1);
+	const tildeLength = Math.max(
+		1,
+		Math.min(end.column - start.column, lineLength - (start.column - 1)),
+	);
+
+	const indicator =
+		padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
+
+	return indicator;
 }
 
 export function formatResult(
