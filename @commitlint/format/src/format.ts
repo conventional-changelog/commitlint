@@ -56,7 +56,7 @@ function formatInput(
 	}
 
 	const positionIndicator = showPosition
-		? getPositionIndicator(errors, input)
+		? getPositionIndicator([...errors, ...warnings], input)
 		: undefined;
 
 	const lines: string[] = [`${decoration}   input: ${decoratedInput}`];
@@ -91,16 +91,15 @@ function getPositionIndicator(
 		const headerEndIndex = input.indexOf("\n\n");
 		if (headerEndIndex === -1) return undefined;
 
-		const bodyLineStart = headerEndIndex + 2;
-		const charsOnLine = input.slice(bodyLineStart).indexOf("\n");
-		const lineLength =
-			charsOnLine === -1 ? input.length - bodyLineStart : charsOnLine;
+		const bodyText = input.slice(headerEndIndex + 2);
+		const firstBodyLine = bodyText.split("\n")[0];
+		const lineLength = firstBodyLine.length;
 
-		if (start.column <= lineLength) {
+		if (start.column <= lineLength + 1) {
 			const spacesBefore = Math.max(0, start.column - 1);
 			const tildeLength = Math.max(
 				1,
-				Math.min(end.column, lineLength) - start.column,
+				Math.min(end.column - start.column, lineLength - (start.column - 1)),
 			);
 			indicator =
 				padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
@@ -109,12 +108,16 @@ function getPositionIndicator(
 		const footerStartIndex = input.lastIndexOf("\n\n");
 		if (footerStartIndex === -1) return undefined;
 
-		const footerLineStart = footerStartIndex + 2;
-		const lineLength = input.length - footerLineStart;
+		const footerText = input.slice(footerStartIndex + 2);
+		const firstFooterLine = footerText.split("\n")[0];
+		const lineLength = firstFooterLine.length;
 
-		if (start.column <= lineLength) {
+		if (start.column <= lineLength + 1) {
 			const spacesBefore = Math.max(0, start.column - 1);
-			const tildeLength = Math.max(1, end.column - start.column);
+			const tildeLength = Math.max(
+				1,
+				Math.min(end.column - start.column, lineLength - (start.column - 1)),
+			);
 			indicator =
 				padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
 		}

@@ -45,8 +45,8 @@ function getRulePosition(
 		case "type-min-length":
 		case "type-max-length": {
 			if (!parsed.type) return undefined;
-			const offset = raw.indexOf(parsed.type);
-			if (offset === -1) return undefined;
+			if (!raw.startsWith(parsed.type)) return undefined;
+			const offset = 0;
 			return {
 				start: { line: 1, column: offset + 1, offset },
 				end: {
@@ -315,8 +315,7 @@ export default async function lint(
 		});
 
 	const results = (await Promise.all(pendingResults)).filter(
-		(result): result is LintRuleOutcome =>
-			result !== null && result.message !== undefined,
+		(result): result is LintRuleOutcome => result !== null,
 	);
 
 	const errors = results.filter(
