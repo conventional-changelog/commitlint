@@ -1,5 +1,6 @@
 import { createRequire } from "node:module";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 
@@ -232,6 +233,38 @@ export function resolveFromSilent(
 }
 
 /**
+ * Get the npx cache directory path if it exists.
+ * npx downloads packages to a cache directory (e.g., ~/.npm/_npx)
+ */
+function getNpxCachePath(): string | void {
+	const home = os.homedir();
+	const npxPath = path.join(home, ".npm", "_npx");
+
+	if (!fs.existsSync(npxPath)) {
+		return undefined;
+	}
+
+	try {
+		const entries = fs.readdirSync(npxPath, { withFileTypes: true });
+		const dirs = entries
+			.filter((entry) => entry.isDirectory())
+			.map((entry) => ({
+				name: entry.name,
+				mtime: fs.statSync(path.join(npxPath, entry.name)).mtime,
+			}))
+			.sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
+
+		if (dirs.length > 0) {
+			return path.join(npxPath, dirs[0].name, "node_modules");
+		}
+	} catch {
+		// Ignore errors reading npx cache
+	}
+
+	return undefined;
+}
+
+/**
  * @see https://github.com/sindresorhus/resolve-global/blob/682a6bb0bd8192b74a6294219bb4c536b3708b65/index.js#L7
  */
 export function resolveGlobalSilent(specifier: string): string | void {
@@ -241,6 +274,14 @@ export function resolveGlobalSilent(specifier: string): string | void {
 	]) {
 		try {
 			return resolveFrom(specifier, globalPackages);
+		} catch {}
+	}
+
+	// Check npx cache directory
+	const npxCachePath = getNpxCachePath();
+	if (npxCachePath) {
+		try {
+			return resolveFrom(specifier, npxCachePath);
 		} catch {}
 	}
 }
