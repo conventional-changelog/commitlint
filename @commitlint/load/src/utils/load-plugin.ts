@@ -30,12 +30,22 @@ export interface LoadPluginOptions {
 	searchPaths?: string[];
 }
 
+function normalizeOptions(
+	options: LoadPluginOptions | boolean,
+): LoadPluginOptions {
+	if (typeof options === "boolean") {
+		return { debug: options };
+	}
+	return options;
+}
+
 export default async function loadPlugin(
 	plugins: PluginRecords,
 	pluginName: string,
-	options: LoadPluginOptions = {},
+	options: LoadPluginOptions | boolean = {},
 ): Promise<PluginRecords> {
-	const { debug = false, searchPaths = [] } = options;
+	const normalized = normalizeOptions(options);
+	const { debug = false, searchPaths = [] } = normalized;
 
 	for (const searchPath of searchPaths) {
 		if (typeof searchPath !== "string" || !path.isAbsolute(searchPath)) {
