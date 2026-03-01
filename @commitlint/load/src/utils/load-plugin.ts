@@ -118,10 +118,14 @@ export default async function loadPlugin(
 		if (debug) {
 			let version: string | null = null;
 
-			try {
-				version = require(`${longName}/package.json`).version;
-			} catch {
-				// Do nothing
+			if (resolvedPath) {
+				try {
+					version = require(
+						path.join(path.dirname(resolvedPath), "package.json"),
+					).version;
+				} catch {
+					// Do nothing
+				}
 			}
 
 			const loadedPluginAndVersion = version
