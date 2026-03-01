@@ -89,26 +89,28 @@ export default async function loadPlugin(
 					// Ignore - path not critical
 				}
 			} catch (err) {
+				let resolutionError: Error | undefined;
 				try {
 					resolvedPath = require.resolve(longName);
-					plugin = await dynamicImport<Plugin>(resolvedPath);
-				} catch {
+				} catch (resolveErr) {
+					resolutionError = resolveErr as Error;
+				}
+
+				if (resolutionError) {
+					// Resolution failed - throw MissingPluginError
 					if (debug) {
 						console.debug(
-							`Failed to load plugin ${longName} via default resolution: ${(err as Error).message}`,
+							`Failed to resolve plugin ${longName}: ${resolutionError.message}`,
 						);
 					}
-
-					const error = new MissingPluginError(
-						pluginName,
-						(err as Error).message,
-						{
-							pluginName: longName,
-							commitlintPath: path.resolve(__dirname, "../.."),
-						},
-					);
-					throw error;
+					throw new MissingPluginError(pluginName, resolutionError.message, {
+						pluginName: longName,
+						commitlintPath: path.resolve(__dirname, "../.."),
+					});
 				}
+
+				// Resolution succeeded but import failed - rethrow original error
+				throw err;
 			}
 		}
 
@@ -126,14 +128,26 @@ export default async function loadPlugin(
 				? `${longName}@${version}`
 				: `${longName}, version unknown`;
 
+			const fromPath = resolvedPath ? ` (from ${resolvedPath})` : "";
 			console.log(
 				pc.blue(
-					`Loaded plugin ${pluginName} (${loadedPluginAndVersion}) (from ${resolvedPath})`,
+					`Loaded plugin ${pluginName} (${loadedPluginAndVersion})${fromPath}`,
 				),
 			);
 		}
 
-		plugins[pluginKey] = plugin;
+		if (plugin) {
+			plugins[pluginKey] = plugin;
+		} else {
+			throw new MissingPluginError(
+				pluginName,
+				"Plugin loaded but is undefined",
+				{
+					pluginName: longName,
+					commitlintPath: path.resolve(__dirname, "../.."),
+				},
+			);
+		}
 	}
 
 	return plugins;

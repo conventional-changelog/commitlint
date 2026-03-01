@@ -3,6 +3,10 @@ import { AsyncRule, Plugin, Rule, SyncRule } from "@commitlint/types";
 
 import loadPlugin from "./load-plugin.js";
 
+vi.mock("@commitlint/resolve-extends", () => ({
+	resolveFromNpxCache: vi.fn(() => undefined),
+}));
+
 vi.mock("commitlint-plugin-example", () => ({ example: true }));
 
 vi.mock("@scope/commitlint-plugin-example", () => ({ scope: true }));
