@@ -290,7 +290,10 @@ function getNpxCachePaths(): string[] {
 			.sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
 
 		npxCachePathsCache = dirs.map((d) => d.path);
-	} catch {
+	} catch (err) {
+		if (process.env.DEBUG === "true") {
+			console.debug(`Failed to read npx cache: ${(err as Error).message}`);
+		}
 		npxCachePathsCache = [];
 	}
 
@@ -306,8 +309,12 @@ export function resolveFromNpxCache(specifier: string): string | undefined {
 	for (const npxDir of getNpxCachePaths()) {
 		try {
 			return require.resolve(specifier, { paths: [npxDir] });
-		} catch {
-			// Try next directory
+		} catch (err) {
+			if (process.env.DEBUG === "true") {
+				console.debug(
+					`Failed to resolve ${specifier} from ${npxDir}: ${(err as Error).message}`,
+				);
+			}
 		}
 	}
 	return undefined;
@@ -323,7 +330,13 @@ export function resolveGlobalSilent(specifier: string): string | undefined {
 	]) {
 		try {
 			return resolveFrom(specifier, globalPackages);
-		} catch {}
+		} catch (err) {
+			if (process.env.DEBUG === "true") {
+				console.debug(
+					`Failed to resolve ${specifier} from global: ${(err as Error).message}`,
+				);
+			}
+		}
 	}
 
 	// Check npx cache directories
