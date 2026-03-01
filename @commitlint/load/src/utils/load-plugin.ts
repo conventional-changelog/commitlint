@@ -20,6 +20,10 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 	return ("default" in imported && imported.default) || imported;
 };
 
+function sanitizeErrorMessage(message: string): string {
+	return message.replace(/\/[^/]+\/node_modules/g, "...");
+}
+
 export interface LoadPluginOptions {
 	debug?: boolean;
 	searchPaths?: string[];
@@ -103,10 +107,14 @@ export default async function loadPlugin(
 							`Failed to resolve plugin ${longName}: ${resolutionError.message}`,
 						);
 					}
-					throw new MissingPluginError(pluginName, resolutionError.message, {
-						pluginName: longName,
-						commitlintPath: path.resolve(__dirname, "../.."),
-					});
+					throw new MissingPluginError(
+						pluginName,
+						sanitizeErrorMessage(resolutionError.message),
+						{
+							pluginName: longName,
+							commitlintPath: path.resolve(__dirname, "../.."),
+						},
+					);
 				}
 
 				// Resolution succeeded but import failed - rethrow original error
