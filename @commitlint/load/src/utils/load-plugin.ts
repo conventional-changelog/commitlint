@@ -22,7 +22,22 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 };
 
 function sanitizeErrorMessage(message: string): string {
-	return message.replace(/\/[^/]+\/node_modules/g, "...");
+	return message
+		.replace(/\/[^/]+\/node_modules/g, "...")
+		.replace(/\\[^\\]+\\node_modules/g, "...");
+}
+
+function findPackageJson(dir: string): string | null {
+	let current = dir;
+	const root = path.parse(dir).root;
+	while (current !== root) {
+		const pkgPath = path.join(current, "package.json");
+		if (fs.existsSync(pkgPath)) {
+			return pkgPath;
+		}
+		current = path.dirname(current);
+	}
+	return null;
 }
 
 export interface LoadPluginOptions {
@@ -153,9 +168,10 @@ export default async function loadPlugin(
 
 			if (resolvedPath) {
 				try {
-					version = require(
-						path.join(path.dirname(resolvedPath), "package.json"),
-					).version;
+					const pkgPath = findPackageJson(path.dirname(resolvedPath));
+					if (pkgPath) {
+						version = require(pkgPath).version;
+					}
 				} catch {
 					// Do nothing
 				}
