@@ -141,38 +141,6 @@ test("should load plugin from npx cache when available", async () => {
 	expect(plugins["example"]).toBeDefined();
 });
 
-test("should prefer npx cache over default resolution", async () => {
-	vi.mocked(resolveFromNpxCache).mockReturnValueOnce(
-		path.join(
-			os.tmpdir(),
-			"npx-cache",
-			"node_modules",
-			"commitlint-plugin-example",
-		),
-	);
-
-	vi.mock("commitlint-plugin-example", () => ({ example: true }));
-
-	const plugins = await loadPlugin({}, "example");
-	expect(plugins["example"]).toBeDefined();
-});
-
-test("should prefer npx cache over default resolution", async () => {
-	vi.mocked(resolveFromNpxCache).mockReturnValueOnce(
-		path.join(
-			os.tmpdir(),
-			"npx-cache",
-			"node_modules",
-			"commitlint-plugin-example",
-		),
-	);
-
-	vi.mock("commitlint-plugin-example", () => ({ example: true }));
-
-	const plugins = await loadPlugin({}, "example");
-	expect(plugins["example"]).toBeDefined();
-});
-
 test("should accept boolean as third parameter for backward compatibility", async () => {
 	const plugins = await loadPlugin({}, "example", true);
 	expect(plugins["example"]).toBeDefined();

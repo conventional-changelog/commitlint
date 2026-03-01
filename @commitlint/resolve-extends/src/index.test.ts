@@ -592,14 +592,3 @@ test("resolveFromNpxCache returns undefined when npx cache does not exist", asyn
 	const result = resolveFromNpxCache("nonexistent-package");
 	expect(result).toBeUndefined();
 });
-
-test("resolveFromNpxCache returns undefined when npx cache does not exist", async () => {
-	const { resolveFromNpxCache } = await import("./index.js");
-
-	vi.spyOn(require, "resolve").mockImplementation(() => {
-		throw new Error("Module not found");
-	});
-
-	const result = resolveFromNpxCache("nonexistent-package");
-	expect(result).toBeUndefined();
-});
