@@ -107,8 +107,10 @@ function getRulePosition(
 				}
 				return undefined;
 			}
-			const subjectStart = raw.indexOf(parsed.subject);
-			if (subjectStart === -1) return undefined;
+			const typeEnd = parsed.type ? parsed.type.length : 0;
+			const hasScope = parsed.scope ? parsed.scope.length + 3 : 0;
+			const separator = ": ".length;
+			const subjectStart = typeEnd + hasScope + separator;
 			return {
 				start: { line: 1, column: subjectStart + 1, offset: subjectStart },
 				end: {
