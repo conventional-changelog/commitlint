@@ -73,6 +73,11 @@ export default async function loadPlugin(
 				`Invalid searchPath "${searchPath}": directory does not exist`,
 			);
 		}
+		if (!fs.statSync(searchPath).isDirectory()) {
+			throw new Error(
+				`Invalid searchPath "${searchPath}": must be a directory, not a file`,
+			);
+		}
 	}
 
 	const longName = normalizePackageName(pluginName);
