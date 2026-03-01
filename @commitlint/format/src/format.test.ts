@@ -328,7 +328,7 @@ test("shows position indicator when showPosition is true and error has position"
 		},
 	);
 
-	expect(actual).toContain("~~~");
+	expect(actual).toContain("^");
 });
 
 test("does not show position indicator when showPosition is false", () => {
@@ -355,10 +355,10 @@ test("does not show position indicator when showPosition is false", () => {
 		},
 	);
 
-	expect(actual).not.toContain("~~~");
+	expect(actual).not.toContain("^");
 });
 
-test("does not show position indicator when showPosition is not provided", () => {
+test("shows position indicator when showPosition is not provided (default)", () => {
 	const actual = format(
 		{
 			results: [
@@ -381,7 +381,7 @@ test("does not show position indicator when showPosition is not provided", () =>
 		},
 	);
 
-	expect(actual).not.toContain("~~~");
+	expect(actual).toContain("^");
 });
 
 test("does not show position indicator when error has no position", () => {
@@ -406,7 +406,7 @@ test("does not show position indicator when error has no position", () => {
 		},
 	);
 
-	expect(actual).not.toContain("~~~");
+	expect(actual).not.toContain("^");
 });
 
 test("shows correct position for subject error", () => {
@@ -434,10 +434,10 @@ test("shows correct position for subject error", () => {
 		},
 	);
 
-	expect(actual).toContain("~~~~~~~~");
+	expect(actual).toContain("^");
 });
 
-test("shows position indicator with multiple tildes for longer errors", () => {
+test("shows position indicator with single caret for longer errors", () => {
 	const actual = format(
 		{
 			results: [
@@ -462,7 +462,5 @@ test("shows position indicator with multiple tildes for longer errors", () => {
 		},
 	);
 
-	expect(actual).toContain(
-		"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-	);
+	expect(actual).toContain("^");
 });

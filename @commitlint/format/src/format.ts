@@ -38,7 +38,7 @@ function formatInput(
 	result: FormattableResult & WithInput,
 	options: FormatOptions = {},
 ): string[] {
-	const { color: enabled = true, showPosition = false } = options;
+	const { color: enabled = true, showPosition = true } = options;
 	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
@@ -47,19 +47,20 @@ function formatInput(
 
 	const sign = "⧗";
 	const decoration = enabled ? pc.gray(sign) : sign;
+	const prefix = `${decoration}   input: `;
 
 	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
 	if (!hasProblems) {
-		return options.verbose ? [`${decoration}   input: ${decoratedInput}`] : [];
+		return options.verbose ? [`${prefix}${decoratedInput}`] : [];
 	}
 
 	const positionIndicator = showPosition
-		? getPositionIndicator([...errors, ...warnings], input)
+		? getPositionIndicator([...errors, ...warnings], input, prefix.length)
 		: undefined;
 
-	const lines: string[] = [`${decoration}   input: ${decoratedInput}`];
+	const lines: string[] = [`${prefix}${decoratedInput}`];
 
 	if (positionIndicator) {
 		lines.push(positionIndicator);
@@ -71,6 +72,7 @@ function formatInput(
 function getPositionIndicator(
 	problems: FormattableProblem[],
 	input: string,
+	prefixLength: number,
 ): string | undefined {
 	const problemWithPosition = problems.find(
 		(problem) => problem?.start !== undefined && problem?.end !== undefined,
@@ -79,28 +81,21 @@ function getPositionIndicator(
 		return undefined;
 	}
 
-	const { start, end } = problemWithPosition;
-	const padding = "           ";
+	const padding = " ".repeat(prefixLength);
 
-	const tilde = "~";
+	const caret = "^";
 
 	const normalizedInput = input.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 	const lines = normalizedInput.split("\n");
-	const targetLine = lines[start.line - 1];
+	const targetLine = lines[problemWithPosition.start.line - 1];
 
 	if (!targetLine) {
 		return undefined;
 	}
 
-	const lineLength = targetLine.length;
-	const spacesBefore = Math.max(0, start.column - 1);
-	const tildeLength = Math.max(
-		1,
-		Math.min(end.column - start.column, lineLength - (start.column - 1)),
-	);
+	const spacesBefore = Math.max(0, problemWithPosition.start.column - 1);
 
-	const indicator =
-		padding + " ".repeat(spacesBefore) + tilde.repeat(tildeLength);
+	const indicator = padding + " ".repeat(spacesBefore) + caret;
 
 	return indicator;
 }

@@ -606,7 +606,7 @@ test("should print help", async () => {
 		  -q, --quiet          toggle console output  [boolean] [default: false]
 		  -t, --to             upper end of the commit range to lint; applies if edit=false  [string]
 		  -V, --verbose        enable verbose output for reports without problems  [boolean]
-		      --show-position  show position of error in output  [boolean]
+		      --show-position  show position of error in output  [boolean] [default: true]
 		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for errors  [boolean]
 		      --options        path to a JSON file or Common.js module containing CLI options
 		  -v, --version        display version information  [boolean]

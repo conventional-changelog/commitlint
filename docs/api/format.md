@@ -62,7 +62,7 @@ type formatOptions = {
   helpUrl: string;
 
   /**
-   * Show position indicator (~~~) for errors in the input line
+   * Show position indicator (^) for errors in the input line
    **/
   showPosition?: boolean;
 }
