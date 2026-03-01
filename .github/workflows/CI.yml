@@ -53,7 +53,7 @@ jobs:
         run: yarn install --ignore-engines --frozen-lockfile
 
       - name: Check format
-        run: yarn format || (yarn format-fix; git diff --exit-code)
+        run: yarn format || (yarn format-fix; git diff; echo "Formatting did not match (see above diff), please run 'yarn format-fix'" >&2 && exit 1)
 
       - name: Lint
         run: yarn lint
