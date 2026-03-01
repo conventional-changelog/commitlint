@@ -581,3 +581,25 @@ test("should correctly merge nested configs", async () => {
 
 	expect(actual).toEqual(expected);
 });
+
+test("resolveFromNpxCache returns undefined when npx cache does not exist", async () => {
+	const { resolveFromNpxCache } = await import("./index.js");
+
+	vi.spyOn(require, "resolve").mockImplementation(() => {
+		throw new Error("Module not found");
+	});
+
+	const result = resolveFromNpxCache("nonexistent-package");
+	expect(result).toBeUndefined();
+});
+
+test("resolveFromNpxCache returns undefined when npx cache does not exist", async () => {
+	const { resolveFromNpxCache } = await import("./index.js");
+
+	vi.spyOn(require, "resolve").mockImplementation(() => {
+		throw new Error("Module not found");
+	});
+
+	const result = resolveFromNpxCache("nonexistent-package");
+	expect(result).toBeUndefined();
+});
