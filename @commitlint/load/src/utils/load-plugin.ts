@@ -1,4 +1,5 @@
 import { createRequire } from "node:module";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -35,6 +36,20 @@ export default async function loadPlugin(
 	options: LoadPluginOptions = {},
 ): Promise<PluginRecords> {
 	const { debug = false, searchPaths = [] } = options;
+
+	for (const searchPath of searchPaths) {
+		if (typeof searchPath !== "string" || !path.isAbsolute(searchPath)) {
+			throw new Error(
+				`Invalid searchPath "${searchPath}": must be an absolute path`,
+			);
+		}
+		if (!fs.existsSync(searchPath)) {
+			throw new Error(
+				`Invalid searchPath "${searchPath}": directory does not exist`,
+			);
+		}
+	}
+
 	const longName = normalizePackageName(pluginName);
 	const shortName = getShorthandName(longName);
 
