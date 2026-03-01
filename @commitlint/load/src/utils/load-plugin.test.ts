@@ -1,7 +1,10 @@
 import { test, expect, vi } from "vitest";
 import { AsyncRule, Plugin, Rule, SyncRule } from "@commitlint/types";
+import path from "node:path";
+import os from "node:os";
 
 import loadPlugin from "./load-plugin.js";
+import { resolveFromNpxCache } from "@commitlint/resolve-extends";
 
 vi.mock("@commitlint/resolve-extends", () => ({
 	resolveFromNpxCache: vi.fn(() => undefined),
@@ -117,4 +120,97 @@ test("should load a scoped plugin when referenced by short name, but should not 
 test("should load a scoped plugin when referenced by long name, but should not get the plugin if '@scope/' is omitted", async () => {
 	const plugins = await loadPlugin({}, "@scope/commitlint-plugin-example");
 	expect(plugins["example"]).toBeUndefined();
+});
+
+test("should load plugin from npx cache when available", async () => {
+	vi.mocked(resolveFromNpxCache).mockReturnValueOnce(
+		path.join(
+			os.tmpdir(),
+			"npx-cache",
+			"node_modules",
+			"commitlint-plugin-example",
+		),
+	);
+
+	vi.mock("commitlint-plugin-example", () => ({ example: true }));
+
+	const plugins = await loadPlugin({}, "example");
+	expect(vi.mocked(resolveFromNpxCache)).toHaveBeenCalledWith(
+		"commitlint-plugin-example",
+	);
+	expect(plugins["example"]).toBeDefined();
+});
+
+test("should prefer npx cache over default resolution", async () => {
+	vi.mocked(resolveFromNpxCache).mockReturnValueOnce(
+		path.join(
+			os.tmpdir(),
+			"npx-cache",
+			"node_modules",
+			"commitlint-plugin-example",
+		),
+	);
+
+	vi.mock("commitlint-plugin-example", () => ({ example: true }));
+
+	const plugins = await loadPlugin({}, "example");
+	expect(plugins["example"]).toBeDefined();
+});
+
+test("should prefer npx cache over default resolution", async () => {
+	vi.mocked(resolveFromNpxCache).mockReturnValueOnce(
+		path.join(
+			os.tmpdir(),
+			"npx-cache",
+			"node_modules",
+			"commitlint-plugin-example",
+		),
+	);
+
+	vi.mock("commitlint-plugin-example", () => ({ example: true }));
+
+	const plugins = await loadPlugin({}, "example");
+	expect(plugins["example"]).toBeDefined();
+});
+
+test("should accept boolean as third parameter for backward compatibility", async () => {
+	const plugins = await loadPlugin({}, "example", true);
+	expect(plugins["example"]).toBeDefined();
+});
+
+test("should throw when searchPath is not a string", async () => {
+	await expect(
+		loadPlugin({}, "example", { searchPaths: [123 as any] }),
+	).rejects.toThrow('Invalid searchPath "123": must be an absolute path');
+});
+
+test("should throw when searchPath is not absolute", async () => {
+	await expect(
+		loadPlugin({}, "example", { searchPaths: ["./relative/path"] }),
+	).rejects.toThrow(
+		'Invalid searchPath "./relative/path": must be an absolute path',
+	);
+});
+
+test("should throw when searchPath does not exist", async () => {
+	await expect(
+		loadPlugin({}, "example", { searchPaths: ["/nonexistent/path"] }),
+	).rejects.toThrow(
+		'Invalid searchPath "/nonexistent/path": directory does not exist',
+	);
+});
+
+test("should throw when searchPath is a file not a directory", async () => {
+	const tempFile = path.join(os.tmpdir(), "test-file.txt");
+	await import("node:fs/promises").then((fs) => fs.writeFile(tempFile, "test"));
+
+	try {
+		await expect(
+			loadPlugin({}, "example", { searchPaths: [tempFile] }),
+		).rejects.toThrow(
+			`Invalid searchPath "${tempFile}": must be a directory, not a file`,
+		);
+	} finally {
+		await import("node:fs/promises").then((fs) => fs.unlink(tempFile));
+	}
 });
