@@ -39,3 +39,10 @@ const _scopeCaseObjectCheck: Partial<RulesConfig> = {
 	"scope-case": _scopeCaseObject,
 };
 void _scopeCaseObjectCheck;
+
+// Simple array form: ensure CaseRuleConfig accepts readonly arrays.
+const _scopeCaseSimple = [ERROR, "always", ["camel-case"]] as const;
+const _scopeCaseSimpleCheck: Partial<RulesConfig> = {
+	"scope-case": _scopeCaseSimple,
+};
+void _scopeCaseSimpleCheck;
