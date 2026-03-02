@@ -10,7 +10,6 @@ const ERROR = RuleConfigSeverity.Error;
 
 // ── scope-enum ────────────────────────────────────────────────────────────────
 
-// Object form: fixed in commit 26179a4
 const _scopeEnumObject = [
 	ERROR,
 	"always",
@@ -31,7 +30,6 @@ void _scopeEnumSimpleCheck;
 
 // ── scope-case ────────────────────────────────────────────────────────────────
 
-// Object form: fixed in commit 26179a4
 const _scopeCaseObject = [
 	ERROR,
 	"always",
