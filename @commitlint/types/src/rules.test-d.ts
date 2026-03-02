@@ -20,8 +20,8 @@ const _scopeEnumObjectCheck: Partial<RulesConfig> = {
 };
 void _scopeEnumObjectCheck;
 
-// Simple array form: the primary use case from the PR.
-// This fails until EnumRuleConfig is changed from string[] to readonly string[].
+// Simple array form: regression check that the array-form enum config
+// remains assignable to RulesConfig when using `as const`.
 const _scopeEnumSimple = [ERROR, "always", ["foo", "baz", "baz"]] as const;
 const _scopeEnumSimpleCheck: Partial<RulesConfig> = {
 	"scope-enum": _scopeEnumSimple,
