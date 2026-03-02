@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.shared.json",
   "files": [],
-  "include": ["./**/*.test.ts", "./**/*-test.ts"],
+  "include": ["./**/*.test.ts", "./**/*-test.ts", "./**/*.test-d.ts"],
   "exclude": ["./**/lib/*.ts"],
   "compilerOptions": {
     "noEmit": true
@@ -29,6 +29,7 @@
     { "path": "@commitlint/prompt" },
     { "path": "@commitlint/cz-commitlint" },
     { "path": "@commitlint/config-conventional" },
-    { "path": "@commitlint/config-pnpm-scopes" }
+    { "path": "@commitlint/config-pnpm-scopes" },
+    { "path": "@commitlint/types" }
   ]
 }
