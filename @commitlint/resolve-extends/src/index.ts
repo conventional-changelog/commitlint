@@ -1,5 +1,6 @@
 import { createRequire } from "node:module";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 
@@ -10,9 +11,10 @@ import resolveFrom_ from "resolve-from";
 import { validateConfig } from "@commitlint/config-validator";
 import type { ParserPreset, UserConfig } from "@commitlint/types";
 
+const require = createRequire(import.meta.url);
+
 const dynamicImport = async <T>(id: string): Promise<T> => {
 	if (id.endsWith(".json")) {
-		const require = createRequire(import.meta.url);
 		return require(id);
 	}
 
@@ -225,22 +227,118 @@ function resolveId(
 export function resolveFromSilent(
 	specifier: string,
 	parent: string,
-): string | void {
+): string | undefined {
 	try {
 		return resolveFrom(specifier, parent);
 	} catch {}
 }
 
 /**
+ * Get the npm cache directory.
+ * Respects npm config (npm_config_cache env var or npm config get cache).
+ */
+function getNpmCacheDir(): string {
+	if (process.env.npm_config_cache) {
+		return process.env.npm_config_cache;
+	}
+
+	try {
+		const { execSync } = require("child_process");
+		const cacheDir = execSync("npm config get cache", {
+			encoding: "utf8",
+			stdio: ["pipe", "pipe", "ignore"],
+		}).trim();
+		if (cacheDir) {
+			return cacheDir;
+		}
+	} catch {
+		// Ignore errors
+	}
+
+	const home = os.homedir();
+	return path.join(home, ".npm");
+}
+
+let npxCachePathsCache: string[] | undefined;
+
+/**
+ * Get the npx cache directory paths.
+ * npx stores packages in a subdirectory of the npm cache (e.g., ~/.npm/_npx).
+ * Results are memoized and sorted by mtime (most recent first) for deterministic resolution.
+ */
+function getNpxCachePaths(): string[] {
+	if (npxCachePathsCache) {
+		return npxCachePathsCache;
+	}
+
+	const npmCache = getNpmCacheDir();
+	const npxPath = path.join(npmCache, "_npx");
+
+	if (!fs.existsSync(npxPath)) {
+		npxCachePathsCache = [];
+		return [];
+	}
+
+	try {
+		const entries = fs.readdirSync(npxPath, { withFileTypes: true });
+		const dirs = entries
+			.filter((entry) => entry.isDirectory())
+			.map((entry) => ({
+				path: path.join(npxPath, entry.name, "node_modules"),
+				mtime: fs.statSync(path.join(npxPath, entry.name)).mtime,
+			}))
+			.sort((a, b) => b.mtime.getTime() - a.mtime.getTime());
+
+		npxCachePathsCache = dirs.map((d) => d.path);
+	} catch (err) {
+		if (process.env.DEBUG === "true") {
+			console.debug(`Failed to read npx cache: ${(err as Error).message}`);
+		}
+		npxCachePathsCache = [];
+	}
+
+	return npxCachePathsCache;
+}
+
+/**
+ * Resolve a module specifier from npx cache directories.
+ * Iterates all npx cache directories and returns the first successful resolution.
+ * Uses require.resolve for proper Node module resolution (respects package.json main/exports).
+ */
+export function resolveFromNpxCache(specifier: string): string | undefined {
+	for (const npxDir of getNpxCachePaths()) {
+		try {
+			return require.resolve(specifier, { paths: [npxDir] });
+		} catch (err) {
+			if (process.env.DEBUG === "true") {
+				console.debug(
+					`Failed to resolve ${specifier} from ${npxDir}: ${(err as Error).message}`,
+				);
+			}
+		}
+	}
+	return undefined;
+}
+
+/**
  * @see https://github.com/sindresorhus/resolve-global/blob/682a6bb0bd8192b74a6294219bb4c536b3708b65/index.js#L7
  */
-export function resolveGlobalSilent(specifier: string): string | void {
+export function resolveGlobalSilent(specifier: string): string | undefined {
 	for (const globalPackages of [
 		globalDirectory.npm.packages,
 		globalDirectory.yarn.packages,
 	]) {
 		try {
 			return resolveFrom(specifier, globalPackages);
-		} catch {}
+		} catch (err) {
+			if (process.env.DEBUG === "true") {
+				console.debug(
+					`Failed to resolve ${specifier} from global: ${(err as Error).message}`,
+				);
+			}
+		}
 	}
+
+	// Check npx cache directories
+	return resolveFromNpxCache(specifier);
 }

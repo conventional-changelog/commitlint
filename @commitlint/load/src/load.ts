@@ -87,11 +87,9 @@ export default async function load(
 		const deduplicatedPlugins = [...new Set(extended.plugins)];
 		for (const plugin of deduplicatedPlugins) {
 			if (typeof plugin === "string") {
-				plugins = await loadPlugin(
-					plugins,
-					plugin,
-					process.env.DEBUG === "true",
-				);
+				plugins = await loadPlugin(plugins, plugin, {
+					debug: process.env.DEBUG === "true",
+				});
 			} else {
 				plugins.local = plugin;
 			}
