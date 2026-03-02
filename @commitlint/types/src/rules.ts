@@ -78,7 +78,7 @@ export type RuleConfig<
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
-	TargetCaseType | TargetCaseType[]
+	TargetCaseType | readonly TargetCaseType[]
 >;
 export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
@@ -86,7 +86,7 @@ export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 >;
 export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
-	string[]
+	readonly string[]
 >;
 export type ObjectRuleConfig<
 	V = RuleConfigQuality.User,
@@ -115,12 +115,18 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	"references-empty": RuleConfig<V>;
 	"scope-case":
 		| CaseRuleConfig<V>
-		| ObjectRuleConfig<V, { cases: TargetCaseType[]; delimiters?: string[] }>;
+		| ObjectRuleConfig<
+				V,
+				{ cases: readonly TargetCaseType[]; delimiters?: readonly string[] }
+		  >;
 	"scope-delimiter-style": EnumRuleConfig<V>;
 	"scope-empty": RuleConfig<V>;
 	"scope-enum":
 		| EnumRuleConfig<V>
-		| ObjectRuleConfig<V, { scopes: string[]; delimiters?: string[] }>;
+		| ObjectRuleConfig<
+				V,
+				{ scopes: readonly string[]; delimiters?: readonly string[] }
+		  >;
 	"scope-max-length": LengthRuleConfig<V>;
 	"scope-min-length": LengthRuleConfig<V>;
 	"signed-off-by": RuleConfig<V, string>;
