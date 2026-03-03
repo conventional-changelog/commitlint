@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.shared.json",
   "files": [],
-  "include": ["./**/*.test.ts", "./**/*-test.ts"],
+  "include": ["./**/*.test.ts", "./**/*-test.ts", "./**/*.test-d.ts"],
   "exclude": ["./**/lib/*.ts"],
   "compilerOptions": {
     "noEmit": true
