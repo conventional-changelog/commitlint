@@ -6,5 +6,5 @@
     "outDir": "./lib"
   },
   "include": ["./src"],
-  "exclude": ["./lib/**/*"]
+  "exclude": ["./src/**/*.test-d.ts", "./lib/**/*"]
 }
