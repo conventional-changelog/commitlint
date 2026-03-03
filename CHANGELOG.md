@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.4.3](https://github.com/conventional-changelog/commitlint/compare/v20.4.2...v20.4.3) (2026-03-03)
+
+
+### Bug Fixes
+
+* footer parser does not escape special chars for regex [#4560](https://github.com/conventional-changelog/commitlint/issues/4560) ([#4634](https://github.com/conventional-changelog/commitlint/issues/4634)) ([8ff7c7f](https://github.com/conventional-changelog/commitlint/commit/8ff7c7fcbc2db2b45910ecb5c01e9f1763060770))
+* npx usage [#613](https://github.com/conventional-changelog/commitlint/issues/613) ([#4630](https://github.com/conventional-changelog/commitlint/issues/4630)) ([1644f1e](https://github.com/conventional-changelog/commitlint/commit/1644f1e8f74a844547e44e3e7a76fabbb96775f8)), closes [#3](https://github.com/conventional-changelog/commitlint/issues/3) [#1](https://github.com/conventional-changelog/commitlint/issues/1) [#2](https://github.com/conventional-changelog/commitlint/issues/2) [#4](https://github.com/conventional-changelog/commitlint/issues/4) [#5](https://github.com/conventional-changelog/commitlint/issues/5) [#7](https://github.com/conventional-changelog/commitlint/issues/7) [#6](https://github.com/conventional-changelog/commitlint/issues/6)
+* **types:** incorrect types for rule options ([#4633](https://github.com/conventional-changelog/commitlint/issues/4633)) ([77b85f2](https://github.com/conventional-changelog/commitlint/commit/77b85f24d3858161d076078d333c96909e6136f8))
+
+
+
+
+
 ## [20.4.2](https://github.com/conventional-changelog/commitlint/compare/v20.4.1...v20.4.2) (2026-02-19)
 
 
