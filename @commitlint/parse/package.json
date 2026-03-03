@@ -37,12 +37,13 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/test": "^20.4.0",
-    "@commitlint/utils": "^20.0.0"
+    "@commitlint/utils": "^20.0.0",
+    "@types/conventional-commits-parser": "^5.0.2"
   },
   "dependencies": {
     "@commitlint/types": "^20.4.0",
-    "conventional-changelog-angular": "^8.1.0",
-    "conventional-commits-parser": "^6.2.1"
+    "conventional-changelog-angular": "^8.2.0",
+    "conventional-commits-parser": "^6.3.0"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }
