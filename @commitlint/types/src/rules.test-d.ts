@@ -1,14 +1,14 @@
-// Regression tests for "as const" compatibility.
-// See: https://github.com/conventional-changelog/commitlint/pull/4633
-//
-// These are compile-time type checks (no runtime behaviour).
-// If a line fails to compile, the associated type definition needs to be fixed.
+/**
+ * Tests for "as const" compatibility:
+ * https://github.com/conventional-changelog/commitlint/pull/4633
+ *
+ * These are compile-time type checks (no runtime behavior). If a line fails to compile, the
+ * associated type definition needs to be fixed.
+ */
 
 import { RuleConfigSeverity, type RulesConfig } from "./index.js";
 
 const ERROR = RuleConfigSeverity.Error;
-
-// ── scope-enum ────────────────────────────────────────────────────────────────
 
 const _scopeEnumObject = [
 	ERROR,
@@ -27,8 +27,6 @@ const _scopeEnumSimpleCheck: Partial<RulesConfig> = {
 	"scope-enum": _scopeEnumSimple,
 };
 void _scopeEnumSimpleCheck;
-
-// ── scope-case ────────────────────────────────────────────────────────────────
 
 const _scopeCaseObject = [
 	ERROR,
