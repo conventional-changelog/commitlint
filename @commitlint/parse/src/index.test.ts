@@ -303,3 +303,15 @@ test("does not work with chinese scopes with incompatible pattern", async () => 
 	expect(actual.subject).toBe(null);
 	expect(actual.scope).toBe(null);
 });
+
+test("parses footer with noteKeywords containing regex-special characters", async () => {
+	const message = "feat: add feature\n\nBody text\n[1] Custom note footer";
+
+	const actual = await parse(message, undefined, {
+		noteKeywords: ["[1]", "Notes:"],
+	});
+
+	// [1] should be recognized as a note keyword (not regex)
+	expect(actual.notes).toHaveLength(1);
+	expect(actual.notes[0].title).toBe("[1]");
+});
