@@ -5,7 +5,7 @@ export default defineConfig({
 		typecheck: {
 			enabled: true,
 		},
-		exclude: ["**/node_modules/**", "**/lib/*.test.js"],
+		exclude: ["**/node_modules/**", "**/lib/*.test.js", "**/lib/*.test.ts"],
 		environment: "commitlint",
 		coverage: {
 			provider: "istanbul",
