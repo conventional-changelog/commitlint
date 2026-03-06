@@ -124,6 +124,24 @@ test("should ignore npm semver commits with footers", () => {
 	);
 });
 
+test("should ignore npm semver commits with CI skip markers", () => {
+	expect(isIgnored("2.3.3-beta.1 [skip ci]")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 [ci skip]")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 [skip-ci]")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 [ci-skip]")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 (skip ci)")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 (ci skip)")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 (skip-ci)")).toBe(true);
+	expect(isIgnored("2.3.3-beta.1 (ci-skip)")).toBe(true);
+});
+
+test("should ignore npm semver commits with chore and CI skip markers", () => {
+	expect(isIgnored("chore(release): 2.3.3-beta.1 [skip ci]")).toBe(true);
+	expect(isIgnored("chore(release): 2.3.3-beta.1 [ci skip]")).toBe(true);
+	expect(isIgnored("chore: 2.3.3-beta.1 [skip ci]")).toBe(true);
+	expect(isIgnored("chore: 2.3.3-beta.1 [ci skip]")).toBe(true);
+});
+
 test("should return true amend commits", () => {
 	expect(isIgnored("amend! initial commit")).toBe(true);
 });

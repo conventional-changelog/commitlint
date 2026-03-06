@@ -8,7 +8,11 @@ const isSemver = (c: string): boolean => {
 		return false;
 	}
 
-	const stripped = firstLine.replace(/^chore(\([^)]+\))?:/, "").trim();
+	const stripped = firstLine
+		.replace(/^chore(\([^)]+\))?:/, "")
+		.replace(/\[(skip|ci)(-|\s)(ci|skip)\]/i, "")
+		.replace(/\((skip|ci)(-|\s)(ci|skip)\)/i, "")
+		.trim();
 	return semver.valid(stripped) !== null;
 };
 
