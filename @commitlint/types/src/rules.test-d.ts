@@ -44,3 +44,31 @@ const _scopeCaseSimpleCheck: Partial<RulesConfig> = {
 	"scope-case": _scopeCaseSimple,
 };
 void _scopeCaseSimpleCheck;
+
+// Tests for context parameter support:
+// https://github.com/conventional-changelog/commitlint/issues/4357
+// Rule functions should accept an optional context parameter with cwd.
+
+// Sync function with context
+const _syncWithCtx: Partial<RulesConfig> = {
+	"scope-enum": (ctx) => [ERROR, "always", ["foo", ctx?.cwd || "bar"]],
+};
+void _syncWithCtx;
+
+// Async function with context
+const _asyncWithCtx: Partial<RulesConfig> = {
+	"scope-enum": async (ctx) => [ERROR, "always", ["foo", ctx?.cwd || "bar"]],
+};
+void _asyncWithCtx;
+
+// Function without context (backward compatibility)
+const _funcNoCtx: Partial<RulesConfig> = {
+	"scope-enum": () => [ERROR, "always", ["foo", "bar"]],
+};
+void _funcNoCtx;
+
+// Async function without context (backward compatibility)
+const _asyncNoCtx: Partial<RulesConfig> = {
+	"scope-enum": async () => [ERROR, "always", ["foo", "bar"]],
+};
+void _asyncNoCtx;
