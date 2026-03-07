@@ -64,9 +64,13 @@ export enum RuleConfigQuality {
 	Qualified,
 }
 
+export interface RuleConfigContext {
+	cwd?: string;
+}
+
 export type QualifiedRuleConfig<T> =
-	| (() => RuleConfigTuple<T>)
-	| (() => Promise<RuleConfigTuple<T>>)
+	| ((ctx?: RuleConfigContext) => RuleConfigTuple<T>)
+	| ((ctx?: RuleConfigContext) => Promise<RuleConfigTuple<T>>)
 	| RuleConfigTuple<T>;
 
 export type RuleConfig<
