@@ -6,6 +6,9 @@ export async function getHistoryCommits(
 	options: GitOptions,
 	opts: { cwd?: string } = {},
 ): Promise<string[]> {
+	// Note: git-raw-commits v5 drops support for arbitrary git log arguments.
+	// We extract and handle 'skip' manually here to preserve backward compatibility.
+	// Other arbitrary arguments passed via gitLogArgs may be silently ignored by v5.
 	const { skip: skipRaw, ...gitOptions } = options as GitOptions & {
 		skip?: unknown;
 	};
