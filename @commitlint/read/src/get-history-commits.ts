@@ -1,11 +1,33 @@
-import gitRawCommits from "git-raw-commits";
-
-import { streamToPromise } from "./stream-to-promise.js";
+import type { GitOptions } from "git-raw-commits";
+import { getRawCommits } from "git-raw-commits";
 
 // Get commit messages from history
 export async function getHistoryCommits(
-	options: gitRawCommits.GitOptions,
+	options: GitOptions,
 	opts: { cwd?: string } = {},
 ): Promise<string[]> {
-	return streamToPromise(gitRawCommits(options, { cwd: opts.cwd }));
+	// Note: git-raw-commits v5 drops support for arbitrary git log arguments.
+	// We extract and handle 'skip' manually here to preserve backward compatibility.
+	// Other arbitrary arguments passed via gitLogArgs may be silently ignored by v5.
+	const { skip: skipRaw, ...gitOptions } = options as GitOptions & {
+		skip?: unknown;
+	};
+
+	let skipNum = 0;
+	if (skipRaw !== undefined) {
+		skipNum = Number(skipRaw);
+		if (!Number.isInteger(skipNum) || skipNum < 0) {
+			throw new TypeError(`Invalid skip value: ${skipRaw}`);
+		}
+	}
+
+	const data: string[] = [];
+	for await (const commit of getRawCommits({ ...gitOptions, cwd: opts.cwd })) {
+		if (skipNum > 0) {
+			skipNum--;
+			continue;
+		}
+		data.push(commit);
+	}
+	return data;
 }
