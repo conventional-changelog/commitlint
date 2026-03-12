@@ -541,6 +541,12 @@ test("parserPreset should be merged correctly", async () => {
 });
 
 // https://github.com/conventional-changelog/commitlint/issues/4640
+// Verifies that mergeWith deep-merges parserPreset objects so that a
+// user's partial override (issuePrefixes) coexists with the extended
+// config's properties (headerPattern, headerCorrespondence).
+// The full string-to-object resolution path is covered by the
+// integration test in @commitlint/load ("partial user parserPreset
+// merges with extended string parserPreset").
 test("user partial parserPreset should merge with extended parserPreset", async () => {
 	const input = {
 		extends: ["extender-name"],

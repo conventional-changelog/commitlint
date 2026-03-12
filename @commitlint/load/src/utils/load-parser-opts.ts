@@ -49,7 +49,10 @@ export async function loadParserOpts(
 			// Preserve any user-provided properties (e.g. issuePrefixes) that
 			// were merged at the outer parserOpts level during config resolution,
 			// while unwrapping the inner module-provided parserOpts (#4640).
-			const { parserOpts: inner, ...rest } = parser.parserOpts;
+			const { parserOpts: inner, ...rest } = parser.parserOpts as Record<
+				string,
+				unknown
+			> & { parserOpts: Record<string, unknown> };
 			parser.parserOpts = { ...inner, ...rest };
 		}
 		return parser;

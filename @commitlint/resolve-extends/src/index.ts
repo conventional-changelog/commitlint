@@ -139,9 +139,12 @@ async function loadExtends(
 	return await ext.reduce(async (configs, raw) => {
 		const resolved = resolveConfig(raw, context);
 
-		const c = await (context.dynamicImport || dynamicImport)<{
-			parserPreset?: string | ParserPreset;
-		}>(resolved);
+		// Shallow-copy so we never mutate an ESM namespace object (#4647).
+		const c = {
+			...(await (context.dynamicImport || dynamicImport)<{
+				parserPreset?: string | ParserPreset;
+			}>(resolved)),
+		};
 		const cwd = path.dirname(resolved);
 		const ctx = { ...context, cwd };
 
