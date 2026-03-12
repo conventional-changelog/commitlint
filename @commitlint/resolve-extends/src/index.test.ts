@@ -540,6 +540,49 @@ test("parserPreset should be merged correctly", async () => {
 	expect(actual).toEqual(expected);
 });
 
+// https://github.com/conventional-changelog/commitlint/issues/4640
+test("user partial parserPreset should merge with extended parserPreset", async () => {
+	const input = {
+		extends: ["extender-name"],
+		parserPreset: {
+			parserOpts: {
+				issuePrefixes: ["PROJ-"],
+			},
+		},
+	};
+
+	const dynamicImport = (id: string) => {
+		switch (id) {
+			case "extender-name":
+				return {
+					parserPreset: {
+						parserOpts: {
+							headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/,
+							headerCorrespondence: ["type", "scope", "subject"],
+						},
+					},
+				};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {
+		resolve: id,
+		dynamicImport: vi.fn(dynamicImport),
+	} as ResolveExtendsContext;
+
+	const actual = await resolveExtends(input, ctx);
+
+	expect(actual.parserPreset).toEqual({
+		parserOpts: {
+			headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/,
+			headerCorrespondence: ["type", "scope", "subject"],
+			issuePrefixes: ["PROJ-"],
+		},
+	});
+});
+
 test("should correctly merge nested configs", async () => {
 	const input = { extends: ["extender-1"] };
 

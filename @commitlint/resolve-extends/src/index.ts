@@ -140,17 +140,17 @@ async function loadExtends(
 		const resolved = resolveConfig(raw, context);
 
 		const c = await (context.dynamicImport || dynamicImport)<{
-			parserPreset?: string;
+			parserPreset?: string | ParserPreset;
 		}>(resolved);
 		const cwd = path.dirname(resolved);
 		const ctx = { ...context, cwd };
 
-		// Resolve parser preset if none was present before
-		if (
-			!context.parserPreset &&
-			typeof c === "object" &&
-			typeof c.parserPreset === "string"
-		) {
+		// Always resolve string parser presets from extended configs so that
+		// their parserOpts (headerPattern, etc.) are available for merging.
+		// Previously this was skipped when the user provided any parserPreset,
+		// which caused partial user overrides (e.g. just issuePrefixes) to
+		// lose the extended preset's headerPattern (see #4640).
+		if (typeof c === "object" && typeof c.parserPreset === "string") {
 			const resolvedParserPreset = resolveFrom(c.parserPreset, cwd);
 
 			const parserPreset: ParserPreset = {
@@ -159,7 +159,7 @@ async function loadExtends(
 			};
 
 			ctx.parserPreset = parserPreset;
-			config.parserPreset = parserPreset;
+			c.parserPreset = parserPreset;
 		}
 
 		validateConfig(resolved, config);
