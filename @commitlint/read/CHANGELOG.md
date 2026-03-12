@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
+
+
+### Bug Fixes
+
+* **read:** update git-raw-commits to v5 API ([#4638](https://github.com/conventional-changelog/commitlint/issues/4638)) ([bd6ab41](https://github.com/conventional-changelog/commitlint/commit/bd6ab41740210215d92bc10fa93184325bc970a6))
+
+
+
+
+
 ## [20.4.3](https://github.com/conventional-changelog/commitlint/compare/v20.4.2...v20.4.3) (2026-03-03)
 
 **Note:** Version bump only for package @commitlint/read

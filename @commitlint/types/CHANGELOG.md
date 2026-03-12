@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
+
+
+### Bug Fixes
+
+* **types:** allow context parameter in QualifiedRuleConfig functions ([#4636](https://github.com/conventional-changelog/commitlint/issues/4636)) ([17537ae](https://github.com/conventional-changelog/commitlint/commit/17537ae05f3402f3b196d5a8cb92ae7207af8ba5)), closes [#4357](https://github.com/conventional-changelog/commitlint/issues/4357)
+
+
+
+
+
 ## [20.4.3](https://github.com/conventional-changelog/commitlint/compare/v20.4.2...v20.4.3) (2026-03-03)
 
 

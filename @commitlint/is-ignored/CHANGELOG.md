@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
+
+
+### Bug Fixes
+
+* **is-ignored:** strip CI skip markers from release commits ([#4637](https://github.com/conventional-changelog/commitlint/issues/4637)) ([56a6fd0](https://github.com/conventional-changelog/commitlint/commit/56a6fd069dc8a46054ce23ddd388ce924ca499c2))
+
+
+
+
+
 ## [20.4.3](https://github.com/conventional-changelog/commitlint/compare/v20.4.2...v20.4.3) (2026-03-03)
 
 **Note:** Version bump only for package @commitlint/is-ignored
