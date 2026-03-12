@@ -21,14 +21,22 @@ export class HeaderQuestion extends Question {
 	beforeQuestionStart(answers: Answers): void {
 		const headerRemainLength =
 			this.headerMaxLength - combineCommitMessage(answers).length;
-		this.maxLength = Math.min(this.maxLength, headerRemainLength);
+		// Reserve 1 char for '!' when useExclamationMark is enabled.
+		const reservedLength = getPromptSettings()["useExclamationMark"] ? 1 : 0;
+		const remainingLength = Math.max(0, headerRemainLength - reservedLength);
+		this.maxLength = Math.min(this.maxLength, remainingLength);
 		this.minLength = Math.min(this.minLength, this.headerMinLength);
 	}
 }
 
 export function combineCommitMessage(answers: Answers): string {
-	const { type = "", scope = "", subject = "" } = answers;
-	const prefix = `${type}${scope ? `(${scope})` : ""}`;
+	const { type = "", scope = "", subject = "", isBreaking } = answers;
+	const hasPrefix = Boolean(type || scope);
+	const breakingMark =
+		hasPrefix && isBreaking && getPromptSettings()["useExclamationMark"]
+			? "!"
+			: "";
+	const prefix = `${type}${scope ? `(${scope})` : ""}${breakingMark}`;
 
 	if (subject) {
 		return ((prefix ? prefix + ": " : "") + subject).trim();

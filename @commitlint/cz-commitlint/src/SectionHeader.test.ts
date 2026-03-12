@@ -11,7 +11,13 @@ import { setRules } from "./store/rules.js";
 
 beforeEach(() => {
 	setRules({});
-	setPromptConfig({});
+	setPromptConfig({
+		settings: {
+			scopeEnumSeparator: ",",
+			enableMultipleScopes: false,
+			useExclamationMark: false,
+		},
+	});
 });
 describe("getQuestions", () => {
 	test("should contain 'type','scope','subject'", () => {
@@ -120,6 +126,88 @@ describe("combineCommitMessage", () => {
 		});
 		expect(commitMessage).toBe("build(typescript)");
 	});
+	test("should add ! after type when isBreaking and useExclamationMark is enabled", () => {
+		setPromptConfig({
+			settings: {
+				useExclamationMark: true,
+			},
+		});
+		const commitMessage = combineCommitMessage({
+			type: "feat",
+			subject: "add new api",
+			isBreaking: true,
+		});
+		expect(commitMessage).toBe("feat!: add new api");
+	});
+
+	test("should add ! after scope when isBreaking and useExclamationMark is enabled", () => {
+		setPromptConfig({
+			settings: {
+				useExclamationMark: true,
+			},
+		});
+		const commitMessage = combineCommitMessage({
+			type: "feat",
+			scope: "api",
+			subject: "add new endpoint",
+			isBreaking: true,
+		});
+		expect(commitMessage).toBe("feat(api)!: add new endpoint");
+	});
+
+	test("should not add ! when isBreaking but useExclamationMark is disabled (default)", () => {
+		setPromptConfig({
+			settings: {
+				useExclamationMark: false,
+			},
+		});
+		const commitMessage = combineCommitMessage({
+			type: "feat",
+			subject: "add new api",
+			isBreaking: true,
+		});
+		expect(commitMessage).toBe("feat: add new api");
+	});
+
+	test("should not add ! when useExclamationMark is enabled but not breaking", () => {
+		setPromptConfig({
+			settings: {
+				useExclamationMark: true,
+			},
+		});
+		const commitMessage = combineCommitMessage({
+			type: "feat",
+			subject: "add new api",
+		});
+		expect(commitMessage).toBe("feat: add new api");
+	});
+
+	test("should add ! without subject when isBreaking and useExclamationMark is enabled", () => {
+		setPromptConfig({
+			settings: {
+				useExclamationMark: true,
+			},
+		});
+		const commitMessage = combineCommitMessage({
+			type: "feat",
+			scope: "api",
+			isBreaking: true,
+		});
+		expect(commitMessage).toBe("feat(api)!");
+	});
+
+	test("should not add ! when type and scope are both empty", () => {
+		setPromptConfig({
+			settings: {
+				useExclamationMark: true,
+			},
+		});
+		const commitMessage = combineCommitMessage({
+			isBreaking: true,
+			subject: "drop support",
+		});
+		expect(commitMessage).toBe("drop support");
+	});
 });
 
 describe("HeaderQuestion", () => {
@@ -151,6 +239,47 @@ describe("HeaderQuestion", () => {
 		(lastQuestion.message as any)(answers);
 		expect(lastQuestion?.validate?.("".padEnd(10, "z"), answers)).toBe(
 			"subject: subject over limit 6",
+		);
+	});
+
+	test("should reserve 1 char for '!' when useExclamationMark is enabled", () => {
+		const headerMaxLength = 20;
+		const type = "refactor";
+		const scope = "config";
+		// "refactor(config)" = 16 chars
+		const charsUsed = `${type}(${scope})`.length; // 16
+		const charsAvailable = headerMaxLength - charsUsed - 1; // -1 for '!'
+		setRules({
+			"header-max-length": [
+				RuleConfigSeverity.Error,
+				"always",
+				headerMaxLength,
+			],
+			"subject-max-length": [RuleConfigSeverity.Error, "always", 10],
+		});
+		setPromptConfig({
+			settings: {
+				useExclamationMark: true,
+			},
+			messages: {
+				skip: "(press enter to skip)",
+				max: "upper %d chars",
+				min: "%d chars at least",
+				emptyWarning: "%s can not be empty",
+				upperLimitWarning: "%s: %s over limit %d",
+				lowerLimitWarning: "%s: %s below limit %d",
+			},
+		});
+		const questions = getQuestions();
+		const answers = { type, scope };
+		const subject = questions[2];
+		(subject.message as any)(answers);
+
+		expect("fix".length).toBeLessThanOrEqual(charsAvailable);
+		expect(subject?.validate?.("fix", answers)).toBe(true);
+		expect("test".length).toBeGreaterThan(charsAvailable);
+		expect(subject?.validate?.("test", answers)).toBe(
+			"subject: subject over limit 1",
 		);
 	});
 });
