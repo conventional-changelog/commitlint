@@ -2,6 +2,7 @@ export default {
 	settings: {
 		scopeEnumSeparator: ",",
 		enableMultipleScopes: false,
+		useExclamationMark: false,
 	},
 	messages: {
 		skip: "(press enter to skip)",

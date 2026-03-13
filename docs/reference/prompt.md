@@ -10,6 +10,7 @@ Set optional options.
 
 - `enableMultipleScopes`: `(boolean)` Enable multiple scopes, select scope with a radio list, disabled by default.
 - `scopeEnumSeparator`: `(string)` Commitlint supports [multiple scopes](/concepts/commit-conventions#multiple-scopes), you can specify the delimiter. It is applied when `enableMultipleScopes` set true.
+- `useExclamationMark`: `(boolean)` Append `!` after the type/scope in the commit header when a breaking change is indicated, disabled by default.
 
 ## `messages`
 

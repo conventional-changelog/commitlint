@@ -19,6 +19,7 @@ export type PromptConfig = {
 	settings: {
 		scopeEnumSeparator: string;
 		enableMultipleScopes: boolean;
+		useExclamationMark: boolean;
 	};
 	messages: PromptMessages;
 	questions: Partial<
