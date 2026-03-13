@@ -382,6 +382,21 @@ test("parser preset overwrites completely instead of merging", async () => {
 	});
 });
 
+// https://github.com/conventional-changelog/commitlint/issues/4640
+test("partial user parserPreset merges with extended string parserPreset", async () => {
+	const cwd = await gitBootstrap(
+		"fixtures/parser-preset-partial-user-override",
+	);
+	const actual = await load({}, { cwd });
+
+	expect(actual.parserPreset).toBeDefined();
+	expect(actual.parserPreset!.parserOpts).toMatchObject({
+		headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/,
+		headerCorrespondence: ["type", "scope", "subject"],
+		issuePrefixes: ["PROJ-"],
+	});
+});
+
 test("recursive extends with parserPreset", async () => {
 	const cwd = await gitBootstrap("fixtures/recursive-parser-preset");
 	const actual = await load({}, { cwd });

@@ -540,6 +540,55 @@ test("parserPreset should be merged correctly", async () => {
 	expect(actual).toEqual(expected);
 });
 
+// https://github.com/conventional-changelog/commitlint/issues/4640
+// Verifies that mergeWith deep-merges parserPreset objects so that a
+// user's partial override (issuePrefixes) coexists with the extended
+// config's properties (headerPattern, headerCorrespondence).
+// The full string-to-object resolution path is covered by the
+// integration test in @commitlint/load ("partial user parserPreset
+// merges with extended string parserPreset").
+test("user partial parserPreset should merge with extended parserPreset", async () => {
+	const input = {
+		extends: ["extender-name"],
+		parserPreset: {
+			parserOpts: {
+				issuePrefixes: ["PROJ-"],
+			},
+		},
+	};
+
+	const dynamicImport = (id: string) => {
+		switch (id) {
+			case "extender-name":
+				return {
+					parserPreset: {
+						parserOpts: {
+							headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/,
+							headerCorrespondence: ["type", "scope", "subject"],
+						},
+					},
+				};
+			default:
+				return {};
+		}
+	};
+
+	const ctx = {
+		resolve: id,
+		dynamicImport: vi.fn(dynamicImport),
+	} as ResolveExtendsContext;
+
+	const actual = await resolveExtends(input, ctx);
+
+	expect(actual.parserPreset).toEqual({
+		parserOpts: {
+			headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/,
+			headerCorrespondence: ["type", "scope", "subject"],
+			issuePrefixes: ["PROJ-"],
+		},
+	});
+});
+
 test("should correctly merge nested configs", async () => {
 	const input = { extends: ["extender-1"] };
 
