@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -209,6 +210,15 @@ async function main(args: MainArgs): Promise<void> {
 
 	const raw = options._;
 	const flags = normalizeFlags(options);
+
+	if (!fs.existsSync(flags.cwd)) {
+		const err = new CliError(
+			`The specified --cwd directory "${flags.cwd}" does not exist.`,
+			pkg.name,
+		);
+		console.error(err.message);
+		throw err;
+	}
 
 	if (typeof options["print-config"] === "string") {
 		const loaded = await load(getSeed(flags), {
