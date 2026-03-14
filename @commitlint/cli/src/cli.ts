@@ -211,7 +211,19 @@ async function main(args: MainArgs): Promise<void> {
 	const raw = options._;
 	const flags = normalizeFlags(options);
 
-	if (!fs.existsSync(flags.cwd)) {
+	try {
+		if (!fs.statSync(flags.cwd).isDirectory()) {
+			const err = new CliError(
+				`The specified --cwd path "${flags.cwd}" is not a directory.`,
+				pkg.name,
+			);
+			console.error(err.message);
+			throw err;
+		}
+	} catch (e) {
+		if (e instanceof CliError) {
+			throw e;
+		}
 		const err = new CliError(
 			`The specified --cwd directory "${flags.cwd}" does not exist.`,
 			pkg.name,

@@ -58,6 +58,17 @@ test("should fail when -d references a non-existent directory", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test("should fail when --cwd references an existing file instead of a directory", async () => {
+	const cwd = await gitBootstrap("fixtures/default");
+	const filePath = path.join(cwd, "commitlint.config.js");
+	const result = cli(["--cwd", filePath], {
+		cwd,
+	})("foo: bar");
+	const output = await result;
+	expect(output.stderr).toContain("is not a directory");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
 test("should succeed when --cwd references an existing directory", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
 	const result = cli(["--cwd", cwd], { cwd })("type: bar");
