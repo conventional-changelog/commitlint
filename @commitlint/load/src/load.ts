@@ -43,8 +43,12 @@ export default async function load(
 	const configFilePath = loaded?.filepath;
 	let config: UserConfig = {};
 	if (loaded) {
-		validateConfig(loaded.filepath || "", loaded.config);
-		config = loaded.config;
+		const resolvedConfig =
+			typeof loaded.config === "function"
+				? await loaded.config()
+				: await loaded.config;
+		validateConfig(loaded.filepath || "", resolvedConfig);
+		config = resolvedConfig;
 	}
 
 	// Merge passed config with file based options
