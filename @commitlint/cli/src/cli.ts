@@ -224,10 +224,12 @@ async function main(args: MainArgs): Promise<void> {
 		if (e instanceof CliError) {
 			throw e;
 		}
-		const err = new CliError(
-			`The specified --cwd directory "${flags.cwd}" does not exist.`,
-			pkg.name,
-		);
+		const code = (e as NodeJS.ErrnoException).code;
+		const message =
+			code === "ENOENT"
+				? `The specified --cwd directory "${flags.cwd}" does not exist.`
+				: `Cannot access the specified --cwd directory "${flags.cwd}": ${code ?? (e as Error).message}`;
+		const err = new CliError(message, pkg.name);
 		console.error(err.message);
 		throw err;
 	}
