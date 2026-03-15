@@ -1,3 +1,4 @@
+import fs from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -209,6 +210,29 @@ async function main(args: MainArgs): Promise<void> {
 
 	const raw = options._;
 	const flags = normalizeFlags(options);
+
+	try {
+		if (!fs.statSync(flags.cwd).isDirectory()) {
+			const err = new CliError(
+				`The specified --cwd path "${flags.cwd}" is not a directory.`,
+				pkg.name,
+			);
+			console.error(err.message);
+			throw err;
+		}
+	} catch (e) {
+		if (e instanceof CliError) {
+			throw e;
+		}
+		const code = (e as NodeJS.ErrnoException).code;
+		const message =
+			code === "ENOENT"
+				? `The specified --cwd directory "${flags.cwd}" does not exist.`
+				: `Cannot access the specified --cwd directory "${flags.cwd}": ${code ?? (e as Error).message}`;
+		const err = new CliError(message, pkg.name);
+		console.error(err.message);
+		throw err;
+	}
 
 	if (typeof options["print-config"] === "string") {
 		const loaded = await load(getSeed(flags), {
