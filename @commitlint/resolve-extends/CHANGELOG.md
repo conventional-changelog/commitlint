@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
+
+
+### Bug Fixes
+
+* **resolve-extends:** always resolve extended parser presets for proper merging ([#4647](https://github.com/conventional-changelog/commitlint/issues/4647)) ([e9ef76c](https://github.com/conventional-changelog/commitlint/commit/e9ef76caf44e77f22086910ce706bbe0c03b0ab5)), closes [#4640](https://github.com/conventional-changelog/commitlint/issues/4640)
+
+
+
+
+
 ## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
 
 **Note:** Version bump only for package @commitlint/resolve-extends

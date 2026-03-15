@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
+
+
+### Bug Fixes
+
+* **cli:** validate that --cwd directory exists before execution ([#4658](https://github.com/conventional-changelog/commitlint/issues/4658)) ([cf80f75](https://github.com/conventional-changelog/commitlint/commit/cf80f75745593f4f018cac301a91f23316c974fd)), closes [#4595](https://github.com/conventional-changelog/commitlint/issues/4595)
+* **load:** resolve async config exports in CJS projects ([#4659](https://github.com/conventional-changelog/commitlint/issues/4659)) ([fce263f](https://github.com/conventional-changelog/commitlint/commit/fce263f544977958f476d6f4c8539e5fab996198)), closes [#4557](https://github.com/conventional-changelog/commitlint/issues/4557)
+* **resolve-extends:** always resolve extended parser presets for proper merging ([#4647](https://github.com/conventional-changelog/commitlint/issues/4647)) ([e9ef76c](https://github.com/conventional-changelog/commitlint/commit/e9ef76caf44e77f22086910ce706bbe0c03b0ab5)), closes [#4640](https://github.com/conventional-changelog/commitlint/issues/4640)
+
+
+### Features
+
+* **cz-commitlint:** add exclamation mark support for breaking changes ([#4655](https://github.com/conventional-changelog/commitlint/issues/4655)) ([3b124a7](https://github.com/conventional-changelog/commitlint/commit/3b124a78000dc2ad353884b72db5ba0c78a642a3))
+
+
+
+
+
 ## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
 
 

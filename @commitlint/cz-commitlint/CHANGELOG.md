@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
+
+
+### Features
+
+* **cz-commitlint:** add exclamation mark support for breaking changes ([#4655](https://github.com/conventional-changelog/commitlint/issues/4655)) ([3b124a7](https://github.com/conventional-changelog/commitlint/commit/3b124a78000dc2ad353884b72db5ba0c78a642a3))
+
+
+
+
+
 ## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
 
 **Note:** Version bump only for package @commitlint/cz-commitlint

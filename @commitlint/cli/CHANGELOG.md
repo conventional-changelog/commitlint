@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
+
+
+### Bug Fixes
+
+* **cli:** validate that --cwd directory exists before execution ([#4658](https://github.com/conventional-changelog/commitlint/issues/4658)) ([cf80f75](https://github.com/conventional-changelog/commitlint/commit/cf80f75745593f4f018cac301a91f23316c974fd)), closes [#4595](https://github.com/conventional-changelog/commitlint/issues/4595)
+
+
+
+
+
 ## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
 
 **Note:** Version bump only for package @commitlint/cli

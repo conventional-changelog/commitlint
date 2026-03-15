@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
+
+**Note:** Version bump only for package @commitlint/config-validator
+
+
+
+
+
 ## [20.4.4](https://github.com/conventional-changelog/commitlint/compare/v20.4.3...v20.4.4) (2026-03-12)
 
 **Note:** Version bump only for package @commitlint/config-validator
