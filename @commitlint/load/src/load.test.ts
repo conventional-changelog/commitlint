@@ -602,3 +602,25 @@ test("default helpUrl should be loaded if not provided in shareable configs", as
 		"https://github.com/conventional-changelog/commitlint/#what-is-commitlint",
 	);
 });
+
+test("should resolve config exported as a Promise", async () => {
+	const cwd = await gitBootstrap("fixtures/async-config-promise");
+	const actual = await load({}, { cwd });
+
+	expect(actual.rules["body-case"]).toStrictEqual([
+		RuleConfigSeverity.Error,
+		"never",
+		"upper-case",
+	]);
+});
+
+test("should resolve config exported as an async function", async () => {
+	const cwd = await gitBootstrap("fixtures/async-config-function");
+	const actual = await load({}, { cwd });
+
+	expect(actual.rules["body-case"]).toStrictEqual([
+		RuleConfigSeverity.Error,
+		"never",
+		"upper-case",
+	]);
+});
