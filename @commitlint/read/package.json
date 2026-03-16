@@ -36,14 +36,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^20.4.3",
-    "@commitlint/utils": "^20.0.0",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "@types/git-raw-commits": "^5.0.0",
     "@types/minimist": "^1.2.4"
   },
   "dependencies": {
-    "@commitlint/top-level": "^20.4.3",
-    "@commitlint/types": "^20.5.0",
+    "@commitlint/top-level": "workspace:^",
+    "@commitlint/types": "workspace:^",
     "git-raw-commits": "^5.0.0",
     "minimist": "^1.2.8",
     "tinyexec": "^1.0.0"

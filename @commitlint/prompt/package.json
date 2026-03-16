@@ -38,16 +38,16 @@
     "node": ">=v18"
   },
   "devDependencies": {
-    "@commitlint/config-angular": "^20.5.0",
-    "@commitlint/types": "^14.0.0",
-    "@commitlint/utils": "^20.0.0",
+    "@commitlint/config-angular": "workspace:^",
+    "@commitlint/types": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "@types/inquirer": "^9.0.7",
     "commitizen": "^4.2.4"
   },
   "dependencies": {
-    "@commitlint/ensure": "^20.5.0",
-    "@commitlint/load": "^20.5.0",
-    "@commitlint/types": "^20.5.0",
+    "@commitlint/ensure": "workspace:^",
+    "@commitlint/load": "workspace:^",
+    "@commitlint/types": "workspace:^",
     "inquirer": "^9.2.15",
     "picocolors": "^1.1.1"
   },

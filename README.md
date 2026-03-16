@@ -209,10 +209,10 @@ Copyright by @marionebl. All `commitlint` packages are released under the MIT li
 ```sh
 git clone git@github.com:conventional-changelog/commitlint.git
 cd commitlint
-yarn
-yarn run build # run build tasks
-yarn start # run tests, again on change
-yarn run commitlint # run CLI
+pnpm install
+pnpm build # run build tasks
+pnpm start # run tests, again on change
+pnpm commitlint # run CLI
 ```
 
 For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).

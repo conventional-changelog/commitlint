@@ -36,7 +36,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/utils": "^20.0.0",
+    "@commitlint/utils": "workspace:^",
     "@types/lodash.camelcase": "^4.3.8",
     "@types/lodash.kebabcase": "^4.1.8",
     "@types/lodash.snakecase": "^4.1.8",
@@ -45,7 +45,7 @@
     "glob": "^11.0.0"
   },
   "dependencies": {
-    "@commitlint/types": "^20.5.0",
+    "@commitlint/types": "workspace:^",
     "lodash.camelcase": "^4.3.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.snakecase": "^4.1.1",

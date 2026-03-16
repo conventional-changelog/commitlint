@@ -1,5 +1,5 @@
-yarn lint-staged
+pnpm lint-staged
 
 # be sure to build with up to date source
 # before running pre-commit hook which is using `@commitlint/cli/lib/cli.js`
-yarn build
+pnpm build
