@@ -10,6 +10,7 @@ export default defineConfig({
 		coverage: {
 			provider: "istanbul",
 			include: ["**/@commitlint/*/src/**"],
+			exclude: ["**/*.json"],
 		},
 	},
 	environments: {

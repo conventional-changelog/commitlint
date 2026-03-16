@@ -1,7 +1,7 @@
 // https://github.com/raszi/node-tmp/issues/229
 
-import type { Environment } from "vitest/environments";
-import { builtinEnvironments } from "vitest/environments";
+import type { Environment } from "vitest/runtime";
+import { builtinEnvironments } from "vitest/runtime";
 import tmp from "tmp";
 
 const nodeEnv = builtinEnvironments.node;
