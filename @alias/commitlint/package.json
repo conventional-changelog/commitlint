@@ -6,9 +6,7 @@
   "files": [
     "cli.js"
   ],
-  "bin": {
-    "commitlint": "cli.js"
-  },
+  "bin": "cli.js",
   "scripts": {
     "deps": "dep-check",
     "pkg": "pkg-check --skip-main"

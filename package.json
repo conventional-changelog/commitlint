@@ -2,6 +2,7 @@
   "name": "@commitlint/root",
   "description": "Lint commit messages",
   "private": true,
+  "packageManager": "yarn@4.13.0",
   "type": "module",
   "version": "1.0.0",
   "license": "MIT",
@@ -104,5 +105,6 @@
     "vitepress-plugin-tabs": "^0.8.0",
     "vitest": "~4.0.18",
     "vue": "^3.5.29"
-  }
+  },
+  "packageManager": "yarn@4.13.0"
 }
