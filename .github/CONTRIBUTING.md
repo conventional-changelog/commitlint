@@ -108,11 +108,12 @@ For more information refer to [vitepress documentation](https://vitepress.dev).
 
 ```sh
 npm login
-nvm use (if you have nvm installed)
+mise install # or: nvm use / asdf install
 ```
 
+- [mise](https://mise.jdx.dev/) (recommended)
 - [nvm](https://github.com/nvm-sh/nvm)
-- [asdf](https://asdf-vm.com/) is supported as well
+- [asdf](https://asdf-vm.com/)
 
 ```sh
 yarn clean
@@ -136,7 +137,7 @@ has not been published yet.
 
 ```sh
 npm login
-nvm use (if you have nvm installed)
+mise install # or: nvm use / asdf install
 ```
 
 ```sh
