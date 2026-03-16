@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - "**"
+      - master
   pull_request:
     types: [opened, synchronize]
 
@@ -18,7 +18,9 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-24.04, windows-2022, windows-2025]
-        node: [18, 20, 22, 24]
+        # Node versions match Ubuntu LTS defaults:
+        # 18 = Ubuntu 24.04, 20 = Ubuntu 25.x, 22 = Ubuntu 26.04
+        node: [18, 20, 22]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
