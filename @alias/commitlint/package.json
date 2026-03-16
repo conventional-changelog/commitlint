@@ -36,12 +36,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/cli": "^20.5.0",
-    "@commitlint/types": "^20.5.0"
+    "@commitlint/cli": "workspace:^",
+    "@commitlint/types": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/test": "^20.4.3",
-    "@commitlint/utils": "^20.0.0",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "tinyexec": "^1.0.0"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"

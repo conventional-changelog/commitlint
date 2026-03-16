@@ -36,19 +36,18 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/parse": "^20.5.0",
-    "@commitlint/test": "^20.4.3",
-    "@commitlint/utils": "^20.0.0",
-    "@types/conventional-commits-parser": "^5.0.2",
+    "@commitlint/parse": "workspace:^",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "conventional-changelog-angular": "^8.2.0",
     "conventional-commits-parser": "^6.3.0",
     "glob": "^11.0.0"
   },
   "dependencies": {
-    "@commitlint/ensure": "^20.5.0",
-    "@commitlint/message": "^20.4.3",
-    "@commitlint/to-lines": "^20.0.0",
-    "@commitlint/types": "^20.5.0"
+    "@commitlint/ensure": "workspace:^",
+    "@commitlint/message": "workspace:^",
+    "@commitlint/to-lines": "workspace:^",
+    "@commitlint/types": "workspace:^"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }

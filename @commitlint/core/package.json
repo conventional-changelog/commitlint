@@ -36,13 +36,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commitlint/format": "^20.5.0",
-    "@commitlint/lint": "^20.5.0",
-    "@commitlint/load": "^20.5.0",
-    "@commitlint/read": "^20.5.0"
+    "@commitlint/format": "workspace:^",
+    "@commitlint/lint": "workspace:^",
+    "@commitlint/load": "workspace:^",
+    "@commitlint/read": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/utils": "^20.0.0"
+    "@commitlint/utils": "workspace:^"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }
