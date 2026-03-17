@@ -25,19 +25,22 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: pnpm/action-setup@v4
+        # version is read from packageManager in package.json
+
       - uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node }}
-          cache: yarn
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install --ignore-engines --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build packages
-        run: yarn build
+        run: pnpm build
 
       - name: Test
-        run: yarn test
+        run: pnpm test
 
   codeQuality:
     name: Code quality
@@ -46,19 +49,22 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - uses: pnpm/action-setup@v4
+        # version is read from packageManager in package.json
+
       - uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          cache: yarn
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install --ignore-engines --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Check format
-        run: yarn format || (yarn format-fix; git diff; echo "Formatting did not match (see above diff), please run 'yarn format-fix'" >&2 && exit 1)
+        run: pnpm format || (pnpm format-fix; git diff; echo "Formatting did not match (see above diff), please run 'pnpm format-fix'" >&2 && exit 1)
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
   nodeJsBaselineAptCompatibility:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
@@ -76,14 +82,14 @@ jobs:
           # would make this CI job entirely pointless
           apt install --yes npm
 
-          npm install --global yarn
-          yarn install
+          npm install --global pnpm@10.32.1
+          pnpm install --frozen-lockfile
 
       - name: Print versions
-        run: node --version && npm --version && yarn --version
+        run: node --version && npm --version && pnpm --version
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Run Tests
-        run: yarn test
+        run: pnpm test
