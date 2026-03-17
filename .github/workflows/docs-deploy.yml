@@ -27,6 +27,7 @@ jobs:
           fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
+        # version is read from packageManager in package.json
 
       - name: Setup Node
         uses: actions/setup-node@v6

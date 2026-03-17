@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - uses: pnpm/action-setup@v4
+        # version is read from packageManager in package.json
 
       - uses: actions/setup-node@v6
         with:
@@ -49,6 +50,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - uses: pnpm/action-setup@v4
+        # version is read from packageManager in package.json
 
       - uses: actions/setup-node@v6
         with:
