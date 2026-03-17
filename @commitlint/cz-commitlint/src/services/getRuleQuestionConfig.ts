@@ -15,15 +15,28 @@ import {
 	ruleIsDisabled,
 } from "../utils/rules.js";
 
+interface GraphemeSegment {
+	segment: string;
+	index: number;
+	input: string;
+	isWordLike?: boolean;
+}
+
 const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
 const isPresentation = /^\p{Emoji_Presentation}/u;
 const isEmojiBase = /^\p{Emoji}/u;
 
 /**
- * Appends Unicode Variation Selector 16 (U+FE0F) to emojis missing it,
- * forcing emoji-width (2 col, like ✨) presentation in terminals. Without VS16,
- * emojis like 🛠 (U+1F6E0) and 🗑 (U+1F5D1) render at text-width (1 col),
- * breaking column alignment in interactive menus.
+ * Normalizes emojis to ensure a consistent 2-column width in terminals by appending
+ * Variation Selector 16 (U+FE0F).
+ * * Emojis like ✨ (U+2728) are "Emoji_Presentation" by default and render at width 2.
+ * However, "text-style" emojis like 🛠 (U+1F6E0) or 🗑 (U+1F5D1) default to width 1
+ * in many terminals, breaking column alignment.
+ * * This function identifies single-grapheme emojis lacking presentation properties
+ * and inserts the VS16 immediately after the base character (before modifiers
+ * like skin tones) to force graphical rendering without breaking ZWJ sequences.
+ * @param emoji The emoji string to normalize.
+ * @returns The normalized emoji string with VS16 inserted where necessary.
  */
 function normalizeEmoji(emoji: string): string {
 	const trimmed = emoji.replace(/\s+$/, "");
@@ -31,22 +44,28 @@ function normalizeEmoji(emoji: string): string {
 
 	if (trimmed.length === 0) return emoji;
 
-	const segments = Array.from(segmenter.segment(trimmed));
+	const segments = Array.from(segmenter.segment(trimmed)) as GraphemeSegment[];
 
 	if (segments.length === 1) {
-		const char = segments[0].segment;
+		const cluster = segments[0].segment;
+		const codePoints = Array.from(cluster);
+		const baseChar = codePoints[0];
 
 		switch (true) {
-			case char.includes("\uFE0F"):
-			case char.includes("\uFE0E"):
+			case cluster.includes("\uFE0F"):
+			case cluster.includes("\uFE0E"):
 				return emoji;
 
-			case isPresentation.test(char):
+			case isPresentation.test(baseChar):
 				return emoji;
 
-			// Is it a "Text-style" emoji base and not a number? Add VS16!
-			case isEmojiBase.test(char) && !/^[0-9#*]$/.test(char):
-				return trimmed + "\uFE0F" + trailing;
+			// 3. If the base char is an Emoji base but not presentation:
+			case isEmojiBase.test(baseChar) && !/^[0-9#*]$/.test(baseChar): {
+				// Reconstruct: Base + VS16 + the rest of the cluster (skin tones, ZWJs, etc.)
+				const normalizedCluster =
+					baseChar + "\uFE0F" + codePoints.slice(1).join("");
+				return normalizedCluster + trailing;
+			}
 		}
 	}
 

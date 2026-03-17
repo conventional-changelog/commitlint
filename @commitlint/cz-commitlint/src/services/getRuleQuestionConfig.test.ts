@@ -546,6 +546,55 @@ describe("enum list", () => {
 		]);
 	});
 
+	test("should correctly normalize emojis with skin tone modifiers", () => {
+		const ENUM_RULE_LIST = ["build", "mod", "sparkle"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					emojiInHeader: true,
+					enum: {
+						build: {
+							description: "Base wrench",
+							emoji: "🛠", // U+1F6E0
+						},
+						mod: {
+							description: "Wrench with skin tone",
+							emoji: "🛠🏽", // U+1F6E0 + U+1F3FD
+						},
+						sparkle: {
+							description: "Naturally wide with skin tone",
+							emoji: "👍🏽", // U+1F44D + U+1F3FD (Thumbs up is Emoji_Presentation)
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+
+		expect(enumList).toEqual([
+			{
+				name: "🛠\uFE0F  build:     Base wrench",
+				value: "🛠\uFE0F build",
+				short: "build",
+			},
+			{
+				name: "🛠\uFE0F🏽  mod:       Wrench with skin tone",
+				value: "🛠\uFE0F🏽 mod",
+				short: "mod",
+			},
+			{
+				name: "👍🏽  sparkle:   Naturally wide with skin tone",
+				value: "👍🏽 sparkle",
+				short: "sparkle",
+			},
+		]);
+	});
+
 	test("should trim empty spaces from emoji in the answer", () => {
 		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
 		setRules({
