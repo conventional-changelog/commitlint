@@ -85,7 +85,7 @@ jobs:
           # would make this CI job entirely pointless
           apt install --yes npm
 
-          npm install --global pnpm
+          npm install --global pnpm@10.32.1
           pnpm install
 
       - name: Print versions
