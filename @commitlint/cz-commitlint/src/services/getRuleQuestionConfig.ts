@@ -1,3 +1,4 @@
+/// <reference lib="es2023.intl" />
 import { RuleField } from "@commitlint/types";
 import { QuestionConfig } from "../Question.js";
 import { getPromptMessages, getPromptQuestions } from "../store/prompts.js";
@@ -13,6 +14,44 @@ import {
 	ruleIsApplicable,
 	ruleIsDisabled,
 } from "../utils/rules.js";
+
+const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
+const isPresentation = /^\p{Emoji_Presentation}/u;
+const isEmojiBase = /^\p{Emoji}/u;
+
+/**
+ * Appends Unicode Variation Selector 16 (U+FE0F) to emojis missing it,
+ * forcing emoji-width (2 col, like ✨) presentation in terminals. Without VS16,
+ * emojis like 🛠 (U+1F6E0) and 🗑 (U+1F5D1) render at text-width (1 col),
+ * breaking column alignment in interactive menus.
+ */
+function normalizeEmoji(emoji: string): string {
+	const trimmed = emoji.replace(/\s+$/, "");
+	const trailing = emoji.slice(trimmed.length);
+
+	if (trimmed.length === 0) return emoji;
+
+	const segments = Array.from(segmenter.segment(trimmed));
+
+	if (segments.length === 1) {
+		const char = segments[0].segment;
+
+		switch (true) {
+			case char.includes("\uFE0F"):
+			case char.includes("\uFE0E"):
+				return emoji;
+
+			case isPresentation.test(char):
+				return emoji;
+
+			// Is it a "Text-style" emoji base and not a number? Add VS16!
+			case isEmojiBase.test(char) && !/^[0-9#*]$/.test(char):
+				return trimmed + "\uFE0F" + trailing;
+		}
+	}
+
+	return emoji;
+}
 
 export default function (rulePrefix: RuleField): QuestionConfig | null {
 	const questions = getPromptQuestions();
@@ -54,7 +93,8 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 				.map((enumName) => {
 					const enumDescription = enumDescriptions[enumName]?.description;
 					if (enumDescription) {
-						const emoji = enumDescriptions[enumName]?.emoji;
+						const rawEmoji = enumDescriptions[enumName]?.emoji;
+						const emoji = rawEmoji ? normalizeEmoji(rawEmoji) : rawEmoji;
 
 						const emojiPrefix = emoji
 							? `${emoji}  `

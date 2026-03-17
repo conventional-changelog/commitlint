@@ -393,6 +393,53 @@ describe("enum list", () => {
 		]);
 	});
 
+	test("should normalize emojis missing VS16 (U+FE0F) for consistent terminal alignment", () => {
+		const ENUM_RULE_LIST = ["build", "revert", "ci"];
+		setRules({
+			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
+		} as any);
+
+		setPromptConfig({
+			questions: {
+				type: {
+					enum: {
+						build: {
+							description: "Build system changes",
+							emoji: "🛠",
+						},
+						revert: {
+							description: "Reverts a commit",
+							emoji: "🗑",
+						},
+						ci: {
+							description: "CI config changes",
+							emoji: "⚙️",
+						},
+					},
+				},
+			},
+		});
+
+		const enumList = getRuleQuestionConfig("type")?.enumList;
+		expect(enumList).toEqual([
+			{
+				name: "🛠\uFE0F  build:    Build system changes",
+				value: "build",
+				short: "build",
+			},
+			{
+				name: "🗑\uFE0F  revert:   Reverts a commit",
+				value: "revert",
+				short: "revert",
+			},
+			{
+				name: "⚙️  ci:       CI config changes",
+				value: "ci",
+				short: "ci",
+			},
+		]);
+	});
+
 	test("should handle no enums having emojis correctly", () => {
 		const ENUM_RULE_LIST = ["feat", "fix", "chore"];
 		setRules({
@@ -438,7 +485,7 @@ describe("enum list", () => {
 	});
 
 	test("should include the emoji in the value when `emojiInHeader` is true", () => {
-		const ENUM_RULE_LIST = ["feat", "fix"];
+		const ENUM_RULE_LIST = ["feat", "fix", "build", "revert"];
 		setRules({
 			"type-enum": [RuleConfigSeverity.Error, "always", ENUM_RULE_LIST],
 		} as any);
@@ -456,22 +503,45 @@ describe("enum list", () => {
 							description: "Bug fixes",
 							emoji: "🐛",
 						},
+						build: {
+							description: "Build changes",
+							emoji: "🛠",
+						},
+						revert: {
+							description: "Revert commit",
+							emoji: "🗑",
+						},
 					},
 				},
 			},
 		});
 
 		const enumList = getRuleQuestionConfig("type")?.enumList;
+
 		expect(enumList).toEqual([
 			{
-				name: "✨  feat:   Features",
+				// ✨ is Emoji_Presentation (width 2). No \uFE0F added.
+				name: "✨  feat:     Features",
 				value: "✨ feat",
 				short: "feat",
 			},
 			{
-				name: "🐛  fix:    Bug fixes",
+				// 🐛 is Emoji_Presentation (width 2). No \uFE0F added.
+				name: "🐛  fix:      Bug fixes",
 				value: "🐛 fix",
 				short: "fix",
+			},
+			{
+				// 🛠 is NOT presentation-default. \uFE0F IS added.
+				name: "🛠\uFE0F  build:    Build changes",
+				value: "🛠\uFE0F build",
+				short: "build",
+			},
+			{
+				// 🗑 is NOT presentation-default. \uFE0F IS added.
+				name: "🗑\uFE0F  revert:   Revert commit",
+				value: "🗑\uFE0F revert",
+				short: "revert",
 			},
 		]);
 	});
