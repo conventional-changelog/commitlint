@@ -21,8 +21,8 @@
     "format": "prettier **/*.{ts,js,json,yml,md} --check",
     "format-fix": "prettier \"**/*.{ts,js,json,yml,md}\" --write",
     "publish": "npm whoami && lerna publish --conventional-commits",
-    "reinstall": "yarn clean && yarn install",
-    "start": "yarn watch",
+    "reinstall": "pnpm clean && pnpm install",
+    "start": "pnpm watch",
     "test": "cross-env HOME=$PWD LANG=en_US.UTF-8 NO_COLOR=1 vitest run --coverage",
     "prepare": "husky"
   },
