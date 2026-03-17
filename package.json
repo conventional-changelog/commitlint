@@ -53,11 +53,6 @@
       "@commitlint/utils"
     ]
   },
-  "workspaces": [
-    "@alias/*",
-    "@commitlint/*",
-    "@packages/*"
-  ],
   "engines": {
     "node": ">=v18",
     "npm": ">=7"
