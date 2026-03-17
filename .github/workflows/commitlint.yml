@@ -39,6 +39,7 @@ jobs:
           node --version
           npm --version
           pnpm --version
+          # commitlint binary is available at root via shamefully-hoist=true in .npmrc
           pnpm commitlint --version
 
       - name: Validate current commit (last commit) with commitlint
