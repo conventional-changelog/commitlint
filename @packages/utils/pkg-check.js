@@ -148,7 +148,10 @@ async function getTarballFiles(source, options) {
 	const result = await x("pnpm", ["pack", "--pack-destination", cwd], {
 		nodeOptions: { cwd: source },
 	});
-	const tarball = path.join(cwd, result.stdout.trim().split("\n").pop());
+	const tarball = path.join(
+		cwd,
+		path.basename(result.stdout.trim().split("\n").pop()),
+	);
 
 	return getArchiveFiles(tarball, options);
 }
