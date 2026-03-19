@@ -132,21 +132,21 @@ test("type-enum", async () => {
 	const result = await commitLint(messages.invalidTypeEnum);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.typeEnum]);
+	expect(result.errors).toMatchObject([errors.typeEnum]);
 });
 
 test("type-case", async () => {
 	const result = await commitLint(messages.invalidTypeCase);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.typeCase, errors.typeEnum]);
+	expect(result.errors).toMatchObject([errors.typeCase, errors.typeEnum]);
 });
 
 test("type-empty", async () => {
 	const result = await commitLint(messages.invalidTypeEmpty);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.typeEmpty]);
+	expect(result.errors).toMatchObject([errors.typeEmpty]);
 });
 
 test("subject-case", async () => {
@@ -158,7 +158,7 @@ test("subject-case", async () => {
 
 	invalidInputs.forEach((result) => {
 		expect(result.valid).toBe(false);
-		expect(result.errors).toEqual([errors.subjectCase]);
+		expect(result.errors).toMatchObject([errors.subjectCase]);
 	});
 });
 
@@ -166,49 +166,49 @@ test("subject-empty", async () => {
 	const result = await commitLint(messages.invalidSubjectEmpty);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.subjectEmpty, errors.typeEmpty]);
+	expect(result.errors).toMatchObject([errors.subjectEmpty, errors.typeEmpty]);
 });
 
 test("subject-full-stop", async () => {
 	const result = await commitLint(messages.invalidSubjectFullStop);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.subjectFullStop]);
+	expect(result.errors).toMatchObject([errors.subjectFullStop]);
 });
 
 test("header-max-length", async () => {
 	const result = await commitLint(messages.invalidHeaderMaxLength);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.headerMaxLength]);
+	expect(result.errors).toMatchObject([errors.headerMaxLength]);
 });
 
 test("footer-leading-blank", async () => {
 	const result = await commitLint(messages.warningFooterLeadingBlank);
 
 	expect(result.valid).toBe(true);
-	expect(result.warnings).toEqual([warnings.footerLeadingBlank]);
+	expect(result.warnings).toMatchObject([warnings.footerLeadingBlank]);
 });
 
 test("footer-max-line-length", async () => {
 	const result = await commitLint(messages.invalidFooterMaxLineLength);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.footerMaxLineLength]);
+	expect(result.errors).toMatchObject([errors.footerMaxLineLength]);
 });
 
 test("body-leading-blank", async () => {
 	const result = await commitLint(messages.warningBodyLeadingBlank);
 
 	expect(result.valid).toBe(true);
-	expect(result.warnings).toEqual([warnings.bodyLeadingBlank]);
+	expect(result.warnings).toMatchObject([warnings.bodyLeadingBlank]);
 });
 
 test("body-max-line-length", async () => {
 	const result = await commitLint(messages.invalidBodyMaxLineLength);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.bodyMaxLineLength]);
+	expect(result.errors).toMatchObject([errors.bodyMaxLineLength]);
 });
 
 test("valid messages", async () => {

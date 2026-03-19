@@ -17,6 +17,7 @@ export interface CliFlags {
 	to?: string;
 	version?: boolean;
 	verbose?: boolean;
+	"show-position"?: boolean;
 	/** @type {'' | 'text' | 'json'} */
 	"print-config"?: string;
 	strict?: boolean;

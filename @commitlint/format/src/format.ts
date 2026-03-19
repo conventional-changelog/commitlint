@@ -5,6 +5,7 @@ import {
 	FormatOptions,
 	FormattableResult,
 	WithInput,
+	FormattableProblem,
 } from "@commitlint/types";
 
 const DEFAULT_SIGNS = [" ", "⚠", "✖"] as const;
@@ -37,7 +38,7 @@ function formatInput(
 	result: FormattableResult & WithInput,
 	options: FormatOptions = {},
 ): string[] {
-	const { color: enabled = true } = options;
+	const { color: enabled = true, showPosition = true } = options;
 	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
@@ -46,13 +47,57 @@ function formatInput(
 
 	const sign = "⧗";
 	const decoration = enabled ? pc.gray(sign) : sign;
+	const prefix = `${decoration}   input: `;
 
 	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
-	return options.verbose || hasProblems
-		? [`${decoration}   input: ${decoratedInput}`]
-		: [];
+	if (!hasProblems) {
+		return options.verbose ? [`${prefix}${decoratedInput}`] : [];
+	}
+
+	const positionIndicator = showPosition
+		? getPositionIndicator([...errors, ...warnings], input, prefix.length)
+		: undefined;
+
+	const lines: string[] = [`${prefix}${decoratedInput}`];
+
+	if (positionIndicator) {
+		lines.push(positionIndicator);
+	}
+
+	return lines;
+}
+
+function getPositionIndicator(
+	problems: FormattableProblem[],
+	input: string,
+	prefixLength: number,
+): string | undefined {
+	const problemWithPosition = problems.find(
+		(problem) => problem?.start !== undefined && problem?.end !== undefined,
+	);
+	if (!problemWithPosition?.start || !problemWithPosition?.end) {
+		return undefined;
+	}
+
+	const padding = " ".repeat(prefixLength);
+
+	const caret = "^";
+
+	const normalizedInput = input.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+	const lines = normalizedInput.split("\n");
+	const targetLine = lines[problemWithPosition.start.line - 1];
+
+	if (!targetLine) {
+		return undefined;
+	}
+
+	const spacesBefore = Math.max(0, problemWithPosition.start.column - 1);
+
+	const indicator = padding + " ".repeat(spacesBefore) + caret;
+
+	return indicator;
 }
 
 export function formatResult(

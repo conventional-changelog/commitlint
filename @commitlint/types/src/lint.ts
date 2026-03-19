@@ -42,4 +42,8 @@ export interface LintRuleOutcome {
 	name: string;
 	/** The message returned from the rule, if invalid */
 	message: string;
+	/** The start position of the error in the input */
+	start?: { line: number; column: number; offset: number };
+	/** The end position of the error in the input */
+	end?: { line: number; column: number; offset: number };
 }
