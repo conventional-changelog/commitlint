@@ -36,7 +36,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "workspace:^"
+    "@commitlint/test": "workspace:^",
+    "@types/node": "^18.19.17"
   },
   "dependencies": {
     "escalade": "^3.2.0"

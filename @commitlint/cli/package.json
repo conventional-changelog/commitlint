@@ -41,9 +41,11 @@
   "devDependencies": {
     "@commitlint/test": "workspace:^",
     "@commitlint/utils": "workspace:^",
+    "@types/fs-extra": "^11.0.3",
     "@types/lodash.mergewith": "^4.6.8",
     "@types/node": "^18.19.17",
     "@types/yargs": "^17.0.29",
+    "conventional-commits-parser": "^6.3.0",
     "fs-extra": "^11.3.4",
     "lodash.mergewith": "^4.6.2"
   },

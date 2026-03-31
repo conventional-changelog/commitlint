@@ -40,7 +40,8 @@
   "license": "MIT",
   "devDependencies": {
     "@commitlint/test": "workspace:^",
-    "@commitlint/utils": "workspace:^"
+    "@commitlint/utils": "workspace:^",
+    "@types/node": "^18.19.17"
   },
   "dependencies": {
     "@commitlint/cli": "workspace:^",

@@ -164,6 +164,9 @@ importers:
       '@commitlint/utils':
         specifier: workspace:^
         version: link:../../@packages/utils
+      '@types/fs-extra':
+        specifier: ^11.0.3
+        version: 11.0.4
       '@types/lodash.mergewith':
         specifier: ^4.6.8
         version: 4.6.9
@@ -173,6 +176,9 @@ importers:
       '@types/yargs':
         specifier: ^17.0.29
         version: 17.0.35
+      conventional-commits-parser:
+        specifier: ^6.3.0
+        version: 6.3.0
       fs-extra:
         specifier: ^11.3.4
         version: 11.3.4
@@ -319,6 +325,9 @@ importers:
       '@commitlint/utils':
         specifier: workspace:^
         version: link:../../@packages/utils
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
 
   '@commitlint/config-workspace-scopes':
     dependencies:
@@ -491,6 +500,9 @@ importers:
       '@commitlint/utils':
         specifier: workspace:^
         version: link:../../@packages/utils
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
 
   '@commitlint/load':
     dependencies:
@@ -593,9 +605,15 @@ importers:
       '@types/inquirer':
         specifier: ^9.0.7
         version: 9.0.9
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
       commitizen:
         specifier: ^4.2.4
         version: 4.3.1(@types/node@18.19.130)(typescript@5.9.3)
+      rxjs:
+        specifier: ^7.5.5
+        version: 7.8.2
 
   '@commitlint/prompt-cli':
     dependencies:
@@ -674,6 +692,9 @@ importers:
       '@types/lodash.mergewith':
         specifier: ^4.6.8
         version: 4.6.9
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
 
   '@commitlint/rules':
     dependencies:
@@ -699,6 +720,9 @@ importers:
       '@commitlint/utils':
         specifier: workspace:^
         version: link:../../@packages/utils
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
       conventional-changelog-angular:
         specifier: ^8.2.0
         version: 8.3.0
@@ -724,6 +748,9 @@ importers:
       '@commitlint/test':
         specifier: workspace:^
         version: link:../../@packages/test
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
 
   '@commitlint/travis-cli':
     dependencies:
@@ -740,6 +767,9 @@ importers:
       '@commitlint/utils':
         specifier: workspace:^
         version: link:../../@packages/utils
+      '@types/node':
+        specifier: ^18.19.17
+        version: 18.19.130
 
   '@commitlint/types':
     dependencies:

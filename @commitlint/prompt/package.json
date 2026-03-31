@@ -42,7 +42,9 @@
     "@commitlint/types": "workspace:^",
     "@commitlint/utils": "workspace:^",
     "@types/inquirer": "^9.0.7",
-    "commitizen": "^4.2.4"
+    "@types/node": "^18.19.17",
+    "commitizen": "^4.2.4",
+    "rxjs": "^7.5.5"
   },
   "dependencies": {
     "@commitlint/ensure": "workspace:^",
