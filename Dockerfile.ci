@@ -3,29 +3,30 @@ FROM docker.io/library/node:18-alpine AS builder
 WORKDIR /src
 COPY . ./
 RUN apk add --no-cache python3 py3-setuptools make g++ git
-RUN yarn install --frozen-lockfile --network-timeout 100000 && \
-    yarn run build && \
+RUN corepack enable pnpm && \
+    pnpm install --frozen-lockfile && \
+    pnpm build && \
     # Commit lint CLI packages
-    npm pack @commitlint/cli && \
-    npm pack @commitlint/config-validator && \
-    npm pack @commitlint/config-pnpm-scopes && \
-    npm pack @commitlint/config-nx-scopes && \
-    npm pack @commitlint/ensure && \
-    npm pack @commitlint/execute-rule && \
-    npm pack @commitlint/format && \
-    npm pack @commitlint/is-ignored && \
-    npm pack @commitlint/lint && \
-    npm pack @commitlint/load && \
-    npm pack @commitlint/message && \
-    npm pack @commitlint/parse && \
-    npm pack @commitlint/read && \
-    npm pack @commitlint/resolve-extends && \
-    npm pack @commitlint/rules && \
-    npm pack @commitlint/to-lines && \
-    npm pack @commitlint/top-level && \
-    npm pack @commitlint/types && \
+    pnpm pack @commitlint/cli && \
+    pnpm pack @commitlint/config-validator && \
+    pnpm pack @commitlint/config-pnpm-scopes && \
+    pnpm pack @commitlint/config-nx-scopes && \
+    pnpm pack @commitlint/ensure && \
+    pnpm pack @commitlint/execute-rule && \
+    pnpm pack @commitlint/format && \
+    pnpm pack @commitlint/is-ignored && \
+    pnpm pack @commitlint/lint && \
+    pnpm pack @commitlint/load && \
+    pnpm pack @commitlint/message && \
+    pnpm pack @commitlint/parse && \
+    pnpm pack @commitlint/read && \
+    pnpm pack @commitlint/resolve-extends && \
+    pnpm pack @commitlint/rules && \
+    pnpm pack @commitlint/to-lines && \
+    pnpm pack @commitlint/top-level && \
+    pnpm pack @commitlint/types && \
     # Default commitlint config
-    npm pack @commitlint/config-conventional
+    pnpm pack @commitlint/config-conventional
 
 FROM docker.io/library/node:18-alpine
 RUN apk add --no-cache git
