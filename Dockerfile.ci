@@ -7,26 +7,27 @@ RUN corepack enable pnpm && \
     pnpm install --frozen-lockfile && \
     pnpm build && \
     # Commit lint CLI packages
-    pnpm pack @commitlint/cli && \
-    pnpm pack @commitlint/config-validator && \
-    pnpm pack @commitlint/config-pnpm-scopes && \
-    pnpm pack @commitlint/config-nx-scopes && \
-    pnpm pack @commitlint/ensure && \
-    pnpm pack @commitlint/execute-rule && \
-    pnpm pack @commitlint/format && \
-    pnpm pack @commitlint/is-ignored && \
-    pnpm pack @commitlint/lint && \
-    pnpm pack @commitlint/load && \
-    pnpm pack @commitlint/message && \
-    pnpm pack @commitlint/parse && \
-    pnpm pack @commitlint/read && \
-    pnpm pack @commitlint/resolve-extends && \
-    pnpm pack @commitlint/rules && \
-    pnpm pack @commitlint/to-lines && \
-    pnpm pack @commitlint/top-level && \
-    pnpm pack @commitlint/types && \
+    # pnpm pack ignores positional args, so use --filter to target each package
+    pnpm --filter @commitlint/cli pack --pack-destination /src && \
+    pnpm --filter @commitlint/config-validator pack --pack-destination /src && \
+    pnpm --filter @commitlint/config-pnpm-scopes pack --pack-destination /src && \
+    pnpm --filter @commitlint/config-nx-scopes pack --pack-destination /src && \
+    pnpm --filter @commitlint/ensure pack --pack-destination /src && \
+    pnpm --filter @commitlint/execute-rule pack --pack-destination /src && \
+    pnpm --filter @commitlint/format pack --pack-destination /src && \
+    pnpm --filter @commitlint/is-ignored pack --pack-destination /src && \
+    pnpm --filter @commitlint/lint pack --pack-destination /src && \
+    pnpm --filter @commitlint/load pack --pack-destination /src && \
+    pnpm --filter @commitlint/message pack --pack-destination /src && \
+    pnpm --filter @commitlint/parse pack --pack-destination /src && \
+    pnpm --filter @commitlint/read pack --pack-destination /src && \
+    pnpm --filter @commitlint/resolve-extends pack --pack-destination /src && \
+    pnpm --filter @commitlint/rules pack --pack-destination /src && \
+    pnpm --filter @commitlint/to-lines pack --pack-destination /src && \
+    pnpm --filter @commitlint/top-level pack --pack-destination /src && \
+    pnpm --filter @commitlint/types pack --pack-destination /src && \
     # Default commitlint config
-    pnpm pack @commitlint/config-conventional
+    pnpm --filter @commitlint/config-conventional pack --pack-destination /src
 
 FROM docker.io/library/node:18-alpine
 RUN apk add --no-cache git
