@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.5.1](https://github.com/conventional-changelog/commitlint/compare/v20.5.0...v20.5.1) (2026-03-31)
+
+**Note:** Version bump only for package vitest-environment-commitlint
+
+
+
+
+
 ## [20.4.2](https://github.com/conventional-changelog/commitlint/compare/v20.4.1...v20.4.2) (2026-02-19)
 
 **Note:** Version bump only for package vitest-environment-commitlint

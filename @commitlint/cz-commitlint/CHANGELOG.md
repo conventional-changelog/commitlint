@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.5.1](https://github.com/conventional-changelog/commitlint/compare/v20.5.0...v20.5.1) (2026-03-31)
+
+
+### Bug Fixes
+
+* **cz-commitlint:** add VS16 to single character emojis ([#4666](https://github.com/conventional-changelog/commitlint/issues/4666)) ([9e3e2d3](https://github.com/conventional-changelog/commitlint/commit/9e3e2d3ebffbc4c2fb60ead37946ede02d2b1381))
+* **cz-commitlint:** handle modifiers correctly ([#4667](https://github.com/conventional-changelog/commitlint/issues/4667)) ([5a3ebf5](https://github.com/conventional-changelog/commitlint/commit/5a3ebf5fc687db4af39a2e82d1a631af91fee29d))
+
+
+
+
+
 # [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
 
 

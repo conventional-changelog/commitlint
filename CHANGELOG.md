@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.5.1](https://github.com/conventional-changelog/commitlint/compare/v20.5.0...v20.5.1) (2026-03-31)
+
+
+### Bug Fixes
+
+* **cz-commitlint:** add VS16 to single character emojis ([#4666](https://github.com/conventional-changelog/commitlint/issues/4666)) ([9e3e2d3](https://github.com/conventional-changelog/commitlint/commit/9e3e2d3ebffbc4c2fb60ead37946ede02d2b1381))
+* **cz-commitlint:** handle modifiers correctly ([#4667](https://github.com/conventional-changelog/commitlint/issues/4667)) ([5a3ebf5](https://github.com/conventional-changelog/commitlint/commit/5a3ebf5fc687db4af39a2e82d1a631af91fee29d))
+* update dependency global-directory to v5 ([#4671](https://github.com/conventional-changelog/commitlint/issues/4671)) ([a300d32](https://github.com/conventional-changelog/commitlint/commit/a300d32eb4cc9a0702b59952a06d2cf31e2faafe))
+
+
+### Reverts
+
+* Revert "fix: update dependency global-directory to v5 (#4671)" (#4677) ([0f124c9](https://github.com/conventional-changelog/commitlint/commit/0f124c9700443fb7145b4746883ec2124f7534a4)), closes [#4671](https://github.com/conventional-changelog/commitlint/issues/4671) [#4677](https://github.com/conventional-changelog/commitlint/issues/4677)
+
+
+
+
+
 # [20.5.0](https://github.com/conventional-changelog/commitlint/compare/v20.4.4...v20.5.0) (2026-03-15)
 
 
