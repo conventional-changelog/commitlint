@@ -212,7 +212,7 @@ cd commitlint
 pnpm install
 pnpm build # run build tasks
 pnpm start # run tests, again on change
-pnpm exec commitlint # run CLI
+pnpm --filter @commitlint/cli exec commitlint # run CLI
 ```
 
 For more information on how to contribute please take a look at our [contribution guide](./.github/CONTRIBUTING.md).
