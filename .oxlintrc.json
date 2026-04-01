@@ -1,5 +1,19 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
+
+  // Migrated from eslint.config.mjs (ESLint v10 flat config).
+  //
+  // Unmappable rules (not available in oxlint):
+  //  - import/no-extraneous-dependencies: validates imports are declared in
+  //    package.json. "lerna run deps" provides partial coverage.
+  //  - valid-expect-in-promise: no oxlint equivalent exists.
+  //
+  // The old config spread @vitest/eslint-plugin's recommended rules (16 rules
+  // like expect-expect, no-focused-tests, no-identical-title, valid-expect,
+  // etc.). In oxlint these live under the "jest" plugin, but enabling it
+  // causes an irreconcilable conflict with vitest/max-nested-describe.
+  // Revisit when oxlint resolves the jest/vitest plugin interaction.
+
   "ignorePatterns": [
     "**/lib/",
     "**/coverage/",
@@ -12,9 +26,6 @@
   },
   "plugins": ["typescript", "import", "vitest"],
   "rules": {
-    "no-empty": "off",
-    "no-var": "off",
-
     "import/default": "off",
     "import/first": "error",
     "import/no-absolute-path": "error",
@@ -38,9 +49,18 @@
   },
   "overrides": [
     {
+      // Match the old ESLint config which only disabled these for TS files
+      "files": ["**/*.ts", "**/*.cts"],
+      "rules": {
+        "no-empty": "off",
+        "no-var": "off"
+      }
+    },
+    {
       "files": ["**/*.test.ts", "**/*.test.js"],
       "rules": {
-        "import/first": "off"
+        "import/first": "off",
+        "vitest/no-import-node-test": "error"
       }
     }
   ]
