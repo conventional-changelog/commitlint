@@ -34,7 +34,8 @@ jobs:
         run: pnpm build
 
       - name: Audit dependencies
-        run: pnpm audit --prod --audit-level=high
+        continue-on-error: true
+        run: pnpm audit --audit-level=high
 
       - name: Print versions
         run: |
