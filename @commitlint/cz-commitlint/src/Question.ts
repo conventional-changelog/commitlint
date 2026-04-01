@@ -1,10 +1,6 @@
 import { PromptMessages, PromptName } from "@commitlint/types";
 import pc from "picocolors";
-import inquirer, {
-	Answers,
-	ChoiceCollection,
-	DistinctQuestion,
-} from "inquirer";
+import inquirer, { Answers, ChoiceCollection, DistinctQuestion } from "inquirer";
 
 import { CaseFn } from "./utils/case-fn.js";
 import { FullStopFn } from "./utils/full-stop-fn.js";
@@ -55,8 +51,7 @@ export default class Question {
 			multipleSelectDefaultDelimiter,
 		}: QuestionConfig,
 	) {
-		if (!name || typeof name !== "string")
-			throw new Error("Question: name is required");
+		if (!name || typeof name !== "string") throw new Error("Question: name is required");
 
 		this._maxLength = maxLength ?? Infinity;
 		this._minLength = minLength ?? 0;
@@ -184,9 +179,7 @@ export default class Question {
 			return output;
 		}
 		const color =
-			output.length <= this.maxLength && output.length >= this.minLength
-				? pc.green
-				: pc.red;
+			output.length <= this.maxLength && output.length >= this.minLength ? pc.green : pc.red;
 		return color("(" + output.length + ") " + output);
 	}
 
@@ -198,14 +191,10 @@ export default class Question {
 			const countLimitMessage = (() => {
 				const messages = [];
 				if (this.minLength > 0 && this.getMessage("min")) {
-					messages.push(
-						this.getMessage("min").replace(/%d/g, this.minLength + ""),
-					);
+					messages.push(this.getMessage("min").replace(/%d/g, this.minLength + ""));
 				}
 				if (this.maxLength < Infinity && this.getMessage("max")) {
-					messages.push(
-						this.getMessage("max").replace(/%d/g, this.maxLength + ""),
-					);
+					messages.push(this.getMessage("max").replace(/%d/g, this.maxLength + ""));
 				}
 
 				return messages.join(", ");

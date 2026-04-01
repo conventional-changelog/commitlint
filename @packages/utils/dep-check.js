@@ -5,10 +5,7 @@ import { x } from "tinyexec";
 const cwd = process.cwd();
 
 function main() {
-	return Promise.all([
-		check(["--missing", "--no-dev", "."]),
-		check(["--extra", "--no-dev", "."]),
-	])
+	return Promise.all([check(["--missing", "--no-dev", "."]), check(["--extra", "--no-dev", "."])])
 		.then((tasks) => [null, tasks.map((t) => t.stdout).join("\n")])
 		.catch((err) => [err]);
 }

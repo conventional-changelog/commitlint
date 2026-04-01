@@ -14,13 +14,7 @@
   // causes an irreconcilable conflict with vitest/max-nested-describe.
   // Revisit when oxlint resolves the jest/vitest plugin interaction.
 
-  "ignorePatterns": [
-    "**/lib/",
-    "**/coverage/",
-    "**/node_modules/",
-    "**/fixtures/",
-    "**/dist/"
-  ],
+  "ignorePatterns": ["**/lib/", "**/coverage/", "**/node_modules/", "**/fixtures/", "**/dist/"],
   "env": {
     "node": true
   },

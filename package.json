@@ -1,10 +1,35 @@
 {
   "name": "@commitlint/root",
-  "description": "Lint commit messages",
-  "private": true,
-  "type": "module",
   "version": "1.0.0",
+  "private": true,
+  "description": "Lint commit messages",
+  "keywords": [
+    "changelog",
+    "check",
+    "conventional",
+    "conventional-changelog",
+    "lint",
+    "log"
+  ],
+  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
   "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conventional-changelog/commitlint.git"
+  },
+  "workspaces": [
+    "@alias/*",
+    "@commitlint/*",
+    "@packages/*"
+  ],
+  "type": "module",
   "scripts": {
     "build": "tsc -b",
     "watch": "tsc -b --watch",
@@ -17,13 +42,36 @@
     "docs-preview": "vitepress preview docs",
     "lint": "oxlint",
     "lint-fix": "oxlint --fix",
-    "format": "prettier **/*.{ts,js,json,yml,md} --check",
-    "format-fix": "prettier \"**/*.{ts,js,json,yml,md}\" --write",
+    "format": "oxfmt --check",
+    "format-fix": "oxfmt",
     "publish": "npm whoami && lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
     "test": "cross-env HOME=$PWD LANG=en_US.UTF-8 NO_COLOR=1 vitest run --coverage",
     "prepare": "husky"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.15.18",
+    "@vitest/coverage-istanbul": "~4.0.18",
+    "cross-env": "^7.0.3",
+    "husky": "^9.1.5",
+    "lerna": "^8.2.0",
+    "lint-staged": "16.4.0",
+    "oxfmt": "^0.43.0",
+    "oxlint": "^1.58.0",
+    "typescript": "^5.2.2",
+    "vitepress": "^1.3.4",
+    "vitepress-plugin-tabs": "^0.8.0",
+    "vitest": "~4.0.18",
+    "vue": "^3.5.29"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "oxlint --fix"
+    ],
+    "*.{ts,js,json,yml,md}": [
+      "oxfmt"
+    ]
   },
   "commitlint": {
     "extends": [
@@ -31,14 +79,11 @@
       "@commitlint/config-workspace-scopes"
     ]
   },
-  "lint-staged": {
-    "*.{ts,js}": [
-      "oxlint --fix"
-    ],
-    "*.{ts,js,json,yml,md}": [
-      "prettier --write"
-    ]
+  "engines": {
+    "node": ">=v18",
+    "npm": ">=7"
   },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "renovate": {
     "rangeStrategy": "update-lockfile",
     "ignorePaths": [
@@ -54,50 +99,5 @@
       "@commitlint/test-environment",
       "@commitlint/utils"
     ]
-  },
-  "workspaces": [
-    "@alias/*",
-    "@commitlint/*",
-    "@packages/*"
-  ],
-  "engines": {
-    "node": ">=v18",
-    "npm": ">=7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/conventional-changelog/commitlint.git"
-  },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://github.com/conventional-changelog/commitlint#readme",
-  "keywords": [
-    "conventional",
-    "conventional-changelog",
-    "log",
-    "changelog",
-    "lint",
-    "check"
-  ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
-  },
-  "devDependencies": {
-    "@swc/core": "^1.15.18",
-    "@vitest/coverage-istanbul": "~4.0.18",
-    "cross-env": "^7.0.3",
-    "husky": "^9.1.5",
-    "lerna": "^8.2.0",
-    "lint-staged": "16.4.0",
-    "oxlint": "^1.58.0",
-    "prettier": "^3.5.3",
-    "typescript": "^5.2.2",
-    "vitepress": "^1.3.4",
-    "vitepress-plugin-tabs": "^0.8.0",
-    "vitest": "~4.0.18",
-    "vue": "^3.5.29"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  }
 }

@@ -17,15 +17,10 @@ export const scopeCase: SyncRule<
 	if (!scope) {
 		return [true];
 	}
-	const isObjectBasedConfiguration =
-		!Array.isArray(value) && !(typeof value === "string");
+	const isObjectBasedConfiguration = !Array.isArray(value) && !(typeof value === "string");
 
 	const checks = (
-		isObjectBasedConfiguration
-			? value.cases
-			: Array.isArray(value)
-				? value
-				: [value]
+		isObjectBasedConfiguration ? value.cases : Array.isArray(value) ? value : [value]
 	).map((check) => {
 		if (typeof check === "string") {
 			return {
@@ -37,21 +32,16 @@ export const scopeCase: SyncRule<
 	});
 
 	const delimiters =
-		isObjectBasedConfiguration && value.delimiters?.length
-			? value.delimiters
-			: ["/", "\\", ","];
+		isObjectBasedConfiguration && value.delimiters?.length ? value.delimiters : ["/", "\\", ","];
 	const delimiterPatterns = delimiters.map((delimiter) => {
-		return delimiter === ","
-			? ", ?"
-			: delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		return delimiter === "," ? ", ?" : delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 	});
 	const delimiterRegex = new RegExp(delimiterPatterns.join("|"));
 	const scopeSegments = scope.split(delimiterRegex);
 
 	const result = checks.some((check) => {
 		const r = scopeSegments.every(
-			(segment) =>
-				delimiterRegex.test(segment) || ensureCase(segment, check.case),
+			(segment) => delimiterRegex.test(segment) || ensureCase(segment, check.case),
 		);
 
 		return negated(check.when) ? !r : r;

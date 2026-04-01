@@ -1,46 +1,46 @@
 {
   "name": "@commitlint/config-conventional",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Shareable commitlint config enforcing conventional commits",
-  "main": "lib/index.js",
-  "files": [
-    "lib/"
+  "keywords": [
+    "angular",
+    "commitlint",
+    "commitlint-config",
+    "conventional-changelog"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  },
+  "license": "MIT",
+  "author": "Mario Nebl <hello@herebecode.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/config-conventional"
   },
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "commitlint-config",
-    "angular"
+  "files": [
+    "lib/"
   ],
-  "author": "Mario Nebl <hello@herebecode.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  "type": "module",
+  "main": "lib/index.js",
+  "publishConfig": {
+    "access": "public"
   },
-  "homepage": "https://commitlint.js.org/",
-  "engines": {
-    "node": ">=v18"
-  },
-  "devDependencies": {
-    "@commitlint/lint": "^20.5.0",
-    "@commitlint/utils": "^20.0.0"
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
   "dependencies": {
     "@commitlint/types": "^20.5.0",
     "conventional-changelog-conventionalcommits": "^9.2.0"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "devDependencies": {
+    "@commitlint/lint": "^20.5.0",
+    "@commitlint/utils": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
 }

@@ -1,45 +1,37 @@
 {
   "name": "@commitlint/read",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Read commit messages from a specified range or last edit",
-  "main": "lib/read.js",
-  "types": "lib/read.d.ts",
-  "files": [
-    "lib/"
+  "keywords": [
+    "commitlint",
+    "conventional-changelog",
+    "core",
+    "library"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check --skip-import"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "engines": {
-    "node": ">=v18"
+  "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/read"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "library",
-    "core"
+  "files": [
+    "lib/"
   ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@commitlint/test": "^20.4.3",
-    "@commitlint/utils": "^20.0.0",
-    "@types/git-raw-commits": "^5.0.0",
-    "@types/minimist": "^1.2.4"
+  "type": "module",
+  "main": "lib/read.js",
+  "types": "lib/read.d.ts",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
     "@commitlint/top-level": "^20.4.3",
@@ -48,5 +40,13 @@
     "minimist": "^1.2.8",
     "tinyexec": "^1.0.0"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "devDependencies": {
+    "@commitlint/test": "^20.4.3",
+    "@commitlint/utils": "^20.0.0",
+    "@types/git-raw-commits": "^5.0.0",
+    "@types/minimist": "^1.2.4"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
 }

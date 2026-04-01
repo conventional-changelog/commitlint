@@ -28,9 +28,7 @@ const require = createRequire(import.meta.url);
 const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
-	const imported = await import(
-		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
-	);
+	const imported = await import(path.isAbsolute(id) ? pathToFileURL(id).toString() : id);
 	return ("default" in imported && imported.default) || imported;
 };
 
@@ -48,8 +46,7 @@ const cli = yargs(process.argv.slice(2))
 		},
 		config: {
 			alias: "g",
-			description:
-				"path to the config file; result code 9 if config is missing",
+			description: "path to the config file; result code 9 if config is missing",
 			type: "string",
 		},
 		"print-config": {
@@ -72,8 +69,7 @@ const cli = yargs(process.argv.slice(2))
 		},
 		env: {
 			alias: "E",
-			description:
-				"check message in the file at path given by environment variable value",
+			description: "check message in the file at path given by environment variable value",
 			type: "string",
 		},
 		extends: {
@@ -88,8 +84,7 @@ const cli = yargs(process.argv.slice(2))
 		},
 		from: {
 			alias: "f",
-			description:
-				"lower end of the commit range to lint; applies if edit=false",
+			description: "lower end of the commit range to lint; applies if edit=false",
 			type: "string",
 		},
 		"from-last-tag": {
@@ -114,8 +109,7 @@ const cli = yargs(process.argv.slice(2))
 		},
 		"parser-preset": {
 			alias: "p",
-			description:
-				"configuration preset to use for conventional-commits-parser",
+			description: "configuration preset to use for conventional-commits-parser",
 			type: "string",
 		},
 		quiet: {
@@ -126,8 +120,7 @@ const cli = yargs(process.argv.slice(2))
 		},
 		to: {
 			alias: "t",
-			description:
-				"upper end of the commit range to lint; applies if edit=false",
+			description: "upper end of the commit range to lint; applies if edit=false",
 			type: "string",
 		},
 		verbose: {
@@ -138,27 +131,16 @@ const cli = yargs(process.argv.slice(2))
 		strict: {
 			alias: "s",
 			type: "boolean",
-			description:
-				"enable strict mode; result code 2 for warnings, 3 for errors",
+			description: "enable strict mode; result code 2 for warnings, 3 for errors",
 		},
 	})
-	.version(
-		"version",
-		"display version information",
-		`${pkg.name}@${pkg.version}`,
-	)
+	.version("version", "display version information", `${pkg.name}@${pkg.version}`)
 	.alias("v", "version")
 	.help("help")
 	.alias("h", "help")
-	.config(
-		"options",
-		"path to a JSON file or Common.js module containing CLI options",
-		require,
-	)
+	.config("options", "path to a JSON file or Common.js module containing CLI options", require)
 	.usage(`${pkg.name}@${pkg.version} - ${pkg.description}\n`)
-	.usage(
-		`[input] reads from stdin if --edit, --env, --from and --to are omitted`,
-	)
+	.usage(`[input] reads from stdin if --edit, --env, --from and --to are omitted`)
 	.strict();
 
 /**
@@ -326,20 +308,14 @@ async function main(args: MainArgs): Promise<void> {
 		const output = await result;
 
 		if (result.exitCode && result.exitCode > 1) {
-			console.warn(
-				"Could not determine core.commentChar git configuration",
-				output.stderr,
-			);
+			console.warn("Could not determine core.commentChar git configuration", output.stderr);
 			opts.parserOpts.commentChar = gitDefaultCommentChar;
 		} else {
-			opts.parserOpts.commentChar =
-				output.stdout.trim() || gitDefaultCommentChar;
+			opts.parserOpts.commentChar = output.stdout.trim() || gitDefaultCommentChar;
 		}
 	}
 
-	const results = await Promise.all(
-		messages.map((message) => lint(message, loaded.rules, opts)),
-	);
+	const results = await Promise.all(messages.map((message) => lint(message, loaded.rules, opts)));
 
 	let isRulesEmpty = false;
 	if (Object.keys(loaded.rules).length === 0) {
@@ -473,8 +449,7 @@ function getEditValue(flags: CliFlags) {
 	// See https://github.com/conventional-changelog/commitlint/issues/103 for details
 	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
 	const isGitParams = edit === "$GIT_PARAMS" || edit === "%GIT_PARAMS%";
-	const isHuskyParams =
-		edit === "$HUSKY_GIT_PARAMS" || edit === "%HUSKY_GIT_PARAMS%";
+	const isHuskyParams = edit === "$HUSKY_GIT_PARAMS" || edit === "%HUSKY_GIT_PARAMS%";
 
 	if (isGitParams || isHuskyParams) {
 		console.warn(`Using environment variable syntax (${edit}) in -e |\
@@ -494,9 +469,7 @@ function getEditValue(flags: CliFlags) {
 }
 
 function getSeed(flags: CliFlags): UserConfig {
-	const n = (flags.extends || []).filter(
-		(i): i is string => typeof i === "string",
-	);
+	const n = (flags.extends || []).filter((i): i is string => typeof i === "string");
 	return n.length > 0
 		? { extends: n, parserPreset: flags["parser-preset"] }
 		: { parserPreset: flags["parser-preset"] };
@@ -514,10 +487,7 @@ function selectParserOpts(parserPreset: ParserPreset | undefined) {
 	return parserPreset.parserOpts;
 }
 
-function loadFormatter(
-	config: QualifiedConfig,
-	flags: CliFlags,
-): Promise<Formatter> {
+function loadFormatter(config: QualifiedConfig, flags: CliFlags): Promise<Formatter> {
 	const moduleName = flags.format || config.formatter || "@commitlint/format";
 	const modulePath =
 		resolveFromSilent(moduleName, __dirname) ||

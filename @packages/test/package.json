@@ -1,36 +1,34 @@
 {
   "name": "@commitlint/test",
-  "type": "module",
   "version": "20.4.3",
-  "description": "test utilities for @commitlint",
+  "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd",
   "private": true,
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib/"
+  "description": "test utilities for @commitlint",
+  "keywords": [
+    "cli",
+    "commitlint",
+    "conventional-changelog"
   ],
-  "engines": {
-    "node": ">=v18"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@packages/test"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "cli"
+  "files": [
+    "lib/"
   ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
-  },
-  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@types/fs-extra": "^11.0.3",
     "@types/tmp": "^0.2.5",
@@ -40,5 +38,7 @@
     "tinyexec": "^1.0.0",
     "tmp": "^0.2.1"
   },
-  "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"
+  "engines": {
+    "node": ">=v18"
+  }
 }

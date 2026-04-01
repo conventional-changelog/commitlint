@@ -37,49 +37,37 @@ test("with noHeaderNoFooter should succeed", async () => {
 });
 
 test("with noHeaderPlainFooter should succeed", async () => {
-	const [actual] = breakingChangeExclamationMark(
-		await parsed.noHeaderPlainFooter,
-	);
+	const [actual] = breakingChangeExclamationMark(await parsed.noHeaderPlainFooter);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test("with noHeaderBreakingFooter should fail", async () => {
-	const [actual] = breakingChangeExclamationMark(
-		await parsed.noHeaderBreakingFooter,
-	);
+	const [actual] = breakingChangeExclamationMark(await parsed.noHeaderBreakingFooter);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test("with plainHeaderPlainFooter should succeed", async () => {
-	const [actual] = breakingChangeExclamationMark(
-		await parsed.plainHeaderPlainFooter,
-	);
+	const [actual] = breakingChangeExclamationMark(await parsed.plainHeaderPlainFooter);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test("with plainHeaderBreakingFooter should fail", async () => {
-	const [actual] = breakingChangeExclamationMark(
-		await parsed.plainHeaderBreakingFooter,
-	);
+	const [actual] = breakingChangeExclamationMark(await parsed.plainHeaderBreakingFooter);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test("with breakingHeaderPlainFooter should fail", async () => {
-	const [actual] = breakingChangeExclamationMark(
-		await parsed.breakingHeaderPlainFooter,
-	);
+	const [actual] = breakingChangeExclamationMark(await parsed.breakingHeaderPlainFooter);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test("with breakingHeaderBreakingFooter should succeed", async () => {
-	const [actual] = breakingChangeExclamationMark(
-		await parsed.breakingHeaderBreakingFooter,
-	);
+	const [actual] = breakingChangeExclamationMark(await parsed.breakingHeaderBreakingFooter);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });

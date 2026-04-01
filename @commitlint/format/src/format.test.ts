@@ -224,9 +224,7 @@ test("format result prints help for errors", () => {
 		},
 	);
 
-	expect(actual).toEqual(
-		expect.arrayContaining([expect.stringContaining("Get help:")]),
-	);
+	expect(actual).toEqual(expect.arrayContaining([expect.stringContaining("Get help:")]));
 });
 
 test("format result prints help for warnings", () => {
@@ -245,9 +243,7 @@ test("format result prints help for warnings", () => {
 		},
 	);
 
-	expect(actual).toEqual(
-		expect.arrayContaining([expect.stringContaining("Get help:")]),
-	);
+	expect(actual).toEqual(expect.arrayContaining([expect.stringContaining("Get help:")]));
 });
 
 test("format result help cotains options.helpUrl", () => {
@@ -268,9 +264,7 @@ test("format result help cotains options.helpUrl", () => {
 		},
 	);
 
-	expect(actual).toEqual(
-		expect.arrayContaining([expect.stringContaining(helpUrl)]),
-	);
+	expect(actual).toEqual(expect.arrayContaining([expect.stringContaining(helpUrl)]));
 });
 
 test("format result omits help for empty problems", () => {
@@ -278,9 +272,7 @@ test("format result omits help for empty problems", () => {
 		warnings: [],
 	});
 
-	expect(actual).not.toEqual(
-		expect.arrayContaining([expect.stringContaining("Get help:")]),
-	);
+	expect(actual).not.toEqual(expect.arrayContaining([expect.stringContaining("Get help:")]));
 });
 
 test("format result should not contain `Get help` prefix if helpUrl is not provided", () => {
@@ -299,7 +291,5 @@ test("format result should not contain `Get help` prefix if helpUrl is not provi
 		},
 	);
 
-	expect(actual).not.toEqual(
-		expect.arrayContaining([expect.stringContaining("Get help:")]),
-	);
+	expect(actual).not.toEqual(expect.arrayContaining([expect.stringContaining("Get help:")]));
 });

@@ -1,49 +1,49 @@
 {
   "name": "@commitlint/is-ignored",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Lint your commit messages",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "files": [
-    "lib/"
+  "keywords": [
+    "commitlint",
+    "conventional-changelog",
+    "core",
+    "library"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "engines": {
-    "node": ">=v18"
+  "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/is-ignored"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "library",
-    "core"
+  "files": [
+    "lib/"
   ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
-  "license": "MIT",
+  "dependencies": {
+    "@commitlint/types": "^20.5.0",
+    "semver": "^7.6.0"
+  },
   "devDependencies": {
     "@commitlint/parse": "^20.5.0",
     "@commitlint/test": "^20.4.3",
     "@commitlint/utils": "^20.0.0",
     "@types/semver": "^7.5.7"
   },
-  "dependencies": {
-    "@commitlint/types": "^20.5.0",
-    "semver": "^7.6.0"
-  },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "engines": {
+    "node": ">=v18"
+  }
 }

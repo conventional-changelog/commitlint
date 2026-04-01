@@ -31,14 +31,11 @@ Module._load = function(path, parent) {
 
 function main(flags) {
 	if (!Proxy) {
-		console
-			.warn("Skipping pkg-check, detected missing Proxy support")
-			.process.exit(0);
+		console.warn("Skipping pkg-check, detected missing Proxy support").process.exit(0);
 	}
 
 	const cwd = flags.cwd || process.cwd();
-	const skipImport =
-		typeof flags.skipImport === "boolean" ? flags.skipImport : false;
+	const skipImport = typeof flags.skipImport === "boolean" ? flags.skipImport : false;
 
 	return readPkg({ cwd }).then((pkg) => {
 		return getTarballFiles(cwd, { write: !skipImport }).then((tarball) => {
@@ -66,9 +63,7 @@ function main(flags) {
 				}
 
 				if (!flags.skipImport && !flags.skipMain) {
-					const importable = fileImportable(
-						path.join(tarball.dirname, pkgFiles.main),
-					);
+					const importable = fileImportable(path.join(tarball.dirname, pkgFiles.main));
 					if (!importable[1]) {
 						problems.push({
 							type: "import",

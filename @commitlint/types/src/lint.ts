@@ -5,9 +5,7 @@ import { RuleConfigSeverity, RuleConfigTuple } from "./rules.js";
 
 export type LintRuleConfig = Record<
 	string,
-	| Readonly<[RuleConfigSeverity.Disabled]>
-	| RuleConfigTuple<void>
-	| RuleConfigTuple<unknown>
+	Readonly<[RuleConfigSeverity.Disabled]> | RuleConfigTuple<void> | RuleConfigTuple<unknown>
 >;
 
 export interface LintOptions {

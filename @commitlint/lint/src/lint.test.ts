@@ -93,9 +93,7 @@ test("throws for invalid rule names", async () => {
 		bar: [RuleConfigSeverity.Warning, "never"],
 	});
 
-	await expect(error).rejects.toThrow(
-		/^Found rules without implementation: foo, bar/,
-	);
+	await expect(error).rejects.toThrow(/^Found rules without implementation: foo, bar/);
 });
 
 test("throws for invalid rule config", async () => {
@@ -141,9 +139,7 @@ test("throws for rule with out of range level", async () => {
 	});
 
 	await expect(error).rejects.toThrow("rule type-enum must be between 0 and 2");
-	await expect(error).rejects.toThrow(
-		"rule header-max-length must be between 0 and 2",
-	);
+	await expect(error).rejects.toThrow("rule header-max-length must be between 0 and 2");
 });
 
 test("throws for rule with invalid condition", async () => {
@@ -163,9 +159,7 @@ test("throws for rule with out of range condition", async () => {
 	});
 
 	await expect(error).rejects.toThrow('type-enum must be "always" or "never"');
-	await expect(error).rejects.toThrow(
-		'header-max-length must be "always" or "never"',
-	);
+	await expect(error).rejects.toThrow('header-max-length must be "always" or "never"');
 });
 
 test("succeds for issue", async () => {

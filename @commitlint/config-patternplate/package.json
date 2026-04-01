@@ -1,35 +1,33 @@
 {
   "name": "@commitlint/config-patternplate",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Lint your commits, patternplate-style",
-  "main": "index.js",
-  "files": [
-    "index.js"
+  "keywords": [
+    "commitlint",
+    "commitlint-config",
+    "conventional-changelog",
+    "patternplate"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check --skip-import"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
+  "license": "MIT",
+  "author": "Mario Nebl <hello@herebecode.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/config-patternplate"
   },
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "commitlint-config",
-    "patternplate"
+  "files": [
+    "index.js"
   ],
-  "author": "Mario Nebl <hello@herebecode.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "engines": {
-    "node": ">=v18"
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
     "@commitlint/config-angular": "^20.5.0",
@@ -40,5 +38,7 @@
     "@commitlint/utils": "^20.0.0",
     "@types/lodash.mergewith": "^4.6.8"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "engines": {
+    "node": ">=v18"
+  }
 }

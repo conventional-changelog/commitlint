@@ -18,19 +18,11 @@ const dynamicImport = async <T>(id: string): Promise<T> => {
 		return require(id);
 	}
 
-	const imported = await import(
-		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
-	);
+	const imported = await import(path.isAbsolute(id) ? pathToFileURL(id).toString() : id);
 	return ("default" in imported && imported.default) || imported;
 };
 
-const pathSuffixes = [
-	"",
-	".js",
-	".json",
-	`${path.sep}index.js`,
-	`${path.sep}index.json`,
-];
+const pathSuffixes = ["", ".js", ".json", `${path.sep}index.js`, `${path.sep}index.json`];
 
 const specifierSuffixes = ["", ".js", ".json", "/index.js", "/index.json"];
 
@@ -184,10 +176,7 @@ function getId(raw: string = "", prefix: string = ""): string {
 	return relative || absolute ? raw : [prefix, raw].filter(String).join("-");
 }
 
-function resolveConfig(
-	raw: string,
-	context: ResolveExtendsContext = {},
-): string {
+function resolveConfig(raw: string, context: ResolveExtendsContext = {}): string {
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
 
@@ -205,10 +194,7 @@ function resolveConfig(
 	return resolved;
 }
 
-function resolveId(
-	specifier: string,
-	context: ResolveExtendsContext = {},
-): string {
+function resolveId(specifier: string, context: ResolveExtendsContext = {}): string {
 	const cwd = context.cwd || process.cwd();
 	const localPath = resolveFromSilent(specifier, cwd);
 
@@ -227,10 +213,7 @@ function resolveId(
 	throw Object.assign(err, { code: "MODULE_NOT_FOUND" });
 }
 
-export function resolveFromSilent(
-	specifier: string,
-	parent: string,
-): string | undefined {
+export function resolveFromSilent(specifier: string, parent: string): string | undefined {
 	try {
 		return resolveFrom(specifier, parent);
 	} catch {}
@@ -314,9 +297,7 @@ export function resolveFromNpxCache(specifier: string): string | undefined {
 			return require.resolve(specifier, { paths: [npxDir] });
 		} catch (err) {
 			if (process.env.DEBUG === "true") {
-				console.debug(
-					`Failed to resolve ${specifier} from ${npxDir}: ${(err as Error).message}`,
-				);
+				console.debug(`Failed to resolve ${specifier} from ${npxDir}: ${(err as Error).message}`);
 			}
 		}
 	}
@@ -327,17 +308,12 @@ export function resolveFromNpxCache(specifier: string): string | undefined {
  * @see https://github.com/sindresorhus/resolve-global/blob/682a6bb0bd8192b74a6294219bb4c536b3708b65/index.js#L7
  */
 export function resolveGlobalSilent(specifier: string): string | undefined {
-	for (const globalPackages of [
-		globalDirectory.npm.packages,
-		globalDirectory.yarn.packages,
-	]) {
+	for (const globalPackages of [globalDirectory.npm.packages, globalDirectory.yarn.packages]) {
 		try {
 			return resolveFrom(specifier, globalPackages);
 		} catch (err) {
 			if (process.env.DEBUG === "true") {
-				console.debug(
-					`Failed to resolve ${specifier} from global: ${(err as Error).message}`,
-				);
+				console.debug(`Failed to resolve ${specifier} from global: ${(err as Error).message}`);
 			}
 		}
 	}

@@ -1,10 +1,7 @@
 import message from "@commitlint/message";
 import { SyncRule } from "@commitlint/types";
 
-export const breakingChangeExclamationMark: SyncRule = (
-	parsed,
-	when = "always",
-) => {
+export const breakingChangeExclamationMark: SyncRule = (parsed, when = "always") => {
 	const header = parsed.header;
 	const footer = parsed.footer;
 
@@ -16,8 +13,7 @@ export const breakingChangeExclamationMark: SyncRule = (
 		return [true];
 	}
 
-	const hasExclamationMark =
-		!!header && /^(\w*)(?:\((.*)\))?!: (.*)$/.test(header);
+	const hasExclamationMark = !!header && /^(\w*)(?:\((.*)\))?!: (.*)$/.test(header);
 	const hasBreakingChange = !!footer && /^BREAKING[ -]CHANGE:/m.test(footer);
 
 	const negated = when === "never";

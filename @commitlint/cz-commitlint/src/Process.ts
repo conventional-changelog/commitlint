@@ -25,11 +25,7 @@ export default async function (
 ): Promise<string> {
 	setRules(rules);
 	setPromptConfig(prompts);
-	const questions = [
-		...getHeaderQuestions(),
-		...getBodyQuestions(),
-		...getFooterQuestions(),
-	];
+	const questions = [...getHeaderQuestions(), ...getBodyQuestions(), ...getFooterQuestions()];
 	const answers = await inquirer.prompt(questions);
 	const header = combineHeader(answers);
 	const body = combineBody(answers);

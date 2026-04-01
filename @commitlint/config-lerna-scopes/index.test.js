@@ -91,10 +91,7 @@ test("returns expected value for scoped lerna repository", async () => {
 
 test("work with no declared packages", async () => {
 	const { "scope-enum": fn } = config.rules;
-	const cwd = await npm.bootstrap(
-		"fixtures/no-packages-declaration",
-		__dirname,
-	);
+	const cwd = await npm.bootstrap("fixtures/no-packages-declaration", __dirname);
 
 	const [, , value] = await fn({ cwd });
 	expect(value).toEqual([]);
@@ -102,10 +99,7 @@ test("work with no declared packages", async () => {
 
 test("inform the user about the transition to config-workspace-scopes if the project is using native workspaces", async () => {
 	const { "scope-enum": fn } = config.rules;
-	const cwd = await npm.bootstrap(
-		"fixtures/transition-to-workspace-scopes",
-		__dirname,
-	);
+	const cwd = await npm.bootstrap("fixtures/transition-to-workspace-scopes", __dirname);
 
 	const consoleWarnSpy = vi.spyOn(console, "warn");
 

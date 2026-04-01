@@ -16,13 +16,9 @@ export const scopeEnum: SyncRule<
 	}
 
 	const delimiters =
-		Array.isArray(value) || !value.delimiters?.length
-			? ["/", "\\", ","]
-			: value.delimiters;
+		Array.isArray(value) || !value.delimiters?.length ? ["/", "\\", ","] : value.delimiters;
 	const delimiterPatterns = delimiters.map((delimiter) => {
-		return delimiter === ","
-			? ", ?"
-			: delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		return delimiter === "," ? ", ?" : delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 	});
 	const messageScopes = scope.split(new RegExp(delimiterPatterns.join("|")));
 	const errorMessage = ["scope must", `be one of [${scopes.join(", ")}]`];

@@ -20,11 +20,7 @@ export default class InputCustomPrompt<
 	private lineSubscription: Subscription;
 	private readonly tabCompletion: string[];
 
-	constructor(
-		question: TQuestion,
-		readLine: ReadlineInterface,
-		answers: Answers,
-	) {
+	constructor(question: TQuestion, readLine: ReadlineInterface, answers: Answers) {
 		super(question, readLine, answers);
 
 		if (this.opt.log) {
@@ -36,9 +32,7 @@ export default class InputCustomPrompt<
 		}
 
 		const events = observe(this.rl);
-		this.lineSubscription = events.keypress.subscribe(
-			this.onKeyPress2.bind(this),
-		);
+		this.lineSubscription = events.keypress.subscribe(this.onKeyPress2.bind(this));
 		this.tabCompletion = (this.opt.tabCompletion || [])
 			.map((item) => item.value)
 			.sort((a, b) => a.localeCompare(b));
@@ -103,12 +97,7 @@ export default class InputCustomPrompt<
 			const maxLength = this.opt.maxLength(this.answers);
 			if (maxLength < Infinity) {
 				const lengthRemaining = maxLength - length;
-				const color =
-					lengthRemaining <= 5
-						? pc.red
-						: lengthRemaining <= 10
-							? pc.yellow
-							: pc.gray;
+				const color = lengthRemaining <= 5 ? pc.red : lengthRemaining <= 10 ? pc.yellow : pc.gray;
 				bottomContent = color(`${lengthRemaining} characters left`);
 			}
 		}

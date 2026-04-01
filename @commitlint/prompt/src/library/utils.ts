@@ -27,9 +27,8 @@ export function getRulePrefix(id: string): string | null {
  * Get a predicate matching rule definitions with a given name
  */
 export function getHasName(name: string) {
-	return <T extends RuleEntry>(
-		rule: RuleEntry,
-	): rule is Exclude<T, [string, undefined]> => getRuleName(rule[0]) === name;
+	return <T extends RuleEntry>(rule: RuleEntry): rule is Exclude<T, [string, undefined]> =>
+		getRuleName(rule[0]) === name;
 }
 
 /**
@@ -85,9 +84,7 @@ export function enumRuleIsActive(
 	rule: RuleEntry,
 ): rule is [
 	string,
-	Readonly<
-		[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, "always", string[]]
-	>,
+	Readonly<[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, "always", string[]]>,
 ] {
 	return (
 		ruleIsActive(rule) &&
@@ -110,12 +107,7 @@ export function getRules(prefix: string, rules: QualifiedRules): RuleEntry[] {
 }
 
 export function getMaxLength(rule?: RuleEntry): number {
-	if (
-		rule &&
-		ruleIsActive(rule) &&
-		ruleIsApplicable(rule) &&
-		typeof rule[1][2] === "number"
-	) {
+	if (rule && ruleIsActive(rule) && ruleIsApplicable(rule) && typeof rule[1][2] === "number") {
 		return rule[1][2];
 	}
 	return Infinity;

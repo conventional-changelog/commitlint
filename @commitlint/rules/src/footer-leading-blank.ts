@@ -19,10 +19,6 @@ export const footerLeadingBlank: SyncRule = (parsed, when = "always") => {
 
 	return [
 		negated ? !succeeds : succeeds,
-		message([
-			"footer",
-			negated ? "may not" : "must",
-			"have leading blank line",
-		]),
+		message(["footer", negated ? "may not" : "must", "have leading blank line"]),
 	];
 };
