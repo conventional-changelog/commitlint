@@ -43,12 +43,12 @@ jobs:
           node --version
           npm --version
           pnpm --version
-          pnpm --filter @commitlint/cli exec commitlint --version
+          node @commitlint/cli/lib/cli.js --version
 
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        run: pnpm --filter @commitlint/cli exec commitlint --last --verbose
+        run: node @commitlint/cli/lib/cli.js --last --verbose
 
       - name: Validate PR commits with commitlint
         if: github.event_name == 'pull_request'
-        run: pnpm --filter @commitlint/cli exec commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        run: node @commitlint/cli/lib/cli.js --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose

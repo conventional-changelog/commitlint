@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@commitlint/config-conventional':
+        specifier: workspace:^
+        version: link:@commitlint/config-conventional
+      '@commitlint/config-workspace-scopes':
+        specifier: workspace:^
+        version: link:@commitlint/config-workspace-scopes
       '@eslint/eslintrc':
         specifier: ^3.3.4
         version: 3.3.5
