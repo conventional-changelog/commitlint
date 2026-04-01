@@ -67,9 +67,10 @@
   },
   "lint-staged": {
     "*.{ts,js}": [
-      "oxlint --fix"
+      "oxlint --fix",
+      "oxfmt --ignore-path .oxfmtignore"
     ],
-    "*.{ts,js,json,yml,md}": [
+    "*.{json,yml,md}": [
       "oxfmt --ignore-path .oxfmtignore"
     ]
   },
