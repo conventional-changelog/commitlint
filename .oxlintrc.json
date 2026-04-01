@@ -1,0 +1,47 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "**/lib/",
+    "**/coverage/",
+    "**/node_modules/",
+    "**/fixtures/",
+    "**/dist/"
+  ],
+  "env": {
+    "node": true
+  },
+  "plugins": ["typescript", "import", "vitest"],
+  "rules": {
+    "no-empty": "off",
+    "no-var": "off",
+
+    "import/default": "off",
+    "import/first": "error",
+    "import/no-absolute-path": "error",
+    "import/no-amd": "error",
+    "import/no-mutable-exports": "error",
+    "import/no-named-default": "error",
+    "import/no-self-import": "error",
+
+    "typescript/no-unused-vars": "off",
+    "typescript/no-use-before-define": "off",
+    "typescript/no-explicit-any": "off",
+    "typescript/explicit-function-return-type": "off",
+    "typescript/no-var-requires": "off",
+    "typescript/no-inferrable-types": "off",
+    "typescript/no-non-null-assertion": "off",
+    "typescript/triple-slash-reference": "off",
+
+    "vitest/hoisted-apis-on-top": "off",
+    "vitest/max-nested-describe": ["error", { "max": 3 }],
+    "vitest/require-mock-type-parameters": "off"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test.js"],
+      "rules": {
+        "import/first": "off"
+      }
+    }
+  ]
+}

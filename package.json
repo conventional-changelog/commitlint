@@ -15,8 +15,8 @@
     "docs-dev": "vitepress dev docs",
     "docs-build": "vitepress build docs",
     "docs-preview": "vitepress preview docs",
-    "lint": "eslint",
-    "lint-fix": "eslint --fix",
+    "lint": "oxlint",
+    "lint-fix": "oxlint --fix",
     "format": "prettier **/*.{ts,js,json,yml,md} --check",
     "format-fix": "prettier \"**/*.{ts,js,json,yml,md}\" --write",
     "publish": "npm whoami && lerna publish --conventional-commits",
@@ -32,6 +32,9 @@
     ]
   },
   "lint-staged": {
+    "*.{ts,js}": [
+      "oxlint --fix"
+    ],
     "*.{ts,js,json,yml,md}": [
       "prettier --write"
     ]
@@ -82,27 +85,19 @@
     "email": "hello@herebecode.com"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.4",
-    "@eslint/js": "^10.0.1",
     "@swc/core": "^1.15.18",
-    "@typescript-eslint/eslint-plugin": "^8.56.1",
-    "@typescript-eslint/parser": "^8.56.1",
     "@vitest/coverage-istanbul": "~4.0.18",
-    "@vitest/eslint-plugin": "^1.3.4",
     "cross-env": "^7.0.3",
-    "eslint": "^10.0.2",
-    "eslint-config-prettier": "^10.0.0",
-    "eslint-import-resolver-typescript": "^4.4.3",
-    "eslint-plugin-import-x": "^4.15.2",
-    "globals": "^16.0.0",
     "husky": "^9.1.5",
     "lerna": "^8.2.0",
     "lint-staged": "16.4.0",
+    "oxlint": "^1.58.0",
     "prettier": "^3.5.3",
     "typescript": "^5.2.2",
     "vitepress": "^1.3.4",
     "vitepress-plugin-tabs": "^0.8.0",
     "vitest": "~4.0.18",
     "vue": "^3.5.29"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
