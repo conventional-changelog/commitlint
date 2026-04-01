@@ -2,6 +2,9 @@
   "$schema": "./node_modules/oxlint/configuration_schema.json",
 
   // Migrated from eslint.config.mjs (ESLint v10 flat config).
+  // Note: oxlint and oxfmt require Node >= 20. The repo's engines field
+  // (>=v18) applies to the published packages. CI runs lint/format on
+  // Node 22 (lts/*). Local development requires Node >= 20 for linting.
   //
   // Unmappable rules (not available in oxlint):
   //  - import/no-extraneous-dependencies: validates imports are declared in

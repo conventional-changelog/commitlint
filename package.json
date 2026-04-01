@@ -42,8 +42,8 @@
     "docs-preview": "vitepress preview docs",
     "lint": "oxlint",
     "lint-fix": "oxlint --fix",
-    "format": "oxfmt --check",
-    "format-fix": "oxfmt",
+    "format": "oxfmt --check --ignore-path .oxfmtignore",
+    "format-fix": "oxfmt --ignore-path .oxfmtignore",
     "publish": "npm whoami && lerna publish --conventional-commits",
     "reinstall": "yarn clean && yarn install",
     "start": "yarn watch",
@@ -70,7 +70,7 @@
       "oxlint --fix"
     ],
     "*.{ts,js,json,yml,md}": [
-      "oxfmt"
+      "oxfmt --ignore-path .oxfmtignore"
     ]
   },
   "commitlint": {
