@@ -18,30 +18,37 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: pnpm/action-setup@v4
+        # version is read from packageManager in package.json
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          cache: yarn
+          cache: pnpm
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build packages
-        run: yarn build
+        run: pnpm build
+
+      - name: Audit dependencies
+        continue-on-error: true
+        run: pnpm audit --audit-level=high
 
       - name: Print versions
         run: |
           git --version
           node --version
           npm --version
-          yarn --version
-          yarn commitlint --version
+          pnpm --version
+          node @commitlint/cli/lib/cli.js --version
 
       - name: Validate current commit (last commit) with commitlint
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        run: yarn commitlint --last --verbose
+        run: node @commitlint/cli/lib/cli.js --last --verbose
 
       - name: Validate PR commits with commitlint
         if: github.event_name == 'pull_request'
-        run: yarn commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
+        run: node @commitlint/cli/lib/cli.js --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose

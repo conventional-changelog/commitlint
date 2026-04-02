@@ -43,9 +43,9 @@
     }
   },
   "dependencies": {
-    "@commitlint/ensure": "^20.5.0",
-    "@commitlint/load": "^20.5.0",
-    "@commitlint/types": "^20.5.0",
+    "@commitlint/ensure": "workspace:^",
+    "@commitlint/load": "workspace:^",
+    "@commitlint/types": "workspace:^",
     "is-plain-obj": "^4.1.0",
     "picocolors": "^1.1.1",
     "word-wrap": "^1.2.5"

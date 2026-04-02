@@ -36,12 +36,11 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/test": "^20.4.3",
-    "@commitlint/utils": "^20.0.0",
-    "@types/conventional-commits-parser": "^5.0.2"
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^"
   },
   "dependencies": {
-    "@commitlint/types": "^20.5.0",
+    "@commitlint/types": "workspace:^",
     "conventional-changelog-angular": "^8.2.0",
     "conventional-commits-parser": "^6.3.0"
   },

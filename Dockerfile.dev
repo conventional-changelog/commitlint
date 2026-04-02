@@ -4,5 +4,6 @@ FROM brainpower/node-cubicle
 WORKDIR /root/repo
 
 ADD . ./
-RUN yarn
-RUN yarn build
+RUN corepack enable pnpm
+RUN pnpm install
+RUN pnpm build

@@ -3,29 +3,31 @@ FROM docker.io/library/node:18-alpine AS builder
 WORKDIR /src
 COPY . ./
 RUN apk add --no-cache python3 py3-setuptools make g++ git
-RUN yarn install --frozen-lockfile --network-timeout 100000 && \
-    yarn run build && \
+RUN corepack enable pnpm && \
+    pnpm install --frozen-lockfile && \
+    pnpm build && \
     # Commit lint CLI packages
-    npm pack @commitlint/cli && \
-    npm pack @commitlint/config-validator && \
-    npm pack @commitlint/config-pnpm-scopes && \
-    npm pack @commitlint/config-nx-scopes && \
-    npm pack @commitlint/ensure && \
-    npm pack @commitlint/execute-rule && \
-    npm pack @commitlint/format && \
-    npm pack @commitlint/is-ignored && \
-    npm pack @commitlint/lint && \
-    npm pack @commitlint/load && \
-    npm pack @commitlint/message && \
-    npm pack @commitlint/parse && \
-    npm pack @commitlint/read && \
-    npm pack @commitlint/resolve-extends && \
-    npm pack @commitlint/rules && \
-    npm pack @commitlint/to-lines && \
-    npm pack @commitlint/top-level && \
-    npm pack @commitlint/types && \
+    # pnpm pack ignores positional args, so use --filter to target each package
+    pnpm --filter @commitlint/cli pack --pack-destination /src && \
+    pnpm --filter @commitlint/config-validator pack --pack-destination /src && \
+    pnpm --filter @commitlint/config-pnpm-scopes pack --pack-destination /src && \
+    pnpm --filter @commitlint/config-nx-scopes pack --pack-destination /src && \
+    pnpm --filter @commitlint/ensure pack --pack-destination /src && \
+    pnpm --filter @commitlint/execute-rule pack --pack-destination /src && \
+    pnpm --filter @commitlint/format pack --pack-destination /src && \
+    pnpm --filter @commitlint/is-ignored pack --pack-destination /src && \
+    pnpm --filter @commitlint/lint pack --pack-destination /src && \
+    pnpm --filter @commitlint/load pack --pack-destination /src && \
+    pnpm --filter @commitlint/message pack --pack-destination /src && \
+    pnpm --filter @commitlint/parse pack --pack-destination /src && \
+    pnpm --filter @commitlint/read pack --pack-destination /src && \
+    pnpm --filter @commitlint/resolve-extends pack --pack-destination /src && \
+    pnpm --filter @commitlint/rules pack --pack-destination /src && \
+    pnpm --filter @commitlint/to-lines pack --pack-destination /src && \
+    pnpm --filter @commitlint/top-level pack --pack-destination /src && \
+    pnpm --filter @commitlint/types pack --pack-destination /src && \
     # Default commitlint config
-    npm pack @commitlint/config-conventional
+    pnpm --filter @commitlint/config-conventional pack --pack-destination /src
 
 FROM docker.io/library/node:18-alpine
 RUN apk add --no-cache git
