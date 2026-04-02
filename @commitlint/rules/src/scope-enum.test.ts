@@ -39,11 +39,7 @@ describe("Scope Enum Validation", () => {
 			test.each(Object.keys(messages))(
 				`Succeeds with a %s message and '${condition}'`,
 				async (messageType) => {
-					const [actual, message] = scopeEnum(
-						await parse(messages[messageType]),
-						condition,
-						[],
-					);
+					const [actual, message] = scopeEnum(await parse(messages[messageType]), condition, []);
 					const expected = true;
 					expect(actual).toEqual(expected);
 					expect(message).toEqual("");
@@ -56,21 +52,13 @@ describe("Scope Enum Validation", () => {
 				const fakeMessage = messages[messageType];
 
 				it(`Succeeds with a '${messageType}' message and '${condition}' with single-scope enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						condition,
-						["bar"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), condition, ["bar"]);
 					expect(actual).toBeTruthy();
 					expect(message).toBeFalsy();
 				});
 
 				it(`Succeeds with a '${messageType}' message  and '${condition}' with multi-scope enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						condition,
-						["bar", "baz"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), condition, ["bar", "baz"]);
 					expect(actual).toBeTruthy();
 					expect(message).toBeFalsy();
 				});
@@ -84,31 +72,19 @@ describe("Scope Enum Validation", () => {
 				const fakeMessage = messages[messageType];
 
 				it(`Succeeds with a '${messageType}' message when all message scopes are included in single-scope enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"always",
-						["bar"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "always", ["bar"]);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual("scope must be one of [bar]");
 				});
 
 				test(`Succeeds with a '${messageType}' message when all message scopes are included in multi-scope enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"always",
-						["bar", "baz"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "always", ["bar", "baz"]);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual("scope must be one of [bar, baz]");
 				});
 
 				test(`Fails with a '${messageType}' message when any message scope is not included in enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"always",
-						["foo"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "always", ["foo"]);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual("scope must be one of [foo]");
 				});
@@ -120,42 +96,28 @@ describe("Scope Enum Validation", () => {
 				const fakeMessage = messages[messageType];
 
 				test(`Succeeds with a '${messageType}' message when all message scopes are included in enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"always",
-						["bar", "baz"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "always", ["bar", "baz"]);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual("scope must be one of [bar, baz]");
 				});
 
 				test(`Fails with a '${messageType}' message when no message scopes are included in enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"always",
-						["foo"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "always", ["foo"]);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual("scope must be one of [foo]");
 				});
 
 				it(`Fails with a '${messageType}' message when only some message scopes are included in enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"always",
-						["bar"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "always", ["bar"]);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual("scope must be one of [bar]");
 				});
 			});
 
 			test(`Succeeds with a 'multipleSlash' message when the scopes are included in enum`, async () => {
-				const [actual, message] = scopeEnum(
-					await parse(messages["multipleSlash"]),
-					"always",
-					["bar/baz"],
-				);
+				const [actual, message] = scopeEnum(await parse(messages["multipleSlash"]), "always", [
+					"bar/baz",
+				]);
 				expect(actual).toBeTruthy();
 				expect(message).toEqual("scope must be one of [bar/baz]");
 			});
@@ -168,42 +130,28 @@ describe("Scope Enum Validation", () => {
 				const fakeMessage = messages[messageType];
 
 				test(`Succeeds with a '${messageType}' message when no message scopes are included in enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"never",
-						["foo"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "never", ["foo"]);
 					expect(actual).toBeTruthy();
 					expect(message).toEqual("scope must not be one of [foo]");
 				});
 
 				it(`Fails with a '${messageType}' message when any message scope is included in single-scope enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"never",
-						["bar"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "never", ["bar"]);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual("scope must not be one of [bar]");
 				});
 
 				test(`Fails with a '${messageType}' message when any message scope is included in multi-scope enum`, async () => {
-					const [actual, message] = scopeEnum(
-						await parse(fakeMessage),
-						"never",
-						["bar", "baz"],
-					);
+					const [actual, message] = scopeEnum(await parse(fakeMessage), "never", ["bar", "baz"]);
 					expect(actual).toBeFalsy();
 					expect(message).toEqual("scope must not be one of [bar, baz]");
 				});
 			});
 
 			test(`Fails with a 'multipleSlash' message when the scopes are included in enum`, async () => {
-				const [actual, message] = scopeEnum(
-					await parse(messages["multipleSlash"]),
-					"never",
-					["bar/baz"],
-				);
+				const [actual, message] = scopeEnum(await parse(messages["multipleSlash"]), "never", [
+					"bar/baz",
+				]);
 				expect(actual).toBeFalsy();
 				expect(message).toEqual("scope must not be one of [bar/baz]");
 			});
@@ -212,26 +160,18 @@ describe("Scope Enum Validation", () => {
 
 	describe("Object-based configuration", () => {
 		test("Supports object value with default delimiters (/, \\ or ,)", async () => {
-			const [actual, error] = scopeEnum(
-				await parse(messages["multipleCommaSpace"]),
-				"always",
-				{
-					scopes: ["bar", "baz"],
-				},
-			);
+			const [actual, error] = scopeEnum(await parse(messages["multipleCommaSpace"]), "always", {
+				scopes: ["bar", "baz"],
+			});
 			expect(actual).toBe(true);
 			expect(error).toEqual("scope must be one of [bar, baz]");
 		});
 
 		test("Supports custom single delimiter", async () => {
-			const [actual, error] = scopeEnum(
-				await parse(messages["pipeDelimiter"]),
-				"always",
-				{
-					scopes: ["bar", "baz"],
-					delimiters: ["|"],
-				},
-			);
+			const [actual, error] = scopeEnum(await parse(messages["pipeDelimiter"]), "always", {
+				scopes: ["bar", "baz"],
+				delimiters: ["|"],
+			});
 			expect(actual).toBe(true);
 			expect(error).toEqual("scope must be one of [bar, baz]");
 		});
@@ -250,53 +190,37 @@ describe("Scope Enum Validation", () => {
 		});
 
 		test("Fails when any scope segment is not in enum with custom delimiter", async () => {
-			const [actual, error] = scopeEnum(
-				await parse(messages["pipeDelimiter"]),
-				"always",
-				{
-					scopes: ["bar", "qux"],
-					delimiters: ["|"],
-				},
-			);
+			const [actual, error] = scopeEnum(await parse(messages["pipeDelimiter"]), "always", {
+				scopes: ["bar", "qux"],
+				delimiters: ["|"],
+			});
 			expect(actual).toBe(false);
 			expect(error).toEqual("scope must be one of [bar, qux]");
 		});
 
 		test("Falls back to default delimiters when delimiters is an empty array", async () => {
-			const [actual, error] = scopeEnum(
-				await parse(messages["multipleSlash"]),
-				"always",
-				{
-					scopes: ["bar", "baz"],
-					delimiters: [],
-				},
-			);
+			const [actual, error] = scopeEnum(await parse(messages["multipleSlash"]), "always", {
+				scopes: ["bar", "baz"],
+				delimiters: [],
+			});
 			expect(actual).toBe(true);
 			expect(error).toEqual("scope must be one of [bar, baz]");
 		});
 
 		test("Uses object value for 'never' with custom delimiter", async () => {
-			const [actual, error] = scopeEnum(
-				await parse(messages["pipeDelimiter"]),
-				"never",
-				{
-					scopes: ["bar", "baz"],
-					delimiters: ["|"],
-				},
-			);
+			const [actual, error] = scopeEnum(await parse(messages["pipeDelimiter"]), "never", {
+				scopes: ["bar", "baz"],
+				delimiters: ["|"],
+			});
 			expect(actual).toBe(false);
 			expect(error).toEqual("scope must not be one of [bar, baz]");
 		});
 
 		test("Handles special characters in delimiters", async () => {
-			const [actual, error] = scopeEnum(
-				await parse(messages["asteriskDelimiter"]),
-				"always",
-				{
-					scopes: ["bar", "baz"],
-					delimiters: ["*"],
-				},
-			);
+			const [actual, error] = scopeEnum(await parse(messages["asteriskDelimiter"]), "always", {
+				scopes: ["bar", "baz"],
+				delimiters: ["*"],
+			});
 			expect(actual).toBe(true);
 			expect(error).toEqual("scope must be one of [bar, baz]");
 		});

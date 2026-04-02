@@ -41,9 +41,7 @@ export default function getPrompt(
 	const required = emptyRule ? ruleIsNotApplicable(emptyRule) : false;
 
 	const forceCaseFn = getForcedCaseFn(rules.find(getHasName("case")));
-	const forceLeadingBlankFn = getForcedLeadingFn(
-		rules.find(getHasName("leading-blank")),
-	);
+	const forceLeadingBlankFn = getForcedLeadingFn(rules.find(getHasName("leading-blank")));
 
 	const maxLengthRule = rules.find(getHasName("max-length"));
 	const inputMaxLength = getMaxLength(maxLengthRule);
@@ -87,11 +85,7 @@ export default function getPrompt(
 			}
 
 			const tabValues = tabCompletion.map((item) => item.value);
-			if (
-				input.length > 0 &&
-				tabValues.length > 0 &&
-				!tabValues.includes(input)
-			) {
+			if (input.length > 0 && tabValues.length > 0 && !tabValues.includes(input)) {
 				return `⚠ ${pc.bold(type)} must be one of ${tabValues.join(", ")}.`;
 			}
 			return true;

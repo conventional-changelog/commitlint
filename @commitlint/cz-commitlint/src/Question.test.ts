@@ -129,9 +129,7 @@ describe("message", () => {
 			skip: true,
 		}).question;
 		expect(question).toHaveProperty("message", expect.any(Function));
-		expect((question.message as any)()).toBe(
-			"please input (press enter to skip):\n",
-		);
+		expect((question.message as any)()).toBe("please input (press enter to skip):\n");
 	});
 
 	test("should not display skip hint when it is input and without skip string", () => {
@@ -159,9 +157,7 @@ describe("message", () => {
 			minLength: 10,
 		} as any).question;
 		expect(question).toHaveProperty("message", expect.any(Function));
-		expect((question.message as any)()).toBe(
-			"please input: 10 chars at least\n",
-		);
+		expect((question.message as any)()).toBe("please input: 10 chars at least\n");
 	});
 
 	test("should display hints with correct format", () => {
@@ -307,9 +303,7 @@ describe("transformer", () => {
 			fullStopFn: (input: string) => input + "!",
 		}).question;
 
-		expect(
-			(question as InputQuestionOptions)?.transformer?.("xxxx", {}, {}),
-		).toBe("Xxxx!");
+		expect((question as InputQuestionOptions)?.transformer?.("xxxx", {}, {})).toBe("Xxxx!");
 	});
 
 	test("should char count with green color when in the limit range", () => {
@@ -318,18 +312,18 @@ describe("transformer", () => {
 			maxLength: 5,
 		}).question;
 
-		expect(
-			(question as InputQuestionOptions)?.transformer?.("xxx", {}, {}),
-		).toEqual(pc.green(`(3) xxx`));
+		expect((question as InputQuestionOptions)?.transformer?.("xxx", {}, {})).toEqual(
+			pc.green(`(3) xxx`),
+		);
 
 		question = new Question("body", {
 			...QUESTION_CONFIG,
 			minLength: 2,
 		}).question;
 
-		expect(
-			(question as InputQuestionOptions)?.transformer?.("xxx", {}, {}),
-		).toEqual(pc.green(`(3) xxx`));
+		expect((question as InputQuestionOptions)?.transformer?.("xxx", {}, {})).toEqual(
+			pc.green(`(3) xxx`),
+		);
 	});
 
 	test("should char count with red color when over the limit range", () => {
@@ -338,18 +332,16 @@ describe("transformer", () => {
 			maxLength: 5,
 		}).question;
 
-		expect(
-			(question as InputQuestionOptions)?.transformer?.("xxxxxx", {}, {}),
-		).toEqual(pc.red(`(6) xxxxxx`));
+		expect((question as InputQuestionOptions)?.transformer?.("xxxxxx", {}, {})).toEqual(
+			pc.red(`(6) xxxxxx`),
+		);
 
 		question = new Question("body", {
 			...QUESTION_CONFIG,
 			minLength: 2,
 		}).question;
 
-		expect(
-			(question as InputQuestionOptions)?.transformer?.("x", {}, {}),
-		).toEqual(pc.red(`(1) x`));
+		expect((question as InputQuestionOptions)?.transformer?.("x", {}, {})).toEqual(pc.red(`(1) x`));
 	});
 });
 

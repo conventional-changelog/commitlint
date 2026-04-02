@@ -173,10 +173,7 @@ console.log(config);
 ### Config file with with current working directory
 
 ```js
-const config = await load(
-  {},
-  { file: ".commitlintrc.yml", cwd: process.cwd() },
-);
+const config = await load({}, { file: ".commitlintrc.yml", cwd: process.cwd() });
 console.log(config);
 /* => 
 { 

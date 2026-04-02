@@ -1,34 +1,32 @@
 {
   "name": "commitlint-config-nx-scopes",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Shareable commitlint config enforcing nx project names as scopes",
-  "files": [
-    "index.js"
+  "keywords": [
+    "commitlint",
+    "commitlint-config",
+    "conventional-changelog",
+    "nx"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
+  "license": "MIT",
+  "author": "Florian Guitton <florian@secretarium.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@alias/commitlint-config-nx-scopes"
   },
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "commitlint-config",
-    "nx"
+  "files": [
+    "index.js"
   ],
-  "author": "Florian Guitton <florian@secretarium.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "engines": {
-    "node": ">=v18"
+  "type": "module",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
   "dependencies": {
     "@commitlint/config-nx-scopes": "^20.5.0"
@@ -36,5 +34,7 @@
   "devDependencies": {
     "@commitlint/utils": "^20.0.0"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "engines": {
+    "node": ">=v18"
+  }
 }

@@ -17,11 +17,7 @@ function isParserOptsFunction<T extends ParserPreset>(
 }
 
 export async function loadParserOpts(
-	pendingParser:
-		| string
-		| Awaitable<ParserPreset>
-		| (() => Awaitable<ParserPreset>)
-		| undefined,
+	pendingParser: string | Awaitable<ParserPreset> | (() => Awaitable<ParserPreset>) | undefined,
 ): Promise<ParserPreset | undefined> {
 	if (typeof pendingParser === "function") {
 		return loadParserOpts(pendingParser());
@@ -42,17 +38,13 @@ export async function loadParserOpts(
 	if (typeof parser.parserOpts === "object") {
 		// Await parser opts if applicable
 		parser.parserOpts = await parser.parserOpts;
-		if (
-			isObjectLike(parser.parserOpts) &&
-			isObjectLike(parser.parserOpts.parserOpts)
-		) {
+		if (isObjectLike(parser.parserOpts) && isObjectLike(parser.parserOpts.parserOpts)) {
 			// Preserve any user-provided properties (e.g. issuePrefixes) that
 			// were merged at the outer parserOpts level during config resolution,
 			// while unwrapping the inner module-provided parserOpts (#4640).
-			const { parserOpts: inner, ...rest } = parser.parserOpts as Record<
-				string,
-				unknown
-			> & { parserOpts: Record<string, unknown> };
+			const { parserOpts: inner, ...rest } = parser.parserOpts as Record<string, unknown> & {
+				parserOpts: Record<string, unknown>;
+			};
 			parser.parserOpts = { ...inner, ...rest };
 		}
 		return parser;

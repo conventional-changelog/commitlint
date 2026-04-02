@@ -6,9 +6,7 @@ import { ruleIsActive, ruleIsNotApplicable } from "./utils.js";
  * @param rule to parse
  * @return transform function applying the leading
  */
-export default function getForcedLeadingFn(
-	rule?: RuleEntry,
-): (input: string) => string {
+export default function getForcedLeadingFn(rule?: RuleEntry): (input: string) => string {
 	if (!rule || !ruleIsActive(rule)) {
 		return (input: string): string => input;
 	}

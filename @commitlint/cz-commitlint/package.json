@@ -1,46 +1,38 @@
 {
   "name": "@commitlint/cz-commitlint",
-  "type": "module",
   "version": "20.5.1",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Commitizen adapter using the commitlint.config.js",
-  "main": "./lib/index.js",
-  "exports": {
-    "import": "./lib/index.js",
-    "require": "./index.cjs"
-  },
-  "files": [
-    "index.cjs",
-    "lib"
-  ],
   "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "cz",
     "commitizen",
+    "commitlint",
+    "conventional-changelog",
+    "cz",
     "cz-commitlint"
   ],
-  "scripts": {
-    "commit": "git-cz"
-  },
   "homepage": "https://commitlint.js.org/",
   "bugs": {
     "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
+  "license": "MIT",
+  "author": "Curly Brackets <water.curly@outlook.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/cz-commitlint"
   },
-  "engineStrict": true,
-  "engines": {
-    "node": ">=v18"
+  "files": [
+    "index.cjs",
+    "lib"
+  ],
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    "import": "./lib/index.js",
+    "require": "./index.cjs"
   },
-  "author": "Curly Brackets <water.curly@outlook.com>",
-  "license": "MIT",
-  "config": {
-    "commitizen": {
-      "path": "./@commitlint/cz-commitlint"
-    }
+  "scripts": {
+    "commit": "git-cz"
   },
   "dependencies": {
     "@commitlint/ensure": "^20.5.0",
@@ -50,13 +42,21 @@
     "picocolors": "^1.1.1",
     "word-wrap": "^1.2.5"
   },
-  "peerDependencies": {
-    "commitizen": "^4.0.3",
-    "inquirer": "^9.0.0"
-  },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "commitizen": "^4.2.4"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "peerDependencies": {
+    "commitizen": "^4.0.3",
+    "inquirer": "^9.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./@commitlint/cz-commitlint"
+    }
+  },
+  "engines": {
+    "node": ">=v18"
+  },
+  "engineStrict": true
 }

@@ -4,12 +4,7 @@ import { expect, test, vi } from "vitest";
 // @ts-expect-error -- no typings
 import config from "@commitlint/config-angular";
 import pc from "picocolors";
-import {
-	Answers,
-	DistinctQuestion,
-	InputCustomOptions,
-	PromptModule,
-} from "inquirer";
+import { Answers, DistinctQuestion, InputCustomOptions, PromptModule } from "inquirer";
 
 import { input } from "./input.js";
 
@@ -54,8 +49,7 @@ test("should not add leading blank line to body and footer if rules are disabled
 	expect(message).toEqual("fix(test): subject\n" + "body\n" + "footer");
 	// reset config mock
 	testConfig.rules["body-leading-blank"] = config.rules["body-leading-blank"];
-	testConfig.rules["footer-leading-blank"] =
-		config.rules["footer-leading-blank"];
+	testConfig.rules["footer-leading-blank"] = config.rules["footer-leading-blank"];
 });
 
 test("should work without scope", async () => {
@@ -93,9 +87,7 @@ test("should fail without type", async () => {
 });
 
 function stub(config: Record<string, Record<string, unknown>>): PromptModule {
-	const prompt = async (
-		questions: DistinctQuestion | DistinctQuestion[],
-	): Promise<any> => {
+	const prompt = async (questions: DistinctQuestion | DistinctQuestion[]): Promise<any> => {
 		const result: Answers = {};
 		const resolvedConfig = Array.isArray(questions) ? questions : [questions];
 		for (const promptConfig of resolvedConfig) {
@@ -115,8 +107,7 @@ function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 					throw new Error(validationResult || undefined);
 				}
 			}
-			const forceLeadingBlankFn = (promptConfig as InputCustomOptions)
-				.forceLeadingBlankFn;
+			const forceLeadingBlankFn = (promptConfig as InputCustomOptions).forceLeadingBlankFn;
 			if (forceLeadingBlankFn) {
 				answer = forceLeadingBlankFn(answer as string);
 			}

@@ -44,9 +44,7 @@ export default async function load(
 	let config: UserConfig = {};
 	if (loaded) {
 		const resolvedConfig =
-			typeof loaded.config === "function"
-				? await loaded.config()
-				: await loaded.config;
+			typeof loaded.config === "function" ? await loaded.config() : await loaded.config;
 		validateConfig(loaded.filepath || "", resolvedConfig);
 		config = resolvedConfig;
 	}
@@ -64,10 +62,7 @@ export default async function load(
 
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === "string") {
-		const resolvedParserPreset = resolveFrom(
-			config.parserPreset,
-			configFilePath,
-		);
+		const resolvedParserPreset = resolveFrom(config.parserPreset, configFilePath);
 
 		config.parserPreset = {
 			name: config.parserPreset,
@@ -101,9 +96,7 @@ export default async function load(
 	}
 
 	const rules = (
-		await Promise.all(
-			Object.entries(extended.rules || {}).map((entry) => executeRule(entry)),
-		)
+		await Promise.all(Object.entries(extended.rules || {}).map((entry) => executeRule(entry)))
 	).reduce<QualifiedRules>((registry, item) => {
 		// type of `item` can be null, but Object.entries always returns key pair
 		const [key, value] = item!;
@@ -118,8 +111,7 @@ export default async function load(
 				? config.helpUrl
 				: "https://github.com/conventional-changelog/commitlint/#what-is-commitlint";
 
-	const prompt =
-		extended.prompt && isPlainObject(extended.prompt) ? extended.prompt : {};
+	const prompt = extended.prompt && isPlainObject(extended.prompt) ? extended.prompt : {};
 
 	return {
 		extends: Array.isArray(extended.extends)

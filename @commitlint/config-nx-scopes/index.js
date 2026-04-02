@@ -5,8 +5,7 @@ import { FsTree } from "nx/src/generators/tree.js";
 export default {
 	utils: { getProjects },
 	rules: {
-		"scope-enum": (ctx) =>
-			Promise.resolve([RuleConfigSeverity.Error, "always", getProjects(ctx)]),
+		"scope-enum": (ctx) => Promise.resolve([RuleConfigSeverity.Error, "always", getProjects(ctx)]),
 	},
 };
 

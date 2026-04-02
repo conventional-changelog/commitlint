@@ -1,46 +1,37 @@
 {
   "name": "@commitlint/load",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Load shared commitlint configuration",
-  "main": "lib/load.js",
-  "types": "lib/load.d.ts",
-  "files": [
-    "lib/"
+  "keywords": [
+    "commitlint",
+    "conventional-changelog",
+    "core",
+    "library"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check --skip-import"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "engines": {
-    "node": ">=v18"
+  "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/load"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "library",
-    "core"
+  "files": [
+    "lib/"
   ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@commitlint/test": "^20.4.3",
-    "@types/lodash.mergewith": "^4.6.8",
-    "@types/node": "^18.19.17",
-    "conventional-changelog-atom": "^5.0.0",
-    "typescript": "^5.2.2"
+  "type": "module",
+  "main": "lib/load.js",
+  "types": "lib/load.d.ts",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
     "@commitlint/config-validator": "^20.5.0",
@@ -53,5 +44,14 @@
     "lodash.mergewith": "^4.6.2",
     "picocolors": "^1.1.1"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "devDependencies": {
+    "@commitlint/test": "^20.4.3",
+    "@types/lodash.mergewith": "^4.6.8",
+    "@types/node": "^18.19.17",
+    "conventional-changelog-atom": "^5.0.0",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
 }

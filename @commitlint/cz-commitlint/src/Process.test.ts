@@ -1,9 +1,5 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
-import {
-	QualifiedRules,
-	RuleConfigSeverity,
-	UserPromptConfig,
-} from "@commitlint/types";
+import { QualifiedRules, RuleConfigSeverity, UserPromptConfig } from "@commitlint/types";
 import { Answers, DistinctQuestion } from "inquirer";
 
 import process from "./Process.js";
@@ -12,10 +8,7 @@ const mockShowTitle = vi.fn();
 const mockShowValidation = vi.fn((message) => message);
 
 // mock inquirer
-const mockPrompt = vi.fn(async function (
-	questions: DistinctQuestion[],
-	answers: Answers,
-) {
+const mockPrompt = vi.fn(async function (questions: DistinctQuestion[], answers: Answers) {
 	for (const { name, message, when, filter, validate } of questions) {
 		if (typeof when !== "function" || (await when(answers))) {
 			const title =
@@ -27,8 +20,7 @@ const mockPrompt = vi.fn(async function (
 			mockShowTitle(title);
 
 			const validation =
-				typeof validate !== "function" ||
-				(await validate((name && answers[name]) ?? "", answers));
+				typeof validate !== "function" || (await validate((name && answers[name]) ?? "", answers));
 
 			if (typeof validation === "string") {
 				mockShowValidation(validation);
@@ -131,8 +123,7 @@ describe("conventional-changlog", () => {
 							emoji: "💎",
 						},
 						refactor: {
-							description:
-								"A code change that neither fixes a bug nor adds a feature",
+							description: "A code change that neither fixes a bug nor adds a feature",
 							title: "Code Refactoring",
 							emoji: "📦",
 						},
@@ -171,12 +162,10 @@ describe("conventional-changlog", () => {
 					},
 				},
 				scope: {
-					description:
-						"What is the scope of this change (e.g. component or file name)",
+					description: "What is the scope of this change (e.g. component or file name)",
 				},
 				subject: {
-					description:
-						"Write a short, imperative tense description of the change",
+					description: "Write a short, imperative tense description of the change",
 				},
 				body: {
 					description: "Provide a longer description of the change",
@@ -215,13 +204,11 @@ describe("conventional-changlog", () => {
 			isIssueAffected: true,
 			issues: "https://github.com/conventional-changelog/commitlint/issues/94",
 		};
-		return process(rules, prompts, InquirerFactory(answers)).then(
-			(commitMessage) => {
-				expect(commitMessage).toBe(
-					"refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94",
-				);
-			},
-		);
+		return process(rules, prompts, InquirerFactory(answers)).then((commitMessage) => {
+			expect(commitMessage).toBe(
+				"refactor(prompt): refactor prompt based on inquirer\n\ninspired by commitizen/cz-conventional-changelog\n\nBREAKING CHANGE: refactor types\nhttps://github.com/conventional-changelog/commitlint/issues/94",
+			);
+		});
 	});
 
 	test("should show validation and stop process when subject is empty", () => {
@@ -235,9 +222,7 @@ describe("conventional-changlog", () => {
 			issues: "https://github.com/conventional-changelog/commitlint/issues/94",
 		};
 		return process(rules, prompts, InquirerFactory(answers)).then(() => {
-			expect(mockShowValidation).toHaveBeenCalledWith(
-				"subject can not be empty",
-			);
+			expect(mockShowValidation).toHaveBeenCalledWith("subject can not be empty");
 			expect(mockShowTitle).toHaveBeenCalledTimes(3);
 		});
 	});

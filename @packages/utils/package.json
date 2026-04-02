@@ -1,47 +1,40 @@
 {
   "name": "@commitlint/utils",
-  "type": "module",
   "version": "20.0.0",
-  "description": "Development utilities for @commitlint",
+  "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd",
   "private": true,
-  "files": [
-    "dep-check.js",
-    "pkg-check.js"
+  "description": "Development utilities for @commitlint",
+  "keywords": [
+    "cli",
+    "commitlint",
+    "conventional-changelog"
   ],
-  "bin": {
-    "dep-check": "./dep-check.js",
-    "pkg-check": "./pkg-check.js"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "scripts": {
-    "deps": "node dep-check.js",
-    "pkg": "node pkg-check.js --skip-main"
-  },
-  "engines": {
-    "node": ">=v18"
+  "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@packages/utils"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  "bin": {
+    "dep-check": "./dep-check.js",
+    "pkg-check": "./pkg-check.js"
   },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "cli"
+  "files": [
+    "dep-check.js",
+    "pkg-check.js"
   ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@types/require-from-string": "^1.2.3",
-    "@types/tar-fs": "^2.0.4",
-    "@types/yargs": "^17.0.29"
+  "type": "module",
+  "scripts": {
+    "deps": "node dep-check.js",
+    "pkg": "node pkg-check.js --skip-main"
   },
   "dependencies": {
     "read-pkg": "^9.0.1",
@@ -51,5 +44,12 @@
     "tmp": "^0.2.1",
     "yargs": "^17.0.0"
   },
-  "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"
+  "devDependencies": {
+    "@types/require-from-string": "^1.2.3",
+    "@types/tar-fs": "^2.0.4",
+    "@types/yargs": "^17.0.29"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
 }

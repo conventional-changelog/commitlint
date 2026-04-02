@@ -4,11 +4,7 @@ export interface CommitMessageData {
 	footer?: string | null;
 }
 
-export const buildCommitMessage = ({
-	header,
-	body,
-	footer,
-}: CommitMessageData): string => {
+export const buildCommitMessage = ({ header, body, footer }: CommitMessageData): string => {
 	let message = header;
 
 	message = body ? `${message}\n\n${body}` : message;

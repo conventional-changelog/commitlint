@@ -420,19 +420,7 @@
 - **value**
 
   ```js
-  [
-    "build",
-    "chore",
-    "ci",
-    "docs",
-    "feat",
-    "fix",
-    "perf",
-    "refactor",
-    "revert",
-    "style",
-    "test",
-  ];
+  ["build", "chore", "ci", "docs", "feat", "fix", "perf", "refactor", "revert", "style", "test"];
   ```
 
 ## type-max-length

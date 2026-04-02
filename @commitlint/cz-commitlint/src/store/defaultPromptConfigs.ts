@@ -17,8 +17,7 @@ export default {
 			description: "<type> holds information about the goal of a change.",
 		},
 		scope: {
-			description:
-				"<scope> marks which sub-component of the project is affected",
+			description: "<scope> marks which sub-component of the project is affected",
 		},
 		subject: {
 			description: "<subject> is a short, high-level description of the change",
@@ -27,8 +26,7 @@ export default {
 			description: "<body> holds additional information about the change",
 		},
 		footer: {
-			description:
-				"<footer> holds further meta data, such as breaking changes and issue ids",
+			description: "<footer> holds further meta data, such as breaking changes and issue ids",
 		},
 	},
 };

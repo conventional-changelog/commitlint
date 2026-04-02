@@ -1,11 +1,7 @@
 import { describe, test, expect, beforeEach } from "vitest";
 import { RuleConfigSeverity } from "@commitlint/types";
 
-import {
-	combineCommitMessage,
-	getQuestions,
-	getQuestionConfig,
-} from "./SectionHeader.js";
+import { combineCommitMessage, getQuestions, getQuestionConfig } from "./SectionHeader.js";
 import { setPromptConfig } from "./store/prompts.js";
 import { setRules } from "./store/rules.js";
 
@@ -250,11 +246,7 @@ describe("HeaderQuestion", () => {
 		const charsUsed = `${type}(${scope})`.length; // 16
 		const charsAvailable = headerMaxLength - charsUsed - 1; // -1 for '!'
 		setRules({
-			"header-max-length": [
-				RuleConfigSeverity.Error,
-				"always",
-				headerMaxLength,
-			],
+			"header-max-length": [RuleConfigSeverity.Error, "always", headerMaxLength],
 			"subject-max-length": [RuleConfigSeverity.Error, "always", 10],
 		});
 		setPromptConfig({
@@ -278,8 +270,6 @@ describe("HeaderQuestion", () => {
 		expect("fix".length).toBeLessThanOrEqual(charsAvailable);
 		expect(subject?.validate?.("fix", answers)).toBe(true);
 		expect("test".length).toBeGreaterThan(charsAvailable);
-		expect(subject?.validate?.("test", answers)).toBe(
-			"subject: subject over limit 1",
-		);
+		expect(subject?.validate?.("test", answers)).toBe("subject: subject over limit 1");
 	});
 });

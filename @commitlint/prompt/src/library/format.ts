@@ -19,8 +19,7 @@ export default function format(input: Result, debug = false): string {
 	};
 	const results = debug
 		? Object.entries(defaultInput).reduce<Result>((registry, [name, value]) => {
-				registry[name as ResultPart] =
-					value === undefined ? pc.gray(`<${name}>`) : pc.bold(value);
+				registry[name as ResultPart] = value === undefined ? pc.gray(`<${name}>`) : pc.bold(value);
 				return registry;
 			}, {})
 		: defaultInput;
@@ -28,9 +27,7 @@ export default function format(input: Result, debug = false): string {
 	// Return formatted string
 	const { type, scope, subject, body, footer } = results;
 	return [
-		`${type || ""}${scope ? `(${scope})` : ""}${type || scope ? ":" : ""} ${
-			subject || ""
-		}`,
+		`${type || ""}${scope ? `(${scope})` : ""}${type || scope ? ":" : ""} ${subject || ""}`,
 		body,
 		footer,
 	]

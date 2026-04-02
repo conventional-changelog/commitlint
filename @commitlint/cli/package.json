@@ -1,52 +1,40 @@
 {
   "name": "@commitlint/cli",
-  "type": "module",
   "version": "20.5.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Lint your commit messages",
-  "files": [
-    "index.cjs",
-    "cli.js",
-    "lib"
+  "keywords": [
+    "cli",
+    "commitlint",
+    "conventional-changelog"
   ],
-  "main": "index.cjs",
-  "bin": {
-    "commitlint": "./cli.js"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check"
-  },
-  "engines": {
-    "node": ">=v18"
+  "license": "MIT",
+  "author": {
+    "name": "Mario Nebl",
+    "email": "hello@herebecode.com"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/cli"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
+  "bin": {
+    "commitlint": "./cli.js"
   },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "cli"
+  "files": [
+    "index.cjs",
+    "cli.js",
+    "lib"
   ],
-  "author": {
-    "name": "Mario Nebl",
-    "email": "hello@herebecode.com"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@commitlint/test": "^20.4.3",
-    "@commitlint/utils": "^20.0.0",
-    "@types/conventional-commits-parser": "^5.0.2",
-    "@types/lodash.mergewith": "^4.6.8",
-    "@types/node": "^18.19.17",
-    "@types/yargs": "^17.0.29",
-    "fs-extra": "^11.3.4",
-    "lodash.mergewith": "^4.6.2"
+  "type": "module",
+  "main": "index.cjs",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
   "dependencies": {
     "@commitlint/format": "^20.5.0",
@@ -57,5 +45,17 @@
     "tinyexec": "^1.0.0",
     "yargs": "^17.0.0"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "devDependencies": {
+    "@commitlint/test": "^20.4.3",
+    "@commitlint/utils": "^20.0.0",
+    "@types/conventional-commits-parser": "^5.0.2",
+    "@types/lodash.mergewith": "^4.6.8",
+    "@types/node": "^18.19.17",
+    "@types/yargs": "^17.0.29",
+    "fs-extra": "^11.3.4",
+    "lodash.mergewith": "^4.6.2"
+  },
+  "engines": {
+    "node": ">=v18"
+  }
 }

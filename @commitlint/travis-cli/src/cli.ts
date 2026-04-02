@@ -8,8 +8,7 @@ const require = createRequire(import.meta.url);
 
 // Allow to override used bins for testing purposes
 const GIT = process.env.TRAVIS_COMMITLINT_GIT_BIN || "git";
-const COMMITLINT =
-	process.env.TRAVIS_COMMITLINT_BIN || require("@commitlint/cli");
+const COMMITLINT = process.env.TRAVIS_COMMITLINT_BIN || require("@commitlint/cli");
 
 const REQUIRED = [
 	"TRAVIS_COMMIT",
@@ -40,8 +39,7 @@ async function main() {
 	await Promise.all([
 		() => fetch({ name: "base", url: `https://github.com/${REPO_SLUG}.git` }),
 		IS_PR
-			? () =>
-					fetch({ name: "source", url: `https://github.com/${PR_SLUG}.git` })
+			? () => fetch({ name: "source", url: `https://github.com/${PR_SLUG}.git` })
 			: () => Promise.resolve(),
 	]);
 
@@ -81,11 +79,7 @@ async function isClean() {
 	return !(result.stdout && result.stdout.trim());
 }
 
-async function lint(
-	args: string[],
-	nodeOptions: SpawnOptions = {},
-	input: string = "",
-) {
+async function lint(args: string[], nodeOptions: SpawnOptions = {}, input: string = "") {
 	const result = x(COMMITLINT, args, {
 		nodeOptions: {
 			stdio: ["pipe", "inherit", "inherit"],
@@ -116,17 +110,13 @@ async function stash() {
 
 function validate() {
 	if (process.env.CI !== "true" || process.env.TRAVIS !== "true") {
-		throw new Error(
-			`@commitlint/travis-cli is intended to be used on Travis CI`,
-		);
+		throw new Error(`@commitlint/travis-cli is intended to be used on Travis CI`);
 	}
 
 	const missing = REQUIRED.filter((envVar) => !(envVar in process.env));
 
 	if (missing.length > 0) {
 		const stanza = missing.length > 1 ? "they were not" : "it was not";
-		throw new Error(
-			`Expected ${missing.join(", ")} to be defined globally, ${stanza}.`,
-		);
+		throw new Error(`Expected ${missing.join(", ")} to be defined globally, ${stanza}.`);
 	}
 }

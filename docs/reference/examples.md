@@ -90,12 +90,8 @@ async function createEmojiParser(): Promise<ParserPreset> {
 
   const parserOpts = {
     // This regular expression validates commit headers with an emoji.
-    breakingHeaderPattern: new RegExp(
-      `^(?:${emojiRegexPart})\\s+(\\w*)(?:\\((.*)\\))?!:\\s+(.*)$`,
-    ),
-    headerPattern: new RegExp(
-      `^(?:${emojiRegexPart})\\s+(\\w*)(?:\\((.*)\\))?!?:\\s+(.*)$`,
-    ),
+    breakingHeaderPattern: new RegExp(`^(?:${emojiRegexPart})\\s+(\\w*)(?:\\((.*)\\))?!:\\s+(.*)$`),
+    headerPattern: new RegExp(`^(?:${emojiRegexPart})\\s+(\\w*)(?:\\((.*)\\))?!?:\\s+(.*)$`),
   };
 
   const emojiParser = merge({}, await createPreset(), {

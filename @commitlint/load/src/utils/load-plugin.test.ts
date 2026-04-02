@@ -91,9 +91,7 @@ test("should throw an error when a plugin has whitespace", async () => {
 });
 
 test("should throw an error when a plugin doesn't exist", () =>
-	expect(() => loadPlugin({}, "nonexistentplugin")).rejects.toThrow(
-		"Failed to load plugin",
-	));
+	expect(() => loadPlugin({}, "nonexistentplugin")).rejects.toThrow("Failed to load plugin"));
 
 test("should load a scoped plugin when referenced by short name", async () => {
 	const plugins = await loadPlugin({}, "@scope/example");
@@ -124,20 +122,13 @@ test("should load a scoped plugin when referenced by long name, but should not g
 
 test("should load plugin from npx cache when available", async () => {
 	vi.mocked(resolveFromNpxCache).mockReturnValueOnce(
-		path.join(
-			os.tmpdir(),
-			"npx-cache",
-			"node_modules",
-			"commitlint-plugin-example",
-		),
+		path.join(os.tmpdir(), "npx-cache", "node_modules", "commitlint-plugin-example"),
 	);
 
 	vi.mock("commitlint-plugin-example", () => ({ example: true }));
 
 	const plugins = await loadPlugin({}, "example");
-	expect(vi.mocked(resolveFromNpxCache)).toHaveBeenCalledWith(
-		"commitlint-plugin-example",
-	);
+	expect(vi.mocked(resolveFromNpxCache)).toHaveBeenCalledWith("commitlint-plugin-example");
 	expect(plugins["example"]).toBeDefined();
 });
 
@@ -147,23 +138,19 @@ test("should accept boolean as third parameter for backward compatibility", asyn
 });
 
 test("should throw when searchPath is not a string", async () => {
-	await expect(
-		loadPlugin({}, "example", { searchPaths: [123 as any] }),
-	).rejects.toThrow('Invalid searchPath "123": must be an absolute path');
+	await expect(loadPlugin({}, "example", { searchPaths: [123 as any] })).rejects.toThrow(
+		'Invalid searchPath "123": must be an absolute path',
+	);
 });
 
 test("should throw when searchPath is not absolute", async () => {
-	await expect(
-		loadPlugin({}, "example", { searchPaths: ["./relative/path"] }),
-	).rejects.toThrow(
+	await expect(loadPlugin({}, "example", { searchPaths: ["./relative/path"] })).rejects.toThrow(
 		'Invalid searchPath "./relative/path": must be an absolute path',
 	);
 });
 
 test("should throw when searchPath does not exist", async () => {
-	await expect(
-		loadPlugin({}, "example", { searchPaths: ["/nonexistent/path"] }),
-	).rejects.toThrow(
+	await expect(loadPlugin({}, "example", { searchPaths: ["/nonexistent/path"] })).rejects.toThrow(
 		'Invalid searchPath "/nonexistent/path": directory does not exist',
 	);
 });
@@ -173,9 +160,7 @@ test("should throw when searchPath is a file not a directory", async () => {
 	await import("node:fs/promises").then((fs) => fs.writeFile(tempFile, "test"));
 
 	try {
-		await expect(
-			loadPlugin({}, "example", { searchPaths: [tempFile] }),
-		).rejects.toThrow(
+		await expect(loadPlugin({}, "example", { searchPaths: [tempFile] })).rejects.toThrow(
 			`Invalid searchPath "${tempFile}": must be a directory, not a file`,
 		);
 	} finally {

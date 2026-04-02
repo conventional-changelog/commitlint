@@ -12,11 +12,7 @@ export class CliError extends Error {
 	public type: string;
 	public error_code: ExitCode;
 
-	constructor(
-		message: string,
-		type: string,
-		error_code = ExitCode.CommitlintErrorDefault,
-	) {
+	constructor(message: string, type: string, error_code = ExitCode.CommitlintErrorDefault) {
 		super(message);
 
 		this.type = type;

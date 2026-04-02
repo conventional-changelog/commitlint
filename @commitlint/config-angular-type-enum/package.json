@@ -1,38 +1,38 @@
 {
   "name": "@commitlint/config-angular-type-enum",
-  "type": "module",
   "version": "20.0.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Shareable commitlint config enforcing the angular commit convention types",
-  "main": "index.js",
-  "files": [
-    "index.js"
+  "keywords": [
+    "angular",
+    "commitlint",
+    "commitlint-config",
+    "conventional-changelog"
   ],
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
+  "license": "MIT",
+  "author": "Mario Nebl <hello@herebecode.com>",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/config-angular-type-enum"
   },
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "commitlint-config",
-    "angular"
+  "files": [
+    "index.js"
   ],
-  "author": "Mario Nebl <hello@herebecode.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "engines": {
-    "node": ">=v18"
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
   "devDependencies": {
     "@commitlint/utils": "^20.0.0"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "engines": {
+    "node": ">=v18"
+  }
 }

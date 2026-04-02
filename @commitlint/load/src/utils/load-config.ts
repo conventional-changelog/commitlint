@@ -1,12 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import {
-	cosmiconfig,
-	defaultLoadersSync,
-	type Loader,
-	defaultLoaders,
-} from "cosmiconfig";
+import { cosmiconfig, defaultLoadersSync, type Loader, defaultLoaders } from "cosmiconfig";
 import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
 
 export interface LoadConfigResult {
@@ -33,9 +28,7 @@ export async function loadConfig(
 	// If dynamic await is supported (Node >= v20.8.0) or directory uses ESM, support
 	// async js/cjs loaders (dynamic import). Otherwise, use synchronous js/cjs loaders.
 	const loaders =
-		isDynamicAwaitSupported() || isEsmModule(cwd)
-			? defaultLoaders
-			: defaultLoadersSync;
+		isDynamicAwaitSupported() || isEsmModule(cwd) ? defaultLoaders : defaultLoadersSync;
 
 	const explorer = cosmiconfig(moduleName, {
 		searchStrategy,

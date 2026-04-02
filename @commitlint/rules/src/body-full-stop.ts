@@ -1,11 +1,7 @@
 import message from "@commitlint/message";
 import { SyncRule } from "@commitlint/types";
 
-export const bodyFullStop: SyncRule<string> = (
-	parsed,
-	when = "always",
-	value = ".",
-) => {
+export const bodyFullStop: SyncRule<string> = (parsed, when = "always", value = ".") => {
 	const input = parsed.body;
 
 	if (!input) {

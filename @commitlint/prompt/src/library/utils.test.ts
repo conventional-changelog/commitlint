@@ -1,9 +1,5 @@
 import { test, expect } from "vitest";
-import {
-	RuleConfigQuality,
-	RuleConfigSeverity,
-	RulesConfig,
-} from "@commitlint/types";
+import { RuleConfigQuality, RuleConfigSeverity, RulesConfig } from "@commitlint/types";
 
 import {
 	enumRuleIsActive,
@@ -48,31 +44,17 @@ test("getRuleName", () => {
 });
 
 test("ruleIsActive", () => {
-	expect(ruleIsActive(["", [RuleConfigSeverity.Error, "always", 100]])).toBe(
-		true,
-	);
-	expect(ruleIsActive(["", [RuleConfigSeverity.Warning, "never", 100]])).toBe(
-		true,
-	);
-	expect(ruleIsActive(["", [RuleConfigSeverity.Disabled, "always", 100]])).toBe(
-		false,
-	);
+	expect(ruleIsActive(["", [RuleConfigSeverity.Error, "always", 100]])).toBe(true);
+	expect(ruleIsActive(["", [RuleConfigSeverity.Warning, "never", 100]])).toBe(true);
+	expect(ruleIsActive(["", [RuleConfigSeverity.Disabled, "always", 100]])).toBe(false);
 	expect(ruleIsActive(["", [RuleConfigSeverity.Error]] as any)).toBe(true);
 });
 
 test("getMaxLength", () => {
-	expect(getMaxLength(["", [RuleConfigSeverity.Error, "always", 100]])).toBe(
-		100,
-	);
-	expect(getMaxLength(["", [RuleConfigSeverity.Warning, "never", 100]])).toBe(
-		Infinity,
-	);
-	expect(getMaxLength(["", [RuleConfigSeverity.Disabled, "always", 100]])).toBe(
-		Infinity,
-	);
-	expect(getMaxLength(["", [RuleConfigSeverity.Error, 100]] as any)).toBe(
-		Infinity,
-	);
+	expect(getMaxLength(["", [RuleConfigSeverity.Error, "always", 100]])).toBe(100);
+	expect(getMaxLength(["", [RuleConfigSeverity.Warning, "never", 100]])).toBe(Infinity);
+	expect(getMaxLength(["", [RuleConfigSeverity.Disabled, "always", 100]])).toBe(Infinity);
+	expect(getMaxLength(["", [RuleConfigSeverity.Error, 100]] as any)).toBe(Infinity);
 
 	const rules: any = {
 		"body-max-line-length": [RuleConfigSeverity.Error, "always", 100],
@@ -97,34 +79,24 @@ test("check enum rule filters", () => {
 		"bar-enum": [RuleConfigSeverity.Disabled, "always", ["foo", "bar", "baz"]],
 	};
 
-	let enumRule = getRules("type", rules)
-		.filter(getHasName("enum"))
-		.find(enumRuleIsActive);
+	let enumRule = getRules("type", rules).filter(getHasName("enum")).find(enumRuleIsActive);
 	expect(enumRule).toEqual([
 		"type-enum",
 		[RuleConfigSeverity.Error, "always", ["build", "chore", "ci"]],
 	]);
 
-	enumRule = getRules("string", rules)
-		.filter(getHasName("enum"))
-		.find(enumRuleIsActive);
+	enumRule = getRules("string", rules).filter(getHasName("enum")).find(enumRuleIsActive);
 	expect(enumRule).toEqual(undefined);
 
-	enumRule = getRules("enum", rules)
-		.filter(getHasName("string"))
-		.find(enumRuleIsActive);
+	enumRule = getRules("enum", rules).filter(getHasName("string")).find(enumRuleIsActive);
 	expect(enumRule).toEqual([
 		"enum-string",
 		[RuleConfigSeverity.Warning, "always", ["1", "2", "3"]],
 	]);
 
-	enumRule = getRules("bar", rules)
-		.filter(getHasName("enum"))
-		.find(enumRuleIsActive);
+	enumRule = getRules("bar", rules).filter(getHasName("enum")).find(enumRuleIsActive);
 	expect(enumRule).toEqual(undefined);
 
-	enumRule = getRules("scope", rules)
-		.filter(getHasName("enum"))
-		.find(enumRuleIsActive);
+	enumRule = getRules("scope", rules).filter(getHasName("enum")).find(enumRuleIsActive);
 	expect(enumRule).toEqual(undefined);
 });

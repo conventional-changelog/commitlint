@@ -1,37 +1,37 @@
 {
   "name": "vitest-environment-commitlint",
-  "type": "module",
   "version": "20.5.1",
-  "description": "test environment for @commitlint",
+  "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd",
   "private": true,
-  "main": "lib/test-environment.js",
-  "types": "lib/test-environment.d.ts",
-  "files": [
-    "lib/"
+  "description": "test environment for @commitlint",
+  "keywords": [
+    "cli",
+    "commitlint",
+    "conventional-changelog",
+    "test"
   ],
-  "engines": {
-    "node": ">=v18"
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@packages/test-environment"
   },
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "test",
-    "cli"
+  "files": [
+    "lib/"
   ],
-  "license": "MIT",
+  "type": "module",
+  "main": "lib/test-environment.js",
+  "types": "lib/test-environment.d.ts",
   "dependencies": {
     "@types/tmp": "^0.2.5",
     "tmp": "^0.2.1",
     "vitest": "~4.0.18"
   },
-  "gitHead": "71f0194f33943954a8dac1c458be47e5049717cd"
+  "engines": {
+    "node": ">=v18"
+  }
 }

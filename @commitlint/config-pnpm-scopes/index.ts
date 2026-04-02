@@ -8,21 +8,18 @@ const readYamlFile = readYamlFileModule.default;
 export default {
 	utils: { getProjects },
 	rules: {
-		"scope-enum": (ctx = {}) =>
-			getProjects(ctx).then((packages: any) => [2, "always", packages]),
+		"scope-enum": (ctx = {}) => getProjects(ctx).then((packages: any) => [2, "always", packages]),
 	},
 };
 
 function requirePackagesManifest(dir: any) {
-	return readYamlFile(path.join(dir, "pnpm-workspace.yaml")).catch(
-		(err: any) => {
-			if (err.code === "ENOENT") {
-				return null;
-			}
+	return readYamlFile(path.join(dir, "pnpm-workspace.yaml")).catch((err: any) => {
+		if (err.code === "ENOENT") {
+			return null;
+		}
 
-			throw err;
-		},
-	);
+		throw err;
+	});
 }
 
 function normalizePatterns(patterns: any) {
@@ -38,9 +35,7 @@ function normalizePatterns(patterns: any) {
 function findWorkspacePackages(cwd: any) {
 	return requirePackagesManifest(cwd)
 		.then((manifest: any) => {
-			const patterns = normalizePatterns(
-				(manifest && manifest.packages) || ["**"],
-			);
+			const patterns = normalizePatterns((manifest && manifest.packages) || ["**"]);
 			const opts = {
 				cwd,
 				ignore: ["**/node_modules/**", "**/bower_components/**"],
@@ -49,15 +44,9 @@ function findWorkspacePackages(cwd: any) {
 			return fg(patterns, opts);
 		})
 		.then((entries: any) => {
-			const paths = Array.from(
-				new Set(entries.map((entry: any) => path.join(cwd, entry))),
-			);
+			const paths = Array.from(new Set(entries.map((entry: any) => path.join(cwd, entry))));
 
-			return Promise.all(
-				paths.map((manifestPath: any) =>
-					readExactProjectManifest(manifestPath),
-				),
-			);
+			return Promise.all(paths.map((manifestPath: any) => readExactProjectManifest(manifestPath)));
 		})
 		.then((manifests: any) => {
 			return manifests.map((manifest: any) => manifest.manifest);
