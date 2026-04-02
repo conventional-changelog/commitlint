@@ -18,7 +18,8 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     strategy:
       matrix:
-        os: [ubuntu-22.04, ubuntu-24.04, windows-2022, windows-2025]
+        os:
+          [ubuntu-22.04, ubuntu-24.04, ubuntu-26.04, windows-2022, windows-2025]
         # 22 = Ubuntu 26.04 LTS
         node: [22, 24]
     runs-on: ${{ matrix.os }}
