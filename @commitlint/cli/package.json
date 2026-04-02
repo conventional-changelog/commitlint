@@ -17,7 +17,7 @@
     "pkg": "pkg-check"
   },
   "engines": {
-    "node": ">=v18"
+    "node": ">=v22"
   },
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "@commitlint/test": "^20.4.3",
     "@commitlint/utils": "^20.0.0",
     "@types/conventional-commits-parser": "^5.0.2",
-    "@types/node": "^18.19.17",
+    "@types/node": "^22.0.0",
     "@types/yargs": "^17.0.29",
     "es-toolkit": "^1.46.0",
     "fs-extra": "^11.3.4"

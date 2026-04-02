@@ -19,9 +19,8 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-24.04, windows-2022, windows-2025]
-        # Node versions match Ubuntu LTS defaults:
-        # 18 = Ubuntu 24.04, 20 = Ubuntu 25.x, 22 = Ubuntu 26.04
-        node: [18, 20, 22]
+        # 22 = Ubuntu 26.04 LTS
+        node: [22, 24]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
@@ -67,7 +66,7 @@ jobs:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-24.04
     container:
-      image: "ubuntu:24.04"
+      image: "ubuntu:26.04"
     steps:
       - uses: actions/checkout@v6
 
