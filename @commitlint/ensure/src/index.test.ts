@@ -2,7 +2,7 @@ import { test, expect } from "vitest";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { globSync } from "glob";
+import { globSync } from "node:fs";
 import camelCase from "lodash.camelcase";
 
 import * as ensure from "./index.js";
@@ -25,10 +25,9 @@ test("rules export functions", () => {
 });
 
 function _glob(pattern: string): string[] {
-	const files = globSync(pattern, {
-		ignore: ["**/index.ts", "**/*.test.ts"],
-		cwd: __dirname,
-	});
+	const files = globSync(pattern, { cwd: __dirname }).filter(
+		(p) => !p.endsWith("index.ts") && !p.endsWith(".test.ts"),
+	);
 	return files.map(relative).map(toExport);
 }
 
