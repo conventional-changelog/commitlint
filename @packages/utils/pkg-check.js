@@ -90,7 +90,7 @@ function main(flags) {
 }
 
 main(
-	yargs
+	yargs(process.argv.slice(2))
 		.options({
 			cwd: {
 				description: "directory to execute in",
@@ -118,7 +118,8 @@ main(
 		.example("$0", "")
 		.help()
 		.version()
-		.strict().argv,
+		.strict()
+		.parseSync(),
 )
 	.then((report) => {
 		if (report.problems.length > 0) {
