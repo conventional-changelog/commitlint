@@ -1,7 +1,7 @@
 import { test, expect } from "vitest";
 import os from "node:os";
 import path from "node:path";
-import fs from "fs-extra";
+import fs from "node:fs";
 
 import * as u from "./index.js";
 
