@@ -1,4 +1,4 @@
-import minimist from "minimist";
+import { parseArgs } from "node:util";
 import type { GitOptions } from "git-raw-commits";
 
 import { getHistoryCommits } from "./get-history-commits.js";
@@ -71,8 +71,13 @@ export default async function getCommitMessages(
 
 	let gitOptions: GitOptions = { from, to };
 	if (gitLogArgs) {
+		const { values, positionals } = parseArgs({
+			args: gitLogArgs.split(" "),
+			strict: false,
+		});
 		gitOptions = {
-			...minimist(gitLogArgs.split(" ")),
+			...values,
+			_: positionals,
 			from,
 			to,
 		};
