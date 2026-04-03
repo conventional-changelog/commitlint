@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import configAngular from "@commitlint/config-angular";
-import { glob } from "glob";
+import { glob } from "node:fs/promises";
 import mergeWith from "lodash.mergewith";
 
 function pathToId(root, filePath) {
@@ -12,8 +12,11 @@ function pathToId(root, filePath) {
 async function getPatternIDs() {
 	const root = path.resolve(process.cwd(), "./patterns");
 	const pattern = path.resolve(root, "**/pattern.json");
-	const files = glob(pattern);
-	return files.map((result) => pathToId(root, result));
+	const files = [];
+	for await (const result of glob(pattern)) {
+		files.push(pathToId(root, result));
+	}
+	return files;
 }
 
 export default mergeWith(configAngular, {

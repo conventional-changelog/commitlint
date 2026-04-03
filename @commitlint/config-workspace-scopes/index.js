@@ -1,7 +1,7 @@
 import { createRequire } from "node:module";
 import Path from "node:path";
 
-import { globSync } from "glob";
+import { globSync } from "node:fs";
 
 const require = createRequire(import.meta.url);
 
@@ -27,7 +27,10 @@ function getPackages(context) {
 
 			const wsGlobs = workspaces.flatMap((ws) => {
 				const path = Path.posix.join(ws, "package.json");
-				return globSync(path, { cwd, ignore: ["**/node_modules/**"] });
+				return globSync(path, {
+					cwd,
+					exclude: (p) => p.includes("node_modules"),
+				});
 			});
 
 			return wsGlobs.sort().map((pJson) => require(Path.join(cwd, pJson)));
