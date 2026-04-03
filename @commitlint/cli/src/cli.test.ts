@@ -3,7 +3,7 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fix, git } from "@commitlint/test";
-import fs from "fs-extra";
+import fs from "node:fs/promises";
 import mergeWith from "lodash.mergewith";
 import { x } from "tinyexec";
 import { ExitCode } from "./cli-error.js";
