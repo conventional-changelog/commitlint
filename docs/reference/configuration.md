@@ -192,13 +192,14 @@ More information can be found in the [Concepts – shareable config section](/co
 
 ## Parser presets
 
-The parser preset used to parse commit messages can be configured.
-Use ids resolvable by the node resolve algorithm.
+The parser preset controls how commit messages are parsed into their component parts (type, scope, subject, body, footer, etc.). By default, commitlint uses the [`conventional-changelog-conventionalcommits`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits) preset, which follows the [Conventional Commits specification](https://www.conventionalcommits.org/).
 
-This means installed npm packages and local files can be used.
+You can override the parser preset using the `parserPreset` property. It accepts:
 
-:::tabs
-== npm
+- A **string** referencing an npm package or local file (resolved via Node's module resolution)
+- An **object** with a `parserOpts` property for inline configuration
+
+### Using an npm package
 
 ```sh
 npm install --save-dev conventional-changelog-atom
@@ -212,7 +213,9 @@ export default {
 };
 ```
 
-== local
+:::
+
+### Using a local file
 
 ::: code-group
 
@@ -232,6 +235,38 @@ export default {
 ```
 
 :::
+
+### Inline `parserOpts`
+
+You can also pass `parserOpts` directly without a separate file. This is useful for small adjustments like custom issue prefixes:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  parserPreset: {
+    parserOpts: {
+      issuePrefixes: ["PROJ-", "JIRA-"],
+    },
+  },
+};
+```
+
+:::
+
+### Available `parserOpts`
+
+The parser is powered by [`conventional-commits-parser`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser). Common options include:
+
+| Option                  | Description                                                          |
+| ----------------------- | -------------------------------------------------------------------- |
+| `headerPattern`         | Regex to match the commit header (type, scope, subject)              |
+| `headerCorrespondence`  | Array of field names matching the capture groups in headerPattern    |
+| `issuePrefixes`         | Prefixes to match issue references (e.g. `["#", "PROJ-"]`)           |
+| `noteKeywords`          | Keywords that mark footer notes (e.g. `["BREAKING CHANGE"]`)         |
+| `breakingHeaderPattern` | Regex to detect breaking changes in the header (e.g. the `!` marker) |
+
+The full list of options follows the [conventional-changelog-config-spec](https://github.com/conventional-changelog/conventional-changelog-config-spec).
 
 ## Formatter
 

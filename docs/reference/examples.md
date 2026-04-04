@@ -4,6 +4,8 @@ These examples show common usages of how commitlint can be configured.
 
 ## Validate for issue/ticket numbers
 
+This example uses inline `parserOpts` to configure the parser to recognize custom issue prefixes (e.g. `PROJ-123`). The `references-empty` rule then enforces that every commit references a ticket.
+
 ::: code-group
 
 ```jsonc [package.json]
@@ -24,6 +26,8 @@ These examples show common usages of how commitlint can be configured.
 ```
 
 :::
+
+See [Parser presets](/reference/configuration#parser-presets) for the full list of available `parserOpts`.
 
 ## Customizing Emojis and Alignment in VS Code
 
