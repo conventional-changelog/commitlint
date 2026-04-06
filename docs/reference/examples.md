@@ -27,7 +27,7 @@ This example uses inline `parserOpts` to configure the parser to recognize custo
 
 :::
 
-See [Parser presets](/reference/configuration#parser-presets) for the full list of available `parserOpts`.
+See [Parser presets](/reference/configuration#parser-presets) for common `parserOpts` and configuration examples.
 
 ## Customizing Emojis and Alignment in VS Code
 

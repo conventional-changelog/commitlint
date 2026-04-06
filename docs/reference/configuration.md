@@ -192,7 +192,7 @@ More information can be found in the [Concepts – shareable config section](/co
 
 ## Parser presets
 
-The parser preset controls how commit messages are parsed into their component parts (type, scope, subject, body, footer, etc.). By default, commitlint uses the [`conventional-changelog-conventionalcommits`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits) preset, which follows the [Conventional Commits specification](https://www.conventionalcommits.org/).
+The parser preset controls how commit messages are parsed into their component parts (type, scope, subject, body, footer, etc.). By default, commitlint does not ship with a parser preset — it falls back to [`conventional-changelog-angular`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular) defaults. When you extend `@commitlint/config-conventional`, the [`conventional-changelog-conventionalcommits`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits) preset is applied, which follows the [Conventional Commits specification](https://www.conventionalcommits.org/).
 
 You can override the parser preset using the `parserPreset` property. It accepts:
 
@@ -254,7 +254,7 @@ export default {
 
 :::
 
-### Available `parserOpts`
+### Common `parserOpts`
 
 The parser is powered by [`conventional-commits-parser`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser). Common options include:
 
@@ -266,7 +266,90 @@ The parser is powered by [`conventional-commits-parser`](https://github.com/conv
 | `noteKeywords`          | Keywords that mark footer notes (e.g. `["BREAKING CHANGE"]`)         |
 | `breakingHeaderPattern` | Regex to detect breaking changes in the header (e.g. the `!` marker) |
 
-The full list of options follows the [conventional-changelog-config-spec](https://github.com/conventional-changelog/conventional-changelog-config-spec).
+For the complete list of options, see the [`conventional-commits-parser` documentation](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#options).
+
+### `presetConfig`
+
+When using a preset like `conventional-changelog-conventionalcommits`, you can pass a `presetConfig` object to customize the preset's behavior without replacing the entire parser configuration. This is commonly used to set commit types that appear in generated changelogs:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  parserPreset: {
+    name: "conventional-changelog-conventionalcommits",
+    presetConfig: {
+      types: [
+        { type: "feat", section: "Features" },
+        { type: "fix", section: "Bug Fixes" },
+        { type: "docs", section: "Documentation", hidden: false },
+        { type: "chore", hidden: true },
+      ],
+    },
+  },
+};
+```
+
+:::
+
+The available `presetConfig` options depend on the preset you are using. See the [`conventional-changelog-conventionalcommits` documentation](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits#preset-configuration) for details.
+
+### Usage with semantic-release
+
+If you use [semantic-release](https://github.com/semantic-release/semantic-release), both commitlint and semantic-release can share the same `conventional-changelog-conventionalcommits` preset. Keeping `parserOpts` and `presetConfig` consistent across both tools ensures that commits parsed during linting match what semantic-release uses for versioning and changelog generation:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  extends: ["@commitlint/config-conventional"],
+  parserPreset: {
+    name: "conventional-changelog-conventionalcommits",
+    presetConfig: {
+      types: [
+        { type: "feat", section: "Features" },
+        { type: "fix", section: "Bug Fixes" },
+        { type: "docs", section: "Documentation", hidden: false },
+      ],
+    },
+  },
+};
+```
+
+:::
+
+```js [.releaserc.js]
+export default {
+  plugins: [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        preset: "conventionalcommits",
+        presetConfig: {
+          types: [
+            { type: "feat", section: "Features" },
+            { type: "fix", section: "Bug Fixes" },
+            { type: "docs", section: "Documentation", hidden: false },
+          ],
+        },
+      },
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        preset: "conventionalcommits",
+        presetConfig: {
+          types: [
+            { type: "feat", section: "Features" },
+            { type: "fix", section: "Bug Fixes" },
+            { type: "docs", section: "Documentation", hidden: false },
+          ],
+        },
+      },
+    ],
+  ],
+};
+```
 
 ## Formatter
 
