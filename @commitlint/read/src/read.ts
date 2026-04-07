@@ -86,8 +86,10 @@ export default async function getCommitMessages(
 			args: gitLogArgs.split(" "),
 			strict: false,
 		});
+		const { "first-parent": firstParent, ...rest } = values;
 		gitOptions = {
-			...values,
+			...rest,
+			...(firstParent !== undefined && { firstParent: Boolean(firstParent) }),
 			_: positionals,
 			from,
 			to,
