@@ -71,8 +71,10 @@ export default async function getCommitMessages(
 
 	let gitOptions: GitOptions = { from, to };
 	if (gitLogArgs) {
+		const { _, ...parsedArgs } = minimist(gitLogArgs.split(" "));
 		gitOptions = {
-			...minimist(gitLogArgs.split(" ")),
+			...parsedArgs,
+			firstParent: parsedArgs["first-parent"],
 			from,
 			to,
 		};
