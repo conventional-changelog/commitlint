@@ -192,13 +192,14 @@ More information can be found in the [Concepts – shareable config section](/co
 
 ## Parser presets
 
-The parser preset used to parse commit messages can be configured.
-Use ids resolvable by the node resolve algorithm.
+The parser preset controls how commit messages are parsed into their component parts (type, scope, subject, body, footer, etc.). By default, commitlint does not ship with a parser preset — it falls back to [`conventional-changelog-angular`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular) defaults. When you extend `@commitlint/config-conventional`, the [`conventional-changelog-conventionalcommits`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits) preset is applied, which follows the [Conventional Commits specification](https://www.conventionalcommits.org/).
 
-This means installed npm packages and local files can be used.
+You can override the parser preset using the `parserPreset` property. It accepts:
 
-:::tabs
-== npm
+- A **string** referencing an npm package or local file (resolved via Node's module resolution)
+- An **object** with a `parserOpts` property for inline configuration
+
+### Using an npm package
 
 ```sh
 npm install --save-dev conventional-changelog-atom
@@ -212,7 +213,9 @@ export default {
 };
 ```
 
-== local
+:::
+
+### Using a local file
 
 ::: code-group
 
@@ -232,6 +235,121 @@ export default {
 ```
 
 :::
+
+### Inline `parserOpts`
+
+You can also pass `parserOpts` directly without a separate file. This is useful for small adjustments like custom issue prefixes:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  parserPreset: {
+    parserOpts: {
+      issuePrefixes: ["PROJ-", "JIRA-"],
+    },
+  },
+};
+```
+
+:::
+
+### Common `parserOpts`
+
+The parser is powered by [`conventional-commits-parser`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser). Common options include:
+
+| Option                  | Description                                                          |
+| ----------------------- | -------------------------------------------------------------------- |
+| `headerPattern`         | Regex to match the commit header (type, scope, subject)              |
+| `headerCorrespondence`  | Array of field names matching the capture groups in headerPattern    |
+| `issuePrefixes`         | Prefixes to match issue references (e.g. `["#", "PROJ-"]`)           |
+| `noteKeywords`          | Keywords that mark footer notes (e.g. `["BREAKING CHANGE"]`)         |
+| `breakingHeaderPattern` | Regex to detect breaking changes in the header (e.g. the `!` marker) |
+
+For the complete list of options, see the [`conventional-commits-parser` documentation](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#options).
+
+### `presetConfig`
+
+When using a preset like `conventional-changelog-conventionalcommits`, you can pass a `presetConfig` object to customize the preset's behavior without replacing the entire parser configuration. This is commonly used to set commit types that appear in generated changelogs:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  parserPreset: {
+    name: "conventional-changelog-conventionalcommits",
+    presetConfig: {
+      types: [
+        { type: "feat", section: "Features" },
+        { type: "fix", section: "Bug Fixes" },
+        { type: "docs", section: "Documentation", hidden: false },
+        { type: "chore", hidden: true },
+      ],
+    },
+  },
+};
+```
+
+:::
+
+The available `presetConfig` options depend on the preset you are using. See the [`conventional-changelog-conventionalcommits` documentation](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits#preset-configuration) for details.
+
+### Usage with semantic-release
+
+If you use [semantic-release](https://github.com/semantic-release/semantic-release), both commitlint and semantic-release can share the same `conventional-changelog-conventionalcommits` preset. Keeping `parserOpts` and `presetConfig` consistent across both tools ensures that commits parsed during linting match what semantic-release uses for versioning and changelog generation:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  extends: ["@commitlint/config-conventional"],
+  parserPreset: {
+    name: "conventional-changelog-conventionalcommits",
+    presetConfig: {
+      types: [
+        { type: "feat", section: "Features" },
+        { type: "fix", section: "Bug Fixes" },
+        { type: "docs", section: "Documentation", hidden: false },
+      ],
+    },
+  },
+};
+```
+
+:::
+
+```js [.releaserc.js]
+export default {
+  plugins: [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        preset: "conventionalcommits",
+        presetConfig: {
+          types: [
+            { type: "feat", section: "Features" },
+            { type: "fix", section: "Bug Fixes" },
+            { type: "docs", section: "Documentation", hidden: false },
+          ],
+        },
+      },
+    ],
+    [
+      "@semantic-release/release-notes-generator",
+      {
+        preset: "conventionalcommits",
+        presetConfig: {
+          types: [
+            { type: "feat", section: "Features" },
+            { type: "fix", section: "Bug Fixes" },
+            { type: "docs", section: "Documentation", hidden: false },
+          ],
+        },
+      },
+    ],
+  ],
+};
+```
 
 ## Formatter
 
