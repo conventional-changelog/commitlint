@@ -311,7 +311,7 @@
 ## subject-case
 
 - **condition**: `subject` is in case `value`
-- **rule**: `always`
+- **rule**: `never`
 - **value**
 
   ```js
