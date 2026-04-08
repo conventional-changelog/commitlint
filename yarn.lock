@@ -6805,6 +6805,14 @@ read-yaml-file@^2.1.0:
     js-yaml "^4.0.0"
     strip-bom "^4.0.0"
 
+read-yaml-file@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/read-yaml-file/-/read-yaml-file-3.0.0.tgz#5d969154c177b31d495c6a162bb9a2231a7be82e"
+  integrity sha512-7urDNDyx3oJt9NGkymzT3qudju76BoJhT6ICWclx6274zxMeSUOhyiceHscSBk4Lfbs0IYpjOjUwLkaOzrsJdQ==
+  dependencies:
+    js-yaml "^4.1.1"
+    strip-bom "^5.0.0"
+
 read@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/read/-/read-3.0.1.tgz#926808f0f7c83fa95f1ef33c0e2c09dbb28fd192"
@@ -7382,6 +7390,11 @@ strip-bom@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
   integrity sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==
+
+strip-bom@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/strip-bom/-/strip-bom-5.0.0.tgz#88d2e135d154dca7a5e06b4a4ba9653b6bdc0dd2"
+  integrity sha512-p+byADHF7SzEcVnLvc/r3uognM1hUhObuHXxJcgLCfD194XAkaLbjq3Wzb0N5G2tgIjH0dgT708Z51QxMeu60A==
 
 strip-comments-strings@1.2.0:
   version "1.2.0"
