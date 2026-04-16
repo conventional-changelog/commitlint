@@ -536,3 +536,5 @@ process.on("unhandledRejection", (reason, promise) => {
 	console.log("Unhandled Rejection at: Promise ", promise, " reason: ", reason);
 	throw reason;
 });
+
+export { defineConfig, type CommitlintConfig } from "./define-config.js";

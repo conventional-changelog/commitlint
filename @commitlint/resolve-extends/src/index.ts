@@ -233,7 +233,9 @@ export function resolveFromSilent(
 ): string | undefined {
 	try {
 		return resolveFrom(specifier, parent);
-	} catch {}
+	} catch {
+		//
+	}
 }
 
 /**
