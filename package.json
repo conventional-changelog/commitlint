@@ -15,7 +15,7 @@
     "docs-dev": "vitepress dev docs",
     "docs-build": "vitepress build docs",
     "docs-preview": "vitepress preview docs",
-    "lint": "eslint",
+    "lint": "eslint --cache",
     "lint-fix": "eslint --fix",
     "format": "prettier **/*.{ts,js,json,yml,md} --check",
     "format-fix": "prettier \"**/*.{ts,js,json,yml,md}\" --write",

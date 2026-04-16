@@ -17,5 +17,7 @@ dist
 docs/.vitepress/dist
 docs/.vitepress/cache
 
+.eslintcache
+
 # For testing nested workspaces does not have the package's dependencies name in the scope
 !**/config-lerna-scopes/fixtures/nested-workspaces/**/node_modules
