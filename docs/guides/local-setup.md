@@ -271,7 +271,8 @@ You can test the hook by simply committing. You should see something like this i
 git commit -m "foo: this will fail"
 #  husky > commit-msg
 No staged files match any of provided globs.
-⧗   input: foo: this will fail
+⧗   --- input ---
+foo: this will fail
 ✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]
 
 ✖   found 1 problems, 0 warnings
