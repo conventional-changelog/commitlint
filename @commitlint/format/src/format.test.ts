@@ -58,6 +58,34 @@ test("returns empty summary with full commit message if verbose", () => {
 	);
 });
 
+test('returns input banner with errors and multi-line input', () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: 'type-enum',
+							message:
+								'type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]',
+						},
+					],
+					warnings: [],
+					input: 'foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester',
+				},
+			],
+		},
+		{
+			color: false,
+		}
+	);
+
+	expect(actual).toStrictEqual(
+		'⧗   --- input ---\nfoo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings'
+	);
+});
+
 test("returns a correct summary of empty .errors and .warnings", () => {
 	const actualError = format({
 		results: [
