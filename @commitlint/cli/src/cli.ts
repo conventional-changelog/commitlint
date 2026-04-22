@@ -135,6 +135,10 @@ const cli = yargs(process.argv.slice(2))
 			type: "boolean",
 			description: "enable verbose output for reports without problems",
 		},
+		"legacy-output": {
+			description: "use the legacy input output format (single-line 'input: ...')",
+			type: "boolean",
+		},
 		strict: {
 			alias: "s",
 			type: "boolean",
@@ -398,6 +402,7 @@ async function main(args: MainArgs): Promise<void> {
 		color: flags.color,
 		verbose: flags.verbose,
 		helpUrl,
+		legacyOutput: flags["legacy-output"],
 	});
 
 	if (!flags.quiet && output !== "") {
