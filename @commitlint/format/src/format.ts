@@ -37,7 +37,7 @@ function formatInput(
 	result: FormattableResult & WithInput,
 	options: FormatOptions = {},
 ): string[] {
-	const { color: enabled = true } = options;
+	const { color: enabled = true, legacyOutput = false } = options;
 	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
@@ -50,9 +50,16 @@ function formatInput(
 	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
 
-	return options.verbose || hasProblems
-		? [`${decoration}   --- input ---\n${decoratedInput}`]
-		: [];
+	if (!(options.verbose || hasProblems)) {
+		return [];
+	}
+
+	if (legacyOutput) {
+		// legacy: single line with 'input: ' prefix, no extra newlines or dashes
+		return [`${decoration}   input: ${decoratedInput}`];
+	}
+
+	return [`${decoration}   --- input ---\n${decoratedInput}`];
 }
 
 export function formatResult(
