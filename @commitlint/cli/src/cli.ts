@@ -136,7 +136,8 @@ const cli = yargs(process.argv.slice(2))
 			description: "enable verbose output for reports without problems",
 		},
 		"legacy-output": {
-			description: "use the legacy input output format (single-line 'input: ...')",
+			description:
+				"use the legacy input output format (single-line 'input: ...')",
 			type: "boolean",
 		},
 		strict: {

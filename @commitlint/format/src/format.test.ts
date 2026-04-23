@@ -82,7 +82,7 @@ test("returns legacy output with full commit message if verbose and legacyOutput
 	);
 });
 
-test('returns input banner with errors and multi-line input', () => {
+test("returns input banner with errors and multi-line input", () => {
 	const actual = format(
 		{
 			results: [
@@ -90,27 +90,28 @@ test('returns input banner with errors and multi-line input', () => {
 					errors: [
 						{
 							level: 2,
-							name: 'type-enum',
+							name: "type-enum",
 							message:
-								'type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]',
+								"type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]",
 						},
 					],
 					warnings: [],
-					input: 'foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester',
+					input:
+						"foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester",
 				},
 			],
 		},
 		{
 			color: false,
-		}
+		},
 	);
 
 	expect(actual).toStrictEqual(
-		'⧗   --- input ---\nfoo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings'
+		"⧗   --- input ---\nfoo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings\n",
 	);
 });
 
-test('returns legacy input banner with errors and multi-line input', () => {
+test("returns legacy input banner with errors and multi-line input", () => {
 	const actual = format(
 		{
 			results: [
@@ -118,24 +119,25 @@ test('returns legacy input banner with errors and multi-line input', () => {
 					errors: [
 						{
 							level: 2,
-							name: 'type-enum',
+							name: "type-enum",
 							message:
-								'type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]',
+								"type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]",
 						},
 					],
 					warnings: [],
-					input: 'foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester',
+					input:
+						"foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester",
 				},
 			],
 		},
 		{
 			color: false,
 			legacyOutput: true,
-		}
+		},
 	);
 
 	expect(actual).toStrictEqual(
-		'⧗   input: foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings'
+		"⧗   input: foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings\n",
 	);
 });
 
