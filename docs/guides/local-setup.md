@@ -20,10 +20,18 @@ You can find complete setup instructions on the [official documentation](https:/
 > The following instructions are meant to `husky@v9` if you are using a different version
 > consult the official documentation of your version.
 
-> [!WARNING]
-> For Windows users: ensure all `husky` files are `UTF-8` enconded. If any other format is used an error may be thrown at runtime such as [cannot execute binary file](https://github.com/typicode/husky/issues/1426).
-
 ---
+
+<!--
+**Note:**
+
+Command `echo "xxxx" > file` on Windows PowerShell v5 will create
+an UTF-16 LE file, which may cause execution failure.
+https://github.com/typicode/husky/issues/1426
+
+So here we use the `node -e` command create the UTF-8 file. And hex encode the dollar sign
+to `\x24` in single-quote string to avoid escaping issues on various shells. (issue#4728)
+-->
 
 :::tabs
 == npm
@@ -37,16 +45,14 @@ npx husky init
 npx husky install
 
 # Add commit message linting to commit-msg hook
-echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
-# Windows PowerShell users should use ` to escape dollar signs
-echo "npx --no -- commitlint --edit `$1" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','npx --no -- commitlint --edit \x241\n')"
 ```
 
 As an alternative you can create a script inside `package.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
-echo "npm run commitlint \${1}" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','npm run commitlint \x24{1}\n')"
 ```
 
 == yarn
@@ -60,16 +66,14 @@ yarn husky init
 yarn husky install
 
 # Add commit message linting to commit-msg hook
-echo "yarn commitlint --edit \$1" > .husky/commit-msg
-# Windows PowerShell users should use ` to escape dollar signs
-echo "yarn commitlint --edit `$1" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','yarn commitlint --edit \x241\n')"
 ```
 
 As an alternative you can create a script inside `package.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
-echo "yarn commitlint \${1}" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','yarn commitlint \x24{1}\n')"
 ```
 
 > [!WARNING]
@@ -86,16 +90,14 @@ pnpm husky init
 pnpm husky install
 
 # Add commit message linting to commit-msg hook
-echo "pnpm dlx commitlint --edit \$1" > .husky/commit-msg
-# Windows PowerShell users should use ` to escape dollar signs
-echo "pnpm dlx commitlint --edit `$1" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','pnpm dlx commitlint --edit \x241\n')"
 ```
 
 As an alternative you can create a script inside `package.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
-echo "pnpm commitlint \${1}" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','pnpm commitlint \x24{1}\n')"
 ```
 
 == bun
@@ -109,9 +111,7 @@ bunx husky init
 bunx husky install
 
 # Add commit message linting to commit-msg hook
-echo "bunx commitlint --edit \$1" > .husky/commit-msg
-# Windows PowerShell users should use ` to escape dollar signs
-echo "bunx commitlint --edit `$1" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','bunx commitlint --edit \x241\n')"
 ```
 
 == deno
@@ -125,9 +125,7 @@ deno task --eval husky init
 deno task --eval husky install
 
 # Add commit message linting to commit-msg hook
-echo "deno task --eval commitlint --edit \$1" > .husky/commit-msg
-# Windows PowerShell users should use ` to escape dollar signs
-echo "deno task --eval commitlint --edit `$1" > .husky/commit-msg
+node -e "fs.writeFileSync('.husky/commit-msg','deno task --eval commitlint --edit \x241\n')"
 ```
 
 :::
