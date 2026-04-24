@@ -22,16 +22,8 @@ You can find complete setup instructions on the [official documentation](https:/
 
 ---
 
-<!--
-**Note:**
-
-Command `echo "xxxx" > file` on Windows PowerShell v5 will create
-an UTF-16 LE file, which may cause execution failure.
-https://github.com/typicode/husky/issues/1426
-
-So here we use the `node -e` command create the UTF-8 file. And hex encode the dollar sign
-to `\x24` in single-quote string to avoid escaping issues on various shells. (issue#4728)
--->
+::::tabs
+=== Linux / macOS
 
 :::tabs
 == npm
@@ -45,14 +37,14 @@ npx husky init
 npx husky install
 
 # Add commit message linting to commit-msg hook
-node -e "fs.writeFileSync('.husky/commit-msg','npx --no -- commitlint --edit \x241\n')"
+echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
-node -e "fs.writeFileSync('.husky/commit-msg','npm run commitlint \x24{1}\n')"
+echo "npm run commitlint \${1}" > .husky/commit-msg
 ```
 
 == yarn
@@ -66,14 +58,14 @@ yarn husky init
 yarn husky install
 
 # Add commit message linting to commit-msg hook
-node -e "fs.writeFileSync('.husky/commit-msg','yarn commitlint --edit \x241\n')"
+echo "yarn commitlint --edit \$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
-node -e "fs.writeFileSync('.husky/commit-msg','yarn commitlint \x24{1}\n')"
+echo "yarn commitlint \${1}" > .husky/commit-msg
 ```
 
 > [!WARNING]
@@ -90,14 +82,14 @@ pnpm husky init
 pnpm husky install
 
 # Add commit message linting to commit-msg hook
-node -e "fs.writeFileSync('.husky/commit-msg','pnpm dlx commitlint --edit \x241\n')"
+echo "pnpm dlx commitlint --edit \$1" > .husky/commit-msg
 ```
 
 As an alternative you can create a script inside `package.json`
 
 ```sh
 npm pkg set scripts.commitlint="commitlint --edit"
-node -e "fs.writeFileSync('.husky/commit-msg','pnpm commitlint \x24{1}\n')"
+echo "pnpm commitlint \${1}" > .husky/commit-msg
 ```
 
 == bun
@@ -111,7 +103,7 @@ bunx husky init
 bunx husky install
 
 # Add commit message linting to commit-msg hook
-node -e "fs.writeFileSync('.husky/commit-msg','bunx commitlint --edit \x241\n')"
+echo "bunx commitlint --edit \$1" > .husky/commit-msg
 ```
 
 == deno
@@ -125,10 +117,110 @@ deno task --eval husky init
 deno task --eval husky install
 
 # Add commit message linting to commit-msg hook
-node -e "fs.writeFileSync('.husky/commit-msg','deno task --eval commitlint --edit \x241\n')"
+echo "deno task --eval commitlint --edit \$1" > .husky/commit-msg
 ```
 
 :::
+
+=== Windows
+
+:::tabs
+== npm
+
+```sh
+npm install --save-dev husky
+
+# husky@v9
+npx husky init
+# husky@v8 or lower
+npx husky install
+
+# Add commit message linting to commit-msg hook
+node -e "fs.writeFileSync('.husky/commit-msg', 'npx --no -- commitlint --edit $'+'1\n')"
+```
+
+As an alternative you can create a script inside `package.json`
+
+```sh
+npm pkg set scripts.commitlint="commitlint --edit"
+node -e "fs.writeFileSync('.husky/commit-msg', 'npm run commitlint $'+'{1}\n')"
+```
+
+== yarn
+
+```sh
+yarn add --dev husky
+
+# husky@v9
+yarn husky init
+# husky@v8 or lower
+yarn husky install
+
+# Add commit message linting to commit-msg hook
+node -e "fs.writeFileSync('.husky/commit-msg', 'yarn commitlint --edit $'+'1\n')"
+```
+
+As an alternative you can create a script inside `package.json`
+
+```sh
+npm pkg set scripts.commitlint="commitlint --edit"
+node -e "fs.writeFileSync('.husky/commit-msg', 'yarn commitlint $'+'{1}\n')"
+```
+
+> [!WARNING]
+> Please note that currently @commitlint/cli doesn't support yarn v2 Plug'n'Play (using yarn > v2 with `nodeLinker: node-modules` in your .yarnrc.yml file may work sometimes)
+
+== pnpm
+
+```sh
+pnpm add --save-dev husky
+
+# husky@v9
+pnpm husky init
+# husky@v8 or lower
+pnpm husky install
+
+# Add commit message linting to commit-msg hook
+node -e "fs.writeFileSync('.husky/commit-msg', 'pnpm dlx commitlint --edit $'+'1\n')"
+```
+
+As an alternative you can create a script inside `package.json`
+
+```sh
+npm pkg set scripts.commitlint="commitlint --edit"
+node -e "fs.writeFileSync('.husky/commit-msg', 'pnpm commitlint $'+'{1}\n')"
+```
+
+== bun
+
+```sh
+bun add --dev husky
+
+# husky@v9
+bunx husky init
+# husky@v8 or lower
+bunx husky install
+
+# Add commit message linting to commit-msg hook
+node -e "fs.writeFileSync('.husky/commit-msg', 'bunx commitlint --edit $'+'1\n')"
+```
+
+== deno
+
+```sh
+deno add --dev husky
+
+# husky@v9
+deno task --eval husky init
+# husky@v8 or lower
+deno task --eval husky install
+
+# Add commit message linting to commit-msg hook
+node -e "fs.writeFileSync('.husky/commit-msg', 'deno task --eval commitlint --edit $'+'1\n')"
+```
+
+:::
+::::
 
 ---
 
