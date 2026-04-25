@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.5.2](https://github.com/conventional-changelog/commitlint/compare/v20.5.1...v20.5.2) (2026-04-25)
+
+
+### Bug Fixes
+
+* update dependency global-directory to v5 ([#4698](https://github.com/conventional-changelog/commitlint/issues/4698)) ([a8b6224](https://github.com/conventional-changelog/commitlint/commit/a8b622497b5ac1bb8d56791a678cc03021b5ade8))
+
+
+
+
+
 ## [20.5.1](https://github.com/conventional-changelog/commitlint/compare/v20.5.0...v20.5.1) (2026-03-31)
 
 
