@@ -4192,7 +4192,7 @@ find-root@1.1.0:
   resolved "https://registry.npmjs.org/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"
   integrity sha512-NKfW6bec6GfKc0SGx1e07QZY9PE99u0Bft/0rzSD5k3sO/vwkVUpDUKVm5Gpp5Ue3YfShPFTX2070tDs5kB9Ng==
 
-find-up-simple@^1.0.0:
+find-up-simple@^1.0.0, find-up-simple@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/find-up-simple/-/find-up-simple-1.0.1.tgz#18fb90ad49e45252c4d7fca56baade04fa3fca1e"
   integrity sha512-afd4O7zpqHeRyg4PfDQsXmlDe2PfdHtJt6Akt8jOWaApLOZk5JXs6VMR29lz03pRe9mpykrRCYIYxaJYcfpncQ==
@@ -6900,12 +6900,12 @@ resolve-pkg-maps@^1.0.0:
   resolved "https://registry.npmjs.org/resolve-pkg-maps/-/resolve-pkg-maps-1.0.0.tgz#616b3dc2c57056b5588c31cdf4b3d64db133720f"
   integrity sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==
 
-resolve-pkg@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/resolve-pkg/-/resolve-pkg-2.0.0.tgz#ac06991418a7623edc119084edc98b0e6bf05a41"
-  integrity sha512-+1lzwXehGCXSeryaISr6WujZzowloigEofRB+dj75y9RRa/obVcYgbHJd53tdYw8pvZj8GojXaaENws8Ktw/hQ==
+resolve-pkg@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.npmjs.org/resolve-pkg/-/resolve-pkg-3.0.1.tgz#f9b6b43b85b1f5bd3cb7a7d249c290a6e423192d"
+  integrity sha512-OYIg+p3xVYwh4R0tnEKU+XZA8qiDY4y7iC+XgoC8LFbZuKHjPuuJ9mhWdSX6KYFNKvgar6hOdNj207DDI0nMfg==
   dependencies:
-    resolve-from "^5.0.0"
+    find-up-simple "^1.0.1"
 
 resolve.exports@2.0.3:
   version "2.0.3"
