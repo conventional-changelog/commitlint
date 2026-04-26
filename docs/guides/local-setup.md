@@ -291,4 +291,7 @@ No staged files match any of provided globs.
 # husky > commit-msg
 ```
 
+Since [v22.0.0](https://github.com/conventional-changelog/commitlint/releases/tag/v22.0.0) `commitlint` will output the commit message after a new line (EOL) instead of after a colon.\
+(You can use the `--legacy-output` flag to get the previous output format used in older versions)
+
 Local linting is fine for fast feedback but can easily be tinkered with. To ensure all commits are linted you'll want to check commits on an automated CI Server too. Learn how to in the [CI Setup guide](/guides/ci-setup).
