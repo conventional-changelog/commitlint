@@ -16,7 +16,7 @@ import {
 	UserConfig,
 } from "@commitlint/types";
 import isPlainObject from "is-plain-obj";
-import mergeWith from "lodash.mergewith";
+import { merge } from "es-toolkit/compat";
 
 import { loadConfig } from "./utils/load-config.js";
 import { loadParserOpts } from "./utils/load-parser-opts.js";
@@ -52,7 +52,7 @@ export default async function load(
 	}
 
 	// Merge passed config with file based options
-	config = mergeWith(
+	config = merge(
 		{
 			extends: [],
 			plugins: [],

@@ -2,7 +2,7 @@ import path from "node:path";
 
 import configAngular from "@commitlint/config-angular";
 import { glob } from "glob";
-import mergeWith from "lodash.mergewith";
+import { merge } from "es-toolkit/compat";
 
 function pathToId(root, filePath) {
 	const relativePath = path.relative(root, filePath);
@@ -16,7 +16,7 @@ async function getPatternIDs() {
 	return files.map((result) => pathToId(root, result));
 }
 
-export default mergeWith(configAngular, {
+export default merge(configAngular, {
 	rules: {
 		"scope-enum": () =>
 			getPatternIDs().then((ids) => [2, "always", ids.concat(["system"])]),
