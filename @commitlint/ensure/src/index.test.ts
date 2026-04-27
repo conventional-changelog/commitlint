@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { globSync } from "glob";
-import camelCase from "lodash.camelcase";
+import { camelCase } from "es-toolkit/compat";
 
 import * as ensure from "./index.js";
 

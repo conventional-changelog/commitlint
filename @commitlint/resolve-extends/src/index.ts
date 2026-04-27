@@ -6,7 +6,7 @@ import { pathToFileURL, fileURLToPath } from "node:url";
 
 import globalDirectory from "global-directory";
 import { moduleResolve } from "import-meta-resolve";
-import mergeWith from "lodash.mergewith";
+import { mergeWith } from "es-toolkit/compat";
 import resolveFrom_ from "resolve-from";
 import { validateConfig } from "@commitlint/config-validator";
 import type { ParserPreset, UserConfig } from "@commitlint/types";

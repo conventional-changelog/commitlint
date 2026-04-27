@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fix, git } from "@commitlint/test";
 import fs from "fs-extra";
-import mergeWith from "lodash.mergewith";
+import { merge } from "es-toolkit/compat";
 import { x } from "tinyexec";
 import { ExitCode } from "./cli-error.js";
 
@@ -720,6 +720,6 @@ describe("should print config", () => {
 async function writePkg(payload: unknown, options: TestOptions) {
 	const pkgPath = path.join(options.cwd, "package.json");
 	const pkg = JSON.parse(await fs.readFile(pkgPath, "utf-8"));
-	const result = mergeWith(pkg, payload);
+	const result = merge(pkg, payload);
 	await fs.writeFile(pkgPath, JSON.stringify(result, null, "  "));
 }
