@@ -32,7 +32,7 @@
   },
   "homepage": "https://commitlint.js.org/",
   "engines": {
-    "node": ">=v18"
+    "node": ">=v22"
   },
   "dependencies": {
     "@pnpm/read-project-manifest": "^5.0.10",
@@ -42,7 +42,7 @@
   "devDependencies": {
     "@commitlint/test": "^20.4.3",
     "@commitlint/utils": "^20.0.0",
-    "@types/node": "^18.19.17",
+    "@types/node": "^22.0.0",
     "typescript": "^6.0.0"
   },
   "exports": {
