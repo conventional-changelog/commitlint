@@ -54,7 +54,90 @@ test("returns empty summary with full commit message if verbose", () => {
 	);
 
 	expect(actual).toStrictEqual(
+		"⧗   --- input ---\nfeat(cli): this is a valid header\n\nThis is a valid body\n\nSigned-off-by: tester\n✔   found 0 problems, 0 warnings",
+	);
+});
+
+test("returns legacy output with full commit message if verbose and legacyOutput", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [],
+					warnings: [],
+					input:
+						"feat(cli): this is a valid header\n\nThis is a valid body\n\nSigned-off-by: tester",
+				},
+			],
+		},
+		{
+			verbose: true,
+			color: false,
+			legacyOutput: true,
+		},
+	);
+
+	expect(actual).toStrictEqual(
 		"⧗   input: feat(cli): this is a valid header\n\nThis is a valid body\n\nSigned-off-by: tester\n✔   found 0 problems, 0 warnings",
+	);
+});
+
+test("returns input banner with errors and multi-line input", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "type-enum",
+							message:
+								"type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]",
+						},
+					],
+					warnings: [],
+					input:
+						"foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester",
+				},
+			],
+		},
+		{
+			color: false,
+		},
+	);
+
+	expect(actual).toStrictEqual(
+		"⧗   --- input ---\nfoo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings\n",
+	);
+});
+
+test("returns legacy input banner with errors and multi-line input", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "type-enum",
+							message:
+								"type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test]",
+						},
+					],
+					warnings: [],
+					input:
+						"foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester",
+				},
+			],
+		},
+		{
+			color: false,
+			legacyOutput: true,
+		},
+	);
+
+	expect(actual).toStrictEqual(
+		"⧗   input: foo: this is an invalid header\n\nThis is a body\n\nSigned-off-by: tester\n✖   type must be one of [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test] [type-enum]\n\n✖   found 1 problems, 0 warnings\n",
 	);
 });
 

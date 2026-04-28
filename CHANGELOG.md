@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.0.0](https://github.com/conventional-changelog/commitlint/compare/v20.5.2...v22.0.0) (2026-04-30)
+
+### BREAKING CHANGES
+
+* When using commitlint in --verbose mode, commit message will be shown after a new line (EOL), instead of after a colon like in older versions. To restore the old behaviour, use the flag `--legacy-output`.
+
+
 ## [20.5.2](https://github.com/conventional-changelog/commitlint/compare/v20.5.1...v20.5.2) (2026-04-25)
 
 
