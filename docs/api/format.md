@@ -60,6 +60,11 @@ type formatOptions = {
    * URL to print as help for reports with problems
    **/
   helpUrl: string;
+
+  /**
+   * Show position indicator (^) for errors in the input line
+   **/
+  showPosition?: boolean;
 }
 
 format(report?: Report = {}, options?: formatOptions = {}) => string[];

@@ -10,10 +10,189 @@ import type {
 	BaseRule,
 	RuleType,
 	QualifiedRules,
+	Position,
 } from "@commitlint/types";
 import { RuleConfigSeverity } from "@commitlint/types";
 
 import { buildCommitMessage } from "./commit-message.js";
+
+function getRulePosition(
+	ruleName: string,
+	parsed: {
+		raw?: string;
+		header?: string | null;
+		type?: string | null;
+		subject?: string | null;
+		scope?: string | null;
+		body?: string | null;
+		footer?: string | null;
+	},
+): { start: Position; end: Position } | undefined {
+	const raw = parsed.raw || "";
+	if (!raw) return undefined;
+
+	const header = parsed.header || "";
+
+	switch (ruleName) {
+		case "type-enum":
+		case "type-empty":
+		case "type-case":
+		case "type-min-length":
+		case "type-max-length": {
+			if (!parsed.type) {
+				if (ruleName === "type-empty") {
+					const offset = 0;
+					return {
+						start: { line: 1, column: offset + 1, offset },
+						end: { line: 1, column: offset + 1, offset },
+					};
+				}
+				return undefined;
+			}
+			if (!raw.startsWith(parsed.type)) return undefined;
+			const offset = 0;
+			return {
+				start: { line: 1, column: offset + 1, offset },
+				end: {
+					line: 1,
+					column: offset + parsed.type.length + 1,
+					offset: offset + parsed.type.length,
+				},
+			};
+		}
+		case "scope-enum":
+		case "scope-empty":
+		case "scope-case":
+		case "scope-min-length":
+		case "scope-max-length":
+		case "scope-delimiter-style": {
+			if (!parsed.scope) {
+				if (ruleName === "scope-empty") {
+					const typeEnd = parsed.type ? parsed.type.length : 0;
+					const offset = typeEnd + 1;
+					return {
+						start: { line: 1, column: offset + 1, offset },
+						end: { line: 1, column: offset + 2, offset: offset + 1 },
+					};
+				}
+				return undefined;
+			}
+			const scopeStart = raw.indexOf(`(${parsed.scope})`);
+			if (scopeStart === -1) return undefined;
+			return {
+				start: { line: 1, column: scopeStart + 2, offset: scopeStart + 1 },
+				end: {
+					line: 1,
+					column: scopeStart + parsed.scope.length + 2,
+					offset: scopeStart + parsed.scope.length + 1,
+				},
+			};
+		}
+		case "subject-empty":
+		case "subject-case":
+		case "subject-min-length":
+		case "subject-max-length":
+		case "subject-full-stop":
+		case "subject-exclamation-mark": {
+			if (!parsed.subject) {
+				if (ruleName === "subject-empty") {
+					const typeEnd = parsed.type ? parsed.type.length : 0;
+					const hasScope = parsed.scope ? parsed.scope.length + 3 : 0;
+					const separator = ": ".length;
+					const offset = typeEnd + hasScope + separator;
+					return {
+						start: { line: 1, column: offset + 1, offset },
+						end: { line: 1, column: offset + 1, offset },
+					};
+				}
+				return undefined;
+			}
+			const typeEnd = parsed.type ? parsed.type.length : 0;
+			const hasScope = parsed.scope ? parsed.scope.length + 3 : 0;
+			const separator = ": ".length;
+			const subjectStart = typeEnd + hasScope + separator;
+			return {
+				start: { line: 1, column: subjectStart + 1, offset: subjectStart },
+				end: {
+					line: 1,
+					column: subjectStart + parsed.subject.length + 1,
+					offset: subjectStart + parsed.subject.length,
+				},
+			};
+		}
+		case "header-min-length":
+		case "header-max-length":
+		case "header-case":
+		case "header-full-stop":
+		case "header-trim": {
+			if (!header) return undefined;
+			return {
+				start: { line: 1, column: 1, offset: 0 },
+				end: { line: 1, column: header.length + 1, offset: header.length },
+			};
+		}
+		case "body-empty":
+		case "body-min-length":
+		case "body-max-length":
+		case "body-case":
+		case "body-full-stop":
+		case "body-leading-blank":
+		case "body-max-line-length": {
+			if (!parsed.body) {
+				if (ruleName === "body-empty") {
+					const bodyOffset = raw.indexOf("\n\n");
+					if (bodyOffset === -1) return undefined;
+					return {
+						start: { line: 2, column: 1, offset: bodyOffset + 2 },
+						end: { line: 2, column: 1, offset: bodyOffset + 2 },
+					};
+				}
+				return undefined;
+			}
+			const bodyOffset = raw.indexOf("\n\n");
+			if (bodyOffset === -1) return undefined;
+			const bodyStartOffset = bodyOffset + 2;
+			return {
+				start: { line: 2, column: 1, offset: bodyStartOffset },
+				end: {
+					line: 2,
+					column: parsed.body.length + 1,
+					offset: bodyStartOffset + parsed.body.length,
+				},
+			};
+		}
+		case "footer-empty":
+		case "footer-min-length":
+		case "footer-max-length":
+		case "footer-leading-blank":
+		case "footer-max-line-length": {
+			if (!parsed.footer) {
+				if (ruleName === "footer-empty") {
+					const footerOffset = raw.lastIndexOf("\n\n");
+					if (footerOffset === -1) return undefined;
+					return {
+						start: { line: 3, column: 1, offset: footerOffset + 2 },
+						end: { line: 3, column: 1, offset: footerOffset + 2 },
+					};
+				}
+				return undefined;
+			}
+			const footerOffset = raw.lastIndexOf("\n\n");
+			if (footerOffset === -1) return undefined;
+			const footerStartOffset = footerOffset + 2;
+			return {
+				start: { line: 3, column: 1, offset: footerStartOffset },
+				end: {
+					line: 3,
+					column: parsed.footer.length + 1,
+					offset: footerStartOffset + parsed.footer.length,
+				},
+			};
+		}
+		default:
+			return undefined;
+	}
+}
 
 export default async function lint(
 	message: string,
@@ -169,12 +348,18 @@ export default async function lint(
 			const executableRule = rule as Rule<unknown>;
 			const [valid, message] = await executableRule(parsed, when, value);
 
-			return {
+			const position = !valid ? getRulePosition(name, parsed) : undefined;
+
+			const outcome: LintRuleOutcome = {
 				level,
 				valid,
 				name,
-				message,
+				message: message ?? "",
+				start: position?.start,
+				end: position?.end,
 			};
+
+			return outcome;
 		});
 
 	const results = (await Promise.all(pendingResults)).filter(

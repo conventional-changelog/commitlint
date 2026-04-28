@@ -303,3 +303,164 @@ test("format result should not contain `Get help` prefix if helpUrl is not provi
 		expect.arrayContaining([expect.stringContaining("Get help:")]),
 	);
 });
+
+test("shows position indicator when showPosition is true and error has position", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "type-enum",
+							message: "type must be one of [feat, fix]",
+							start: { line: 1, column: 1, offset: 0 },
+							end: { line: 1, column: 4, offset: 3 },
+						},
+					],
+					input: "foo: some message",
+				},
+			],
+		},
+		{
+			showPosition: true,
+			color: false,
+		},
+	);
+
+	expect(actual).toContain("^");
+});
+
+test("does not show position indicator when showPosition is false", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "type-enum",
+							message: "type must be one of [feat, fix]",
+							start: { line: 1, column: 1, offset: 0 },
+							end: { line: 1, column: 4, offset: 3 },
+						},
+					],
+					input: "foo: some message",
+				},
+			],
+		},
+		{
+			showPosition: false,
+			color: false,
+		},
+	);
+
+	expect(actual).not.toContain("^");
+});
+
+test("shows position indicator when showPosition is not provided (default)", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "type-enum",
+							message: "type must be one of [feat, fix]",
+							start: { line: 1, column: 1, offset: 0 },
+							end: { line: 1, column: 4, offset: 3 },
+						},
+					],
+					input: "foo: some message",
+				},
+			],
+		},
+		{
+			color: false,
+		},
+	);
+
+	expect(actual).toContain("^");
+});
+
+test("does not show position indicator when error has no position", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "type-enum",
+							message: "type must be one of [feat, fix]",
+						},
+					],
+					input: "foo: some message",
+				},
+			],
+		},
+		{
+			showPosition: true,
+			color: false,
+		},
+	);
+
+	expect(actual).not.toContain("^");
+});
+
+test("shows correct position for subject error", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "subject-max-length",
+							message: "subject must not be longer than 72 characters",
+							start: { line: 1, column: 10, offset: 9 },
+							end: { line: 1, column: 50, offset: 49 },
+						},
+					],
+					input:
+						"feat: this is a subject that is way too long for the commit message format",
+				},
+			],
+		},
+		{
+			showPosition: true,
+			color: false,
+		},
+	);
+
+	expect(actual).toContain("^");
+});
+
+test("shows position indicator with single caret for longer errors", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "header-max-length",
+							message: "header must not be longer than 100 characters",
+							start: { line: 1, column: 1, offset: 0 },
+							end: { line: 1, column: 80, offset: 79 },
+						},
+					],
+					input:
+						"feat: this is a very long header that exceeds the maximum allowed character limit for the commit message",
+				},
+			],
+		},
+		{
+			showPosition: true,
+			color: false,
+		},
+	);
+
+	expect(actual).toContain("^");
+});
