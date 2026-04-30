@@ -1,6 +1,6 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import fg from "fast-glob";
+import { glob } from "node:fs/promises";
 import configWorkspaceScopes from "@commitlint/config-workspace-scopes";
 
 export default {
@@ -41,10 +41,16 @@ async function findPackages(cwd) {
 	}
 
 	const patterns = normalizePatterns(packages);
-	const entries = await fg(patterns, {
-		cwd,
-		ignore: ["**/node_modules/**", "**/bower_components/**"],
-	});
+	const entries = [];
+	for (const pattern of patterns) {
+		for await (const entry of glob(pattern, {
+			cwd,
+			exclude: (p) =>
+				p.includes("node_modules") || p.includes("bower_components"),
+		})) {
+			entries.push(entry);
+		}
+	}
 
 	const pkgJsons = await Promise.all(
 		Array.from(new Set(entries.map((entry) => path.join(cwd, entry)))).map(

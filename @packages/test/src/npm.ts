@@ -1,7 +1,7 @@
 import path from "node:path";
 import { createRequire } from "node:module";
 
-import fs from "fs-extra";
+import fs from "node:fs/promises";
 import resolvePkg from "resolve-pkg";
 
 import * as git from "./git.js";
@@ -12,9 +12,15 @@ export async function installModules(cwd: string) {
 	const manifestPath = path.join(cwd, "package.json");
 	const targetModulesPath = path.join(cwd, "node_modules");
 
-	if (await fs.pathExists(manifestPath)) {
-		const { dependencies = {}, devDependencies = {} } =
-			await fs.readJson(manifestPath);
+	if (
+		await fs
+			.access(manifestPath)
+			.then(() => true)
+			.catch(() => false)
+	) {
+		const { dependencies = {}, devDependencies = {} } = JSON.parse(
+			await fs.readFile(manifestPath, "utf-8"),
+		);
 		const deps = Object.keys({ ...dependencies, ...devDependencies });
 		await Promise.all(
 			deps.map(async (dependency: any) => {
@@ -69,7 +75,7 @@ export async function installModules(cwd: string) {
 				const relativePath = path.relative(sourceModulesPath, sourcePath);
 				const targetPath = path.join(targetModulesPath, relativePath);
 
-				await fs.mkdirp(path.join(targetPath, ".."));
+				await fs.mkdir(path.join(targetPath, ".."), { recursive: true });
 				await fs.symlink(sourcePath, targetPath);
 			}),
 		);

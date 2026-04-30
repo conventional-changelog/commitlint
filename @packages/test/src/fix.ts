@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import fs from "fs-extra";
+import fs from "node:fs/promises";
 import { packageDirectory as pkgDir } from "pkg-dir";
 import tmp from "tmp";
 
@@ -16,7 +16,9 @@ export async function bootstrap(fixture?: string, directory?: string) {
 			throw new Error(`ENOENT, no such file or directory '${packageDir}'`);
 		}
 
-		await fs.copy(path.join(packageDir, fixture), tmpDir.name);
+		await fs.cp(path.join(packageDir, fixture), tmpDir.name, {
+			recursive: true,
+		});
 	}
 
 	return tmpDir.name;

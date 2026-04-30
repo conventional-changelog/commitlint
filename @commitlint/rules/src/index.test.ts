@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { globSync } from "glob";
+import { globSync } from "node:fs";
 
 import rules from "./index.js";
 
@@ -34,10 +34,9 @@ test("all rules are present in documentation", () => {
 });
 
 function _glob(pattern: string) {
-	const files = globSync(pattern, {
-		ignore: ["**/index.ts", "**/*.test.ts"],
-		cwd: __dirname,
-	});
+	const files = globSync(pattern, { cwd: __dirname }).filter(
+		(p) => !p.endsWith("index.ts") && !p.endsWith(".test.ts"),
+	);
 	return files.map(relative).map(toExport);
 }
 

@@ -1,6 +1,6 @@
 import path from "node:path";
 
-import fg from "fast-glob";
+import { glob } from "node:fs/promises";
 import readYamlFileModule from "read-yaml-file";
 import { readExactProjectManifest } from "@pnpm/read-project-manifest";
 const readYamlFile = readYamlFileModule.default;
@@ -28,25 +28,30 @@ function requirePackagesManifest(dir: any) {
 function normalizePatterns(patterns: any) {
 	const normalizedPatterns = [];
 	for (const pattern of patterns) {
-		normalizedPatterns.push(pattern.replace(/\/?$/, "/package.json"));
-		normalizedPatterns.push(pattern.replace(/\/?$/, "/package.json5"));
-		normalizedPatterns.push(pattern.replace(/\/?$/, "/package.yaml"));
+		normalizedPatterns.push(
+			pattern.replace(/\/?$/, "/package.{json,json5,yaml}"),
+		);
 	}
 	return normalizedPatterns;
 }
 
 function findWorkspacePackages(cwd: any) {
 	return requirePackagesManifest(cwd)
-		.then((manifest: any) => {
+		.then(async (manifest: any) => {
 			const patterns = normalizePatterns(
 				(manifest && manifest.packages) || ["**"],
 			);
-			const opts = {
-				cwd,
-				ignore: ["**/node_modules/**", "**/bower_components/**"],
-			};
-
-			return fg(patterns, opts);
+			const entries: string[] = [];
+			for (const pattern of patterns) {
+				for await (const entry of glob(pattern, {
+					cwd,
+					exclude: (p) =>
+						p.includes("node_modules") || p.includes("bower_components"),
+				})) {
+					entries.push(entry);
+				}
+			}
+			return entries;
 		})
 		.then((entries: any) => {
 			const paths = Array.from(
