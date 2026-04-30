@@ -182,7 +182,7 @@ spec:
 Validate commits within a PR by leveraging [BitBucket`s default variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
 
 ```yml
-image: node:18
+image: node:22
 
 pipelines:
   pull-requests:
