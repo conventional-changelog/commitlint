@@ -173,10 +173,21 @@ function getRulePosition(
 				end: offsetToPosition(raw, bodyEndOffset),
 			};
 		}
+		case "footer-leading-blank": {
+			if (!parsed.footer) return undefined;
+			const footerOffset = raw.lastIndexOf("\n\n");
+			if (footerOffset !== -1) {
+				const start = offsetToPosition(raw, footerOffset + 1);
+				return { start, end: start };
+			}
+			const footerInRaw = parsed.footer ? raw.indexOf(parsed.footer) : -1;
+			if (footerInRaw === -1) return undefined;
+			const start = offsetToPosition(raw, footerInRaw);
+			return { start, end: start };
+		}
 		case "footer-empty":
 		case "footer-min-length":
 		case "footer-max-length":
-		case "footer-leading-blank":
 		case "footer-max-line-length": {
 			if (!parsed.footer) {
 				if (ruleName === "footer-empty") {
