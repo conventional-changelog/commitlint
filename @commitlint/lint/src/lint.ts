@@ -139,12 +139,21 @@ function getRulePosition(
 				end: { line: 1, column: header.length + 1, offset: header.length },
 			};
 		}
+		case "body-leading-blank": {
+			if (!parsed.body) return undefined;
+			const bodyOffset = raw.indexOf("\n\n");
+			if (bodyOffset !== -1) {
+				const start = offsetToPosition(raw, bodyOffset + 1);
+				return { start, end: start };
+			}
+			const start = offsetToPosition(raw, header.length);
+			return { start, end: start };
+		}
 		case "body-empty":
 		case "body-min-length":
 		case "body-max-length":
 		case "body-case":
 		case "body-full-stop":
-		case "body-leading-blank":
 		case "body-max-line-length": {
 			if (!parsed.body) {
 				if (ruleName === "body-empty") {
