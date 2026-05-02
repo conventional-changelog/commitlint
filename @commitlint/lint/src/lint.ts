@@ -104,10 +104,7 @@ function getRulePosition(
 		case "subject-exclamation-mark": {
 			if (!parsed.subject) {
 				if (ruleName === "subject-empty") {
-					const typeEnd = parsed.type ? parsed.type.length : 0;
-					const hasScope = parsed.scope ? parsed.scope.length + 3 : 0;
-					const separator = ": ".length;
-					const offset = typeEnd + hasScope + separator;
+					const offset = header.length;
 					return {
 						start: { line: 1, column: offset + 1, offset },
 						end: { line: 1, column: offset + 1, offset },
@@ -115,10 +112,8 @@ function getRulePosition(
 				}
 				return undefined;
 			}
-			const typeEnd = parsed.type ? parsed.type.length : 0;
-			const hasScope = parsed.scope ? parsed.scope.length + 3 : 0;
-			const separator = ": ".length;
-			const subjectStart = typeEnd + hasScope + separator;
+			const subjectStart = header.indexOf(parsed.subject);
+			if (subjectStart === -1) return undefined;
 			return {
 				start: { line: 1, column: subjectStart + 1, offset: subjectStart },
 				end: {
