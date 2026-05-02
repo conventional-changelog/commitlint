@@ -418,7 +418,7 @@ test("returns position for body-max-line-length error", async () => {
 	});
 	expect(result.valid).toBe(false);
 	expect(result.errors[0].name).toBe("body-max-line-length");
-	expect(result.errors[0].start?.line).toBe(2);
+	expect(result.errors[0].start?.line).toBe(3);
 });
 
 test("returns no position for rules without position support", async () => {

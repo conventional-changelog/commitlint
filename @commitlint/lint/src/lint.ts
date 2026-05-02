@@ -16,6 +16,14 @@ import { RuleConfigSeverity } from "@commitlint/types";
 
 import { buildCommitMessage } from "./commit-message.js";
 
+function offsetToPosition(raw: string, offset: number): Position {
+	const before = raw.slice(0, offset);
+	const newlineCount = (before.match(/\n/g) || []).length;
+	const lastNewline = before.lastIndexOf("\n");
+	const column = lastNewline === -1 ? offset + 1 : offset - lastNewline;
+	return { line: newlineCount + 1, column, offset };
+}
+
 function getRulePosition(
 	ruleName: string,
 	parsed: {
@@ -142,23 +150,18 @@ function getRulePosition(
 				if (ruleName === "body-empty") {
 					const bodyOffset = raw.indexOf("\n\n");
 					if (bodyOffset === -1) return undefined;
-					return {
-						start: { line: 2, column: 1, offset: bodyOffset + 2 },
-						end: { line: 2, column: 1, offset: bodyOffset + 2 },
-					};
+					const start = offsetToPosition(raw, bodyOffset + 2);
+					return { start, end: start };
 				}
 				return undefined;
 			}
 			const bodyOffset = raw.indexOf("\n\n");
 			if (bodyOffset === -1) return undefined;
 			const bodyStartOffset = bodyOffset + 2;
+			const bodyEndOffset = bodyStartOffset + parsed.body.length;
 			return {
-				start: { line: 2, column: 1, offset: bodyStartOffset },
-				end: {
-					line: 2,
-					column: parsed.body.length + 1,
-					offset: bodyStartOffset + parsed.body.length,
-				},
+				start: offsetToPosition(raw, bodyStartOffset),
+				end: offsetToPosition(raw, bodyEndOffset),
 			};
 		}
 		case "footer-empty":
