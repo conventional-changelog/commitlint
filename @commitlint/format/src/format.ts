@@ -49,32 +49,49 @@ function formatInput(
 	const decoration = enabled ? pc.gray(sign) : sign;
 	const prefix = `${decoration}   input: `;
 	const visiblePrefixLength = `${sign}   input: `.length;
+	const padding = " ".repeat(visiblePrefixLength);
 
-	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
+	const normalizedInput = input.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+	const inputLines = normalizedInput.split("\n");
+
+	const renderedInputLines = inputLines.map((lineText, i) => {
+		const decoratedLine = enabled ? pc.bold(lineText) : lineText;
+		const linePrefix = i === 0 ? prefix : padding;
+		return `${linePrefix}${decoratedLine}`;
+	});
 
 	if (!hasProblems) {
-		return options.verbose ? [`${prefix}${decoratedInput}`] : [];
+		return options.verbose ? renderedInputLines : [];
 	}
 
-	const positionIndicator = showPosition
-		? getPositionIndicator([...errors, ...warnings], input, visiblePrefixLength)
+	const indicator = showPosition
+		? getPositionIndicator(
+				[...errors, ...warnings],
+				inputLines,
+				visiblePrefixLength,
+			)
 		: undefined;
 
-	const lines: string[] = [`${prefix}${decoratedInput}`];
-
-	if (positionIndicator) {
-		lines.push(positionIndicator);
+	if (!indicator) {
+		return renderedInputLines;
 	}
 
+	const lines: string[] = [];
+	for (let i = 0; i < renderedInputLines.length; i++) {
+		lines.push(renderedInputLines[i]);
+		if (i + 1 === indicator.line) {
+			lines.push(indicator.text);
+		}
+	}
 	return lines;
 }
 
 function getPositionIndicator(
 	problems: FormattableProblem[],
-	input: string,
+	inputLines: string[],
 	prefixLength: number,
-): string | undefined {
+): { text: string; line: number } | undefined {
 	const problemWithPosition = problems.find(
 		(problem) => problem?.start !== undefined && problem?.end !== undefined,
 	);
@@ -82,23 +99,17 @@ function getPositionIndicator(
 		return undefined;
 	}
 
-	const padding = " ".repeat(prefixLength);
-
-	const caret = "^";
-
-	const normalizedInput = input.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-	const lines = normalizedInput.split("\n");
-	const targetLine = lines[problemWithPosition.start.line - 1];
-
-	if (!targetLine) {
+	const targetLine = inputLines[problemWithPosition.start.line - 1];
+	if (targetLine === undefined) {
 		return undefined;
 	}
 
+	const padding = " ".repeat(prefixLength);
+	const caret = "^";
 	const spacesBefore = Math.max(0, problemWithPosition.start.column - 1);
+	const text = padding + " ".repeat(spacesBefore) + caret;
 
-	const indicator = padding + " ".repeat(spacesBefore) + caret;
-
-	return indicator;
+	return { text, line: problemWithPosition.start.line };
 }
 
 export function formatResult(

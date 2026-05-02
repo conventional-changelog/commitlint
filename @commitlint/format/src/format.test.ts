@@ -54,7 +54,7 @@ test("returns empty summary with full commit message if verbose", () => {
 	);
 
 	expect(actual).toStrictEqual(
-		"⧗   input: feat(cli): this is a valid header\n\nThis is a valid body\n\nSigned-off-by: tester\n✔   found 0 problems, 0 warnings",
+		"⧗   input: feat(cli): this is a valid header\n           \n           This is a valid body\n           \n           Signed-off-by: tester\n✔   found 0 problems, 0 warnings",
 	);
 });
 
@@ -435,6 +435,38 @@ test("shows correct position for subject error", () => {
 	);
 
 	expect(actual).toContain("^");
+});
+
+test("renders position indicator under the failing line for multi-line input", () => {
+	const actual = format(
+		{
+			results: [
+				{
+					errors: [
+						{
+							level: 2,
+							name: "body-max-line-length",
+							message: "body must not have lines longer than 80 characters",
+							start: { line: 3, column: 1, offset: 14 },
+							end: { line: 3, column: 100, offset: 113 },
+						},
+					],
+					input: "feat: header\n\nthis body line is far too long to fit",
+				},
+			],
+		},
+		{
+			showPosition: true,
+			color: false,
+		},
+	);
+
+	const lines = actual.split("\n");
+	const bodyLineIndex = lines.findIndex((l) =>
+		l.includes("this body line is far too long"),
+	);
+	expect(bodyLineIndex).toBeGreaterThan(-1);
+	expect(lines[bodyLineIndex + 1]).toContain("^");
 });
 
 test("shows position indicator with single caret for longer errors", () => {
