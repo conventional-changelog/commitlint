@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import path from "node:path";
 import fs from "node:fs";
+import { readFile } from "node:fs/promises";
 
-import readPkg from "read-pkg";
 import requireFromString from "require-from-string";
 import tar from "tar-fs";
 import { x } from "tinyexec";
@@ -40,7 +40,7 @@ function main(flags) {
 	const skipImport =
 		typeof flags.skipImport === "boolean" ? flags.skipImport : false;
 
-	return readPkg({ cwd }).then((pkg) => {
+	return readPkg(cwd).then((pkg) => {
 		return getTarballFiles(cwd, { write: !skipImport }).then((tarball) => {
 			return getPackageFiles(cwd).then((pkgFiles) => {
 				let problems = [];
@@ -208,6 +208,11 @@ function getPkgBinFiles(bin) {
 	if (typeof bin === "object") {
 		return Object.values(bin).map((b) => path.normalize(b));
 	}
+}
+
+async function readPkg(cwd) {
+	const data = await readFile(path.join(cwd, "package.json"), "utf8");
+	return JSON.parse(data);
 }
 
 function fileImportable(file) {
