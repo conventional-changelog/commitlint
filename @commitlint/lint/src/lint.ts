@@ -173,23 +173,18 @@ function getRulePosition(
 				if (ruleName === "footer-empty") {
 					const footerOffset = raw.lastIndexOf("\n\n");
 					if (footerOffset === -1) return undefined;
-					return {
-						start: { line: 3, column: 1, offset: footerOffset + 2 },
-						end: { line: 3, column: 1, offset: footerOffset + 2 },
-					};
+					const start = offsetToPosition(raw, footerOffset + 2);
+					return { start, end: start };
 				}
 				return undefined;
 			}
 			const footerOffset = raw.lastIndexOf("\n\n");
 			if (footerOffset === -1) return undefined;
 			const footerStartOffset = footerOffset + 2;
+			const footerEndOffset = footerStartOffset + parsed.footer.length;
 			return {
-				start: { line: 3, column: 1, offset: footerStartOffset },
-				end: {
-					line: 3,
-					column: parsed.footer.length + 1,
-					offset: footerStartOffset + parsed.footer.length,
-				},
+				start: offsetToPosition(raw, footerStartOffset),
+				end: offsetToPosition(raw, footerEndOffset),
 			};
 		}
 		default:
