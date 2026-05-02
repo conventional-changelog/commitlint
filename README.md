@@ -169,7 +169,7 @@ Check the [main website](https://commitlint.js.org/).
 
 ## Version Support and Releases
 
-- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 22`
+- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 22.12`
 - git `>= 2.13.2`
 
 ### Releases
