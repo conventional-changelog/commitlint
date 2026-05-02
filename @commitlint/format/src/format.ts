@@ -48,6 +48,7 @@ function formatInput(
 	const sign = "⧗";
 	const decoration = enabled ? pc.gray(sign) : sign;
 	const prefix = `${decoration}   input: `;
+	const visiblePrefixLength = `${sign}   input: `.length;
 
 	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
@@ -57,7 +58,7 @@ function formatInput(
 	}
 
 	const positionIndicator = showPosition
-		? getPositionIndicator([...errors, ...warnings], input, prefix.length)
+		? getPositionIndicator([...errors, ...warnings], input, visiblePrefixLength)
 		: undefined;
 
 	const lines: string[] = [`${prefix}${decoratedInput}`];
