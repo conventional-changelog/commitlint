@@ -421,6 +421,36 @@ test("returns position for body-max-line-length error", async () => {
 	expect(result.errors[0].start?.line).toBe(3);
 });
 
+test("returns correct footer line for multi-line body", async () => {
+	const longFooter =
+		"BREAKING CHANGE: a footer line that is far too long to fit within the configured maximum allowed character limit for the footer";
+	const message = `feat: head\n\nbody line 1\nbody line 2\nbody line 3\n\n${longFooter}`;
+	const result = await lint(message, {
+		"footer-max-line-length": [RuleConfigSeverity.Error, "always", 80],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("footer-max-line-length");
+	expect(result.errors[0].start?.line).toBe(7);
+});
+
+test("returns position for body-leading-blank when blank is missing", async () => {
+	const result = await lint("feat: head\nbody content", {
+		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-leading-blank");
+	expect(result.errors[0].start).toBeDefined();
+});
+
+test("returns position for footer-leading-blank when blank is missing", async () => {
+	const result = await lint("feat: head\n\nbody\nBREAKING CHANGE: something", {
+		"footer-leading-blank": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("footer-leading-blank");
+	expect(result.errors[0].start).toBeDefined();
+});
+
 test("returns no position for rules without position support", async () => {
 	const result = await lint("something #1", {
 		"references-empty": [RuleConfigSeverity.Error, "always"],

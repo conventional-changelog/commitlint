@@ -437,6 +437,32 @@ test("shows correct position for subject error", () => {
 	expect(actual).toContain("^");
 });
 
+test("position indicator alignment is identical with or without color", () => {
+	const result = {
+		errors: [
+			{
+				level: 2 as const,
+				name: "subject-max-length",
+				message: "subject must not be longer than 72 characters",
+				start: { line: 1, column: 10, offset: 9 },
+				end: { line: 1, column: 50, offset: 49 },
+			},
+		],
+		input: "feat: this subject is going to be a bit too long",
+	};
+
+	const colored = format({ results: [result] }, { showPosition: true });
+	const plain = format(
+		{ results: [result] },
+		{ showPosition: true, color: false },
+	);
+
+	const indicatorOf = (output: string) =>
+		output.split("\n").find((line) => line.trimStart().startsWith("^"));
+
+	expect(indicatorOf(colored)).toBe(indicatorOf(plain));
+});
+
 test("renders position indicator under the failing line for multi-line input", () => {
 	const actual = format(
 		{
