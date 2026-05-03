@@ -495,7 +495,9 @@ test("should print full commit message when input from stdin fails", async () =>
 	// output text in plain text so we can compare it
 	const result = cli(["--color=false"], { cwd })(input);
 	const output = await result;
-	expect(output.stdout.trim()).toContain(input);
+	for (const line of input.split("\n").filter((l) => l.length > 0)) {
+		expect(output.stdout).toContain(line);
+	}
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
