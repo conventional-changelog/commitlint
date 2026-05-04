@@ -8,8 +8,11 @@ export type Formatter = (
 ) => string;
 
 export interface Position {
+	/** 1-indexed line in the input. */
 	line: number;
+	/** 1-indexed character column on the line (not display width). */
 	column: number;
+	/** 0-indexed character offset from the start of the input. */
 	offset: number;
 }
 
