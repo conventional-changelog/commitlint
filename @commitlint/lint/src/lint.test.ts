@@ -421,6 +421,19 @@ test("returns position for body-max-line-length error", async () => {
 	expect(result.errors[0].start?.line).toBe(3);
 });
 
+test("subject-exclamation-mark caret ignores bangs inside the subject", async () => {
+	// Header has "!" inside the subject text; the rule fires under "always"
+	// because there's no breaking-change "!" before the colon. The caret
+	// should land on the colon (where "!" should go), not on the bang in
+	// "hello!".
+	const result = await lint("feat: hello! world", {
+		"subject-exclamation-mark": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("subject-exclamation-mark");
+	expect(result.errors[0].start?.column).toBe(5);
+});
+
 test("returns body position for CRLF-style commit messages", async () => {
 	const longBodyLine =
 		"this is a body line that is way too long and exceeds the maximum allowed character limit of one hundred characters for each line in the body";
