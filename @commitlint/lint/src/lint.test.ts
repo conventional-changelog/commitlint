@@ -421,6 +421,15 @@ test("returns position for body-max-line-length error", async () => {
 	expect(result.errors[0].start?.line).toBe(3);
 });
 
+test("returns subject position even when type and subject share text", async () => {
+	const result = await lint("foo: foo", {
+		"subject-min-length": [RuleConfigSeverity.Error, "always", 10],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("subject-min-length");
+	expect(result.errors[0].start?.column).toBe(6);
+});
+
 test("returns correct footer line for multi-line body", async () => {
 	const longFooter =
 		"BREAKING CHANGE: a footer line that is far too long to fit within the configured maximum allowed character limit for the footer";

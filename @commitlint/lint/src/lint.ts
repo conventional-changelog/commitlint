@@ -112,7 +112,7 @@ function getRulePosition(
 				}
 				return undefined;
 			}
-			const subjectStart = header.indexOf(parsed.subject);
+			const subjectStart = header.lastIndexOf(parsed.subject);
 			if (subjectStart === -1) return undefined;
 			return {
 				start: { line: 1, column: subjectStart + 1, offset: subjectStart },
