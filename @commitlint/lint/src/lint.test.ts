@@ -466,22 +466,39 @@ test("returns correct footer line for multi-line body", async () => {
 	expect(result.errors[0].start?.line).toBe(7);
 });
 
-test("returns position for body-leading-blank when blank is missing", async () => {
+test("returns position for body-leading-blank pointing at end of header", async () => {
 	const result = await lint("feat: head\nbody content", {
 		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
 	});
 	expect(result.valid).toBe(false);
 	expect(result.errors[0].name).toBe("body-leading-blank");
-	expect(result.errors[0].start).toBeDefined();
+	// Header "feat: head" is 10 chars; offset 10 is the line break after it.
+	expect(result.errors[0].start?.offset).toBe(10);
 });
 
-test("returns position for footer-leading-blank when blank is missing", async () => {
-	const result = await lint("feat: head\n\nbody\nBREAKING CHANGE: something", {
+test("body-leading-blank position ignores paragraph breaks inside body", async () => {
+	// raw contains a "\n\n" inside the body, but the rule fires because
+	// the blank between header and body is missing. Caret must point at
+	// the header/body boundary, not the in-body paragraph break.
+	const result = await lint("feat: head\nfirst paragraph\n\nsecond paragraph", {
+		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-leading-blank");
+	expect(result.errors[0].start?.offset).toBe(10);
+});
+
+test("returns position for footer-leading-blank pointing right before footer", async () => {
+	const message = "feat: head\n\nbody\nBREAKING CHANGE: something";
+	const result = await lint(message, {
 		"footer-leading-blank": [RuleConfigSeverity.Error, "always"],
 	});
 	expect(result.valid).toBe(false);
 	expect(result.errors[0].name).toBe("footer-leading-blank");
-	expect(result.errors[0].start).toBeDefined();
+	// Footer starts at index of "BREAKING CHANGE"; caret points at the
+	// character immediately before it.
+	const expected = message.indexOf("BREAKING CHANGE") - 1;
+	expect(result.errors[0].start?.offset).toBe(expected);
 });
 
 test("returns no position for rules without position support", async () => {

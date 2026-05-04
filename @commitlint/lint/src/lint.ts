@@ -150,11 +150,9 @@ function getRulePosition(
 		}
 		case "body-leading-blank": {
 			if (!parsed.body) return undefined;
-			const bodyOffset = raw.indexOf("\n\n");
-			if (bodyOffset !== -1) {
-				const start = offsetToPosition(raw, bodyOffset + 1);
-				return { start, end: start };
-			}
+			// Point at the header/body boundary in both directions:
+			// for "always" failures it's where the missing blank should be,
+			// for "never" failures it's the existing blank line.
 			const start = offsetToPosition(raw, header.length);
 			return { start, end: start };
 		}
@@ -184,14 +182,13 @@ function getRulePosition(
 		}
 		case "footer-leading-blank": {
 			if (!parsed.footer) return undefined;
-			const footerOffset = raw.lastIndexOf("\n\n");
-			if (footerOffset !== -1) {
-				const start = offsetToPosition(raw, footerOffset + 1);
-				return { start, end: start };
-			}
-			const footerInRaw = parsed.footer ? raw.indexOf(parsed.footer) : -1;
-			if (footerInRaw === -1) return undefined;
-			const start = offsetToPosition(raw, footerInRaw);
+			// Point at the body/footer boundary. Find the footer in raw
+			// and aim at the character immediately before it — that's the
+			// existing blank or the missing-blank position depending on
+			// which direction the rule failed in.
+			const footerStart = raw.indexOf(parsed.footer);
+			if (footerStart <= 0) return undefined;
+			const start = offsetToPosition(raw, footerStart - 1);
 			return { start, end: start };
 		}
 		case "footer-empty":
