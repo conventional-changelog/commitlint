@@ -193,6 +193,24 @@ test("should fail for input from stdin with rule from rc", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test("should print position indicator caret by default on failure", async () => {
+	const cwd = await gitBootstrap("fixtures/simple");
+	const result = cli(["--color=false"], { cwd })("foo: bar");
+	const output = await result;
+	expect(output.stdout).toContain("^");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
+test("should suppress position indicator when --no-show-position is set", async () => {
+	const cwd = await gitBootstrap("fixtures/simple");
+	const result = cli(["--color=false", "--no-show-position"], { cwd })(
+		"foo: bar",
+	);
+	const output = await result;
+	expect(output.stdout).not.toContain("^");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
 test("should work with --config option", async () => {
 	const file = "config/commitlint.config.js";
 	const cwd = await gitBootstrap("fixtures/specify-config-file");
