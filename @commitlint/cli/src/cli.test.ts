@@ -513,8 +513,13 @@ test("should print full commit message when input from stdin fails", async () =>
 	// output text in plain text so we can compare it
 	const result = cli(["--color=false"], { cwd })(input);
 	const output = await result;
+	// Each input line must appear in stdout *in the original order* —
+	// independent toContain checks would let scrambled output pass.
+	let cursor = 0;
 	for (const line of input.split("\n").filter((l) => l.length > 0)) {
-		expect(output.stdout).toContain(line);
+		const found = output.stdout.indexOf(line, cursor);
+		expect(found).toBeGreaterThanOrEqual(cursor);
+		cursor = found + line.length;
 	}
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
