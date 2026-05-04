@@ -421,6 +421,16 @@ test("returns position for body-max-line-length error", async () => {
 	expect(result.errors[0].start?.line).toBe(3);
 });
 
+test("body-empty returns position for header-only commits", async () => {
+	const result = await lint("feat: head", {
+		"body-empty": [RuleConfigSeverity.Error, "never"],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-empty");
+	// "feat: head".length === 10
+	expect(result.errors[0].start?.offset).toBe(10);
+});
+
 test("subject-exclamation-mark caret ignores bangs inside the subject", async () => {
 	// Header has "!" inside the subject text; the rule fires under "always"
 	// because there's no breaking-change "!" before the colon. The caret

@@ -165,8 +165,10 @@ function getRulePosition(
 			if (!parsed.body) {
 				if (ruleName === "body-empty") {
 					const bodyOffset = raw.indexOf("\n\n");
-					if (bodyOffset === -1) return undefined;
-					const start = offsetToPosition(raw, bodyOffset + 2);
+					// For header-only commits there is no "\n\n" — the missing
+					// body would belong right after the header.
+					const bodyStart = bodyOffset === -1 ? header.length : bodyOffset + 2;
+					const start = offsetToPosition(raw, bodyStart);
 					return { start, end: start };
 				}
 				return undefined;
