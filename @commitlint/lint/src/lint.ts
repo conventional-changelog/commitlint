@@ -57,8 +57,8 @@ function getRulePosition(
 				}
 				return undefined;
 			}
-			if (!raw.startsWith(parsed.type)) return undefined;
-			const offset = 0;
+			const offset = header.indexOf(parsed.type);
+			if (offset === -1) return undefined;
 			return {
 				start: { line: 1, column: offset + 1, offset },
 				end: {
