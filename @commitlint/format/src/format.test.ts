@@ -358,7 +358,7 @@ test("does not show position indicator when showPosition is false", () => {
 	expect(actual).not.toContain("^");
 });
 
-test("shows position indicator when showPosition is not provided (default)", () => {
+test("hides position indicator when showPosition is not provided (default)", () => {
 	const actual = format(
 		{
 			results: [
@@ -381,7 +381,7 @@ test("shows position indicator when showPosition is not provided (default)", () 
 		},
 	);
 
-	expect(actual).toContain("^");
+	expect(actual).not.toContain("^");
 });
 
 test("does not show position indicator when error has no position", () => {

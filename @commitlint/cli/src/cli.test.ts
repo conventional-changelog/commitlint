@@ -193,21 +193,19 @@ test("should fail for input from stdin with rule from rc", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
-test("should print position indicator caret by default on failure", async () => {
+test("should hide position indicator caret by default on failure", async () => {
 	const cwd = await gitBootstrap("fixtures/simple");
 	const result = cli(["--color=false"], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stdout).toContain("^");
+	expect(output.stdout).not.toContain("^");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
-test("should suppress position indicator when --no-show-position is set", async () => {
+test("should show position indicator when --show-position is set", async () => {
 	const cwd = await gitBootstrap("fixtures/simple");
-	const result = cli(["--color=false", "--no-show-position"], { cwd })(
-		"foo: bar",
-	);
+	const result = cli(["--color=false", "--show-position"], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stdout).not.toContain("^");
+	expect(output.stdout).toContain("^");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
@@ -669,7 +667,7 @@ test("should print help", async () => {
 		  -q, --quiet          toggle console output  [boolean] [default: false]
 		  -t, --to             upper end of the commit range to lint; applies if edit=false  [string]
 		  -V, --verbose        enable verbose output for reports without problems  [boolean]
-		      --show-position  show position of error in output  [boolean] [default: true]
+		      --show-position  show position of error in output  [boolean] [default: false]
 		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for errors  [boolean]
 		      --options        path to a JSON file or Common.js module containing CLI options
 		  -v, --version        display version information  [boolean]

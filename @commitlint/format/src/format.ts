@@ -38,7 +38,7 @@ function formatInput(
 	result: FormattableResult & WithInput,
 	options: FormatOptions = {},
 ): string[] {
-	const { color: enabled = true, showPosition = true } = options;
+	const { color: enabled = true, showPosition = false } = options;
 	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
