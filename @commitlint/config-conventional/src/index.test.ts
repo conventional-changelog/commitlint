@@ -132,21 +132,44 @@ test("type-enum", async () => {
 	const result = await commitLint(messages.invalidTypeEnum);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.typeEnum]);
+	expect(result.errors).toEqual([
+		{
+			...errors.typeEnum,
+			start: { line: 1, column: 1, offset: 0 },
+			end: { line: 1, column: 4, offset: 3 },
+		},
+	]);
 });
 
 test("type-case", async () => {
 	const result = await commitLint(messages.invalidTypeCase);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.typeCase, errors.typeEnum]);
+	expect(result.errors).toEqual([
+		{
+			...errors.typeCase,
+			start: { line: 1, column: 1, offset: 0 },
+			end: { line: 1, column: 4, offset: 3 },
+		},
+		{
+			...errors.typeEnum,
+			start: { line: 1, column: 1, offset: 0 },
+			end: { line: 1, column: 4, offset: 3 },
+		},
+	]);
 });
 
 test("type-empty", async () => {
 	const result = await commitLint(messages.invalidTypeEmpty);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.typeEmpty]);
+	expect(result.errors).toEqual([
+		{
+			...errors.typeEmpty,
+			start: { line: 1, column: 1, offset: 0 },
+			end: { line: 1, column: 1, offset: 0 },
+		},
+	]);
 });
 
 test("subject-case", async () => {
@@ -156,9 +179,23 @@ test("subject-case", async () => {
 		),
 	);
 
-	invalidInputs.forEach((result) => {
+	const headerPrefix = "fix(scope): ";
+	invalidInputs.forEach((result, i) => {
+		const input = messages.invalidSubjectCases[i];
+		const subject = input.slice(headerPrefix.length);
+		const offset = headerPrefix.length;
 		expect(result.valid).toBe(false);
-		expect(result.errors).toEqual([errors.subjectCase]);
+		expect(result.errors).toEqual([
+			{
+				...errors.subjectCase,
+				start: { line: 1, column: offset + 1, offset },
+				end: {
+					line: 1,
+					column: offset + subject.length + 1,
+					offset: offset + subject.length,
+				},
+			},
+		]);
 	});
 });
 
@@ -166,49 +203,114 @@ test("subject-empty", async () => {
 	const result = await commitLint(messages.invalidSubjectEmpty);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.subjectEmpty, errors.typeEmpty]);
+	// "fix:" — header length 4; type "fix" at offset 0 length 3.
+	expect(result.errors).toEqual([
+		{
+			...errors.subjectEmpty,
+			start: { line: 1, column: 5, offset: 4 },
+			end: { line: 1, column: 5, offset: 4 },
+		},
+		{
+			...errors.typeEmpty,
+			start: { line: 1, column: 1, offset: 0 },
+			end: { line: 1, column: 1, offset: 0 },
+		},
+	]);
 });
 
 test("subject-full-stop", async () => {
 	const result = await commitLint(messages.invalidSubjectFullStop);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.subjectFullStop]);
+	// "fix: some message." — subject "some message." at offset 5, length 13
+	// (parser keeps the trailing period in parsed.subject).
+	expect(result.errors).toEqual([
+		{
+			...errors.subjectFullStop,
+			start: { line: 1, column: 6, offset: 5 },
+			end: { line: 1, column: 19, offset: 18 },
+		},
+	]);
 });
 
 test("header-max-length", async () => {
 	const result = await commitLint(messages.invalidHeaderMaxLength);
+	const header = messages.invalidHeaderMaxLength;
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.headerMaxLength]);
+	expect(result.errors).toEqual([
+		{
+			...errors.headerMaxLength,
+			start: { line: 1, column: 1, offset: 0 },
+			end: { line: 1, column: header.length + 1, offset: header.length },
+		},
+	]);
 });
 
 test("footer-leading-blank", async () => {
 	const result = await commitLint(messages.warningFooterLeadingBlank);
+	const message = messages.warningFooterLeadingBlank;
+	const footerOffset = message.indexOf("BREAKING CHANGE") - 1;
 
 	expect(result.valid).toBe(true);
-	expect(result.warnings).toEqual([warnings.footerLeadingBlank]);
+	expect(result.warnings).toEqual([
+		{
+			...warnings.footerLeadingBlank,
+			start: {
+				line: 3,
+				column: message.split("\n")[2].length + 1,
+				offset: footerOffset,
+			},
+			end: {
+				line: 3,
+				column: message.split("\n")[2].length + 1,
+				offset: footerOffset,
+			},
+		},
+	]);
 });
 
 test("footer-max-line-length", async () => {
 	const result = await commitLint(messages.invalidFooterMaxLineLength);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.footerMaxLineLength]);
+	expect(result.errors).toHaveLength(1);
+	expect(result.errors[0]).toMatchObject(errors.footerMaxLineLength);
+	expect(result.errors[0].start).toBeDefined();
+	expect(result.errors[0].end).toBeDefined();
 });
 
 test("body-leading-blank", async () => {
 	const result = await commitLint(messages.warningBodyLeadingBlank);
+	const message = messages.warningBodyLeadingBlank;
+	const headerLength = message.split("\n")[0].length;
 
 	expect(result.valid).toBe(true);
-	expect(result.warnings).toEqual([warnings.bodyLeadingBlank]);
+	expect(result.warnings).toEqual([
+		{
+			...warnings.bodyLeadingBlank,
+			start: {
+				line: 1,
+				column: headerLength + 1,
+				offset: headerLength,
+			},
+			end: {
+				line: 1,
+				column: headerLength + 1,
+				offset: headerLength,
+			},
+		},
+	]);
 });
 
 test("body-max-line-length", async () => {
 	const result = await commitLint(messages.invalidBodyMaxLineLength);
 
 	expect(result.valid).toBe(false);
-	expect(result.errors).toEqual([errors.bodyMaxLineLength]);
+	expect(result.errors).toHaveLength(1);
+	expect(result.errors[0]).toMatchObject(errors.bodyMaxLineLength);
+	expect(result.errors[0].start).toBeDefined();
+	expect(result.errors[0].end).toBeDefined();
 });
 
 test("valid messages", async () => {

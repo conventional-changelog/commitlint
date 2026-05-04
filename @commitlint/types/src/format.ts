@@ -7,10 +7,21 @@ export type Formatter = (
 	options: FormatOptions,
 ) => string;
 
+export interface Position {
+	/** 1-indexed line in the input. */
+	line: number;
+	/** 1-indexed character column on the line (not display width). */
+	column: number;
+	/** 0-indexed character offset from the start of the input. */
+	offset: number;
+}
+
 export interface FormattableProblem {
 	level: RuleConfigSeverity;
 	name: keyof QualifiedRules;
 	message: string;
+	start?: Position;
+	end?: Position;
 }
 
 export interface FormattableResult {
@@ -41,4 +52,5 @@ export interface FormatOptions {
 	colors?: readonly [PicocolorsColor, PicocolorsColor, PicocolorsColor];
 	verbose?: boolean;
 	helpUrl?: string;
+	showPosition?: boolean;
 }

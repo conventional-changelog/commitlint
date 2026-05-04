@@ -5,6 +5,7 @@ import {
 	FormatOptions,
 	FormattableResult,
 	WithInput,
+	FormattableProblem,
 } from "@commitlint/types";
 
 const DEFAULT_SIGNS = [" ", "⚠", "✖"] as const;
@@ -37,7 +38,7 @@ function formatInput(
 	result: FormattableResult & WithInput,
 	options: FormatOptions = {},
 ): string[] {
-	const { color: enabled = true } = options;
+	const { color: enabled = true, showPosition = true } = options;
 	const { errors = [], warnings = [], input = "" } = result;
 
 	if (!input) {
@@ -46,13 +47,69 @@ function formatInput(
 
 	const sign = "⧗";
 	const decoration = enabled ? pc.gray(sign) : sign;
+	const prefix = `${decoration}   input: `;
+	const visiblePrefixLength = `${sign}   input: `.length;
+	const padding = " ".repeat(visiblePrefixLength);
 
-	const decoratedInput = enabled ? pc.bold(input) : input;
 	const hasProblems = errors.length > 0 || warnings.length > 0;
+	const normalizedInput = input.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+	const inputLines = normalizedInput.split("\n");
 
-	return options.verbose || hasProblems
-		? [`${decoration}   input: ${decoratedInput}`]
-		: [];
+	const renderedInputLines = inputLines.map((lineText, i) => {
+		const decoratedLine = enabled ? pc.bold(lineText) : lineText;
+		const linePrefix = i === 0 ? prefix : padding;
+		return `${linePrefix}${decoratedLine}`;
+	});
+
+	if (!hasProblems) {
+		return options.verbose ? renderedInputLines : [];
+	}
+
+	const indicator = showPosition
+		? getPositionIndicator(
+				[...errors, ...warnings],
+				inputLines,
+				visiblePrefixLength,
+			)
+		: undefined;
+
+	if (!indicator) {
+		return renderedInputLines;
+	}
+
+	const lines: string[] = [];
+	for (let i = 0; i < renderedInputLines.length; i++) {
+		lines.push(renderedInputLines[i]);
+		if (i + 1 === indicator.line) {
+			lines.push(indicator.text);
+		}
+	}
+	return lines;
+}
+
+function getPositionIndicator(
+	problems: FormattableProblem[],
+	inputLines: string[],
+	prefixLength: number,
+): { text: string; line: number } | undefined {
+	const problemWithPosition = problems.find(
+		(problem) => problem?.start !== undefined && problem?.end !== undefined,
+	);
+	if (!problemWithPosition?.start || !problemWithPosition?.end) {
+		return undefined;
+	}
+
+	const targetLine = inputLines[problemWithPosition.start.line - 1];
+	if (targetLine === undefined) {
+		return undefined;
+	}
+
+	const padding = " ".repeat(prefixLength);
+	const caret = "^";
+	const spacesBefore = Math.max(0, problemWithPosition.start.column - 1);
+	const text = padding + " ".repeat(spacesBefore) + caret;
+
+	return { text, line: problemWithPosition.start.line };
 }
 
 export function formatResult(

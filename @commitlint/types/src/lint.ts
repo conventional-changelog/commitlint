@@ -1,4 +1,5 @@
 import type { ParserOptions as Options } from "conventional-commits-parser";
+import { Position } from "./format.js";
 import { IsIgnoredOptions } from "./is-ignored.js";
 import { PluginRecords } from "./load.js";
 import { RuleConfigSeverity, RuleConfigTuple } from "./rules.js";
@@ -42,4 +43,8 @@ export interface LintRuleOutcome {
 	name: string;
 	/** The message returned from the rule, if invalid */
 	message: string;
+	/** The start position of the error in the input */
+	start?: Position;
+	/** The end position of the error in the input */
+	end?: Position;
 }
