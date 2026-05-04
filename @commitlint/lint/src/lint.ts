@@ -36,7 +36,7 @@ function getRulePosition(
 		footer?: string | null;
 	},
 ): { start: Position; end: Position } | undefined {
-	const raw = parsed.raw || "";
+	const raw = (parsed.raw || "").replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 	if (!raw) return undefined;
 
 	const header = parsed.header || "";

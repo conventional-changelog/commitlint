@@ -421,6 +421,17 @@ test("returns position for body-max-line-length error", async () => {
 	expect(result.errors[0].start?.line).toBe(3);
 });
 
+test("returns body position for CRLF-style commit messages", async () => {
+	const longBodyLine =
+		"this is a body line that is way too long and exceeds the maximum allowed character limit of one hundred characters for each line in the body";
+	const result = await lint(`feat: head\r\n\r\n${longBodyLine}`, {
+		"body-max-line-length": [RuleConfigSeverity.Error, "always", 80],
+	});
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("body-max-line-length");
+	expect(result.errors[0].start).toBeDefined();
+});
+
 test("returns subject position even when type and subject share text", async () => {
 	const result = await lint("foo: foo", {
 		"subject-min-length": [RuleConfigSeverity.Error, "always", 10],
