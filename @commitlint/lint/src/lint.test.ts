@@ -421,6 +421,27 @@ test("returns position for body-max-line-length error", async () => {
 	expect(result.errors[0].start?.line).toBe(3);
 });
 
+test("returns subject position with custom parserOpts.headerPattern", async () => {
+	// type-scope-subject grammar (non-default headerPattern). Subject
+	// position must be located by searching the header rather than
+	// computed from a hard-coded ": " separator.
+	const result = await lint(
+		"foo-bar",
+		{
+			"subject-min-length": [RuleConfigSeverity.Error, "always", 10],
+		},
+		{
+			parserOpts: {
+				headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
+			},
+		},
+	);
+	expect(result.valid).toBe(false);
+	expect(result.errors[0].name).toBe("subject-min-length");
+	// "foo-bar": "bar" starts at offset 4
+	expect(result.errors[0].start?.column).toBe(5);
+});
+
 test("body-empty returns position for header-only commits", async () => {
 	const result = await lint("feat: head", {
 		"body-empty": [RuleConfigSeverity.Error, "never"],
