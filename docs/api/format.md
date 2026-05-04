@@ -24,6 +24,17 @@ type Problem = {
    * Message to print
    */
   message: string;
+  /*
+   * Start position of the problem in the input.
+   * Required (together with `end`) for the position
+   * indicator (`^`) to render under the input line
+   * when `showPosition` is enabled.
+   */
+  start?: { line: number; column: number; offset: number };
+  /*
+   * End position of the problem in the input.
+   */
+  end?: { line: number; column: number; offset: number };
 }
 
 type Report = {
