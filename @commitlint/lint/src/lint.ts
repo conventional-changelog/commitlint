@@ -96,12 +96,26 @@ function getRulePosition(
 				},
 			};
 		}
+		case "subject-exclamation-mark": {
+			const bangIndex = header.indexOf("!");
+			if (bangIndex !== -1) {
+				return {
+					start: { line: 1, column: bangIndex + 1, offset: bangIndex },
+					end: { line: 1, column: bangIndex + 2, offset: bangIndex + 1 },
+				};
+			}
+			const colonIndex = header.indexOf(":");
+			if (colonIndex === -1) return undefined;
+			return {
+				start: { line: 1, column: colonIndex + 1, offset: colonIndex },
+				end: { line: 1, column: colonIndex + 1, offset: colonIndex },
+			};
+		}
 		case "subject-empty":
 		case "subject-case":
 		case "subject-min-length":
 		case "subject-max-length":
-		case "subject-full-stop":
-		case "subject-exclamation-mark": {
+		case "subject-full-stop": {
 			if (!parsed.subject) {
 				if (ruleName === "subject-empty") {
 					const offset = header.length;
