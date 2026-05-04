@@ -74,7 +74,7 @@ type formatOptions = {
 
   /**
    * Show position indicator (^) for errors in the input line.
-   * Defaults to `false`.
+   * Defaults to `true`.
    **/
   showPosition?: boolean;
 }

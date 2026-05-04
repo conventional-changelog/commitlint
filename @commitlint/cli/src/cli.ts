@@ -137,7 +137,7 @@ const cli = yargs(process.argv.slice(2))
 		},
 		"show-position": {
 			type: "boolean",
-			default: false,
+			default: true,
 			description: "show position of error in output",
 		},
 		strict: {
