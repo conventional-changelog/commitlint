@@ -176,7 +176,12 @@ function getRulePosition(
 			const bodyOffset = raw.indexOf("\n\n");
 			if (bodyOffset === -1) return undefined;
 			const bodyStartOffset = bodyOffset + 2;
-			const bodyEndOffset = bodyStartOffset + parsed.body.length;
+			// Clamp end to raw.length: parsed.body may be trimmed/normalized
+			// so start + body.length can exceed the actual raw range.
+			const bodyEndOffset = Math.min(
+				bodyStartOffset + parsed.body.length,
+				raw.length,
+			);
 			return {
 				start: offsetToPosition(raw, bodyStartOffset),
 				end: offsetToPosition(raw, bodyEndOffset),
@@ -209,7 +214,10 @@ function getRulePosition(
 			const footerOffset = raw.lastIndexOf("\n\n");
 			if (footerOffset === -1) return undefined;
 			const footerStartOffset = footerOffset + 2;
-			const footerEndOffset = footerStartOffset + parsed.footer.length;
+			const footerEndOffset = Math.min(
+				footerStartOffset + parsed.footer.length,
+				raw.length,
+			);
 			return {
 				start: offsetToPosition(raw, footerStartOffset),
 				end: offsetToPosition(raw, footerEndOffset),
