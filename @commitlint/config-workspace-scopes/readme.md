@@ -31,9 +31,6 @@ packages
 └── web
 
 ❯ echo "build(api): change something in api's build" | commitlint
-⧗   --- input ---
-build(api): change something in api's build
-✔   found 0 problems, 0 warnings
 
 ❯ echo "test(foo): this won't pass" | commitlint
 ⧗   --- input ---
@@ -42,9 +39,6 @@ test(foo): this won't pass
 ✖   found 1 problems, 0 warnings
 
 ❯ echo "ci: do some general maintenance" | commitlint
-⧗   --- input ---
-ci: do some general maintenance
-✔   found 0 problems, 0 warnings
 ```
 
 Consult [Rules reference](https://commitlint.js.org/reference/rules) for a list of available rules.
