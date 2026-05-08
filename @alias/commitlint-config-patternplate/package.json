@@ -1,7 +1,7 @@
 {
   "name": "commitlint-config-patternplate",
   "type": "module",
-  "version": "20.5.3",
+  "version": "21.0.0",
   "description": "Lint your commits, patternplate-style",
   "files": [
     "index.js"
@@ -31,10 +31,10 @@
     "node": ">=22.12.0"
   },
   "dependencies": {
-    "@commitlint/config-patternplate": "^20.5.3"
+    "@commitlint/config-patternplate": "^21.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^20.0.0"
+    "@commitlint/utils": "^21.0.0"
   },
   "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
 }
