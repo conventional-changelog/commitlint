@@ -169,20 +169,10 @@ Check the [main website](https://commitlint.js.org/).
 
 ## Version Support and Releases
 
-- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 22.12`
+- Node.js [LTS](https://github.com/nodejs/LTS#lts-schedule) `>= 22.12.0`
 - git `>= 2.13.2`
 
 ### Releases
-
-Security patches will be applied to versions which are not yet EOL.\
-Features will only be applied to the current main version.
-
-| Release                                                                          | Initial release |
-| -------------------------------------------------------------------------------- | --------------- |
-| [v19](https://github.com/conventional-changelog/commitlint/releases/tag/v19.0.0) | 02/2024         |
-| [v18](https://github.com/conventional-changelog/commitlint/releases/tag/v18.0.0) | 10/2023         |
-
-EOL is usually after around a year.
 
 We're not a sponsored OSS project. Therefore we can't promise that we will release patch versions for older releases in a timely manner.\
 If you are stuck on an older version and need a security patch we're happy if you can provide a PR.
