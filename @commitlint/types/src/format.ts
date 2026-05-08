@@ -41,4 +41,5 @@ export interface FormatOptions {
 	colors?: readonly [PicocolorsColor, PicocolorsColor, PicocolorsColor];
 	verbose?: boolean;
 	helpUrl?: string;
+	legacyOutput?: boolean;
 }

@@ -20,6 +20,7 @@ export interface CliFlags {
 	/** @type {'' | 'text' | 'json'} */
 	"print-config"?: string;
 	strict?: boolean;
+	"legacy-output"?: boolean;
 	_: (string | number)[];
 	$0: string;
 }
