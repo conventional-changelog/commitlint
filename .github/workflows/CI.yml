@@ -15,7 +15,15 @@ on:
 
 jobs:
   build:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    if: >-
+      (
+        github.event_name != 'pull_request'
+        || github.event.pull_request.head.repo.full_name != github.repository
+      )
+      && (
+        github.event_name != 'schedule'
+        || github.repository_owner == 'conventional-changelog'
+      )
     strategy:
       matrix:
         os: [ubuntu-22.04, ubuntu-24.04, windows-2022, windows-2025]
@@ -41,7 +49,15 @@ jobs:
 
   codeQuality:
     name: Code quality
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    if: >-
+      (
+        github.event_name != 'pull_request'
+        || github.event.pull_request.head.repo.full_name != github.repository
+      )
+      && (
+        github.event_name != 'schedule'
+        || github.repository_owner == 'conventional-changelog'
+      )
     needs: [build]
     runs-on: ubuntu-24.04
     steps:
@@ -63,7 +79,15 @@ jobs:
 
   nodeJsBaselineAptCompatibility:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+    if: >-
+      (
+        github.event_name != 'pull_request'
+        || github.event.pull_request.head.repo.full_name != github.repository
+      )
+      && (
+        github.event_name != 'schedule'
+        || github.repository_owner == 'conventional-changelog'
+      )
     runs-on: ubuntu-24.04
     container:
       image: "ubuntu:26.04"
