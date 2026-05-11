@@ -24,6 +24,14 @@ test("throws an actionable error when --edit is used on a fresh repo without COM
 	);
 });
 
+test("throws an actionable error when --edit <file> points at a missing path", async () => {
+	const cwd: string = await git.bootstrap();
+
+	await expect(read({ edit: "does-not-exist", cwd })).rejects.toThrow(
+		/No commit message file found.*Check that the path passed to --edit/s,
+	);
+});
+
 test("get edit commit message from git root", async () => {
 	const cwd: string = await git.bootstrap();
 
