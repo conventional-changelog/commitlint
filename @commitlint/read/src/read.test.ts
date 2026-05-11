@@ -16,6 +16,14 @@ test("get edit commit message specified by the `edit` flag", async () => {
 	expect(actual).toEqual(expected);
 });
 
+test("throws an actionable error when --edit is used on a fresh repo without COMMIT_EDITMSG", async () => {
+	const cwd: string = await git.bootstrap();
+
+	await expect(read({ edit: true, cwd })).rejects.toThrow(
+		/No commit message file found.*commit-msg hook/s,
+	);
+});
+
 test("get edit commit message from git root", async () => {
 	const cwd: string = await git.bootstrap();
 
