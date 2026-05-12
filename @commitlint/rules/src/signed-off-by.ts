@@ -4,11 +4,7 @@ import { SyncRule } from "@commitlint/types";
 
 const CHERRY_PICK_REGEX = /^\(cherry picked from commit [0-9a-f]{7,64}\)$/i;
 
-export const signedOffBy: SyncRule<string> = (
-	parsed,
-	when = "always",
-	value = "",
-) => {
+export const signedOffBy: SyncRule<string> = (parsed, when = "always", value = "") => {
 	const lines = toLines(parsed.raw).filter(
 		(ln) =>
 			// skip comments

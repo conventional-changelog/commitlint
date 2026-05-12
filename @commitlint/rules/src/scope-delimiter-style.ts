@@ -2,11 +2,7 @@ import * as ensure from "@commitlint/ensure";
 import message from "@commitlint/message";
 import { SyncRule } from "@commitlint/types";
 
-export const scopeDelimiterStyle: SyncRule<string[]> = (
-	{ scope },
-	when = "always",
-	value = [],
-) => {
+export const scopeDelimiterStyle: SyncRule<string[]> = ({ scope }, when = "always", value = []) => {
 	if (!scope) {
 		return [true];
 	}
@@ -28,8 +24,6 @@ export const scopeDelimiterStyle: SyncRule<string[]> = (
 
 	return [
 		isNever ? !isAllDelimitersAllowed : isAllDelimitersAllowed,
-		message([
-			`scope delimiters must ${isNever ? "not " : ""}be one of [${delimiters.join(", ")}]`,
-		]),
+		message([`scope delimiters must ${isNever ? "not " : ""}be one of [${delimiters.join(", ")}]`]),
 	];
 };

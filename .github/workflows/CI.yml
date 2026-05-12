@@ -77,6 +77,13 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      # oxlint has no equivalent of the eslint vitest/no-focused-tests rule,
+      # so a stray it.only / describe.only would silently disable the rest of
+      # a test file. This step is the safety net; the same check also runs
+      # via lint-staged on pre-commit. See scripts/check-no-focused-tests.js.
+      - name: Check no focused tests
+        run: yarn check-no-focused-tests
+
   nodeJsBaselineAptCompatibility:
     name: NodeJS installed from stock Ubuntu-LTS packages (not external sources)
     if: >-

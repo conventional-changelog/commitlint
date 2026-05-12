@@ -36,8 +36,7 @@ async function getConfig() {
         [
           ...(await getProjects(
             ctx,
-            ({ name, projectType }) =>
-              !name.includes("e2e") && projectType == "application",
+            ({ name, projectType }) => !name.includes("e2e") && projectType == "application",
           )),
         ],
       ],
@@ -66,12 +65,7 @@ async function getConfig() {
       "scope-enum": async (ctx) => [
         2,
         "always",
-        [
-          ...(await getProjects(
-            ctx,
-            ({ tags }) => !tags.includes("stage:end-of-life"),
-          )),
-        ],
+        [...(await getProjects(ctx, ({ tags }) => !tags.includes("stage:end-of-life")))],
       ],
     },
     // . . .

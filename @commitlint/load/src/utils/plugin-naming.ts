@@ -36,26 +36,17 @@ export function normalizePackageName(name: string) {
 		 * it's a scoped package
 		 * package name is the prefix, or just a username
 		 */
-		const scopedPackageShortcutRegex = new RegExp(
-				`^(@[^/]+)(?:/(?:${prefix})?)?$`,
-				"u",
-			),
+		const scopedPackageShortcutRegex = new RegExp(`^(@[^/]+)(?:/(?:${prefix})?)?$`, "u"),
 			scopedPackageNameRegex = new RegExp(`^${prefix}(?:-|$)`, "u");
 
 		if (scopedPackageShortcutRegex.test(normalizedName)) {
-			normalizedName = normalizedName.replace(
-				scopedPackageShortcutRegex,
-				`$1/${prefix}`,
-			);
+			normalizedName = normalizedName.replace(scopedPackageShortcutRegex, `$1/${prefix}`);
 		} else if (!scopedPackageNameRegex.test(normalizedName.split("/")[1])) {
 			/**
 			 * for scoped packages, insert the prefix after the first / unless
 			 * the path is already @scope/eslint or @scope/eslint-xxx-yyy
 			 */
-			normalizedName = normalizedName.replace(
-				/^@([^/]+)\/(.*)$/u,
-				`@$1/${prefix}-$2`,
-			);
+			normalizedName = normalizedName.replace(/^@([^/]+)\/(.*)$/u, `@$1/${prefix}-$2`);
 		}
 	} else if (normalizedName.indexOf(`${prefix}-`) !== 0) {
 		normalizedName = `${prefix}-${normalizedName}`;

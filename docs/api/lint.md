@@ -95,11 +95,7 @@ const opts = {
   },
 };
 
-const report = await lint(
-  "foo-bar",
-  { "type-enum": [2, "always", ["foo"]] },
-  opts,
-);
+const report = await lint("foo-bar", { "type-enum": [2, "always", ["foo"]] }, opts);
 console.log(report);
 // => { valid: true, errors: [], warnings: [] }
 ```

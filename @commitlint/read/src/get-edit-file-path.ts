@@ -3,10 +3,7 @@ import { Stats } from "node:fs";
 import fs from "fs/promises";
 
 // Get path to recently edited commit message file
-export async function getEditFilePath(
-	top: string,
-	edit?: boolean | string,
-): Promise<string> {
+export async function getEditFilePath(top: string, edit?: boolean | string): Promise<string> {
 	if (typeof edit === "string") {
 		return path.resolve(top, edit);
 	}

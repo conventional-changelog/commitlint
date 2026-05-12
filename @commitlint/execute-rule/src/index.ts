@@ -6,9 +6,7 @@ type ExecutedRule<T> = readonly [string, T];
 
 export default execute;
 
-export async function execute<T = unknown>(
-	rule?: Rule<T>,
-): Promise<ExecutedRule<T> | null> {
+export async function execute<T = unknown>(rule?: Rule<T>): Promise<ExecutedRule<T> | null> {
 	if (!Array.isArray(rule)) {
 		return null;
 	}

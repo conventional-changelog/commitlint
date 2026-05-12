@@ -1,15 +1,4 @@
-const types = [
-	"build",
-	"ci",
-	"docs",
-	"feat",
-	"fix",
-	"perf",
-	"refactor",
-	"revert",
-	"style",
-	"test",
-];
+const types = ["build", "ci", "docs", "feat", "fix", "perf", "refactor", "revert", "style", "test"];
 
 export default {
 	rules: {

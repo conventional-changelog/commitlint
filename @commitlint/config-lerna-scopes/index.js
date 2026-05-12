@@ -6,8 +6,7 @@ import configWorkspaceScopes from "@commitlint/config-workspace-scopes";
 export default {
 	utils: { getProjects },
 	rules: {
-		"scope-enum": (ctx) =>
-			getProjects(ctx).then((packages) => [2, "always", packages]),
+		"scope-enum": (ctx) => getProjects(ctx).then((packages) => [2, "always", packages]),
 	},
 };
 
@@ -45,16 +44,15 @@ async function findPackages(cwd) {
 	for (const pattern of patterns) {
 		for await (const entry of glob(pattern, {
 			cwd,
-			exclude: (p) =>
-				p.includes("node_modules") || p.includes("bower_components"),
+			exclude: (p) => p.includes("node_modules") || p.includes("bower_components"),
 		})) {
 			entries.push(entry);
 		}
 	}
 
 	const pkgJsons = await Promise.all(
-		Array.from(new Set(entries.map((entry) => path.join(cwd, entry)))).map(
-			(pkgPath) => fs.readFile(pkgPath, { encoding: "utf-8" }),
+		Array.from(new Set(entries.map((entry) => path.join(cwd, entry)))).map((pkgPath) =>
+			fs.readFile(pkgPath, { encoding: "utf-8" }),
 		),
 	);
 

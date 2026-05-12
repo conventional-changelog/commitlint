@@ -21,12 +21,9 @@ const opts = (async () => {
 
 const parsed = {
 	plain: (async () => parse(messages.plain, undefined, (await opts).parser))(),
-	comment: (async () =>
-		parse(messages.comment, undefined, (await opts).parser))(),
-	reference: (async () =>
-		parse(messages.reference, undefined, (await opts).parser))(),
-	references: (async () =>
-		parse(messages.references, undefined, (await opts).parser))(),
+	comment: (async () => parse(messages.comment, undefined, (await opts).parser))(),
+	reference: (async () => parse(messages.reference, undefined, (await opts).parser))(),
+	references: (async () => parse(messages.references, undefined, (await opts).parser))(),
 	prefix: parse(messages.prefix, undefined, {
 		issuePrefixes: ["REF-"],
 	}),

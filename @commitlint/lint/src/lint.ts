@@ -20,15 +20,11 @@ export default async function lint(
 	rawRulesConfig?: QualifiedRules,
 	rawOpts?: LintOptions,
 ): Promise<LintOutcome> {
-	const opts = rawOpts
-		? rawOpts
-		: { defaultIgnores: undefined, ignores: undefined };
+	const opts = rawOpts ? rawOpts : { defaultIgnores: undefined, ignores: undefined };
 	const rulesConfig = rawRulesConfig || {};
 
 	// Found a wildcard match, skip
-	if (
-		isIgnored(message, { defaults: opts.defaultIgnores, ignores: opts.ignores })
-	) {
+	if (isIgnored(message, { defaults: opts.defaultIgnores, ignores: opts.ignores })) {
 		return {
 			valid: true,
 			errors: [],
@@ -43,11 +39,7 @@ export default async function lint(
 			? { header: null, body: null, footer: null }
 			: await parse(message, undefined, opts.parserOpts);
 
-	if (
-		parsed.header === null &&
-		parsed.body === null &&
-		parsed.footer === null
-	) {
+	if (parsed.header === null && parsed.body === null && parsed.footer === null) {
 		// Commit is empty, skip
 		return {
 			valid: true,
@@ -57,9 +49,7 @@ export default async function lint(
 		};
 	}
 
-	const allRules: Map<string, BaseRule<never, RuleType>> = new Map(
-		Object.entries(defaultRules),
-	);
+	const allRules: Map<string, BaseRule<never, RuleType>> = new Map(Object.entries(defaultRules));
 
 	if (opts.plugins) {
 		Object.values(opts.plugins).forEach((plugin) => {
@@ -122,9 +112,7 @@ export default async function lint(
 
 			if (level < 0 || level > 2) {
 				return new RangeError(
-					`level for rule ${name} must be between 0 and 2, received ${util.inspect(
-						level,
-					)}`,
+					`level for rule ${name} must be between 0 and 2, received ${util.inspect(level)}`,
 				);
 			}
 
@@ -138,9 +126,7 @@ export default async function lint(
 
 			if (when !== "never" && when !== "always") {
 				return new Error(
-					`condition for rule ${name} must be "always" or "never", received ${util.inspect(
-						when,
-					)}`,
+					`condition for rule ${name} must be "always" or "never", received ${util.inspect(when)}`,
 				);
 			}
 

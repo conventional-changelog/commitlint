@@ -1,37 +1,37 @@
 {
   "name": "@commitlint/config-workspace-scopes",
-  "type": "module",
   "version": "21.0.0",
+  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679",
   "description": "Shareable commitlint config enforcing workspace names as scopes",
-  "main": "index.js",
-  "scripts": {
-    "deps": "dep-check",
-    "pkg": "pkg-check"
+  "keywords": [
+    "commitlint",
+    "commitlint-config",
+    "conventional-changelog",
+    "npm-workspaces",
+    "yarn-workspaces"
+  ],
+  "homepage": "https://commitlint.js.org/",
+  "bugs": {
+    "url": "https://github.com/conventional-changelog/commitlint/issues"
   },
+  "license": "MIT",
+  "author": "Jan Biasi (https://github.com/janbiasi)",
   "repository": {
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git",
     "directory": "@commitlint/config-lerna-scopes"
   },
-  "keywords": [
-    "conventional-changelog",
-    "commitlint",
-    "commitlint-config",
-    "npm-workspaces",
-    "yarn-workspaces"
-  ],
-  "author": "Jan Biasi (https://github.com/janbiasi)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/conventional-changelog/commitlint/issues"
-  },
-  "homepage": "https://commitlint.js.org/",
-  "engines": {
-    "node": ">=22.12.0"
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "deps": "dep-check",
+    "pkg": "pkg-check"
   },
   "devDependencies": {
     "@commitlint/test": "^21.0.0",
     "@commitlint/utils": "^21.0.0"
   },
-  "gitHead": "e82f05a737626bb69979d14564f5ff601997f679"
+  "engines": {
+    "node": ">=22.12.0"
+  }
 }

@@ -39,9 +39,7 @@ test("should throw when not on travis ci", async () => {
 	};
 
 	const output = await cli({ env });
-	expect(output.stderr).toContain(
-		"@commitlint/travis-cli is intended to be used on Travis CI",
-	);
+	expect(output.stderr).toContain("@commitlint/travis-cli is intended to be used on Travis CI");
 });
 
 test("should throw when on travis ci, but env vars are missing", async () => {

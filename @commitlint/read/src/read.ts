@@ -28,29 +28,19 @@ export default async function getCommitMessages(
 	}
 
 	if (last) {
-		const gitCommandResult = await x(
-			"git",
-			["log", "-1", "--pretty=format:%B"],
-			{ nodeOptions: { cwd } },
-		);
+		const gitCommandResult = await x("git", ["log", "-1", "--pretty=format:%B"], {
+			nodeOptions: { cwd },
+		});
 		let output = gitCommandResult.stdout.trim();
 		// strip output of extra quotation marks ("")
-		if (output[0] == '"' && output[output.length - 1] == '"')
-			output = output.slice(1, -1);
+		if (output[0] == '"' && output[output.length - 1] == '"') output = output.slice(1, -1);
 		return [output];
 	}
 
 	if (!from && fromLastTag) {
 		const output = await x(
 			"git",
-			[
-				"describe",
-				"--abbrev=40",
-				"--always",
-				"--first-parent",
-				"--long",
-				"--tags",
-			],
+			["describe", "--abbrev=40", "--always", "--first-parent", "--long", "--tags"],
 			{ nodeOptions: { cwd } },
 		);
 		const stdout = output.stdout.trim();

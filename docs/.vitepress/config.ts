@@ -6,15 +6,12 @@ export default defineConfig({
 	title: "commitlint",
 	description: "Lint commit messages",
 
-	head: [
-		["link", { rel: "icon", type: "image/png", href: "/assets/icon.png" }],
-	],
+	head: [["link", { rel: "icon", type: "image/png", href: "/assets/icon.png" }]],
 
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
 		editLink: {
-			pattern:
-				"https://github.com/conventional-changelog/commitlint/edit/master/docs/:path",
+			pattern: "https://github.com/conventional-changelog/commitlint/edit/master/docs/:path",
 		},
 
 		logo: "/assets/icon.png",

@@ -9,10 +9,7 @@ import type { ErrorObject } from "ajv";
 export function formatErrors(errors: ErrorObject[]): string {
 	return errors
 		.map((error) => {
-			if (
-				error.keyword === "additionalProperties" &&
-				"additionalProperty" in error.params
-			) {
+			if (error.keyword === "additionalProperties" && "additionalProperty" in error.params) {
 				const formattedPropertyPath = error.instancePath.length
 					? `${error.instancePath.slice(1)}.${error.params.additionalProperty}`
 					: error.params.additionalProperty;
@@ -27,18 +24,13 @@ export function formatErrors(errors: ErrorObject[]): string {
 				return `Property "${formattedField}" has the wrong type - ${error.message}`;
 			}
 			const field =
-				(error.instancePath[0] === "."
-					? error.instancePath.slice(1)
-					: error.instancePath) || "Config";
+				(error.instancePath[0] === "." ? error.instancePath.slice(1) : error.instancePath) ||
+				"Config";
 			if (error.keyword === "typeof") {
-				return `"${field}" should be a ${error.schema}. Value: ${JSON.stringify(
-					error.data,
-				)}`;
+				return `"${field}" should be a ${error.schema}. Value: ${JSON.stringify(error.data)}`;
 			}
 
-			return `"${field}" ${error.message}. Value: ${JSON.stringify(
-				error.data,
-			)}`;
+			return `"${field}" ${error.message}. Value: ${JSON.stringify(error.data)}`;
 		})
 		.map((message) => `\t- ${message}.\n`)
 		.join("");

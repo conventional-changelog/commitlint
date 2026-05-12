@@ -21,7 +21,6 @@ async function getPatternIDs() {
 
 export default merge(configAngular, {
 	rules: {
-		"scope-enum": () =>
-			getPatternIDs().then((ids) => [2, "always", ids.concat(["system"])]),
+		"scope-enum": () => getPatternIDs().then((ids) => [2, "always", ids.concat(["system"])]),
 	},
 });

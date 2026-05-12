@@ -1,10 +1,4 @@
-export type RuleField =
-	| "header"
-	| "type"
-	| "scope"
-	| "subject"
-	| "body"
-	| "footer";
+export type RuleField = "header" | "type" | "scope" | "subject" | "body" | "footer";
 
 export type PromptName =
 	| RuleField

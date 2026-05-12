@@ -6,9 +6,7 @@ declare module "inquirer" {
 		description?: string;
 	}
 
-	export interface InputCustomOptions<
-		T extends Answers = Answers,
-	> extends InputQuestionOptions<T> {
+	export interface InputCustomOptions<T extends Answers = Answers> extends InputQuestionOptions<T> {
 		/**
 		 * @inheritdoc
 		 */

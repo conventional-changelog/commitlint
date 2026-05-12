@@ -8,12 +8,8 @@ let setPromptConfig: typeof prompts.setPromptConfig;
 
 beforeEach(async () => {
 	vi.resetModules();
-	({
-		getPromptQuestions,
-		getPromptMessages,
-		getPromptSettings,
-		setPromptConfig,
-	} = await import("./prompts.js"));
+	({ getPromptQuestions, getPromptMessages, getPromptSettings, setPromptConfig } =
+		await import("./prompts.js"));
 });
 
 describe("setPromptConfig", () => {
@@ -56,12 +52,8 @@ describe("setPromptConfig", () => {
 		};
 		setPromptConfig(promptConfig);
 
-		expect(getPromptMessages()["emptyWarning"]).toBe(
-			promptConfig.messages.emptyWarning,
-		);
-		expect(getPromptMessages()["lowerLimitWarning"]).toBe(
-			initialMessages["lowerLimitWarning"],
-		);
+		expect(getPromptMessages()["emptyWarning"]).toBe(promptConfig.messages.emptyWarning);
+		expect(getPromptMessages()["lowerLimitWarning"]).toBe(initialMessages["lowerLimitWarning"]);
 	});
 
 	test("should not merge message when prompt config message is not a string", () => {
@@ -76,9 +68,7 @@ describe("setPromptConfig", () => {
 		};
 		setPromptConfig(promptConfig as any);
 
-		expect(getPromptMessages()["emptyWarning"]).toBe(
-			promptConfig.messages.emptyWarning,
-		);
+		expect(getPromptMessages()["emptyWarning"]).toBe(promptConfig.messages.emptyWarning);
 		expect(getPromptMessages()["min"]).toBe(initialMessages["min"]);
 	});
 
@@ -121,9 +111,7 @@ describe("setPromptConfig", () => {
 		});
 		expect(getPromptSettings()["scopeEnumSeparator"]).toEqual("/");
 
-		const processExit = vi
-			.spyOn(process, "exit")
-			.mockImplementation(() => undefined as never);
+		const processExit = vi.spyOn(process, "exit").mockImplementation(() => undefined as never);
 		setPromptConfig({
 			settings: {
 				scopeEnumSeparator: "-",

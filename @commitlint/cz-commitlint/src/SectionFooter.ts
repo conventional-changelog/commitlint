@@ -91,9 +91,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 			if (name === "issuesBody") {
 				Object.assign(questionConfigs, {
 					when: (answers: Answers) => {
-						return (
-							answers.isIssueAffected && !answers.body && !answers.breakingBody
-						);
+						return answers.isIssueAffected && !answers.body && !answers.breakingBody;
 					},
 				});
 			}
@@ -112,12 +110,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 				});
 			}
 
-			const instance = new FooterQuestion(
-				name,
-				questionConfigs,
-				footerMaxLength,
-				footerMinLength,
-			);
+			const instance = new FooterQuestion(name, questionConfigs, footerMaxLength, footerMinLength);
 
 			return instance.question;
 		});
@@ -134,8 +127,7 @@ export function combineCommitMessage(answers: Answers): string {
 
 	if (breaking) {
 		const BREAKING_CHANGE = "BREAKING CHANGE: ";
-		const message =
-			BREAKING_CHANGE + breaking.replace(new RegExp(`^${BREAKING_CHANGE}`), "");
+		const message = BREAKING_CHANGE + breaking.replace(new RegExp(`^${BREAKING_CHANGE}`), "");
 		footerNotes.push(
 			maxLineLength < Infinity
 				? wrap(message, {

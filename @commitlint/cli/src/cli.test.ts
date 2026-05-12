@@ -42,9 +42,7 @@ test("should fail when --cwd references a non-existent directory", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
 	const result = cli(["--cwd", "doesNotExist"], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stderr).toContain(
-		'The specified --cwd directory "doesNotExist" does not exist.',
-	);
+	expect(output.stderr).toContain('The specified --cwd directory "doesNotExist" does not exist.');
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
@@ -52,9 +50,7 @@ test("should fail when -d references a non-existent directory", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
 	const result = cli(["-d", "doesNotExist"], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stderr).toContain(
-		'The specified --cwd directory "doesNotExist" does not exist.',
-	);
+	expect(output.stderr).toContain('The specified --cwd directory "doesNotExist" does not exist.');
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
@@ -160,10 +156,9 @@ test("should produce help for problems", async () => {
 
 test("should produce help for problems with correct helpurl", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
-	const result = cli(
-		["-H https://github.com/conventional-changelog/commitlint/#testhelpurl"],
-		{ cwd },
-	)("foo: bar");
+	const result = cli(["-H https://github.com/conventional-changelog/commitlint/#testhelpurl"], {
+		cwd,
+	})("foo: bar");
 	const output = await result;
 	expect(output.stdout.trim()).toContain(
 		"Get help: https://github.com/conventional-changelog/commitlint/#testhelpurl",
@@ -214,9 +209,7 @@ test("should output help URL defined in config file", async () => {
 	const cwd = await gitBootstrap("fixtures/help-url");
 	const result = cli([], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stdout.trim()).toContain(
-		"Get help: https://www.example.com/foo",
-	);
+	expect(output.stdout.trim()).toContain("Get help: https://www.example.com/foo");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
@@ -240,10 +233,7 @@ test("should produce no error output with -q flag", async () => {
 
 test("should work with husky commitmsg hook and git commit", async () => {
 	const cwd = await gitBootstrap("fixtures/husky/integration");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e` } } },
-		{ cwd },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e` } } }, { cwd });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -257,10 +247,7 @@ test("should work with husky commitmsg hook and git commit", async () => {
 test("should work with husky commitmsg hook in sub packages", async () => {
 	const upper = await gitBootstrap("fixtures/husky");
 	const cwd = path.join(upper, "integration");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e` } } },
-		{ cwd: upper },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e` } } }, { cwd: upper });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -272,10 +259,7 @@ test("should work with husky commitmsg hook in sub packages", async () => {
 
 test("should work with husky via commitlint -e $GIT_PARAMS", async () => {
 	const cwd = await gitBootstrap("fixtures/husky/integration");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e $GIT_PARAMS` } } },
-		{ cwd },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e $GIT_PARAMS` } } }, { cwd });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -287,10 +271,7 @@ test("should work with husky via commitlint -e $GIT_PARAMS", async () => {
 
 test("should work with husky via commitlint -e %GIT_PARAMS%", async () => {
 	const cwd = await gitBootstrap("fixtures/husky/integration");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e %GIT_PARAMS%` } } },
-		{ cwd },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e %GIT_PARAMS%` } } }, { cwd });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -302,10 +283,7 @@ test("should work with husky via commitlint -e %GIT_PARAMS%", async () => {
 
 test("should work with husky via commitlint -e $HUSKY_GIT_PARAMS", async () => {
 	const cwd = await gitBootstrap("fixtures/husky/integration");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e $HUSKY_GIT_PARAMS` } } },
-		{ cwd },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e $HUSKY_GIT_PARAMS` } } }, { cwd });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -317,10 +295,7 @@ test("should work with husky via commitlint -e $HUSKY_GIT_PARAMS", async () => {
 
 test("should work with husky via commitlint -e %HUSKY_GIT_PARAMS%", async () => {
 	const cwd = await gitBootstrap("fixtures/husky/integration");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e %HUSKY_GIT_PARAMS%` } } },
-		{ cwd },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e %HUSKY_GIT_PARAMS%` } } }, { cwd });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -357,9 +332,7 @@ test("should allow reading of environment variables for edit file, failing if in
 
 test("should pick up parser preset and fail accordingly", async () => {
 	const cwd = await gitBootstrap("fixtures/parser-preset");
-	const result = cli(["--parser-preset", "./parser-preset"], { cwd })(
-		"type(scope): subject",
-	);
+	const result = cli(["--parser-preset", "./parser-preset"], { cwd })("type(scope): subject");
 	const output = await result;
 	expect(output.stdout.trim()).toContain("may not be empty");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
@@ -367,9 +340,7 @@ test("should pick up parser preset and fail accordingly", async () => {
 
 test("should pick up parser preset and succeed accordingly", async () => {
 	const cwd = await gitBootstrap("fixtures/parser-preset");
-	const result = cli(["--parser-preset", "./parser-preset"], { cwd })(
-		"----type(scope): subject",
-	);
+	const result = cli(["--parser-preset", "./parser-preset"], { cwd })("----type(scope): subject");
 	await result;
 	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
@@ -412,10 +383,7 @@ test("should pick up config from inside git repo with precedence and fail accord
 
 test("should handle --amend with signoff", async () => {
 	const cwd = await gitBootstrap("fixtures/signoff");
-	await writePkg(
-		{ husky: { hooks: { "commit-msg": `'${bin}' -e` } } },
-		{ cwd },
-	);
+	await writePkg({ husky: { hooks: { "commit-msg": `'${bin}' -e` } } }, { cwd });
 
 	// await x('npm', ['install'], { nodeOptions: {cwd}}); // npm install is failing on windows machines
 	await x("git", ["add", "package.json"], { nodeOptions: { cwd } });
@@ -441,10 +409,7 @@ test("it uses parserOpts.commentChar when not using edit mode", async () => {
 
 test("it doesn't use parserOpts.commentChar when using edit mode", async () => {
 	const cwd = await gitBootstrap("fixtures/comment-char");
-	await fs.writeFile(
-		path.join(cwd, ".git", "COMMIT_EDITMSG"),
-		"header: foo\n\n$body\n",
-	);
+	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n$body\n");
 
 	const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
 	const output = await result;
@@ -457,10 +422,7 @@ test("it uses core.commentChar git config when using edit mode", async () => {
 	await x("git", ["config", "--local", "core.commentChar", "$"], {
 		nodeOptions: { cwd },
 	});
-	await fs.writeFile(
-		path.join(cwd, ".git", "COMMIT_EDITMSG"),
-		"header: foo\n\n$body\n",
-	);
+	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n$body\n");
 
 	const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
 	const output = await result;
@@ -470,10 +432,7 @@ test("it uses core.commentChar git config when using edit mode", async () => {
 
 test("it falls back to # for core.commentChar when using edit mode", async () => {
 	const cwd = await gitBootstrap("fixtures/comment-char");
-	await fs.writeFile(
-		path.join(cwd, ".git", "COMMIT_EDITMSG"),
-		"header: foo\n\n#body\n",
-	);
+	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n#body\n");
 
 	const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
 	const output = await result;
@@ -514,9 +473,7 @@ test("should fail for invalid formatters from configuration", async () => {
 	const cwd = await gitBootstrap("fixtures/custom-formatter");
 	const result = cli([], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stderr).toContain(
-		"Using format custom-formatter, but cannot find the module",
-	);
+	expect(output.stderr).toContain("Using format custom-formatter, but cannot find the module");
 	expect(output.stdout.trim()).toEqual("");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
@@ -560,9 +517,7 @@ test("should fail for invalid formatters from flags", async () => {
 	const cwd = await gitBootstrap("fixtures/custom-formatter");
 	const result = cli(["--format", "through-flag"], { cwd })("foo: bar");
 	const output = await result;
-	expect(output.stderr).toContain(
-		"Using format through-flag, but cannot find the module",
-	);
+	expect(output.stderr).toContain("Using format through-flag, but cannot find the module");
 	expect(output.stdout.trim()).toEqual("");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
@@ -573,22 +528,15 @@ test("should work with absolute formatter path", async () => {
 		"../fixtures/custom-formatter/formatters/custom.js",
 	);
 	const cwd = await gitBootstrap("fixtures/custom-formatter");
-	const result = cli(["--format", formatterPath], { cwd })(
-		"test: this should work",
-	);
+	const result = cli(["--format", formatterPath], { cwd })("test: this should work");
 	const output = await result;
 	expect(output.stdout.trim()).toContain("custom-formatter-ok");
 	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
 test("should work with relative formatter path", async () => {
-	const cwd = path.resolve(
-		await gitBootstrap("fixtures/custom-formatter"),
-		"./formatters",
-	);
-	const result = cli(["--format", "./custom.js"], { cwd })(
-		"test: this should work",
-	);
+	const cwd = path.resolve(await gitBootstrap("fixtures/custom-formatter"), "./formatters");
+	const result = cli(["--format", "./custom.js"], { cwd })("test: this should work");
 	const output = await result;
 	expect(output.stdout.trim()).toContain("custom-formatter-ok");
 	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);

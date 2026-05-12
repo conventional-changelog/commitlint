@@ -58,41 +58,25 @@ test("with long should fail", async () => {
 });
 
 test("with short with multiple lines should succeed", async () => {
-	const [actual] = bodyMaxLineLength(
-		await parsed.shortMultipleLines,
-		undefined,
-		value,
-	);
+	const [actual] = bodyMaxLineLength(await parsed.shortMultipleLines, undefined, value);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test("with long with multiple lines should fail", async () => {
-	const [actual] = bodyMaxLineLength(
-		await parsed.longMultipleLines,
-		undefined,
-		value,
-	);
+	const [actual] = bodyMaxLineLength(await parsed.longMultipleLines, undefined, value);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
 test("with multiple lines and standalone URL should succeed", async () => {
-	const [actual] = bodyMaxLineLength(
-		await parsed.urlStandalone,
-		undefined,
-		value,
-	);
+	const [actual] = bodyMaxLineLength(await parsed.urlStandalone, undefined, value);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test("with multiple lines and URL in inline Markdown link should succeed", async () => {
-	const [actual] = bodyMaxLineLength(
-		await parsed.urlMarkdownLinkInline,
-		undefined,
-		30,
-	);
+	const [actual] = bodyMaxLineLength(await parsed.urlMarkdownLinkInline, undefined, 30);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });

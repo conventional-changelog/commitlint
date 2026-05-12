@@ -11,15 +11,11 @@ const lintMessage = async (message) => {
 	const result = await lint(m, rules, { parserOpts });
 
 	if (result.errors.length > 1) {
-		throw new Error(
-			"Commit test should only have one error message to validate against",
-		);
+		throw new Error("Commit test should only have one error message to validate against");
 	}
 
 	if (result.warnings.length > 1) {
-		throw new Error(
-			"Commit test should only have one warning message to validate against",
-		);
+		throw new Error("Commit test should only have one warning message to validate against");
 	}
 
 	return result;
@@ -33,9 +29,7 @@ test("a valid commit message", async () => {
 });
 
 test("a valid message with a scope", async () => {
-	const result = await lintMessage(
-		"test(scope): a valid angular commit with a scope",
-	);
+	const result = await lintMessage("test(scope): a valid angular commit with a scope");
 	expect(result.valid).toBe(true);
 	expect(result.errors).toStrictEqual([]);
 	expect(result.warnings).toStrictEqual([]);
@@ -96,9 +90,7 @@ test("message header with ! in it", async () => {
 });
 
 test("message header with ! in it and a scope", async () => {
-	const result = await lintMessage(
-		`test(scope)!: with a breaking change in the type`,
-	);
+	const result = await lintMessage(`test(scope)!: with a breaking change in the type`);
 
 	expect(result.valid).toBe(false);
 	expect(result.errors[0].message).toBe(

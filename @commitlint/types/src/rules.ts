@@ -52,9 +52,7 @@ export enum RuleConfigSeverity {
 export type RuleConfigCondition = "always" | "never";
 
 export type RuleConfigTuple<T> = T extends void
-	?
-			| Readonly<[RuleConfigSeverity.Disabled]>
-			| Readonly<[RuleConfigSeverity, RuleConfigCondition]>
+	? Readonly<[RuleConfigSeverity.Disabled]> | Readonly<[RuleConfigSeverity, RuleConfigCondition]>
 	:
 			| Readonly<[RuleConfigSeverity.Disabled]>
 			| Readonly<[RuleConfigSeverity, RuleConfigCondition, T]>;
@@ -76,26 +74,18 @@ export type QualifiedRuleConfig<T> =
 export type RuleConfig<
 	V = RuleConfigQuality.Qualified,
 	T = void,
-> = V extends RuleConfigQuality.Qualified
-	? RuleConfigTuple<T>
-	: QualifiedRuleConfig<T>;
+> = V extends RuleConfigQuality.Qualified ? RuleConfigTuple<T> : QualifiedRuleConfig<T>;
 
 export type CaseRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
 	V,
 	TargetCaseType | readonly TargetCaseType[]
 >;
-export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
+export type LengthRuleConfig<V = RuleConfigQuality.User> = RuleConfig<V, number>;
+export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<V, readonly string[]>;
+export type ObjectRuleConfig<V = RuleConfigQuality.User, T = Record<string, unknown>> = RuleConfig<
 	V,
-	number
+	T
 >;
-export type EnumRuleConfig<V = RuleConfigQuality.User> = RuleConfig<
-	V,
-	readonly string[]
->;
-export type ObjectRuleConfig<
-	V = RuleConfigQuality.User,
-	T = Record<string, unknown>,
-> = RuleConfig<V, T>;
 
 export type RulesConfig<V = RuleConfigQuality.User> = {
 	"body-case": CaseRuleConfig<V>;
@@ -119,18 +109,12 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	"references-empty": RuleConfig<V>;
 	"scope-case":
 		| CaseRuleConfig<V>
-		| ObjectRuleConfig<
-				V,
-				{ cases: readonly TargetCaseType[]; delimiters?: readonly string[] }
-		  >;
+		| ObjectRuleConfig<V, { cases: readonly TargetCaseType[]; delimiters?: readonly string[] }>;
 	"scope-delimiter-style": EnumRuleConfig<V>;
 	"scope-empty": RuleConfig<V>;
 	"scope-enum":
 		| EnumRuleConfig<V>
-		| ObjectRuleConfig<
-				V,
-				{ scopes: readonly string[]; delimiters?: readonly string[] }
-		  >;
+		| ObjectRuleConfig<V, { scopes: readonly string[]; delimiters?: readonly string[] }>;
 	"scope-max-length": LengthRuleConfig<V>;
 	"scope-min-length": LengthRuleConfig<V>;
 	"signed-off-by": RuleConfig<V, string>;

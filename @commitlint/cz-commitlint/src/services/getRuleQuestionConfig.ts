@@ -62,8 +62,7 @@ function normalizeEmoji(emoji: string): string {
 			// 3. If the base char is an Emoji base but not presentation:
 			case isEmojiBase.test(baseChar) && !/^[0-9#*]$/.test(baseChar): {
 				// Reconstruct: Base + VS16 + the rest of the cluster (skin tones, ZWJs, etc.)
-				const normalizedCluster =
-					baseChar + "\uFE0F" + codePoints.slice(1).join("");
+				const normalizedCluster = baseChar + "\uFE0F" + codePoints.slice(1).join("");
 				return normalizedCluster + trailing;
 			}
 		}
@@ -77,8 +76,7 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 	const questionSettings = questions[rulePrefix];
 	const emptyRule = getRule(rulePrefix, "empty");
 
-	const mustBeEmpty =
-		emptyRule && ruleIsActive(emptyRule) && ruleIsApplicable(emptyRule);
+	const mustBeEmpty = emptyRule && ruleIsActive(emptyRule) && ruleIsApplicable(emptyRule);
 
 	if (mustBeEmpty) {
 		return null;
@@ -87,8 +85,7 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 	const canBeSkip = !emptyRule || ruleIsDisabled(emptyRule);
 
 	const enumRule = getRule(rulePrefix, "enum");
-	const enumRuleList =
-		enumRule && enumRuleIsActive(enumRule) ? getEnumList(enumRule) : null;
+	const enumRuleList = enumRule && enumRuleIsActive(enumRule) ? getEnumList(enumRule) : null;
 	let enumList;
 
 	if (enumRuleList) {
@@ -97,15 +94,10 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 
 		if (enumDescriptions) {
 			const enumNames = Object.keys(enumDescriptions);
-			const longest = Math.max(
-				...enumRuleList.map((enumName) => enumName.length),
-			);
-			const firstHasEmoji =
-				(enumDescriptions[enumNames[0]]?.emoji?.length ?? 0) > 0;
+			const longest = Math.max(...enumRuleList.map((enumName) => enumName.length));
+			const firstHasEmoji = (enumDescriptions[enumNames[0]]?.emoji?.length ?? 0) > 0;
 			const hasConsistentEmojiUsage = !enumRuleList.some(
-				(enumName) =>
-					(enumDescriptions[enumName]?.emoji?.length ?? 0) > 0 !==
-					firstHasEmoji,
+				(enumName) => (enumDescriptions[enumName]?.emoji?.length ?? 0) > 0 !== firstHasEmoji,
 			);
 			enumList = enumRuleList
 				.sort((a, b) => enumNames.indexOf(a) - enumNames.indexOf(b))
@@ -115,18 +107,13 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 						const rawEmoji = enumDescriptions[enumName]?.emoji;
 						const emoji = rawEmoji ? normalizeEmoji(rawEmoji) : rawEmoji;
 
-						const emojiPrefix = emoji
-							? `${emoji}  `
-							: hasConsistentEmojiUsage
-								? ""
-								: "    ";
+						const emojiPrefix = emoji ? `${emoji}  ` : hasConsistentEmojiUsage ? "" : "    ";
 
 						const paddedName = `${enumName}:`.padEnd(longest + 4);
 
 						const name = `${emojiPrefix}${paddedName}${enumDescription}`;
 
-						const value =
-							emojiInHeader && emoji ? `${emoji.trim()} ${enumName}` : enumName;
+						const value = emojiInHeader && emoji ? `${emoji.trim()} ${enumName}` : enumName;
 
 						return { name, value, short: enumName };
 					} else {

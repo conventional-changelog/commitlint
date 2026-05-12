@@ -221,8 +221,7 @@ test("keep -side notes- in the body section", async () => {
 });
 
 test("allows separating -side nodes- by setting parserOpts.fieldPattern", async () => {
-	const message =
-		"type(scope): subject\n\nbody text\n-authorName-\nrenovate[bot]";
+	const message = "type(scope): subject\n\nbody text\n-authorName-\nrenovate[bot]";
 	const changelogOpts = {
 		parserOpts: {
 			fieldPattern: /^-(.*)-$/,
