@@ -142,10 +142,12 @@ async function getTarballFiles(source, options) {
 		unsafeCleanup: true,
 	});
 	const cwd = tmpDir.name;
-	const tarball = path.join(cwd, "test-archive.tgz");
-	await x("yarn", ["pack", "--filename", tarball], {
+	// pnpm pack prints the absolute path of the produced tarball; take the
+	// basename so it joins cleanly with the temp dir we passed as destination.
+	const result = await x("pnpm", ["pack", "--pack-destination", cwd], {
 		nodeOptions: { cwd: source },
 	});
+	const tarball = path.join(cwd, path.basename(result.stdout.trim().split("\n").pop()));
 
 	return getArchiveFiles(tarball, options);
 }
