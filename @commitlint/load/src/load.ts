@@ -23,9 +23,10 @@ import { loadParserOpts } from "./utils/load-parser-opts.js";
 import loadPlugin from "./utils/load-plugin.js";
 
 /**
- * Resolve relative/custom formatter paths from the config directory.
- * Package specifiers (e.g. "@commitlint/format") are kept as-is so the
- * runtime resolves them via standard module resolution at import time.
+ * Resolve relative formatter paths (e.g. "./my-formatter.js") from the
+ * config directory. Package specifiers and absolute paths are kept as-is
+ * so the runtime resolves them via standard module resolution at import
+ * time.
  */
 const resolveFormatter = (formatter: string, parent?: string): string => {
 	if (!formatter.startsWith(".")) {
