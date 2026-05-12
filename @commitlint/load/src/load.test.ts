@@ -181,7 +181,7 @@ test("uses seed with parserPreset", async () => {
 test("invalid extend should throw", async () => {
 	const cwd = await gitBootstrap("fixtures/extends-invalid");
 
-	await expect(load({}, { cwd })).rejects.toThrow();
+	await expect(load({}, { cwd })).rejects.toThrow(/Cannot find module/);
 });
 
 test("empty file should have no rules", async () => {

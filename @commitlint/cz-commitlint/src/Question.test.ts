@@ -29,7 +29,7 @@ describe("name", () => {
 				new Question("" as any, {
 					...QUESTION_CONFIG,
 				}),
-		).toThrow();
+		).toThrow("Question: name is required");
 
 		expect(
 			() =>
@@ -41,7 +41,7 @@ describe("name", () => {
 						...QUESTION_CONFIG,
 					},
 				),
-		).toThrow();
+		).toThrow("Question: name is required");
 	});
 
 	test("should set name when name is valid", () => {

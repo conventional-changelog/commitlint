@@ -41,7 +41,8 @@
 
     "vitest/hoisted-apis-on-top": "off",
     "vitest/max-nested-describe": ["error", { "max": 3 }],
-    "vitest/require-mock-type-parameters": "off"
+    "vitest/require-mock-type-parameters": "off",
+    "vitest/require-to-throw-message": "error"
   },
   "overrides": [
     {
