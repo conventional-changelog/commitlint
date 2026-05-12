@@ -1,0 +1,64 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+
+  // Migrated from eslint.config.mjs (ESLint v10 flat config).
+  // Note: oxlint and oxfmt require Node >= 20. The repo's engines field
+  // (>=v18) applies to the published packages. CI runs lint/format on
+  // Node 22 (lts/*). Local development requires Node >= 20 for linting.
+  //
+  // Unmappable rules (not available in oxlint):
+  //  - import/no-extraneous-dependencies: validates imports are declared in
+  //    package.json. "lerna run deps" provides partial coverage.
+  //  - valid-expect-in-promise: no oxlint equivalent exists.
+  //
+  // The old config spread @vitest/eslint-plugin's recommended rules (16 rules
+  // like expect-expect, no-focused-tests, no-identical-title, valid-expect,
+  // etc.). In oxlint these live under the "jest" plugin, but enabling it
+  // causes an irreconcilable conflict with vitest/max-nested-describe.
+  // Revisit when oxlint resolves the jest/vitest plugin interaction.
+
+  "ignorePatterns": ["**/lib/", "**/coverage/", "**/node_modules/", "**/fixtures/", "**/dist/"],
+  "env": {
+    "node": true
+  },
+  "plugins": ["typescript", "import", "vitest"],
+  "rules": {
+    "import/default": "off",
+    "import/first": "error",
+    "import/no-absolute-path": "error",
+    "import/no-amd": "error",
+    "import/no-mutable-exports": "error",
+    "import/no-named-default": "error",
+    "import/no-self-import": "error",
+
+    "typescript/no-unused-vars": "off",
+    "typescript/no-use-before-define": "off",
+    "typescript/no-explicit-any": "off",
+    "typescript/explicit-function-return-type": "off",
+    "typescript/no-var-requires": "off",
+    "typescript/no-inferrable-types": "off",
+    "typescript/no-non-null-assertion": "off",
+    "typescript/triple-slash-reference": "off",
+
+    "vitest/hoisted-apis-on-top": "off",
+    "vitest/max-nested-describe": ["error", { "max": 3 }],
+    "vitest/require-mock-type-parameters": "off"
+  },
+  "overrides": [
+    {
+      // Match the old ESLint config which only disabled these for TS files
+      "files": ["**/*.ts", "**/*.cts"],
+      "rules": {
+        "no-empty": "off",
+        "no-var": "off"
+      }
+    },
+    {
+      "files": ["**/*.test.ts", "**/*.test.js"],
+      "rules": {
+        "import/first": "off",
+        "vitest/no-import-node-test": "error"
+      }
+    }
+  ]
+}
