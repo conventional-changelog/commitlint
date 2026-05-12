@@ -4,5 +4,5 @@ FROM brainpower/node-cubicle
 WORKDIR /root/repo
 
 ADD . ./
-RUN yarn
-RUN yarn build
+RUN corepack enable && pnpm install --frozen-lockfile
+RUN pnpm build
