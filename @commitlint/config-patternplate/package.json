@@ -30,11 +30,11 @@
     "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
-    "@commitlint/config-angular": "^21.0.0",
+    "@commitlint/config-angular": "workspace:^",
     "es-toolkit": "^1.46.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

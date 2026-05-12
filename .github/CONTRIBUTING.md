@@ -63,12 +63,29 @@ To make your life easier commitlint is commitizen-friendly and provides the npm 
 
 ### Environment setup
 
-This project uses `yarn`, so be sure that it is available in your shell environment.
+> [!IMPORTANT]
+> **Upgrading from a pre-pnpm clone?**
+> This repo switched from yarn to pnpm. If your local checkout predates that,
+> run a one-time cleanup before `pnpm install`:
+>
+> ```sh
+> rm -rf node_modules @commitlint/*/node_modules @packages/*/node_modules @alias/*/node_modules
+> # If you have an open PR with yarn.lock changes, rebase onto master
+> # and regenerate pnpm-lock.yaml with `pnpm install`.
+> ```
+
+This project uses `pnpm`, so be sure that it is available in your shell environment.
+The required version is pinned in `package.json` (`packageManager` field); the
+easiest ways to install it are:
+
+- [mise](https://mise.jdx.dev/): `mise install` (uses `.mise.toml`)
+- [corepack](https://nodejs.org/api/corepack.html): `corepack enable` (ships with Node)
+- [direct install](https://pnpm.io/installation)
 
 After cloning the repo run
 
 ```sh
-yarn install
+pnpm install
 ```
 
 ### Testing
@@ -76,8 +93,8 @@ yarn install
 From the project root directory, use the following commands to run the test suite
 
 ```sh
-yarn build
-yarn test
+pnpm build
+pnpm test
 ```
 
 ### Documentation updates
@@ -86,14 +103,14 @@ Documentation uses `vitepress`.
 To run and edit the documentation locally run:
 
 ```sh
-yarn docs-dev
+pnpm docs-dev
 ```
 
 To have a preview of the deployed doc run:
 
 ```sh
-yarn docs-build
-yarn docs-serve
+pnpm docs-build
+pnpm docs-preview
 ```
 
 For more information refer to [vitepress documentation](https://vitepress.dev).
@@ -114,11 +131,11 @@ mise install
 - [mise](https://mise.jdx.dev/)
 
 ```sh
-yarn clean
-yarn install
-yarn build
-yarn test
-yarn run publish --otp <one-time password>
+pnpm clean
+pnpm install
+pnpm build
+pnpm test
+pnpm run publish --otp <one-time password>
 ```
 
 If something in between fails (like a new package was added and needs to be published for the
@@ -139,11 +156,11 @@ mise install
 ```
 
 ```sh
-yarn clean
-yarn install
-yarn build
-yarn test
-npx lerna publish --conventional-commits --dist-tag [`next` | `next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
+pnpm clean
+pnpm install
+pnpm build
+pnpm test
+pnpm lerna publish --conventional-commits --dist-tag [`next` | `next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
 ```
 
 If for some reason this stops in between, you can manually publish missing packages like this:

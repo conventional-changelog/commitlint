@@ -34,14 +34,14 @@
     "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
-    "@commitlint/is-ignored": "^21.0.0",
-    "@commitlint/parse": "^21.0.0",
-    "@commitlint/rules": "^21.0.0",
-    "@commitlint/types": "^21.0.0"
+    "@commitlint/is-ignored": "workspace:^",
+    "@commitlint/parse": "workspace:^",
+    "@commitlint/rules": "workspace:^",
+    "@commitlint/types": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/test": "^21.0.0",
-    "@commitlint/utils": "^21.0.0",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "@types/node": "^22.0.0"
   },
   "engines": {

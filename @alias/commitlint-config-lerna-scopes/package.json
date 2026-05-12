@@ -29,10 +29,10 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/config-lerna-scopes": "^21.0.0"
+    "@commitlint/config-lerna-scopes": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

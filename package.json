@@ -24,11 +24,6 @@
     "type": "git",
     "url": "https://github.com/conventional-changelog/commitlint.git"
   },
-  "workspaces": [
-    "@alias/*",
-    "@commitlint/*",
-    "@packages/*"
-  ],
   "type": "module",
   "scripts": {
     "build": "tsc -b",
@@ -46,15 +41,16 @@
     "format": "oxfmt --check --ignore-path .oxfmtignore",
     "format-fix": "oxfmt --ignore-path .oxfmtignore",
     "publish": "npm whoami && lerna publish --conventional-commits",
-    "reinstall": "yarn clean && yarn install",
-    "start": "yarn watch",
+    "reinstall": "pnpm clean && pnpm install",
+    "start": "pnpm watch",
     "test": "vitest run --coverage",
     "prepare": "husky"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^21.0.0",
-    "@commitlint/config-workspace-scopes": "^21.0.0",
+    "@commitlint/config-conventional": "workspace:^",
+    "@commitlint/config-workspace-scopes": "workspace:^",
     "@swc/core": "^1.15.18",
+    "@types/node": "^22.0.0",
     "@vitest/coverage-istanbul": "~4.0.18",
     "husky": "^9.1.5",
     "lerna": "^8.2.0",
@@ -65,7 +61,7 @@
     "vitepress": "^1.3.4",
     "vitepress-plugin-tabs": "^0.9.0",
     "vitest": "~4.0.18",
-    "vitest-environment-commitlint": "^21.0.0",
+    "vitest-environment-commitlint": "workspace:^",
     "vue": "^3.5.29"
   },
   "lint-staged": {
@@ -86,23 +82,29 @@
   },
   "engines": {
     "node": ">=22.12.0",
-    "npm": ">=7"
+    "pnpm": ">=11"
   },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
+  "packageManager": "pnpm@11.1.0+sha512.0c44e842e5686b2c061a81adda8b2258bd8818e9704b2cf2c63d56b931a7b2e910092e085027003b96ca3911ab56a07f6df5abaed2be9925034cdd686a535b14",
   "renovate": {
     "rangeStrategy": "update-lockfile",
     "ignorePaths": [
       "**/fixtures/**/package.json"
     ],
     "extends": [
-      "config:base"
+      "config:recommended"
     ],
     "semanticCommitType": "chore",
     "semanticCommitScope": null,
     "ignoreDeps": [
       "@commitlint/test",
-      "@commitlint/test-environment",
-      "@commitlint/utils"
-    ]
+      "@commitlint/utils",
+      "vitest-environment-commitlint"
+    ],
+    "lockFileMaintenance": {
+      "enabled": true,
+      "schedule": [
+        "before 5am on monday"
+      ]
+    }
   }
 }

@@ -26,21 +26,24 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: yarn
+          cache: pnpm
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
 
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
 
       - name: Build with VitePress
         run: |
-          yarn docs-build
+          pnpm docs-build
           touch ./docs/.vitepress/dist/.nojekyll
 
       - name: Upload artifact

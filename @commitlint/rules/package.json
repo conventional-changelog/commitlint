@@ -34,15 +34,15 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/ensure": "^21.0.0",
-    "@commitlint/message": "^21.0.0",
-    "@commitlint/to-lines": "^21.0.0",
-    "@commitlint/types": "^21.0.0"
+    "@commitlint/ensure": "workspace:^",
+    "@commitlint/message": "workspace:^",
+    "@commitlint/to-lines": "workspace:^",
+    "@commitlint/types": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/parse": "^21.0.0",
-    "@commitlint/test": "^21.0.0",
-    "@commitlint/utils": "^21.0.0",
+    "@commitlint/parse": "workspace:^",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "@types/node": "^22.0.0",
     "conventional-changelog-angular": "^8.2.0",
     "conventional-commits-parser": "^6.3.0"

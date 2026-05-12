@@ -33,12 +33,12 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/types": "^21.0.0",
+    "@commitlint/types": "workspace:^",
     "conventional-changelog-conventionalcommits": "^9.2.0"
   },
   "devDependencies": {
-    "@commitlint/lint": "^21.0.0",
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/lint": "workspace:^",
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

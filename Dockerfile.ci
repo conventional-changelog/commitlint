@@ -3,8 +3,10 @@ FROM docker.io/library/node:22-alpine AS builder
 WORKDIR /src
 COPY . ./
 RUN apk add --no-cache python3 py3-setuptools make g++ git
-RUN yarn install --frozen-lockfile --network-timeout 100000 && \
-    yarn run build && \
+# corepack reads the pnpm version from package.json `packageManager` field.
+RUN corepack enable && \
+    pnpm install --frozen-lockfile && \
+    pnpm run build && \
     # Commit lint CLI packages
     npm pack @commitlint/cli && \
     npm pack @commitlint/config-validator && \

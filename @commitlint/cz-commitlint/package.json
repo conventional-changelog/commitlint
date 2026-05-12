@@ -35,9 +35,9 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "@commitlint/ensure": "^21.0.0",
-    "@commitlint/load": "^21.0.0",
-    "@commitlint/types": "^21.0.0",
+    "@commitlint/ensure": "workspace:^",
+    "@commitlint/load": "workspace:^",
+    "@commitlint/types": "workspace:^",
     "is-plain-obj": "^4.1.0",
     "picocolors": "^1.1.1",
     "word-wrap": "^1.2.5"

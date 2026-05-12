@@ -37,17 +37,17 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/format": "^21.0.0",
-    "@commitlint/lint": "^21.0.0",
-    "@commitlint/load": "^21.0.0",
-    "@commitlint/read": "^21.0.0",
-    "@commitlint/types": "^21.0.0",
+    "@commitlint/format": "workspace:^",
+    "@commitlint/lint": "workspace:^",
+    "@commitlint/load": "workspace:^",
+    "@commitlint/read": "workspace:^",
+    "@commitlint/types": "workspace:^",
     "tinyexec": "^1.0.0",
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@commitlint/test": "^21.0.0",
-    "@commitlint/utils": "^21.0.0",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "@types/node": "^22.0.0",
     "@types/yargs": "^17.0.29",
     "conventional-commits-parser": "^6.3.0",

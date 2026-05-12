@@ -34,11 +34,11 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/types": "^21.0.0",
+    "@commitlint/types": "workspace:^",
     "es-toolkit": "^1.46.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

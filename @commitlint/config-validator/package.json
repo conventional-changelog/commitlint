@@ -34,11 +34,11 @@
     "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
-    "@commitlint/types": "^21.0.0",
+    "@commitlint/types": "workspace:^",
     "ajv": "^8.11.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^21.0.0",
+    "@commitlint/utils": "workspace:^",
     "@types/node": "^22.0.0"
   },
   "engines": {
