@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* **types:** add presetConfig to ParserPreset interface ([#4749](https://github.com/conventional-changelog/commitlint/issues/4749)) ([e402cd4](https://github.com/conventional-changelog/commitlint/commit/e402cd415ec820c683ea934c24386c5191966ac4)), closes [#4748](https://github.com/conventional-changelog/commitlint/issues/4748)
+
+
+
+
+
 # [21.0.0](https://github.com/conventional-changelog/commitlint/compare/v20.5.3...v21.0.0) (2026-05-08)
 
 

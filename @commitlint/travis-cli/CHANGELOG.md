@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
+
+**Note:** Version bump only for package @commitlint/travis-cli
+
+
+
+
+
 # [21.0.0](https://github.com/conventional-changelog/commitlint/compare/v20.5.3...v21.0.0) (2026-05-08)
 
 
