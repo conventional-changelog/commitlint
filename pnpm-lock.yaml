@@ -461,6 +461,9 @@ importers:
       '@commitlint/test':
         specifier: workspace:^
         version: link:../../@packages/test
+      '@commitlint/utils':
+        specifier: workspace:^
+        version: link:../../@packages/utils
       '@types/node':
         specifier: ^22.0.0
         version: 22.19.19
@@ -654,6 +657,9 @@ importers:
       '@commitlint/test':
         specifier: workspace:^
         version: link:../../@packages/test
+      '@commitlint/utils':
+        specifier: workspace:^
+        version: link:../../@packages/utils
       '@types/node':
         specifier: ^22.0.0
         version: 22.19.19
