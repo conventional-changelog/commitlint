@@ -34,8 +34,8 @@
     "pkg": "pkg-check"
   },
   "devDependencies": {
-    "@commitlint/test": "^21.0.0",
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

@@ -1,0 +1,11 @@
+packages:
+  - "@commitlint/*"
+  - "@packages/*"
+  - "@alias/*"
+
+# Install scripts are denied by default. Each entry below is an explicit
+# decision; flip to true only with a documented reason.
+allowBuilds:
+  "@swc/core": false
+  esbuild: false
+  nx: false

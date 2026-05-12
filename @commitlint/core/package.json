@@ -34,13 +34,13 @@
     "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
-    "@commitlint/format": "^21.0.0",
-    "@commitlint/lint": "^21.0.0",
-    "@commitlint/load": "^21.0.0",
-    "@commitlint/read": "^21.0.0"
+    "@commitlint/format": "workspace:^",
+    "@commitlint/lint": "workspace:^",
+    "@commitlint/load": "workspace:^",
+    "@commitlint/read": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

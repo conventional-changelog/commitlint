@@ -30,11 +30,11 @@
     "pkg": "pkg-check --skip-import"
   },
   "dependencies": {
-    "@commitlint/config-angular-type-enum": "^21.0.0"
+    "@commitlint/config-angular-type-enum": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/lint": "^21.0.0",
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/lint": "workspace:^",
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"

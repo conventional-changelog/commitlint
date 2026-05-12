@@ -34,14 +34,14 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/config-validator": "^21.0.0",
-    "@commitlint/types": "^21.0.0",
+    "@commitlint/config-validator": "workspace:^",
+    "@commitlint/types": "workspace:^",
     "es-toolkit": "^1.46.0",
     "global-directory": "^5.0.0",
     "resolve-from": "^5.0.0"
   },
   "devDependencies": {
-    "@commitlint/utils": "^21.0.0",
+    "@commitlint/utils": "workspace:^",
     "@types/node": "^22.0.0"
   },
   "engines": {

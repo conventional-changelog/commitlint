@@ -34,12 +34,12 @@
     "pkg": "pkg-check --skip-main"
   },
   "dependencies": {
-    "@commitlint/cli": "^21.0.0",
-    "@commitlint/types": "^21.0.0"
+    "@commitlint/cli": "workspace:^",
+    "@commitlint/types": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/test": "^21.0.0",
-    "@commitlint/utils": "^21.0.0",
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^",
     "tinyexec": "^1.0.0"
   },
   "engines": {

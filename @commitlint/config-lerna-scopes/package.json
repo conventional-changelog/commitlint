@@ -30,11 +30,11 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
-    "@commitlint/config-workspace-scopes": "^21.0.0"
+    "@commitlint/config-workspace-scopes": "workspace:^"
   },
   "devDependencies": {
-    "@commitlint/test": "^21.0.0",
-    "@commitlint/utils": "^21.0.0"
+    "@commitlint/test": "workspace:^",
+    "@commitlint/utils": "workspace:^"
   },
   "peerDependencies": {
     "lerna": "*"
