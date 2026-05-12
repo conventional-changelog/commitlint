@@ -97,8 +97,8 @@
     "semanticCommitScope": null,
     "ignoreDeps": [
       "@commitlint/test",
-      "@commitlint/test-environment",
-      "@commitlint/utils"
+      "@commitlint/utils",
+      "vitest-environment-commitlint"
     ]
   }
 }
