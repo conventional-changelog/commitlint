@@ -23,9 +23,15 @@ import { loadParserOpts } from "./utils/load-parser-opts.js";
 import loadPlugin from "./utils/load-plugin.js";
 
 /**
- * formatter should be kept as is when unable to resolve it from config directory
+ * Resolve relative formatter paths (e.g. "./my-formatter.js") from the
+ * config directory. Package specifiers and absolute paths are kept as-is
+ * so the runtime resolves them via standard module resolution at import
+ * time.
  */
 const resolveFormatter = (formatter: string, parent?: string): string => {
+	if (!formatter.startsWith(".")) {
+		return formatter;
+	}
 	try {
 		return resolveFrom(formatter, parent);
 	} catch (error) {
