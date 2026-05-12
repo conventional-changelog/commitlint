@@ -1,11 +1,7 @@
 import message from "@commitlint/message";
 import { SyncRule } from "@commitlint/types";
 
-export const subjectFullStop: SyncRule<string> = (
-	parsed,
-	when = "always",
-	value = ".",
-) => {
+export const subjectFullStop: SyncRule<string> = (parsed, when = "always", value = ".") => {
 	const colonIndex = parsed.header?.indexOf(":") || 0;
 	if (colonIndex > 0 && colonIndex === parsed.header!.length - 1) {
 		return [true];

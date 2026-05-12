@@ -80,7 +80,5 @@ test("returns expected value for workspaces has nested packages", async () => {
 
 	const [, , value] = await fn({ cwd });
 	expect(value).toEqual(expect.arrayContaining(["nested-a", "nested-b"]));
-	expect(value).toEqual(
-		expect.not.arrayContaining(["dependency-a", "dependency-b"]),
-	);
+	expect(value).toEqual(expect.not.arrayContaining(["dependency-a", "dependency-b"]));
 });

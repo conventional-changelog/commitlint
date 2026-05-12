@@ -1,10 +1,6 @@
 import type { Parser } from "@commitlint/types";
 
-import {
-	type Commit,
-	type ParserOptions,
-	CommitParser,
-} from "conventional-commits-parser";
+import { type Commit, type ParserOptions, CommitParser } from "conventional-commits-parser";
 // @ts-expect-error -- no typings
 import defaultChangelogOpts from "conventional-changelog-angular";
 

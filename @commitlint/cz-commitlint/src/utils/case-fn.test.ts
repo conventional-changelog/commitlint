@@ -76,11 +76,7 @@ test("should transform text correctly with single case", () => {
 });
 
 test("should transform text correctly with multiple cases", () => {
-	const rule = getCaseFn([
-		RuleConfigSeverity.Warning,
-		"always",
-		["camel-case", "lowercase"],
-	]);
+	const rule = getCaseFn([RuleConfigSeverity.Warning, "always", ["camel-case", "lowercase"]]);
 	expect(rule("test")).toBe("test");
 	expect(rule("test-foo")).toBe("test-foo");
 	expect(rule("testFoo")).toBe("testFoo");

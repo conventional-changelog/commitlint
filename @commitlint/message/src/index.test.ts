@@ -11,7 +11,5 @@ test("should return an empty string for empty input array", () => {
 });
 
 test("should filter falsy values", () => {
-	expect(message([null, "some", undefined, "message", null])).toBe(
-		"some message",
-	);
+	expect(message([null, "some", undefined, "message", null])).toBe("some message");
 });

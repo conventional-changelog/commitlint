@@ -8,6 +8,4 @@ const URL_REGEX = /\bhttps?:\/\/\S+/;
 
 export default (value: string, max: number): boolean =>
 	typeof value === "string" &&
-	value
-		.split(/\r?\n/)
-		.every((line) => URL_REGEX.test(line) || ensure(line, max));
+	value.split(/\r?\n/).every((line) => URL_REGEX.test(line) || ensure(line, max));

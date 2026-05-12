@@ -18,8 +18,7 @@ export default {
 				description: "Improves formatting, white-space.",
 			},
 			refactor: {
-				description:
-					"Rewrites code without feature, performance or bug changes.",
+				description: "Rewrites code without feature, performance or bug changes.",
 			},
 			perf: {
 				description: "Improves performance.",
@@ -49,8 +48,7 @@ export default {
 		multiline: true,
 	},
 	footer: {
-		description:
-			"<footer> holds further meta data, such as breaking changes and issue ids",
+		description: "<footer> holds further meta data, such as breaking changes and issue ids",
 		multiline: true,
 	},
 };

@@ -8,8 +8,7 @@ const require = createRequire(import.meta.url);
 export default {
 	utils: { getPackages },
 	rules: {
-		"scope-enum": (ctx) =>
-			getPackages(ctx).then((packages) => [2, "always", packages]),
+		"scope-enum": (ctx) => getPackages(ctx).then((packages) => [2, "always", packages]),
 	},
 };
 

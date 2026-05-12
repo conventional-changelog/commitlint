@@ -19,9 +19,7 @@ export async function input(prompter: PromptModule): Promise<string> {
 	const parts = ["type", "scope", "subject", "body", "footer"] as const;
 	const headerParts = ["type", "scope", "subject"];
 
-	const headerLengthRule = getRules("header", rules).find(
-		getHasName("max-length"),
-	);
+	const headerLengthRule = getRules("header", rules).find(getHasName("max-length"));
 	const maxLength = getMaxLength(headerLengthRule);
 
 	try {

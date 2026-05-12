@@ -163,34 +163,22 @@ test("true for `Any_CASE_iN_back-quotes` on start-case", () => {
 });
 
 test("true for lowercase `Any_CASE_iN_back-quotes` lowercase on lowercase", () => {
-	const actual = ensure(
-		"lowercase `Any_CASE_iN_back-quotes` lowercase",
-		"lowercase",
-	);
+	const actual = ensure("lowercase `Any_CASE_iN_back-quotes` lowercase", "lowercase");
 	expect(actual).toBe(true);
 });
 
 test("false for UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE on lowercase", () => {
-	const actual = ensure(
-		"UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE",
-		"lowercase",
-	);
+	const actual = ensure("UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE", "lowercase");
 	expect(actual).toBe(false);
 });
 
 test("true for UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE on uppercase", () => {
-	const actual = ensure(
-		"UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE",
-		"uppercase",
-	);
+	const actual = ensure("UPPERCASE `Any_CASE_iN_back-quotes` UPPERCASE", "uppercase");
 	expect(actual).toBe(true);
 });
 
 test("false for lowercase `Any_CASE_iN_back-quotes` lowercase on uppercase", () => {
-	const actual = ensure(
-		"lowercase `Any_CASE_iN_back-quotes` lowercase",
-		"uppercase",
-	);
+	const actual = ensure("lowercase `Any_CASE_iN_back-quotes` lowercase", "uppercase");
 	expect(actual).toBe(false);
 });
 
@@ -200,74 +188,47 @@ test("true for fooBar`Any_CASE_iN_back-quotes`fooBar on camel-case", () => {
 });
 
 test("false for Foo Bar`Any_CASE_iN_back-quotes` Foo Bar on camel-case", () => {
-	const actual = ensure(
-		"Foo Bar`Any_CASE_iN_back-quotes` Foo Bar",
-		"camel-case",
-	);
+	const actual = ensure("Foo Bar`Any_CASE_iN_back-quotes` Foo Bar", "camel-case");
 	expect(actual).toBe(false);
 });
 
 test("true for foo-bar`Any_CASE_iN_back-quotes`foo-bar on kebab-case", () => {
-	const actual = ensure(
-		"foo-bar`Any_CASE_iN_back-quotes`foo-bar",
-		"kebab-case",
-	);
+	const actual = ensure("foo-bar`Any_CASE_iN_back-quotes`foo-bar", "kebab-case");
 	expect(actual).toBe(true);
 });
 
 test("false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on kebab-case", () => {
-	const actual = ensure(
-		"Foo Bar `Any_CASE_iN_back-quotes` Foo Bar",
-		"kebab-case",
-	);
+	const actual = ensure("Foo Bar `Any_CASE_iN_back-quotes` Foo Bar", "kebab-case");
 	expect(actual).toBe(false);
 });
 
 test("true for foo_bar`Any_CASE_iN_back-quotes`foo_bar on snake-case", () => {
-	const actual = ensure(
-		"foo_bar`Any_CASE_iN_back-quotes`foo_bar",
-		"snake-case",
-	);
+	const actual = ensure("foo_bar`Any_CASE_iN_back-quotes`foo_bar", "snake-case");
 	expect(actual).toBe(true);
 });
 
 test("false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on snake-case", () => {
-	const actual = ensure(
-		"Foo Bar `Any_CASE_iN_back-quotes` Foo Bar",
-		"snake-case",
-	);
+	const actual = ensure("Foo Bar `Any_CASE_iN_back-quotes` Foo Bar", "snake-case");
 	expect(actual).toBe(false);
 });
 
 test("true for PascalCase`Any_CASE_iN_back-quotes`PascalCase on pascal-case", () => {
-	const actual = ensure(
-		"PascalCase`Any_CASE_iN_back-quotes`PascalCase",
-		"pascal-case",
-	);
+	const actual = ensure("PascalCase`Any_CASE_iN_back-quotes`PascalCase", "pascal-case");
 	expect(actual).toBe(true);
 });
 
 test("false for Foo Bar `Any_CASE_iN_back-quotes` Foo Bar on pascal-case", () => {
-	const actual = ensure(
-		"Foo Bar `Any_CASE_iN_back-quotes` Foo Bar",
-		"pascal-case",
-	);
+	const actual = ensure("Foo Bar `Any_CASE_iN_back-quotes` Foo Bar", "pascal-case");
 	expect(actual).toBe(false);
 });
 
 test("true for Foo Bar`Any_CASE_iN_back-quotes` Foo Bar on start-case", () => {
-	const actual = ensure(
-		"Foo Bar `Any_CASE_iN_back-quotes`Foo Bar",
-		"start-case",
-	);
+	const actual = ensure("Foo Bar `Any_CASE_iN_back-quotes`Foo Bar", "start-case");
 	expect(actual).toBe(true);
 });
 
 test("false for foo_bar`Any_CASE_iN_back-quotes`foo_bar on start-case", () => {
-	const actual = ensure(
-		"foo_bar`Any_CASE_iN_back-quotes`foo_bar",
-		"start-case",
-	);
+	const actual = ensure("foo_bar`Any_CASE_iN_back-quotes`foo_bar", "start-case");
 	expect(actual).toBe(false);
 });
 

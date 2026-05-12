@@ -19,8 +19,7 @@ export class HeaderQuestion extends Question {
 		this.headerMinLength = headerMinLength ?? 0;
 	}
 	beforeQuestionStart(answers: Answers): void {
-		const headerRemainLength =
-			this.headerMaxLength - combineCommitMessage(answers).length;
+		const headerRemainLength = this.headerMaxLength - combineCommitMessage(answers).length;
 		// Reserve 1 char for '!' when useExclamationMark is enabled.
 		const reservedLength = getPromptSettings()["useExclamationMark"] ? 1 : 0;
 		const remainingLength = Math.max(0, headerRemainLength - reservedLength);
@@ -33,9 +32,7 @@ export function combineCommitMessage(answers: Answers): string {
 	const { type = "", scope = "", subject = "", isBreaking } = answers;
 	const hasPrefix = Boolean(type || scope);
 	const breakingMark =
-		hasPrefix && isBreaking && getPromptSettings()["useExclamationMark"]
-			? "!"
-			: "";
+		hasPrefix && isBreaking && getPromptSettings()["useExclamationMark"] ? "!" : "";
 	const prefix = `${type}${scope ? `(${scope})` : ""}${breakingMark}`;
 
 	if (subject) {
@@ -71,16 +68,13 @@ export function getQuestions(): Array<DistinctQuestion> {
 	return questions;
 }
 
-export function getQuestionConfig(
-	name: RuleField,
-): ReturnType<typeof getRuleQuestionConfig> {
+export function getQuestionConfig(name: RuleField): ReturnType<typeof getRuleQuestionConfig> {
 	const questionConfig = getRuleQuestionConfig(name);
 
 	if (questionConfig) {
 		if (name === "scope") {
 			if (getPromptSettings()["enableMultipleScopes"]) {
-				questionConfig.multipleSelectDefaultDelimiter =
-					getPromptSettings()["scopeEnumSeparator"];
+				questionConfig.multipleSelectDefaultDelimiter = getPromptSettings()["scopeEnumSeparator"];
 			}
 			// split scope string to segments, match commitlint rules
 			questionConfig.multipleValueDelimiters = /\/|\\|,/g;

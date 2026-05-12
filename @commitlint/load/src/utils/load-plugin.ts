@@ -15,16 +15,12 @@ const require = createRequire(import.meta.url);
 const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 
 const dynamicImport = async <T>(id: string): Promise<T> => {
-	const imported = await import(
-		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
-	);
+	const imported = await import(path.isAbsolute(id) ? pathToFileURL(id).toString() : id);
 	return ("default" in imported && imported.default) || imported;
 };
 
 function sanitizeErrorMessage(message: string): string {
-	return message
-		.replace(/\/[^/]+\/node_modules/g, "...")
-		.replace(/\\[^\\]+\\node_modules/g, "...");
+	return message.replace(/\/[^/]+\/node_modules/g, "...").replace(/\\[^\\]+\\node_modules/g, "...");
 }
 
 function findPackageJson(dir: string): string | null {
@@ -45,9 +41,7 @@ export interface LoadPluginOptions {
 	searchPaths?: string[];
 }
 
-function normalizeOptions(
-	options: LoadPluginOptions | boolean,
-): LoadPluginOptions {
+function normalizeOptions(options: LoadPluginOptions | boolean): LoadPluginOptions {
 	if (typeof options === "boolean") {
 		return { debug: options };
 	}
@@ -64,19 +58,13 @@ export default async function loadPlugin(
 
 	for (const searchPath of searchPaths) {
 		if (typeof searchPath !== "string" || !path.isAbsolute(searchPath)) {
-			throw new Error(
-				`Invalid searchPath "${searchPath}": must be an absolute path`,
-			);
+			throw new Error(`Invalid searchPath "${searchPath}": must be an absolute path`);
 		}
 		if (!fs.existsSync(searchPath)) {
-			throw new Error(
-				`Invalid searchPath "${searchPath}": directory does not exist`,
-			);
+			throw new Error(`Invalid searchPath "${searchPath}": directory does not exist`);
 		}
 		if (!fs.statSync(searchPath).isDirectory()) {
-			throw new Error(
-				`Invalid searchPath "${searchPath}": must be a directory, not a file`,
-			);
+			throw new Error(`Invalid searchPath "${searchPath}": must be a directory, not a file`);
 		}
 	}
 
@@ -148,18 +136,12 @@ export default async function loadPlugin(
 				if (resolutionError) {
 					// Resolution failed - throw MissingPluginError
 					if (debug) {
-						console.debug(
-							`Failed to resolve plugin ${longName}: ${resolutionError.message}`,
-						);
+						console.debug(`Failed to resolve plugin ${longName}: ${resolutionError.message}`);
 					}
-					throw new MissingPluginError(
-						pluginName,
-						sanitizeErrorMessage(resolutionError.message),
-						{
-							pluginName: longName,
-							commitlintPath: path.resolve(__dirname, "../.."),
-						},
-					);
+					throw new MissingPluginError(pluginName, sanitizeErrorMessage(resolutionError.message), {
+						pluginName: longName,
+						commitlintPath: path.resolve(__dirname, "../.."),
+					});
 				}
 
 				// Resolution succeeded but import failed - rethrow original error
@@ -187,24 +169,16 @@ export default async function loadPlugin(
 				: `${longName}, version unknown`;
 
 			const fromPath = resolvedPath ? ` (from ${resolvedPath})` : "";
-			console.log(
-				pc.blue(
-					`Loaded plugin ${pluginName} (${loadedPluginAndVersion})${fromPath}`,
-				),
-			);
+			console.log(pc.blue(`Loaded plugin ${pluginName} (${loadedPluginAndVersion})${fromPath}`));
 		}
 
 		if (plugin) {
 			plugins[pluginKey] = plugin;
 		} else {
-			throw new MissingPluginError(
-				pluginName,
-				"Plugin loaded but is undefined",
-				{
-					pluginName: longName,
-					commitlintPath: path.resolve(__dirname, "../.."),
-				},
-			);
+			throw new MissingPluginError(pluginName, "Plugin loaded but is undefined", {
+				pluginName: longName,
+				commitlintPath: path.resolve(__dirname, "../.."),
+			});
 		}
 	}
 

@@ -9,9 +9,7 @@ import config from "./index.js";
 const { rules, parserPreset } = config;
 
 const dynamicImport = async (id: string) => {
-	const imported = await import(
-		path.isAbsolute(id) ? pathToFileURL(id).toString() : id
-	);
+	const imported = await import(path.isAbsolute(id) ? pathToFileURL(id).toString() : id);
 	return ("default" in imported && imported.default) || imported;
 };
 
@@ -36,8 +34,7 @@ const messages = {
 	invalidSubjectFullStop: "fix: some message.",
 	invalidHeaderMaxLength:
 		"fix: some message that is way too long and breaks the line max-length by several characters since the max is 100",
-	warningFooterLeadingBlank:
-		"fix: some message\n\nbody\nBREAKING CHANGE: It will be significant",
+	warningFooterLeadingBlank: "fix: some message\n\nbody\nBREAKING CHANGE: It will be significant",
 	invalidFooterMaxLineLength:
 		'fix: some message\n\nbody\n\nBREAKING CHANGE: footer with multiple lines\nhas a message that is way too long and will break the line rule "line-max-length" by several characters',
 	warningBodyLeadingBlank: "fix: some message\nbody",
@@ -75,8 +72,7 @@ const errors = {
 	},
 	subjectCase: {
 		level: 2,
-		message:
-			"subject must not be sentence-case, start-case, pascal-case, upper-case",
+		message: "subject must not be sentence-case, start-case, pascal-case, upper-case",
 		name: "subject-case",
 		valid: false,
 	},
@@ -94,8 +90,7 @@ const errors = {
 	},
 	headerMaxLength: {
 		level: 2,
-		message:
-			"header must not be longer than 100 characters, current length is 112",
+		message: "header must not be longer than 100 characters, current length is 112",
 		name: "header-max-length",
 		valid: false,
 	},
@@ -151,9 +146,7 @@ test("type-empty", async () => {
 
 test("subject-case", async () => {
 	const invalidInputs = await Promise.all(
-		messages.invalidSubjectCases.map((invalidInput) =>
-			commitLint(invalidInput),
-		),
+		messages.invalidSubjectCases.map((invalidInput) => commitLint(invalidInput)),
 	);
 
 	invalidInputs.forEach((result) => {
@@ -212,9 +205,7 @@ test("body-max-line-length", async () => {
 });
 
 test("valid messages", async () => {
-	const validInputs = await Promise.all(
-		messages.validMessages.map((input) => commitLint(input)),
-	);
+	const validInputs = await Promise.all(messages.validMessages.map((input) => commitLint(input)));
 
 	validInputs.forEach((result) => {
 		expect(result.valid).toBe(true);

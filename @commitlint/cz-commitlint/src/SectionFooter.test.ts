@@ -14,8 +14,7 @@ describe("getQuestions", () => {
 		setPromptConfig({
 			questions: {
 				footer: {
-					description:
-						"<footer> holds further meta data, such as breaking changes and issue ids",
+					description: "<footer> holds further meta data, such as breaking changes and issue ids",
 				},
 				issues: {
 					description: "<issues> link",
@@ -211,8 +210,7 @@ describe("combineCommitMessage", () => {
 	});
 	test("should return correct string with BreakChange,issue,footer", () => {
 		const commitMessage = combineCommitMessage({
-			issues:
-				"https://github.com/conventional-changelog/commitlint/issues/2507",
+			issues: "https://github.com/conventional-changelog/commitlint/issues/2507",
 			breaking: "BREAKING CHANGE: xxxxxx",
 			footer: "Other footer information.",
 		});
@@ -226,8 +224,7 @@ describe("combineCommitMessage", () => {
 			"footer-max-line-length": [RuleConfigSeverity.Error, "always", 10],
 		});
 		const commitMessage = combineCommitMessage({
-			issues:
-				"https://github.com/conventional-changelog/commitlint/issues/2507",
+			issues: "https://github.com/conventional-changelog/commitlint/issues/2507",
 			breaking: "BREAKING CHANGE: xxxxxx",
 			footer: "Other footer information.",
 		});
@@ -242,8 +239,7 @@ describe("combineCommitMessage", () => {
 			"footer-leading-blank": [RuleConfigSeverity.Error, "always"],
 		});
 		const commitMessage = combineCommitMessage({
-			issues:
-				"https://github.com/conventional-changelog/commitlint/issues/2507",
+			issues: "https://github.com/conventional-changelog/commitlint/issues/2507",
 			breaking: "BREAKING CHANGE: xxxxxx",
 			footer: "Other footer information.",
 		});
@@ -254,8 +250,7 @@ describe("combineCommitMessage", () => {
 
 	test("when does not have break change", () => {
 		const commitMessage = combineCommitMessage({
-			issues:
-				"https://github.com/conventional-changelog/commitlint/issues/2507",
+			issues: "https://github.com/conventional-changelog/commitlint/issues/2507",
 			footer: "Other footer information.",
 		});
 		expect(commitMessage).toBe(
@@ -294,8 +289,7 @@ describe("FooterQuestion", () => {
 					description: "<issues> link",
 				},
 				footer: {
-					description:
-						"<footer> holds further meta data, such as breaking changes and issue ids",
+					description: "<footer> holds further meta data, such as breaking changes and issue ids",
 				},
 			},
 		});

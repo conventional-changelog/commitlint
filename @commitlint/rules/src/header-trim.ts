@@ -12,11 +12,9 @@ export const headerTrim: SyncRule = (parsed) => {
 	if (startsWithWhiteSpace && endsWithWhiteSpace)
 		return [false, message(["header", "must not be surrounded by whitespace"])];
 
-	if (startsWithWhiteSpace)
-		return [false, message(["header", "must not start with whitespace"])];
+	if (startsWithWhiteSpace) return [false, message(["header", "must not start with whitespace"])];
 
-	if (endsWithWhiteSpace)
-		return [false, message(["header", "must not end with whitespace"])];
+	if (endsWithWhiteSpace) return [false, message(["header", "must not end with whitespace"])];
 
 	return [true];
 };

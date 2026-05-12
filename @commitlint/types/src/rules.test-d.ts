@@ -10,11 +10,7 @@ import { RuleConfigSeverity, type RulesConfig } from "./index.js";
 
 const ERROR = RuleConfigSeverity.Error;
 
-const _scopeEnumObject = [
-	ERROR,
-	"always",
-	{ scopes: ["foo", "bar"] as const },
-] as const;
+const _scopeEnumObject = [ERROR, "always", { scopes: ["foo", "bar"] as const }] as const;
 const _scopeEnumObjectCheck: Partial<RulesConfig> = {
 	"scope-enum": _scopeEnumObject,
 };

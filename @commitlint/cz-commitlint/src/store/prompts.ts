@@ -28,13 +28,8 @@ export function setPromptConfig(newPromptConfig: UserPromptConfig): void {
 	}
 
 	if (settings && isPlainObject(settings)) {
-		if (
-			settings["scopeEnumSeparator"] &&
-			!/^\/|\\|,$/.test(settings["scopeEnumSeparator"])
-		) {
-			console.log(
-				`prompt.settings.scopeEnumSeparator must be one of ',', '\\', '/'.`,
-			);
+		if (settings["scopeEnumSeparator"] && !/^\/|\\|,$/.test(settings["scopeEnumSeparator"])) {
+			console.log(`prompt.settings.scopeEnumSeparator must be one of ',', '\\', '/'.`);
 			process.exit(1);
 		}
 		store[storeKey]["settings"] = {

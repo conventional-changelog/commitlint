@@ -255,28 +255,19 @@ test('with uppercase scope should succeed for "always uppercase"', async () => {
 });
 
 test('with uppercase scope should succeed for "always [uppercase, lowercase]"', async () => {
-	const [actual] = scopeCase(await parsed.uppercase, "always", [
-		"uppercase",
-		"lowercase",
-	]);
+	const [actual] = scopeCase(await parsed.uppercase, "always", ["uppercase", "lowercase"]);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test('with lowercase scope should succeed for "always [uppercase, lowercase]"', async () => {
-	const [actual] = scopeCase(await parsed.lowercase, "always", [
-		"uppercase",
-		"lowercase",
-	]);
+	const [actual] = scopeCase(await parsed.lowercase, "always", ["uppercase", "lowercase"]);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test('with mixedcase scope should fail for "always [uppercase, lowercase]"', async () => {
-	const [actual] = scopeCase(await parsed.mixedcase, "always", [
-		"uppercase",
-		"lowercase",
-	]);
+	const [actual] = scopeCase(await parsed.mixedcase, "always", ["uppercase", "lowercase"]);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
@@ -292,19 +283,13 @@ test('with mixedcase scope should pass for "always [uppercase, lowercase, camel-
 });
 
 test('with mixedcase scope should pass for "never [uppercase, lowercase]"', async () => {
-	const [actual] = scopeCase(await parsed.mixedcase, "never", [
-		"uppercase",
-		"lowercase",
-	]);
+	const [actual] = scopeCase(await parsed.mixedcase, "never", ["uppercase", "lowercase"]);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
 test('with uppercase scope should fail for "never [uppercase, lowercase]"', async () => {
-	const [actual] = scopeCase(await parsed.uppercase, "never", [
-		"uppercase",
-		"lowercase",
-	]);
+	const [actual] = scopeCase(await parsed.uppercase, "never", ["uppercase", "lowercase"]);
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
@@ -343,9 +328,7 @@ test("with object-based configuration should support custom single delimiter", a
 });
 
 test("with object-based configuration should support multiple custom delimiters", async () => {
-	const commit = await parse(
-		"feat(scope|my-scope/shared-scope,common-scope): subject",
-	);
+	const commit = await parse("feat(scope|my-scope/shared-scope,common-scope): subject");
 	const [actual] = scopeCase(commit, "always", {
 		cases: ["kebab-case"],
 		delimiters: ["|", "/", ","],

@@ -13,9 +13,7 @@ function main() {
 	return isStageEmpty()
 		.then((empty) => {
 			if (empty) {
-				console.log(
-					`Nothing to commit. Stage your changes via "git add" execute "commit" again`,
-				);
+				console.log(`Nothing to commit. Stage your changes via "git add" execute "commit" again`);
 				process.exit(1);
 			}
 		})

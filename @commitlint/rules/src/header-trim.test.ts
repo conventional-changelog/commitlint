@@ -39,9 +39,7 @@ test.each([
 	{ scenario: "tab", commit: parsed.tabStart },
 ] as const)("should fail when starts with $scenario", async ({ commit }) => {
 	const result = headerTrim(await commit);
-	expect(result).toEqual(
-		expect.arrayContaining([false, "header must not start with whitespace"]),
-	);
+	expect(result).toEqual(expect.arrayContaining([false, "header must not start with whitespace"]));
 });
 
 test.each([
@@ -50,24 +48,16 @@ test.each([
 	{ scenario: "tab", commit: parsed.tabEnd },
 ] as const)("should fail when ends with $scenario", async ({ commit }) => {
 	const result = headerTrim(await commit);
-	expect(result).toEqual(
-		expect.arrayContaining([false, "header must not end with whitespace"]),
-	);
+	expect(result).toEqual(expect.arrayContaining([false, "header must not end with whitespace"]));
 });
 
 test.each([
 	{ scenario: "mixed whitespace", commit: parsed.mixSurround },
 	{ scenario: "whitespace", commit: parsed.whitespaceSurround },
 	{ scenario: "tab", commit: parsed.tabSurround },
-] as const)(
-	"should fail when surrounded by with $scenario",
-	async ({ commit }) => {
-		const result = headerTrim(await commit);
-		expect(result).toEqual(
-			expect.arrayContaining([
-				false,
-				"header must not be surrounded by whitespace",
-			]),
-		);
-	},
-);
+] as const)("should fail when surrounded by with $scenario", async ({ commit }) => {
+	const result = headerTrim(await commit);
+	expect(result).toEqual(
+		expect.arrayContaining([false, "header must not be surrounded by whitespace"]),
+	);
+});

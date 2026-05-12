@@ -34,11 +34,7 @@ export async function installModules(cwd: string) {
 							const rel = path.relative(sourceModulesPath, entry);
 							const segments = rel.split(path.sep);
 							if (segments[0].startsWith("@")) {
-								sourcePath = path.join(
-									sourceModulesPath,
-									segments[0],
-									segments[1],
-								);
+								sourcePath = path.join(sourceModulesPath, segments[0], segments[1]);
 							} else {
 								sourcePath = path.join(sourceModulesPath, segments[0]);
 							}
@@ -53,11 +49,7 @@ export async function installModules(cwd: string) {
 						) {
 							// Expected: package not found via require.resolve
 						} else {
-							console.warn(
-								"Unexpected error while resolving dependency:",
-								dependency,
-								e,
-							);
+							console.warn("Unexpected error while resolving dependency:", dependency, e);
 						}
 					}
 				}
@@ -88,10 +80,7 @@ export async function bootstrap(fixture: string, directory?: string) {
 	return cwd;
 }
 
-function findParentPath(
-	parentPath: string,
-	dirname: string,
-): string | undefined {
+function findParentPath(parentPath: string, dirname: string): string | undefined {
 	const parts = parentPath.split(path.sep);
 	const idx = parts.lastIndexOf(dirname);
 	if (idx >= 0) {
