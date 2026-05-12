@@ -201,7 +201,7 @@ git clone git@github.com:conventional-changelog/commitlint.git
 cd commitlint
 pnpm install
 pnpm build # run build tasks
-pnpm start # run tests, again on change
+pnpm start # rebuild on change (tsc -b --watch)
 node @commitlint/cli/cli.js # run CLI
 ```
 
