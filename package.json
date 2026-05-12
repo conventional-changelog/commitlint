@@ -91,7 +91,7 @@
       "**/fixtures/**/package.json"
     ],
     "extends": [
-      "config:base"
+      "config:recommended"
     ],
     "semanticCommitType": "chore",
     "semanticCommitScope": null,
@@ -99,6 +99,12 @@
       "@commitlint/test",
       "@commitlint/utils",
       "vitest-environment-commitlint"
-    ]
+    ],
+    "lockFileMaintenance": {
+      "enabled": true,
+      "schedule": [
+        "before 5am on monday"
+      ]
+    }
   }
 }
