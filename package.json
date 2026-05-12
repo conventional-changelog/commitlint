@@ -42,6 +42,7 @@
     "docs-preview": "vitepress preview docs",
     "lint": "oxlint",
     "lint-fix": "oxlint --fix",
+    "check-no-focused-tests": "node scripts/check-no-focused-tests.js",
     "format": "oxfmt --check --ignore-path .oxfmtignore",
     "format-fix": "oxfmt --ignore-path .oxfmtignore",
     "publish": "npm whoami && lerna publish --conventional-commits",
@@ -66,6 +67,7 @@
   },
   "lint-staged": {
     "*.{ts,js}": [
+      "node scripts/check-no-focused-tests.js",
       "oxlint --fix",
       "oxfmt --ignore-path .oxfmtignore"
     ],
