@@ -1,0 +1,36 @@
+name: Audit
+
+on:
+  schedule:
+    # Monday 06:00 UTC. Visibility-only — no PRs are gated by this run.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: pnpm audit (non-blocking)
+    if: github.repository == 'conventional-changelog/commitlint'
+    runs-on: ubuntu-latest
+    # Findings here are almost always in upstream tooling we use deliberately
+    # (lerna, nx, commitizen, vitepress). The job surfaces issues for review
+    # but does not block ongoing work — hence continue-on-error.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit
+        run: pnpm audit --audit-level=high
