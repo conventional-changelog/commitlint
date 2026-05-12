@@ -52,6 +52,8 @@
     "prepare": "husky"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^21.0.0",
+    "@commitlint/config-workspace-scopes": "^21.0.0",
     "@swc/core": "^1.15.18",
     "@vitest/coverage-istanbul": "~4.0.18",
     "husky": "^9.1.5",
