@@ -46,4 +46,5 @@ export interface ParserPreset {
 	path?: string;
 	parserOpts?: unknown;
 	parser?: unknown;
+	presetConfig?: unknown;
 }
