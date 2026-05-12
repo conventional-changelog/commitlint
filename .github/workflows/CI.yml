@@ -116,9 +116,13 @@ jobs:
           # would make this CI job entirely pointless
           apt install --yes nodejs npm
 
-          # corepack ships with Node >=16.10 and reads pnpm version from
-          # package.json `packageManager` field.
-          corepack enable
+          # Ubuntu's bundled corepack (with stock Node) trips on the dynamic
+          # ESM imports pnpm 11 uses at launch (ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING).
+          # Install pnpm directly via npm so this job stays honest about
+          # "stock apt + one explicit pnpm install" rather than papering over
+          # a packaging mismatch.
+          PNPM_VERSION=$(node -p "require('./package.json').packageManager.split('@')[1].split('+')[0]")
+          npm install --global pnpm@${PNPM_VERSION}
           pnpm install --frozen-lockfile
 
       - name: Print versions
