@@ -59,6 +59,27 @@ export default async function getCommitMessages(
 		}
 	}
 
+	// Verify the two refs share a merge-base before handing off the range
+	// walk to git-raw-commits. In a shallow clone the common ancestor may
+	// be missing, in which case `git log from..to` silently returns only
+	// the commits that happen to be present, hiding invalid commits in the
+	// unfetched portion of history.
+	if (from) {
+		// `to` is left undefined here when no --to was given; git-raw-commits
+		// defaults it to HEAD, so we mirror that for the merge-base check.
+		const effectiveTo = to ?? "HEAD";
+		const mergeBase = await x("git", ["merge-base", from, effectiveTo], {
+			nodeOptions: { cwd },
+		});
+		if (mergeBase.exitCode === 1) {
+			throw new Error(
+				`Cannot find merge-base between '${from}' and '${effectiveTo}'. ` +
+					`This typically indicates incomplete git history (e.g., a shallow clone). ` +
+					`Consider fetching more history.`,
+			);
+		}
+	}
+
 	let gitOptions: GitOptions = { from, to };
 	if (gitLogArgs) {
 		const { values, positionals } = parseArgs({
