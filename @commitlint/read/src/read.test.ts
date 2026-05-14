@@ -164,3 +164,43 @@ test("should not read any commits when there are no tags", async () => {
 
 	expect(result).toHaveLength(0);
 });
+
+test("throws when from and to share no merge-base", async () => {
+	const cwd: string = await git.bootstrap();
+	await x("git", ["commit", "--allow-empty", "-m", "main commit"], {
+		nodeOptions: { cwd },
+	});
+	const initialBranch = (
+		await x("git", ["rev-parse", "--abbrev-ref", "HEAD"], {
+			nodeOptions: { cwd },
+		})
+	).stdout.trim();
+
+	await x("git", ["checkout", "--orphan", "other"], { nodeOptions: { cwd } });
+	await x("git", ["commit", "--allow-empty", "-m", "orphan commit"], {
+		nodeOptions: { cwd },
+	});
+
+	await expect(read({ from: initialBranch, to: "other", cwd })).rejects.toThrow(
+		/Cannot find merge-base/,
+	);
+});
+
+test("throws when from has no merge-base with HEAD (no --to)", async () => {
+	const cwd: string = await git.bootstrap();
+	await x("git", ["commit", "--allow-empty", "-m", "main commit"], {
+		nodeOptions: { cwd },
+	});
+	const initialBranch = (
+		await x("git", ["rev-parse", "--abbrev-ref", "HEAD"], {
+			nodeOptions: { cwd },
+		})
+	).stdout.trim();
+
+	await x("git", ["checkout", "--orphan", "other"], { nodeOptions: { cwd } });
+	await x("git", ["commit", "--allow-empty", "-m", "orphan commit"], {
+		nodeOptions: { cwd },
+	});
+
+	await expect(read({ from: initialBranch, cwd })).rejects.toThrow(/Cannot find merge-base/);
+});
