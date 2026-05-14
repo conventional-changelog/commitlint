@@ -22,10 +22,7 @@ export async function getEditCommit(cwd?: string, edit?: boolean | string): Prom
 				typeof edit === "string"
 					? `Check that the path passed to --edit exists and is readable.`
 					: `--edit reads the message prepared by 'git commit' and is intended to run from a commit-msg hook. If you want to lint existing history, use --from / --to instead; to lint a specific file, pass its path as --edit <file>.`;
-			throw new Error(
-				`No commit message file found at ${editFilePath}. ${hint}`,
-				{ cause: err },
-			);
+			throw new Error(`No commit message file found at ${editFilePath}. ${hint}`, { cause: err });
 		}
 		throw err;
 	}
