@@ -120,6 +120,21 @@ test("regression test for running with --last flag", async () => {
 	expect(output.stderr).toEqual("");
 });
 
+test("should fail when --from and --to point to the same commit", async () => {
+	const cwd = await gitBootstrap("fixtures/default");
+	const result = cli(["--from", "abc123", "--to", "abc123"], { cwd })();
+	const output = await result;
+	expect(output.stderr).toContain("--from");
+	expect(output.stderr).toContain("--to");
+	expect(output.stderr).toContain("abc123");
+
+	// suggestions to user
+	expect(output.stderr).toContain("--last");
+	expect(output.stderr).toContain("abc123^");
+
+	expect(result.exitCode).toBe(ExitCode.CommitlintInvalidArgument);
+});
+
 test("should produce no output with --quiet flag", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
 	const result = cli(["--quiet"], { cwd })("foo: bar");
