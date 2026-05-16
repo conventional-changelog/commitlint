@@ -253,6 +253,17 @@ async function main(args: MainArgs): Promise<void> {
 		throw err;
 	}
 
+	if (Object.hasOwn(flags, "from") && Object.hasOwn(flags, "to") && flags.from === flags.to) {
+		const err = new CliError(
+			`Invalid input flags: --from and --to resolve to the same commit. To lint that single commit, use --last (for HEAD) or --from $${flags.from}^ --to $${flags.from}.`,
+			pkg.name,
+			ExitCode.CommitlintInvalidArgument,
+		);
+		cli.showHelp("log");
+		console.error(err.message);
+		throw err;
+	}
+
 	const input = await (fromStdin
 		? stdin()
 		: read({
