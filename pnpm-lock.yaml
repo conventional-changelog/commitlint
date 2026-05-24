@@ -705,8 +705,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.0
       resolve-pkg:
-        specifier: ^2.0.0
-        version: 2.0.0
+        specifier: ^3.0.0
+        version: 3.0.1
       tinyexec:
         specifier: ^1.0.0
         version: 1.2.2
@@ -4403,9 +4403,9 @@ packages:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
 
-  resolve-pkg@2.0.0:
-    resolution: {integrity: sha512-+1lzwXehGCXSeryaISr6WujZzowloigEofRB+dj75y9RRa/obVcYgbHJd53tdYw8pvZj8GojXaaENws8Ktw/hQ==}
-    engines: {node: '>=8'}
+  resolve-pkg@3.0.1:
+    resolution: {integrity: sha512-OYIg+p3xVYwh4R0tnEKU+XZA8qiDY4y7iC+XgoC8LFbZuKHjPuuJ9mhWdSX6KYFNKvgar6hOdNj207DDI0nMfg==}
+    engines: {node: '>=20'}
 
   resolve.exports@2.0.3:
     resolution: {integrity: sha512-OcXjMsGdhL4XnbShKpAcSqPMzQoYkYyhbEaeSko47MjRP9NfEQMhZkXL1DoFlt9LWQn4YttrdnV6X2OiyzBi+A==}
@@ -8910,9 +8910,9 @@ snapshots:
 
   resolve-from@5.0.0: {}
 
-  resolve-pkg@2.0.0:
+  resolve-pkg@3.0.1:
     dependencies:
-      resolve-from: 5.0.0
+      find-up-simple: 1.0.1
 
   resolve.exports@2.0.3: {}
 
