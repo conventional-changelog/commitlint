@@ -1,9 +1,8 @@
 import path from "node:path";
 
 import { glob } from "node:fs/promises";
-import readYamlFileModule from "read-yaml-file";
+import { readYamlFile } from "read-yaml-file";
 import { readExactProjectManifest } from "@pnpm/read-project-manifest";
-const readYamlFile = readYamlFileModule.default;
 
 export default {
 	utils: { getProjects },
