@@ -74,7 +74,7 @@ importers:
         version: link:../../@packages/utils
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
 
   '@alias/commitlint-config-angular':
     dependencies:
@@ -135,7 +135,7 @@ importers:
         version: link:../types
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
@@ -549,7 +549,7 @@ importers:
         version: 9.3.8(@types/node@22.19.19)
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -571,7 +571,7 @@ importers:
         version: 5.0.1(conventional-commits-parser@6.4.0)
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -671,7 +671,7 @@ importers:
         version: link:../cli
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -709,7 +709,7 @@ importers:
         version: 2.0.0
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
       tmp:
         specifier: ^0.2.1
         version: 0.2.5
@@ -736,7 +736,7 @@ importers:
         version: 3.1.2
       tinyexec:
         specifier: ^1.0.0
-        version: 1.1.2
+        version: 1.2.2
       tmp:
         specifier: ^0.2.1
         version: 0.2.5
@@ -4703,6 +4703,10 @@ packages:
 
   tinyexec@1.1.2:
     resolution: {integrity: sha512-dAqSqE/RabpBKI8+h26GfLq6Vb3JVXs30XYQjdMjaj/c2tS8IYYMbIzP599KtRj7c57/wYApb3QjgRgXmrCukA==}
+    engines: {node: '>=18'}
+
+  tinyexec@1.2.2:
+    resolution: {integrity: sha512-M/Q0B2cp4K7kynaT/vnED1j8TlLY+Pp7C6Wl2bl/7u/F0mUVwdyOpwomQb8JpYLitHUssAJRmLZdMCGsrx7i+g==}
     engines: {node: '>=18'}
 
   tinyglobby@0.2.12:
@@ -9244,6 +9248,8 @@ snapshots:
   tinybench@2.9.0: {}
 
   tinyexec@1.1.2: {}
+
+  tinyexec@1.2.2: {}
 
   tinyglobby@0.2.12:
     dependencies:
