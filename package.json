@@ -88,6 +88,8 @@
   "renovate": {
     "rangeStrategy": "update-lockfile",
     "rebaseWhen": "behind-base-branch",
+    "minimumReleaseAge": "3 days",
+    "internalChecksFilter": "strict",
     "ignorePaths": [
       "**/fixtures/**/package.json"
     ],
