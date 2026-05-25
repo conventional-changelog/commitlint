@@ -157,7 +157,7 @@ importers:
         version: 6.4.0
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.46.1
+        version: 1.47.0
 
   '@commitlint/config-angular':
     dependencies:
@@ -233,7 +233,7 @@ importers:
         version: link:../config-angular
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.46.1
+        version: 1.47.0
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -356,7 +356,7 @@ importers:
         version: link:../types
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.46.1
+        version: 1.47.0
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -450,7 +450,7 @@ importers:
         version: 6.3.0(@types/node@22.19.19)(cosmiconfig@9.0.1(typescript@6.0.3))(typescript@6.0.3)
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.46.1
+        version: 1.47.0
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -593,7 +593,7 @@ importers:
         version: link:../types
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.46.1
+        version: 1.47.0
       global-directory:
         specifier: ^5.0.0
         version: 5.0.0
@@ -3071,6 +3071,9 @@ packages:
 
   es-toolkit@1.46.1:
     resolution: {integrity: sha512-5eNtXOs3tbfxXOj04tjjseeWkRWaoCjdEI+96DgwzZoe6c9juL49pXlzAFTI72aWC9Y8p7168g6XIKjh7k6pyQ==}
+
+  es-toolkit@1.47.0:
+    resolution: {integrity: sha512-n1GuoD0WEQZMBk5tttoZSqwgyLx01oqa5XsBmCHwPyNe1S9jPBEmtR2pSgp2kJuWE3ciFZ6yRHmY4pM4C3OOkw==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -7225,7 +7228,10 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.2
 
-  es-toolkit@1.46.1: {}
+  es-toolkit@1.46.1:
+    optional: true
+
+  es-toolkit@1.47.0: {}
 
   esbuild@0.21.5:
     optionalDependencies:
