@@ -245,8 +245,8 @@ importers:
   '@commitlint/config-pnpm-scopes':
     dependencies:
       '@pnpm/read-project-manifest':
-        specifier: ^5.0.10
-        version: 5.0.11
+        specifier: ^6.0.0
+        version: 6.0.10
       read-yaml-file:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1769,33 +1769,33 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@pnpm/constants@7.1.1':
-    resolution: {integrity: sha512-31pZqMtjwV+Vaq7MaPrT1EoDFSYwye3dp6BiHIGRJmVThCQwySRKM7hCvqqI94epNkqFAAYoWrNynWoRYosGdw==}
-    engines: {node: '>=16.14'}
+  '@pnpm/constants@10.0.0':
+    resolution: {integrity: sha512-dxIXcW1F1dxIGfye2JXE7Q8WVwYB0axVzdBOkvE1WKIVR4xjB8e6k/Dkjo7DpbyfW5Vu2k21p6dyM32YLSAWoQ==}
+    engines: {node: '>=18.12'}
 
-  '@pnpm/error@5.0.3':
-    resolution: {integrity: sha512-ONJU5cUeoeJSy50qOYsMZQHTA/9QKmGgh1ATfEpCLgtbdwqUiwD9MxHNeXUYYI/pocBCz6r1ZCFqiQvO+8SUKA==}
-    engines: {node: '>=16.14'}
+  '@pnpm/error@6.0.3':
+    resolution: {integrity: sha512-OIYhG7HQh4zUFh2s8/6bp7glVRjNxms7bpzXVOLV7pyRa+rSYFmqJ8zDsBC64k58nuaxS85Ip+SCDjFxsFGeOg==}
+    engines: {node: '>=18.12'}
 
-  '@pnpm/graceful-fs@3.2.0':
-    resolution: {integrity: sha512-vRoXJxscDpHak7YE9SqCkzfrayn+Lw+YueOeHIPEqkgokrHeYgYeONoc2kGh0ObHaRtNSsonozVfJ456kxLNvA==}
-    engines: {node: '>=16.14'}
+  '@pnpm/graceful-fs@4.0.0':
+    resolution: {integrity: sha512-933nhV2Prp51522poxX6Chvb7kEW3U3kzVWoqDU1+icB+QE7z/2qQ8wYHsBt4jm0Uil/sF67t77ugOr8bR63kg==}
+    engines: {node: '>=18.12'}
 
-  '@pnpm/read-project-manifest@5.0.11':
-    resolution: {integrity: sha512-themRLiDt9Ud6Somlu0PJbeprBBQEhlI1xNG5bZIv26yfLsc1vYLd1TfgGViD1b8fP0jxAqsUrDM+WMaMKI+gw==}
-    engines: {node: '>=16.14'}
+  '@pnpm/read-project-manifest@6.0.10':
+    resolution: {integrity: sha512-A5f2wbx+Y5RjG687umaeDFUq67zKg50RuFssKwOaitjwdFA1BEzF3CRMgpqQ2VAgenGRm6d5QaP9u2iQZ+NWEg==}
+    engines: {node: '>=18.12'}
 
-  '@pnpm/text.comments-parser@2.0.0':
-    resolution: {integrity: sha512-DRWtTmmxQQtuWHf1xPt9bqzCSq8d0MQF5x1kdpCDMLd7xk3nP4To2/OGkPrb8MKbrWsgCNDwXyKCFlEKrAg7fg==}
-    engines: {node: '>=16.14'}
+  '@pnpm/text.comments-parser@3.0.0':
+    resolution: {integrity: sha512-BSGvYd59kPKVTUk1InekEp+TiPnJ8650/bQyiOUFSvqHi61YipcR+E4H2i3xTnk2e+GHdGbXvEtAZbQmyxb0/g==}
+    engines: {node: '>=18.12'}
 
-  '@pnpm/types@9.4.2':
-    resolution: {integrity: sha512-g1hcF8Nv4gd76POilz9gD4LITAPXOe5nX4ijgr8ixCbLQZfcpYiMfJ+C1RlMNRUDo8vhlNB4O3bUlxmT6EAQXA==}
-    engines: {node: '>=16.14'}
+  '@pnpm/types@12.2.0':
+    resolution: {integrity: sha512-5RtwWhX39j89/Tmyv2QSlpiNjErA357T/8r1Dkg+2lD3P7RuS7Xi2tChvmOC3VlezEFNcWnEGCOeKoGRkDuqFA==}
+    engines: {node: '>=18.12'}
 
-  '@pnpm/write-project-manifest@5.0.6':
-    resolution: {integrity: sha512-3qkKCftRE/HXzoWedyDuaMMUQzheDwx8AQXR0DnA9ylsBnZQYNut19Ado/gzi5+IvznaMcqrBszw57j3y1/ILw==}
-    engines: {node: '>=16.14'}
+  '@pnpm/write-project-manifest@6.0.7':
+    resolution: {integrity: sha512-UbY9aXp39wVffFX4FZ35NwF9pnl+ccq5i1yaBKamNB1kC8dU7oB/FgFrCva5cC6ox1y5ynze2SB8fj7uF7+kCw==}
+    engines: {node: '>=18.12'}
 
   '@rolldown/binding-android-arm64@1.0.2':
     resolution: {integrity: sha512-ZS4D1JPGn/MYQN/SYDWftIE/nVsM8j/AFOYEzAoOE2O3NktQOZru+/vYXGbR/qtdLdIfGCP0lcoJiYVzsEz+iQ==}
@@ -6118,24 +6118,24 @@ snapshots:
   '@oxlint/binding-win32-x64-msvc@1.66.0':
     optional: true
 
-  '@pnpm/constants@7.1.1': {}
+  '@pnpm/constants@10.0.0': {}
 
-  '@pnpm/error@5.0.3':
+  '@pnpm/error@6.0.3':
     dependencies:
-      '@pnpm/constants': 7.1.1
+      '@pnpm/constants': 10.0.0
 
-  '@pnpm/graceful-fs@3.2.0':
+  '@pnpm/graceful-fs@4.0.0':
     dependencies:
       graceful-fs: 4.2.11
 
-  '@pnpm/read-project-manifest@5.0.11':
+  '@pnpm/read-project-manifest@6.0.10':
     dependencies:
       '@gwhitney/detect-indent': 7.0.1
-      '@pnpm/error': 5.0.3
-      '@pnpm/graceful-fs': 3.2.0
-      '@pnpm/text.comments-parser': 2.0.0
-      '@pnpm/types': 9.4.2
-      '@pnpm/write-project-manifest': 5.0.6
+      '@pnpm/error': 6.0.3
+      '@pnpm/graceful-fs': 4.0.0
+      '@pnpm/text.comments-parser': 3.0.0
+      '@pnpm/types': 12.2.0
+      '@pnpm/write-project-manifest': 6.0.7
       fast-deep-equal: 3.1.3
       is-windows: 1.0.2
       json5: 2.2.3
@@ -6145,16 +6145,16 @@ snapshots:
       sort-keys: 4.2.0
       strip-bom: 4.0.0
 
-  '@pnpm/text.comments-parser@2.0.0':
+  '@pnpm/text.comments-parser@3.0.0':
     dependencies:
       strip-comments-strings: 1.2.0
 
-  '@pnpm/types@9.4.2': {}
+  '@pnpm/types@12.2.0': {}
 
-  '@pnpm/write-project-manifest@5.0.6':
+  '@pnpm/write-project-manifest@6.0.7':
     dependencies:
-      '@pnpm/text.comments-parser': 2.0.0
-      '@pnpm/types': 9.4.2
+      '@pnpm/text.comments-parser': 3.0.0
+      '@pnpm/types': 12.2.0
       json5: 2.2.3
       write-file-atomic: 5.0.1
       write-yaml-file: 5.0.0
