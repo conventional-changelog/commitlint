@@ -14,7 +14,7 @@ export default defineConfig({
 		environment: "commitlint",
 		coverage: {
 			provider: "istanbul",
-			include: ["**/@commitlint/*/src/**"],
+			include: ["**/@commitlint/*/src/**/*.{ts,js,mjs,cjs}"],
 		},
 	},
 	environments: {
