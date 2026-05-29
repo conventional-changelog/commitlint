@@ -72,6 +72,25 @@ test("should succeed when --cwd references an existing directory", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
+test("should resolve config from --cwd instead of the process working directory", async () => {
+	// The process runs in a fixture whose config requires type "outer",
+	// so "bar: baz" is rejected when that config is used.
+	const processCwd = await gitBootstrap("fixtures/outer-scope");
+	// --cwd points at a fixture whose config only forbids type "foo",
+	// so "bar: baz" is accepted when that config is used.
+	const targetCwd = await gitBootstrap("fixtures/default");
+
+	// Sanity check: without --cwd the process directory's config applies and rejects the message.
+	const withoutCwd = cli([], { cwd: processCwd })("bar: baz");
+	await withoutCwd;
+	expect(withoutCwd.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+
+	// With --cwd config resolution is redirected to the target directory, which accepts the message.
+	const withCwd = cli(["--cwd", targetCwd], { cwd: processCwd })("bar: baz");
+	await withCwd;
+	expect(withCwd.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
 test("should throw when called without [input]", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
 	const result = cli([], { cwd })();
