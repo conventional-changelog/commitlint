@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* apply oxfmt formatting to get-edit-commit.ts ([#4768](https://github.com/conventional-changelog/commitlint/issues/4768)) ([1af3138](https://github.com/conventional-changelog/commitlint/commit/1af313897e0ba1626b9901387905ace902a63e1b)), closes [#4755](https://github.com/conventional-changelog/commitlint/issues/4755)
+* **config-pnpm-scopes:** adapt to read-yaml-file v3 named export ([#4701](https://github.com/conventional-changelog/commitlint/issues/4701)) ([8b55772](https://github.com/conventional-changelog/commitlint/commit/8b557726a4c59020be30bee44d1f5de6ead25c7b))
+* disallow same commit hash for --from and --to ([#4773](https://github.com/conventional-changelog/commitlint/issues/4773)) ([121005e](https://github.com/conventional-changelog/commitlint/commit/121005e86341537c4bf59a8453cae21dbd4954ec))
+* emit actionable error when --edit cannot find COMMIT_EDITMSG ([#589](https://github.com/conventional-changelog/commitlint/issues/589)) ([#4755](https://github.com/conventional-changelog/commitlint/issues/4755)) ([bb10907](https://github.com/conventional-changelog/commitlint/commit/bb1090717410ed702847f9d569ce3ad9eee51d41))
+* **read:** fail when --from and --to share no merge-base [#4555](https://github.com/conventional-changelog/commitlint/issues/4555) ([#4754](https://github.com/conventional-changelog/commitlint/issues/4754)) ([e4595eb](https://github.com/conventional-changelog/commitlint/commit/e4595eb79e67a3c51960e95b1dcc696754312cdb))
+* update dependency @pnpm/read-project-manifest to v6 ([#4617](https://github.com/conventional-changelog/commitlint/issues/4617)) ([ca16ec1](https://github.com/conventional-changelog/commitlint/commit/ca16ec111d9c7c680f672534cf7bb70f0f563a76))
+* update vitest monorepo to ~4.1.0 ([#4654](https://github.com/conventional-changelog/commitlint/issues/4654)) ([f1f25d5](https://github.com/conventional-changelog/commitlint/commit/f1f25d59e1f244c1226eb485db67f1166e649bde))
+
+
+
+
+
 ## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
 
 

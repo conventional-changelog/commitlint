@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* update vitest monorepo to ~4.1.0 ([#4654](https://github.com/conventional-changelog/commitlint/issues/4654)) ([f1f25d5](https://github.com/conventional-changelog/commitlint/commit/f1f25d59e1f244c1226eb485db67f1166e649bde))
+
+
+
+
+
 ## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
 
 **Note:** Version bump only for package vitest-environment-commitlint

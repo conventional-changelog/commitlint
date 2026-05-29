@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* **config-pnpm-scopes:** adapt to read-yaml-file v3 named export ([#4701](https://github.com/conventional-changelog/commitlint/issues/4701)) ([8b55772](https://github.com/conventional-changelog/commitlint/commit/8b557726a4c59020be30bee44d1f5de6ead25c7b))
+* update dependency @pnpm/read-project-manifest to v6 ([#4617](https://github.com/conventional-changelog/commitlint/issues/4617)) ([ca16ec1](https://github.com/conventional-changelog/commitlint/commit/ca16ec111d9c7c680f672534cf7bb70f0f563a76))
+
+
+
+
+
 ## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
 
 **Note:** Version bump only for package @commitlint/config-pnpm-scopes

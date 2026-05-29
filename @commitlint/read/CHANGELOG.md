@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
+
+
+### Bug Fixes
+
+* apply oxfmt formatting to get-edit-commit.ts ([#4768](https://github.com/conventional-changelog/commitlint/issues/4768)) ([1af3138](https://github.com/conventional-changelog/commitlint/commit/1af313897e0ba1626b9901387905ace902a63e1b)), closes [#4755](https://github.com/conventional-changelog/commitlint/issues/4755)
+* emit actionable error when --edit cannot find COMMIT_EDITMSG ([#589](https://github.com/conventional-changelog/commitlint/issues/589)) ([#4755](https://github.com/conventional-changelog/commitlint/issues/4755)) ([bb10907](https://github.com/conventional-changelog/commitlint/commit/bb1090717410ed702847f9d569ce3ad9eee51d41))
+* **read:** fail when --from and --to share no merge-base [#4555](https://github.com/conventional-changelog/commitlint/issues/4555) ([#4754](https://github.com/conventional-changelog/commitlint/issues/4754)) ([e4595eb](https://github.com/conventional-changelog/commitlint/commit/e4595eb79e67a3c51960e95b1dcc696754312cdb))
+
+
+
+
+
 ## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
 
 **Note:** Version bump only for package @commitlint/read
