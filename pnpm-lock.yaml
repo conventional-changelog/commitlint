@@ -715,7 +715,7 @@ importers:
         version: 1.2.2
       tmp:
         specifier: ^0.2.1
-        version: 0.2.6
+        version: 0.2.7
 
   '@packages/test-environment':
     dependencies:
@@ -724,7 +724,7 @@ importers:
         version: 0.2.6
       tmp:
         specifier: ^0.2.1
-        version: 0.2.6
+        version: 0.2.7
       vitest:
         specifier: ~4.1.0
         version: 4.1.7(@types/node@22.19.19)(@vitest/coverage-istanbul@4.1.7)(vite@8.0.14(@types/node@22.19.19)(jiti@2.6.1)(yaml@2.9.0))
@@ -742,7 +742,7 @@ importers:
         version: 1.2.2
       tmp:
         specifier: ^0.2.1
-        version: 0.2.6
+        version: 0.2.7
       yargs:
         specifier: ^18.0.0
         version: 18.0.0
@@ -4780,8 +4780,8 @@ packages:
     resolution: {integrity: sha512-UdiSoX6ypifLmrfQ/XfiawN6hkjSBpCjhKxxZcWlUUmoXLaCKQU0bx4HF/tdDK2uzRuchf1txGvrWBzYREssoQ==}
     engines: {node: '>=14.14'}
 
-  tmp@0.2.6:
-    resolution: {integrity: sha512-5sJPdPjfI5Kx+qbrDesxkglRBxW//g7hCsqspEjwkewGvBMGIKMOTKzLt1hFVJzyadba3lDUN20O9qhvbQUSTA==}
+  tmp@0.2.7:
+    resolution: {integrity: sha512-e0votIpp4Uo2AJYSzVHV6xCcawuiez3DzqDAbrTc3YxBkplN6e+dM13ZeIcZnDg/QpSuU2zfZ3rzwY8ukEnaXw==}
     engines: {node: '>=14.14'}
 
   to-regex-range@5.0.1:
@@ -9374,7 +9374,7 @@ snapshots:
 
   tmp@0.2.4: {}
 
-  tmp@0.2.6: {}
+  tmp@0.2.7: {}
 
   to-regex-range@5.0.1:
     dependencies:
