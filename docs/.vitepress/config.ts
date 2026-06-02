@@ -31,6 +31,7 @@ export default defineConfig({
 					{ text: "Local setup", link: "/local-setup" },
 					{ text: "CI setup", link: "/ci-setup" },
 					{ text: "Use prompt", link: "/use-prompt" },
+					{ text: "AI agents", link: "/ai-agents" },
 				],
 			},
 			{
