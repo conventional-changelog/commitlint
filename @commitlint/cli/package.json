@@ -37,6 +37,7 @@
     "pkg": "pkg-check"
   },
   "dependencies": {
+    "@commitlint/config-conventional": "workspace:^",
     "@commitlint/format": "workspace:^",
     "@commitlint/lint": "workspace:^",
     "@commitlint/load": "workspace:^",

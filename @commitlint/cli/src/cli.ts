@@ -36,6 +36,8 @@ const pkg: typeof import("../package.json") = require("../package.json");
 
 const gitDefaultCommentChar = "#";
 
+const defaultConfig = "@commitlint/config-conventional";
+
 const cli = yargs(process.argv.slice(2))
 	.options({
 		color: {
@@ -48,6 +50,11 @@ const cli = yargs(process.argv.slice(2))
 			alias: "g",
 			description: "path to the config file; result code 9 if config is missing",
 			type: "string",
+		},
+		"default-config": {
+			description:
+				"use built-in default config (@commitlint/config-conventional) when no rules are found",
+			type: "boolean",
 		},
 		"print-config": {
 			choices: ["", "text", "json"],
@@ -221,10 +228,7 @@ async function main(args: MainArgs): Promise<void> {
 	}
 
 	if (typeof options["print-config"] === "string") {
-		const loaded = await load(getSeed(flags), {
-			cwd: flags.cwd,
-			file: flags.config,
-		});
+		const loaded = await loadConfig(flags);
 
 		switch (options["print-config"]) {
 			case "json":
@@ -291,10 +295,7 @@ async function main(args: MainArgs): Promise<void> {
 		throw err;
 	}
 
-	const loaded = await load(getSeed(flags), {
-		cwd: flags.cwd,
-		file: flags.config,
-	});
+	const loaded = await loadConfig(flags);
 	const parserOpts = selectParserOpts(loaded.parserPreset);
 	const opts: LintOptions & { parserOpts: Options } = {
 		parserOpts: {},
@@ -351,6 +352,7 @@ async function main(args: MainArgs): Promise<void> {
 						"Please add rules to your `commitlint.config.js`",
 						"    - Getting started guide: https://commitlint.js.org/guides/getting-started",
 						"    - Example config: https://github.com/conventional-changelog/commitlint/blob/master/%40commitlint/config-conventional/src/index.ts",
+						"    - Or run commitlint with the built-in default config: commitlint --default-config",
 					].join("\n"),
 				},
 			],
@@ -484,6 +486,42 @@ function getEditValue(flags: CliFlags) {
 	return edit;
 }
 
+async function loadConfig(flags: CliFlags): Promise<QualifiedConfig> {
+	const loaded = await load(getSeed(flags), {
+		cwd: flags.cwd,
+		file: flags.config,
+	});
+
+	// `--default-config` falls back to the built-in default config when
+	// config resolution yields no rules (e.g. no config file was found).
+	// The default config is prepended so user-supplied --extends configs
+	// keep precedence over it.
+	if (flags["default-config"] && Object.keys(loaded.rules).length === 0) {
+		const extendsWithDefault = [resolveDefaultConfig(flags), ...(flags.extends || [])];
+		return load(getSeed({ ...flags, extends: extendsWithDefault }), {
+			cwd: flags.cwd,
+			file: flags.config,
+		});
+	}
+
+	return loaded;
+}
+
+function resolveDefaultConfig(flags: CliFlags): string {
+	// Resolve from the cli package itself first so the fallback works without
+	// @commitlint/config-conventional being installed in the linted project
+	// (e.g. `npx commitlint --default-config` or strictly isolated node_modules).
+	return resolveModulePath(defaultConfig, flags) || defaultConfig;
+}
+
+function resolveModulePath(moduleName: string, flags: CliFlags): string | undefined {
+	return (
+		resolveFromSilent(moduleName, __dirname) ||
+		resolveFromSilent(moduleName, flags.cwd) ||
+		resolveGlobalSilent(moduleName)
+	);
+}
+
 function getSeed(flags: CliFlags): UserConfig {
 	const n = (flags.extends || []).filter((i): i is string => typeof i === "string");
 	return n.length > 0
@@ -505,10 +543,7 @@ function selectParserOpts(parserPreset: ParserPreset | undefined) {
 
 function loadFormatter(config: QualifiedConfig, flags: CliFlags): Promise<Formatter> {
 	const moduleName = flags.format || config.formatter || "@commitlint/format";
-	const modulePath =
-		resolveFromSilent(moduleName, __dirname) ||
-		resolveFromSilent(moduleName, flags.cwd) ||
-		resolveGlobalSilent(moduleName);
+	const modulePath = resolveModulePath(moduleName, flags);
 
 	if (modulePath) {
 		return dynamicImport<Formatter>(modulePath);
