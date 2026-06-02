@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import llmstxt from "vitepress-plugin-llms";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 // https://vitepress.dev/reference/site-config
@@ -31,6 +32,7 @@ export default defineConfig({
 					{ text: "Local setup", link: "/local-setup" },
 					{ text: "CI setup", link: "/ci-setup" },
 					{ text: "Use prompt", link: "/use-prompt" },
+					{ text: "AI agents", link: "/ai-agents" },
 				],
 			},
 			{
@@ -99,5 +101,9 @@ export default defineConfig({
 		config(md) {
 			md.use(tabsMarkdownPlugin);
 		},
+	},
+
+	vite: {
+		plugins: [llmstxt()],
 	},
 });
