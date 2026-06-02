@@ -214,6 +214,66 @@ test("should succeed for input from stdin with rules", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
 });
 
+test("should fail without config file and without --default-config flag", async () => {
+	const cwd = await gitBootstrap("fixtures/no-config");
+	const result = cli([], { cwd })("feat: this should not work");
+	const output = await result;
+	expect(output.stdout.trim()).toContain("Please add rules");
+	expect(result.exitCode).toBe(ExitCode.CommitlintInvalidArgument);
+});
+
+test("should succeed for conventional input from stdin without config file with --default-config flag", async () => {
+	const cwd = await gitBootstrap("fixtures/no-config");
+	const result = cli(["--default-config"], { cwd })("feat: this should work");
+	const output = await result;
+	expect(output.stderr).toEqual("");
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
+test("should fail for non-conventional input from stdin without config file with --default-config flag", async () => {
+	const cwd = await gitBootstrap("fixtures/no-config");
+	const result = cli(["--default-config"], { cwd })("this is not a conventional commit");
+	const output = await result;
+	expect(output.stdout.trim()).toContain("type may not be empty");
+	expect(output.stdout.trim()).toContain("subject may not be empty");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
+test("should prefer config file over --default-config flag", async () => {
+	const cwd = await gitBootstrap("fixtures/default");
+	// "type: bar" passes the fixture config (type-enum never [foo]) but would
+	// fail @commitlint/config-conventional (type "type" is not allowed there)
+	const result = cli(["--default-config"], { cwd })("type: bar");
+	await result;
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
+test("should fall back to default config with --default-config flag for a config file without rules", async () => {
+	const cwd = await gitBootstrap("fixtures/empty");
+	const result = cli(["--default-config"], { cwd })("feat: this should work");
+	await result;
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
+test("should keep --extends configs when the --default-config fallback applies", async () => {
+	const cwd = await gitBootstrap("fixtures/no-config");
+	// ./helpurl-only contributes a helpUrl but no rules, so the fallback
+	// still applies and must not drop the user-supplied extends
+	const result = cli(["--default-config", "--extends", "./helpurl-only"], { cwd })("foo bar");
+	const output = await result;
+	expect(output.stdout.trim()).toContain("type may not be empty");
+	expect(output.stdout.trim()).toContain("https://example.com/no-rules");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
+test("should point to the --default-config flag when no rules are found", async () => {
+	const cwd = await gitBootstrap("fixtures/empty");
+	const result = cli([], { cwd })("foo: bar");
+	const output = await result;
+	expect(output.stdout.trim()).toContain("--default-config");
+	expect(result.exitCode).toBe(ExitCode.CommitlintInvalidArgument);
+});
+
 test("should fail for input from stdin with rule from rc", async () => {
 	const cwd = await gitBootstrap("fixtures/simple");
 	const result = cli([], { cwd })("foo: bar");
@@ -609,28 +669,29 @@ test("should print help", async () => {
 		[input] reads from stdin if --edit, --env, --from and --to are omitted
 
 		Options:
-		  -c, --color          toggle colored output  [boolean] [default: true]
-		  -g, --config         path to the config file; result code 9 if config is missing  [string]
-		      --print-config   print resolved config  [string] [choices: "", "text", "json"]
-		  -d, --cwd            directory to execute in  [string] [default: (Working Directory)]
-		  -e, --edit           read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG  [string]
-		  -E, --env            check message in the file at path given by environment variable value  [string]
-		  -x, --extends        array of shareable configurations to extend  [array]
-		  -H, --help-url       help url in error message  [string]
-		  -f, --from           lower end of the commit range to lint; applies if edit=false  [string]
-		      --from-last-tag  uses the last tag as the lower end of the commit range to lint; applies if edit=false and from is not set  [boolean]
-		      --git-log-args   additional git log arguments as space separated string, example '--first-parent --cherry-pick'  [string]
-		  -l, --last           just analyze the last commit; applies if edit=false  [boolean]
-		  -o, --format         output format of the results  [string]
-		  -p, --parser-preset  configuration preset to use for conventional-commits-parser  [string]
-		  -q, --quiet          toggle console output  [boolean] [default: false]
-		  -t, --to             upper end of the commit range to lint; applies if edit=false  [string]
-		  -V, --verbose        enable verbose output for reports without problems  [boolean]
-		      --legacy-output  use the legacy input output format (single-line 'input: ...')  [boolean]
-		  -s, --strict         enable strict mode; result code 2 for warnings, 3 for errors  [boolean]
-		      --options        path to a JSON file or Common.js module containing CLI options
-		  -v, --version        display version information  [boolean]
-		  -h, --help           Show help  [boolean]"
+		  -c, --color           toggle colored output  [boolean] [default: true]
+		  -g, --config          path to the config file; result code 9 if config is missing  [string]
+		      --default-config  use built-in default config (@commitlint/config-conventional) when no rules are found  [boolean]
+		      --print-config    print resolved config  [string] [choices: "", "text", "json"]
+		  -d, --cwd             directory to execute in  [string] [default: (Working Directory)]
+		  -e, --edit            read last commit message from the specified file or fallbacks to ./.git/COMMIT_EDITMSG  [string]
+		  -E, --env             check message in the file at path given by environment variable value  [string]
+		  -x, --extends         array of shareable configurations to extend  [array]
+		  -H, --help-url        help url in error message  [string]
+		  -f, --from            lower end of the commit range to lint; applies if edit=false  [string]
+		      --from-last-tag   uses the last tag as the lower end of the commit range to lint; applies if edit=false and from is not set  [boolean]
+		      --git-log-args    additional git log arguments as space separated string, example '--first-parent --cherry-pick'  [string]
+		  -l, --last            just analyze the last commit; applies if edit=false  [boolean]
+		  -o, --format          output format of the results  [string]
+		  -p, --parser-preset   configuration preset to use for conventional-commits-parser  [string]
+		  -q, --quiet           toggle console output  [boolean] [default: false]
+		  -t, --to              upper end of the commit range to lint; applies if edit=false  [string]
+		  -V, --verbose         enable verbose output for reports without problems  [boolean]
+		      --legacy-output   use the legacy input output format (single-line 'input: ...')  [boolean]
+		  -s, --strict          enable strict mode; result code 2 for warnings, 3 for errors  [boolean]
+		      --options         path to a JSON file or Common.js module containing CLI options
+		  -v, --version         display version information  [boolean]
+		  -h, --help            Show help  [boolean]"
 	`);
 });
 
@@ -697,6 +758,15 @@ describe("should print config", () => {
 		expect(output.stdout.trim()).toMatchInlineSnapshot(
 			`"{"extends":[],"formatter":"@commitlint/format","plugins":{},"rules":{"type-enum":[2,"never",["foo"]]},"helpUrl":"https://github.com/conventional-changelog/commitlint/#what-is-commitlint","prompt":{}}"`,
 		);
+	});
+
+	test("should print default config with --default-config flag when no config file is found", async () => {
+		const cwd = await gitBootstrap("fixtures/no-config");
+		const result = cli(["--print-config=json", "--no-color", "--default-config"], { cwd })();
+		const output = await result;
+		const printed = JSON.parse(output.stdout.trim());
+		expect(printed.rules).toHaveProperty("type-enum");
+		expect(printed.rules["type-enum"][2]).toContain("feat");
 	});
 });
 

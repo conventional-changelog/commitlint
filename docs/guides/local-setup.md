@@ -263,6 +263,15 @@ deno task --eval commitlint --from HEAD~1 --to HEAD --verbose
 
 This will check your last commit and return an error if invalid or a positive output if valid.
 
+::: tip
+To try commitlint without creating a configuration file first, pipe a message to it and use the built-in default config ([@commitlint/config-conventional](https://www.npmjs.com/package/@commitlint/config-conventional)):
+
+```sh
+echo "feat: add new feature" | npx commitlint --default-config
+```
+
+:::
+
 ### Test the hook
 
 You can test the hook by simply committing. You should see something like this if everything works.

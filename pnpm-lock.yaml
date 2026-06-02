@@ -124,6 +124,9 @@ importers:
 
   '@commitlint/cli':
     dependencies:
+      '@commitlint/config-conventional':
+        specifier: workspace:^
+        version: link:../config-conventional
       '@commitlint/format':
         specifier: workspace:^
         version: link:../format
