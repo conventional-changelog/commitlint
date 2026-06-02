@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import llmstxt from "vitepress-plugin-llms";
 import { tabsMarkdownPlugin } from "vitepress-plugin-tabs";
 
 // https://vitepress.dev/reference/site-config
@@ -100,5 +101,9 @@ export default defineConfig({
 		config(md) {
 			md.use(tabsMarkdownPlugin);
 		},
+	},
+
+	vite: {
+		plugins: [llmstxt()],
 	},
 });
