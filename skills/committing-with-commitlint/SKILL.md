@@ -49,8 +49,11 @@ The rules that matter most when writing a message:
 | `body-leading-blank`   | Blank line required between subject and body                             |
 | `body-max-line-length` | Maximum length of each body line                                         |
 
-If there is no config or a rule is absent, follow Conventional Commits defaults:
-lower-case type, no trailing period, header at most 72 characters.
+A rule that is absent or disabled (severity 0) is simply not enforced. When unsure, use
+a conservative baseline that passes the common presets: lower-case type, no trailing
+period, header under 72 characters (config-conventional allows up to 100). Note that
+running commitlint with no config at all fails with an `empty-rules` error rather than
+falling back to any default convention.
 
 ## 3. Write the message
 
