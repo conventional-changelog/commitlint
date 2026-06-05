@@ -110,6 +110,15 @@
       "schedule": [
         "before 5am on monday"
       ]
-    }
+    },
+    "packageRules": [
+      {
+        "description": "Lock file maintenance is package-manager-controlled and produces upgrade entries without a releaseTimestamp, so the minimumReleaseAge (renovate/stability-days) check can never pass and these PRs sit pending forever. Exempt them; this mirrors Renovate's security:minimumReleaseAgeNpm preset. The 3-day gate still applies to all regular dependency updates.",
+        "matchUpdateTypes": [
+          "lockFileMaintenance"
+        ],
+        "minimumReleaseAge": null
+      }
+    ]
   }
 }
