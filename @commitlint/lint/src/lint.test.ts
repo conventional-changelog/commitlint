@@ -1,4 +1,5 @@
 import { test, expect } from "vitest";
+import type { Parser } from "@commitlint/types";
 import { RuleConfigSeverity } from "@commitlint/types";
 
 import lint from "./lint.js";
@@ -307,4 +308,86 @@ test("passes for async rule", async () => {
 	);
 
 	expect(report.valid).toBe(true);
+});
+
+test("custom parser output is used by rules", async () => {
+	// The default parser extracts no type from this message; the custom parser supplies one,
+	// so type-empty (never) only passes because the custom parser ran.
+	const customParser: Parser = (message) => ({
+		type: "feat",
+		scope: null,
+		subject: "my-feature",
+		body: null,
+		footer: null,
+		header: message,
+	});
+
+	const report = await lint(
+		"a message with no conventional type",
+		{
+			"type-empty": [RuleConfigSeverity.Error, "never"],
+		},
+		{ parser: customParser },
+	);
+
+	expect(report.valid).toBe(true);
+	expect(report.errors.length).toBe(0);
+});
+
+test("custom parser overrides the default parse result", async () => {
+	// "feat: add thing" is a valid feat to the default parser; the custom parser rewrites the
+	// type to "wip", so the commit only fails type-enum because the custom parser ran.
+	const customParser: Parser = (message) => ({
+		type: "wip",
+		scope: null,
+		subject: "add thing",
+		body: null,
+		footer: null,
+		header: message,
+	});
+
+	const report = await lint(
+		"feat: add thing",
+		{
+			"type-enum": [RuleConfigSeverity.Error, "always", ["feat"]],
+		},
+		{ parser: customParser },
+	);
+
+	expect(report.valid).toBe(false);
+	expect(report.errors.length).toBe(1);
+});
+
+test("custom parser receives parser options as second argument", async () => {
+	let receivedOpts: Record<string, unknown> | undefined;
+
+	const customParser: Parser = (_message, opts) => {
+		receivedOpts =
+			typeof opts === "object" && opts !== null ? (opts as Record<string, unknown>) : {};
+		return {
+			header: "custom-parsed-header",
+			type: "chore",
+			subject: null,
+			body: null,
+			footer: null,
+			merge: null,
+			revert: null,
+			notes: [],
+			mentions: [],
+			references: [],
+		} as unknown as ReturnType<Parser>;
+	};
+
+	const customOpts = { headerPattern: /^custom-parsed-header/ };
+
+	await lint(
+		"any message",
+		{
+			"type-enum": [RuleConfigSeverity.Error, "always", ["chore"]],
+		},
+		{ parser: customParser, parserOpts: customOpts },
+	);
+
+	expect(receivedOpts).toBeDefined();
+	expect((receivedOpts as Record<string, unknown>).headerPattern).toBeDefined();
 });
