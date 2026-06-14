@@ -397,7 +397,7 @@ importers:
         version: link:../types
       semver:
         specifier: ^7.6.0
-        version: 7.8.3
+        version: 7.8.4
     devDependencies:
       '@commitlint/parse':
         specifier: workspace:^
@@ -4716,11 +4716,6 @@ packages:
 
   semver@7.7.4:
     resolution: {integrity: sha512-vFKC2IEtQnVhpT78h1Yp8wzwrf8CM+MzKMHGJZfBtzhZNycRFnXsHk6E5TxIkkMsgNS7mdX3AGB7x2QM2di4lA==}
-    engines: {node: '>=10'}
-    hasBin: true
-
-  semver@7.8.3:
-    resolution: {integrity: sha512-wnilbGyMxzbY7dNOl7jpKbLSjcfeweJWU5j4+u5qW+6/wuGD9KzIGOyZnQVSBM9E7DtWaaH3CyHkppYrKYoxwg==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -9873,8 +9868,6 @@ snapshots:
   semver@7.7.2: {}
 
   semver@7.7.4: {}
-
-  semver@7.8.3: {}
 
   semver@7.8.4: {}
 
