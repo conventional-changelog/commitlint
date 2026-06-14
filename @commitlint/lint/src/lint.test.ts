@@ -1,4 +1,5 @@
 import { test, expect } from "vitest";
+import type { Parser } from "@commitlint/types";
 import { RuleConfigSeverity } from "@commitlint/types";
 
 import lint from "./lint.js";
@@ -304,6 +305,82 @@ test("passes for async rule", async () => {
 				},
 			},
 		},
+	);
+
+	expect(report.valid).toBe(true);
+});
+
+test("uses custom parser when provided", async () => {
+	const customParser: Parser = (message) => ({
+		type: "feat",
+		scope: null,
+		subject: "my-feature",
+		body: null,
+		footer: null,
+		header: message.trim(),
+	});
+
+	const report = await lint(
+		"any message",
+		{
+			"type-enum": [RuleConfigSeverity.Error, "always", ["feat"]],
+		},
+		{ parser: customParser },
+	);
+
+	expect(report.valid).toBe(true);
+	expect(report.errors.length).toBe(0);
+});
+
+test("custom parser output is used by rules", async () => {
+	const customParser: Parser = (_message) => ({
+		type: null,
+		scope: "auth",
+		subject: "fix login",
+		body: null,
+		footer: null,
+		header: "scope(subject): description",
+	});
+
+	const report = await lint(
+		"any message",
+		{
+			"type-empty": [RuleConfigSeverity.Error, "never"],
+		},
+		{ parser: customParser },
+	);
+
+	expect(report.valid).toBe(false);
+	expect(report.errors.length).toBe(1);
+});
+
+test("custom parser works alongside parserOpts", async () => {
+	const customParser: Parser = (_message) =>
+		({
+			type: "chore",
+			subject: "dep bump",
+			body: null,
+			footer: "Refs #42",
+			header: "chore: dep bump",
+			references: [
+				{
+					raw: "Refs #42",
+					action: "Refs",
+					owner: null,
+					repository: null,
+					issue: "42",
+					prefix: "#",
+				},
+			],
+		}) as unknown as ReturnType<Parser>;
+
+	const report = await lint(
+		"any message",
+		{
+			"type-enum": [RuleConfigSeverity.Error, "always", ["chore"]],
+			"references-empty": [RuleConfigSeverity.Error, "never"],
+		},
+		{ parser: customParser },
 	);
 
 	expect(report.valid).toBe(true);

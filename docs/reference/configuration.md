@@ -253,6 +253,77 @@ export default {
 
 :::
 
+### Custom parser function
+
+You can provide a custom commit parsing implementation by supplying a `parser` function in your configuration. This is useful if you have specific parsing requirements that cannot be met by existing presets or options.
+
+The custom function must return an object matching the [`Commit` type from `conventional-commits-parser`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#commit), which includes all fields from `CommitBase`: `header`, `type`, `scope`, `subject`, `body`, `footer`, `merge`, `revert`, `notes`, `mentions`, and `references`. The `raw` property must be omitted (it is set by commitlint internally).
+
+Omitting any of the array fields (`notes`, `mentions`, `references`) will cause lint rules like `references-empty` to crash, since they expect arrays rather than `undefined`:
+
+::: code-group
+
+```js [commitlint.config.js]
+export default {
+  parserPreset: {
+    parser: (message, options) => {
+      // Instantiate your custom parsing implementation
+      const parser = new MyParser(options);
+      const parsed = parser.parse(message);
+
+      // Return all required CommitBase fields from the parsed result
+      return {
+        header: parsed.header ?? message.trim(),
+        type: parsed.type ?? null,
+        scope: parsed.scope ?? null,
+        subject: parsed.subject ?? null,
+        body: parsed.body ?? null,
+        footer: parsed.footer ?? null,
+        merge: null,
+        revert: null,
+        notes: parsed.notes ?? [],
+        mentions: parsed.mentions ?? [],
+        references: parsed.references ?? [],
+      };
+    },
+  },
+};
+```
+
+```ts [commitlint.config.ts]
+import type { Parser as CommitParser } from "@commitlint/types";
+
+const myParser: CommitParser = (message, options) => {
+  // Instantiate your custom parsing implementation
+  const parser = new MyParser(options);
+  const parsed = parser.parse(message);
+
+  return {
+    header: parsed.header ?? message.trim(),
+    type: parsed.type ?? null,
+    scope: parsed.scope ?? null,
+    subject: parsed.subject ?? null,
+    body: parsed.body ?? null,
+    footer: parsed.footer ?? null,
+    merge: null,
+    revert: null,
+    notes: parsed.notes ?? [],
+    mentions: parsed.mentions ?? [],
+    references: parsed.references ?? [],
+  };
+};
+
+export default {
+  parserPreset: {
+    parser: myParser,
+  },
+};
+```
+
+:::
+
+### Common `parserOpts`
+
 ### Common `parserOpts`
 
 The parser is powered by [`conventional-commits-parser`](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser). Common options include:

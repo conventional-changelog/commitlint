@@ -1,6 +1,7 @@
 import type { ParserOptions as Options } from "conventional-commits-parser";
 import { IsIgnoredOptions } from "./is-ignored.js";
 import { PluginRecords } from "./load.js";
+import { Parser } from "./parse.js";
 import { RuleConfigSeverity, RuleConfigTuple } from "./rules.js";
 
 export type LintRuleConfig = Record<
@@ -15,6 +16,8 @@ export interface LintOptions {
 	ignores?: IsIgnoredOptions["ignores"];
 	/** The parser configuration to use when linting the commit */
 	parserOpts?: Options;
+	/** An optional custom parser function for parsing commit messages */
+	parser?: Parser;
 
 	plugins?: PluginRecords;
 	helpUrl?: string;

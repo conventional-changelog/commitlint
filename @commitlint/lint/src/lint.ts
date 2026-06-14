@@ -37,7 +37,7 @@ export default async function lint(
 	const parsed =
 		message === ""
 			? { header: null, body: null, footer: null }
-			: await parse(message, undefined, opts.parserOpts);
+			: await parse(message, opts.parser, opts.parserOpts);
 
 	if (parsed.header === null && parsed.body === null && parsed.footer === null) {
 		// Commit is empty, skip
