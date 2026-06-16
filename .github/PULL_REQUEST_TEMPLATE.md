@@ -41,5 +41,7 @@ echo "your commit message here" | commitlint # fails/passes
 
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.
+- [ ] I have verified that any documentation examples I added/changed actually work.
 - [ ] I have added tests to cover my changes.
 - [ ] All new and existing tests passed.
+- [ ] For a feature/bug fix, my commits follow the [test-driven flow](https://github.com/conventional-changelog/commitlint/blob/master/.github/CONTRIBUTING.md#test-driven-development): a failing-test commit, then the implementation.
