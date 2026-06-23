@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.1.0](https://github.com/conventional-changelog/commitlint/compare/v21.0.2...v21.1.0) (2026-06-23)
+
+
+### Features
+
+* **cli:** add --default-config flag to lint without a config file ([#4805](https://github.com/conventional-changelog/commitlint/issues/4805)) ([7af27ba](https://github.com/conventional-changelog/commitlint/commit/7af27ba1bcfe2347d02df2efd6dca7203b6768c5)), closes [#3662](https://github.com/conventional-changelog/commitlint/issues/3662)
+
+
+
+
+
 ## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
 
 

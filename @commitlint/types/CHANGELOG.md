@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.1.0](https://github.com/conventional-changelog/commitlint/compare/v21.0.2...v21.1.0) (2026-06-23)
+
+
+### Features
+
+* **lint:** allow for custom commit parser function ([#4829](https://github.com/conventional-changelog/commitlint/issues/4829)) ([e820753](https://github.com/conventional-changelog/commitlint/commit/e8207534a9342264daecddec930ddf6cbacb83ca)), closes [#4816](https://github.com/conventional-changelog/commitlint/issues/4816) [#4816](https://github.com/conventional-changelog/commitlint/issues/4816)
+
+
+
+
+
 ## [21.0.1](https://github.com/conventional-changelog/commitlint/compare/v21.0.0...v21.0.1) (2026-05-12)
 
 

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.1.0](https://github.com/conventional-changelog/commitlint/compare/v21.0.2...v21.1.0) (2026-06-23)
+
+
+### Bug Fixes
+
+* remove duplicate es-toolkit@1.47.1 keys from lockfile ([#4833](https://github.com/conventional-changelog/commitlint/issues/4833)) ([b3323f5](https://github.com/conventional-changelog/commitlint/commit/b3323f53701963e4b676da5f9741fa57dc0345b5)), closes [#4831](https://github.com/conventional-changelog/commitlint/issues/4831)
+
+
+### Features
+
+* **cli:** add --default-config flag to lint without a config file ([#4805](https://github.com/conventional-changelog/commitlint/issues/4805)) ([7af27ba](https://github.com/conventional-changelog/commitlint/commit/7af27ba1bcfe2347d02df2efd6dca7203b6768c5)), closes [#3662](https://github.com/conventional-changelog/commitlint/issues/3662)
+* **lint:** allow for custom commit parser function ([#4829](https://github.com/conventional-changelog/commitlint/issues/4829)) ([e820753](https://github.com/conventional-changelog/commitlint/commit/e8207534a9342264daecddec930ddf6cbacb83ca)), closes [#4816](https://github.com/conventional-changelog/commitlint/issues/4816) [#4816](https://github.com/conventional-changelog/commitlint/issues/4816)
+
+
+
+
+
 ## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
 
 
