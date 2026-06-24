@@ -166,7 +166,7 @@ importers:
         version: 6.4.0
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.47.1
+        version: 1.48.1
 
   '@commitlint/config-angular':
     dependencies:
@@ -242,7 +242,7 @@ importers:
         version: link:../config-angular
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.47.1
+        version: 1.48.1
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -365,7 +365,7 @@ importers:
         version: link:../types
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.47.1
+        version: 1.48.1
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -459,7 +459,7 @@ importers:
         version: 6.3.0(@types/node@22.20.0)(cosmiconfig@9.0.2(typescript@6.0.3))(typescript@6.0.3)
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.47.1
+        version: 1.48.1
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -602,7 +602,7 @@ importers:
         version: link:../types
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.47.1
+        version: 1.48.1
       global-directory:
         specifier: ^5.0.0
         version: 5.0.0
@@ -3111,8 +3111,8 @@ packages:
     resolution: {integrity: sha512-j6vWzfrGVfyXxge+O0x5sh6cvxAog0a/4Rdd2K36zCMV5eJ+/+tOAngRO8cODMNWbVRdVlmGZQL2YS3yR8bIUA==}
     engines: {node: '>= 0.4'}
 
-  es-toolkit@1.47.1:
-    resolution: {integrity: sha512-5RAqEwf4P4E17p+W75KLOWw/nOvKZzSQpxM32IpI2KZLaVonjTrZ0Ai5ghMaVI9eKC2p8eoQgcBdkEDgzFk6+Q==}
+  es-toolkit@1.48.1:
+    resolution: {integrity: sha512-wfnXlwd5I75eXRtdD2vuEs50xHHESECDsGD7yiQnfFVNoa5522NwXEbmgo98LfiukSQHs+mBM7/YG3qKJB9/mQ==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -4175,8 +4175,8 @@ packages:
     resolution: {integrity: sha512-WWdIxpyjEn+FhQJQQv9aQAYlHoNVdzIzUySNV1gHUPDSdZJ3yZn7pAAbQcV7B56Mvu881q9FZV+0Vx2xC44VWA==}
     engines: {node: ^18.17.0 || >=20.5.0}
 
-  nanoid@3.3.14:
-    resolution: {integrity: sha512-U9kYi5bpVMEI31yC8iw4bJJp0avcHXA0W8/wNfLfnvJYzihQo2ZRPYPvpAAd570HAcCBjCTN7vnr+v4StKl1IQ==}
+  nanoid@3.3.15:
+    resolution: {integrity: sha512-y7Wygv/7mEOvxTuEQDB8StXdMRBWf1kR/tlhAzBRUFkB2jfcLOAxO/SHmOO2zgz1pVgK29/kyupn059/bCHdjA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -5665,7 +5665,7 @@ snapshots:
       '@commitlint/types': 21.0.1
       cosmiconfig: 9.0.2(typescript@6.0.3)
       cosmiconfig-typescript-loader: 6.3.0(@types/node@22.20.0)(cosmiconfig@9.0.2(typescript@6.0.3))(typescript@6.0.3)
-      es-toolkit: 1.47.1
+      es-toolkit: 1.48.1
       is-plain-obj: 4.1.0
       picocolors: 1.1.1
     transitivePeerDependencies:
@@ -5677,7 +5677,7 @@ snapshots:
     dependencies:
       '@commitlint/config-validator': 21.0.1
       '@commitlint/types': 21.0.1
-      es-toolkit: 1.47.1
+      es-toolkit: 1.48.1
       global-directory: 5.0.0
       resolve-from: 5.0.0
     optional: true
@@ -7582,9 +7582,9 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
       has-tostringtag: 1.0.2
-      hasown: 2.0.2
+      hasown: 2.0.4
 
-  es-toolkit@1.47.1: {}
+  es-toolkit@1.48.1: {}
 
   esbuild@0.21.5:
     optionalDependencies:
@@ -8871,7 +8871,7 @@ snapshots:
 
   mute-stream@2.0.0: {}
 
-  nanoid@3.3.14: {}
+  nanoid@3.3.15: {}
 
   negotiator@1.0.0: {}
 
@@ -9509,7 +9509,7 @@ snapshots:
 
   postcss@8.5.15:
     dependencies:
-      nanoid: 3.3.14
+      nanoid: 3.3.15
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
