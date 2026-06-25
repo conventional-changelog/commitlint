@@ -113,8 +113,15 @@ jobs:
           apt update --yes
 
           # NOTE: do not change the below with an `actions/setup-node` step! or it
-          # would make this CI job entirely pointless
-          apt install --yes nodejs npm
+          # would make this CI job entirely pointless.
+          #
+          # `git` is needed because the test suite bootstraps throwaway repos via
+          # `git init`. It used to arrive as an apt Recommends of the npm chain,
+          # but on ubuntu:26.04 apt stopped pulling that recommend in (same image
+          # digest, same node/npm versions), so install it explicitly. The
+          # checkout step runs before this and uses the REST API fallback either
+          # way, which is fine — the tests create their own repos.
+          apt install --yes nodejs npm git
 
           # Ubuntu's bundled corepack (with stock Node) trips on the dynamic
           # ESM imports pnpm 11 uses at launch (ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING).
