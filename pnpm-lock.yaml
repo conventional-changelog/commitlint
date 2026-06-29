@@ -498,8 +498,8 @@ importers:
         specifier: workspace:^
         version: link:../types
       conventional-changelog-angular:
-        specifier: ^8.2.0
-        version: 8.3.1
+        specifier: ^9.0.0
+        version: 9.2.0
       conventional-commits-parser:
         specifier: ^6.3.0
         version: 6.4.0
@@ -645,8 +645,8 @@ importers:
         specifier: ^22.0.0
         version: 22.20.0
       conventional-changelog-angular:
-        specifier: ^8.2.0
-        version: 8.3.1
+        specifier: ^9.0.0
+        version: 9.2.0
       conventional-commits-parser:
         specifier: ^6.3.0
         version: 6.4.0
@@ -939,6 +939,10 @@ packages:
         optional: true
       conventional-commits-parser:
         optional: true
+
+  '@conventional-changelog/template@1.2.0':
+    resolution: {integrity: sha512-12qHxvlKjHmP0PQ+17EREgC7lWyLwbph1RKcZQZ7k7ZWGmrxfxC9gadHGfvzr0g0u8BhiBGg3tks93txodlyRQ==}
+    engines: {node: '>=22'}
 
   '@docsearch/css@3.8.2':
     resolution: {integrity: sha512-y05ayQFyUmCXze79+56v/4HpycYF3uFqB78pLPrSV5ZKAlDuIAAJNhaRi8tTdRNXh05yxX/TyNnzD6LwSM89vQ==}
@@ -2852,9 +2856,9 @@ packages:
     resolution: {integrity: sha512-ROjNchA9LgfNMTTFSIWPzebCwOGFdgkEq45EnvvrmSLvCtAw0HSmrCs7/ty+wAeYUZyNay0YMUNYFTRL72PkBQ==}
     engines: {node: '>=16'}
 
-  conventional-changelog-angular@8.3.1:
-    resolution: {integrity: sha512-6gfI3otXK5Ph5DfCOI1dblr+kN3FAm5a97hYoQkqNZxOaYa5WKfXH+AnpsmS+iUH2mgVC2Cg2Qw9m5OKcmNrIg==}
-    engines: {node: '>=18'}
+  conventional-changelog-angular@9.2.0:
+    resolution: {integrity: sha512-2EihZvM1KmbBGwuUow8lNXLe+ECRFsyOcV8X0197/WI7Rvvgfi55Oicfw0wxJTXGGIVXSfj+xBoNj+cxLlIiVw==}
+    engines: {node: '>=22'}
 
   conventional-changelog-atom@5.1.0:
     resolution: {integrity: sha512-fw7GpI9jHNCWGBnTsPRI452ypQbNupGwsjrXfozvRNE0c92pJRpoj9rXfzDKUYJcsmk0H4XKaQjhjelwI9z27w==}
@@ -5687,6 +5691,8 @@ snapshots:
     optionalDependencies:
       conventional-commits-parser: 6.4.0
 
+  '@conventional-changelog/template@1.2.0': {}
+
   '@docsearch/css@3.8.2': {}
 
   '@docsearch/js@3.8.2(@algolia/client-search@5.55.1)(search-insights@2.17.3)':
@@ -7336,9 +7342,9 @@ snapshots:
     dependencies:
       compare-func: 2.0.0
 
-  conventional-changelog-angular@8.3.1:
+  conventional-changelog-angular@9.2.0:
     dependencies:
-      compare-func: 2.0.0
+      '@conventional-changelog/template': 1.2.0
 
   conventional-changelog-atom@5.1.0: {}
 
