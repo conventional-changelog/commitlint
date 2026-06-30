@@ -162,8 +162,8 @@ importers:
         specifier: ^17.0.29
         version: 17.0.35
       conventional-commits-parser:
-        specifier: ^6.3.0
-        version: 6.4.0
+        specifier: ^7.0.0
+        version: 7.0.0
       es-toolkit:
         specifier: ^1.46.0
         version: 1.49.0
@@ -501,8 +501,8 @@ importers:
         specifier: ^8.2.0
         version: 8.3.1
       conventional-commits-parser:
-        specifier: ^6.3.0
-        version: 6.4.0
+        specifier: ^7.0.0
+        version: 7.0.0
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -648,8 +648,8 @@ importers:
         specifier: ^8.2.0
         version: 8.3.1
       conventional-commits-parser:
-        specifier: ^6.3.0
-        version: 6.4.0
+        specifier: ^7.0.0
+        version: 7.0.0
 
   '@commitlint/to-lines':
     devDependencies:
@@ -695,8 +695,8 @@ importers:
   '@commitlint/types':
     dependencies:
       conventional-commits-parser:
-        specifier: ^6.3.0
-        version: 6.4.0
+        specifier: ^7.0.0
+        version: 7.0.0
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -2149,6 +2149,10 @@ packages:
     resolution: {integrity: sha512-KxXvfapcixpz6rVEB6HPjOUZT22yN6v0vI0urQSk1L8MlEWPDFCZkhw2xmkyoTGYeFw7tWTZd7e3lVzRZRN/EA==}
     engines: {node: '>=18'}
 
+  '@simple-libs/stream-utils@2.0.0':
+    resolution: {integrity: sha512-fCTuZK4QBa+39Oz9l4OGfJfz+GpwCp3AqO7Zch3to99xHPgstVsRFpeQ8LNd2o1Gv8raL2mCFwiaHh7bFSp5DQ==}
+    engines: {node: '>=22'}
+
   '@sinclair/typebox@0.34.49':
     resolution: {integrity: sha512-brySQQs7Jtn0joV8Xh9ZV/hZb9Ozb0pmazDIASBkYKCjXrXU3mpcFahmK/z4YDhGkQvP9mWJbVyahdtU5wQA+A==}
 
@@ -2894,6 +2898,11 @@ packages:
   conventional-commits-parser@6.4.0:
     resolution: {integrity: sha512-tvRg7FIBNlyPzjdG8wWRlPHQJJHI7DylhtRGeU9Lq+JuoPh5BKpPRX83ZdLrvXuOSu5Eo/e7SzOQhU4Hd2Miuw==}
     engines: {node: '>=18'}
+    hasBin: true
+
+  conventional-commits-parser@7.0.0:
+    resolution: {integrity: sha512-dZe/p+FgGQLNJFqaCgNdl8j6a7gI8xuaN30Wy5g7nvyK3jqOpNUEUZ3pGJ5D68h89uRh038FtkeOk/bnGmYkmg==}
+    engines: {node: '>=22'}
     hasBin: true
 
   conventional-recommended-bump@7.0.1:
@@ -3980,6 +3989,10 @@ packages:
   meow@13.2.0:
     resolution: {integrity: sha512-pxQJQzB6djGPXh08dacEloMFopsOqGVRKFPYvPOt9XDZ1HasbgDZA74CJGreSU4G3Ak7EFJGoiH2auq+yXISgA==}
     engines: {node: '>=18'}
+
+  meow@14.1.0:
+    resolution: {integrity: sha512-EDYo6VlmtnumlcBCbh1gLJ//9jvM/ndXHfVXIFrZVr6fGcwTUyCTFNTLCKuY3ffbK8L/+3Mzqnd58RojiZqHVw==}
+    engines: {node: '>=20'}
 
   meow@8.1.2:
     resolution: {integrity: sha512-r85E3NdZ+mpYk1C6RjPFEMSE+s1iZMuHtsHAqY0DT3jZczl0diWUZ8g6oU7h0M9cD2EL+PzaYghhCLzR0ZNn5Q==}
@@ -6643,6 +6656,8 @@ snapshots:
 
   '@simple-libs/stream-utils@1.2.0': {}
 
+  '@simple-libs/stream-utils@2.0.0': {}
+
   '@sinclair/typebox@0.34.49': {}
 
   '@standard-schema/spec@1.1.0': {}
@@ -7390,6 +7405,12 @@ snapshots:
     dependencies:
       '@simple-libs/stream-utils': 1.2.0
       meow: 13.2.0
+    optional: true
+
+  conventional-commits-parser@7.0.0:
+    dependencies:
+      '@simple-libs/stream-utils': 2.0.0
+      meow: 14.1.0
 
   conventional-recommended-bump@7.0.1:
     dependencies:
@@ -8586,6 +8607,8 @@ snapshots:
   mdurl@2.0.0: {}
 
   meow@13.2.0: {}
+
+  meow@14.1.0: {}
 
   meow@8.1.2:
     dependencies:
