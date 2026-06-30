@@ -25,6 +25,90 @@ const pathSuffixes = ["", ".js", ".json", `${path.sep}index.js`, `${path.sep}ind
 
 const specifierSuffixes = ["", ".js", ".json", "/index.js", "/index.json"];
 
+/**
+ * Recover the entry point from a package manifest, preferring the ESM
+ * (`import`) condition of the `exports` map and falling back to `module`/`main`.
+ */
+const resolveExportsEntry = (manifest: Record<string, unknown>): string => {
+	const fromConditions = (value: unknown): string | undefined => {
+		if (typeof value === "string") {
+			return value;
+		}
+		if (value && typeof value === "object" && !Array.isArray(value)) {
+			const conditions = value as Record<string, unknown>;
+			for (const key of ["import", "module", "node", "default"]) {
+				if (key in conditions) {
+					const resolved = fromConditions(conditions[key]);
+					if (resolved) {
+						return resolved;
+					}
+				}
+			}
+		}
+		return undefined;
+	};
+
+	let exp = manifest.exports;
+	if (exp && typeof exp === "object" && !Array.isArray(exp) && "." in (exp as object)) {
+		exp = (exp as Record<string, unknown>)["."];
+	}
+
+	return (
+		fromConditions(exp) ||
+		(typeof manifest.module === "string" ? manifest.module : undefined) ||
+		(typeof manifest.main === "string" ? manifest.main : undefined) ||
+		"index.js"
+	);
+};
+
+/**
+ * Pure-ESM presets such as conventional-changelog-angular@>=9 and
+ * conventional-changelog-conventionalcommits@>=10 declare only the `import`
+ * condition in their `exports` map (no `require`/`default`/`main`), so the
+ * CommonJS resolvers above fail with ERR_PACKAGE_PATH_NOT_EXPORTED. Walk
+ * node_modules from the requesting location and read the manifest ourselves.
+ */
+const resolveEsmOnly = (lookup: string, fromDir: string): string | undefined => {
+	if (path.isAbsolute(lookup) || lookup.startsWith(".")) {
+		return undefined;
+	}
+
+	const segments = lookup.split("/");
+	const pkgName = lookup.startsWith("@") ? segments.slice(0, 2).join("/") : segments[0];
+	const subpath = lookup.slice(pkgName.length).replace(/^\//, "");
+
+	let dir = fromDir;
+	for (;;) {
+		const pkgDir = path.join(dir, "node_modules", pkgName);
+		const manifestPath = path.join(pkgDir, "package.json");
+
+		if (fs.existsSync(manifestPath)) {
+			if (subpath) {
+				for (const suffix of pathSuffixes) {
+					const filename = path.join(pkgDir, subpath) + suffix;
+					if (fs.existsSync(filename)) {
+						return filename;
+					}
+				}
+				return undefined;
+			}
+
+			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+			const resolved = path.join(pkgDir, resolveExportsEntry(manifest));
+			if (fs.existsSync(resolved)) {
+				return resolved;
+			}
+			return undefined;
+		}
+
+		const parentDir = path.dirname(dir);
+		if (parentDir === dir) {
+			return undefined;
+		}
+		dir = parentDir;
+	}
+};
+
 export const resolveFrom = (lookup: string, parent?: string): string => {
 	if (path.isAbsolute(lookup)) {
 		for (const suffix of pathSuffixes) {
@@ -62,6 +146,10 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 		 */
 		return resolveFrom_(path.dirname(parentPath), lookup);
 	} catch {
+		const esmResolved = resolveEsmOnly(lookup, path.dirname(parentPath));
+		if (esmResolved) {
+			return esmResolved;
+		}
 		throw resolveError;
 	}
 };

@@ -1,8 +1,11 @@
-import { test, expect, vi } from "vitest";
+import { test, expect, vi, afterEach } from "vitest";
 import { createRequire } from "node:module";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { RuleConfigSeverity, UserConfig } from "@commitlint/types";
 
-import resolveExtends, { ResolveExtendsContext } from "./index.js";
+import resolveExtends, { ResolveExtendsContext, resolveFrom } from "./index.js";
 
 const require = createRequire(import.meta.url);
 
@@ -627,4 +630,74 @@ test("should correctly merge nested configs", async () => {
 	};
 
 	expect(actual).toEqual(expected);
+});
+
+const scaffoldedRoots: string[] = [];
+
+afterEach(() => {
+	for (const root of scaffoldedRoots.splice(0)) {
+		fs.rmSync(root, { recursive: true, force: true });
+	}
+});
+
+// Create a throwaway `<root>/node_modules/<pkg>` layout and return <root>.
+const scaffoldModule = (
+	pkg: string,
+	manifest: Record<string, unknown>,
+	files: Record<string, string>,
+): string => {
+	const root = fs.mkdtempSync(path.join(os.tmpdir(), "resolve-from-"));
+	scaffoldedRoots.push(root);
+	const pkgDir = path.join(root, "node_modules", pkg);
+	fs.mkdirSync(pkgDir, { recursive: true });
+	fs.writeFileSync(path.join(pkgDir, "package.json"), JSON.stringify(manifest));
+	for (const [relative, content] of Object.entries(files)) {
+		const file = path.join(pkgDir, relative);
+		fs.mkdirSync(path.dirname(file), { recursive: true });
+		fs.writeFileSync(file, content);
+	}
+	return root;
+};
+
+// CommonJS resolvers cannot read an `exports` map that only declares the `import`
+// condition (no require/default/main), so resolveFrom must fall back to reading the
+// manifest itself. See conventional-changelog-angular@>=9 / conventionalcommits@>=10.
+test("resolveFrom resolves a pure-ESM package exposing only the import condition", () => {
+	const root = scaffoldModule(
+		"esm-only-preset",
+		{
+			name: "esm-only-preset",
+			type: "module",
+			exports: { types: "./index.d.ts", import: "./index.js" },
+		},
+		{ "index.js": "export default {};" },
+	);
+
+	expect(resolveFrom("esm-only-preset", root)).toBe(
+		path.join(root, "node_modules", "esm-only-preset", "index.js"),
+	);
+});
+
+test("resolveFrom resolves a subpath of a pure-ESM package", () => {
+	const root = scaffoldModule(
+		"esm-only-preset",
+		{ name: "esm-only-preset", type: "module", exports: { import: "./index.js" } },
+		{ "index.js": "export default {};", "feature.js": "export default {};" },
+	);
+
+	expect(resolveFrom("esm-only-preset/feature", root)).toBe(
+		path.join(root, "node_modules", "esm-only-preset", "feature.js"),
+	);
+});
+
+test("resolveFrom falls back to main when the exports map has no runtime condition", () => {
+	const root = scaffoldModule(
+		"types-only-preset",
+		{ name: "types-only-preset", exports: { types: "./index.d.ts" }, main: "./main.js" },
+		{ "main.js": "module.exports = {};" },
+	);
+
+	expect(resolveFrom("types-only-preset", root)).toBe(
+		path.join(root, "node_modules", "types-only-preset", "main.js"),
+	);
 });
