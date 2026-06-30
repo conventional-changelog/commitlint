@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.2.0](https://github.com/conventional-changelog/commitlint/compare/v21.1.0...v21.2.0) (2026-06-30)
+
+
+### Features
+
+* **resolve-extends:** resolve pure-ESM presets (conventional-changelog v7/v9/v10) ([#4859](https://github.com/conventional-changelog/commitlint/issues/4859)) ([fdb566f](https://github.com/conventional-changelog/commitlint/commit/fdb566fe59457a786eac80e2a8cbb994638daba0))
+
+
+
+
+
 # [21.1.0](https://github.com/conventional-changelog/commitlint/compare/v21.0.2...v21.1.0) (2026-06-23)
 
 **Note:** Version bump only for package @commitlint/parse
