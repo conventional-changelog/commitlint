@@ -2,7 +2,7 @@ import { test, expect } from "vitest";
 import parse from "@commitlint/parse";
 import { referencesEmpty } from "./references-empty.js";
 
-// @ts-expect-error -- no typings
+import type { ParserOptions } from "conventional-commits-parser";
 import preset from "conventional-changelog-angular";
 
 const messages = {
@@ -14,7 +14,7 @@ const messages = {
 };
 
 const opts = (async () => {
-	const o = await preset();
+	const o = (await preset()) as { parser: ParserOptions };
 	o.parser.commentChar = "#";
 	return o;
 })();

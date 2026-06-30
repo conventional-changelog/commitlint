@@ -1,5 +1,15 @@
 import { test, expect } from "vitest";
+import type { ParserOptions } from "conventional-commits-parser";
+
 import parse from "./index.js";
+
+// conventional-changelog-angular@>=9 exposes a single default `createPreset()`
+// whose return is typed as `{}`; the parser options live under `.parser`.
+const angularParserOpts = async (): Promise<ParserOptions> => {
+	const { default: createPreset } = await import("conventional-changelog-angular");
+	const { parser } = (await createPreset()) as { parser: ParserOptions };
+	return parser;
+};
 
 test("throws when called without params", async () => {
 	await expect((parse as any)()).rejects.toThrow("Expected a raw commit");
@@ -143,10 +153,8 @@ test("supports scopes with / and empty parserOpts", async () => {
 
 test("ignores comments", async () => {
 	const message = "type(some/scope): subject\n# some comment";
-	// @ts-expect-error -- no typings
-	const changelogOpts = await import("conventional-changelog-angular");
 	const opts = {
-		...changelogOpts.parser,
+		...(await angularParserOpts()),
 		commentChar: "#",
 	};
 	const actual = await parse(message, undefined, opts);
@@ -158,9 +166,7 @@ test("ignores comments", async () => {
 
 test("parses inline references in subject and body", async () => {
 	const message = "type(some/scope): subject #reference\n\nthings #reference";
-	// @ts-expect-error -- no typings
-	const changelogOpts = await import("conventional-changelog-angular");
-	const actual = await parse(message, undefined, changelogOpts.parser);
+	const actual = await parse(message, undefined, await angularParserOpts());
 
 	expect(actual.subject).toBe("subject #reference");
 	expect(actual.body).toBe("");
@@ -186,10 +192,8 @@ test("parses inline references in subject and body", async () => {
 
 test("filters comment lines when commentChar is set", async () => {
 	const message = "type(scope): subject\n# this is a comment\nbody content";
-	// @ts-expect-error -- no typings
-	const changelogOpts = await import("conventional-changelog-angular");
 	const opts = {
-		...changelogOpts.parser,
+		...(await angularParserOpts()),
 		commentChar: "#",
 	};
 	const actual = await parse(message, undefined, opts);
@@ -235,11 +239,9 @@ test("allows separating -side nodes- by setting parserOpts.fieldPattern", async 
 
 test("parses references leading subject", async () => {
 	const message = "#1 some subject";
-	// @ts-expect-error -- no typings
-	const opts = await import("conventional-changelog-angular");
 	const {
 		references: [actual],
-	} = await parse(message, undefined, opts);
+	} = await parse(message, undefined, await angularParserOpts());
 
 	expect(actual.issue).toBe("1");
 });

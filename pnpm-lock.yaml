@@ -498,8 +498,8 @@ importers:
         specifier: workspace:^
         version: link:../types
       conventional-changelog-angular:
-        specifier: ^8.2.0
-        version: 8.3.1
+        specifier: ^9.0.0
+        version: 9.2.0
       conventional-commits-parser:
         specifier: ^7.0.0
         version: 7.0.0
@@ -645,8 +645,8 @@ importers:
         specifier: ^22.0.0
         version: 22.20.0
       conventional-changelog-angular:
-        specifier: ^8.2.0
-        version: 8.3.1
+        specifier: ^9.0.0
+        version: 9.2.0
       conventional-commits-parser:
         specifier: ^7.0.0
         version: 7.0.0
@@ -2860,9 +2860,9 @@ packages:
     resolution: {integrity: sha512-ROjNchA9LgfNMTTFSIWPzebCwOGFdgkEq45EnvvrmSLvCtAw0HSmrCs7/ty+wAeYUZyNay0YMUNYFTRL72PkBQ==}
     engines: {node: '>=16'}
 
-  conventional-changelog-angular@8.3.1:
-    resolution: {integrity: sha512-6gfI3otXK5Ph5DfCOI1dblr+kN3FAm5a97hYoQkqNZxOaYa5WKfXH+AnpsmS+iUH2mgVC2Cg2Qw9m5OKcmNrIg==}
-    engines: {node: '>=18'}
+  conventional-changelog-angular@9.2.0:
+    resolution: {integrity: sha512-2EihZvM1KmbBGwuUow8lNXLe+ECRFsyOcV8X0197/WI7Rvvgfi55Oicfw0wxJTXGGIVXSfj+xBoNj+cxLlIiVw==}
+    engines: {node: '>=22'}
 
   conventional-changelog-atom@5.1.0:
     resolution: {integrity: sha512-fw7GpI9jHNCWGBnTsPRI452ypQbNupGwsjrXfozvRNE0c92pJRpoj9rXfzDKUYJcsmk0H4XKaQjhjelwI9z27w==}
@@ -7357,9 +7357,9 @@ snapshots:
     dependencies:
       compare-func: 2.0.0
 
-  conventional-changelog-angular@8.3.1:
+  conventional-changelog-angular@9.2.0:
     dependencies:
-      compare-func: 2.0.0
+      '@conventional-changelog/template': 1.2.0
 
   conventional-changelog-atom@5.1.0: {}
 
