@@ -1,5 +1,7 @@
 import path from "node:path";
 import { createRequire } from "node:module";
+import { existsSync, realpathSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 
 import fs from "node:fs/promises";
 import resolvePkg from "resolve-pkg";
@@ -7,6 +9,34 @@ import resolvePkg from "resolve-pkg";
 import * as git from "./git.js";
 
 const require = createRequire(import.meta.url);
+
+/**
+ * Pure-ESM packages (e.g. conventional-changelog-angular@>=9,
+ * conventional-changelog-conventionalcommits@>=10) ship an `exports` map with
+ * only the `import` condition, which the CommonJS resolvers (`resolve-pkg`,
+ * `require.resolve`) cannot read. Locate the package directory by walking up
+ * from this module and checking both the regular and the pnpm-virtual-store
+ * (`node_modules/.pnpm/node_modules/<name>`) layouts.
+ */
+function resolveModuleDir(dependency: string): string | undefined {
+	let dir = path.dirname(fileURLToPath(import.meta.url));
+	for (;;) {
+		for (const rel of [
+			path.join("node_modules", dependency),
+			path.join("node_modules", ".pnpm", "node_modules", dependency),
+		]) {
+			const candidate = path.join(dir, rel);
+			if (existsSync(path.join(candidate, "package.json"))) {
+				return realpathSync(candidate);
+			}
+		}
+		const parent = path.dirname(dir);
+		if (parent === dir) {
+			return undefined;
+		}
+		dir = parent;
+	}
+}
 
 export async function installModules(cwd: string) {
 	const manifestPath = path.join(cwd, "package.json");
@@ -52,6 +82,10 @@ export async function installModules(cwd: string) {
 							console.warn("Unexpected error while resolving dependency:", dependency, e);
 						}
 					}
+				}
+
+				if (!sourcePath) {
+					sourcePath = resolveModuleDir(dependency);
 				}
 
 				if (!sourcePath) {

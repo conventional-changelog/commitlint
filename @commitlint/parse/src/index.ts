@@ -1,7 +1,6 @@
 import type { Parser } from "@commitlint/types";
 
 import { type Commit, type ParserOptions, CommitParser } from "conventional-commits-parser";
-// @ts-expect-error -- no typings
 import defaultChangelogOpts from "conventional-changelog-angular";
 
 const defaultParser: Parser = (message, options) => {
@@ -21,7 +20,12 @@ export async function parse(
 	parser: Parser = defaultParser,
 	parserOpts?: ParserOptions,
 ): Promise<Commit> {
-	const preset = await defaultChangelogOpts();
+	// conventional-changelog-angular@>=9 ships typings that declare the preset as
+	// `{}`; the parser options live under `.parser` at runtime.
+	const preset = (await defaultChangelogOpts()) as {
+		parser?: ParserOptions;
+		parserOpts?: ParserOptions;
+	};
 	const defaultOpts = preset.parser || preset.parserOpts;
 	// Support user-provided parser options passed either flat or nested under a 'parser' key
 	const userOpts = (parserOpts as any)?.parser || parserOpts || {};

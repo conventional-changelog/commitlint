@@ -1,13 +1,13 @@
 import { test, expect } from "vitest";
 import parse from "@commitlint/parse";
-// @ts-expect-error -- no typings
+import type { ParserOptions } from "conventional-commits-parser";
 import preset from "conventional-changelog-angular";
 
 import { subjectExclamationMark } from "./subject-exclamation-mark.js";
 
 const parseMessage = async (str: string) => {
-	const { parserOpts } = await preset();
-	return parse(str, undefined, parserOpts);
+	const { parser } = (await preset()) as { parser: ParserOptions };
+	return parse(str, undefined, parser);
 };
 
 const messages = {
