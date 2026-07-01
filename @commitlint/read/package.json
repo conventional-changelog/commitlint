@@ -36,13 +36,12 @@
   "dependencies": {
     "@commitlint/top-level": "workspace:^",
     "@commitlint/types": "workspace:^",
-    "git-raw-commits": "^5.0.0",
+    "@conventional-changelog/git-client": "^3.0.0",
     "tinyexec": "^1.0.0"
   },
   "devDependencies": {
     "@commitlint/test": "workspace:^",
-    "@commitlint/utils": "workspace:^",
-    "@types/git-raw-commits": "^5.0.0"
+    "@commitlint/utils": "workspace:^"
   },
   "engines": {
     "node": ">=22.12.0"
