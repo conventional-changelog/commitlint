@@ -79,3 +79,11 @@ body:
       placeholder: vx.x.x
     validations:
       required: true
+  - type: input
+    id: package-manager
+    attributes:
+      label: "Package manager & version"
+      description: Include the install mode too — resolution differs a lot, especially Yarn Plug'n'Play (no node_modules)
+      placeholder: "e.g. yarn 4.17.0 (Plug'n'Play), pnpm 9.15.0, npm 10.8.0"
+    validations:
+      required: true
