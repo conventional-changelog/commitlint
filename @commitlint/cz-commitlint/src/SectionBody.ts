@@ -1,13 +1,13 @@
-import { Answers, DistinctQuestion } from "inquirer";
 import wrap from "word-wrap";
 
 import Question from "./Question.js";
 import getRuleQuestionConfig from "./services/getRuleQuestionConfig.js";
 import { getRule } from "./store/rules.js";
+import { PromptAnswers, PromptQuestion } from "./types.js";
 import getLeadingBlankFn from "./utils/leading-blank-fn.js";
 import { getMaxLength } from "./utils/rules.js";
 
-export function getQuestions(): Array<DistinctQuestion> {
+export function getQuestions(): Array<PromptQuestion> {
 	// body
 	const questionConfig = getRuleQuestionConfig("body");
 
@@ -15,7 +15,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 	else return [new Question("body", questionConfig).question];
 }
 
-export function combineCommitMessage(answers: Answers): string {
+export function combineCommitMessage(answers: PromptAnswers): string {
 	const maxLineLength = getMaxLength(getRule("body", "max-line-length"));
 	const leadingBlankFn = getLeadingBlankFn(getRule("body", "leading-blank"));
 	const { body, breakingBody, issuesBody } = answers;

@@ -1,5 +1,5 @@
 import load from "@commitlint/load";
-import type { Answers, DistinctQuestion } from "inquirer";
+import type { PromptAnswers, PromptQuestion } from "./types.js";
 
 import process from "./Process.js";
 
@@ -12,7 +12,7 @@ type Commit = (message: string) => void;
  */
 export function prompter(
 	inquirerIns: {
-		prompt(questions: DistinctQuestion[]): Promise<Answers>;
+		prompt(questions: PromptQuestion[]): Promise<PromptAnswers>;
 	},
 	commit: Commit,
 ): void {

@@ -1,9 +1,9 @@
 import { PromptName, RuleField } from "@commitlint/types";
-import { Answers, DistinctQuestion } from "inquirer";
 
 import Question, { QuestionConfig } from "./Question.js";
 import getRuleQuestionConfig from "./services/getRuleQuestionConfig.js";
 import { getPromptSettings } from "./store/prompts.js";
+import { PromptAnswers, PromptQuestion } from "./types.js";
 
 export class HeaderQuestion extends Question {
 	headerMaxLength: number;
@@ -18,7 +18,7 @@ export class HeaderQuestion extends Question {
 		this.headerMaxLength = headerMaxLength ?? Infinity;
 		this.headerMinLength = headerMinLength ?? 0;
 	}
-	beforeQuestionStart(answers: Answers): void {
+	beforeQuestionStart(answers: PromptAnswers): void {
 		const headerRemainLength = this.headerMaxLength - combineCommitMessage(answers).length;
 		// Reserve 1 char for '!' when useExclamationMark is enabled.
 		const reservedLength = getPromptSettings()["useExclamationMark"] ? 1 : 0;
@@ -28,7 +28,7 @@ export class HeaderQuestion extends Question {
 	}
 }
 
-export function combineCommitMessage(answers: Answers): string {
+export function combineCommitMessage(answers: PromptAnswers): string {
 	const { type = "", scope = "", subject = "", isBreaking } = answers;
 	const hasPrefix = Boolean(type || scope);
 	const breakingMark =
@@ -42,9 +42,9 @@ export function combineCommitMessage(answers: Answers): string {
 	}
 }
 
-export function getQuestions(): Array<DistinctQuestion> {
+export function getQuestions(): Array<PromptQuestion> {
 	// header: type, scope, subject
-	const questions: Array<DistinctQuestion> = [];
+	const questions: Array<PromptQuestion> = [];
 
 	const headerRuleFields: RuleField[] = ["type", "scope", "subject"];
 	const headerRuleQuestionConfig = getRuleQuestionConfig("header");

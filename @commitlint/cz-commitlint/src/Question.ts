@@ -1,22 +1,26 @@
 import { PromptMessages, PromptName } from "@commitlint/types";
 import pc from "picocolors";
-import inquirer, { Answers, ChoiceCollection, DistinctQuestion } from "inquirer";
+import inquirer from "inquirer";
 
+import { PromptAnswers, PromptQuestion } from "./types.js";
 import { CaseFn } from "./utils/case-fn.js";
 import { FullStopFn } from "./utils/full-stop-fn.js";
 
 export type QuestionConfig = {
+	enumList?: Array<
+		| string
+		| {
+				name: string;
+				value: string;
+		  }
+	> | null;
 	title: string;
 	messages: PromptMessages;
 	maxLength?: number;
 	minLength?: number;
 	defaultValue?: string;
-	when?: DistinctQuestion["when"];
+	when?: PromptQuestion["when"];
 	skip?: boolean;
-	enumList?: ChoiceCollection<{
-		name: string;
-		value: string;
-	}> | null;
 	multipleValueDelimiters?: RegExp;
 	multipleSelectDefaultDelimiter?: string;
 	fullStopFn?: FullStopFn;
@@ -24,7 +28,7 @@ export type QuestionConfig = {
 };
 
 export default class Question {
-	private _question: Readonly<DistinctQuestion>;
+	private _question: Readonly<PromptQuestion>;
 	private messages: PromptMessages;
 	private skip: boolean;
 	private _maxLength: number;
@@ -68,7 +72,7 @@ export default class Question {
 
 		if (enumList && Array.isArray(enumList)) {
 			this._question = {
-				type: multipleSelectDefaultDelimiter ? "checkbox" : "list",
+				type: multipleSelectDefaultDelimiter ? "checkbox" : "select",
 				choices: skip
 					? [
 							...enumList,
@@ -105,7 +109,7 @@ export default class Question {
 		return this.messages[key] ?? "";
 	}
 
-	get question(): Readonly<DistinctQuestion> {
+	get question(): Readonly<PromptQuestion> {
 		return this._question;
 	}
 
@@ -125,7 +129,7 @@ export default class Question {
 		this._minLength = minLength;
 	}
 
-	protected beforeQuestionStart(_answers: Answers): void {
+	protected beforeQuestionStart(_answers: PromptAnswers): void {
 		return;
 	}
 
@@ -172,7 +176,7 @@ export default class Question {
 		return this.fullStopFn(toCased);
 	}
 
-	protected transformer(input: string, _answers: Answers): string {
+	protected transformer(input: string, _answers: PromptAnswers): string {
 		const output = this.filter(input);
 
 		if (this.maxLength === Infinity && this.minLength === 0) {
@@ -183,7 +187,7 @@ export default class Question {
 		return color("(" + output.length + ") " + output);
 	}
 
-	protected decorateMessage(_answers: Answers): string {
+	protected decorateMessage(_answers: PromptAnswers): string {
 		if (this.beforeQuestionStart) {
 			this.beforeQuestionStart(_answers);
 		}

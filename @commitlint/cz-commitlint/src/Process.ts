@@ -1,5 +1,5 @@
 import { QualifiedRules, UserPromptConfig } from "@commitlint/types";
-import type { Answers, DistinctQuestion } from "inquirer";
+import type { PromptAnswers, PromptQuestion } from "./types.js";
 
 import {
 	combineCommitMessage as combineBody,
@@ -20,7 +20,7 @@ export default async function (
 	rules: QualifiedRules,
 	prompts: UserPromptConfig,
 	inquirer: {
-		prompt(questions: DistinctQuestion[]): Promise<Answers>;
+		prompt(questions: PromptQuestion[]): Promise<PromptAnswers>;
 	},
 ): Promise<string> {
 	setRules(rules);
