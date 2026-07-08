@@ -465,7 +465,7 @@ function getEditValue(flags: CliFlags) {
 	// This does not work properly with win32 systems, where env variable declarations
 	// use a different syntax
 	// See https://github.com/conventional-changelog/commitlint/issues/103 for details
-	// This has been superceded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
+	// This has been superseded by the `-E GIT_PARAMS` / `-E HUSKY_GIT_PARAMS`
 	const isGitParams = edit === "$GIT_PARAMS" || edit === "%GIT_PARAMS%";
 	const isHuskyParams = edit === "$HUSKY_GIT_PARAMS" || edit === "%HUSKY_GIT_PARAMS%";
 

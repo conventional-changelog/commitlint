@@ -82,7 +82,7 @@ export function getShorthandName(fullname: string) {
 /**
  * Gets the scope (namespace) of a term.
  * @param {string} term The term which may have the namespace.
- * @returns {string} The namepace of the term if it has one.
+ * @returns {string} The namespace of the term if it has one.
  */
 export function getNamespaceFromTerm(term: string) {
 	const match = NAMESPACE_REGEX.exec(term);

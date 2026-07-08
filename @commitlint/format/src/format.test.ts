@@ -327,7 +327,7 @@ test("format result prints help for warnings", () => {
 	expect(actual).toEqual(expect.arrayContaining([expect.stringContaining("Get help:")]));
 });
 
-test("format result help cotains options.helpUrl", () => {
+test("format result help contains options.helpUrl", () => {
 	const helpUrl = "https://example.com";
 
 	const actual = formatResult(
