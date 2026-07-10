@@ -1,8 +1,9 @@
 import { describe, test, expect, vi } from "vitest";
 import pc from "picocolors";
-import inquirer, { Answers, InputQuestionOptions } from "inquirer";
+import inquirer from "inquirer";
 
 import Question from "./Question.js";
+import { PromptAnswers } from "./types.js";
 
 const MESSAGES = {
 	skip: "(press enter to skip)",
@@ -54,12 +55,12 @@ describe("name", () => {
 });
 
 describe("type", () => {
-	test('should return "list" type when enumList is array and multipleSelectDefaultDelimiter is undefined', () => {
+	test('should return "select" type when enumList is array and multipleSelectDefaultDelimiter is undefined', () => {
 		const question = new Question("scope", {
 			...QUESTION_CONFIG,
 			enumList: ["cli", "core"],
 		}).question;
-		expect(question).toHaveProperty("type", "list");
+		expect(question).toHaveProperty("type", "select");
 		expect(question).toHaveProperty("choices", ["cli", "core"]);
 		expect(question).not.toHaveProperty("transformer");
 	});
@@ -81,7 +82,7 @@ describe("type", () => {
 			enumList: ["cli", "core"],
 			skip: true,
 		}).question;
-		expect(question).toHaveProperty("type", "list");
+		expect(question).toHaveProperty("type", "select");
 		expect(question).toHaveProperty("choices", [
 			"cli",
 			"core",
@@ -112,6 +113,10 @@ describe("type", () => {
 		expect(question).toHaveProperty("transformer", expect.any(Function));
 	});
 });
+
+type QuestionWithTransformer = {
+	transformer?: (input: string, answers: PromptAnswers, context?: unknown) => string;
+};
 
 describe("message", () => {
 	test("should display title when it is not input", () => {
@@ -176,7 +181,7 @@ describe("message", () => {
 	test("should execute function beforeQuestionStart when init message", () => {
 		const mockFn = vi.fn();
 		class CustomQuestion extends Question {
-			beforeQuestionStart(answers: Answers): void {
+			beforeQuestionStart(answers: PromptAnswers): void {
 				mockFn(answers);
 			}
 		}
@@ -303,7 +308,7 @@ describe("transformer", () => {
 			fullStopFn: (input: string) => input + "!",
 		}).question;
 
-		expect((question as InputQuestionOptions)?.transformer?.("xxxx", {}, {})).toBe("Xxxx!");
+		expect((question as QuestionWithTransformer)?.transformer?.("xxxx", {}, {})).toBe("Xxxx!");
 	});
 
 	test("should char count with green color when in the limit range", () => {
@@ -312,7 +317,7 @@ describe("transformer", () => {
 			maxLength: 5,
 		}).question;
 
-		expect((question as InputQuestionOptions)?.transformer?.("xxx", {}, {})).toEqual(
+		expect((question as QuestionWithTransformer)?.transformer?.("xxx", {}, {})).toEqual(
 			pc.green(`(3) xxx`),
 		);
 
@@ -321,7 +326,7 @@ describe("transformer", () => {
 			minLength: 2,
 		}).question;
 
-		expect((question as InputQuestionOptions)?.transformer?.("xxx", {}, {})).toEqual(
+		expect((question as QuestionWithTransformer)?.transformer?.("xxx", {}, {})).toEqual(
 			pc.green(`(3) xxx`),
 		);
 	});
@@ -332,7 +337,7 @@ describe("transformer", () => {
 			maxLength: 5,
 		}).question;
 
-		expect((question as InputQuestionOptions)?.transformer?.("xxxxxx", {}, {})).toEqual(
+		expect((question as QuestionWithTransformer)?.transformer?.("xxxxxx", {}, {})).toEqual(
 			pc.red(`(6) xxxxxx`),
 		);
 
@@ -341,13 +346,15 @@ describe("transformer", () => {
 			minLength: 2,
 		}).question;
 
-		expect((question as InputQuestionOptions)?.transformer?.("x", {}, {})).toEqual(pc.red(`(1) x`));
+		expect((question as QuestionWithTransformer)?.transformer?.("x", {}, {})).toEqual(
+			pc.red(`(1) x`),
+		);
 	});
 });
 
 describe("inquirer question", () => {
 	test('should pass "when" and "default" field to inquirer question', () => {
-		const when = (answers: Answers) => !!answers.header;
+		const when = (answers: PromptAnswers) => !!answers.header;
 		const question = new Question("body", {
 			...QUESTION_CONFIG,
 			when,

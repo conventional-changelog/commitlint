@@ -1,11 +1,11 @@
 import { PromptName } from "@commitlint/types";
-import { Answers, DistinctQuestion } from "inquirer";
 import wrap from "word-wrap";
 
 import Question, { QuestionConfig } from "./Question.js";
 import getRuleQuestionConfig from "./services/getRuleQuestionConfig.js";
 import { getPromptMessages, getPromptQuestions } from "./store/prompts.js";
 import { getRule } from "./store/rules.js";
+import { PromptAnswers, PromptQuestion } from "./types.js";
 import getLeadingBlankFn from "./utils/leading-blank-fn.js";
 import { getMaxLength } from "./utils/rules.js";
 
@@ -22,7 +22,7 @@ export class FooterQuestion extends Question {
 		this.footerMaxLength = footerMaxLength ?? Infinity;
 		this.footerMinLength = footerMinLength ?? 0;
 	}
-	beforeQuestionStart(answers: Answers): void {
+	beforeQuestionStart(answers: PromptAnswers): void {
 		const footerRemainLength =
 			this.footerMaxLength - combineCommitMessage(answers).length - "\n".length;
 		this.maxLength = Math.min(this.maxLength, footerRemainLength);
@@ -30,7 +30,7 @@ export class FooterQuestion extends Question {
 	}
 }
 
-export function getQuestions(): Array<DistinctQuestion> {
+export function getQuestions(): Array<PromptQuestion> {
 	const footerQuestionConfig = getRuleQuestionConfig("footer");
 
 	if (!footerQuestionConfig) return [];
@@ -68,7 +68,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 
 			if (name === "breakingBody") {
 				Object.assign(questionConfigs, {
-					when: (answers: Answers) => {
+					when: (answers: PromptAnswers) => {
 						return answers.isBreaking && !answers.body;
 					},
 				});
@@ -76,7 +76,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 
 			if (name === "breaking") {
 				Object.assign(questionConfigs, {
-					when: (answers: Answers) => {
+					when: (answers: PromptAnswers) => {
 						return answers.isBreaking;
 					},
 				});
@@ -90,7 +90,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 
 			if (name === "issuesBody") {
 				Object.assign(questionConfigs, {
-					when: (answers: Answers) => {
+					when: (answers: PromptAnswers) => {
 						return answers.isIssueAffected && !answers.body && !answers.breakingBody;
 					},
 				});
@@ -98,7 +98,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 
 			if (name === "issues") {
 				Object.assign(questionConfigs, {
-					when: (answers: Answers) => {
+					when: (answers: PromptAnswers) => {
 						return answers.isIssueAffected;
 					},
 				});
@@ -116,7 +116,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 		});
 }
 
-export function combineCommitMessage(answers: Answers): string {
+export function combineCommitMessage(answers: PromptAnswers): string {
 	// TODO references-empty
 	// TODO signed-off-by
 	const maxLineLength = getMaxLength(getRule("footer", "max-line-length"));

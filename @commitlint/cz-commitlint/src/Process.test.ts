@@ -1,14 +1,14 @@
 import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { QualifiedRules, RuleConfigSeverity, UserPromptConfig } from "@commitlint/types";
-import { Answers, DistinctQuestion } from "inquirer";
 
 import process from "./Process.js";
+import { PromptAnswers, PromptQuestion } from "./types.js";
 
 const mockShowTitle = vi.fn();
 const mockShowValidation = vi.fn((message) => message);
 
 // mock inquirer
-const mockPrompt = vi.fn(async function (questions: DistinctQuestion[], answers: Answers) {
+const mockPrompt = vi.fn(async function (questions: PromptQuestion[], answers: PromptAnswers) {
 	for (const { name, message, when, filter, validate } of questions) {
 		if (typeof when !== "function" || (await when(answers))) {
 			const title =
@@ -32,9 +32,9 @@ const mockPrompt = vi.fn(async function (questions: DistinctQuestion[], answers:
 	}
 });
 
-function InquirerFactory(answers: Answers) {
+function InquirerFactory(answers: PromptAnswers) {
 	const inquirer = {
-		async prompt(questions: DistinctQuestion[]) {
+		async prompt(questions: PromptQuestion[]) {
 			await mockPrompt(questions, answers);
 			return answers;
 		},
