@@ -22,7 +22,7 @@ importers:
         version: 22.20.1
       '@vitest/coverage-istanbul':
         specifier: ~4.1.0
-        version: 4.1.10(vitest@4.1.10)
+        version: 4.1.10(supports-color@7.2.0)(vitest@4.1.10)
       husky:
         specifier: ^9.1.5
         version: 9.1.7
@@ -49,7 +49,7 @@ importers:
         version: 1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2)
       vitepress-plugin-llms:
         specifier: ^1.13.1
-        version: 1.13.2
+        version: 1.13.3
       vitepress-plugin-tabs:
         specifier: ^0.9.0
         version: 0.9.1(vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2))(vue@3.5.39(typescript@7.0.2))
@@ -5351,8 +5351,8 @@ packages:
       yaml:
         optional: true
 
-  vitepress-plugin-llms@1.13.2:
-    resolution: {integrity: sha512-2O4s0I5pjEZzgnoWgBPCZCyhah9FH5uQB6lGADazMoyF1URJshtG04ZnmX+cbmQmniN3T5JzdJO9B4q8JHDKOQ==}
+  vitepress-plugin-llms@1.13.3:
+    resolution: {integrity: sha512-C6bygRzuVp54kveM6pngVNg4H9sKMx7K67iwoO4PUzBK22NiXF9SoFm/WdjKp2fJrMcOabKtQMuyNFF20c2Anw==}
     engines: {node: '>=18'}
 
   vitepress-plugin-tabs@0.9.1:
@@ -5679,7 +5679,7 @@ snapshots:
 
   '@babel/compat-data@7.29.7': {}
 
-  '@babel/core@7.29.7':
+  '@babel/core@7.29.7(supports-color@7.2.0)':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
@@ -5688,7 +5688,7 @@ snapshots:
       '@babel/helpers': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/template': 7.29.7
-      '@babel/traverse': 7.29.7
+      '@babel/traverse': 7.29.7(supports-color@7.2.0)
       '@babel/types': 7.29.7
       '@jridgewell/remapping': 2.3.5
       convert-source-map: 2.0.0
@@ -5719,17 +5719,17 @@ snapshots:
 
   '@babel/helper-module-imports@7.29.7':
     dependencies:
-      '@babel/traverse': 7.29.7
+      '@babel/traverse': 7.29.7(supports-color@7.2.0)
       '@babel/types': 7.29.7
     transitivePeerDependencies:
       - supports-color
 
   '@babel/helper-module-transforms@7.29.7(@babel/core@7.29.7)':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@7.2.0)
       '@babel/helper-module-imports': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
-      '@babel/traverse': 7.29.7
+      '@babel/traverse': 7.29.7(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -5754,7 +5754,7 @@ snapshots:
       '@babel/parser': 7.29.7
       '@babel/types': 7.29.7
 
-  '@babel/traverse@7.29.7':
+  '@babel/traverse@7.29.7(supports-color@7.2.0)':
     dependencies:
       '@babel/code-frame': 7.29.7
       '@babel/generator': 7.29.7
@@ -6999,9 +6999,9 @@ snapshots:
       vite: 5.4.21(@types/node@22.20.1)(lightningcss@1.32.0)
       vue: 3.5.39(typescript@7.0.2)
 
-  '@vitest/coverage-istanbul@4.1.10(vitest@4.1.10)':
+  '@vitest/coverage-istanbul@4.1.10(supports-color@7.2.0)(vitest@4.1.10)':
     dependencies:
-      '@babel/core': 7.29.7
+      '@babel/core': 7.29.7(supports-color@7.2.0)
       '@istanbuljs/schema': 0.1.6
       '@jridgewell/gen-mapping': 0.3.13
       '@jridgewell/trace-mapping': 0.3.31
@@ -7143,7 +7143,7 @@ snapshots:
       '@vueuse/shared': 12.8.2(typescript@7.0.2)
       vue: 3.5.39(typescript@7.0.2)
     optionalDependencies:
-      axios: 1.16.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
+      axios: 1.16.1
       focus-trap: 7.8.0
     transitivePeerDependencies:
       - typescript
@@ -7172,6 +7172,13 @@ snapshots:
   abbrev@4.0.0: {}
 
   add-stream@1.0.0: {}
+
+  agent-base@6.0.2:
+    dependencies:
+      debug: 4.4.3(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
 
   agent-base@6.0.2(supports-color@7.2.0):
     dependencies:
@@ -7258,11 +7265,22 @@ snapshots:
 
   axios@1.16.0:
     dependencies:
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@7.2.0))
+      follow-redirects: 1.16.0
       form-data: 4.0.6
       proxy-from-env: 2.1.0
     transitivePeerDependencies:
       - debug
+
+  axios@1.16.1:
+    dependencies:
+      follow-redirects: 1.16.0
+      form-data: 4.0.6
+      https-proxy-agent: 5.0.1
+      proxy-from-env: 2.1.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+    optional: true
 
   axios@1.16.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0):
     dependencies:
@@ -7921,6 +7939,8 @@ snapshots:
     dependencies:
       tabbable: 6.5.0
 
+  follow-redirects@1.16.0: {}
+
   follow-redirects@1.16.0(debug@4.4.3(supports-color@7.2.0)):
     optionalDependencies:
       debug: 4.4.3(supports-color@7.2.0)
@@ -8162,6 +8182,14 @@ snapshots:
       debug: 4.4.3(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
+
+  https-proxy-agent@5.0.1:
+    dependencies:
+      agent-base: 6.0.2
+      debug: 4.4.3(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
 
   https-proxy-agent@5.0.1(supports-color@7.2.0):
     dependencies:
@@ -9223,7 +9251,7 @@ snapshots:
       escape-string-regexp: 1.0.5
       figures: 3.2.0
       flat: 5.0.2
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@7.2.0))
+      follow-redirects: 1.16.0
       form-data: 4.0.6
       fs-constants: 1.0.0
       function-bind: 1.1.2
@@ -10436,7 +10464,7 @@ snapshots:
       jiti: 2.6.1
       yaml: 2.9.0
 
-  vitepress-plugin-llms@1.13.2:
+  vitepress-plugin-llms@1.13.3:
     dependencies:
       gray-matter: 4.0.3
       markdown-it: 14.3.0
@@ -10534,7 +10562,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.20.1
-      '@vitest/coverage-istanbul': 4.1.10(vitest@4.1.10)
+      '@vitest/coverage-istanbul': 4.1.10(supports-color@7.2.0)(vitest@4.1.10)
     transitivePeerDependencies:
       - msw
 
