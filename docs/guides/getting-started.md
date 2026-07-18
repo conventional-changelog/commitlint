@@ -24,7 +24,7 @@ bun add -d @commitlint/cli @commitlint/config-conventional
 
 ```sh [deno]
 deno add -D npm:@commitlint/cli npm:@commitlint/config-conventional
-# Create a local node_modules directory for Node.js module resolution
+# Deno 2 only: create a local node_modules directory for Node.js module resolution
 deno install --node-modules-dir=auto
 ```
 
