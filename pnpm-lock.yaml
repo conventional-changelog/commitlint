@@ -43,19 +43,19 @@ importers:
         version: 7.0.2
       vite:
         specifier: ^8.0.0
-        version: 8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)
+        version: 8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)
       vitepress:
         specifier: ^1.3.4
-        version: 1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2)
+        version: 1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.19)(search-insights@2.17.3)(typescript@7.0.2)
       vitepress-plugin-llms:
         specifier: ^1.13.1
         version: 1.13.3(supports-color@7.2.0)
       vitepress-plugin-tabs:
         specifier: ^0.9.0
-        version: 0.9.1(vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2))(vue@3.5.39(typescript@7.0.2))
+        version: 0.9.1(vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.19)(search-insights@2.17.3)(typescript@7.0.2))(vue@3.5.39(typescript@7.0.2))
       vitest:
         specifier: ~4.1.0
-        version: 4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
+        version: 4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
       vitest-environment-commitlint:
         specifier: workspace:^
         version: link:@packages/test-environment
@@ -730,7 +730,7 @@ importers:
         version: 0.2.7
       vitest:
         specifier: ~4.1.0
-        version: 4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
+        version: 4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
 
   '@packages/utils':
     dependencies:
@@ -4637,6 +4637,10 @@ packages:
     resolution: {integrity: sha512-J7EF+8X+CzRPaJPOv9Ck2wNWJvGnnl3PcNPAdGg6GTLjyVpyQ0yATMSXRFRV01BviT/9Gwuc3rjEyJbDJG9a4w==}
     engines: {node: ^10 || ^12 || >=14}
 
+  postcss@8.5.19:
+    resolution: {integrity: sha512-Mz8SaolMd8nB+G13WkORcxQKHZ/NE4xXevtkJHVuG+guo9/wYKlIMTKAqGdEmYOXR2ijPjTYNHssizdaVSUNdQ==}
+    engines: {node: ^10 || ^12 || >=14}
+
   preact@10.29.7:
     resolution: {integrity: sha512-DCHYrK/B10yUD3ZjLfhZ3WIE/9Vf9VFUODcRE2dRomTYDpJk6z6L9wecSfhfE6M9ZTHUdyQkoC46arIDhEV84Q==}
     peerDependencies:
@@ -5308,8 +5312,8 @@ packages:
       terser:
         optional: true
 
-  vite@8.1.4:
-    resolution: {integrity: sha512-bTT9PsdWO+MQMNG9ZXIP/qM9wGh37DFxTV/sPq9cFpHr3w4jkgef032PkAL9jAqhk3Nz8NQw3O8n6/xFkqO4QQ==}
+  vite@8.1.5:
+    resolution: {integrity: sha512-7ULLwsCdYx/nRyrpiEwvqb5TFHrMVZyBt+rg/OAXT7rgj/z+DtTDyKFeLAdDkubDVDKD8jOsndmy7m55XcfUsw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -7011,7 +7015,7 @@ snapshots:
       magicast: 0.5.3
       obug: 2.1.3
       tinyrainbow: 3.1.0
-      vitest: 4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
+      vitest: 4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -7024,13 +7028,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.10(vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))':
+  '@vitest/mocker@4.1.10(vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.10
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)
+      vite: 8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.10':
     dependencies:
@@ -7143,7 +7147,7 @@ snapshots:
       '@vueuse/shared': 12.8.2(typescript@7.0.2)
       vue: 3.5.39(typescript@7.0.2)
     optionalDependencies:
-      axios: 1.16.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0)
+      axios: 1.16.1
       focus-trap: 7.8.0
     transitivePeerDependencies:
       - typescript
@@ -7172,6 +7176,13 @@ snapshots:
   abbrev@4.0.0: {}
 
   add-stream@1.0.0: {}
+
+  agent-base@6.0.2:
+    dependencies:
+      debug: 4.4.3(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
 
   agent-base@6.0.2(supports-color@7.2.0):
     dependencies:
@@ -7258,11 +7269,22 @@ snapshots:
 
   axios@1.16.0:
     dependencies:
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@7.2.0))
+      follow-redirects: 1.16.0
       form-data: 4.0.6
       proxy-from-env: 2.1.0
     transitivePeerDependencies:
       - debug
+
+  axios@1.16.1:
+    dependencies:
+      follow-redirects: 1.16.0
+      form-data: 4.0.6
+      https-proxy-agent: 5.0.1
+      proxy-from-env: 2.1.0
+    transitivePeerDependencies:
+      - debug
+      - supports-color
+    optional: true
 
   axios@1.16.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0):
     dependencies:
@@ -7921,6 +7943,8 @@ snapshots:
     dependencies:
       tabbable: 6.5.0
 
+  follow-redirects@1.16.0: {}
+
   follow-redirects@1.16.0(debug@4.4.3(supports-color@7.2.0)):
     optionalDependencies:
       debug: 4.4.3(supports-color@7.2.0)
@@ -8162,6 +8186,14 @@ snapshots:
       debug: 4.4.3(supports-color@7.2.0)
     transitivePeerDependencies:
       - supports-color
+
+  https-proxy-agent@5.0.1:
+    dependencies:
+      agent-base: 6.0.2
+      debug: 4.4.3(supports-color@7.2.0)
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
 
   https-proxy-agent@5.0.1(supports-color@7.2.0):
     dependencies:
@@ -9077,7 +9109,7 @@ snapshots:
       proc-log: 6.1.0
       semver: 7.7.2
       tar: 7.5.11
-      tinyglobby: 0.2.12
+      tinyglobby: 0.2.17
       undici: 6.27.0
       which: 6.0.1
 
@@ -9223,7 +9255,7 @@ snapshots:
       escape-string-regexp: 1.0.5
       figures: 3.2.0
       flat: 5.0.2
-      follow-redirects: 1.16.0(debug@4.4.3(supports-color@7.2.0))
+      follow-redirects: 1.16.0
       form-data: 4.0.6
       fs-constants: 1.0.0
       function-bind: 1.1.2
@@ -9701,6 +9733,12 @@ snapshots:
       util-deprecate: 1.0.2
 
   postcss@8.5.17:
+    dependencies:
+      nanoid: 3.3.15
+      picocolors: 1.1.1
+      source-map-js: 1.2.1
+
+  postcss@8.5.19:
     dependencies:
       nanoid: 3.3.15
       picocolors: 1.1.1
@@ -10423,11 +10461,11 @@ snapshots:
       fsevents: 2.3.3
       lightningcss: 1.32.0
 
-  vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0):
+  vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.5
-      postcss: 8.5.17
+      postcss: 8.5.19
       rolldown: 1.1.5
       tinyglobby: 0.2.17
     optionalDependencies:
@@ -10455,12 +10493,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vitepress-plugin-tabs@0.9.1(vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2))(vue@3.5.39(typescript@7.0.2)):
+  vitepress-plugin-tabs@0.9.1(vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.19)(search-insights@2.17.3)(typescript@7.0.2))(vue@3.5.39(typescript@7.0.2)):
     dependencies:
-      vitepress: 1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2)
+      vitepress: 1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.19)(search-insights@2.17.3)(typescript@7.0.2)
       vue: 3.5.39(typescript@7.0.2)
 
-  vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.17)(search-insights@2.17.3)(typescript@7.0.2):
+  vitepress@1.6.4(@algolia/client-search@5.55.2)(@types/node@22.20.1)(axios@1.16.1)(lightningcss@1.32.0)(postcss@8.5.19)(search-insights@2.17.3)(typescript@7.0.2):
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.55.2)(search-insights@2.17.3)
@@ -10481,7 +10519,7 @@ snapshots:
       vite: 5.4.21(@types/node@22.20.1)(lightningcss@1.32.0)
       vue: 3.5.39(typescript@7.0.2)
     optionalDependencies:
-      postcss: 8.5.17
+      postcss: 8.5.19
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
@@ -10510,10 +10548,10 @@ snapshots:
       - typescript
       - universal-cookie
 
-  vitest@4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)):
+  vitest@4.1.10(@types/node@22.20.1)(@vitest/coverage-istanbul@4.1.10)(vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.10
-      '@vitest/mocker': 4.1.10(vite@8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
+      '@vitest/mocker': 4.1.10(vite@8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.10
       '@vitest/runner': 4.1.10
       '@vitest/snapshot': 4.1.10
@@ -10530,7 +10568,7 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 8.1.4(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)
+      vite: 8.1.5(@types/node@22.20.1)(jiti@2.6.1)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.20.1
