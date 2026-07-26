@@ -12,6 +12,28 @@ npm install --save-dev @commitlint/config-conventional @commitlint/cli
 echo "export default {extends: ['@commitlint/config-conventional']};" > commitlint.config.js
 ```
 
+## Beyond the specification
+
+This config enforces the [Conventional Commits](https://conventionalcommits.org/) convention, plus a few stylistic rules the specification itself does not require.
+The stylistic rules are inherited from the [Angular commit convention](https://github.com/angular/angular/blob/main/contributing-docs/commit-message-guidelines.md) commitlint originates from:
+
+- `header-max-length`, `body-max-line-length` and `footer-max-line-length` limit lines to 100 characters to keep messages readable in git tooling — body and footer lines containing URLs are exempt
+- `type-enum` restricts the type to the list below, while the specification allows any type
+- `type-case`, `subject-case` and `subject-full-stop` normalize style: lower-case types, no sentence-case, start-case, pascal-case or upper-case subjects, no trailing full-stop
+
+These rules narrow the specification — they do not conflict with it.
+If you prefer the plain specification, override the rules you do not want in your config:
+
+```js
+export default {
+  extends: ["@commitlint/config-conventional"],
+  rules: {
+    "body-max-line-length": [0],
+    "footer-max-line-length": [0],
+  },
+};
+```
+
 ## Rules
 
 ### Problems
