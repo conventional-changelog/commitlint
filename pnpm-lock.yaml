@@ -163,7 +163,7 @@ importers:
         version: 17.0.35
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.0
+        version: 7.1.1
       es-toolkit:
         specifier: ^1.46.0
         version: 1.50.0
@@ -502,7 +502,7 @@ importers:
         version: 9.2.1
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.0
+        version: 7.1.1
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -577,7 +577,7 @@ importers:
         version: link:../types
       '@conventional-changelog/git-client':
         specifier: ^3.0.0
-        version: 3.1.0(conventional-commits-parser@7.1.0)
+        version: 3.1.0(conventional-commits-parser@7.1.1)
       tinyexec:
         specifier: ^1.0.0
         version: 1.2.4
@@ -646,7 +646,7 @@ importers:
         version: 9.2.1
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.0
+        version: 7.1.1
 
   '@commitlint/to-lines':
     devDependencies:
@@ -693,7 +693,7 @@ importers:
     dependencies:
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.0
+        version: 7.1.1
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -3012,6 +3012,11 @@ packages:
 
   conventional-commits-parser@7.1.0:
     resolution: {integrity: sha512-DPp6hkUjvwIivxbkrTiLXeRswNv1A/4GFA2X6scXma0AMa9632V3TwxmrlkUIEtUktiM3Ln+RrSH2xlP3/jUTw==}
+    engines: {node: '>=22'}
+    hasBin: true
+
+  conventional-commits-parser@7.1.1:
+    resolution: {integrity: sha512-B0f42jI++V5Vb7qK+DDw68r0dNxz5hk+RdKUkx2NOi39emc9hsHa3u2M3doF7QQhRFzCrAj7uM90teG+RBTaYQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -5759,13 +5764,13 @@ snapshots:
       picocolors: 1.1.1
     optional: true
 
-  '@conventional-changelog/git-client@3.1.0(conventional-commits-parser@7.1.0)':
+  '@conventional-changelog/git-client@3.1.0(conventional-commits-parser@7.1.1)':
     dependencies:
       '@simple-libs/child-process-utils': 2.0.0
       '@simple-libs/stream-utils': 2.0.0
       semver: 7.8.5
     optionalDependencies:
-      conventional-commits-parser: 7.1.0
+      conventional-commits-parser: 7.1.1
 
   '@conventional-changelog/template@1.2.1': {}
 
@@ -7533,6 +7538,12 @@ snapshots:
       split2: 3.2.2
 
   conventional-commits-parser@7.1.0:
+    dependencies:
+      '@simple-libs/stream-utils': 2.0.0
+      argue-cli: 3.1.0
+    optional: true
+
+  conventional-commits-parser@7.1.1:
     dependencies:
       '@simple-libs/stream-utils': 2.0.0
       argue-cli: 3.1.0
