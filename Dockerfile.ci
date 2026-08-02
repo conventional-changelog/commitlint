@@ -37,6 +37,23 @@ RUN npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
     npm install --no-audit -g *.tgz && \
     rm -rf *.tgz
-RUN --mount=type=bind,source=.github/fixtures/docker/commitlint.config.ts,target=/tmp/commitlint.config.ts \
-    echo "fix: load TypeScript config" | commitlint --config /tmp/commitlint.config.ts
+RUN <<'EOF'
+set -eu
+cat >/tmp/commitlint.config.ts <<'CONFIG'
+import { RuleConfigSeverity } from "@commitlint/types";
+import type { UserConfig } from "@commitlint/types";
+
+export default {
+	extends: ["@commitlint/config-conventional"],
+	rules: {
+		"header-max-length": [RuleConfigSeverity.Error, "always", 100],
+	},
+} satisfies UserConfig;
+CONFIG
+echo "fix: load TypeScript config" | commitlint --config /tmp/commitlint.config.ts
+if echo "fix: this TypeScript configuration rule rejects a header that is deliberately longer than one hundred characters in the container smoke test" | commitlint --config /tmp/commitlint.config.ts; then
+	exit 1
+fi
+rm -rf /tmp/jiti /tmp/node-compile-cache /tmp/commitlint.config.ts
+EOF
 ENTRYPOINT ["commitlint"]
