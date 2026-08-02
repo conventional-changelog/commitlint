@@ -36,4 +36,6 @@ RUN npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
     npm install --no-audit -g *.tgz && \
     rm -rf *.tgz
+RUN --mount=type=bind,source=.github/fixtures/docker/commitlint.config.ts,target=/tmp/commitlint.config.ts \
+    echo "fix: load TypeScript config" | commitlint --config /tmp/commitlint.config.ts
 ENTRYPOINT ["commitlint"]
