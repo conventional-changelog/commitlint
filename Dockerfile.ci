@@ -30,6 +30,7 @@ RUN corepack enable && \
     npm pack @commitlint/config-conventional
 
 FROM docker.io/library/node:22-alpine
+ENV NODE_PATH=/usr/local/lib/node_modules
 RUN apk add --no-cache git
 COPY --from=builder /src/*.tgz ./
 RUN npm config set fetch-retry-mintimeout 20000 && \
