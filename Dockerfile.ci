@@ -46,12 +46,12 @@ import type { UserConfig } from "@commitlint/types";
 export default {
 	extends: ["@commitlint/config-conventional"],
 	rules: {
-		"header-max-length": [RuleConfigSeverity.Error, "always", 100],
+		"header-max-length": [RuleConfigSeverity.Error, "always", 50],
 	},
 } satisfies UserConfig;
 CONFIG
 echo "fix: load TypeScript config" | commitlint --config /tmp/commitlint.config.ts
-if echo "fix: this TypeScript configuration rule rejects a header that is deliberately longer than one hundred characters in the container smoke test" | commitlint --config /tmp/commitlint.config.ts; then
+if echo "fix: reject a header that exceeds the custom configured limit" | commitlint --config /tmp/commitlint.config.ts; then
 	exit 1
 fi
 rm -rf /tmp/jiti /tmp/node-compile-cache /tmp/commitlint.config.ts
