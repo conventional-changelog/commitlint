@@ -30,10 +30,30 @@ RUN corepack enable && \
     npm pack @commitlint/config-conventional
 
 FROM docker.io/library/node:22-alpine
+ENV NODE_PATH=/usr/local/lib/node_modules
 RUN apk add --no-cache git
 COPY --from=builder /src/*.tgz ./
 RUN npm config set fetch-retry-mintimeout 20000 && \
     npm config set fetch-retry-maxtimeout 120000 && \
     npm install --no-audit -g *.tgz && \
     rm -rf *.tgz
+RUN <<'EOF'
+set -eu
+cat >/tmp/commitlint.config.ts <<'CONFIG'
+import { RuleConfigSeverity } from "@commitlint/types";
+import type { UserConfig } from "@commitlint/types";
+
+export default {
+	extends: ["@commitlint/config-conventional"],
+	rules: {
+		"header-max-length": [RuleConfigSeverity.Error, "always", 50],
+	},
+} satisfies UserConfig;
+CONFIG
+echo "fix: load TypeScript config" | commitlint --config /tmp/commitlint.config.ts
+if echo "fix: reject a header that exceeds the custom configured limit" | commitlint --config /tmp/commitlint.config.ts; then
+	exit 1
+fi
+rm -rf /tmp/jiti /tmp/node-compile-cache /tmp/commitlint.config.ts
+EOF
 ENTRYPOINT ["commitlint"]
