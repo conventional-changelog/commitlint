@@ -306,7 +306,7 @@ test("does not work with chinese scopes with incompatible pattern", async () => 
 });
 
 test("parses footer with noteKeywords containing regex-special characters", async () => {
-	const message = "feat: add feature\n\nBody text\n[1] Custom note footer";
+	const message = "feat: add feature\n\nBody text\n[1]: Custom note footer";
 
 	const actual = await parse(message, undefined, {
 		noteKeywords: ["[1]", "Notes:"],
