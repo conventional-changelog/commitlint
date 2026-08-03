@@ -163,7 +163,7 @@ importers:
         version: 17.0.35
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.1
+        version: 7.1.2
       es-toolkit:
         specifier: ^1.46.0
         version: 1.50.0
@@ -502,7 +502,7 @@ importers:
         version: 9.2.1
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.1
+        version: 7.1.2
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -646,7 +646,7 @@ importers:
         version: 9.2.1
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.1
+        version: 7.1.2
 
   '@commitlint/to-lines':
     devDependencies:
@@ -693,7 +693,7 @@ importers:
     dependencies:
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.1
+        version: 7.1.2
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -3053,6 +3053,11 @@ packages:
 
   conventional-commits-parser@7.1.1:
     resolution: {integrity: sha512-B0f42jI++V5Vb7qK+DDw68r0dNxz5hk+RdKUkx2NOi39emc9hsHa3u2M3doF7QQhRFzCrAj7uM90teG+RBTaYQ==}
+    engines: {node: '>=22'}
+    hasBin: true
+
+  conventional-commits-parser@7.1.2:
+    resolution: {integrity: sha512-O+x4N2yH+ijvqWlIyTHsXTAP+algNWgGbjY2duCe8w2vUMvUB95cLRslCPfTMQyLAKlet3bhZTdu6ozn4M+QJQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -7632,6 +7637,11 @@ snapshots:
       argue-cli: 3.1.0
 
   conventional-commits-parser@7.1.1:
+    dependencies:
+      '@simple-libs/stream-utils': 2.0.0
+      argue-cli: 3.1.0
+
+  conventional-commits-parser@7.1.2:
     dependencies:
       '@simple-libs/stream-utils': 2.0.0
       argue-cli: 3.1.0
