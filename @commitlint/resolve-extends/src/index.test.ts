@@ -716,7 +716,15 @@ test("resolveFrom does not load pnpapi outside Plug'n'Play", () => {
 		{ "index.js": "export default {};" },
 	);
 
-	expect(() => resolveFrom(pkg, root)).toThrow(/Cannot find module/);
+	const descriptor = Object.getOwnPropertyDescriptor(process.versions, "pnp");
+	Reflect.deleteProperty(process.versions, "pnp");
+	try {
+		expect(() => resolveFrom(pkg, root)).toThrow(/Cannot find module/);
+	} finally {
+		if (descriptor) {
+			Object.defineProperty(process.versions, "pnp", descriptor);
+		}
+	}
 });
 
 test("resolveFrom resolves a pure-ESM package through Yarn Plug'n'Play", () => {
