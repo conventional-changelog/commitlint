@@ -103,24 +103,30 @@ const resolveEsmOnly = (
 	const pkgName = lookup.startsWith("@") ? segments.slice(0, 2).join("/") : segments[0];
 	const subpath = lookup.slice(pkgName.length).replace(/^\//, "");
 
-	try {
-		const pnpApi = localRequire("pnpapi") as {
-			resolveToUnqualified(
-				request: string,
-				issuer: string | null,
-				options: { considerBuiltins: boolean },
-			): string | null;
-		};
-		const pkgDir = pnpApi.resolveToUnqualified(pkgName, parentPath, {
-			considerBuiltins: false,
-		});
-		if (pkgDir) {
-			const resolved = resolveEsmPackage(pkgDir, subpath);
-			if (resolved) {
-				return resolved;
+	if ("pnp" in process.versions) {
+		try {
+			const pnpApi = localRequire("pnpapi") as {
+				resolveToUnqualified(
+					request: string,
+					issuer: string | null,
+					options: { considerBuiltins: boolean },
+				): string | null;
+			};
+			const pkgDir = pnpApi.resolveToUnqualified(pkgName, parentPath, {
+				considerBuiltins: false,
+			});
+			if (pkgDir) {
+				const resolved = resolveEsmPackage(pkgDir, subpath);
+				if (resolved) {
+					return resolved;
+				}
+			}
+		} catch (err) {
+			if (process.env.DEBUG === "true") {
+				console.debug(`Failed to resolve ${lookup} through Yarn PnP: ${(err as Error).message}`);
 			}
 		}
-	} catch {}
+	}
 
 	let dir = path.dirname(parentPath);
 	for (;;) {
