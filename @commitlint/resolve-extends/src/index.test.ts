@@ -659,6 +659,32 @@ const scaffoldModule = (
 	return root;
 };
 
+const scaffoldPnpModule = (
+	pkg: string,
+	manifest: Record<string, unknown>,
+	files: Record<string, string>,
+): { root: string; pkgDir: string } => {
+	const root = fs.mkdtempSync(path.join(os.tmpdir(), "resolve-from-pnp-"));
+	scaffoldedRoots.push(root);
+	const pkgDir = path.join(root, ".yarn", "cache", pkg, "node_modules", pkg);
+	fs.mkdirSync(pkgDir, { recursive: true });
+	fs.writeFileSync(path.join(pkgDir, "package.json"), JSON.stringify(manifest));
+	for (const [relative, content] of Object.entries(files)) {
+		const file = path.join(pkgDir, relative);
+		fs.mkdirSync(path.dirname(file), { recursive: true });
+		fs.writeFileSync(file, content);
+	}
+
+	const pnpApiDir = path.join(root, "node_modules", "pnpapi");
+	fs.mkdirSync(pnpApiDir, { recursive: true });
+	fs.writeFileSync(
+		path.join(pnpApiDir, "index.js"),
+		`module.exports.resolveToUnqualified = (request, issuer, options) => request === ${JSON.stringify(pkg)} && issuer === ${JSON.stringify(path.join(root, "noop.js"))} && options.considerBuiltins === false ? ${JSON.stringify(pkgDir)} : undefined;`,
+	);
+
+	return { root, pkgDir };
+};
+
 // CommonJS resolvers cannot read an `exports` map that only declares the `import`
 // condition (no require/default/main), so resolveFrom must fall back to reading the
 // manifest itself. See conventional-changelog-angular@>=9 / conventionalcommits@>=10.
@@ -676,6 +702,54 @@ test("resolveFrom resolves a pure-ESM package exposing only the import condition
 	expect(resolveFrom("esm-only-preset", root)).toBe(
 		path.join(root, "node_modules", "esm-only-preset", "index.js"),
 	);
+});
+
+test("resolveFrom does not load pnpapi outside Plug'n'Play", () => {
+	const pkg = "pnp-esm-only-preset";
+	const { root } = scaffoldPnpModule(
+		pkg,
+		{
+			name: pkg,
+			type: "module",
+			exports: { types: "./index.d.ts", import: "./index.js" },
+		},
+		{ "index.js": "export default {};" },
+	);
+
+	const descriptor = Object.getOwnPropertyDescriptor(process.versions, "pnp");
+	Reflect.deleteProperty(process.versions, "pnp");
+	try {
+		expect(() => resolveFrom(pkg, root)).toThrow(/Cannot find module/);
+	} finally {
+		if (descriptor) {
+			Object.defineProperty(process.versions, "pnp", descriptor);
+		}
+	}
+});
+
+test("resolveFrom resolves a pure-ESM package through Yarn Plug'n'Play", () => {
+	const pkg = "pnp-esm-only-preset";
+	const { root, pkgDir } = scaffoldPnpModule(
+		pkg,
+		{
+			name: pkg,
+			type: "module",
+			exports: { types: "./index.d.ts", import: "./index.js" },
+		},
+		{ "index.js": "export default {};" },
+	);
+
+	const descriptor = Object.getOwnPropertyDescriptor(process.versions, "pnp");
+	Object.defineProperty(process.versions, "pnp", { configurable: true, value: "3" });
+	try {
+		expect(resolveFrom(pkg, root)).toBe(path.join(pkgDir, "index.js"));
+	} finally {
+		if (descriptor) {
+			Object.defineProperty(process.versions, "pnp", descriptor);
+		} else {
+			Reflect.deleteProperty(process.versions, "pnp");
+		}
+	}
 });
 
 test("resolveFrom resolves a subpath of a pure-ESM package", () => {

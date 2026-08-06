@@ -61,6 +61,28 @@ const resolveExportsEntry = (manifest: Record<string, unknown>): string => {
 	);
 };
 
+const resolveEsmPackage = (pkgDir: string, subpath: string): string | undefined => {
+	const manifestPath = path.join(pkgDir, "package.json");
+
+	if (!fs.existsSync(manifestPath)) {
+		return undefined;
+	}
+
+	if (subpath) {
+		for (const suffix of pathSuffixes) {
+			const filename = path.join(pkgDir, subpath) + suffix;
+			if (fs.existsSync(filename)) {
+				return filename;
+			}
+		}
+		return undefined;
+	}
+
+	const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
+	const resolved = path.join(pkgDir, resolveExportsEntry(manifest));
+	return fs.existsSync(resolved) ? resolved : undefined;
+};
+
 /**
  * Pure-ESM presets such as conventional-changelog-angular@>=9 and
  * conventional-changelog-conventionalcommits@>=10 declare only the `import`
@@ -68,7 +90,11 @@ const resolveExportsEntry = (manifest: Record<string, unknown>): string => {
  * CommonJS resolvers above fail with ERR_PACKAGE_PATH_NOT_EXPORTED. Walk
  * node_modules from the requesting location and read the manifest ourselves.
  */
-const resolveEsmOnly = (lookup: string, fromDir: string): string | undefined => {
+const resolveEsmOnly = (
+	lookup: string,
+	parentPath: string,
+	localRequire: ReturnType<typeof createRequire>,
+): string | undefined => {
 	if (path.isAbsolute(lookup) || lookup.startsWith(".")) {
 		return undefined;
 	}
@@ -77,28 +103,38 @@ const resolveEsmOnly = (lookup: string, fromDir: string): string | undefined => 
 	const pkgName = lookup.startsWith("@") ? segments.slice(0, 2).join("/") : segments[0];
 	const subpath = lookup.slice(pkgName.length).replace(/^\//, "");
 
-	let dir = fromDir;
+	if ("pnp" in process.versions) {
+		try {
+			const pnpApi = localRequire("pnpapi") as {
+				resolveToUnqualified(
+					request: string,
+					issuer: string | null,
+					options: { considerBuiltins: boolean },
+				): string | null;
+			};
+			const pkgDir = pnpApi.resolveToUnqualified(pkgName, parentPath, {
+				considerBuiltins: false,
+			});
+			if (pkgDir) {
+				const resolved = resolveEsmPackage(pkgDir, subpath);
+				if (resolved) {
+					return resolved;
+				}
+			}
+		} catch (err) {
+			if (process.env.DEBUG === "true") {
+				console.debug(`Failed to resolve ${lookup} through Yarn PnP: ${(err as Error).message}`);
+			}
+		}
+	}
+
+	let dir = path.dirname(parentPath);
 	for (;;) {
 		const pkgDir = path.join(dir, "node_modules", pkgName);
 		const manifestPath = path.join(pkgDir, "package.json");
 
 		if (fs.existsSync(manifestPath)) {
-			if (subpath) {
-				for (const suffix of pathSuffixes) {
-					const filename = path.join(pkgDir, subpath) + suffix;
-					if (fs.existsSync(filename)) {
-						return filename;
-					}
-				}
-				return undefined;
-			}
-
-			const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
-			const resolved = path.join(pkgDir, resolveExportsEntry(manifest));
-			if (fs.existsSync(resolved)) {
-				return resolved;
-			}
-			return undefined;
+			return resolveEsmPackage(pkgDir, subpath);
 		}
 
 		const parentDir = path.dirname(dir);
@@ -146,7 +182,7 @@ export const resolveFrom = (lookup: string, parent?: string): string => {
 		 */
 		return resolveFrom_(path.dirname(parentPath), lookup);
 	} catch {
-		const esmResolved = resolveEsmOnly(lookup, path.dirname(parentPath));
+		const esmResolved = resolveEsmOnly(lookup, parentPath, localRequire);
 		if (esmResolved) {
 			return esmResolved;
 		}
