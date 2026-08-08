@@ -452,11 +452,11 @@ importers:
         specifier: workspace:^
         version: link:../types
       cosmiconfig:
-        specifier: ^9.0.1
-        version: 9.0.2(typescript@7.0.2)
+        specifier: ^10.0.0
+        version: 10.0.0
       cosmiconfig-typescript-loader:
         specifier: ^6.1.0
-        version: 6.3.0(@types/node@22.20.1)(cosmiconfig@9.0.2(typescript@7.0.2))(typescript@7.0.2)
+        version: 6.3.0(@types/node@22.20.1)(cosmiconfig@10.0.0)(typescript@7.0.2)
       es-toolkit:
         specifier: ^1.46.0
         version: 1.50.0
@@ -2910,6 +2910,10 @@ packages:
       '@types/node': '*'
       cosmiconfig: '>=9'
       typescript: '>=5'
+
+  cosmiconfig@10.0.0:
+    resolution: {integrity: sha512-RYs2EfrIoS16yh6j/MLgF753u5rROFFw3XGjcJXM4UQJm1iGXX7gKNyk4O/bCkyfi9Qfo+fVdd3FrnviZv830g==}
+    engines: {node: ^22.18 || >= 24}
 
   cosmiconfig@9.0.0:
     resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==}
@@ -7006,18 +7010,31 @@ snapshots:
     dependencies:
       is-what: 5.5.0
 
+  cosmiconfig-typescript-loader@6.3.0(@types/node@22.20.1)(cosmiconfig@10.0.0)(typescript@7.0.2):
+    dependencies:
+      '@types/node': 22.20.1
+      cosmiconfig: 10.0.0
+      jiti: 2.6.1
+      typescript: 7.0.2
+
   cosmiconfig-typescript-loader@6.3.0(@types/node@22.20.1)(cosmiconfig@9.0.2(typescript@7.0.2))(typescript@7.0.2):
     dependencies:
       '@types/node': 22.20.1
       cosmiconfig: 9.0.2(typescript@7.0.2)
       jiti: 2.6.1
       typescript: 7.0.2
+    optional: true
+
+  cosmiconfig@10.0.0:
+    dependencies:
+      env-paths: 2.2.1
+      js-yaml: 4.3.1
 
   cosmiconfig@9.0.0(typescript@7.0.2):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.3.0
+      js-yaml: 4.3.1
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 7.0.2
@@ -7030,6 +7047,7 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 7.0.2
+    optional: true
 
   cross-spawn@7.0.6:
     dependencies:
