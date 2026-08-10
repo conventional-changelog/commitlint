@@ -4,8 +4,16 @@ on:
   push:
     branches:
       - "**"
+      # Merge-queue commits are validated via the merge_group event below;
+      # without this exclusion every queue build would run twice.
+      - "!gh-readonly-queue/**"
   pull_request:
     types: [opened, synchronize]
+
+  # Runs the required checks on the exact merge result the merge queue is
+  # about to land on master, so a PR whose checks passed against an older
+  # base (e.g. a stale renovate lockfile branch) cannot break master.
+  merge_group:
 
   workflow_dispatch:
 
