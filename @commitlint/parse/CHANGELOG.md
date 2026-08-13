@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.2](https://github.com/conventional-changelog/commitlint/compare/v21.2.1...v21.2.2) (2026-08-13)
+
+### Bug Fixes
+
+* **parse:** require colon after note keywords (conventional-commits-parser 7.1.2) ([#4927](https://github.com/conventional-changelog/commitlint/issues/4927)) ([b83c515](https://github.com/conventional-changelog/commitlint/commit/b83c51569d195183c695330eeb0b4f5784e0d418)), closes [conventional-changelog/conventional-changelog#1517](https://github.com/conventional-changelog/conventional-changelog/issues/1517)
+
+
 # [21.2.0](https://github.com/conventional-changelog/commitlint/compare/v21.1.0...v21.2.0) (2026-06-30)
 
 

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.2](https://github.com/conventional-changelog/commitlint/compare/v21.2.1...v21.2.2) (2026-08-13)
+
+### Bug Fixes
+
+* **container:** resolve packages from TypeScript configs ([#4914](https://github.com/conventional-changelog/commitlint/issues/4914)) ([f5712a9](https://github.com/conventional-changelog/commitlint/commit/f5712a9d216358607540e73ab4f348c237c4c224))
+* **parse:** require colon after note keywords (conventional-commits-parser 7.1.2) ([#4927](https://github.com/conventional-changelog/commitlint/issues/4927)) ([b83c515](https://github.com/conventional-changelog/commitlint/commit/b83c51569d195183c695330eeb0b4f5784e0d418)), closes [conventional-changelog/conventional-changelog#1517](https://github.com/conventional-changelog/conventional-changelog/issues/1517)
+* **resolve-extends:** support Yarn Plug'n'Play ([#4933](https://github.com/conventional-changelog/commitlint/issues/4933)) ([67ee127](https://github.com/conventional-changelog/commitlint/commit/67ee1271ea5960e774b4b956830ab4705da9040c))
+
+
 ## [21.2.1](https://github.com/conventional-changelog/commitlint/compare/v21.2.0...v21.2.1) (2026-07-08)
 
 **Note:** Version bump only for package @commitlint/root
