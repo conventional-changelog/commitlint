@@ -499,7 +499,7 @@ importers:
         version: link:../types
       conventional-changelog-angular:
         specifier: ^9.0.0
-        version: 9.2.1
+        version: 9.3.0
       conventional-commits-parser:
         specifier: ^7.0.0
         version: 7.1.2
@@ -643,7 +643,7 @@ importers:
         version: 22.20.1
       conventional-changelog-angular:
         specifier: ^9.0.0
-        version: 9.2.1
+        version: 9.3.0
       conventional-commits-parser:
         specifier: ^7.0.0
         version: 7.1.2
@@ -943,6 +943,10 @@ packages:
 
   '@conventional-changelog/template@1.2.1':
     resolution: {integrity: sha512-TzlTVpKPjaqW6qOYjQcYUDuGsLCNsvFHVBXkYGTAnf5V37jCWrE5haKNXzz0WZUtVHjrpV76L1buANjwXMfT8w==}
+    engines: {node: '>=22'}
+
+  '@conventional-changelog/template@1.3.0':
+    resolution: {integrity: sha512-GsCw/qu92GI0EX6s7fxUi/SG1lmFjG9XZivxxEDZXqztuQKCn5o5wKdz4v005zci0Md7EZzgAwmQLoIEDZoaow==}
     engines: {node: '>=22'}
 
   '@docsearch/css@3.8.2':
@@ -2823,6 +2827,10 @@ packages:
 
   conventional-changelog-angular@9.2.1:
     resolution: {integrity: sha512-oWSL6ZhnXbYraOFTK3PgRAQJ8fADDAEv5K6AdeyQPLvjFmhG8+ejL0jZZp/R7vTmGJaBvZEE+sE7dB4bCv7sAw==}
+    engines: {node: '>=22'}
+
+  conventional-changelog-angular@9.3.0:
+    resolution: {integrity: sha512-0MWQLVUT1oVCsUGs9aAWteBVxPlLwJTn5VbQH7B0B3fDizZgrJ9QGnKl/2mp1+5P7153GCBCjO/v1aKJ6eysCg==}
     engines: {node: '>=22'}
 
   conventional-changelog-atom@5.1.0:
@@ -5300,6 +5308,8 @@ snapshots:
 
   '@conventional-changelog/template@1.2.1': {}
 
+  '@conventional-changelog/template@1.3.0': {}
+
   '@docsearch/css@3.8.2': {}
 
   '@docsearch/js@3.8.2(@algolia/client-search@5.56.0)(search-insights@2.17.3)':
@@ -6876,6 +6886,10 @@ snapshots:
   conventional-changelog-angular@9.2.1:
     dependencies:
       '@conventional-changelog/template': 1.2.1
+
+  conventional-changelog-angular@9.3.0:
+    dependencies:
+      '@conventional-changelog/template': 1.3.0
 
   conventional-changelog-atom@5.1.0: {}
 
