@@ -83,7 +83,6 @@ The required version is pinned in `package.json` (`packageManager` field); the
 easiest ways to install it are:
 
 - [mise](https://mise.jdx.dev/): `mise install` (uses `.mise.toml`)
-- [corepack](https://nodejs.org/api/corepack.html): `corepack enable` (ships with Node)
 - [direct install](https://pnpm.io/installation)
 
 After cloning the repo run
