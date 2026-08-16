@@ -41,6 +41,14 @@ const _scopeCaseSimpleCheck: Partial<RulesConfig> = {
 };
 void _scopeCaseSimpleCheck;
 
+// Regression check: breaking-change-exclamation-mark has no target case, so it
+// must accept a plain two-element tuple.
+const _breakingChangeExclamationMark = [ERROR, "always"] as const;
+const _breakingChangeExclamationMarkCheck: Partial<RulesConfig> = {
+	"breaking-change-exclamation-mark": _breakingChangeExclamationMark,
+};
+void _breakingChangeExclamationMarkCheck;
+
 // Tests for context parameter support:
 // https://github.com/conventional-changelog/commitlint/issues/4357
 // Rule functions should accept an optional context parameter with cwd.
