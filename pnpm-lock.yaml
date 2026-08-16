@@ -49,7 +49,7 @@ importers:
         version: 1.6.4(@algolia/client-search@5.56.0)(@types/node@22.20.1)(axios@1.18.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0))(lightningcss@1.33.0)(postcss@8.5.26)(search-insights@2.17.3)(typescript@7.0.2)
       vitepress-plugin-llms:
         specifier: ^1.13.1
-        version: 1.13.4(supports-color@7.2.0)
+        version: 1.13.5(supports-color@7.2.0)
       vitepress-plugin-tabs:
         specifier: ^0.9.0
         version: 0.9.1(vitepress@1.6.4(@algolia/client-search@5.56.0)(@types/node@22.20.1)(axios@1.18.1(debug@4.4.3(supports-color@7.2.0))(supports-color@7.2.0))(lightningcss@1.33.0)(postcss@8.5.26)(search-insights@2.17.3)(typescript@7.0.2))(vue@3.5.41(typescript@7.0.2))
@@ -4854,8 +4854,8 @@ packages:
       yaml:
         optional: true
 
-  vitepress-plugin-llms@1.13.4:
-    resolution: {integrity: sha512-3/L1ceexjpJirWWGlfvqx2hmaDTFGSkSHrn3y2C7RZm6lNa/vmvU49Ayr4GxLYQfOFfo9CP6rsWdD+6rEbnIxA==}
+  vitepress-plugin-llms@1.13.5:
+    resolution: {integrity: sha512-CTiDkKRs0h64J5rdiICdHmXH4pM1gBu2S/MJ+OxSAm+vM72srBkHr86ZubzfMJbGJh4AMVKff4R3oCu8etI1ww==}
     engines: {node: '>=18'}
 
   vitepress-plugin-tabs@0.9.1:
@@ -9297,7 +9297,7 @@ snapshots:
       jiti: 2.6.1
       yaml: 2.9.0
 
-  vitepress-plugin-llms@1.13.4(supports-color@7.2.0):
+  vitepress-plugin-llms@1.13.5(supports-color@7.2.0):
     dependencies:
       '@11ty/gray-matter': 2.1.0
       markdown-it: 14.3.0
