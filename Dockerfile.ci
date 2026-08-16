@@ -3,8 +3,9 @@ FROM docker.io/library/node:22-alpine AS builder
 WORKDIR /src
 COPY . ./
 RUN apk add --no-cache python3 py3-setuptools make g++ git
-# corepack reads the pnpm version from package.json `packageManager` field.
-RUN corepack enable && \
+# Install the pnpm version pinned in package.json `packageManager` via npm;
+# corepack was removed from Node 25+ and cannot install pnpm >= 12.
+RUN npm install --global pnpm@$(node -p "require('./package.json').packageManager.split('@')[1].split('+')[0]") && \
     pnpm install --frozen-lockfile && \
     pnpm run build && \
     # Commit lint CLI packages
