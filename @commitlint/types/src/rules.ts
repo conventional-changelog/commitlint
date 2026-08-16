@@ -95,7 +95,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	"body-max-length": LengthRuleConfig<V>;
 	"body-max-line-length": LengthRuleConfig<V>;
 	"body-min-length": LengthRuleConfig<V>;
-	"breaking-change-exclamation-mark": CaseRuleConfig<V>;
+	"breaking-change-exclamation-mark": RuleConfig<V>;
 	"footer-empty": RuleConfig<V>;
 	"footer-leading-blank": RuleConfig<V>;
 	"footer-max-length": LengthRuleConfig<V>;
