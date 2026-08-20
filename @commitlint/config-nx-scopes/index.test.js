@@ -102,32 +102,34 @@ test("includes projects inferred by an nx plugin", async () => {
 	expect(value).toEqual(["fixture-inferred-i", "fixture-inferred-j"]);
 });
 
+test("ignores what nx plugins print to stdout", async () => {
+	const { "scope-enum": fn } = config.rules;
+	const cwd = await npm.bootstrap("fixtures/noisy", __dirname);
+
+	const [, , value] = await fn({ cwd });
+	expect(value).toEqual(["fixture-noisy-k"]);
+});
+
 test("exposes getProjects", () => {
 	expect(config.utils.getProjects).toEqual(expect.any(Function));
 });
 
-test("getProjects resolves with the project names", async () => {
+test("getProjects returns the project names synchronously", async () => {
 	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
 
-	await expect(config.utils.getProjects({ cwd })).resolves.toEqual([
-		"fixture-basic-a",
-		"fixture-basic-b",
-	]);
+	expect(config.utils.getProjects({ cwd })).toEqual(["fixture-basic-a", "fixture-basic-b"]);
 });
 
 test("getProjects passes the tags of an inferred project to the selector", async () => {
 	const cwd = await npm.bootstrap("fixtures/inferred", __dirname);
 
-	const value = await config.utils.getProjects({ cwd }, ({ tags }) => tags.includes("inferred"));
+	const value = config.utils.getProjects({ cwd }, ({ tags }) => tags.includes("inferred"));
 	expect(value).toEqual(["fixture-inferred-i"]);
 });
 
 test("getProjects passes the project type of an inferred project to the selector", async () => {
 	const cwd = await npm.bootstrap("fixtures/inferred", __dirname);
 
-	const value = await config.utils.getProjects(
-		{ cwd },
-		({ projectType }) => projectType === "library",
-	);
+	const value = config.utils.getProjects({ cwd }, ({ projectType }) => projectType === "library");
 	expect(value).toEqual(["fixture-inferred-i", "fixture-inferred-j"]);
 });

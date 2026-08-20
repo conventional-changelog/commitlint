@@ -1,26 +1,32 @@
-import { fork } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 import { RuleConfigSeverity } from "@commitlint/types";
 
 const projectGraphReader = fileURLToPath(new URL("./project-graph.js", import.meta.url));
 
+/**
+ * Stdio slot the graph reader writes its payload to. Nx, its daemon and the
+ * worker processes it runs plugins in all write to stdout, so the payload gets
+ * a pipe of its own instead of sharing one with them.
+ */
+const payloadFd = 3;
+
 export default {
 	utils: { getProjects },
 	rules: {
-		"scope-enum": async (ctx) => [RuleConfigSeverity.Error, "always", await getProjects(ctx)],
+		"scope-enum": (ctx) => Promise.resolve([RuleConfigSeverity.Error, "always", getProjects(ctx)]),
 	},
 };
 
 /**
  * @param {(params: Pick<Nx.ProjectConfiguration, 'name' | 'projectType' | 'tags'>) => boolean} selector
  */
-async function getProjects(context, selector = () => true) {
+function getProjects(context, selector = () => true) {
 	const ctx = context || {};
 	const cwd = ctx.cwd || process.cwd();
 
-	const projects = await readProjectGraph(cwd);
-	return projects
+	return readProjectGraph(cwd)
 		.filter((project) =>
 			selector({
 				name: project.name,
@@ -37,32 +43,24 @@ async function getProjects(context, selector = () => true) {
  * graph is read in a child process started in the directory we care about.
  */
 function readProjectGraph(cwd) {
-	return new Promise((resolve, reject) => {
-		const child = fork(projectGraphReader, {
+	const { status, error, stdout, stderr, output } = spawnSync(
+		process.execPath,
+		[projectGraphReader],
+		{
 			cwd,
-			stdio: ["ignore", "pipe", "pipe", "ipc"],
-		});
+			encoding: "utf8",
+			stdio: ["ignore", "pipe", "pipe", "pipe"],
+			// A workspace with a lot of projects or a chatty plugin must not run
+			// into the default 1 MB cap, which aborts the read.
+			maxBuffer: Infinity,
+		},
+	);
 
-		let projects;
-		let output = "";
+	const payload = output[payloadFd];
+	if (error || status !== 0 || !payload) {
+		const reason = error ? error.message : stderr || stdout;
+		throw new Error(`Unable to read the nx project graph in "${cwd}".\n${reason}`.trim());
+	}
 
-		child.stdout.on("data", (chunk) => {
-			output += chunk;
-		});
-		child.stderr.on("data", (chunk) => {
-			output += chunk;
-		});
-		child.on("message", (message) => {
-			projects = message;
-		});
-		child.on("error", reject);
-		child.on("close", () => {
-			if (projects !== undefined) {
-				resolve(projects);
-				return;
-			}
-
-			reject(new Error(`Unable to read the nx project graph in "${cwd}".\n${output}`.trim()));
-		});
-	});
+	return JSON.parse(payload);
 }
