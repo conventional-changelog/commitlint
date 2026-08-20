@@ -23,8 +23,11 @@ export default async function lint(
 	const opts = rawOpts ? rawOpts : { defaultIgnores: undefined, ignores: undefined };
 	const rulesConfig = rawRulesConfig || {};
 
-	// Found a wildcard match, skip
-	if (isIgnored(message, { defaults: opts.defaultIgnores, ignores: opts.ignores })) {
+	// Found a wildcard match, skip. Matchers see the message without the trailing
+	// newlines git leaves behind. Only the end is trimmed, since the default matchers
+	// are anchored to the start, and `message` itself is left alone because rules such
+	// as body-leading-blank read its blank lines back off `parsed.raw`.
+	if (isIgnored(message?.trimEnd(), { defaults: opts.defaultIgnores, ignores: opts.ignores })) {
 		return {
 			valid: true,
 			errors: [],
