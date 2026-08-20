@@ -5,6 +5,9 @@ Lint your nx project commits
 Shareable `commitlint` config enforcing nx project and workspace names as scopes.
 Use with [@commitlint/cli](../cli) and [@commitlint/prompt-cli](../prompt-cli).
 
+Scopes are read from the nx project graph, so a project contributed by an nx plugin is
+a valid scope even though it has no `project.json` or `package.json` of its own.
+
 ## Getting started
 
 ```
