@@ -1,6 +1,8 @@
 /**
- * Reads the nx project graph and writes every project it contains to file
- * descriptor 3, where the parent process picks it up.
+ * Reads the nx project graph and writes every project it contains to the file
+ * descriptor named by its first argument, where the parent process picks it up.
+ * The parent owns that number and passes it down, so there is nothing here to
+ * keep in step with it by hand.
  *
  * This runs as a child process on purpose. Nx derives the workspace root from
  * `process.cwd()` when it is first loaded and bakes that value into its cache
@@ -15,7 +17,12 @@ import { writeSync } from "node:fs";
 
 import { createProjectGraphAsync } from "nx/src/project-graph/project-graph.js";
 
-const payloadFd = 3;
+const payloadFd = Number(process.argv[2]);
+if (!Number.isInteger(payloadFd) || payloadFd < 3) {
+	throw new Error(
+		`Expected the payload file descriptor as the first argument, got "${process.argv[2]}".`,
+	);
+}
 
 const graph = await createProjectGraphAsync({ exitOnError: false });
 

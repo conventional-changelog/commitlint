@@ -9,6 +9,9 @@ const projectGraphReader = fileURLToPath(new URL("./project-graph.js", import.me
  * Stdio slot the graph reader writes its payload to. Nx, its daemon and the
  * worker processes it runs plugins in all write to stdout, so the payload gets
  * a pipe of its own instead of sharing one with them.
+ *
+ * This is the only place the descriptor is declared: the reader is told which
+ * one to write to on its command line, so the two sides cannot drift apart.
  */
 const payloadFd = 3;
 
@@ -45,10 +48,11 @@ function getProjects(context, selector = () => true) {
 function readProjectGraph(cwd) {
 	const { status, error, stdout, stderr, output } = spawnSync(
 		process.execPath,
-		[projectGraphReader],
+		[projectGraphReader, String(payloadFd)],
 		{
 			cwd,
 			encoding: "utf8",
+			// stdin, stdout, stderr, then the payload pipe at `payloadFd`.
 			stdio: ["ignore", "pipe", "pipe", "pipe"],
 			// A workspace with a lot of projects or a chatty plugin must not run
 			// into the default 1 MB cap, which aborts the read.
