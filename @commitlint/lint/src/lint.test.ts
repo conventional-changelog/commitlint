@@ -1,4 +1,4 @@
-import { test, expect } from "vitest";
+import { test, expect, vi } from "vitest";
 import type { Parser } from "@commitlint/types";
 import { RuleConfigSeverity } from "@commitlint/types";
 
@@ -70,6 +70,93 @@ test("positive on custom ignored message and broken rule", async () => {
 	);
 	expect(actual.valid).toBe(true);
 	expect(actual.input).toBe(ignoredMessage);
+});
+
+test("positive on custom ignored message with trailing newlines", async () => {
+	const ignoredMessage = "Initialize project using Create React App";
+	const actual = await lint(
+		`${ignoredMessage}\n\n`,
+		{
+			"type-empty": [RuleConfigSeverity.Error, "never"],
+			"subject-empty": [RuleConfigSeverity.Error, "never"],
+		},
+		{
+			ignores: [(c) => c === ignoredMessage],
+		},
+	);
+	expect(actual.valid).toBe(true);
+	expect(actual.errors).toEqual([]);
+});
+
+test("passes the message without trailing whitespace to ignore matchers", async () => {
+	const matcher = vi.fn(() => false);
+	await lint("feat: thing\n\nbody\n\n", {}, { ignores: [matcher] });
+	expect(matcher).toHaveBeenCalledWith("feat: thing\n\nbody");
+});
+
+test("keeps leading whitespace in the message passed to ignore matchers", async () => {
+	// The default matchers are anchored to the start of the message, so trimming
+	// the start would start ignoring messages that are linted today.
+	const matcher = vi.fn(() => false);
+	await lint("\nfeat: thing\n\n", {}, { ignores: [matcher] });
+	expect(matcher).toHaveBeenCalledWith("\nfeat: thing");
+});
+
+test("negative on a semver message behind a leading blank line", async () => {
+	const actual = await lint("\nv1.2.3\n\n", {
+		"type-empty": [RuleConfigSeverity.Error, "never"],
+	});
+	expect(actual.valid).toBe(false);
+});
+
+test("positive on whitespace only message and the documented empty ignore matcher", async () => {
+	const matcher = vi.fn((commit: string) => commit === "");
+	await expect(
+		lint(
+			"\n\n",
+			{
+				"type-empty": [RuleConfigSeverity.Error, "never"],
+			},
+			{ ignores: [matcher] },
+		),
+	).resolves.toMatchObject({ valid: true });
+	expect(matcher).toHaveBeenCalledWith("");
+});
+
+test("reports the message as given for ignored messages", async () => {
+	const message = "Initialize project using Create React App\n\n";
+	const actual = await lint(
+		message,
+		{},
+		{ ignores: [(c) => c === "Initialize project using Create React App"] },
+	);
+	expect(actual.input).toBe(message);
+});
+
+test("keeps the message as it was read when evaluating rules", async () => {
+	// `parsed.raw` is line-indexed by body-leading-blank and footer-leading-blank,
+	// so rules must keep seeing the message exactly as it was read.
+	const actual = await lint("\nfeat: thing\n\nbody\n\n", {
+		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
+	});
+	expect(actual.valid).toBe(false);
+	expect(actual.errors.map((error) => error.name)).toEqual(["body-leading-blank"]);
+});
+
+test("parses a multi line message the same way with or without a trailing newline", async () => {
+	const message = "feat: thing\n\nbody line one\n\nbody line two\n\nBREAKING CHANGE: nope";
+	const rules = {
+		"body-leading-blank": [RuleConfigSeverity.Error, "always"],
+		"footer-leading-blank": [RuleConfigSeverity.Error, "always"],
+		"body-max-line-length": [RuleConfigSeverity.Error, "always", 10],
+	} as const;
+
+	const withTrailingNewlines = await lint(`${message}\n\n`, rules);
+	const withoutTrailingNewlines = await lint(message, rules);
+
+	expect(withTrailingNewlines.valid).toBe(withoutTrailingNewlines.valid);
+	expect(withTrailingNewlines.errors).toEqual(withoutTrailingNewlines.errors);
+	expect(withTrailingNewlines.warnings).toEqual(withoutTrailingNewlines.warnings);
 });
 
 test("positive on stub message and opts", async () => {

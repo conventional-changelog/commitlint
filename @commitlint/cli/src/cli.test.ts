@@ -586,6 +586,34 @@ test("should not skip linting if message does not match ignores config", async (
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test("should skip linting if an edit mode message matches an exact ignores config", async () => {
+	const cwd = await gitBootstrap("fixtures/ignores-exact");
+	await fs.writeFile(
+		path.join(cwd, ".git", "COMMIT_EDITMSG"),
+		"Initialize project using Create React App\n",
+	);
+
+	const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
+	await result;
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
+test("should skip linting if a stdin message matches an exact ignores config", async () => {
+	const cwd = await gitBootstrap("fixtures/ignores-exact");
+	const result = cli([], { cwd })("Initialize project using Create React App\n");
+	await result;
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
+test("should not skip linting if an edit mode message does not match an exact ignores config", async () => {
+	const cwd = await gitBootstrap("fixtures/ignores-exact");
+	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "Some other message\n");
+
+	const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
+	await result;
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
 test("should not skip linting if defaultIgnores is false", async () => {
 	const cwd = await gitBootstrap("fixtures/default-ignores-false");
 	const result = cli([], { cwd })("fixup! foo: bar");
