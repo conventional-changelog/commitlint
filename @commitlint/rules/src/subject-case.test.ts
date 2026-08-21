@@ -511,3 +511,40 @@ test("accepts mixed Latin and Cyrillic lowercase subjects", async () => {
 
 	expect(actual).toBe(true);
 });
+
+test('with "never" should report only the case that matched', async () => {
+	const [actual, message] = subjectCase(await parsed.pascalcase, "never", [
+		"sentence-case",
+		"start-case",
+	]);
+	expect(actual).toEqual(false);
+	expect(message).toEqual("subject must not be sentence-case");
+});
+
+test('with "never" should report every case that matched', async () => {
+	const [actual, message] = subjectCase(await parsed.pascalcase, "never", [
+		"sentence-case",
+		"pascal-case",
+		"start-case",
+	]);
+	expect(actual).toEqual(false);
+	expect(message).toEqual("subject must not be sentence-case, pascal-case");
+});
+
+test('with "always" should report every configured case when none matched', async () => {
+	const [actual, message] = subjectCase(await parsed.pascalcase, "always", [
+		"upper-case",
+		"kebab-case",
+	]);
+	expect(actual).toEqual(false);
+	expect(message).toEqual("subject must be upper-case, kebab-case");
+});
+
+test('with "never" should report every configured case when none matched', async () => {
+	const [actual, message] = subjectCase(await parsed.pascalcase, "never", [
+		"upper-case",
+		"kebab-case",
+	]);
+	expect(actual).toEqual(true);
+	expect(message).toEqual("subject must not be upper-case, kebab-case");
+});
