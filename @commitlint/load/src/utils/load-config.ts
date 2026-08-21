@@ -86,7 +86,7 @@ export const isDynamicAwaitSupported = () => {
 		.split(".")
 		.map((val) => parseInt(val));
 
-	return major >= 20 && minor >= 8;
+	return major > 20 || (major === 20 && minor >= 8);
 };
 
 // Is the given directory set up to use ESM (ECMAScript Modules)?
