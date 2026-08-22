@@ -54,3 +54,16 @@ test("runs an async function which returns the preset", async () => {
 
 	expect(opts).toEqual(preset);
 });
+
+// https://github.com/conventional-changelog/commitlint/issues/2488
+test("runs the factory of a scoped conventional-changelog preset", async () => {
+	const parserOpts = { headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/ };
+	const preset = {
+		name: "@scope/conventional-changelog-custom",
+		parserOpts: (cb: (_: never, opts: { parserOpts: unknown }) => void) => {
+			cb(undefined as never, { parserOpts });
+		},
+	};
+
+	expect(await loadParserOpts(preset)).toHaveProperty("parserOpts", parserOpts);
+});

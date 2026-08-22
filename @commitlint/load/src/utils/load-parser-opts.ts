@@ -6,6 +6,20 @@ function isObjectLike(obj: unknown): obj is Record<string, unknown> {
 	return Boolean(obj) && typeof obj === "object"; // typeof null === 'object'
 }
 
+/**
+ * Presets published under a scope keep the conventional prefix after the
+ * scope, e.g. `@scope/conventional-changelog-preset` (#2488).
+ */
+function isConventionalChangelogPreset(name: unknown): boolean {
+	if (typeof name !== "string") {
+		return false;
+	}
+
+	const unscoped = name.startsWith("@") ? name.slice(name.indexOf("/") + 1) : name;
+
+	return unscoped.startsWith("conventional-changelog-");
+}
+
 function isParserOptsFunction<T extends ParserPreset>(
 	obj: T,
 ): obj is T & {
@@ -51,11 +65,7 @@ export async function loadParserOpts(
 	}
 
 	// Create parser opts from factory
-	if (
-		isParserOptsFunction(parser) &&
-		typeof parser.name === "string" &&
-		parser.name.startsWith("conventional-changelog-")
-	) {
+	if (isParserOptsFunction(parser) && isConventionalChangelogPreset(parser.name)) {
 		return new Promise((resolve) => {
 			const result = parser.parserOpts((_: never, opts) => {
 				resolve({
