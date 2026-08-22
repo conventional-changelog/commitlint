@@ -7,7 +7,6 @@ import { RuleConfigSeverity } from "@commitlint/types";
 import { fix, git, npm } from "@commitlint/test";
 
 import load, { resolveFrom } from "./load.js";
-import { isDynamicAwaitSupported } from "./utils/load-config.js";
 
 const __dirname = path.resolve(fileURLToPath(import.meta.url), "..");
 
@@ -291,9 +290,7 @@ describe.each([["basic"], ["extends"]])("%s config", (template) => {
 	test.each(
 		configTestCases
 			// Skip ESM tests for the extends suite until resolve-extends supports ESM
-			.filter(({ isEsm }) => template !== "extends" || !isEsm)
-			// Skip ESM tests if dynamic await is not supported; Jest will crash with a seg fault error
-			.filter(({ isEsm }) => isDynamicAwaitSupported() || !isEsm),
+			.filter(({ isEsm }) => template !== "extends" || !isEsm),
 	)("$filename, ESM: $isEsm", async ({ filename, isEsm }) => {
 		const cwd = await gitBootstrap(`fixtures/${templateFolder}`);
 
