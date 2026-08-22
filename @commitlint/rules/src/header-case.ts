@@ -25,12 +25,18 @@ export const headerCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 		return check;
 	});
 
-	const result = checks.some((check) => {
+	const matches = checks.filter((check) => {
 		const r = ensureCase(header, check.case);
 		return negated(check.when) ? !r : r;
 	});
 
-	const list = checks.map((c) => c.case).join(", ");
+	const result = matches.length > 0;
+
+	// A `never` rule fails because a case matched, so report the case(s) that
+	// did. An `always` rule fails because none matched, so it keeps reporting
+	// every configured case.
+	const reported = negated(when) && result ? matches : checks;
+	const list = reported.map((c) => c.case).join(", ");
 
 	return [
 		negated(when) ? !result : result,

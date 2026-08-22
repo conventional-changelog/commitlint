@@ -366,3 +366,40 @@ test('with object-based configuration should respect "never" when custom delimit
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
+
+test('with "never" should report only the case that matched', async () => {
+	const [actual, message] = scopeCase(await parsed.pascalcase, "never", [
+		"sentence-case",
+		"start-case",
+	]);
+	expect(actual).toEqual(false);
+	expect(message).toEqual("scope must not be sentence-case");
+});
+
+test('with "never" should report every case that matched', async () => {
+	const [actual, message] = scopeCase(await parsed.pascalcase, "never", [
+		"sentence-case",
+		"pascal-case",
+		"start-case",
+	]);
+	expect(actual).toEqual(false);
+	expect(message).toEqual("scope must not be sentence-case, pascal-case");
+});
+
+test('with "always" should report every configured case when none matched', async () => {
+	const [actual, message] = scopeCase(await parsed.pascalcase, "always", [
+		"upper-case",
+		"kebab-case",
+	]);
+	expect(actual).toEqual(false);
+	expect(message).toEqual("scope must be upper-case, kebab-case");
+});
+
+test('with "never" should report every configured case when none matched', async () => {
+	const [actual, message] = scopeCase(await parsed.pascalcase, "never", [
+		"upper-case",
+		"kebab-case",
+	]);
+	expect(actual).toEqual(true);
+	expect(message).toEqual("scope must not be upper-case, kebab-case");
+});

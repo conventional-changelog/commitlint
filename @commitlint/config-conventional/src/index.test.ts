@@ -70,12 +70,12 @@ const errors = {
 		name: "type-empty",
 		valid: false,
 	},
-	subjectCase: {
+	subjectCase: (matched: string) => ({
 		level: 2,
-		message: "subject must not be sentence-case, start-case, pascal-case, upper-case",
+		message: `subject must not be ${matched}`,
 		name: "subject-case",
 		valid: false,
-	},
+	}),
 	subjectEmpty: {
 		level: 2,
 		message: "subject may not be empty",
@@ -145,13 +145,22 @@ test("type-empty", async () => {
 });
 
 test("subject-case", async () => {
+	// One entry per `messages.invalidSubjectCases` input: the configured cases
+	// that the subject matches, which is what the failure message reports.
+	const matched = [
+		"sentence-case",
+		"sentence-case, start-case",
+		"sentence-case, pascal-case",
+		"sentence-case, start-case, upper-case",
+	];
+
 	const invalidInputs = await Promise.all(
 		messages.invalidSubjectCases.map((invalidInput) => commitLint(invalidInput)),
 	);
 
-	invalidInputs.forEach((result) => {
+	invalidInputs.forEach((result, index) => {
 		expect(result.valid).toBe(false);
-		expect(result.errors).toEqual([errors.subjectCase]);
+		expect(result.errors).toEqual([errors.subjectCase(matched[index])]);
 	});
 });
 
