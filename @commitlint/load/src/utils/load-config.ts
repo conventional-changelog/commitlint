@@ -1,7 +1,6 @@
-import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 
-import { cosmiconfig, defaultLoadersSync, type Loader, defaultLoaders } from "cosmiconfig";
+import { cosmiconfig, type Loader, defaultLoaders } from "cosmiconfig";
 import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
 
 export interface LoadConfigResult {
@@ -24,11 +23,6 @@ export async function loadConfig(
 		}
 		return tsLoaderInstance(...args);
 	};
-
-	// If dynamic await is supported (Node >= v20.8.0) or directory uses ESM, support
-	// async js/cjs loaders (dynamic import). Otherwise, use synchronous js/cjs loaders.
-	const loaders =
-		isDynamicAwaitSupported() || isEsmModule(cwd) ? defaultLoaders : defaultLoadersSync;
 
 	const explorer = cosmiconfig(moduleName, {
 		searchStrategy,
@@ -60,8 +54,8 @@ export async function loadConfig(
 			".ts": tsLoader,
 			".cts": tsLoader,
 			".mts": tsLoader,
-			".cjs": loaders[".cjs"],
-			".js": loaders[".js"],
+			".cjs": defaultLoaders[".cjs"],
+			".js": defaultLoaders[".js"],
 		},
 	});
 
@@ -76,27 +70,3 @@ export async function loadConfig(
 
 	return null;
 }
-
-// See the following issues for more context, contributing to failing Jest tests:
-//  - Issue: https://github.com/nodejs/node/issues/40058
-//  - Resolution: https://github.com/nodejs/node/pull/48510 (Node v20.8.0)
-export const isDynamicAwaitSupported = () => {
-	const [major, minor] = process.version
-		.replace("v", "")
-		.split(".")
-		.map((val) => parseInt(val));
-
-	return major > 20 || (major === 20 && minor >= 8);
-};
-
-// Is the given directory set up to use ESM (ECMAScript Modules)?
-export const isEsmModule = (cwd: string) => {
-	const packagePath = path.join(cwd, "package.json");
-
-	if (!existsSync(packagePath)) {
-		return false;
-	}
-
-	const packageJSON = readFileSync(packagePath, { encoding: "utf-8" });
-	return JSON.parse(packageJSON)?.type === "module";
-};
