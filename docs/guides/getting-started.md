@@ -47,10 +47,4 @@ node -e "fs.writeFileSync('commitlint.config.js', process.argv[1])" "export defa
 
 :::
 
-> [!WARNING]
-> Node v24 changes the way that modules are loaded, and this includes the commitlint config file. If your project does not contain a `package.json`, commitlint may fail to load the config, resulting in a `Please add rules to your commitlint.config.js` error message. This can be fixed by doing either of the following:
->
-> - Add a `package.json` file, declaring your project as an ES6 module. This can be done easily by running `npm init es6`.
-> - Rename the config file from `commitlint.config.js` to `commitlint.config.mjs`.
-
 Refer to [configuration documentation](/reference/configuration) for more information.
