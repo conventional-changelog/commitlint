@@ -9,3 +9,16 @@ allowBuilds:
   "@swc/core": false
   esbuild: false
   nx: false
+
+# Supply-chain hardening; pnpm ignores these in .npmrc, silently, so they live here.
+# - strictDepBuilds: an unlisted build script fails the install instead of warning
+# - verifyDepsBeforeRun: refuse to run scripts against a lockfile-stale node_modules
+# - resolutionMode: prefer versions current at the last direct-dep publish, limiting
+#   exposure to a freshly compromised transitive release
+#
+# engineStrict is off on purpose: it enforces every dependency's engines, which
+# currently resolves above engines.node here. Revisit with the node floor bump;
+# do not raise engines.node to satisfy it.
+strictDepBuilds: true
+verifyDepsBeforeRun: error
+resolutionMode: time-based
