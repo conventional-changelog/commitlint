@@ -6,73 +6,72 @@
  * associated type definition needs to be fixed.
  */
 
+import { assertType, test } from "vitest";
+
 import { RuleConfigSeverity, type RulesConfig } from "./index.js";
 
 const ERROR = RuleConfigSeverity.Error;
 
-const _scopeEnumObject = [ERROR, "always", { scopes: ["foo", "bar"] as const }] as const;
-const _scopeEnumObjectCheck: Partial<RulesConfig> = {
-	"scope-enum": _scopeEnumObject,
-};
-void _scopeEnumObjectCheck;
+test("scope-enum accepts an as-const object config", () => {
+	const scopeEnumObject = [ERROR, "always", { scopes: ["foo", "bar"] as const }] as const;
+	assertType<Partial<RulesConfig>>({ "scope-enum": scopeEnumObject });
+});
 
 // Simple array form: regression check that the array-form enum config
 // remains assignable to RulesConfig when using `as const`.
-const _scopeEnumSimple = [ERROR, "always", ["foo", "baz", "baz"]] as const;
-const _scopeEnumSimpleCheck: Partial<RulesConfig> = {
-	"scope-enum": _scopeEnumSimple,
-};
-void _scopeEnumSimpleCheck;
+test("scope-enum accepts an as-const array config", () => {
+	const scopeEnumSimple = [ERROR, "always", ["foo", "baz", "baz"]] as const;
+	assertType<Partial<RulesConfig>>({ "scope-enum": scopeEnumSimple });
+});
 
-const _scopeCaseObject = [
-	ERROR,
-	"always",
-	{ cases: ["camel-case"] as const, delimiters: ["-"] as const },
-] as const;
-const _scopeCaseObjectCheck: Partial<RulesConfig> = {
-	"scope-case": _scopeCaseObject,
-};
-void _scopeCaseObjectCheck;
+test("scope-case accepts an as-const object config", () => {
+	const scopeCaseObject = [
+		ERROR,
+		"always",
+		{ cases: ["camel-case"] as const, delimiters: ["-"] as const },
+	] as const;
+	assertType<Partial<RulesConfig>>({ "scope-case": scopeCaseObject });
+});
 
 // Simple array form: ensure CaseRuleConfig accepts readonly arrays.
-const _scopeCaseSimple = [ERROR, "always", ["camel-case"]] as const;
-const _scopeCaseSimpleCheck: Partial<RulesConfig> = {
-	"scope-case": _scopeCaseSimple,
-};
-void _scopeCaseSimpleCheck;
+test("scope-case accepts an as-const array config", () => {
+	const scopeCaseSimple = [ERROR, "always", ["camel-case"]] as const;
+	assertType<Partial<RulesConfig>>({ "scope-case": scopeCaseSimple });
+});
 
 // Regression check: breaking-change-exclamation-mark has no target case, so it
 // must accept a plain two-element tuple.
-const _breakingChangeExclamationMark = [ERROR, "always"] as const;
-const _breakingChangeExclamationMarkCheck: Partial<RulesConfig> = {
-	"breaking-change-exclamation-mark": _breakingChangeExclamationMark,
-};
-void _breakingChangeExclamationMarkCheck;
+test("breaking-change-exclamation-mark accepts a two-element tuple", () => {
+	const breakingChangeExclamationMark = [ERROR, "always"] as const;
+	assertType<Partial<RulesConfig>>({
+		"breaking-change-exclamation-mark": breakingChangeExclamationMark,
+	});
+});
 
 // Tests for context parameter support:
 // https://github.com/conventional-changelog/commitlint/issues/4357
 // Rule functions should accept an optional context parameter with cwd.
 
-// Sync function with context
-const _syncWithCtx: Partial<RulesConfig> = {
-	"scope-enum": (ctx) => [ERROR, "always", ["foo", ctx?.cwd || "bar"]],
-};
-void _syncWithCtx;
+test("sync rule function accepts a context parameter", () => {
+	assertType<Partial<RulesConfig>>({
+		"scope-enum": (ctx) => [ERROR, "always", ["foo", ctx?.cwd || "bar"]],
+	});
+});
 
-// Async function with context
-const _asyncWithCtx: Partial<RulesConfig> = {
-	"scope-enum": async (ctx) => [ERROR, "always", ["foo", ctx?.cwd || "bar"]],
-};
-void _asyncWithCtx;
+test("async rule function accepts a context parameter", () => {
+	assertType<Partial<RulesConfig>>({
+		"scope-enum": async (ctx) => [ERROR, "always", ["foo", ctx?.cwd || "bar"]],
+	});
+});
 
-// Function without context (backward compatibility)
-const _funcNoCtx: Partial<RulesConfig> = {
-	"scope-enum": () => [ERROR, "always", ["foo", "bar"]],
-};
-void _funcNoCtx;
+test("sync rule function without context stays assignable", () => {
+	assertType<Partial<RulesConfig>>({
+		"scope-enum": () => [ERROR, "always", ["foo", "bar"]],
+	});
+});
 
-// Async function without context (backward compatibility)
-const _asyncNoCtx: Partial<RulesConfig> = {
-	"scope-enum": async () => [ERROR, "always", ["foo", "bar"]],
-};
-void _asyncNoCtx;
+test("async rule function without context stays assignable", () => {
+	assertType<Partial<RulesConfig>>({
+		"scope-enum": async () => [ERROR, "always", ["foo", "bar"]],
+	});
+});

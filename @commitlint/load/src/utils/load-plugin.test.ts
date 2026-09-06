@@ -125,8 +125,6 @@ test("should load plugin from npx cache when available", async () => {
 		path.join(os.tmpdir(), "npx-cache", "node_modules", "commitlint-plugin-example"),
 	);
 
-	vi.mock("commitlint-plugin-example", () => ({ example: true }));
-
 	const plugins = await loadPlugin({}, "example");
 	expect(vi.mocked(resolveFromNpxCache)).toHaveBeenCalledWith("commitlint-plugin-example");
 	expect(plugins["example"]).toBeDefined();
