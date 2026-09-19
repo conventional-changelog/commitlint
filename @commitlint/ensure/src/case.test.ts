@@ -62,9 +62,9 @@ test("false for lowercase on sentencecase", () => {
 	expect(actual).toBe(false);
 });
 
-test("true for UPPERCASE on sentencecase", () => {
+test("false for UPPERCASE on sentencecase (single word)", () => {
 	const actual = ensure("UPPERCASE", "sentence-case");
-	expect(actual).toBe(true);
+	expect(actual).toBe(false);
 });
 
 test("true for Start Case on sentencecase", () => {
@@ -72,8 +72,41 @@ test("true for Start Case on sentencecase", () => {
 	expect(actual).toBe(true);
 });
 
-test("true for PascalCase on sentencecase", () => {
+test("false for PascalCase on sentencecase (single word, not sentence-case)", () => {
 	const actual = ensure("PascalCase", "sentence-case");
+	expect(actual).toBe(false);
+});
+
+// See: https://github.com/conventional-changelog/commitlint/issues/3501
+// A single-word camelCase string should not be classified as sentence-case
+// or start-case, because those require at least one word boundary (space).
+test("false for camelCase on sentencecase (regression for #3501)", () => {
+	const actual = ensure("CurationFacets", "sentence-case");
+	expect(actual).toBe(false);
+});
+
+test("false for camelCase on start-case (regression for #3501)", () => {
+	const actual = ensure("CurationFacets", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for single-word on sentence-case", () => {
+	expect(ensure("Hello", "sentence-case")).toBe(false);
+	expect(ensure("World", "sentence-case")).toBe(false);
+});
+
+test("false for single-word on start-case", () => {
+	expect(ensure("Hello", "start-case")).toBe(false);
+	expect(ensure("World", "start-case")).toBe(false);
+});
+
+test("true for multi-word sentence-case on sentence-case", () => {
+	const actual = ensure("Sentence case here", "sentence-case");
+	expect(actual).toBe(true);
+});
+
+test("true for multi-word start-case on start-case", () => {
+	const actual = ensure("Sentence Case Here", "start-case");
 	expect(actual).toBe(true);
 });
 
@@ -92,9 +125,9 @@ test("false for camelCase on sentencecase", () => {
 	expect(actual).toBe(false);
 });
 
-test("true for * on sentence-case", () => {
+test("false for * on sentence-case (single char, not sentence-case)", () => {
 	const actual = ensure("*", "sentence-case");
-	expect(actual).toBe(true);
+	expect(actual).toBe(false);
 });
 
 test("true for * on camel-case", () => {

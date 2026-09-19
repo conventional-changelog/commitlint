@@ -17,5 +17,18 @@ function ensureCase(raw: string = "", target: TargetCaseType = "lowercase"): boo
 		return true;
 	}
 
+	// Sentence-case and start-case both require at least one word boundary
+	// (i.e. more than a single word). Without this check, a single-word input
+	// like "CurationFacets" or "Hello" would match sentence-case, because
+	// toCase applies upperFirst() which is a no-op for already-capitalized
+	// single words — making camelCase indistinguishable from sentence-case.
+	// See: https://github.com/conventional-changelog/commitlint/issues/3501
+	if (
+		(target === "sentence-case" || target === "sentencecase" || target === "start-case") &&
+		!input.includes(" ")
+	) {
+		return false;
+	}
+
 	return transformed === input;
 }
