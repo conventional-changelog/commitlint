@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
+
+### Bug Fixes
+
+* update vitest monorepo to v5 ([#4992](https://github.com/conventional-changelog/commitlint/issues/4992)) ([91fb534](https://github.com/conventional-changelog/commitlint/commit/91fb534b8c9a1016ea4614f522a79a69977c52e4)), closes [vitest-dev/vitest#10222](https://github.com/vitest-dev/vitest/issues/10222) [vitest-dev/vitest#10460](https://github.com/vitest-dev/vitest/issues/10460) [vitest-dev/vitest#10449](https://github.com/vitest-dev/vitest/issues/10449)
+
+
 ## [21.0.2](https://github.com/conventional-changelog/commitlint/compare/v21.0.1...v21.0.2) (2026-05-29)
 
 

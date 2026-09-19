@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
+
+### Bug Fixes
+
+* **config-nx-scopes:** read scopes from the nx project graph ([#4957](https://github.com/conventional-changelog/commitlint/issues/4957)) ([013c358](https://github.com/conventional-changelog/commitlint/commit/013c3582e60ca9675fbc1e994cb6f28dd5e8403d))
+
+
 # [21.2.0](https://github.com/conventional-changelog/commitlint/compare/v21.1.0...v21.2.0) (2026-06-30)
 
 **Note:** Version bump only for package @commitlint/config-nx-scopes

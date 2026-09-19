@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
+
+### Bug Fixes
+
+* **rules:** report the case that matched in case rule failure messages ([#4962](https://github.com/conventional-changelog/commitlint/issues/4962)) ([9f5f7bc](https://github.com/conventional-changelog/commitlint/commit/9f5f7bc0304f85f270097a4046da6d0509c44620))
+
+
 ## [21.2.2](https://github.com/conventional-changelog/commitlint/compare/v21.2.1...v21.2.2) (2026-08-13)
 
 **Note:** Version bump only for package @commitlint/config-conventional

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
+
+### Bug Fixes
+
+* **config-nx-scopes:** read scopes from the nx project graph ([#4957](https://github.com/conventional-changelog/commitlint/issues/4957)) ([013c358](https://github.com/conventional-changelog/commitlint/commit/013c3582e60ca9675fbc1e994cb6f28dd5e8403d))
+* **lint:** trim trailing whitespace off the message handed to ignore matchers ([#4960](https://github.com/conventional-changelog/commitlint/issues/4960)) ([a6f279b](https://github.com/conventional-changelog/commitlint/commit/a6f279b931bb4cf01d17a9ced48de5b9377172bd))
+* **load:** detect dynamic await support on node majors above 20 ([#4961](https://github.com/conventional-changelog/commitlint/issues/4961)) ([77df555](https://github.com/conventional-changelog/commitlint/commit/77df55532e77108714d7c0090f7f85a9b7b4a0af))
+* **load:** run the parser factory of scoped conventional-changelog presets ([#4968](https://github.com/conventional-changelog/commitlint/issues/4968)) ([a42b18c](https://github.com/conventional-changelog/commitlint/commit/a42b18c5cde5e70b39b636017b8dfbd7dfe890ca)), closes [#2488](https://github.com/conventional-changelog/commitlint/issues/2488)
+* **rules:** report the case that matched in case rule failure messages ([#4962](https://github.com/conventional-changelog/commitlint/issues/4962)) ([9f5f7bc](https://github.com/conventional-changelog/commitlint/commit/9f5f7bc0304f85f270097a4046da6d0509c44620))
+* **types:** correct breaking-change-exclamation-mark rule config type ([#4954](https://github.com/conventional-changelog/commitlint/issues/4954)) ([66f0ffb](https://github.com/conventional-changelog/commitlint/commit/66f0ffb2d2f2b8e5964b3774f7b7f6d964253f9e))
+* update vitest monorepo to v5 ([#4992](https://github.com/conventional-changelog/commitlint/issues/4992)) ([91fb534](https://github.com/conventional-changelog/commitlint/commit/91fb534b8c9a1016ea4614f522a79a69977c52e4)), closes [vitest-dev/vitest#10222](https://github.com/vitest-dev/vitest/issues/10222) [vitest-dev/vitest#10460](https://github.com/vitest-dev/vitest/issues/10460) [vitest-dev/vitest#10449](https://github.com/vitest-dev/vitest/issues/10449)
+
+
 ## [21.2.2](https://github.com/conventional-changelog/commitlint/compare/v21.2.1...v21.2.2) (2026-08-13)
 
 ### Bug Fixes
