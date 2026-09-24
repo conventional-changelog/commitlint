@@ -27,5 +27,22 @@ export async function getEditCommit(cwd?: string, edit?: boolean | string): Prom
 		throw err;
 	}
 
-	return [`${editFile.toString("utf-8")}\n`];
+	const raw = editFile.toString("utf-8");
+
+	// Strip the verbose diff added by `git commit --verbose`.
+	// Git appends the diff after a scissors line and/or a `diff --git`
+	// marker.  The diff is never part of the final commit message so
+	// neither should commitlint see it (see #437).
+	const diffIndex = raw.indexOf("\ndiff --git ");
+	const scissorsIndex = raw.indexOf("\n# ------------------------ >8 ------------------------");
+	const cutIndex =
+		diffIndex !== -1 && scissorsIndex !== -1
+			? Math.min(diffIndex, scissorsIndex)
+			: diffIndex !== -1
+				? diffIndex
+				: scissorsIndex;
+
+	const cleaned = cutIndex !== -1 ? raw.slice(0, cutIndex) : raw;
+
+	return [`${cleaned}\n`];
 }
