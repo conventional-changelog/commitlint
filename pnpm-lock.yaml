@@ -305,7 +305,7 @@ importers:
         version: 1.3.1
       yargs:
         specifier: ^18.0.0
-        version: 18.1.0
+        version: 18.2.0
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -906,7 +906,7 @@ importers:
         version: 0.2.7
       yargs:
         specifier: ^18.0.0
-        version: 18.1.0
+        version: 18.2.0
     devDependencies:
       '@types/require-from-string':
         specifier: ^1.2.3
@@ -5199,8 +5199,8 @@ packages:
     resolution: {integrity: sha512-GZtjxm/J/4TSxuL3FNYjCmLktBTnIw/rVmKSIyKeYAZpmJB2ig9VauCC5xsa82GNKVKDAqpOn3KVzNt0zmrU0g==}
     engines: {node: '>=12'}
 
-  yargs@18.1.0:
-    resolution: {integrity: sha512-2rAgRKu54VsHkqI0/tYkmluGXHD4KW7yZoycuqDQ15QOTnc2VVfy0nN/1eMhnQLO00A+dwtK20xuCnc1YGeUyg==}
+  yargs@18.2.0:
+    resolution: {integrity: sha512-9OpKOLeaoNFecEp7P6iYbzze/5CqWoH7N3SMs/6y1XF4nMvFMspEGZzJ6uFi9MmQwXhyzqYoSEKO3tvA3Z/o2w==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=23}
 
   yoctocolors-cjs@2.1.3:
@@ -9664,7 +9664,7 @@ snapshots:
       y18n: 5.0.8
       yargs-parser: 21.1.1
 
-  yargs@18.1.0:
+  yargs@18.2.0:
     dependencies:
       cliui: 9.0.1
       escalade: 3.2.0
