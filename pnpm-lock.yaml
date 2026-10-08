@@ -352,7 +352,7 @@ importers:
         version: link:../types
       conventional-changelog-conventionalcommits:
         specifier: ^10.0.0
-        version: 10.4.0
+        version: 10.4.1
     devDependencies:
       '@commitlint/lint':
         specifier: workspace:^
@@ -3021,8 +3021,8 @@ packages:
     engines: {node: '>=18'}
     deprecated: This preset is deprecated. Please use conventional-changelog-conventionalcommits or conventional-changelog-angular instead.
 
-  conventional-changelog-conventionalcommits@10.4.0:
-    resolution: {integrity: sha512-Rriac6ZrAlVm6cy9Bz4NSp+WMHpwNXoPIYex+HjCgduAVUSbnew29DQjQw0C4g9u3HtSYzGiGY+pdBXAZo+4aA==}
+  conventional-changelog-conventionalcommits@10.4.1:
+    resolution: {integrity: sha512-jS1LRFSbRoAr6JbhhRy1JYfNNUj5LM3+v49hRE03CgccsiYqgdVj/RTmrw4J1rylrqijHwdOlJWiJa61JHOgHg==}
     engines: {node: '>=22'}
 
   conventional-changelog-preset-loader@6.0.1:
@@ -7063,7 +7063,7 @@ snapshots:
 
   conventional-changelog-atom@5.1.0: {}
 
-  conventional-changelog-conventionalcommits@10.4.0:
+  conventional-changelog-conventionalcommits@10.4.1:
     dependencies:
       '@conventional-changelog/template': 1.4.0
 
