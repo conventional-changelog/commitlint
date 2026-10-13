@@ -568,3 +568,45 @@ test("should resolve config exported as an async function", async () => {
 		"upper-case",
 	]);
 });
+
+describe("seed arrays replace arrays from the config file", () => {
+	test("rule options", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const actual = await load(
+			{ rules: { "type-enum": [RuleConfigSeverity.Warning, "never", ["x"]] } },
+			{ cwd },
+		);
+
+		expect(actual.rules["type-enum"]).toStrictEqual([RuleConfigSeverity.Warning, "never", ["x"]]);
+	});
+
+	test("shorter rule config", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const actual = await load({ rules: { "type-enum": [RuleConfigSeverity.Disabled] } }, { cwd });
+
+		expect(actual.rules["type-enum"]).toStrictEqual([RuleConfigSeverity.Disabled]);
+	});
+
+	test("extends", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const actual = await load({ extends: ["./third"] }, { cwd });
+
+		expect(actual.extends).toStrictEqual(["./third"]);
+		expect(Object.keys(actual.rules).sort()).toStrictEqual(["scope-case", "type-enum"]);
+	});
+
+	test("plugins", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const actual = await load({ plugins: ["example"] }, { cwd });
+
+		expect(actual.plugins).toStrictEqual({ example: plugin });
+	});
+
+	test("unless the seed array is empty", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const actual = await load({ extends: [], plugins: [] }, { cwd });
+
+		expect(actual.extends).toStrictEqual(["./first", "./second"]);
+		expect(actual.plugins).toStrictEqual({ example: plugin, "@scope/example": scopedPlugin });
+	});
+});
