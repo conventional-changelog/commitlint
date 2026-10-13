@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import { cosmiconfig, type Loader, defaultLoaders } from "cosmiconfig";
-import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
+import { createJiti, type Jiti } from "jiti";
 
 export interface LoadConfigResult {
 	config: unknown;
@@ -16,12 +16,18 @@ export async function loadConfig(
 	cwd: string,
 	configPath?: string,
 ): Promise<LoadConfigResult | null> {
-	let tsLoaderInstance: Loader | undefined;
-	const tsLoader: Loader = (...args) => {
-		if (!tsLoaderInstance) {
-			tsLoaderInstance = TypeScriptLoader();
+	let jiti: Jiti | undefined;
+	const tsLoader: Loader = async (filepath) => {
+		jiti ??= createJiti("", { interopDefault: true });
+		try {
+			const result = await jiti.import<{ default?: unknown }>(filepath);
+			return result.default || result;
+		} catch (error) {
+			if (error instanceof Error) {
+				error.message = `TypeScriptLoader failed to compile TypeScript:\n${error.message}`;
+			}
+			throw error;
 		}
-		return tsLoaderInstance(...args);
 	};
 
 	const explorer = cosmiconfig(moduleName, {
