@@ -7,6 +7,7 @@ import resolveExtends, {
 	resolveFromSilent,
 	resolveGlobalSilent,
 	loadParserPreset,
+	mergeConfig,
 } from "@commitlint/resolve-extends";
 import {
 	LoadOptions,
@@ -16,23 +17,10 @@ import {
 	UserConfig,
 } from "@commitlint/types";
 import isPlainObject from "is-plain-obj";
-import { createDefu } from "defu";
 
 import { loadConfig } from "./utils/load-config.js";
 import { loadParserOpts } from "./utils/load-parser-opts.js";
 import loadPlugin from "./utils/load-plugin.js";
-
-// Incoming values win, including nulls and arrays. Seed arrays replace file arrays.
-const mergeConfig = createDefu((object, key, value) => {
-	const incoming = object[key];
-	if (incoming === undefined) {
-		return false;
-	}
-	if (isPlainObject(value) && isPlainObject(incoming)) {
-		object[key] = mergeConfig(value, { ...value, ...incoming });
-	}
-	return true;
-});
 
 /**
  * Resolve relative formatter paths (e.g. "./my-formatter.js") from the
@@ -68,10 +56,7 @@ export default async function load(
 	}
 
 	// Merge passed config with file based options
-	config = mergeConfig(
-		{ extends: [], plugins: [], rules: {} },
-		mergeConfig(config, { ...config, ...seed }),
-	);
+	config = mergeConfig(seed, config, { extends: [], plugins: [], rules: {} });
 
 	// Resolve parserPreset key
 	if (typeof config.parserPreset === "string") {

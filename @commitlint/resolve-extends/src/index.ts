@@ -5,11 +5,13 @@ import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 
 import globalDirectory from "global-directory";
-import { createDefu } from "defu";
-import isPlainObject from "is-plain-obj";
 import resolveFrom_ from "resolve-from";
 import { validateConfig } from "@commitlint/config-validator";
 import type { ParserPreset, UserConfig } from "@commitlint/types";
+
+import { mergeConfig } from "./merge-config.js";
+
+export { mergeConfig };
 
 const require = createRequire(import.meta.url);
 
@@ -218,26 +220,6 @@ export interface ResolveExtendsContext {
 	dynamicImport?<T>(id: string): T | Promise<T>;
 }
 
-// Put the incoming config in defu's defaults position so explicit nulls survive.
-// The custom merger gives it precedence, replacing arrays except for plugins.
-const mergeConfig = createDefu((object, key, value) => {
-	const incoming = object[key];
-	if (incoming === value) {
-		return true;
-	}
-	if (incoming === undefined) {
-		return false;
-	}
-	if (key === "plugins" && Array.isArray(value) && Array.isArray(incoming)) {
-		Object.assign(object, { [key]: [...value, ...incoming] });
-		return true;
-	}
-	if (isPlainObject(value) && isPlainObject(incoming)) {
-		object[key] = mergeConfig(value, { ...value, ...incoming });
-	}
-	return true;
-});
-
 export default async function resolveExtends(
 	config: UserConfig = {},
 	context: ResolveExtendsContext = {},
@@ -246,7 +228,13 @@ export default async function resolveExtends(
 	const extended = await loadExtends(config, context);
 	extended.push(config);
 	return extended.reduce(
-		(r, { extends: _, ...c }) => mergeConfig(r, { ...r, ...c }),
+		(r, { extends: _, plugins, ...c }) => {
+			const merged = mergeConfig(c, r);
+			if (plugins !== undefined) {
+				merged.plugins = [...(r.plugins ?? []), ...plugins];
+			}
+			return merged;
+		},
 		e ? { extends: e } : {},
 	);
 }
