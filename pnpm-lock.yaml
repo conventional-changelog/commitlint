@@ -612,15 +612,15 @@ importers:
       cosmiconfig:
         specifier: ^9.0.1
         version: 9.0.2(typescript@7.0.2)
-      cosmiconfig-typescript-loader:
-        specifier: ^6.1.0
-        version: 6.3.0(@types/node@22.20.5)(cosmiconfig@9.0.2(typescript@7.0.2))(typescript@7.0.2)
       es-toolkit:
         specifier: ^1.46.0
         version: 1.52.0
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
+      jiti:
+        specifier: ^2.6.1
+        version: 2.6.1
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -6852,6 +6852,7 @@ snapshots:
       cosmiconfig: 9.0.2(typescript@7.0.2)
       jiti: 2.6.1
       typescript: 7.0.2
+    optional: true
 
   cosmiconfig@9.0.2(typescript@7.0.2):
     dependencies:
