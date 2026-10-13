@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { fix, git } from "@commitlint/test";
 import fs from "node:fs/promises";
-import { merge } from "es-toolkit/compat";
+import { defu } from "defu";
 import { x } from "tinyexec";
 import { ExitCode } from "./cli-error.js";
 
@@ -801,6 +801,6 @@ describe("should print config", () => {
 async function writePkg(payload: unknown, options: TestOptions) {
 	const pkgPath = path.join(options.cwd, "package.json");
 	const pkg = JSON.parse(await fs.readFile(pkgPath, "utf-8"));
-	const result = merge(pkg, payload);
+	const result = defu(payload as Record<string, unknown>, pkg);
 	await fs.writeFile(pkgPath, JSON.stringify(result, null, "  "));
 }

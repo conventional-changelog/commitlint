@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { globSync } from "node:fs";
-import { camelCase } from "es-toolkit/compat";
+import { camelCase } from "scule";
 
 import * as ensure from "./index.js";
 

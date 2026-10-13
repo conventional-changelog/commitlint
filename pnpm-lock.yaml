@@ -322,9 +322,9 @@ importers:
       conventional-commits-parser:
         specifier: ^7.0.0
         version: 7.1.3
-      es-toolkit:
-        specifier: ^1.46.0
-        version: 1.52.0
+      defu:
+        specifier: ^6.1.7
+        version: 6.1.7
 
   '@commitlint/config-angular':
     dependencies:
@@ -398,9 +398,9 @@ importers:
       '@commitlint/config-angular':
         specifier: workspace:^
         version: link:../config-angular
-      es-toolkit:
-        specifier: ^1.46.0
-        version: 1.52.0
+      defu:
+        specifier: ^6.1.7
+        version: 6.1.7
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -521,9 +521,9 @@ importers:
       '@commitlint/types':
         specifier: workspace:^
         version: link:../types
-      es-toolkit:
-        specifier: ^1.46.0
-        version: 1.52.0
+      scule:
+        specifier: ^1.3.0
+        version: 1.3.0
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -615,9 +615,9 @@ importers:
       cosmiconfig-typescript-loader:
         specifier: ^6.1.0
         version: 6.3.0(@types/node@22.20.5)(cosmiconfig@9.0.2(typescript@7.0.2))(typescript@7.0.2)
-      es-toolkit:
-        specifier: ^1.46.0
-        version: 1.52.0
+      defu:
+        specifier: ^6.1.7
+        version: 6.1.7
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -755,12 +755,15 @@ importers:
       '@commitlint/types':
         specifier: workspace:^
         version: link:../types
-      es-toolkit:
-        specifier: ^1.46.0
-        version: 1.52.0
+      defu:
+        specifier: ^6.1.7
+        version: 6.1.7
       global-directory:
         specifier: ^5.0.0
         version: 5.0.0
+      is-plain-obj:
+        specifier: ^4.1.0
+        version: 4.1.0
       resolve-from:
         specifier: ^5.0.0
         version: 5.0.0
@@ -3103,6 +3106,9 @@ packages:
     resolution: {integrity: sha512-N+MeXYoqr3pOgn8xfyRPREN7gHakLYjhsHhWGT3fWAiL4IkAt0iDw14QiiEm2bE30c5XX5q0FtAA3CK5f9/BUg==}
     engines: {node: '>=12'}
 
+  defu@6.1.7:
+    resolution: {integrity: sha512-7z22QmUWiQ/2d0KkdYmANbRUVABpZ9SNYyH5vx6PZ+nE5bcC0l7uFvEfHlyld/HcGBFTL536ClDt3DEcSlEJAQ==}
+
   dequal@2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
@@ -4401,6 +4407,9 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  scule@1.3.0:
+    resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
 
   search-insights@2.17.3:
     resolution: {integrity: sha512-RQPdCYTa8A68uM2jwxoY842xDhvx3E5LFL1LxvxCNMev4o5mLuokczhzjAgGwUZBAmOKZknArSxLKmXtIi2AxQ==}
@@ -6907,6 +6916,8 @@ snapshots:
 
   define-lazy-prop@3.0.0: {}
 
+  defu@6.1.7: {}
+
   dequal@2.0.3: {}
 
   detect-file@1.0.0: {}
@@ -6957,7 +6968,8 @@ snapshots:
 
   es-module-lexer@2.3.2: {}
 
-  es-toolkit@1.52.0: {}
+  es-toolkit@1.52.0:
+    optional: true
 
   esbuild@0.21.5:
     optionalDependencies:
@@ -8542,6 +8554,8 @@ snapshots:
   safe-buffer@5.2.1: {}
 
   safer-buffer@2.1.2: {}
+
+  scule@1.3.0: {}
 
   search-insights@2.17.3: {}
 

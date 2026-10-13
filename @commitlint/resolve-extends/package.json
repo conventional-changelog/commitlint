@@ -36,8 +36,9 @@
   "dependencies": {
     "@commitlint/config-validator": "workspace:^",
     "@commitlint/types": "workspace:^",
-    "es-toolkit": "^1.46.0",
+    "defu": "^6.1.7",
     "global-directory": "^5.0.0",
+    "is-plain-obj": "^4.1.0",
     "resolve-from": "^5.0.0"
   },
   "devDependencies": {

@@ -2,7 +2,7 @@ import path from "node:path";
 
 import configAngular from "@commitlint/config-angular";
 import { glob } from "node:fs/promises";
-import { merge } from "es-toolkit/compat";
+import { defu } from "defu";
 
 function pathToId(root, filePath) {
 	const relativePath = path.relative(root, filePath);
@@ -19,8 +19,11 @@ async function getPatternIDs() {
 	return files;
 }
 
-export default merge(configAngular, {
-	rules: {
-		"scope-enum": () => getPatternIDs().then((ids) => [2, "always", ids.concat(["system"])]),
+export default defu(
+	{
+		rules: {
+			"scope-enum": () => getPatternIDs().then((ids) => [2, "always", ids.concat(["system"])]),
+		},
 	},
-});
+	configAngular,
+);
