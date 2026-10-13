@@ -602,6 +602,40 @@ describe("seed arrays replace arrays from the config file", () => {
 		expect(actual.plugins).toStrictEqual({ example: plugin });
 	});
 
+	test("without aliasing the seed", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const seed = {
+			extends: ["./third"],
+			rules: { "type-enum": [RuleConfigSeverity.Warning, "never", ["x"]] as any },
+		};
+		const actual = await load(seed, { cwd });
+
+		actual.extends.push("./mutated");
+		(actual.rules["type-enum"] as any)[2].push("mutated");
+
+		expect(seed).toStrictEqual({
+			extends: ["./third"],
+			rules: { "type-enum": [RuleConfigSeverity.Warning, "never", ["x"]] },
+		});
+	});
+
+	test("without aliasing the config file", async () => {
+		const cwd = await gitBootstrap("fixtures/seed-array-override");
+		const first = await load({}, { cwd });
+
+		first.extends.push("./mutated");
+		(first.rules["type-enum"] as any)[2].push("mutated");
+
+		const second = await load({}, { cwd });
+
+		expect(second.extends).toStrictEqual(["./first", "./second"]);
+		expect(second.rules["type-enum"]).toStrictEqual([
+			RuleConfigSeverity.Error,
+			"always",
+			["a", "b", "c", "d"],
+		]);
+	});
+
 	test("unless the seed array is empty", async () => {
 		const cwd = await gitBootstrap("fixtures/seed-array-override");
 		const actual = await load({ extends: [], plugins: [] }, { cwd });
