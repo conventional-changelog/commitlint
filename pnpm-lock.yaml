@@ -620,7 +620,7 @@ importers:
         version: 4.1.0
       jiti:
         specifier: ^2.6.1
-        version: 2.6.1
+        version: 2.7.0
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -3594,6 +3594,10 @@ packages:
 
   jiti@2.6.1:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
+    hasBin: true
+
+  jiti@2.7.0:
+    resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
 
   js-tokens@10.0.0:
@@ -7404,7 +7408,10 @@ snapshots:
 
   isexe@4.0.0: {}
 
-  jiti@2.6.1: {}
+  jiti@2.6.1:
+    optional: true
+
+  jiti@2.7.0: {}
 
   js-tokens@10.0.0: {}
 
