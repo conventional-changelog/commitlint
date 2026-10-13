@@ -56,7 +56,8 @@ export default async function load(
 	}
 
 	// Merge passed config with file based options
-	// A non-empty array replaces the one it overrides instead of being merged into it index by index
+	// A non-empty array replaces the one it overrides instead of being merged into it index by index.
+	// Emptying the target lets the default merge copy the values, so the result never aliases its sources.
 	config = mergeWith(
 		{
 			extends: [],
@@ -65,10 +66,11 @@ export default async function load(
 		},
 		config,
 		seed,
-		(_objValue: unknown, srcValue: unknown) => {
-			if (Array.isArray(srcValue) && srcValue.length > 0) {
-				return srcValue;
+		(objValue: unknown, srcValue: unknown) => {
+			if (Array.isArray(objValue) && Array.isArray(srcValue) && srcValue.length > 0) {
+				objValue.length = 0;
 			}
+			return undefined;
 		},
 	);
 
