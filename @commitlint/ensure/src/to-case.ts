@@ -2,21 +2,23 @@ import { TargetCaseType } from "@commitlint/types";
 import { camelCase, kebabCase, snakeCase, pascalCase, splitByCase, upperFirst } from "scule";
 
 export default function toCase(input: string, target: TargetCaseType): string {
-	const words = splitByCase(
-		input.replace(/[’']/g, "").replace(/[^\p{L}\p{N}\p{M}]+/gu, "-"),
-	).filter(Boolean);
+	// scule does not split whitespace, but commit messages contain multiple words.
+	const separated = input.replace(/\s+/g, "-");
 
 	switch (target) {
 		case "camel-case":
-			return camelCase(words, { normalize: true });
+			return camelCase(separated, { normalize: true });
 		case "kebab-case":
-			return kebabCase(words);
+			return kebabCase(separated);
 		case "snake-case":
-			return snakeCase(words);
+			return snakeCase(separated);
 		case "pascal-case":
-			return pascalCase(words, { normalize: true });
+			return pascalCase(separated, { normalize: true });
 		case "start-case":
-			return words.map((word) => upperFirst(word)).join(" ");
+			return splitByCase(separated)
+				.filter(Boolean)
+				.map((word) => upperFirst(word))
+				.join(" ");
 		case "upper-case":
 		case "uppercase":
 			return input.toUpperCase();
