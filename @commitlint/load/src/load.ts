@@ -16,7 +16,7 @@ import {
 	UserConfig,
 } from "@commitlint/types";
 import isPlainObject from "is-plain-obj";
-import { merge } from "es-toolkit/compat";
+import { mergeWith } from "es-toolkit/compat";
 
 import { loadConfig } from "./utils/load-config.js";
 import { loadParserOpts } from "./utils/load-parser-opts.js";
@@ -56,7 +56,8 @@ export default async function load(
 	}
 
 	// Merge passed config with file based options
-	config = merge(
+	// A non-empty array replaces the one it overrides instead of being merged into it index by index
+	config = mergeWith(
 		{
 			extends: [],
 			plugins: [],
@@ -64,6 +65,11 @@ export default async function load(
 		},
 		config,
 		seed,
+		(_objValue: unknown, srcValue: unknown) => {
+			if (Array.isArray(srcValue) && srcValue.length > 0) {
+				return srcValue;
+			}
+		},
 	);
 
 	// Resolve parserPreset key
