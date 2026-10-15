@@ -186,7 +186,7 @@ importers:
         version: 9.1.7
       lerna:
         specifier: ^10.0.0
-        version: 10.1.0(@swc/core@1.16.18)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@7.0.2)
+        version: 10.1.1(@swc/core@1.16.18)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@7.0.2)
       lint-staged:
         specifier: 17.6.0
         version: 17.6.0
@@ -368,7 +368,7 @@ importers:
         version: link:../config-workspace-scopes
       lerna:
         specifier: '*'
-        version: 10.1.0(@swc/core@1.16.18)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@7.0.2)
+        version: 10.1.1(@swc/core@1.16.18)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@7.0.2)
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -3663,8 +3663,8 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
 
-  lerna@10.1.0:
-    resolution: {integrity: sha512-hGxvsNh8wFY6Gj/Ei7R/Ux2eDXJRZZ4CVVmGryjtdLXgTn2VO7fKHZySHb0K8u7SfIrdaeaP1Zn1HbIjC7f6Pg==}
+  lerna@10.1.1:
+    resolution: {integrity: sha512-WDGaMGDGj5jV0n6Yx2zuBDWH0ym6toUE6w+maaPLqeMd3ncDRN+NJMcVWImVdUKCIHRk2Xk+X7QQkFXdHKsscA==}
     engines: {node: ^22.22.2 || ^24.15.0 || ^26.0.0}
     hasBin: true
 
@@ -7461,7 +7461,7 @@ snapshots:
 
   kind-of@6.0.3: {}
 
-  lerna@10.1.0(@swc/core@1.16.18)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@7.0.2):
+  lerna@10.1.1(@swc/core@1.16.18)(@types/node@22.20.5)(supports-color@7.2.0)(typescript@7.0.2):
     dependencies:
       '@npmcli/arborist': 10.0.3(supports-color@7.2.0)
       '@npmcli/package-json': 8.0.0
