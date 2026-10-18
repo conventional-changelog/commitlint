@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
+
+### Bug Fixes
+
+* **load:** replace config file arrays with seed arrays ([#5056](https://github.com/conventional-changelog/commitlint/issues/5056)) ([bedc10f](https://github.com/conventional-changelog/commitlint/commit/bedc10f907de3d9a771635e8f014d5ab22526734))
+* update dependency jsonc to v3 ([#5020](https://github.com/conventional-changelog/commitlint/issues/5020)) ([5a9d6a4](https://github.com/conventional-changelog/commitlint/commit/5a9d6a43e813ea74cf62c04e188b9417909b0b9f))
+
+### Performance Improvements
+
+* **load:** load typescript configs with jiti directly ([#5052](https://github.com/conventional-changelog/commitlint/issues/5052)) ([3103b86](https://github.com/conventional-changelog/commitlint/commit/3103b86c6f53f03430619a8c178e0c80a385dfcd))
+
+
 ## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
 
 ### Bug Fixes

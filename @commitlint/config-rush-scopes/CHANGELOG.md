@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
+
+### Bug Fixes
+
+* update dependency jsonc to v3 ([#5020](https://github.com/conventional-changelog/commitlint/issues/5020)) ([5a9d6a4](https://github.com/conventional-changelog/commitlint/commit/5a9d6a43e813ea74cf62c04e188b9417909b0b9f))
+
+
 # [21.2.0](https://github.com/conventional-changelog/commitlint/compare/v21.1.0...v21.2.0) (2026-06-30)
 
 **Note:** Version bump only for package @commitlint/config-rush-scopes
