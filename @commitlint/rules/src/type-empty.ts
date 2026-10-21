@@ -23,7 +23,9 @@ function getHeaderHint(header?: string | null) {
 		return undefined;
 	}
 
-	if (!header.includes(":")) {
+	// Only headers that start like "type " or "type(scope) ", so custom
+	// formats without a colon keep the plain message
+	if (!header.includes(":") && /^\w+(?:\([^)]*\))?!? \S/.test(header)) {
 		return '(did you forget the ":" after the type?)';
 	}
 
