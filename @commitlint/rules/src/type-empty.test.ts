@@ -74,3 +74,14 @@ test("does not hint when the header has a colon and a space", async () => {
 	const [, message] = typeEmpty(await parse(": add something"), "never");
 	expect(message).toEqual("type may not be empty");
 });
+
+test("does not hint for a custom header format without a colon", async () => {
+	const [, message] = typeEmpty(
+		await parse("-subject", undefined, {
+			headerPattern: /^(\w*)(?:\((.*)\))?-(.*)$/,
+			headerCorrespondence: ["type", "scope", "subject"],
+		}),
+		"never",
+	);
+	expect(message).toEqual("type may not be empty");
+});
