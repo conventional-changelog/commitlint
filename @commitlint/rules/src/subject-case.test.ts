@@ -21,6 +21,7 @@ const messages = {
 	snakecase_unicode: "test: сэ_дэв", // Mongolian for `sub_ject`
 	startcase: "test: Sub Ject",
 	startcase_unicode: "test: Äm Ne", // Swedish for `Sub Ject`
+	startcase_version: "feat: Add Module 1.0.0",
 	sentencecase: "test: Sub ject",
 	sentencecase_unicode: "test: Мав зуъ", // Tajik for `Sub ject`
 };
@@ -44,6 +45,7 @@ const parsed = {
 	snakecase_unicode: parse(messages.snakecase_unicode),
 	startcase: parse(messages.startcase),
 	startcase_unicode: parse(messages.startcase_unicode),
+	startcase_version: parse(messages.startcase_version),
 	sentencecase: parse(messages.sentencecase),
 	sentencecase_unicode: parse(messages.sentencecase_unicode),
 };
@@ -320,6 +322,12 @@ test('with startcase subject should fail for "always camelcase"', async () => {
 
 test('with startcase subject should succeed for "always startcase"', async () => {
 	const [actual] = subjectCase(await parsed.startcase, "always", "start-case");
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('with startcase subject containing a version should succeed for "always startcase"', async () => {
+	const [actual] = subjectCase(await parsed.startcase_version, "always", "start-case");
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
