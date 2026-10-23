@@ -610,8 +610,8 @@ importers:
         specifier: workspace:^
         version: link:../types
       cosmiconfig:
-        specifier: ^9.0.1
-        version: 9.0.2(typescript@7.0.2)
+        specifier: ^10.0.0
+        version: 10.0.1
       es-toolkit:
         specifier: ^1.46.0
         version: 1.52.0
@@ -3043,6 +3043,10 @@ packages:
       '@types/node': '*'
       cosmiconfig: '>=9'
       typescript: '>=5'
+
+  cosmiconfig@10.0.1:
+    resolution: {integrity: sha512-/zvGoYn0y27QTBmK+0B+oPdEPC4fKGUmJsMTQbDjqph00TrkqfVFW/M+C6ya54sYCgHC6QCwK/mI6djt8cEGHQ==}
+    engines: {node: ^22.18 || >= 24}
 
   cosmiconfig@9.0.2:
     resolution: {integrity: sha512-gtTZxTDau1wL7Y7zifc2dd8jHSK/k6BTx/2Xp/BpdlAdnlYWFVt7qhJqgwi7637yRwRQ3qL4ZidbB4I8tA5VOg==}
@@ -6860,6 +6864,11 @@ snapshots:
       jiti: 2.6.1
       typescript: 7.0.2
     optional: true
+
+  cosmiconfig@10.0.1:
+    dependencies:
+      env-paths: 2.2.1
+      js-yaml: 5.4.2
 
   cosmiconfig@9.0.2(typescript@7.0.2):
     dependencies:
