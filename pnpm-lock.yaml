@@ -324,7 +324,7 @@ importers:
         version: 7.1.3
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.52.0
+        version: 1.53.0
 
   '@commitlint/config-angular':
     dependencies:
@@ -400,7 +400,7 @@ importers:
         version: link:../config-angular
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.52.0
+        version: 1.53.0
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -523,7 +523,7 @@ importers:
         version: link:../types
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.52.0
+        version: 1.53.0
     devDependencies:
       '@commitlint/utils':
         specifier: workspace:^
@@ -614,7 +614,7 @@ importers:
         version: 9.0.2(typescript@7.0.2)
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.52.0
+        version: 1.53.0
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -757,7 +757,7 @@ importers:
         version: link:../types
       es-toolkit:
         specifier: ^1.46.0
-        version: 1.52.0
+        version: 1.53.0
       global-directory:
         specifier: ^5.0.0
         version: 5.0.0
@@ -3227,8 +3227,8 @@ packages:
   es-module-lexer@2.3.2:
     resolution: {integrity: sha512-poHGpORABojJJucnV9KbOavETW8lBVnphkW77ER5/BQ5Fz7oXSoCNek7IH3vR5nRjdsEz926ibFYX8KtLQmdyw==}
 
-  es-toolkit@1.52.0:
-    resolution: {integrity: sha512-XTNEJQh1tY1ZJVcf6ayP/2n4ZPyaHlW2FWs7xvw5ddPuhUVjLD3olQVQS7kf58JbAB48iL0uL/jerTrjtV3lDA==}
+  es-toolkit@1.53.0:
+    resolution: {integrity: sha512-3+AYXp9fmJ/UhHBMYj2/U+RaUouMD90SzoItyDOB2Za7W6dB7fQApFGnZPl2MF6K8/Tv1koh1JyirSx/kju6Pw==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -5293,7 +5293,7 @@ snapshots:
       '@commitlint/resolve-extends': 21.2.3
       '@commitlint/types': 21.2.3
       cosmiconfig: 9.0.2(typescript@7.0.2)
-      es-toolkit: 1.52.0
+      es-toolkit: 1.53.0
       is-plain-obj: 4.1.0
       jiti: 2.7.0
       picocolors: 1.1.1
@@ -5305,7 +5305,7 @@ snapshots:
     dependencies:
       '@commitlint/config-validator': 21.2.3
       '@commitlint/types': 21.2.3
-      es-toolkit: 1.52.0
+      es-toolkit: 1.53.0
       global-directory: 5.0.0
       resolve-from: 5.0.0
     optional: true
@@ -7043,7 +7043,7 @@ snapshots:
 
   es-module-lexer@2.3.2: {}
 
-  es-toolkit@1.52.0: {}
+  es-toolkit@1.53.0: {}
 
   esbuild@0.21.5:
     optionalDependencies:
