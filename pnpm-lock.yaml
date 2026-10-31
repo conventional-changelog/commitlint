@@ -610,8 +610,8 @@ importers:
         specifier: workspace:^
         version: link:../types
       cosmiconfig:
-        specifier: ^9.0.1
-        version: 9.0.2(typescript@7.0.2)
+        specifier: ^10.0.0
+        version: 10.0.1
       es-toolkit:
         specifier: ^1.46.0
         version: 1.53.0
@@ -3089,6 +3089,10 @@ packages:
   copy-anything@4.1.5:
     resolution: {integrity: sha512-vePst2VLTSqPglW7Q98VwFpGiGpOHTyXIo81MO5VyLecA5zMbZw/P/V1vmwD1jksa2iJpn/YkDrJ3XhTfzUyhQ==}
     engines: {node: '>=18'}
+
+  cosmiconfig@10.0.1:
+    resolution: {integrity: sha512-/zvGoYn0y27QTBmK+0B+oPdEPC4fKGUmJsMTQbDjqph00TrkqfVFW/M+C6ya54sYCgHC6QCwK/mI6djt8cEGHQ==}
+    engines: {node: ^22.18 || >= 24}
 
   cosmiconfig@9.0.2:
     resolution: {integrity: sha512-gtTZxTDau1wL7Y7zifc2dd8jHSK/k6BTx/2Xp/BpdlAdnlYWFVt7qhJqgwi7637yRwRQ3qL4ZidbB4I8tA5VOg==}
@@ -6939,6 +6943,11 @@ snapshots:
   convert-source-map@2.0.0: {}
 
   copy-anything@4.1.5: {}
+
+  cosmiconfig@10.0.1:
+    dependencies:
+      env-paths: 2.2.1
+      js-yaml: 5.4.2
 
   cosmiconfig@9.0.2(typescript@7.0.2):
     dependencies:
