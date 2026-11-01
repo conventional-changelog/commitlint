@@ -377,6 +377,29 @@ test("returns original message with commit header, body and footer, parsing comm
 	expect(report.input).toBe(expected);
 });
 
+test("preserves original spacing between body and footer", async () => {
+	const message =
+		"fix: resolve user login timeout\n\nincreased auth token ttl to 15m\nSigned-off-by: Developer <dev@example.com>";
+
+	const report = await lint(message);
+
+	expect(report.input).toBe(message);
+});
+
+test("keeps CRLF line endings with and without a commentChar", async () => {
+	const message = "fix: x\r\n\r\nbody\r\nSigned-off-by: Dev <dev@example.com>";
+
+	const plain = await lint(message);
+	const withComment = await lint(
+		`${message}\r\n# comment`,
+		{},
+		{ parserOpts: { commentChar: "#" } },
+	);
+
+	expect(plain.input).toBe(message);
+	expect(withComment.input).toBe(message);
+});
+
 test("passes for async rule", async () => {
 	const report = await lint(
 		"somehting #1",
