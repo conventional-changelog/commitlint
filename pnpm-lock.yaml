@@ -510,8 +510,8 @@ importers:
         version: 1.2.5
     devDependencies:
       '@types/inquirer':
-        specifier: ^9.0.7
-        version: 9.0.10
+        specifier: ^10.0.0
+        version: 10.0.0(@types/node@22.20.5)
       commitizen:
         specifier: ^4.2.4
         version: 4.3.2(@types/node@22.20.5)(typescript@7.0.2)
@@ -694,8 +694,8 @@ importers:
         specifier: workspace:^
         version: link:../../@packages/utils
       '@types/inquirer':
-        specifier: ^9.0.7
-        version: 9.0.10
+        specifier: ^10.0.0
+        version: 10.0.0(@types/node@22.20.5)
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.5
@@ -2440,8 +2440,9 @@ packages:
   '@types/hast@3.0.5':
     resolution: {integrity: sha512-rp/ezSWaD1m44dPKICGhiskI13nVr7qTloFwDa/IYkhhf5nzwP+zIQcIJh3WIFSBOy/H1PzB40jPjMDksN4F+g==}
 
-  '@types/inquirer@9.0.10':
-    resolution: {integrity: sha512-vFW2WbXwO9eZpRT5GJGFJ/shgyMNnYozmnjakt9jCQSS1lvqX8pZEQMjJ9RdDPct/YxwciQ8+V8OYn9euIrZDA==}
+  '@types/inquirer@10.0.0':
+    resolution: {integrity: sha512-h1Y4dQCbTBrV3s6ITOi77IKZDqnnhSvOm6gC48VlJ1wd3Z33SUkrvbalwhfaC6OXrgZL0fNldv5+aty7+Z3Xhw==}
+    deprecated: This is a stub types definition. inquirer provides its own type definitions, so you do not need this installed.
 
   '@types/jsesc@2.5.1':
     resolution: {integrity: sha512-9VN+6yxLOPLOav+7PwjZbxiID2bVaeq0ED4qSQmdQTdjnXJSaCVKTR58t15oqH1H5t8Ng2ZX1SabJVoN9Q34bw==}
@@ -2478,9 +2479,6 @@ packages:
 
   '@types/tar-stream@3.1.5':
     resolution: {integrity: sha512-zCUA6CSDw0t2cpQiZixpyzfubpeuVZmBr5wztvuCG4bhy7reX/9wGXdZxEzz2CjMFLQ32UPR/01jzUUSRJeCeQ==}
-
-  '@types/through@0.0.33':
-    resolution: {integrity: sha512-HsJ+z3QuETzP3cswwtzt2vEIiHBk/dCcHGhbmG5X3ecnwFD/lPrMpliGXxSCg03L9AhrdwA4Oz/qfspkDW+xGQ==}
 
   '@types/tmp@0.2.6':
     resolution: {integrity: sha512-chhaNf2oKHlRkDGt+tiKE2Z5aJ6qalm7Z9rlLdBwmOiAAf09YQvvoLXjWK4HWPF1xU/fqvMgfNfpVoBscA/tKA==}
@@ -6345,10 +6343,11 @@ snapshots:
     dependencies:
       '@types/unist': 3.0.3
 
-  '@types/inquirer@9.0.10':
+  '@types/inquirer@10.0.0(@types/node@22.20.5)':
     dependencies:
-      '@types/through': 0.0.33
-      rxjs: 7.8.2
+      inquirer: 9.3.8(@types/node@22.20.5)
+    transitivePeerDependencies:
+      - '@types/node'
 
   '@types/jsesc@2.5.1': {}
 
@@ -6383,10 +6382,6 @@ snapshots:
       '@types/tar-stream': 3.1.5
 
   '@types/tar-stream@3.1.5':
-    dependencies:
-      '@types/node': 22.20.5
-
-  '@types/through@0.0.33':
     dependencies:
       '@types/node': 22.20.5
 
