@@ -13,8 +13,6 @@ import type {
 } from "@commitlint/types";
 import { RuleConfigSeverity } from "@commitlint/types";
 
-import { buildCommitMessage } from "./commit-message.js";
-
 export default async function lint(
 	message: string,
 	rawRulesConfig?: QualifiedRules,
@@ -179,10 +177,23 @@ export default async function lint(
 
 	const valid = errors.length === 0;
 
+	const parserOptions = (opts.parserOpts as any)?.parser || opts.parserOpts;
+	const commentChar = parserOptions?.commentChar;
+	let input = message;
+	if (commentChar) {
+		const scissors = `${commentChar} ------------------------ >8 ------------------------`;
+		const lines = message.split(/(?<=\n)/);
+		const cut = lines.findIndex((line) => line.startsWith(scissors));
+		input = (cut === -1 ? lines : lines.slice(0, cut))
+			.filter((line) => !line.startsWith(commentChar))
+			.join("");
+	}
+	input = input.trimEnd();
+
 	return {
 		valid,
 		errors,
 		warnings,
-		input: buildCommitMessage(parsed),
+		input,
 	};
 }
