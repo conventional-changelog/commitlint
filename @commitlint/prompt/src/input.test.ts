@@ -66,6 +66,20 @@ test("should work without scope", async () => {
 	expect(message).toEqual("fix: subject\n" + "\nbody\n" + "\nfooter");
 });
 
+test("should apply the case enforced by case rules to the answers", async () => {
+	const prompt = stub({
+		"input-custom": {
+			type: "fix",
+			scope: "TEST",
+			subject: "subject",
+			body: "body",
+			footer: "footer",
+		},
+	});
+	const message = await input(prompt);
+	expect(message).toEqual("fix(test): subject\n" + "\nbody\n" + "\nfooter");
+});
+
 test("should fail without type", async () => {
 	const spy = vi.spyOn(console, "error");
 	const prompt = stub({
@@ -99,6 +113,11 @@ function stub(config: Record<string, Record<string, unknown>>): PromptModule {
 			let answer = questions[promptConfig.name!];
 			if (answer == null) {
 				throw new Error(`Unexpected config name: ${promptConfig.name}`);
+			}
+			// inquirer runs `filter` on the raw input before `validate`
+			const filter = promptConfig.filter;
+			if (filter) {
+				answer = await filter(answer, result);
 			}
 			const validate = promptConfig.validate;
 			if (validate) {
