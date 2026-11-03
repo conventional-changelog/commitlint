@@ -377,6 +377,54 @@ test("returns original message with commit header, body and footer, parsing comm
 	expect(report.input).toBe(expected);
 });
 
+test("preserves original spacing between body and footer", async () => {
+	const message =
+		"fix: resolve user login timeout\n\nincreased auth token ttl to 15m\nSigned-off-by: Developer <dev@example.com>";
+
+	const report = await lint(message);
+
+	expect(report.input).toBe(message);
+});
+
+test("drops the scissors line and everything after it", async () => {
+	const message =
+		"fix: x\n\nbody\n# ------------------------ >8 ------------------------\ndiff --git a/f b/f\n+added line";
+
+	const report = await lint(message, {}, { parserOpts: { commentChar: "#" } });
+
+	expect(report.input).toBe("fix: x\n\nbody");
+});
+
+test("removes the trailing newline without a commentChar", async () => {
+	const report = await lint("fix: x\n\nbody\n");
+
+	expect(report.input).toBe("fix: x\n\nbody");
+});
+
+test("keeps CRLF line endings with and without a commentChar", async () => {
+	const message = "fix: x\r\n\r\nbody\r\nSigned-off-by: Dev <dev@example.com>";
+
+	const plain = await lint(message);
+	const withComment = await lint(
+		`${message}\r\n# comment`,
+		{},
+		{ parserOpts: { commentChar: "#" } },
+	);
+
+	expect(plain.input).toBe(message);
+	expect(withComment.input).toBe(message);
+});
+
+test("reads commentChar from nested parser options", async () => {
+	const report = await lint(
+		"fix: x\n\nbody\n\n# comment",
+		{},
+		{ parserOpts: { parser: { commentChar: "#" } } as any },
+	);
+
+	expect(report.input).toBe("fix: x\n\nbody");
+});
+
 test("passes for async rule", async () => {
 	const report = await lint(
 		"somehting #1",
