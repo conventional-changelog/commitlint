@@ -526,3 +526,22 @@ test("custom parser receives parser options as second argument", async () => {
 	expect(receivedOpts).toBeDefined();
 	expect((receivedOpts as Record<string, unknown>).headerPattern).toBeDefined();
 });
+
+test.each([
+	["Signed-off-by", "This is a commit message\n\nSigned-off-by: me@example.com"],
+	["Co-authored-by", "feat: x\n\nCo-authored-by: A <a@example.com>"],
+])("does not treat a %s trailer as the commit body", async (_name, message) => {
+	const report = await lint(message, {
+		"body-empty": [RuleConfigSeverity.Error, "never"],
+	});
+
+	expect(report.errors.map((e) => e.name)).toEqual(["body-empty"]);
+});
+
+test("accepts a body that is followed by a trailer", async () => {
+	const report = await lint("feat: x\n\nbody here\n\nSigned-off-by: me@example.com", {
+		"body-empty": [RuleConfigSeverity.Error, "never"],
+	});
+
+	expect(report.valid).toBe(true);
+});
