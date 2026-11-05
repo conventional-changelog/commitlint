@@ -165,25 +165,25 @@ test("ignores comments", async () => {
 });
 
 test("parses inline references in subject and body", async () => {
-	const message = "type(some/scope): subject #reference\n\nthings #reference";
+	const message = "type(some/scope): subject #1\n\nthings #2";
 	const actual = await parse(message, undefined, await angularParserOpts());
 
-	expect(actual.subject).toBe("subject #reference");
+	expect(actual.subject).toBe("subject #1");
 	expect(actual.body).toBe("");
 	// v6 behavior: body content with references moves to footer
-	expect(actual.footer).toBe("things #reference");
+	expect(actual.footer).toBe("things #2");
 	// v6 behavior: both reference instances are captured
 	expect(actual.references).toHaveLength(2);
 	expect(actual.references).toEqual(
 		expect.arrayContaining([
 			expect.objectContaining({
-				raw: "type(some/scope): subject #reference",
-				issue: "reference",
+				raw: "type(some/scope): subject #1",
+				issue: "1",
 				prefix: "#",
 			}),
 			expect.objectContaining({
-				raw: "things #reference",
-				issue: "reference",
+				raw: "things #2",
+				issue: "2",
 				prefix: "#",
 			}),
 		]),
