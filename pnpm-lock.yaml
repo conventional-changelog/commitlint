@@ -321,7 +321,7 @@ importers:
         version: 17.0.35
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.3
+        version: 7.1.4
       es-toolkit:
         specifier: ^1.46.0
         version: 1.53.1
@@ -660,7 +660,7 @@ importers:
         version: 9.4.0
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.3
+        version: 7.1.4
     devDependencies:
       '@commitlint/test':
         specifier: workspace:^
@@ -735,7 +735,7 @@ importers:
         version: link:../types
       '@conventional-changelog/git-client':
         specifier: ^3.0.0
-        version: 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.3)
+        version: 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       tinyexec:
         specifier: ^1.0.0
         version: 1.3.1
@@ -804,7 +804,7 @@ importers:
         version: 9.4.0
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.3
+        version: 7.1.4
 
   '@commitlint/to-lines':
     devDependencies:
@@ -851,7 +851,7 @@ importers:
     dependencies:
       conventional-commits-parser:
         specifier: ^7.0.0
-        version: 7.1.3
+        version: 7.1.4
       picocolors:
         specifier: ^1.1.1
         version: 1.1.1
@@ -3081,8 +3081,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  conventional-commits-parser@7.1.3:
-    resolution: {integrity: sha512-Q9oWm1o9uy/oEsZQIraoFMZ4RuPD+79KgwWj6mJVP356tazolCB0piRLZ5Kz9te9p027uSEcUW+Gu44Eh+X79g==}
+  conventional-commits-parser@7.1.4:
+    resolution: {integrity: sha512-TW3PZHi6hwF4cyu7KKc4kNqD1cgg8AkkK5ge9+zsEfpjaSXOeeIQyNWBr7kx5hR2wFuKVmr0be37RzcpmACQIA==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -5330,27 +5330,18 @@ snapshots:
 
   '@commitlint/types@21.2.3':
     dependencies:
-      conventional-commits-parser: 7.1.3
+      conventional-commits-parser: 7.1.4
       picocolors: 1.1.1
     optional: true
 
-  '@conventional-changelog/git-client@3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)':
+  '@conventional-changelog/git-client@3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)':
     dependencies:
       '@simple-libs/child-process-utils': 2.0.0
       '@simple-libs/stream-utils': 2.0.0
       verkit: 0.5.0
     optionalDependencies:
       conventional-commits-filter: 6.0.1
-      conventional-commits-parser: 7.1.2
-
-  '@conventional-changelog/git-client@3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.3)':
-    dependencies:
-      '@simple-libs/child-process-utils': 2.0.0
-      '@simple-libs/stream-utils': 2.0.0
-      verkit: 0.5.0
-    optionalDependencies:
-      conventional-commits-filter: 6.0.1
-      conventional-commits-parser: 7.1.3
+      conventional-commits-parser: 7.1.4
 
   '@conventional-changelog/template@1.4.0': {}
 
@@ -6929,14 +6920,14 @@ snapshots:
 
   conventional-changelog@8.1.3:
     dependencies:
-      '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)
+      '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       '@simple-libs/hosted-git-info': 2.0.0
       '@simple-libs/normalize-package-data': 1.0.0
       argue-cli: 3.2.0
       conventional-changelog-preset-loader: 6.0.1
       conventional-changelog-writer: 9.3.0
       conventional-commits-filter: 6.0.1
-      conventional-commits-parser: 7.1.2
+      conventional-commits-parser: 7.1.4
       fd-package-json: 2.0.0
 
   conventional-commit-types@3.0.0: {}
@@ -6948,18 +6939,18 @@ snapshots:
       '@simple-libs/stream-utils': 2.0.0
       argue-cli: 3.2.0
 
-  conventional-commits-parser@7.1.3:
+  conventional-commits-parser@7.1.4:
     dependencies:
       '@simple-libs/stream-utils': 2.0.0
       argue-cli: 3.2.0
 
   conventional-recommended-bump@12.1.0:
     dependencies:
-      '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)
+      '@conventional-changelog/git-client': 3.2.0(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.4)
       argue-cli: 3.2.0
       conventional-changelog-preset-loader: 6.0.1
       conventional-commits-filter: 6.0.1
-      conventional-commits-parser: 7.1.2
+      conventional-commits-parser: 7.1.4
 
   convert-source-map@2.0.0: {}
 
