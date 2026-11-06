@@ -555,7 +555,7 @@ importers:
         version: link:../types
       semver:
         specifier: ^7.6.0
-        version: 7.8.5
+        version: 7.8.6
     devDependencies:
       '@commitlint/parse':
         specifier: workspace:^
@@ -4487,6 +4487,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.8.6:
+    resolution: {integrity: sha512-9lpSSU4Mly3mrtruwLs1eLK6+gzbzqeBFwRNjIjE+9LuDpWdYctrQlQ3ej1Ilgi7gknpsTRnPoLP8DpCHqHIJw==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   shiki@2.5.0:
     resolution: {integrity: sha512-mI//trrsaiCIPsja5CNfsyNOqgAZUb6VpJA+340toL42UpzQlXpwRV9nch69X6gaUxrr9kaOOa6e3y3uAkGFxQ==}
 
@@ -5676,7 +5681,7 @@ snapshots:
       proggy: 4.0.0
       promise-all-reject-late: 1.0.1
       promise-call-limit: 3.0.2
-      semver: 7.8.5
+      semver: 7.8.6
       ssri: 14.0.0
       treeverse: 3.0.0
       validate-npm-package-name: 8.0.0
@@ -5687,7 +5692,7 @@ snapshots:
 
   '@npmcli/fs@6.0.0':
     dependencies:
-      semver: 7.8.5
+      semver: 7.8.6
 
   '@npmcli/git@8.0.0':
     dependencies:
@@ -5697,7 +5702,7 @@ snapshots:
       lru-cache: 11.5.3
       npm-pick-manifest: 12.0.0
       proc-log: 7.0.0
-      semver: 7.8.5
+      semver: 7.8.6
       which: 7.0.0
 
   '@npmcli/installed-package-contents@5.0.0':
@@ -5718,7 +5723,7 @@ snapshots:
       json-parse-even-better-errors: 6.0.0
       pacote: 22.0.0(supports-color@7.2.0)
       proc-log: 7.0.0
-      semver: 7.8.5
+      semver: 7.8.6
     transitivePeerDependencies:
       - kerberos
       - supports-color
@@ -5734,7 +5739,7 @@ snapshots:
       hosted-git-info: 10.1.1
       json-parse-even-better-errors: 6.0.0
       proc-log: 7.0.0
-      semver: 7.8.5
+      semver: 7.8.6
       spdx-expression-parse: 4.0.0
 
   '@npmcli/promise-spawn@10.0.1':
@@ -5760,7 +5765,7 @@ snapshots:
       ejs: 5.0.1
       minimatch: 10.2.5
       nx: 23.3.1(@swc/core@1.16.21)
-      semver: 7.8.5
+      semver: 7.8.6
       tslib: 2.9.1
       yargs-parser: 21.1.1
 
@@ -6261,7 +6266,7 @@ snapshots:
   '@simple-libs/normalize-package-data@1.0.0':
     dependencies:
       '@simple-libs/hosted-git-info': 2.0.0
-      semver: 7.8.5
+      semver: 7.8.6
 
   '@simple-libs/stream-utils@2.0.0': {}
 
@@ -7406,7 +7411,7 @@ snapshots:
       npm-package-arg: 14.0.0
       promzard: 4.0.0
       read: 6.0.0
-      semver: 7.8.5
+      semver: 7.8.6
       validate-npm-package-name: 8.0.0
 
   inquirer@14.2.2(@types/node@22.20.5):
@@ -7629,7 +7634,7 @@ snapshots:
       npm-package-arg: 14.0.0
       npm-registry-fetch: 20.0.1(supports-color@7.2.0)
       proc-log: 7.0.0
-      semver: 7.8.5
+      semver: 7.8.6
       sigstore: 5.0.0(supports-color@7.2.0)
       ssri: 14.0.0
     transitivePeerDependencies:
@@ -8070,7 +8075,7 @@ snapshots:
       graceful-fs: 4.2.11
       nopt: 10.0.1
       proc-log: 7.0.0
-      semver: 7.8.5
+      semver: 7.8.6
       tar: 7.5.22
       tinyglobby: 0.2.17
       undici: 8.12.3
@@ -8088,7 +8093,7 @@ snapshots:
 
   npm-install-checks@9.0.0:
     dependencies:
-      semver: 7.8.5
+      semver: 7.8.6
 
   npm-normalize-package-bin@6.0.0: {}
 
@@ -8096,7 +8101,7 @@ snapshots:
     dependencies:
       hosted-git-info: 10.1.1
       proc-log: 7.0.0
-      semver: 7.8.5
+      semver: 7.8.6
       validate-npm-package-name: 8.0.0
 
   npm-packlist@11.3.0:
@@ -8110,7 +8115,7 @@ snapshots:
       npm-install-checks: 9.0.0
       npm-normalize-package-bin: 6.0.0
       npm-package-arg: 14.0.0
-      semver: 7.8.5
+      semver: 7.8.6
 
   npm-registry-fetch@20.0.1(supports-color@7.2.0):
     dependencies:
@@ -8759,6 +8764,8 @@ snapshots:
       kind-of: 6.0.3
 
   semver@7.8.5: {}
+
+  semver@7.8.6: {}
 
   shiki@2.5.0:
     dependencies:
