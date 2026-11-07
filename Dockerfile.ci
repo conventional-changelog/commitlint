@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM docker.io/library/node:22-alpine AS builder
+FROM docker.io/library/node:26-alpine AS builder
 WORKDIR /src
 COPY . ./
 RUN apk add --no-cache python3 py3-setuptools make g++ git
@@ -36,7 +36,7 @@ RUN pnpm_version=$(node -p "require('./package.json').packageManager.split('@')[
     # Default commitlint config
     npm pack @commitlint/config-conventional
 
-FROM docker.io/library/node:22-alpine
+FROM docker.io/library/node:26-alpine
 ENV NODE_PATH=/usr/local/lib/node_modules
 RUN apk add --no-cache git
 COPY --from=builder /src/*.tgz ./
