@@ -5,6 +5,7 @@ import { bodyMaxLineLength } from "./body-max-line-length.js";
 
 const short = "a";
 const long = "ab";
+const longFooter = `Signed-off-by: ${"a".repeat(110)}`;
 const url = "https://example.com/URL/with/a/very/long/path";
 
 const value = short.length;
@@ -13,6 +14,7 @@ const messages = {
 	empty: "test: subject",
 	short: `test: subject\n${short}`,
 	long: `test: subject\n${long}`,
+	longFooter: `test: subject\n\n${short}\n\n${longFooter}`,
 	shortMultipleLines: `test:subject\n${short}\n${short}\n${short}`,
 	longMultipleLines: `test:subject\n${short}\n${long}\n${short}`,
 	urlStandalone: `test:subject\n${short}\n${url}\n${short}`,
@@ -54,6 +56,12 @@ test("with short should succeed", async () => {
 test("with long should fail", async () => {
 	const [actual] = bodyMaxLineLength(await parsed.long, undefined, value);
 	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test("with long footer should succeed", async () => {
+	const [actual] = bodyMaxLineLength(await parsed.longFooter, undefined, value);
+	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
