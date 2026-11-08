@@ -33,8 +33,14 @@ type Report = {
   warnings: Problem[];
 }
 
+type RuleOutcome = [boolean, string?];
+type RuleImplementation = (parsed: any, when?: RuleCondition, value?: any) => RuleOutcome | Promise<RuleOutcome>;
+
 type Options = {
   parserOpts?: any;
+  plugins?: {[pluginName: string]: {rules: {[ruleName: string]: RuleImplementation}}};
+  ignores?: ((commit: string) => boolean)[];
+  defaultIgnores?: boolean;
 };
 
 lint(message: string, rules: {[ruleName: string]: Rule}, opts?: Options) => Promise<Report>;
@@ -102,6 +108,8 @@ console.log(report);
 
 ## Load configuration
 
+`lint` knows only the built-in rules. Pass the loaded `plugins` too, or `lint` throws `Found rules without implementation` for rules that come from plugins. Pass `ignores` and `defaultIgnores` so ignored commits (merges, reverts, your own matchers) are skipped, like the CLI does.
+
 ```js
 import load from "@commitlint/load";
 import lint from "@commitlint/lint";
@@ -110,12 +118,13 @@ const CONFIG = {
   extends: ["@commitlint/config-conventional"],
 };
 
-const opts = await load(CONFIG);
-const report = await lint(
-  "foo: bar",
-  opts.rules,
-  opts.parserPreset ? { parserOpts: opts.parserPreset.parserOpts } : {},
-);
+const config = await load(CONFIG);
+const report = await lint("foo: bar", config.rules, {
+  parserOpts: config.parserPreset?.parserOpts,
+  plugins: config.plugins,
+  ignores: config.ignores,
+  defaultIgnores: config.defaultIgnores,
+});
 console.log(report);
 /* => 
 { 
@@ -145,7 +154,7 @@ const RULES = {
 
 const commits = await read({ to: "HEAD", from: "HEAD~2" });
 
-console.info(commits.map((commit) => lint(commit, RULES)));
+console.info(await Promise.all(commits.map((commit) => lint(commit, RULES))));
 ```
 
 ## Simplified last-commit checker
@@ -155,14 +164,15 @@ import load from "@commitlint/load";
 import read from "@commitlint/read";
 import lint from "@commitlint/lint";
 
-const { rules, parserPreset } = load();
+const config = await load();
 const [commit] = await read({ from: "HEAD~1" });
 
-const report = await lint(
-  commit,
-  rules,
-  parserPreset ? { parserOpts: parserPreset.parserOpts } : {},
-);
+const report = await lint(commit, config.rules, {
+  parserOpts: config.parserPreset?.parserOpts,
+  plugins: config.plugins,
+  ignores: config.ignores,
+  defaultIgnores: config.defaultIgnores,
+});
 
-console.log(JSON.stringify(result.valid));
+console.log(JSON.stringify(report.valid));
 ```
