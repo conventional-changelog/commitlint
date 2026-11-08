@@ -138,6 +138,17 @@ echo "fix: some message." # fails
 echo "fix: some message" # passes
 ```
 
+#### header-breaking-change
+
+- **condition**: `header` starts with `BREAKING CHANGE:` or `BREAKING-CHANGE:`
+- **rule**: `never`
+- **level**: `error`
+
+```sh
+echo "BREAKING CHANGE: drop node 18" # fails
+echo "feat!: drop node 18" # passes
+```
+
 #### header-max-length
 
 - **condition**: `header` has `value` or less characters

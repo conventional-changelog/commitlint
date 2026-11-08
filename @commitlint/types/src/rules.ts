@@ -101,6 +101,7 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	"footer-max-length": LengthRuleConfig<V>;
 	"footer-max-line-length": LengthRuleConfig<V>;
 	"footer-min-length": LengthRuleConfig<V>;
+	"header-breaking-change": RuleConfig<V>;
 	"header-case": CaseRuleConfig<V>;
 	"header-full-stop": RuleConfig<V, string>;
 	"header-max-length": LengthRuleConfig<V>;

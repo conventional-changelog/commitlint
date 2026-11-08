@@ -1,14 +1,10 @@
 import { test, expect } from "vitest";
 import parse from "@commitlint/parse";
-import type { SyncRule } from "@commitlint/types";
 
-import rules from "./index.js";
+import { headerBreakingChange } from "./header-breaking-change.js";
 
-const run = async (message: string, when?: "always" | "never") => {
-	const rule = (rules as Record<string, SyncRule | undefined>)["header-breaking-change"];
-	expect(rule).toBeTypeOf("function");
-	return rule!(await parse(message), when);
-};
+const run = async (message: string, when?: "always" | "never") =>
+	headerBreakingChange(await parse(message), when);
 
 const messages = {
 	space: "BREAKING CHANGE: drop node 18",
