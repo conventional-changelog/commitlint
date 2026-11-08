@@ -36,25 +36,6 @@ const pkg: typeof import("../package.json") = require("../package.json");
 
 const gitDefaultCommentChar = "#";
 
-// core.commentChar and core.commentString are aliases, so the last one set wins.
-// For "auto", git uses "#" unless a line of the message already starts with it.
-async function getGitCommentChar(): Promise<string> {
-	const result = x("git", ["config", "--get-regexp", "^core\\.comment(char|string)$"]);
-	const output = await result;
-
-	if (result.exitCode && result.exitCode > 1) {
-		console.warn("Could not determine core.commentChar git configuration", output.stderr);
-		return gitDefaultCommentChar;
-	}
-
-	const value = output.stdout
-		.split("\n")
-		.filter(Boolean)
-		.pop()
-		?.replace(/^\S+ ?/, "");
-	return !value || value.toLowerCase() === "auto" ? gitDefaultCommentChar : value;
-}
-
 const defaultConfig = "@commitlint/config-conventional";
 
 const cli = yargs(process.argv.slice(2))
@@ -336,8 +317,9 @@ async function main(args: MainArgs): Promise<void> {
 	}
 	const format = await loadFormatter(loaded, flags);
 
+	// Git drops comment lines when it commits, so lint the message without them.
 	if (flags.edit) {
-		opts.parserOpts.commentChar = await getGitCommentChar();
+		opts.parserOpts.commentChar = await getGitCommentString();
 	}
 
 	const results = await Promise.all(messages.map((message) => lint(message, loaded.rules, opts)));
@@ -450,6 +432,29 @@ function normalizeFlags(flags: CliFlags): CliFlags {
 		...flags,
 		edit,
 	};
+}
+
+// core.commentChar and core.commentString are aliases, so the last one set wins.
+// For "auto", git picks "#" unless a message line already starts with it.
+// We always use "#" here (git removes auto in 3.0).
+async function getGitCommentString(): Promise<string> {
+	const result = x("git", ["config", "--get-regexp", "^core\\.comment(char|string)$"]);
+	const output = await result;
+
+	if (result.exitCode && result.exitCode > 1) {
+		console.warn(
+			"Could not determine core.commentChar/core.commentString git configuration",
+			output.stderr,
+		);
+		return gitDefaultCommentChar;
+	}
+
+	const value = output.stdout
+		.split("\n")
+		.filter(Boolean)
+		.pop()
+		?.replace(/^\S+ ?/, "");
+	return !value || value.toLowerCase() === "auto" ? gitDefaultCommentChar : value;
 }
 
 function getEditValue(flags: CliFlags) {
