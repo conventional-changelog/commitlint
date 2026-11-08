@@ -11,6 +11,7 @@ import { footerLeadingBlank } from "./footer-leading-blank.js";
 import { footerMaxLength } from "./footer-max-length.js";
 import { footerMaxLineLength } from "./footer-max-line-length.js";
 import { footerMinLength } from "./footer-min-length.js";
+import { headerBreakingChange } from "./header-breaking-change.js";
 import { headerCase } from "./header-case.js";
 import { headerFullStop } from "./header-full-stop.js";
 import { headerMaxLength } from "./header-max-length.js";
@@ -51,6 +52,7 @@ export default {
 	"footer-max-length": footerMaxLength,
 	"footer-max-line-length": footerMaxLineLength,
 	"footer-min-length": footerMinLength,
+	"header-breaking-change": headerBreakingChange,
 	"header-case": headerCase,
 	"header-full-stop": headerFullStop,
 	"header-max-length": headerMaxLength,

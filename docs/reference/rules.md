@@ -129,6 +129,15 @@
   0
   ```
 
+## header-breaking-change
+
+- **condition**: `header` starts with `BREAKING CHANGE:` or `BREAKING-CHANGE:`
+- **rule**: `never`
+
+> [!NOTE]
+>
+> Put `BREAKING CHANGE:` in the footer, or add `!` after the type, e.g. `feat!: drop node 18`.
+
 ## header-case
 
 - **condition**: `header` is in case `value`
