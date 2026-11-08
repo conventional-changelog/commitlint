@@ -11,6 +11,8 @@ const messages = {
 	caseless: "test: 这是一次提交", // Chinese for `this is a commit`
 	uppercase: "test: SUBJECT",
 	uppercase_unicode: "test: ÛNDERWERP", // Frisian for `SUBJECT`
+	uppercase_leading_whitespace: "test:  SUBJECT",
+	lowercase_leading_whitespace: "test:  subject",
 	camelcase: "test: subJect",
 	camelcase_unicode: "test: θέΜα", // Greek for `subJect`
 	kebabcase: "test: sub-ject",
@@ -34,6 +36,8 @@ const parsed = {
 	caseless: parse(messages.caseless),
 	uppercase: parse(messages.uppercase),
 	uppercase_unicode: parse(messages.uppercase_unicode),
+	uppercase_leading_whitespace: parse(messages.uppercase_leading_whitespace),
+	lowercase_leading_whitespace: parse(messages.lowercase_leading_whitespace),
 	camelcase: parse(messages.camelcase),
 	camelcase_unicode: parse(messages.camelcase_unicode),
 	kebabcase: parse(messages.kebabcase),
@@ -547,4 +551,22 @@ test('with "never" should report every configured case when none matched', async
 	]);
 	expect(actual).toEqual(true);
 	expect(message).toEqual("subject must not be upper-case, kebab-case");
+});
+
+test('with leading whitespace in subject should fail for "never uppercase"', async () => {
+	const [actual] = subjectCase(await parsed.uppercase_leading_whitespace, "never", "uppercase");
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with leading whitespace in subject should fail for "always lowercase"', async () => {
+	const [actual] = subjectCase(await parsed.uppercase_leading_whitespace, "always", "lowercase");
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('with leading whitespace in subject should succeed for "always lowercase"', async () => {
+	const [actual] = subjectCase(await parsed.lowercase_leading_whitespace, "always", "lowercase");
+	const expected = true;
+	expect(actual).toEqual(expected);
 });

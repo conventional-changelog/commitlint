@@ -3,8 +3,9 @@ import message from "@commitlint/message";
 import { TargetCaseType, SyncRule } from "@commitlint/types";
 
 /**
- * Since the rule requires first symbol of a subject to be a letter, use
- * Unicode `Cased_Letter` category now to allow non-Latin alphabets as well.
+ * Since the rule requires the first non-whitespace symbol of a subject to be
+ * a letter, use Unicode `Cased_Letter` category now to allow non-Latin
+ * alphabets as well.
  *
  * Do not use `Letter` category directly to avoid capturing `Modifier_Letter`
  * (which just modifiers letters, so we probably shouldn't anyway) and
@@ -28,7 +29,7 @@ export const subjectCase: SyncRule<TargetCaseType | TargetCaseType[]> = (
 ) => {
 	const { subject } = parsed;
 
-	if (typeof subject !== "string" || !subject.match(startsWithLetterRegex)) {
+	if (typeof subject !== "string" || !subject.trimStart().match(startsWithLetterRegex)) {
 		return [true];
 	}
 
