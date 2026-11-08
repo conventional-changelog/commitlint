@@ -36,6 +36,25 @@ const pkg: typeof import("../package.json") = require("../package.json");
 
 const gitDefaultCommentChar = "#";
 
+// core.commentChar and core.commentString are aliases, so the last one set wins.
+// For "auto", git uses "#" unless a line of the message already starts with it.
+async function getGitCommentChar(): Promise<string> {
+	const result = x("git", ["config", "--get-regexp", "^core\\.comment(char|string)$"]);
+	const output = await result;
+
+	if (result.exitCode && result.exitCode > 1) {
+		console.warn("Could not determine core.commentChar git configuration", output.stderr);
+		return gitDefaultCommentChar;
+	}
+
+	const value = output.stdout
+		.split("\n")
+		.filter(Boolean)
+		.pop()
+		?.replace(/^\S+ ?/, "");
+	return !value || value.toLowerCase() === "auto" ? gitDefaultCommentChar : value;
+}
+
 const defaultConfig = "@commitlint/config-conventional";
 
 const cli = yargs(process.argv.slice(2))
@@ -317,18 +336,8 @@ async function main(args: MainArgs): Promise<void> {
 	}
 	const format = await loadFormatter(loaded, flags);
 
-	// If reading from `.git/COMMIT_EDIT_MSG`, strip comments using
-	// core.commentChar from git configuration, falling back to '#'.
 	if (flags.edit) {
-		const result = x("git", ["config", "core.commentChar"]);
-		const output = await result;
-
-		if (result.exitCode && result.exitCode > 1) {
-			console.warn("Could not determine core.commentChar git configuration", output.stderr);
-			opts.parserOpts.commentChar = gitDefaultCommentChar;
-		} else {
-			opts.parserOpts.commentChar = output.stdout.trim() || gitDefaultCommentChar;
-		}
+		opts.parserOpts.commentChar = await getGitCommentChar();
 	}
 
 	const results = await Promise.all(messages.map((message) => lint(message, loaded.rules, opts)));
