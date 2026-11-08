@@ -524,6 +524,40 @@ test("it uses core.commentChar git config when using edit mode", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test("it uses core.commentString git config when using edit mode", async () => {
+	const cwd = await gitBootstrap("fixtures/comment-char");
+	await x("git", ["config", "--local", "core.commentChar", ";"], {
+		nodeOptions: { cwd },
+	});
+	await x("git", ["config", "--local", "core.commentString", "//"], {
+		nodeOptions: { cwd },
+	});
+	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n//body\n");
+
+	const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
+	const output = await result;
+	expect(output.stderr).toBe("");
+	expect(output.stdout.trim()).toContain("[body-empty]");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
+test.each(["auto", "AUTO"])(
+	"it falls back to # when core.commentChar is %s in edit mode",
+	async (value) => {
+		const cwd = await gitBootstrap("fixtures/comment-char");
+		await x("git", ["config", "--local", "core.commentChar", value], {
+			nodeOptions: { cwd },
+		});
+		await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n#body\n");
+
+		const result = cli(["--edit", ".git/COMMIT_EDITMSG"], { cwd })();
+		const output = await result;
+		expect(output.stderr).toBe("");
+		expect(output.stdout.trim()).toContain("[body-empty]");
+		expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+	},
+);
+
 test("it falls back to # for core.commentChar when using edit mode", async () => {
 	const cwd = await gitBootstrap("fixtures/comment-char");
 	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n#body\n");
