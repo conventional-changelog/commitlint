@@ -32,6 +32,7 @@ const messages = {
 	],
 	invalidSubjectEmpty: "fix:",
 	invalidSubjectFullStop: "fix: some message.",
+	invalidHeaderBreakingChange: "BREAKING CHANGE: drop node 18",
 	invalidHeaderMaxLength:
 		"fix: some message that is way too long and breaks the line max-length by several characters since the max is 100",
 	warningFooterLeadingBlank: "fix: some message\n\nbody\nBREAKING CHANGE: It will be significant",
@@ -86,6 +87,13 @@ const errors = {
 		level: 2,
 		message: "subject may not end with full stop",
 		name: "subject-full-stop",
+		valid: false,
+	},
+	headerBreakingChange: {
+		level: 2,
+		message:
+			"header must not start with BREAKING CHANGE; mark breaking changes with ! after the type or a BREAKING CHANGE footer",
+		name: "header-breaking-change",
 		valid: false,
 	},
 	headerMaxLength: {
@@ -176,6 +184,17 @@ test("subject-full-stop", async () => {
 
 	expect(result.valid).toBe(false);
 	expect(result.errors).toEqual([errors.subjectFullStop]);
+});
+
+test("header-breaking-change", async () => {
+	const result = await commitLint(messages.invalidHeaderBreakingChange);
+
+	expect(result.valid).toBe(false);
+	expect(result.errors).toEqual([
+		errors.headerBreakingChange,
+		errors.subjectEmpty,
+		errors.typeEmpty,
+	]);
 });
 
 test("header-max-length", async () => {
