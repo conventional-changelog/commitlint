@@ -107,6 +107,18 @@ test("should only read the last commit", async () => {
 	expect(result).toEqual(["commit X"]);
 });
 
+test("should keep leading whitespace of the last commit", async () => {
+	const cwd: string = await git.bootstrap();
+
+	await x("git", ["commit", "--allow-empty", "-m", "  feat: leading spaces"], {
+		nodeOptions: { cwd },
+	});
+
+	const result = await read({ cwd, last: true });
+
+	expect(result).toEqual(["  feat: leading spaces"]);
+});
+
 test("should read commits from the last annotated tag", async () => {
 	const cwd: string = await git.bootstrap();
 
