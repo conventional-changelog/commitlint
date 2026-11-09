@@ -30,7 +30,8 @@ export default async function getCommitMessages(
 		const gitCommandResult = await x("git", ["log", "-1", "--pretty=format:%B"], {
 			nodeOptions: { cwd },
 		});
-		let output = gitCommandResult.stdout.trim();
+		// Keep the message as committed apart from the final newline.
+		let output = gitCommandResult.stdout.replace(/\r?\n$/, "");
 		// strip output of extra quotation marks ("")
 		if (output[0] == '"' && output[output.length - 1] == '"') output = output.slice(1, -1);
 		return [output];
