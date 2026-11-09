@@ -64,7 +64,7 @@ Add these keywords into your `package.json` file to make it easy for others to f
 
 ## Local Plugins
 
-In case you want to develop your plugins locally without the need to publish to `npm`, you can declare your plugins inside your project locally. Please be aware that you can declare **only one** local plugin. If more than one local plugin is used, across `plugins` and any extended configs, only the last one is kept.
+In case you want to develop your plugins locally without the need to publish to `npm`, you can declare your plugins inside your project locally.
 
 ### Usage Example
 
@@ -131,7 +131,7 @@ export default {
 
 :::
 
-To use rules from more than one file, merge them into one local plugin:
+To use rules from more than one file, import each one and list them all:
 
 ::: code-group
 
@@ -140,7 +140,7 @@ import first from "./plugins/first.js";
 import second from "./plugins/second.js";
 
 export default {
-  plugins: [{ rules: { ...first.rules, ...second.rules } }],
+  plugins: [first, second],
 };
 ```
 

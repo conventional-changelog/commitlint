@@ -98,13 +98,16 @@ export default async function load(
 	let plugins: PluginRecords = {};
 	if (Array.isArray(extended.plugins)) {
 		const deduplicatedPlugins = [...new Set(extended.plugins)];
+		let localIndex = 0;
 		for (const plugin of deduplicatedPlugins) {
 			if (typeof plugin === "string") {
 				plugins = await loadPlugin(plugins, plugin, {
 					debug: process.env.DEBUG === "true",
 				});
 			} else {
-				plugins.local = plugin;
+				// The first keeps `local` for compatibility; `:` can't appear in npm plugin names.
+				plugins[localIndex === 0 ? "local" : `local:${localIndex}`] = plugin;
+				localIndex++;
 			}
 		}
 	}
