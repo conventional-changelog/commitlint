@@ -1,0 +1,100 @@
+name: Release PR
+
+# Opens (or updates) the release pull request: bumps versions and writes the
+# changelogs from the Conventional Commits since the last tag. Merging that PR
+# through the merge queue starts the "Release" workflow, which publishes to npm.
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump. `conventional` picks it from the commits since the last tag."
+        type: choice
+        default: conventional
+        options:
+          - conventional
+          - patch
+          - minor
+          - major
+          - prerelease
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-pr
+  cancel-in-progress: false
+
+jobs:
+  release-pr:
+    if: github.repository == 'conventional-changelog/commitlint' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      # A token from the release app instead of GITHUB_TOKEN: pull requests
+      # opened with GITHUB_TOKEN don't trigger the CI and commitlint workflows,
+      # so the release PR could never pass its required checks.
+      - name: Create app token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
+      - name: Get app bot user id
+        id: bot
+        run: echo "id=$(gh api "/users/${APP_SLUG}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        env:
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - uses: actions/checkout@v7
+        with:
+          # lerna needs the full history and the tags to find the last release.
+          fetch-depth: 0
+          persist-credentials: false
+
+      # pnpm version is sourced from package.json `packageManager` field.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Bump versions and write changelogs
+        run: |
+          case "$BUMP" in
+            conventional) set -- ;;
+            prerelease) set -- --conventional-prerelease --preid next ;;
+            *) set -- "$BUMP" ;;
+          esac
+          pnpm lerna version "$@" --conventional-commits --no-git-tag-version --no-push --yes
+        env:
+          BUMP: ${{ inputs.bump }}
+
+      - name: Read version and release notes
+        id: release
+        run: |
+          echo "version=$(node -p 'require("./lerna.json").version')" >> "$GITHUB_OUTPUT"
+          {
+            echo "Merging this PR publishes the packages to npm, tags the release and creates the GitHub release."
+            echo
+            awk '/^##? \[[0-9]/ { n++ } n == 1' CHANGELOG.md
+          } > "$RUNNER_TEMP/release-pr-body.md"
+
+      - name: Open or update the release PR
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: release
+          delete-branch: true
+          sign-commits: true
+          commit-message: "chore(release): v${{ steps.release.outputs.version }}"
+          title: "chore(release): v${{ steps.release.outputs.version }}"
+          body-path: ${{ runner.temp }}/release-pr-body.md
+          author: "${{ steps.app-token.outputs.app-slug }}[bot] <${{ steps.bot.outputs.id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>"
+          committer: "${{ steps.app-token.outputs.app-slug }}[bot] <${{ steps.bot.outputs.id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>"

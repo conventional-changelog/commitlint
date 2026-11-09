@@ -145,6 +145,19 @@ For more information refer to [vitepress documentation](https://vitepress.dev).
 
 ## Publishing a release
 
+Releases are published from GitHub Actions with [npm trusted publishing](https://docs.npmjs.com/trusted-publishers), so no npm token or one-time password is needed.
+
+1. Run the [Release PR workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release-pr.yml) on `master`. Leave `bump` on `conventional` to pick the version from the commits since the last tag, or choose `patch`, `minor`, `major` or `prerelease` (a `-next.N` version on the `next` dist-tag).
+1. It opens a `chore(release): vX.Y.Z` pull request with the version bumps and changelogs. Review it. Running the workflow again updates the same pull request.
+1. Merge it with "Merge when ready". The [Release workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release.yml) then publishes every package version that is not on npm yet, tags the commit, creates the GitHub release and starts the container build.
+1. Post in the [commitlint Slack-channel][12]
+
+If publishing fails part way, fix the cause and run the Release workflow again from the Actions tab. It only publishes what is still missing, and tags once everything is out.
+
+### Publishing by hand
+
+Only needed if the workflows can't be used, for example when a new package has to be published for the first time (trusted publishing can only be set up for a package that already exists on npm).
+
 ```sh
 npm login
 mise install
@@ -160,32 +173,7 @@ pnpm test
 pnpm run publish --otp <one-time password>
 ```
 
-If something in between fails (like a new package was added and needs to be published for the
-first time but you forgot) you can use `lerna publish from-package` to publish anything that
-has not been published yet.
-
-### Create GitHub release
-
-1. Copy changelog entry for the new version
-1. Create release for the new tag: https://github.com/conventional-changelog/commitlint/releases
-1. Post in the [commitlint Slack-channel][12]
-
-### Publish a `next` release (or i.e. patch release)
-
-```sh
-npm login
-mise install
-```
-
-```sh
-pnpm clean
-pnpm install
-pnpm build
-pnpm test
-pnpm lerna publish --conventional-commits --dist-tag [`next` | `next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
-```
-
-If for some reason this stops in between, you can manually publish missing packages like this:
+If something in between fails you can use `lerna publish from-package` to publish anything that has not been published yet, or publish single packages:
 
 ```sh
 npm publish <package-name> --tag [`latest` | `next` | `[release-vXX(BRANCH)]`] --otp <one-time password>
