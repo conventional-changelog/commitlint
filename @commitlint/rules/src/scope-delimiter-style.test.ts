@@ -7,6 +7,7 @@ const messages = {
 
 	kebabScope: "feat(lint-staged): subject",
 	snakeScope: "feat(my_scope): subject",
+	unicodeScope: "feat(café): subject",
 
 	defaultSlash: "feat(core/api): subject",
 	defaultComma: "feat(core,api): subject",
@@ -39,6 +40,7 @@ describe("Scope Delimiter Validation", () => {
 		test.each([
 			{ scenario: "kebab-case scope", commit: messages.kebabScope },
 			{ scenario: "snake_case scope", commit: messages.snakeScope },
+			{ scenario: "non-ASCII letter scope", commit: messages.unicodeScope },
 		] as const)("Treats $scenario as part of the scope and not a delimiter", async ({ commit }) => {
 			const [actual, error] = scopeDelimiterStyle(await parse(commit), "always");
 
