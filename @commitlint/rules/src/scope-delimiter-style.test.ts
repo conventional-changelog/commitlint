@@ -8,6 +8,8 @@ const messages = {
 	kebabScope: "feat(lint-staged): subject",
 	snakeScope: "feat(my_scope): subject",
 	unicodeScope: "feat(café): subject",
+	decomposedScope: "feat(cafe\u0301): subject",
+	unicodeDigitsScope: "feat(core١٢٣): subject",
 
 	defaultSlash: "feat(core/api): subject",
 	defaultComma: "feat(core,api): subject",
@@ -41,6 +43,8 @@ describe("Scope Delimiter Validation", () => {
 			{ scenario: "kebab-case scope", commit: messages.kebabScope },
 			{ scenario: "snake_case scope", commit: messages.snakeScope },
 			{ scenario: "non-ASCII letter scope", commit: messages.unicodeScope },
+			{ scenario: "decomposed letter scope", commit: messages.decomposedScope },
+			{ scenario: "non-ASCII digit scope", commit: messages.unicodeDigitsScope },
 		] as const)("Treats $scenario as part of the scope and not a delimiter", async ({ commit }) => {
 			const [actual, error] = scopeDelimiterStyle(await parse(commit), "always");
 
@@ -97,6 +101,22 @@ describe("Scope Delimiter Validation", () => {
 	});
 
 	describe("Custom configuration", () => {
+		test.each([
+			{ scope: "core❤️api", delimiter: "❤️", allowed: true },
+			{ scope: "cafe\u0301❤️api", delimiter: "❤️", allowed: true },
+			{ scope: "core❤️api", delimiter: "❤", allowed: false },
+			{ scope: "core❤api", delimiter: "❤️", allowed: false },
+			{ scope: "core❤️/✈️api", delimiter: "❤️/✈️", allowed: true },
+		])(
+			"Preserves marks in $scope when checking $delimiter",
+			async ({ scope, delimiter, allowed }) => {
+				const parsed = await parse(`feat(${scope}): subject`);
+
+				expect(scopeDelimiterStyle(parsed, "always", [delimiter])[0]).toEqual(allowed);
+				expect(scopeDelimiterStyle(parsed, "never", [delimiter])[0]).toEqual(!allowed);
+			},
+		);
+
 		test("Falls back to default delimiters when delimiters is an empty array", async () => {
 			const [actual, error] = scopeDelimiterStyle(await parse(messages.defaultComma), "always", []);
 
