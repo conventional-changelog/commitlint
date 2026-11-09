@@ -64,7 +64,7 @@ Add these keywords into your `package.json` file to make it easy for others to f
 
 ## Local Plugins
 
-In case you want to develop your plugins locally without the need to publish to `npm`, you can send declare your plugins inside your project locally. Please be aware that you can declare **only one** local plugin.
+In case you want to develop your plugins locally without the need to publish to `npm`, you can declare your plugins inside your project locally. Please be aware that you can declare **only one** local plugin. If more than one local plugin is used, across `plugins` and any extended configs, only the last one is kept.
 
 ### Usage Example
 
@@ -97,6 +97,75 @@ export default {
 > echo "feat: random subject" | commitlint # fails
 > echo "feat: Hello World" | commitlint # passes
 ```
+
+### Plugin in its own file
+
+An entry in `plugins` that is a string is loaded as an npm package, so a path like `"./plugins/my-plugin.js"` fails with `Cannot find module 'commitlint-plugin-./plugins/my-plugin.js'`. Import the file instead:
+
+::: code-group
+
+```js [commitlint.config.js]
+import myPlugin from "./plugins/my-plugin.js";
+
+export default {
+  rules: {
+    "hello-world-rule": [2, "always"],
+  },
+  plugins: [myPlugin],
+};
+```
+
+```js [plugins/my-plugin.js]
+export default {
+  rules: {
+    "hello-world-rule": ({ subject }) => {
+      const HELLO_WORLD = "Hello World";
+      return [
+        (subject ?? "").includes(HELLO_WORLD),
+        `Your subject should contain ${HELLO_WORLD} message`,
+      ];
+    },
+  },
+};
+```
+
+:::
+
+To use rules from more than one file, merge them into one local plugin:
+
+::: code-group
+
+```js [commitlint.config.js]
+import first from "./plugins/first.js";
+import second from "./plugins/second.js";
+
+export default {
+  plugins: [{ rules: { ...first.rules, ...second.rules } }],
+};
+```
+
+:::
+
+### JSON and YAML configurations
+
+JSON and YAML can't hold functions. Export the local plugin from a JavaScript file and add that file to [`extends`](/reference/configuration#shareable-configuration):
+
+::: code-group
+
+```js [local-plugins.js]
+import myPlugin from "./plugins/my-plugin.js";
+
+export default { plugins: [myPlugin] };
+```
+
+```json [.commitlintrc.json]
+{
+  "extends": ["./local-plugins.js"],
+  "rules": { "hello-world-rule": [2, "always"] }
+}
+```
+
+:::
 
 ## Further Reading
 
