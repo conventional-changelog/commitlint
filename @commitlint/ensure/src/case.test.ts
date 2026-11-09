@@ -232,6 +232,71 @@ test("false for foo_bar`Any_CASE_iN_back-quotes`foo_bar on start-case", () => {
 	expect(actual).toBe(false);
 });
 
+test("true for Add Module 1.0.0 on start-case", () => {
+	const actual = ensure("Add Module 1.0.0", "start-case");
+	expect(actual).toBe(true);
+});
+
+test("true for Add Core.js on start-case", () => {
+	const actual = ensure("Add Core.js", "start-case");
+	expect(actual).toBe(true);
+});
+
+test("true for Support Node.js 22 And Es2015 on start-case", () => {
+	const actual = ensure("Support Node.js 22 And Es2015", "start-case");
+	expect(actual).toBe(true);
+});
+
+test("true for Typo on start-case", () => {
+	const actual = ensure("Typo", "start-case");
+	expect(actual).toBe(true);
+});
+
+test("true for Release on start-case", () => {
+	const actual = ensure("Release", "start-case");
+	expect(actual).toBe(true);
+});
+
+test("false for Add module 1.0.0 on start-case", () => {
+	const actual = ensure("Add module 1.0.0", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add core.js on start-case", () => {
+	const actual = ensure("Add core.js", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add Module v1.0.0 on start-case", () => {
+	const actual = ensure("Add Module v1.0.0", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add FooBar.js on start-case", () => {
+	const actual = ensure("Add FooBar.js", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add Foo_bar 1.0.0 on start-case", () => {
+	const actual = ensure("Add Foo_bar 1.0.0", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add Foo-bar 1.0.0 on start-case", () => {
+	const actual = ensure("Add Foo-bar 1.0.0", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add Foo_bar.js on start-case", () => {
+	const actual = ensure("Add Foo_bar.js", "start-case");
+	expect(actual).toBe(false);
+});
+
+test("false for Add  Module 1.0.0 (double space) on start-case", () => {
+	const actual = ensure("Add  Module 1.0.0", "start-case");
+	expect(actual).toBe(false);
+});
+
 test("true for lowercase `Any_CASE_iN_back-quotes` `Any_CASE_iN_back-quotes` lowercase on lowercase", () => {
 	const actual = ensure(
 		"lowercase `Any_CASE_iN_back-quotes` `Any_CASE_iN_back-quotes` lowercase",
