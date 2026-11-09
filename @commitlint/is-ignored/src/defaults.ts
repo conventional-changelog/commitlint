@@ -19,8 +19,8 @@ const isSemver = (c: string): boolean => {
 const test = (r: RegExp): ((c: string) => boolean) => r.test.bind(r);
 
 export const wildcards: Matcher[] = [
-	test(/^((Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?)))(?:\r?\n)*$)/m),
-	test(/^(Merge tag (.*?))(?:\r?\n)*$/m),
+	test(/^((Merge pull request)|(Merge (.*?) into (.*?)|(Merge branch (.*?)))(?:\r?\n|$))/),
+	test(/^(Merge tag (.*?))(?:\r?\n|$)/),
 	test(/^(R|r)evert (.*)/),
 	test(/^(R|r)eapply (.*)/),
 	test(/^(amend|fixup|squash)!/),

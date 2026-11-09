@@ -84,6 +84,17 @@ test("should return true for tag merges with newline characters and more charact
 	expect(isIgnored("Merge tag '1.1.1'\r\n # some comment")).toBe(true);
 });
 
+test("should return false when a merge line is only in the body", () => {
+	expect(isIgnored("add stuff\n\nMerge branch 'main' into my-feature")).toBe(false);
+	expect(isIgnored("add stuff\r\n\r\nMerge branch 'main'")).toBe(false);
+	expect(isIgnored("add stuff\n\nMerge pull request #369 from a/b")).toBe(false);
+	expect(isIgnored("add stuff\n\nMerge tag '1.1.1'")).toBe(false);
+});
+
+test("should return false when a merge line follows a blank first line", () => {
+	expect(isIgnored("\nMerge branch 'main'")).toBe(false);
+});
+
 test("should return true for revert commits", () => {
 	expect(
 		isIgnored(
