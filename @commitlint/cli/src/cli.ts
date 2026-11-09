@@ -319,7 +319,7 @@ async function main(args: MainArgs): Promise<void> {
 
 	// Git drops comment lines when it commits, so lint the message without them.
 	if (flags.edit) {
-		opts.parserOpts.commentChar = await getGitCommentString();
+		opts.parserOpts.commentChar = await getGitCommentString(flags.cwd);
 	}
 
 	const results = await Promise.all(messages.map((message) => lint(message, loaded.rules, opts)));
@@ -437,8 +437,10 @@ function normalizeFlags(flags: CliFlags): CliFlags {
 // core.commentChar and core.commentString are aliases, so the last one set wins.
 // For "auto", git picks "#" unless a message line already starts with it.
 // We always use "#" here (git removes auto in 3.0).
-async function getGitCommentString(): Promise<string> {
-	const result = x("git", ["config", "--get-regexp", "^core\\.comment(char|string)$"]);
+async function getGitCommentString(cwd: string): Promise<string> {
+	const result = x("git", ["config", "--get-regexp", "^core\\.comment(char|string)$"], {
+		nodeOptions: { cwd },
+	});
 	const output = await result;
 
 	if (result.exitCode && result.exitCode > 1) {
