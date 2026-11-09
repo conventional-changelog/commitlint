@@ -8,7 +8,7 @@ export const scopeDelimiterStyle: SyncRule<string[]> = ({ scope }, when = "alway
 	}
 
 	const delimiters = value.length ? value : ["/", "\\", ","];
-	const scopeRawDelimiters = scope.match(/[^\p{L}\p{M}\p{N}_-]+/gu) ?? [];
+	const scopeRawDelimiters = scope.match(/[^\p{L}\p{M}\p{N}_-][^\p{L}\p{N}_-]*/gu) ?? [];
 	const scopeDelimiters = [
 		...new Set(
 			scopeRawDelimiters.map((delimiter) => {
