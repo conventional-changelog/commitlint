@@ -147,12 +147,12 @@ For more information refer to [vitepress documentation](https://vitepress.dev).
 
 Releases are published from GitHub Actions with [npm trusted publishing](https://docs.npmjs.com/trusted-publishers), so no npm token or one-time password is needed.
 
-1. Run the [Release PR workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release-pr.yml) on `master`. Leave `bump` on `conventional` to pick the version from the commits since the last tag, or choose `patch`, `minor`, `major` or `prerelease` (a `-next.N` version on the `next` dist-tag).
-1. It opens a `chore(release): vX.Y.Z` pull request with the version bumps and changelogs. Review it. Running the workflow again updates the same pull request.
-1. Merge it with "Merge when ready". The [Release workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release.yml) then publishes every package version that is not on npm yet, tags the commit, creates the GitHub release and starts the container build.
+1. Run the [Release PR workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release-pr.yml) on `master`. Leave `bump` on `conventional` to pick the version from the commits since the last tag, or choose `patch`, `minor` or `major`. `prerelease` makes a `-next.N` version on the `next` dist-tag, and `graduate` turns a prerelease into the stable version.
+1. It opens a `chore(release): vX.Y.Z` pull request with the version bumps and changelogs. While it is open, every push to `master` regenerates it, so it always contains everything that was merged. Review it.
+1. Merge it with "Merge when ready". The [Release workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release.yml) then publishes every package version that is not on npm yet, tags the commit, creates the GitHub release and, for stable versions, starts the container build.
 1. Post in the [commitlint Slack-channel][12]
 
-If publishing fails part way, fix the cause and run the Release workflow again from the Actions tab. It only publishes what is still missing, and tags once everything is out.
+If publishing fails part way, fix the cause and run the Release workflow again from the Actions tab. It releases the commit that last changed `lerna.json`, only publishes what is still missing, and stops once the GitHub release exists. If only the container build failed, run the container build workflow on the release tag.
 
 ### Publishing by hand
 
