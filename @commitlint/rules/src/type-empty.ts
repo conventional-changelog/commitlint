@@ -7,6 +7,31 @@ export const typeEmpty: SyncRule = (parsed, when = "always") => {
 	const notEmpty = ensure.notEmpty(parsed.type || "");
 	return [
 		negated ? notEmpty : !notEmpty,
-		message(["type", negated ? "may not" : "must", "be empty"]),
+		message([
+			"type",
+			negated ? "may not" : "must",
+			"be empty",
+			negated && !notEmpty ? getHeaderHint(parsed.header) : undefined,
+		]),
 	];
 };
+
+// A header like "feat add" or "feat:add" doesn't parse, so the type ends up
+// empty and the error alone doesn't point at the actual mistake
+function getHeaderHint(header?: string | null) {
+	if (!header) {
+		return undefined;
+	}
+
+	// Only headers that start like "type " or "type(scope) ", so custom
+	// formats without a colon keep the plain message
+	if (!header.includes(":") && /^\w+(?:\([^)]*\))?!? \S/.test(header)) {
+		return '(did you forget the ":" after the type?)';
+	}
+
+	if (/^\w+(?:\([^)]*\))?!?:\S/.test(header)) {
+		return '(did you forget the space after ":"?)';
+	}
+
+	return undefined;
+}
