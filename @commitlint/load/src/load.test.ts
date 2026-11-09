@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { RuleConfigSeverity } from "@commitlint/types";
+import { type Plugin, type PluginRecords, RuleConfigSeverity } from "@commitlint/types";
 import { fix, git, npm } from "@commitlint/test";
 
 import load, { resolveFrom } from "./load.js";
@@ -161,6 +161,35 @@ test("local plugins should be loaded from shareable configs", async () => {
 			},
 		}),
 	);
+});
+
+const loadedRuleNames = (plugins: PluginRecords) =>
+	Object.values(plugins).flatMap((plugin) => Object.keys(plugin.rules));
+
+test("every local plugin should be kept", async () => {
+	const cwd = await gitBootstrap("fixtures/extends-empty");
+	const actual = await load(
+		{ plugins: [{ rules: { "rule-a": () => [true] } }, { rules: { "rule-b": () => [true] } }] },
+		{ cwd },
+	);
+
+	expect(loadedRuleNames(actual.plugins)).toEqual(["rule-a", "rule-b"]);
+});
+
+test("local plugins from shareable configs should be kept next to own local plugins", async () => {
+	const cwd = await gitBootstrap("fixtures/extends-with-local-plugins");
+	const actual = await load({ plugins: [{ rules: { "rule-own": () => [true] } }] }, { cwd });
+
+	expect(loadedRuleNames(actual.plugins)).toEqual(["hello-world-rule", "is-positive", "rule-own"]);
+});
+
+test("plugins should keep their configured order", async () => {
+	const cwd = await gitBootstrap("fixtures/extends-empty");
+	const first: Plugin = { rules: { shared: () => [true, "first"] } };
+	const last: Plugin = { rules: { shared: () => [true, "last"] } };
+	const actual = await load({ plugins: [first, "example", last] }, { cwd });
+
+	expect(Object.values(actual.plugins)).toEqual([first, plugin, last]);
 });
 
 test("uses seed with parserPreset", async () => {
