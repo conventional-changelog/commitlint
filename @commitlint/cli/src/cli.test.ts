@@ -524,6 +524,20 @@ test("it uses core.commentChar git config when using edit mode", async () => {
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test("it uses core.commentChar git config of --cwd when using edit mode", async () => {
+	const processCwd = await gitBootstrap("fixtures/default");
+	const cwd = await gitBootstrap("fixtures/comment-char");
+	await x("git", ["config", "--local", "core.commentChar", "$"], {
+		nodeOptions: { cwd },
+	});
+	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n$body\n");
+
+	const result = cli(["--cwd", cwd, "--edit", ".git/COMMIT_EDITMSG"], { cwd: processCwd })();
+	const output = await result;
+	expect(output.stdout.trim()).toContain("[body-empty]");
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+});
+
 test("it uses core.commentString git config when using edit mode", async () => {
 	const cwd = await gitBootstrap("fixtures/comment-char");
 	await x("git", ["config", "--local", "core.commentChar", ";"], {
