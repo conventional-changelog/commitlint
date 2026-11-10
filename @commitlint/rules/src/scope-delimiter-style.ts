@@ -8,6 +8,7 @@ export const scopeDelimiterStyle: SyncRule<string[]> = ({ scope }, when = "alway
 	}
 
 	const delimiters = value.length ? value : ["/", "\\", ","];
+	// Marks cannot start a delimiter, but must stay after symbols to preserve emoji such as ❤️.
 	const scopeRawDelimiters = scope.match(/[^\p{L}\p{M}\p{N}_-][^\p{L}\p{N}_-]*/gu) ?? [];
 	const scopeDelimiters = [
 		...new Set(

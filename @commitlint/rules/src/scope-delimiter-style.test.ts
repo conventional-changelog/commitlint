@@ -10,6 +10,7 @@ const messages = {
 	unicodeScope: "feat(café): subject",
 	decomposedScope: "feat(cafe\u0301): subject",
 	unicodeDigitsScope: "feat(core١٢٣): subject",
+	keycapScope: "feat(core1\ufe0f\u20e3api): subject",
 
 	defaultSlash: "feat(core/api): subject",
 	defaultComma: "feat(core,api): subject",
@@ -45,6 +46,7 @@ describe("Scope Delimiter Validation", () => {
 			{ scenario: "non-ASCII letter scope", commit: messages.unicodeScope },
 			{ scenario: "decomposed letter scope", commit: messages.decomposedScope },
 			{ scenario: "non-ASCII digit scope", commit: messages.unicodeDigitsScope },
+			{ scenario: "keycap digit and marks", commit: messages.keycapScope },
 		] as const)("Treats $scenario as part of the scope and not a delimiter", async ({ commit }) => {
 			const [actual, error] = scopeDelimiterStyle(await parse(commit), "always");
 
@@ -85,6 +87,13 @@ describe("Scope Delimiter Validation", () => {
 	});
 
 	describe('"never" with default configuration', () => {
+		test("Treats keycap digits and marks as scope content", async () => {
+			expect(scopeDelimiterStyle(await parse(messages.keycapScope), "never")).toEqual([
+				false,
+				"scope delimiters must not be one of [/, \\, ,]",
+			]);
+		});
+
 		test("Fails when scope uses only default delimiters", async () => {
 			const [actual, error] = scopeDelimiterStyle(await parse(messages.defaultSlash), "never");
 
@@ -101,19 +110,40 @@ describe("Scope Delimiter Validation", () => {
 	});
 
 	describe("Custom configuration", () => {
+		test.each(["²", "Ⅻ", "½", "①"] as const)(
+			"Treats Unicode number %s as scope content in both modes",
+			async (number) => {
+				const parsed = await parse(`feat(core${number}api): subject`);
+				expect(scopeDelimiterStyle(parsed, "always")).toEqual([
+					true,
+					"scope delimiters must be one of [/, \\, ,]",
+				]);
+				expect(scopeDelimiterStyle(parsed, "never")).toEqual([
+					false,
+					"scope delimiters must not be one of [/, \\, ,]",
+				]);
+			},
+		);
+
 		test.each([
 			{ scope: "core❤️api", delimiter: "❤️", allowed: true },
 			{ scope: "cafe\u0301❤️api", delimiter: "❤️", allowed: true },
 			{ scope: "core❤️api", delimiter: "❤", allowed: false },
 			{ scope: "core❤api", delimiter: "❤️", allowed: false },
 			{ scope: "core❤️/✈️api", delimiter: "❤️/✈️", allowed: true },
-		])(
+		] as const)(
 			"Preserves marks in $scope when checking $delimiter",
 			async ({ scope, delimiter, allowed }) => {
 				const parsed = await parse(`feat(${scope}): subject`);
 
-				expect(scopeDelimiterStyle(parsed, "always", [delimiter])[0]).toEqual(allowed);
-				expect(scopeDelimiterStyle(parsed, "never", [delimiter])[0]).toEqual(!allowed);
+				expect(scopeDelimiterStyle(parsed, "always", [delimiter])).toEqual([
+					allowed,
+					`scope delimiters must be one of [${delimiter}]`,
+				]);
+				expect(scopeDelimiterStyle(parsed, "never", [delimiter])).toEqual([
+					!allowed,
+					`scope delimiters must not be one of [${delimiter}]`,
+				]);
 			},
 		);
 

@@ -242,6 +242,8 @@
 
 ## scope-delimiter-style
 
+A delimiter starts with a character other than a Unicode letter, mark, or number, `_`, or `-`. Marks after delimiter symbols stay with the delimiter, preserving emoji such as `❤️`; keycap sequences such as `1️⃣` remain scope content.
+
 - **condition**: all delimiters found in `scope` must match `value`
 - **rule**: `always`
 - **value**
