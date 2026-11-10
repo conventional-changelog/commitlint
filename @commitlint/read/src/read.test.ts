@@ -107,16 +107,37 @@ test("should only read the last commit", async () => {
 	expect(result).toEqual(["commit X"]);
 });
 
-test("should keep leading whitespace of the last commit", async () => {
+test.each([
+	{
+		scenario: "leading spaces",
+		message: "  feat: leading spaces",
+		expected: "  feat: leading spaces",
+	},
+	{
+		scenario: "trailing spaces",
+		message: "feat: trailing spaces  ",
+		expected: "feat: trailing spaces  ",
+	},
+	{
+		scenario: "trailing blank lines",
+		message: "feat: blank lines\n\n\n",
+		expected: "feat: blank lines\n\n",
+	},
+	{
+		scenario: "quotes before blank lines",
+		message: '"feat: quoted"\n\n',
+		expected: '"feat: quoted"\n',
+	},
+])("should keep $scenario in the last commit", async ({ message, expected }) => {
 	const cwd: string = await git.bootstrap();
 
-	await x("git", ["commit", "--allow-empty", "-m", "  feat: leading spaces"], {
+	await x("git", ["commit", "--allow-empty", "--cleanup=verbatim", "-m", message], {
 		nodeOptions: { cwd },
 	});
 
 	const result = await read({ cwd, last: true });
 
-	expect(result).toEqual(["  feat: leading spaces"]);
+	expect(result).toEqual([expected]);
 });
 
 test("should read commits from the last annotated tag", async () => {
