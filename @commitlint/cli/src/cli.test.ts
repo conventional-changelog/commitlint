@@ -525,14 +525,15 @@ test("it uses core.commentChar git config when using edit mode", async () => {
 });
 
 test("it uses core.commentChar git config of --cwd when using edit mode", async () => {
+	// Run from a separate repository without the target's custom comment character.
 	const processCwd = await gitBootstrap("fixtures/default");
-	const cwd = await gitBootstrap("fixtures/comment-char");
-	await x("git", ["config", "--local", "core.commentChar", "$"], {
-		nodeOptions: { cwd },
+	const targetCwd = await gitBootstrap("fixtures/comment-char");
+	await x("git", ["config", "--local", "core.commentChar", ";"], {
+		nodeOptions: { cwd: targetCwd },
 	});
-	await fs.writeFile(path.join(cwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n$body\n");
+	await fs.writeFile(path.join(targetCwd, ".git", "COMMIT_EDITMSG"), "header: foo\n\n;body\n");
 
-	const result = cli(["--cwd", cwd, "--edit", ".git/COMMIT_EDITMSG"], { cwd: processCwd })();
+	const result = cli(["--cwd", targetCwd, "--edit", ".git/COMMIT_EDITMSG"], { cwd: processCwd })();
 	const output = await result;
 	expect(output.stdout.trim()).toContain("[body-empty]");
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
