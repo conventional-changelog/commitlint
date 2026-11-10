@@ -7,9 +7,15 @@ export const scopeEnum: SyncRule<
 	| {
 			scopes: string[];
 			delimiters?: string[];
+			scopesByType?: Record<string, string[]>;
 	  }
-> = ({ scope }, when = "always", value = []) => {
-	const scopes = Array.isArray(value) ? value : value.scopes;
+> = ({ scope, type }, when = "always", value = []) => {
+	// A list given for the commit type replaces the general one for that type.
+	const typeScopes =
+		Array.isArray(value) || !type || !value.scopesByType || !Object.hasOwn(value.scopesByType, type)
+			? undefined
+			: value.scopesByType[type];
+	const scopes = typeScopes ?? (Array.isArray(value) ? value : value.scopes);
 
 	if (!scope || !scopes.length) {
 		return [true, ""];
@@ -21,7 +27,11 @@ export const scopeEnum: SyncRule<
 		return delimiter === "," ? ", ?" : delimiter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 	});
 	const messageScopes = scope.split(new RegExp(delimiterPatterns.join("|")));
-	const errorMessage = ["scope must", `be one of [${scopes.join(", ")}]`];
+	const errorMessage = [
+		"scope must",
+		`be one of [${scopes.join(", ")}]`,
+		typeScopes ? `for type ${type}` : undefined,
+	];
 	const isScopeInEnum = (scope: string) => ensure.enum(scope, scopes);
 	let isValid;
 
