@@ -38,6 +38,39 @@ test("fails for missing extends", async () => {
 	);
 });
 
+test("does not resolve missing relative configs from the tool installation", async () => {
+	const cwd = scaffoldModule("unrelated", {}, {});
+	const dynamicImport = vi.fn(() => ({}));
+
+	await expect(
+		resolveExtends({ extends: ["./index.js"] }, {
+			cwd,
+			dynamicImport,
+			resolveGlobal: () => {
+				throw new Error("Cannot find module");
+			},
+		} as ResolveExtendsContext),
+	).rejects.toThrow(/Cannot find module/);
+
+	expect(dynamicImport).not.toHaveBeenCalled();
+});
+
+test("does not bypass a caller-supplied config resolver", async () => {
+	const dynamicImport = vi.fn(() => ({}));
+	const error = new Error("Config denied by custom resolver");
+
+	await expect(
+		resolveExtends({ extends: ["@commitlint/config-conventional"] }, {
+			resolve: () => {
+				throw error;
+			},
+			dynamicImport,
+		} as ResolveExtendsContext),
+	).rejects.toBe(error);
+
+	expect(dynamicImport).not.toHaveBeenCalled();
+});
+
 test("resolves extends for single config", async () => {
 	const input = { extends: "extender-name" };
 	const ctx = {

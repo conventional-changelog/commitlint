@@ -239,6 +239,26 @@ test("should fail for non-conventional input from stdin without config file with
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test.each([
+	["feat: valid message", ExitCode.CommitlintDefault, ""],
+	["not conventional", ExitCode.CommitlintErrorDefault, "type may not be empty"],
+])("should resolve a preset installed with the tool for %s", async (message, exitCode, error) => {
+	const cwd = await gitBootstrap("fixtures/empty");
+	await fs.writeFile(
+		path.join(cwd, "commitlint.config.js"),
+		'module.exports = {extends: ["@commitlint/config-conventional"]};',
+	);
+	const result = cli([], {
+		cwd,
+		env: { NODE_PATH: "", npm_config_cache: path.join(cwd, ".npm-cache") },
+	})(message);
+	const output = await result;
+
+	expect(output.stderr).toEqual("");
+	expect(output.stdout).toContain(error);
+	expect(result.exitCode).toBe(exitCode);
+});
+
 test("should prefer config file over --default-config flag", async () => {
 	const cwd = await gitBootstrap("fixtures/default");
 	// "type: bar" passes the fixture config (type-enum never [foo]) but would
