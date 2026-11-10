@@ -303,7 +303,22 @@ function resolveConfig(raw: string, context: ResolveExtendsContext = {}): string
 		resolved = resolve(id, context);
 	} catch (err) {
 		const legacy = getId(raw, "conventional-changelog-lint-config");
-		resolved = resolve(legacy, context);
+		try {
+			resolved = resolve(legacy, context);
+		} catch (error) {
+			if (
+				!context.resolve &&
+				!path.isAbsolute(id) &&
+				!id.startsWith(".") &&
+				(error as NodeJS.ErrnoException)?.code === "MODULE_NOT_FOUND"
+			) {
+				const installedPath = resolveFromSilent(id, fileURLToPath(import.meta.url));
+				if (typeof installedPath === "string") {
+					return installedPath;
+				}
+			}
+			throw error;
+		}
 		console.warn(
 			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`,
 		);
