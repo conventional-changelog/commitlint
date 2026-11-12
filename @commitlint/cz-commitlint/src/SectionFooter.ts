@@ -51,6 +51,11 @@ export function getQuestions(): Array<DistinctQuestion> {
 	const referencesRequired = referencesActive && ruleIsNotApplicable(referencesRule);
 	const referencesForbidden = referencesActive && ruleIsApplicable(referencesRule);
 
+	// issuesBody would become the commit body, so it is left out when body-empty forbids one.
+	const bodyRule = getRule("body", "empty");
+	const bodyForbidden =
+		bodyRule !== undefined && ruleIsActive(bodyRule) && ruleIsApplicable(bodyRule);
+
 	const issueFields: PromptName[] = ["isIssueAffected", "issuesBody", "issues"];
 	const fields: PromptName[] = ["isBreaking", "breakingBody", "breaking", ...issueFields, "footer"];
 
@@ -58,6 +63,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 		.filter((name) => name in getPromptQuestions())
 		.filter((name) => !(referencesForbidden && issueFields.includes(name)))
 		.filter((name) => !(referencesRequired && issueFields.includes(name) && name !== "issues"))
+		.filter((name) => !(bodyForbidden && name === "issuesBody"))
 		.map((name) => {
 			const questions = getPromptQuestions();
 
