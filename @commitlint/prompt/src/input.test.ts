@@ -3,6 +3,7 @@
 import { expect, test, vi } from "vitest";
 // @ts-expect-error -- no typings
 import config from "@commitlint/config-angular";
+import load from "@commitlint/load";
 import pc from "picocolors";
 import { Answers, DistinctQuestion, InputCustomOptions, PromptModule } from "inquirer";
 
@@ -16,7 +17,7 @@ const testConfig = {
 };
 
 vi.mock("@commitlint/load", () => ({
-	default: () => testConfig,
+	default: vi.fn(() => testConfig),
 }));
 
 test("should work with all fields filled", async () => {
@@ -84,6 +85,21 @@ test("should fail without type", async () => {
 		new Error(`⚠ ${pc.bold("type")} may not be empty.`),
 	);
 	spy.mockRestore();
+});
+
+test("should pass the config file and cwd on to load", async () => {
+	const prompt = stub({
+		"input-custom": {
+			type: "fix",
+			scope: "test",
+			subject: "subject",
+			body: "body",
+			footer: "footer",
+		},
+	});
+	const options = { cwd: "/some/project", file: "config/commitlint.config.js" };
+	await input(prompt, options);
+	expect(load).toHaveBeenLastCalledWith({}, options);
 });
 
 function stub(config: Record<string, Record<string, unknown>>): PromptModule {
