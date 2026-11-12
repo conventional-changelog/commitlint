@@ -7,7 +7,12 @@ import getRuleQuestionConfig from "./services/getRuleQuestionConfig.js";
 import { getPromptMessages, getPromptQuestions } from "./store/prompts.js";
 import { getRule } from "./store/rules.js";
 import getLeadingBlankFn from "./utils/leading-blank-fn.js";
-import { getMaxLength } from "./utils/rules.js";
+import {
+	getMaxLength,
+	ruleIsActive,
+	ruleIsApplicable,
+	ruleIsNotApplicable,
+} from "./utils/rules.js";
 
 export class FooterQuestion extends Question {
 	footerMaxLength: number;
@@ -38,18 +43,21 @@ export function getQuestions(): Array<DistinctQuestion> {
 	const footerMaxLength = footerQuestionConfig.maxLength;
 	const footerMinLength = footerQuestionConfig.minLength;
 
-	const fields: PromptName[] = [
-		"isBreaking",
-		"breakingBody",
-		"breaking",
-		"isIssueAffected",
-		"issuesBody",
-		"issues",
-		"footer",
-	];
+	// references-empty decides whether issue references are asked for at all:
+	// "always" forbids them. "never" makes them mandatory, and since the rule only
+	// needs the reference itself, the other issue steps are left out then.
+	const referencesRule = getRule("references", "empty");
+	const referencesActive = referencesRule !== undefined && ruleIsActive(referencesRule);
+	const referencesRequired = referencesActive && ruleIsNotApplicable(referencesRule);
+	const referencesForbidden = referencesActive && ruleIsApplicable(referencesRule);
+
+	const issueFields: PromptName[] = ["isIssueAffected", "issuesBody", "issues"];
+	const fields: PromptName[] = ["isBreaking", "breakingBody", "breaking", ...issueFields, "footer"];
 
 	return fields
 		.filter((name) => name in getPromptQuestions())
+		.filter((name) => !(referencesForbidden && issueFields.includes(name)))
+		.filter((name) => !(referencesRequired && issueFields.includes(name) && name !== "issues"))
 		.map((name) => {
 			const questions = getPromptQuestions();
 
@@ -99,7 +107,7 @@ export function getQuestions(): Array<DistinctQuestion> {
 			if (name === "issues") {
 				Object.assign(questionConfigs, {
 					when: (answers: Answers) => {
-						return answers.isIssueAffected;
+						return referencesRequired || answers.isIssueAffected;
 					},
 				});
 			}
@@ -117,7 +125,6 @@ export function getQuestions(): Array<DistinctQuestion> {
 }
 
 export function combineCommitMessage(answers: Answers): string {
-	// TODO references-empty
 	// TODO signed-off-by
 	const maxLineLength = getMaxLength(getRule("footer", "max-line-length"));
 	const leadingBlankFn = getLeadingBlankFn(getRule("footer", "leading-blank"));
