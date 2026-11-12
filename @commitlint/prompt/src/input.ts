@@ -1,4 +1,5 @@
 import load from "@commitlint/load";
+import type { LoadOptions } from "@commitlint/types";
 import type { DistinctQuestion, PromptModule } from "inquirer";
 
 import format from "./library/format.js";
@@ -12,10 +13,11 @@ import InputCustomPrompt from "./inquirer/InputCustomPrompt.js";
  * Get user input by interactive prompt based on
  * conventional-changelog-lint rules.
  * @param prompter
+ * @param options where to load the commitlint config from
  * @return commit message
  */
-export async function input(prompter: PromptModule): Promise<string> {
-	const { rules } = await load();
+export async function input(prompter: PromptModule, options: LoadOptions = {}): Promise<string> {
+	const { rules } = await load({}, options);
 	const parts = ["type", "scope", "subject", "body", "footer"] as const;
 	const headerParts = ["type", "scope", "subject"];
 

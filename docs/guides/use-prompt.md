@@ -115,6 +115,43 @@ deno task commit
 
 :::
 
+## Use a config file from a custom path
+
+By default the prompt picks up the configuration the same way `commitlint` does, starting from the current working directory.
+Pass `--config` (or `-g`) to load a specific file instead, just like with [`@commitlint/cli`](/reference/cli):
+
+```json:line-numbers {3}
+{
+  "scripts": {
+    "commit": "commit --config ./config/commitlint.config.js"
+  }
+}
+```
+
+Relative paths are resolved from the current working directory.
+
+You can also pass the flag when running the script. With npm it has to come after `--`: otherwise npm takes `--config` and `-g` for options of its own, and the prompt silently uses the default config.
+
+::: code-group
+
+```sh [npm]
+npm run commit -- --config ./config/commitlint.config.js
+```
+
+```sh [yarn]
+yarn commit --config ./config/commitlint.config.js
+```
+
+```sh [pnpm]
+pnpm commit --config ./config/commitlint.config.js
+```
+
+```sh [bun]
+bun commit --config ./config/commitlint.config.js
+```
+
+:::
+
 # An alternative to `@commitlint/prompt-cli`: commitizen
 
 Another way to author commit messages that adhere to the commit convention configured in `commitlint.config.js` is to use `commitizen`.
