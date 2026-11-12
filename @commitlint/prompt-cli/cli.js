@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+import { parseArgs } from "node:util";
+
 import { prompter } from "@commitlint/prompt";
 import inquirer from "inquirer";
 import { x } from "tinyexec";
@@ -10,6 +12,14 @@ main().catch((err) => {
 });
 
 function main() {
+	const { values: flags } = parseArgs({
+		options: {
+			config: { type: "string", short: "g" },
+		},
+		strict: false,
+	});
+	const file = typeof flags.config === "string" ? flags.config : undefined;
+
 	return isStageEmpty()
 		.then((empty) => {
 			if (empty) {
@@ -17,7 +27,7 @@ function main() {
 				process.exit(1);
 			}
 		})
-		.then(() => prompter(inquirer, commit));
+		.then(() => prompter(inquirer, commit, { file }));
 }
 
 function isStageEmpty() {
