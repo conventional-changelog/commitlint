@@ -7,12 +7,7 @@ import getRuleQuestionConfig from "./services/getRuleQuestionConfig.js";
 import { getPromptMessages, getPromptQuestions } from "./store/prompts.js";
 import { getRule } from "./store/rules.js";
 import getLeadingBlankFn from "./utils/leading-blank-fn.js";
-import {
-	getMaxLength,
-	ruleIsActive,
-	ruleIsApplicable,
-	ruleIsNotApplicable,
-} from "./utils/rules.js";
+import { getMaxLength, ruleIsActive, ruleIsNotApplicable, ruleMustBeEmpty } from "./utils/rules.js";
 
 export class FooterQuestion extends Question {
 	footerMaxLength: number;
@@ -47,14 +42,14 @@ export function getQuestions(): Array<DistinctQuestion> {
 	// "always" forbids them. "never" makes them mandatory, and since the rule only
 	// needs the reference itself, the other issue steps are left out then.
 	const referencesRule = getRule("references", "empty");
-	const referencesActive = referencesRule !== undefined && ruleIsActive(referencesRule);
-	const referencesRequired = referencesActive && ruleIsNotApplicable(referencesRule);
-	const referencesForbidden = referencesActive && ruleIsApplicable(referencesRule);
+	const referencesRequired =
+		referencesRule !== undefined &&
+		ruleIsActive(referencesRule) &&
+		ruleIsNotApplicable(referencesRule);
+	const referencesForbidden = ruleMustBeEmpty(referencesRule);
 
 	// issuesBody would become the commit body, so it is left out when body-empty forbids one.
-	const bodyRule = getRule("body", "empty");
-	const bodyForbidden =
-		bodyRule !== undefined && ruleIsActive(bodyRule) && ruleIsApplicable(bodyRule);
+	const bodyForbidden = ruleMustBeEmpty(getRule("body", "empty"));
 
 	const issueFields: PromptName[] = ["isIssueAffected", "issuesBody", "issues"];
 	const fields: PromptName[] = ["isBreaking", "breakingBody", "breaking", ...issueFields, "footer"];

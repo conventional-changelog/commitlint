@@ -10,6 +10,7 @@ import {
 	ruleIsApplicable,
 	ruleIsDisabled,
 	ruleIsNotApplicable,
+	ruleMustBeEmpty,
 } from "./rules.js";
 
 test("ruleIsDisabled", () => {
@@ -46,6 +47,15 @@ test("ruleIsNotApplicable", () => {
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error] as any)).toBe(false);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, "always"])).toBe(false);
 	expect(ruleIsNotApplicable([RuleConfigSeverity.Error, "always", 100])).toBe(false);
+});
+
+test("ruleMustBeEmpty", () => {
+	expect(ruleMustBeEmpty([RuleConfigSeverity.Error, "always"])).toBe(true);
+	expect(ruleMustBeEmpty([RuleConfigSeverity.Warning, "always"])).toBe(true);
+	expect(ruleMustBeEmpty([RuleConfigSeverity.Error, "never"])).toBe(false);
+	expect(ruleMustBeEmpty([RuleConfigSeverity.Disabled, "always"])).toBe(false);
+	expect(ruleMustBeEmpty([RuleConfigSeverity.Disabled])).toBe(false);
+	expect(ruleMustBeEmpty(undefined)).toBe(false);
 });
 
 test("getMaxLength", () => {
