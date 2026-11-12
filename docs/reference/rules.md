@@ -319,6 +319,11 @@ A delimiter starts with a character other than a Unicode letter, mark, or number
   'Signed-off-by:'
   ```
 
+> [!NOTE]
+>
+> The sign-off must be in the trailer block, the last paragraph of the message.
+> Other trailers, such as `Co-authored-by:`, may follow it.
+
 ## subject-case
 
 - **condition**: `subject` is in case `value`
