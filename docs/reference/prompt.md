@@ -40,6 +40,13 @@ Specify the interactive steps, Steps can only be configured in
 - `issues`
 - `issuesBody`
 
+The issue steps follow the [`references-empty`](/reference/rules#references-empty) rule:
+
+- `never`: only `issues` is asked, and it cannot be skipped. `isIssueAffected` and `issuesBody` are left out. The answer needs a reference the parser recognizes, so it has to carry a configured issue prefix: `fix #123` passes, `fix 123` still fails the rule.
+- `always`: none of the issue steps are asked.
+
+`issuesBody` is also left out when [`body-empty`](/reference/rules#body-empty) is `always`.
+
 ![cz-commitlint questions](/assets/cz-commitlint.png)
 
 ```js

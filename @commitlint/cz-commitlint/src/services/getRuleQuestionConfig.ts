@@ -10,9 +10,8 @@ import {
 	getEnumList,
 	getMaxLength,
 	getMinLength,
-	ruleIsActive,
-	ruleIsApplicable,
 	ruleIsDisabled,
+	ruleMustBeEmpty,
 } from "../utils/rules.js";
 
 interface GraphemeSegment {
@@ -76,9 +75,7 @@ export default function (rulePrefix: RuleField): QuestionConfig | null {
 	const questionSettings = questions[rulePrefix];
 	const emptyRule = getRule(rulePrefix, "empty");
 
-	const mustBeEmpty = emptyRule && ruleIsActive(emptyRule) && ruleIsApplicable(emptyRule);
-
-	if (mustBeEmpty) {
+	if (ruleMustBeEmpty(emptyRule)) {
 		return null;
 	}
 

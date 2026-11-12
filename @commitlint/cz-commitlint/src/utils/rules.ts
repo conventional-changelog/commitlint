@@ -54,6 +54,15 @@ export function ruleIsNotApplicable(
 	return false;
 }
 
+/**
+ * Check if an "*-empty" rule definition forces the field to be empty
+ * @param rule to check
+ * @return if the field must be empty
+ */
+export function ruleMustBeEmpty(rule?: Rule): boolean {
+	return rule !== undefined && ruleIsActive(rule) && ruleIsApplicable(rule);
+}
+
 export function enumRuleIsActive(
 	rule: Rule,
 ): rule is Readonly<[RuleConfigSeverity.Warning | RuleConfigSeverity.Error, "always", string[]]> {
