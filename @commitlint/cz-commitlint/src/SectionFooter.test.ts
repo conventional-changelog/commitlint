@@ -195,6 +195,30 @@ describe("getQuestions", () => {
 		).toBe(false);
 	});
 
+	test("should not ask for body info on affected issues when the body must be empty", () => {
+		setRules({
+			"body-empty": [RuleConfigSeverity.Error, "always"],
+		});
+		setPromptConfig({
+			questions: {
+				isIssueAffected: {
+					description: "Does this change affect any open issues?",
+				},
+				issuesBody: {
+					description:
+						"If issues are closed, the commit requires a body. Please enter a longer description of the commit itself",
+				},
+				issues: {
+					description: 'Add issue references (e.g. "fix #123", "re #123".)',
+				},
+			},
+		});
+
+		const names = getQuestions().map((question) => question.name);
+
+		expect(names).toEqual(["isIssueAffected", "issues"]);
+	});
+
 	describe("references-empty", () => {
 		const issueQuestions = {
 			isIssueAffected: {
