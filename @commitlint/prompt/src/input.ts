@@ -13,11 +13,11 @@ import InputCustomPrompt from "./inquirer/InputCustomPrompt.js";
  * Get user input by interactive prompt based on
  * conventional-changelog-lint rules.
  * @param prompter
- * @param _options where to load the commitlint config from
+ * @param options where to load the commitlint config from
  * @return commit message
  */
-export async function input(prompter: PromptModule, _options: LoadOptions = {}): Promise<string> {
-	const { rules } = await load();
+export async function input(prompter: PromptModule, options: LoadOptions = {}): Promise<string> {
+	const { rules } = await load({}, options);
 	const parts = ["type", "scope", "subject", "body", "footer"] as const;
 	const headerParts = ["type", "scope", "subject"];
 
