@@ -194,6 +194,69 @@ describe("getQuestions", () => {
 			}),
 		).toBe(false);
 	});
+
+	describe("references-empty", () => {
+		const issueQuestions = {
+			isIssueAffected: {
+				description: "Does this change affect any open issues?",
+			},
+			issuesBody: {
+				description:
+					"If issues are closed, the commit requires a body. Please enter a longer description of the commit itself",
+			},
+			issues: {
+				description: 'Add issue references (e.g. "fix #123", "re #123".)',
+			},
+		};
+		const names = () => getQuestions().map((question) => question.name);
+
+		test("should only ask for issue info when references may not be empty", () => {
+			setRules({
+				"references-empty": [RuleConfigSeverity.Error, "never"],
+			});
+			setPromptConfig({ questions: issueQuestions });
+
+			expect(names()).toEqual(["issues"]);
+		});
+
+		test("should ask for issue info without an answer on affected issues when references may not be empty", () => {
+			setRules({
+				"references-empty": [RuleConfigSeverity.Error, "never"],
+			});
+			setPromptConfig({ questions: issueQuestions });
+
+			const issues = getQuestions().find((question) => question.name === "issues");
+			const when = issues?.when as any;
+
+			expect(when({})).toBe(true);
+		});
+
+		test("should not ask for issue info when references must be empty", () => {
+			setRules({
+				"references-empty": [RuleConfigSeverity.Error, "always"],
+			});
+			setPromptConfig({
+				questions: {
+					...issueQuestions,
+					footer: {
+						description: "<footer> holds further meta data",
+					},
+				},
+			});
+
+			expect(names()).toEqual(["footer"]);
+		});
+
+		test("should only follow references-empty while the rule is enabled", () => {
+			setPromptConfig({ questions: issueQuestions });
+
+			setRules({ "references-empty": [RuleConfigSeverity.Disabled, "never"] });
+			expect(names()).toEqual(["isIssueAffected", "issuesBody", "issues"]);
+
+			setRules({ "references-empty": [RuleConfigSeverity.Warning, "never"] });
+			expect(names()).toEqual(["issues"]);
+		});
+	});
 });
 
 describe("combineCommitMessage", () => {
