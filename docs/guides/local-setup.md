@@ -224,6 +224,39 @@ node -e "fs.writeFileSync('.husky/commit-msg', 'deno task --eval commitlint --ed
 
 ---
 
+### Using the pre-commit framework
+
+If your project manages its hooks with [pre-commit](https://pre-commit.com), add commitlint as a local hook to your `.pre-commit-config.yaml`. pre-commit installs commitlint into an environment of its own, so the project does not need a `package.json`.
+
+```yaml
+default_install_hook_types: [pre-commit, commit-msg]
+repos:
+  - repo: local
+    hooks:
+      - id: commitlint
+        name: commitlint
+        entry: commitlint --edit
+        language: node
+        stages: [commit-msg]
+        additional_dependencies:
+          - "@commitlint/cli"
+          - "@commitlint/config-conventional"
+```
+
+Then install the hooks:
+
+```sh
+pre-commit install
+```
+
+> [!NOTE]
+>
+> - List every package your configuration needs in `additional_dependencies`: shareable configs from `extends`, plugins and parser presets. The hook cannot see packages installed in your project.
+> - Pin the versions (for example `"@commitlint/cli@21.2.4"`) for reproducible installs. pre-commit installs the dependencies once and does not update them on its own.
+> - commitlint runs on the `commit-msg` hook, so that hook type has to be installed. `default_install_hook_types` takes care of it; without it run `pre-commit install --hook-type commit-msg`.
+
+---
+
 ### Using git hooks
 
 Info about git hooks can be found on [Git documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
