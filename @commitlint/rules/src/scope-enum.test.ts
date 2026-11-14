@@ -225,4 +225,67 @@ describe("Scope Enum Validation", () => {
 			expect(error).toEqual("scope must be one of [bar, baz]");
 		});
 	});
+
+	describe("Per-type scopes", () => {
+		const value = {
+			scopes: ["core", "cli"],
+			scopesByType: {
+				build: ["npm", "webpack"],
+				chore: [],
+			},
+		};
+
+		test("Succeeds when the scope is listed for the commit type", async () => {
+			const [actual, error] = scopeEnum(await parse("build(npm): qux"), "always", value);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must be one of [npm, webpack] for type build");
+		});
+
+		test("Fails when the scope is only listed for other types", async () => {
+			const [actual, error] = scopeEnum(await parse("build(core): qux"), "always", value);
+			expect(actual).toBe(false);
+			expect(error).toEqual("scope must be one of [npm, webpack] for type build");
+		});
+
+		test("Keeps using scopes for types without a list of their own", async () => {
+			const [listed] = scopeEnum(await parse("feat(core): qux"), "always", value);
+			const [buildOnly, error] = scopeEnum(await parse("feat(npm): qux"), "always", value);
+			const [unrelated] = scopeEnum(await parse("build(core): qux"), "always", value);
+			expect(listed).toBe(true);
+			expect(buildOnly).toBe(false);
+			expect(error).toEqual("scope must be one of [core, cli]");
+			expect(unrelated).toBe(false);
+		});
+
+		test("Accepts any scope for a type with an empty list", async () => {
+			const [actual, error] = scopeEnum(await parse("chore(anything): qux"), "always", value);
+			expect(actual).toBe(true);
+			expect(error).toEqual("");
+		});
+
+		test("Checks every scope segment against the list of the commit type", async () => {
+			const [all] = scopeEnum(await parse("build(npm|webpack): qux"), "always", {
+				...value,
+				delimiters: ["|"],
+			});
+			const [some] = scopeEnum(await parse("build(npm|core): qux"), "always", {
+				...value,
+				delimiters: ["|"],
+			});
+			expect(all).toBe(true);
+			expect(some).toBe(false);
+		});
+
+		test("Fails for 'never' when the scope is listed for the commit type", async () => {
+			const [actual, error] = scopeEnum(await parse("build(npm): qux"), "never", value);
+			expect(actual).toBe(false);
+			expect(error).toEqual("scope must not be one of [npm, webpack] for type build");
+		});
+
+		test("Succeeds for 'never' when the scope is only listed for other types", async () => {
+			const [actual, error] = scopeEnum(await parse("build(core): qux"), "never", value);
+			expect(actual).toBe(true);
+			expect(error).toEqual("scope must not be one of [npm, webpack] for type build");
+		});
+	});
 });

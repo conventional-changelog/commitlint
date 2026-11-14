@@ -276,18 +276,23 @@ A delimiter starts with a character other than a Unicode letter, mark, or number
   ```js
   {
     scopes: ["foo", "bar"],
-    delimiters: ["/"]
+    delimiters: ["/"],
+    scopesByType: {
+      build: ["npm", "webpack"]
+    }
   }
   ```
 
   - `scopes` — list of allowed scope values
   - `delimiters` — optional list of delimiter strings used to split multi-segment scopes (default: `["/", "\", ","]`)
+  - `scopesByType` — optional lists of scope values per commit type. A commit whose `type` has a list is checked against that list instead of `scopes`; all other types keep using `scopes`.
 
 > [!NOTE]
 >
 > - This rule always passes if no scopes are provided in the message or the value > is an empty array.
 > - When set to `always`, all message scopes must be found in the value.
 > - When set to `never`, none of the message scopes can be found in the value.
+> - An empty list in `scopesByType` lifts the restriction for that type, the same way an empty `scopes` does for all types.
 
 ## scope-max-length
 
