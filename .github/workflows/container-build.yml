@@ -8,6 +8,8 @@ on:
   pull_request:
     paths:
       - "Dockerfile.ci"
+  # Started by release.yml after publishing, with the release tag as ref.
+  workflow_dispatch:
 jobs:
   container-build:
     if: github.repository == 'conventional-changelog/commitlint'

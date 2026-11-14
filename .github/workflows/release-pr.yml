@@ -1,0 +1,135 @@
+name: Release PR
+
+# Opens (or updates) the release pull request: bumps versions and writes the
+# changelogs from the Conventional Commits since the last tag. Merging that PR
+# through the merge queue starts the "Release" workflow, which publishes to npm.
+#
+# While a release PR is open, every push to master regenerates it, so it never
+# misses commits that were merged after it was opened.
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump. `conventional` picks it from the commits since the last tag, `graduate` turns a prerelease into a stable version."
+        type: choice
+        default: conventional
+        options:
+          - conventional
+          - patch
+          - minor
+          - major
+          - prerelease
+          - graduate
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-pr
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    if: github.repository == 'conventional-changelog/commitlint' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      run: ${{ steps.plan.outputs.run }}
+      bump: ${{ steps.plan.outputs.bump }}
+    steps:
+      - name: Decide whether to open or update the release PR
+        id: plan
+        run: |
+          if [ "$EVENT" = workflow_dispatch ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "bump=$INPUT_BUMP" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # On a push, only refresh a release PR that is already open, keeping
+          # the bump it was opened with.
+          body=$(gh pr view release --repo "$GITHUB_REPOSITORY" --json state,body --jq 'select(.state == "OPEN") | .body' || true)
+          if [ -n "$body" ]; then
+            bump=$(printf '%s\n' "$body" | sed -n 's/^<!-- bump: \(.*\) -->$/\1/p')
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "bump=${bump:-conventional}" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          EVENT: ${{ github.event_name }}
+          INPUT_BUMP: ${{ inputs.bump }}
+          GH_TOKEN: ${{ github.token }}
+
+  release-pr:
+    needs: plan
+    if: needs.plan.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      # A token from the release app instead of GITHUB_TOKEN: pull requests
+      # opened with GITHUB_TOKEN don't trigger the CI and commitlint workflows,
+      # so the release PR could never pass its required checks.
+      - name: Create app token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ vars.RELEASE_APP_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v7
+        with:
+          # lerna needs the full history and the tags to find the last release.
+          fetch-depth: 0
+          persist-credentials: false
+
+      # pnpm version is sourced from package.json `packageManager` field.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Bump versions and write changelogs
+        run: |
+          case "$BUMP" in
+            conventional) set -- ;;
+            prerelease) set -- --conventional-prerelease --preid next ;;
+            graduate) set -- --conventional-graduate ;;
+            *) set -- "$BUMP" ;;
+          esac
+          pnpm lerna version "$@" --conventional-commits --no-git-tag-version --no-push --yes
+        env:
+          BUMP: ${{ needs.plan.outputs.bump }}
+
+      - name: Read version and release notes
+        id: release
+        run: |
+          echo "version=$(node -p 'require("./lerna.json").version')" >> "$GITHUB_OUTPUT"
+          {
+            echo "Merging this PR publishes the packages to npm, tags the release and creates the GitHub release."
+            echo
+            echo "<!-- bump: $BUMP -->"
+            echo
+            awk '/^##? \[[0-9]/ { n++ } n == 1' CHANGELOG.md
+          } > "$RUNNER_TEMP/release-pr-body.md"
+        env:
+          BUMP: ${{ needs.plan.outputs.bump }}
+
+      # Commits are created through the GitHub API as the app, so they are signed.
+      - name: Open or update the release PR
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: release
+          delete-branch: true
+          sign-commits: true
+          commit-message: "chore(release): v${{ steps.release.outputs.version }}"
+          title: "chore(release): v${{ steps.release.outputs.version }}"
+          body-path: ${{ runner.temp }}/release-pr-body.md
