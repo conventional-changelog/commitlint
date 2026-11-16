@@ -115,7 +115,14 @@ export type RulesConfig<V = RuleConfigQuality.User> = {
 	"scope-empty": RuleConfig<V>;
 	"scope-enum":
 		| EnumRuleConfig<V>
-		| ObjectRuleConfig<V, { scopes: readonly string[]; delimiters?: readonly string[] }>;
+		| ObjectRuleConfig<
+				V,
+				{
+					scopes: readonly string[];
+					delimiters?: readonly string[];
+					scopesByType?: Readonly<Record<string, readonly string[]>>;
+				}
+		  >;
 	"scope-max-length": LengthRuleConfig<V>;
 	"scope-min-length": LengthRuleConfig<V>;
 	"signed-off-by": RuleConfig<V, string>;
