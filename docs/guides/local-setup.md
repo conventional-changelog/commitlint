@@ -8,7 +8,7 @@ Follow the [Getting Started](/guides/getting-started) for basic installation and
 
 ## Add hook
 
-To use commitlint you need to setup `commit-msg` hook (currently `pre-commit` hook is not supported)
+To use commitlint you need to set up a `commit-msg` hook. commitlint runs on the `commit-msg` hook, not on git's `pre-commit` hook.
 
 ### Using a git hooks manager
 
@@ -221,6 +221,46 @@ node -e "fs.writeFileSync('.husky/commit-msg', 'deno task --eval commitlint --ed
 
 :::
 ::::
+
+---
+
+### Using the pre-commit framework
+
+If your project manages its hooks with [pre-commit](https://pre-commit.com), add commitlint as a local hook to your `.pre-commit-config.yaml`. pre-commit installs commitlint into an environment of its own, so the project does not need a `package.json`.
+
+```yaml
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]
+repos:
+  - repo: local
+    hooks:
+      - id: commitlint
+        name: commitlint
+        entry: commitlint --edit
+        language: node
+        stages: [commit-msg]
+        additional_dependencies:
+          - "@commitlint/cli"
+          - "@commitlint/config-conventional"
+```
+
+Then install the hooks:
+
+```sh
+pre-commit install
+```
+
+> [!NOTE]
+>
+> - List every package your configuration needs in `additional_dependencies`: shareable configs from `extends`, plugins and parser presets.
+> - Pin the versions (for example `"@commitlint/cli@21.2.4"`) for reproducible installs. `pre-commit autoupdate` skips `repo: local` hooks, so bump the versions by hand.
+> - commitlint runs on the `commit-msg` hook, so that hook type has to be installed. `default_install_hook_types` takes care of it; without it run `pre-commit install --hook-type commit-msg`.
+> - `default_stages: [pre-commit]` keeps your other hooks, the ones that declare no `stages`, from also running on the commit message.
+
+> [!IMPORTANT]
+> The hook needs Node.js 22.12 or later. By default pre-commit uses the `node` on your `PATH` only when it is installed outside your home directory. A Node.js from nvm, mise, volta or fnm is ignored, and pre-commit downloads the latest Node.js on the first run instead (on Windows it always downloads). A system Node.js outside your home directory is used as it is, even if it is older than commitlint needs.
+>
+> Set `language_version` on the hook to choose: `system` uses the `node` on your `PATH`, and a version number such as `22.12.0` makes pre-commit download that version.
 
 ---
 
