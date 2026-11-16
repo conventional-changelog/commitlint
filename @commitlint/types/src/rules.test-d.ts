@@ -17,6 +17,12 @@ test("scope-enum accepts an as-const object config", () => {
 	assertType<Partial<RulesConfig>>({ "scope-enum": scopeEnumObject });
 });
 
+test("scope-enum accepts per-type scopes", () => {
+	assertType<Partial<RulesConfig>>({
+		"scope-enum": [ERROR, "always", { scopes: ["foo"], scopesByType: { build: ["npm"] } }],
+	});
+});
+
 // Simple array form: regression check that the array-form enum config
 // remains assignable to RulesConfig when using `as const`.
 test("scope-enum accepts an as-const array config", () => {
