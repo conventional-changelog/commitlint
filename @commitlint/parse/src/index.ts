@@ -15,6 +15,31 @@ const defaultParser: Parser = (message, options) => {
 	return result;
 };
 
+// The presets capture the type of a header with `(\w*)`, which only matches ASCII word
+// characters. Types in other scripts, e.g. `功能: 新增登录`, would be left without a type.
+const asciiTypeCapture = "^(\\w*)";
+const unicodeTypeCapture = "^([\\p{L}\\p{N}_]*)";
+
+function widenTypeCapture(pattern: unknown): unknown {
+	if (
+		!(pattern instanceof RegExp) ||
+		/[uv]/.test(pattern.flags) ||
+		!pattern.source.startsWith(asciiTypeCapture)
+	) {
+		return pattern;
+	}
+
+	try {
+		return new RegExp(
+			unicodeTypeCapture + pattern.source.slice(asciiTypeCapture.length),
+			pattern.flags + "u",
+		);
+	} catch {
+		// the rest of the pattern is not valid in unicode mode
+		return pattern;
+	}
+}
+
 export async function parse(
 	message: string,
 	parser: Parser = defaultParser,
@@ -34,6 +59,11 @@ export async function parse(
 		fieldPattern: null,
 		...userOpts,
 	};
+	for (const key of ["headerPattern", "breakingHeaderPattern"] as const) {
+		if (opts[key]) {
+			opts[key] = widenTypeCapture(opts[key]) as RegExp;
+		}
+	}
 	const parsed = parser(message, opts) as Commit;
 	parsed.raw = message;
 	return parsed;
