@@ -43,12 +43,10 @@ test("does not resolve missing relative configs from the tool installation", asy
 	const dynamicImport = vi.fn(() => ({}));
 
 	await expect(
-		resolveExtends({ extends: ["./index.js"] }, {
+		resolveExtends({ extends: ["../package.json"] }, {
 			cwd,
 			dynamicImport,
-			resolveGlobal: () => {
-				throw new Error("Cannot find module");
-			},
+			resolveGlobal: vi.fn(),
 		} as ResolveExtendsContext),
 	).rejects.toThrow(/Cannot find module/);
 
@@ -57,7 +55,9 @@ test("does not resolve missing relative configs from the tool installation", asy
 
 test("does not bypass a caller-supplied config resolver", async () => {
 	const dynamicImport = vi.fn(() => ({}));
-	const error = new Error("Config denied by custom resolver");
+	const error = Object.assign(new Error("Config denied by custom resolver"), {
+		code: "MODULE_NOT_FOUND",
+	});
 
 	await expect(
 		resolveExtends({ extends: ["@commitlint/config-conventional"] }, {

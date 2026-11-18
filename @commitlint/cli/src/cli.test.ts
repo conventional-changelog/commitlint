@@ -241,8 +241,12 @@ test("should fail for non-conventional input from stdin without config file with
 
 test.each([
 	["feat: valid message", ExitCode.CommitlintDefault, ""],
-	["not conventional", ExitCode.CommitlintErrorDefault, "type may not be empty"],
-])("should resolve a preset installed with the tool for %s", async (message, exitCode, error) => {
+	[
+		"not conventional",
+		ExitCode.CommitlintErrorDefault,
+		expect.stringContaining("type may not be empty"),
+	],
+])("should resolve a preset installed with the tool for %s", async (message, exitCode, stdout) => {
 	const cwd = await gitBootstrap("fixtures/empty");
 	await fs.writeFile(
 		path.join(cwd, "commitlint.config.js"),
@@ -250,12 +254,18 @@ test.each([
 	);
 	const result = cli([], {
 		cwd,
-		env: { NODE_PATH: "", npm_config_cache: path.join(cwd, ".npm-cache") },
+		env: {
+			NODE_PATH: "",
+			npm_config_cache: path.join(cwd, ".npm-cache"),
+			npm_config_prefix: cwd,
+			XDG_DATA_HOME: cwd,
+			LOCALAPPDATA: cwd,
+		},
 	})(message);
 	const output = await result;
 
 	expect(output.stderr).toEqual("");
-	expect(output.stdout).toContain(error);
+	expect(output.stdout).toEqual(stdout);
 	expect(result.exitCode).toBe(exitCode);
 });
 
