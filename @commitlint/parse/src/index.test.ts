@@ -387,3 +387,34 @@ test("leaves header patterns that do not start with a word capture alone", async
 	expect(actual.type).toBe(null);
 	expect(actual.subject).toBe(null);
 });
+
+test.each(["सुधार", "cafe\u0301"])(
+	"parses the type %s that contains combining marks",
+	async (type) => {
+		const actual = await parse(`${type}: subject`);
+
+		expect(actual.type).toBe(type);
+		expect(actual.subject).toBe("subject");
+	},
+);
+
+test("keeps what a custom header pattern matched before the type was widened", async () => {
+	const actual = await parse("feat: 😀", undefined, {
+		headerPattern: /^(\w*): (.{2})$/,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe("feat");
+	expect(actual.subject).toBe("😀");
+});
+
+test("keeps what a custom breaking header pattern matched before the type was widened", async () => {
+	const actual = await parse("feat!: 😀", undefined, {
+		headerPattern: /^(\w*)!?: (.*)$/,
+		breakingHeaderPattern: /^(\w*)(?:\((.*)\))?!: (.{2})$/,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe("feat");
+	expect(actual.notes).toMatchObject([{ title: "BREAKING CHANGE", text: "😀" }]);
+});
