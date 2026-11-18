@@ -17,8 +17,9 @@ const defaultParser: Parser = (message, options) => {
 
 // The presets capture the type of a header with `(\w*)`, which only matches ASCII word
 // characters. Types in other scripts, e.g. `功能: 新增登录`, would be left without a type.
+const hasNonAscii = /\P{ASCII}/u;
 const asciiTypeCapture = "^(\\w*)";
-const unicodeTypeCapture = "^([\\p{L}\\p{N}_]*)";
+const unicodeTypeCapture = "^([\\p{L}\\p{M}\\p{N}_]*)";
 
 function widenTypeCapture(pattern: unknown): unknown {
 	if (
@@ -40,6 +41,19 @@ function widenTypeCapture(pattern: unknown): unknown {
 	}
 }
 
+function widenTypeCaptures<T extends Record<string, any>>(opts: T): T | null {
+	const widened: Record<string, any> = { ...opts };
+	let changed = false;
+	for (const key of ["headerPattern", "breakingHeaderPattern"]) {
+		const pattern = widenTypeCapture(opts[key]);
+		if (pattern !== opts[key]) {
+			widened[key] = pattern;
+			changed = true;
+		}
+	}
+	return changed ? (widened as T) : null;
+}
+
 export async function parse(
 	message: string,
 	parser: Parser = defaultParser,
@@ -59,12 +73,18 @@ export async function parse(
 		fieldPattern: null,
 		...userOpts,
 	};
-	for (const key of ["headerPattern", "breakingHeaderPattern"] as const) {
-		if (opts[key]) {
-			opts[key] = widenTypeCapture(opts[key]) as RegExp;
+	let parsed = parser(message, opts) as Commit;
+	// Adding the `u` flag changes how the whole pattern reads, so the widened patterns
+	// are only a second try for non-ASCII headers that got no type from the original ones.
+	if (parsed.type == null && hasNonAscii.test(message)) {
+		const widened = widenTypeCaptures(opts);
+		if (widened) {
+			const retried = parser(message, widened) as Commit;
+			if (retried.type != null) {
+				parsed = retried;
+			}
 		}
 	}
-	const parsed = parser(message, opts) as Commit;
 	parsed.raw = message;
 	return parsed;
 }

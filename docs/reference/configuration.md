@@ -265,7 +265,7 @@ The parser is powered by [`conventional-commits-parser`](https://github.com/conv
 | `noteKeywords`          | Keywords that mark footer notes (e.g. `["BREAKING CHANGE"]`)         |
 | `breakingHeaderPattern` | Regex to detect breaking changes in the header (e.g. the `!` marker) |
 
-A `headerPattern` or `breakingHeaderPattern` that starts with `^(\w*)` also matches types written in other scripts, e.g. `功能: 新增登录`. commitlint reads that leading capture as letters, numbers and `_` of any script. Patterns that already use the `u` or `v` flag and patterns that start differently are used as written.
+If a header with non-ASCII characters gets no type, commitlint tries again with a `headerPattern` or `breakingHeaderPattern` that starts with `^(\w*)` rewritten to read the type as letters, combining marks, numbers and `_` of any script (and the `u` flag added), so `功能: 新增登录` has the type `功能`. The result of the first try is kept when it already has a type, and patterns that use the `u` or `v` flag or start differently are used as written.
 
 For the complete list of options, see the [`conventional-commits-parser` documentation](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-commits-parser#options).
 
