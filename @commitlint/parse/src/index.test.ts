@@ -316,3 +316,74 @@ test("parses footer with noteKeywords containing regex-special characters", asyn
 	expect(actual.notes).toHaveLength(1);
 	expect(actual.notes[0].title).toBe("[1]");
 });
+
+test("parses a non-ASCII type", async () => {
+	const actual = await parse("功能: 新增登录");
+
+	expect(actual.type).toBe("功能");
+	expect(actual.scope).toBe(null);
+	expect(actual.subject).toBe("新增登录");
+});
+
+test("parses a non-ASCII type with a scope", async () => {
+	const actual = await parse("修复(面试评价): 测试");
+
+	expect(actual.type).toBe("修复");
+	expect(actual.scope).toBe("面试评价");
+	expect(actual.subject).toBe("测试");
+});
+
+test.each(["функция", "über", "機能", "feat2", "fix_it", "日本語_2"])(
+	"parses the type %s made of letters, numbers and underscores",
+	async (type) => {
+		const actual = await parse(`${type}: subject`);
+
+		expect(actual.type).toBe(type);
+		expect(actual.subject).toBe("subject");
+	},
+);
+
+test.each(["功 能: subject", "功能。: subject", "功能-x: subject"])(
+	"does not accept spaces or punctuation in the type of %s",
+	async (header) => {
+		const actual = await parse(header);
+
+		expect(actual.type).toBe(null);
+		expect(actual.subject).toBe(null);
+	},
+);
+
+test("parses a non-ASCII type with the conventional commits header patterns", async () => {
+	const parserOpts = {
+		headerPattern: /^(\w*)(?:\((.*)\))?!?: (.*)$/,
+		breakingHeaderPattern: /^(\w*)(?:\((.*)\))?!: (.*)$/,
+		headerCorrespondence: ["type", "scope", "subject"],
+	};
+
+	const actual = await parse("功能(登录)!: 新增登录", undefined, parserOpts);
+
+	expect(actual.type).toBe("功能");
+	expect(actual.scope).toBe("登录");
+	expect(actual.subject).toBe("新增登录");
+	expect(actual.notes).toMatchObject([{ title: "BREAKING CHANGE", text: "新增登录" }]);
+});
+
+test("keeps the flags of the header pattern", async () => {
+	const actual = await parse("功能: SUBJECT", undefined, {
+		headerPattern: /^(\w*): (subject)$/i,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe("功能");
+	expect(actual.subject).toBe("SUBJECT");
+});
+
+test("leaves header patterns that do not start with a word capture alone", async () => {
+	const actual = await parse("功能: subject", undefined, {
+		headerPattern: /^([a-z]*): (.*)$/,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe(null);
+	expect(actual.subject).toBe(null);
+});
