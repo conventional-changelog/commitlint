@@ -21,10 +21,6 @@ const hasNonAscii = /\P{ASCII}/u;
 const asciiTypeCapture = "^(\\w*)";
 const unicodeTypeCapture = "^([\\p{L}\\p{M}\\p{N}_]*)";
 
-function headerOf(message: string): string {
-	return message.trimStart().split("\n", 1)[0];
-}
-
 function widenTypeCapture(pattern: unknown): unknown {
 	if (
 		!(pattern instanceof RegExp) ||
@@ -45,7 +41,7 @@ function widenTypeCapture(pattern: unknown): unknown {
 	}
 }
 
-function widenTypeCaptures<T extends Record<string, any>>(opts: T): T | null {
+function widenHeaderPatterns<T extends Record<string, any>>(opts: T): T | null {
 	const widened: Record<string, any> = { ...opts };
 	let changed = false;
 	for (const key of ["headerPattern", "breakingHeaderPattern"]) {
@@ -81,8 +77,8 @@ export async function parse(
 	// Adding the `u` flag changes how the whole pattern reads, so the widened patterns
 	// are only a second try for non-ASCII headers that got no type from the original ones.
 	// A custom parser is not asked again, as it never asked for these patterns.
-	if (parser === defaultParser && parsed.type == null && hasNonAscii.test(headerOf(message))) {
-		const widened = widenTypeCaptures(opts);
+	if (parser === defaultParser && parsed.type == null && hasNonAscii.test(parsed.header ?? "")) {
+		const widened = widenHeaderPatterns(opts);
 		if (widened) {
 			const retried = parser(message, widened) as Commit;
 			if (retried.type != null) {
