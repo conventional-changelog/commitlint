@@ -36,6 +36,7 @@ export async function parse(
 	};
 	const parsed = parser(message, opts) as Commit;
 	parsed.raw = message;
+
 	return parsed;
 }
 
