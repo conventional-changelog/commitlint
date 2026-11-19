@@ -368,6 +368,15 @@ test("parses a non-ASCII type with the conventional commits header patterns", as
 	expect(actual.notes).toMatchObject([{ title: "BREAKING CHANGE", text: "新增登录" }]);
 });
 
+test("parses a non-ASCII type after a leading comment", async () => {
+	const actual = await parse("# comment\n功能: subject", undefined, {
+		commentChar: "#",
+	});
+
+	expect(actual.type).toBe("功能");
+	expect(actual.subject).toBe("subject");
+});
+
 test("keeps the flags of the header pattern", async () => {
 	const actual = await parse("功能: SUBJECT", undefined, {
 		headerPattern: /^(\w*): (subject)$/i,
