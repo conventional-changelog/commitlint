@@ -195,12 +195,15 @@ describe("getQuestions", () => {
 		).toBe(false);
 	});
 
-	test("should not ask for body info on affected issues when the body must be empty", () => {
+	test("should not ask for body info when the body must be empty", () => {
 		setRules({
 			"body-empty": [RuleConfigSeverity.Error, "always"],
 		});
 		setPromptConfig({
 			questions: {
+				isBreaking: { description: "Are there any breaking changes?" },
+				breakingBody: { description: "Describe the reason for the change" },
+				breaking: { description: "Describe the breaking changes" },
 				isIssueAffected: {
 					description: "Does this change affect any open issues?",
 				},
@@ -216,7 +219,7 @@ describe("getQuestions", () => {
 
 		const names = getQuestions().map((question) => question.name);
 
-		expect(names).toEqual(["isIssueAffected", "issues"]);
+		expect(names).toEqual(["isBreaking", "breaking", "isIssueAffected", "issues"]);
 	});
 
 	describe("references-empty", () => {
