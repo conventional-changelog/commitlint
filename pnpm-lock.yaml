@@ -420,6 +420,9 @@ importers:
       '@pnpm/read-project-manifest':
         specifier: ^6.0.0
         version: 6.0.10
+      picomatch:
+        specifier: ^4.0.7
+        version: 4.0.7
       read-yaml-file:
         specifier: ^3.0.0
         version: 3.0.0
@@ -433,6 +436,9 @@ importers:
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.5
+      '@types/picomatch':
+        specifier: ^4.0.3
+        version: 4.0.3
       typescript:
         specifier: ^7.0.0
         version: 7.0.2
@@ -2544,6 +2550,9 @@ packages:
 
   '@types/parse-path@7.0.3':
     resolution: {integrity: sha512-LriObC2+KYZD3FzCrgWGv/qufdUy4eXrxcLgQMfYXgPbLIecKIsVBaQgUPmxSSLcjmYbDTQbMgr6qr6l/eb7Bg==}
+
+  '@types/picomatch@4.0.3':
+    resolution: {integrity: sha512-iG0T6+nYJ9FAPmx9SsUlnwcq1ZVRuCXcVEvWnntoPlrOpwtSTKNDC9uVAxTsC3PUvJ+99n4RpAcNgBbHX3JSnQ==}
 
   '@types/require-from-string@1.2.3':
     resolution: {integrity: sha512-kxLU5xvefySGpp1Z7VCt4m5AhQJUZ8HjW8ADdeS7GieqFPHLAde007fd9bxeXEsFXyaA0LeWIoQXyXP17mGpIg==}
@@ -6447,6 +6456,8 @@ snapshots:
       undici-types: 8.9.0
 
   '@types/parse-path@7.0.3': {}
+
+  '@types/picomatch@4.0.3': {}
 
   '@types/require-from-string@1.2.3': {}
 
