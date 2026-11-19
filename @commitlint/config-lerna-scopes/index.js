@@ -1,7 +1,10 @@
 import path from "node:path";
+import { createRequire } from "node:module";
 import fs from "node:fs/promises";
 import { glob } from "node:fs/promises";
 import configWorkspaceScopes from "@commitlint/config-workspace-scopes";
+
+const require = createRequire(import.meta.url);
 
 export default {
 	utils: { getProjects },
@@ -63,10 +66,11 @@ async function getProjects(context) {
 	const ctx = context || {};
 	const cwd = ctx.cwd || process.cwd();
 
-	// try to read workspaces for backwards compatibility
-	const workspacePackages = await configWorkspaceScopes.utils.getPackages({
-		cwd,
-	});
+	// The deprecated workspace fallback only applies to array declarations.
+	const { workspaces } = require(path.join(cwd, "package.json"));
+	const workspacePackages = Array.isArray(workspaces)
+		? await configWorkspaceScopes.utils.getPackages({ cwd })
+		: [];
 	// native npm/yarn workspaces detected, inform user to use new package instead
 	if (workspacePackages.length > 0) {
 		console.warn(
