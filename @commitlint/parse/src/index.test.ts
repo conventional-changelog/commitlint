@@ -418,3 +418,55 @@ test("keeps what a custom breaking header pattern matched before the type was wi
 	expect(actual.type).toBe("feat");
 	expect(actual.notes).toMatchObject([{ title: "BREAKING CHANGE", text: "😀" }]);
 });
+
+test("does not call a custom parser a second time", async () => {
+	const calls: ParserOptions[] = [];
+	const parser = (_message: string, options?: ParserOptions) => {
+		calls.push(options as ParserOptions);
+		return { type: null, scope: null, subject: null, header: "功能: subject" } as never;
+	};
+
+	await parse("功能: subject", parser, {
+		headerPattern: /^(\w*): (.*)$/,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(calls).toHaveLength(1);
+	expect(calls[0].headerPattern?.source).toBe("^(\\w*): (.*)$");
+});
+
+test.each([
+	["u", /^(\w*): (.*)$/u],
+	["v", new RegExp("^(\\w*): (.*)$", "v")],
+])("leaves a header pattern with the %s flag alone", async (_flag, headerPattern) => {
+	const actual = await parse("功能: subject", undefined, {
+		headerPattern,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe(null);
+	expect(actual.subject).toBe(null);
+});
+
+test("leaves a header pattern that is not valid in unicode mode alone", async () => {
+	// `\-` outside of a character class is a syntax error once the `u` flag is on
+	const headerPattern = new RegExp("^(\\w*)\\-: (.*)$");
+
+	const actual = await parse("功能-: subject", undefined, {
+		headerPattern,
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe(null);
+	expect(actual.subject).toBe(null);
+});
+
+test("still parses an ASCII type with a pattern that is not valid in unicode mode", async () => {
+	const actual = await parse("feat-: subject", undefined, {
+		headerPattern: new RegExp("^(\\w*)\\-: (.*)$"),
+		headerCorrespondence: ["type", "subject"],
+	});
+
+	expect(actual.type).toBe("feat");
+	expect(actual.subject).toBe("subject");
+});

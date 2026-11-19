@@ -3,6 +3,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 
 import lint from "@commitlint/lint";
+import { RuleConfigSeverity } from "@commitlint/types";
 
 import config from "./index.js";
 
@@ -13,9 +14,9 @@ const dynamicImport = async (id: string) => {
 	return ("default" in imported && imported.default) || imported;
 };
 
-const commitLint = async (message: string) => {
+const commitLint = async (message: string, customRules: Parameters<typeof lint>[1] = rules) => {
 	const preset = await (await dynamicImport(parserPreset))();
-	return lint(message, rules, {
+	return lint(message, customRules, {
 		parserOpts: preset.parser || preset.parserOpts,
 	});
 };
@@ -240,4 +241,28 @@ test("valid messages", async () => {
 		expect(result.errors).toEqual([]);
 		expect(result.warnings).toEqual([]);
 	});
+});
+
+test("non-ASCII type from the issue config", async () => {
+	// the rules of https://github.com/conventional-changelog/commitlint/issues/2674
+	const issueRules = {
+		...rules,
+		"type-case": [RuleConfigSeverity.Disabled],
+		"subject-case": [RuleConfigSeverity.Disabled],
+		"type-enum": [
+			RuleConfigSeverity.Error,
+			"always",
+			[...rules["type-enum"][2], "构建", "功能", "修复"],
+		],
+	} as Parameters<typeof lint>[1];
+
+	const actual = await commitLint("功能:  new feature", issueRules);
+
+	expect(actual.valid).toBe(true);
+	expect(actual.errors).toEqual([]);
+
+	const rejected = await commitLint("功能:  new feature");
+
+	expect(rejected.valid).toBe(false);
+	expect(rejected.errors).toMatchObject([{ name: "type-enum" }]);
 });
