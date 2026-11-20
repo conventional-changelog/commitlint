@@ -89,6 +89,29 @@ test("get edit commit message while skipping first commit", async () => {
 	expect(actual).toEqual(expected);
 });
 
+test("only reads first-parent commits when --first-parent is passed", async () => {
+	const cwd: string = await git.bootstrap();
+	const commit = (msg: string) =>
+		x("git", ["commit", "--allow-empty", "-m", msg], { nodeOptions: { cwd } });
+
+	await commit("base");
+	await x("git", ["checkout", "-b", "side"], { nodeOptions: { cwd } });
+	await commit("side");
+	await x("git", ["checkout", "-"], { nodeOptions: { cwd } });
+	await commit("main");
+	await x("git", ["merge", "--no-ff", "side", "-m", "merge side"], {
+		nodeOptions: { cwd },
+	});
+
+	const expected = ["merge side\n\n", "main\n\n"];
+	const actual = await read({
+		from: "HEAD~2",
+		cwd,
+		gitLogArgs: "--first-parent",
+	});
+	expect(actual).toEqual(expected);
+});
+
 test("should only read the last commit", async () => {
 	const cwd: string = await git.bootstrap();
 
