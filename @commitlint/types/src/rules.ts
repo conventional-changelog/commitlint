@@ -2,12 +2,13 @@ import type { Commit } from "conventional-commits-parser";
 
 import { TargetCaseType } from "./ensure.js";
 
+export type RuleHint = string;
 /**
  * Rules match the input either as successful or failed.
  * For example, when `header-full-stop` detects a full stop and is set as "always"; it's true.
  * If the `header-full-stop` discovers a full stop but is set to "never"; it's false.
  */
-export type RuleOutcome = Readonly<[boolean, string?]>;
+export type RuleOutcome = Readonly<[boolean, string?, RuleHint?]>;
 
 /**
  * Rules receive a parsed commit, condition, and possible additional settings through value.

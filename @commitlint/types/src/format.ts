@@ -8,6 +8,7 @@ export interface FormattableProblem {
 	level: RuleConfigSeverity;
 	name: keyof QualifiedRules;
 	message: string;
+	hint?: string;
 }
 
 export interface FormattableResult {

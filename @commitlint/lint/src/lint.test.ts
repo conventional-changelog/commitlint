@@ -546,6 +546,38 @@ test("accepts a body that is followed by a trailer", async () => {
 	expect(report.valid).toBe(true);
 });
 
+test.each([RuleConfigSeverity.Warning, RuleConfigSeverity.Error])(
+	"preserves hints on failed rules at severity %s",
+	async (level) => {
+		const actual = await lint("missing prefix", { "type-empty": [level, "never"] });
+		expect([...actual.errors, ...actual.warnings]).toEqual([
+			expect.objectContaining({
+				name: "type-empty",
+				hint: 'add a type before the subject, e.g. "feat: add new feature"',
+			}),
+		]);
+		expect(actual.valid).toBe(level === RuleConfigSeverity.Warning);
+	},
+);
+
+test("passing rules with hints produce no diagnostics", async () => {
+	const actual = await lint("feat: change", { "subject-empty": [2, "never"] });
+	expect(actual).toEqual({ valid: true, input: "feat: change", errors: [], warnings: [] });
+});
+
+test("preserves legacy two-element plugin outcomes", async () => {
+	const report = await lint(
+		"feat: change",
+		{ "legacy-rule": [2, "always"] },
+		{
+			plugins: { local: { rules: { "legacy-rule": () => [false, "legacy failure"] } } },
+		},
+	);
+	expect(report.errors).toEqual([
+		{ level: 2, valid: false, name: "legacy-rule", message: "legacy failure" },
+	]);
+});
+
 test("negative on a non-ASCII type that is not in type-enum", async () => {
 	const actual = await lint("功能: 新增登录", {
 		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],

@@ -59,13 +59,15 @@ export function formatResult(
 	const { signs = DEFAULT_SIGNS, colors = DEFAULT_COLORS, color: enabled = true } = options;
 	const { errors = [], warnings = [] } = result;
 
-	const problems = [...errors, ...warnings].map((problem) => {
+	const problems = [...errors, ...warnings].flatMap((problem) => {
 		const sign = signs[problem.level] || "";
 		const colorName: PicocolorsColor = colors[problem.level] || ("white" as const);
 		const colorFn = pc[colorName];
 		const decoration = enabled ? colorFn(sign) : sign;
 		const name = enabled ? pc.gray(`[${problem.name}]`) : `[${problem.name}]`;
-		return `${decoration}   ${problem.message} ${name}`;
+		const line = `${decoration}   ${problem.message} ${name}`;
+		const hintLines = problem.hint ? problem.hint.split(/\r?\n/).map((hint) => `    ${hint}`) : [];
+		return [line, ...hintLines];
 	});
 
 	const sign = selectSign(result);

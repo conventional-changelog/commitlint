@@ -69,6 +69,7 @@ const errors = {
 	typeEmpty: {
 		level: 2,
 		message: "type may not be empty",
+		hint: 'add a type before the subject, e.g. "feat: add new feature"',
 		name: "type-empty",
 		valid: false,
 	},
@@ -81,6 +82,7 @@ const errors = {
 	subjectEmpty: {
 		level: 2,
 		message: "subject may not be empty",
+		hint: 'add a subject after the type, e.g. "feat(Compiler): add new feature"',
 		name: "subject-empty",
 		valid: false,
 	},
