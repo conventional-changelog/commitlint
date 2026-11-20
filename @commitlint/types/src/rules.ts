@@ -54,9 +54,8 @@ export type RuleConfigCondition = "always" | "never";
 
 export type RuleConfigTuple<T> = T extends void
 	? Readonly<[RuleConfigSeverity.Disabled]> | Readonly<[RuleConfigSeverity, RuleConfigCondition]>
-	:
-			| Readonly<[RuleConfigSeverity.Disabled]>
-			| Readonly<[RuleConfigSeverity, RuleConfigCondition, T]>;
+	: | Readonly<[RuleConfigSeverity.Disabled]>
+		| Readonly<[RuleConfigSeverity, RuleConfigCondition, T]>;
 
 export enum RuleConfigQuality {
 	User,

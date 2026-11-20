@@ -298,17 +298,34 @@ function resolveConfig(raw: string, context: ResolveExtendsContext = {}): string
 	const resolve = context.resolve || resolveId;
 	const id = getId(raw, context.prefix);
 
-	let resolved: string;
 	try {
-		resolved = resolve(id, context);
-	} catch (err) {
-		const legacy = getId(raw, "conventional-changelog-lint-config");
-		resolved = resolve(legacy, context);
-		console.warn(
-			`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`,
-		);
+		return resolve(id, context);
+	} catch {
+		// Try the legacy name before looking in the tool installation.
 	}
 
+	const legacy = getId(raw, "conventional-changelog-lint-config");
+	let resolved: string;
+	try {
+		resolved = resolve(legacy, context);
+	} catch (error) {
+		if (
+			!context.resolve &&
+			!path.isAbsolute(id) &&
+			!id.startsWith(".") &&
+			(error as NodeJS.ErrnoException)?.code === "MODULE_NOT_FOUND"
+		) {
+			const installed = resolveFromSilent(id);
+			if (installed !== undefined) {
+				return installed;
+			}
+		}
+		throw error;
+	}
+
+	console.warn(
+		`Resolving ${raw} to legacy config ${legacy}. To silence this warning raise an issue at 'npm repo ${legacy}' to rename to ${id}.`,
+	);
 	return resolved;
 }
 
@@ -331,7 +348,7 @@ function resolveId(specifier: string, context: ResolveExtendsContext = {}): stri
 	throw Object.assign(err, { code: "MODULE_NOT_FOUND" });
 }
 
-export function resolveFromSilent(specifier: string, parent: string): string | undefined {
+export function resolveFromSilent(specifier: string, parent?: string): string | undefined {
 	try {
 		return resolveFrom(specifier, parent);
 	} catch {}
