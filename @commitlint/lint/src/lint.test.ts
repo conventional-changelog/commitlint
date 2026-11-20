@@ -545,3 +545,21 @@ test("accepts a body that is followed by a trailer", async () => {
 
 	expect(report.valid).toBe(true);
 });
+
+test("negative on a non-ASCII type that is not in type-enum", async () => {
+	const actual = await lint("功能: 新增登录", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "fix"]],
+	});
+
+	expect(actual.valid).toBe(false);
+	expect(actual.errors).toMatchObject([{ name: "type-enum" }]);
+});
+
+test("positive on a non-ASCII type that is in type-enum", async () => {
+	const actual = await lint("功能: 新增登录", {
+		"type-enum": [RuleConfigSeverity.Error, "always", ["feat", "功能"]],
+		"type-empty": [RuleConfigSeverity.Error, "never"],
+	});
+
+	expect(actual.valid).toBe(true);
+});
