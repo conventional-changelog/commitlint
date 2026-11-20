@@ -295,6 +295,36 @@ test("true for numeric on lowercase", () => {
 	expect(actual).toBe(true);
 });
 
+test("false for uppercase word between apostrophes on lowercase", () => {
+	const actual = ensure("don't Break when it's set", "lowercase");
+	expect(actual).toBe(false);
+});
+
+test("true for lowercase with apostrophes on lowercase", () => {
+	const actual = ensure("don't break when it's set", "lowercase");
+	expect(actual).toBe(true);
+});
+
+test("true for lowercase with apostrophe and 'Any_CASE_iN_single-quotes' on lowercase", () => {
+	const actual = ensure("don't use 'Any_CASE_iN_single-quotes' anymore", "lowercase");
+	expect(actual).toBe(true);
+});
+
+test("false for uppercase word between apostrophes in non-ASCII words on lowercase", () => {
+	const actual = ensure("ne'Uppercase dé'jà", "lowercase");
+	expect(actual).toBe(false);
+});
+
+test("false for uppercase word after an apostrophe following a combining mark on lowercase", () => {
+	const actual = ensure("cafe\u0301's New 'Menu' works", "lowercase");
+	expect(actual).toBe(false);
+});
+
+test("false for uppercase word quoted right after an accented letter on lowercase", () => {
+	const actual = ensure("d\u00e9'Foo' x", "lowercase");
+	expect(actual).toBe(false);
+});
+
 test("throw TypeError for invalid case name", () => {
 	const actualFn = () => ensure("anything", "someweirdcase" as any);
 	expect(actualFn).toThrow(TypeError);
