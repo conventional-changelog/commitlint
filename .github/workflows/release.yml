@@ -1,0 +1,129 @@
+name: Release
+
+# Publishes a release once the release PR (see release-pr.yml) is merged:
+# publishes every package version that is not on npm yet, tags the commit,
+# creates the GitHub release and starts the container build.
+#
+# npm authenticates this workflow through trusted publishing (OIDC), so there
+# is no npm token. Each package's trusted publisher on npmjs.com must name this
+# repository, this workflow file (release.yml) and the `release` environment.
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - lerna.json
+  # Re-run after a failed publish: only versions missing on npm get published.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.repository == 'conventional-changelog/commitlint' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    outputs:
+      sha: ${{ steps.release.outputs.sha }}
+      tag: ${{ steps.release.outputs.tag }}
+      dist-tag: ${{ steps.release.outputs.dist-tag }}
+      already-released: ${{ steps.release.outputs.already-released }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Find the release
+        id: release
+        run: |
+          # On a manual re-run master may have moved on, so release the commit
+          # that last changed lerna.json, not the latest one.
+          sha=$(git log -1 --format=%H -- lerna.json)
+          version=$(git show "${sha}:lerna.json" | node -p 'JSON.parse(require("fs").readFileSync(0, "utf8")).version')
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "tag=v$version" >> "$GITHUB_OUTPUT"
+          case "$version" in
+            *-*) echo "dist-tag=next" >> "$GITHUB_OUTPUT" ;;
+            *) echo "dist-tag=latest" >> "$GITHUB_OUTPUT" ;;
+          esac
+          if gh release view "v$version" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "v$version is already released."
+            echo "already-released=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+  publish:
+    needs: check
+    if: needs.check.outputs.already-released != 'true'
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write # create the tag and the GitHub release
+      id-token: write # npm trusted publishing and provenance
+      actions: write # start the container build
+    env:
+      SHA: ${{ needs.check.outputs.sha }}
+      TAG: ${{ needs.check.outputs.tag }}
+      DIST_TAG: ${{ needs.check.outputs.dist-tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.check.outputs.sha }}
+          persist-credentials: false
+
+      # pnpm version is sourced from package.json `packageManager` field.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Tests already ran on this commit in the merge queue.
+      - name: Build packages
+        run: pnpm build
+
+      # lerna exchanges the GitHub OIDC token for npm credentials itself and
+      # adds provenance for public repositories.
+      - name: Publish to npm
+        run: pnpm lerna publish from-package --dist-tag "$DIST_TAG" --yes
+
+      # Annotated, because lerna finds the last release with `git describe`,
+      # which ignores lightweight tags.
+      - name: Tag the release
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" > /dev/null 2>&1; then
+            echo "$TAG already exists."
+            exit 0
+          fi
+          tag_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/tags" -f tag="$TAG" -f message="$TAG" -f object="$SHA" -f type=commit --jq .sha)
+          gh api "repos/$GITHUB_REPOSITORY/git/refs" -f ref="refs/tags/$TAG" -f sha="$tag_sha" > /dev/null
+
+      - name: Create GitHub release
+        run: |
+          awk '/^##? \[[0-9]/ { n++ } n == 1' CHANGELOG.md > "$RUNNER_TEMP/release-notes.md"
+          if [ "$DIST_TAG" = next ]; then set -- --prerelease; else set -- --latest; fi
+          gh release create "$TAG" --verify-tag --title "$TAG" --notes-file "$RUNNER_TEMP/release-notes.md" "$@"
+
+      # Tags created with GITHUB_TOKEN don't trigger other workflows, so start
+      # the container build here. Only for stable versions: the image installs
+      # the `latest` packages from npm. npm's CDN can take a few minutes to
+      # serve every new tarball, hence the wait. If it fails, run the
+      # container build workflow by hand on the tag.
+      - name: Start container build
+        if: needs.check.outputs.dist-tag == 'latest'
+        run: |
+          sleep 300
+          gh workflow run container-build.yml --repo "$GITHUB_REPOSITORY" --ref "$TAG"
