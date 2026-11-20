@@ -3,7 +3,6 @@ import type { Commit } from "conventional-commits-parser";
 import { TargetCaseType } from "./ensure.js";
 
 export type RuleHint = string;
-
 /**
  * Rules match the input either as successful or failed.
  * For example, when `header-full-stop` detects a full stop and is set as "always"; it's true.

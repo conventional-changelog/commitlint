@@ -374,3 +374,24 @@ test("format result should not contain `Get help` prefix if helpUrl is not provi
 
 	expect(actual).not.toEqual(expect.arrayContaining([expect.stringContaining("Get help:")]));
 });
+
+test("prints multiline hints below their problem without duplicating messages", () => {
+	const actual = formatResult(
+		{
+			errors: [
+				{
+					level: 2,
+					name: "type-empty",
+					message: "type may not be empty",
+					hint: "add a type\nexample: feat: change",
+				},
+			],
+		},
+		{ color: false },
+	).join("\n");
+	expect(actual).toContain(
+		"✖   type may not be empty [type-empty]\n    add a type\n    example: feat: change",
+	);
+	expect(actual.match(/type may not be empty/g)).toHaveLength(1);
+	expect(actual).toContain("1 problems, 0 warnings");
+});

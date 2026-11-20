@@ -24,7 +24,7 @@ test("with plain message it should succeed for empty keyword", async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.omit);
+	expect(hint).toEqual(hints.add);
 });
 
 test('with plain message it should succeed for "never"', async () => {
@@ -32,7 +32,7 @@ test('with plain message it should succeed for "never"', async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.omit);
+	expect(hint).toEqual(hints.add);
 });
 
 test('with plain message it should fail for "always"', async () => {
@@ -40,7 +40,7 @@ test('with plain message it should fail for "always"', async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.add);
+	expect(hint).toEqual(hints.omit);
 });
 
 test("with superfluous message it should fail for empty keyword", async () => {
@@ -48,7 +48,7 @@ test("with superfluous message it should fail for empty keyword", async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.omit);
+	expect(hint).toEqual(hints.add);
 });
 
 test('with superfluous message it should fail for "never"', async () => {
@@ -56,7 +56,7 @@ test('with superfluous message it should fail for "never"', async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.omit);
+	expect(hint).toEqual(hints.add);
 });
 
 test('with superfluous message it should fail for "always"', async () => {
@@ -64,7 +64,7 @@ test('with superfluous message it should fail for "always"', async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.add);
+	expect(hint).toEqual(hints.omit);
 });
 
 test("with empty message it should fail for empty keyword", async () => {
@@ -72,7 +72,7 @@ test("with empty message it should fail for empty keyword", async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.omit);
+	expect(hint).toEqual(hints.add);
 });
 
 test('with empty message it should fail for "never"', async () => {
@@ -80,7 +80,7 @@ test('with empty message it should fail for "never"', async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.omit);
+	expect(hint).toEqual(hints.add);
 });
 
 test('with empty message it should fail for "always"', async () => {
@@ -88,5 +88,5 @@ test('with empty message it should fail for "always"', async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.add);
+	expect(hint).toEqual(hints.omit);
 });

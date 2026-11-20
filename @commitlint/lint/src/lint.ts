@@ -146,7 +146,6 @@ export default async function lint(
 		.map(async (entry) => {
 			const [name, config] = entry;
 			const [level, when, value] = config!; //
-
 			const rule = allRules.get(name);
 
 			if (!rule) {
@@ -154,13 +153,15 @@ export default async function lint(
 			}
 
 			const executableRule = rule as Rule<unknown>;
-			const [valid, message] = await executableRule(parsed, when, value);
+			const executedRule = await executableRule(parsed, when, value);
+			const [valid, message, hint] = executedRule;
 
 			return {
 				level,
 				valid,
 				name,
 				message,
+				...(hint ? { hint } : {}),
 			};
 		});
 
@@ -171,6 +172,7 @@ export default async function lint(
 	const errors = results.filter(
 		(result) => result.level === RuleConfigSeverity.Error && !result.valid,
 	);
+
 	const warnings = results.filter(
 		(result) => result.level === RuleConfigSeverity.Warning && !result.valid,
 	);
@@ -180,6 +182,7 @@ export default async function lint(
 	const parserOptions = (opts.parserOpts as any)?.parser || opts.parserOpts;
 	const commentChar = parserOptions?.commentChar;
 	let input = message;
+
 	if (commentChar) {
 		const scissors = `${commentChar} ------------------------ >8 ------------------------`;
 		const lines = message.split(/(?<=\n)/);

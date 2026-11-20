@@ -853,3 +853,21 @@ async function writePkg(payload: unknown, options: TestOptions) {
 	const result = merge(pkg, payload);
 	await fs.writeFile(pkgPath, JSON.stringify(result, null, "  "));
 }
+
+test("prints rule hints once and respects quiet mode", async () => {
+	const cwd = await gitBootstrap("fixtures/default");
+	await fs.writeFile(
+		path.join(cwd, "commitlint.config.cjs"),
+		'module.exports = { rules: { "type-empty": [2, "never"] } };',
+	);
+	const args = ["--config", "commitlint.config.cjs", "--no-color"];
+	const result = cli(args, { cwd })("missing prefix");
+	const output = await result;
+	expect(output.stdout).toContain(
+		'type may not be empty [type-empty]\n    add a type before the subject, e.g. "feat: add new feature"',
+	);
+	expect(output.stdout.match(/type may not be empty/g)).toHaveLength(1);
+	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+	const quiet = await cli([...args, "--quiet"], { cwd })("missing prefix");
+	expect(quiet.stdout).toBe("");
+});

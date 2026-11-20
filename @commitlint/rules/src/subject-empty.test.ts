@@ -62,5 +62,5 @@ test('with subject fail for "always"', async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
-	expect(hint).toEqual(hints.add);
+	expect(hint).toEqual(hints.absent);
 });

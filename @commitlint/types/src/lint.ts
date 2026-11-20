@@ -43,4 +43,7 @@ export interface LintRuleOutcome {
 	name: string;
 	/** The message returned from the rule, if invalid */
 	message: string;
+
+	/** Optional guidance for correcting the rule violation. */
+	hint?: string;
 }

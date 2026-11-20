@@ -47,3 +47,13 @@ test('with type fail for "always"', async () => {
 	const expected = false;
 	expect(actual).toEqual(expected);
 });
+
+test("suggests adding a required type", async () => {
+	expect(typeEmpty(await parsed.empty, "never")[2]).toBe(
+		'add a type before the subject, e.g. "feat: add new feature"',
+	);
+});
+
+test("suggests removing a forbidden type", async () => {
+	expect(typeEmpty(await parsed.filled, "always")[2]).toBe("leave out the type prefix");
+});

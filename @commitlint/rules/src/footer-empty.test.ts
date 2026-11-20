@@ -29,7 +29,6 @@ const hints = {
 test("with simple message should succeed for empty keyword", async () => {
 	const [actual, message, hint] = footerEmpty(await parsed.simple);
 	const expected = true;
-	console.log(`hint is `, hint);
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
 	expect(hint).toEqual(hints.omit);
