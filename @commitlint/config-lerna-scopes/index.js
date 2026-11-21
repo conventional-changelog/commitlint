@@ -27,17 +27,20 @@ function normalizePatterns(patterns) {
 	return normalizedPatterns;
 }
 
-/**
- * Find all package.json contents in the defined cwd
- * @param {string} cwd
- * @returns A list of parsed package.json files as objects
- */
-async function findPackages(cwd) {
+async function readLernaPatterns(cwd) {
 	const json = await fs.readFile(path.join(cwd, "lerna.json"), {
 		encoding: "utf-8",
 	});
+	return JSON.parse(json)?.packages;
+}
 
-	const packages = JSON.parse(json)?.packages || [];
+/**
+ * Find all package.json contents in the defined cwd
+ * @param {string} cwd
+ * @param {string[]} packages
+ * @returns A list of parsed package.json files as objects
+ */
+async function findPackages(cwd, packages) {
 	if (packages.length === 0) {
 		return [];
 	}
@@ -66,11 +69,14 @@ async function getProjects(context) {
 	const ctx = context || {};
 	const cwd = ctx.cwd || process.cwd();
 
-	// The deprecated workspace fallback only applies to array declarations.
 	const { workspaces } = require(path.join(cwd, "package.json"));
-	const workspacePackages = Array.isArray(workspaces)
-		? await configWorkspaceScopes.utils.getPackages({ cwd })
-		: [];
+	const hasWorkspaceArray = Array.isArray(workspaces);
+	// Keep the legacy array fallback. For objects, Lerna's own list takes priority.
+	const lernaPatterns = hasWorkspaceArray ? undefined : await readLernaPatterns(cwd);
+	const workspacePackages =
+		hasWorkspaceArray || lernaPatterns == null
+			? await configWorkspaceScopes.utils.getPackages({ cwd })
+			: [];
 	// native npm/yarn workspaces detected, inform user to use new package instead
 	if (workspacePackages.length > 0) {
 		console.warn(
@@ -83,7 +89,8 @@ async function getProjects(context) {
 		return workspacePackages;
 	}
 
-	const packages = await findPackages(cwd);
+	const patterns = hasWorkspaceArray ? await readLernaPatterns(cwd) : lernaPatterns;
+	const packages = await findPackages(cwd, patterns || []);
 
 	return packages
 		.reduce((pkgNames, pkg) => {
