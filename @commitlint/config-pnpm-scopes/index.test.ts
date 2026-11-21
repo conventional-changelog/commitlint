@@ -1,4 +1,5 @@
 import { test, expect } from "vitest";
+import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -73,4 +74,15 @@ test("returns expected value for scoped pnpm repository", async () => {
 	const [, , value] = await fn({ cwd });
 
 	expect(value).toEqual(["a", "b", "global"]);
+});
+
+test("omits scopes excluded by pnpm workspace patterns", async () => {
+	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
+	await writeFile(
+		path.join(cwd, "pnpm-workspace.yaml"),
+		"packages:\n  - '!packages/b'\n  - 'packages/*'\n",
+	);
+
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["a", "global"]);
 });
