@@ -76,13 +76,23 @@ test("returns expected value for scoped pnpm repository", async () => {
 	expect(value).toEqual(["a", "b", "global"]);
 });
 
-test("omits scopes excluded by pnpm workspace patterns", async () => {
-	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
-	await writeFile(
-		path.join(cwd, "pnpm-workspace.yaml"),
-		"packages:\n  - '!packages/b'\n  - 'packages/*'\n",
-	);
-
+test("omits excluded workspace scopes without pruning same-named manifests", async () => {
+	const cwd = await npm.bootstrap("fixtures/excluded", __dirname);
 	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
 	expect(scopes).toEqual(["a", "global"]);
+});
+
+test.each([
+	["leading extglob", ["!(packages)/*"], ["global", "literal"]],
+	["excluded extglob", ["{packages,!packages}/*", "!!(packages)/*"], ["a", "b", "global"]],
+	["double bang", ["packages/*", "!!packages/a"], ["a", "b", "global"]],
+	["absolute exclusion", ["packages/*", "!${cwd}/packages/b"], ["a", "global"]],
+])("interprets a pnpm %s", async (_kind, patterns, expected) => {
+	const cwd = await npm.bootstrap("fixtures/excluded", __dirname);
+	const workspace = patterns.map((pattern) =>
+		pattern.replace("${cwd}", cwd.split(path.sep).join("/")),
+	);
+	await writeFile(path.join(cwd, "pnpm-workspace.yaml"), JSON.stringify({ packages: workspace }));
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(expected);
 });

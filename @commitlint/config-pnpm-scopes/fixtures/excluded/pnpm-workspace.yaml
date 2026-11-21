@@ -1,0 +1,6 @@
+packages:
+  - "**"
+  - "!."
+  - "!packages/b"
+  - "!**/test/**"
+  - '!\!packages/literal'
