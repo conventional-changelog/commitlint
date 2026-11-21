@@ -27,12 +27,14 @@ function workspacePatterns(patterns: string[], cwd: string) {
 	const excluded: string[] = [];
 	for (const pattern of patterns) {
 		const manifest = pattern.replace(/\/?$/, "/package.{json,json5,yaml}");
-		// pnpm treats a leading !(...) as an inclusive extglob.
+		// Match pnpm's tinyglobby pattern handling: !(...) stays inclusive,
+		// and a double bang is ignored unless it excludes an extglob.
 		if (!pattern.startsWith("!") || pattern.startsWith("!(")) {
 			included.push(manifest);
 		} else if (!pattern.startsWith("!!") || pattern.startsWith("!!(")) {
 			const exclusion = manifest.slice(1);
-			// Workspace globs use forward slashes. A leading backslash can escape a literal "!".
+			// Match absolute exclusions relative to the workspace. Keep escapes
+			// such as \! in relative globs so the matcher can read the literal bang.
 			const absolute = path.posix.isAbsolute(exclusion) || path.parse(exclusion).root.length > 1;
 			const relative = absolute
 				? path.relative(cwd, exclusion).split(path.sep).join("/")
@@ -56,10 +58,8 @@ function findWorkspacePackages(cwd: any) {
 			const entries: string[] = [];
 			for await (const entry of glob(included, {
 				cwd,
-				exclude: (p) =>
-					p.includes("node_modules") || p.includes("bower_components") || isExcluded(p),
+				exclude: (p) => p.includes("node_modules") || p.includes("bower_components"),
 			})) {
-				// Node 22 can yield literal paths without calling the exclude callback.
 				if (!isExcluded(entry)) {
 					entries.push(entry);
 				}
