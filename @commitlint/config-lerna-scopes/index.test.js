@@ -1,5 +1,4 @@
 import { test, expect, vi } from "vitest";
-import { writeFile } from "node:fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -75,14 +74,16 @@ test("returns expected value for basic lerna repository", async () => {
 });
 
 test("keeps the Lerna package list when workspaces is an object", async () => {
-	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
-	await writeFile(
-		path.join(cwd, "package.json"),
-		JSON.stringify({ workspaces: { packages: ["packages/a"] } }),
-	);
+	const cwd = await npm.bootstrap("fixtures/workspace-object-explicit", __dirname);
 
 	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
 	expect(scopes).toEqual(["basic-a", "basic-b"]);
+});
+
+test("uses a workspace object when Lerna has no packages list", async () => {
+	const cwd = await npm.bootstrap("fixtures/workspace-object-fallback", __dirname);
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["basic-a"]);
 });
 
 test("returns expected value for lerna repository containing modules", async () => {

@@ -1,5 +1,4 @@
 import { test, expect } from "vitest";
-import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -76,11 +75,7 @@ test("returns expected value for scoped workspaces", async () => {
 });
 
 test("reads package patterns from a workspace object", async () => {
-	const cwd = await npm.bootstrap("fixtures/basic", __dirname);
-	await writeFile(
-		path.join(cwd, "package.json"),
-		JSON.stringify({ private: true, workspaces: { packages: ["@packages/*"] } }),
-	);
+	const cwd = await npm.bootstrap("fixtures/workspace-object", __dirname);
 
 	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
 	expect(scopes).toEqual(["a", "b"]);
