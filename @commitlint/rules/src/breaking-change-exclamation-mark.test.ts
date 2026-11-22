@@ -71,3 +71,17 @@ test("with breakingHeaderBreakingFooter should succeed", async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
+
+test("with non-ASCII breakingHeaderBreakingFooter should succeed", async () => {
+	const [actual] = breakingChangeExclamationMark(
+		await parse(`功能!: 新增登录\n\n${breakingFooter}`),
+	);
+	expect(actual).toEqual(true);
+});
+
+test("with non-ASCII scoped breakingHeaderPlainFooter should fail", async () => {
+	const [actual] = breakingChangeExclamationMark(
+		await parse(`修复(界面)!: 调整布局\n\n${plainFooter}`),
+	);
+	expect(actual).toEqual(false);
+});

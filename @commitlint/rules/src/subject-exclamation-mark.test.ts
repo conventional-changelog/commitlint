@@ -57,3 +57,13 @@ test('without against "never" should succeed', async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
+
+test('non-ASCII type with exclamation mark against "always" should succeed', async () => {
+	const [actual] = subjectExclamationMark(await parseMessage("功能!: 新增登录\n"), "always");
+	expect(actual).toEqual(true);
+});
+
+test('non-ASCII type and scope with exclamation mark against "never" should fail', async () => {
+	const [actual] = subjectExclamationMark(await parseMessage("修复(界面)!: 调整布局\n"), "never");
+	expect(actual).toEqual(false);
+});
