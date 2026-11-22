@@ -46,7 +46,7 @@ test('with superfluous message it should fail for "never"', async () => {
 
 test('with superfluous message it should fail for "always"', async () => {
 	const [actual] = scopeEmpty(await parsed.superfluous, "always");
-	const expected = true;
+	const expected = false;
 	expect(actual).toEqual(expected);
 });
 
