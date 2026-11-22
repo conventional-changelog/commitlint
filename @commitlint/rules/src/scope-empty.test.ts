@@ -1,6 +1,7 @@
 import { test, expect } from "vitest";
 import parse from "@commitlint/parse";
 import { scopeEmpty } from "./scope-empty.js";
+import { headerTrim } from "./header-trim.js";
 
 const messages = {
 	plain: "foo(bar): baz",
@@ -15,7 +16,7 @@ const parsed = {
 };
 
 const hints = {
-	add: 'add a scope after the type, e.g. "feat(app): add new feature "',
+	add: 'add a scope after the type, e.g. "feat(app): add new feature"',
 	omit: 'leave out the scope, e.g. "feat:"',
 };
 
@@ -89,4 +90,14 @@ test('with empty message it should fail for "always"', async () => {
 	expect(actual).toEqual(expected);
 	expect(message).toBeDefined();
 	expect(hint).toEqual(hints.omit);
+});
+
+test("required-scope hint example satisfies scope-empty and header-trim", async () => {
+	const [, , hint] = scopeEmpty(await parsed.empty, "never");
+	const example = hint?.match(/"([^"]+)"/)?.[1];
+	expect(example).toBeDefined();
+	if (example === undefined) throw new Error("Missing hint example");
+	const commit = await parse(example);
+	expect(scopeEmpty(commit, "never")[0]).toBe(true);
+	expect(headerTrim(commit)[0]).toBe(true);
 });
