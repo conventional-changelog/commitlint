@@ -15,7 +15,7 @@ const parsed = {
 };
 
 const hints = {
-	add: 'add a scope after the type, e.g. "feat(Compiler):"',
+	add: 'add a scope after the type, e.g. "feat(app): add new feature "',
 	omit: 'leave out the scope, e.g. "feat:"',
 };
 
