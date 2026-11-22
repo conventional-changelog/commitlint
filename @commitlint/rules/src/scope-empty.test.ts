@@ -67,3 +67,17 @@ test('with empty message it should fail for "always"', async () => {
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
+
+test.each([
+	["✨ feat(): something", false],
+	["✨ feat()!:  something", false],
+	["✨ feat: something", true],
+	["✨ feat: example feat(): something", true],
+])('with the emoji parser, "%s" should return %s for "always"', async (header, expected) => {
+	const commit = await parse(header, undefined, {
+		headerPattern: /^✨\s+(\w*)(?:\((.*)\))?!?:\s+(.*)$/,
+		breakingHeaderPattern: /^✨\s+(\w*)(?:\((.*)\))?!:\s+(.*)$/,
+	});
+	const [actual] = scopeEmpty(commit, "always");
+	expect(actual).toBe(expected);
+});
