@@ -261,6 +261,8 @@ A delimiter starts with a character other than a Unicode letter, mark, or number
 - **condition**: `scope` is empty
 - **rule**: `never`
 
+With `always`, empty parentheses like `feat(): subject` are reported too.
+
 ## scope-enum
 
 - **condition**: `scope` is found in value

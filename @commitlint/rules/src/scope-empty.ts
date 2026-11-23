@@ -8,14 +8,16 @@ export const scopeEmpty: SyncRule = (parsed, when = "never") => {
 	const notEmpty = ensure.notEmpty(scope || "");
 	const headerBeforeSubject =
 		subject && header?.endsWith(subject) ? header.slice(0, -subject.length).trimEnd() : undefined;
-	const hasEmptyScope =
+	if (
+		negated &&
+		!notEmpty &&
 		type != null &&
-		(header?.startsWith(`${type}(): `) ||
-			header?.startsWith(`${type}()!: `) ||
-			headerBeforeSubject?.endsWith(`${type}():`) ||
-			headerBeforeSubject?.endsWith(`${type}()!:`));
+		(headerBeforeSubject?.endsWith(`${type}():`) || headerBeforeSubject?.endsWith(`${type}()!:`))
+	) {
+		return [false, 'scope must be empty, remove the empty "()"'];
+	}
 	return [
-		negated ? !notEmpty && !hasEmptyScope : notEmpty,
+		negated ? !notEmpty : notEmpty,
 		message(["scope", negated ? "must" : "may not", "be empty"]),
 	];
 };
