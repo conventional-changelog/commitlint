@@ -219,6 +219,21 @@ describe("getQuestions", () => {
 		expect(names).toEqual(["isIssueAffected", "issues"]);
 	});
 
+	test("should not ask for breaking body info when the body must be empty", () => {
+		setRules({
+			"body-empty": [RuleConfigSeverity.Error, "always"],
+		});
+		setPromptConfig({
+			questions: {
+				isBreaking: { description: "Are there any breaking changes?" },
+				breakingBody: { description: "Describe the reason for the change" },
+				breaking: { description: "Describe the breaking changes" },
+			},
+		});
+		const names = getQuestions().map((question) => question.name);
+		expect(names).toEqual(["isBreaking", "breaking"]);
+	});
+
 	describe("references-empty", () => {
 		const issueQuestions = {
 			isIssueAffected: {
