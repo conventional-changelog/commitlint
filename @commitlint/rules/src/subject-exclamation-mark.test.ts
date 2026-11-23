@@ -14,12 +14,20 @@ const messages = {
 	empty: "test:\n",
 	with: `test!: subject\n`,
 	without: `test: subject\n`,
+	withNonAscii: "功能!: 新增登录\n",
+	withNonAsciiScope: "修复(界面)!: 调整布局\n",
+	withCombiningMark: "सुधार!: subject\n",
+	withoutNonAscii: "功能: 新增登录\n",
 };
 
 const parsed = {
 	empty: parseMessage(messages.empty),
 	with: parseMessage(messages.with),
 	without: parseMessage(messages.without),
+	withNonAscii: parseMessage(messages.withNonAscii),
+	withNonAsciiScope: parseMessage(messages.withNonAsciiScope),
+	withCombiningMark: parseMessage(messages.withCombiningMark),
+	withoutNonAscii: parseMessage(messages.withoutNonAscii),
 };
 
 test('empty against "always" should fail', async () => {
@@ -58,12 +66,26 @@ test('without against "never" should succeed', async () => {
 	expect(actual).toEqual(expected);
 });
 
-test('non-ASCII type with exclamation mark against "always" should succeed', async () => {
-	const [actual] = subjectExclamationMark(await parseMessage("功能!: 新增登录\n"), "always");
-	expect(actual).toEqual(true);
+test('withNonAscii against "always" should succeed', async () => {
+	const [actual] = subjectExclamationMark(await parsed.withNonAscii, "always");
+	const expected = true;
+	expect(actual).toEqual(expected);
 });
 
-test('non-ASCII type and scope with exclamation mark against "never" should fail', async () => {
-	const [actual] = subjectExclamationMark(await parseMessage("修复(界面)!: 调整布局\n"), "never");
-	expect(actual).toEqual(false);
+test('withNonAsciiScope against "never" should fail', async () => {
+	const [actual] = subjectExclamationMark(await parsed.withNonAsciiScope, "never");
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test('withCombiningMark against "always" should succeed', async () => {
+	const [actual] = subjectExclamationMark(await parsed.withCombiningMark, "always");
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test('withoutNonAscii against "always" should fail', async () => {
+	const [actual] = subjectExclamationMark(await parsed.withoutNonAscii, "always");
+	const expected = false;
+	expect(actual).toEqual(expected);
 });
