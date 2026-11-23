@@ -614,6 +614,23 @@ test("it falls back to # for core.commentChar when using edit mode", async () =>
 	expect(result.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 });
 
+test("should read the edit message when .git is a symlink to the git directory", async () => {
+	const cwd = await gitBootstrap("fixtures/default");
+	const gitDir = path.join(cwd, "actual-git-dir");
+	await fs.rename(path.join(cwd, ".git"), gitDir);
+	await fs.symlink(
+		gitDir,
+		path.join(cwd, ".git"),
+		process.platform === "win32" ? "junction" : "dir",
+	);
+	await fs.writeFile(path.join(gitDir, "COMMIT_EDITMSG"), "type: bar\n");
+
+	const result = cli(["-e"], { cwd })();
+	const output = await result;
+	expect(output.stderr).toEqual("");
+	expect(result.exitCode).toBe(ExitCode.CommitlintDefault);
+});
+
 test("should handle linting with issue prefixes", async () => {
 	const cwd = await gitBootstrap("fixtures/issue-prefixes");
 	const result = cli([], { cwd })("foobar REF-1");
