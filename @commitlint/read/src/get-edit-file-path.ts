@@ -9,7 +9,7 @@ export async function getEditFilePath(top: string, edit?: boolean | string): Pro
 	}
 
 	const dotgitPath = path.join(top, ".git");
-	const dotgitStats: Stats = await fs.lstat(dotgitPath);
+	const dotgitStats: Stats = await fs.stat(dotgitPath);
 
 	if (dotgitStats.isDirectory()) {
 		return path.join(top, ".git/COMMIT_EDITMSG");
