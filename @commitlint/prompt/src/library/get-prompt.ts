@@ -110,6 +110,10 @@ export default function getPrompt(
 			return prefix + EOL;
 		},
 		maxLength,
+		// Store the answer in the enforced case, matching what the transformer displays.
+		filter(value: string) {
+			return forceCaseFn(value);
+		},
 		transformer(value: string) {
 			return forceCaseFn(value);
 		},
