@@ -27,9 +27,7 @@ test('with plain message it should succeed for "never"', async () => {
 });
 
 test('with plain message it should fail for "always"', async () => {
-	const [actual] = scopeEmpty(await parsed.plain, "always");
-	const expected = false;
-	expect(actual).toEqual(expected);
+	expect(scopeEmpty(await parsed.plain, "always")).toEqual([false, "scope must be empty"]);
 });
 
 test("with superfluous message it should fail for empty keyword", async () => {
@@ -39,15 +37,14 @@ test("with superfluous message it should fail for empty keyword", async () => {
 });
 
 test('with superfluous message it should fail for "never"', async () => {
-	const [actual] = scopeEmpty(await parsed.superfluous, "never");
-	const expected = false;
-	expect(actual).toEqual(expected);
+	expect(scopeEmpty(await parsed.superfluous, "never")).toEqual([false, "scope may not be empty"]);
 });
 
 test('with superfluous message it should fail for "always"', async () => {
-	const [actual] = scopeEmpty(await parsed.superfluous, "always");
-	const expected = false;
-	expect(actual).toEqual(expected);
+	expect(scopeEmpty(await parsed.superfluous, "always")).toEqual([
+		false,
+		'scope must be empty, remove the empty "()"',
+	]);
 });
 
 test("with empty message it should fail for empty keyword", async () => {
