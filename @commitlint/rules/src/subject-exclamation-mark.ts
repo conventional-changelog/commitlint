@@ -8,7 +8,7 @@ export const subjectExclamationMark: SyncRule = (parsed, when = "always") => {
 	}
 
 	const negated = when === "never";
-	const hasExclamationMark = /^(\w*)(?:\((.*)\))?!: (.*)$/.test(input);
+	const hasExclamationMark = /^([\p{L}\p{M}\p{N}_]*)(?:\((.*)\))?!: (.*)$/u.test(input);
 
 	return [
 		negated ? !hasExclamationMark : hasExclamationMark,

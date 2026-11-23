@@ -5,6 +5,10 @@ import { breakingChangeExclamationMark } from "./breaking-change-exclamation-mar
 const noHeader = "commit message";
 const plainHeader = "type: subject";
 const breakingHeader = "type!: subject";
+const nonAsciiPlainHeader = "功能: 新增登录";
+const nonAsciiBreakingHeader = "功能!: 新增登录";
+const nonAsciiScopedBreakingHeader = "修复(界面)!: 调整布局";
+const combiningMarkBreakingHeader = "सुधार!: subject";
 const noFooter = "";
 const plainFooter = "Some-Other-Trailer: content";
 const breakingFooter = "BREAKING CHANGE: reason";
@@ -18,6 +22,10 @@ const messages = {
 	plainHeaderBreakingFooter: `${plainHeader}\n\n${breakingFooter}`,
 	breakingHeaderPlainFooter: `${breakingHeader}\n\n${plainFooter}`,
 	breakingHeaderBreakingFooter: `${breakingHeader}\n\n${breakingFooter}`,
+	nonAsciiPlainHeaderBreakingFooter: `${nonAsciiPlainHeader}\n\n${breakingFooter}`,
+	nonAsciiBreakingHeaderBreakingFooter: `${nonAsciiBreakingHeader}\n\n${breakingFooter}`,
+	nonAsciiScopedBreakingHeaderPlainFooter: `${nonAsciiScopedBreakingHeader}\n\n${plainFooter}`,
+	combiningMarkBreakingHeaderBreakingFooter: `${combiningMarkBreakingHeader}\n\n${breakingFooter}`,
 };
 
 const parsed = {
@@ -28,6 +36,12 @@ const parsed = {
 	plainHeaderBreakingFooter: parse(messages.plainHeaderBreakingFooter),
 	breakingHeaderPlainFooter: parse(messages.breakingHeaderPlainFooter),
 	breakingHeaderBreakingFooter: parse(messages.breakingHeaderBreakingFooter),
+	nonAsciiPlainHeaderBreakingFooter: parse(messages.nonAsciiPlainHeaderBreakingFooter),
+	nonAsciiBreakingHeaderBreakingFooter: parse(messages.nonAsciiBreakingHeaderBreakingFooter),
+	nonAsciiScopedBreakingHeaderPlainFooter: parse(messages.nonAsciiScopedBreakingHeaderPlainFooter),
+	combiningMarkBreakingHeaderBreakingFooter: parse(
+		messages.combiningMarkBreakingHeaderBreakingFooter,
+	),
 };
 
 test("with noHeaderNoFooter should succeed", async () => {
@@ -68,6 +82,34 @@ test("with breakingHeaderPlainFooter should fail", async () => {
 
 test("with breakingHeaderBreakingFooter should succeed", async () => {
 	const [actual] = breakingChangeExclamationMark(await parsed.breakingHeaderBreakingFooter);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with nonAsciiPlainHeaderBreakingFooter should fail", async () => {
+	const [actual] = breakingChangeExclamationMark(await parsed.nonAsciiPlainHeaderBreakingFooter);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test("with nonAsciiBreakingHeaderBreakingFooter should succeed", async () => {
+	const [actual] = breakingChangeExclamationMark(await parsed.nonAsciiBreakingHeaderBreakingFooter);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with nonAsciiScopedBreakingHeaderPlainFooter should fail", async () => {
+	const [actual] = breakingChangeExclamationMark(
+		await parsed.nonAsciiScopedBreakingHeaderPlainFooter,
+	);
+	const expected = false;
+	expect(actual).toEqual(expected);
+});
+
+test("with combiningMarkBreakingHeaderBreakingFooter should succeed", async () => {
+	const [actual] = breakingChangeExclamationMark(
+		await parsed.combiningMarkBreakingHeaderBreakingFooter,
+	);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
