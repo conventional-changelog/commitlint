@@ -19,12 +19,13 @@ function getPackages(context) {
 			const cwd = ctx.cwd || process.cwd();
 
 			const { workspaces } = require(Path.join(cwd, "package.json"));
-			if (!Array.isArray(workspaces)) {
+			const patterns = Array.isArray(workspaces) ? workspaces : workspaces?.packages;
+			if (!Array.isArray(patterns)) {
 				// no workspaces configured, skipping
 				return [];
 			}
 
-			const wsGlobs = workspaces.flatMap((ws) => {
+			const wsGlobs = patterns.flatMap((ws) => {
 				const path = Path.posix.join(ws, "package.json");
 				return globSync(path, {
 					cwd,

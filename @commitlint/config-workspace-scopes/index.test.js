@@ -74,6 +74,13 @@ test("returns expected value for scoped workspaces", async () => {
 	expect(value).toEqual(["a", "b"]);
 });
 
+test("reads package patterns from a workspace object", async () => {
+	const cwd = await npm.bootstrap("fixtures/workspace-object", __dirname);
+
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["a", "b"]);
+});
+
 test("returns expected value for workspaces has nested packages", async () => {
 	const { "scope-enum": fn } = config.rules;
 	const cwd = await npm.bootstrap("fixtures/nested-workspaces", __dirname);

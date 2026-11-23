@@ -73,6 +73,19 @@ test("returns expected value for basic lerna repository", async () => {
 	expect(value).toEqual(["basic-a", "basic-b"]);
 });
 
+test("keeps the Lerna package list when workspaces is an object", async () => {
+	const cwd = await npm.bootstrap("fixtures/workspace-object-explicit", __dirname);
+
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["basic-a", "basic-b"]);
+});
+
+test("uses a workspace object when Lerna has no packages list", async () => {
+	const cwd = await npm.bootstrap("fixtures/workspace-object-fallback", __dirname);
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["basic-a"]);
+});
+
 test("returns expected value for lerna repository containing modules", async () => {
 	const { "scope-enum": fn } = config.rules;
 	const cwd = await npm.bootstrap("fixtures/modules", __dirname);
