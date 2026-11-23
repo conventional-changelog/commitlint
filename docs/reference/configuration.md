@@ -363,6 +363,50 @@ export default {
 };
 ```
 
+### Custom messages
+
+To tell developers how commits work in your project, point `helpUrl` at your own guide. For more, write a small formatter that wraps `@commitlint/format`. It can replace the message of a rule and add text below the problems:
+
+```js
+// commitlint-format.mjs
+import format from "@commitlint/format";
+
+const messages = {
+  "type-empty": 'start with a type, e.g. "feat: add login"',
+};
+
+export default function (report, options) {
+  for (const result of report.results) {
+    for (const problem of [...result.errors, ...result.warnings]) {
+      problem.message = messages[problem.name] ?? problem.message;
+    }
+  }
+  const output = format(report, options);
+  return report.valid ? output : `${output}\nRun "pnpm commit" to write a valid message.`;
+}
+```
+
+```js
+// commitlint.config.mjs
+export default {
+  extends: ["@commitlint/config-conventional"],
+  formatter: "./commitlint-format.mjs",
+  helpUrl: "https://github.com/your-org/your-repo/blob/main/CONTRIBUTING.md#commits",
+};
+```
+
+Install `@commitlint/format` next to `@commitlint/cli`, so the import also resolves with pnpm. For `add login` the output then reads:
+
+```text
+✖   subject may not be empty [subject-empty]
+✖   start with a type, e.g. "feat: add login" [type-empty]
+
+✖   found 2 problems, 0 warnings
+ⓘ   Get help: https://github.com/your-org/your-repo/blob/main/CONTRIBUTING.md#commits
+
+Run "pnpm commit" to write a valid message.
+```
+
 ## Rules
 
 Refer to [Rules](/reference/rules.md) for a complete list of available rules.
