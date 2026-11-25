@@ -119,6 +119,12 @@ const cli = yargs(process.argv.slice(2))
 			description: "configuration preset to use for conventional-commits-parser",
 			type: "string",
 		},
+		path: {
+			description:
+				"limit commit range to commits affecting the specified path(s); applies if edit=false",
+			type: "array",
+			string: true,
+		},
 		quiet: {
 			alias: "q",
 			default: false,
@@ -278,6 +284,7 @@ async function main(args: MainArgs): Promise<void> {
 				edit: flags.edit,
 				cwd: flags.cwd,
 				gitLogArgs: flags["git-log-args"],
+				path: flags.path,
 			}));
 
 	const messages = (Array.isArray(input) ? input : [input])
@@ -422,16 +429,34 @@ function checkFromHistory(flags: CliFlags): boolean {
 		typeof flags.from === "string" ||
 		typeof flags["from-last-tag"] === "boolean" ||
 		typeof flags.to === "string" ||
-		typeof flags.last === "boolean"
+		typeof flags.last === "boolean" ||
+		(Array.isArray(flags.path) && flags.path.length > 0)
 	);
 }
 
 function normalizeFlags(flags: CliFlags): CliFlags {
 	const edit = getEditValue(flags);
-	return {
+	const normalizedPath = getPathValue(flags);
+	const result: CliFlags = {
 		...flags,
 		edit,
 	};
+	if (normalizedPath) {
+		result.path = normalizedPath;
+	} else {
+		delete result.path;
+	}
+	return result;
+}
+
+function getPathValue(flags: CliFlags): string[] | undefined {
+	if (!flags.path) {
+		return undefined;
+	}
+	const paths = (Array.isArray(flags.path) ? flags.path : [flags.path]).filter(
+		(value): value is string => typeof value === "string" && value !== "",
+	);
+	return paths.length > 0 ? paths : undefined;
 }
 
 // core.commentChar and core.commentString are aliases, so the last one set wins.

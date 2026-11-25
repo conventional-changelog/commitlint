@@ -6,10 +6,6 @@ import { x } from "tinyexec";
 
 import read from "./read.js";
 
-const readWithPath = read as (
-	settings: Parameters<typeof read>[0] & { path?: string | string[] },
-) => ReturnType<typeof read>;
-
 test("get edit commit message specified by the `edit` flag", async () => {
 	const cwd: string = await git.bootstrap();
 
@@ -259,7 +255,7 @@ test("filters history commits by a single path", async () => {
 	await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "fix(a): update a"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({ cwd, path: "packages/a" });
+	const actual = await read({ cwd, path: "packages/a" });
 	expect(actual).toEqual(["fix(a): update a\n\n", "feat(a): add a\n\n"]);
 });
 
@@ -281,7 +277,7 @@ test("filters history commits by multiple paths and ignores empty path entries",
 	await x("git", ["add", "packages/c/c.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(c): add c"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({ cwd, path: ["", "packages/a", "packages/c"] });
+	const actual = await read({ cwd, path: ["", "packages/a", "packages/c"] });
 	expect(actual).toEqual(["feat(c): add c\n\n", "feat(a): add a\n\n"]);
 });
 
@@ -306,7 +302,7 @@ test("filters commits within a from..to range by path", async () => {
 	await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(a): fourth"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({ cwd, from: "HEAD~3", to: "HEAD~1", path: "packages/a" });
+	const actual = await read({ cwd, from: "HEAD~3", to: "HEAD~1", path: "packages/a" });
 	expect(actual).toEqual(["feat(a): third\n\n"]);
 });
 
@@ -328,7 +324,7 @@ test("filters commits since the last tag by path", async () => {
 	await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(a): post-tag a"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({ cwd, fromLastTag: true, path: "packages/a" });
+	const actual = await read({ cwd, fromLastTag: true, path: "packages/a" });
 	expect(actual).toEqual(["feat(a): post-tag a\n\n"]);
 });
 
@@ -345,10 +341,8 @@ test("filters the last commit by path", async () => {
 	await x("git", ["add", "packages/b/b.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(b): last in b"], { nodeOptions: { cwd } });
 
-	expect(await readWithPath({ cwd, last: true, path: "packages/a" })).toEqual([
-		"feat(a): last in a",
-	]);
-	expect(await readWithPath({ cwd, last: true, path: "packages/nonexistent" })).toEqual([]);
+	expect(await read({ cwd, last: true, path: "packages/a" })).toEqual(["feat(a): last in a"]);
+	expect(await read({ cwd, last: true, path: "packages/nonexistent" })).toEqual([]);
 });
 
 test("filters commits by paths containing spaces", async () => {
@@ -364,7 +358,7 @@ test("filters commits by paths containing spaces", async () => {
 	await x("git", ["add", "other/file.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat: other path"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({ cwd, path: "dir with spaces" });
+	const actual = await read({ cwd, path: "dir with spaces" });
 	expect(actual).toEqual(["feat: space path\n\n"]);
 });
 
@@ -379,12 +373,10 @@ test("treats dash-prefixed paths as pathspecs rather than git flags", async () =
 	await x("git", ["add", "normal.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat: normal file"], { nodeOptions: { cwd } });
 
-	expect(await readWithPath({ cwd, path: "--weird-file" })).toEqual(["feat: dash file\n\n"]);
-	expect(await readWithPath({ cwd, path: "--all" })).toEqual([]);
-	expect(await readWithPath({ cwd, last: true, path: "--weird-file" })).toEqual([
-		"feat: dash file",
-	]);
-	expect(await readWithPath({ cwd, last: true, path: "--all" })).toEqual([]);
+	expect(await read({ cwd, path: "--weird-file" })).toEqual(["feat: dash file\n\n"]);
+	expect(await read({ cwd, path: "--all" })).toEqual([]);
+	expect(await read({ cwd, last: true, path: "--weird-file" })).toEqual(["feat: dash file"]);
+	expect(await read({ cwd, last: true, path: "--all" })).toEqual([]);
 });
 
 test("returns an empty list when no commits affect the specified path", async () => {
@@ -395,7 +387,7 @@ test("returns an empty list when no commits affect the specified path", async ()
 	await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(a): add a"], { nodeOptions: { cwd } });
 
-	expect(await readWithPath({ cwd, path: "packages/nonexistent" })).toEqual([]);
+	expect(await read({ cwd, path: "packages/nonexistent" })).toEqual([]);
 });
 
 test("combines path filtering with gitLogArgs", async () => {
@@ -419,7 +411,7 @@ test("combines path filtering with gitLogArgs", async () => {
 	await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(a): four"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({
+	const actual = await read({
 		cwd,
 		from: "HEAD~3",
 		gitLogArgs: "--skip 1",
@@ -441,6 +433,6 @@ test("resolves relative path from a subdirectory cwd", async () => {
 	await x("git", ["add", "packages/b/b.txt"], { nodeOptions: { cwd } });
 	await x("git", ["commit", "-m", "feat(b): add b"], { nodeOptions: { cwd } });
 
-	const actual = await readWithPath({ cwd: path.join(cwd, "packages/a"), path: "." });
+	const actual = await read({ cwd: path.join(cwd, "packages/a"), path: "." });
 	expect(actual).toEqual(["feat(a): add a\n\n"]);
 });

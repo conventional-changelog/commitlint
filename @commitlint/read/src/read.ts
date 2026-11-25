@@ -1,11 +1,15 @@
 import { parseArgs } from "node:util";
 
-import { getHistoryCommits, type HistoryCommitsOptions } from "./get-history-commits.js";
+import {
+	getHistoryCommits,
+	normalizePaths,
+	type HistoryCommitsOptions,
+} from "./get-history-commits.js";
 import { getEditCommit } from "./get-edit-commit.js";
 
 import { x } from "tinyexec";
 
-interface GetCommitMessageOptions {
+export interface GetCommitMessageOptions {
 	cwd?: string;
 	from?: string;
 	fromLastTag?: boolean;
@@ -13,23 +17,33 @@ interface GetCommitMessageOptions {
 	last?: boolean;
 	edit?: boolean | string;
 	gitLogArgs?: string;
+	path?: string | string[];
 }
 
 // Get commit messages
 export default async function getCommitMessages(
 	settings: GetCommitMessageOptions,
 ): Promise<string[]> {
-	const { cwd, fromLastTag, to, last, edit, gitLogArgs } = settings;
+	const { cwd, fromLastTag, to, last, edit, gitLogArgs, path } = settings;
 	let from = settings.from;
 
 	if (edit) {
 		return getEditCommit(cwd, edit);
 	}
 
+	const normalizedPaths = normalizePaths(path);
+
 	if (last) {
-		const gitCommandResult = await x("git", ["log", "-1", "--pretty=format:%B"], {
+		const args = ["log", "-1", "--pretty=format:%B"];
+		if (normalizedPaths) {
+			args.push("--", ...normalizedPaths);
+		}
+		const gitCommandResult = await x("git", args, {
 			nodeOptions: { cwd },
 		});
+		if (gitCommandResult.stdout === "") {
+			return [];
+		}
 		// Keep the message as committed apart from the final newline.
 		let output = gitCommandResult.stdout.replace(/\r?\n$/, "");
 		// strip output of extra quotation marks ("")
@@ -80,7 +94,11 @@ export default async function getCommitMessages(
 		}
 	}
 
-	let gitOptions: HistoryCommitsOptions = { from, to };
+	let gitOptions: HistoryCommitsOptions = {
+		from,
+		to,
+		...(normalizedPaths ? { path: normalizedPaths } : {}),
+	};
 	if (gitLogArgs) {
 		const { values, positionals } = parseArgs({
 			args: gitLogArgs.split(" "),
@@ -91,6 +109,7 @@ export default async function getCommitMessages(
 			_: positionals,
 			from,
 			to,
+			...(normalizedPaths ? { path: normalizedPaths } : {}),
 		};
 	}
 
