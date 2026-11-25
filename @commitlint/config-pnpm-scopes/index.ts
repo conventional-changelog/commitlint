@@ -1,7 +1,6 @@
 import path from "node:path";
 
 import { glob } from "node:fs/promises";
-import picomatch from "picomatch";
 import { readYamlFile } from "read-yaml-file";
 import { readExactProjectManifest } from "@pnpm/read-project-manifest";
 
@@ -22,39 +21,26 @@ function requirePackagesManifest(dir: any) {
 	});
 }
 
-function workspacePatterns(patterns: string[], cwd: string) {
+function workspacePatterns(patterns: string[]) {
 	const included: string[] = [];
 	const excluded: string[] = [];
 	for (const pattern of patterns) {
 		const manifest = pattern.replace(/\/?$/, "/package.{json,json5,yaml}");
-		// Match pnpm's tinyglobby pattern handling: !(...) stays inclusive,
-		// and a double bang is ignored unless it excludes an extglob.
-		if (!pattern.startsWith("!") || pattern.startsWith("!(")) {
+		if (pattern.startsWith("!")) {
+			excluded.push(path.posix.normalize(manifest.slice(1)));
+		} else {
 			included.push(manifest);
-		} else if (!pattern.startsWith("!!") || pattern.startsWith("!!(")) {
-			const exclusion = manifest.slice(1);
-			// Match absolute exclusions relative to the workspace. Keep escapes
-			// such as \! in relative globs so the matcher can read the literal bang.
-			const absolute = path.posix.isAbsolute(exclusion) || path.parse(exclusion).root.length > 1;
-			const relative = absolute
-				? path.relative(cwd, exclusion).split(path.sep).join("/")
-				: exclusion;
-			excluded.push(path.posix.normalize(relative));
 		}
 	}
-	const matches = picomatch(excluded, { posix: true });
-	function isExcluded(entry: string) {
-		if (excluded.length === 0) return false;
-		const relative = path.isAbsolute(entry) ? path.relative(cwd, entry) : entry;
-		return matches(relative.split(path.sep).join("/"));
-	}
+	const isExcluded = (entry: string) =>
+		excluded.some((glob) => path.posix.matchesGlob(entry.split(path.sep).join("/"), glob));
 	return { included, isExcluded };
 }
 
 function findWorkspacePackages(cwd: any) {
 	return requirePackagesManifest(cwd)
 		.then(async (manifest: any) => {
-			const { included, isExcluded } = workspacePatterns(manifest?.packages || ["**"], cwd);
+			const { included, isExcluded } = workspacePatterns(manifest?.packages || ["**"]);
 			const entries: string[] = [];
 			for await (const entry of glob(included, {
 				cwd,

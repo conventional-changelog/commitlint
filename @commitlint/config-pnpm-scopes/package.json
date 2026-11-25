@@ -41,14 +41,12 @@
   },
   "dependencies": {
     "@pnpm/read-project-manifest": "^6.0.0",
-    "picomatch": "^4.0.7",
     "read-yaml-file": "^3.0.0"
   },
   "devDependencies": {
     "@commitlint/test": "workspace:^",
     "@commitlint/utils": "workspace:^",
     "@types/node": "^22.0.0",
-    "@types/picomatch": "^4.0.3",
     "typescript": "^7.0.0"
   },
   "engines": {
