@@ -274,9 +274,12 @@ async function main(args: MainArgs): Promise<void> {
 		throw err;
 	}
 
-	const input = await (fromStdin
-		? stdin()
-		: read({
+	let input: string | string[];
+	if (fromStdin) {
+		input = await stdin();
+	} else {
+		try {
+			input = await read({
 				to: flags.to,
 				from: flags.from,
 				fromLastTag: flags["from-last-tag"],
@@ -285,7 +288,14 @@ async function main(args: MainArgs): Promise<void> {
 				cwd: flags.cwd,
 				gitLogArgs: flags["git-log-args"],
 				path: flags.path,
-			}));
+			});
+		} catch (e) {
+			const message = (e instanceof Error && e.message ? e.message : String(e)).trim();
+			const err = new CliError(message, pkg.name);
+			console.error(err.message);
+			throw err;
+		}
+	}
 
 	const messages = (Array.isArray(input) ? input : [input])
 		.filter((message) => typeof message === "string")
@@ -395,6 +405,17 @@ async function main(args: MainArgs): Promise<void> {
 	if (!flags.quiet && output !== "") {
 		console.log(output);
 	}
+	if (
+		!flags.quiet &&
+		!isRulesEmpty &&
+		!checkFromEdit(flags) &&
+		messages.length === 0 &&
+		flags.path?.some(Boolean)
+	) {
+		console.warn(
+			`No commits matched --path (${flags.path.filter(Boolean).join(", ")}); nothing to lint.`,
+		);
+	}
 
 	if (flags.strict) {
 		if (report.errorCount > 0) {
@@ -430,33 +451,16 @@ function checkFromHistory(flags: CliFlags): boolean {
 		typeof flags["from-last-tag"] === "boolean" ||
 		typeof flags.to === "string" ||
 		typeof flags.last === "boolean" ||
-		(Array.isArray(flags.path) && flags.path.length > 0)
+		Boolean(flags.path?.some(Boolean))
 	);
 }
 
 function normalizeFlags(flags: CliFlags): CliFlags {
 	const edit = getEditValue(flags);
-	const normalizedPath = getPathValue(flags);
-	const result: CliFlags = {
+	return {
 		...flags,
 		edit,
 	};
-	if (normalizedPath) {
-		result.path = normalizedPath;
-	} else {
-		delete result.path;
-	}
-	return result;
-}
-
-function getPathValue(flags: CliFlags): string[] | undefined {
-	if (!flags.path) {
-		return undefined;
-	}
-	const paths = (Array.isArray(flags.path) ? flags.path : [flags.path]).filter(
-		(value): value is string => typeof value === "string" && value !== "",
-	);
-	return paths.length > 0 ? paths : undefined;
 }
 
 // core.commentChar and core.commentString are aliases, so the last one set wins.

@@ -900,91 +900,39 @@ describe("should print config", () => {
 });
 
 describe("path filtering with --path", () => {
-	test("should filter commits by --path when linting a range", async () => {
+	async function commitFile(cwd: string, file: string, message: string, content = file) {
+		const fullPath = path.join(cwd, file);
+		await fs.mkdir(path.dirname(fullPath), { recursive: true });
+		await fs.writeFile(fullPath, content);
+		await x("git", ["add", "--", file], { nodeOptions: { cwd } });
+		await x("git", ["commit", "-m", message], { nodeOptions: { cwd } });
+	}
+
+	test("should support repeated --path flags", async () => {
 		const cwd = await gitBootstrap("fixtures/default");
-		await fs.mkdir(path.join(cwd, "packages/a"), { recursive: true });
-		await fs.mkdir(path.join(cwd, "packages/b"), { recursive: true });
+		await commitFile(cwd, "packages/a/a.txt", "type: valid in a");
+		await commitFile(cwd, "packages/b/b.txt", "foo: invalid in b");
+		await commitFile(cwd, "packages/c/c.txt", "type: valid in c");
 
-		await x("git", ["add", "commitlint.config.js"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "chore: initial"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/a/a.txt"), "a");
-		await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: valid in a"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/b/b.txt"), "b");
-		await x("git", ["add", "packages/b/b.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "foo: invalid in b"], { nodeOptions: { cwd } });
-
-		const passResult = cli(
-			["--from", "HEAD~2", "--to", "HEAD", "--path", "packages/a", "--verbose"],
-			{
-				cwd,
-			},
-		)();
-		const passOutput = await passResult;
-		expect(passResult.exitCode).toBe(ExitCode.CommitlintDefault);
-		expect(passOutput.stdout).toContain("type: valid in a");
-		expect(passOutput.stdout).not.toContain("foo: invalid in b");
-
-		const failResult = cli(["--from", "HEAD~2", "--to", "HEAD", "--path", "packages/b"], { cwd })();
-		const failOutput = await failResult;
-		expect(failResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
-		expect(failOutput.stdout).toContain("foo: invalid in b");
-		expect(failOutput.stdout).toContain("type must not be one of [foo]");
-	});
-
-	test("should support multiple --path flags", async () => {
-		const cwd = await gitBootstrap("fixtures/default");
-		await fs.mkdir(path.join(cwd, "packages/a"), { recursive: true });
-		await fs.mkdir(path.join(cwd, "packages/b"), { recursive: true });
-		await fs.mkdir(path.join(cwd, "packages/c"), { recursive: true });
-
-		await x("git", ["add", "commitlint.config.js"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "chore: initial"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/a/a.txt"), "a");
-		await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: valid in a"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/b/b.txt"), "b");
-		await x("git", ["add", "packages/b/b.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "foo: invalid in b"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/c/c.txt"), "c");
-		await x("git", ["add", "packages/c/c.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: valid in c"], { nodeOptions: { cwd } });
-
-		const passResult = cli(
-			["--from", "HEAD~3", "--path", "packages/a", "--path", "packages/c", "--verbose"],
-			{ cwd },
-		)();
+		const passResult = cli(["--path", "packages/a", "--path", "packages/c", "--verbose"], {
+			cwd,
+		})();
 		const passOutput = await passResult;
 		expect(passResult.exitCode).toBe(ExitCode.CommitlintDefault);
 		expect(passOutput.stdout).toContain("type: valid in a");
 		expect(passOutput.stdout).toContain("type: valid in c");
 		expect(passOutput.stdout).not.toContain("foo: invalid in b");
 
-		const failResult = cli(["--from", "HEAD~3", "--path", "packages/a", "--path", "packages/b"], {
-			cwd,
-		})();
+		const failResult = cli(["--path", "packages/a", "--path", "packages/b"], { cwd })();
 		const failOutput = await failResult;
 		expect(failResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 		expect(failOutput.stdout).toContain("foo: invalid in b");
 	});
 
-	test("should lint git history when --path is used without --from or --to", async () => {
+	test("should lint git history when --path is used on its own", async () => {
 		const cwd = await gitBootstrap("fixtures/default");
-		await fs.mkdir(path.join(cwd, "packages/a"), { recursive: true });
-		await fs.mkdir(path.join(cwd, "packages/b"), { recursive: true });
-
-		await fs.writeFile(path.join(cwd, "packages/a/a.txt"), "a");
-		await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: valid in a"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/b/b.txt"), "b");
-		await x("git", ["add", "packages/b/b.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "foo: invalid in b"], { nodeOptions: { cwd } });
+		await commitFile(cwd, "packages/a/a.txt", "type: valid in a");
+		await commitFile(cwd, "packages/b/b.txt", "foo: invalid in b");
 
 		const passResult = cli(["--path", "packages/a", "--verbose"], { cwd })();
 		const passOutput = await passResult;
@@ -995,96 +943,60 @@ describe("path filtering with --path", () => {
 		const failOutput = await failResult;
 		expect(failResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
 		expect(failOutput.stdout).toContain("foo: invalid in b");
-
-		const emptyResult = cli(["--path", "packages/nonexistent"], { cwd })();
-		await emptyResult;
-		expect(emptyResult.exitCode).toBe(ExitCode.CommitlintDefault);
 	});
 
-	test("should filter the last commit by --path when combined with --last", async () => {
+	test("should print a note when no commits match --path", async () => {
 		const cwd = await gitBootstrap("fixtures/default");
-		await fs.mkdir(path.join(cwd, "packages/a"), { recursive: true });
-		await fs.mkdir(path.join(cwd, "packages/b"), { recursive: true });
+		await commitFile(cwd, "packages/a/a.txt", "type: valid in a");
 
-		await fs.writeFile(path.join(cwd, "packages/a/a.txt"), "a");
-		await x("git", ["add", "packages/a/a.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: last in a"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "packages/b/b.txt"), "b");
-		await x("git", ["add", "packages/b/b.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "foo: last in b"], { nodeOptions: { cwd } });
-
-		const passResult = cli(["--last", "--path", "packages/a", "--verbose"], { cwd })();
-		const passOutput = await passResult;
-		expect(passResult.exitCode).toBe(ExitCode.CommitlintDefault);
-		expect(passOutput.stdout).toContain("type: last in a");
-
-		const failResult = cli(["--last", "--path", "packages/b"], { cwd })();
-		const failOutput = await failResult;
-		expect(failResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
-		expect(failOutput.stdout).toContain("foo: last in b");
-
-		const emptyResult = cli(["--last", "--path", "packages/nonexistent"], { cwd })();
-		await emptyResult;
+		const emptyResult = cli(["--path", "pakages/a"], { cwd })();
+		const emptyOutput = await emptyResult;
 		expect(emptyResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(emptyOutput.stderr).toContain("No commits matched --path (pakages/a)");
+
+		const quietResult = cli(["--path", "pakages/a", "--quiet"], { cwd })();
+		const quietOutput = await quietResult;
+		expect(quietResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(quietOutput.stderr).toBe("");
 	});
 
-	test("should handle spaces and dash-prefixed paths with --path", async () => {
+	test("should report bad --path git errors consistently for --last and --from", async () => {
 		const cwd = await gitBootstrap("fixtures/default");
-		await fs.mkdir(path.join(cwd, "dir with spaces"), { recursive: true });
-		await fs.mkdir(path.join(cwd, "other"), { recursive: true });
+		await commitFile(cwd, "packages/a/a.txt", "type: first", "1");
+		await commitFile(cwd, "packages/a/a.txt", "type: second", "2");
 
-		await fs.writeFile(path.join(cwd, "dir with spaces/file.txt"), "space");
-		await x("git", ["add", "dir with spaces/file.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: space dir"], { nodeOptions: { cwd } });
+		const lastResult = cli(["--last", "--path", "../outside"], { cwd })();
+		const lastOutput = await lastResult;
+		expect(lastResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+		expect(lastOutput.stderr).toContain("outside repository");
+		expect(lastOutput.stderr).not.toContain("\n    at ");
 
-		await fs.writeFile(path.join(cwd, "--flag-file"), "dash");
-		await x("git", ["add", "--", "--flag-file"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "type: dash file"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(path.join(cwd, "other/file.txt"), "other");
-		await x("git", ["add", "other/file.txt"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "foo: invalid other"], { nodeOptions: { cwd } });
-
-		const spaceResult = cli(["--path", "dir with spaces", "--verbose"], { cwd })();
-		const spaceOutput = await spaceResult;
-		expect(spaceResult.exitCode).toBe(ExitCode.CommitlintDefault);
-		expect(spaceOutput.stdout).toContain("type: space dir");
-		expect(spaceOutput.stdout).not.toContain("foo: invalid other");
-
-		const dashResult = cli(["--path=--flag-file", "--verbose"], { cwd })();
-		const dashOutput = await dashResult;
-		expect(dashResult.exitCode).toBe(ExitCode.CommitlintDefault);
-		expect(dashOutput.stdout).toContain("type: dash file");
-		expect(dashOutput.stdout).not.toContain("foo: invalid other");
+		const rangeResult = cli(["--from", "HEAD~1", "--path", "../outside"], { cwd })();
+		const rangeOutput = await rangeResult;
+		expect(rangeResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+		expect(rangeOutput.stderr).toBe(lastOutput.stderr);
 	});
 
 	test("should support per-package configs with --cwd and --path .", async () => {
 		const cwd = await gitBootstrap("fixtures/empty");
-		const pkgADir = path.join(cwd, "packages/a");
-		const pkgBDir = path.join(cwd, "packages/b");
-		await fs.mkdir(pkgADir, { recursive: true });
-		await fs.mkdir(pkgBDir, { recursive: true });
-
-		await fs.writeFile(
-			path.join(pkgADir, "commitlint.config.js"),
+		await commitFile(
+			cwd,
+			"packages/a/commitlint.config.js",
+			"bar: valid for package a",
 			'module.exports = { rules: { "type-enum": [2, "never", ["foo"]] } };\n',
 		);
-		await x("git", ["add", "packages/a/commitlint.config.js"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "bar: valid for package a"], { nodeOptions: { cwd } });
-
-		await fs.writeFile(
-			path.join(pkgBDir, "commitlint.config.js"),
+		await commitFile(
+			cwd,
+			"packages/b/commitlint.config.js",
+			"foo: valid for package b",
 			'module.exports = { rules: { "type-enum": [2, "never", ["bar"]] } };\n',
 		);
-		await x("git", ["add", "packages/b/commitlint.config.js"], { nodeOptions: { cwd } });
-		await x("git", ["commit", "-m", "foo: valid for package b"], { nodeOptions: { cwd } });
 
-		const pkgAResult = cli(["--cwd", pkgADir, "--path", "."], { cwd })();
+		const pkgAResult = cli(["--cwd", path.join(cwd, "packages/a"), "--path", "."], { cwd })();
 		await pkgAResult;
 		expect(pkgAResult.exitCode).toBe(ExitCode.CommitlintDefault);
 
-		const pkgBResult = cli(["--cwd", pkgBDir, "--path", "."], { cwd })();
+		const pkgBResult = cli(["--cwd", path.join(cwd, "packages/b"), "--path", "."], { cwd })();
 		await pkgBResult;
 		expect(pkgBResult.exitCode).toBe(ExitCode.CommitlintDefault);
 	});

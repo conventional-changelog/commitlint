@@ -1,15 +1,11 @@
 import { parseArgs } from "node:util";
 
-import {
-	getHistoryCommits,
-	normalizePaths,
-	type HistoryCommitsOptions,
-} from "./get-history-commits.js";
+import { getHistoryCommits, type HistoryCommitsOptions } from "./get-history-commits.js";
 import { getEditCommit } from "./get-edit-commit.js";
 
 import { x } from "tinyexec";
 
-export interface GetCommitMessageOptions {
+interface GetCommitMessageOptions {
 	cwd?: string;
 	from?: string;
 	fromLastTag?: boolean;
@@ -18,6 +14,16 @@ export interface GetCommitMessageOptions {
 	edit?: boolean | string;
 	gitLogArgs?: string;
 	path?: string | string[];
+}
+
+function normalizePaths(path?: string | string[]): string[] | undefined {
+	if (path === undefined) {
+		return undefined;
+	}
+	const paths = (Array.isArray(path) ? path : [path]).filter(
+		(value): value is string => typeof value === "string" && value !== "",
+	);
+	return paths.length > 0 ? paths : undefined;
 }
 
 // Get commit messages
@@ -41,7 +47,10 @@ export default async function getCommitMessages(
 		const gitCommandResult = await x("git", args, {
 			nodeOptions: { cwd },
 		});
-		if (gitCommandResult.stdout === "") {
+		if (gitCommandResult.exitCode !== 0) {
+			throw new Error(gitCommandResult.stderr.trim() || "Process exited with non-zero code");
+		}
+		if (normalizedPaths && gitCommandResult.stdout === "") {
 			return [];
 		}
 		// Keep the message as committed apart from the final newline.
