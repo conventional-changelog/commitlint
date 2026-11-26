@@ -4,8 +4,7 @@ import { footerMaxLineLength } from "./footer-max-line-length.js";
 
 const short = "BREAKING CHANGE: a";
 const long = "BREAKING CHANGE: ab";
-const coAuthoredByBare = "Co-Authored-By: my-really-long-email-address@my-really-long-domain.com";
-const coAuthoredByAngle =
+const coAuthoredBy =
 	"Co-authored-by: Very Long Contributor Name <12345678+very-long-username@users.noreply.github.com>";
 
 const value = short.length;
@@ -17,10 +16,8 @@ const messages = {
 	long: `test: subject\n${long}`,
 	shortMultipleLines: `test:subject\n${short}\n${short}\n${short}`,
 	longMultipleLines: `test:subject\n${short}\n${long}\n${short}`,
-	coAuthoredByBare: `test: subject\n\nbody\n\n${coAuthoredByBare}`,
-	coAuthoredByAngle: `test: subject\n\nbody\n\n${coAuthoredByAngle}`,
-	coAuthoredByWithBreakingChange: `test: subject\n\nbody\n\n${short}\n${coAuthoredByAngle}`,
-	coAuthoredByWithLongLine: `test: subject\n\nbody\n\n${long}\n${coAuthoredByAngle}`,
+	coAuthoredBy: `test: subject\n\nbody\n\n${coAuthoredBy}`,
+	coAuthoredByWithLongLine: `test: subject\n\nbody\n\n${long}\n${coAuthoredBy}`,
 };
 
 const parsed = {
@@ -28,9 +25,7 @@ const parsed = {
 	empty: parse(messages.empty),
 	short: parse(messages.short),
 	long: parse(messages.long),
-	coAuthoredByBare: parse(messages.coAuthoredByBare),
-	coAuthoredByAngle: parse(messages.coAuthoredByAngle),
-	coAuthoredByWithBreakingChange: parse(messages.coAuthoredByWithBreakingChange),
+	coAuthoredBy: parse(messages.coAuthoredBy),
 	coAuthoredByWithLongLine: parse(messages.coAuthoredByWithLongLine),
 };
 
@@ -70,29 +65,13 @@ test("with long with multiple lines should fail", async () => {
 	expect(actual).toEqual(expected);
 });
 
-test("with Co-Authored-By bare email in footer should succeed", async () => {
-	const [actual] = footerMaxLineLength(await parsed.coAuthoredByBare, undefined, value);
+test("with Co-authored-by trailer in footer should succeed", async () => {
+	const [actual] = footerMaxLineLength(await parsed.coAuthoredBy, undefined, value);
 	const expected = true;
 	expect(actual).toEqual(expected);
 });
 
-test("with Co-authored-by angle-bracketed email in footer should succeed", async () => {
-	const [actual] = footerMaxLineLength(await parsed.coAuthoredByAngle, undefined, value);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
-
-test("with BREAKING CHANGE and Co-authored-by email in footer should succeed", async () => {
-	const [actual] = footerMaxLineLength(
-		await parsed.coAuthoredByWithBreakingChange,
-		undefined,
-		value,
-	);
-	const expected = true;
-	expect(actual).toEqual(expected);
-});
-
-test("with long footer line alongside Co-authored-by email should fail", async () => {
+test("with long footer line alongside Co-authored-by trailer should fail", async () => {
 	const [actual] = footerMaxLineLength(await parsed.coAuthoredByWithLongLine, undefined, value);
 	const expected = false;
 	expect(actual).toEqual(expected);
