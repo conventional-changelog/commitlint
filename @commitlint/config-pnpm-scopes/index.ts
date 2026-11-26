@@ -21,24 +21,32 @@ function requirePackagesManifest(dir: any) {
 	});
 }
 
-function normalizePatterns(patterns: any) {
-	const normalizedPatterns = [];
+function workspacePatterns(patterns: string[]) {
+	const included: string[] = [];
+	const excluded: string[] = [];
 	for (const pattern of patterns) {
-		normalizedPatterns.push(pattern.replace(/\/?$/, "/package.{json,json5,yaml}"));
+		const manifest = pattern.replace(/\/?$/, "/package.{json,json5,yaml}");
+		if (pattern.startsWith("!")) {
+			excluded.push(path.posix.normalize(manifest.slice(1)));
+		} else {
+			included.push(manifest);
+		}
 	}
-	return normalizedPatterns;
+	const isExcluded = (entry: string) =>
+		excluded.some((glob) => path.posix.matchesGlob(entry.split(path.sep).join("/"), glob));
+	return { included, isExcluded };
 }
 
 function findWorkspacePackages(cwd: any) {
 	return requirePackagesManifest(cwd)
 		.then(async (manifest: any) => {
-			const patterns = normalizePatterns((manifest && manifest.packages) || ["**"]);
+			const { included, isExcluded } = workspacePatterns(manifest?.packages || ["**"]);
 			const entries: string[] = [];
-			for (const pattern of patterns) {
-				for await (const entry of glob(pattern, {
-					cwd,
-					exclude: (p) => p.includes("node_modules") || p.includes("bower_components"),
-				})) {
+			for await (const entry of glob(included, {
+				cwd,
+				exclude: (p) => p.includes("node_modules") || p.includes("bower_components"),
+			})) {
+				if (!isExcluded(entry)) {
 					entries.push(entry);
 				}
 			}

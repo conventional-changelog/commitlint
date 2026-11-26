@@ -1,4 +1,5 @@
 import { test, expect } from "vitest";
+import { writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -73,4 +74,20 @@ test("returns expected value for scoped pnpm repository", async () => {
 	const [, , value] = await fn({ cwd });
 
 	expect(value).toEqual(["a", "b", "global"]);
+});
+
+test("omits excluded workspace scopes without pruning same-named manifests", async () => {
+	const cwd = await npm.bootstrap("fixtures/excluded", __dirname);
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["a", "global"]);
+});
+
+test("interprets a pnpm double bang", async () => {
+	const cwd = await npm.bootstrap("fixtures/excluded", __dirname);
+	await writeFile(
+		path.join(cwd, "pnpm-workspace.yaml"),
+		JSON.stringify({ packages: ["packages/*", "!!packages/a"] }),
+	);
+	const [, , scopes] = await config.rules["scope-enum"]({ cwd });
+	expect(scopes).toEqual(["a", "b", "global"]);
 });
