@@ -6,6 +6,8 @@ import { bodyMaxLineLength } from "./body-max-line-length.js";
 const short = "a";
 const long = "ab";
 const url = "https://example.com/URL/with/a/very/long/path";
+const trailer =
+	"Co-authored-by: Very Long Contributor Name <12345678+very-long-username@users.noreply.github.com>";
 
 const value = short.length;
 
@@ -78,5 +80,23 @@ test("with multiple lines and standalone URL should succeed", async () => {
 test("with multiple lines and URL in inline Markdown link should succeed", async () => {
 	const [actual] = bodyMaxLineLength(await parsed.urlMarkdownLinkInline, undefined, 30);
 	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with multiple lines and email trailer in body should succeed", async () => {
+	const commit = Object.assign({}, await parsed.empty, {
+		body: `${short}\n${trailer}\n${short}`,
+	});
+	const [actual] = bodyMaxLineLength(commit, undefined, value);
+	const expected = true;
+	expect(actual).toEqual(expected);
+});
+
+test("with long body line alongside email trailer should fail", async () => {
+	const commit = Object.assign({}, await parsed.empty, {
+		body: `${long}\n${trailer}\n${short}`,
+	});
+	const [actual] = bodyMaxLineLength(commit, undefined, value);
+	const expected = false;
 	expect(actual).toEqual(expected);
 });

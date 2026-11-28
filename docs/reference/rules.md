@@ -57,7 +57,7 @@
 
 ## body-max-line-length
 
-- **condition**: `body` lines have `value` or less characters, or contain a URL
+- **condition**: `body` lines have `value` or less characters, contain a URL, or are a trailer with an email address
 - **rule**: `always`
 - **value**
 
@@ -111,7 +111,7 @@
 
 ## footer-max-line-length
 
-- **condition**: `footer` lines have `value` or less characters
+- **condition**: `footer` lines have `value` or less characters, contain a URL, or are a trailer with an email address
 - **rule**: `always`
 - **value**
 
