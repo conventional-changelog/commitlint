@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **cli:** read core.commentChar from the --cwd repository in edit mode ([#5119](https://github.com/conventional-changelog/commitlint/issues/5119)) ([741f660](https://github.com/conventional-changelog/commitlint/commit/741f660e867e9b4f98642ab291ca198ae96e4771))
+* **cli:** read core.commentString and handle core.commentChar=auto in edit mode ([#5101](https://github.com/conventional-changelog/commitlint/issues/5101)) ([e0ca71c](https://github.com/conventional-changelog/commitlint/commit/e0ca71c808ad9cba2dfc052dfa50b2b31be84fd6))
+* **config-pnpm-scopes:** respect workspace exclusion patterns ([#5142](https://github.com/conventional-changelog/commitlint/issues/5142)) ([3816fbd](https://github.com/conventional-changelog/commitlint/commit/3816fbde802fe692518df136ab8a357f7cd4a83c))
+* **config-workspace-scopes:** read package patterns from workspace objects ([#5143](https://github.com/conventional-changelog/commitlint/issues/5143)) ([e487c9a](https://github.com/conventional-changelog/commitlint/commit/e487c9a7b8714beb9c0f1df726fc938f423acbad))
+* **cz-commitlint:** skip the breaking body when the body must be empty ([#5141](https://github.com/conventional-changelog/commitlint/issues/5141)) ([420186c](https://github.com/conventional-changelog/commitlint/commit/420186c40de1c016bcfcd7e9912483dd7a957e58))
+* **ensure:** don't treat apostrophes inside words as quotes in case checks ([#5140](https://github.com/conventional-changelog/commitlint/issues/5140)) ([381b0ae](https://github.com/conventional-changelog/commitlint/commit/381b0ae26ec4036ed2252eb64841651537fb4963))
+* **is-ignored:** only match merge commits on the first line ([#5117](https://github.com/conventional-changelog/commitlint/issues/5117)) ([8316b0b](https://github.com/conventional-changelog/commitlint/commit/8316b0b4b136c8890cd225c81f38d1a168b8e83e))
+* **lint:** preserve original spacing in commit message ([#5091](https://github.com/conventional-changelog/commitlint/issues/5091)) ([b0786f5](https://github.com/conventional-changelog/commitlint/commit/b0786f51202bd9776e559991c2188f5d12f21108))
+* **load:** keep every local plugin instead of only the last one ([#5114](https://github.com/conventional-changelog/commitlint/issues/5114)) ([6004cd2](https://github.com/conventional-changelog/commitlint/commit/6004cd2c55dfc11f5cfff4d8a454fbbcdb79dfcb))
+* **parse:** parse commit types in any script ([#5137](https://github.com/conventional-changelog/commitlint/issues/5137)) ([411e899](https://github.com/conventional-changelog/commitlint/commit/411e8998ca34bcdbae464cacc5563e873de85ae6)), closes [#2674](https://github.com/conventional-changelog/commitlint/issues/2674)
+* **read:** handle symlinked .git directories ([#5157](https://github.com/conventional-changelog/commitlint/issues/5157)) ([c3c08ed](https://github.com/conventional-changelog/commitlint/commit/c3c08ed862b6e5c85714cf9612f359349e70f896))
+* **read:** keep leading whitespace of the last commit message ([#5121](https://github.com/conventional-changelog/commitlint/issues/5121)) ([52ca546](https://github.com/conventional-changelog/commitlint/commit/52ca5460caba8c68ec56e123dbb4bddff9de1642))
+* **resolve-extends:** find presets installed with commitlint ([#5124](https://github.com/conventional-changelog/commitlint/issues/5124)) ([d360fa2](https://github.com/conventional-changelog/commitlint/commit/d360fa2021ec5ffa835f791329e00639fde35db8))
+* **rules:** check subject-case when the subject starts with whitespace ([#5103](https://github.com/conventional-changelog/commitlint/issues/5103)) ([3fa4b6c](https://github.com/conventional-changelog/commitlint/commit/3fa4b6c4d0b1a4917adcd262236b2de48ef26236))
+* **rules:** do not treat non-ASCII letters as scope delimiters ([#5120](https://github.com/conventional-changelog/commitlint/issues/5120)) ([8ae9a9f](https://github.com/conventional-changelog/commitlint/commit/8ae9a9f8b964db512358fe5b32bd5af668b129a8))
+* **rules:** improve signed-off-by compatibility with agent commits ([#5118](https://github.com/conventional-changelog/commitlint/issues/5118)) ([b8c9f19](https://github.com/conventional-changelog/commitlint/commit/b8c9f1913cd44fd7ccd60760f41021f028926516))
+* **rules:** match non-ASCII breaking types ([#5149](https://github.com/conventional-changelog/commitlint/issues/5149)) ([dcb50f1](https://github.com/conventional-changelog/commitlint/commit/dcb50f1fc2715f8759ff09700c4b17abcfa6efc7))
+* **rules:** reject explicit empty scopes with scope-empty always ([#5150](https://github.com/conventional-changelog/commitlint/issues/5150)) ([c25ab46](https://github.com/conventional-changelog/commitlint/commit/c25ab461823d57a84df8f74a737af1c9d4db5e13))
+* update vitest monorepo to ~5.1.0 ([#5097](https://github.com/conventional-changelog/commitlint/issues/5097)) ([cbce261](https://github.com/conventional-changelog/commitlint/commit/cbce2618bd25225d07538448de6cb3ec2ab043cc))
+
+### Features
+
+* **cli,read:** support filtering git log commits by path ([#5161](https://github.com/conventional-changelog/commitlint/issues/5161)) ([361f3d9](https://github.com/conventional-changelog/commitlint/commit/361f3d99bbeea52ce56d86efb5bf8e7d9e9f57d7))
+* **cz-commitlint:** follow references-empty in the footer prompt ([#5128](https://github.com/conventional-changelog/commitlint/issues/5128)) ([cc15f99](https://github.com/conventional-changelog/commitlint/commit/cc15f99c4e8d0e9691b25837dc38e6e0956fd822))
+* **ensure:** ignore email trailer lines in max-line-length ([#5160](https://github.com/conventional-changelog/commitlint/issues/5160)) ([1b8d329](https://github.com/conventional-changelog/commitlint/commit/1b8d3293cad79ed27c88eca59cbd07cf59b944d4))
+* **prompt-cli:** add --config to load a custom config file ([#5125](https://github.com/conventional-changelog/commitlint/issues/5125)) ([6a9e600](https://github.com/conventional-changelog/commitlint/commit/6a9e60057f47346838971e53545f29a96f6f5762))
+* **rules:** add header-breaking-change to reject BREAKING CHANGE in the header ([#5104](https://github.com/conventional-changelog/commitlint/issues/5104)) ([2229164](https://github.com/conventional-changelog/commitlint/commit/2229164b28a1e34b4ba6b7c6a735a6bbae206895))
+* **rules:** support per-type scopes in scope-enum ([#5126](https://github.com/conventional-changelog/commitlint/issues/5126)) ([f26bc52](https://github.com/conventional-changelog/commitlint/commit/f26bc5264c13dcebfaa351f30abbd6e30a679a5a))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 ### Bug Fixes

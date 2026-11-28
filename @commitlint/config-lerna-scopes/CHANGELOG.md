@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **config-workspace-scopes:** read package patterns from workspace objects ([#5143](https://github.com/conventional-changelog/commitlint/issues/5143)) ([e487c9a](https://github.com/conventional-changelog/commitlint/commit/e487c9a7b8714beb9c0f1df726fc938f423acbad))
+
+
 # [21.2.0](https://github.com/conventional-changelog/commitlint/compare/v21.1.0...v21.2.0) (2026-06-30)
 
 **Note:** Version bump only for package @commitlint/config-lerna-scopes

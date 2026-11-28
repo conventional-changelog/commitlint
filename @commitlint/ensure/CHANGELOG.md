@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **ensure:** don't treat apostrophes inside words as quotes in case checks ([#5140](https://github.com/conventional-changelog/commitlint/issues/5140)) ([381b0ae](https://github.com/conventional-changelog/commitlint/commit/381b0ae26ec4036ed2252eb64841651537fb4963))
+
+### Features
+
+* **ensure:** ignore email trailer lines in max-line-length ([#5160](https://github.com/conventional-changelog/commitlint/issues/5160)) ([1b8d329](https://github.com/conventional-changelog/commitlint/commit/1b8d3293cad79ed27c88eca59cbd07cf59b944d4))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 **Note:** Version bump only for package @commitlint/ensure

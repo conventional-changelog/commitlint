@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **parse:** parse commit types in any script ([#5137](https://github.com/conventional-changelog/commitlint/issues/5137)) ([411e899](https://github.com/conventional-changelog/commitlint/commit/411e8998ca34bcdbae464cacc5563e873de85ae6)), closes [#2674](https://github.com/conventional-changelog/commitlint/issues/2674)
+
+
 ## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
 
 **Note:** Version bump only for package @commitlint/parse

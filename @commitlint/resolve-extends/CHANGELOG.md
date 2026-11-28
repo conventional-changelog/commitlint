@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **resolve-extends:** find presets installed with commitlint ([#5124](https://github.com/conventional-changelog/commitlint/issues/5124)) ([d360fa2](https://github.com/conventional-changelog/commitlint/commit/d360fa2021ec5ffa835f791329e00639fde35db8))
+
+
 ## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
 
 **Note:** Version bump only for package @commitlint/resolve-extends

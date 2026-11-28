@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **rules:** check subject-case when the subject starts with whitespace ([#5103](https://github.com/conventional-changelog/commitlint/issues/5103)) ([3fa4b6c](https://github.com/conventional-changelog/commitlint/commit/3fa4b6c4d0b1a4917adcd262236b2de48ef26236))
+* **rules:** do not treat non-ASCII letters as scope delimiters ([#5120](https://github.com/conventional-changelog/commitlint/issues/5120)) ([8ae9a9f](https://github.com/conventional-changelog/commitlint/commit/8ae9a9f8b964db512358fe5b32bd5af668b129a8))
+* **rules:** improve signed-off-by compatibility with agent commits ([#5118](https://github.com/conventional-changelog/commitlint/issues/5118)) ([b8c9f19](https://github.com/conventional-changelog/commitlint/commit/b8c9f1913cd44fd7ccd60760f41021f028926516))
+* **rules:** match non-ASCII breaking types ([#5149](https://github.com/conventional-changelog/commitlint/issues/5149)) ([dcb50f1](https://github.com/conventional-changelog/commitlint/commit/dcb50f1fc2715f8759ff09700c4b17abcfa6efc7))
+* **rules:** reject explicit empty scopes with scope-empty always ([#5150](https://github.com/conventional-changelog/commitlint/issues/5150)) ([c25ab46](https://github.com/conventional-changelog/commitlint/commit/c25ab461823d57a84df8f74a737af1c9d4db5e13))
+
+### Features
+
+* **ensure:** ignore email trailer lines in max-line-length ([#5160](https://github.com/conventional-changelog/commitlint/issues/5160)) ([1b8d329](https://github.com/conventional-changelog/commitlint/commit/1b8d3293cad79ed27c88eca59cbd07cf59b944d4))
+* **rules:** add header-breaking-change to reject BREAKING CHANGE in the header ([#5104](https://github.com/conventional-changelog/commitlint/issues/5104)) ([2229164](https://github.com/conventional-changelog/commitlint/commit/2229164b28a1e34b4ba6b7c6a735a6bbae206895))
+* **rules:** support per-type scopes in scope-enum ([#5126](https://github.com/conventional-changelog/commitlint/issues/5126)) ([f26bc52](https://github.com/conventional-changelog/commitlint/commit/f26bc5264c13dcebfaa351f30abbd6e30a679a5a))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 **Note:** Version bump only for package @commitlint/rules

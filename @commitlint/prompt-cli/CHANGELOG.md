@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Features
+
+* **prompt-cli:** add --config to load a custom config file ([#5125](https://github.com/conventional-changelog/commitlint/issues/5125)) ([6a9e600](https://github.com/conventional-changelog/commitlint/commit/6a9e60057f47346838971e53545f29a96f6f5762))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 **Note:** Version bump only for package @commitlint/prompt-cli

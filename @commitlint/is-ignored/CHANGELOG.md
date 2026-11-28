@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **is-ignored:** only match merge commits on the first line ([#5117](https://github.com/conventional-changelog/commitlint/issues/5117)) ([8316b0b](https://github.com/conventional-changelog/commitlint/commit/8316b0b4b136c8890cd225c81f38d1a168b8e83e))
+
+
 ## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
 
 **Note:** Version bump only for package @commitlint/is-ignored

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **cli:** read core.commentChar from the --cwd repository in edit mode ([#5119](https://github.com/conventional-changelog/commitlint/issues/5119)) ([741f660](https://github.com/conventional-changelog/commitlint/commit/741f660e867e9b4f98642ab291ca198ae96e4771))
+* **cli:** read core.commentString and handle core.commentChar=auto in edit mode ([#5101](https://github.com/conventional-changelog/commitlint/issues/5101)) ([e0ca71c](https://github.com/conventional-changelog/commitlint/commit/e0ca71c808ad9cba2dfc052dfa50b2b31be84fd6))
+* **read:** handle symlinked .git directories ([#5157](https://github.com/conventional-changelog/commitlint/issues/5157)) ([c3c08ed](https://github.com/conventional-changelog/commitlint/commit/c3c08ed862b6e5c85714cf9612f359349e70f896))
+* **resolve-extends:** find presets installed with commitlint ([#5124](https://github.com/conventional-changelog/commitlint/issues/5124)) ([d360fa2](https://github.com/conventional-changelog/commitlint/commit/d360fa2021ec5ffa835f791329e00639fde35db8))
+
+### Features
+
+* **cli,read:** support filtering git log commits by path ([#5161](https://github.com/conventional-changelog/commitlint/issues/5161)) ([361f3d9](https://github.com/conventional-changelog/commitlint/commit/361f3d99bbeea52ce56d86efb5bf8e7d9e9f57d7))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 **Note:** Version bump only for package @commitlint/cli

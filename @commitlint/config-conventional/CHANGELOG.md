@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **parse:** parse commit types in any script ([#5137](https://github.com/conventional-changelog/commitlint/issues/5137)) ([411e899](https://github.com/conventional-changelog/commitlint/commit/411e8998ca34bcdbae464cacc5563e873de85ae6)), closes [#2674](https://github.com/conventional-changelog/commitlint/issues/2674)
+
+### Features
+
+* **ensure:** ignore email trailer lines in max-line-length ([#5160](https://github.com/conventional-changelog/commitlint/issues/5160)) ([1b8d329](https://github.com/conventional-changelog/commitlint/commit/1b8d3293cad79ed27c88eca59cbd07cf59b944d4))
+* **rules:** add header-breaking-change to reject BREAKING CHANGE in the header ([#5104](https://github.com/conventional-changelog/commitlint/issues/5104)) ([2229164](https://github.com/conventional-changelog/commitlint/commit/2229164b28a1e34b4ba6b7c6a735a6bbae206895))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 **Note:** Version bump only for package @commitlint/config-conventional

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Features
+
+* **rules:** add header-breaking-change to reject BREAKING CHANGE in the header ([#5104](https://github.com/conventional-changelog/commitlint/issues/5104)) ([2229164](https://github.com/conventional-changelog/commitlint/commit/2229164b28a1e34b4ba6b7c6a735a6bbae206895))
+* **rules:** support per-type scopes in scope-enum ([#5126](https://github.com/conventional-changelog/commitlint/issues/5126)) ([f26bc52](https://github.com/conventional-changelog/commitlint/commit/f26bc5264c13dcebfaa351f30abbd6e30a679a5a))
+
+
 ## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
 
 ### Bug Fixes

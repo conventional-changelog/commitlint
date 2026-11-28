@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **read:** handle symlinked .git directories ([#5157](https://github.com/conventional-changelog/commitlint/issues/5157)) ([c3c08ed](https://github.com/conventional-changelog/commitlint/commit/c3c08ed862b6e5c85714cf9612f359349e70f896))
+* **read:** keep leading whitespace of the last commit message ([#5121](https://github.com/conventional-changelog/commitlint/issues/5121)) ([52ca546](https://github.com/conventional-changelog/commitlint/commit/52ca5460caba8c68ec56e123dbb4bddff9de1642))
+
+### Features
+
+* **cli,read:** support filtering git log commits by path ([#5161](https://github.com/conventional-changelog/commitlint/issues/5161)) ([361f3d9](https://github.com/conventional-changelog/commitlint/commit/361f3d99bbeea52ce56d86efb5bf8e7d9e9f57d7))
+
+
 ## [21.2.3](https://github.com/conventional-changelog/commitlint/compare/v21.2.2...v21.2.3) (2026-09-19)
 
 **Note:** Version bump only for package @commitlint/read

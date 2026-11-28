@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **load:** keep every local plugin instead of only the last one ([#5114](https://github.com/conventional-changelog/commitlint/issues/5114)) ([6004cd2](https://github.com/conventional-changelog/commitlint/commit/6004cd2c55dfc11f5cfff4d8a454fbbcdb79dfcb))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 ### Bug Fixes

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **cz-commitlint:** skip the breaking body when the body must be empty ([#5141](https://github.com/conventional-changelog/commitlint/issues/5141)) ([420186c](https://github.com/conventional-changelog/commitlint/commit/420186c40de1c016bcfcd7e9912483dd7a957e58))
+
+### Features
+
+* **cz-commitlint:** follow references-empty in the footer prompt ([#5128](https://github.com/conventional-changelog/commitlint/issues/5128)) ([cc15f99](https://github.com/conventional-changelog/commitlint/commit/cc15f99c4e8d0e9691b25837dc38e6e0956fd822))
+
+
 ## [21.2.4](https://github.com/conventional-changelog/commitlint/compare/v21.2.3...v21.2.4) (2026-10-18)
 
 **Note:** Version bump only for package @commitlint/cz-commitlint

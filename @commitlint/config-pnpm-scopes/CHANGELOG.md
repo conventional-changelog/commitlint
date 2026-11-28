@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [21.3.0](https://github.com/conventional-changelog/commitlint/compare/v21.2.4...v21.3.0) (2026-11-28)
+
+### Bug Fixes
+
+* **config-pnpm-scopes:** respect workspace exclusion patterns ([#5142](https://github.com/conventional-changelog/commitlint/issues/5142)) ([3816fbd](https://github.com/conventional-changelog/commitlint/commit/3816fbde802fe692518df136ab8a357f7cd4a83c))
+
+
 ## [21.2.2](https://github.com/conventional-changelog/commitlint/compare/v21.2.1...v21.2.2) (2026-08-13)
 
 **Note:** Version bump only for package @commitlint/config-pnpm-scopes
