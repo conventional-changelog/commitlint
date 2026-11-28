@@ -812,6 +812,7 @@ test("should print help", async () => {
 		  -l, --last            just analyze the last commit; applies if edit=false  [boolean]
 		  -o, --format          output format of the results  [string]
 		  -p, --parser-preset   configuration preset to use for conventional-commits-parser  [string]
+		      --path            limit commit range to commits affecting the specified path(s); applies if edit=false  [array]
 		  -q, --quiet           toggle console output  [boolean] [default: false]
 		  -t, --to              upper end of the commit range to lint; applies if edit=false  [string]
 		  -V, --verbose         enable verbose output for reports without problems  [boolean]
@@ -895,6 +896,123 @@ describe("should print config", () => {
 		const printed = JSON.parse(output.stdout.trim());
 		expect(printed.rules).toHaveProperty("type-enum");
 		expect(printed.rules["type-enum"][2]).toContain("feat");
+	});
+});
+
+describe("path filtering with --path", () => {
+	async function commitFile(cwd: string, file: string, message: string, content = file) {
+		const fullPath = path.join(cwd, file);
+		await fs.mkdir(path.dirname(fullPath), { recursive: true });
+		await fs.writeFile(fullPath, content);
+		await x("git", ["add", "--", file], { nodeOptions: { cwd } });
+		await x("git", ["commit", "-m", message], { nodeOptions: { cwd } });
+	}
+
+	test("should support repeated --path flags", async () => {
+		const cwd = await gitBootstrap("fixtures/default");
+		await commitFile(cwd, "packages/a/a.txt", "type: valid in a");
+		await commitFile(cwd, "packages/b/b.txt", "foo: invalid in b");
+		await commitFile(cwd, "packages/c/c.txt", "type: valid in c");
+
+		const passResult = cli(["--path", "packages/a", "--path", "packages/c", "--verbose"], {
+			cwd,
+		})();
+		const passOutput = await passResult;
+		expect(passResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(passOutput.stdout).toContain("type: valid in a");
+		expect(passOutput.stdout).toContain("type: valid in c");
+		expect(passOutput.stdout).not.toContain("foo: invalid in b");
+
+		const failResult = cli(["--path", "packages/a", "--path", "packages/b"], { cwd })();
+		const failOutput = await failResult;
+		expect(failResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+		expect(failOutput.stdout).toContain("foo: invalid in b");
+	});
+
+	test("should lint git history when --path is used on its own", async () => {
+		const cwd = await gitBootstrap("fixtures/default");
+		await commitFile(cwd, "packages/a/a.txt", "type: valid in a");
+		await commitFile(cwd, "packages/b/b.txt", "foo: invalid in b");
+
+		const passResult = cli(["--path", "packages/a", "--verbose"], { cwd })();
+		const passOutput = await passResult;
+		expect(passResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(passOutput.stdout).toContain("type: valid in a");
+
+		const failResult = cli(["--path", "packages/b"], { cwd })();
+		const failOutput = await failResult;
+		expect(failResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+		expect(failOutput.stdout).toContain("foo: invalid in b");
+	});
+
+	test("should print a note when no commits match --path", async () => {
+		const cwd = await gitBootstrap("fixtures/default");
+		await commitFile(cwd, "packages/a/a.txt", "type: valid in a");
+
+		const emptyResult = cli(["--path", "pakages/a"], { cwd })();
+		const emptyOutput = await emptyResult;
+		expect(emptyResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(emptyOutput.stderr).toContain("No commits matched --path (pakages/a)");
+
+		const quietResult = cli(["--path", "pakages/a", "--quiet"], { cwd })();
+		const quietOutput = await quietResult;
+		expect(quietResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(quietOutput.stderr).toBe("");
+	});
+
+	test("should report bad --path git errors consistently for --last and --from", async () => {
+		const cwd = await gitBootstrap("fixtures/default");
+		await commitFile(cwd, "packages/a/a.txt", "type: first", "1");
+		await commitFile(cwd, "packages/a/a.txt", "type: second", "2");
+
+		const lastResult = cli(["--last", "--path", "../outside"], { cwd })();
+		const lastOutput = await lastResult;
+		expect(lastResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+		expect(lastOutput.stderr).toContain("outside repository");
+		expect(lastOutput.stderr).not.toContain("\n    at ");
+
+		const rangeResult = cli(["--from", "HEAD~1", "--path", "../outside"], { cwd })();
+		const rangeOutput = await rangeResult;
+		expect(rangeResult.exitCode).toBe(ExitCode.CommitlintErrorDefault);
+		expect(rangeOutput.stderr).toBe(lastOutput.stderr);
+	});
+
+	test("should keep exiting 0 for --last without --path in an empty or non-git directory", async () => {
+		const emptyRepo = await gitBootstrap("fixtures/default");
+		const emptyResult = cli(["--last"], { cwd: emptyRepo })();
+		const emptyOutput = await emptyResult;
+		expect(emptyResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(emptyOutput.stderr).toBe("");
+
+		const nonGitDir = await fixBootstrap("fixtures/default");
+		const nonGitResult = cli(["--last"], { cwd: nonGitDir })();
+		const nonGitOutput = await nonGitResult;
+		expect(nonGitResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(nonGitOutput.stderr).toBe("");
+	});
+
+	test("should support per-package configs with --cwd and --path .", async () => {
+		const cwd = await gitBootstrap("fixtures/empty");
+		await commitFile(
+			cwd,
+			"packages/a/commitlint.config.js",
+			"bar: valid for package a",
+			'module.exports = { rules: { "type-enum": [2, "never", ["foo"]] } };\n',
+		);
+		await commitFile(
+			cwd,
+			"packages/b/commitlint.config.js",
+			"foo: valid for package b",
+			'module.exports = { rules: { "type-enum": [2, "never", ["bar"]] } };\n',
+		);
+
+		const pkgAResult = cli(["--cwd", path.join(cwd, "packages/a"), "--path", "."], { cwd })();
+		await pkgAResult;
+		expect(pkgAResult.exitCode).toBe(ExitCode.CommitlintDefault);
+
+		const pkgBResult = cli(["--cwd", path.join(cwd, "packages/b"), "--path", "."], { cwd })();
+		await pkgBResult;
+		expect(pkgBResult.exitCode).toBe(ExitCode.CommitlintDefault);
 	});
 });
 

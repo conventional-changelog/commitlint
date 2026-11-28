@@ -119,6 +119,12 @@ const cli = yargs(process.argv.slice(2))
 			description: "configuration preset to use for conventional-commits-parser",
 			type: "string",
 		},
+		path: {
+			description:
+				"limit commit range to commits affecting the specified path(s); applies if edit=false",
+			type: "array",
+			string: true,
+		},
 		quiet: {
 			alias: "q",
 			default: false,
@@ -268,9 +274,12 @@ async function main(args: MainArgs): Promise<void> {
 		throw err;
 	}
 
-	const input = await (fromStdin
-		? stdin()
-		: read({
+	let input: string | string[];
+	if (fromStdin) {
+		input = await stdin();
+	} else {
+		try {
+			input = await read({
 				to: flags.to,
 				from: flags.from,
 				fromLastTag: flags["from-last-tag"],
@@ -278,7 +287,15 @@ async function main(args: MainArgs): Promise<void> {
 				edit: flags.edit,
 				cwd: flags.cwd,
 				gitLogArgs: flags["git-log-args"],
-			}));
+				path: flags.path,
+			});
+		} catch (e) {
+			const message = (e instanceof Error && e.message ? e.message : String(e)).trim();
+			const err = new CliError(message, pkg.name);
+			console.error(err.message);
+			throw err;
+		}
+	}
 
 	const messages = (Array.isArray(input) ? input : [input])
 		.filter((message) => typeof message === "string")
@@ -388,6 +405,17 @@ async function main(args: MainArgs): Promise<void> {
 	if (!flags.quiet && output !== "") {
 		console.log(output);
 	}
+	if (
+		!flags.quiet &&
+		!isRulesEmpty &&
+		!checkFromEdit(flags) &&
+		messages.length === 0 &&
+		flags.path?.some(Boolean)
+	) {
+		console.warn(
+			`No commits matched --path (${flags.path.filter(Boolean).join(", ")}); nothing to lint.`,
+		);
+	}
 
 	if (flags.strict) {
 		if (report.errorCount > 0) {
@@ -422,7 +450,8 @@ function checkFromHistory(flags: CliFlags): boolean {
 		typeof flags.from === "string" ||
 		typeof flags["from-last-tag"] === "boolean" ||
 		typeof flags.to === "string" ||
-		typeof flags.last === "boolean"
+		typeof flags.last === "boolean" ||
+		Boolean(flags.path?.some(Boolean))
 	);
 }
 

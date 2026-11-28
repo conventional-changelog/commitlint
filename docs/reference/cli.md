@@ -41,6 +41,8 @@ Options:
   -o, --format          output format of the results                    [string]
   -p, --parser-preset   configuration preset to use for
                         conventional-commits-parser                     [string]
+      --path            limit commit range to commits affecting the specified
+                        path(s); applies if edit=false                   [array]
   -q, --quiet           toggle console output         [boolean] [default: false]
   -t, --to              upper end of the commit range to lint; applies if
                         edit=false                                      [string]
@@ -73,3 +75,20 @@ where creating a `commitlint.config.js` and installing a shareable config is
 not practical. A configuration file with rules always takes precedence over
 `--default-config`, and configs passed via `--extends` are kept and override
 the default config when the fallback applies.
+
+## Filter commits by path
+
+Pass `--path` to limit linting to commits that touch one or more paths. Paths
+are resolved relative to `--cwd`, and `--path` switches commitlint to reading
+from Git history even when `--from` and `--to` are omitted:
+
+```sh
+# Lint commits in a range affecting a single package
+npx commitlint --from main --to HEAD --path packages/a
+
+# Repeat --path to match multiple paths
+npx commitlint --from main --path packages/a --path packages/b
+
+# Lint commits for a package using its local config
+npx commitlint --cwd packages/a --path .
+```

@@ -18,6 +18,8 @@ type Range = {
   to: string;
   /* Whether (boolean) to read from ./.git/COMMIT_EDITMSG or where to read from (string) */
   edit?: boolean | string;
+  /* Limit commits to those affecting the specified path(s) */
+  path?: string | string[];
 };
 
 read(range: Range) => Promise<string[]>
@@ -66,4 +68,14 @@ console.info(result);
 const result = await read({ edit: "./git/GITGUI_EDITMESSAGE" });
 console.info(result);
 // => ['I did something via git gui\n\n']
+```
+
+### Read commits affecting specific paths
+
+```js
+const result = await read({ from: "HEAD~2", path: "packages/a" });
+console.info(result);
+// => ['I did something\n\n']
+
+const multi = await read({ from: "HEAD~2", path: ["packages/a", "packages/b"] });
 ```

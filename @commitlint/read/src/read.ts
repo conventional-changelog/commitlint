@@ -13,23 +13,48 @@ interface GetCommitMessageOptions {
 	last?: boolean;
 	edit?: boolean | string;
 	gitLogArgs?: string;
+	path?: string | string[];
+}
+
+function normalizePaths(path?: string | string[]): string[] | undefined {
+	if (path === undefined) {
+		return undefined;
+	}
+	const paths = (Array.isArray(path) ? path : [path]).filter(
+		(value): value is string => typeof value === "string" && value !== "",
+	);
+	return paths.length > 0 ? paths : undefined;
 }
 
 // Get commit messages
 export default async function getCommitMessages(
 	settings: GetCommitMessageOptions,
 ): Promise<string[]> {
-	const { cwd, fromLastTag, to, last, edit, gitLogArgs } = settings;
+	const { cwd, fromLastTag, to, last, edit, gitLogArgs, path } = settings;
 	let from = settings.from;
 
 	if (edit) {
 		return getEditCommit(cwd, edit);
 	}
 
+	const normalizedPaths = normalizePaths(path);
+
 	if (last) {
-		const gitCommandResult = await x("git", ["log", "-1", "--pretty=format:%B"], {
+		const args = ["log", "-1", "--pretty=format:%B"];
+		if (normalizedPaths) {
+			args.push("--", ...normalizedPaths);
+		}
+		const gitCommandResult = await x("git", args, {
 			nodeOptions: { cwd },
 		});
+		if (normalizedPaths) {
+			if (gitCommandResult.exitCode !== 0) {
+				throw new Error(gitCommandResult.stderr.trim() || "Process exited with non-zero code");
+			}
+			if (gitCommandResult.stdout === "") {
+				return [];
+			}
+		}
 		// Keep the message as committed apart from the final newline.
 		let output = gitCommandResult.stdout.replace(/\r?\n$/, "");
 		// strip output of extra quotation marks ("")
@@ -80,7 +105,11 @@ export default async function getCommitMessages(
 		}
 	}
 
-	let gitOptions: HistoryCommitsOptions = { from, to };
+	let gitOptions: HistoryCommitsOptions = {
+		from,
+		to,
+		...(normalizedPaths ? { path: normalizedPaths } : {}),
+	};
 	if (gitLogArgs) {
 		const { values, positionals } = parseArgs({
 			args: gitLogArgs.split(" "),
@@ -91,6 +120,7 @@ export default async function getCommitMessages(
 			_: positionals,
 			from,
 			to,
+			...(normalizedPaths ? { path: normalizedPaths } : {}),
 		};
 	}
 

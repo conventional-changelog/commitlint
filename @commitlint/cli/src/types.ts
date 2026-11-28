@@ -14,6 +14,7 @@ export interface CliFlags {
 	last?: boolean;
 	format?: string;
 	"parser-preset"?: string;
+	path?: string[];
 	quiet: boolean;
 	to?: string;
 	version?: boolean;
