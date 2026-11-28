@@ -47,11 +47,13 @@ export default async function getCommitMessages(
 		const gitCommandResult = await x("git", args, {
 			nodeOptions: { cwd },
 		});
-		if (gitCommandResult.exitCode !== 0) {
-			throw new Error(gitCommandResult.stderr.trim() || "Process exited with non-zero code");
-		}
-		if (normalizedPaths && gitCommandResult.stdout === "") {
-			return [];
+		if (normalizedPaths) {
+			if (gitCommandResult.exitCode !== 0) {
+				throw new Error(gitCommandResult.stderr.trim() || "Process exited with non-zero code");
+			}
+			if (gitCommandResult.stdout === "") {
+				return [];
+			}
 		}
 		// Keep the message as committed apart from the final newline.
 		let output = gitCommandResult.stdout.replace(/\r?\n$/, "");

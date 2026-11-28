@@ -977,6 +977,20 @@ describe("path filtering with --path", () => {
 		expect(rangeOutput.stderr).toBe(lastOutput.stderr);
 	});
 
+	test("should keep exiting 0 for --last without --path in an empty or non-git directory", async () => {
+		const emptyRepo = await gitBootstrap("fixtures/default");
+		const emptyResult = cli(["--last"], { cwd: emptyRepo })();
+		const emptyOutput = await emptyResult;
+		expect(emptyResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(emptyOutput.stderr).toBe("");
+
+		const nonGitDir = await fixBootstrap("fixtures/default");
+		const nonGitResult = cli(["--last"], { cwd: nonGitDir })();
+		const nonGitOutput = await nonGitResult;
+		expect(nonGitResult.exitCode).toBe(ExitCode.CommitlintDefault);
+		expect(nonGitOutput.stderr).toBe("");
+	});
+
 	test("should support per-package configs with --cwd and --path .", async () => {
 		const cwd = await gitBootstrap("fixtures/empty");
 		await commitFile(

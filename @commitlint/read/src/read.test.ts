@@ -1,7 +1,7 @@
 import { test, expect } from "vitest";
 import fs from "fs/promises";
 import path from "node:path";
-import { git } from "@commitlint/test";
+import { fix, git } from "@commitlint/test";
 import { x } from "tinyexec";
 
 import read from "./read.js";
@@ -304,6 +304,14 @@ test("keeps empty string for last commit with empty message when path is not set
 	});
 
 	expect(await read({ cwd, last: true })).toEqual([""]);
+});
+
+test("ignores git errors in last mode when path is not set", async () => {
+	const emptyRepo = await git.bootstrap();
+	const nonGitDir = await fix.bootstrap();
+
+	expect(await read({ cwd: emptyRepo, last: true })).toEqual([""]);
+	expect(await read({ cwd: nonGitDir, last: true })).toEqual([""]);
 });
 
 test("rejects bad paths the same way in last and range mode", async () => {
