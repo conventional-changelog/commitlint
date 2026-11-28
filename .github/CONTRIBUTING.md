@@ -149,7 +149,8 @@ Releases are published from GitHub Actions with [npm trusted publishing](https:/
 
 1. Run the [Release PR workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release-pr.yml) on `master`. Leave `bump` on `conventional` to pick the version from the commits since the last tag, or choose `patch`, `minor` or `major`. `prerelease` makes a `-next.N` version on the `next` dist-tag, and `graduate` turns a prerelease into the stable version.
 1. It opens a `chore(release): vX.Y.Z` pull request with the version bumps and changelogs. While it is open, every push to `master` regenerates it, so it always contains everything that was merged. Review it.
-1. Merge it with "Merge when ready". The [Release workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release.yml) then publishes every package version that is not on npm yet, tags the commit, creates the GitHub release and, for stable versions, starts the container build.
+1. Merge it with "Merge when ready". This starts the [Release workflow](https://github.com/conventional-changelog/commitlint/actions/workflows/release.yml).
+1. Approve its deployment to the `release` environment: open the run and click "Review deployments". The workflow then publishes every package version that is not on npm yet, tags the commit, creates the GitHub release and, for stable versions, starts the container build.
 1. Post in the [commitlint Slack-channel][12]
 
 If publishing fails part way, fix the cause and run the Release workflow again from the Actions tab. It releases the commit that last changed `lerna.json`, only publishes what is still missing, and stops once the GitHub release exists. If only the container build failed, run the container build workflow on the release tag.
@@ -188,6 +189,12 @@ npm publish [PACKAGE_NAME] --access public
 ```
 
 From within the folder first i.e. `cd @commitlint/new-packages`.
+
+Then let the Release workflow publish its next versions (npm 11.15 or newer):
+
+```sh
+npm trust github [PACKAGE_NAME] --file release.yml --repo conventional-changelog/commitlint --env release --allow-publish
+```
 
 #### Move `next` to `latest`
 
